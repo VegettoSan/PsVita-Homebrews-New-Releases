@@ -1,6 +1,26 @@
 [
   {
     "platform": "github",
+    "repo": "BMK-Studio/VitaUSBStream",
+    "tag": "1.4",
+    "name": "VitaUSBStream Beta",
+    "url": "https://github.com/BMK-Studio/VitaUSBStream/releases/tag/1.4",
+    "published": "2026-09-10T17:51:33Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Major UI and Camera Streaming Update\r\n\r\n- New Sony PAF interface that is cleaner and easier to read.\r\n- Larger text and controls for better visibility on the PS Vita screen.\r\n- Redesigned streaming mode presentation with distinct colors.\r\n- Added camera streaming with two native resolution profiles:\r\n  - **640×480 at 60 FPS**\r\n  - **480×272 at 30 FPS**\r\n- Added support for both front and rear cameras, with switching via the **L/R buttons**.\r\n- Added support for the PS Vita microphone during camera streaming.\r\n- Camera streaming now uses native resolutions directly, without resizing.\r\n- Improved compatibility with the Windows Camera app and OBS.\r\n- Improved camera mode stability, especially with the **480×272** profile.\r\n- Improved memory management when switching or stopping streaming modes.\r\n- Camera, microphone, and audio resources are now released when streaming stops.\r\n- Improved USB recovery after streaming errors.\r\n- Screen On and Screen Off modes are now clearly identified.\r\n- In Screen Off mode, disconnecting the USB cable restores the display, while reconnecting it turns the display off again.\r\n- Improved standby and wake-up behavior during streaming.\r\n- The interface now clearly displays the active source: screen, front camera, or rear camera.\r\n- Improved installation, updating, and detection of VitaUSBStream, HomebrewUpdate, and HomebrewPatch.\r\n- Various stability improvements and minor fixes.",
+    "assets": [
+      {
+        "name": "VUSC00001-01.40-VitaUSBStream.vpk",
+        "size": 763315,
+        "download_url": "https://github.com/BMK-Studio/VitaUSBStream/releases/download/1.4/VUSC00001-01.40-VitaUSBStream.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "BenMitnicK"
+  },
+  {
+    "platform": "github",
     "repo": "VegettoSan/PSVitaAlive",
     "tag": "02.03",
     "name": "PsVita Alive Store 02.03",
@@ -3868,32 +3888,6 @@
         "name": "rocksndiamonds_vita_1.12.vpk",
         "size": 2814410,
         "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "rsn8887"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/openbor",
-    "tag": "v4704-rsn8887git-1.2",
-    "name": "OpenBOR Vita (v1.2) and Switch (v1.1)",
-    "url": "https://github.com/rsn8887/openbor/releases/tag/v4704-rsn8887git-1.2",
-    "published": "2020-10-02T23:45:20Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "![OpenBOR_Switch_1](https://user-images.githubusercontent.com/13071547/76482076-26ebcb00-63e1-11ea-99aa-77f2cab4c352.jpg)\r\n\r\n![OpenBOR_Switch_2](https://user-images.githubusercontent.com/13071547/76482082-2bb07f00-63e1-11ea-9975-363a198feaa4.jpg)\r\n\r\nDescription\r\n=====\r\nThis is a release of Cpasjuste port of OpenBOR to the Vita and Switch, based on Cpasjuste's original port and Plombo's work before that.\r\n\r\nI created a .vpk and .nro from Cpasjuste's port and made some improvements (see changelog below).\r\n\r\nOpenBOR is a continuation of the Beats Of Rage 2D game engine, which was originally created by the wonderful folks over at Senile Team.\r\n\r\nOfficial Website of the project: http://www.chronocrash.com/forum/\r\n\r\nThanks\r\n=====\r\n\r\nThanks to Cpasjuste for the Switch and Vita ports.\r\n\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, | Gatcher |, Jesse Harlin, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR, Uni, and Marco Verhoeven. \r\n\r\nThanks to dragonz for testing and notifying me of the bugs on VitaTV.\r\n\r\nInstallation\r\n======\r\nVita:\r\n- install the vpk\r\n- copy game .pak files to `ux0:data/openbor/paks`\r\n- enjoy!\r\n\r\nSwitch:\r\n- copy the .nro file to `/switch/openbor/`\r\n- copy game .pak game files to `/switch/openbor/Paks/`\r\n- enjoy!\r\n\r\nRecommended Settings\r\n======\r\nFor optimum display quality on Vita, after launching a game\r\n- press Start to see the menu\r\n- select `Video Options`\r\n- select `Filtering: linear`\r\n- select `Shader: sharp`\r\n\r\nTo change aspect ratio: After launching a game, select Video Options->Fullscreen Type: Preserve Aspect Ratio or Stretch To Screen to switch between between 4:3 or 16:9 aspect ratio.\r\n\r\nBuild Instructions\r\n======\r\nVita:\r\n```\r\ncmake -DBUILD_PSP2=1 -DBUILD_TREMOR=1 -DCMAKE_BUILD_TYPE=Release ../openbor\r\nmake OpenBOR.vpk -j12\r\n```\r\n\r\nSwitch:\r\n```\r\ncmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../openbor\r\nmake OpenBOR.nro -j12\r\n```\r\n\r\nChangelog\r\n=======\r\nv1.2 (Vita only)\r\n- speed up startup time by disabling excessive debug logging\r\n- fix player 2, 3, 4 controls on VitaTV\r\n- fix Vita button names in control mapping menu \r\n- allow select button to be remapped for all players on VitaTV. Shader has to be selected in video options menu, not via select button anymore.\r\n\r\nv1.1 (Switch only)\r\n\r\n- fix compilation with latest toolchain on Switch, fixes controls on firmware 9.0.0 and later\r\n- fix crash on startup on Switch\r\n- fix docked mode on Switch\r\n- fix aspect ratio correction option on Switch\r\n- on Switch, set new default options to fullscreen stretched with bilinear filtering (can be changed in video options after starting a game)\r\n- on Switch, add icon\r\n\r\nv1.0\r\n\r\nFirst release\r\n",
-    "assets": [
-      {
-        "name": "OpenBOR.nro",
-        "size": 9098113,
-        "download_url": "https://github.com/rsn8887/openbor/releases/download/v4704-rsn8887git-1.2/OpenBOR.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "OpenBOR.vpk",
-        "size": 1026839,
-        "download_url": "https://github.com/rsn8887/openbor/releases/download/v4704-rsn8887git-1.2/OpenBOR.vpk",
         "content_type": "application/octet-stream"
       }
     ],
