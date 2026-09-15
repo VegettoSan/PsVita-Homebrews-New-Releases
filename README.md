@@ -92,7 +92,7 @@ GitHub Actions
 La URL esperada es:
 
 ```text
-https://vegettossan.github.io/PsVita-Homebrews-New-Releases/
+https://vegettosan.github.io/PsVita-Homebrews-New-Releases/
 ```
 
 > GitHub transforma el nombre de usuario a minúsculas en el dominio.
