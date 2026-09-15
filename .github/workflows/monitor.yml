@@ -39,14 +39,16 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Sync PSVitaAlive catalog and check releases
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[scan]')
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: python monitor.py
 
-      - name: Add PSVitaAlive names and icons
+      - name: Build PSVitaAlive-enriched dashboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python enrich_dashboard.py
 
       - name: Commit generated data
