@@ -1,96 +1,139 @@
-# PsVita Homebrews – New Releases
+# PS Vita Homebrews — New Releases
 
-Monitor automático de nuevos releases de homebrew para PS Vita (GitHub + GitLab).
+Monitor automático de releases de **homebrew, ports, plugins y utilidades de PS Vita**.
 
-- Revisa repositorios cada 3 horas
-- Notifica en **Discord** cuando sale un release nuevo
-- Genera un **dashboard web** con título, versión, body, fecha y botones de descarga de los assets
-- El repositorio puede ser privado
+La lista de proyectos ya no se mantiene manualmente: cada ejecución descarga el catálogo público de **[PSVitaAlive](https://github.com/VegettoSan/PSVitaAlive)**, descubre los repositorios de **GitHub y GitLab** enlazados por el catálogo y comprueba sus releases.
 
-## Estructura
+## Qué hace
 
+- 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`.
+- ⏱️ Se ejecuta automáticamente **cada 3 horas** con GitHub Actions.
+- 🐙 Soporta repositorios de **GitHub**.
+- 🦊 Soporta proyectos de **GitLab**, incluidos grupos/subgrupos.
+- 🔔 Envía a **Discord** únicamente los releases nuevos.
+- 🧯 La primera sincronización completa es silenciosa para no inundar Discord con releases antiguos.
+- 📦 Destaca assets típicos de Vita como `.vpk`, `.skprx`, `.suprx`, `.self` y `.zip`.
+- 🌐 Genera un dashboard responsive en `docs/index.html`.
+- 🔎 La web incluye búsqueda y filtro por plataforma.
+- 🧾 Guarda hasta los **500 releases** más recientes.
+- 🛡️ Un repositorio caído o eliminado no detiene el resto de la ejecución.
+
+## Flujo
+
+```text
+PSVitaAlive/catalog.json
+        │
+        ▼
+ descubrir GitHub/GitLab
+        │
+        ├──► repos.txt
+        │
+        ▼
+ consultar releases
+        │
+        ├──► data/state.json
+        ├──► data/releases.json
+        ├──► data/sync.json
+        ├──► Discord
+        └──► docs/index.html ──► GitHub Pages
 ```
-├── repos.txt                 ← Aquí agregas los repositorios
-├── monitor.py                ← Script principal
+
+## Archivos principales
+
+```text
+├── .github/workflows/monitor.yml
+├── monitor.py
+├── requirements.txt
+├── repos.txt                 # Generado automáticamente
 ├── data/
-│   ├── state.json            ← Último tag visto por repo
-│   └── releases.json         ← Historial de releases
-├── docs/
-│   └── index.html            ← Dashboard web
-└── .github/workflows/
-    └── monitor.yml
+│   ├── state.json
+│   ├── releases.json
+│   └── sync.json             # Generado en la primera ejecución de la V2
+└── docs/
+    └── index.html
 ```
 
-## Configuración rápida
+> `repos.txt` es un archivo generado. No es necesario agregar repositorios manualmente mientras estén enlazados desde el catálogo de PSVitaAlive.
 
-### 1. Secrets necesarios
+## Configuración de Discord
 
-Ve a **Settings → Secrets and variables → Actions** y crea:
+En el repositorio abre:
 
-| Secret                 | Obligatorio | Descripción                                      |
-|------------------------|-------------|--------------------------------------------------|
-| `DISCORD_WEBHOOK_URL`  | Sí          | URL del webhook de tu canal de Discord           |
-| `GITHUB_TOKEN`         | Recomendado | Personal Access Token (scope `public_repo`)      |
-| `GITLAB_TOKEN`         | Opcional    | Token de GitLab si monitoreas repos privados     |
+**Settings → Secrets and variables → Actions → New repository secret**
 
-> El `GITHUB_TOKEN` por defecto de Actions ya se usa para hacer push.  
-> El secret `GITHUB_TOKEN` extra es para aumentar el rate limit de la API al consultar otros repos.
+y crea:
 
-### 2. Crear Webhook de Discord
-
-1. Entra a tu servidor de Discord
-2. Editar canal → Integraciones → Webhooks → **Nuevo Webhook**
-3. Copia la URL y pégala en el secret `DISCORD_WEBHOOK_URL`
-
-### 3. Activar GitHub Pages (aunque el repo sea privado)
-
-1. Ve a **Settings → Pages**
-2. Source: **GitHub Actions**
-3. Guarda
-
-Como el repositorio es privado, el sitio solo será visible para las personas que tengan acceso al repo.
-
-### 4. Agregar repositorios
-
-Edita `repos.txt`:
-
+```text
+DISCORD_WEBHOOK_URL
 ```
-# GitHub
+
+El webhook **no debe escribirse en `monitor.py`, en el workflow ni en ningún archivo público**.
+
+### Tokens
+
+El workflow usa automáticamente `${{ secrets.GITHUB_TOKEN }}` proporcionado por GitHub Actions.
+
+`GITLAB_TOKEN` es opcional y solo hace falta si en el futuro se quieren consultar proyectos privados o aumentar acceso en GitLab.
+
+## GitHub Pages
+
+La web se publica desde el artefacto generado en `docs/`.
+
+En:
+
+**Settings → Pages → Build and deployment → Source**
+
+selecciona:
+
+```text
+GitHub Actions
+```
+
+La URL esperada es:
+
+```text
+https://vegettossan.github.io/PsVita-Homebrews-New-Releases/
+```
+
+> GitHub transforma el nombre de usuario a minúsculas en el dominio.
+
+## Ejecución manual
+
+También puedes ejecutar el monitor desde:
+
+**Actions → PS Vita Release Tracker → Run workflow**
+
+o localmente:
+
+```bash
+python -m pip install -r requirements.txt
+python monitor.py
+```
+
+## Variables opcionales
+
+| Variable | Uso |
+|---|---|
+| `DISCORD_WEBHOOK_URL` | Webhook de notificaciones |
+| `GITHUB_TOKEN` | Token para la API de GitHub |
+| `GITLAB_TOKEN` | Token opcional para GitLab |
+| `PSVITAALIVE_CATALOG_URL` | Permite cambiar temporalmente la fuente del catálogo |
+
+## Comportamiento de la primera sincronización
+
+El repositorio ya tenía un estado previo con proyectos monitorizados. Al migrar a la sincronización completa de PSVitaAlive pueden aparecer muchos repositorios adicionales.
+
+Para evitar spam:
+
+1. Los repos recién descubiertos se incorporan al estado.
+2. Sus releases actuales se añaden al dashboard.
+3. **No se envían cientos de notificaciones históricas.**
+4. Desde la siguiente ejecución, cualquier release nuevo sí genera notificación.
+
+## Fuente del catálogo
+
+Los metadatos del catálogo de homebrew provienen de PSVitaAlive. El catálogo mantiene registros canónicos por aplicación y enlaces a repositorios/release pages.
+
+Proyecto:
+
 https://github.com/VegettoSan/PSVitaAlive
-TheOfficialFloW/VitaShell
-
-# GitLab
-https://gitlab.com/usuario/proyecto
-```
-
-### 5. Primera ejecución
-
-Ve a la pestaña **Actions** → workflow **Monitor New Releases** → **Run workflow**.
-
-## Dashboard
-
-Después de la primera ejecución tendrás el dashboard en:
-
-```
-https://<tu-usuario>.github.io/PsVita-Homebrews-New-Releases/
-```
-
-(si el repo se llama exactamente así)
-
-O puedes abrirlo localmente abriendo `docs/index.html`.
-
-## Características del dashboard
-
-- Título del release
-- Versión / tag
-- Fecha de publicación
-- Body completo (con scroll)
-- Botones de descarga de **todos los assets** del release
-- Indicador de Pre-release
-- Color distinto para GitHub (azul) y GitLab (naranja)
-
-## Notas
-
-- El historial guarda los últimos 100 releases.
-- Solo se notifica a Discord cuando el tag cambia (no reenvía el mismo release).
-- Puedes ejecutar el workflow manualmente cuando quieras.
