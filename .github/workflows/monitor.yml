@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: psvita-release-tracker
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   monitor-and-build:
@@ -39,6 +39,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Sync PSVitaAlive catalog and check releases
+        if: github.event_name != 'push'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
