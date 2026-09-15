@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>474</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">405</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>69</strong><span>pendientes</span></div>
-        <div class="stat"><strong>467</strong><span>GitHub</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">412</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>70</strong><span>pendientes</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>7</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,80 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="vitube vitube shorelight82/vitube-vpk vitube v2.0 v2.0 media ## vitube 2.0 — hardware decoder no longer needs a system-wide plugin
+
+**fixes #2 and #5** (vitadb and green vita crashing after vitube): vitube
+bundled `reavplayer.suprx` (sonicmastr&#x27;s reavplayer), a taihen plugin that
+patched five syscall stubs inside `sceavcodecuser`, a module every process
+on the console shares. when vitube was closed from the livearea, the
+process was killed and the plugin&#x27;s cleanup never ran, so the patches stayed
+in place and crashed the next app that touched the hardware h.264 decoder —
+until the console was rebooted.
+
+the plugin is gone. the decoder now calls `sceavcdecdecodeauinternal` and
+`sceavcdecdecodegetpicturewithworkpictureinternal` directly — the same pair
+the plugin&#x27;s hook used to redirect to — so nothing outside vitube&#x27;s own
+process is touched anymore.
+
+**if you&#x27;re updating from 1.2 or earlier**, reboot the console once after
+installing. vitube 2.0 itself doesn&#x27;t need it, but a hook left behind by an
+older vitube session survives until the next reboot regardless of which
+version replaces it.
+
+no changes to playback quality, sign-in or networking. saved settings stay
+valid.
+
+### install
+download `vitube.vpk` and install it with vitashell (requires henkaku/ensō).
+existing installs are updated in place. the corresponding source for this
+build (gpl-3.0 §6) is this repository at tag `v2.0`.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/vi-tube-psvita/icon0.png" alt="Icono de ViTube" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">MEDIA · GITHUB · shorelight82/vitube-vpk</div>
+                      <h2><a href="https://github.com/shorelight82/vitube-vpk/releases/tag/v2.0" target="_blank" rel="noopener">ViTube</a></h2>
+                      <div class="release-name">ViTube v2.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v2.0</span>
+                    <span>2026-09-15 07:45 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.2 → release v2.0</div>
+                  
+                  <div class="body markdown-body"><h2>ViTube 2.0 — hardware decoder no longer needs a system-wide plugin</h2>
+<p><strong>Fixes #2 and #5</strong> (VitaDB and Green Vita crashing after ViTube): ViTube
+bundled <code>reAvPlayer.suprx</code> (SonicMastr's ReAvPlayer), a taiHEN plugin that
+patched five syscall stubs inside <code>SceAvcodecUser</code>, a module every process
+on the console shares. When ViTube was closed from the LiveArea, the
+process was killed and the plugin's cleanup never ran, so the patches stayed
+in place and crashed the next app that touched the hardware H.264 decoder —
+until the console was rebooted.</p>
+<p>The plugin is gone. The decoder now calls <code>sceAvcdecDecodeAuInternal</code> and
+<code>sceAvcdecDecodeGetPictureWithWorkPictureInternal</code> directly — the same pair
+the plugin's hook used to redirect to — so nothing outside ViTube's own
+process is touched anymore.</p>
+<p><strong>If you're updating from 1.2 or earlier</strong>, reboot the console once after
+installing. ViTube 2.0 itself doesn't need it, but a hook left behind by an
+older ViTube session survives until the next reboot regardless of which
+version replaces it.</p>
+<p>No changes to playback quality, sign-in or networking. Saved settings stay
+valid.</p>
+<h3>Install</h3>
+<p>Download <code>ViTube.vpk</code> and install it with VitaShell (requires HENkaku/Ensō).
+Existing installs are updated in place. The corresponding source for this
+build (GPL-3.0 §6) is this repository at tag <code>v2.0</code>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/shorelight82/vitube-vpk/releases/download/v2.0/ViTube.vpk" target="_blank" rel="noopener">⬇ ViTube.vpk · 4.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="psvitaalive store psvitaalive store vegettosan/psvitaalive psvita alive store 02.04 02.04 utilities # psvita alive store 02.04
 
 - fixed an issue causing errors during zip file extraction (64-bit offsets).
@@ -2074,53 +2148,6 @@ adicionalmente, este repositorio incluye peelmaker, una herramienta de escritori
 <p>Adicionalmente, este repositorio incluye PeelMaker, una herramienta de escritorio (Windows) para encuadrar y optimizar tus imágenes y que cumplan con los estrictos requisitos de Fruitpeel de forma automática.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/AlecksPV1/PeelGallery/releases/download/v1.0/PeelGallery.vpk" target="_blank" rel="noopener">⬇ PeelGallery.vpk · 4.1 MB</a><a class="btn" href="https://github.com/AlecksPV1/PeelGallery/releases/download/v1.0/PeelMaker.exe" target="_blank" rel="noopener">PeelMaker.exe · 25.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="vitube vitube shorelight82/vitube-vpk vitube v1.2 v1.2 media ## vitube 1.2 — four new languages, brazil region
-
-**interface** now in six languages: deutsch, english, español, português (brasil), italiano, français. switch under *more → language*; *automatic* keeps following the region.
-
-**region brazil** (`pt`/`br`) under *more → region*. portuguese relative dates (&quot;há 3 dias&quot;, &quot;há 1 mês&quot;) are recognised for newest-first sorting.
-
-**first launch:** consoles set to french, spanish, italian or brazilian portuguese now start in their own region and language instead of us/english.
-
-**minor:** two player messages (&quot;continuing in …&quot; and the fallback for unplayable videos) were hardcoded in german and now follow the language setting.
-
-no changes to playback, sign-in or networking. saved settings stay valid.
-
-### install
-download `vitube.vpk` and install it with vitashell (requires henkaku/ensō). existing installs are updated in place. the corresponding source for this build (gpl-3.0 §6) is this repository at tag `v1.2`.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/vi-tube-psvita/icon0.png" alt="Icono de ViTube" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">MEDIA · GITHUB · shorelight82/vitube-vpk</div>
-                      <h2><a href="https://github.com/shorelight82/vitube-vpk/releases/tag/v1.2" target="_blank" rel="noopener">ViTube</a></h2>
-                      <div class="release-name">ViTube v1.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.2</span>
-                    <span>2026-09-08 11:03 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.2</div>
-                  
-                  <div class="body markdown-body"><h2>ViTube 1.2 — four new languages, Brazil region</h2>
-<p><strong>Interface</strong> now in six languages: Deutsch, English, Español, Português (Brasil), Italiano, Français. Switch under <em>More → Language</em>; <em>Automatic</em> keeps following the region.</p>
-<p><strong>Region Brazil</strong> (<code>pt</code>/<code>BR</code>) under <em>More → Region</em>. Portuguese relative dates (&quot;há 3 dias&quot;, &quot;há 1 mês&quot;) are recognised for newest-first sorting.</p>
-<p><strong>First launch:</strong> consoles set to French, Spanish, Italian or Brazilian Portuguese now start in their own region and language instead of US/English.</p>
-<p><strong>Minor:</strong> two player messages (&quot;Continuing in …&quot; and the fallback for unplayable videos) were hardcoded in German and now follow the language setting.</p>
-<p>No changes to playback, sign-in or networking. Saved settings stay valid.</p>
-<h3>Install</h3>
-<p>Download <code>ViTube.vpk</code> and install it with VitaShell (requires HENkaku/Ensō). Existing installs are updated in place. The corresponding source for this build (GPL-3.0 §6) is this repository at tag <code>v1.2</code>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/shorelight82/vitube-vpk/releases/download/v1.2/ViTube.vpk" target="_blank" rel="noopener">⬇ ViTube.vpk · 4.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -22846,6 +22873,203 @@ https://github.com/codiak101/registryprofiler#readme">
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="custom livearea custom livearea anthj/custom-livearea v1.0 v1.0 utilities # custom livearea
+
+![pic](https://github.com/anthj/custom-livearea/blob/main/custom%20la1.jpg)
+
+------
+what can it do?
+------
+- change bubble images
+- change page and start button images
+- rename bubbles
+- hide stock bubbles
+
+------
+why?
+------
+using custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.
+
+![pic](https://github.com/anthj/custom-livearea/blob/main/custom%20la2.jpg)
+
+------
+
+more details
+------
+
+if you have created your custom bubble images and/or names you can backup the customlivearea folder to transfer it to another system or just keep it somewhere safe.. then you are able to scan this folder to re apply your settings if you ever need to..
+
+------
+
+if you need to reset everything you can choose to delete custom image and name data or just reset the information,  leaving the custom files.. you can also choose to delete the app.db with resets everything including your bubble layout
+
+------
+
+* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)
+
+thanks to :
+* rin and gl33ntwine for their help getting me unstuck a few times..
+* marcus b for the inspiration">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-custom-livearea/icon0.png" alt="Icono de Custom LiveArea" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Custom-LiveArea</div>
+                      <h2><a href="https://github.com/AntHJ/Custom-LiveArea/releases/tag/v1.0" target="_blank" rel="noopener">Custom LiveArea</a></h2>
+                      <div class="release-name">v1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-12-12 07:41 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Custom LiveArea</h1>
+<p><img src="https://github.com/AntHJ/Custom-LiveArea/blob/main/Custom%20LA1.jpg" alt="pic"></p>
+<hr>
+<h2>What can it do?</h2>
+<ul>
+<li>Change bubble images</li>
+<li>Change Page and start button images</li>
+<li>Rename bubbles</li>
+<li>Hide stock bubbles</li>
+</ul>
+<hr>
+<h2>Why?</h2>
+<p>Using custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.</p>
+<p><img src="https://github.com/AntHJ/Custom-LiveArea/blob/main/Custom%20LA2.jpg" alt="pic"></p>
+<hr>
+<h2>More details</h2>
+<p>If you have created your custom bubble images and/or names you can backup the CustomLiveArea folder to transfer it to another system or just keep it somewhere safe.. then you are able to scan this folder to re apply your settings if you ever need to..</p>
+<hr>
+<p>If you need to reset everything you can choose to delete custom image and name data or just reset the information,  leaving the custom files.. you can also choose to delete the app.db with resets everything including your bubble layout</p>
+<hr>
+<ul>
+<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
+</ul>
+<p>Thanks to :</p>
+<ul>
+<li>Rin and gl33ntwine for their help getting me unstuck a few times..</li>
+<li>Marcus B for the inspiration</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Custom-LiveArea/releases/download/v1.0/Custom.LiveArea.vpk" target="_blank" rel="noopener">⬇ Custom.LiveArea.vpk · 4.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="bubble recall bubble recall anthj/bubble-recall bubble recall v1.0 utilities # bubble recall
+
+![pic](https://github.com/anthj/bubble-recall/blob/main/bubble%20recall.jpg)
+
+------
+easily backup and restore your bubble layout.. this is useful for 2 reasons..
+1. if you have a custom vita build that you often transfer onto other systems you probably know that neatly arranging your apps every time is tedious and time consuming.. well, this will save your custom layout so it can be restored onto other systems.
+
+2. if you often swap systems such as going from the vita to a pstv or vice-versa, you will often loose the neat bubble layout you created.. this will help swap from system to system by saving and restoring the layout .
+
+------
+
+* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-bubble-recall/icon0.png" alt="Icono de Bubble Recall" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Bubble-Recall</div>
+                      <h2><a href="https://github.com/AntHJ/Bubble-Recall/releases/tag/v1.0" target="_blank" rel="noopener">Bubble Recall</a></h2>
+                      <div class="release-name">Bubble Recall</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-12-12 07:37 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Bubble Recall</h1>
+<p><img src="https://github.com/AntHJ/Bubble-Recall/blob/main/Bubble%20Recall.jpg" alt="pic"></p>
+<hr>
+<p>Easily backup and restore your bubble layout.. this is useful for 2 reasons..</p>
+<ol>
+<li><p>If you have a custom Vita build that you often transfer onto other systems you probably know that neatly arranging your apps every time is tedious and time consuming.. well, this will save your custom layout so it can be restored onto other systems.</p>
+</li>
+<li><p>if you often swap systems such as going from the Vita to a PSTV or vice-versa, you will often loose the neat bubble layout you created.. this will help swap from system to system by saving and restoring the layout .</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Bubble-Recall/releases/download/v1.0/Bubble.Recall.vpk" target="_blank" rel="noopener">⬇ Bubble.Recall.vpk · 3.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="stock app remover stock app remover anthj/stock-app-remover v1.0 v1.0 utilities # stock app remover
+![pic](https://github.com/anthj/stock-app-remover/blob/main/stock%20app%20remover.jpg)
+
+------
+hide apps
+------
+
+simply select your desired app and press the start button, this app will then hide your chosen bubbles and the system will reboot.. 
+
+------
+show apps
+------
+
+to restore the apps simply do the same.. restored bubbles will apear on the same page / folder as you have the app itself so make sure there is space around it, or male a folder with just this app in it
+
+------
+
+* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-stock-app-remover/icon0.png" alt="Icono de Stock App Remover" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Stock-App-Remover</div>
+                      <h2><a href="https://github.com/AntHJ/Stock-App-Remover/releases/tag/v1.0" target="_blank" rel="noopener">Stock App Remover</a></h2>
+                      <div class="release-name">v1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-12-12 07:29 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Stock App Remover</h1>
+<p><img src="https://github.com/AntHJ/Stock-App-Remover/blob/main/Stock%20App%20Remover.jpg" alt="pic"></p>
+<hr>
+<h2>Hide apps</h2>
+<p>Simply select your desired app and press the start button, this app will then hide your chosen bubbles and the system will reboot..</p>
+<hr>
+<h2>Show apps</h2>
+<p>To restore the apps simply do the same.. Restored bubbles will apear on the same page / folder as you have the app itself so make sure there is space around it, or male a folder with just this app in it</p>
+<hr>
+<ul>
+<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Stock-App-Remover/releases/download/v1.0/Stock.App.Remover.vpk" target="_blank" rel="noopener">⬇ Stock.App.Remover.vpk · 4.4 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="a super small shmup a super small shmup island-games/a-super-small-shmup a super small shmup v1.02 v1.02 games - updated to the latest version of libbartender.
 - small fixes.">
               <div class="card-layout">
@@ -22956,6 +23180,100 @@ if your current installed version is &lt; 1.2.5 make sure to delete the original
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="retroarch bubble builder retroarch bubble builder anthj/retroarch-bubble-builder retroarch bubble builder v1.0 utilities # retroarch bubble builder
+* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)
+
+![pic](https://github.com/anthj/retroarch-bubble-builder/blob/main/00.png)
+
+------
+the first page you will see is the summary of your bubbles details.. this includes the selected rom file, the core it will use, the bubbleid and its name on the liveaena.. you can press left and right on the d-pad to manually select a core if needed.. cores that are inluded in your current retroarch install will be green, any you dont have will be red..
+
+------
+![pic](https://github.com/anthj/retroarch-bubble-builder/blob/main/01.png)
+
+------
+the file selection screen offers you some shortcuts to help locate your files.. you can set it to remember a temporary custom folder for quicker access to your chosen folder..
+
+------
+![pic](https://github.com/anthj/retroarch-bubble-builder/blob/main/02.png)
+
+------
+the next 2 screens are where you can load and resize your images into the template area to add your custom launch page background image and the start button.. the start button can be moved into 1 of 3 positions, or by pressing start it will use the background image giving it the illusion of being transparent.. from the button page you also have the ability of adding manual images (optional)  
+
+------
+![pic](https://github.com/anthj/retroarch-bubble-builder/blob/main/03.png)
+
+------
+the help page shows roughly how to use the controls, but there are also prompts on each screen to help you along the way just in case you need them..
+
+------
+![pic](https://github.com/anthj/retroarch-bubble-builder/blob/main/05.png)
+
+------
+the last of the edit pages is for the bubble itself.. you can load an image file and resise it for the template, you can add the overlay if needed, or you can select a color from the box and make a custom color button..
+
+------
+![pic](https://github.com/anthj/retroarch-bubble-builder/blob/main/04.png)
+
+------
+once you are ready you can press start on the summary page and your bubble will be created and installed..
+
+- you may get image loading errors due to limitations in lua, try to use smaller resolution files to avoid crashing">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-retroarch-bubble-builder/icon0.png" alt="Icono de Retroarch Bubble Builder" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Retroarch-Bubble-Builder</div>
+                      <h2><a href="https://github.com/AntHJ/Retroarch-Bubble-Builder/releases/tag/v1.0" target="_blank" rel="noopener">Retroarch Bubble Builder</a></h2>
+                      <div class="release-name">Retroarch Bubble Builder</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-11-19 07:17 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Retroarch Bubble Builder</h1>
+<ul>
+<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
+</ul>
+<p><img src="https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/00.png" alt="pic"></p>
+<hr>
+<p>The first page you will see is the summary of your bubbles details.. This includes the selected Rom file, the core it will use, the BubbleID and its name on the LiveAena.. you can press left and right on the D-Pad to manually select a core if needed.. cores that are inluded in your current Retroarch install will be green, any you dont have will be red..</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/01.png" alt="pic"></p>
+<hr>
+<p>The file selection screen offers you some shortcuts to help locate your files.. you can set it to remember a temporary custom folder for quicker access to your chosen folder..</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/02.png" alt="pic"></p>
+<hr>
+<p>The next 2 screens are where you can load and resize your images into the template area to add your custom launch page background image and the start button.. the start button can be moved into 1 of 3 positions, or by pressing START it will use the background image giving it the illusion of being transparent.. from the button page you also have the ability of adding manual images (optional)</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/03.png" alt="pic"></p>
+<hr>
+<p>The help page shows roughly how to use the controls, but there are also prompts on each screen to help you along the way just in case you need them..</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/05.png" alt="pic"></p>
+<hr>
+<p>The last of the edit pages is for the Bubble itself.. you can load an image file and resise it for the template, you can add the overlay if needed, or you can select a color from the box and make a custom color button..</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/04.png" alt="pic"></p>
+<hr>
+<p>Once you are ready you can press START on the summary page and your bubble will be created and installed..</p>
+<ul>
+<li>you may get Image loading errors due to limitations in LUA, try to use smaller resolution files to avoid crashing</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Retroarch-Bubble-Builder/releases/download/v1.0/Retroarch.Bubble.Builder.vpk" target="_blank" rel="noopener">⬇ Retroarch.Bubble.Builder.vpk · 5.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="bartender bartender island-games/bartender bartender v1.0 v1.0 utilities this is the initial release of the bartender app.">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-bartender/icon0.png" alt="Icono de Bartender" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -22978,6 +23296,89 @@ if your current installed version is &lt; 1.2.5 make sure to delete the original
                   <div class="body markdown-body"><p>This is the initial release of the Bartender app.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/island-games/Bartender/releases/download/v1.0/Bartender.vpk" target="_blank" rel="noopener">⬇ Bartender.vpk · 1.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="squid game squid game anthj/squid-game squid game v1.0 games # squid-game
+this is my 1st ever attempt at making a game and even tho its not the best, its a little short and ive probably done things a little unusual but it works, im happy about the way it turned out and i had fun creating it.. 
+
+------
+
+![](https://github.com/anthj/squid-game/blob/main/game1.png)
+![](https://github.com/anthj/squid-game/blob/main/game1b.png)
+
+use the d-pad and only move when she sings.. this level has 3 random maps (obsticle courses) for you to navigate within the time limit
+
+------
+![](https://github.com/anthj/squid-game/blob/main/game2.png)
+![](https://github.com/anthj/squid-game/blob/main/game2b.png)
+
+use your finger to carefully trace the shape on the honeycomb.. there are 3 randomly selected shapes, a square, a circle and a triangle
+
+------
+![](https://github.com/anthj/squid-game/blob/main/game3.png)
+![](https://github.com/anthj/squid-game/blob/main/game3b.png)
+
+carefully time you button presses to tug at the highest force to beat your opponent.. there are 3 strength levels which determins the speed of the rope.. you can use any action button for this
+
+------
+![](https://github.com/anthj/squid-game/blob/main/game4.png)
+![](https://github.com/anthj/squid-game/blob/main/game4b.png)
+
+a simple game that is tricky to beat, a random number of marbles (1-4) will be in the hand, make your guess of either odd or even and try to win all the marbles.. the looser will be shot
+
+------
+![](https://github.com/anthj/squid-game/blob/main/game5.png)
+![](https://github.com/anthj/squid-game/blob/main/game5b.png)
+
+the final game is all about luck, the path is randomly generated. will you be victorious and learn a hidden secret, or will you plumit to your death?
+
+good luck!">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-squid-game/icon0.png" alt="Icono de Squid Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">GAMES · GITHUB · AntHJ/Squid-Game</div>
+                      <h2><a href="https://github.com/AntHJ/Squid-Game/releases/tag/v1.0" target="_blank" rel="noopener">Squid Game</a></h2>
+                      <div class="release-name">Squid Game</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-11-06 22:34 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Squid-Game</h1>
+<p>This is my 1st ever attempt at making a game and even tho its not the best, its a little short and ive probably done things a little unusual but it works, im happy about the way it turned out and i had fun creating it..</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Squid-Game/blob/main/Game1.png" alt="">
+<img src="https://github.com/AntHJ/Squid-Game/blob/main/Game1b.png" alt=""></p>
+<p>use the d-pad and only move when she sings.. this level has 3 random maps (obsticle courses) for you to navigate within the time limit</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Squid-Game/blob/main/Game2.png" alt="">
+<img src="https://github.com/AntHJ/Squid-Game/blob/main/Game2b.png" alt=""></p>
+<p>use your finger to carefully trace the shape on the honeycomb.. there are 3 randomly selected shapes, a square, a circle and a triangle</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Squid-Game/blob/main/Game3.png" alt="">
+<img src="https://github.com/AntHJ/Squid-Game/blob/main/Game3b.png" alt=""></p>
+<p>carefully time you button presses to tug at the highest force to beat your opponent.. there are 3 strength levels which determins the speed of the rope.. you can use any action button for this</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Squid-Game/blob/main/Game4.png" alt="">
+<img src="https://github.com/AntHJ/Squid-Game/blob/main/Game4b.png" alt=""></p>
+<p>a simple game that is tricky to beat, a random number of marbles (1-4) will be in the hand, make your guess of either odd or even and try to win ALL the marbles.. the looser will be shot</p>
+<hr>
+<p><img src="https://github.com/AntHJ/Squid-Game/blob/main/Game5.png" alt="">
+<img src="https://github.com/AntHJ/Squid-Game/blob/main/Game5b.png" alt=""></p>
+<p>the final game is all about luck, the path is randomly generated. will you be victorious and learn a hidden secret, or will you plumit to your death?</p>
+<p>good luck!</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Squid-Game/releases/download/v1.0/Squid.Game.vpk" target="_blank" rel="noopener">⬇ Squid.Game.vpk · 27.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -23541,6 +23942,58 @@ there are still a lot of features to be added, but this is the first viable vers
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/Electric1447/EasyVPK/releases/download/v2.1.0/easyvpk.vpk" target="_blank" rel="noopener">⬇ easyvpk.vpk · 2.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="applocker applocker anthj/applocker applocker v1.2 v1.2 utilities easily lock and unlock you apps, ideal for use with kids or adults who like to mess where they shouldnt..
+
+        this app gives you 3 extra levels of security :
+  
+        - simple (analogue and trigger combo unlock)
+        - difficult (konami code unlock)
+        - high (app cannot be unlocked with a combo)
+
+to bypass the standard lock :
+hold the left analogue to the left, the right analogue to the right and press both l + r triggers at the same time....
+
+to bypass the konami code lock :
+press up, up, down, down, left, right, left, right, x, o
+
+
+if you have selected to fully lock an app then the combos wont bypass the locks">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-applocker/icon0.png" alt="Icono de AppLocker" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/AppLocker</div>
+                      <h2><a href="https://github.com/AntHJ/AppLocker/releases/tag/v1.2" target="_blank" rel="noopener">AppLocker</a></h2>
+                      <div class="release-name">AppLocker v1.2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2</span>
+                    <span>2021-08-14 17:17 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.2</div>
+                  
+                  <div class="body markdown-body"><p>Easily Lock and Unlock you apps, ideal for use with kids or adults who like to mess where they shouldnt..</p>
+<pre><code>    This app gives you 3 extra levels of security :
+
+    - Simple (Analogue and Trigger combo unlock)
+    - Difficult (Konami code unlock)
+    - High (App cannot be unlocked with a combo)</code></pre>
+<p>To bypass the standard lock :
+Hold the Left analogue to the left, the right analogue to the right and press both L + R triggers at the same time....</p>
+<p>To bypass the Konami code lock :
+Press Up, Up, Down, Down, Left, Right, Left, Right, X, O</p>
+<p>If you have selected to FULLY LOCK an app then the combos wont bypass the locks</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/AppLocker/releases/download/v1.2/AppLocker-v1.2.vpk" target="_blank" rel="noopener">⬇ AppLocker-v1.2.vpk · 3.4 MB</a></div>
                 </div>
               </div>
             </article>
@@ -25556,6 +26009,33 @@ Three finger drag = drag'n'drop (right mouse button is held down)</p>
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="worminator 3 worminator 3 ammeir/worminator worminator v1.0 v1.0 ports first version of worminator.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-worminator-3/icon0.png" alt="Icono de Worminator 3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ammeir/worminator</div>
+                      <h2><a href="https://github.com/ammeir/worminator/releases/tag/v1.0" target="_blank" rel="noopener">Worminator 3</a></h2>
+                      <div class="release-name">Worminator v1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-05-08 18:42 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><p>First version of Worminator.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ammeir/worminator/releases/download/v1.0/worminator_v10.zip" target="_blank" rel="noopener">⬇ worminator_v10.zip · 27.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="fadetoblack fadetoblack usineur/f2bgl f2bgl for switch 0.3.1 switch-0.3.1 ports ## installation
 
 - copy `f2bgl.nro` to `/switch/f2bgl/` folder.
@@ -26764,6 +27244,33 @@ Both files can be opened or extracted with anything that can extract <code>.zip<
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="hurrican hurrican ammeir/hurrican hurrican v0.9 v0.9 ports first release of hurrican.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-hurrican/icon0.png" alt="Icono de Hurrican" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ammeir/hurrican</div>
+                      <h2><a href="https://github.com/ammeir/hurrican/releases/tag/v0.9" target="_blank" rel="noopener">Hurrican</a></h2>
+                      <div class="release-name">Hurrican v0.9</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.9</span>
+                    <span>2021-02-15 08:13 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.9</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.9</div>
+                  
+                  <div class="body markdown-body"><p>First release of Hurrican.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ammeir/hurrican/releases/download/v0.9/hurrican_v09.zip" target="_blank" rel="noopener">⬇ hurrican_v09.zip · 37.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="sonic 2 vita sonic 2 vita sonic 1 vita sonicmastr/sonic-1-2-vita sonic 1 and sonic 2 vita 1.1.0 1.1.0 ports ## livearea assets made by [danhanado](https://twitter.com/danmcl1)!
 
 # changlog:
@@ -27032,7 +27539,7 @@ Optionally, place your Videos folder from your copy of Sonic CD and put it in <c
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-15 06:57 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-15 08:15 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "shorelight82/vitube-vpk",
+    "release_id": "388952632",
+    "tag": "v2.0",
+    "name": "ViTube v2.0",
+    "url": "https://github.com/shorelight82/vitube-vpk/releases/tag/v2.0",
+    "published": "2026-09-15T07:45:06Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## ViTube 2.0 — hardware decoder no longer needs a system-wide plugin\n\n**Fixes #2 and #5** (VitaDB and Green Vita crashing after ViTube): ViTube\nbundled `reAvPlayer.suprx` (SonicMastr's ReAvPlayer), a taiHEN plugin that\npatched five syscall stubs inside `SceAvcodecUser`, a module every process\non the console shares. When ViTube was closed from the LiveArea, the\nprocess was killed and the plugin's cleanup never ran, so the patches stayed\nin place and crashed the next app that touched the hardware H.264 decoder —\nuntil the console was rebooted.\n\nThe plugin is gone. The decoder now calls `sceAvcdecDecodeAuInternal` and\n`sceAvcdecDecodeGetPictureWithWorkPictureInternal` directly — the same pair\nthe plugin's hook used to redirect to — so nothing outside ViTube's own\nprocess is touched anymore.\n\n**If you're updating from 1.2 or earlier**, reboot the console once after\ninstalling. ViTube 2.0 itself doesn't need it, but a hook left behind by an\nolder ViTube session survives until the next reboot regardless of which\nversion replaces it.\n\nNo changes to playback quality, sign-in or networking. Saved settings stay\nvalid.\n\n### Install\nDownload `ViTube.vpk` and install it with VitaShell (requires HENkaku/Ensō).\nExisting installs are updated in place. The corresponding source for this\nbuild (GPL-3.0 §6) is this repository at tag `v2.0`.\n",
+    "assets": [
+      {
+        "name": "ViTube.vpk",
+        "size": 4212250,
+        "download_url": "https://github.com/shorelight82/vitube-vpk/releases/download/v2.0/ViTube.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "shorelight82",
+    "homebrew_name": "ViTube",
+    "homebrew_icon": "https://archive.org/download/vi-tube-psvita/icon0.png",
+    "homebrew_category": "media",
+    "homebrew_description": "Native YouTube client for the PlayStation Vita",
+    "homebrew_long_description": "Native YouTube client for the PlayStation Vita. Talks directly to YouTube's internal API — no companion server, no account requirement, no browser.",
+    "homebrew_id": "vitube",
+    "homebrew_authors": [
+      "shorelight82"
+    ],
+    "homebrew_version": "1.2",
+    "catalog_apps": [
+      {
+        "id": "vitube",
+        "name": "ViTube",
+        "icon": "https://archive.org/download/vi-tube-psvita/icon0.png",
+        "category": "media",
+        "description": "Native YouTube client for the PlayStation Vita",
+        "long_description": "Native YouTube client for the PlayStation Vita. Talks directly to YouTube's internal API — no companion server, no account requirement, no browser.",
+        "version": "1.2",
+        "version_date": "2026-09-08",
+        "author_ids": [
+          "shorelight82"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.2 → release v2.0",
+    "catalog_version": "1.2"
+  },
+  {
+    "platform": "github",
     "repo": "VegettoSan/PSVitaAlive",
     "release_id": "388892251",
     "tag": "02.04",
@@ -1154,55 +1203,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.0",
     "catalog_version": "1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "shorelight82/vitube-vpk",
-    "release_id": "384656956",
-    "tag": "v1.2",
-    "name": "ViTube v1.2",
-    "url": "https://github.com/shorelight82/vitube-vpk/releases/tag/v1.2",
-    "published": "2026-09-08T11:03:21Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## ViTube 1.2 — four new languages, Brazil region\n\n**Interface** now in six languages: Deutsch, English, Español, Português (Brasil), Italiano, Français. Switch under *More → Language*; *Automatic* keeps following the region.\n\n**Region Brazil** (`pt`/`BR`) under *More → Region*. Portuguese relative dates (\"há 3 dias\", \"há 1 mês\") are recognised for newest-first sorting.\n\n**First launch:** consoles set to French, Spanish, Italian or Brazilian Portuguese now start in their own region and language instead of US/English.\n\n**Minor:** two player messages (\"Continuing in …\" and the fallback for unplayable videos) were hardcoded in German and now follow the language setting.\n\nNo changes to playback, sign-in or networking. Saved settings stay valid.\n\n### Install\nDownload `ViTube.vpk` and install it with VitaShell (requires HENkaku/Ensō). Existing installs are updated in place. The corresponding source for this build (GPL-3.0 §6) is this repository at tag `v1.2`.\n",
-    "assets": [
-      {
-        "name": "ViTube.vpk",
-        "size": 4214909,
-        "download_url": "https://github.com/shorelight82/vitube-vpk/releases/download/v1.2/ViTube.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "shorelight82",
-    "homebrew_name": "ViTube",
-    "homebrew_icon": "https://archive.org/download/vi-tube-psvita/icon0.png",
-    "homebrew_category": "media",
-    "homebrew_description": "Native YouTube client for the PlayStation Vita",
-    "homebrew_id": "vitube",
-    "homebrew_authors": [
-      "shorelight82"
-    ],
-    "catalog_apps": [
-      {
-        "id": "vitube",
-        "name": "ViTube",
-        "icon": "https://archive.org/download/vi-tube-psvita/icon0.png",
-        "category": "media",
-        "description": "Native YouTube client for the PlayStation Vita",
-        "long_description": "Native YouTube client for the PlayStation Vita. Talks directly to YouTube's internal API — no companion server, no account requirement, no browser.",
-        "version": "1.2",
-        "version_date": "2026-09-08",
-        "author_ids": [
-          "shorelight82"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Native YouTube client for the PlayStation Vita. Talks directly to YouTube's internal API — no companion server, no account requirement, no browser.",
-    "homebrew_version": "1.2",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.2",
-    "catalog_version": "1.2"
   },
   {
     "platform": "github",
@@ -29907,6 +29907,153 @@
   },
   {
     "platform": "github",
+    "repo": "AntHJ/Custom-LiveArea",
+    "release_id": "55125419",
+    "tag": "v1.0",
+    "name": "v1.0",
+    "url": "https://github.com/AntHJ/Custom-LiveArea/releases/tag/v1.0",
+    "published": "2021-12-12T07:41:27Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Custom LiveArea\r\n\r\n![pic](https://github.com/AntHJ/Custom-LiveArea/blob/main/Custom%20LA1.jpg)\r\n\r\n------\r\nWhat can it do?\r\n------\r\n- Change bubble images\r\n- Change Page and start button images\r\n- Rename bubbles\r\n- Hide stock bubbles\r\n\r\n------\r\nWhy?\r\n------\r\nUsing custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.\r\n\r\n![pic](https://github.com/AntHJ/Custom-LiveArea/blob/main/Custom%20LA2.jpg)\r\n\r\n------\r\n\r\nMore details\r\n------\r\n\r\nIf you have created your custom bubble images and/or names you can backup the CustomLiveArea folder to transfer it to another system or just keep it somewhere safe.. then you are able to scan this folder to re apply your settings if you ever need to..\r\n\r\n------\r\n\r\nIf you need to reset everything you can choose to delete custom image and name data or just reset the information,  leaving the custom files.. you can also choose to delete the app.db with resets everything including your bubble layout\r\n\r\n------\r\n\r\n* Utilises Lua Player Plus Vita (lpp-vita). [Learn more.](https://github.com/Rinnegatamante/lpp-vita)\r\n\r\nThanks to :\r\n* Rin and gl33ntwine for their help getting me unstuck a few times..\r\n* Marcus B for the inspiration",
+    "assets": [
+      {
+        "name": "Custom.LiveArea.vpk",
+        "size": 5017198,
+        "download_url": "https://github.com/AntHJ/Custom-LiveArea/releases/download/v1.0/Custom.LiveArea.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AntHJ",
+    "homebrew_name": "Custom LiveArea",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-custom-livearea/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "App to customize your bubbles.",
+    "homebrew_long_description": "Using custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.\nCustomise icons, title names and images of your apps and games bubbles.",
+    "homebrew_id": "custom-livearea",
+    "homebrew_authors": [
+      "anthj"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "custom-livearea",
+        "name": "Custom LiveArea",
+        "icon": "https://archive.org/download/psvitaalive-custom-livearea/icon0.png",
+        "category": "utilities",
+        "description": "App to customize your bubbles.",
+        "long_description": "Using custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.\nCustomise icons, title names and images of your apps and games bubbles.",
+        "version": "v.1.0",
+        "version_date": "2021-12-12",
+        "author_ids": [
+          "anthj"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "AntHJ/Bubble-Recall",
+    "release_id": "55125292",
+    "tag": "v1.0",
+    "name": "Bubble Recall",
+    "url": "https://github.com/AntHJ/Bubble-Recall/releases/tag/v1.0",
+    "published": "2021-12-12T07:37:46Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Bubble Recall\r\n\r\n![pic](https://github.com/AntHJ/Bubble-Recall/blob/main/Bubble%20Recall.jpg)\r\n\r\n------\r\nEasily backup and restore your bubble layout.. this is useful for 2 reasons..\r\n1. If you have a custom Vita build that you often transfer onto other systems you probably know that neatly arranging your apps every time is tedious and time consuming.. well, this will save your custom layout so it can be restored onto other systems.\r\n\r\n2. if you often swap systems such as going from the Vita to a PSTV or vice-versa, you will often loose the neat bubble layout you created.. this will help swap from system to system by saving and restoring the layout .\r\n\r\n------\r\n\r\n* Utilises Lua Player Plus Vita (lpp-vita). [Learn more.](https://github.com/Rinnegatamante/lpp-vita)",
+    "assets": [
+      {
+        "name": "Bubble.Recall.vpk",
+        "size": 3775090,
+        "download_url": "https://github.com/AntHJ/Bubble-Recall/releases/download/v1.0/Bubble.Recall.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AntHJ",
+    "homebrew_name": "Bubble Recall",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-bubble-recall/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Quickly and easily save and restore your bubbles layouts.",
+    "homebrew_long_description": "If you have a custom Vita build that you often transfer onto other systems or you swap your SD between devices, you probably know that neatly arranging your apps every time is tedious and time consuming. This will save your custom layout so it can be restored onto other systems.",
+    "homebrew_id": "bubble-recall",
+    "homebrew_authors": [
+      "anthj"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "bubble-recall",
+        "name": "Bubble Recall",
+        "icon": "https://archive.org/download/psvitaalive-bubble-recall/icon0.png",
+        "category": "utilities",
+        "description": "Quickly and easily save and restore your bubbles layouts.",
+        "long_description": "If you have a custom Vita build that you often transfer onto other systems or you swap your SD between devices, you probably know that neatly arranging your apps every time is tedious and time consuming. This will save your custom layout so it can be restored onto other systems.",
+        "version": "v.1.0",
+        "version_date": "2021-12-12",
+        "author_ids": [
+          "anthj"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "AntHJ/Stock-App-Remover",
+    "release_id": "55124932",
+    "tag": "v1.0",
+    "name": "v1.0",
+    "url": "https://github.com/AntHJ/Stock-App-Remover/releases/tag/v1.0",
+    "published": "2021-12-12T07:29:21Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Stock App Remover\r\n![pic](https://github.com/AntHJ/Stock-App-Remover/blob/main/Stock%20App%20Remover.jpg)\r\n\r\n------\r\nHide apps\r\n------\r\n\r\nSimply select your desired app and press the start button, this app will then hide your chosen bubbles and the system will reboot.. \r\n\r\n------\r\nShow apps\r\n------\r\n\r\nTo restore the apps simply do the same.. Restored bubbles will apear on the same page / folder as you have the app itself so make sure there is space around it, or male a folder with just this app in it\r\n\r\n------\r\n\r\n* Utilises Lua Player Plus Vita (lpp-vita). [Learn more.](https://github.com/Rinnegatamante/lpp-vita)",
+    "assets": [
+      {
+        "name": "Stock.App.Remover.vpk",
+        "size": 4621733,
+        "download_url": "https://github.com/AntHJ/Stock-App-Remover/releases/download/v1.0/Stock.App.Remover.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AntHJ",
+    "homebrew_name": "Stock App Remover",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-stock-app-remover/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Quick and easy way to remove/hide stock apps.",
+    "homebrew_long_description": "This app is not destructive and does not actually \"remove\" the stock apps. It just hides them from the LiveArea. You can of course restore them.",
+    "homebrew_id": "stock-app-remover",
+    "homebrew_authors": [
+      "anthj"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "stock-app-remover",
+        "name": "Stock App Remover",
+        "icon": "https://archive.org/download/psvitaalive-stock-app-remover/icon0.png",
+        "category": "utilities",
+        "description": "Quick and easy way to remove/hide stock apps.",
+        "long_description": "This app is not destructive and does not actually \"remove\" the stock apps. It just hides them from the LiveArea. You can of course restore them.",
+        "version": "v.1.0",
+        "version_date": "2021-12-12",
+        "author_ids": [
+          "anthj"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "island-games/A-Super-Small-Shmup",
     "release_id": "54471210",
     "tag": "v1.02",
@@ -30054,6 +30201,55 @@
   },
   {
     "platform": "github",
+    "repo": "AntHJ/Retroarch-Bubble-Builder",
+    "release_id": "53697960",
+    "tag": "v1.0",
+    "name": "Retroarch Bubble Builder",
+    "url": "https://github.com/AntHJ/Retroarch-Bubble-Builder/releases/tag/v1.0",
+    "published": "2021-11-19T07:17:10Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Retroarch Bubble Builder\r\n* Utilises Lua Player Plus Vita (lpp-vita). [Learn more.](https://github.com/Rinnegatamante/lpp-vita)\r\n\r\n![pic](https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/00.png)\r\n\r\n------\r\nThe first page you will see is the summary of your bubbles details.. This includes the selected Rom file, the core it will use, the BubbleID and its name on the LiveAena.. you can press left and right on the D-Pad to manually select a core if needed.. cores that are inluded in your current Retroarch install will be green, any you dont have will be red..\r\n\r\n------\r\n![pic](https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/01.png)\r\n\r\n------\r\nThe file selection screen offers you some shortcuts to help locate your files.. you can set it to remember a temporary custom folder for quicker access to your chosen folder..\r\n\r\n------\r\n![pic](https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/02.png)\r\n\r\n------\r\nThe next 2 screens are where you can load and resize your images into the template area to add your custom launch page background image and the start button.. the start button can be moved into 1 of 3 positions, or by pressing START it will use the background image giving it the illusion of being transparent.. from the button page you also have the ability of adding manual images (optional)  \r\n\r\n------\r\n![pic](https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/03.png)\r\n\r\n------\r\nThe help page shows roughly how to use the controls, but there are also prompts on each screen to help you along the way just in case you need them..\r\n\r\n------\r\n![pic](https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/05.png)\r\n\r\n------\r\nThe last of the edit pages is for the Bubble itself.. you can load an image file and resise it for the template, you can add the overlay if needed, or you can select a color from the box and make a custom color button..\r\n\r\n------\r\n![pic](https://github.com/AntHJ/Retroarch-Bubble-Builder/blob/main/04.png)\r\n\r\n------\r\nOnce you are ready you can press START on the summary page and your bubble will be created and installed..\r\n\r\n- you may get Image loading errors due to limitations in LUA, try to use smaller resolution files to avoid crashing\r\n",
+    "assets": [
+      {
+        "name": "Retroarch.Bubble.Builder.vpk",
+        "size": 5885149,
+        "download_url": "https://github.com/AntHJ/Retroarch-Bubble-Builder/releases/download/v1.0/Retroarch.Bubble.Builder.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AntHJ",
+    "homebrew_name": "Retroarch Bubble Builder",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-retroarch-bubble-builder/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Tool to create custom bubbles for Retroarch games.",
+    "homebrew_long_description": "With this tool you are able to load your own images and resize them to make your own bubble and launch page.. if your using the Crazymac build or older verions of Retroarch the shortcut feature wasn't included, this app can also make your Retroarch compatible with the bubble shortcuts..",
+    "homebrew_id": "retroarch-bubble-builder",
+    "homebrew_authors": [
+      "anthj"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "retroarch-bubble-builder",
+        "name": "Retroarch Bubble Builder",
+        "icon": "https://archive.org/download/psvitaalive-retroarch-bubble-builder/icon0.png",
+        "category": "utilities",
+        "description": "Tool to create custom bubbles for Retroarch games.",
+        "long_description": "With this tool you are able to load your own images and resize them to make your own bubble and launch page.. if your using the Crazymac build or older verions of Retroarch the shortcut feature wasn't included, this app can also make your Retroarch compatible with the bubble shortcuts..",
+        "version": "v.1.0",
+        "version_date": "2021-11-19",
+        "author_ids": [
+          "anthj"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "island-games/Bartender",
     "release_id": "53118583",
     "tag": "v1.0",
@@ -30094,6 +30290,55 @@
         "version_date": "2021-11-10",
         "author_ids": [
           "island-games"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "AntHJ/Squid-Game",
+    "release_id": "52855430",
+    "tag": "v1.0",
+    "name": "Squid Game",
+    "url": "https://github.com/AntHJ/Squid-Game/releases/tag/v1.0",
+    "published": "2021-11-06T22:34:16Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Squid-Game\r\nThis is my 1st ever attempt at making a game and even tho its not the best, its a little short and ive probably done things a little unusual but it works, im happy about the way it turned out and i had fun creating it.. \r\n\r\n------\r\n\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game1.png)\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game1b.png)\r\n\r\nuse the d-pad and only move when she sings.. this level has 3 random maps (obsticle courses) for you to navigate within the time limit\r\n\r\n------\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game2.png)\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game2b.png)\r\n\r\nuse your finger to carefully trace the shape on the honeycomb.. there are 3 randomly selected shapes, a square, a circle and a triangle\r\n\r\n------\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game3.png)\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game3b.png)\r\n\r\ncarefully time you button presses to tug at the highest force to beat your opponent.. there are 3 strength levels which determins the speed of the rope.. you can use any action button for this\r\n\r\n------\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game4.png)\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game4b.png)\r\n\r\na simple game that is tricky to beat, a random number of marbles (1-4) will be in the hand, make your guess of either odd or even and try to win ALL the marbles.. the looser will be shot\r\n\r\n------\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game5.png)\r\n![](https://github.com/AntHJ/Squid-Game/blob/main/Game5b.png)\r\n\r\nthe final game is all about luck, the path is randomly generated. will you be victorious and learn a hidden secret, or will you plumit to your death?\r\n\r\ngood luck!",
+    "assets": [
+      {
+        "name": "Squid.Game.vpk",
+        "size": 28319506,
+        "download_url": "https://github.com/AntHJ/Squid-Game/releases/download/v1.0/Squid.Game.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AntHJ",
+    "homebrew_name": "Squid Game",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-squid-game/icon0.png",
+    "homebrew_category": "games",
+    "homebrew_description": "A challenge based game inspired by the hit Netflix show.",
+    "homebrew_long_description": "A challenge based game inspired by the hit Netflix show. Created in Lua using Lua Player Plus.",
+    "homebrew_id": "squid-game",
+    "homebrew_authors": [
+      "anthj"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "squid-game",
+        "name": "Squid Game",
+        "icon": "https://archive.org/download/psvitaalive-squid-game/icon0.png",
+        "category": "games",
+        "description": "A challenge based game inspired by the hit Netflix show.",
+        "long_description": "A challenge based game inspired by the hit Netflix show. Created in Lua using Lua Player Plus.",
+        "version": "v.1.0",
+        "version_date": "2021-11-06",
+        "author_ids": [
+          "anthj"
         ]
       }
     ],
@@ -30893,6 +31138,55 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.2.1.0",
     "catalog_version": "v.2.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "AntHJ/AppLocker",
+    "release_id": "47855094",
+    "tag": "v1.2",
+    "name": "AppLocker v1.2",
+    "url": "https://github.com/AntHJ/AppLocker/releases/tag/v1.2",
+    "published": "2021-08-14T17:17:40Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Easily Lock and Unlock you apps, ideal for use with kids or adults who like to mess where they shouldnt..\r\n\r\n        This app gives you 3 extra levels of security :\r\n  \r\n        - Simple (Analogue and Trigger combo unlock)\r\n        - Difficult (Konami code unlock)\r\n        - High (App cannot be unlocked with a combo)\r\n\r\nTo bypass the standard lock :\r\nHold the Left analogue to the left, the right analogue to the right and press both L + R triggers at the same time....\r\n\r\nTo bypass the Konami code lock :\r\nPress Up, Up, Down, Down, Left, Right, Left, Right, X, O\r\n\r\n\r\nIf you have selected to FULLY LOCK an app then the combos wont bypass the locks",
+    "assets": [
+      {
+        "name": "AppLocker-v1.2.vpk",
+        "size": 3591941,
+        "download_url": "https://github.com/AntHJ/AppLocker/releases/download/v1.2/AppLocker-v1.2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AntHJ",
+    "homebrew_name": "AppLocker",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-applocker/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Lock and Unlock your apps quickly and easily",
+    "homebrew_long_description": "You can now Lock and Unlock access to your Vitas apps. Pressing X on your selected app will create a lock that is bypassable by a combo, Pressing Square will FULLY lock the app so it cannot be bypassed, and Pressing O will remove the app lock.\nTo bypass the lock : Hold the left analogue left, the right analogue right and press both L + R triggers all at the same time..",
+    "homebrew_id": "applocker",
+    "homebrew_authors": [
+      "anthj"
+    ],
+    "homebrew_version": "v.1.2",
+    "catalog_apps": [
+      {
+        "id": "applocker",
+        "name": "AppLocker",
+        "icon": "https://archive.org/download/psvitaalive-applocker/icon0.png",
+        "category": "utilities",
+        "description": "Lock and Unlock your apps quickly and easily",
+        "long_description": "You can now Lock and Unlock access to your Vitas apps. Pressing X on your selected app will create a lock that is bypassable by a combo, Pressing Square will FULLY lock the app so it cannot be bypassed, and Pressing O will remove the app lock.\nTo bypass the lock : Hold the left analogue left, the right analogue right and press both L + R triggers all at the same time..",
+        "version": "v.1.2",
+        "version_date": "2021-08-14",
+        "author_ids": [
+          "anthj"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.2",
+    "catalog_version": "v.1.2"
   },
   {
     "platform": "github",
@@ -32016,6 +32310,55 @@
   },
   {
     "platform": "github",
+    "repo": "ammeir/worminator",
+    "release_id": "42650633",
+    "tag": "v1.0",
+    "name": "Worminator v1.0",
+    "url": "https://github.com/ammeir/worminator/releases/tag/v1.0",
+    "published": "2021-05-08T18:42:16Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "First version of Worminator.",
+    "assets": [
+      {
+        "name": "worminator_v10.zip",
+        "size": 29017876,
+        "download_url": "https://github.com/ammeir/worminator/releases/download/v1.0/worminator_v10.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "ammeir",
+    "homebrew_name": "Worminator 3",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-worminator-3/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Worminator 3 for PSVITA.",
+    "homebrew_long_description": "Worminator 3 is a sidescrolling action platformer game where you play as The Worminator and fight your way through many levels of madness and mayhem. It features huge levels, two episodes, nine unique weapons, Matrix-style \"bullet time\", hidden locations, multiple difficulties, several other optional characters and many cheats that influence gameplay.",
+    "homebrew_id": "worminator-3",
+    "homebrew_authors": [
+      "ammeir"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "worminator-3",
+        "name": "Worminator 3",
+        "icon": "https://archive.org/download/psvitaalive-worminator-3/icon0.png",
+        "category": "ports",
+        "description": "Port of Worminator 3 for PSVITA.",
+        "long_description": "Worminator 3 is a sidescrolling action platformer game where you play as The Worminator and fight your way through many levels of madness and mayhem. It features huge levels, two episodes, nine unique weapons, Matrix-style \"bullet time\", hidden locations, multiple difficulties, several other optional characters and many cheats that influence gameplay.",
+        "version": "v.1.0",
+        "version_date": "2021-05-08",
+        "author_ids": [
+          "ammeir"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "usineur/f2bgl",
     "release_id": "42629758",
     "tag": "switch-0.3.1",
@@ -32494,6 +32837,55 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive r4",
     "catalog_version": "r4"
+  },
+  {
+    "platform": "github",
+    "repo": "ammeir/hurrican",
+    "release_id": "37634620",
+    "tag": "v0.9",
+    "name": "Hurrican v0.9",
+    "url": "https://github.com/ammeir/hurrican/releases/tag/v0.9",
+    "published": "2021-02-15T08:13:42Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "First release of Hurrican.",
+    "assets": [
+      {
+        "name": "hurrican_v09.zip",
+        "size": 39682443,
+        "download_url": "https://github.com/ammeir/hurrican/releases/download/v0.9/hurrican_v09.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "ammeir",
+    "homebrew_name": "Hurrican",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-hurrican/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Hurrican for PSVITA.",
+    "homebrew_long_description": "Hurrican is a freeware jump and shoot game created by Poke53280 that is based on the Turrican game series. Blast your way through nine action-packed levels filled with different enemies and powerups.",
+    "homebrew_id": "hurrican",
+    "homebrew_authors": [
+      "ammeir"
+    ],
+    "homebrew_version": "v.0.9",
+    "catalog_apps": [
+      {
+        "id": "hurrican",
+        "name": "Hurrican",
+        "icon": "https://archive.org/download/psvitaalive-hurrican/icon0.png",
+        "category": "ports",
+        "description": "Port of Hurrican for PSVITA.",
+        "long_description": "Hurrican is a freeware jump and shoot game created by Poke53280 that is based on the Turrican game series. Blast your way through nine action-packed levels filled with different enemies and powerups.",
+        "version": "v.0.9",
+        "version_date": "2021-02-15",
+        "author_ids": [
+          "ammeir"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.0.9",
+    "catalog_version": "v.0.9"
   },
   {
     "platform": "github",
