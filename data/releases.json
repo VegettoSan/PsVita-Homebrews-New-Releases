@@ -1,6 +1,122 @@
 [
   {
     "platform": "github",
+    "repo": "ONElua/AdrenalineBubbleManager",
+    "release_id": "389636684",
+    "tag": "6.23",
+    "name": "Adrenaline Bubble Manager v6.23",
+    "url": "https://github.com/ONElua/AdrenalineBubbleManager/releases/tag/6.23",
+    "published": "2026-09-16T04:25:09Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Changelog 6.23\r\n\r\n#### DAX / ZSO (isage 8.0.2)\r\n- Scan and list support for **DAX** and **ZSO** when using **Adrenaline isage 8.0.2** with ABM modules\r\n- Format detection via `files.type` (ISO / CSO / PBP / DAX / ZSO)\r\n\r\n#### Sort modes\r\n- New and improved sort options: **Title**, **MTime**, **Installed**, **Category**, **GameID**, **Device**, **Format**\r\n- Fixed sort behaviour (including **MTime** newest → oldest with proper date parsing)\r\n- **Format** group order: iso → cso → pbp → dax → zso, then title A–Z within each group\r\n- **Category** / **Device** / **Format** / **Installed**: group first, then title A–Z\r\n\r\n#### List display\r\n- Each game shows platform tag: **[PSP]**, **[PSX]**, or **[HB]** (from SFO category)\r\n- When sorting by **Category**, **Device**, or **Format**, the matching value is shown in brackets after the platform tag (e.g. `[UG]`, `[ux0]`, `[iso]`)\r\n\r\n#### Debug log\r\n- Optional scan log at `ux0:data/ABM/debug_log.txt`\r\n- One entry flow per game: **SCAN** (path first), then **OK** / **FAIL** / **SKIP**\r\n- Overwritten on each full scan (does not accumulate across launches)\r\n\r\n#### Seasonal particles\r\n- **December 20–25:** white snow particles\r\n- **September 15–16:** green / white / red particles\r\n\r\n#### Notes\r\n- Full DAX/ZSO support needs a ONELua build that reports types **4 (DAX)** and **9 (ZSO)** and can read those images",
+    "assets": [
+      {
+        "name": "AdrenalineBubbleManager.vpk",
+        "size": 10527979,
+        "download_url": "https://github.com/ONElua/AdrenalineBubbleManager/releases/download/6.23/AdrenalineBubbleManager.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "ONElua",
+    "homebrew_name": "Adrenaline Bubbles Manager",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-adrenaline-bubbles-manager/icon0.png",
+    "homebrew_category": "games",
+    "homebrew_description": "",
+    "homebrew_long_description": "This useful application allows you to make personalized bubbles with 'icon' and 'title' of your PSP content (HBS/PSX/ISO/CSO) quick and easy.(It doesn't work on Adrenaline 8).",
+    "homebrew_id": "adrenaline-bubbles-manager",
+    "homebrew_authors": [
+      "onelua"
+    ],
+    "homebrew_version": "6.20",
+    "catalog_apps": [
+      {
+        "id": "adrenaline-bubbles-manager",
+        "name": "Adrenaline Bubbles Manager",
+        "icon": "https://archive.org/download/psvitaalive-adrenaline-bubbles-manager/icon0.png",
+        "category": "games",
+        "description": "",
+        "long_description": "This useful application allows you to make personalized bubbles with 'icon' and 'title' of your PSP content (HBS/PSX/ISO/CSO) quick and easy.(It doesn't work on Adrenaline 8).",
+        "version": "6.20",
+        "version_date": "2023-07-23",
+        "author_ids": [
+          "onelua"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 6.20 → release 6.23",
+    "catalog_version": "6.20"
+  },
+  {
+    "platform": "github",
+    "repo": "WolffsRoom/DeltaruneVita",
+    "release_id": "389602249",
+    "tag": "v0.74",
+    "name": "Deltarune Vita v0.74 (Internal Development Build)",
+    "url": "https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.74",
+    "published": "2026-09-16T02:41:25Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "<img src=\"https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&h=thumb.php&f=FRIEND_overworld_vision.gif\" alt=\"Friend Overworld\" width=\"120\">\r\n\r\n> [!WARNING]\r\n> This is an internal development pre-release. Bugs, crashes, missing graphics and performance issues may occur. \r\n\r\n## Highlights\r\n\r\n### Improvements in Modern-GL and shaders\r\n\r\n- Continued implementation of GameMaker shaders in Modern-GL, including Chapter 5 town lighting and shadows.\r\n- Corrected rendering paths for external PNGs, borders, fonts and interface graphics.\r\n- Improved texture residency, surface handling and diagnostics for heavy rooms and battles.\r\n- Shader switching in Graphics Settings restores the loading overlay's graphics state.\r\n<table>\r\n  <tr>\r\n    <td align=\"center\"><b>Without shaders</b></td>\r\n    <td align=\"center\"><b>With shaders</b></td>\r\n  </tr>\r\n  <tr>\r\n    <td>\r\n      <img src=\"https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-without-shaders.png\" alt=\"Chapter 5 town without shaders\">\r\n    </td>\r\n    <td>\r\n      <img src=\"https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-with-shaders.png\" alt=\"Chapter 5 town with shaders\">\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td align=\"center\"><b><code>room_town_mid</code> running on Legacy-GL</b></td>\r\n    <td align=\"center\"><b><code>room_town_mid</code> running on Modern-GL</b></td>\r\n  </tr>\r\n</table>\r\n\r\n> [!NOTE]\r\n> Modern-GL **remains experimental.**\r\n> However, the results obtained in Chapter 5 are promising.\r\n\r\n### Chapter 3\r\n\r\n- Corrected the vertical region used by surface copies, including the photograph capture path.\r\n- Added the grayscale photograph shaders to the compact Legacy-GL shader list. Enable shaders to test the gray regions in \"Round 2\".\r\n- Limited repetitive slow-event diagnostics to one message per second while retaining per-frame Draw maxima and a suppressed-event count.\r\n\r\n### Game Settings\r\n\r\n- **Replaced synthetic accent marks with complete glyphs from the extended font.**\r\n\r\nAs a stopgap measure. The Chapter 5 is only available in English for most translations. The Game Settings menu was also defaulting to English. This is just an adjustment to ensure the Game Settings menu has a specific language selected while the game itself runs in English due to the lack of a translation.\r\n- Corrected accented-glyph sizing and baseline alignment against the Chapter 5 font.\r\n- Reduced main option labels to the same 1.60 scale as the main values.\r\n- Fixed horizontal/vertical mirroring of the four border corners in Modern-GL.\r\n\r\n## Known issues\r\n\r\n- Chapter 5 video can fail before its first frame because SceAvPlayer cannot allocate a contiguous 21 MiB block. Audio can still play independently.\r\n- Heavy Chapter 3, 4 and 5 scenes can still have low FPS or loading stalls.\r\n\r\n## Assets / Installation \r\n\r\n1. Install **`Deltarune-v0.74.Internal-Build-Test.vpk`** with VitaShell. \r\n2. Keep your prepared game data and matching texture caches.\r\n3. For this version, simply use the same files generated by [v0.73](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.73).\r\n\r\n## Testing / bug reports\r\n\r\nPlease use the [Issues page](https://github.com/WolffsRoom/DeltaruneVita/issues). Include the build number, chapter, room, language, renderer, shader setting, texture-compression mode and relevant `butterscotch-probe.log`. \r\n\r\n_Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release._\r\n",
+    "assets": [
+      {
+        "name": "ch5-town-with-shaders.png",
+        "size": 143037,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-with-shaders.png",
+        "content_type": "image/png"
+      },
+      {
+        "name": "ch5-town-without-shaders.png",
+        "size": 141011,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-without-shaders.png",
+        "content_type": "image/png"
+      },
+      {
+        "name": "Deltarune-v0.74.Internal-Build-Test.vpk",
+        "size": 5594880,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/Deltarune-v0.74.Internal-Build-Test.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 386,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      }
+    ],
+    "author": "WolffsRoom",
+    "homebrew_name": "Deltarune Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Deltarune for PSVita.",
+    "homebrew_long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
+    "homebrew_id": "deltarune-vita",
+    "homebrew_authors": [
+      "chatgpt-ai"
+    ],
+    "homebrew_version": "v.0.69",
+    "catalog_apps": [
+      {
+        "id": "deltarune-vita",
+        "name": "Deltarune Vita",
+        "icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Deltarune for PSVita.",
+        "long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
+        "version": "v.0.69",
+        "version_date": "2026-07-27",
+        "author_ids": [
+          "chatgpt-ai"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.74",
+    "catalog_version": "v.0.69"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
     "release_id": "389352794",
     "tag": "continuous-error-with-sdl3",
@@ -346,7 +462,7 @@
     "homebrew_authors": [
       "rinnegatamante"
     ],
-    "homebrew_version": "1.4",
+    "homebrew_version": "1.4.1",
     "catalog_apps": [
       {
         "id": "ctr-high-octane",
@@ -355,16 +471,16 @@
         "category": "ports",
         "description": "is a sourceport for PSVita of Crash Team Racing based on the ctr-native project.",
         "long_description": "Crash Team Racing: High Octane is a sourceport for PSVita of Crash Team Racing based on the ctr-native project. It focuses on new features, enhancements and optimization.",
-        "version": "1.4",
-        "version_date": "2026-09-14",
+        "version": "1.4.1",
+        "version_date": "2026-09-15",
         "author_ids": [
           "rinnegatamante"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.4 → release v.1.4.1",
-    "catalog_version": "1.4"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.4.1",
+    "catalog_version": "1.4.1"
   },
   {
     "platform": "github",
@@ -395,7 +511,7 @@
     "homebrew_authors": [
       "shorelight82"
     ],
-    "homebrew_version": "1.2",
+    "homebrew_version": "2.0",
     "catalog_apps": [
       {
         "id": "vitube",
@@ -404,16 +520,16 @@
         "category": "media",
         "description": "Native YouTube client for the PlayStation Vita",
         "long_description": "Native YouTube client for the PlayStation Vita. Talks directly to YouTube's internal API — no companion server, no account requirement, no browser.",
-        "version": "1.2",
-        "version_date": "2026-09-08",
+        "version": "2.0",
+        "version_date": "2026-09-15",
         "author_ids": [
           "shorelight82"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.2 → release v2.0",
-    "catalog_version": "1.2"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 2.0",
+    "catalog_version": "2.0"
   },
   {
     "platform": "github",
@@ -605,85 +721,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.8.3.0 → release v8.4.0",
     "catalog_version": "v.8.3.0"
-  },
-  {
-    "platform": "github",
-    "repo": "WolffsRoom/DeltaruneVita",
-    "tag": "v0.73",
-    "name": "Deltarune Vita v0.73",
-    "url": "https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.73",
-    "published": "2026-09-13T03:55:03Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "<br>\r\n<br>\r\n\r\n<img src=\"https://email-files.fangamer.com/list_48/campaign_18/PlayCards-cyOHKzSGkQUTJpvN.gif\" alt=\"Friend Overworld\" width=\"200\">\r\n\r\n# Public Release v0.73\r\n\r\nThis is the biggest **DeltaruneVita** update to date, focused on texture memory, Room transitions, native video/audio, loading screens, patchers, language support, Chapter 3/5 performance, and overall Vita stability.\r\n\r\nv0.73 consolidates the work developed throughout the internal **v0.70**, **v0.71**, and **v0.72** builds into a new public release.\r\n\r\n> [!IMPORTANT]\r\n> This update requires generating and transferring a **fresh data folder using a v0.73 patcher**.\r\n>\r\n> The rebuilt `data.win`, BC3/RGBA4444 caches, language data, and patch manifests must all come from the same v0.73 preparation pipeline.\r\n>\r\n> **Do not reuse or mix caches generated for older Texture Page layouts.**\r\n\r\n<div align=\"center\">\r\n\r\n### DELTARUNE for PS Vita (v0.73 Update Trailer)\r\n\r\n<a href=\"https://youtu.be/-ryE5zShYhU\">\r\n  <img src=\"https://img.youtube.com/vi/-ryE5zShYhU/maxresdefault.jpg\" width=\"85%\" style=\"border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);\" alt=\"DELTARUNE Vita v0.73 Update Trailer\">\r\n</a>\r\n\r\n<br>\r\n\r\n<a href=\"https://youtu.be/-ryE5zShYhU\">\r\n  <img src=\"https://img.shields.io/badge/YouTube-Watch%20Update%20Trailer-FF0000?style=for-the-badge&logo=youtube&logoColor=white\" alt=\"Watch the v0.73 update trailer on YouTube\">\r\n</a>\r\n\r\n</div>\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://deltarune.wiki/images/Crowd_overworld.gif?cb=o680kx&h=thumb.php&f=Crowd_overworld.gif\" alt=\"Crow\" width=\"300\">\r\n</p>\r\n\r\n## Main Changes\r\n\r\n### Loading screen\r\n\r\nThe loading and texture-generation presentation has been substantially redesigned.\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/LoadingGenerating.png\" alt=\"DeltaruneVita v0.73 texture generation screen\" width=\"900\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Texture generation screen with the optional loading mini-game.</em></p>\r\n\r\n- Added localized loading/generation labels and real texture/shader progress.\r\n- Added multiple Toby loading animations.\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/toby-loading/toby_walk.gif\" alt=\"Toby walk loading animation\" width=\"80\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/toby-loading/toby_turn.gif\" alt=\"Toby turn loading animation\" width=\"37\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/toby-loading/toby_dance.gif\" alt=\"Toby dance loading animation\" width=\"120\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/toby-loading/toby_spin.gif\" alt=\"Toby spin loading animation\" width=\"80\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/toby-loading/toby_sleep.gif\" alt=\"Toby sleep loading animation\" width=\"80\">\r\n</p>\r\n\r\n- Added a loading animation that follows the progress bar and accelerates off-screen once texture preparation is complete:\r\n\r\n  <img width=\"20\" height=\"42\" alt=\"frame_0\" src=\"https://github.com/user-attachments/assets/c0b57ac6-ce12-456b-9b57-70aeaeaad52a\" />\r\n\r\n### Optional texture-generation mini-game\r\n\r\n- Added an optional full-screen mini-game during **GENERATING TEXTURES**.\r\n- The optional loading mini-game recreates DELTARUNE's battle-defense phase, allowing you to move the Heart and dodge enemy-style attack patterns while textures are being generated.\r\n\r\nThe mini-game is optional. If it is never activated, the normal texture-generation path remains synchronous.\r\n\r\nWhen PLAY is enabled during generation, the current texture page is completed safely before the remaining preparation work is handed to the background worker. VitaGL rendering remains on the main thread.\r\n\r\n### Textures: DeltaRepack and DeltaCache\r\n\r\nv0.73 consolidates the new texture pipeline developed after v0.69.\r\n\r\nThe preparation flow is now:\r\n\r\n```text\r\nOfficial DELTARUNE data.win\r\n        ↓\r\nDeltaRepack\r\n(room-aware Texture Page rebuild)\r\n        ↓\r\nFinal rebuilt data.win\r\n        ↓\r\nDeltaCache\r\n(validated BC3 + RGBA4444 caches)\r\n        ↓\r\nPS Vita runtime\r\n```\r\n\r\n- **[DeltaRepack](https://github.com/WolffsRoom/DeltaRepack/)** rebuilds GameMaker Texture Pages into a more granular layout designed to reduce the amount of unrelated texture data kept resident by a Room.\r\n- Large sparse atlases can be replaced with smaller or rectangular power-of-two layouts where appropriate.\r\n- **[DeltaCache](https://github.com/WolffsRoom/DeltaCache/)** generates GPU-ready `.bc3.pvr` and `.r444` files from the final rebuilt `data.win`.\r\n- Generated caches are validated against the final TXTR metadata before being accepted.\r\n- Font, textbox, and other pixel-critical Texture Pages remain on the safer lossless-compatible path.\r\n- BC3/DXT5 is used where its memory savings are beneficial without sacrificing critical UI/text quality.\r\n- Missing eligible caches can be generated locally on the Vita during **GENERATING TEXTURES**.\r\n- Complete cache sets use fast completion markers instead of rescanning every texture file at every startup.\r\n- Language packs keep their own matching cache layouts when their `data.win` changes atlas contents or indices.\r\n\r\nThe higher rebuilt Texture Page count is intentional: smaller pages allow the runtime to keep a more focused per-Room working set instead of keeping a few oversized atlases resident.\r\n\r\n### Room-aware texture residency and memory\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/texture/Graphics.png\" alt=\"DeltaruneVita graphics settings\" width=\"49%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/texture/Texture.png\" alt=\"DeltaruneVita texture settings\" width=\"49%\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Graphics and texture-memory configuration used by the optimized Vita pipeline.</em></p>\r\n\r\nTexture residency, preload, and eviction behavior received extensive work across Chapters 2–5.\r\n\r\n- Improved Room-aware texture residency and eviction.\r\n- Reduced repeated uploads of stale Texture Pages during transitions.\r\n- Improved handling of current-Room and near-Room resources.\r\n- Added safer memory policies for particularly heavy Chapter 3 and Chapter 5 sequences.\r\n- Protected font/UI pages from inappropriate BC3 compression.\r\n- Improved transition-time cleanup so stale textures can be retired before destination-Room uploads.\r\n- Reduced unnecessary retained CPU-side texture staging in memory-heavy Chapters.\r\n- Improved prepared-texture validation and fallback handling.\r\n- Expanded semantic resource detection so important assets are increasingly tracked by their real GameMaker resources instead of hardcoded Texture Page IDs.\r\n- Fixed dynamic Texture Page tracking when new textures are created from surfaces, preventing renderer bookkeeping corruption after runtime page growth.\r\n\r\n### Native video playback\r\n\r\nThe native video work from v0.72 is now part of the v0.73 public release.\r\n\r\n  <img src=\"https://media.tenor.com/42LC_etFIIcAAAAj/deltarune-tenna.gif\" alt=\"Tenna Dance\" width=\"200\" align=\"left\" hspace=\"0\">\r\n\r\n- Added the native `SceAvPlayer` backend for GameMaker video functions (no FFmpeg/libavcodec or external Vita video plugin is required).\r\n- Implemented Vita paths for `video_open`, `video_draw`, `video_close`, status, position, duration, looping, and volume.\r\n- Added GameMaker-compatible `video_start` / `video_end` async event handling.\r\n- Video frames are decoded by SceAvPlayer and presented through VitaGL/SceGxm.\r\n- Chapter 3 retains the original GameMaker subtitle/event lifecycle around native video playback.\r\n- Added safer CPU/PHYCONT cleanup after video playback.\r\n\r\n<br>\r\n\r\n#### Safer video shutdown\r\n\r\nThe SceAvPlayer teardown path was revised after investigation of a post-video Vita crash.\r\n\r\nThe Vita video-audio worker is now stopped and joined before the AVPlayer controller is destroyed:\r\n\r\n```text\r\nVideo state -> INACTIVE\r\n        ↓\r\nAudio worker exits\r\n        ↓\r\nThread joined\r\n        ↓\r\nsceAvPlayerStop()\r\n        ↓\r\nsceAvPlayerClose()\r\n```\r\n\r\nThis prevents the video-audio worker from accessing an AVPlayer object while it is being destroyed.\r\n\r\n### Audio\r\n\r\nAudio handling has received major transition and streaming improvements.\r\n\r\n  <img src=\"https://i.redd.it/mixcj0cg2k6d1.gif\" alt=\"Cup and cakes\" width=\"170\" align=\"left\" hspace=\"0\">\r\n\r\n- Music playback across Room transitions has been improved to preserve compatible streams and playback positions whenever possible. Transitions are now smoother when the destination Room changes music, reducing unnecessary restarts, repeated track intros, and audio issues during long Room or texture-loading stalls.\r\n- Several fixes were also made to the streaming backend, including corrected stale OpenAL buffer handling, proper seeking for streamed OGG audio, and earlier audio initialization for Vita runtime paths that depend on it.\r\n- Native video playback now uses a dedicated Vita audio path, preventing it from disrupting the game's normal OpenAL output. Loading and mini-game sounds also use dedicated OpenAL sources, allowing them to play even while normal startup audio is intentionally held.\r\n- Frequently used battle SFX can now be prepared earlier, reducing first-use stalls during gameplay.\r\n\r\n<br>\r\n<br>\r\n<br>\r\n\r\n### Battle dialogue rendering\r\n\r\nThe battle-dialogue clipping issue reported in previous public builds has received a renderer-side fix.\r\n\r\n- Fixed the final pixel row of some `fnt_main` glyphs being clipped in battle dialogue.\r\n- The issue was caused by VitaGL rasterization at the glyph quad boundary, not by missing font pixels in `data.win` or the generated texture cache.\r\n- v0.73 preserves DELTARUNE's original line spacing and font layout.\r\n- The renderer explicitly restores the real final texel row only for the affected battle-text path.\r\n- The fix applies globally to Chapters that use the same battle writer/font path instead of being hardcoded to Chapter 2 or 3.\r\n\r\n### Game Settings\r\n\r\nThe Vita-native Game Settings menu continues to expand.\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/GraphicSettings.png\" alt=\"DeltaruneVita v0.73 graphics settings\" width=\"900\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Vita-native graphics and performance settings.</em></p>\r\n\r\nOpen it with **Select**.\r\n\r\nAvailable options include:\r\n\r\n- Native / Balanced / Performance resolution profiles.\r\n- Optimized / None / Aggressive texture-compression modes.\r\n- 30 / 40 / 60 FPS and unlocked frame-rate modes.\r\n- **Legacy GL** and experimental **Modern GL** renderer selection.\r\n- Scanlines, Sharp Bilinear, Dithering, and VHS screen effects.\r\n- Dynamic / Simple / Disabled console borders.\r\n- Master / Music / SFX volume controls.\r\n- Touch-control configuration.\r\n- Language selection.\r\n- Trophy and notification settings.\r\n- Developer diagnostics and Room tools when Dev Mode is enabled.\r\n\r\nRecommended settings:\r\n\r\n```text\r\nResolution: Native\r\nTexture compression: Optimized\r\nFrame-rate limit: 30 FPS\r\nRenderer: Legacy GL\r\n```\r\n\r\nLegacy GL remains the recommended renderer for normal gameplay.\r\n\r\n#### Screen effects\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/screen-effects/Normal.png\" alt=\"Normal screen output\" width=\"32%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/screen-effects/Scanline.png\" alt=\"Scanline screen effect\" width=\"32%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/screen-effects/SharpBilinear.png\" alt=\"Sharp Bilinear screen effect\" width=\"32%\">\r\n</p>\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/screen-effects/DitheringBlending.png\" alt=\"Dithering and blending screen effect\" width=\"49%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/screen-effects/VHS.png\" alt=\"VHS screen effect\" width=\"49%\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Normal output and the optional Scanline, Sharp Bilinear, Dithering/Blending, and VHS effects.</em></p>\r\n\r\n### Trophy system\r\n\r\nThe trophy work introduced in the internal v0.70 cycle is included in v0.73.\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/trophies/InternalTrophies.png\" alt=\"DeltaruneVita internal trophy menu\" width=\"70%\">\r\n</p>\r\n\r\n<details>\r\n<summary><strong>View the full DELTARUNE Vita trophy list</strong></summary>\r\n\r\n<br>\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/trophies/TrophyList.png\" alt=\"Full DeltaruneVita trophy list\" width=\"90%\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Complete list of the 30 trophies available in DeltaruneVita.</em></p>\r\n\r\n</details>\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/trophies/TrophyNotification.png\" alt=\"DeltaruneVita trophy notification\" width=\"32%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/trophies/VitaSystem1.png\" alt=\"DeltaruneVita native PS Vita trophy integration\" width=\"32%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/trophies/VitaSystem2.png\" alt=\"DeltaruneVita native PS Vita trophy list\" width=\"32%\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Internal trophy tracking, unlock notifications, and native PS Vita trophy integration.</em></p>\r\n\r\n- 30-trophy DELTARUNE Vita system.\r\n- Gameplay trophies remain mapped to their corresponding game events.\r\n- Trophy 0 — **CONNECTION** remains the platinum.\r\n- Local trophy progress is preserved between sessions.\r\n- Unlock notifications and the in-game trophy list remain available.\r\n- Native Vita trophy integration is available when the required native trophy environment is installed.\r\n- Compatibility fallbacks remain available for older translated `data.win` files that predate the newer DELTARUNE event manager.\r\n- Trophy ID 27 remains standardized as **RING / ANEL**.\r\n- Legacy trophy compatibility can be diagnosed through the development log.\r\n\r\nLocal progress:\r\n\r\n```text\r\nux0:data/deltarune_saves/trophies.ini\r\n```\r\n\r\n### Languages and translations\r\n\r\n| Language | Translation | Status |\r\n|---|---|---|\r\n| <img width=\"34\" height=\"28\" alt=\"English\" src=\"https://github.com/user-attachments/assets/6d833db2-741c-462d-aaf3-2dd49c0a6f97\" /> **English** | Official | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"Japanese\" src=\"https://github.com/user-attachments/assets/c57bc886-e74a-4139-8a58-5034fdb84f96\" /> **Japanese** | Official | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"Brazilian Portuguese\" src=\"https://github.com/user-attachments/assets/6df2136c-2c08-47d1-9508-94a6a796d05f\" /> **Brazilian Portuguese** | [Teiarruma](https://github.com/teiarruma/deltarune-ptbr), Chapters 1–4 | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"Spanish\" src=\"https://github.com/user-attachments/assets/2051371a-4e9c-42f2-862e-cea44a6abd18\" /> **Spanish** | [DeltaESP](https://deltaesp.site), Chapters 1–5 | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"French\" src=\"https://github.com/user-attachments/assets/0004e66e-4a48-4746-a849-d906f51d80c3\" /> **French** | [DELTARUNE FR](https://deltarune-fr.com/), Chapters 1–4 | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"German\" src=\"https://github.com/user-attachments/assets/25e6ada8-3a43-481d-adb7-99f268a48dcd\" /> **German** | [Chexle](https://gamejolt.com/games/deltarune_rus/979798), Chapters 1–4 | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"Russian\" src=\"https://github.com/user-attachments/assets/ab04877f-577f-4cdf-8efd-387cfbb14b8f\" /> **Russian** | [sasik](https://sasikqq.itch.io/deltarune-ru), Chapters 1–5 | ✅ |\r\n| <img width=\"34\" height=\"28\" alt=\"Turkish\" src=\"https://github.com/user-attachments/assets/4a866377-a588-41ce-99f2-8e69dc79da39\" /> **Turkish** | _BlueSoul Translation Team_ | ✅ |\r\n\r\n*Starting with [v0.71](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.71), the language selector also displays the flags of the countries represented by the languages, hehe.*\r\n\r\n> [!WARNING]\r\n> Some translations rely on **DeltranslatePatch**, a tool that has not yet been adapted to work with **Butterscotch / DeltaruneVita**.\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/LanguageSettings.png\" alt=\"DeltaruneVita v0.73 language settings\" width=\"900\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Language selection and translation support in v0.73.</em></p>\r\n\r\n**Additional changes include:**\r\n\r\n- Separate `data.win` and matching texture-cache handling for translated variants.\r\n- Shared language-package catalog between the patchers.\r\n- Package validation using file size and SHA-256.\r\n- Improved accented-character handling.\r\n- Fixes for language-specific menus and assets.\r\n- Language-specific video lookup where required.\r\n- Improved fallback behavior without mixing incompatible atlas layouts.\r\n\r\n### Borders and visual fixes\r\n\r\n<p align=\"center\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/borders/DynamicBorders.png\" alt=\"Dynamic console borders\" width=\"32%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/borders/SimpleBorder.png\" alt=\"Simple console border\" width=\"32%\">\r\n  <img src=\"https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/gh-pages/assets/screenshots/v0.73/borders/NoBorder.png\" alt=\"Console borders disabled\" width=\"32%\">\r\n</p>\r\n\r\n<p align=\"center\"><em>Dynamic, Simple, and Disabled console-border modes.</em></p>\r\n\r\n- Continued dynamic console-border improvements.\r\n- Added/corrected Chapter 3 border mappings for TV, game-show, Castle Town, and special Rooms.\r\n- Improved border behavior during Room transitions.\r\n- Fixed Chapter 3 game-show presentation regressions introduced during texture-memory experimentation.\r\n- Continued fixes for missing/flashing assets caused by aggressive memory pressure.\r\n- Improved pixel-critical texture handling for UI and fonts.\r\n\r\n### Runtime and stability\r\n\r\n- Continued Chapter 3 and Chapter 5 memory-pressure work.\r\n- Improved renderer behavior around heavy surface usage.\r\n- Added safer dynamic texture tracking.\r\n- Improved Room transition cleanup.\r\n- Reduced repeated Texture Page loading in several high-pressure sequences.\r\n- Added protections around native-video teardown.\r\n- Improved diagnostics for memory, textures, video, and audio.\r\n- Continued compatibility fixes for GameMaker behavior required by Chapters 1–5.\r\n- Preserved save data separately under `ux0:data/deltarune_saves/`.\r\n\r\n## Chapter Compatibility and Performance Notes\r\n\r\n<details>\r\n<summary><strong>Chapter 1</strong></summary>\r\n\r\n- Playable and extensively reviewed.\r\n- Additional first-use battle resource preparation.\r\n- Improved music continuity across Room transitions.\r\n- Reduced unnecessary audio restart behavior.\r\n- Continues to serve as one of the most stable chapters in the port.\r\n\r\n</details>\r\n\r\n<details>\r\n<summary><strong>Chapter 2</strong></summary>\r\n\r\n- Playable.\r\n- Retains the previous fixes for light puzzles, mice sequences, battles, texture residency, and Room transitions.\r\n- Improved castle/city/mansion memory behavior.\r\n- Improved battle dialogue rendering.\r\n- Additional audio-transition and texture-cache work.\r\n\r\n</details>\r\n\r\n<details>\r\n<summary><strong>Chapter 3</strong></summary>\r\n\r\nChapter 3 received the largest amount of v0.73-specific development work.\r\n\r\n- Native MP4 playback.\r\n- Chapter 3 Tenna video integration.\r\n- Original GameMaker async video lifecycle support.\r\n- Improved TV/game-show texture memory behavior.\r\n- Additional Room-transition profiling and cleanup.\r\n- Game-show visual fixes.\r\n- Rhythm / mini-game resource preparation.\r\n- Border corrections.\r\n- Reduced unnecessary RGBA4444 residency in heavy presentation sequences.\r\n- Continued investigation of demanding battle and TV Rooms.\r\n\r\nChapter 3 remains one of the main performance-testing targets.\r\n\r\n</details>\r\n\r\n<details>\r\n<summary><strong>Chapter 4</strong></summary>\r\n\r\n- Playable.\r\n- Uses the rebuilt Texture Page layout and matching caches.\r\n- Improved runtime/interface compatibility.\r\n- Fixed dynamic Texture Page bookkeeping after runtime surface/sprite creation.\r\n- Language-specific cache layouts remain supported.\r\n\r\n</details>\r\n\r\n<details>\r\n<summary><strong>Chapter 5</strong></summary>\r\n\r\n- Playable.\r\n- Continues to benefit heavily from the rebuilt texture pipeline.\r\n- Improved Room-aware cleanup and texture residency.\r\n- Reduced memory pressure in heavy battles and composition sequences.\r\n- More aggressive compression can be used for non-critical pages while fonts/UI remain protected.\r\n- Chapter 5 remains the largest overall memory/performance stress test.\r\n\r\n</details>\r\n\r\n## Updating from v0.69, internal v0.70–v0.72 builds, or older versions\r\n\r\n1. Install `Deltarune-v0.73.vpk`.\r\n2. Generate a fresh data folder using either v0.73 patcher (Deltarune Vita Patcher or Seam's Patcher).\r\n3. Replace the older generated `deltarune` data with the v0.73 output.\r\n4. Do not mix old Texture Page caches with the new rebuilt `data.win`.\r\n\r\n\r\n<div align=\"left\">\r\n\r\n<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n<tr>\r\n<td bgcolor=\"#000000\" style=\"background-color: #000000; padding: 16px; border: 4px solid #ffffff; border-radius: 6px;\">\r\n\r\n  <img src=\"https://static.wikia.nocookie.net/delta-rune/images/a/ac/Seam_Face.png/revision/latest/thumbnail/width/360/height/360?cb=20190722005950&path-prefix=es\" alt=\"Seam\" width=\"90\" align=\"left\" style=\"margin-right: 15px;\">\r\n\r\n  <p align=\"left\" style=\"color: #ffffff; font-family: monospace; margin: 0;\">\r\n    <i>“Hey, traveler. Why don't you come by my store?”</i>\r\n    <br><br>\r\n    Access the <b><a href=\"https://wolffsroom.github.io/DeltaruneVita/\" style=\"color: #ffff00;\">Seam's Patcher</a></b>.\r\n  </p>\r\n\r\n</td>\r\n</tr>\r\n</table>\r\n\r\n</div>\r\n\r\n## Known Issues\r\n\r\n- **Modern GL remains experimental** and may produce missing graphics, shader problems, or GPU instability.\r\n- Chapter 3's heaviest TV/battle sequences can still show performance drops or first-use stalls.\r\n- Chapter 5 remains the most demanding chapter and can still encounter low FPS or memory pressure in complex scenes and battles.\r\n- Some Chapter 5 shadow/effect behavior is not yet fully reproduced by the Legacy GL renderer.\r\n- 60 FPS compatibility continues to improve, but **30 FPS remains the recommended default**.\r\n- Some first-use textures or sound effects may still cause a short hitch in demanding sequences.\r\n- Translation packages whose Texture Page layout differs from the original game require their matching v0.73 caches.\r\n\r\n## Installation Guide\r\n\r\nFor full setup steps, please refer to the [Installation Guide](https://github.com/WolffsRoom/DeltaruneVita#installation-guide).\r\n\r\n## Bug reports and diagnostics\r\n\r\nIf you encounter a problem, please open a ticket on the Issues page:\r\n\r\nhttps://github.com/WolffsRoom/DeltaruneVita/issues\r\n\r\nPlease include:\r\n\r\n```text\r\nux0:data/deltarune/deltarunevita/butterscotch-probe.log\r\n```\r\n\r\nand, when relevant:\r\n\r\n- Chapter and Room.\r\n- Selected language.\r\n- Renderer.\r\n- Texture-compression mode.\r\n- FPS limit.\r\n- Screenshot/video of visual problems.\r\n- Generated `psp2dmp` crash dump when available.\r\n\r\nIf Dev Mode is enabled, also include the corresponding diagnostic information from the affected Room.\r\n\r\n## Assets\r\n\r\n  <img src=\"https://email-files.fangamer.com/list_48/campaign_15/shadowguys_wavingmoney-tOYeHM9diwN8AaSH.gif\" alt=\"Kris\" width=\"200\" align=\"left\" hspace=\"0\">\r\n\r\n- `Deltarune-v0.73.vpk` (PS Vita application).\r\n- Deltarune Vita Patcher v0.73 (Windows 64-bit);\r\n- Deltarune Vita Patcher v0.73 (Windows 32-bit);\r\n- Seam's Patcher v0.73 (Windows 64-bit);\r\n- Seam's Patcher v0.73 (Windows 32-bit).\r\n\r\n<br>\r\n<br>\r\n\r\n> [!WARNING]\r\n> DeltaruneVita remains under active development.\r\n>\r\n> Performance drops, graphical issues, missing effects, or occasional crashes may still occur in demanding Rooms. Please report reproducible problems with logs whenever possible.",
-    "assets": [
-      {
-        "name": "Deltarune-v0.73.vpk",
-        "size": 5591870,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.73/Deltarune-v0.73.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Deltarune.Vita.Patcher.v0.73.32bits.zip",
-        "size": 187978165,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.73/Deltarune.Vita.Patcher.v0.73.32bits.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Deltarune.Vita.Patcher.v0.73.64bits.zip",
-        "size": 203194166,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.73/Deltarune.Vita.Patcher.v0.73.64bits.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Seam.s.Patcher.v0.73.32bits.zip",
-        "size": 172530575,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.73/Seam.s.Patcher.v0.73.32bits.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Seam.s.Patcher.v0.73.64bits.zip",
-        "size": 173531304,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.73/Seam.s.Patcher.v0.73.64bits.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 499,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.73/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      }
-    ],
-    "author": "WolffsRoom",
-    "homebrew_name": "Deltarune Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Deltarune for PSVita.",
-    "homebrew_id": "deltarune-vita",
-    "homebrew_authors": [
-      "chatgpt-ai"
-    ],
-    "catalog_apps": [
-      {
-        "id": "deltarune-vita",
-        "name": "Deltarune Vita",
-        "icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Deltarune for PSVita.",
-        "long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
-        "version": "v.0.69",
-        "version_date": "2026-07-27",
-        "author_ids": [
-          "chatgpt-ai"
-        ]
-      }
-    ],
-    "release_id": "387785664",
-    "homebrew_long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
-    "homebrew_version": "v.0.69",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.73",
-    "catalog_version": "v.0.69"
   },
   {
     "platform": "github",
@@ -1487,55 +1524,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive Alpha 0.1.0",
     "catalog_version": "Alpha 0.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "ONElua/AdrenalineBubbleManager",
-    "release_id": "383435566",
-    "tag": "6.22",
-    "name": "Adrenaline Bubble Manager v6.22",
-    "url": "https://github.com/ONElua/AdrenalineBubbleManager/releases/tag/6.22",
-    "published": "2026-09-06T02:19:24Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## What’s new in 6.22\r\n- Fix module install: file-by-file copy into sce_module and conditional CRC log\r\n- Update isage ABM adrenaline_user.suprx to fix PSP EBOOT.PBP bubble launch for Adrenaline v8.0.2",
-    "assets": [
-      {
-        "name": "AdrenalineBubbleManager.vpk",
-        "size": 10525790,
-        "download_url": "https://github.com/ONElua/AdrenalineBubbleManager/releases/download/6.22/AdrenalineBubbleManager.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ONElua",
-    "homebrew_name": "Adrenaline Bubbles Manager",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-adrenaline-bubbles-manager/icon0.png",
-    "homebrew_category": "games",
-    "homebrew_description": "",
-    "homebrew_id": "adrenaline-bubbles-manager",
-    "homebrew_authors": [
-      "onelua"
-    ],
-    "catalog_apps": [
-      {
-        "id": "adrenaline-bubbles-manager",
-        "name": "Adrenaline Bubbles Manager",
-        "icon": "https://archive.org/download/psvitaalive-adrenaline-bubbles-manager/icon0.png",
-        "category": "games",
-        "description": "",
-        "long_description": "This useful application allows you to make personalized bubbles with 'icon' and 'title' of your PSP content (HBS/PSX/ISO/CSO) quick and easy.(It doesn't work on Adrenaline 8).",
-        "version": "6.20",
-        "version_date": "2023-07-23",
-        "author_ids": [
-          "onelua"
-        ]
-      }
-    ],
-    "homebrew_long_description": "This useful application allows you to make personalized bubbles with 'icon' and 'title' of your PSP content (HBS/PSX/ISO/CSO) quick and easy.(It doesn't work on Adrenaline 8).",
-    "homebrew_version": "6.20",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 6.20 → release 6.22",
-    "catalog_version": "6.20"
   },
   {
     "platform": "github",
@@ -33169,54 +33157,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.40",
     "catalog_version": "v.1.40"
-  },
-  {
-    "platform": "github",
-    "repo": "ammeir/vicevita",
-    "release_id": "35521785",
-    "tag": "v1.2",
-    "name": "VICEVita v1.2",
-    "url": "https://github.com/ammeir/vicevita/releases/tag/v1.2",
-    "published": "2020-12-19T13:27:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "-Added ability to browse to uma0: device for game loading (thanks @rsn8887).\r\n-Added a sliding keyboard option.\r\n-Added fast access to drive's zip folder.\r\n-Modified file browser to remember the last visited directory.\r\n-Modified menu button actions.\r\n-Bug fix: Fixed a crash when attaching empty disk images to a drive.\r\n-Bug fix: Fixed release issues with shifted control mappings.\r\n-Bug fix: Fixed failure to attach and load tape/cart if drive status was 'not active'.\r\n",
-    "assets": [
-      {
-        "name": "vicevita.vpk",
-        "size": 2489495,
-        "download_url": "https://github.com/ammeir/vicevita/releases/download/v1.2/vicevita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ammeir",
-    "homebrew_name": "VICEVita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-vicevita/icon0.png",
-    "homebrew_category": "emulators",
-    "homebrew_description": "Commodore 64 emulator.",
-    "homebrew_long_description": "VICEVita is a port of the Versatile Commodore Emulator (VICE) for the PlayStation Vita.\nIt features a completely new UI with touch keyboard, savestates and control mappings.",
-    "homebrew_id": "vicevita",
-    "homebrew_authors": [
-      "ammeir"
-    ],
-    "homebrew_version": "v.1.2",
-    "catalog_apps": [
-      {
-        "id": "vicevita",
-        "name": "VICEVita",
-        "icon": "https://archive.org/download/psvitaalive-vicevita/icon0.png",
-        "category": "emulators",
-        "description": "Commodore 64 emulator.",
-        "long_description": "VICEVita is a port of the Versatile Commodore Emulator (VICE) for the PlayStation Vita.\nIt features a completely new UI with touch keyboard, savestates and control mappings.",
-        "version": "v.1.2",
-        "version_date": "2020-12-19",
-        "author_ids": [
-          "ammeir"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2",
-    "catalog_version": "v.1.2"
   }
 ]
