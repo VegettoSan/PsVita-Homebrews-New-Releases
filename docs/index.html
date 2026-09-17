@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">413</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>70</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">412</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>71</strong><span>pendientes</span></div>
         <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>7</strong><span>GitLab</span></div>
       </div>
@@ -219,6 +219,134 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="golden balloon golden balloon zm2283145/goldenballoon-vita-port golden balloon vita v1.7.2 v1.7.2 ports # golden balloon 1.7.2
+
+*released 2026-09-17.*
+
+## ps vita
+
+- retains the committed gameplay-jingle ownership fix: spatial ambience must
+  not stop silver-coin or key ditties. normal audio and silver-coin pickup
+  jingles were confirmed on real vita hardware using the reverted working
+  baseline for this release. the unsuccessful experimental audio rewrites are
+  not included.
+- uses native 960x544 rendering with 2x anisotropic filtering in restored and
+  remastered. the vita backend enforces an effective 1x render scale.
+- skips the unsupported remasterfx output post-processing shader before
+  compilation, avoiding the shader-compiler failure that affected subsequent
+  shaders. incompatible rl-5 per-pixel lighting remains disabled. restored is
+  recommended; the full desktop remastered effects are not available on vita.
+- adds vita rice/gliden64 pack discovery, an in-game pack toggle, and zip
+  extraction with a visible progress screen and vita-compatible directory
+  installation.
+- loads rice replacements asynchronously when decode helpers are available.
+  adds `tools/ricepack/vita_optimize_pack.py` and `.vtex` loading for rgba8
+  textures with prebuilt mip chains. converted packs must be supplied by the
+  user and are not included in the vpk.
+- excludes the uncommitted per-scene texture-preload work and its related cache
+  changes. that wip remains local pending hd-pack/audio testing. ordinary
+  on-demand async texture loading is retained. **texture pop-in remains a
+  known issue**, and audio performance with heavy enabled packs has not been
+  separately qualified.
+- includes opt-in vita profiler/debugnet lifecycle and renderer/texture metrics
+  for development. the published vpk is built with both debugger and profiler
+  disabled.
+
+the audio implementation is unchanged from the hardware-confirmed baseline.
+runtime code is taken from committed `ec64a161`, without the local preload wip;
+the release adds version and documentation updates only. the earlier full
+adventure completion remains evidence for the restored baseline, not a newly
+completed 1.7.2 playthrough. if a heavy pack causes audio or frame-time problems,
+disable the pack when troubleshooting.
+
+install `goldenballoon-vita-v1.7.2.vpk` over the existing `gbln00001` application.
+back up saves and retain `ux0:data/goldenballoon/`, including your own rom and
+optional packs. the vpk includes the 98-trophy pack and livearea artwork, but
+no rom or gameplay assets. notrpdrm remains optional for trophies.
+
+the compiled version and vita package metadata use `mdkr_version` `1.7.2`
+and `app_ver` `01.72`. source is tagged `v1.7.2` on the `optimization` branch.
+
+
+## download integrity
+
+`goldenballoon-vita-v1.7.2.vpk` sha-256:
+
+```
+8511ddb5b6e7b4cd6b33e3a102e14e7e7fd56b02aea9494d585cb0418e9d953e
+```">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/golden-balloon-psvita/icon0.png" alt="Icono de Golden Balloon" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · zm2283145/goldenballoon-vita-port</div>
+                      <h2><a href="https://github.com/zm2283145/goldenballoon-vita-port/releases/tag/v1.7.2" target="_blank" rel="noopener">Golden Balloon</a></h2>
+                      <div class="release-name">Golden Balloon Vita v1.7.2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.7.2</span>
+                    <span>2026-09-17 23:04 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.7.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.7.1 → release v1.7.2</div>
+                  
+                  <div class="body markdown-body"><h1>Golden Balloon 1.7.2</h1>
+<p><em>Released 2026-09-17.</em></p>
+<h2>PS Vita</h2>
+<ul>
+<li>Retains the committed gameplay-jingle ownership fix: spatial ambience must
+not stop silver-coin or key ditties. Normal audio and silver-coin pickup
+jingles were confirmed on real Vita hardware using the reverted working
+baseline for this release. The unsuccessful experimental audio rewrites are
+not included.</li>
+<li>Uses native 960x544 rendering with 2x anisotropic filtering in Restored and
+Remastered. The Vita backend enforces an effective 1x render scale.</li>
+<li>Skips the unsupported RemasterFX output post-processing shader before
+compilation, avoiding the shader-compiler failure that affected subsequent
+shaders. Incompatible RL-5 per-pixel lighting remains disabled. Restored is
+recommended; the full desktop Remastered effects are not available on Vita.</li>
+<li>Adds Vita Rice/GLideN64 pack discovery, an in-game pack toggle, and ZIP
+extraction with a visible progress screen and Vita-compatible directory
+installation.</li>
+<li>Loads Rice replacements asynchronously when decode helpers are available.
+Adds <code>tools/ricepack/vita_optimize_pack.py</code> and <code>.vtex</code> loading for RGBA8
+textures with prebuilt mip chains. Converted packs must be supplied by the
+user and are not included in the VPK.</li>
+<li>Excludes the uncommitted per-scene texture-preload work and its related cache
+changes. That WIP remains local pending HD-pack/audio testing. Ordinary
+on-demand async texture loading is retained. <strong>Texture pop-in remains a
+known issue</strong>, and audio performance with heavy enabled packs has not been
+separately qualified.</li>
+<li>Includes opt-in Vita profiler/DebugNet lifecycle and renderer/texture metrics
+for development. The published VPK is built with both debugger and profiler
+disabled.</li>
+</ul>
+<p>The audio implementation is unchanged from the hardware-confirmed baseline.
+Runtime code is taken from committed <code>ec64a161</code>, without the local preload WIP;
+the release adds version and documentation updates only. The earlier full
+Adventure completion remains evidence for the Restored baseline, not a newly
+completed 1.7.2 playthrough. If a heavy pack causes audio or frame-time problems,
+disable the pack when troubleshooting.</p>
+<p>Install <code>GoldenBalloon-Vita-v1.7.2.vpk</code> over the existing <code>GBLN00001</code> application.
+Back up saves and retain <code>ux0:data/goldenballoon/</code>, including your own ROM and
+optional packs. The VPK includes the 98-trophy pack and LiveArea artwork, but
+no ROM or gameplay assets. NoTrpDrm remains optional for trophies.</p>
+<p>The compiled version and Vita package metadata use <code>MDKR_VERSION</code> <code>1.7.2</code>
+and <code>APP_VER</code> <code>01.72</code>. Source is tagged <code>v1.7.2</code> on the <code>optimization</code> branch.</p>
+<h2>Download integrity</h2>
+<p><code>GoldenBalloon-Vita-v1.7.2.vpk</code> SHA-256:</p>
+<pre><code>8511ddb5b6e7b4cd6b33e3a102e14e7e7fd56b02aea9494d585cb0418e9d953e
+</code></pre>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/zm2283145/goldenballoon-vita-port/releases/download/v1.7.2/GoldenBalloon-Vita-v1.7.2.vpk" target="_blank" rel="noopener">⬇ GoldenBalloon-Vita-v1.7.2.vpk · 4.5 MB</a><a class="btn" href="https://github.com/zm2283145/goldenballoon-vita-port/releases/download/v1.7.2/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 97.0 B</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="psvitaalive store psvitaalive store vegettosan/psvitaalive psvita alive store 02.05 02.05 utilities ## psvitaalive 02.05
 
 ### what&#x27;s new
@@ -1139,39 +1267,6 @@ since this is a **beta release**, the game is fully playable from start to finis
 <p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.0.2/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="golden balloon golden balloon zm2283145/goldenballoon-vita-port golden balloon vita v1.7.1 v1.7.1 ports fixes character-specific “collect five balloons in one adventure session” trophies for all 13 racers.
-
-normal race victories and silver-coin clears now advance the same session counter as free-roaming overworld balloons, while retaining the correct taj, wizpig, and terry identities.
-
-this release retains the persistent vita shader cache and asynchronous, non-blocking trophy unlocks introduced in v1.7.0.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/golden-balloon-psvita/icon0.png" alt="Icono de Golden Balloon" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · zm2283145/goldenballoon-vita-port</div>
-                      <h2><a href="https://github.com/zm2283145/goldenballoon-vita-port/releases/tag/v1.7.1" target="_blank" rel="noopener">Golden Balloon</a></h2>
-                      <div class="release-name">Golden Balloon Vita v1.7.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.7.1</span>
-                    <span>2026-09-11 03:01 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.7.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.7.1</div>
-                  
-                  <div class="body markdown-body"><p>Fixes character-specific “collect five balloons in one Adventure session” trophies for all 13 racers.</p>
-<p>Normal race victories and silver-coin clears now advance the same session counter as free-roaming overworld balloons, while retaining the correct Taj, Wizpig, and Terry identities.</p>
-<p>This release retains the persistent Vita shader cache and asynchronous, non-blocking trophy unlocks introduced in v1.7.0.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/zm2283145/goldenballoon-vita-port/releases/download/v1.7.1/GoldenBalloon-Vita-v1.7.1.vpk" target="_blank" rel="noopener">⬇ GoldenBalloon-Vita-v1.7.1.vpk · 4.3 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26794,7 +26889,7 @@ Optionally, place your Videos folder from your copy of Sonic CD and put it in <c
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-17 18:43 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-17 23:18 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

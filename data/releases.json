@@ -1,6 +1,63 @@
 [
   {
     "platform": "github",
+    "repo": "zm2283145/goldenballoon-vita-port",
+    "release_id": "391110485",
+    "tag": "v1.7.2",
+    "name": "Golden Balloon Vita v1.7.2",
+    "url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/tag/v1.7.2",
+    "published": "2026-09-17T23:04:32Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Golden Balloon 1.7.2\r\n\r\n*Released 2026-09-17.*\r\n\r\n## PS Vita\r\n\r\n- Retains the committed gameplay-jingle ownership fix: spatial ambience must\r\n  not stop silver-coin or key ditties. Normal audio and silver-coin pickup\r\n  jingles were confirmed on real Vita hardware using the reverted working\r\n  baseline for this release. The unsuccessful experimental audio rewrites are\r\n  not included.\r\n- Uses native 960x544 rendering with 2x anisotropic filtering in Restored and\r\n  Remastered. The Vita backend enforces an effective 1x render scale.\r\n- Skips the unsupported RemasterFX output post-processing shader before\r\n  compilation, avoiding the shader-compiler failure that affected subsequent\r\n  shaders. Incompatible RL-5 per-pixel lighting remains disabled. Restored is\r\n  recommended; the full desktop Remastered effects are not available on Vita.\r\n- Adds Vita Rice/GLideN64 pack discovery, an in-game pack toggle, and ZIP\r\n  extraction with a visible progress screen and Vita-compatible directory\r\n  installation.\r\n- Loads Rice replacements asynchronously when decode helpers are available.\r\n  Adds `tools/ricepack/vita_optimize_pack.py` and `.vtex` loading for RGBA8\r\n  textures with prebuilt mip chains. Converted packs must be supplied by the\r\n  user and are not included in the VPK.\r\n- Excludes the uncommitted per-scene texture-preload work and its related cache\r\n  changes. That WIP remains local pending HD-pack/audio testing. Ordinary\r\n  on-demand async texture loading is retained. **Texture pop-in remains a\r\n  known issue**, and audio performance with heavy enabled packs has not been\r\n  separately qualified.\r\n- Includes opt-in Vita profiler/DebugNet lifecycle and renderer/texture metrics\r\n  for development. The published VPK is built with both debugger and profiler\r\n  disabled.\r\n\r\nThe audio implementation is unchanged from the hardware-confirmed baseline.\r\nRuntime code is taken from committed `ec64a161`, without the local preload WIP;\r\nthe release adds version and documentation updates only. The earlier full\r\nAdventure completion remains evidence for the Restored baseline, not a newly\r\ncompleted 1.7.2 playthrough. If a heavy pack causes audio or frame-time problems,\r\ndisable the pack when troubleshooting.\r\n\r\nInstall `GoldenBalloon-Vita-v1.7.2.vpk` over the existing `GBLN00001` application.\r\nBack up saves and retain `ux0:data/goldenballoon/`, including your own ROM and\r\noptional packs. The VPK includes the 98-trophy pack and LiveArea artwork, but\r\nno ROM or gameplay assets. NoTrpDrm remains optional for trophies.\r\n\r\nThe compiled version and Vita package metadata use `MDKR_VERSION` `1.7.2`\r\nand `APP_VER` `01.72`. Source is tagged `v1.7.2` on the `optimization` branch.\r\n\r\n\r\n## Download integrity\r\n\r\n`GoldenBalloon-Vita-v1.7.2.vpk` SHA-256:\r\n\r\n```\r\n8511ddb5b6e7b4cd6b33e3a102e14e7e7fd56b02aea9494d585cb0418e9d953e\r\n```\r\n",
+    "assets": [
+      {
+        "name": "GoldenBalloon-Vita-v1.7.2.vpk",
+        "size": 4746335,
+        "download_url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/download/v1.7.2/GoldenBalloon-Vita-v1.7.2.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 97,
+        "download_url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/download/v1.7.2/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      }
+    ],
+    "author": "zm2283145",
+    "homebrew_name": "Golden Balloon",
+    "homebrew_icon": "https://archive.org/download/golden-balloon-psvita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "DKR64 Vita Port of Golden Ballon",
+    "homebrew_long_description": "A PS Vita port of Golden Balloon, itself a native and browser source port of the 1997 Nintendo 64 kart racer, built on the community decompilation.\nNot an emulator: the game is cross-compiled for the Vita and runs from a ROM you already own.",
+    "homebrew_id": "golden-balloon",
+    "homebrew_authors": [
+      "claude-ai",
+      "zm2283145"
+    ],
+    "homebrew_version": "1.7.1",
+    "catalog_apps": [
+      {
+        "id": "golden-balloon",
+        "name": "Golden Balloon",
+        "icon": "https://archive.org/download/golden-balloon-psvita/icon0.png",
+        "category": "ports",
+        "description": "DKR64 Vita Port of Golden Ballon",
+        "long_description": "A PS Vita port of Golden Balloon, itself a native and browser source port of the 1997 Nintendo 64 kart racer, built on the community decompilation.\nNot an emulator: the game is cross-compiled for the Vita and runs from a ROM you already own.",
+        "version": "1.7.1",
+        "version_date": "2026-09-10",
+        "author_ids": [
+          "claude-ai",
+          "zm2283145"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.7.1 → release v1.7.2",
+    "catalog_version": "1.7.1"
+  },
+  {
+    "platform": "github",
     "repo": "VegettoSan/PSVitaAlive",
     "release_id": "390508581",
     "tag": "02.05",
@@ -870,57 +927,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.0.2",
     "catalog_version": "1.0.2"
-  },
-  {
-    "platform": "github",
-    "repo": "zm2283145/goldenballoon-vita-port",
-    "release_id": "386758014",
-    "tag": "v1.7.1",
-    "name": "Golden Balloon Vita v1.7.1",
-    "url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/tag/v1.7.1",
-    "published": "2026-09-11T03:01:10Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Fixes character-specific “collect five balloons in one Adventure session” trophies for all 13 racers.\n\nNormal race victories and silver-coin clears now advance the same session counter as free-roaming overworld balloons, while retaining the correct Taj, Wizpig, and Terry identities.\n\nThis release retains the persistent Vita shader cache and asynchronous, non-blocking trophy unlocks introduced in v1.7.0.",
-    "assets": [
-      {
-        "name": "GoldenBalloon-Vita-v1.7.1.vpk",
-        "size": 4473413,
-        "download_url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/download/v1.7.1/GoldenBalloon-Vita-v1.7.1.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "zm2283145",
-    "homebrew_name": "Golden Balloon",
-    "homebrew_icon": "https://archive.org/download/golden-balloon-psvita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "DKR64 Vita Port of Golden Ballon",
-    "homebrew_id": "golden-balloon",
-    "homebrew_authors": [
-      "claude-ai",
-      "zm2283145"
-    ],
-    "catalog_apps": [
-      {
-        "id": "golden-balloon",
-        "name": "Golden Balloon",
-        "icon": "https://archive.org/download/golden-balloon-psvita/icon0.png",
-        "category": "ports",
-        "description": "DKR64 Vita Port of Golden Ballon",
-        "long_description": "A PS Vita port of Golden Balloon, itself a native and browser source port of the 1997 Nintendo 64 kart racer, built on the community decompilation.\nNot an emulator: the game is cross-compiled for the Vita and runs from a ROM you already own.",
-        "version": "1.7.1",
-        "version_date": "2026-09-10",
-        "author_ids": [
-          "claude-ai",
-          "zm2283145"
-        ]
-      }
-    ],
-    "homebrew_long_description": "A PS Vita port of Golden Balloon, itself a native and browser source port of the 1997 Nintendo 64 kart racer, built on the community decompilation.\nNot an emulator: the game is cross-compiled for the Vita and runs from a ROM you already own.",
-    "homebrew_version": "1.7.1",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.7.1",
-    "catalog_version": "1.7.1"
   },
   {
     "platform": "gitlab",
