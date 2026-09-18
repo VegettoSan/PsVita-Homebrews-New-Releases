@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">412</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>71</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>484</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">414</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>70</strong><span>pendientes</span></div>
+        <div class="stat"><strong>477</strong><span>GitHub</span></div>
         <div class="stat"><strong>7</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,7 +219,7 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="golden balloon golden balloon zm2283145/goldenballoon-vita-port golden balloon vita v1.7.2 v1.7.2 ports # golden balloon 1.7.2
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="golden balloon golden balloon zm2283145/goldenballoon-vita-port golden balloon vita v1.7.2 v1.7.2 ports # golden balloon 1.7.2
 
 *released 2026-09-17.*
 
@@ -284,14 +284,14 @@ and `app_ver` `01.72`. source is tagged `v1.7.2` on the `optimization` branch.
                       <h2><a href="https://github.com/zm2283145/goldenballoon-vita-port/releases/tag/v1.7.2" target="_blank" rel="noopener">Golden Balloon</a></h2>
                       <div class="release-name">Golden Balloon Vita v1.7.2</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v1.7.2</span>
                     <span>2026-09-17 23:04 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.7.1</span>
+                    <span class="catalog-version">PSVitaAlive: 1.7.2</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.7.1 → release v1.7.2</div>
+                  <div class="catalog-detail">PSVitaAlive 1.7.2</div>
                   
                   <div class="body markdown-body"><h1>Golden Balloon 1.7.2</h1>
 <p><em>Released 2026-09-17.</em></p>
@@ -389,6 +389,255 @@ and <code>APP_VER</code> <code>01.72</code>. Source is tagged <code>v1.7.2</code
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/VegettoSan/PSVitaAlive/releases/download/02.05/PSVitaAlive.vpk" target="_blank" rel="noopener">⬇ PSVitaAlive.vpk · 7.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="shadow guardian shadow guardian metalsyntax/shadow-guardian-vita shadow guardian vita v1.2.5 v1.2.5 ports # shadow guardian vita v1.2.5
+
+this is a wrapper/port of **shadow guardian hd** for the ps vita.
+
+## changelog
+
+- v1.2.5: fixed broken rendering on interactable objects. `shaders/interactible_basic.xml`, `interactible_bump.xml`, and `interactible_shadowmap.xml` (the engine&#x27;s own shader source, shipped inside the original game data) use glsl that android&#x27;s gles driver quietly accepts but the vita&#x27;s on-device shark compiler (`shark_compile_shader_extended()`) rejects outright: a `vec4(1)` constructor without an explicit float literal in all three, and — in `_bump` only — an `outlinesize` uniform that&#x27;s read in the shader body but never declared. all three previously failed to compile on vita; the v1.2.1 and v1.2.4 hotfixes only stopped the game from crashing when that happened (a symptom of the bug, not the cause), so the interactable objects using these shaders kept rendering without their proper material/shading even on a &quot;successful&quot; boot. found by diffing a tester&#x27;s working data folder against a clean apk data dump — the only differences were these 3 files, hand-patched locally but never shipped. corrected copies are now bundled inside the vpk (`extras/shader_patches/`) and installed to `ux0:data/shadowguardian/shaders/` automatically on every boot (`apply_shader_patches()` in `source/utils/init.c`), so this is fixed for every tester regardless of which data dump they installed from — no manual file replacement needed.
+## setup instructions
+
+in order to properly install the game, you&#x27;ll need to extract the data from the original android game.
+
+1. install the `kubridge` and `fd_fix` plugins on your ps vita.
+2. install `libshacccg.suprx`, if you don&#x27;t have it already, by following [this guide](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).
+3. obtain the original apk of shadow guardian (`shadow-guardian-hd-v1-0-1-uk-ru.apk`) and the required data files.
+4. extract the `.apk` using any zip extractor.
+5. place the executable `libshadowguardian.so` (from `lib/armeabi-v7a/` inside the apk) in `ux0:data/shadowguardian/`. (if the apk also contains `libstormgloft.so`, you can copy it too — it does no harm.)
+6. place all game asset folders (`res`, `shaders`, `textures`, `models`, `music`, `sounds`, etc.) in `ux0:data/shadowguardian/`.
+7. make sure the 16:9 assets `sprites_1_7` and `gui_1_7` are present. if the apk only ships the `sprites_1_6` / `gui_1_6` variants, duplicate them with vitashell (copy + paste + rename) so the `_1_7` names exist — missing 16:9 gui assets can crash the game on the loading screen. also confirm the `res/` folder was copied.
+8. double-check that `gui_1_6` and `sprites_1_6` themselves are also present in `ux0:data/shadowguardian/` (not just the `_1_7` copies) — some assets are only ever requested by their `_1_6` name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.
+9. download and install `shadowguardian.vpk` on your ps vita.
+
+## controls
+
+- **left analog** - movement (in-game only)
+- **right analog** - camera (free-look)
+- **d-pad** - menu navigation / movement
+- **r** - fire
+- **l / square** - aim (hold)
+- **cross** - contextual action (jump / run / grab / climb)
+- **triangle** - reload / switch weapon
+- **circle** - toggle virtual buttons (hide/show hud layout)
+- **start** - pause / back
+- **select** - menu
+- **touch screen** - original touch controls
+
+## known issues
+
+- reload/weapon touch position (triangle) confirmed by layout only; verify in combat on hardware.
+- [update this section prior to release with any remaining unresolved bugs]
+
+## troubleshooting
+
+**crash on the loading screen (`c2-12828-1` error):** this is usually a data setup problem, not a game bug. check the following with vitashell:
+
+1. you installed the **latest** `shadowguardian.vpk` (older builds have known crashes that are already fixed).
+2. `kubridge` and `fd_fix` plugins plus `libshacccg.suprx` are installed (see setup above).
+3. in `ux0:data/shadowguardian/`: `libshadowguardian.so`, the `res/` folder, and all asset folders are present, and **both** the `_1_6` and `_1_7` variants of `sprites` and `gui` exist (`sprites_1_6`, `sprites_1_7`, `gui_1_6`, `gui_1_7`) — copy whichever ones are missing from the variant you do have. as of v1.2.3, a missing `gui_1_6`/`gui_1_7` or `sprites_1_6`/`sprites_1_7` shows a clear &quot;missing game data files&quot; dialog on boot instead of crashing later — if you see that dialog, it&#x27;s telling you exactly which one to fix.
+
+**if it still crashes**, please report it with:
+
+1. the newest `ux0:data/shadowguardian/logs/game_log_*.txt` (from the time of the crash — do not delete it).
+2. the newest `ux0:data/psp2core-*-eboot.bin.psp2dmp` core dump.
+3. a note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).
+
+## credits
+
+- theflow for the `so_loader` wrapper and android porting boilerplate.
+- rinnegatamante for `vitagl` and porting tools.
+- gameloft for the original game.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/shadow-guardian-ps-vita/icon0.png" alt="Icono de Shadow Guardian" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Shadow-Guardian-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/tag/v1.2.5" target="_blank" rel="noopener">Shadow Guardian</a></h2>
+                      <div class="release-name">Shadow Guardian Vita v1.2.5</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.5</span>
+                    <span>2026-09-16 05:57 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2.5</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.2.5</div>
+                  
+                  <div class="body markdown-body"><h1>Shadow Guardian Vita v1.2.5</h1>
+<p>This is a wrapper/port of <strong>Shadow Guardian HD</strong> for the PS Vita.</p>
+<h2>Changelog</h2>
+<ul>
+<li>v1.2.5: Fixed broken rendering on interactable objects. <code>shaders/interactible_basic.xml</code>, <code>interactible_bump.xml</code>, and <code>interactible_shadowmap.xml</code> (the engine's own shader source, shipped inside the original game data) use GLSL that Android's GLES driver quietly accepts but the Vita's on-device Shark compiler (<code>shark_compile_shader_extended()</code>) rejects outright: a <code>vec4(1)</code> constructor without an explicit float literal in all three, and — in <code>_bump</code> only — an <code>OutlineSize</code> uniform that's read in the shader body but never declared. All three previously failed to compile on Vita; the v1.2.1 and v1.2.4 hotfixes only stopped the game from crashing when that happened (a symptom of the bug, not the cause), so the interactable objects using these shaders kept rendering without their proper material/shading even on a &quot;successful&quot; boot. Found by diffing a tester's working data folder against a clean APK data dump — the only differences were these 3 files, hand-patched locally but never shipped. Corrected copies are now bundled inside the VPK (<code>extras/shader_patches/</code>) and installed to <code>ux0:data/shadowguardian/shaders/</code> automatically on every boot (<code>apply_shader_patches()</code> in <code>source/utils/init.c</code>), so this is fixed for every tester regardless of which data dump they installed from — no manual file replacement needed.</li>
+</ul>
+<h2>Setup Instructions</h2>
+<p>In order to properly install the game, you'll need to extract the data from the original Android game.</p>
+<ol>
+<li>Install the <code>kubridge</code> and <code>fd_fix</code> plugins on your PS Vita.</li>
+<li>Install <code>libshacccg.suprx</code>, if you don't have it already, by following <a target="_blank" rel="noopener noreferrer" href="https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx">this guide</a>.</li>
+<li>Obtain the original APK of Shadow Guardian (<code>Shadow-Guardian-HD-v1-0-1-UK-RU.apk</code>) and the required data files.</li>
+<li>Extract the <code>.apk</code> using any zip extractor.</li>
+<li>Place the executable <code>libshadowguardian.so</code> (from <code>lib/armeabi-v7a/</code> inside the APK) in <code>ux0:data/shadowguardian/</code>. (If the APK also contains <code>libStormGLOFT.so</code>, you can copy it too — it does no harm.)</li>
+<li>Place all game asset folders (<code>res</code>, <code>shaders</code>, <code>textures</code>, <code>models</code>, <code>music</code>, <code>sounds</code>, etc.) in <code>ux0:data/shadowguardian/</code>.</li>
+<li>Make sure the 16:9 assets <code>sprites_1_7</code> and <code>gui_1_7</code> are present. If the APK only ships the <code>sprites_1_6</code> / <code>gui_1_6</code> variants, duplicate them with VitaShell (Copy + Paste + Rename) so the <code>_1_7</code> names exist — missing 16:9 GUI assets can crash the game on the LOADING screen. Also confirm the <code>res/</code> folder was copied.</li>
+<li>Double-check that <code>gui_1_6</code> and <code>sprites_1_6</code> themselves are also present in <code>ux0:data/shadowguardian/</code> (not just the <code>_1_7</code> copies) — some assets are only ever requested by their <code>_1_6</code> name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.</li>
+<li>Download and install <code>shadowguardian.vpk</code> on your PS Vita.</li>
+</ol>
+<h2>Controls</h2>
+<ul>
+<li><strong>Left Analog</strong> - Movement (in-game only)</li>
+<li><strong>Right Analog</strong> - Camera (free-look)</li>
+<li><strong>D-Pad</strong> - Menu Navigation / Movement</li>
+<li><strong>R</strong> - Fire</li>
+<li><strong>L / Square</strong> - Aim (hold)</li>
+<li><strong>Cross</strong> - Contextual action (jump / run / grab / climb)</li>
+<li><strong>Triangle</strong> - Reload / Switch weapon</li>
+<li><strong>Circle</strong> - Toggle Virtual Buttons (Hide/Show HUD layout)</li>
+<li><strong>Start</strong> - Pause / Back</li>
+<li><strong>Select</strong> - Menu</li>
+<li><strong>Touch Screen</strong> - Original Touch Controls</li>
+</ul>
+<h2>Known Issues</h2>
+<ul>
+<li>Reload/weapon touch position (Triangle) confirmed by layout only; verify in combat on hardware.</li>
+<li>[Update this section prior to release with any remaining unresolved bugs]</li>
+</ul>
+<h2>Troubleshooting</h2>
+<p><strong>Crash on the LOADING screen (<code>C2-12828-1</code> error):</strong> this is usually a data setup problem, not a game bug. Check the following with VitaShell:</p>
+<ol>
+<li>You installed the <strong>latest</strong> <code>shadowguardian.vpk</code> (older builds have known crashes that are already fixed).</li>
+<li><code>kubridge</code> and <code>fd_fix</code> plugins plus <code>libshacccg.suprx</code> are installed (see Setup above).</li>
+<li>In <code>ux0:data/shadowguardian/</code>: <code>libshadowguardian.so</code>, the <code>res/</code> folder, and all asset folders are present, and <strong>both</strong> the <code>_1_6</code> and <code>_1_7</code> variants of <code>sprites</code> and <code>gui</code> exist (<code>sprites_1_6</code>, <code>sprites_1_7</code>, <code>gui_1_6</code>, <code>gui_1_7</code>) — copy whichever ones are missing from the variant you do have. As of v1.2.3, a missing <code>gui_1_6</code>/<code>gui_1_7</code> or <code>sprites_1_6</code>/<code>sprites_1_7</code> shows a clear &quot;missing game data files&quot; dialog on boot instead of crashing later — if you see that dialog, it's telling you exactly which one to fix.</li>
+</ol>
+<p><strong>If it still crashes</strong>, please report it with:</p>
+<ol>
+<li>The newest <code>ux0:data/shadowguardian/logs/game_log_*.txt</code> (from the time of the crash — do not delete it).</li>
+<li>The newest <code>ux0:data/psp2core-*-eboot.bin.psp2dmp</code> core dump.</li>
+<li>A note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).</li>
+</ol>
+<h2>Credits</h2>
+<ul>
+<li>TheFloW for the <code>so_loader</code> wrapper and Android porting boilerplate.</li>
+<li>Rinnegatamante for <code>vitaGL</code> and porting tools.</li>
+<li>Gameloft for the original game.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/download/v1.2.5/shadowguardian.vpk" target="_blank" rel="noopener">⬇ shadowguardian.vpk · 1.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita  the impossible game — ps vita port v1.0.0 v1.0.0 ports # the impossible game — ps vita port v1.0.0
+
+first playable release of the native **the impossible game** (flukedude) port for ps vita /
+ps tv. runs `libimpossible.so` directly on arm via a *soloader* + *falsojni*, with opengl es
+1.1 (fixed-function pipeline) rendering through vitagl.
+
+## ✨ what&#x27;s new
+
+- **both base levels playable** (fire aura, original xbox level) at a stable 60 fps, with
+  audio, progress/medal saving, and both physical and touch controls.
+- **fixed the persistent black-screen bug**: the root cause was a `libvitagl.a` shared
+  across several ports on the dev machine that was broken for this specific binary (the
+  framebuffer never received any pixels even though every layer — gl, gxm,
+  `scedisplaysetframebuf` — reported success). fixed by vendoring vitagl as its own git
+  submodule, built from source, instead of depending on that shared global install.
+- **full native ui**: all 7 menu states (main menu, level select, pause, how-to-play,
+  stats, medals, victory) reimplemented in c with dual touch + d-pad/button support.
+- **full audio**: dedicated multithreaded mixer (`sceaudioout`, 44.1khz stereo), streaming
+  bgm and preloaded, latency-free sfx, all decoded via `stb_vorbis`.
+
+## ⚠️ known issues / pending work
+
+- flukedude&#x27;s additional level &quot;world pack&quot; content ships as a separate apk and hasn&#x27;t
+  been analyzed or integrated yet — planned as future work.
+
+## 📋 requirements
+
+- ps vita / ps tv running custom firmware (henkaku or enso), firmware 3.60/3.65+.
+- [`kubridge`](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin.
+- [`libshacccg.suprx`](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
+- a legally obtained copy of **the impossible game** for android
+  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).
+
+## 📦 installation
+
+1. install `theimpossiblegame.vpk` with vitashell.
+2. copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on
+   the console (see `readme.md` for the full file layout).
+
+---
+
+see `readme.md` for the full port description, and `port_progress.md` for the bug-by-bug
+diagnosis log (every fix confirmed on real hardware, no guessing).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.0.0" target="_blank" rel="noopener">The Impossible Game</a></h2>
+                      <div class="release-name"> The Impossible Game — PS Vita Port v1.0.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0.0</span>
+                    <span>2026-09-16 05:19 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.0</div>
+                  
+                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.0.0</h1>
+<p>First playable release of the native <strong>The Impossible Game</strong> (FlukeDude) port for PS Vita /
+PS TV. Runs <code>libimpossible.so</code> directly on ARM via a <em>soloader</em> + <em>FalsoJNI</em>, with OpenGL ES
+1.1 (fixed-function pipeline) rendering through vitaGL.</p>
+<h2>✨ What's New</h2>
+<ul>
+<li><strong>Both base levels playable</strong> (Fire Aura, Original Xbox Level) at a stable 60 FPS, with
+audio, progress/medal saving, and both physical and touch controls.</li>
+<li><strong>Fixed the persistent black-screen bug</strong>: the root cause was a <code>libvitaGL.a</code> shared
+across several ports on the dev machine that was broken for this specific binary (the
+framebuffer never received any pixels even though every layer — GL, GXM,
+<code>sceDisplaySetFrameBuf</code> — reported success). Fixed by vendoring vitaGL as its own git
+submodule, built from source, instead of depending on that shared global install.</li>
+<li><strong>Full native UI</strong>: all 7 menu states (main menu, level select, pause, how-to-play,
+stats, medals, victory) reimplemented in C with dual touch + D-Pad/button support.</li>
+<li><strong>Full audio</strong>: dedicated multithreaded mixer (<code>SceAudioOut</code>, 44.1kHz stereo), streaming
+BGM and preloaded, latency-free SFX, all decoded via <code>stb_vorbis</code>.</li>
+</ul>
+<h2>⚠️ Known Issues / Pending Work</h2>
+<ul>
+<li>FlukeDude's additional level &quot;world pack&quot; content ships as a separate APK and hasn't
+been analyzed or integrated yet — planned as future work.</li>
+</ul>
+<h2>📋 Requirements</h2>
+<ul>
+<li>PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><code>kubridge</code></a> installed as a kernel plugin.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><code>libshacccg.suprx</code></a> installed in <code>ur0:data/</code>.</li>
+<li>A legally obtained copy of <strong>The Impossible Game</strong> for Android
+(<code>05133-the-impossible-1.5.2.apk</code>, package <code>com.flukedude.impossiblegame</code>).</li>
+</ul>
+<h2>📦 Installation</h2>
+<ol>
+<li>Install <code>theimpossiblegame.vpk</code> with VitaShell.</li>
+<li>Copy the contents of <code>ux0_data/theimpossiblegame/</code> to <code>ux0:data/theimpossiblegame/</code> on
+the console (see <code>README.md</code> for the full file layout).</li>
+</ol>
+<hr>
+<p>See <code>README.md</code> for the full port description, and <code>port_progress.md</code> for the bug-by-bug
+diagnosis log (every fix confirmed on real hardware, no guessing).</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.0.0/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 781.7 KB</a></div>
                 </div>
               </div>
             </article>
@@ -26829,67 +27078,10 @@ Optionally, place your Videos folder from your copy of Sonic CD and put it in <c
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="vitalbum vitalbum joel16/vitalbum vitalbum v1.40 v1.40 utilities - config file now makes use of the scelibjson api for reading/writing instead of jansson.
-- no longer manually accounts for the offset when writing error logs.
-- files that aren&#x27;t supported by vitalbum are now filtered out and not displayed in the gui.
-- added support for viewing svgs using nanosvg
-- properly use cancel/enter buttons throughout the ui.
-- the ui now uses the official ps vita font.
-- settings now has a new section where it displays the app version as well as the versions of various libraries used in this application that expose some sort of version info in their api.
-- libtiff updated to v4.2.0
-- libjpeg-turbo updated to v2.0.6.
-- fix .tiff images being read from the wrong orientation.
-- allow the use of l/r triggers to scroll through images in a single folder.
-- the right analog stick can be used to move around image if its size is bigger than 960x544.
-- the left analog stick can be used to zoom in/out of image.
-- clean-up imgui implementation (removed unused touchscreen/mouse functionalities).
-- many under the hood changes for qol improvements.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-vitalbum/icon0.png" alt="Icono de VITAlbum" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · joel16/VITAlbum</div>
-                      <h2><a href="https://github.com/joel16/VITAlbum/releases/tag/v1.40" target="_blank" rel="noopener">VITAlbum</a></h2>
-                      <div class="release-name">VITAlbum v1.40</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.40</span>
-                    <span>2020-12-31 18:27 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.40</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.40</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Config file now makes use of the SceLibJson API for reading/writing instead of jansson.</li>
-<li>No longer manually accounts for the offset when writing error logs.</li>
-<li>Files that aren't supported by VITAlbum are now filtered out and not displayed in the GUI.</li>
-<li>Added support for viewing SVGs using nanosvg</li>
-<li>Properly use cancel/enter buttons throughout the UI.</li>
-<li>The UI now uses the official PS Vita font.</li>
-<li>Settings now has a new section where it displays the app version as well as the versions of various libraries used in this application that expose some sort of version info in their API.</li>
-<li>LibTIFF updated to v4.2.0</li>
-<li>libjpeg-turbo updated to v2.0.6.</li>
-<li>Fix .TIFF images being read from the wrong orientation.</li>
-<li>Allow the use of L/R triggers to scroll through images in a single folder.</li>
-<li>The right analog stick can be used to move around image if its size is bigger than 960x544.</li>
-<li>The left analog stick can be used to zoom in/out of image.</li>
-<li>Clean-up imgui implementation (removed unused touchscreen/mouse functionalities).</li>
-<li>Many under the hood changes for QOL improvements.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/joel16/VITAlbum/releases/download/v1.40/VITAlbum.vpk" target="_blank" rel="noopener">⬇ VITAlbum.vpk · 1.5 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-18 02:28 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-18 07:49 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

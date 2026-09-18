@@ -32,10 +32,9 @@
     "homebrew_long_description": "A PS Vita port of Golden Balloon, itself a native and browser source port of the 1997 Nintendo 64 kart racer, built on the community decompilation.\nNot an emulator: the game is cross-compiled for the Vita and runs from a ROM you already own.",
     "homebrew_id": "golden-balloon",
     "homebrew_authors": [
-      "claude-ai",
       "zm2283145"
     ],
-    "homebrew_version": "1.7.1",
+    "homebrew_version": "1.7.2",
     "catalog_apps": [
       {
         "id": "golden-balloon",
@@ -44,17 +43,16 @@
         "category": "ports",
         "description": "DKR64 Vita Port of Golden Ballon",
         "long_description": "A PS Vita port of Golden Balloon, itself a native and browser source port of the 1997 Nintendo 64 kart racer, built on the community decompilation.\nNot an emulator: the game is cross-compiled for the Vita and runs from a ROM you already own.",
-        "version": "1.7.1",
-        "version_date": "2026-09-10",
+        "version": "1.7.2",
+        "version_date": "2026-09-17",
         "author_ids": [
-          "claude-ai",
           "zm2283145"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.7.1 → release v1.7.2",
-    "catalog_version": "1.7.1"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.7.2",
+    "catalog_version": "1.7.2"
   },
   {
     "platform": "github",
@@ -104,6 +102,104 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive oficial · 02.05",
     "catalog_version": "02.05"
+  },
+  {
+    "platform": "github",
+    "repo": "MetalSyntax/Shadow-Guardian-vita",
+    "release_id": "389669126",
+    "tag": "v1.2.5",
+    "name": "Shadow Guardian Vita v1.2.5",
+    "url": "https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/tag/v1.2.5",
+    "published": "2026-09-16T05:57:33Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Shadow Guardian Vita v1.2.5\r\n\r\nThis is a wrapper/port of **Shadow Guardian HD** for the PS Vita.\r\n\r\n## Changelog\r\n\r\n- v1.2.5: Fixed broken rendering on interactable objects. `shaders/interactible_basic.xml`, `interactible_bump.xml`, and `interactible_shadowmap.xml` (the engine's own shader source, shipped inside the original game data) use GLSL that Android's GLES driver quietly accepts but the Vita's on-device Shark compiler (`shark_compile_shader_extended()`) rejects outright: a `vec4(1)` constructor without an explicit float literal in all three, and — in `_bump` only — an `OutlineSize` uniform that's read in the shader body but never declared. All three previously failed to compile on Vita; the v1.2.1 and v1.2.4 hotfixes only stopped the game from crashing when that happened (a symptom of the bug, not the cause), so the interactable objects using these shaders kept rendering without their proper material/shading even on a \"successful\" boot. Found by diffing a tester's working data folder against a clean APK data dump — the only differences were these 3 files, hand-patched locally but never shipped. Corrected copies are now bundled inside the VPK (`extras/shader_patches/`) and installed to `ux0:data/shadowguardian/shaders/` automatically on every boot (`apply_shader_patches()` in `source/utils/init.c`), so this is fixed for every tester regardless of which data dump they installed from — no manual file replacement needed.\r\n## Setup Instructions\r\n\r\nIn order to properly install the game, you'll need to extract the data from the original Android game.\r\n\r\n1. Install the `kubridge` and `fd_fix` plugins on your PS Vita.\r\n2. Install `libshacccg.suprx`, if you don't have it already, by following [this guide](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).\r\n3. Obtain the original APK of Shadow Guardian (`Shadow-Guardian-HD-v1-0-1-UK-RU.apk`) and the required data files.\r\n4. Extract the `.apk` using any zip extractor.\r\n5. Place the executable `libshadowguardian.so` (from `lib/armeabi-v7a/` inside the APK) in `ux0:data/shadowguardian/`. (If the APK also contains `libStormGLOFT.so`, you can copy it too — it does no harm.)\r\n6. Place all game asset folders (`res`, `shaders`, `textures`, `models`, `music`, `sounds`, etc.) in `ux0:data/shadowguardian/`.\r\n7. Make sure the 16:9 assets `sprites_1_7` and `gui_1_7` are present. If the APK only ships the `sprites_1_6` / `gui_1_6` variants, duplicate them with VitaShell (Copy + Paste + Rename) so the `_1_7` names exist — missing 16:9 GUI assets can crash the game on the LOADING screen. Also confirm the `res/` folder was copied.\r\n8. Double-check that `gui_1_6` and `sprites_1_6` themselves are also present in `ux0:data/shadowguardian/` (not just the `_1_7` copies) — some assets are only ever requested by their `_1_6` name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.\r\n9. Download and install `shadowguardian.vpk` on your PS Vita.\r\n\r\n## Controls\r\n\r\n- **Left Analog** - Movement (in-game only)\r\n- **Right Analog** - Camera (free-look)\r\n- **D-Pad** - Menu Navigation / Movement\r\n- **R** - Fire\r\n- **L / Square** - Aim (hold)\r\n- **Cross** - Contextual action (jump / run / grab / climb)\r\n- **Triangle** - Reload / Switch weapon\r\n- **Circle** - Toggle Virtual Buttons (Hide/Show HUD layout)\r\n- **Start** - Pause / Back\r\n- **Select** - Menu\r\n- **Touch Screen** - Original Touch Controls\r\n\r\n## Known Issues\r\n\r\n- Reload/weapon touch position (Triangle) confirmed by layout only; verify in combat on hardware.\r\n- [Update this section prior to release with any remaining unresolved bugs]\r\n\r\n## Troubleshooting\r\n\r\n**Crash on the LOADING screen (`C2-12828-1` error):** this is usually a data setup problem, not a game bug. Check the following with VitaShell:\r\n\r\n1. You installed the **latest** `shadowguardian.vpk` (older builds have known crashes that are already fixed).\r\n2. `kubridge` and `fd_fix` plugins plus `libshacccg.suprx` are installed (see Setup above).\r\n3. In `ux0:data/shadowguardian/`: `libshadowguardian.so`, the `res/` folder, and all asset folders are present, and **both** the `_1_6` and `_1_7` variants of `sprites` and `gui` exist (`sprites_1_6`, `sprites_1_7`, `gui_1_6`, `gui_1_7`) — copy whichever ones are missing from the variant you do have. As of v1.2.3, a missing `gui_1_6`/`gui_1_7` or `sprites_1_6`/`sprites_1_7` shows a clear \"missing game data files\" dialog on boot instead of crashing later — if you see that dialog, it's telling you exactly which one to fix.\r\n\r\n**If it still crashes**, please report it with:\r\n\r\n1. The newest `ux0:data/shadowguardian/logs/game_log_*.txt` (from the time of the crash — do not delete it).\r\n2. The newest `ux0:data/psp2core-*-eboot.bin.psp2dmp` core dump.\r\n3. A note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).\r\n\r\n## Credits\r\n\r\n- TheFloW for the `so_loader` wrapper and Android porting boilerplate.\r\n- Rinnegatamante for `vitaGL` and porting tools.\r\n- Gameloft for the original game.\r\n",
+    "assets": [
+      {
+        "name": "shadowguardian.vpk",
+        "size": 1183212,
+        "download_url": "https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/download/v1.2.5/shadowguardian.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "Shadow Guardian",
+    "homebrew_icon": "https://archive.org/download/shadow-guardian-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "This is a wrapper/port of Shadow Guardian HD for the PS Vita.",
+    "homebrew_long_description": "The port works by loading the official Android ARMv7 libshadowguardian.so executable in memory, resolving its imports with custom stubs, and patching it to properly run on the PS Vita using a fake JNI environment and translating OpenGL ES 2.0 calls to vitaGL.",
+    "homebrew_id": "shadow-guardian",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.2.5",
+    "catalog_apps": [
+      {
+        "id": "shadow-guardian",
+        "name": "Shadow Guardian",
+        "icon": "https://archive.org/download/shadow-guardian-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "This is a wrapper/port of Shadow Guardian HD for the PS Vita.",
+        "long_description": "The port works by loading the official Android ARMv7 libshadowguardian.so executable in memory, resolving its imports with custom stubs, and patching it to properly run on the PS Vita using a fake JNI environment and translating OpenGL ES 2.0 calls to vitaGL.",
+        "version": "1.2.5",
+        "version_date": "2026-09-16",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.2.5",
+    "catalog_version": "1.2.5"
+  },
+  {
+    "platform": "github",
+    "repo": "MetalSyntax/The-Impossible-Game-vita",
+    "release_id": "389655292",
+    "tag": "v1.0.0",
+    "name": " The Impossible Game — PS Vita Port v1.0.0",
+    "url": "https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.0.0",
+    "published": "2026-09-16T05:19:32Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# The Impossible Game — PS Vita Port v1.0.0\r\n\r\nFirst playable release of the native **The Impossible Game** (FlukeDude) port for PS Vita /\r\nPS TV. Runs `libimpossible.so` directly on ARM via a *soloader* + *FalsoJNI*, with OpenGL ES\r\n1.1 (fixed-function pipeline) rendering through vitaGL.\r\n\r\n## ✨ What's New\r\n\r\n- **Both base levels playable** (Fire Aura, Original Xbox Level) at a stable 60 FPS, with\r\n  audio, progress/medal saving, and both physical and touch controls.\r\n- **Fixed the persistent black-screen bug**: the root cause was a `libvitaGL.a` shared\r\n  across several ports on the dev machine that was broken for this specific binary (the\r\n  framebuffer never received any pixels even though every layer — GL, GXM,\r\n  `sceDisplaySetFrameBuf` — reported success). Fixed by vendoring vitaGL as its own git\r\n  submodule, built from source, instead of depending on that shared global install.\r\n- **Full native UI**: all 7 menu states (main menu, level select, pause, how-to-play,\r\n  stats, medals, victory) reimplemented in C with dual touch + D-Pad/button support.\r\n- **Full audio**: dedicated multithreaded mixer (`SceAudioOut`, 44.1kHz stereo), streaming\r\n  BGM and preloaded, latency-free SFX, all decoded via `stb_vorbis`.\r\n\r\n## ⚠️ Known Issues / Pending Work\r\n\r\n- FlukeDude's additional level \"world pack\" content ships as a separate APK and hasn't\r\n  been analyzed or integrated yet — planned as future work.\r\n\r\n## 📋 Requirements\r\n\r\n- PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.\r\n- [`kubridge`](https://github.com/TheOfficialFloW/kubridge/releases) installed as a kernel plugin.\r\n- [`libshacccg.suprx`](https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest) installed in `ur0:data/`.\r\n- A legally obtained copy of **The Impossible Game** for Android\r\n  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).\r\n\r\n## 📦 Installation\r\n\r\n1. Install `theimpossiblegame.vpk` with VitaShell.\r\n2. Copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on\r\n   the console (see `README.md` for the full file layout).\r\n\r\n---\r\n\r\nSee `README.md` for the full port description, and `port_progress.md` for the bug-by-bug\r\ndiagnosis log (every fix confirmed on real hardware, no guessing).",
+    "assets": [
+      {
+        "name": "theimpossiblegame.vpk",
+        "size": 800456,
+        "download_url": "https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.0.0/theimpossiblegame.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "The Impossible Game",
+    "homebrew_icon": "https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Android to PS Vita port of The Impossible Game originally published by Fluke Games (FlukeDude)",
+    "homebrew_long_description": "The Impossible Game is FlukeDude's rhythm-platformer, originally released for Android as 05133-the-impossible-1.5.2.apk (package com.flukedude.impossiblegame). This port runs the compiled native library (libimpossible.so — a small, self-contained proprietary engine that handles cube physics, collisions, procedural level generation, and rendering) directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI). The UI and audio layers, which were Java on Android, have been fully reimplemented natively in C (menu.c, audio.c, texture.c, save.c) for zero-latency input and native performance.",
+    "homebrew_id": "the-impossible-game",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.0.0",
+    "catalog_apps": [
+      {
+        "id": "the-impossible-game",
+        "name": "The Impossible Game",
+        "icon": "https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Android to PS Vita port of The Impossible Game originally published by Fluke Games (FlukeDude)",
+        "long_description": "The Impossible Game is FlukeDude's rhythm-platformer, originally released for Android as 05133-the-impossible-1.5.2.apk (package com.flukedude.impossiblegame). This port runs the compiled native library (libimpossible.so — a small, self-contained proprietary engine that handles cube physics, collisions, procedural level generation, and rendering) directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI). The UI and audio layers, which were Java on Android, have been fully reimplemented natively in C (menu.c, audio.c, texture.c, save.c) for zero-latency input and native performance.",
+        "version": "1.0.0",
+        "version_date": "2026-09-16",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0.0",
+    "catalog_version": "1.0.0"
   },
   {
     "platform": "github",
@@ -904,7 +1000,6 @@
     "homebrew_long_description": "Asphalt 5 is Gameloft's arcade racing game, originally released for Android as Asphalt-5-HD-v3.4.1.apk. This port runs the compiled native library (libasphalt5.so) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 1.1 fixed-function rendering backend.",
     "homebrew_id": "asphalt-5",
     "homebrew_authors": [
-      "claude-ai",
       "metalsyntax"
     ],
     "homebrew_version": "1.0.2",
@@ -919,7 +1014,6 @@
         "version": "1.0.2",
         "version_date": "2026-09-11",
         "author_ids": [
-          "claude-ai",
           "metalsyntax"
         ]
       }
@@ -33165,54 +33259,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.0.2 Alpha",
     "catalog_version": "v.0.2 Alpha"
-  },
-  {
-    "platform": "github",
-    "repo": "joel16/VITAlbum",
-    "release_id": "35882210",
-    "tag": "v1.40",
-    "name": "VITAlbum v1.40",
-    "url": "https://github.com/joel16/VITAlbum/releases/tag/v1.40",
-    "published": "2020-12-31T18:27:29Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Config file now makes use of the SceLibJson API for reading/writing instead of jansson.\r\n- No longer manually accounts for the offset when writing error logs.\r\n- Files that aren't supported by VITAlbum are now filtered out and not displayed in the GUI.\r\n- Added support for viewing SVGs using nanosvg\r\n- Properly use cancel/enter buttons throughout the UI.\r\n- The UI now uses the official PS Vita font.\r\n- Settings now has a new section where it displays the app version as well as the versions of various libraries used in this application that expose some sort of version info in their API.\r\n- LibTIFF updated to v4.2.0\r\n- libjpeg-turbo updated to v2.0.6.\r\n- Fix .TIFF images being read from the wrong orientation.\r\n- Allow the use of L/R triggers to scroll through images in a single folder.\r\n- The right analog stick can be used to move around image if its size is bigger than 960x544.\r\n- The left analog stick can be used to zoom in/out of image.\r\n- Clean-up imgui implementation (removed unused touchscreen/mouse functionalities).\r\n- Many under the hood changes for QOL improvements.",
-    "assets": [
-      {
-        "name": "VITAlbum.vpk",
-        "size": 1524725,
-        "download_url": "https://github.com/joel16/VITAlbum/releases/download/v1.40/VITAlbum.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "joel16",
-    "homebrew_name": "VITAlbum",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-vitalbum/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Image Viewer for PSVITA/PSTV.",
-    "homebrew_long_description": "A simple homebrew file browser that is used for viewing various image formats on the PlayStation Vita.",
-    "homebrew_id": "vitalbum",
-    "homebrew_authors": [
-      "joel16"
-    ],
-    "homebrew_version": "v.1.40",
-    "catalog_apps": [
-      {
-        "id": "vitalbum",
-        "name": "VITAlbum",
-        "icon": "https://archive.org/download/psvitaalive-vitalbum/icon0.png",
-        "category": "utilities",
-        "description": "Image Viewer for PSVITA/PSTV.",
-        "long_description": "A simple homebrew file browser that is used for viewing various image formats on the PlayStation Vita.",
-        "version": "v.1.40",
-        "version_date": "2020-12-31",
-        "author_ids": [
-          "joel16"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.40",
-    "catalog_version": "v.1.40"
   }
 ]
