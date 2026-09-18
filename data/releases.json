@@ -1,6 +1,110 @@
 [
   {
     "platform": "github",
+    "repo": "WolffsRoom/DeltaruneVita",
+    "release_id": "391354320",
+    "tag": "v0.75",
+    "name": "Deltarune Vita v0.75 (Internal Development Build)",
+    "url": "https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.75",
+    "published": "2026-09-18T09:30:49Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "<img src=\"https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&h=thumb.php&f=FRIEND_overworld_vision.gif\" alt=\"Friend Overworld\" width=\"120\">\r\n\r\n> [!WARNING]\r\n> This is an internal development pre-release, not a release candidate. Bugs, GPU crashes, missing graphics and performance issues may still occur.\r\n\r\n## Highlights\r\n\r\n### Borders (NXRUNE mod adaptation)\r\n\r\nAdaptation of the changes applied to the .win files of Chapters 3, 4, and 5 by the _NXRUNE_ mod **(Deltarune Borders Mod and More**). The logic was adapted for the DeltaruneVita project, including the preservation of externalized border images.\r\n\r\nNow, the borders change during specific in-game events, rather than just upon switching the current Room (as was the initial behavior of dynamic borders).\r\n\r\n### Modern-GL and shaders: GPU stability work\r\n\r\n- Resource collection now closes the active GXM scene and waits for submitted work before freeing retired allocations. It no longer opens a new scene immediately before collection.\r\n- Custom shader uniforms now use GXM-managed reservations instead of a 2 MiB circular buffer that could overwrite data still needed by earlier draws.\r\n- Failed uniform reservations reject the affected draw instead of copying through an invalid pointer or submitting it to the GPU. These checks remain active in release builds.\r\n- These changes apply to the shared renderer across rooms, including the Chapter 3 minigame and Chapter 5 Castle Town shop. Shaders remain enabled; rooms are not excluded as a workaround.\r\n\r\n> [!NOTE]\r\n> Modern-GL remains experimental. The new regressions passed locally, but desktop tests do not emulate the Vita GPU. The reported hardware crashes still require confirmation with v0.75-7 on the device.\r\n\r\n### Chapter 3\r\n\r\n- Blue Stars border switching follows the original `border_switch` event rather than an audience-object heuristic, avoiding an early transition and dependence on dialogue language.\r\n- Synchronized texture eviction for gameshow/board rooms, plus working-set trimming and texture prewarming for `room_board_2`.\r\n- Intro texture prewarming targets pages associated with long loading stalls in device logs.\r\n- Device validation is still needed. Synchronized eviction may introduce short transition pauses; translated data that changes texture-page layout also needs checking.\r\n\r\n### Chapter 5 \r\n\r\n#### Flowey video\r\n\r\n- Added pacing for the 24 FPS video and corrected the orientation of the host-screen blit.\r\n- Audio transition hold is released when the first video frame is presented, with active streams resumed explicitly.\r\n- End-of-file handling preserves the last frame while the scripted fade, pause and resume sequence finishes.\r\n- These changes are implemented, but audio synchronization, orientation and the complete ending still need a new device test. The video is not marked as fully fixed.\r\n\r\n#### Final battle performance\r\n\r\n- Intermediate surfaces use a compact format to reduce graphics-memory pressure.\r\n- Added a Vita-specific lightweight `shd_tower`, reducing expensive per-pixel calculations and texture samples while retaining rotation, height, scale, front/back behavior and color blending.\r\n- Tower surface reuse on alternate frames remains in place.\r\n- The lightweight shader approximates the original appearance, especially at the cylinder edges. Its visual quality and FPS improvement are not yet confirmed on the Vita. Earlier device tests still reached only approximately 3–5 FPS in the critical scene.\r\n\r\n>[!WARNING] \r\n> I'm trying to implement the `shd_tower`, this version might still run worse than the previous one (v0.74).\r\n\r\n## Known issues\r\n\r\n- GPU stability with **Modern-GL + shaders ON** still needs device confirmation in the minigame, Castle Town shop and other transitions.\r\n- Flowey video audio/finalization and final battle performance remain under validation.\r\n- Garden petal presentation and the intended Garden border fade-in remain unresolved or awaiting final validation.\r\n- Duplicated TP presentation in the Garden battle remains open. Logs show one tension-bar instance and one view; surface composition is still under investigation.\r\n- Garden battles and other heavy scenes can still have severe FPS drops or loading stalls.\r\n\r\n## Assets / Installation\r\n\r\n1. Just Install **`Deltarune-v0.75.Internal-Build-Test.vpk`** with VitaShell or FMVita.\r\n2. Keep your prepared game data and matching texture caches.\r\n3. For this version, simply use the same files generated by [v0.73](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.73).\r\n\r\n## Testing / bug reports\r\n\r\nPlease use the [Issues page](https://github.com/WolffsRoom/DeltaruneVita/issues). Include the build number, chapter, room, language, renderer, shader setting, texture-compression mode and relevant `butterscotch-probe.log`. \r\n\r\n_Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release._\r\n",
+    "assets": [
+      {
+        "name": "Deltarune-v0.75.Internal-Build-Test.vpk",
+        "size": 5623266,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.75/Deltarune-v0.75.Internal-Build-Test.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 107,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.75/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      }
+    ],
+    "author": "WolffsRoom",
+    "homebrew_name": "Deltarune Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Deltarune for PSVita.",
+    "homebrew_long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
+    "homebrew_id": "deltarune-vita",
+    "homebrew_authors": [
+      "chatgpt-ai"
+    ],
+    "homebrew_version": "v.0.69",
+    "catalog_apps": [
+      {
+        "id": "deltarune-vita",
+        "name": "Deltarune Vita",
+        "icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Deltarune for PSVita.",
+        "long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
+        "version": "v.0.69",
+        "version_date": "2026-07-27",
+        "author_ids": [
+          "chatgpt-ai"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.75",
+    "catalog_version": "v.0.69"
+  },
+  {
+    "platform": "github",
+    "repo": "VegettoSan/PSVitaAlive",
+    "release_id": "391299298",
+    "tag": "02.06",
+    "name": "PsVita Alive Store 02.06",
+    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.06",
+    "published": "2026-09-18T07:53:21Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## PSVitaAlive 02.06\r\n\r\n### What's New\r\n\r\n* Added a new animated mascot system for the protection screen, including built-in Sonic and Crash mascots.\r\n* Added mascot selection and persistent preferences.\r\n* Improved update detection, including better handling of Vita `APP_VER` versions and installation receipts.\r\n* Improved and localized Installed / Update Available badges.\r\n* Fixed update badge scrolling and clipping inside the catalog.\r\n* Improved the Request Data option to only appear where applicable.\r\n* Additional UI improvements, fixes, and catalog updates.\r\n",
+    "assets": [
+      {
+        "name": "PSVitaAlive.vpk",
+        "size": 8404535,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.06/PSVitaAlive.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "VegettoSan",
+    "homebrew_name": "PSVitaAlive Store",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
+    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+    "homebrew_id": "psvitaalive-store",
+    "homebrew_authors": [
+      "vegettosan"
+    ],
+    "homebrew_version": "02.06",
+    "catalog_apps": [
+      {
+        "id": "psvitaalive-store",
+        "name": "PSVitaAlive Store",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+        "category": "utilities",
+        "description": "Homebrew store and catalog for PlayStation Vita.",
+        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+        "version": "02.06",
+        "version_date": "2026-09-18",
+        "author_ids": [
+          "vegettosan"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive oficial · 02.06",
+    "catalog_version": "02.06"
+  },
+  {
+    "platform": "github",
     "repo": "zm2283145/goldenballoon-vita-port",
     "release_id": "391110485",
     "tag": "v1.7.2",
@@ -53,55 +157,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.7.2",
     "catalog_version": "1.7.2"
-  },
-  {
-    "platform": "github",
-    "repo": "VegettoSan/PSVitaAlive",
-    "release_id": "390508581",
-    "tag": "02.05",
-    "name": "PsVita Alive Store 02.05",
-    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.05",
-    "published": "2026-09-17T07:27:23Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## PSVitaAlive 02.05\r\n\r\n### What's New\r\n\r\n* Added OLED/LCD screen protection mode for long downloads, extractions, and installations.\r\n* Fixed crashes caused by repeatedly opening and closing the search keyboard.\r\n* Major image loading, caching, memory usage, and scrolling performance improvements.\r\n* Improved PS Vita PKG installation through BGDL, including better handling of extensionless PKG links.\r\n* Fixed self-update version detection to reliably use GitHub release tags.\r\n* Improved UI responsiveness and Settings performance.\r\n* Additional stability fixes and catalog updates.\r\n",
-    "assets": [
-      {
-        "name": "PSVitaAlive.vpk",
-        "size": 8264905,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.05/PSVitaAlive.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VegettoSan",
-    "homebrew_name": "PSVitaAlive Store",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
-    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-    "homebrew_id": "psvitaalive-store",
-    "homebrew_authors": [
-      "vegettosan"
-    ],
-    "homebrew_version": "02.05",
-    "catalog_apps": [
-      {
-        "id": "psvitaalive-store",
-        "name": "PSVitaAlive Store",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-        "category": "utilities",
-        "description": "Homebrew store and catalog for PlayStation Vita.",
-        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-        "version": "02.05",
-        "version_date": "2026-09-17",
-        "author_ids": [
-          "vegettosan"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive oficial · 02.05",
-    "catalog_version": "02.05"
   },
   {
     "platform": "github",
@@ -249,73 +304,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 6.20 → release 6.23",
     "catalog_version": "6.20"
-  },
-  {
-    "platform": "github",
-    "repo": "WolffsRoom/DeltaruneVita",
-    "release_id": "389602249",
-    "tag": "v0.74",
-    "name": "Deltarune Vita v0.74 (Internal Development Build)",
-    "url": "https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.74",
-    "published": "2026-09-16T02:41:25Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "<img src=\"https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&h=thumb.php&f=FRIEND_overworld_vision.gif\" alt=\"Friend Overworld\" width=\"120\">\r\n\r\n> [!WARNING]\r\n> This is an internal development pre-release. Bugs, crashes, missing graphics and performance issues may occur. \r\n\r\n## Highlights\r\n\r\n### Improvements in Modern-GL and shaders\r\n\r\n- Continued implementation of GameMaker shaders in Modern-GL, including Chapter 5 town lighting and shadows.\r\n- Corrected rendering paths for external PNGs, borders, fonts and interface graphics.\r\n- Improved texture residency, surface handling and diagnostics for heavy rooms and battles.\r\n- Shader switching in Graphics Settings restores the loading overlay's graphics state.\r\n<table>\r\n  <tr>\r\n    <td align=\"center\"><b>Without shaders</b></td>\r\n    <td align=\"center\"><b>With shaders</b></td>\r\n  </tr>\r\n  <tr>\r\n    <td>\r\n      <img src=\"https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-without-shaders.png\" alt=\"Chapter 5 town without shaders\">\r\n    </td>\r\n    <td>\r\n      <img src=\"https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-with-shaders.png\" alt=\"Chapter 5 town with shaders\">\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td align=\"center\"><b><code>room_town_mid</code> running on Legacy-GL</b></td>\r\n    <td align=\"center\"><b><code>room_town_mid</code> running on Modern-GL</b></td>\r\n  </tr>\r\n</table>\r\n\r\n> [!NOTE]\r\n> Modern-GL **remains experimental.**\r\n> However, the results obtained in Chapter 5 are promising.\r\n\r\n### Chapter 3\r\n\r\n- Corrected the vertical region used by surface copies, including the photograph capture path.\r\n- Added the grayscale photograph shaders to the compact Legacy-GL shader list. Enable shaders to test the gray regions in \"Round 2\".\r\n- Limited repetitive slow-event diagnostics to one message per second while retaining per-frame Draw maxima and a suppressed-event count.\r\n\r\n### Game Settings\r\n\r\n- **Replaced synthetic accent marks with complete glyphs from the extended font.**\r\n\r\nAs a stopgap measure. The Chapter 5 is only available in English for most translations. The Game Settings menu was also defaulting to English. This is just an adjustment to ensure the Game Settings menu has a specific language selected while the game itself runs in English due to the lack of a translation.\r\n- Corrected accented-glyph sizing and baseline alignment against the Chapter 5 font.\r\n- Reduced main option labels to the same 1.60 scale as the main values.\r\n- Fixed horizontal/vertical mirroring of the four border corners in Modern-GL.\r\n\r\n## Known issues\r\n\r\n- Chapter 5 video can fail before its first frame because SceAvPlayer cannot allocate a contiguous 21 MiB block. Audio can still play independently.\r\n- Heavy Chapter 3, 4 and 5 scenes can still have low FPS or loading stalls.\r\n\r\n## Assets / Installation \r\n\r\n1. Install **`Deltarune-v0.74.Internal-Build-Test.vpk`** with VitaShell. \r\n2. Keep your prepared game data and matching texture caches.\r\n3. For this version, simply use the same files generated by [v0.73](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.73).\r\n\r\n## Testing / bug reports\r\n\r\nPlease use the [Issues page](https://github.com/WolffsRoom/DeltaruneVita/issues). Include the build number, chapter, room, language, renderer, shader setting, texture-compression mode and relevant `butterscotch-probe.log`. \r\n\r\n_Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release._\r\n",
-    "assets": [
-      {
-        "name": "ch5-town-with-shaders.png",
-        "size": 143037,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-with-shaders.png",
-        "content_type": "image/png"
-      },
-      {
-        "name": "ch5-town-without-shaders.png",
-        "size": 141011,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/ch5-town-without-shaders.png",
-        "content_type": "image/png"
-      },
-      {
-        "name": "Deltarune-v0.74.Internal-Build-Test.vpk",
-        "size": 5594880,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/Deltarune-v0.74.Internal-Build-Test.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 386,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.74/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      }
-    ],
-    "author": "WolffsRoom",
-    "homebrew_name": "Deltarune Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Deltarune for PSVita.",
-    "homebrew_long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
-    "homebrew_id": "deltarune-vita",
-    "homebrew_authors": [
-      "chatgpt-ai"
-    ],
-    "homebrew_version": "v.0.69",
-    "catalog_apps": [
-      {
-        "id": "deltarune-vita",
-        "name": "Deltarune Vita",
-        "icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Deltarune for PSVita.",
-        "long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.",
-        "version": "v.0.69",
-        "version_date": "2026-07-27",
-        "author_ids": [
-          "chatgpt-ai"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.74",
-    "catalog_version": "v.0.69"
   },
   {
     "platform": "github",
@@ -33210,54 +33198,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.2",
     "catalog_version": "v.2"
-  },
-  {
-    "platform": "github",
-    "repo": "SonicMastr/Sonic-CD-Vita",
-    "release_id": "35974807",
-    "tag": "0.2",
-    "name": "Sonic CD Vita Alpha 0.2",
-    "url": "https://github.com/SonicMastr/Sonic-CD-Vita/releases/tag/0.2",
-    "published": "2021-01-05T00:49:06Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "### Overclock to the Max\r\n# Many Fixes this time\r\n\r\nIsage is an Angel\r\n\r\n- Time Attack loads and works (Infinite Loops sure do suck)\r\n- We have Video Playback (Still no audio though, and is extremely laggy. Don't worry, we'll have a fix for that come the Hardware Decoder).\r\n- Special Stages now run 2x faster \r\n- Gif decoding will no longer halt games\r\n- Main Menu runs at Full Speed now :D\r\n- Sonic's Face is Transparent again (All is right with the world)\r\n\r\n## Installing:\r\nInstall the VPK\r\nTake the Data.rsdk file from your legit copy of Sonic CD and put in `ux0:data/SonicCD/`\r\nOptionally, place your Videos folder from your copy of Sonic CD and put it in `ux0:data/SonicCD/`\r\n\r\nThat's it!\r\n\r\n### Known issues\r\n- Rare crash while loading a save or starting new game. Just restart.\r\n- Special Stages Run at around 40fps average. This is simply due to the Software renderer and should be fixed when a Hardware renderer is added\r\n- A single frame flashes in-between transitions",
-    "assets": [
-      {
-        "name": "SonicCD.vpk",
-        "size": 969613,
-        "download_url": "https://github.com/SonicMastr/Sonic-CD-Vita/releases/download/0.2/SonicCD.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SonicMastr",
-    "homebrew_name": "Sonic CD Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-sonic-cd-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Sonic CD for PSVITA/PSTV.",
-    "homebrew_long_description": "Port of Sonic CD for PSVITA/PSTV based on the decompilation of Sonic CD 2011.\nThis specific decompilation is based on the PC remake with improvements & tweaks from the mobile remakes.",
-    "homebrew_id": "sonic-cd-vita",
-    "homebrew_authors": [
-      "sonicmastr"
-    ],
-    "homebrew_version": "v.0.2 Alpha",
-    "catalog_apps": [
-      {
-        "id": "sonic-cd-vita",
-        "name": "Sonic CD Vita",
-        "icon": "https://archive.org/download/psvitaalive-sonic-cd-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Sonic CD for PSVITA/PSTV.",
-        "long_description": "Port of Sonic CD for PSVITA/PSTV based on the decompilation of Sonic CD 2011.\nThis specific decompilation is based on the PC remake with improvements & tweaks from the mobile remakes.",
-        "version": "v.0.2 Alpha",
-        "version_date": "2021-01-05",
-        "author_ids": [
-          "sonicmastr"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.2 Alpha",
-    "catalog_version": "v.0.2 Alpha"
   }
 ]
