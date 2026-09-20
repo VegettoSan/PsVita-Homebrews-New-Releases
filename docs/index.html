@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">411</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>72</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">407</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>74</strong><span>pendientes</span></div>
+        <div class="stat"><strong>473</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,79 +219,338 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.6.0 (experimental build 21.1) vita-v0.6.0-build.21.1 ports experimental native ps vita port. this is an unpublished draft for maintainer review.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.7.1 (experimental build 23.1) vita-v0.7.1-build.23.1 ports **experimental ps vita build for testing. back up your saves before updating.**
 
-release version: 0.6.0
-commit: 95566d845bec29c41152b9d37362cfc2ad4fc6b6
-build: https://github.com/zm2283145/melee-vita/actions/runs/35479782606
+## what changed in 0.7.1
 
-install smashmeleevita.vpk with vitashell. read readme-vita.md for the required
-homebrew environment, shader compiler module, disc image
-path, and controls. game data and proprietary modules are not included.
+- trophy gallery trophies and gameplay objects now receive their intended lighting instead of appearing flat, dark, or inside visible rectangles.
+- snag the trophies restores its foggy background. copied-screen effects such as the off-screen player magnifier and pokemon stadium monitor now work without breaking one another.
+- star rod and other item effects no longer draw large boxes around their textures.
+- screen clears now happen when melee requests them. this fixes the stage clear overlay flicker and corrects the shared path behind missing or black stage elements such as peach&#x27;s castle switches and brinstar props.
+- fixed the adventure mode crash triggered by jumping on the first goomba.
+- fixed a recurring render-thread crash seen during copied-screen transitions, including the crash at the end of adventure mode on battlefield. this correction was derived from two complete matching crash dumps and still needs broader hardware coverage.
+- added **1,437 built-in warmed shaders** gathered from real vita play. release builds still learn and save new shaders as you play, so uncommon first-time effects can still stutter once.
+- vita **r** now acts as the gamecube r trigger, and **select** acts as z.
+- updated the livearea icon and backgrounds.
 
-expect stuttering while shaders compile at runtime. cached shaders reduce
-repeat compilation as you play, but performance and compatibility remain
-experimental. back up saves before updating.
+## install notes
 
-- pills, pill bottles, shells, barrels, crates/item boxes, and their smash logo now render.
+- keep your existing `ux0:data/melee/shadercache/` directory when updating; the game will continue adding shaders that are not already built in.
+- requires your own uncompressed usa revision 2 / ntsc-u 1.02 `gale01.iso` and `ur0:data/libshacccg.suprx`. neither is included.
+- title id remains `mlvita002`; package version is `00.71`.
 
-- mario’s coin effects render correctly.
+**vpk sha-256:** `3bd678e262b96c6f6affc69e0d2016ffd83d67179fa543ca276eb01dad9d75fd`
 
-- coin lottery’s central coin renders.
-
-- trophy collection’s gold trophy bases render.
-
-- trophy collection no longer hangs with the imported 100% save.
-
-- trophy gallery now opens and works without crashing on that save.
-
-- the congratulations screen no longer displays purple/grey corruption.">
+built from commit `8d95cba3ac1124b30341af6a72c8f341df42d87a` by [github actions run 35492931073](https://github.com/zm2283145/melee-vita/actions/runs/35492931073).">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/smash-melee-vita/icon0.png" alt="Icono de Smash Melee Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · zm2283145/melee-Vita</div>
-                      <h2><a href="https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.6.0-build.21.1" target="_blank" rel="noopener">Smash Melee Vita</a></h2>
-                      <div class="release-name">Smash Melee Vita 0.6.0 (experimental build 21.1)</div>
+                      <h2><a href="https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.7.1-build.23.1" target="_blank" rel="noopener">Smash Melee Vita</a></h2>
+                      <div class="release-name">Smash Melee Vita 0.7.1 (experimental build 23.1)</div>
                     </div>
                     <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">vita-v0.6.0-build.21.1</span>
-                    <span>2026-09-20 00:59 UTC</span>
+                    <span class="tag">vita-v0.7.1-build.23.1</span>
+                    <span>2026-09-20 06:01 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 0.6.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.6.0 → release vita-v0.6.0-build.21.1</div>
+                  <div class="catalog-detail">PSVitaAlive 0.6.0 → release vita-v0.7.1-build.23.1</div>
                   
-                  <div class="body markdown-body"><p>Experimental native PS Vita port. This is an unpublished draft for maintainer review.</p>
-<p>Release version: 0.6.0
-Commit: 95566d845bec29c41152b9d37362cfc2ad4fc6b6
-Build: <a target="_blank" rel="noopener noreferrer" href="https://github.com/zm2283145/melee-Vita/actions/runs/35479782606">https://github.com/zm2283145/melee-Vita/actions/runs/35479782606</a></p>
-<p>Install SmashMeleevita.vpk with VitaShell. Read README-Vita.md for the required
-homebrew environment, shader compiler module, disc image
-path, and controls. Game data and proprietary modules are not included.</p>
-<p>Expect stuttering while shaders compile at runtime. Cached shaders reduce
-repeat compilation as you play, but performance and compatibility remain
-experimental. Back up saves before updating.</p>
+                  <div class="body markdown-body"><p><strong>Experimental PS Vita build for testing. Back up your saves before updating.</strong></p>
+<h2>What changed in 0.7.1</h2>
 <ul>
-<li><p>Pills, pill bottles, shells, barrels, crates/item boxes, and their Smash logo now render.</p>
-</li>
-<li><p>Mario’s coin effects render correctly.</p>
-</li>
-<li><p>Coin Lottery’s central coin renders.</p>
-</li>
-<li><p>Trophy Collection’s gold trophy bases render.</p>
-</li>
-<li><p>Trophy Collection no longer hangs with the imported 100% save.</p>
-</li>
-<li><p>Trophy Gallery now opens and works without crashing on that save.</p>
-</li>
-<li><p>The Congratulations screen no longer displays purple/grey corruption.</p>
+<li>Trophy Gallery trophies and gameplay objects now receive their intended lighting instead of appearing flat, dark, or inside visible rectangles.</li>
+<li>Snag the Trophies restores its foggy background. Copied-screen effects such as the off-screen player magnifier and Pokemon Stadium monitor now work without breaking one another.</li>
+<li>Star Rod and other item effects no longer draw large boxes around their textures.</li>
+<li>Screen clears now happen when Melee requests them. This fixes the Stage Clear overlay flicker and corrects the shared path behind missing or black stage elements such as Peach's Castle switches and Brinstar props.</li>
+<li>Fixed the Adventure Mode crash triggered by jumping on the first Goomba.</li>
+<li>Fixed a recurring render-thread crash seen during copied-screen transitions, including the crash at the end of Adventure Mode on Battlefield. This correction was derived from two complete matching crash dumps and still needs broader hardware coverage.</li>
+<li>Added <strong>1,437 built-in warmed shaders</strong> gathered from real Vita play. Release builds still learn and save new shaders as you play, so uncommon first-time effects can still stutter once.</li>
+<li>Vita <strong>R</strong> now acts as the GameCube R trigger, and <strong>Select</strong> acts as Z.</li>
+<li>Updated the LiveArea icon and backgrounds.</li>
+</ul>
+<h2>Install notes</h2>
+<ul>
+<li>Keep your existing <code>ux0:data/melee/shadercache/</code> directory when updating; the game will continue adding shaders that are not already built in.</li>
+<li>Requires your own uncompressed USA revision 2 / NTSC-U 1.02 <code>GALE01.iso</code> and <code>ur0:data/libshacccg.suprx</code>. Neither is included.</li>
+<li>Title ID remains <code>MLVITA002</code>; package version is <code>00.71</code>.</li>
+</ul>
+<p><strong>VPK SHA-256:</strong> <code>3BD678E262B96C6F6AFFC69E0D2016FFD83D67179FA543CA276EB01DAD9D75FD</code></p>
+<p>Built from commit <code>8d95cba3ac1124b30341af6a72c8f341df42d87a</code> by <a target="_blank" rel="noopener noreferrer" href="https://github.com/zm2283145/melee-Vita/actions/runs/35492931073">GitHub Actions run 35492931073</a>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/SmashMeleevita.vpk" target="_blank" rel="noopener">⬇ SmashMeleevita.vpk · 3.1 MB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/COMMIT.txt" target="_blank" rel="noopener">COMMIT.txt · 41.0 B</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/COPYING" target="_blank" rel="noopener">COPYING · 34.3 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/LICENSE.md" target="_blank" rel="noopener">LICENSE.md · 2.4 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/README-Vita.md" target="_blank" rel="noopener">README-Vita.md · 7.3 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 473.0 B</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.7.1-build.23.1/version.json" target="_blank" rel="noopener">version.json · 43.0 B</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.0.3 v1.0.3 ports # asphalt 5 hd - ps vita port v1.0.3
+
+we are incredibly excited to announce the first public beta release of **asphalt 5** for the ps vita! 
+
+this port uses a custom android wrapper (soloader/falsojni) to run the original armv6 android executable natively on the vita, fully hardware-accelerated via `vitagl`. 
+
+since this is a **beta release**, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.
+
+### ✨ key features in this beta:
+* **full physical controls integration:** we&#x27;ve built a custom input router that seamlessly bridges vita physical buttons with the game&#x27;s native touch engine. it only works with the **touch buttons** control scheme (not tilt or the drag-to-steer variants) — this is now forced automatically the very first time you run the port, before any save file exists.
+  * **menus:** fully navigable using the **d-pad** or **left analog stick** (up/down). use **❌ (cross)** to select and **⭕ (circle)** to go back.
+  * **title screens:** press any face button to instantly skip splash screens.
+  * **in-game racing:** 
+    * **d-pad left/right, l/r triggers, or left analog stick** to steer.
+    * **❌ (cross)** to trigger nitrous.
+    * **🟥 (square)** to brake / drift.
+    * **start** to pause (circle no longer duplicates this in-race — it&#x27;s menu-only back now).
+* **custom optimized audio engine:** the original android game used heavy floating-point math for audio mixing, which crippled the vita&#x27;s cpu. we wrote a custom 32-bit fixed-point audio mixer from scratch with **linear interpolation**, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48khz audio output through the vita&#x27;s main audio port. it follows the engine&#x27;s own routing: looped sounds (engine hum, skids) track rpm live, long music tracks get a dedicated voice that sfx can never steal, and the master bus uses a soft limiter so heavy scenes don&#x27;t square-wave.
+* **hardware accelerated graphics:** running buttery smooth thanks to `vitagl`.
+* **post-race flow:** results screens advance with a tap anywhere, or with **❌ (cross)** on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.
+* **intro &amp; cutscene video playback:** the game&#x27;s original mpeg-4 `.mp4` cutscenes (which the vita has no hardware decoder for) play in software at a smooth **30 fps** with in-sync audio — the intro trailer (`a5_ultimate_vnfs_2.mp4`) and the in-race videos alike. videos are decoded at half resolution and upscaled, so motion stays fluid; press **❌ (cross)** or **start** at any time to skip.
+* **no screen-off freeze:** the port resets the vita&#x27;s idle timer every frame, so the console&#x27;s auto power-save can no longer turn the screen off and freeze the game while you read a menu.
+
+### ⚠️ known issues / beta status:
+* **open issue — touch buttons icons still visible, and nitro often needs several presses:** the on-screen brake/nitro icons are drawn even though physical controls work, and ❌ (cross) frequently needs multiple presses before nitro actually fires — **except** pressing 🟥 (square, brake/drift) immediately before ❌ (cross), which reliably triggers nitro on the very first try. root cause not isolated yet; we need a console log capturing that exact drift-then-nitro pattern to fix it for real instead of guessing.
+* **recent adjustments (build clean, not yet confirmed on real hardware):** left analog stick steering, a sharper internal render resolution (800x480 instead of 720x432), touch buttons forced as the default control scheme on first run, and circle no longer opening the pause menu mid-race (start already did that, so the overlap was removed).
+* this is a beta! you might encounter occasional ui quirks or unmapped buttons in very specific sub-menus. 
+* performance is mostly solid, but some heavy tracks might experience slight frame drops. further optimizations are planned.
+* the intro trailer needs its `.mp4` present in `ux0:data/asphalt5/data/` — otherwise it is skipped.
+* manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.
+
+### 🛠️ installation instructions:
+1. install `libshacccg.suprx` if you don&#x27;t have it already (required for vitagl).
+2. install the provided `asphalt5.vpk`.
+3. extract the game data files (assets) into `ux0:data/asphalt5/`. *(note: data files are not provided with this release; you must extract them from your own legally obtained copy of the android game).*
+4. launch the game and enjoy!
+
+---
+*a huge thanks to the ps vita homebrew community and the vitagl contributors for making this possible! let us know your feedback and bug reports.*">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/asphalt-5-ps-vita/icon0.png" alt="Icono de Asphalt 5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Asphalt-5-Vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.0.3" target="_blank" rel="noopener">Asphalt 5</a></h2>
+                      <div class="release-name">Asphalt 5 HD - PS Vita Port v1.0.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0.3</span>
+                    <span>2026-09-20 04:47 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.2 → release v1.0.3</div>
+                  
+                  <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port v1.0.3</h1>
+<p>We are incredibly excited to announce the first public Beta release of <strong>Asphalt 5</strong> for the PS Vita!</p>
+<p>This port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via <code>vitaGL</code>.</p>
+<p>Since this is a <strong>Beta release</strong>, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.</p>
+<h3>✨ Key Features in this Beta:</h3>
+<ul>
+<li><strong>Full Physical Controls Integration:</strong> We've built a custom input router that seamlessly bridges Vita physical buttons with the game's native touch engine. It only works with the <strong>Touch Buttons</strong> control scheme (not Tilt or the drag-to-steer variants) — this is now forced automatically the very first time you run the port, before any save file exists.<ul>
+<li><strong>Menus:</strong> Fully navigable using the <strong>D-Pad</strong> or <strong>Left Analog Stick</strong> (Up/Down). Use <strong>❌ (Cross)</strong> to select and <strong>⭕ (Circle)</strong> to go back.</li>
+<li><strong>Title Screens:</strong> Press any face button to instantly skip splash screens.</li>
+<li><strong>In-Game Racing:</strong><ul>
+<li><strong>D-Pad Left/Right, L/R Triggers, or Left Analog Stick</strong> to Steer.</li>
+<li><strong>❌ (Cross)</strong> to trigger Nitrous.</li>
+<li><strong>🟥 (Square)</strong> to Brake / Drift.</li>
+<li><strong>Start</strong> to Pause (Circle no longer duplicates this in-race — it's menu-only Back now).</li>
+</ul>
 </li>
 </ul>
+</li>
+<li><strong>Custom Optimized Audio Engine:</strong> The original Android game used heavy floating-point math for audio mixing, which crippled the Vita's CPU. We wrote a custom 32-bit fixed-point audio mixer from scratch with <strong>Linear Interpolation</strong>, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48kHz audio output through the Vita's MAIN audio port. It follows the engine's own routing: looped sounds (engine hum, skids) track RPM live, long music tracks get a dedicated voice that SFX can never steal, and the master bus uses a soft limiter so heavy scenes don't square-wave.</li>
+<li><strong>Hardware Accelerated Graphics:</strong> Running buttery smooth thanks to <code>vitaGL</code>.</li>
+<li><strong>Post-Race Flow:</strong> Results screens advance with a tap anywhere, or with <strong>❌ (Cross)</strong> on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.</li>
+<li><strong>Intro &amp; Cutscene Video Playback:</strong> The game's original MPEG-4 <code>.mp4</code> cutscenes (which the Vita has no hardware decoder for) play in software at a smooth <strong>30 FPS</strong> with in-sync audio — the intro trailer (<code>A5_Ultimate_VNFS_2.mp4</code>) and the in-race videos alike. Videos are decoded at half resolution and upscaled, so motion stays fluid; press <strong>❌ (Cross)</strong> or <strong>Start</strong> at any time to skip.</li>
+<li><strong>No Screen-Off Freeze:</strong> The port resets the Vita's idle timer every frame, so the console's auto power-save can no longer turn the screen off and freeze the game while you read a menu.</li>
+</ul>
+<h3>⚠️ Known Issues / Beta Status:</h3>
+<ul>
+<li><strong>Open issue — Touch Buttons icons still visible, and Nitro often needs several presses:</strong> the on-screen brake/nitro icons are drawn even though physical controls work, and ❌ (Cross) frequently needs multiple presses before Nitro actually fires — <strong>except</strong> pressing 🟥 (Square, brake/drift) immediately before ❌ (Cross), which reliably triggers Nitro on the very first try. Root cause not isolated yet; we need a console log capturing that exact drift-then-nitro pattern to fix it for real instead of guessing.</li>
+<li><strong>Recent adjustments (build clean, not yet confirmed on real hardware):</strong> left analog stick steering, a sharper internal render resolution (800x480 instead of 720x432), Touch Buttons forced as the default control scheme on first run, and Circle no longer opening the pause menu mid-race (Start already did that, so the overlap was removed).</li>
+<li>This is a Beta! You might encounter occasional UI quirks or unmapped buttons in very specific sub-menus.</li>
+<li>Performance is mostly solid, but some heavy tracks might experience slight frame drops. Further optimizations are planned.</li>
+<li>The intro trailer needs its <code>.mp4</code> present in <code>ux0:data/asphalt5/data/</code> — otherwise it is skipped.</li>
+<li>Manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.</li>
+</ul>
+<h3>🛠️ Installation Instructions:</h3>
+<ol>
+<li>Install <code>libshacccg.suprx</code> if you don't have it already (required for vitaGL).</li>
+<li>Install the provided <code>Asphalt5.vpk</code>.</li>
+<li>Extract the game data files (assets) into <code>ux0:data/asphalt5/</code>. <em>(Note: Data files are not provided with this release; you must extract them from your own legally obtained copy of the Android game).</em></li>
+<li>Launch the game and enjoy!</li>
+</ol>
+<hr>
+<p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/SmashMeleevita.vpk" target="_blank" rel="noopener">⬇ SmashMeleevita.vpk · 2.9 MB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/README-Vita.md" target="_blank" rel="noopener">README-Vita.md · 7.2 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 473.0 B</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/version.json" target="_blank" rel="noopener">version.json · 43.0 B</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.0.3/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="shadow guardian shadow guardian metalsyntax/shadow-guardian-vita shadow guardian vita v1.3 v1.3 ports # shadow guardian vita v1.3
+
+this is a wrapper/port of **shadow guardian hd** for the ps vita.
+
+## changelog
+
+- v1.3: full controls rework based on hardware testing feedback:
+  - **wrong weapon-switch position fixed.** the old touch coordinate for the weapon icon was only measured by eye and turned out to sit inside the fire button&#x27;s touch hit-radius, so pressing that button fired the gun instead of switching weapons. all button positions (fire, aim, contextual action, grab, weapon) were re-measured with a pixel grid over a real 960x544 gameplay screenshot.
+  - **weapon switch moved to square and reworked as a swipe, not a tap.** reading the engine&#x27;s own input handler (`out_ghidra.c:86760-86813`) showed the real weapon selector responds to the *drag delta* of a touch (`actor::setnextweapon()` / `setpreviousweapon()` picked by the sign of the movement, matching its actual &quot;left/right arrow slider&quot; look), not a fixed tap zone — so square now sends a synthetic down → drag-right → release over the weapon icon instead of a plain tap.
+  - **circle reassigned from a debug visibility toggle to grab/interact** (the hand icon never had a physical button before); **select now toggles the touch controls** on/off, taking over the old debug-toggle role.
+  - **square no longer shares the aim spot with l** — only l aims now.
+  - **virtual button hiding is now enforced every frame** instead of once at startup, fixing buttons (the aim reticle in particular) that the engine would silently re-show later in a session.
+  - **hooked `gs_gameplay::highlightbutton`** so the button-highlight glow shown during aim feedback / &quot;touch this button&quot; tutorial prompts is suppressed while the touch controls are hidden, instead of glowing over an otherwise-invisible button.
+  - **the weapon-selector graphics are hidden too now** (previously always shown by request), using the exact gui item index range (`0xb`-`0x20`) the engine itself uses to fade them out.
+  - **free-look camera (right stick) rewritten** from an absolute stick-to-touch-position mapping — which hard-capped at a fixed offset and could never complete a full turn — to a continuous relative drag with invisible wraparound recentring, so holding the stick now keeps rotating indefinitely: slow and precise at a light tilt, fast at full tilt, a full 360° around the character is now possible.
+  - **fixed a blurry intro video.** a texture-downsampling optimization was quartering the effective resolution of `logo.m4v` before a 4x upscale to the screen; disabled, since the intro is only a few seconds and the blur wasn&#x27;t worth the saved upload bandwidth.
+
+## setup instructions
+
+in order to properly install the game, you&#x27;ll need to extract the data from the original android game.
+
+1. install the `kubridge` and `fd_fix` plugins on your ps vita.
+2. install `libshacccg.suprx`, if you don&#x27;t have it already, by following [this guide](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).
+3. obtain the original apk of shadow guardian (`shadow-guardian-hd-v1-0-1-uk-ru.apk`) and the required data files.
+4. extract the `.apk` using any zip extractor.
+5. place the executable `libshadowguardian.so` (from `lib/armeabi-v7a/` inside the apk) in `ux0:data/shadowguardian/`. (if the apk also contains `libstormgloft.so`, you can copy it too — it does no harm.)
+6. place all game asset folders (`res`, `shaders`, `textures`, `models`, `music`, `sounds`, etc.) in `ux0:data/shadowguardian/`.
+7. make sure the 16:9 assets `sprites_1_7` and `gui_1_7` are present. if the apk only ships the `sprites_1_6` / `gui_1_6` variants, duplicate them with vitashell (copy + paste + rename) so the `_1_7` names exist — missing 16:9 gui assets can crash the game on the loading screen. also confirm the `res/` folder was copied.
+8. double-check that `gui_1_6` and `sprites_1_6` themselves are also present in `ux0:data/shadowguardian/` (not just the `_1_7` copies) — some assets are only ever requested by their `_1_6` name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.
+9. download and install `shadowguardian.vpk` on your ps vita.
+
+## controls
+
+- **left analog** - movement (in-game only)
+- **right analog** - camera (free-look, continuous drag - hold to keep turning; light tilt for slow/precise aim, full tilt for a fast full 360°)
+- **d-pad** - menu navigation / movement
+- **r** - fire
+- **l** - aim (hold)
+- **cross** - contextual action (jump / run / climb)
+- **circle** - grab / interact
+- **square** - switch weapon
+- **start** - pause / back
+- **select** - toggle virtual buttons (hide/show touch controls)
+- **touch screen** - original touch controls
+
+## known issues
+
+- a blue highlight/glow effect shown specifically when switching weapons may still appear even with the touch controls hidden — the generic `highlightbutton` hook (v1.3) covers the button-prompt glow, but the weapon-change flash may come from a separate, not-yet-located effect. please report it with a log/screenshot of the exact moment it happens.
+- square&#x27;s weapon-switch swipe and the new continuous camera drag (v1.3) are newly implemented and pending confirmation on hardware across multiple weapons/play sessions.
+
+## troubleshooting
+
+**crash on the loading screen (`c2-12828-1` error):** this is usually a data setup problem, not a game bug. check the following with vitashell:
+
+1. you installed the **latest** `shadowguardian.vpk` (older builds have known crashes that are already fixed).
+2. `kubridge` and `fd_fix` plugins plus `libshacccg.suprx` are installed (see setup above).
+3. in `ux0:data/shadowguardian/`: `libshadowguardian.so`, the `res/` folder, and all asset folders are present, and **both** the `_1_6` and `_1_7` variants of `sprites` and `gui` exist (`sprites_1_6`, `sprites_1_7`, `gui_1_6`, `gui_1_7`) — copy whichever ones are missing from the variant you do have. as of v1.2.3, a missing `gui_1_6`/`gui_1_7` or `sprites_1_6`/`sprites_1_7` shows a clear &quot;missing game data files&quot; dialog on boot instead of crashing later — if you see that dialog, it&#x27;s telling you exactly which one to fix.
+
+**if it still crashes**, please report it with:
+
+1. the newest `ux0:data/shadowguardian/logs/game_log_*.txt` (from the time of the crash — do not delete it).
+2. the newest `ux0:data/psp2core-*-eboot.bin.psp2dmp` core dump.
+3. a note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).
+
+## credits
+
+- theflow for the `so_loader` wrapper and android porting boilerplate.
+- rinnegatamante for `vitagl` and porting tools.
+- gameloft for the original game.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/shadow-guardian-ps-vita/icon0.png" alt="Icono de Shadow Guardian" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Shadow-Guardian-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/tag/v1.3" target="_blank" rel="noopener">Shadow Guardian</a></h2>
+                      <div class="release-name">Shadow Guardian Vita v1.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.3</span>
+                    <span>2026-09-20 04:30 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2.5</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.2.5 → release v1.3</div>
+                  
+                  <div class="body markdown-body"><h1>Shadow Guardian Vita v1.3</h1>
+<p>This is a wrapper/port of <strong>Shadow Guardian HD</strong> for the PS Vita.</p>
+<h2>Changelog</h2>
+<ul>
+<li>v1.3: Full controls rework based on hardware testing feedback:<ul>
+<li><strong>Wrong weapon-switch position fixed.</strong> The old touch coordinate for the weapon icon was only measured by eye and turned out to sit inside the FIRE button's touch hit-radius, so pressing that button fired the gun instead of switching weapons. All button positions (fire, aim, contextual action, grab, weapon) were re-measured with a pixel grid over a real 960x544 gameplay screenshot.</li>
+<li><strong>Weapon switch moved to Square and reworked as a swipe, not a tap.</strong> Reading the engine's own input handler (<code>out_ghidra.c:86760-86813</code>) showed the real weapon selector responds to the <em>drag delta</em> of a touch (<code>Actor::SetNextWeapon()</code> / <code>SetPreviousWeapon()</code> picked by the sign of the movement, matching its actual &quot;left/right arrow slider&quot; look), not a fixed tap zone — so Square now sends a synthetic down → drag-right → release over the weapon icon instead of a plain tap.</li>
+<li><strong>Circle reassigned from a debug visibility toggle to Grab/interact</strong> (the hand icon never had a physical button before); <strong>Select now toggles the touch controls</strong> on/off, taking over the old debug-toggle role.</li>
+<li><strong>Square no longer shares the Aim spot with L</strong> — only L aims now.</li>
+<li><strong>Virtual button hiding is now enforced every frame</strong> instead of once at startup, fixing buttons (the aim reticle in particular) that the engine would silently re-show later in a session.</li>
+<li><strong>Hooked <code>GS_GamePlay::HighlightButton</code></strong> so the button-highlight glow shown during aim feedback / &quot;touch this button&quot; tutorial prompts is suppressed while the touch controls are hidden, instead of glowing over an otherwise-invisible button.</li>
+<li><strong>The weapon-selector graphics are hidden too now</strong> (previously always shown by request), using the exact GUI item index range (<code>0xb</code>-<code>0x20</code>) the engine itself uses to fade them out.</li>
+<li><strong>Free-look camera (right stick) rewritten</strong> from an absolute stick-to-touch-position mapping — which hard-capped at a fixed offset and could never complete a full turn — to a continuous relative drag with invisible wraparound recentring, so holding the stick now keeps rotating indefinitely: slow and precise at a light tilt, fast at full tilt, a full 360° around the character is now possible.</li>
+<li><strong>Fixed a blurry intro video.</strong> A texture-downsampling optimization was quartering the effective resolution of <code>logo.m4v</code> before a 4x upscale to the screen; disabled, since the intro is only a few seconds and the blur wasn't worth the saved upload bandwidth.</li>
+</ul>
+</li>
+</ul>
+<h2>Setup Instructions</h2>
+<p>In order to properly install the game, you'll need to extract the data from the original Android game.</p>
+<ol>
+<li>Install the <code>kubridge</code> and <code>fd_fix</code> plugins on your PS Vita.</li>
+<li>Install <code>libshacccg.suprx</code>, if you don't have it already, by following <a target="_blank" rel="noopener noreferrer" href="https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx">this guide</a>.</li>
+<li>Obtain the original APK of Shadow Guardian (<code>Shadow-Guardian-HD-v1-0-1-UK-RU.apk</code>) and the required data files.</li>
+<li>Extract the <code>.apk</code> using any zip extractor.</li>
+<li>Place the executable <code>libshadowguardian.so</code> (from <code>lib/armeabi-v7a/</code> inside the APK) in <code>ux0:data/shadowguardian/</code>. (If the APK also contains <code>libStormGLOFT.so</code>, you can copy it too — it does no harm.)</li>
+<li>Place all game asset folders (<code>res</code>, <code>shaders</code>, <code>textures</code>, <code>models</code>, <code>music</code>, <code>sounds</code>, etc.) in <code>ux0:data/shadowguardian/</code>.</li>
+<li>Make sure the 16:9 assets <code>sprites_1_7</code> and <code>gui_1_7</code> are present. If the APK only ships the <code>sprites_1_6</code> / <code>gui_1_6</code> variants, duplicate them with VitaShell (Copy + Paste + Rename) so the <code>_1_7</code> names exist — missing 16:9 GUI assets can crash the game on the LOADING screen. Also confirm the <code>res/</code> folder was copied.</li>
+<li>Double-check that <code>gui_1_6</code> and <code>sprites_1_6</code> themselves are also present in <code>ux0:data/shadowguardian/</code> (not just the <code>_1_7</code> copies) — some assets are only ever requested by their <code>_1_6</code> name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.</li>
+<li>Download and install <code>shadowguardian.vpk</code> on your PS Vita.</li>
+</ol>
+<h2>Controls</h2>
+<ul>
+<li><strong>Left Analog</strong> - Movement (in-game only)</li>
+<li><strong>Right Analog</strong> - Camera (free-look, continuous drag - hold to keep turning; light tilt for slow/precise aim, full tilt for a fast full 360°)</li>
+<li><strong>D-Pad</strong> - Menu Navigation / Movement</li>
+<li><strong>R</strong> - Fire</li>
+<li><strong>L</strong> - Aim (hold)</li>
+<li><strong>Cross</strong> - Contextual action (jump / run / climb)</li>
+<li><strong>Circle</strong> - Grab / interact</li>
+<li><strong>Square</strong> - Switch weapon</li>
+<li><strong>Start</strong> - Pause / Back</li>
+<li><strong>Select</strong> - Toggle Virtual Buttons (Hide/Show touch controls)</li>
+<li><strong>Touch Screen</strong> - Original Touch Controls</li>
+</ul>
+<h2>Known Issues</h2>
+<ul>
+<li>A blue highlight/glow effect shown specifically when switching weapons may still appear even with the touch controls hidden — the generic <code>HighlightButton</code> hook (v1.3) covers the button-prompt glow, but the weapon-change flash may come from a separate, not-yet-located effect. Please report it with a log/screenshot of the exact moment it happens.</li>
+<li>Square's weapon-switch swipe and the new continuous camera drag (v1.3) are newly implemented and pending confirmation on hardware across multiple weapons/play sessions.</li>
+</ul>
+<h2>Troubleshooting</h2>
+<p><strong>Crash on the LOADING screen (<code>C2-12828-1</code> error):</strong> this is usually a data setup problem, not a game bug. Check the following with VitaShell:</p>
+<ol>
+<li>You installed the <strong>latest</strong> <code>shadowguardian.vpk</code> (older builds have known crashes that are already fixed).</li>
+<li><code>kubridge</code> and <code>fd_fix</code> plugins plus <code>libshacccg.suprx</code> are installed (see Setup above).</li>
+<li>In <code>ux0:data/shadowguardian/</code>: <code>libshadowguardian.so</code>, the <code>res/</code> folder, and all asset folders are present, and <strong>both</strong> the <code>_1_6</code> and <code>_1_7</code> variants of <code>sprites</code> and <code>gui</code> exist (<code>sprites_1_6</code>, <code>sprites_1_7</code>, <code>gui_1_6</code>, <code>gui_1_7</code>) — copy whichever ones are missing from the variant you do have. As of v1.2.3, a missing <code>gui_1_6</code>/<code>gui_1_7</code> or <code>sprites_1_6</code>/<code>sprites_1_7</code> shows a clear &quot;missing game data files&quot; dialog on boot instead of crashing later — if you see that dialog, it's telling you exactly which one to fix.</li>
+</ol>
+<p><strong>If it still crashes</strong>, please report it with:</p>
+<ol>
+<li>The newest <code>ux0:data/shadowguardian/logs/game_log_*.txt</code> (from the time of the crash — do not delete it).</li>
+<li>The newest <code>ux0:data/psp2core-*-eboot.bin.psp2dmp</code> core dump.</li>
+<li>A note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).</li>
+</ol>
+<h2>Credits</h2>
+<ul>
+<li>TheFloW for the <code>so_loader</code> wrapper and Android porting boilerplate.</li>
+<li>Rinnegatamante for <code>vitaGL</code> and porting tools.</li>
+<li>Gameloft for the original game.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/download/v1.3/shadowguardian.vpk" target="_blank" rel="noopener">⬇ shadowguardian.vpk · 1.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -785,147 +1044,6 @@ sha-256: 07413098f3b1b69435736f66c0622d05e902397516347a7f4847d748c18f13d3">
 <p>SHA-256: 07413098F3B1B69435736F66C0622D05E902397516347A7F4847D748C18F13D3</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://gitlab.com/-/project/86541142/uploads/b45bad669d5e2faf8b30ae5172c51091/PowerpuffVita_v0.1.1.vpk" target="_blank" rel="noopener">⬇ PowerpuffVita_v0.1.1.vpk</a><a class="btn" href="https://gitlab.com/-/project/86541142/uploads/02f1ee46b55f211cd7af91f0e0485333/Powerpuff_Girls_Mojo_Madness_Vita_v0.1.1_Windows_Installer_payload-flex.zip" target="_blank" rel="noopener">Powerpuff_Girls_Mojo_Madness_Vita_v0.1.1_Windows_Installer.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar" target="_blank" rel="noopener">source.tar</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="shadow guardian shadow guardian metalsyntax/shadow-guardian-vita shadow guardian vita v1.2.5 v1.2.5 ports # shadow guardian vita v1.2.5
-
-this is a wrapper/port of **shadow guardian hd** for the ps vita.
-
-## changelog
-
-- v1.2.5: fixed broken rendering on interactable objects. `shaders/interactible_basic.xml`, `interactible_bump.xml`, and `interactible_shadowmap.xml` (the engine&#x27;s own shader source, shipped inside the original game data) use glsl that android&#x27;s gles driver quietly accepts but the vita&#x27;s on-device shark compiler (`shark_compile_shader_extended()`) rejects outright: a `vec4(1)` constructor without an explicit float literal in all three, and — in `_bump` only — an `outlinesize` uniform that&#x27;s read in the shader body but never declared. all three previously failed to compile on vita; the v1.2.1 and v1.2.4 hotfixes only stopped the game from crashing when that happened (a symptom of the bug, not the cause), so the interactable objects using these shaders kept rendering without their proper material/shading even on a &quot;successful&quot; boot. found by diffing a tester&#x27;s working data folder against a clean apk data dump — the only differences were these 3 files, hand-patched locally but never shipped. corrected copies are now bundled inside the vpk (`extras/shader_patches/`) and installed to `ux0:data/shadowguardian/shaders/` automatically on every boot (`apply_shader_patches()` in `source/utils/init.c`), so this is fixed for every tester regardless of which data dump they installed from — no manual file replacement needed.
-## setup instructions
-
-in order to properly install the game, you&#x27;ll need to extract the data from the original android game.
-
-1. install the `kubridge` and `fd_fix` plugins on your ps vita.
-2. install `libshacccg.suprx`, if you don&#x27;t have it already, by following [this guide](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).
-3. obtain the original apk of shadow guardian (`shadow-guardian-hd-v1-0-1-uk-ru.apk`) and the required data files.
-4. extract the `.apk` using any zip extractor.
-5. place the executable `libshadowguardian.so` (from `lib/armeabi-v7a/` inside the apk) in `ux0:data/shadowguardian/`. (if the apk also contains `libstormgloft.so`, you can copy it too — it does no harm.)
-6. place all game asset folders (`res`, `shaders`, `textures`, `models`, `music`, `sounds`, etc.) in `ux0:data/shadowguardian/`.
-7. make sure the 16:9 assets `sprites_1_7` and `gui_1_7` are present. if the apk only ships the `sprites_1_6` / `gui_1_6` variants, duplicate them with vitashell (copy + paste + rename) so the `_1_7` names exist — missing 16:9 gui assets can crash the game on the loading screen. also confirm the `res/` folder was copied.
-8. double-check that `gui_1_6` and `sprites_1_6` themselves are also present in `ux0:data/shadowguardian/` (not just the `_1_7` copies) — some assets are only ever requested by their `_1_6` name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.
-9. download and install `shadowguardian.vpk` on your ps vita.
-
-## controls
-
-- **left analog** - movement (in-game only)
-- **right analog** - camera (free-look)
-- **d-pad** - menu navigation / movement
-- **r** - fire
-- **l / square** - aim (hold)
-- **cross** - contextual action (jump / run / grab / climb)
-- **triangle** - reload / switch weapon
-- **circle** - toggle virtual buttons (hide/show hud layout)
-- **start** - pause / back
-- **select** - menu
-- **touch screen** - original touch controls
-
-## known issues
-
-- reload/weapon touch position (triangle) confirmed by layout only; verify in combat on hardware.
-- [update this section prior to release with any remaining unresolved bugs]
-
-## troubleshooting
-
-**crash on the loading screen (`c2-12828-1` error):** this is usually a data setup problem, not a game bug. check the following with vitashell:
-
-1. you installed the **latest** `shadowguardian.vpk` (older builds have known crashes that are already fixed).
-2. `kubridge` and `fd_fix` plugins plus `libshacccg.suprx` are installed (see setup above).
-3. in `ux0:data/shadowguardian/`: `libshadowguardian.so`, the `res/` folder, and all asset folders are present, and **both** the `_1_6` and `_1_7` variants of `sprites` and `gui` exist (`sprites_1_6`, `sprites_1_7`, `gui_1_6`, `gui_1_7`) — copy whichever ones are missing from the variant you do have. as of v1.2.3, a missing `gui_1_6`/`gui_1_7` or `sprites_1_6`/`sprites_1_7` shows a clear &quot;missing game data files&quot; dialog on boot instead of crashing later — if you see that dialog, it&#x27;s telling you exactly which one to fix.
-
-**if it still crashes**, please report it with:
-
-1. the newest `ux0:data/shadowguardian/logs/game_log_*.txt` (from the time of the crash — do not delete it).
-2. the newest `ux0:data/psp2core-*-eboot.bin.psp2dmp` core dump.
-3. a note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).
-
-## credits
-
-- theflow for the `so_loader` wrapper and android porting boilerplate.
-- rinnegatamante for `vitagl` and porting tools.
-- gameloft for the original game.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/shadow-guardian-ps-vita/icon0.png" alt="Icono de Shadow Guardian" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Shadow-Guardian-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/tag/v1.2.5" target="_blank" rel="noopener">Shadow Guardian</a></h2>
-                      <div class="release-name">Shadow Guardian Vita v1.2.5</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.2.5</span>
-                    <span>2026-09-16 05:57 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.2.5</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.2.5</div>
-                  
-                  <div class="body markdown-body"><h1>Shadow Guardian Vita v1.2.5</h1>
-<p>This is a wrapper/port of <strong>Shadow Guardian HD</strong> for the PS Vita.</p>
-<h2>Changelog</h2>
-<ul>
-<li>v1.2.5: Fixed broken rendering on interactable objects. <code>shaders/interactible_basic.xml</code>, <code>interactible_bump.xml</code>, and <code>interactible_shadowmap.xml</code> (the engine's own shader source, shipped inside the original game data) use GLSL that Android's GLES driver quietly accepts but the Vita's on-device Shark compiler (<code>shark_compile_shader_extended()</code>) rejects outright: a <code>vec4(1)</code> constructor without an explicit float literal in all three, and — in <code>_bump</code> only — an <code>OutlineSize</code> uniform that's read in the shader body but never declared. All three previously failed to compile on Vita; the v1.2.1 and v1.2.4 hotfixes only stopped the game from crashing when that happened (a symptom of the bug, not the cause), so the interactable objects using these shaders kept rendering without their proper material/shading even on a &quot;successful&quot; boot. Found by diffing a tester's working data folder against a clean APK data dump — the only differences were these 3 files, hand-patched locally but never shipped. Corrected copies are now bundled inside the VPK (<code>extras/shader_patches/</code>) and installed to <code>ux0:data/shadowguardian/shaders/</code> automatically on every boot (<code>apply_shader_patches()</code> in <code>source/utils/init.c</code>), so this is fixed for every tester regardless of which data dump they installed from — no manual file replacement needed.</li>
-</ul>
-<h2>Setup Instructions</h2>
-<p>In order to properly install the game, you'll need to extract the data from the original Android game.</p>
-<ol>
-<li>Install the <code>kubridge</code> and <code>fd_fix</code> plugins on your PS Vita.</li>
-<li>Install <code>libshacccg.suprx</code>, if you don't have it already, by following <a target="_blank" rel="noopener noreferrer" href="https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx">this guide</a>.</li>
-<li>Obtain the original APK of Shadow Guardian (<code>Shadow-Guardian-HD-v1-0-1-UK-RU.apk</code>) and the required data files.</li>
-<li>Extract the <code>.apk</code> using any zip extractor.</li>
-<li>Place the executable <code>libshadowguardian.so</code> (from <code>lib/armeabi-v7a/</code> inside the APK) in <code>ux0:data/shadowguardian/</code>. (If the APK also contains <code>libStormGLOFT.so</code>, you can copy it too — it does no harm.)</li>
-<li>Place all game asset folders (<code>res</code>, <code>shaders</code>, <code>textures</code>, <code>models</code>, <code>music</code>, <code>sounds</code>, etc.) in <code>ux0:data/shadowguardian/</code>.</li>
-<li>Make sure the 16:9 assets <code>sprites_1_7</code> and <code>gui_1_7</code> are present. If the APK only ships the <code>sprites_1_6</code> / <code>gui_1_6</code> variants, duplicate them with VitaShell (Copy + Paste + Rename) so the <code>_1_7</code> names exist — missing 16:9 GUI assets can crash the game on the LOADING screen. Also confirm the <code>res/</code> folder was copied.</li>
-<li>Double-check that <code>gui_1_6</code> and <code>sprites_1_6</code> themselves are also present in <code>ux0:data/shadowguardian/</code> (not just the <code>_1_7</code> copies) — some assets are only ever requested by their <code>_1_6</code> name at runtime, and a copy missing just these two files can pass every other check and still crash later during gameplay.</li>
-<li>Download and install <code>shadowguardian.vpk</code> on your PS Vita.</li>
-</ol>
-<h2>Controls</h2>
-<ul>
-<li><strong>Left Analog</strong> - Movement (in-game only)</li>
-<li><strong>Right Analog</strong> - Camera (free-look)</li>
-<li><strong>D-Pad</strong> - Menu Navigation / Movement</li>
-<li><strong>R</strong> - Fire</li>
-<li><strong>L / Square</strong> - Aim (hold)</li>
-<li><strong>Cross</strong> - Contextual action (jump / run / grab / climb)</li>
-<li><strong>Triangle</strong> - Reload / Switch weapon</li>
-<li><strong>Circle</strong> - Toggle Virtual Buttons (Hide/Show HUD layout)</li>
-<li><strong>Start</strong> - Pause / Back</li>
-<li><strong>Select</strong> - Menu</li>
-<li><strong>Touch Screen</strong> - Original Touch Controls</li>
-</ul>
-<h2>Known Issues</h2>
-<ul>
-<li>Reload/weapon touch position (Triangle) confirmed by layout only; verify in combat on hardware.</li>
-<li>[Update this section prior to release with any remaining unresolved bugs]</li>
-</ul>
-<h2>Troubleshooting</h2>
-<p><strong>Crash on the LOADING screen (<code>C2-12828-1</code> error):</strong> this is usually a data setup problem, not a game bug. Check the following with VitaShell:</p>
-<ol>
-<li>You installed the <strong>latest</strong> <code>shadowguardian.vpk</code> (older builds have known crashes that are already fixed).</li>
-<li><code>kubridge</code> and <code>fd_fix</code> plugins plus <code>libshacccg.suprx</code> are installed (see Setup above).</li>
-<li>In <code>ux0:data/shadowguardian/</code>: <code>libshadowguardian.so</code>, the <code>res/</code> folder, and all asset folders are present, and <strong>both</strong> the <code>_1_6</code> and <code>_1_7</code> variants of <code>sprites</code> and <code>gui</code> exist (<code>sprites_1_6</code>, <code>sprites_1_7</code>, <code>gui_1_6</code>, <code>gui_1_7</code>) — copy whichever ones are missing from the variant you do have. As of v1.2.3, a missing <code>gui_1_6</code>/<code>gui_1_7</code> or <code>sprites_1_6</code>/<code>sprites_1_7</code> shows a clear &quot;missing game data files&quot; dialog on boot instead of crashing later — if you see that dialog, it's telling you exactly which one to fix.</li>
-</ol>
-<p><strong>If it still crashes</strong>, please report it with:</p>
-<ol>
-<li>The newest <code>ux0:data/shadowguardian/logs/game_log_*.txt</code> (from the time of the crash — do not delete it).</li>
-<li>The newest <code>ux0:data/psp2core-*-eboot.bin.psp2dmp</code> core dump.</li>
-<li>A note on exactly when it happens (on boot, which level loading, do you ever reach the menu?).</li>
-</ol>
-<h2>Credits</h2>
-<ul>
-<li>TheFloW for the <code>so_loader</code> wrapper and Android porting boilerplate.</li>
-<li>Rinnegatamante for <code>vitaGL</code> and porting tools.</li>
-<li>Gameloft for the original game.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/download/v1.2.5/shadowguardian.vpk" target="_blank" rel="noopener">⬇ shadowguardian.vpk · 1.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1650,108 +1768,6 @@ Include the build ID and the world/level/menu action.</p>
 </code></pre>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/LeZergan/pvz2vita/releases/download/v1.1-rc12/pvz2-vita-latest.vpk" target="_blank" rel="noopener">⬇ pvz2-vita-latest.vpk · 1.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.0.2 v1.0.2 ports # asphalt 5 hd - ps vita port  v1.0.2 🏎️💨
-
-we are incredibly excited to announce the first public beta release of **asphalt 5** for the ps vita! 
-
-this port uses a custom android wrapper (soloader/falsojni) to run the original armv6 android executable natively on the vita, fully hardware-accelerated via `vitagl`. 
-
-since this is a **beta release**, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.
-
-### ✨ key features in this beta:
-* **full physical controls integration:** we&#x27;ve built a custom input router that seamlessly bridges vita physical buttons with the game&#x27;s native touch engine.
-  * **menus:** fully navigable using the **d-pad** or **left analog stick** (up/down). use **❌ (cross)** to select and **⭕ (circle)** to go back.
-  * **title screens:** press any face button to instantly skip splash screens.
-  * **in-game racing:** 
-    * **d-pad left/right** (or l/r triggers) to steer.
-    * **❌ (cross)** to trigger nitrous.
-    * **🟥 (square)** to brake / drift.
-    * **start** to pause.
-* **custom optimized audio engine:** the original android game used heavy floating-point math for audio mixing, which crippled the vita&#x27;s cpu. we wrote a custom 32-bit fixed-point audio mixer from scratch with **linear interpolation**, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48khz audio output through the vita&#x27;s main audio port. it follows the engine&#x27;s own routing: looped sounds (engine hum, skids) track rpm live, long music tracks get a dedicated voice that sfx can never steal, and the master bus uses a soft limiter so heavy scenes don&#x27;t square-wave.
-* **hardware accelerated graphics:** running buttery smooth thanks to `vitagl`.
-* **post-race flow:** results screens advance with a tap anywhere, or with **❌ (cross)** on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.
-* **intro &amp; cutscene video playback:** the game&#x27;s original mpeg-4 `.mp4` cutscenes (which the vita has no hardware decoder for) play in software at a smooth **30 fps** with in-sync audio — the intro trailer (`a5_ultimate_vnfs_2.mp4`) and the in-race videos alike. videos are decoded at half resolution and upscaled, so motion stays fluid; press **❌ (cross)** or **start** at any time to skip.
-* **no screen-off freeze:** the port resets the vita&#x27;s idle timer every frame, so the console&#x27;s auto power-save can no longer turn the screen off and freeze the game while you read a menu.
-
-### ⚠️ known issues / beta status:
-* this is a beta! you might encounter occasional ui quirks or unmapped buttons in very specific sub-menus. 
-* performance is mostly solid, but some heavy tracks might experience slight frame drops. further optimizations are planned.
-* the intro trailer needs its `.mp4` present in `ux0:data/asphalt5/data/` — otherwise it is skipped.
-* manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.
-
-### 🛠️ installation instructions:
-1. install `libshacccg.suprx` if you don&#x27;t have it already (required for vitagl).
-2. install the provided `asphalt5.vpk`.
-3. extract the game data files (assets) into `ux0:data/asphalt5/`. *(note: data files are not provided with this release; you must extract them from your own legally obtained copy of the android game).*
-4. launch the game and enjoy!
-
----
-*a huge thanks to the ps vita homebrew community and the vitagl contributors for making this possible! let us know your feedback and bug reports.*">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/asphalt-5-ps-vita/icon0.png" alt="Icono de Asphalt 5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Asphalt-5-Vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.0.2" target="_blank" rel="noopener">Asphalt 5</a></h2>
-                      <div class="release-name">Asphalt 5 HD - PS Vita Port v1.0.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.2</span>
-                    <span>2026-09-11 05:04 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.2</div>
-                  
-                  <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port  v1.0.2 🏎️💨</h1>
-<p>We are incredibly excited to announce the first public Beta release of <strong>Asphalt 5</strong> for the PS Vita!</p>
-<p>This port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via <code>vitaGL</code>.</p>
-<p>Since this is a <strong>Beta release</strong>, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.</p>
-<h3>✨ Key Features in this Beta:</h3>
-<ul>
-<li><strong>Full Physical Controls Integration:</strong> We've built a custom input router that seamlessly bridges Vita physical buttons with the game's native touch engine.<ul>
-<li><strong>Menus:</strong> Fully navigable using the <strong>D-Pad</strong> or <strong>Left Analog Stick</strong> (Up/Down). Use <strong>❌ (Cross)</strong> to select and <strong>⭕ (Circle)</strong> to go back.</li>
-<li><strong>Title Screens:</strong> Press any face button to instantly skip splash screens.</li>
-<li><strong>In-Game Racing:</strong><ul>
-<li><strong>D-Pad Left/Right</strong> (or L/R Triggers) to Steer.</li>
-<li><strong>❌ (Cross)</strong> to trigger Nitrous.</li>
-<li><strong>🟥 (Square)</strong> to Brake / Drift.</li>
-<li><strong>Start</strong> to Pause.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Custom Optimized Audio Engine:</strong> The original Android game used heavy floating-point math for audio mixing, which crippled the Vita's CPU. We wrote a custom 32-bit fixed-point audio mixer from scratch with <strong>Linear Interpolation</strong>, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48kHz audio output through the Vita's MAIN audio port. It follows the engine's own routing: looped sounds (engine hum, skids) track RPM live, long music tracks get a dedicated voice that SFX can never steal, and the master bus uses a soft limiter so heavy scenes don't square-wave.</li>
-<li><strong>Hardware Accelerated Graphics:</strong> Running buttery smooth thanks to <code>vitaGL</code>.</li>
-<li><strong>Post-Race Flow:</strong> Results screens advance with a tap anywhere, or with <strong>❌ (Cross)</strong> on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.</li>
-<li><strong>Intro &amp; Cutscene Video Playback:</strong> The game's original MPEG-4 <code>.mp4</code> cutscenes (which the Vita has no hardware decoder for) play in software at a smooth <strong>30 FPS</strong> with in-sync audio — the intro trailer (<code>A5_Ultimate_VNFS_2.mp4</code>) and the in-race videos alike. Videos are decoded at half resolution and upscaled, so motion stays fluid; press <strong>❌ (Cross)</strong> or <strong>Start</strong> at any time to skip.</li>
-<li><strong>No Screen-Off Freeze:</strong> The port resets the Vita's idle timer every frame, so the console's auto power-save can no longer turn the screen off and freeze the game while you read a menu.</li>
-</ul>
-<h3>⚠️ Known Issues / Beta Status:</h3>
-<ul>
-<li>This is a Beta! You might encounter occasional UI quirks or unmapped buttons in very specific sub-menus.</li>
-<li>Performance is mostly solid, but some heavy tracks might experience slight frame drops. Further optimizations are planned.</li>
-<li>The intro trailer needs its <code>.mp4</code> present in <code>ux0:data/asphalt5/data/</code> — otherwise it is skipped.</li>
-<li>Manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.</li>
-</ul>
-<h3>🛠️ Installation Instructions:</h3>
-<ol>
-<li>Install <code>libshacccg.suprx</code> if you don't have it already (required for vitaGL).</li>
-<li>Install the provided <code>Asphalt5.vpk</code>.</li>
-<li>Extract the game data files (assets) into <code>ux0:data/asphalt5/</code>. <em>(Note: Data files are not provided with this release; you must extract them from your own legally obtained copy of the Android game).</em></li>
-<li>Launch the game and enjoy!</li>
-</ol>
-<hr>
-<p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.0.2/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26925,162 +26941,10 @@ ANALOG STICK – mouse</p>
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="max payne max payne fgsfdsfgs/max_vita release 4 r4 ports ### changelog
-* added fios2 i/o from the gtasa port to reduce stutter due to sd reads;
-* added a config file with a bunch of settings to tweak;
-* restored debris (bullet cases and empty mags);
-* added crouch toggle option to circumvent the problem with the face buttons;
-* added option to load priority archives (ie mpm mod archives; no pc mod will probably work without edits);
-* other misc changes.
-
-if you already had a previous release installed and working, you only need to install the new vpk for this update.
-
-### known issues
-
-* the game takes a while to start and load levels.
-* key binding menu does not display button names correctly.
-* intro movies don&#x27;t play, since the player is not implemented.
-
-### how to install
-
-before installing the game, you should do the following on your vita:
-1. [install kubridge](https://github.com/theofficialflow/kubridge/releases/) same way you install other `.skprx` plugins: download `kubridge.suprx`, copy it to `ux0:/tai/` and add these lines to your `ux0:/tai/config.txt`:
-```
-*kernel
-ux0:tai/kubridge.skprx
-```
-2. (optional) [install fdfix](https://github.com/theofficialflow/fdfix) if you don&#x27;t want your game to crash on suspend.
-2. [extract the runtime shader compiler](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).
-3. reboot.
-
-you&#x27;re going to need:
-* `.apk` file for version 1.7 (latest version at the time of writing);
-* `.obb` file for version 1.6 or 1.7 (usually located at `/sdcard/android/obb/com.rockstar.maxpayne/main.3.com.rockstar.maxpayne.obb`).
-
-both files [can be obtained](https://stackoverflow.com/questions/11012976/how-do-i-get-the-apk-of-an-installed-app-without-root-access) from your phone if you have a copy of the game installed.
-both files can be opened or extracted with anything that can extract `.zip` files.
-
-to install:
-1. install the latest vpk from the releases page.
-2. extract the `assets` folder from your `.apk` to `ux0:/data` and rename it to `maxpayne`.
-3. extract `lib/armeabi-v7a/libmaxpayne.so` from your `.apk` to `ux0:/data/maxpayne`.
-4. extract the contents of the `.obb` file into `ux0:/data/maxpayne`. you can skip all the `.msf` files except for `maxpaynesoundsv2.msf` and any extra languages that you want.
-5. extract the contents of the `data.zip` from the latest release into `ux0:/data`. replace everything.
-
-you can put the game data onto `uma0:` or `imc0:` instead of `ux0:`. paths remain the same.
-
-the game will show an error message if it detects that anything is wrong. please read those and check the relevant parts of your setup.
-
-if the error says `could not find symbol ...`, that likely means you have the wrong `.apk`. you need one for v1.7, others **will not work**.
-
-if the game crashes on startup, double check your setup and the closed issues. if you can&#x27;t find a solution, please post an issue with your last crash dump attached. crash dumps are usually in `ux0:/data/`.
-
-the vita port has an extra config file, located at `ux0:/data/maxpayne/config.txt`. it is created when you first run the game and allows you to tweak some internal settings. for more detailed descriptions of said settings check the [wiki article](https://github.com/fgsfdsfgs/max_vita/wiki/config-variables).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-max-payne/icon0.png" alt="Icono de Max Payne" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · fgsfdsfgs/max_vita</div>
-                      <h2><a href="https://github.com/fgsfdsfgs/max_vita/releases/tag/r4" target="_blank" rel="noopener">Max Payne</a></h2>
-                      <div class="release-name">Release 4</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">r4</span>
-                    <span>2021-02-17 20:44 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: r4</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive r4</div>
-                  
-                  <div class="body markdown-body"><h3>Changelog</h3>
-<ul>
-<li>added FIOS2 I/O from the GTASA port to reduce stutter due to SD reads;</li>
-<li>added a config file with a bunch of settings to tweak;</li>
-<li>restored debris (bullet cases and empty mags);</li>
-<li>added crouch toggle option to circumvent the problem with the face buttons;</li>
-<li>added option to load priority archives (ie MPM mod archives; no PC mod will probably work without edits);</li>
-<li>other misc changes.</li>
-</ul>
-<p>If you already had a previous release installed and working, you only need to install the new VPK for this update.</p>
-<h3>Known issues</h3>
-<ul>
-<li>The game takes a while to start and load levels.</li>
-<li>Key binding menu does not display button names correctly.</li>
-<li>Intro movies don't play, since the player is not implemented.</li>
-</ul>
-<h3>How to install</h3>
-<p>Before installing the game, you should do the following on your Vita:</p>
-<ol>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases/">Install kubridge</a> same way you install other <code>.skprx</code> plugins: download <code>kubridge.suprx</code>, copy it to <code>ux0:/tai/</code> and add these lines to your <code>ux0:/tai/config.txt</code>:</li>
-</ol>
-<pre><code>*KERNEL
-ux0:tai/kubridge.skprx
-</code></pre>
-<ol>
-<li>(optional) <a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/FdFix">Install fdfix</a> if you don't want your game to crash on suspend.</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx">Extract the runtime shader compiler</a>.</li>
-<li>Reboot.</li>
-</ol>
-<p>You're going to need:</p>
-<ul>
-<li><code>.apk</code> file for version 1.7 (latest version at the time of writing);</li>
-<li><code>.obb</code> file for version 1.6 or 1.7 (usually located at <code>/sdcard/android/obb/com.rockstar.maxpayne/main.3.com.rockstar.maxpayne.obb</code>).</li>
-</ul>
-<p>Both files <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/questions/11012976/how-do-i-get-the-apk-of-an-installed-app-without-root-access">can be obtained</a> from your phone if you have a copy of the game installed.
-Both files can be opened or extracted with anything that can extract <code>.zip</code> files.</p>
-<p>To install:</p>
-<ol>
-<li>Install the latest VPK from the Releases page.</li>
-<li>Extract the <code>assets</code> folder from your <code>.apk</code> to <code>ux0:/data</code> and rename it to <code>maxpayne</code>.</li>
-<li>Extract <code>lib/armeabi-v7a/libMaxPayne.so</code> from your <code>.apk</code> to <code>ux0:/data/maxpayne</code>.</li>
-<li>Extract the contents of the <code>.obb</code> file into <code>ux0:/data/maxpayne</code>. You can skip all the <code>.msf</code> files except for <code>MaxPayneSoundsv2.msf</code> and any extra languages that you want.</li>
-<li>Extract the contents of the <code>data.zip</code> from the latest release into <code>ux0:/data</code>. Replace everything.</li>
-</ol>
-<p>You can put the game data onto <code>uma0:</code> or <code>imc0:</code> instead of <code>ux0:</code>. Paths remain the same.</p>
-<p>The game will show an error message if it detects that anything is wrong. Please read those and check the relevant parts of your setup.</p>
-<p>If the error says <code>Could not find symbol ...</code>, that likely means you have the wrong <code>.apk</code>. You need one for v1.7, others <strong>will not work</strong>.</p>
-<p>If the game crashes on startup, double check your setup and the closed issues. If you can't find a solution, please post an issue with your last crash dump attached. Crash dumps are usually in <code>ux0:/data/</code>.</p>
-<p>The Vita port has an extra config file, located at <code>ux0:/data/maxpayne/config.txt</code>. It is created when you first run the game and allows you to tweak some internal settings. For more detailed descriptions of said settings check the <a target="_blank" rel="noopener noreferrer" href="https://github.com/fgsfdsfgs/max_vita/wiki/Config-variables">wiki article</a>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/fgsfdsfgs/max_vita/releases/download/r4/MaxPayne_r4.vpk" target="_blank" rel="noopener">⬇ MaxPayne_r4.vpk · 969.8 KB</a><a class="btn" href="https://github.com/fgsfdsfgs/max_vita/releases/download/r4/data.zip" target="_blank" rel="noopener">data.zip · 15.2 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="hurrican hurrican ammeir/hurrican hurrican v0.9 v0.9 ports first release of hurrican.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-hurrican/icon0.png" alt="Icono de Hurrican" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ammeir/hurrican</div>
-                      <h2><a href="https://github.com/ammeir/hurrican/releases/tag/v0.9" target="_blank" rel="noopener">Hurrican</a></h2>
-                      <div class="release-name">Hurrican v0.9</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.9</span>
-                    <span>2021-02-15 08:13 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.9</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.9</div>
-                  
-                  <div class="body markdown-body"><p>First release of Hurrican.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ammeir/hurrican/releases/download/v0.9/hurrican_v09.zip" target="_blank" rel="noopener">⬇ hurrican_v09.zip · 37.8 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-20 02:38 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-20 08:08 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
