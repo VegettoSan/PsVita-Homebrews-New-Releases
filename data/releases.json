@@ -1,6 +1,73 @@
 [
   {
     "platform": "github",
+    "repo": "zm2283145/melee-Vita",
+    "release_id": "392268725",
+    "tag": "vita-v0.6.0-build.21.1",
+    "name": "Smash Melee Vita 0.6.0 (experimental build 21.1)",
+    "url": "https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.6.0-build.21.1",
+    "published": "2026-09-20T00:59:29Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Experimental native PS Vita port. This is an unpublished draft for maintainer review.\r\n\r\nRelease version: 0.6.0\r\nCommit: 95566d845bec29c41152b9d37362cfc2ad4fc6b6\r\nBuild: https://github.com/zm2283145/melee-Vita/actions/runs/35479782606\r\n\r\nInstall SmashMeleevita.vpk with VitaShell. Read README-Vita.md for the required\r\nhomebrew environment, shader compiler module, disc image\r\npath, and controls. Game data and proprietary modules are not included.\r\n\r\nExpect stuttering while shaders compile at runtime. Cached shaders reduce\r\nrepeat compilation as you play, but performance and compatibility remain\r\nexperimental. Back up saves before updating.\r\n\r\n- Pills, pill bottles, shells, barrels, crates/item boxes, and their Smash logo now render.\r\n\r\n- Mario’s coin effects render correctly.\r\n\r\n- Coin Lottery’s central coin renders.\r\n\r\n- Trophy Collection’s gold trophy bases render.\r\n\r\n- Trophy Collection no longer hangs with the imported 100% save.\r\n\r\n- Trophy Gallery now opens and works without crashing on that save.\r\n\r\n- The Congratulations screen no longer displays purple/grey corruption.\r\n",
+    "assets": [
+      {
+        "name": "README-Vita.md",
+        "size": 7353,
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/README-Vita.md",
+        "content_type": "text/markdown; charset=utf-8"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 473,
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "SmashMeleevita.vpk",
+        "size": 3022343,
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/SmashMeleevita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "version.json",
+        "size": 43,
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.21.1/version.json",
+        "content_type": "application/json"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Smash Melee Vita",
+    "homebrew_icon": "https://archive.org/download/smash-melee-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
+    "homebrew_long_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
+    "homebrew_id": "smash-melee-vita",
+    "homebrew_authors": [
+      "zm2283145"
+    ],
+    "homebrew_version": "0.6.0",
+    "catalog_apps": [
+      {
+        "id": "smash-melee-vita",
+        "name": "Smash Melee Vita",
+        "icon": "https://archive.org/download/smash-melee-vita/icon0.png",
+        "category": "ports",
+        "description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
+        "long_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
+        "version": "0.6.0",
+        "version_date": "2026-09-18",
+        "author_ids": [
+          "zm2283145"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.6.0 → release vita-v0.6.0-build.21.1",
+    "catalog_version": "0.6.0"
+  },
+  {
+    "platform": "github",
     "repo": "Franckrst/D2Vita",
     "release_id": "392006450",
     "tag": "v0.1.6",
@@ -228,91 +295,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
     "catalog_version": "v.0.1"
-  },
-  {
-    "platform": "github",
-    "repo": "zm2283145/melee-Vita",
-    "release_id": "391646511",
-    "tag": "vita-v0.6.0-build.16.1",
-    "name": "Smash Melee Vita 0.6.0 (transition performance)",
-    "url": "https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.6.0-build.16.1",
-    "published": "2026-09-18T17:13:57Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Experimental native PS Vita port.\n\n## Highlights\n\n- Fixed CDRAM/physical-memory exhaustion during rapid Classic and credits scene changes by draining queued GPU work before safely retiring scene textures and copy targets.\n- Reduced Match Clear slowdown with a lighter Vita blur path and targeted copy throttling while preserving the first valid copy for new targets.\n- Fixed the Match Clear overlay sizing so its black bars and composition extend across the full display without changing global viewport behavior.\n- Improved Press Start -> main menu -> character select -> gameplay transitions with asynchronous archive reads, fewer redundant waits, and a bundled warm shader cache.\n- Preserved native opening-movie playback, the translated GX/game frontend and lifecycle, and the existing boss-camera fix.\n\n## Build and installation\n\nThis release uses the locally built, hardware-tested Release VPK for commit `6ed6697100807c124dbfc7fed0841d952ae65580`. It was installed as `MLVITA002`, completed five consecutive native opening-movie startup checks without a crash, and retained the bundled `shadercache/warm5.bin`.\n\nVPK SHA-256: `B3F039552495D67000911037D93816A620BCD9D384CA2D5D3F35FBD49EBE27D6`\n\nInstall `SmashMeleevita.vpk` with VitaShell. See `README-Vita.md` for the required homebrew environment, shader compiler module, disc-image path, and controls. Game data and proprietary modules are not included. Performance and compatibility remain experimental; back up saves before updating.",
-    "assets": [
-      {
-        "name": "COMMIT.txt",
-        "size": 41,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/COMMIT.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "COPYING",
-        "size": 35149,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/COPYING",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "LICENSE.md",
-        "size": 2437,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/LICENSE.md",
-        "content_type": "text/markdown; charset=utf-8"
-      },
-      {
-        "name": "README-Vita.md",
-        "size": 7353,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/README-Vita.md",
-        "content_type": "text/markdown; charset=utf-8"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 473,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "SmashMeleevita.vpk",
-        "size": 2889934,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/SmashMeleevita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "version.json",
-        "size": 43,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.6.0-build.16.1/version.json",
-        "content_type": "application/json"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Smash Melee Vita",
-    "homebrew_icon": "https://archive.org/download/smash-melee-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
-    "homebrew_long_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
-    "homebrew_id": "smash-melee-vita",
-    "homebrew_authors": [
-      "zm2283145"
-    ],
-    "homebrew_version": "0.6.0",
-    "catalog_apps": [
-      {
-        "id": "smash-melee-vita",
-        "name": "Smash Melee Vita",
-        "icon": "https://archive.org/download/smash-melee-vita/icon0.png",
-        "category": "ports",
-        "description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
-        "long_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
-        "version": "0.6.0",
-        "version_date": "2026-09-18",
-        "author_ids": [
-          "zm2283145"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.6.0 → release vita-v0.6.0-build.16.1",
-    "catalog_version": "0.6.0"
   },
   {
     "platform": "github",
@@ -33226,73 +33208,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.0.9",
     "catalog_version": "v.0.9"
-  },
-  {
-    "platform": "github",
-    "repo": "SonicMastr/Sonic-1-2-Vita",
-    "release_id": "36795442",
-    "tag": "1.1.0",
-    "name": "Sonic 1 and Sonic 2 Vita 1.1.0",
-    "url": "https://github.com/SonicMastr/Sonic-1-2-Vita/releases/tag/1.1.0",
-    "published": "2021-01-23T00:35:57Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Livearea Assets made by [Danhanado](https://twitter.com/DanMcL1)!\r\n\r\n# Changlog:\r\n\r\nIt's fixed!\r\n\r\nThanks to the Team working on the original Decompilation, Audio Crashes have been fixed! You can actually play the game normally without much disruption (But this doesn't mean completely crash free). This also marks the first \"Stable\" release of the port.\r\n\r\nTime Attack is also fixed in this release.\r\n\r\n# Installing:\r\nSame as Sonic CD.\r\n\r\nPlace Data.rsdk in ux0:data/Sonic1/ for Sonic the Hedgehog 1\r\nPlace Data.rsdk in ux0:data/Sonic2/ for Sonic the Hedgehog 2\r\n\r\nTested with the Android version\r\nKeep in mind, you need to get the data from within the APK. So I recommend this app (https://play.google.com/store/apps/details?id=com.touchfield.appbackuprestore) to back it up and open it as a zip archive on your computer. It'll be called data.rsdk.xmf. You just need to rename it to data.rsdk\r\n\r\nKnown issues:\r\nSounds stops working after suspension on some systems. It will start playing again after an event triggers playback.\r\n\r\n",
-    "assets": [
-      {
-        "name": "Sonic1.vpk",
-        "size": 936835,
-        "download_url": "https://github.com/SonicMastr/Sonic-1-2-Vita/releases/download/1.1.0/Sonic1.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Sonic2.vpk",
-        "size": 962589,
-        "download_url": "https://github.com/SonicMastr/Sonic-1-2-Vita/releases/download/1.1.0/Sonic2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SonicMastr",
-    "homebrew_name": "Sonic 2 Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-sonic-2-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Sonic 2 for PSVITA/PSTV.",
-    "homebrew_long_description": "A port of the second Sonic game (Sonic The Hedgehog 2) based on a full decompilation of the original game.",
-    "homebrew_id": "sonic-2-vita",
-    "homebrew_authors": [
-      "sonicmastr"
-    ],
-    "homebrew_version": "v.1.1.0",
-    "catalog_apps": [
-      {
-        "id": "sonic-2-vita",
-        "name": "Sonic 2 Vita",
-        "icon": "https://archive.org/download/psvitaalive-sonic-2-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Sonic 2 for PSVITA/PSTV.",
-        "long_description": "A port of the second Sonic game (Sonic The Hedgehog 2) based on a full decompilation of the original game.",
-        "version": "v.1.1.0",
-        "version_date": "2021-01-23",
-        "author_ids": [
-          "sonicmastr"
-        ]
-      },
-      {
-        "id": "sonic-1-vita",
-        "name": "Sonic 1 Vita",
-        "icon": "https://archive.org/download/psvitaalive-sonic-1-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Sonic 1 for PSVITA.",
-        "long_description": "A port of the first Sonic game (Sonic The Hedgehog) based on a full decompilation of the original game.",
-        "version": "v.1.1.0",
-        "version_date": "2021-01-23",
-        "author_ids": [
-          "sonicmastr"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.1.0",
-    "catalog_version": "v.1.1.0"
   }
 ]
