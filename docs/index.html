@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">405</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>77</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,204 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita the impossible game — ps vita port v1.1.0 v.1.1.0 ports # the impossible game — ps vita port v1.1.0
+
+adds full support for the official **level pack** add-on (3 extra levels), on top of the
+playable base port from v1.0.0. runs `libimpossible.so` directly on arm via a *soloader* +
+*falsojni*, with opengl es 1.1 (fixed-function pipeline) rendering through vitagl.
+
+## ✨ what&#x27;s new
+
+- **5 levels playable**: the 2 base levels (fire aura, original xbox level) plus the 3 levels
+  from the official level pack (chaoz fantasy, heaven, phazd) — confirmed working on real
+  hardware with audio, input, and save data.
+- **level pack `.so` support**: the loader now resolves the level pack&#x27;s
+  `libimpossible.so` (same 11 jni exports, `impossiblegamelevelpack` symbol prefix instead of
+  `impossiblegame`) — no source changes needed to swap between the base and level pack `.so`.
+- **save data expanded**: 6 → 12 medals, 2 → 5 levels of practice/no-flag progress tracking.
+- **menu scaled to 5 levels**: level select grew from 2 to 5 buttons (3+2 grid with a back
+  button), stats and medals screens grew from 3 to 6 subpages each.
+- **per-level music**: added `bgm_soundtrack2/3/4` for chaoz fantasy/heaven/phazd; the 2 base
+  levels keep using the original `soundtrack.ogg`.
+
+## ⚠️ known issues / pending work
+
+- none currently open. the level pack&#x27;s `statspage4/5/6.png` assets only ship at their original
+  mdpi resolution (no landscape crop like the base game&#x27;s stats pages) — a minor, cosmetic
+  sharpness difference only, not a functional issue.
+- updating an existing install resets `save.dat` (the save layout grew to fit 5 levels / 12
+  medals) — expected, not a bug.
+
+## 📋 requirements
+
+- ps vita / ps tv running custom firmware (henkaku or enso), firmware 3.60/3.65+.
+- [`kubridge`](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin.
+- [`libshacccg.suprx`](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
+- a legally obtained copy of **the impossible game** for android
+  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).
+- *(optional, for the 3 extra levels)* a legally obtained copy of the **level pack** add-on
+  (`05133-impossible-level-pack.apk`, package `com.flukedude.impossiblegamelevelpack`).
+
+## 📦 installation
+
+1. install `theimpossiblegame.vpk` with vitashell.
+2. copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on
+   the console (see `readme.md` for the full file layout).
+3. **for the 3 extra levels**: unzip `05133-impossible-level-pack.apk` on your pc and merge its
+   `.so`, `soundtrack2/3/4.ogg`, and level-select/stats/medals pngs into
+   `ux0:data/theimpossiblegame/` — see the
+   [level pack installation](readme.md#-level-pack-installation-5-levels-optional) section in
+   `readme.md` for the exact file list and paths. without this step, the game still runs fine
+   with just the 2 base levels.
+
+---
+
+see `readme.md` for the full port description, and `port_progress.md` for the bug-by-bug
+diagnosis log (every fix confirmed on real hardware, no guessing).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v.1.1.0" target="_blank" rel="noopener">The Impossible Game</a></h2>
+                      <div class="release-name">The Impossible Game — PS Vita Port v1.1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v.1.1.0</span>
+                    <span>2026-09-21 01:27 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.0 → release v.1.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.1.0</h1>
+<p>Adds full support for the official <strong>Level Pack</strong> add-on (3 extra levels), on top of the
+playable base port from v1.0.0. Runs <code>libimpossible.so</code> directly on ARM via a <em>soloader</em> +
+<em>FalsoJNI</em>, with OpenGL ES 1.1 (fixed-function pipeline) rendering through vitaGL.</p>
+<h2>✨ What's New</h2>
+<ul>
+<li><strong>5 levels playable</strong>: the 2 base levels (Fire Aura, Original Xbox Level) plus the 3 levels
+from the official Level Pack (Chaoz Fantasy, Heaven, Phazd) — confirmed working on real
+hardware with audio, input, and save data.</li>
+<li><strong>Level Pack <code>.so</code> support</strong>: the loader now resolves the Level Pack's
+<code>libimpossible.so</code> (same 11 JNI exports, <code>impossiblegamelevelpack</code> symbol prefix instead of
+<code>impossiblegame</code>) — no source changes needed to swap between the base and Level Pack <code>.so</code>.</li>
+<li><strong>Save data expanded</strong>: 6 → 12 medals, 2 → 5 levels of practice/no-flag progress tracking.</li>
+<li><strong>Menu scaled to 5 levels</strong>: level select grew from 2 to 5 buttons (3+2 grid with a back
+button), Stats and Medals screens grew from 3 to 6 subpages each.</li>
+<li><strong>Per-level music</strong>: added <code>BGM_SOUNDTRACK2/3/4</code> for Chaoz Fantasy/Heaven/Phazd; the 2 base
+levels keep using the original <code>soundtrack.ogg</code>.</li>
+</ul>
+<h2>⚠️ Known Issues / Pending Work</h2>
+<ul>
+<li>None currently open. The Level Pack's <code>statspage4/5/6.png</code> assets only ship at their original
+mdpi resolution (no landscape crop like the base game's stats pages) — a minor, cosmetic
+sharpness difference only, not a functional issue.</li>
+<li>Updating an existing install resets <code>save.dat</code> (the save layout grew to fit 5 levels / 12
+medals) — expected, not a bug.</li>
+</ul>
+<h2>📋 Requirements</h2>
+<ul>
+<li>PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><code>kubridge</code></a> installed as a kernel plugin.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><code>libshacccg.suprx</code></a> installed in <code>ur0:data/</code>.</li>
+<li>A legally obtained copy of <strong>The Impossible Game</strong> for Android
+(<code>05133-the-impossible-1.5.2.apk</code>, package <code>com.flukedude.impossiblegame</code>).</li>
+<li><em>(Optional, for the 3 extra levels)</em> A legally obtained copy of the <strong>Level Pack</strong> add-on
+(<code>05133-Impossible-Level-Pack.apk</code>, package <code>com.flukedude.impossiblegamelevelpack</code>).</li>
+</ul>
+<h2>📦 Installation</h2>
+<ol>
+<li>Install <code>theimpossiblegame.vpk</code> with VitaShell.</li>
+<li>Copy the contents of <code>ux0_data/theimpossiblegame/</code> to <code>ux0:data/theimpossiblegame/</code> on
+the console (see <code>README.md</code> for the full file layout).</li>
+<li><strong>For the 3 extra levels</strong>: unzip <code>05133-Impossible-Level-Pack.apk</code> on your PC and merge its
+<code>.so</code>, <code>soundtrack2/3/4.ogg</code>, and level-select/stats/medals PNGs into
+<code>ux0:data/theimpossiblegame/</code> — see the
+<a target="_blank" rel="noopener noreferrer" href="README.md#-level-pack-installation-5-levels-optional">Level Pack Installation</a> section in
+<code>README.md</code> for the exact file list and paths. Without this step, the game still runs fine
+with just the 2 base levels.</li>
+</ol>
+<hr>
+<p>See <code>README.md</code> for the full port description, and <code>port_progress.md</code> for the bug-by-bug
+diagnosis log (every fix confirmed on real hardware, no guessing).</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v.1.1.0/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 783.0 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="jk2vita jk2vita ndrwhun/jk2vita jk2 vita 1.0.1 release-1.0.1 ports # jk2vita 1.0.1
+
+bug-fix release. install over 1.0; settings, saves and the texture cache are kept.
+
+## fixes
+
+- pad buttons could not be bound from the controls menu
+- the last row touched in the controls menu kept pulsing red
+- start no longer closes the controls menu while it waits for a key
+- mirrors and &quot;portals&quot; no longer show the room behind them
+- additive effects inside fog (saber glow, bolts, lights) were too dark
+- a texture could draw the picture of one freed just before it
+- filter changes on a texture in use took effect one bind late
+- a draw could run with the wrong matrices when the frame ran out of uniform space
+- a video frame that changes size could be freed while still on screen
+- texture lookups slowed over a long session
+- a music track that fails mid-stream is stopped from the main thread
+- texture and skin workers no longer run above the audio mixer
+
+## defaults
+
+- look assist (`g_aimassist`) on for new installs; a saved config keeps its value">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-jk2vita/icon0.png" alt="Icono de JK2VITA" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · NDRWhun/JK2VITA</div>
+                      <h2><a href="https://github.com/NDRWhun/JK2VITA/releases/tag/release-1.0.1" target="_blank" rel="noopener">JK2VITA</a></h2>
+                      <div class="release-name">JK2 Vita 1.0.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">release-1.0.1</span>
+                    <span>2026-09-20 23:01 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.1</div>
+                  
+                  <div class="body markdown-body"><h1>JK2VITA 1.0.1</h1>
+<p>Bug-fix release. Install over 1.0; settings, saves and the texture cache are kept.</p>
+<h2>Fixes</h2>
+<ul>
+<li>Pad buttons could not be bound from the Controls menu</li>
+<li>The last row touched in the Controls menu kept pulsing red</li>
+<li>Start no longer closes the Controls menu while it waits for a key</li>
+<li>Mirrors and &quot;portals&quot; no longer show the room behind them</li>
+<li>Additive effects inside fog (saber glow, bolts, lights) were too dark</li>
+<li>A texture could draw the picture of one freed just before it</li>
+<li>Filter changes on a texture in use took effect one bind late</li>
+<li>A draw could run with the wrong matrices when the frame ran out of uniform space</li>
+<li>A video frame that changes size could be freed while still on screen</li>
+<li>Texture lookups slowed over a long session</li>
+<li>A music track that fails mid-stream is stopped from the main thread</li>
+<li>Texture and skin workers no longer run above the audio mixer</li>
+</ul>
+<h2>Defaults</h2>
+<ul>
+<li>Look assist (<code>g_aimAssist</code>) on for new installs; a saved config keeps its value</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/NDRWhun/JK2VITA/releases/download/release-1.0.1/JK2VITA_1.0.1.vpk" target="_blank" rel="noopener">⬇ JK2VITA_1.0.1.vpk · 3.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.8 v0.1.8 ports - update winx86 (fix some jit memory error)
 - fix circul model fps
 
@@ -1365,114 +1563,6 @@ sha-256: 07413098f3b1b69435736f66c0622d05e902397516347a7f4847d748c18f13d3">
 <p>SHA-256: 07413098F3B1B69435736F66C0622D05E902397516347A7F4847D748C18F13D3</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://gitlab.com/-/project/86541142/uploads/b45bad669d5e2faf8b30ae5172c51091/PowerpuffVita_v0.1.1.vpk" target="_blank" rel="noopener">⬇ PowerpuffVita_v0.1.1.vpk</a><a class="btn" href="https://gitlab.com/-/project/86541142/uploads/02f1ee46b55f211cd7af91f0e0485333/Powerpuff_Girls_Mojo_Madness_Vita_v0.1.1_Windows_Installer_payload-flex.zip" target="_blank" rel="noopener">Powerpuff_Girls_Mojo_Madness_Vita_v0.1.1_Windows_Installer.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar" target="_blank" rel="noopener">source.tar</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita  the impossible game — ps vita port v1.0.0 v1.0.0 ports # the impossible game — ps vita port v1.0.0
-
-first playable release of the native **the impossible game** (flukedude) port for ps vita /
-ps tv. runs `libimpossible.so` directly on arm via a *soloader* + *falsojni*, with opengl es
-1.1 (fixed-function pipeline) rendering through vitagl.
-
-## ✨ what&#x27;s new
-
-- **both base levels playable** (fire aura, original xbox level) at a stable 60 fps, with
-  audio, progress/medal saving, and both physical and touch controls.
-- **fixed the persistent black-screen bug**: the root cause was a `libvitagl.a` shared
-  across several ports on the dev machine that was broken for this specific binary (the
-  framebuffer never received any pixels even though every layer — gl, gxm,
-  `scedisplaysetframebuf` — reported success). fixed by vendoring vitagl as its own git
-  submodule, built from source, instead of depending on that shared global install.
-- **full native ui**: all 7 menu states (main menu, level select, pause, how-to-play,
-  stats, medals, victory) reimplemented in c with dual touch + d-pad/button support.
-- **full audio**: dedicated multithreaded mixer (`sceaudioout`, 44.1khz stereo), streaming
-  bgm and preloaded, latency-free sfx, all decoded via `stb_vorbis`.
-
-## ⚠️ known issues / pending work
-
-- flukedude&#x27;s additional level &quot;world pack&quot; content ships as a separate apk and hasn&#x27;t
-  been analyzed or integrated yet — planned as future work.
-
-## 📋 requirements
-
-- ps vita / ps tv running custom firmware (henkaku or enso), firmware 3.60/3.65+.
-- [`kubridge`](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin.
-- [`libshacccg.suprx`](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
-- a legally obtained copy of **the impossible game** for android
-  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).
-
-## 📦 installation
-
-1. install `theimpossiblegame.vpk` with vitashell.
-2. copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on
-   the console (see `readme.md` for the full file layout).
-
----
-
-see `readme.md` for the full port description, and `port_progress.md` for the bug-by-bug
-diagnosis log (every fix confirmed on real hardware, no guessing).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.0.0" target="_blank" rel="noopener">The Impossible Game</a></h2>
-                      <div class="release-name"> The Impossible Game — PS Vita Port v1.0.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.0</span>
-                    <span>2026-09-16 05:19 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.0</div>
-                  
-                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.0.0</h1>
-<p>First playable release of the native <strong>The Impossible Game</strong> (FlukeDude) port for PS Vita /
-PS TV. Runs <code>libimpossible.so</code> directly on ARM via a <em>soloader</em> + <em>FalsoJNI</em>, with OpenGL ES
-1.1 (fixed-function pipeline) rendering through vitaGL.</p>
-<h2>✨ What's New</h2>
-<ul>
-<li><strong>Both base levels playable</strong> (Fire Aura, Original Xbox Level) at a stable 60 FPS, with
-audio, progress/medal saving, and both physical and touch controls.</li>
-<li><strong>Fixed the persistent black-screen bug</strong>: the root cause was a <code>libvitaGL.a</code> shared
-across several ports on the dev machine that was broken for this specific binary (the
-framebuffer never received any pixels even though every layer — GL, GXM,
-<code>sceDisplaySetFrameBuf</code> — reported success). Fixed by vendoring vitaGL as its own git
-submodule, built from source, instead of depending on that shared global install.</li>
-<li><strong>Full native UI</strong>: all 7 menu states (main menu, level select, pause, how-to-play,
-stats, medals, victory) reimplemented in C with dual touch + D-Pad/button support.</li>
-<li><strong>Full audio</strong>: dedicated multithreaded mixer (<code>SceAudioOut</code>, 44.1kHz stereo), streaming
-BGM and preloaded, latency-free SFX, all decoded via <code>stb_vorbis</code>.</li>
-</ul>
-<h2>⚠️ Known Issues / Pending Work</h2>
-<ul>
-<li>FlukeDude's additional level &quot;world pack&quot; content ships as a separate APK and hasn't
-been analyzed or integrated yet — planned as future work.</li>
-</ul>
-<h2>📋 Requirements</h2>
-<ul>
-<li>PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><code>kubridge</code></a> installed as a kernel plugin.</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><code>libshacccg.suprx</code></a> installed in <code>ur0:data/</code>.</li>
-<li>A legally obtained copy of <strong>The Impossible Game</strong> for Android
-(<code>05133-the-impossible-1.5.2.apk</code>, package <code>com.flukedude.impossiblegame</code>).</li>
-</ul>
-<h2>📦 Installation</h2>
-<ol>
-<li>Install <code>theimpossiblegame.vpk</code> with VitaShell.</li>
-<li>Copy the contents of <code>ux0_data/theimpossiblegame/</code> to <code>ux0:data/theimpossiblegame/</code> on
-the console (see <code>README.md</code> for the full file layout).</li>
-</ol>
-<hr>
-<p>See <code>README.md</code> for the full port description, and <code>port_progress.md</code> for the bug-by-bug
-diagnosis log (every fix confirmed on real hardware, no guessing).</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.0.0/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 781.7 KB</a></div>
                 </div>
               </div>
             </article>
@@ -3716,7 +3806,7 @@ copy `filemanager_v0.6.2.vpk` to your ps vita and install it with vitashell or a
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="javita javita ndrwhun/javita javita 1.0.1 release-1.0.1 ports # javita 1.0.1
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="javita javita ndrwhun/javita javita 1.0.1 release-1.0.1 ports # javita 1.0.1
 
 bug-fix release. install the new vpk over 1.0.0; settings, saves and texture cache are kept.
 
@@ -3743,7 +3833,7 @@ bug-fix release. install the new vpk over 1.0.0; settings, saves and texture cac
 
 gplv2 — full source for this build: https://github.com/ndrwhun/javita">
               <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/JK2VITA/icon0.png" alt="Icono de JAVITA" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/javita-ps-vita/icon0.png" alt="Icono de JAVITA" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
@@ -3751,14 +3841,14 @@ gplv2 — full source for this build: https://github.com/ndrwhun/javita">
                       <h2><a href="https://github.com/NDRWhun/JAVITA/releases/tag/release-1.0.1" target="_blank" rel="noopener">JAVITA</a></h2>
                       <div class="release-name">JAVITA 1.0.1</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">release-1.0.1</span>
                     <span>2026-08-27 10:51 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0 → release release-1.0.1</div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0.1</div>
                   
                   <div class="body markdown-body"><h1>JAVITA 1.0.1</h1>
 <p>Bug-fix release. Install the new VPK over 1.0.0; settings, saves and texture cache are kept.</p>
@@ -5862,195 +5952,6 @@ before installing, ensure your ps vita has:
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Inotia3-vita/releases/download/1.0.0/inotia3-release.vpk" target="_blank" rel="noopener">⬇ inotia3-release.vpk · 977.9 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="jk2vita jk2vita ndrwhun/jk2vita jk2 vita 1.0 release-1.0 ports &lt;img width=&quot;840&quot; height=&quot;500&quot; alt=&quot;bg&quot; src=&quot;https://github.com/user-attachments/assets/0b893d0f-7f8b-41b3-8a52-ee81c4045619&quot; /&gt;
-
-
-
-## renderer
-
-- **no `libshacccg.suprx` needed.** shaders are compiled at build time and ship inside the eboot
-- native gxm backend — the game draws through scegxm directly. vitagl is gone, submodule and all
-- own dxt1/dxt5 block compressor, so the texture cache no longer depends on vitagl&#x27;s
-- large textures allocate from cdram instead of exhausting lpddr
-- world geometry, skybox, dynamic lights, surface sprites, flares, cinematics and the screen melt all draw through the backend
-- fog runs in the fragment program off the map&#x27;s fog volume, on the game&#x27;s own curve, per pixel
-- screenshots and the screen melt read back from the display buffer
-- ghoul2 vertices skin on the render thread
-- on-screen keyboard and system dialogs composite through the native present
-
-## menus
-
-- the d-pad drives menu focus, and focus carries the pointer with it, so items highlight and
-  activate the way they do under a cursor
-- left and right change a setting&#x27;s value directly — toggles, multi-choice options and sliders —
-  without moving the cursor onto the control
-
-## performance
-
-- static vertex-lit world surfaces stay resident in gpu buffers, with every stage drawn from them
-- world buffers packed in material order
-- vertex uniforms resolved once instead of per draw; fragment uniforms reserved only when stale
-- effect debris and colliding particles sweep across a slice of frames
-- point contents skips brush models the point cannot be inside
-- voice lines load on demand
-
-## memory
-
-- map-load allocations come from reserved regions instead of the general heap, which cuts the block
-  count and peak usage a level change leaves behind
-
-## fixes
-
-- collision leaf cache was shared across cores
-- textures and world buffers could be freed while the gpu was still reading them
-- dxt cache entries are checked against the geometry their header claims
-- out-of-memory eviction and the weather point cache moved to the main thread
-- immediate-mode draws could sample a texture unit that was never written
-- vertex ring and shader registrations survive a `vid_restart`
-- stale dynamic light bits when a surface entered the view
-- brush check counter was narrower than the count it was compared against
-- region clip could run past the screen
-- console text is printed as data, not as a format string
-- nan is tested by bit pattern, so `-ffast-math` cannot fold the check away
-- the vita default binds are applied on first run only, instead of overwriting custom binds
-- the picmip floor the vita block documents is actually installed
-- sound uses the stock pool budget
-- async sound reads retry; an unsampled voice line stays marked as playing
-- raw sample path guarded against ring overflow
-- the version banner reported the wrong engine name, `linux` as the platform, and the build type in
-  place of the build date
-
-## cinematics
-
-- a frame is decoded when the decoder switches handles, so a cutscene no longer opens on a stale frame
-- video map stages bind their own scratch image
-- stopping a cutscene stops its voice track with it
-
-## removed
-
-- render-scale path
-- `r_effectcombine` — additive effect stages are folded by the backend&#x27;s texture env instead
-- prebuilt windows audio dlls
-
-## defaults
-
-- ghoul2 crowd lod is off
-
-## livearea
-
-- new icon and start button
-
-## build
-
-- builds to `build/`; no vitagl or sdl install step
-- configuration app and gxm probe are opt-in
-- third-party table and readme corrected">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-jk2vita/icon0.png" alt="Icono de JK2VITA" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · NDRWhun/JK2VITA</div>
-                      <h2><a href="https://github.com/NDRWhun/JK2VITA/releases/tag/release-1.0" target="_blank" rel="noopener">JK2VITA</a></h2>
-                      <div class="release-name">JK2 Vita 1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">release-1.0</span>
-                    <span>2026-08-10 18:18 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p><img width="840" height="500" alt="bg" src="https://github.com/user-attachments/assets/0b893d0f-7f8b-41b3-8a52-ee81c4045619"></p>
-<h2>Renderer</h2>
-<ul>
-<li><strong>No <code>libshacccg.suprx</code> needed.</strong> Shaders are compiled at build time and ship inside the eboot</li>
-<li>Native GXM backend — the game draws through sceGxm directly. vitaGL is gone, submodule and all</li>
-<li>Own DXT1/DXT5 block compressor, so the texture cache no longer depends on vitaGL's</li>
-<li>Large textures allocate from CDRAM instead of exhausting LPDDR</li>
-<li>World geometry, skybox, dynamic lights, surface sprites, flares, cinematics and the screen melt all draw through the backend</li>
-<li>Fog runs in the fragment program off the map's fog volume, on the game's own curve, per pixel</li>
-<li>Screenshots and the screen melt read back from the display buffer</li>
-<li>Ghoul2 vertices skin on the render thread</li>
-<li>On-screen keyboard and system dialogs composite through the native present</li>
-</ul>
-<h2>Menus</h2>
-<ul>
-<li>The d-pad drives menu focus, and focus carries the pointer with it, so items highlight and
-activate the way they do under a cursor</li>
-<li>Left and right change a setting's value directly — toggles, multi-choice options and sliders —
-without moving the cursor onto the control</li>
-</ul>
-<h2>Performance</h2>
-<ul>
-<li>Static vertex-lit world surfaces stay resident in GPU buffers, with every stage drawn from them</li>
-<li>World buffers packed in material order</li>
-<li>Vertex uniforms resolved once instead of per draw; fragment uniforms reserved only when stale</li>
-<li>Effect debris and colliding particles sweep across a slice of frames</li>
-<li>Point contents skips brush models the point cannot be inside</li>
-<li>Voice lines load on demand</li>
-</ul>
-<h2>Memory</h2>
-<ul>
-<li>Map-load allocations come from reserved regions instead of the general heap, which cuts the block
-count and peak usage a level change leaves behind</li>
-</ul>
-<h2>Fixes</h2>
-<ul>
-<li>Collision leaf cache was shared across cores</li>
-<li>Textures and world buffers could be freed while the GPU was still reading them</li>
-<li>DXT cache entries are checked against the geometry their header claims</li>
-<li>Out-of-memory eviction and the weather point cache moved to the main thread</li>
-<li>Immediate-mode draws could sample a texture unit that was never written</li>
-<li>Vertex ring and shader registrations survive a <code>vid_restart</code></li>
-<li>Stale dynamic light bits when a surface entered the view</li>
-<li>Brush check counter was narrower than the count it was compared against</li>
-<li>Region clip could run past the screen</li>
-<li>Console text is printed as data, not as a format string</li>
-<li>NaN is tested by bit pattern, so <code>-ffast-math</code> cannot fold the check away</li>
-<li>The Vita default binds are applied on first run only, instead of overwriting custom binds</li>
-<li>The picmip floor the Vita block documents is actually installed</li>
-<li>Sound uses the stock pool budget</li>
-<li>Async sound reads retry; an unsampled voice line stays marked as playing</li>
-<li>Raw sample path guarded against ring overflow</li>
-<li>The version banner reported the wrong engine name, <code>linux</code> as the platform, and the build type in
-place of the build date</li>
-</ul>
-<h2>Cinematics</h2>
-<ul>
-<li>A frame is decoded when the decoder switches handles, so a cutscene no longer opens on a stale frame</li>
-<li>Video map stages bind their own scratch image</li>
-<li>Stopping a cutscene stops its voice track with it</li>
-</ul>
-<h2>Removed</h2>
-<ul>
-<li>Render-scale path</li>
-<li><code>r_effectCombine</code> — additive effect stages are folded by the backend's texture env instead</li>
-<li>Prebuilt Windows audio DLLs</li>
-</ul>
-<h2>Defaults</h2>
-<ul>
-<li>Ghoul2 crowd LOD is off</li>
-</ul>
-<h2>LiveArea</h2>
-<ul>
-<li>New icon and start button</li>
-</ul>
-<h2>Build</h2>
-<ul>
-<li>Builds to <code>build/</code>; no vitaGL or SDL install step</li>
-<li>Configuration app and GXM probe are opt-in</li>
-<li>Third-party table and README corrected</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/NDRWhun/JK2VITA/releases/download/release-1.0/JK2VITA-1.0.vpk" target="_blank" rel="noopener">⬇ JK2VITA-1.0.vpk · 3.3 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27047,37 +26948,10 @@ ANALOG STICK – mouse</p>
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ccleste-vita ccleste-vita decomius/ccleste-vita release v1.0 ports port of celeste classic for psvita.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ccleste-vita/icon0.png" alt="Icono de ccleste-vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Decomius/ccleste-vita</div>
-                      <h2><a href="https://github.com/Decomius/ccleste-vita/releases/tag/v1.0" target="_blank" rel="noopener">ccleste-vita</a></h2>
-                      <div class="release-name">Release</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-03-06 15:07 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v1.0</div>
-                  
-                  <div class="body markdown-body"><p>Port of Celeste Classic for PSVITA.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Decomius/ccleste-vita/releases/download/v1.0/ccleste-vita.vpk" target="_blank" rel="noopener">⬇ ccleste-vita.vpk · 2.3 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-20 22:50 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-21 02:36 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

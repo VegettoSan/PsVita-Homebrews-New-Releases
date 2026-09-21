@@ -1,6 +1,104 @@
 [
   {
     "platform": "github",
+    "repo": "MetalSyntax/The-Impossible-Game-vita",
+    "release_id": "392640490",
+    "tag": "v.1.1.0",
+    "name": "The Impossible Game — PS Vita Port v1.1.0",
+    "url": "https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v.1.1.0",
+    "published": "2026-09-21T01:27:53Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# The Impossible Game — PS Vita Port v1.1.0\r\n\r\nAdds full support for the official **Level Pack** add-on (3 extra levels), on top of the\r\nplayable base port from v1.0.0. Runs `libimpossible.so` directly on ARM via a *soloader* +\r\n*FalsoJNI*, with OpenGL ES 1.1 (fixed-function pipeline) rendering through vitaGL.\r\n\r\n## ✨ What's New\r\n\r\n- **5 levels playable**: the 2 base levels (Fire Aura, Original Xbox Level) plus the 3 levels\r\n  from the official Level Pack (Chaoz Fantasy, Heaven, Phazd) — confirmed working on real\r\n  hardware with audio, input, and save data.\r\n- **Level Pack `.so` support**: the loader now resolves the Level Pack's\r\n  `libimpossible.so` (same 11 JNI exports, `impossiblegamelevelpack` symbol prefix instead of\r\n  `impossiblegame`) — no source changes needed to swap between the base and Level Pack `.so`.\r\n- **Save data expanded**: 6 → 12 medals, 2 → 5 levels of practice/no-flag progress tracking.\r\n- **Menu scaled to 5 levels**: level select grew from 2 to 5 buttons (3+2 grid with a back\r\n  button), Stats and Medals screens grew from 3 to 6 subpages each.\r\n- **Per-level music**: added `BGM_SOUNDTRACK2/3/4` for Chaoz Fantasy/Heaven/Phazd; the 2 base\r\n  levels keep using the original `soundtrack.ogg`.\r\n\r\n## ⚠️ Known Issues / Pending Work\r\n\r\n- None currently open. The Level Pack's `statspage4/5/6.png` assets only ship at their original\r\n  mdpi resolution (no landscape crop like the base game's stats pages) — a minor, cosmetic\r\n  sharpness difference only, not a functional issue.\r\n- Updating an existing install resets `save.dat` (the save layout grew to fit 5 levels / 12\r\n  medals) — expected, not a bug.\r\n\r\n## 📋 Requirements\r\n\r\n- PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.\r\n- [`kubridge`](https://github.com/TheOfficialFloW/kubridge/releases) installed as a kernel plugin.\r\n- [`libshacccg.suprx`](https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest) installed in `ur0:data/`.\r\n- A legally obtained copy of **The Impossible Game** for Android\r\n  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).\r\n- *(Optional, for the 3 extra levels)* A legally obtained copy of the **Level Pack** add-on\r\n  (`05133-Impossible-Level-Pack.apk`, package `com.flukedude.impossiblegamelevelpack`).\r\n\r\n## 📦 Installation\r\n\r\n1. Install `theimpossiblegame.vpk` with VitaShell.\r\n2. Copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on\r\n   the console (see `README.md` for the full file layout).\r\n3. **For the 3 extra levels**: unzip `05133-Impossible-Level-Pack.apk` on your PC and merge its\r\n   `.so`, `soundtrack2/3/4.ogg`, and level-select/stats/medals PNGs into\r\n   `ux0:data/theimpossiblegame/` — see the\r\n   [Level Pack Installation](README.md#-level-pack-installation-5-levels-optional) section in\r\n   `README.md` for the exact file list and paths. Without this step, the game still runs fine\r\n   with just the 2 base levels.\r\n\r\n---\r\n\r\nSee `README.md` for the full port description, and `port_progress.md` for the bug-by-bug\r\ndiagnosis log (every fix confirmed on real hardware, no guessing).\r\n",
+    "assets": [
+      {
+        "name": "theimpossiblegame.vpk",
+        "size": 801752,
+        "download_url": "https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v.1.1.0/theimpossiblegame.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "The Impossible Game",
+    "homebrew_icon": "https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Android to PS Vita port of The Impossible Game originally published by Fluke Games (FlukeDude)",
+    "homebrew_long_description": "The Impossible Game is FlukeDude's rhythm-platformer, originally released for Android as 05133-the-impossible-1.5.2.apk (package com.flukedude.impossiblegame). This port runs the compiled native library (libimpossible.so — a small, self-contained proprietary engine that handles cube physics, collisions, procedural level generation, and rendering) directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI). The UI and audio layers, which were Java on Android, have been fully reimplemented natively in C (menu.c, audio.c, texture.c, save.c) for zero-latency input and native performance.",
+    "homebrew_id": "the-impossible-game",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.0.0",
+    "catalog_apps": [
+      {
+        "id": "the-impossible-game",
+        "name": "The Impossible Game",
+        "icon": "https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Android to PS Vita port of The Impossible Game originally published by Fluke Games (FlukeDude)",
+        "long_description": "The Impossible Game is FlukeDude's rhythm-platformer, originally released for Android as 05133-the-impossible-1.5.2.apk (package com.flukedude.impossiblegame). This port runs the compiled native library (libimpossible.so — a small, self-contained proprietary engine that handles cube physics, collisions, procedural level generation, and rendering) directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI). The UI and audio layers, which were Java on Android, have been fully reimplemented natively in C (menu.c, audio.c, texture.c, save.c) for zero-latency input and native performance.",
+        "version": "1.0.0",
+        "version_date": "2026-09-16",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.0 → release v.1.1.0",
+    "catalog_version": "1.0.0"
+  },
+  {
+    "platform": "github",
+    "repo": "NDRWhun/JK2VITA",
+    "release_id": "392603233",
+    "tag": "release-1.0.1",
+    "name": "JK2 Vita 1.0.1",
+    "url": "https://github.com/NDRWhun/JK2VITA/releases/tag/release-1.0.1",
+    "published": "2026-09-20T23:01:54Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# JK2VITA 1.0.1\r\n\r\nBug-fix release. Install over 1.0; settings, saves and the texture cache are kept.\r\n\r\n## Fixes\r\n\r\n- Pad buttons could not be bound from the Controls menu\r\n- The last row touched in the Controls menu kept pulsing red\r\n- Start no longer closes the Controls menu while it waits for a key\r\n- Mirrors and \"portals\" no longer show the room behind them\r\n- Additive effects inside fog (saber glow, bolts, lights) were too dark\r\n- A texture could draw the picture of one freed just before it\r\n- Filter changes on a texture in use took effect one bind late\r\n- A draw could run with the wrong matrices when the frame ran out of uniform space\r\n- A video frame that changes size could be freed while still on screen\r\n- Texture lookups slowed over a long session\r\n- A music track that fails mid-stream is stopped from the main thread\r\n- Texture and skin workers no longer run above the audio mixer\r\n\r\n## Defaults\r\n\r\n- Look assist (`g_aimAssist`) on for new installs; a saved config keeps its value\r\n\r\n",
+    "assets": [
+      {
+        "name": "JK2VITA_1.0.1.vpk",
+        "size": 3423727,
+        "download_url": "https://github.com/NDRWhun/JK2VITA/releases/download/release-1.0.1/JK2VITA_1.0.1.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "NDRWhun",
+    "homebrew_name": "JK2VITA",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-jk2vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita.",
+    "homebrew_long_description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita based over OpenJK.",
+    "homebrew_id": "jk2vita",
+    "homebrew_authors": [
+      "ndrw"
+    ],
+    "homebrew_version": "1.0.1",
+    "catalog_apps": [
+      {
+        "id": "jk2vita",
+        "name": "JK2VITA",
+        "icon": "https://archive.org/download/psvitaalive-jk2vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita.",
+        "long_description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita based over OpenJK.",
+        "version": "1.0.1",
+        "version_date": "2026-09-20",
+        "author_ids": [
+          "ndrw"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0.1",
+    "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "Franckrst/D2Vita",
     "release_id": "392572171",
     "tag": "v0.1.8",
@@ -970,55 +1068,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 0.1.1",
     "catalog_version": "0.1.1"
-  },
-  {
-    "platform": "github",
-    "repo": "MetalSyntax/The-Impossible-Game-vita",
-    "release_id": "389655292",
-    "tag": "v1.0.0",
-    "name": " The Impossible Game — PS Vita Port v1.0.0",
-    "url": "https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.0.0",
-    "published": "2026-09-16T05:19:32Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# The Impossible Game — PS Vita Port v1.0.0\r\n\r\nFirst playable release of the native **The Impossible Game** (FlukeDude) port for PS Vita /\r\nPS TV. Runs `libimpossible.so` directly on ARM via a *soloader* + *FalsoJNI*, with OpenGL ES\r\n1.1 (fixed-function pipeline) rendering through vitaGL.\r\n\r\n## ✨ What's New\r\n\r\n- **Both base levels playable** (Fire Aura, Original Xbox Level) at a stable 60 FPS, with\r\n  audio, progress/medal saving, and both physical and touch controls.\r\n- **Fixed the persistent black-screen bug**: the root cause was a `libvitaGL.a` shared\r\n  across several ports on the dev machine that was broken for this specific binary (the\r\n  framebuffer never received any pixels even though every layer — GL, GXM,\r\n  `sceDisplaySetFrameBuf` — reported success). Fixed by vendoring vitaGL as its own git\r\n  submodule, built from source, instead of depending on that shared global install.\r\n- **Full native UI**: all 7 menu states (main menu, level select, pause, how-to-play,\r\n  stats, medals, victory) reimplemented in C with dual touch + D-Pad/button support.\r\n- **Full audio**: dedicated multithreaded mixer (`SceAudioOut`, 44.1kHz stereo), streaming\r\n  BGM and preloaded, latency-free SFX, all decoded via `stb_vorbis`.\r\n\r\n## ⚠️ Known Issues / Pending Work\r\n\r\n- FlukeDude's additional level \"world pack\" content ships as a separate APK and hasn't\r\n  been analyzed or integrated yet — planned as future work.\r\n\r\n## 📋 Requirements\r\n\r\n- PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.\r\n- [`kubridge`](https://github.com/TheOfficialFloW/kubridge/releases) installed as a kernel plugin.\r\n- [`libshacccg.suprx`](https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest) installed in `ur0:data/`.\r\n- A legally obtained copy of **The Impossible Game** for Android\r\n  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).\r\n\r\n## 📦 Installation\r\n\r\n1. Install `theimpossiblegame.vpk` with VitaShell.\r\n2. Copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on\r\n   the console (see `README.md` for the full file layout).\r\n\r\n---\r\n\r\nSee `README.md` for the full port description, and `port_progress.md` for the bug-by-bug\r\ndiagnosis log (every fix confirmed on real hardware, no guessing).",
-    "assets": [
-      {
-        "name": "theimpossiblegame.vpk",
-        "size": 800456,
-        "download_url": "https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.0.0/theimpossiblegame.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MetalSyntax",
-    "homebrew_name": "The Impossible Game",
-    "homebrew_icon": "https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Android to PS Vita port of The Impossible Game originally published by Fluke Games (FlukeDude)",
-    "homebrew_long_description": "The Impossible Game is FlukeDude's rhythm-platformer, originally released for Android as 05133-the-impossible-1.5.2.apk (package com.flukedude.impossiblegame). This port runs the compiled native library (libimpossible.so — a small, self-contained proprietary engine that handles cube physics, collisions, procedural level generation, and rendering) directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI). The UI and audio layers, which were Java on Android, have been fully reimplemented natively in C (menu.c, audio.c, texture.c, save.c) for zero-latency input and native performance.",
-    "homebrew_id": "the-impossible-game",
-    "homebrew_authors": [
-      "metalsyntax"
-    ],
-    "homebrew_version": "1.0.0",
-    "catalog_apps": [
-      {
-        "id": "the-impossible-game",
-        "name": "The Impossible Game",
-        "icon": "https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Android to PS Vita port of The Impossible Game originally published by Fluke Games (FlukeDude)",
-        "long_description": "The Impossible Game is FlukeDude's rhythm-platformer, originally released for Android as 05133-the-impossible-1.5.2.apk (package com.flukedude.impossiblegame). This port runs the compiled native library (libimpossible.so — a small, self-contained proprietary engine that handles cube physics, collisions, procedural level generation, and rendering) directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI). The UI and audio layers, which were Java on Android, have been fully reimplemented natively in C (menu.c, audio.c, texture.c, save.c) for zero-latency input and native performance.",
-        "version": "1.0.0",
-        "version_date": "2026-09-16",
-        "author_ids": [
-          "metalsyntax"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0.0",
-    "catalog_version": "1.0.0"
   },
   {
     "platform": "github",
@@ -2967,7 +3016,7 @@
     ],
     "author": "NDRWhun",
     "homebrew_name": "JAVITA",
-    "homebrew_icon": "https://archive.org/download/JK2VITA/icon0.png",
+    "homebrew_icon": "https://archive.org/download/javita-ps-vita/icon0.png",
     "homebrew_category": "ports",
     "homebrew_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita.",
     "homebrew_id": "javita",
@@ -2978,22 +3027,22 @@
       {
         "id": "javita",
         "name": "JAVITA",
-        "icon": "https://archive.org/download/JK2VITA/icon0.png",
+        "icon": "https://archive.org/download/javita-ps-vita/icon0.png",
         "category": "ports",
         "description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita.",
         "long_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita based on OpenJK.",
-        "version": "v.1.0",
-        "version_date": "2026-08-22",
+        "version": "v.1.0.1",
+        "version_date": "2026-08-27",
         "author_ids": [
           "ndrw"
         ]
       }
     ],
     "homebrew_long_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita based on OpenJK.",
-    "homebrew_version": "v.1.0",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.0 → release release-1.0.1",
-    "catalog_version": "v.1.0"
+    "homebrew_version": "v.1.0.1",
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0.1",
+    "catalog_version": "v.1.0.1"
   },
   {
     "platform": "github",
@@ -4982,55 +5031,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0.0",
     "catalog_version": "v.1.0.0"
-  },
-  {
-    "platform": "github",
-    "repo": "NDRWhun/JK2VITA",
-    "release_id": "368111801",
-    "tag": "release-1.0",
-    "name": "JK2 Vita 1.0",
-    "url": "https://github.com/NDRWhun/JK2VITA/releases/tag/release-1.0",
-    "published": "2026-08-10T18:18:28Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\r\n\r\n<img width=\"840\" height=\"500\" alt=\"bg\" src=\"https://github.com/user-attachments/assets/0b893d0f-7f8b-41b3-8a52-ee81c4045619\" />\r\n\r\n\r\n\r\n## Renderer\r\n\r\n- **No `libshacccg.suprx` needed.** Shaders are compiled at build time and ship inside the eboot\r\n- Native GXM backend — the game draws through sceGxm directly. vitaGL is gone, submodule and all\r\n- Own DXT1/DXT5 block compressor, so the texture cache no longer depends on vitaGL's\r\n- Large textures allocate from CDRAM instead of exhausting LPDDR\r\n- World geometry, skybox, dynamic lights, surface sprites, flares, cinematics and the screen melt all draw through the backend\r\n- Fog runs in the fragment program off the map's fog volume, on the game's own curve, per pixel\r\n- Screenshots and the screen melt read back from the display buffer\r\n- Ghoul2 vertices skin on the render thread\r\n- On-screen keyboard and system dialogs composite through the native present\r\n\r\n## Menus\r\n\r\n- The d-pad drives menu focus, and focus carries the pointer with it, so items highlight and\r\n  activate the way they do under a cursor\r\n- Left and right change a setting's value directly — toggles, multi-choice options and sliders —\r\n  without moving the cursor onto the control\r\n\r\n## Performance\r\n\r\n- Static vertex-lit world surfaces stay resident in GPU buffers, with every stage drawn from them\r\n- World buffers packed in material order\r\n- Vertex uniforms resolved once instead of per draw; fragment uniforms reserved only when stale\r\n- Effect debris and colliding particles sweep across a slice of frames\r\n- Point contents skips brush models the point cannot be inside\r\n- Voice lines load on demand\r\n\r\n## Memory\r\n\r\n- Map-load allocations come from reserved regions instead of the general heap, which cuts the block\r\n  count and peak usage a level change leaves behind\r\n\r\n## Fixes\r\n\r\n- Collision leaf cache was shared across cores\r\n- Textures and world buffers could be freed while the GPU was still reading them\r\n- DXT cache entries are checked against the geometry their header claims\r\n- Out-of-memory eviction and the weather point cache moved to the main thread\r\n- Immediate-mode draws could sample a texture unit that was never written\r\n- Vertex ring and shader registrations survive a `vid_restart`\r\n- Stale dynamic light bits when a surface entered the view\r\n- Brush check counter was narrower than the count it was compared against\r\n- Region clip could run past the screen\r\n- Console text is printed as data, not as a format string\r\n- NaN is tested by bit pattern, so `-ffast-math` cannot fold the check away\r\n- The Vita default binds are applied on first run only, instead of overwriting custom binds\r\n- The picmip floor the Vita block documents is actually installed\r\n- Sound uses the stock pool budget\r\n- Async sound reads retry; an unsampled voice line stays marked as playing\r\n- Raw sample path guarded against ring overflow\r\n- The version banner reported the wrong engine name, `linux` as the platform, and the build type in\r\n  place of the build date\r\n\r\n## Cinematics\r\n\r\n- A frame is decoded when the decoder switches handles, so a cutscene no longer opens on a stale frame\r\n- Video map stages bind their own scratch image\r\n- Stopping a cutscene stops its voice track with it\r\n\r\n## Removed\r\n\r\n- Render-scale path\r\n- `r_effectCombine` — additive effect stages are folded by the backend's texture env instead\r\n- Prebuilt Windows audio DLLs\r\n\r\n## Defaults\r\n\r\n- Ghoul2 crowd LOD is off\r\n\r\n## LiveArea\r\n\r\n- New icon and start button\r\n\r\n## Build\r\n\r\n- Builds to `build/`; no vitaGL or SDL install step\r\n- Configuration app and GXM probe are opt-in\r\n- Third-party table and README corrected\r\n\r\n",
-    "assets": [
-      {
-        "name": "JK2VITA-1.0.vpk",
-        "size": 3422087,
-        "download_url": "https://github.com/NDRWhun/JK2VITA/releases/download/release-1.0/JK2VITA-1.0.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "NDRWhun",
-    "homebrew_name": "JK2VITA",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-jk2vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita.",
-    "homebrew_id": "jk2vita",
-    "homebrew_authors": [
-      "ndrw"
-    ],
-    "catalog_apps": [
-      {
-        "id": "jk2vita",
-        "name": "JK2VITA",
-        "icon": "https://archive.org/download/psvitaalive-jk2vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita.",
-        "long_description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita based over OpenJK.",
-        "version": "v.1.0",
-        "version_date": "2026-08-10",
-        "author_ids": [
-          "ndrw"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Port of Star Wars Jedi Knight II: Jedi Outcast for PSVita based over OpenJK.",
-    "homebrew_version": "v.1.0",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
   },
   {
     "platform": "github",
@@ -33175,54 +33175,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0",
     "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "Decomius/ccleste-vita",
-    "release_id": "39379354",
-    "tag": "v1.0",
-    "name": "Release",
-    "url": "https://github.com/Decomius/ccleste-vita/releases/tag/v1.0",
-    "published": "2021-03-06T15:07:42Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "ccleste-vita.vpk",
-        "size": 2408396,
-        "download_url": "https://github.com/Decomius/ccleste-vita/releases/download/v1.0/ccleste-vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Decomius",
-    "homebrew_name": "ccleste-vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-ccleste-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Celeste Classic for PSVITA.",
-    "homebrew_long_description": "This is a port for PSVITA/PSTV of a C source port of the original celeste (Celeste classic) for the PICO-8, designed to be portable.\nCeleste is a platform game in which players control a girl named Madeline as she makes her way up a mountain while avoiding various deadly obstacles.",
-    "homebrew_id": "ccleste-vita",
-    "homebrew_authors": [
-      "decomius"
-    ],
-    "homebrew_version": "v1.0",
-    "catalog_apps": [
-      {
-        "id": "ccleste-vita",
-        "name": "ccleste-vita",
-        "icon": "https://archive.org/download/psvitaalive-ccleste-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Celeste Classic for PSVITA.",
-        "long_description": "This is a port for PSVITA/PSTV of a C source port of the original celeste (Celeste classic) for the PICO-8, designed to be portable.\nCeleste is a platform game in which players control a girl named Madeline as she makes her way up a mountain while avoiding various deadly obstacles.",
-        "version": "v1.0",
-        "version_date": "2021-03-06",
-        "author_ids": [
-          "decomius"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.0",
-    "catalog_version": "v1.0"
   }
 ]
