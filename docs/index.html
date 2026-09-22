@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>481</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">408</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">410</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>73</strong><span>pendientes</span></div>
-        <div class="stat"><strong>473</strong><span>GitHub</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,82 +219,53 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.8.2 (experimental build 37.1) vita-v0.8.2-build.37.1 ports smash melee vita is still an **experimental** ps vita port. this build contains several major graphics and performance improvements, but bugs, slowdowns, visual problems, and crashes are still possible. please report any problems you find on the github issue tracker.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.8.4 v0.8.4 ports ## changes in vita v0.8.4
 
-## what changed, in plain language
-
-- **trophy lottery is much faster.** the tested scene improved from roughly 8 fps to about 28-30 fps by letting the vita gpu reuse bump-mapped models instead of rebuilding them constantly.
-- **giga bowser&#x27;s transformation is smoother and displays correctly.** the transformation now uses the faster gpu path without leaving duplicated or ghosted character geometry after giga bowser is defeated.
-- **fountain of dreams is faster and visually correct.** the stage&#x27;s large point effects and repeated model data are handled more efficiently. hardware testing sustained about 20-21 fps without the translucent-square regression.
-
-## important experimental-build notes
-
-- the game may still contain bugs, visual glitches, slow areas, or crashes.
-- shader compilation happens while playing and can cause temporary stuttering. previously compiled shaders are cached, so affected scenes should become smoother after they have been played.
-- back up your save data before updating.
-- if something goes wrong, report the stage, characters, mode, and what happened immediately before the problem.
-
-## installation
-
-install **smashmeleevita.vpk** with vitashell. read the attached **readme-vita.md** for the required homebrew environment, shader compiler module, disc-image path, and controls. game data and proprietary modules are not included.
-
-this is an optimized release build. debug logging and debugger support are disabled.
-
-## hidden debug tools
-
-this build includes melee&#x27;s original developer menus for testing matches, items, cameras, collision displays, sound, and other internal features. nothing appears during normal play.
-
-to reveal **debug tools**, open options and enter **up, up, down, down, left, right, left, right, select** on the d-pad. the unlock lasts only until the application closes.
-
-these menus were designed for developers, so some combinations may behave strangely. dangerous save, memory-card, and unsupported hardware actions are disabled. read the attached **debug-tools.md** before using them.
-
-release version: 0.8.2  
-build: 37.1  
-commit: `887a84d54a6d5a150cf7b1f6ff5f60e9cbd5ceee`">
+- added an opt-in, in-game self-updater for published github releases.
+- update checks run asynchronously and silently continue when the vita is
+  offline.
+- updates require an ed25519-signed manifest and exact vpk size and sha-256
+  verification before installation.
+- a temporary, strictly headless helper safely backs up and replaces the
+  stopped game, automatically relaunches melee, and removes itself after the
+  updated game confirms a healthy startup.
+- failed promotions restore the previous application package. saves,
+  `gale01.iso`, and the writable shader cache remain outside the transaction
+  and are never replaced.">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/smash-melee-vita/icon0.png" alt="Icono de Smash Melee Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · zm2283145/melee-Vita</div>
-                      <h2><a href="https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.8.2-build.37.1" target="_blank" rel="noopener">Smash Melee Vita</a></h2>
-                      <div class="release-name">Smash Melee Vita 0.8.2 (experimental build 37.1)</div>
+                      <h2><a href="https://github.com/zm2283145/melee-Vita/releases/tag/v0.8.4" target="_blank" rel="noopener">Smash Melee Vita</a></h2>
+                      <div class="release-name">Smash Melee Vita 0.8.4</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">vita-v0.8.2-build.37.1</span>
-                    <span>2026-09-21 21:04 UTC</span>
+                    <span class="tag">v0.8.4</span>
+                    <span>2026-09-22 02:32 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 0.7.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.7.1 → release vita-v0.8.2-build.37.1</div>
+                  <div class="catalog-detail">PSVitaAlive 0.7.1 → release v0.8.4</div>
                   
-                  <div class="body markdown-body"><p>Smash Melee Vita is still an <strong>experimental</strong> PS Vita port. This build contains several major graphics and performance improvements, but bugs, slowdowns, visual problems, and crashes are still possible. Please report any problems you find on the GitHub issue tracker.</p>
-<h2>What changed, in plain language</h2>
+                  <div class="body markdown-body"><h2>Changes in Vita v0.8.4</h2>
 <ul>
-<li><strong>Trophy Lottery is much faster.</strong> The tested scene improved from roughly 8 FPS to about 28-30 FPS by letting the Vita GPU reuse bump-mapped models instead of rebuilding them constantly.</li>
-<li><strong>Giga Bowser's transformation is smoother and displays correctly.</strong> The transformation now uses the faster GPU path without leaving duplicated or ghosted character geometry after Giga Bowser is defeated.</li>
-<li><strong>Fountain of Dreams is faster and visually correct.</strong> The stage's large point effects and repeated model data are handled more efficiently. Hardware testing sustained about 20-21 FPS without the translucent-square regression.</li>
+<li>Added an opt-in, in-game self-updater for published GitHub Releases.</li>
+<li>Update checks run asynchronously and silently continue when the Vita is
+offline.</li>
+<li>Updates require an Ed25519-signed manifest and exact VPK size and SHA-256
+verification before installation.</li>
+<li>A temporary, strictly headless helper safely backs up and replaces the
+stopped game, automatically relaunches Melee, and removes itself after the
+updated game confirms a healthy startup.</li>
+<li>Failed promotions restore the previous application package. Saves,
+<code>GALE01.iso</code>, and the writable shader cache remain outside the transaction
+and are never replaced.</li>
 </ul>
-<h2>Important experimental-build notes</h2>
-<ul>
-<li>The game may still contain bugs, visual glitches, slow areas, or crashes.</li>
-<li>Shader compilation happens while playing and can cause temporary stuttering. Previously compiled shaders are cached, so affected scenes should become smoother after they have been played.</li>
-<li>Back up your save data before updating.</li>
-<li>If something goes wrong, report the stage, characters, mode, and what happened immediately before the problem.</li>
-</ul>
-<h2>Installation</h2>
-<p>Install <strong>SmashMeleevita.vpk</strong> with VitaShell. Read the attached <strong>README-Vita.md</strong> for the required homebrew environment, shader compiler module, disc-image path, and controls. Game data and proprietary modules are not included.</p>
-<p>This is an optimized Release build. Debug logging and debugger support are disabled.</p>
-<h2>Hidden Debug Tools</h2>
-<p>This build includes Melee's original developer menus for testing matches, items, cameras, collision displays, sound, and other internal features. Nothing appears during normal play.</p>
-<p>To reveal <strong>DEBUG TOOLS</strong>, open Options and enter <strong>Up, Up, Down, Down, Left, Right, Left, Right, Select</strong> on the D-pad. The unlock lasts only until the application closes.</p>
-<p>These menus were designed for developers, so some combinations may behave strangely. Dangerous save, memory-card, and unsupported hardware actions are disabled. Read the attached <strong>DEBUG-TOOLS.md</strong> before using them.</p>
-<p>Release version: 0.8.2<br>
-Build: 37.1<br>
-Commit: <code>887a84d54a6d5a150cf7b1f6ff5f60e9cbd5ceee</code></p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/SmashMeleevita.vpk" target="_blank" rel="noopener">⬇ SmashMeleevita.vpk · 3.4 MB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/COMMIT.txt" target="_blank" rel="noopener">COMMIT.txt · 41.0 B</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/COPYING" target="_blank" rel="noopener">COPYING · 34.3 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/DEBUG-TOOLS.md" target="_blank" rel="noopener">DEBUG-TOOLS.md · 13.3 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/LICENSE.md" target="_blank" rel="noopener">LICENSE.md · 2.4 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/README-Vita.md" target="_blank" rel="noopener">README-Vita.md · 8.4 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 554.0 B</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/version.json" target="_blank" rel="noopener">version.json · 43.0 B</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/SmashMeleevita-0.8.4.vpk" target="_blank" rel="noopener">⬇ SmashMeleevita-0.8.4.vpk · 5.0 MB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/DEBUG-TOOLS.md" target="_blank" rel="noopener">DEBUG-TOOLS.md · 13.3 KB</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/melee-update-manifest.txt" target="_blank" rel="noopener">melee-update-manifest.txt · 278.0 B</a><a class="btn" href="https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/version.json" target="_blank" rel="noopener">version.json · 43.0 B</a></div>
                 </div>
               </div>
             </article>
@@ -26845,10 +26816,64 @@ ANALOG STICK – mouse</p>
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="abbey of crime abbey of crime samuel85/abbey vita vita_v1.0 ports tested on a ps vita with a system version 3.73 and the vita3k emulator.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-abbey-of-crime/icon0.png" alt="Icono de Abbey of Crime" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Samuel85/Abbey</div>
+                      <h2><a href="https://github.com/Samuel85/Abbey/releases/tag/Vita_v1.0" target="_blank" rel="noopener">Abbey of Crime</a></h2>
+                      <div class="release-name">Vita</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">Vita_v1.0</span>
+                    <span>2021-03-08 13:29 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><p>Tested on a PS vita with a system version 3.73 and the Vita3K emulator.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Samuel85/Abbey/releases/download/Vita_v1.0/abbey_v1.0.vpk" target="_blank" rel="noopener">⬇ abbey_v1.0.vpk · 2.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ccleste-vita ccleste-vita decomius/ccleste-vita release v1.0 ports port of celeste classic for psvita.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ccleste-vita/icon0.png" alt="Icono de ccleste-vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Decomius/ccleste-vita</div>
+                      <h2><a href="https://github.com/Decomius/ccleste-vita/releases/tag/v1.0" target="_blank" rel="noopener">ccleste-vita</a></h2>
+                      <div class="release-name">Release</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-03-06 15:07 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v1.0</div>
+                  
+                  <div class="body markdown-body"><p>Port of Celeste Classic for PSVITA.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Decomius/ccleste-vita/releases/download/v1.0/ccleste-vita.vpk" target="_blank" rel="noopener">⬇ ccleste-vita.vpk · 2.3 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-21 21:29 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-22 02:38 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

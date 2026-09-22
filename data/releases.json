@@ -2,61 +2,37 @@
   {
     "platform": "github",
     "repo": "zm2283145/melee-Vita",
-    "release_id": "393283279",
-    "tag": "vita-v0.8.2-build.37.1",
-    "name": "Smash Melee Vita 0.8.2 (experimental build 37.1)",
-    "url": "https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.8.2-build.37.1",
-    "published": "2026-09-21T21:04:39Z",
-    "prerelease": true,
+    "release_id": "393415940",
+    "tag": "v0.8.4",
+    "name": "Smash Melee Vita 0.8.4",
+    "url": "https://github.com/zm2283145/melee-Vita/releases/tag/v0.8.4",
+    "published": "2026-09-22T02:32:02Z",
+    "prerelease": false,
     "draft": false,
-    "body": "Smash Melee Vita is still an **experimental** PS Vita port. This build contains several major graphics and performance improvements, but bugs, slowdowns, visual problems, and crashes are still possible. Please report any problems you find on the GitHub issue tracker.\r\n\r\n## What changed, in plain language\r\n\r\n- **Trophy Lottery is much faster.** The tested scene improved from roughly 8 FPS to about 28-30 FPS by letting the Vita GPU reuse bump-mapped models instead of rebuilding them constantly.\r\n- **Giga Bowser's transformation is smoother and displays correctly.** The transformation now uses the faster GPU path without leaving duplicated or ghosted character geometry after Giga Bowser is defeated.\r\n- **Fountain of Dreams is faster and visually correct.** The stage's large point effects and repeated model data are handled more efficiently. Hardware testing sustained about 20-21 FPS without the translucent-square regression.\r\n\r\n## Important experimental-build notes\r\n\r\n- The game may still contain bugs, visual glitches, slow areas, or crashes.\r\n- Shader compilation happens while playing and can cause temporary stuttering. Previously compiled shaders are cached, so affected scenes should become smoother after they have been played.\r\n- Back up your save data before updating.\r\n- If something goes wrong, report the stage, characters, mode, and what happened immediately before the problem.\r\n\r\n## Installation\r\n\r\nInstall **SmashMeleevita.vpk** with VitaShell. Read the attached **README-Vita.md** for the required homebrew environment, shader compiler module, disc-image path, and controls. Game data and proprietary modules are not included.\r\n\r\nThis is an optimized Release build. Debug logging and debugger support are disabled.\r\n\r\n## Hidden Debug Tools\r\n\r\nThis build includes Melee's original developer menus for testing matches, items, cameras, collision displays, sound, and other internal features. Nothing appears during normal play.\r\n\r\nTo reveal **DEBUG TOOLS**, open Options and enter **Up, Up, Down, Down, Left, Right, Left, Right, Select** on the D-pad. The unlock lasts only until the application closes.\r\n\r\nThese menus were designed for developers, so some combinations may behave strangely. Dangerous save, memory-card, and unsupported hardware actions are disabled. Read the attached **DEBUG-TOOLS.md** before using them.\r\n\r\nRelease version: 0.8.2  \r\nBuild: 37.1  \r\nCommit: `887a84d54a6d5a150cf7b1f6ff5f60e9cbd5ceee`\r\n",
+    "body": "## Changes in Vita v0.8.4\r\n\r\n- Added an opt-in, in-game self-updater for published GitHub Releases.\r\n- Update checks run asynchronously and silently continue when the Vita is\r\n  offline.\r\n- Updates require an Ed25519-signed manifest and exact VPK size and SHA-256\r\n  verification before installation.\r\n- A temporary, strictly headless helper safely backs up and replaces the\r\n  stopped game, automatically relaunches Melee, and removes itself after the\r\n  updated game confirms a healthy startup.\r\n- Failed promotions restore the previous application package. Saves,\r\n  `GALE01.iso`, and the writable shader cache remain outside the transaction\r\n  and are never replaced.\n",
     "assets": [
-      {
-        "name": "COMMIT.txt",
-        "size": 41,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/COMMIT.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "COPYING",
-        "size": 35149,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/COPYING",
-        "content_type": "application/octet-stream"
-      },
       {
         "name": "DEBUG-TOOLS.md",
         "size": 13570,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/DEBUG-TOOLS.md",
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/DEBUG-TOOLS.md",
         "content_type": "text/markdown; charset=utf-8"
       },
       {
-        "name": "LICENSE.md",
-        "size": 2437,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/LICENSE.md",
-        "content_type": "text/markdown; charset=utf-8"
-      },
-      {
-        "name": "README-Vita.md",
-        "size": 8652,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/README-Vita.md",
-        "content_type": "text/markdown; charset=utf-8"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 554,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/SHA256SUMS.txt",
+        "name": "melee-update-manifest.txt",
+        "size": 278,
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/melee-update-manifest.txt",
         "content_type": "text/plain; charset=utf-8"
       },
       {
-        "name": "SmashMeleevita.vpk",
-        "size": 3608601,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/SmashMeleevita.vpk",
+        "name": "SmashMeleevita-0.8.4.vpk",
+        "size": 5285652,
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/SmashMeleevita-0.8.4.vpk",
         "content_type": "application/octet-stream"
       },
       {
         "name": "version.json",
         "size": 43,
-        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/vita-v0.8.2-build.37.1/version.json",
+        "download_url": "https://github.com/zm2283145/melee-Vita/releases/download/v0.8.4/version.json",
         "content_type": "application/json"
       }
     ],
@@ -87,7 +63,7 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.7.1 → release vita-v0.8.2-build.37.1",
+    "catalog_update_detail": "PSVitaAlive 0.7.1 → release v0.8.4",
     "catalog_version": "0.7.1"
   },
   {
@@ -33132,5 +33108,103 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.00",
     "catalog_version": "v.1.00"
+  },
+  {
+    "platform": "github",
+    "repo": "Samuel85/Abbey",
+    "release_id": "39439646",
+    "tag": "Vita_v1.0",
+    "name": "Vita",
+    "url": "https://github.com/Samuel85/Abbey/releases/tag/Vita_v1.0",
+    "published": "2021-03-08T13:29:17Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Tested on a PS vita with a system version 3.73 and the Vita3K emulator.",
+    "assets": [
+      {
+        "name": "abbey_v1.0.vpk",
+        "size": 2378727,
+        "download_url": "https://github.com/Samuel85/Abbey/releases/download/Vita_v1.0/abbey_v1.0.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Samuel85",
+    "homebrew_name": "Abbey of Crime",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-abbey-of-crime/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Abbey of Crime for PSVITA/PSTV.",
+    "homebrew_long_description": "A free game inspired by Umberto Eco's novel and Jean-Jaques Annaud's film \"The Name of the Rose',  and based on the game \"La abadía del crimen\" by Paco Menéndez and Juan Delcán.",
+    "homebrew_id": "abbey-of-crime",
+    "homebrew_authors": [
+      "samuel85"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "abbey-of-crime",
+        "name": "Abbey of Crime",
+        "icon": "https://archive.org/download/psvitaalive-abbey-of-crime/icon0.png",
+        "category": "ports",
+        "description": "Port of Abbey of Crime for PSVITA/PSTV.",
+        "long_description": "A free game inspired by Umberto Eco's novel and Jean-Jaques Annaud's film \"The Name of the Rose',  and based on the game \"La abadía del crimen\" by Paco Menéndez and Juan Delcán.",
+        "version": "v.1.0",
+        "version_date": "2021-03-07",
+        "author_ids": [
+          "samuel85"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "Decomius/ccleste-vita",
+    "release_id": "39379354",
+    "tag": "v1.0",
+    "name": "Release",
+    "url": "https://github.com/Decomius/ccleste-vita/releases/tag/v1.0",
+    "published": "2021-03-06T15:07:42Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "",
+    "assets": [
+      {
+        "name": "ccleste-vita.vpk",
+        "size": 2408396,
+        "download_url": "https://github.com/Decomius/ccleste-vita/releases/download/v1.0/ccleste-vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Decomius",
+    "homebrew_name": "ccleste-vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-ccleste-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Celeste Classic for PSVITA.",
+    "homebrew_long_description": "This is a port for PSVITA/PSTV of a C source port of the original celeste (Celeste classic) for the PICO-8, designed to be portable.\nCeleste is a platform game in which players control a girl named Madeline as she makes her way up a mountain while avoiding various deadly obstacles.",
+    "homebrew_id": "ccleste-vita",
+    "homebrew_authors": [
+      "decomius"
+    ],
+    "homebrew_version": "v1.0",
+    "catalog_apps": [
+      {
+        "id": "ccleste-vita",
+        "name": "ccleste-vita",
+        "icon": "https://archive.org/download/psvitaalive-ccleste-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Celeste Classic for PSVITA.",
+        "long_description": "This is a port for PSVITA/PSTV of a C source port of the original celeste (Celeste classic) for the PICO-8, designed to be portable.\nCeleste is a platform game in which players control a girl named Madeline as she makes her way up a mountain while avoiding various deadly obstacles.",
+        "version": "v1.0",
+        "version_date": "2021-03-06",
+        "author_ids": [
+          "decomius"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v1.0",
+    "catalog_version": "v1.0"
   }
 ]
