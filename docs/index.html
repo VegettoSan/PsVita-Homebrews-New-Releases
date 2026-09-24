@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>482</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>76</strong><span>pendientes</span></div>
-        <div class="stat"><strong>474</strong><span>GitHub</span></div>
+        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">404</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>77</strong><span>pendientes</span></div>
+        <div class="stat"><strong>473</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,216 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.1.0 v1.1.0 ports # asphalt 5 hd - ps vita port (v1.1.0) 🏎️💨
+
+**asphalt 5** for ps vita is out of beta. the game is fully playable from start to finish with physical controls, full audio and cutscene video.
+
+this port uses a custom android wrapper (soloader/falsojni) to run the original armv6 android executable natively on the vita, fully hardware-accelerated via `vitagl`.
+
+### 🔧 fixed since the beta
+* **nitro works on a single press.** before, ❌ (cross) often needed several presses unless you
+  were also steering or braking. the engine only reads a nitro press during its 25 hz game-logic
+  step, and on the vita some frames run no step at all, so the press got lost. it&#x27;s now held
+  until the car logic reads it.
+* **the drift skid no longer gets stuck** after a drift ends (before, it kept playing until you
+  paused).
+* **race music no longer plays twice** on top of itself.
+* **scenery ambient loops tamed.** a &quot;revving + skidding&quot; clip tied to some animated track
+  objects looped at full volume from far away and sounded like a phantom car. it now fades out
+  much faster with distance and never goes above 50%.
+* **brake and nitro on-screen icons at ~1% opacity**, since the physical buttons drive them.
+  press **select** during a race to show or hide them.
+* **exit closes the app** from the pause menu and the main menu.
+* **cutscene video at ~30 fps** (was ~10), still skippable with ❌ or start.
+* **no screen-off freeze** while idling in menus.
+* **left analog stick steering**, a sharper internal render resolution (800x480), touch buttons
+  as the default control scheme on a fresh install, and circle no longer duplicating start&#x27;s
+  pause mid-race.
+
+### ✨ features
+* **full physical controls.** a custom input router bridges the vita&#x27;s buttons with the game&#x27;s
+  native touch engine. it only works with the **touch buttons** control scheme, which is set
+  automatically on a fresh install.
+  * **menus:** **d-pad** or **left analog stick** (up/down). **❌ (cross)** selects, **⭕ (circle)**
+    goes back.
+  * **title screens:** any face button skips.
+  * **racing:**
+    * **d-pad left/right, l/r triggers, or left analog stick** to steer.
+    * **❌ (cross)** for nitro.
+    * **🟥 (square)** to brake / drift.
+    * **start** to pause.
+    * **select** to show / hide the on-screen brake &amp; nitro icons.
+* **custom audio engine.** a 32-bit fixed-point mixer with linear interpolation at 48 khz. it
+  follows the engine&#x27;s routing: looped engine and skid sounds track rpm live, music has a
+  dedicated voice that sfx can&#x27;t steal, and a soft limiter keeps busy scenes clean.
+* **hardware-accelerated graphics** via `vitagl`.
+* **post-race flow.** results screens advance with a tap or ❌. held race inputs are released
+  cleanly at the state change.
+
+### ⚠️ known issues
+* only the **touch buttons** control scheme works with physical controls. don&#x27;t switch to tilt or
+  the drag schemes in options.
+* manual standby (power button sleep/resume mid-game) is untested. idling is safe.
+* heavy tracks may drop a few frames at busy moments.
+* the intro trailer needs its `.mp4` in `ux0:data/asphalt5/data/`. otherwise it&#x27;s skipped.
+
+### 🛠️ installation instructions
+1. install `libshacccg.suprx` if you don&#x27;t have it already (required for vitagl).
+2. install the provided `asphalt5.vpk`.
+3. extract the game data files (assets) into `ux0:data/asphalt5/`. *(data files are not
+   provided with this release. you must extract them from your own legally obtained copy of the
+   android game.)*
+4. launch the game and enjoy!
+
+---
+*a huge thanks to the ps vita homebrew community and the vitagl contributors for making this possible! let us know your feedback and bug reports.*">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/asphalt-5-ps-vita/icon0.png" alt="Icono de Asphalt 5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Asphalt-5-Vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.1.0" target="_blank" rel="noopener">Asphalt 5</a></h2>
+                      <div class="release-name">Asphalt 5 HD - PS Vita Port v1.1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.1.0</span>
+                    <span>2026-09-24 22:05 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.3 → release v1.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port (v1.1.0) 🏎️💨</h1>
+<p><strong>Asphalt 5</strong> for PS Vita is out of beta. The game is fully playable from start to finish with physical controls, full audio and cutscene video.</p>
+<p>This port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via <code>vitaGL</code>.</p>
+<h3>🔧 Fixed since the Beta</h3>
+<ul>
+<li><strong>Nitro works on a single press.</strong> Before, ❌ (Cross) often needed several presses unless you
+were also steering or braking. The engine only reads a nitro press during its 25 Hz game-logic
+step, and on the Vita some frames run no step at all, so the press got lost. It's now held
+until the car logic reads it.</li>
+<li><strong>The drift skid no longer gets stuck</strong> after a drift ends (before, it kept playing until you
+paused).</li>
+<li><strong>Race music no longer plays twice</strong> on top of itself.</li>
+<li><strong>Scenery ambient loops tamed.</strong> A &quot;revving + skidding&quot; clip tied to some animated track
+objects looped at full volume from far away and sounded like a phantom car. It now fades out
+much faster with distance and never goes above 50%.</li>
+<li><strong>Brake and nitro on-screen icons at ~1% opacity</strong>, since the physical buttons drive them.
+Press <strong>SELECT</strong> during a race to show or hide them.</li>
+<li><strong>Exit closes the app</strong> from the pause menu and the main menu.</li>
+<li><strong>Cutscene video at ~30 FPS</strong> (was ~10), still skippable with ❌ or Start.</li>
+<li><strong>No screen-off freeze</strong> while idling in menus.</li>
+<li><strong>Left analog stick steering</strong>, a sharper internal render resolution (800x480), Touch Buttons
+as the default control scheme on a fresh install, and Circle no longer duplicating Start's
+pause mid-race.</li>
+</ul>
+<h3>✨ Features</h3>
+<ul>
+<li><strong>Full physical controls.</strong> A custom input router bridges the Vita's buttons with the game's
+native touch engine. It only works with the <strong>Touch Buttons</strong> control scheme, which is set
+automatically on a fresh install.<ul>
+<li><strong>Menus:</strong> <strong>D-Pad</strong> or <strong>Left Analog Stick</strong> (Up/Down). <strong>❌ (Cross)</strong> selects, <strong>⭕ (Circle)</strong>
+goes back.</li>
+<li><strong>Title screens:</strong> any face button skips.</li>
+<li><strong>Racing:</strong><ul>
+<li><strong>D-Pad Left/Right, L/R Triggers, or Left Analog Stick</strong> to steer.</li>
+<li><strong>❌ (Cross)</strong> for nitro.</li>
+<li><strong>🟥 (Square)</strong> to brake / drift.</li>
+<li><strong>Start</strong> to pause.</li>
+<li><strong>Select</strong> to show / hide the on-screen brake &amp; nitro icons.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Custom audio engine.</strong> A 32-bit fixed-point mixer with linear interpolation at 48 kHz. It
+follows the engine's routing: looped engine and skid sounds track RPM live, music has a
+dedicated voice that SFX can't steal, and a soft limiter keeps busy scenes clean.</li>
+<li><strong>Hardware-accelerated graphics</strong> via <code>vitaGL</code>.</li>
+<li><strong>Post-race flow.</strong> Results screens advance with a tap or ❌. Held race inputs are released
+cleanly at the state change.</li>
+</ul>
+<h3>⚠️ Known Issues</h3>
+<ul>
+<li>Only the <strong>Touch Buttons</strong> control scheme works with physical controls. Don't switch to Tilt or
+the drag schemes in Options.</li>
+<li>Manual standby (power button sleep/resume mid-game) is untested. Idling is safe.</li>
+<li>Heavy tracks may drop a few frames at busy moments.</li>
+<li>The intro trailer needs its <code>.mp4</code> in <code>ux0:data/asphalt5/data/</code>. Otherwise it's skipped.</li>
+</ul>
+<h3>🛠️ Installation Instructions</h3>
+<ol>
+<li>Install <code>libshacccg.suprx</code> if you don't have it already (required for vitaGL).</li>
+<li>Install the provided <code>asphalt5.vpk</code>.</li>
+<li>Extract the game data files (assets) into <code>ux0:data/asphalt5/</code>. <em>(Data files are not
+provided with this release. You must extract them from your own legally obtained copy of the
+Android game.)</em></li>
+<li>Launch the game and enjoy!</li>
+</ol>
+<hr>
+<p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.1.0/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.11-remapping-beta4 v0.1.11-remapping-beta4 ports **full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
+                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.11-remapping-beta4" target="_blank" rel="noopener">D2Vita</a></h2>
+                      <div class="release-name">v0.1.11-remapping-beta4</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.11-remapping-beta4</span>
+                    <span>2026-09-24 21:56 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.9</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.9 → release v0.1.11-remapping-beta4</div>
+                  
+                  <div class="body markdown-body"><p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4">https://github.com/Franckrst/D2Vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.11-remapping-beta4/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.5 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4194">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
+                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
+                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">continuous</span>
+                    <span>2026-09-24 20:29 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
+                  
+                  <div class="body markdown-body"><p>buildnum 4194</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 29.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 37.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 29.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 21.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="battleship vita battleship vita robin994/battleship-vita 1.5 test build (ps vita) - 2026-09-24 1.5-test ports test prerelease for the ps vita port. this build is intended to validate the latest crash and performance fixes on real hardware before the next stable release.
 
 ## fixes included
@@ -591,33 +801,6 @@ platforms keep Auto.</li>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.11-beta5 v0.1.11-beta5 ports **full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.11-beta4...v0.1.11-beta5">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
-                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.11-beta5" target="_blank" rel="noopener">D2Vita</a></h2>
-                      <div class="release-name">v0.1.11-beta5</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.11-beta5</span>
-                    <span>2026-09-24 09:36 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.9</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.9 → release v0.1.11-beta5</div>
-                  
-                  <div class="body markdown-body"><p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.11-beta4...v0.1.11-beta5">https://github.com/Franckrst/D2Vita/compare/v0.1.11-beta4...v0.1.11-beta5</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.11-beta5/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.5 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.8.12 v0.8.12 ports ## changes in vita v0.8.12
 
 - fixed analog stick input on playstation tv with a dualshock 3 controller.
@@ -728,33 +911,6 @@ fix: crash after koopa bros transition">
 <p>Fix: Crash after Koopa bros transition</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/kaziema/pmvita/releases/download/v0.3.1/PaperMarioVita.vpk" target="_blank" rel="noopener">⬇ PaperMarioVita.vpk · 7.5 MB</a><a class="btn" href="https://github.com/kaziema/pmvita/releases/download/v0.3.1/papership.o2r" target="_blank" rel="noopener">papership.o2r · 5.1 KB</a><a class="btn" href="https://github.com/kaziema/pmvita/releases/download/v0.3.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 165.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4193">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
-                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
-                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">continuous</span>
-                    <span>2026-09-23 18:30 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
-                  
-                  <div class="body markdown-body"><p>buildnum 4193</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 29.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 37.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 29.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 21.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1151,112 +1307,6 @@ Lots of things happened over the years and even more things are possible nowaday
 <p><strong>Note:</strong> This release was AI-assisted.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/jimbob4000/RetroFlow-Launcher/releases/download/v8.4.1/RetroFlow_v8.4.1.vpk" target="_blank" rel="noopener">⬇ RetroFlow_v8.4.1.vpk · 13.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.0.3 v1.0.3 ports # asphalt 5 hd - ps vita port v1.0.3
-
-we are incredibly excited to announce the first public beta release of **asphalt 5** for the ps vita! 
-
-this port uses a custom android wrapper (soloader/falsojni) to run the original armv6 android executable natively on the vita, fully hardware-accelerated via `vitagl`. 
-
-since this is a **beta release**, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.
-
-### ✨ key features in this beta:
-* **full physical controls integration:** we&#x27;ve built a custom input router that seamlessly bridges vita physical buttons with the game&#x27;s native touch engine. it only works with the **touch buttons** control scheme (not tilt or the drag-to-steer variants) — this is now forced automatically the very first time you run the port, before any save file exists.
-  * **menus:** fully navigable using the **d-pad** or **left analog stick** (up/down). use **❌ (cross)** to select and **⭕ (circle)** to go back.
-  * **title screens:** press any face button to instantly skip splash screens.
-  * **in-game racing:** 
-    * **d-pad left/right, l/r triggers, or left analog stick** to steer.
-    * **❌ (cross)** to trigger nitrous.
-    * **🟥 (square)** to brake / drift.
-    * **start** to pause (circle no longer duplicates this in-race — it&#x27;s menu-only back now).
-* **custom optimized audio engine:** the original android game used heavy floating-point math for audio mixing, which crippled the vita&#x27;s cpu. we wrote a custom 32-bit fixed-point audio mixer from scratch with **linear interpolation**, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48khz audio output through the vita&#x27;s main audio port. it follows the engine&#x27;s own routing: looped sounds (engine hum, skids) track rpm live, long music tracks get a dedicated voice that sfx can never steal, and the master bus uses a soft limiter so heavy scenes don&#x27;t square-wave.
-* **hardware accelerated graphics:** running buttery smooth thanks to `vitagl`.
-* **post-race flow:** results screens advance with a tap anywhere, or with **❌ (cross)** on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.
-* **intro &amp; cutscene video playback:** the game&#x27;s original mpeg-4 `.mp4` cutscenes (which the vita has no hardware decoder for) play in software at a smooth **30 fps** with in-sync audio — the intro trailer (`a5_ultimate_vnfs_2.mp4`) and the in-race videos alike. videos are decoded at half resolution and upscaled, so motion stays fluid; press **❌ (cross)** or **start** at any time to skip.
-* **no screen-off freeze:** the port resets the vita&#x27;s idle timer every frame, so the console&#x27;s auto power-save can no longer turn the screen off and freeze the game while you read a menu.
-
-### ⚠️ known issues / beta status:
-* **open issue — touch buttons icons still visible, and nitro often needs several presses:** the on-screen brake/nitro icons are drawn even though physical controls work, and ❌ (cross) frequently needs multiple presses before nitro actually fires — **except** pressing 🟥 (square, brake/drift) immediately before ❌ (cross), which reliably triggers nitro on the very first try. root cause not isolated yet; we need a console log capturing that exact drift-then-nitro pattern to fix it for real instead of guessing.
-* **recent adjustments (build clean, not yet confirmed on real hardware):** left analog stick steering, a sharper internal render resolution (800x480 instead of 720x432), touch buttons forced as the default control scheme on first run, and circle no longer opening the pause menu mid-race (start already did that, so the overlap was removed).
-* this is a beta! you might encounter occasional ui quirks or unmapped buttons in very specific sub-menus. 
-* performance is mostly solid, but some heavy tracks might experience slight frame drops. further optimizations are planned.
-* the intro trailer needs its `.mp4` present in `ux0:data/asphalt5/data/` — otherwise it is skipped.
-* manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.
-
-### 🛠️ installation instructions:
-1. install `libshacccg.suprx` if you don&#x27;t have it already (required for vitagl).
-2. install the provided `asphalt5.vpk`.
-3. extract the game data files (assets) into `ux0:data/asphalt5/`. *(note: data files are not provided with this release; you must extract them from your own legally obtained copy of the android game).*
-4. launch the game and enjoy!
-
----
-*a huge thanks to the ps vita homebrew community and the vitagl contributors for making this possible! let us know your feedback and bug reports.*">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/asphalt-5-ps-vita/icon0.png" alt="Icono de Asphalt 5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Asphalt-5-Vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.0.3" target="_blank" rel="noopener">Asphalt 5</a></h2>
-                      <div class="release-name">Asphalt 5 HD - PS Vita Port v1.0.3</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.3</span>
-                    <span>2026-09-20 04:47 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.3</div>
-                  
-                  <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port v1.0.3</h1>
-<p>We are incredibly excited to announce the first public Beta release of <strong>Asphalt 5</strong> for the PS Vita!</p>
-<p>This port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via <code>vitaGL</code>.</p>
-<p>Since this is a <strong>Beta release</strong>, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.</p>
-<h3>✨ Key Features in this Beta:</h3>
-<ul>
-<li><strong>Full Physical Controls Integration:</strong> We've built a custom input router that seamlessly bridges Vita physical buttons with the game's native touch engine. It only works with the <strong>Touch Buttons</strong> control scheme (not Tilt or the drag-to-steer variants) — this is now forced automatically the very first time you run the port, before any save file exists.<ul>
-<li><strong>Menus:</strong> Fully navigable using the <strong>D-Pad</strong> or <strong>Left Analog Stick</strong> (Up/Down). Use <strong>❌ (Cross)</strong> to select and <strong>⭕ (Circle)</strong> to go back.</li>
-<li><strong>Title Screens:</strong> Press any face button to instantly skip splash screens.</li>
-<li><strong>In-Game Racing:</strong><ul>
-<li><strong>D-Pad Left/Right, L/R Triggers, or Left Analog Stick</strong> to Steer.</li>
-<li><strong>❌ (Cross)</strong> to trigger Nitrous.</li>
-<li><strong>🟥 (Square)</strong> to Brake / Drift.</li>
-<li><strong>Start</strong> to Pause (Circle no longer duplicates this in-race — it's menu-only Back now).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Custom Optimized Audio Engine:</strong> The original Android game used heavy floating-point math for audio mixing, which crippled the Vita's CPU. We wrote a custom 32-bit fixed-point audio mixer from scratch with <strong>Linear Interpolation</strong>, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48kHz audio output through the Vita's MAIN audio port. It follows the engine's own routing: looped sounds (engine hum, skids) track RPM live, long music tracks get a dedicated voice that SFX can never steal, and the master bus uses a soft limiter so heavy scenes don't square-wave.</li>
-<li><strong>Hardware Accelerated Graphics:</strong> Running buttery smooth thanks to <code>vitaGL</code>.</li>
-<li><strong>Post-Race Flow:</strong> Results screens advance with a tap anywhere, or with <strong>❌ (Cross)</strong> on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.</li>
-<li><strong>Intro &amp; Cutscene Video Playback:</strong> The game's original MPEG-4 <code>.mp4</code> cutscenes (which the Vita has no hardware decoder for) play in software at a smooth <strong>30 FPS</strong> with in-sync audio — the intro trailer (<code>A5_Ultimate_VNFS_2.mp4</code>) and the in-race videos alike. Videos are decoded at half resolution and upscaled, so motion stays fluid; press <strong>❌ (Cross)</strong> or <strong>Start</strong> at any time to skip.</li>
-<li><strong>No Screen-Off Freeze:</strong> The port resets the Vita's idle timer every frame, so the console's auto power-save can no longer turn the screen off and freeze the game while you read a menu.</li>
-</ul>
-<h3>⚠️ Known Issues / Beta Status:</h3>
-<ul>
-<li><strong>Open issue — Touch Buttons icons still visible, and Nitro often needs several presses:</strong> the on-screen brake/nitro icons are drawn even though physical controls work, and ❌ (Cross) frequently needs multiple presses before Nitro actually fires — <strong>except</strong> pressing 🟥 (Square, brake/drift) immediately before ❌ (Cross), which reliably triggers Nitro on the very first try. Root cause not isolated yet; we need a console log capturing that exact drift-then-nitro pattern to fix it for real instead of guessing.</li>
-<li><strong>Recent adjustments (build clean, not yet confirmed on real hardware):</strong> left analog stick steering, a sharper internal render resolution (800x480 instead of 720x432), Touch Buttons forced as the default control scheme on first run, and Circle no longer opening the pause menu mid-race (Start already did that, so the overlap was removed).</li>
-<li>This is a Beta! You might encounter occasional UI quirks or unmapped buttons in very specific sub-menus.</li>
-<li>Performance is mostly solid, but some heavy tracks might experience slight frame drops. Further optimizations are planned.</li>
-<li>The intro trailer needs its <code>.mp4</code> present in <code>ux0:data/asphalt5/data/</code> — otherwise it is skipped.</li>
-<li>Manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.</li>
-</ul>
-<h3>🛠️ Installation Instructions:</h3>
-<ol>
-<li>Install <code>libshacccg.suprx</code> if you don't have it already (required for vitaGL).</li>
-<li>Install the provided <code>Asphalt5.vpk</code>.</li>
-<li>Extract the game data files (assets) into <code>ux0:data/asphalt5/</code>. <em>(Note: Data files are not provided with this release; you must extract them from your own legally obtained copy of the Android game).</em></li>
-<li>Launch the game and enjoy!</li>
-</ol>
-<hr>
-<p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.0.3/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26144,692 +26194,10 @@ this version of vita media player is meant for 1920x1088 output for the pstv. it
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="basilisk ii basilisk ii rsn8887/basiliskii-vita basilisk ii vita v0.33h (mod by rsn8887) 0.33hgit-rsn8887 emulators last changes
-======
-0.33h
-
-- implement slow/fast modifiers for analog pointer
-- allow more memory (&gt;29 mb) for emulated computer
-
-overview
-=====
-
-this is a release of meetpatty’s basilisk ii mac emulator for vita with the changes listed below. my earlier changes to 0.32 have already been incorporated into the upstream repository.
-
-![](https://s14.postimg.cc/649ygto0x/5_eea1_e55-_bcc1-409_c-9_fb9-4_b8954_ed93_c1.jpg)
-
-thanks to meetpatty for an amazing port of this emulator.
-
-thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr
-
-this release is for anyone who wants to try it out in the meantime before meetpatty releases a new official version.
-
-basilisk ii for the vita
-=======
-
-basilisk ii is a multi-platform mac ii emulator whose code is released under the terms of the
-gpl v2.
-
-features for the vita version include:
-
-* emulates a mac ii series machine running os 7.0.1 through 8.1, depending on the rom used.
-* uses uae cpu emulation, with new softfloat fpu emulation for better compatibility.
-* supports on-the-fly change of colors and resolution (requires display manager).
-* has stereo, 16-bit, 44khz audio (requires sound manager 3.0).
-* supports emulated floppy and cdrom with removable media (no cd audio yet).
-* supports up to four hardfiles for use as fixed drives.
-* emulates a mac extended adb keyboard and mouse. buttons can be remapped on-the-fly.
-* bluetooth keyboard and mouse support.
-* on-screen overlay keyboard that controlled with vita buttons.
-* analog joystick pointer movement with adjustable speed and deadzone
-* touch pointer controls (front/rear panel) with gestures and selectable direct/indirect mode
-
-the main basilisk ii website is located at http://basilisk.cebix.net/. this version of basilisk ii
-is based on chilly willy&#x27;s psp port v1.1.1.
-
-basilisk ii comes with absolutely no warranty. this is free software, and you are welcome to
-redistribute it under the terms of the gnu general public license.
-
-installing basilisk ii for the vita
-===================================
-
-install the vpk in the usual way. copy the basilisk ii folder in the archive to ux0:data.  
-if you look at the folder, you&#x27;ll see the following:  
-
-(directories)  
-cdroms  
-disks  
-files  
-hardfiles  
-imaps  
-roms  
-
-(files)  
-basiliskii_prefs  
-imaps/default  
-imaps/dpad_mouse  
-
-the cdroms folder is where you copy the bin/cue dumps of mac cdroms you wish to use with the
-emulation. these should be standard mode1 iso dumps, not raw dumps. the extension for cdrom
-images are normally “.bin”, “.iso”, or “.img”.
-
-the disks folder is where you copy floppy images you wish to use with the emulation. these are
-plain dumps of 1.44 mb high-density mac or pc format microfloppy disks. pc format requires the
-appropriate mac extension to read, such as maclink (part of os 8). all files in this folder
-should have an extension of “.dsk”.
-
-the files folder is mounted on the mac desktop when enabled in the settings. files in this folder
-should be in appledouble, hqx, and binhex format.
-
-the hardfiles folder contains the files that are used as fixed hard disks in the emulation. they
-can be virtually any size, but will generally be between 200 and 400 mb as a basic installation
-of os8 takes about 120 mb. you can have any number of files in this directory, but only a maximum
-of four can be selected at one time. the extension of files in this folder should b “.hfv”, but may
-also have no extension at all.
-
-the imaps folder holds the input maps for remapping the vita buttons into mac input events. this will
-be explained later.
-
-the roms folder holds the mac rom images you might use with the emulation. you select one image in
-the emulation setup. they can have any file name, but a typical extension is “.rom”.
-
-basiliskii_prefs is a sample preferences file.
-
-note: no apple macintosh roms or software of any sort is included with this program. you&#x27;ll have to
-find them yourself. this emulator is useless without a rom and macos.
-
-controls
-========
-select - invoke the imap/floppy/cdrom menu  
-
-while in the imap/floppy/cdrom menu, you press up/down to change between input maps,
-floppies, and cdroms. press left/right to browse the list of files in the imaps, disks, and
-cdroms directories, respectively. press cross to select an input map, or mount a cd-rom or
-floppy. press select again to exit the menu. note that you can only have one cd-rom and
-floppy mounted at a time. to mount another, you must first dismount the cd-rom/floppy
-which is already mounted. on the mac, you dismount disks/cd-roms by throwing them in the
-trash, or by selecting the disk and then selecting eject from the special menu (or pressing
-the command + e keys).
-
-default controls
-================
-cross – mouse button  
-square – enter key  
-circle – command + w (close window)  
-triangle – command + q (quit application)  
-rtrigger – control key  
-ltrigger – option key  
-up/down/left/right – corresponding cursor key  
-analog stick – mouse  
-
-analog_speed controls
-================
-cross – mouse button  
-square – enter key  
-circle – control key + mouse button (&quot;right click&quot;)
-triangle – command + q (quit application)  
-rtrigger – hold to slow down analog joystick mouse
-ltrigger – hold to speed up analog joystick mouse
-up/down/left/right – corresponding cursor key  
-analog stick – mouse  
-
-dpad_mouse controls
-===================
-cross – mouse button  
-square – enter key  
-circle – command + w (close window)  
-triangle – command + q (quit application)  
-rtrigger – control key  
-ltrigger – move mouse faster  
-up/down/left/right – mouse  
-analog stick – mouse  
-
-bluetooth mouse / keyboard controls
-=================
-real bluetooth keyboard and mice also work. this was tested working with jelly bean bt keyboard and mouse combo asin:b06y56bbyp and with the standalone jelly comb bluetooth wireless mouse asin:b075hbdwcf. vita and vitatv do not pair with all bt keyboards or mice, some work, some don&#x27;t.
-
-imap file format
-================
-
-each line has the following format:
-
-&lt;vita key(s) pressed&gt; &lt;vita key(s) not pressed&gt; &lt;mac key 1&gt; &lt;mac key 2&gt; &lt;mac key 3&gt; &lt;mac key 4&gt;
-
-lines starting with # are treated as comment lines and ignored,
-
-valid vita key values are (or keys to combine):
-
-0x0000  no key  
-0x0008	start button.  
-0x0010	up d-pad button.  
-0x0020	right d-pad button.  
-0x0040	down d-pad button.  
-0x0080	left d-pad button.  
-0x0100	left trigger.  
-0x0200	right trigger.  
-0x1000	triangle button.  
-0x2000	circle button.  
-0x4000	cross button.  
-0x8000	square button.  
-
-see below for basilisk ii key codes
-
-example d-pad up = cursor up: 
-
-0x0010 0x0000 62 255 255 255
-
-example triangle = command + q: 
-
-0x1000 0x0000 55 12 255 255
-
-see imaps/default and imaps/dpad_mouse for further examples
-
-basilisk ii key codes
-=====================
-````	
-0       a	
-1       s	
-2       d	
-3       f	
-4       h	
-5       g	
-6       z	
-7       x	
-8       c	
-9       v	
-11      b	
-12      q	
-13      w	
-14      e	
-15      r	
-16      y	
-17      t	
-18      1	
-19      2	
-20      3	
-21      4	
-22      6	
-23      5	
-24      =	
-25      9	
-26      7	
-27      -	
-28      8	
-29      0	
-30      ]	
-31      o	
-32      u	
-33      [	
-34      i	
-35      p	
-36      return	
-37      l	
-38      j	
-39      &#x27;	
-40      k	
-41      ;	
-42      \	
-43      ,	
-44      /	
-45      n	
-46      m	
-47      .	
-48      tab	
-49      space	
-50      `	
-51      backspace	
-53      esc	
-54      ctrl left	
-55      alt left (-&gt; command)	
-56      shift left	
-57      caps lock	
-58      logo left (-&gt; option)	
-59      cursor left	
-60      cursor right	
-61      cursor down	
-62      cursor up	
-65      kp .	
-67      kp *	
-69      kp +	
-71      num lock	
-75      kp /	
-76      kp enter	
-78      kp -	
-82      kp 0	
-83      kp 1	
-84      kp 2	
-85      kp 3	
-86      kp 4	
-87      kp 5	
-88      kp 6	
-89      kp 7	
-91      kp 8	
-92      kp 9	
-96      f5	
-97      f6	
-98      f7	
-99      f3	
-100     f8	
-101     f9	
-103     f11	
-105     printscrn	
-107     scroll lock	
-109     f10	
-111     f12	
-113     pause	
-114     insert	
-115     home	
-116     page up	
-117     delete	
-118     f4	
-119     end	
-120     f2	
-121     page down	
-122     f1
-255     no key press
-256     mouse button 1
-1024	slow down analog stick mouse
-1025	speed up analog stick mouse
-`````
-
-indirect touch controls
-=====
-
-indirect touch controls are always used on the rear panel. on the front panel, the default is to use direct touch (pointer jumps to finger), but indirect controls can be enabled in the menu. 
-
-for multi-touch gestures, the fingers have to be far enough apart from each other, so that the vita will not erroneously recognize them as a single finger. otherwise the pointer will jump around.
-
-- single finger drag: move the mouse pointer, how far the pointer moves in response to finger motion depends on the mouse speed setting
-- single finger short tap: left mouse button. 
-- one finger short tap while holding another finger: right mouse button. 
-- long second finger tap while holding another finger: initiate left mouse button drag and drop, useful to hold left button down to bring up menus. 
-- long third finger tap while holding two other fingers: initiate right mouse button drag and drop. drag and drop stops when last finger is released.
-
-changelog 
------------
-
-0.33h
-
-- implement slow/fast modifiers for analog pointer
-- allow more memory (&gt;29 mb) for emulated computer
-
-0.33g
-
-- further improve pointer motion with analog stick
-
-0.33f
-
-- improve pointer response to diagonal stick directions
-
-0.33e
-
-- remove bluetooth mouse lag
-- apply pointer speed setting also to bluetooth mouse
-
-0.33d
-
-- prevent accidental clicks when moving pointer using rear touch or indirect front touch
-
-0.33c
-
-- implemented rear touch (can be enabled in options)
-- implemented indirect front touch (can be enabled in options) 
-- implemented pointer speed option
-- implemented radial scaled analog joystick deadzone
-- added cpu speed option to max out all frequencies (cpu, gpu and bus) for maximum speed
-
-0.33b
-
-- now uses the full analog joystick range of the vita
-
-0.33a
-
-- attempt to reduce bluetooth mouse lag (hard to tell if it helped)
-- re-compiled with latest source from meetpatty, which includes support of uma0:
-
-0.32c
-- bugfix with new 640x400 resolution (was added to internal list of modes twice)
-
-0.32b
-- add 640x400 resolution option
-- improve picture quality for resolutions where mac pixels do not map 1:1 onto vita pixels. pixels are much less distorted now in those cases.
-- add aspect ratio option &quot;square pixels,&quot; useful to achieve a larger display of some fullscreen games without distortion. for example fullscreen games that run in 640x400 fit the vita screen pretty well, even without stretching.
-
-the system 7 resolution setting has a higher priority than the basiliskii settings. so, to change resolution, it is not enough to only change it in the basilisk prefs. the resolution has to be changed also in the &quot;monitors&quot; extension in system 7. otherwise, the os will set it back during boot.
-
-0.32a
-- more keys accessible in the danzeff osk. 
-- highlight qualifier keys selected with &quot;select&quot; when osk is displayed">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-basilisk-ii/icon0.png" alt="Icono de Basilisk II" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">EMULATORS · GITHUB · rsn8887/basiliskii-vita</div>
-                      <h2><a href="https://github.com/rsn8887/basiliskii-vita/releases/tag/0.33hgit-rsn8887" target="_blank" rel="noopener">Basilisk II</a></h2>
-                      <div class="release-name">Basilisk II Vita v0.33h (mod by rsn8887)</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">0.33hgit-rsn8887</span>
-                    <span>2021-04-06 17:06 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.33hgit-rsn8887</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.33hgit-rsn8887</div>
-                  
-                  <div class="body markdown-body"><h1>Last Changes</h1>
-<p>0.33h</p>
-<ul>
-<li>implement slow/fast modifiers for analog pointer</li>
-<li>allow more memory (&gt;29 MB) for emulated computer</li>
-</ul>
-<h1>Overview</h1>
-<p>This is a release of MeetPatty’s Basilisk II Mac Emulator for Vita with the changes listed below. My earlier changes to 0.32 have already been incorporated into the upstream repository.</p>
-<p><img src="https://s14.postimg.cc/649ygto0x/5_EEA1_E55-_BCC1-409_C-9_FB9-4_B8954_ED93_C1.jpg" alt=""></p>
-<p>Thanks to MeetPatty for an amazing port of this emulator.</p>
-<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR</p>
-<p>This release is for anyone who wants to try it out in the meantime before MeetPatty releases a new official version.</p>
-<h1>Basilisk II for the Vita</h1>
-<p>Basilisk II is a multi-platform Mac II emulator whose code is released under the terms of the
-GPL v2.</p>
-<p>Features for the Vita version include:</p>
-<ul>
-<li>Emulates a Mac II series machine running OS 7.0.1 through 8.1, depending on the ROM used.</li>
-<li>Uses UAE CPU emulation, with new SoftFloat FPU emulation for better compatibility.</li>
-<li>Supports on-the-fly change of colors and resolution (requires Display Manager).</li>
-<li>Has stereo, 16-bit, 44kHz audio (requires Sound Manager 3.0).</li>
-<li>Supports emulated floppy and CDROM with removable media (no CD audio yet).</li>
-<li>Supports up to four hardfiles for use as fixed drives.</li>
-<li>Emulates a Mac Extended ADB keyboard and mouse. Buttons can be remapped on-the-fly.</li>
-<li>Bluetooth keyboard and mouse support.</li>
-<li>On-screen overlay keyboard that controlled with Vita buttons.</li>
-<li>Analog joystick pointer movement with adjustable speed and deadzone</li>
-<li>Touch pointer controls (front/rear panel) with gestures and selectable direct/indirect mode</li>
-</ul>
-<p>The main Basilisk II website is located at <a target="_blank" rel="noopener noreferrer" href="http://basilisk.cebix.net/">http://basilisk.cebix.net/</a>. This version of Basilisk II
-is based on Chilly Willy's PSP port v1.1.1.</p>
-<p>Basilisk II comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to
-redistribute it under the terms of the GNU General Public License.</p>
-<h1>Installing Basilisk II for the Vita</h1>
-<p>Install the vpk in the usual way. Copy the Basilisk II folder in the archive to ux0:data.<br>
-If you look at the folder, you'll see the following:</p>
-<p>(directories)<br>
-cdroms<br>
-disks<br>
-files<br>
-hardfiles<br>
-imaps<br>
-roms</p>
-<p>(files)<br>
-BasiliskII_prefs<br>
-imaps/default<br>
-imaps/dpad_mouse</p>
-<p>The cdroms folder is where you copy the bin/cue dumps of Mac CDROMs you wish to use with the
-emulation. These should be standard MODE1 ISO dumps, not raw dumps. The extension for CDROM
-images are normally “.bin”, “.iso”, or “.img”.</p>
-<p>The disks folder is where you copy floppy images you wish to use with the emulation. These are
-plain dumps of 1.44 MB high-density Mac or PC format microfloppy disks. PC format requires the
-appropriate Mac extension to read, such as MacLink (part of OS 8). All files in this folder
-should have an extension of “.dsk”.</p>
-<p>The files folder is mounted on the Mac desktop when enabled in the settings. Files in this folder
-should be in AppleDouble, hqx, and binhex format.</p>
-<p>The hardfiles folder contains the files that are used as fixed hard disks in the emulation. They
-can be virtually any size, but will generally be between 200 and 400 MB as a basic installation
-of OS8 takes about 120 MB. You can have any number of files in this directory, but only a maximum
-of four can be selected at one time. The extension of files in this folder should b “.hfv”, but may
-also have no extension at all.</p>
-<p>The imaps folder holds the input maps for remapping the Vita buttons into Mac input events. This will
-be explained later.</p>
-<p>The roms folder holds the Mac ROM images you might use with the emulation. You select one image in
-the emulation setup. They can have any file name, but a typical extension is “.rom”.</p>
-<p>BasiliskII_prefs is a sample preferences file.</p>
-<p>Note: No Apple Macintosh ROMs or software of any sort is included with this program. You'll have to
-find them yourself. This emulator is useless without a ROM and MacOS.</p>
-<h1>Controls</h1>
-<p>SELECT - Invoke the imap/floppy/cdrom menu</p>
-<p>While in the imap/floppy/cdrom menu, you press up/down to change between input maps,
-floppies, and cdroms. Press left/right to browse the list of files in the imaps, disks, and
-cdroms directories, respectively. Press CROSS to select an input map, or mount a CD-ROM or
-floppy. Press SELECT again to exit the menu. Note that you can only have one cd-rom and
-floppy mounted at a time. To mount another, you must first dismount the CD-ROM/floppy
-which is already mounted. On the Mac, you dismount disks/cd-roms by throwing them in the
-trash, or by selecting the disk and then selecting Eject from the Special menu (or pressing
-the Command + E keys).</p>
-<h1>Default Controls</h1>
-<p>CROSS – mouse button<br>
-SQUARE – enter key<br>
-CIRCLE – command + w (Close Window)<br>
-TRIANGLE – command + q (Quit Application)<br>
-RTRIGGER – control key<br>
-LTRIGGER – option key<br>
-UP/DOWN/LEFT/RIGHT – corresponding cursor key<br>
-ANALOG STICK – mouse</p>
-<h1>analog_speed Controls</h1>
-<p>CROSS – mouse button<br>
-SQUARE – enter key<br>
-CIRCLE – control key + mouse button (&quot;right click&quot;)
-TRIANGLE – command + q (Quit Application)<br>
-RTRIGGER – hold to slow down analog joystick mouse
-LTRIGGER – hold to speed up analog joystick mouse
-UP/DOWN/LEFT/RIGHT – corresponding cursor key<br>
-ANALOG STICK – mouse</p>
-<h1>dpad_mouse Controls</h1>
-<p>CROSS – mouse button<br>
-SQUARE – enter key<br>
-CIRCLE – command + w (Close Window)<br>
-TRIANGLE – command + q (Quit Application)<br>
-RTRIGGER – control key<br>
-LTRIGGER – move mouse faster<br>
-UP/DOWN/LEFT/RIGHT – mouse<br>
-ANALOG STICK – mouse</p>
-<h1>Bluetooth mouse / keyboard controls</h1>
-<p>Real Bluetooth keyboard and mice also work. This was tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. Vita and VitaTV do not pair with all BT keyboards or mice, some work, some don't.</p>
-<h1>Imap file format</h1>
-<p>Each line has the following format:</p>
-<p>&lt;vita key(s) pressed&gt; &lt;vita key(s) not pressed&gt; &lt;mac key 1&gt; &lt;mac key 2&gt; &lt;mac key 3&gt; &lt;mac key 4&gt;</p>
-<p>Lines starting with # are treated as comment lines and ignored,</p>
-<p>Valid vita key values are (OR keys to combine):</p>
-<p>0x0000  No key<br>
-0x0008	Start button.<br>
-0x0010	Up D-Pad button.<br>
-0x0020	Right D-Pad button.<br>
-0x0040	Down D-Pad button.<br>
-0x0080	Left D-Pad button.<br>
-0x0100	Left trigger.<br>
-0x0200	Right trigger.<br>
-0x1000	Triangle button.<br>
-0x2000	Circle button.<br>
-0x4000	Cross button.<br>
-0x8000	Square button.</p>
-<p>See below for Basilisk II key codes</p>
-<p>Example D-Pad Up = cursor up:</p>
-<p>0x0010 0x0000 62 255 255 255</p>
-<p>Example Triangle = command + q:</p>
-<p>0x1000 0x0000 55 12 255 255</p>
-<p>See imaps/default and imaps/dpad_mouse for further examples</p>
-<h1>Basilisk II Key Codes</h1>
-<pre><code>0       A	
-1       S	
-2       D	
-3       F	
-4       H	
-5       G	
-6       Z	
-7       X	
-8       C	
-9       V	
-11      B	
-12      Q	
-13      W	
-14      E	
-15      R	
-16      Y	
-17      T	
-18      1	
-19      2	
-20      3	
-21      4	
-22      6	
-23      5	
-24      =	
-25      9	
-26      7	
-27      -	
-28      8	
-29      0	
-30      ]	
-31      O	
-32      U	
-33      [	
-34      I	
-35      P	
-36      Return	
-37      L	
-38      J	
-39      '	
-40      K	
-41      ;	
-42      \	
-43      ,	
-44      /	
-45      N	
-46      M	
-47      .	
-48      Tab	
-49      Space	
-50      `	
-51      Backspace	
-53      Esc	
-54      Ctrl Left	
-55      Alt Left (-&gt; Command)	
-56      Shift Left	
-57      Caps Lock	
-58      Logo Left (-&gt; Option)	
-59      Cursor Left	
-60      Cursor Right	
-61      Cursor Down	
-62      Cursor Up	
-65      KP .	
-67      KP *	
-69      KP +	
-71      Num Lock	
-75      KP /	
-76      KP Enter	
-78      KP -	
-82      KP 0	
-83      KP 1	
-84      KP 2	
-85      KP 3	
-86      KP 4	
-87      KP 5	
-88      KP 6	
-89      KP 7	
-91      KP 8	
-92      KP 9	
-96      F5	
-97      F6	
-98      F7	
-99      F3	
-100     F8	
-101     F9	
-103     F11	
-105     PrintScrn	
-107     Scroll Lock	
-109     F10	
-111     F12	
-113     Pause	
-114     Insert	
-115     Home	
-116     Page Up	
-117     Delete	
-118     F4	
-119     End	
-120     F2	
-121     Page Down	
-122     F1
-255     No key press
-256     Mouse button 1
-1024	Slow down analog stick mouse
-1025	Speed up analog stick mouse
-</code></pre>
-<h1>Indirect Touch Controls</h1>
-<p>Indirect touch controls are always used on the rear panel. On the front panel, the default is to use direct touch (pointer jumps to finger), but indirect controls can be enabled in the menu.</p>
-<p>For multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.</p>
-<ul>
-<li>Single finger drag: move the mouse pointer, how far the pointer moves in response to finger motion depends on the Mouse Speed setting</li>
-<li>Single finger short tap: left mouse button.</li>
-<li>One finger short tap while holding another finger: right mouse button.</li>
-<li>Long second finger tap while holding another finger: initiate left mouse button drag and drop, useful to hold left button down to bring up menus.</li>
-<li>Long third finger tap while holding two other fingers: initiate right mouse button drag and drop. Drag and drop stops when last finger is released.</li>
-</ul>
-<h2>Changelog</h2>
-<p>0.33h</p>
-<ul>
-<li>implement slow/fast modifiers for analog pointer</li>
-<li>allow more memory (&gt;29 MB) for emulated computer</li>
-</ul>
-<p>0.33g</p>
-<ul>
-<li>further improve pointer motion with analog stick</li>
-</ul>
-<p>0.33f</p>
-<ul>
-<li>improve pointer response to diagonal stick directions</li>
-</ul>
-<p>0.33e</p>
-<ul>
-<li>remove bluetooth mouse lag</li>
-<li>apply pointer speed setting also to bluetooth mouse</li>
-</ul>
-<p>0.33d</p>
-<ul>
-<li>prevent accidental clicks when moving pointer using rear touch or indirect front touch</li>
-</ul>
-<p>0.33c</p>
-<ul>
-<li>implemented rear touch (can be enabled in options)</li>
-<li>implemented indirect front touch (can be enabled in options)</li>
-<li>implemented pointer speed option</li>
-<li>implemented radial scaled analog joystick deadzone</li>
-<li>added cpu speed option to max out all frequencies (CPU, GPU and BUS) for maximum speed</li>
-</ul>
-<p>0.33b</p>
-<ul>
-<li>now uses the full analog joystick range of the Vita</li>
-</ul>
-<p>0.33a</p>
-<ul>
-<li>attempt to reduce bluetooth mouse lag (hard to tell if it helped)</li>
-<li>re-compiled with latest source from MeetPatty, which includes support of uma0:</li>
-</ul>
-<p>0.32c</p>
-<ul>
-<li>bugfix with new 640x400 resolution (was added to internal list of modes twice)</li>
-</ul>
-<p>0.32b</p>
-<ul>
-<li>add 640x400 resolution option</li>
-<li>improve picture quality for resolutions where mac pixels do not map 1:1 onto vita pixels. Pixels are much less distorted now in those cases.</li>
-<li>add aspect ratio option &quot;square pixels,&quot; useful to achieve a larger display of some fullscreen games without distortion. For example fullscreen games that run in 640x400 fit the Vita screen pretty well, even without stretching.</li>
-</ul>
-<p>The System 7 resolution setting has a higher priority than the Basiliskii settings. So, to change resolution, it is not enough to only change it in the Basilisk prefs. The resolution has to be changed also in the &quot;monitors&quot; extension in system 7. Otherwise, the os will set it back during boot.</p>
-<p>0.32a</p>
-<ul>
-<li>more keys accessible in the Danzeff OSK.</li>
-<li>highlight qualifier keys selected with &quot;select&quot; when OSK is displayed</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/basiliskii-vita/releases/download/0.33hgit-rsn8887/BasiliskII_Vita_v0.33h.vpk" target="_blank" rel="noopener">⬇ BasiliskII_Vita_v0.33h.vpk · 1.4 MB</a><a class="btn" href="https://github.com/rsn8887/basiliskii-vita/releases/download/0.33hgit-rsn8887/data.zip" target="_blank" rel="noopener">data.zip · 3.1 KB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-24 18:46 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-24 23:43 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

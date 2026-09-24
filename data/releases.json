@@ -1,6 +1,305 @@
 [
   {
     "platform": "github",
+    "repo": "MetalSyntax/Asphalt-5-Vita",
+    "release_id": "396110245",
+    "tag": "v1.1.0",
+    "name": "Asphalt 5 HD - PS Vita Port v1.1.0",
+    "url": "https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.1.0",
+    "published": "2026-09-24T22:05:04Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Asphalt 5 HD - PS Vita Port (v1.1.0) 🏎️💨\r\n\r\n**Asphalt 5** for PS Vita is out of beta. The game is fully playable from start to finish with physical controls, full audio and cutscene video.\r\n\r\nThis port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via `vitaGL`.\r\n\r\n### 🔧 Fixed since the Beta\r\n* **Nitro works on a single press.** Before, ❌ (Cross) often needed several presses unless you\r\n  were also steering or braking. The engine only reads a nitro press during its 25 Hz game-logic\r\n  step, and on the Vita some frames run no step at all, so the press got lost. It's now held\r\n  until the car logic reads it.\r\n* **The drift skid no longer gets stuck** after a drift ends (before, it kept playing until you\r\n  paused).\r\n* **Race music no longer plays twice** on top of itself.\r\n* **Scenery ambient loops tamed.** A \"revving + skidding\" clip tied to some animated track\r\n  objects looped at full volume from far away and sounded like a phantom car. It now fades out\r\n  much faster with distance and never goes above 50%.\r\n* **Brake and nitro on-screen icons at ~1% opacity**, since the physical buttons drive them.\r\n  Press **SELECT** during a race to show or hide them.\r\n* **Exit closes the app** from the pause menu and the main menu.\r\n* **Cutscene video at ~30 FPS** (was ~10), still skippable with ❌ or Start.\r\n* **No screen-off freeze** while idling in menus.\r\n* **Left analog stick steering**, a sharper internal render resolution (800x480), Touch Buttons\r\n  as the default control scheme on a fresh install, and Circle no longer duplicating Start's\r\n  pause mid-race.\r\n\r\n### ✨ Features\r\n* **Full physical controls.** A custom input router bridges the Vita's buttons with the game's\r\n  native touch engine. It only works with the **Touch Buttons** control scheme, which is set\r\n  automatically on a fresh install.\r\n  * **Menus:** **D-Pad** or **Left Analog Stick** (Up/Down). **❌ (Cross)** selects, **⭕ (Circle)**\r\n    goes back.\r\n  * **Title screens:** any face button skips.\r\n  * **Racing:**\r\n    * **D-Pad Left/Right, L/R Triggers, or Left Analog Stick** to steer.\r\n    * **❌ (Cross)** for nitro.\r\n    * **🟥 (Square)** to brake / drift.\r\n    * **Start** to pause.\r\n    * **Select** to show / hide the on-screen brake & nitro icons.\r\n* **Custom audio engine.** A 32-bit fixed-point mixer with linear interpolation at 48 kHz. It\r\n  follows the engine's routing: looped engine and skid sounds track RPM live, music has a\r\n  dedicated voice that SFX can't steal, and a soft limiter keeps busy scenes clean.\r\n* **Hardware-accelerated graphics** via `vitaGL`.\r\n* **Post-race flow.** Results screens advance with a tap or ❌. Held race inputs are released\r\n  cleanly at the state change.\r\n\r\n### ⚠️ Known Issues\r\n* Only the **Touch Buttons** control scheme works with physical controls. Don't switch to Tilt or\r\n  the drag schemes in Options.\r\n* Manual standby (power button sleep/resume mid-game) is untested. Idling is safe.\r\n* Heavy tracks may drop a few frames at busy moments.\r\n* The intro trailer needs its `.mp4` in `ux0:data/asphalt5/data/`. Otherwise it's skipped.\r\n\r\n### 🛠️ Installation Instructions\r\n1. Install `libshacccg.suprx` if you don't have it already (required for vitaGL).\r\n2. Install the provided `asphalt5.vpk`.\r\n3. Extract the game data files (assets) into `ux0:data/asphalt5/`. *(Data files are not\r\n   provided with this release. You must extract them from your own legally obtained copy of the\r\n   Android game.)*\r\n4. Launch the game and enjoy!\r\n\r\n---\r\n*A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.*",
+    "assets": [
+      {
+        "name": "asphalt5.vpk",
+        "size": 2004869,
+        "download_url": "https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.1.0/asphalt5.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "Asphalt 5",
+    "homebrew_icon": "https://archive.org/download/asphalt-5-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native PS Vita wrapper/port of Asphalt 5, originally published by Gameloft for Android, built on soloader-boilerplate.",
+    "homebrew_long_description": "Asphalt 5 is Gameloft's arcade racing game, originally released for Android as Asphalt-5-HD-v3.4.1.apk. This port runs the compiled native library (libasphalt5.so) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 1.1 fixed-function rendering backend.",
+    "homebrew_id": "asphalt-5",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.0.3",
+    "catalog_apps": [
+      {
+        "id": "asphalt-5",
+        "name": "Asphalt 5",
+        "icon": "https://archive.org/download/asphalt-5-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Native PS Vita wrapper/port of Asphalt 5, originally published by Gameloft for Android, built on soloader-boilerplate.",
+        "long_description": "Asphalt 5 is Gameloft's arcade racing game, originally released for Android as Asphalt-5-HD-v3.4.1.apk. This port runs the compiled native library (libasphalt5.so) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 1.1 fixed-function rendering backend.",
+        "version": "1.0.3",
+        "version_date": "2026-09-19",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.3 → release v1.1.0",
+    "catalog_version": "1.0.3"
+  },
+  {
+    "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "396109151",
+    "tag": "v0.1.11-remapping-beta4",
+    "name": "v0.1.11-remapping-beta4",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.11-remapping-beta4",
+    "published": "2026-09-24T21:56:45Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 7896995,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.11-remapping-beta4/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.1.9",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+        "version": "0.1.9",
+        "version_date": "2026-09-21",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.9 → release v0.1.11-remapping-beta4",
+    "catalog_version": "0.1.9"
+  },
+  {
+    "platform": "github",
+    "repo": "FWGS/xash3d-fwgs",
+    "release_id": "396055497",
+    "tag": "continuous",
+    "name": "Xash3D FWGS Continuous master Build",
+    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
+    "published": "2026-09-24T20:29:22Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "buildnum 4194\n",
+    "assets": [
+      {
+        "name": "su.xash.Engine.Compat.i386.flatpak",
+        "size": 11938944,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
+        "content_type": "application/vnd.flatpak"
+      },
+      {
+        "name": "xash3d-fwgs-amd64.AppImage",
+        "size": 31226360,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-android-mappings.tar.zst",
+        "size": 2603120,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
+        "content_type": "application/zstd"
+      },
+      {
+        "name": "xash3d-fwgs-android.apk",
+        "size": 38839503,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "xash3d-fwgs-apple-amd64.tar.xz",
+        "size": 5375236,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-apple-arm64.tar.xz",
+        "size": 5118668,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-arm64.AppImage",
+        "size": 22047240,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-armhf.AppImage",
+        "size": 21478788,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-i386.AppImage",
+        "size": 31055224,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-ios-arm64.ipa",
+        "size": 5476719,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "xash3d-fwgs-linux-amd64.tar.gz",
+        "size": 33391033,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-arm64.tar.gz",
+        "size": 23699811,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-armhf.tar.gz",
+        "size": 22998600,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-i386.tar.gz",
+        "size": 33313079,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
+        "size": 21494513,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
+        "size": 20026140,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-nswitch.7z",
+        "size": 16418896,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-psvita.7z",
+        "size": 26730173,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-win32-amd64.7z",
+        "size": 20043062,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-win32-i386.7z",
+        "size": 21105868,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xashds-linux-amd64.tar.gz",
+        "size": 3473139,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-arm64.tar.gz",
+        "size": 3408321,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-armhf.tar.gz",
+        "size": 3335426,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-i386.tar.gz",
+        "size": 3414199,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-ppc64el.tar.gz",
+        "size": 3589410,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-riscv64.tar.gz",
+        "size": 3174965,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Xash3D-FWGS",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
+    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "xash3d-fwgs",
+    "homebrew_authors": [
+      "xash3d-fwgs-team",
+      "fgsfds"
+    ],
+    "homebrew_version": "v.continuous",
+    "catalog_apps": [
+      {
+        "id": "xash3d-fwgs",
+        "name": "Xash3D-FWGS",
+        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+        "category": "ports",
+        "description": "Port of Xash3D-FWGS for PSVITA.",
+        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.continuous",
+        "version_date": "2023-10-07",
+        "author_ids": [
+          "xash3d-fwgs-team",
+          "fgsfds"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.continuous",
+    "catalog_version": "v.continuous"
+  },
+  {
+    "platform": "github",
     "repo": "robin994/battleship-vita",
     "release_id": "395914759",
     "tag": "1.5-test",
@@ -373,55 +672,6 @@
   },
   {
     "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "395530263",
-    "tag": "v0.1.11-beta5",
-    "name": "v0.1.11-beta5",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.11-beta5",
-    "published": "2026-09-24T09:36:27Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.11-beta4...v0.1.11-beta5",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 7846354,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.11-beta5/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.1.9",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-        "version": "0.1.9",
-        "version_date": "2026-09-21",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.9 → release v0.1.11-beta5",
-    "catalog_version": "0.1.9"
-  },
-  {
-    "platform": "github",
     "repo": "zm2283145/melee-Vita",
     "release_id": "395364504",
     "tag": "v0.8.12",
@@ -596,207 +846,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 0.1.0 → release v0.3.1",
     "catalog_version": "0.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "FWGS/xash3d-fwgs",
-    "release_id": "394945908",
-    "tag": "continuous",
-    "name": "Xash3D FWGS Continuous master Build",
-    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
-    "published": "2026-09-23T18:30:45Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "buildnum 4193\n",
-    "assets": [
-      {
-        "name": "su.xash.Engine.Compat.i386.flatpak",
-        "size": 11946232,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
-        "content_type": "application/vnd.flatpak"
-      },
-      {
-        "name": "xash3d-fwgs-amd64.AppImage",
-        "size": 31222264,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-android-mappings.tar.zst",
-        "size": 2605192,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
-        "content_type": "application/zstd"
-      },
-      {
-        "name": "xash3d-fwgs-android.apk",
-        "size": 38839835,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "xash3d-fwgs-apple-amd64.tar.xz",
-        "size": 5375248,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-apple-arm64.tar.xz",
-        "size": 5121416,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-arm64.AppImage",
-        "size": 22047240,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-armhf.AppImage",
-        "size": 21482884,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-i386.AppImage",
-        "size": 31051128,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-ios-arm64.ipa",
-        "size": 5476777,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "xash3d-fwgs-linux-amd64.tar.gz",
-        "size": 33390723,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-arm64.tar.gz",
-        "size": 23696910,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-armhf.tar.gz",
-        "size": 22999288,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-i386.tar.gz",
-        "size": 33311017,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
-        "size": 21492593,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
-        "size": 20029270,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-nswitch.7z",
-        "size": 16415687,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-psvita.7z",
-        "size": 26727810,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-amd64.7z",
-        "size": 20043687,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-i386.7z",
-        "size": 21098374,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xashds-linux-amd64.tar.gz",
-        "size": 3473225,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-arm64.tar.gz",
-        "size": 3408324,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-armhf.tar.gz",
-        "size": 3335426,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-i386.tar.gz",
-        "size": 3414208,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-ppc64el.tar.gz",
-        "size": 3589331,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-riscv64.tar.gz",
-        "size": 3177976,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Xash3D-FWGS",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
-    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "xash3d-fwgs",
-    "homebrew_authors": [
-      "xash3d-fwgs-team",
-      "fgsfds"
-    ],
-    "homebrew_version": "v.continuous",
-    "catalog_apps": [
-      {
-        "id": "xash3d-fwgs",
-        "name": "Xash3D-FWGS",
-        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-        "category": "ports",
-        "description": "Port of Xash3D-FWGS for PSVITA.",
-        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.continuous",
-        "version_date": "2023-10-07",
-        "author_ids": [
-          "xash3d-fwgs-team",
-          "fgsfds"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.continuous",
-    "catalog_version": "v.continuous"
   },
   {
     "platform": "github",
@@ -1274,55 +1323,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.8.3.0 → release v8.4.1",
     "catalog_version": "v.8.3.0"
-  },
-  {
-    "platform": "github",
-    "repo": "MetalSyntax/Asphalt-5-Vita",
-    "release_id": "392315194",
-    "tag": "v1.0.3",
-    "name": "Asphalt 5 HD - PS Vita Port v1.0.3",
-    "url": "https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.0.3",
-    "published": "2026-09-20T04:47:47Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# Asphalt 5 HD - PS Vita Port v1.0.3\r\n\r\nWe are incredibly excited to announce the first public Beta release of **Asphalt 5** for the PS Vita! \r\n\r\nThis port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via `vitaGL`. \r\n\r\nSince this is a **Beta release**, the game is fully playable from start to finish, but please keep in mind that there are still some minor bugs and details being ironed out.\r\n\r\n### ✨ Key Features in this Beta:\r\n* **Full Physical Controls Integration:** We've built a custom input router that seamlessly bridges Vita physical buttons with the game's native touch engine. It only works with the **Touch Buttons** control scheme (not Tilt or the drag-to-steer variants) — this is now forced automatically the very first time you run the port, before any save file exists.\r\n  * **Menus:** Fully navigable using the **D-Pad** or **Left Analog Stick** (Up/Down). Use **❌ (Cross)** to select and **⭕ (Circle)** to go back.\r\n  * **Title Screens:** Press any face button to instantly skip splash screens.\r\n  * **In-Game Racing:** \r\n    * **D-Pad Left/Right, L/R Triggers, or Left Analog Stick** to Steer.\r\n    * **❌ (Cross)** to trigger Nitrous.\r\n    * **🟥 (Square)** to Brake / Drift.\r\n    * **Start** to Pause (Circle no longer duplicates this in-race — it's menu-only Back now).\r\n* **Custom Optimized Audio Engine:** The original Android game used heavy floating-point math for audio mixing, which crippled the Vita's CPU. We wrote a custom 32-bit fixed-point audio mixer from scratch with **Linear Interpolation**, providing perfectly smooth engine pitches, zero stuttering, and high-fidelity 48kHz audio output through the Vita's MAIN audio port. It follows the engine's own routing: looped sounds (engine hum, skids) track RPM live, long music tracks get a dedicated voice that SFX can never steal, and the master bus uses a soft limiter so heavy scenes don't square-wave.\r\n* **Hardware Accelerated Graphics:** Running buttery smooth thanks to `vitaGL`.\r\n* **Post-Race Flow:** Results screens advance with a tap anywhere, or with **❌ (Cross)** on the pad — held steering/nitro from the race is cleanly released at the state change, so no more stuck input after crossing the finish line.\r\n* **Intro & Cutscene Video Playback:** The game's original MPEG-4 `.mp4` cutscenes (which the Vita has no hardware decoder for) play in software at a smooth **30 FPS** with in-sync audio — the intro trailer (`A5_Ultimate_VNFS_2.mp4`) and the in-race videos alike. Videos are decoded at half resolution and upscaled, so motion stays fluid; press **❌ (Cross)** or **Start** at any time to skip.\r\n* **No Screen-Off Freeze:** The port resets the Vita's idle timer every frame, so the console's auto power-save can no longer turn the screen off and freeze the game while you read a menu.\r\n\r\n### ⚠️ Known Issues / Beta Status:\r\n* **Open issue — Touch Buttons icons still visible, and Nitro often needs several presses:** the on-screen brake/nitro icons are drawn even though physical controls work, and ❌ (Cross) frequently needs multiple presses before Nitro actually fires — **except** pressing 🟥 (Square, brake/drift) immediately before ❌ (Cross), which reliably triggers Nitro on the very first try. Root cause not isolated yet; we need a console log capturing that exact drift-then-nitro pattern to fix it for real instead of guessing.\r\n* **Recent adjustments (build clean, not yet confirmed on real hardware):** left analog stick steering, a sharper internal render resolution (800x480 instead of 720x432), Touch Buttons forced as the default control scheme on first run, and Circle no longer opening the pause menu mid-race (Start already did that, so the overlap was removed).\r\n* This is a Beta! You might encounter occasional UI quirks or unmapped buttons in very specific sub-menus. \r\n* Performance is mostly solid, but some heavy tracks might experience slight frame drops. Further optimizations are planned.\r\n* The intro trailer needs its `.mp4` present in `ux0:data/asphalt5/data/` — otherwise it is skipped.\r\n* Manual standby with the power button (sleep/resume) is still untested — leaving the game idle is safe, but putting the console to sleep mid-game may not resume cleanly yet.\r\n\r\n### 🛠️ Installation Instructions:\r\n1. Install `libshacccg.suprx` if you don't have it already (required for vitaGL).\r\n2. Install the provided `Asphalt5.vpk`.\r\n3. Extract the game data files (assets) into `ux0:data/asphalt5/`. *(Note: Data files are not provided with this release; you must extract them from your own legally obtained copy of the Android game).*\r\n4. Launch the game and enjoy!\r\n\r\n---\r\n*A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.*\r\n",
-    "assets": [
-      {
-        "name": "asphalt5.vpk",
-        "size": 2003423,
-        "download_url": "https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.0.3/asphalt5.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MetalSyntax",
-    "homebrew_name": "Asphalt 5",
-    "homebrew_icon": "https://archive.org/download/asphalt-5-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native PS Vita wrapper/port of Asphalt 5, originally published by Gameloft for Android, built on soloader-boilerplate.",
-    "homebrew_long_description": "Asphalt 5 is Gameloft's arcade racing game, originally released for Android as Asphalt-5-HD-v3.4.1.apk. This port runs the compiled native library (libasphalt5.so) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 1.1 fixed-function rendering backend.",
-    "homebrew_id": "asphalt-5",
-    "homebrew_authors": [
-      "metalsyntax"
-    ],
-    "homebrew_version": "1.0.3",
-    "catalog_apps": [
-      {
-        "id": "asphalt-5",
-        "name": "Asphalt 5",
-        "icon": "https://archive.org/download/asphalt-5-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "Native PS Vita wrapper/port of Asphalt 5, originally published by Gameloft for Android, built on soloader-boilerplate.",
-        "long_description": "Asphalt 5 is Gameloft's arcade racing game, originally released for Android as Asphalt-5-HD-v3.4.1.apk. This port runs the compiled native library (libasphalt5.so) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 1.1 fixed-function rendering backend.",
-        "version": "1.0.3",
-        "version_date": "2026-09-19",
-        "author_ids": [
-          "metalsyntax"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0.3",
-    "catalog_version": "1.0.3"
   },
   {
     "platform": "github",
@@ -33142,62 +33142,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.01",
     "catalog_version": "v.1.01"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/basiliskii-vita",
-    "release_id": "41010877",
-    "tag": "0.33hgit-rsn8887",
-    "name": "Basilisk II Vita v0.33h (mod by rsn8887)",
-    "url": "https://github.com/rsn8887/basiliskii-vita/releases/tag/0.33hgit-rsn8887",
-    "published": "2021-04-06T17:06:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Last Changes\r\n======\r\n0.33h\r\n\r\n- implement slow/fast modifiers for analog pointer\r\n- allow more memory (>29 MB) for emulated computer\r\n\r\nOverview\r\n=====\r\n\r\nThis is a release of MeetPatty’s Basilisk II Mac Emulator for Vita with the changes listed below. My earlier changes to 0.32 have already been incorporated into the upstream repository.\r\n\r\n![](https://s14.postimg.cc/649ygto0x/5_EEA1_E55-_BCC1-409_C-9_FB9-4_B8954_ED93_C1.jpg)\r\n\r\nThanks to MeetPatty for an amazing port of this emulator.\r\n\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR\r\n\r\nThis release is for anyone who wants to try it out in the meantime before MeetPatty releases a new official version.\r\n\r\nBasilisk II for the Vita\r\n=======\r\n\r\nBasilisk II is a multi-platform Mac II emulator whose code is released under the terms of the\r\nGPL v2.\r\n\r\nFeatures for the Vita version include:\r\n\r\n* Emulates a Mac II series machine running OS 7.0.1 through 8.1, depending on the ROM used.\r\n* Uses UAE CPU emulation, with new SoftFloat FPU emulation for better compatibility.\r\n* Supports on-the-fly change of colors and resolution (requires Display Manager).\r\n* Has stereo, 16-bit, 44kHz audio (requires Sound Manager 3.0).\r\n* Supports emulated floppy and CDROM with removable media (no CD audio yet).\r\n* Supports up to four hardfiles for use as fixed drives.\r\n* Emulates a Mac Extended ADB keyboard and mouse. Buttons can be remapped on-the-fly.\r\n* Bluetooth keyboard and mouse support.\r\n* On-screen overlay keyboard that controlled with Vita buttons.\r\n* Analog joystick pointer movement with adjustable speed and deadzone\r\n* Touch pointer controls (front/rear panel) with gestures and selectable direct/indirect mode\r\n\r\nThe main Basilisk II website is located at http://basilisk.cebix.net/. This version of Basilisk II\r\nis based on Chilly Willy's PSP port v1.1.1.\r\n\r\nBasilisk II comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to\r\nredistribute it under the terms of the GNU General Public License.\r\n\r\nInstalling Basilisk II for the Vita\r\n===================================\r\n\r\nInstall the vpk in the usual way. Copy the Basilisk II folder in the archive to ux0:data.  \r\nIf you look at the folder, you'll see the following:  \r\n\r\n(directories)  \r\ncdroms  \r\ndisks  \r\nfiles  \r\nhardfiles  \r\nimaps  \r\nroms  \r\n\r\n(files)  \r\nBasiliskII_prefs  \r\nimaps/default  \r\nimaps/dpad_mouse  \r\n\r\nThe cdroms folder is where you copy the bin/cue dumps of Mac CDROMs you wish to use with the\r\nemulation. These should be standard MODE1 ISO dumps, not raw dumps. The extension for CDROM\r\nimages are normally “.bin”, “.iso”, or “.img”.\r\n\r\nThe disks folder is where you copy floppy images you wish to use with the emulation. These are\r\nplain dumps of 1.44 MB high-density Mac or PC format microfloppy disks. PC format requires the\r\nappropriate Mac extension to read, such as MacLink (part of OS 8). All files in this folder\r\nshould have an extension of “.dsk”.\r\n\r\nThe files folder is mounted on the Mac desktop when enabled in the settings. Files in this folder\r\nshould be in AppleDouble, hqx, and binhex format.\r\n\r\nThe hardfiles folder contains the files that are used as fixed hard disks in the emulation. They\r\ncan be virtually any size, but will generally be between 200 and 400 MB as a basic installation\r\nof OS8 takes about 120 MB. You can have any number of files in this directory, but only a maximum\r\nof four can be selected at one time. The extension of files in this folder should b “.hfv”, but may\r\nalso have no extension at all.\r\n\r\nThe imaps folder holds the input maps for remapping the Vita buttons into Mac input events. This will\r\nbe explained later.\r\n\r\nThe roms folder holds the Mac ROM images you might use with the emulation. You select one image in\r\nthe emulation setup. They can have any file name, but a typical extension is “.rom”.\r\n\r\nBasiliskII_prefs is a sample preferences file.\r\n\r\nNote: No Apple Macintosh ROMs or software of any sort is included with this program. You'll have to\r\nfind them yourself. This emulator is useless without a ROM and MacOS.\r\n\r\nControls\r\n========\r\nSELECT - Invoke the imap/floppy/cdrom menu  \r\n\r\nWhile in the imap/floppy/cdrom menu, you press up/down to change between input maps,\r\nfloppies, and cdroms. Press left/right to browse the list of files in the imaps, disks, and\r\ncdroms directories, respectively. Press CROSS to select an input map, or mount a CD-ROM or\r\nfloppy. Press SELECT again to exit the menu. Note that you can only have one cd-rom and\r\nfloppy mounted at a time. To mount another, you must first dismount the CD-ROM/floppy\r\nwhich is already mounted. On the Mac, you dismount disks/cd-roms by throwing them in the\r\ntrash, or by selecting the disk and then selecting Eject from the Special menu (or pressing\r\nthe Command + E keys).\r\n\r\nDefault Controls\r\n================\r\nCROSS – mouse button  \r\nSQUARE – enter key  \r\nCIRCLE – command + w (Close Window)  \r\nTRIANGLE – command + q (Quit Application)  \r\nRTRIGGER – control key  \r\nLTRIGGER – option key  \r\nUP/DOWN/LEFT/RIGHT – corresponding cursor key  \r\nANALOG STICK – mouse  \r\n\r\nanalog_speed Controls\r\n================\r\nCROSS – mouse button  \r\nSQUARE – enter key  \r\nCIRCLE – control key + mouse button (\"right click\")\r\nTRIANGLE – command + q (Quit Application)  \r\nRTRIGGER – hold to slow down analog joystick mouse\r\nLTRIGGER – hold to speed up analog joystick mouse\r\nUP/DOWN/LEFT/RIGHT – corresponding cursor key  \r\nANALOG STICK – mouse  \r\n\r\ndpad_mouse Controls\r\n===================\r\nCROSS – mouse button  \r\nSQUARE – enter key  \r\nCIRCLE – command + w (Close Window)  \r\nTRIANGLE – command + q (Quit Application)  \r\nRTRIGGER – control key  \r\nLTRIGGER – move mouse faster  \r\nUP/DOWN/LEFT/RIGHT – mouse  \r\nANALOG STICK – mouse  \r\n\r\nBluetooth mouse / keyboard controls\r\n=================\r\nReal Bluetooth keyboard and mice also work. This was tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. Vita and VitaTV do not pair with all BT keyboards or mice, some work, some don't.\r\n\r\nImap file format\r\n================\r\n\r\nEach line has the following format:\r\n\r\n<vita key(s) pressed> <vita key(s) not pressed> <mac key 1> <mac key 2> <mac key 3> <mac key 4>\r\n\r\nLines starting with # are treated as comment lines and ignored,\r\n\r\nValid vita key values are (OR keys to combine):\r\n\r\n0x0000  No key  \r\n0x0008\tStart button.  \r\n0x0010\tUp D-Pad button.  \r\n0x0020\tRight D-Pad button.  \r\n0x0040\tDown D-Pad button.  \r\n0x0080\tLeft D-Pad button.  \r\n0x0100\tLeft trigger.  \r\n0x0200\tRight trigger.  \r\n0x1000\tTriangle button.  \r\n0x2000\tCircle button.  \r\n0x4000\tCross button.  \r\n0x8000\tSquare button.  \r\n\r\nSee below for Basilisk II key codes\r\n\r\nExample D-Pad Up = cursor up: \r\n\r\n0x0010 0x0000 62 255 255 255\r\n\r\nExample Triangle = command + q: \r\n\r\n0x1000 0x0000 55 12 255 255\r\n\r\nSee imaps/default and imaps/dpad_mouse for further examples\r\n\r\nBasilisk II Key Codes\r\n=====================\r\n````\t\r\n0       A\t\r\n1       S\t\r\n2       D\t\r\n3       F\t\r\n4       H\t\r\n5       G\t\r\n6       Z\t\r\n7       X\t\r\n8       C\t\r\n9       V\t\r\n11      B\t\r\n12      Q\t\r\n13      W\t\r\n14      E\t\r\n15      R\t\r\n16      Y\t\r\n17      T\t\r\n18      1\t\r\n19      2\t\r\n20      3\t\r\n21      4\t\r\n22      6\t\r\n23      5\t\r\n24      =\t\r\n25      9\t\r\n26      7\t\r\n27      -\t\r\n28      8\t\r\n29      0\t\r\n30      ]\t\r\n31      O\t\r\n32      U\t\r\n33      [\t\r\n34      I\t\r\n35      P\t\r\n36      Return\t\r\n37      L\t\r\n38      J\t\r\n39      '\t\r\n40      K\t\r\n41      ;\t\r\n42      \\\t\r\n43      ,\t\r\n44      /\t\r\n45      N\t\r\n46      M\t\r\n47      .\t\r\n48      Tab\t\r\n49      Space\t\r\n50      `\t\r\n51      Backspace\t\r\n53      Esc\t\r\n54      Ctrl Left\t\r\n55      Alt Left (-> Command)\t\r\n56      Shift Left\t\r\n57      Caps Lock\t\r\n58      Logo Left (-> Option)\t\r\n59      Cursor Left\t\r\n60      Cursor Right\t\r\n61      Cursor Down\t\r\n62      Cursor Up\t\r\n65      KP .\t\r\n67      KP *\t\r\n69      KP +\t\r\n71      Num Lock\t\r\n75      KP /\t\r\n76      KP Enter\t\r\n78      KP -\t\r\n82      KP 0\t\r\n83      KP 1\t\r\n84      KP 2\t\r\n85      KP 3\t\r\n86      KP 4\t\r\n87      KP 5\t\r\n88      KP 6\t\r\n89      KP 7\t\r\n91      KP 8\t\r\n92      KP 9\t\r\n96      F5\t\r\n97      F6\t\r\n98      F7\t\r\n99      F3\t\r\n100     F8\t\r\n101     F9\t\r\n103     F11\t\r\n105     PrintScrn\t\r\n107     Scroll Lock\t\r\n109     F10\t\r\n111     F12\t\r\n113     Pause\t\r\n114     Insert\t\r\n115     Home\t\r\n116     Page Up\t\r\n117     Delete\t\r\n118     F4\t\r\n119     End\t\r\n120     F2\t\r\n121     Page Down\t\r\n122     F1\r\n255     No key press\r\n256     Mouse button 1\r\n1024\tSlow down analog stick mouse\r\n1025\tSpeed up analog stick mouse\r\n`````\r\n\r\nIndirect Touch Controls\r\n=====\r\n\r\nIndirect touch controls are always used on the rear panel. On the front panel, the default is to use direct touch (pointer jumps to finger), but indirect controls can be enabled in the menu. \r\n\r\nFor multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.\r\n\r\n- Single finger drag: move the mouse pointer, how far the pointer moves in response to finger motion depends on the Mouse Speed setting\r\n- Single finger short tap: left mouse button. \r\n- One finger short tap while holding another finger: right mouse button. \r\n- Long second finger tap while holding another finger: initiate left mouse button drag and drop, useful to hold left button down to bring up menus. \r\n- Long third finger tap while holding two other fingers: initiate right mouse button drag and drop. Drag and drop stops when last finger is released.\r\n\r\nChangelog \r\n-----------\r\n\r\n0.33h\r\n\r\n- implement slow/fast modifiers for analog pointer\r\n- allow more memory (>29 MB) for emulated computer\r\n\r\n0.33g\r\n\r\n- further improve pointer motion with analog stick\r\n\r\n0.33f\r\n\r\n- improve pointer response to diagonal stick directions\r\n\r\n0.33e\r\n\r\n- remove bluetooth mouse lag\r\n- apply pointer speed setting also to bluetooth mouse\r\n\r\n0.33d\r\n\r\n- prevent accidental clicks when moving pointer using rear touch or indirect front touch\r\n\r\n0.33c\r\n\r\n- implemented rear touch (can be enabled in options)\r\n- implemented indirect front touch (can be enabled in options) \r\n- implemented pointer speed option\r\n- implemented radial scaled analog joystick deadzone\r\n- added cpu speed option to max out all frequencies (CPU, GPU and BUS) for maximum speed\r\n\r\n0.33b\r\n\r\n- now uses the full analog joystick range of the Vita\r\n\r\n0.33a\r\n\r\n- attempt to reduce bluetooth mouse lag (hard to tell if it helped)\r\n- re-compiled with latest source from MeetPatty, which includes support of uma0:\r\n\r\n0.32c\r\n- bugfix with new 640x400 resolution (was added to internal list of modes twice)\r\n\r\n0.32b\r\n- add 640x400 resolution option\r\n- improve picture quality for resolutions where mac pixels do not map 1:1 onto vita pixels. Pixels are much less distorted now in those cases.\r\n- add aspect ratio option \"square pixels,\" useful to achieve a larger display of some fullscreen games without distortion. For example fullscreen games that run in 640x400 fit the Vita screen pretty well, even without stretching.\r\n\r\nThe System 7 resolution setting has a higher priority than the Basiliskii settings. So, to change resolution, it is not enough to only change it in the Basilisk prefs. The resolution has to be changed also in the \"monitors\" extension in system 7. Otherwise, the os will set it back during boot.\r\n\r\n0.32a\r\n- more keys accessible in the Danzeff OSK. \r\n- highlight qualifier keys selected with \"select\" when OSK is displayed\r\n",
-    "assets": [
-      {
-        "name": "BasiliskII_Vita_v0.33h.vpk",
-        "size": 1416438,
-        "download_url": "https://github.com/rsn8887/basiliskii-vita/releases/download/0.33hgit-rsn8887/BasiliskII_Vita_v0.33h.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "data.zip",
-        "size": 3138,
-        "download_url": "https://github.com/rsn8887/basiliskii-vita/releases/download/0.33hgit-rsn8887/data.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "rsn8887",
-    "homebrew_name": "Basilisk II",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-basilisk-ii/icon0.png",
-    "homebrew_category": "emulators",
-    "homebrew_description": "68k Macintosh emulator for PSVITA.",
-    "homebrew_long_description": "Port of Basilisk II to the PSVita. Based off Chilly Willy's port to the PSP.\nBasilisk II is an Open Source 68k Macintosh emulator. That is, it allows you to run 68k MacOS software on your computer, even if you are using a different operating system. However, you still need a copy of MacOS and a Macintosh ROM image to use Basilisk II.",
-    "homebrew_id": "basilisk-ii",
-    "homebrew_authors": [
-      "meetpatty",
-      "rsn8887"
-    ],
-    "homebrew_version": "0.33hgit-rsn8887",
-    "catalog_apps": [
-      {
-        "id": "basilisk-ii",
-        "name": "Basilisk II",
-        "icon": "https://archive.org/download/psvitaalive-basilisk-ii/icon0.png",
-        "category": "emulators",
-        "description": "68k Macintosh emulator for PSVITA.",
-        "long_description": "Port of Basilisk II to the PSVita. Based off Chilly Willy's port to the PSP.\nBasilisk II is an Open Source 68k Macintosh emulator. That is, it allows you to run 68k MacOS software on your computer, even if you are using a different operating system. However, you still need a copy of MacOS and a Macintosh ROM image to use Basilisk II.",
-        "version": "0.33hgit-rsn8887",
-        "version_date": "2021-04-06",
-        "author_ids": [
-          "meetpatty",
-          "rsn8887"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.33hgit-rsn8887",
-    "catalog_version": "0.33hgit-rsn8887"
   }
 ]
