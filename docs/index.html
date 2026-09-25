@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>481</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">404</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>484</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">407</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>77</strong><span>pendientes</span></div>
-        <div class="stat"><strong>473</strong><span>GitHub</span></div>
+        <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -26194,10 +26194,745 @@ this version of vita media player is meant for 1920x1088 output for the pstv. it
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="basilisk ii basilisk ii rsn8887/basiliskii-vita basilisk ii vita v0.33h (mod by rsn8887) 0.33hgit-rsn8887 emulators last changes
+======
+0.33h
+
+- implement slow/fast modifiers for analog pointer
+- allow more memory (&gt;29 mb) for emulated computer
+
+overview
+=====
+
+this is a release of meetpatty’s basilisk ii mac emulator for vita with the changes listed below. my earlier changes to 0.32 have already been incorporated into the upstream repository.
+
+![](https://s14.postimg.cc/649ygto0x/5_eea1_e55-_bcc1-409_c-9_fb9-4_b8954_ed93_c1.jpg)
+
+thanks to meetpatty for an amazing port of this emulator.
+
+thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr
+
+this release is for anyone who wants to try it out in the meantime before meetpatty releases a new official version.
+
+basilisk ii for the vita
+=======
+
+basilisk ii is a multi-platform mac ii emulator whose code is released under the terms of the
+gpl v2.
+
+features for the vita version include:
+
+* emulates a mac ii series machine running os 7.0.1 through 8.1, depending on the rom used.
+* uses uae cpu emulation, with new softfloat fpu emulation for better compatibility.
+* supports on-the-fly change of colors and resolution (requires display manager).
+* has stereo, 16-bit, 44khz audio (requires sound manager 3.0).
+* supports emulated floppy and cdrom with removable media (no cd audio yet).
+* supports up to four hardfiles for use as fixed drives.
+* emulates a mac extended adb keyboard and mouse. buttons can be remapped on-the-fly.
+* bluetooth keyboard and mouse support.
+* on-screen overlay keyboard that controlled with vita buttons.
+* analog joystick pointer movement with adjustable speed and deadzone
+* touch pointer controls (front/rear panel) with gestures and selectable direct/indirect mode
+
+the main basilisk ii website is located at http://basilisk.cebix.net/. this version of basilisk ii
+is based on chilly willy&#x27;s psp port v1.1.1.
+
+basilisk ii comes with absolutely no warranty. this is free software, and you are welcome to
+redistribute it under the terms of the gnu general public license.
+
+installing basilisk ii for the vita
+===================================
+
+install the vpk in the usual way. copy the basilisk ii folder in the archive to ux0:data.  
+if you look at the folder, you&#x27;ll see the following:  
+
+(directories)  
+cdroms  
+disks  
+files  
+hardfiles  
+imaps  
+roms  
+
+(files)  
+basiliskii_prefs  
+imaps/default  
+imaps/dpad_mouse  
+
+the cdroms folder is where you copy the bin/cue dumps of mac cdroms you wish to use with the
+emulation. these should be standard mode1 iso dumps, not raw dumps. the extension for cdrom
+images are normally “.bin”, “.iso”, or “.img”.
+
+the disks folder is where you copy floppy images you wish to use with the emulation. these are
+plain dumps of 1.44 mb high-density mac or pc format microfloppy disks. pc format requires the
+appropriate mac extension to read, such as maclink (part of os 8). all files in this folder
+should have an extension of “.dsk”.
+
+the files folder is mounted on the mac desktop when enabled in the settings. files in this folder
+should be in appledouble, hqx, and binhex format.
+
+the hardfiles folder contains the files that are used as fixed hard disks in the emulation. they
+can be virtually any size, but will generally be between 200 and 400 mb as a basic installation
+of os8 takes about 120 mb. you can have any number of files in this directory, but only a maximum
+of four can be selected at one time. the extension of files in this folder should b “.hfv”, but may
+also have no extension at all.
+
+the imaps folder holds the input maps for remapping the vita buttons into mac input events. this will
+be explained later.
+
+the roms folder holds the mac rom images you might use with the emulation. you select one image in
+the emulation setup. they can have any file name, but a typical extension is “.rom”.
+
+basiliskii_prefs is a sample preferences file.
+
+note: no apple macintosh roms or software of any sort is included with this program. you&#x27;ll have to
+find them yourself. this emulator is useless without a rom and macos.
+
+controls
+========
+select - invoke the imap/floppy/cdrom menu  
+
+while in the imap/floppy/cdrom menu, you press up/down to change between input maps,
+floppies, and cdroms. press left/right to browse the list of files in the imaps, disks, and
+cdroms directories, respectively. press cross to select an input map, or mount a cd-rom or
+floppy. press select again to exit the menu. note that you can only have one cd-rom and
+floppy mounted at a time. to mount another, you must first dismount the cd-rom/floppy
+which is already mounted. on the mac, you dismount disks/cd-roms by throwing them in the
+trash, or by selecting the disk and then selecting eject from the special menu (or pressing
+the command + e keys).
+
+default controls
+================
+cross – mouse button  
+square – enter key  
+circle – command + w (close window)  
+triangle – command + q (quit application)  
+rtrigger – control key  
+ltrigger – option key  
+up/down/left/right – corresponding cursor key  
+analog stick – mouse  
+
+analog_speed controls
+================
+cross – mouse button  
+square – enter key  
+circle – control key + mouse button (&quot;right click&quot;)
+triangle – command + q (quit application)  
+rtrigger – hold to slow down analog joystick mouse
+ltrigger – hold to speed up analog joystick mouse
+up/down/left/right – corresponding cursor key  
+analog stick – mouse  
+
+dpad_mouse controls
+===================
+cross – mouse button  
+square – enter key  
+circle – command + w (close window)  
+triangle – command + q (quit application)  
+rtrigger – control key  
+ltrigger – move mouse faster  
+up/down/left/right – mouse  
+analog stick – mouse  
+
+bluetooth mouse / keyboard controls
+=================
+real bluetooth keyboard and mice also work. this was tested working with jelly bean bt keyboard and mouse combo asin:b06y56bbyp and with the standalone jelly comb bluetooth wireless mouse asin:b075hbdwcf. vita and vitatv do not pair with all bt keyboards or mice, some work, some don&#x27;t.
+
+imap file format
+================
+
+each line has the following format:
+
+&lt;vita key(s) pressed&gt; &lt;vita key(s) not pressed&gt; &lt;mac key 1&gt; &lt;mac key 2&gt; &lt;mac key 3&gt; &lt;mac key 4&gt;
+
+lines starting with # are treated as comment lines and ignored,
+
+valid vita key values are (or keys to combine):
+
+0x0000  no key  
+0x0008	start button.  
+0x0010	up d-pad button.  
+0x0020	right d-pad button.  
+0x0040	down d-pad button.  
+0x0080	left d-pad button.  
+0x0100	left trigger.  
+0x0200	right trigger.  
+0x1000	triangle button.  
+0x2000	circle button.  
+0x4000	cross button.  
+0x8000	square button.  
+
+see below for basilisk ii key codes
+
+example d-pad up = cursor up: 
+
+0x0010 0x0000 62 255 255 255
+
+example triangle = command + q: 
+
+0x1000 0x0000 55 12 255 255
+
+see imaps/default and imaps/dpad_mouse for further examples
+
+basilisk ii key codes
+=====================
+````	
+0       a	
+1       s	
+2       d	
+3       f	
+4       h	
+5       g	
+6       z	
+7       x	
+8       c	
+9       v	
+11      b	
+12      q	
+13      w	
+14      e	
+15      r	
+16      y	
+17      t	
+18      1	
+19      2	
+20      3	
+21      4	
+22      6	
+23      5	
+24      =	
+25      9	
+26      7	
+27      -	
+28      8	
+29      0	
+30      ]	
+31      o	
+32      u	
+33      [	
+34      i	
+35      p	
+36      return	
+37      l	
+38      j	
+39      &#x27;	
+40      k	
+41      ;	
+42      \	
+43      ,	
+44      /	
+45      n	
+46      m	
+47      .	
+48      tab	
+49      space	
+50      `	
+51      backspace	
+53      esc	
+54      ctrl left	
+55      alt left (-&gt; command)	
+56      shift left	
+57      caps lock	
+58      logo left (-&gt; option)	
+59      cursor left	
+60      cursor right	
+61      cursor down	
+62      cursor up	
+65      kp .	
+67      kp *	
+69      kp +	
+71      num lock	
+75      kp /	
+76      kp enter	
+78      kp -	
+82      kp 0	
+83      kp 1	
+84      kp 2	
+85      kp 3	
+86      kp 4	
+87      kp 5	
+88      kp 6	
+89      kp 7	
+91      kp 8	
+92      kp 9	
+96      f5	
+97      f6	
+98      f7	
+99      f3	
+100     f8	
+101     f9	
+103     f11	
+105     printscrn	
+107     scroll lock	
+109     f10	
+111     f12	
+113     pause	
+114     insert	
+115     home	
+116     page up	
+117     delete	
+118     f4	
+119     end	
+120     f2	
+121     page down	
+122     f1
+255     no key press
+256     mouse button 1
+1024	slow down analog stick mouse
+1025	speed up analog stick mouse
+`````
+
+indirect touch controls
+=====
+
+indirect touch controls are always used on the rear panel. on the front panel, the default is to use direct touch (pointer jumps to finger), but indirect controls can be enabled in the menu. 
+
+for multi-touch gestures, the fingers have to be far enough apart from each other, so that the vita will not erroneously recognize them as a single finger. otherwise the pointer will jump around.
+
+- single finger drag: move the mouse pointer, how far the pointer moves in response to finger motion depends on the mouse speed setting
+- single finger short tap: left mouse button. 
+- one finger short tap while holding another finger: right mouse button. 
+- long second finger tap while holding another finger: initiate left mouse button drag and drop, useful to hold left button down to bring up menus. 
+- long third finger tap while holding two other fingers: initiate right mouse button drag and drop. drag and drop stops when last finger is released.
+
+changelog 
+-----------
+
+0.33h
+
+- implement slow/fast modifiers for analog pointer
+- allow more memory (&gt;29 mb) for emulated computer
+
+0.33g
+
+- further improve pointer motion with analog stick
+
+0.33f
+
+- improve pointer response to diagonal stick directions
+
+0.33e
+
+- remove bluetooth mouse lag
+- apply pointer speed setting also to bluetooth mouse
+
+0.33d
+
+- prevent accidental clicks when moving pointer using rear touch or indirect front touch
+
+0.33c
+
+- implemented rear touch (can be enabled in options)
+- implemented indirect front touch (can be enabled in options) 
+- implemented pointer speed option
+- implemented radial scaled analog joystick deadzone
+- added cpu speed option to max out all frequencies (cpu, gpu and bus) for maximum speed
+
+0.33b
+
+- now uses the full analog joystick range of the vita
+
+0.33a
+
+- attempt to reduce bluetooth mouse lag (hard to tell if it helped)
+- re-compiled with latest source from meetpatty, which includes support of uma0:
+
+0.32c
+- bugfix with new 640x400 resolution (was added to internal list of modes twice)
+
+0.32b
+- add 640x400 resolution option
+- improve picture quality for resolutions where mac pixels do not map 1:1 onto vita pixels. pixels are much less distorted now in those cases.
+- add aspect ratio option &quot;square pixels,&quot; useful to achieve a larger display of some fullscreen games without distortion. for example fullscreen games that run in 640x400 fit the vita screen pretty well, even without stretching.
+
+the system 7 resolution setting has a higher priority than the basiliskii settings. so, to change resolution, it is not enough to only change it in the basilisk prefs. the resolution has to be changed also in the &quot;monitors&quot; extension in system 7. otherwise, the os will set it back during boot.
+
+0.32a
+- more keys accessible in the danzeff osk. 
+- highlight qualifier keys selected with &quot;select&quot; when osk is displayed">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-basilisk-ii/icon0.png" alt="Icono de Basilisk II" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">EMULATORS · GITHUB · rsn8887/basiliskii-vita</div>
+                      <h2><a href="https://github.com/rsn8887/basiliskii-vita/releases/tag/0.33hgit-rsn8887" target="_blank" rel="noopener">Basilisk II</a></h2>
+                      <div class="release-name">Basilisk II Vita v0.33h (mod by rsn8887)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">0.33hgit-rsn8887</span>
+                    <span>2021-04-06 17:06 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.33hgit-rsn8887</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.33hgit-rsn8887</div>
+                  
+                  <div class="body markdown-body"><h1>Last Changes</h1>
+<p>0.33h</p>
+<ul>
+<li>implement slow/fast modifiers for analog pointer</li>
+<li>allow more memory (&gt;29 MB) for emulated computer</li>
+</ul>
+<h1>Overview</h1>
+<p>This is a release of MeetPatty’s Basilisk II Mac Emulator for Vita with the changes listed below. My earlier changes to 0.32 have already been incorporated into the upstream repository.</p>
+<p><img src="https://s14.postimg.cc/649ygto0x/5_EEA1_E55-_BCC1-409_C-9_FB9-4_B8954_ED93_C1.jpg" alt=""></p>
+<p>Thanks to MeetPatty for an amazing port of this emulator.</p>
+<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR</p>
+<p>This release is for anyone who wants to try it out in the meantime before MeetPatty releases a new official version.</p>
+<h1>Basilisk II for the Vita</h1>
+<p>Basilisk II is a multi-platform Mac II emulator whose code is released under the terms of the
+GPL v2.</p>
+<p>Features for the Vita version include:</p>
+<ul>
+<li>Emulates a Mac II series machine running OS 7.0.1 through 8.1, depending on the ROM used.</li>
+<li>Uses UAE CPU emulation, with new SoftFloat FPU emulation for better compatibility.</li>
+<li>Supports on-the-fly change of colors and resolution (requires Display Manager).</li>
+<li>Has stereo, 16-bit, 44kHz audio (requires Sound Manager 3.0).</li>
+<li>Supports emulated floppy and CDROM with removable media (no CD audio yet).</li>
+<li>Supports up to four hardfiles for use as fixed drives.</li>
+<li>Emulates a Mac Extended ADB keyboard and mouse. Buttons can be remapped on-the-fly.</li>
+<li>Bluetooth keyboard and mouse support.</li>
+<li>On-screen overlay keyboard that controlled with Vita buttons.</li>
+<li>Analog joystick pointer movement with adjustable speed and deadzone</li>
+<li>Touch pointer controls (front/rear panel) with gestures and selectable direct/indirect mode</li>
+</ul>
+<p>The main Basilisk II website is located at <a target="_blank" rel="noopener noreferrer" href="http://basilisk.cebix.net/">http://basilisk.cebix.net/</a>. This version of Basilisk II
+is based on Chilly Willy's PSP port v1.1.1.</p>
+<p>Basilisk II comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to
+redistribute it under the terms of the GNU General Public License.</p>
+<h1>Installing Basilisk II for the Vita</h1>
+<p>Install the vpk in the usual way. Copy the Basilisk II folder in the archive to ux0:data.<br>
+If you look at the folder, you'll see the following:</p>
+<p>(directories)<br>
+cdroms<br>
+disks<br>
+files<br>
+hardfiles<br>
+imaps<br>
+roms</p>
+<p>(files)<br>
+BasiliskII_prefs<br>
+imaps/default<br>
+imaps/dpad_mouse</p>
+<p>The cdroms folder is where you copy the bin/cue dumps of Mac CDROMs you wish to use with the
+emulation. These should be standard MODE1 ISO dumps, not raw dumps. The extension for CDROM
+images are normally “.bin”, “.iso”, or “.img”.</p>
+<p>The disks folder is where you copy floppy images you wish to use with the emulation. These are
+plain dumps of 1.44 MB high-density Mac or PC format microfloppy disks. PC format requires the
+appropriate Mac extension to read, such as MacLink (part of OS 8). All files in this folder
+should have an extension of “.dsk”.</p>
+<p>The files folder is mounted on the Mac desktop when enabled in the settings. Files in this folder
+should be in AppleDouble, hqx, and binhex format.</p>
+<p>The hardfiles folder contains the files that are used as fixed hard disks in the emulation. They
+can be virtually any size, but will generally be between 200 and 400 MB as a basic installation
+of OS8 takes about 120 MB. You can have any number of files in this directory, but only a maximum
+of four can be selected at one time. The extension of files in this folder should b “.hfv”, but may
+also have no extension at all.</p>
+<p>The imaps folder holds the input maps for remapping the Vita buttons into Mac input events. This will
+be explained later.</p>
+<p>The roms folder holds the Mac ROM images you might use with the emulation. You select one image in
+the emulation setup. They can have any file name, but a typical extension is “.rom”.</p>
+<p>BasiliskII_prefs is a sample preferences file.</p>
+<p>Note: No Apple Macintosh ROMs or software of any sort is included with this program. You'll have to
+find them yourself. This emulator is useless without a ROM and MacOS.</p>
+<h1>Controls</h1>
+<p>SELECT - Invoke the imap/floppy/cdrom menu</p>
+<p>While in the imap/floppy/cdrom menu, you press up/down to change between input maps,
+floppies, and cdroms. Press left/right to browse the list of files in the imaps, disks, and
+cdroms directories, respectively. Press CROSS to select an input map, or mount a CD-ROM or
+floppy. Press SELECT again to exit the menu. Note that you can only have one cd-rom and
+floppy mounted at a time. To mount another, you must first dismount the CD-ROM/floppy
+which is already mounted. On the Mac, you dismount disks/cd-roms by throwing them in the
+trash, or by selecting the disk and then selecting Eject from the Special menu (or pressing
+the Command + E keys).</p>
+<h1>Default Controls</h1>
+<p>CROSS – mouse button<br>
+SQUARE – enter key<br>
+CIRCLE – command + w (Close Window)<br>
+TRIANGLE – command + q (Quit Application)<br>
+RTRIGGER – control key<br>
+LTRIGGER – option key<br>
+UP/DOWN/LEFT/RIGHT – corresponding cursor key<br>
+ANALOG STICK – mouse</p>
+<h1>analog_speed Controls</h1>
+<p>CROSS – mouse button<br>
+SQUARE – enter key<br>
+CIRCLE – control key + mouse button (&quot;right click&quot;)
+TRIANGLE – command + q (Quit Application)<br>
+RTRIGGER – hold to slow down analog joystick mouse
+LTRIGGER – hold to speed up analog joystick mouse
+UP/DOWN/LEFT/RIGHT – corresponding cursor key<br>
+ANALOG STICK – mouse</p>
+<h1>dpad_mouse Controls</h1>
+<p>CROSS – mouse button<br>
+SQUARE – enter key<br>
+CIRCLE – command + w (Close Window)<br>
+TRIANGLE – command + q (Quit Application)<br>
+RTRIGGER – control key<br>
+LTRIGGER – move mouse faster<br>
+UP/DOWN/LEFT/RIGHT – mouse<br>
+ANALOG STICK – mouse</p>
+<h1>Bluetooth mouse / keyboard controls</h1>
+<p>Real Bluetooth keyboard and mice also work. This was tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. Vita and VitaTV do not pair with all BT keyboards or mice, some work, some don't.</p>
+<h1>Imap file format</h1>
+<p>Each line has the following format:</p>
+<p>&lt;vita key(s) pressed&gt; &lt;vita key(s) not pressed&gt; &lt;mac key 1&gt; &lt;mac key 2&gt; &lt;mac key 3&gt; &lt;mac key 4&gt;</p>
+<p>Lines starting with # are treated as comment lines and ignored,</p>
+<p>Valid vita key values are (OR keys to combine):</p>
+<p>0x0000  No key<br>
+0x0008	Start button.<br>
+0x0010	Up D-Pad button.<br>
+0x0020	Right D-Pad button.<br>
+0x0040	Down D-Pad button.<br>
+0x0080	Left D-Pad button.<br>
+0x0100	Left trigger.<br>
+0x0200	Right trigger.<br>
+0x1000	Triangle button.<br>
+0x2000	Circle button.<br>
+0x4000	Cross button.<br>
+0x8000	Square button.</p>
+<p>See below for Basilisk II key codes</p>
+<p>Example D-Pad Up = cursor up:</p>
+<p>0x0010 0x0000 62 255 255 255</p>
+<p>Example Triangle = command + q:</p>
+<p>0x1000 0x0000 55 12 255 255</p>
+<p>See imaps/default and imaps/dpad_mouse for further examples</p>
+<h1>Basilisk II Key Codes</h1>
+<pre><code>0       A	
+1       S	
+2       D	
+3       F	
+4       H	
+5       G	
+6       Z	
+7       X	
+8       C	
+9       V	
+11      B	
+12      Q	
+13      W	
+14      E	
+15      R	
+16      Y	
+17      T	
+18      1	
+19      2	
+20      3	
+21      4	
+22      6	
+23      5	
+24      =	
+25      9	
+26      7	
+27      -	
+28      8	
+29      0	
+30      ]	
+31      O	
+32      U	
+33      [	
+34      I	
+35      P	
+36      Return	
+37      L	
+38      J	
+39      '	
+40      K	
+41      ;	
+42      \	
+43      ,	
+44      /	
+45      N	
+46      M	
+47      .	
+48      Tab	
+49      Space	
+50      `	
+51      Backspace	
+53      Esc	
+54      Ctrl Left	
+55      Alt Left (-&gt; Command)	
+56      Shift Left	
+57      Caps Lock	
+58      Logo Left (-&gt; Option)	
+59      Cursor Left	
+60      Cursor Right	
+61      Cursor Down	
+62      Cursor Up	
+65      KP .	
+67      KP *	
+69      KP +	
+71      Num Lock	
+75      KP /	
+76      KP Enter	
+78      KP -	
+82      KP 0	
+83      KP 1	
+84      KP 2	
+85      KP 3	
+86      KP 4	
+87      KP 5	
+88      KP 6	
+89      KP 7	
+91      KP 8	
+92      KP 9	
+96      F5	
+97      F6	
+98      F7	
+99      F3	
+100     F8	
+101     F9	
+103     F11	
+105     PrintScrn	
+107     Scroll Lock	
+109     F10	
+111     F12	
+113     Pause	
+114     Insert	
+115     Home	
+116     Page Up	
+117     Delete	
+118     F4	
+119     End	
+120     F2	
+121     Page Down	
+122     F1
+255     No key press
+256     Mouse button 1
+1024	Slow down analog stick mouse
+1025	Speed up analog stick mouse
+</code></pre>
+<h1>Indirect Touch Controls</h1>
+<p>Indirect touch controls are always used on the rear panel. On the front panel, the default is to use direct touch (pointer jumps to finger), but indirect controls can be enabled in the menu.</p>
+<p>For multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.</p>
+<ul>
+<li>Single finger drag: move the mouse pointer, how far the pointer moves in response to finger motion depends on the Mouse Speed setting</li>
+<li>Single finger short tap: left mouse button.</li>
+<li>One finger short tap while holding another finger: right mouse button.</li>
+<li>Long second finger tap while holding another finger: initiate left mouse button drag and drop, useful to hold left button down to bring up menus.</li>
+<li>Long third finger tap while holding two other fingers: initiate right mouse button drag and drop. Drag and drop stops when last finger is released.</li>
+</ul>
+<h2>Changelog</h2>
+<p>0.33h</p>
+<ul>
+<li>implement slow/fast modifiers for analog pointer</li>
+<li>allow more memory (&gt;29 MB) for emulated computer</li>
+</ul>
+<p>0.33g</p>
+<ul>
+<li>further improve pointer motion with analog stick</li>
+</ul>
+<p>0.33f</p>
+<ul>
+<li>improve pointer response to diagonal stick directions</li>
+</ul>
+<p>0.33e</p>
+<ul>
+<li>remove bluetooth mouse lag</li>
+<li>apply pointer speed setting also to bluetooth mouse</li>
+</ul>
+<p>0.33d</p>
+<ul>
+<li>prevent accidental clicks when moving pointer using rear touch or indirect front touch</li>
+</ul>
+<p>0.33c</p>
+<ul>
+<li>implemented rear touch (can be enabled in options)</li>
+<li>implemented indirect front touch (can be enabled in options)</li>
+<li>implemented pointer speed option</li>
+<li>implemented radial scaled analog joystick deadzone</li>
+<li>added cpu speed option to max out all frequencies (CPU, GPU and BUS) for maximum speed</li>
+</ul>
+<p>0.33b</p>
+<ul>
+<li>now uses the full analog joystick range of the Vita</li>
+</ul>
+<p>0.33a</p>
+<ul>
+<li>attempt to reduce bluetooth mouse lag (hard to tell if it helped)</li>
+<li>re-compiled with latest source from MeetPatty, which includes support of uma0:</li>
+</ul>
+<p>0.32c</p>
+<ul>
+<li>bugfix with new 640x400 resolution (was added to internal list of modes twice)</li>
+</ul>
+<p>0.32b</p>
+<ul>
+<li>add 640x400 resolution option</li>
+<li>improve picture quality for resolutions where mac pixels do not map 1:1 onto vita pixels. Pixels are much less distorted now in those cases.</li>
+<li>add aspect ratio option &quot;square pixels,&quot; useful to achieve a larger display of some fullscreen games without distortion. For example fullscreen games that run in 640x400 fit the Vita screen pretty well, even without stretching.</li>
+</ul>
+<p>The System 7 resolution setting has a higher priority than the Basiliskii settings. So, to change resolution, it is not enough to only change it in the Basilisk prefs. The resolution has to be changed also in the &quot;monitors&quot; extension in system 7. Otherwise, the os will set it back during boot.</p>
+<p>0.32a</p>
+<ul>
+<li>more keys accessible in the Danzeff OSK.</li>
+<li>highlight qualifier keys selected with &quot;select&quot; when OSK is displayed</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/basiliskii-vita/releases/download/0.33hgit-rsn8887/BasiliskII_Vita_v0.33h.vpk" target="_blank" rel="noopener">⬇ BasiliskII_Vita_v0.33h.vpk · 1.4 MB</a><a class="btn" href="https://github.com/rsn8887/basiliskii-vita/releases/download/0.33hgit-rsn8887/data.zip" target="_blank" rel="noopener">data.zip · 3.1 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="mkrandom mkrandom tau5/mkrandom first release 1.00 utilities ">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-mkrandom/icon0.png" alt="Icono de Mkrandom" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · Tau5/mkrandom</div>
+                      <h2><a href="https://github.com/Tau5/mkrandom/releases/tag/1.00" target="_blank" rel="noopener">Mkrandom</a></h2>
+                      <div class="release-name">First release</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.00</span>
+                    <span>2021-03-27 15:28 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.00</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.00</div>
+                  
+                  <div class="body markdown-body"><p>Sin descripción.</p></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Tau5/mkrandom/releases/download/1.00/mkrandom.vpk" target="_blank" rel="noopener">⬇ mkrandom.vpk · 1.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="abbey of crime abbey of crime samuel85/abbey vita vita_v1.0 ports tested on a ps vita with a system version 3.73 and the vita3k emulator.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-abbey-of-crime/icon0.png" alt="Icono de Abbey of Crime" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Samuel85/Abbey</div>
+                      <h2><a href="https://github.com/Samuel85/Abbey/releases/tag/Vita_v1.0" target="_blank" rel="noopener">Abbey of Crime</a></h2>
+                      <div class="release-name">Vita</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">Vita_v1.0</span>
+                    <span>2021-03-08 13:29 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><p>Tested on a PS vita with a system version 3.73 and the Vita3K emulator.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Samuel85/Abbey/releases/download/Vita_v1.0/abbey_v1.0.vpk" target="_blank" rel="noopener">⬇ abbey_v1.0.vpk · 2.3 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-24 23:43 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-25 02:45 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
