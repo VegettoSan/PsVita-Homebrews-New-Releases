@@ -1,6 +1,67 @@
 [
   {
     "platform": "github",
+    "repo": "NDRWhun/JAVITA",
+    "release_id": "397710496",
+    "tag": "mp_playtest-1.1.0a",
+    "name": "JAVITA 1.1.0a - Multiplayer Playtest, Single Player Fixes",
+    "url": "https://github.com/NDRWhun/JAVITA/releases/tag/mp_playtest-1.1.0a",
+    "published": "2026-09-27T16:21:13Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "# JAVITA 1.1.0\r\n\r\nMultiplayer PLAYTEST arrives, and everything loads a lot faster. Install the new VPKs over 1.0.x;\r\nsettings, saves and the texture cache are kept.\r\n\r\n## Highlights\r\n\r\n- **Multiplayer.** `JAMPVITA.vpk` is a second app that plays online on Jedi Academy\r\n  servers. Same game data folder, same controls; the combo layer maps to taunt, duel and\r\n  saber stance instead of force powers.\r\n- **Faster boot.** The main menu appears in a fraction of the time it took in 1.0.\r\n- **Faster level loads**, single-player and multiplayer both.\r\n- **Pre-built texture cache.** The first visit to a level no longer has to be slow. A PC\r\n  tool (`tools/texbake`) builds the whole cache in seconds and copies one file to the card.\r\n  Lowering texture detail no longer throws the cache away either.\r\n\r\n## Fixed\r\n\r\n- **Game closing on multiplayer join.** A load error during a join could shut the game\r\n  down to the LiveArea. It now returns to the menu with a message. The same fix applies\r\n  to single-player level loads.\r\n- **Sound effects** load faster and a little cleaner.\r\n\r\n## Known issues\r\n\r\n- Dynamic glow is unavailable.\r\n- Stencil shadows (`cg_shadows 2`) have to be set from the console each session.\r\n- Raising texture detail (`r_picmip` to a lower number) still rebuilds the cache once.\r\n\r\n## Install\r\n\r\n1. Install `JAVITA.vpk` (single-player) and/or `JAMPVITA.vpk` (multiplayer) with VitaShell.\r\n2. Copy the four `assets*.pk3` files to `ux0:data/JAVITA/base/` if you have not already.\r\n3. Optional: run `tools/texbake` on your PC and copy its `pack.bin` to\r\n   `ux0:data/JAVITA/texcache_dxt/` to skip the first-visit texture wait entirely.\r\n\r\nControls and settings are in the [README](https://github.com/NDRWhun/JAVITA#readme).\r\n\r\n## Source\r\n\r\nGPLv2 — full source for this build: https://github.com/NDRWhun/JAVITA\r\n",
+    "assets": [
+      {
+        "name": "JAMPVITA.vpk",
+        "size": 4385287,
+        "download_url": "https://github.com/NDRWhun/JAVITA/releases/download/mp_playtest-1.1.0a/JAMPVITA.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "JAVITA.vpk",
+        "size": 3847826,
+        "download_url": "https://github.com/NDRWhun/JAVITA/releases/download/mp_playtest-1.1.0a/JAVITA.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "texbake.zip",
+        "size": 176521,
+        "download_url": "https://github.com/NDRWhun/JAVITA/releases/download/mp_playtest-1.1.0a/texbake.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "NDRWhun",
+    "homebrew_name": "JAVITA",
+    "homebrew_icon": "https://archive.org/download/javita-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita.",
+    "homebrew_long_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita based on OpenJK.",
+    "homebrew_id": "javita",
+    "homebrew_authors": [
+      "ndrw"
+    ],
+    "homebrew_version": "v.1.0.1",
+    "catalog_apps": [
+      {
+        "id": "javita",
+        "name": "JAVITA",
+        "icon": "https://archive.org/download/javita-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita.",
+        "long_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita based on OpenJK.",
+        "version": "v.1.0.1",
+        "version_date": "2026-08-27",
+        "author_ids": [
+          "ndrw"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.1.0.1 → release mp_playtest-1.1.0a",
+    "catalog_version": "v.1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "fr3dsp/sonic-r-vita",
     "release_id": "397593557",
     "tag": "v1.2",
@@ -3506,55 +3567,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v0.6.1 → release v0.6.2",
     "catalog_version": "v0.6.1"
-  },
-  {
-    "platform": "github",
-    "repo": "NDRWhun/JAVITA",
-    "release_id": "377743225",
-    "tag": "release-1.0.1",
-    "name": "JAVITA 1.0.1",
-    "url": "https://github.com/NDRWhun/JAVITA/releases/tag/release-1.0.1",
-    "published": "2026-08-27T10:51:32Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# JAVITA 1.0.1\r\n\r\nBug-fix release. Install the new VPK over 1.0.0; settings, saves and texture cache are kept.\r\n\r\n## Fixed\r\n\r\n- **Fog.** Fog now fades out gradually instead of ending at a hard edge, and everything\r\n  drawn is affected by it, including the batched world geometry that previously ignored it.\r\n  On Hoth the render distance cut no longer shows as a dark band behind the fog.\r\n- **Frozen mission select.** The tier menu showed a stuck frame while it compressed its\r\n  planet art on the first visit. It now shows a loading screen. The wait itself is\r\n  unchanged — see Known issues.\r\n- **Menu characters.** Models shown on the debrief and saber screens were being folded\r\n  into the world geometry batch, which is not valid for a menu and could draw them wrong.\r\n\r\n## Known issues\r\n\r\n- The first visit to each tier menu is slow while its art is compressed and cached.\r\n- Changing texture detail (`r_picmip`) discards the texture cache, so the loads after it\r\n  are slow once per area.\r\n- Mirrors and portals draw unclipped.\r\n- Dynamic glow is unavailable.\r\n\r\n## Source\r\n\r\nGPLv2 — full source for this build: https://github.com/NDRWhun/JAVITA\r\n",
-    "assets": [
-      {
-        "name": "JAVITA_1.0.1.vpk",
-        "size": 3820474,
-        "download_url": "https://github.com/NDRWhun/JAVITA/releases/download/release-1.0.1/JAVITA_1.0.1.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "NDRWhun",
-    "homebrew_name": "JAVITA",
-    "homebrew_icon": "https://archive.org/download/javita-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita.",
-    "homebrew_id": "javita",
-    "homebrew_authors": [
-      "ndrw"
-    ],
-    "catalog_apps": [
-      {
-        "id": "javita",
-        "name": "JAVITA",
-        "icon": "https://archive.org/download/javita-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita.",
-        "long_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita based on OpenJK.",
-        "version": "v.1.0.1",
-        "version_date": "2026-08-27",
-        "author_ids": [
-          "ndrw"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Port of Star Wars Jedi Knight: Jedi Academy for PSVita based on OpenJK.",
-    "homebrew_version": "v.1.0.1",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.1",
-    "catalog_version": "v.1.0.1"
   },
   {
     "platform": "github",
