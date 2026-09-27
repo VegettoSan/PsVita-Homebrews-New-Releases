@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "397773829",
+    "tag": "v0.1.12",
+    "name": "v0.1.12",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.12",
+    "published": "2026-09-27T19:06:46Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n- **Perspective floor no longer flickers.** In heavy Perspective scenes\n  (Harrogath's gate: ~1.3 MB of Glide records per frame) the render ring\n  could not hold the frame being sent to the GPU on the second core *and*\n  the next one, and the Glide DLL silently dropped the end of each frame —\n  a patch of floor, different every frame. The flush thread now gives the\n  ring space back as it walks the frame instead of at its end. Console, at\n  the gate, Perspective ON: 0 dropped records, 24 fps (a first fix that sent\n  those frames synchronously cured the flicker but fell to 9 fps there).\n- **The in-game Resolution option zooms again.** *800×600* draws at the\n  Vita's native 960×544 as before; *640×480* now draws at 848×480 — the\n  original 640×480's height at the screen's shape — scaled ×1.13 to full\n  screen, so characters look as big as native 640×480. Before, choosing\n  640×480 only swapped the HUD art. Switching mid-game works in both\n  directions (the world used to stop two thirds across the screen after a\n  switch to 640). `D2_RES640=WxH` forces another size, `D2_RES640=0` gives\n  the original bordered 640×480. Confirmed on console.\n- **HUD gaps filled at 640×480 too.** The 640 bar and the column between\n  two open panels are filled with stone taken from the game's own inventory\n  panel, read from the game's already-loaded art at the first UI draw — no\n  panel needs to be opened first, and no Blizzard art is added to the\n  package. Not available for classic (non-Lord of Destruction) characters.\n- **HUD gaps no longer come back with Perspective OFF**, and the black\n  column between two open panels (character sheet + inventory) is filled\n  again at 960×544 — its expected position had not followed the vertical\n  centring of the panels. Confirmed on console, Perspective ON and OFF.\n- **Act V runs faster:** the Glide driver now announces two texture units,\n  which lifts D2's sprite cache from 3 MiB — it was re-sending ~50 known\n  textures per frame. Console patrol bench: ~20 → ~24 fps (the game's own\n  cap is 25).\n- **Blinking monsters (Death Maulers) fixed in the texture atlas**: with two\n  texture units the atlas could fill up in the wilds and a failed upload\n  left the previous sprite bound. The atlas grows to 48 MiB, a failed\n  upload now leaves the texture unbound instead of stale, and full size\n  classes borrow unused pages from the others. Verified with the qemu\n  texture oracle (718 wrong-texture draws → 0); console confirmation is\n  still pending.\n- The boot log (`boot_progress.txt`) is now written asynchronously: its\n  periodic reports no longer stall the game thread (30–107 ms each before).\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.10...v0.1.12",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 7925488,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.12/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.1.10",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+        "version": "0.1.10",
+        "version_date": "2026-09-22",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.10 → release v0.1.12",
+    "catalog_version": "0.1.10"
+  },
+  {
+    "platform": "github",
     "repo": "NDRWhun/JAVITA",
     "release_id": "397710496",
     "tag": "mp_playtest-1.1.0a",
@@ -820,55 +869,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.1.0",
     "catalog_version": "1.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "396109151",
-    "tag": "v0.1.11-remapping-beta4",
-    "name": "v0.1.11-remapping-beta4",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.11-remapping-beta4",
-    "published": "2026-09-24T21:56:45Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 7896995,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.11-remapping-beta4/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.1.10",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-        "version": "0.1.10",
-        "version_date": "2026-09-22",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.10 → release v0.1.11-remapping-beta4",
-    "catalog_version": "0.1.10"
   },
   {
     "platform": "github",

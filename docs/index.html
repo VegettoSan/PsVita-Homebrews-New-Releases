@@ -219,6 +219,117 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.12 v0.1.12 ports - **perspective floor no longer flickers.** in heavy perspective scenes
+  (harrogath&#x27;s gate: ~1.3 mb of glide records per frame) the render ring
+  could not hold the frame being sent to the gpu on the second core *and*
+  the next one, and the glide dll silently dropped the end of each frame —
+  a patch of floor, different every frame. the flush thread now gives the
+  ring space back as it walks the frame instead of at its end. console, at
+  the gate, perspective on: 0 dropped records, 24 fps (a first fix that sent
+  those frames synchronously cured the flicker but fell to 9 fps there).
+- **the in-game resolution option zooms again.** *800×600* draws at the
+  vita&#x27;s native 960×544 as before; *640×480* now draws at 848×480 — the
+  original 640×480&#x27;s height at the screen&#x27;s shape — scaled ×1.13 to full
+  screen, so characters look as big as native 640×480. before, choosing
+  640×480 only swapped the hud art. switching mid-game works in both
+  directions (the world used to stop two thirds across the screen after a
+  switch to 640). `d2_res640=wxh` forces another size, `d2_res640=0` gives
+  the original bordered 640×480. confirmed on console.
+- **hud gaps filled at 640×480 too.** the 640 bar and the column between
+  two open panels are filled with stone taken from the game&#x27;s own inventory
+  panel, read from the game&#x27;s already-loaded art at the first ui draw — no
+  panel needs to be opened first, and no blizzard art is added to the
+  package. not available for classic (non-lord of destruction) characters.
+- **hud gaps no longer come back with perspective off**, and the black
+  column between two open panels (character sheet + inventory) is filled
+  again at 960×544 — its expected position had not followed the vertical
+  centring of the panels. confirmed on console, perspective on and off.
+- **act v runs faster:** the glide driver now announces two texture units,
+  which lifts d2&#x27;s sprite cache from 3 mib — it was re-sending ~50 known
+  textures per frame. console patrol bench: ~20 → ~24 fps (the game&#x27;s own
+  cap is 25).
+- **blinking monsters (death maulers) fixed in the texture atlas**: with two
+  texture units the atlas could fill up in the wilds and a failed upload
+  left the previous sprite bound. the atlas grows to 48 mib, a failed
+  upload now leaves the texture unbound instead of stale, and full size
+  classes borrow unused pages from the others. verified with the qemu
+  texture oracle (718 wrong-texture draws → 0); console confirmation is
+  still pending.
+- the boot log (`boot_progress.txt`) is now written asynchronously: its
+  periodic reports no longer stall the game thread (30–107 ms each before).
+
+
+version française : [journal des versions](https://github.com/franckrst/d2vita/blob/main/docs-site/changelog.fr.md).
+
+
+**full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.10...v0.1.12">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
+                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.12" target="_blank" rel="noopener">D2Vita</a></h2>
+                      <div class="release-name">v0.1.12</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.12</span>
+                    <span>2026-09-27 19:06 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.10</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.10 → release v0.1.12</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li><strong>Perspective floor no longer flickers.</strong> In heavy Perspective scenes
+(Harrogath's gate: ~1.3 MB of Glide records per frame) the render ring
+could not hold the frame being sent to the GPU on the second core <em>and</em>
+the next one, and the Glide DLL silently dropped the end of each frame —
+a patch of floor, different every frame. The flush thread now gives the
+ring space back as it walks the frame instead of at its end. Console, at
+the gate, Perspective ON: 0 dropped records, 24 fps (a first fix that sent
+those frames synchronously cured the flicker but fell to 9 fps there).</li>
+<li><strong>The in-game Resolution option zooms again.</strong> <em>800×600</em> draws at the
+Vita's native 960×544 as before; <em>640×480</em> now draws at 848×480 — the
+original 640×480's height at the screen's shape — scaled ×1.13 to full
+screen, so characters look as big as native 640×480. Before, choosing
+640×480 only swapped the HUD art. Switching mid-game works in both
+directions (the world used to stop two thirds across the screen after a
+switch to 640). <code>D2_RES640=WxH</code> forces another size, <code>D2_RES640=0</code> gives
+the original bordered 640×480. Confirmed on console.</li>
+<li><strong>HUD gaps filled at 640×480 too.</strong> The 640 bar and the column between
+two open panels are filled with stone taken from the game's own inventory
+panel, read from the game's already-loaded art at the first UI draw — no
+panel needs to be opened first, and no Blizzard art is added to the
+package. Not available for classic (non-Lord of Destruction) characters.</li>
+<li><strong>HUD gaps no longer come back with Perspective OFF</strong>, and the black
+column between two open panels (character sheet + inventory) is filled
+again at 960×544 — its expected position had not followed the vertical
+centring of the panels. Confirmed on console, Perspective ON and OFF.</li>
+<li><strong>Act V runs faster:</strong> the Glide driver now announces two texture units,
+which lifts D2's sprite cache from 3 MiB — it was re-sending ~50 known
+textures per frame. Console patrol bench: ~20 → ~24 fps (the game's own
+cap is 25).</li>
+<li><strong>Blinking monsters (Death Maulers) fixed in the texture atlas</strong>: with two
+texture units the atlas could fill up in the wilds and a failed upload
+left the previous sprite bound. The atlas grows to 48 MiB, a failed
+upload now leaves the texture unbound instead of stale, and full size
+classes borrow unused pages from the others. Verified with the qemu
+texture oracle (718 wrong-texture draws → 0); console confirmation is
+still pending.</li>
+<li>The boot log (<code>boot_progress.txt</code>) is now written asynchronously: its
+periodic reports no longer stall the game thread (30–107 ms each before).</li>
+</ul>
+<p>Version française : <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md">journal des versions</a>.</p>
+<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.10...v0.1.12">https://github.com/Franckrst/D2Vita/compare/v0.1.10...v0.1.12</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.12/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="javita javita ndrwhun/javita javita 1.1.0a - multiplayer playtest, single player fixes mp_playtest-1.1.0a ports # javita 1.1.0
 
 multiplayer playtest arrives, and everything loads a lot faster. install the new vpks over 1.0.x;
@@ -946,33 +1057,6 @@ Android game.)</em></li>
 <p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.1.0/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.11-remapping-beta4 v0.1.11-remapping-beta4 ports **full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
-                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.11-remapping-beta4" target="_blank" rel="noopener">D2Vita</a></h2>
-                      <div class="release-name">v0.1.11-remapping-beta4</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.11-remapping-beta4</span>
-                    <span>2026-09-24 21:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.10</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.10 → release v0.1.11-remapping-beta4</div>
-                  
-                  <div class="body markdown-body"><p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4">https://github.com/Franckrst/D2Vita/compare/v0.1.11-remapping-beta3...v0.1.11-remapping-beta4</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.11-remapping-beta4/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.5 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26435,7 +26519,7 @@ http://cyxdown.free.fr/f2b/changes.txt
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-27 18:48 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-27 23:31 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
