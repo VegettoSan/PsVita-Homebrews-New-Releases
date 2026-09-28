@@ -1,6 +1,104 @@
 [
   {
     "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "398051562",
+    "tag": "v0.1.13",
+    "name": "v0.1.13",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.13",
+    "published": "2026-09-28T08:06:35Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n- **Act V stutter gone.** On the scripted Harrogath patrol (real console,\n  110 s), frames over 60 ms drop from ~25 to 3 and the frame rate reaches\n  the game's own cap: 24.0 → 25.0 fps. The cause was ours: an engine-side\n  25 Hz frame cap written for online play also ran in solo (it armed\n  whenever `D2NET` was set, which the default config always sets). Solo\n  Diablo II already draws exactly once per 40 ms simulation step; the cap\n  waited a little longer than 40 ms every frame, drifted against the game's\n  own clock, and the game then skipped a draw every few seconds. The cap is\n  now off by default. **Online:** there is no engine cap either anymore —\n  not re-measured online yet; if the game ever runs too fast in a\n  Battle.net game, `D2_ONLINE_CAP=25` in `env.txt` brings the old cap back.\n- **Less CPU per frame (~1.6 ms of game-thread work, ~5% of a frame).**\n  The most frequent calls from the game into the runtime (clock reads,\n  critical sections — ~650 per frame) are now served from inside the\n  translated code instead of leaving it and coming back; the Glide ring\n  DLL copies Perspective vertices in line; `wsprintfA` no longer allocates.\n  Main core load on the patrol: ~77% → ~74%. Proven identical on qemu\n  (pixel-identical image over 4000 frames, critical-section contention\n  test) and measured on console with interleaved passes.\n- **Fewer memory-card reads when new content streams in:** a seek now\n  reads 32 KiB ahead instead of 8 (~60% fewer card reads on the patrol),\n  no extra RAM.\n- **Native Perspective floor (`D2_F3NATIF=1`) faster**, still opt-in: it is\n  now served in line and writes its draws directly, another ~1.25 ms per\n  frame on the patrol (0 divergence against the game's own code on 168,503\n  compared cells).\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.12...v0.1.13",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 7943163,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.13/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.1.12",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+        "version": "0.1.12",
+        "version_date": "2026-09-27",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.12 → release v0.1.13",
+    "catalog_version": "0.1.12"
+  },
+  {
+    "platform": "github",
+    "repo": "Brendonm17/ACGC-Vita-Port",
+    "release_id": "397926383",
+    "tag": "v0.5.0",
+    "name": "Animal Crossing Vita v0.5.0",
+    "url": "https://github.com/Brendonm17/ACGC-Vita-Port/releases/tag/v0.5.0",
+    "published": "2026-09-28T03:31:31Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Animal Crossing Vita v0.5.0 Multiplayer Update\r\n\r\nUp to 4 players in one town: the host and 3 visitors, all playing at the same time. You travel by train through Porter, like the old card trips.\r\n\r\n- Talk to Porter, go on a trip, then pick **Visit a friend.** or **Have visitors.**\r\n- Three ways to connect:\r\n  - **Right beside me!** Vita local wireless, no router needed.\r\n  - **On my Wi-Fi.** Same network, finds open towns by itself.\r\n  - **Far away.** Internet. The host gets an 8-character ticket number to hand out.\r\n- Far away, the host's Vita opens UDP port 19520 on the router itself (NAT-PMP, then UPnP). If the router refuses it or keeps it for another device, it tries 19521-19523. Only the host needs a port. Behind CGNAT you can't host far away, but you can still visit.\r\n- Shared between screens: players, villagers, bugs and fish, weather and clock, events, the train and Porter, items, rooms, the island cottage and NES games. (If you find anything missing let me know!!)\r\n- Chat: speech balloons over heads. Tap the balloon in the bottom left, 32 characters, GameCube or Vita keyboard. Typing shows as dots. Messages from players off screen show at the screen edge facing them, or over the building they're in.\r\n- New Online page: Title screen > Options > Online. Chat on/off, keyboard, what visitors can do, and asking before visitors join. The host's settings are the ones that count in their town.\r\n- Saves stay normal GameCube .gci files. While you're visiting, your character is also kept in `mp_passport_*` files next to your save. Don't delete them mid-trip.\r\n- Items you pick up in someone's town are only yours once the host's game has saved them, so nothing gets duplicated.\r\n- Everyone needs the same release.\r\n\r\nNot shared yet: Kapp'n's boat ride (everyone keeps their own boat), where Nook and Mable stand in shops, events waiting for a host who's in a menu or talk, and how clean Gracie's car looks.\r\n\r\nDetails, ports and troubleshooting are in `vita/MULTIPLAYER.md`. Back up your saves before playing online. And be careful who you share your info with!\r\n\r\n## Fixes\r\n\r\n- Many small visual bugs fixed\r\n- Resetti menu background fixed\r\n- Dpad spam doesnt play last action anymore\r\n- NES games not working for some users, and optional path for roms in settings.ini\r\n- Version number on main menu\r\n\r\n## Security\r\n\r\n- Blocked known text and save exploits: control codes in passwords, bulletin board posts and names; message and choice overflows; NES card game overflows. The host also cleans text coming in from visitors.\r\n\r\nNote: Please be careful who you share your IP with, I am not responsible for bad actors. Please use at your own risk, and respect other players.\r\n\r\n## Trophies\r\n\r\n- While you're visiting, only your own progress counts.\r\n\r\n## Modding\r\n\r\n- Initial framework for multiplayer sync API (mods). Joining checks that everyone runs the same gameplay mods.",
+    "assets": [
+      {
+        "name": "ac_vita_mp.vpk",
+        "size": 7042094,
+        "download_url": "https://github.com/Brendonm17/ACGC-Vita-Port/releases/download/v0.5.0/ac_vita_mp.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Brendonm17",
+    "homebrew_name": "Animal Crossing Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-animal-crossing-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Animal Crossing for PSVita.",
+    "homebrew_long_description": "Port of Animal Crossing for the Nintendo Gamecube, based on the decompilation and PC port.",
+    "homebrew_id": "animal-crossing-vita",
+    "homebrew_authors": [
+      "bren"
+    ],
+    "homebrew_version": "v.0.4.1",
+    "catalog_apps": [
+      {
+        "id": "animal-crossing-vita",
+        "name": "Animal Crossing Vita",
+        "icon": "https://archive.org/download/psvitaalive-animal-crossing-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Animal Crossing for PSVita.",
+        "long_description": "Port of Animal Crossing for the Nintendo Gamecube, based on the decompilation and PC port.",
+        "version": "v.0.4.1",
+        "version_date": "2026-06-06",
+        "author_ids": [
+          "bren"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.4.1 → release v0.5.0",
+    "catalog_version": "v.0.4.1"
+  },
+  {
+    "platform": "github",
     "repo": "MetalSyntax/Asphalt-5-Vita",
     "release_id": "397898053",
     "tag": "v1.2.0",
@@ -28,7 +126,7 @@
     "homebrew_authors": [
       "metalsyntax"
     ],
-    "homebrew_version": "1.1.0",
+    "homebrew_version": "1.2.0",
     "catalog_apps": [
       {
         "id": "asphalt-5",
@@ -37,16 +135,16 @@
         "category": "ports",
         "description": "Native PS Vita wrapper/port of Asphalt 5, originally published by Gameloft for Android, built on soloader-boilerplate.",
         "long_description": "Asphalt 5 is Gameloft's arcade racing game, originally released for Android as Asphalt-5-HD-v3.4.1.apk. This port runs the compiled native library (libasphalt5.so) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 1.1 fixed-function rendering backend.",
-        "version": "1.1.0",
-        "version_date": "2026-09-24",
+        "version": "1.2.0",
+        "version_date": "2026-09-28",
         "author_ids": [
           "metalsyntax"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1.0 → release v1.2.0",
-    "catalog_version": "1.1.0"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.2.0",
+    "catalog_version": "1.2.0"
   },
   {
     "platform": "github",
@@ -251,55 +349,6 @@
   },
   {
     "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "397773829",
-    "tag": "v0.1.12",
-    "name": "v0.1.12",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.12",
-    "published": "2026-09-27T19:06:46Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\n- **Perspective floor no longer flickers.** In heavy Perspective scenes\n  (Harrogath's gate: ~1.3 MB of Glide records per frame) the render ring\n  could not hold the frame being sent to the GPU on the second core *and*\n  the next one, and the Glide DLL silently dropped the end of each frame —\n  a patch of floor, different every frame. The flush thread now gives the\n  ring space back as it walks the frame instead of at its end. Console, at\n  the gate, Perspective ON: 0 dropped records, 24 fps (a first fix that sent\n  those frames synchronously cured the flicker but fell to 9 fps there).\n- **The in-game Resolution option zooms again.** *800×600* draws at the\n  Vita's native 960×544 as before; *640×480* now draws at 848×480 — the\n  original 640×480's height at the screen's shape — scaled ×1.13 to full\n  screen, so characters look as big as native 640×480. Before, choosing\n  640×480 only swapped the HUD art. Switching mid-game works in both\n  directions (the world used to stop two thirds across the screen after a\n  switch to 640). `D2_RES640=WxH` forces another size, `D2_RES640=0` gives\n  the original bordered 640×480. Confirmed on console.\n- **HUD gaps filled at 640×480 too.** The 640 bar and the column between\n  two open panels are filled with stone taken from the game's own inventory\n  panel, read from the game's already-loaded art at the first UI draw — no\n  panel needs to be opened first, and no Blizzard art is added to the\n  package. Not available for classic (non-Lord of Destruction) characters.\n- **HUD gaps no longer come back with Perspective OFF**, and the black\n  column between two open panels (character sheet + inventory) is filled\n  again at 960×544 — its expected position had not followed the vertical\n  centring of the panels. Confirmed on console, Perspective ON and OFF.\n- **Act V runs faster:** the Glide driver now announces two texture units,\n  which lifts D2's sprite cache from 3 MiB — it was re-sending ~50 known\n  textures per frame. Console patrol bench: ~20 → ~24 fps (the game's own\n  cap is 25).\n- **Blinking monsters (Death Maulers) fixed in the texture atlas**: with two\n  texture units the atlas could fill up in the wilds and a failed upload\n  left the previous sprite bound. The atlas grows to 48 MiB, a failed\n  upload now leaves the texture unbound instead of stale, and full size\n  classes borrow unused pages from the others. Verified with the qemu\n  texture oracle (718 wrong-texture draws → 0); console confirmation is\n  still pending.\n- The boot log (`boot_progress.txt`) is now written asynchronously: its\n  periodic reports no longer stall the game thread (30–107 ms each before).\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.10...v0.1.12",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 7925488,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.12/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.1.10",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-        "version": "0.1.10",
-        "version_date": "2026-09-22",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.10 → release v0.1.12",
-    "catalog_version": "0.1.10"
-  },
-  {
-    "platform": "github",
     "repo": "NDRWhun/JAVITA",
     "release_id": "397710496",
     "tag": "mp_playtest-1.1.0a",
@@ -361,6 +410,55 @@
   },
   {
     "platform": "github",
+    "repo": "CHUTA7X/Real-Racing-2-Vita-Port-Release",
+    "release_id": "397703398",
+    "tag": "Vita-Port",
+    "name": "RR2 Public Beta v0.0.1",
+    "url": "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/tag/Vita-Port",
+    "published": "2026-09-27T15:32:08Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "This the Public Beta, I am so close to the final release but in the meantime you can test this built and help me to find any bugs or request features and tweaks.\r\nWhats on this initial release:\r\n\r\n    Menu runs 60fps\r\n    Carrer mode and other modes runs between 30 to 60fps with drops (hopefully fix in final versión)\r\n    100% working audio with no bugs\r\n    implemented physical controls mapping (method B in game) (more to come in future Beta)\r\n    implemented a cursor for vita's with broken touch screen (left stick movement X for click)\r\n\r\n!! Important !!\r\n\r\nYou will need to provide your own original and official game data folder for MALI graphics card, Please Do not use PowerVR, Tegra or Adreno, my versión only works with MALI version you can always take a look at archive.org you may find what you need \r\n\r\nThe game folder should look like this ux0/data/rr2/files/...\r\nThe first launched will take a while as the game deploy the files to the paths for better performance this will only happen 1 time. \r\n\r\nIf you want to support me and my projects you can always buy a coffee at https://buymeacoffee.com/chuta7x\r\nYou can follow me at https://x.com/chuta141",
+    "assets": [
+      {
+        "name": "RR2Vita_Public_Beta_v0.0.1.vpk",
+        "size": 5185268,
+        "download_url": "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/download/Vita-Port/RR2Vita_Public_Beta_v0.0.1.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "CHUTA7X",
+    "homebrew_name": "Real Racing 2",
+    "homebrew_icon": "https://archive.org/download/real-racing-2-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A RR2 vita port based on android HD version.",
+    "homebrew_long_description": "A RR2 vita port based on android HD version.",
+    "homebrew_id": "real-racing-2",
+    "homebrew_authors": [
+      "chuta7x"
+    ],
+    "homebrew_version": "0.0.1",
+    "catalog_apps": [
+      {
+        "id": "real-racing-2",
+        "name": "Real Racing 2",
+        "icon": "https://archive.org/download/real-racing-2-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "A RR2 vita port based on android HD version.",
+        "long_description": "A RR2 vita port based on android HD version.",
+        "version": "0.0.1",
+        "version_date": "2026-09-27",
+        "author_ids": [
+          "chuta7x"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.0.1 → release Vita-Port",
+    "catalog_version": "0.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "fr3dsp/sonic-r-vita",
     "release_id": "397593557",
     "tag": "v1.2",
@@ -388,7 +486,7 @@
     "homebrew_authors": [
       "fr3dsp"
     ],
-    "homebrew_version": "1.1",
+    "homebrew_version": "1.2",
     "catalog_apps": [
       {
         "id": "sonic-r",
@@ -397,16 +495,16 @@
         "category": "ports",
         "description": "A reimplementation of Sonic R for the PlayStation Vita.",
         "long_description": "A reimplementation of Sonic R for the PlayStation Vita.",
-        "version": "1.1",
-        "version_date": "2026-09-24",
+        "version": "1.2",
+        "version_date": "2026-09-27",
         "author_ids": [
           "fr3dsp"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1 → release v1.2",
-    "catalog_version": "1.1"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.2",
+    "catalog_version": "1.2"
   },
   {
     "platform": "github",
@@ -437,7 +535,7 @@
     "homebrew_authors": [
       "metalsyntax"
     ],
-    "homebrew_version": "1.3.0",
+    "homebrew_version": "1.4.0",
     "catalog_apps": [
       {
         "id": "shadow-guardian",
@@ -446,16 +544,16 @@
         "category": "ports",
         "description": "This is a wrapper/port of Shadow Guardian HD for the PS Vita.",
         "long_description": "The port works by loading the official Android ARMv7 libshadowguardian.so executable in memory, resolving its imports with custom stubs, and patching it to properly run on the PS Vita using a fake JNI environment and translating OpenGL ES 2.0 calls to vitaGL.",
-        "version": "1.3.0",
-        "version_date": "2026-09-19",
+        "version": "1.4.0",
+        "version_date": "2026-09-27",
         "author_ids": [
           "metalsyntax"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.3.0 → release v1.4",
-    "catalog_version": "1.3.0"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.4.0",
+    "catalog_version": "1.4.0"
   },
   {
     "platform": "github",
@@ -492,7 +590,7 @@
     "homebrew_authors": [
       "kaziema"
     ],
-    "homebrew_version": "0.3.1",
+    "homebrew_version": "0.4.0",
     "catalog_apps": [
       {
         "id": "paper-mario-vita",
@@ -501,16 +599,16 @@
         "category": "ports",
         "description": "This is built on top of PaperShip, the decomp-based port of Paper Mario 64 running on libultraship, retargeted for PS Vita hardware.",
         "long_description": "This is built on top of PaperShip, the decomp-based port of Paper Mario 64 running on libultraship, retargeted for PS Vita hardware.",
-        "version": "0.3.1",
-        "version_date": "2026-09-23",
+        "version": "0.4.0",
+        "version_date": "2026-09-26",
         "author_ids": [
           "kaziema"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.3.1 → release v0.4.0",
-    "catalog_version": "0.3.1"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.4.0",
+    "catalog_version": "0.4.0"
   },
   {
     "platform": "github",
@@ -612,7 +710,7 @@
     ],
     "author": "github-actions[bot]",
     "homebrew_name": "Smash Melee Vita",
-    "homebrew_icon": "https://archive.org/download/smash-melee-vita/icon0.png",
+    "homebrew_icon": "https://archive.org/download/smash-melee-port-ps-vita/icon0.png",
     "homebrew_category": "ports",
     "homebrew_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
     "homebrew_long_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
@@ -620,25 +718,25 @@
     "homebrew_authors": [
       "zm2283145"
     ],
-    "homebrew_version": "0.8.12",
+    "homebrew_version": "0.8.15",
     "catalog_apps": [
       {
         "id": "smash-melee-vita",
         "name": "Smash Melee Vita",
-        "icon": "https://archive.org/download/smash-melee-vita/icon0.png",
+        "icon": "https://archive.org/download/smash-melee-port-ps-vita/icon0.png",
         "category": "ports",
         "description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
         "long_description": "Native PlayStation Vita port of Super Smash Bros. Melee (NTSC-U 1.02), built from doldecomp/melee on aurora.",
-        "version": "0.8.12",
-        "version_date": "2026-09-24",
+        "version": "0.8.15",
+        "version_date": "2026-09-26",
         "author_ids": [
           "zm2283145"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.8.12 → release v0.8.15",
-    "catalog_version": "0.8.12"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.8.15",
+    "catalog_version": "0.8.15"
   },
   {
     "platform": "github",
@@ -936,6 +1034,55 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.1.0 → release 1.5-test",
     "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "memory-hunter/arcaea-vita",
+    "release_id": "395894480",
+    "tag": "1.0",
+    "name": "First release",
+    "url": "https://github.com/memory-hunter/arcaea-vita/releases/tag/1.0",
+    "published": "2026-09-24T17:02:48Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "This is the first release.\r\nHas been tested moderately. It shouldn't crash in any menus and is able to go into gameplay just fine.",
+    "assets": [
+      {
+        "name": "arcaea.vpk",
+        "size": 2723249,
+        "download_url": "https://github.com/memory-hunter/arcaea-vita/releases/download/1.0/arcaea.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "memory-hunter",
+    "homebrew_name": "Arcaea",
+    "homebrew_icon": "https://archive.org/download/arcaea-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita .so loader port of Arcaea",
+    "homebrew_long_description": "Arcaea is a mobile rhythm game developed by lowiro, released on March 9, 2017. The game known for its deep storyline and unique gameplay mechanics; players tap, hold, and slide on a musical arc as they follow notes that appear in time with music. It also features both \"sky\" and \"ground\" notes that players must interact with.",
+    "homebrew_id": "arcaea",
+    "homebrew_authors": [
+      "memoryhunter"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "arcaea",
+        "name": "Arcaea",
+        "icon": "https://archive.org/download/arcaea-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita .so loader port of Arcaea",
+        "long_description": "Arcaea is a mobile rhythm game developed by lowiro, released on March 9, 2017. The game known for its deep storyline and unique gameplay mechanics; players tap, hold, and slide on a musical arc as they follow notes that appear in time with music. It also features both \"sky\" and \"ground\" notes that players must interact with.",
+        "version": "1.0",
+        "version_date": "2026-09-24",
+        "author_ids": [
+          "memoryhunter"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0",
+    "catalog_version": "1.0"
   },
   {
     "platform": "github",
@@ -1559,6 +1706,55 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.0.1",
     "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
+    "repo": "MetalSyntax/Dungeon-Hunter-2-vita",
+    "release_id": "392338250",
+    "tag": "v1.1.0",
+    "name": "Dungeon Hunter 2 — PS Vita · v1.1.0",
+    "url": "https://github.com/MetalSyntax/Dungeon-Hunter-2-vita/releases/tag/v1.1.0",
+    "published": "2026-09-20T21:01:59Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Dungeon Hunter 2 — PS Vita · v1.1.0 \r\n\r\n> Paste the section below into the GitHub release description. The title above goes in the\r\n> release-title field; suggested tag: `v1.1.0`.\r\n\r\n---\r\n\r\n**All physical buttons now work — movement, attacks, skills, potion, pause and character menu —\r\nand saves/options finally persist across reboots.**\r\n\r\n## Physical controls, finished\r\n\r\nEvery action button now works, including the three that never did: **Circle** (skill 3),\r\n**START** (pause / in-game menu) and **SELECT** (character screen). They were dead on every prior\r\nbuild even though the previous attempt's synthetic touch events provably reached the engine.\r\n\r\nThe real cause: the touch layer (`TouchScreenBase`) indexes its slot array as `this + 48 *\r\npointer_id` **with no bounds check**, and its `clear()` loops exactly 8 times — so only pointer\r\nids `0..7` are valid. Circle/START/SELECT were assigned ids 7/8/9; the last two wrote past the\r\narray and clobbered the engine's own touch counter, which is why the tap \"arrived\" in the log but\r\nnever did anything. Coordinates were never the problem — the previous synthetic-touch approach had\r\na structural ceiling.\r\n\r\nFixed by dropping synthetic touch for these three entirely and calling the engine directly instead,\r\nmirroring exactly what its own Flash HUD buttons do (reverse-engineered from the HUD's own\r\nActionScript bytecode):\r\n\r\n- **Circle** → the same `CTRLIsAllowed` → `SG_GetSkillInSlot` → `Cmd_BeginSkill`/`Cmd_EndSkill`\r\n  sequence the skill-3 HUD button makes.\r\n- **START / SELECT** → `MenuBase::FS_PushState(\"menu_Ingame\" / \"menu_CharacterMenu\")`, and if the\r\n  menu is already open, the same button closes it (`MenuFX::PopAll`) — one press to open, one to\r\n  close.\r\n- **L + R** → new combo, toggles the bottom HUD controls' opacity between 1% (default — play with\r\n  physical buttons, HUD stays out of the way) and 100% (to use them with touch again).\r\n\r\nThe left stick and D-pad also got a real fix this release: instead of faking a touch drag on the\r\nFlash virtual joystick (which GameSWF's hit-test never reliably accepted), the loader now writes\r\nthe engine's own `HUDControls` movement fields directly every frame, the same fields its own touch\r\nhandler fills in when a real finger drags the stick. Confirmed on hardware: both D-pad and analog\r\nstick move the character correctly.\r\n\r\n## Saves and options now persist (verified on hardware)\r\n\r\nProgress, settings and language previously died in RAM: the game played fine in-session but\r\nrebooted to an old save, always in English. Three separate causes, all fixed and confirmed with a\r\nsave → reboot → load cycle on a real Vita (Spanish kept, character level and items intact):\r\n\r\n- **The port forced English on every boot.** The loader rewrote the saved language to English for\r\n  the first 180 frames of each launch, so changing language could never stick. Now the saved\r\n  language is read once and only reset if out of range.\r\n- **The async save queue was never guaranteed to reach disk.** Player/level saves are queued in\r\n  RAM (`Savegame::saveAll → AddJob`) and drained by fire-and-forget worker threads — and quitting\r\n  with START+SELECT skipped `Application::Quit`, the only synchronous drain, entirely. The queue is\r\n  now also drained on a timer when jobs are pending and unconditionally at exit.\r\n- **Stale read cache.** The file cache never invalidated on write/delete, so a freshly written save\r\n  could still load pre-save bytes in-session. Writes, deletes and renames now invalidate.\r\n\r\n## Also fixed\r\n\r\n- **Crash on quitting while a sound was playing.** `Application::Quit` stops every sound with a\r\n  0ms fade, which frees its audio objects synchronously on the main thread — racing the engine's\r\n  own audio thread, which was iterating that same list at the same moment. Confirmed from a crash\r\n  dump (prefetch abort through a freed vtable). Level-transition sound stops already used a 500ms\r\n  fade and never crashed, so quit-time stops now take the same safe path; nothing audible changes,\r\n  and level transitions are untouched.\r\n- **A long-standing source of multi-second freezes: every localization file was silently failing\r\n  to load.** Every `text/<zone>.spanish`/`.symbols` lookup this whole project was hitting a\r\n  relative path that resolves under `assets/` on the real device, which holds nothing but the save\r\n  file — the actual files live under `data/text/`, and unlike other asset types, this one had no\r\n  retry-on-failure path anywhere in the engine. A burst of ~12-18 of these misses in the same frame\r\n  window was directly responsible for multi-hundred-millisecond stalls (one measured at 834ms\r\n  average over 60 frames). Now redirected to the correct path on first failure, same pattern\r\n  already used for a couple of other asset types.\r\n- **vitaGL's CPU-only speedhacks are now baked into every build by default** (`MATH_SPEEDHACK`,\r\n  `CIRCULAR_POOL_SPEEDHACK`, `NO_TEX_COMBINER`) — previously only in the opt-in `--hack-safe`\r\n  variant. Confirmed via `nm -D` that this engine imports zero fixed-function GL entry points (100%\r\n  GLSL), so the two math-related flags are free no-ops here and the real, measured win comes from\r\n  `CIRCULAR_POOL_SPEEDHACK`'s vertex-data pooling. The plain `dungeon_hunter_2.vpk` build now\r\n  performs the same as the old `_hack_safe` variant; `--hack-safe` is kept only for compatibility.\r\n- Log files are now `.log` instead of `.txt`.\r\n\r\n## Performance: 5-6 FPS → ~20-25 FPS in gameplay, ~60 in menus\r\n\r\nThis is unchanged since the last notes and remains the honest headline: sustained combat is\r\n~20-25 FPS (up from 5-6), menus and light scenes reach ~60. **The GPU was never the bottleneck** —\r\n`eglSwapBuffers` costs ~0.2ms per frame throughout, while CPU-side work (the engine tick) was\r\n120-185ms. Two independent resolution-reduction tests changed combat FPS *not at all*, ruling out\r\nfill-rate directly rather than assuming it. See `PORTING_PLAN.md` Phase 23 for the full write-up.\r\n\r\n## Known issues\r\n\r\n- **Framerate is ~20-25 FPS in gameplay, not 60.** The dominant remaining cost is understood but\r\n  not fixed: the engine's real frustum culling has to stay bypassed (see below), so it animates and\r\n  updates the *entire level* every frame regardless of the camera.\r\n- **The engine's frustum culling is bypassed.** This is what makes enemies render reliably, but\r\n  it's also the main remaining performance waste. Naively re-enabling it (`--culling-test 2`)\r\n  measured *slower* and brings back the invisible-enemy bug, so the real fix is the stale bounding\r\n  box (or a second, object-level visibility gate — see `PORTING_PLAN.md`) that made the bypass\r\n  necessary in the first place.\r\n- **Some enemies still render invisible** (health bar and aggro ring show, no model). The opacity\r\n  hypothesis has been ruled out with hard evidence (52/52 sampled enemies at full opacity); the\r\n  current leads are all culling-related.\r\n- The repeating HUD icon column is still unresolved.\r\n\r\n## Installing\r\n\r\nYou need to **legally own Dungeon Hunter 2 HD for Android.** This repository and this release contain\r\n**no** Gameloft assets, APK, or `.so` binaries — only the loader/bridge. You supply the game data\r\nyourself.\r\n\r\n1. Install [taiHEN](https://github.com/yifanlu/taiHEN)'s `kubridge.skprx`, and place Sony's\r\n   `libshacccg.suprx` under `ur0:data/` (obtained separately — it is Sony's binary and is not\r\n   redistributed here).\r\n2. Install the `.vpk`.\r\n3. Stage the game's asset files as loose files under `ux0:data/dungeon-hunter-2/`. See\r\n   `PORTING_PLAN.md` Phase 8 for the exact layout the asset bridge expects.\r\n\r\n## For contributors\r\n\r\n`PORTING_PLAN.md` documents every hypothesis tried for the open issues above, what was ruled out\r\nand how, and exactly which diagnostic hooks are already wired up and waiting for a fresh hardware\r\nlog. If you have a physical Vita and want to help, that's the place to start.\r\n\r\n## Credits\r\n\r\nBuilt on [SoLoBoP](https://github.com/v-atamanenko) (Andy Nguyen, Rinnegatamante, Volodymyr\r\nAtamanenko) and [FalsoJNI](https://github.com/v-atamanenko/FalsoJNI), rendering through\r\n[vitaGL](https://github.com/Rinnegatamante/vitaGL) built from source. Particular thanks to the\r\n**Asphalt-5-Vita** and **Asphalt-6-Vita** ports, whose own performance write-ups pointed directly\r\nat several of the fixes in this and the previous release — they are the closest comparable ports\r\nand their notes were worth more than any amount of guessing.\r\n\r\nDungeon Hunter 2 is © Gameloft. This is an unofficial, non-commercial fan port, not affiliated with\r\nor endorsed by Gameloft. The loader/bridge source in this repository is MIT licensed; that covers\r\nthis project's own code only.",
+    "assets": [
+      {
+        "name": "dungeon_hunter_2.vpk",
+        "size": 1608407,
+        "download_url": "https://github.com/MetalSyntax/Dungeon-Hunter-2-vita/releases/download/v1.1.0/dungeon_hunter_2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "Dungeon Hunter 2",
+    "homebrew_icon": "https://archive.org/download/dungeon-hunter-2-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Dungeon Hunter 2 native port for PS Vita via so-loader",
+    "homebrew_long_description": "A native port of Gameloft's Dungeon Hunter 2 (Android) to the PlayStation Vita, built on TheFloW's so-loader technique: the original Android .so libraries are relocated and run directly on the Vita, with a from-scratch FalsoJNI-based bridge standing in for the parts of the Android runtime the game calls into (rendering surface, touch input, asset loading, audio), rendering through vitaGL built from source.",
+    "homebrew_id": "dungeon-hunter-2",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.1.0",
+    "catalog_apps": [
+      {
+        "id": "dungeon-hunter-2",
+        "name": "Dungeon Hunter 2",
+        "icon": "https://archive.org/download/dungeon-hunter-2-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Dungeon Hunter 2 native port for PS Vita via so-loader",
+        "long_description": "A native port of Gameloft's Dungeon Hunter 2 (Android) to the PlayStation Vita, built on TheFloW's so-loader technique: the original Android .so libraries are relocated and run directly on the Vita, with a from-scratch FalsoJNI-based bridge standing in for the parts of the Android runtime the game calls into (rendering surface, touch input, asset loading, audio), rendering through vitaGL built from source.",
+        "version": "1.1.0",
+        "version_date": "2026-09-20",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.1.0",
+    "catalog_version": "1.1.0"
   },
   {
     "platform": "github",
@@ -13539,55 +13735,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.57 → release v0.61-test0",
     "catalog_version": "v.0.57"
-  },
-  {
-    "platform": "github",
-    "repo": "Brendonm17/ACGC-Vita-Port",
-    "release_id": "335224816",
-    "tag": "v0.4.1",
-    "name": "Animal Crossing v0.4.1",
-    "url": "https://github.com/Brendonm17/ACGC-Vita-Port/releases/tag/v0.4.1",
-    "published": "2026-06-05T22:25:03Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Animal Crossing Vita v0.4.1\r\n\r\nBetter performance near waterfalls when the summer rainbow is out. New shader, getting close to 0 uber fallbacks lol\r\n\r\n### Bug fixes\r\n- Free cam: fixed island cottage and bungalow collision, a duplicate mesh, and the camera toggling on its own during Kapp'n boat transitions.\r\n- Kapp'n trophy now fires when you step off the boat, instead of after talking to the islander.\r\n- Saves: autosave moved to a background thread, saves staged off the heap.\r\n- Trimmed a pile of redundant GPU shader copies, freeing memory.\r\n\r\n### Thanks\r\n- **FlyingMeta** for the ACGC-PC-Port.\r\n- **Cuyler36** and the ACGC decomp team.\r\n- **Rinnegatamante** for VitaGL and NoTrpDrm.",
-    "assets": [
-      {
-        "name": "ac_vita.vpk",
-        "size": 6742478,
-        "download_url": "https://github.com/Brendonm17/ACGC-Vita-Port/releases/download/v0.4.1/ac_vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Brendonm17",
-    "homebrew_name": "Animal Crossing Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-animal-crossing-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Animal Crossing for PSVita.",
-    "homebrew_id": "animal-crossing-vita",
-    "homebrew_authors": [
-      "bren"
-    ],
-    "catalog_apps": [
-      {
-        "id": "animal-crossing-vita",
-        "name": "Animal Crossing Vita",
-        "icon": "https://archive.org/download/psvitaalive-animal-crossing-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Animal Crossing for PSVita.",
-        "long_description": "Port of Animal Crossing for the Nintendo Gamecube, based on the decompilation and PC port.",
-        "version": "v.0.4.1",
-        "version_date": "2026-06-06",
-        "author_ids": [
-          "bren"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Port of Animal Crossing for the Nintendo Gamecube, based on the decompilation and PC port.",
-    "homebrew_version": "v.0.4.1",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.4.1",
-    "catalog_version": "v.0.4.1"
   },
   {
     "platform": "github",
@@ -33001,219 +33148,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.08switchgit-vita/switch-rsn8887",
     "catalog_version": "1.08switchgit-vita/switch-rsn8887"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/rocksndiamonds",
-    "release_id": "43415144",
-    "tag": "1.15",
-    "name": "Rocks'n'Diamonds and Mirrormagic for Vita (v1.12) and Switch (v1.15)",
-    "url": "https://github.com/rsn8887/rocksndiamonds/releases/tag/1.15",
-    "published": "2021-05-22T19:09:54Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Recent Changes\r\n======\r\n1.15 (Switch only)\r\n\r\n- on Switch, add 12.0.0 support. Only .nro files changed, data is the same.\r\n\r\nDescription\r\n======\r\nThese are my Vita and Switch ports of Rocks'n'Diamonds and Mirrormagic. \r\n\r\n**Rocks'n'Diamonds** is a Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels.\r\n\r\n![Screenshot of Rocks'n'Diamonds Vita](screenshots/rnd_new_a.jpg)\r\n\r\n**Mirrormagic** is a game by Holger Schemel in the tradition of Deflektor and Mindbender. You guide a laser beam by adjusting mirrors before the time limit runs out.\r\n\r\n![Screenshot of Mirrormagic Vita](screenshots/mm_new_a.jpg)\r\n\r\nMore information about the games can be found at the homepages for the Windows versions:\r\n\r\nhttp://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/\r\nhttp://www.artsoft.org/mirrormagic\r\n\r\nAnd the official manual for Rocks'n'Diamonds is here:\r\n\r\nhttps://www.artsoft.org/rocksndiamonds/manual/index.html\r\n\r\nThanks\r\n======\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nThanks @FrangarCJ for help with optimizing the rendering. \r\n\r\nThanks to Holger Schemel for making a great and portable game.\r\n\r\nThanks to the many devs of VitaSDK for a great development environment.\r\n\r\nThanks to all the devs of DevKitPro for Switch for a great development suite. \r\n\r\nInstallation (Vita)\r\n=====\r\n\r\n- install the vpks\r\n\r\n- extract contents of `rocksndiamonds_data.zip` and `mirrormagic_data.zip` and copy them to your Vita's `ux0:/data` folder. You should have folders `ux0:/data/rocksndiamonds` and `ux0:/data/mirrormagic` on your Vita with the files in them.  \r\n\r\nInstallation (Switch)\r\n=====\r\n\r\n- extract `rocksndiamonds_data.zip` and `mirrormagic_data.zip` to the folder `switch/` in the root of your sd card. You should have folders such as `switch/rocksndiamonds/levels` and `switch/mirrormagic/levels` and more. Make sure none of the folders or files has the \"archive\" flag set after copying.\r\n \r\n- copy `rocksndiamonds.nro` to `switch/rocksndiamonds/` and `mirrormagic.nro` to `switch/mirrormagic/`\r\n\r\n- use nsp injection to start the games, otherwise the on-screen keyboard will not work. On SX OS, you can do this by holding down R while launching any installed game to make hbmenu appear. \r\n\r\nVita/Switch-Exclusive Features\r\n=======\r\n- game controller mapping including analog joystick mouse controls\r\n- front touch controls with left/right mouse click and drag and drop gestures\r\n- the game runs smooth at the same speed as the desktop versions\r\n- additional level package with thousands of levels as separate download (see 'More Levels')\r\n- auto-hide mouse cursor when using the dpad\r\n- easily switch player focus in multiplayer games using r+triangle and r+square\r\n- 60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.\r\n- text entry with Vita/Switch touch keyboard, no physical keyboard or mouse required\r\n\r\nVita-Exclusive Features\r\n========\r\n- support for bluetooth keyboard and mouse\r\n\r\nGamepad Controls (Vita)\r\n======\r\nDpad or left stick = move player and navigate menus  \r\nright stick = move mouse pointer  \r\nCross = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)  \r\nCircle = secondary button (drop dynamite)  \r\nSquare / L = left mouse button  \r\nTriangle / R = right mouse button  \r\nSelect = quit (escape key, also cancels requesters)  \r\nStart = pause (space key)  \r\nR+Triangle = set focus to next player (ALL->1->2->3->4)  \r\nR+Square = set player focus to previous player (ALL<-1<-2<-3<-4)  \r\n\r\nGamepad Controls (Switch)\r\n======\r\nDpad or left stick = move player and navigate menus  \r\nright stick = move mouse pointer  \r\nB = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)  \r\nA = secondary button (drop dynamite)  \r\nY or L = left mouse button  \r\nX or R = right mouse button  \r\nMinus = quit (escape key, also cancels requesters)  \r\nPlus = pause (space key)  \r\nR+X = set focus to next player (ALL->1->2->3->4)  \r\nR+Y = set player focus to previous player (ALL<-1<-2<-3<-4)  \r\n\r\nTouch Controls\r\n=======\r\nNote: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.\r\n\r\nSingle short tap = left mouse click  \r\nSingle short tap while holding a second finger down = right mouse click  \r\nSingle finger drag = move the mouse pointer  \r\nDual finger drag = drag'n'drop (left mouse button is held down)  \r\nThree finger drag = drag'n'drop (right mouse button is held down)  \r\n\r\nMore Levels for Rocks'n'Diamonds\r\n=========\r\n\r\n- More than 50,000 additional Rocks'n'Diamonds levels can be downloaded here: http://www.artsoft.org/rocksndiamonds/levels/\r\n\r\n- I made a single easy-to-install zip More_Levels_v2.zip (~90 MB). It contains selected additional levels from the above site and is available with the other release files.\r\n\r\n- Just download, unzip, and  transfer to your Vita, so that you have a subfolder `ux0:/data/rocksndiamonds/levels/More_Levels`. Or transfer to your Switch, so that you have a subfolder `switch/rocksndiamonds/levels/More_Levels`.\r\n\r\n- FTP transfer of levelsets has to be done using binary transfer mode, not Auto or ASCII . Otherwise some levels will be treated as ASCII with mangled line endings and won't work. This was verified with the Emerald_Mine_Club_original_1 levels and FileZilla FTP.\r\n\r\nNotes\r\n=====\r\n- It is possible to get a wrong screen size on Switch by messing with the options. The solution is to navigate to setup->graphics and enable Fullscreen mode and set Window size to 100%, then select \"save & exit\"\r\n\r\n- To load new level sets, go to the level number selection in the menu, and press X (B on Switch). A new screen should open that shows a few levels. Go to the parent dir and into the folder Classic Games. There are many more levels already included in that folder.\r\n\r\n- Sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. This is fixed by simply restarting the game and loading the levelset again.\r\n\r\n- To answer the OK/Cancel dialogs in the game, press select (minus on Switch) to cancel (this is escape), or X (B on Switch) for OK.\r\n\r\n- You can install new level sets for Rocks'n'Diamonds by copying them into ux0:/data/rocksndiamonds/levels on Vita, or /switch/rocksndiamonds/levels on Switch. See the official manual: https://www.artsoft.org/rocksndiamonds/manual/manual.html#\r\n\r\n- Similarly, you can install new level sets for Mirrormagic by copying them into ux0:/data/mirrormagic/levels on Vita, and /switch/mirrormagic/levels on Switch. \r\n\r\n- If you mess up some options and want to reset to default, you can delete the folder 'ux0:/data/rocksndiamonds/userdata' and/or 'ux0:/data/mirrormagic/userdata'. On Switch, the folders are '/switch/rocksndiamonds/userdata' and '/switch/mirrormagic/userdata'.\r\n\r\n- For multiplayer team mode in Rocks'n'Diamonds, enable it via Setup->Game & Menu->Team-Mode (Multiplayer)->on. You also have to find make a level that has multiple players. R+Square and R+Triangle (R+Y and R+X on Switch) can be used in-game to change focus between players, see Game Controls. All controllers have to be paired before launching the app, otherwise they will not be recognized by the game.\r\n\r\nBuild Instructions\r\n=====\r\n- clone the repository, then\r\n````\r\ncd rocksndiamonds\r\n````\r\nThen use\r\n````\r\nmake vitarocks\r\n````\r\nor\r\n````\r\nmake switchrocks\r\n````\r\nfor Rocks'n'Diamonds, and\r\n````\r\nmake vitamirror\r\n````\r\nor\r\n````\r\nmake switchmirror\r\n````\r\nfor Mirrormagic.\r\n\r\nYou need the latest SDL2 Vita library from 05-23-2018 or later for this to work. The latest SDL2 library can be downloaded by updating your vitasdk, or here: https://dl.vitasdk.org\r\n\r\nCHANGELOG\r\n=====\r\n1.15 (Switch only)\r\n\r\n- on Switch, add 12.0.0 support. Only .nro files changed, data is the same.\r\n\r\n1.14 (Switch only)\r\n\r\n- on Switch, add 9.0.0 support\r\n- on Switch, fix .ogg audio playback\r\n- on Switch, fix pointer getting stuck when controlled with physical USB mouse\r\n\r\n1.13 (Switch only)\r\n\r\n- on Switch, fix automatically turning on/off VSync on selecting/deselecting Game Speed: 60 fps mode \r\n\r\n1.12\r\n\r\n- fix crash when loading levelsets that change screenmode, such as Supaplex (Original)\r\n- on Switch, fix slow-down when pressing home button\r\n- on Switch, use 1080p resolution when docked\r\n\r\n\r\n1.11 (Switch only)\r\n\r\n- On Switch, implement on-screen keyboard (only works when launching with nsp injection)\r\n\r\n1.10 (Switch only)\r\n\r\n- fixed problem on Switch with too-large screen in docked mode when loading saved config. The workaround was to change window size to 100% and save again. Now Fullscreen mode should be set to \"On\" and then this problem does not appear anymore.\r\n\r\n1.9switch\r\n\r\n- added Switch port\r\n\r\n1.9\r\n\r\n- add '60 fps' game speed setting for perfectly smooth motion in some levels on the Vita. It works well with the bundled Emerald Mine levelsets. This mode is 20% faster than the default setting 'normal.'\r\n\r\n- removed slow-down when playing levelsets that use the Emerald Mine engine with default graphics.\r\n\r\n1.8\r\n\r\n- map set player focus to r+triangle and r+square for multiplayer games on VitaTV (up to 4 players)\r\n\r\n1.7\r\n\r\n- enabled mp3 music support, used by some custom levelsets\r\n\r\n1.6\r\n\r\n- support editing multiline textfields in level editor\r\n\r\n1.5\r\n\r\n- optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @FrangarCJ for the help).\r\n- fixed sticky touch inputs and other issues with touch controls\r\n\r\n1.4\r\n\r\n- fixed screen centering\r\n- fixed screen scaling so it works for all sizes\r\n\r\n1.3\r\n\r\n- Mirrormagic as separate app. It uses the same codebase as Rocks'n'Diamonds.\r\n- Smoother mouse pointer motion.\r\n\r\n1.2\r\n\r\n- Significant speedup by drawing directly to texture pixels. Setting game speed to 'very fast' actually makes it faster now.\r\n\r\n1.1\r\n\r\n- implemented mouse pointer controls via right analog stick and front touch. The level editor is fully usable now.\r\n- improved picture quality for sharper graphics\r\n\r\n1.0\r\n\r\n- fixed name entry using touch keyboard. It works without any return or backspace keypresses now.\r\n- fixed graphics corruption of some cartoons on menu screen (updated data.zip)\r\n\r\n0.9\r\n\r\n- initial Vita release\r\n",
-    "assets": [
-      {
-        "name": "mirrormagic.nro",
-        "size": 11255096,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "mirrormagic_data.zip",
-        "size": 1571524,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_data.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "mirrormagic_vita_1.12.vpk",
-        "size": 2742965,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "More_Levels_v2.zip",
-        "size": 92324655,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/More_Levels_v2.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "rocksndiamonds.nro",
-        "size": 11260669,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "rocksndiamonds_data.zip",
-        "size": 1506209,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_data.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "rocksndiamonds_vita_1.12.vpk",
-        "size": 2814410,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "rsn8887",
-    "homebrew_name": "rocksndiamonds",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Rocks'n'Diamonds port for PSVITA.",
-    "homebrew_long_description": "Rocks'n'Diamonds is a scrolling tile-based computer puzzle game that can be described as a combined Boulder Dash, Supaplex, Emerald Mine, and Sokoban clone. It is a free software game under the GPLv2 license created by Artsoft Entertainment and designed by Holger Schemel. For additional level packs, see the release notes at https://github.com/rsn8887/rocksndiamonds/releases/latest",
-    "homebrew_id": "rocksndiamonds",
-    "homebrew_authors": [
-      "rsn8887"
-    ],
-    "homebrew_version": "1.15",
-    "catalog_apps": [
-      {
-        "id": "rocksndiamonds",
-        "name": "rocksndiamonds",
-        "icon": "https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png",
-        "category": "ports",
-        "description": "Rocks'n'Diamonds port for PSVITA.",
-        "long_description": "Rocks'n'Diamonds is a scrolling tile-based computer puzzle game that can be described as a combined Boulder Dash, Supaplex, Emerald Mine, and Sokoban clone. It is a free software game under the GPLv2 license created by Artsoft Entertainment and designed by Holger Schemel. For additional level packs, see the release notes at https://github.com/rsn8887/rocksndiamonds/releases/latest",
-        "version": "1.15",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      },
-      {
-        "id": "mirrormagic",
-        "name": "mirrormagic",
-        "icon": "https://archive.org/download/psvitaalive-mirrormagic/icon0.png",
-        "category": "ports",
-        "description": "Mirrormagic port for PSVITA",
-        "long_description": "Mirrormagic is a game in the tradition of Deflektor and Mindbender written by Holger Schemel. You guide a laser beam by adjusting mirrors before the time limit runs out.",
-        "version": "1.15",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.15",
-    "catalog_version": "1.15"
-  },
-  {
-    "platform": "github",
-    "repo": "m1s3ry/crashlands-vita",
-    "release_id": "43275770",
-    "tag": "v1.0",
-    "name": "v1.0 - Initial Release",
-    "url": "https://github.com/m1s3ry/crashlands-vita/releases/tag/v1.0",
-    "published": "2021-05-20T10:51:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Please, follow installation instructions in the readme of this repo.",
-    "assets": [
-      {
-        "name": "Crashlands.Vita.Patch.Epic.Games.Store.zip",
-        "size": 48457632,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Epic.Games.Store.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Crashlands.Vita.Patch.GoG.1.4.4.zip",
-        "size": 48128376,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.GoG.1.4.4.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Crashlands.Vita.Patch.Steam.Build.6083635.zip",
-        "size": 48456569,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Steam.Build.6083635.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Crashlands_v1.0.0.KyuHEN.Version.VPK",
-        "size": 3002252,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands_v1.0.0.KyuHEN.Version.VPK",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "m1s3ry",
-    "homebrew_name": "Crashlands",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-crashlands/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Crashlands for PSVita.",
-    "homebrew_long_description": "Craft, battle, and quest your way through Crashlands, a story-driven Crafting ARPG overflowing with sass! Original game by Butterscotch Shenanigans.\nInstall instructions in Release Page (Github).",
-    "homebrew_id": "crashlands",
-    "homebrew_authors": [
-      "m1s3ry"
-    ],
-    "homebrew_version": "v.1.0.0",
-    "catalog_apps": [
-      {
-        "id": "crashlands",
-        "name": "Crashlands",
-        "icon": "https://archive.org/download/psvitaalive-crashlands/icon0.png",
-        "category": "ports",
-        "description": "Port of Crashlands for PSVita.",
-        "long_description": "Craft, battle, and quest your way through Crashlands, a story-driven Crafting ARPG overflowing with sass! Original game by Butterscotch Shenanigans.\nInstall instructions in Release Page (Github).",
-        "version": "v.1.0.0",
-        "version_date": "2021-05-20",
-        "author_ids": [
-          "m1s3ry"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0",
-    "catalog_version": "v.1.0.0"
-  },
-  {
-    "platform": "github",
-    "repo": "ammeir/worminator",
-    "release_id": "42650633",
-    "tag": "v1.0",
-    "name": "Worminator v1.0",
-    "url": "https://github.com/ammeir/worminator/releases/tag/v1.0",
-    "published": "2021-05-08T18:42:16Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "First version of Worminator.",
-    "assets": [
-      {
-        "name": "worminator_v10.zip",
-        "size": 29017876,
-        "download_url": "https://github.com/ammeir/worminator/releases/download/v1.0/worminator_v10.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "ammeir",
-    "homebrew_name": "Worminator 3",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-worminator-3/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Worminator 3 for PSVITA.",
-    "homebrew_long_description": "Worminator 3 is a sidescrolling action platformer game where you play as The Worminator and fight your way through many levels of madness and mayhem. It features huge levels, two episodes, nine unique weapons, Matrix-style \"bullet time\", hidden locations, multiple difficulties, several other optional characters and many cheats that influence gameplay.",
-    "homebrew_id": "worminator-3",
-    "homebrew_authors": [
-      "ammeir"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "worminator-3",
-        "name": "Worminator 3",
-        "icon": "https://archive.org/download/psvitaalive-worminator-3/icon0.png",
-        "category": "ports",
-        "description": "Port of Worminator 3 for PSVITA.",
-        "long_description": "Worminator 3 is a sidescrolling action platformer game where you play as The Worminator and fight your way through many levels of madness and mayhem. It features huge levels, two episodes, nine unique weapons, Matrix-style \"bullet time\", hidden locations, multiple difficulties, several other optional characters and many cheats that influence gameplay.",
-        "version": "v.1.0",
-        "version_date": "2021-05-08",
-        "author_ids": [
-          "ammeir"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
   }
 ]

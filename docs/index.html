@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>482</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">403</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>79</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>76</strong><span>pendientes</span></div>
         <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
@@ -219,7 +219,202 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.2.0 v1.2.0 ports # asphalt 5 hd - ps vita port (v1.2.0) 🏎️💨
+            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.13 v0.1.13 ports - **act v stutter gone.** on the scripted harrogath patrol (real console,
+  110 s), frames over 60 ms drop from ~25 to 3 and the frame rate reaches
+  the game&#x27;s own cap: 24.0 → 25.0 fps. the cause was ours: an engine-side
+  25 hz frame cap written for online play also ran in solo (it armed
+  whenever `d2net` was set, which the default config always sets). solo
+  diablo ii already draws exactly once per 40 ms simulation step; the cap
+  waited a little longer than 40 ms every frame, drifted against the game&#x27;s
+  own clock, and the game then skipped a draw every few seconds. the cap is
+  now off by default. **online:** there is no engine cap either anymore —
+  not re-measured online yet; if the game ever runs too fast in a
+  battle.net game, `d2_online_cap=25` in `env.txt` brings the old cap back.
+- **less cpu per frame (~1.6 ms of game-thread work, ~5% of a frame).**
+  the most frequent calls from the game into the runtime (clock reads,
+  critical sections — ~650 per frame) are now served from inside the
+  translated code instead of leaving it and coming back; the glide ring
+  dll copies perspective vertices in line; `wsprintfa` no longer allocates.
+  main core load on the patrol: ~77% → ~74%. proven identical on qemu
+  (pixel-identical image over 4000 frames, critical-section contention
+  test) and measured on console with interleaved passes.
+- **fewer memory-card reads when new content streams in:** a seek now
+  reads 32 kib ahead instead of 8 (~60% fewer card reads on the patrol),
+  no extra ram.
+- **native perspective floor (`d2_f3natif=1`) faster**, still opt-in: it is
+  now served in line and writes its draws directly, another ~1.25 ms per
+  frame on the patrol (0 divergence against the game&#x27;s own code on 168,503
+  compared cells).
+
+
+version française : [journal des versions](https://github.com/franckrst/d2vita/blob/main/docs-site/changelog.fr.md).
+
+
+**full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.12...v0.1.13">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
+                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.13" target="_blank" rel="noopener">D2Vita</a></h2>
+                      <div class="release-name">v0.1.13</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.13</span>
+                    <span>2026-09-28 08:06 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.12</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.12 → release v0.1.13</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li><strong>Act V stutter gone.</strong> On the scripted Harrogath patrol (real console,
+110 s), frames over 60 ms drop from ~25 to 3 and the frame rate reaches
+the game's own cap: 24.0 → 25.0 fps. The cause was ours: an engine-side
+25 Hz frame cap written for online play also ran in solo (it armed
+whenever <code>D2NET</code> was set, which the default config always sets). Solo
+Diablo II already draws exactly once per 40 ms simulation step; the cap
+waited a little longer than 40 ms every frame, drifted against the game's
+own clock, and the game then skipped a draw every few seconds. The cap is
+now off by default. <strong>Online:</strong> there is no engine cap either anymore —
+not re-measured online yet; if the game ever runs too fast in a
+Battle.net game, <code>D2_ONLINE_CAP=25</code> in <code>env.txt</code> brings the old cap back.</li>
+<li><strong>Less CPU per frame (~1.6 ms of game-thread work, ~5% of a frame).</strong>
+The most frequent calls from the game into the runtime (clock reads,
+critical sections — ~650 per frame) are now served from inside the
+translated code instead of leaving it and coming back; the Glide ring
+DLL copies Perspective vertices in line; <code>wsprintfA</code> no longer allocates.
+Main core load on the patrol: ~77% → ~74%. Proven identical on qemu
+(pixel-identical image over 4000 frames, critical-section contention
+test) and measured on console with interleaved passes.</li>
+<li><strong>Fewer memory-card reads when new content streams in:</strong> a seek now
+reads 32 KiB ahead instead of 8 (~60% fewer card reads on the patrol),
+no extra RAM.</li>
+<li><strong>Native Perspective floor (<code>D2_F3NATIF=1</code>) faster</strong>, still opt-in: it is
+now served in line and writes its draws directly, another ~1.25 ms per
+frame on the patrol (0 divergence against the game's own code on 168,503
+compared cells).</li>
+</ul>
+<p>Version française : <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md">journal des versions</a>.</p>
+<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.12...v0.1.13">https://github.com/Franckrst/D2Vita/compare/v0.1.12...v0.1.13</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.13/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="animal crossing vita animal crossing vita brendonm17/acgc-vita-port animal crossing vita v0.5.0 v0.5.0 ports ## animal crossing vita v0.5.0 multiplayer update
+
+up to 4 players in one town: the host and 3 visitors, all playing at the same time. you travel by train through porter, like the old card trips.
+
+- talk to porter, go on a trip, then pick **visit a friend.** or **have visitors.**
+- three ways to connect:
+  - **right beside me!** vita local wireless, no router needed.
+  - **on my wi-fi.** same network, finds open towns by itself.
+  - **far away.** internet. the host gets an 8-character ticket number to hand out.
+- far away, the host&#x27;s vita opens udp port 19520 on the router itself (nat-pmp, then upnp). if the router refuses it or keeps it for another device, it tries 19521-19523. only the host needs a port. behind cgnat you can&#x27;t host far away, but you can still visit.
+- shared between screens: players, villagers, bugs and fish, weather and clock, events, the train and porter, items, rooms, the island cottage and nes games. (if you find anything missing let me know!!)
+- chat: speech balloons over heads. tap the balloon in the bottom left, 32 characters, gamecube or vita keyboard. typing shows as dots. messages from players off screen show at the screen edge facing them, or over the building they&#x27;re in.
+- new online page: title screen &gt; options &gt; online. chat on/off, keyboard, what visitors can do, and asking before visitors join. the host&#x27;s settings are the ones that count in their town.
+- saves stay normal gamecube .gci files. while you&#x27;re visiting, your character is also kept in `mp_passport_*` files next to your save. don&#x27;t delete them mid-trip.
+- items you pick up in someone&#x27;s town are only yours once the host&#x27;s game has saved them, so nothing gets duplicated.
+- everyone needs the same release.
+
+not shared yet: kapp&#x27;n&#x27;s boat ride (everyone keeps their own boat), where nook and mable stand in shops, events waiting for a host who&#x27;s in a menu or talk, and how clean gracie&#x27;s car looks.
+
+details, ports and troubleshooting are in `vita/multiplayer.md`. back up your saves before playing online. and be careful who you share your info with!
+
+## fixes
+
+- many small visual bugs fixed
+- resetti menu background fixed
+- dpad spam doesnt play last action anymore
+- nes games not working for some users, and optional path for roms in settings.ini
+- version number on main menu
+
+## security
+
+- blocked known text and save exploits: control codes in passwords, bulletin board posts and names; message and choice overflows; nes card game overflows. the host also cleans text coming in from visitors.
+
+note: please be careful who you share your ip with, i am not responsible for bad actors. please use at your own risk, and respect other players.
+
+## trophies
+
+- while you&#x27;re visiting, only your own progress counts.
+
+## modding
+
+- initial framework for multiplayer sync api (mods). joining checks that everyone runs the same gameplay mods.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-animal-crossing-vita/icon0.png" alt="Icono de Animal Crossing Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Brendonm17/ACGC-Vita-Port</div>
+                      <h2><a href="https://github.com/Brendonm17/ACGC-Vita-Port/releases/tag/v0.5.0" target="_blank" rel="noopener">Animal Crossing Vita</a></h2>
+                      <div class="release-name">Animal Crossing Vita v0.5.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.5.0</span>
+                    <span>2026-09-28 03:31 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.4.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.4.1 → release v0.5.0</div>
+                  
+                  <div class="body markdown-body"><h2>Animal Crossing Vita v0.5.0 Multiplayer Update</h2>
+<p>Up to 4 players in one town: the host and 3 visitors, all playing at the same time. You travel by train through Porter, like the old card trips.</p>
+<ul>
+<li>Talk to Porter, go on a trip, then pick <strong>Visit a friend.</strong> or <strong>Have visitors.</strong></li>
+<li>Three ways to connect:<ul>
+<li><strong>Right beside me!</strong> Vita local wireless, no router needed.</li>
+<li><strong>On my Wi-Fi.</strong> Same network, finds open towns by itself.</li>
+<li><strong>Far away.</strong> Internet. The host gets an 8-character ticket number to hand out.</li>
+</ul>
+</li>
+<li>Far away, the host's Vita opens UDP port 19520 on the router itself (NAT-PMP, then UPnP). If the router refuses it or keeps it for another device, it tries 19521-19523. Only the host needs a port. Behind CGNAT you can't host far away, but you can still visit.</li>
+<li>Shared between screens: players, villagers, bugs and fish, weather and clock, events, the train and Porter, items, rooms, the island cottage and NES games. (If you find anything missing let me know!!)</li>
+<li>Chat: speech balloons over heads. Tap the balloon in the bottom left, 32 characters, GameCube or Vita keyboard. Typing shows as dots. Messages from players off screen show at the screen edge facing them, or over the building they're in.</li>
+<li>New Online page: Title screen &gt; Options &gt; Online. Chat on/off, keyboard, what visitors can do, and asking before visitors join. The host's settings are the ones that count in their town.</li>
+<li>Saves stay normal GameCube .gci files. While you're visiting, your character is also kept in <code>mp_passport_*</code> files next to your save. Don't delete them mid-trip.</li>
+<li>Items you pick up in someone's town are only yours once the host's game has saved them, so nothing gets duplicated.</li>
+<li>Everyone needs the same release.</li>
+</ul>
+<p>Not shared yet: Kapp'n's boat ride (everyone keeps their own boat), where Nook and Mable stand in shops, events waiting for a host who's in a menu or talk, and how clean Gracie's car looks.</p>
+<p>Details, ports and troubleshooting are in <code>vita/MULTIPLAYER.md</code>. Back up your saves before playing online. And be careful who you share your info with!</p>
+<h2>Fixes</h2>
+<ul>
+<li>Many small visual bugs fixed</li>
+<li>Resetti menu background fixed</li>
+<li>Dpad spam doesnt play last action anymore</li>
+<li>NES games not working for some users, and optional path for roms in settings.ini</li>
+<li>Version number on main menu</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>Blocked known text and save exploits: control codes in passwords, bulletin board posts and names; message and choice overflows; NES card game overflows. The host also cleans text coming in from visitors.</li>
+</ul>
+<p>Note: Please be careful who you share your IP with, I am not responsible for bad actors. Please use at your own risk, and respect other players.</p>
+<h2>Trophies</h2>
+<ul>
+<li>While you're visiting, only your own progress counts.</li>
+</ul>
+<h2>Modding</h2>
+<ul>
+<li>Initial framework for multiplayer sync API (mods). Joining checks that everyone runs the same gameplay mods.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Brendonm17/ACGC-Vita-Port/releases/download/v0.5.0/ac_vita_mp.vpk" target="_blank" rel="noopener">⬇ ac_vita_mp.vpk · 6.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.2.0 v1.2.0 ports # asphalt 5 hd - ps vita port (v1.2.0) 🏎️💨
 
 **asphalt 5** for ps vita is fully playable from start to finish with physical controls, full
 audio and cutscene video.
@@ -290,14 +485,14 @@ executable natively on the vita, fully hardware-accelerated via `vitagl`.
                       <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.2.0" target="_blank" rel="noopener">Asphalt 5</a></h2>
                       <div class="release-name">Asphalt 5 HD - PS Vita Port v1.2.0</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v1.2.0</span>
                     <span>2026-09-28 01:59 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release v1.2.0</div>
+                  <div class="catalog-detail">PSVitaAlive 1.2.0</div>
                   
                   <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port (v1.2.0) 🏎️💨</h1>
 <p><strong>Asphalt 5</strong> for PS Vita is fully playable from start to finish with physical controls, full
@@ -395,117 +590,6 @@ Android game.)</em></li>
                   <div class="body markdown-body"><p>buildnum 4197</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 15.8 KB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 29.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 37.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 29.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 21.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.12 v0.1.12 ports - **perspective floor no longer flickers.** in heavy perspective scenes
-  (harrogath&#x27;s gate: ~1.3 mb of glide records per frame) the render ring
-  could not hold the frame being sent to the gpu on the second core *and*
-  the next one, and the glide dll silently dropped the end of each frame —
-  a patch of floor, different every frame. the flush thread now gives the
-  ring space back as it walks the frame instead of at its end. console, at
-  the gate, perspective on: 0 dropped records, 24 fps (a first fix that sent
-  those frames synchronously cured the flicker but fell to 9 fps there).
-- **the in-game resolution option zooms again.** *800×600* draws at the
-  vita&#x27;s native 960×544 as before; *640×480* now draws at 848×480 — the
-  original 640×480&#x27;s height at the screen&#x27;s shape — scaled ×1.13 to full
-  screen, so characters look as big as native 640×480. before, choosing
-  640×480 only swapped the hud art. switching mid-game works in both
-  directions (the world used to stop two thirds across the screen after a
-  switch to 640). `d2_res640=wxh` forces another size, `d2_res640=0` gives
-  the original bordered 640×480. confirmed on console.
-- **hud gaps filled at 640×480 too.** the 640 bar and the column between
-  two open panels are filled with stone taken from the game&#x27;s own inventory
-  panel, read from the game&#x27;s already-loaded art at the first ui draw — no
-  panel needs to be opened first, and no blizzard art is added to the
-  package. not available for classic (non-lord of destruction) characters.
-- **hud gaps no longer come back with perspective off**, and the black
-  column between two open panels (character sheet + inventory) is filled
-  again at 960×544 — its expected position had not followed the vertical
-  centring of the panels. confirmed on console, perspective on and off.
-- **act v runs faster:** the glide driver now announces two texture units,
-  which lifts d2&#x27;s sprite cache from 3 mib — it was re-sending ~50 known
-  textures per frame. console patrol bench: ~20 → ~24 fps (the game&#x27;s own
-  cap is 25).
-- **blinking monsters (death maulers) fixed in the texture atlas**: with two
-  texture units the atlas could fill up in the wilds and a failed upload
-  left the previous sprite bound. the atlas grows to 48 mib, a failed
-  upload now leaves the texture unbound instead of stale, and full size
-  classes borrow unused pages from the others. verified with the qemu
-  texture oracle (718 wrong-texture draws → 0); console confirmation is
-  still pending.
-- the boot log (`boot_progress.txt`) is now written asynchronously: its
-  periodic reports no longer stall the game thread (30–107 ms each before).
-
-
-version française : [journal des versions](https://github.com/franckrst/d2vita/blob/main/docs-site/changelog.fr.md).
-
-
-**full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.10...v0.1.12">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
-                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.12" target="_blank" rel="noopener">D2Vita</a></h2>
-                      <div class="release-name">v0.1.12</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.12</span>
-                    <span>2026-09-27 19:06 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.10</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.10 → release v0.1.12</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li><strong>Perspective floor no longer flickers.</strong> In heavy Perspective scenes
-(Harrogath's gate: ~1.3 MB of Glide records per frame) the render ring
-could not hold the frame being sent to the GPU on the second core <em>and</em>
-the next one, and the Glide DLL silently dropped the end of each frame —
-a patch of floor, different every frame. The flush thread now gives the
-ring space back as it walks the frame instead of at its end. Console, at
-the gate, Perspective ON: 0 dropped records, 24 fps (a first fix that sent
-those frames synchronously cured the flicker but fell to 9 fps there).</li>
-<li><strong>The in-game Resolution option zooms again.</strong> <em>800×600</em> draws at the
-Vita's native 960×544 as before; <em>640×480</em> now draws at 848×480 — the
-original 640×480's height at the screen's shape — scaled ×1.13 to full
-screen, so characters look as big as native 640×480. Before, choosing
-640×480 only swapped the HUD art. Switching mid-game works in both
-directions (the world used to stop two thirds across the screen after a
-switch to 640). <code>D2_RES640=WxH</code> forces another size, <code>D2_RES640=0</code> gives
-the original bordered 640×480. Confirmed on console.</li>
-<li><strong>HUD gaps filled at 640×480 too.</strong> The 640 bar and the column between
-two open panels are filled with stone taken from the game's own inventory
-panel, read from the game's already-loaded art at the first UI draw — no
-panel needs to be opened first, and no Blizzard art is added to the
-package. Not available for classic (non-Lord of Destruction) characters.</li>
-<li><strong>HUD gaps no longer come back with Perspective OFF</strong>, and the black
-column between two open panels (character sheet + inventory) is filled
-again at 960×544 — its expected position had not followed the vertical
-centring of the panels. Confirmed on console, Perspective ON and OFF.</li>
-<li><strong>Act V runs faster:</strong> the Glide driver now announces two texture units,
-which lifts D2's sprite cache from 3 MiB — it was re-sending ~50 known
-textures per frame. Console patrol bench: ~20 → ~24 fps (the game's own
-cap is 25).</li>
-<li><strong>Blinking monsters (Death Maulers) fixed in the texture atlas</strong>: with two
-texture units the atlas could fill up in the wilds and a failed upload
-left the previous sprite bound. The atlas grows to 48 MiB, a failed
-upload now leaves the texture unbound instead of stale, and full size
-classes borrow unused pages from the others. Verified with the qemu
-texture oracle (718 wrong-texture draws → 0); console confirmation is
-still pending.</li>
-<li>The boot log (<code>boot_progress.txt</code>) is now written asynchronously: its
-periodic reports no longer stall the game thread (30–107 ms each before).</li>
-</ul>
-<p>Version française : <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md">journal des versions</a>.</p>
-<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.10...v0.1.12">https://github.com/Franckrst/D2Vita/compare/v0.1.10...v0.1.12</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.12/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -614,7 +698,63 @@ to single-player level loads.</li>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="sonic r sonic r fr3dsp/sonic-r-vita v1.2 v1.2 ports this update fixes some visual bugs and improves local multiplayer, now it has been tested and should work as intended, being widescreen and controllers working better, again adds last updates of vitagl.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="real racing 2 real racing 2 chuta7x/real-racing-2-vita-port-release rr2 public beta v0.0.1 vita-port ports this the public beta, i am so close to the final release but in the meantime you can test this built and help me to find any bugs or request features and tweaks.
+whats on this initial release:
+
+    menu runs 60fps
+    carrer mode and other modes runs between 30 to 60fps with drops (hopefully fix in final versión)
+    100% working audio with no bugs
+    implemented physical controls mapping (method b in game) (more to come in future beta)
+    implemented a cursor for vita&#x27;s with broken touch screen (left stick movement x for click)
+
+!! important !!
+
+you will need to provide your own original and official game data folder for mali graphics card, please do not use powervr, tegra or adreno, my versión only works with mali version you can always take a look at archive.org you may find what you need 
+
+the game folder should look like this ux0/data/rr2/files/...
+the first launched will take a while as the game deploy the files to the paths for better performance this will only happen 1 time. 
+
+if you want to support me and my projects you can always buy a coffee at https://buymeacoffee.com/chuta7x
+you can follow me at https://x.com/chuta141">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/real-racing-2-ps-vita/icon0.png" alt="Icono de Real Racing 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · CHUTA7X/Real-Racing-2-Vita-Port-Release</div>
+                      <h2><a href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/tag/Vita-Port" target="_blank" rel="noopener">Real Racing 2</a></h2>
+                      <div class="release-name">RR2 Public Beta v0.0.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">Vita-Port</span>
+                    <span>2026-09-27 15:32 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.0.1 → release Vita-Port</div>
+                  
+                  <div class="body markdown-body"><p>This the Public Beta, I am so close to the final release but in the meantime you can test this built and help me to find any bugs or request features and tweaks.
+Whats on this initial release:</p>
+<pre><code>Menu runs 60fps
+Carrer mode and other modes runs between 30 to 60fps with drops (hopefully fix in final versión)
+100% working audio with no bugs
+implemented physical controls mapping (method B in game) (more to come in future Beta)
+implemented a cursor for vita's with broken touch screen (left stick movement X for click)</code></pre>
+<p>!! Important !!</p>
+<p>You will need to provide your own original and official game data folder for MALI graphics card, Please Do not use PowerVR, Tegra or Adreno, my versión only works with MALI version you can always take a look at archive.org you may find what you need</p>
+<p>The game folder should look like this ux0/data/rr2/files/...
+The first launched will take a while as the game deploy the files to the paths for better performance this will only happen 1 time.</p>
+<p>If you want to support me and my projects you can always buy a coffee at <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a>
+You can follow me at <a target="_blank" rel="noopener noreferrer" href="https://x.com/chuta141">https://x.com/chuta141</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/download/Vita-Port/RR2Vita_Public_Beta_v0.0.1.vpk" target="_blank" rel="noopener">⬇ RR2Vita_Public_Beta_v0.0.1.vpk · 4.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="sonic r sonic r fr3dsp/sonic-r-vita v1.2 v1.2 ports this update fixes some visual bugs and improves local multiplayer, now it has been tested and should work as intended, being widescreen and controllers working better, again adds last updates of vitagl.
 
 online play is disabled because i am lazy to make it work correctly!
 
@@ -634,14 +774,14 @@ and that&#x27;s all i think!">
                       <h2><a href="https://github.com/fr3dsp/sonic-r-vita/releases/tag/v1.2" target="_blank" rel="noopener">Sonic R</a></h2>
                       <div class="release-name">v1.2</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v1.2</span>
                     <span>2026-09-27 09:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1 → release v1.2</div>
+                  <div class="catalog-detail">PSVitaAlive 1.2</div>
                   
                   <div class="body markdown-body"><p>This update fixes some visual bugs and improves local multiplayer, now it has been tested and should work as intended, being widescreen and controllers working better, again adds last updates of vitaGL.</p>
 <p>Online play is disabled because I am lazy to make it work correctly!</p>
@@ -656,7 +796,7 @@ and that&#x27;s all i think!">
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="shadow guardian shadow guardian metalsyntax/shadow-guardian-vita shadow guardian vita v1.4 v1.4 ports # shadow guardian vita v1.4
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="shadow guardian shadow guardian metalsyntax/shadow-guardian-vita shadow guardian vita v1.4 v1.4 ports # shadow guardian vita v1.4
 
 this is a wrapper/port of **shadow guardian hd** for the ps vita.
 
@@ -729,14 +869,14 @@ in order to properly install the game, you&#x27;ll need to extract the data from
                       <h2><a href="https://github.com/MetalSyntax/Shadow-Guardian-vita/releases/tag/v1.4" target="_blank" rel="noopener">Shadow Guardian</a></h2>
                       <div class="release-name">Shadow Guardian Vita v1.4</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v1.4</span>
                     <span>2026-09-27 04:49 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
+                    <span class="catalog-version">PSVitaAlive: 1.4.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release v1.4</div>
+                  <div class="catalog-detail">PSVitaAlive 1.4.0</div>
                   
                   <div class="body markdown-body"><h1>Shadow Guardian Vita v1.4</h1>
 <p>This is a wrapper/port of <strong>Shadow Guardian HD</strong> for the PS Vita.</p>
@@ -808,7 +948,7 @@ in order to properly install the game, you&#x27;ll need to extract the data from
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="paper mario vita paper mario vita kaziema/pmvita public beta 0.4.0 v0.4.0 ports # 0.4.0 (major release)
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="paper mario vita paper mario vita kaziema/pmvita public beta 0.4.0 v0.4.0 ports # 0.4.0 (major release)
 
 ## new installation instructions and update instructions:
 
@@ -843,14 +983,14 @@ fix: file read cache misc. fixes
                       <h2><a href="https://github.com/kaziema/pmvita/releases/tag/v0.4.0" target="_blank" rel="noopener">Paper Mario Vita</a></h2>
                       <div class="release-name">Public Beta 0.4.0</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v0.4.0</span>
                     <span>2026-09-26 20:31 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.3.1</span>
+                    <span class="catalog-version">PSVitaAlive: 0.4.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.3.1 → release v0.4.0</div>
+                  <div class="catalog-detail">PSVitaAlive 0.4.0</div>
                   
                   <div class="body markdown-body"><h1>0.4.0 (Major Release)</h1>
 <h2>New Installation Instructions and Update Instructions:</h2>
@@ -936,7 +1076,7 @@ Fix: file read cache misc. fixes</p>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.8.15 v0.8.15 ports ## changes in vita v0.8.15
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.8.15 v0.8.15 ports ## changes in vita v0.8.15
 
 - bowser&#x27;s defeat cutscenes, before and after giga bowser, now run at around
   30 fps instead of 8-12 fps, and the freeze when bowser turns into giga
@@ -953,7 +1093,7 @@ Fix: file read cache misc. fixes</p>
 - the game keeps running at full speed when the frame rate dips, instead of
   slowing down.">
               <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/smash-melee-vita/icon0.png" alt="Icono de Smash Melee Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/smash-melee-port-ps-vita/icon0.png" alt="Icono de Smash Melee Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
@@ -961,14 +1101,14 @@ Fix: file read cache misc. fixes</p>
                       <h2><a href="https://github.com/zm2283145/melee-Vita/releases/tag/v0.8.15" target="_blank" rel="noopener">Smash Melee Vita</a></h2>
                       <div class="release-name">Smash Melee Vita 0.8.15</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v0.8.15</span>
                     <span>2026-09-26 14:20 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.8.12</span>
+                    <span class="catalog-version">PSVitaAlive: 0.8.15</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.8.12 → release v0.8.15</div>
+                  <div class="catalog-detail">PSVitaAlive 0.8.15</div>
                   
                   <div class="body markdown-body"><h2>Changes in Vita v0.8.15</h2>
 <ul>
@@ -1137,6 +1277,35 @@ source commit: `4412bfa` (`vita: prepare performance and crash-fix test prerelea
 <p>Source commit: <code>4412bfa</code> (<code>Vita: prepare performance and crash-fix test prerelease</code>).</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/robin994/battleship-vita/releases/download/1.5-test/battleship.vpk" target="_blank" rel="noopener">⬇ battleship.vpk · 7.1 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5-test/texture_pack_1.5x.zip" target="_blank" rel="noopener">texture_pack_1.5x.zip · 18.8 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5-test/texture_pack_1x.zip" target="_blank" rel="noopener">texture_pack_1x.zip · 9.6 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5-test/texture_pack_2x.zip" target="_blank" rel="noopener">texture_pack_2x.zip · 22.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="arcaea arcaea memory-hunter/arcaea-vita first release 1.0 ports this is the first release.
+has been tested moderately. it shouldn&#x27;t crash in any menus and is able to go into gameplay just fine.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/arcaea-ps-vita/icon0.png" alt="Icono de Arcaea" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · memory-hunter/arcaea-vita</div>
+                      <h2><a href="https://github.com/memory-hunter/arcaea-vita/releases/tag/1.0" target="_blank" rel="noopener">Arcaea</a></h2>
+                      <div class="release-name">First release</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.0</span>
+                    <span>2026-09-24 17:02 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0</div>
+                  
+                  <div class="body markdown-body"><p>This is the first release.
+Has been tested moderately. It shouldn't crash in any menus and is able to go into gameplay just fine.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/memory-hunter/arcaea-vita/releases/download/1.0/arcaea.vpk" target="_blank" rel="noopener">⬇ arcaea.vpk · 2.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1896,6 +2065,286 @@ bug-fix release. install over 1.0; settings, saves and the texture cache are kep
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/NDRWhun/JK2VITA/releases/download/release-1.0.1/JK2VITA_1.0.1.vpk" target="_blank" rel="noopener">⬇ JK2VITA_1.0.1.vpk · 3.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="dungeon hunter 2 dungeon hunter 2 metalsyntax/dungeon-hunter-2-vita dungeon hunter 2 — ps vita · v1.1.0 v1.1.0 ports # dungeon hunter 2 — ps vita · v1.1.0 
+
+&gt; paste the section below into the github release description. the title above goes in the
+&gt; release-title field; suggested tag: `v1.1.0`.
+
+---
+
+**all physical buttons now work — movement, attacks, skills, potion, pause and character menu —
+and saves/options finally persist across reboots.**
+
+## physical controls, finished
+
+every action button now works, including the three that never did: **circle** (skill 3),
+**start** (pause / in-game menu) and **select** (character screen). they were dead on every prior
+build even though the previous attempt&#x27;s synthetic touch events provably reached the engine.
+
+the real cause: the touch layer (`touchscreenbase`) indexes its slot array as `this + 48 *
+pointer_id` **with no bounds check**, and its `clear()` loops exactly 8 times — so only pointer
+ids `0..7` are valid. circle/start/select were assigned ids 7/8/9; the last two wrote past the
+array and clobbered the engine&#x27;s own touch counter, which is why the tap &quot;arrived&quot; in the log but
+never did anything. coordinates were never the problem — the previous synthetic-touch approach had
+a structural ceiling.
+
+fixed by dropping synthetic touch for these three entirely and calling the engine directly instead,
+mirroring exactly what its own flash hud buttons do (reverse-engineered from the hud&#x27;s own
+actionscript bytecode):
+
+- **circle** → the same `ctrlisallowed` → `sg_getskillinslot` → `cmd_beginskill`/`cmd_endskill`
+  sequence the skill-3 hud button makes.
+- **start / select** → `menubase::fs_pushstate(&quot;menu_ingame&quot; / &quot;menu_charactermenu&quot;)`, and if the
+  menu is already open, the same button closes it (`menufx::popall`) — one press to open, one to
+  close.
+- **l + r** → new combo, toggles the bottom hud controls&#x27; opacity between 1% (default — play with
+  physical buttons, hud stays out of the way) and 100% (to use them with touch again).
+
+the left stick and d-pad also got a real fix this release: instead of faking a touch drag on the
+flash virtual joystick (which gameswf&#x27;s hit-test never reliably accepted), the loader now writes
+the engine&#x27;s own `hudcontrols` movement fields directly every frame, the same fields its own touch
+handler fills in when a real finger drags the stick. confirmed on hardware: both d-pad and analog
+stick move the character correctly.
+
+## saves and options now persist (verified on hardware)
+
+progress, settings and language previously died in ram: the game played fine in-session but
+rebooted to an old save, always in english. three separate causes, all fixed and confirmed with a
+save → reboot → load cycle on a real vita (spanish kept, character level and items intact):
+
+- **the port forced english on every boot.** the loader rewrote the saved language to english for
+  the first 180 frames of each launch, so changing language could never stick. now the saved
+  language is read once and only reset if out of range.
+- **the async save queue was never guaranteed to reach disk.** player/level saves are queued in
+  ram (`savegame::saveall → addjob`) and drained by fire-and-forget worker threads — and quitting
+  with start+select skipped `application::quit`, the only synchronous drain, entirely. the queue is
+  now also drained on a timer when jobs are pending and unconditionally at exit.
+- **stale read cache.** the file cache never invalidated on write/delete, so a freshly written save
+  could still load pre-save bytes in-session. writes, deletes and renames now invalidate.
+
+## also fixed
+
+- **crash on quitting while a sound was playing.** `application::quit` stops every sound with a
+  0ms fade, which frees its audio objects synchronously on the main thread — racing the engine&#x27;s
+  own audio thread, which was iterating that same list at the same moment. confirmed from a crash
+  dump (prefetch abort through a freed vtable). level-transition sound stops already used a 500ms
+  fade and never crashed, so quit-time stops now take the same safe path; nothing audible changes,
+  and level transitions are untouched.
+- **a long-standing source of multi-second freezes: every localization file was silently failing
+  to load.** every `text/&lt;zone&gt;.spanish`/`.symbols` lookup this whole project was hitting a
+  relative path that resolves under `assets/` on the real device, which holds nothing but the save
+  file — the actual files live under `data/text/`, and unlike other asset types, this one had no
+  retry-on-failure path anywhere in the engine. a burst of ~12-18 of these misses in the same frame
+  window was directly responsible for multi-hundred-millisecond stalls (one measured at 834ms
+  average over 60 frames). now redirected to the correct path on first failure, same pattern
+  already used for a couple of other asset types.
+- **vitagl&#x27;s cpu-only speedhacks are now baked into every build by default** (`math_speedhack`,
+  `circular_pool_speedhack`, `no_tex_combiner`) — previously only in the opt-in `--hack-safe`
+  variant. confirmed via `nm -d` that this engine imports zero fixed-function gl entry points (100%
+  glsl), so the two math-related flags are free no-ops here and the real, measured win comes from
+  `circular_pool_speedhack`&#x27;s vertex-data pooling. the plain `dungeon_hunter_2.vpk` build now
+  performs the same as the old `_hack_safe` variant; `--hack-safe` is kept only for compatibility.
+- log files are now `.log` instead of `.txt`.
+
+## performance: 5-6 fps → ~20-25 fps in gameplay, ~60 in menus
+
+this is unchanged since the last notes and remains the honest headline: sustained combat is
+~20-25 fps (up from 5-6), menus and light scenes reach ~60. **the gpu was never the bottleneck** —
+`eglswapbuffers` costs ~0.2ms per frame throughout, while cpu-side work (the engine tick) was
+120-185ms. two independent resolution-reduction tests changed combat fps *not at all*, ruling out
+fill-rate directly rather than assuming it. see `porting_plan.md` phase 23 for the full write-up.
+
+## known issues
+
+- **framerate is ~20-25 fps in gameplay, not 60.** the dominant remaining cost is understood but
+  not fixed: the engine&#x27;s real frustum culling has to stay bypassed (see below), so it animates and
+  updates the *entire level* every frame regardless of the camera.
+- **the engine&#x27;s frustum culling is bypassed.** this is what makes enemies render reliably, but
+  it&#x27;s also the main remaining performance waste. naively re-enabling it (`--culling-test 2`)
+  measured *slower* and brings back the invisible-enemy bug, so the real fix is the stale bounding
+  box (or a second, object-level visibility gate — see `porting_plan.md`) that made the bypass
+  necessary in the first place.
+- **some enemies still render invisible** (health bar and aggro ring show, no model). the opacity
+  hypothesis has been ruled out with hard evidence (52/52 sampled enemies at full opacity); the
+  current leads are all culling-related.
+- the repeating hud icon column is still unresolved.
+
+## installing
+
+you need to **legally own dungeon hunter 2 hd for android.** this repository and this release contain
+**no** gameloft assets, apk, or `.so` binaries — only the loader/bridge. you supply the game data
+yourself.
+
+1. install [taihen](https://github.com/yifanlu/taihen)&#x27;s `kubridge.skprx`, and place sony&#x27;s
+   `libshacccg.suprx` under `ur0:data/` (obtained separately — it is sony&#x27;s binary and is not
+   redistributed here).
+2. install the `.vpk`.
+3. stage the game&#x27;s asset files as loose files under `ux0:data/dungeon-hunter-2/`. see
+   `porting_plan.md` phase 8 for the exact layout the asset bridge expects.
+
+## for contributors
+
+`porting_plan.md` documents every hypothesis tried for the open issues above, what was ruled out
+and how, and exactly which diagnostic hooks are already wired up and waiting for a fresh hardware
+log. if you have a physical vita and want to help, that&#x27;s the place to start.
+
+## credits
+
+built on [solobop](https://github.com/v-atamanenko) (andy nguyen, rinnegatamante, volodymyr
+atamanenko) and [falsojni](https://github.com/v-atamanenko/falsojni), rendering through
+[vitagl](https://github.com/rinnegatamante/vitagl) built from source. particular thanks to the
+**asphalt-5-vita** and **asphalt-6-vita** ports, whose own performance write-ups pointed directly
+at several of the fixes in this and the previous release — they are the closest comparable ports
+and their notes were worth more than any amount of guessing.
+
+dungeon hunter 2 is © gameloft. this is an unofficial, non-commercial fan port, not affiliated with
+or endorsed by gameloft. the loader/bridge source in this repository is mit licensed; that covers
+this project&#x27;s own code only.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/dungeon-hunter-2-ps-vita/icon0.png" alt="Icono de Dungeon Hunter 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Dungeon-Hunter-2-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Dungeon-Hunter-2-vita/releases/tag/v1.1.0" target="_blank" rel="noopener">Dungeon Hunter 2</a></h2>
+                      <div class="release-name">Dungeon Hunter 2 — PS Vita · v1.1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.1.0</span>
+                    <span>2026-09-20 21:01 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.0</div>
+                  
+                  <div class="body markdown-body"><h1>Dungeon Hunter 2 — PS Vita · v1.1.0</h1>
+<blockquote>
+<p>Paste the section below into the GitHub release description. The title above goes in the
+release-title field; suggested tag: <code>v1.1.0</code>.</p>
+</blockquote>
+<hr>
+<p><strong>All physical buttons now work — movement, attacks, skills, potion, pause and character menu —
+and saves/options finally persist across reboots.</strong></p>
+<h2>Physical controls, finished</h2>
+<p>Every action button now works, including the three that never did: <strong>Circle</strong> (skill 3),
+<strong>START</strong> (pause / in-game menu) and <strong>SELECT</strong> (character screen). They were dead on every prior
+build even though the previous attempt's synthetic touch events provably reached the engine.</p>
+<p>The real cause: the touch layer (<code>TouchScreenBase</code>) indexes its slot array as <code>this + 48 * pointer_id</code> <strong>with no bounds check</strong>, and its <code>clear()</code> loops exactly 8 times — so only pointer
+ids <code>0..7</code> are valid. Circle/START/SELECT were assigned ids 7/8/9; the last two wrote past the
+array and clobbered the engine's own touch counter, which is why the tap &quot;arrived&quot; in the log but
+never did anything. Coordinates were never the problem — the previous synthetic-touch approach had
+a structural ceiling.</p>
+<p>Fixed by dropping synthetic touch for these three entirely and calling the engine directly instead,
+mirroring exactly what its own Flash HUD buttons do (reverse-engineered from the HUD's own
+ActionScript bytecode):</p>
+<ul>
+<li><strong>Circle</strong> → the same <code>CTRLIsAllowed</code> → <code>SG_GetSkillInSlot</code> → <code>Cmd_BeginSkill</code>/<code>Cmd_EndSkill</code>
+sequence the skill-3 HUD button makes.</li>
+<li><strong>START / SELECT</strong> → <code>MenuBase::FS_PushState(&quot;menu_Ingame&quot; / &quot;menu_CharacterMenu&quot;)</code>, and if the
+menu is already open, the same button closes it (<code>MenuFX::PopAll</code>) — one press to open, one to
+close.</li>
+<li><strong>L + R</strong> → new combo, toggles the bottom HUD controls' opacity between 1% (default — play with
+physical buttons, HUD stays out of the way) and 100% (to use them with touch again).</li>
+</ul>
+<p>The left stick and D-pad also got a real fix this release: instead of faking a touch drag on the
+Flash virtual joystick (which GameSWF's hit-test never reliably accepted), the loader now writes
+the engine's own <code>HUDControls</code> movement fields directly every frame, the same fields its own touch
+handler fills in when a real finger drags the stick. Confirmed on hardware: both D-pad and analog
+stick move the character correctly.</p>
+<h2>Saves and options now persist (verified on hardware)</h2>
+<p>Progress, settings and language previously died in RAM: the game played fine in-session but
+rebooted to an old save, always in English. Three separate causes, all fixed and confirmed with a
+save → reboot → load cycle on a real Vita (Spanish kept, character level and items intact):</p>
+<ul>
+<li><strong>The port forced English on every boot.</strong> The loader rewrote the saved language to English for
+the first 180 frames of each launch, so changing language could never stick. Now the saved
+language is read once and only reset if out of range.</li>
+<li><strong>The async save queue was never guaranteed to reach disk.</strong> Player/level saves are queued in
+RAM (<code>Savegame::saveAll → AddJob</code>) and drained by fire-and-forget worker threads — and quitting
+with START+SELECT skipped <code>Application::Quit</code>, the only synchronous drain, entirely. The queue is
+now also drained on a timer when jobs are pending and unconditionally at exit.</li>
+<li><strong>Stale read cache.</strong> The file cache never invalidated on write/delete, so a freshly written save
+could still load pre-save bytes in-session. Writes, deletes and renames now invalidate.</li>
+</ul>
+<h2>Also fixed</h2>
+<ul>
+<li><strong>Crash on quitting while a sound was playing.</strong> <code>Application::Quit</code> stops every sound with a
+0ms fade, which frees its audio objects synchronously on the main thread — racing the engine's
+own audio thread, which was iterating that same list at the same moment. Confirmed from a crash
+dump (prefetch abort through a freed vtable). Level-transition sound stops already used a 500ms
+fade and never crashed, so quit-time stops now take the same safe path; nothing audible changes,
+and level transitions are untouched.</li>
+<li><strong>A long-standing source of multi-second freezes: every localization file was silently failing
+to load.</strong> Every <code>text/&lt;zone&gt;.spanish</code>/<code>.symbols</code> lookup this whole project was hitting a
+relative path that resolves under <code>assets/</code> on the real device, which holds nothing but the save
+file — the actual files live under <code>data/text/</code>, and unlike other asset types, this one had no
+retry-on-failure path anywhere in the engine. A burst of ~12-18 of these misses in the same frame
+window was directly responsible for multi-hundred-millisecond stalls (one measured at 834ms
+average over 60 frames). Now redirected to the correct path on first failure, same pattern
+already used for a couple of other asset types.</li>
+<li><strong>vitaGL's CPU-only speedhacks are now baked into every build by default</strong> (<code>MATH_SPEEDHACK</code>,
+<code>CIRCULAR_POOL_SPEEDHACK</code>, <code>NO_TEX_COMBINER</code>) — previously only in the opt-in <code>--hack-safe</code>
+variant. Confirmed via <code>nm -D</code> that this engine imports zero fixed-function GL entry points (100%
+GLSL), so the two math-related flags are free no-ops here and the real, measured win comes from
+<code>CIRCULAR_POOL_SPEEDHACK</code>'s vertex-data pooling. The plain <code>dungeon_hunter_2.vpk</code> build now
+performs the same as the old <code>_hack_safe</code> variant; <code>--hack-safe</code> is kept only for compatibility.</li>
+<li>Log files are now <code>.log</code> instead of <code>.txt</code>.</li>
+</ul>
+<h2>Performance: 5-6 FPS → ~20-25 FPS in gameplay, ~60 in menus</h2>
+<p>This is unchanged since the last notes and remains the honest headline: sustained combat is
+~20-25 FPS (up from 5-6), menus and light scenes reach ~60. <strong>The GPU was never the bottleneck</strong> —
+<code>eglSwapBuffers</code> costs ~0.2ms per frame throughout, while CPU-side work (the engine tick) was
+120-185ms. Two independent resolution-reduction tests changed combat FPS <em>not at all</em>, ruling out
+fill-rate directly rather than assuming it. See <code>PORTING_PLAN.md</code> Phase 23 for the full write-up.</p>
+<h2>Known issues</h2>
+<ul>
+<li><strong>Framerate is ~20-25 FPS in gameplay, not 60.</strong> The dominant remaining cost is understood but
+not fixed: the engine's real frustum culling has to stay bypassed (see below), so it animates and
+updates the <em>entire level</em> every frame regardless of the camera.</li>
+<li><strong>The engine's frustum culling is bypassed.</strong> This is what makes enemies render reliably, but
+it's also the main remaining performance waste. Naively re-enabling it (<code>--culling-test 2</code>)
+measured <em>slower</em> and brings back the invisible-enemy bug, so the real fix is the stale bounding
+box (or a second, object-level visibility gate — see <code>PORTING_PLAN.md</code>) that made the bypass
+necessary in the first place.</li>
+<li><strong>Some enemies still render invisible</strong> (health bar and aggro ring show, no model). The opacity
+hypothesis has been ruled out with hard evidence (52/52 sampled enemies at full opacity); the
+current leads are all culling-related.</li>
+<li>The repeating HUD icon column is still unresolved.</li>
+</ul>
+<h2>Installing</h2>
+<p>You need to <strong>legally own Dungeon Hunter 2 HD for Android.</strong> This repository and this release contain
+<strong>no</strong> Gameloft assets, APK, or <code>.so</code> binaries — only the loader/bridge. You supply the game data
+yourself.</p>
+<ol>
+<li>Install <a target="_blank" rel="noopener noreferrer" href="https://github.com/yifanlu/taiHEN">taiHEN</a>'s <code>kubridge.skprx</code>, and place Sony's
+<code>libshacccg.suprx</code> under <code>ur0:data/</code> (obtained separately — it is Sony's binary and is not
+redistributed here).</li>
+<li>Install the <code>.vpk</code>.</li>
+<li>Stage the game's asset files as loose files under <code>ux0:data/dungeon-hunter-2/</code>. See
+<code>PORTING_PLAN.md</code> Phase 8 for the exact layout the asset bridge expects.</li>
+</ol>
+<h2>For contributors</h2>
+<p><code>PORTING_PLAN.md</code> documents every hypothesis tried for the open issues above, what was ruled out
+and how, and exactly which diagnostic hooks are already wired up and waiting for a fresh hardware
+log. If you have a physical Vita and want to help, that's the place to start.</p>
+<h2>Credits</h2>
+<p>Built on <a target="_blank" rel="noopener noreferrer" href="https://github.com/v-atamanenko">SoLoBoP</a> (Andy Nguyen, Rinnegatamante, Volodymyr
+Atamanenko) and <a target="_blank" rel="noopener noreferrer" href="https://github.com/v-atamanenko/FalsoJNI">FalsoJNI</a>, rendering through
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/vitaGL">vitaGL</a> built from source. Particular thanks to the
+<strong>Asphalt-5-Vita</strong> and <strong>Asphalt-6-Vita</strong> ports, whose own performance write-ups pointed directly
+at several of the fixes in this and the previous release — they are the closest comparable ports
+and their notes were worth more than any amount of guessing.</p>
+<p>Dungeon Hunter 2 is © Gameloft. This is an unofficial, non-commercial fan port, not affiliated with
+or endorsed by Gameloft. The loader/bridge source in this repository is MIT licensed; that covers
+this project's own code only.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Dungeon-Hunter-2-vita/releases/download/v1.1.0/dungeon_hunter_2.vpk" target="_blank" rel="noopener">⬇ dungeon_hunter_2.vpk · 1.5 MB</a></div>
                 </div>
               </div>
             </article>
@@ -9063,60 +9512,6 @@ Add better batch download (<a target="_blank" rel="noopener noreferrer" href="ht
 A lot of changes (<a target="_blank" rel="noopener noreferrer" href="https://github.com/blastrock/pkgj/pull/461">https://github.com/blastrock/pkgj/pull/461</a>) by @toaster-code</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/blastrock/pkgj/releases/download/v0.61-test0/pkgj.vpk" target="_blank" rel="noopener">⬇ pkgj.vpk · 2.8 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="animal crossing vita animal crossing vita brendonm17/acgc-vita-port animal crossing v0.4.1 v0.4.1 ports ## animal crossing vita v0.4.1
-
-better performance near waterfalls when the summer rainbow is out. new shader, getting close to 0 uber fallbacks lol
-
-### bug fixes
-- free cam: fixed island cottage and bungalow collision, a duplicate mesh, and the camera toggling on its own during kapp&#x27;n boat transitions.
-- kapp&#x27;n trophy now fires when you step off the boat, instead of after talking to the islander.
-- saves: autosave moved to a background thread, saves staged off the heap.
-- trimmed a pile of redundant gpu shader copies, freeing memory.
-
-### thanks
-- **flyingmeta** for the acgc-pc-port.
-- **cuyler36** and the acgc decomp team.
-- **rinnegatamante** for vitagl and notrpdrm.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-animal-crossing-vita/icon0.png" alt="Icono de Animal Crossing Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Brendonm17/ACGC-Vita-Port</div>
-                      <h2><a href="https://github.com/Brendonm17/ACGC-Vita-Port/releases/tag/v0.4.1" target="_blank" rel="noopener">Animal Crossing Vita</a></h2>
-                      <div class="release-name">Animal Crossing v0.4.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.4.1</span>
-                    <span>2026-06-05 22:25 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.4.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.4.1</div>
-                  
-                  <div class="body markdown-body"><h2>Animal Crossing Vita v0.4.1</h2>
-<p>Better performance near waterfalls when the summer rainbow is out. New shader, getting close to 0 uber fallbacks lol</p>
-<h3>Bug fixes</h3>
-<ul>
-<li>Free cam: fixed island cottage and bungalow collision, a duplicate mesh, and the camera toggling on its own during Kapp'n boat transitions.</li>
-<li>Kapp'n trophy now fires when you step off the boat, instead of after talking to the islander.</li>
-<li>Saves: autosave moved to a background thread, saves staged off the heap.</li>
-<li>Trimmed a pile of redundant GPU shader copies, freeing memory.</li>
-</ul>
-<h3>Thanks</h3>
-<ul>
-<li><strong>FlyingMeta</strong> for the ACGC-PC-Port.</li>
-<li><strong>Cuyler36</strong> and the ACGC decomp team.</li>
-<li><strong>Rinnegatamante</strong> for VitaGL and NoTrpDrm.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Brendonm17/ACGC-Vita-Port/releases/download/v0.4.1/ac_vita.vpk" target="_blank" rel="noopener">⬇ ac_vita.vpk · 6.4 MB</a></div>
                 </div>
               </div>
             </article>
@@ -25752,552 +26147,10 @@ Those are both included as binaries and linked automatically.</p>
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="rocksndiamonds rocksndiamonds mirrormagic rsn8887/rocksndiamonds rocks&#x27;n&#x27;diamonds and mirrormagic for vita (v1.12) and switch (v1.15) 1.15 ports recent changes
-======
-1.15 (switch only)
-
-- on switch, add 12.0.0 support. only .nro files changed, data is the same.
-
-description
-======
-these are my vita and switch ports of rocks&#x27;n&#x27;diamonds and mirrormagic. 
-
-**rocks&#x27;n&#x27;diamonds** is a boulderdash type game by holger schemel with many unique features, such as the ability to play remade levels from boulderdash, emerald mine and supaplex and many more levels.
-
-![screenshot of rocks&#x27;n&#x27;diamonds vita](screenshots/rnd_new_a.jpg)
-
-**mirrormagic** is a game by holger schemel in the tradition of deflektor and mindbender. you guide a laser beam by adjusting mirrors before the time limit runs out.
-
-![screenshot of mirrormagic vita](screenshots/mm_new_a.jpg)
-
-more information about the games can be found at the homepages for the windows versions:
-
-http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/
-http://www.artsoft.org/mirrormagic
-
-and the official manual for rocks&#x27;n&#x27;diamonds is here:
-
-https://www.artsoft.org/rocksndiamonds/manual/index.html
-
-thanks
-======
-thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
-
-thanks @frangarcj for help with optimizing the rendering. 
-
-thanks to holger schemel for making a great and portable game.
-
-thanks to the many devs of vitasdk for a great development environment.
-
-thanks to all the devs of devkitpro for switch for a great development suite. 
-
-installation (vita)
-=====
-
-- install the vpks
-
-- extract contents of `rocksndiamonds_data.zip` and `mirrormagic_data.zip` and copy them to your vita&#x27;s `ux0:/data` folder. you should have folders `ux0:/data/rocksndiamonds` and `ux0:/data/mirrormagic` on your vita with the files in them.  
-
-installation (switch)
-=====
-
-- extract `rocksndiamonds_data.zip` and `mirrormagic_data.zip` to the folder `switch/` in the root of your sd card. you should have folders such as `switch/rocksndiamonds/levels` and `switch/mirrormagic/levels` and more. make sure none of the folders or files has the &quot;archive&quot; flag set after copying.
- 
-- copy `rocksndiamonds.nro` to `switch/rocksndiamonds/` and `mirrormagic.nro` to `switch/mirrormagic/`
-
-- use nsp injection to start the games, otherwise the on-screen keyboard will not work. on sx os, you can do this by holding down r while launching any installed game to make hbmenu appear. 
-
-vita/switch-exclusive features
-=======
-- game controller mapping including analog joystick mouse controls
-- front touch controls with left/right mouse click and drag and drop gestures
-- the game runs smooth at the same speed as the desktop versions
-- additional level package with thousands of levels as separate download (see &#x27;more levels&#x27;)
-- auto-hide mouse cursor when using the dpad
-- easily switch player focus in multiplayer games using r+triangle and r+square
-- 60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.
-- text entry with vita/switch touch keyboard, no physical keyboard or mouse required
-
-vita-exclusive features
-========
-- support for bluetooth keyboard and mouse
-
-gamepad controls (vita)
-======
-dpad or left stick = move player and navigate menus  
-right stick = move mouse pointer  
-cross = primary button (+ direction for snap action or turning mirrors, also &#x27;ok&#x27; in menu)  
-circle = secondary button (drop dynamite)  
-square / l = left mouse button  
-triangle / r = right mouse button  
-select = quit (escape key, also cancels requesters)  
-start = pause (space key)  
-r+triangle = set focus to next player (all-&gt;1-&gt;2-&gt;3-&gt;4)  
-r+square = set player focus to previous player (all&lt;-1&lt;-2&lt;-3&lt;-4)  
-
-gamepad controls (switch)
-======
-dpad or left stick = move player and navigate menus  
-right stick = move mouse pointer  
-b = primary button (+ direction for snap action or turning mirrors, also &#x27;ok&#x27; in menu)  
-a = secondary button (drop dynamite)  
-y or l = left mouse button  
-x or r = right mouse button  
-minus = quit (escape key, also cancels requesters)  
-plus = pause (space key)  
-r+x = set focus to next player (all-&gt;1-&gt;2-&gt;3-&gt;4)  
-r+y = set player focus to previous player (all&lt;-1&lt;-2&lt;-3&lt;-4)  
-
-touch controls
-=======
-note: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the vita will not erroneously recognize them as a single finger. otherwise the pointer will jump around.
-
-single short tap = left mouse click  
-single short tap while holding a second finger down = right mouse click  
-single finger drag = move the mouse pointer  
-dual finger drag = drag&#x27;n&#x27;drop (left mouse button is held down)  
-three finger drag = drag&#x27;n&#x27;drop (right mouse button is held down)  
-
-more levels for rocks&#x27;n&#x27;diamonds
-=========
-
-- more than 50,000 additional rocks&#x27;n&#x27;diamonds levels can be downloaded here: http://www.artsoft.org/rocksndiamonds/levels/
-
-- i made a single easy-to-install zip more_levels_v2.zip (~90 mb). it contains selected additional levels from the above site and is available with the other release files.
-
-- just download, unzip, and  transfer to your vita, so that you have a subfolder `ux0:/data/rocksndiamonds/levels/more_levels`. or transfer to your switch, so that you have a subfolder `switch/rocksndiamonds/levels/more_levels`.
-
-- ftp transfer of levelsets has to be done using binary transfer mode, not auto or ascii . otherwise some levels will be treated as ascii with mangled line endings and won&#x27;t work. this was verified with the emerald_mine_club_original_1 levels and filezilla ftp.
-
-notes
-=====
-- it is possible to get a wrong screen size on switch by messing with the options. the solution is to navigate to setup-&gt;graphics and enable fullscreen mode and set window size to 100%, then select &quot;save &amp; exit&quot;
-
-- to load new level sets, go to the level number selection in the menu, and press x (b on switch). a new screen should open that shows a few levels. go to the parent dir and into the folder classic games. there are many more levels already included in that folder.
-
-- sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. this is fixed by simply restarting the game and loading the levelset again.
-
-- to answer the ok/cancel dialogs in the game, press select (minus on switch) to cancel (this is escape), or x (b on switch) for ok.
-
-- you can install new level sets for rocks&#x27;n&#x27;diamonds by copying them into ux0:/data/rocksndiamonds/levels on vita, or /switch/rocksndiamonds/levels on switch. see the official manual: https://www.artsoft.org/rocksndiamonds/manual/manual.html#
-
-- similarly, you can install new level sets for mirrormagic by copying them into ux0:/data/mirrormagic/levels on vita, and /switch/mirrormagic/levels on switch. 
-
-- if you mess up some options and want to reset to default, you can delete the folder &#x27;ux0:/data/rocksndiamonds/userdata&#x27; and/or &#x27;ux0:/data/mirrormagic/userdata&#x27;. on switch, the folders are &#x27;/switch/rocksndiamonds/userdata&#x27; and &#x27;/switch/mirrormagic/userdata&#x27;.
-
-- for multiplayer team mode in rocks&#x27;n&#x27;diamonds, enable it via setup-&gt;game &amp; menu-&gt;team-mode (multiplayer)-&gt;on. you also have to find make a level that has multiple players. r+square and r+triangle (r+y and r+x on switch) can be used in-game to change focus between players, see game controls. all controllers have to be paired before launching the app, otherwise they will not be recognized by the game.
-
-build instructions
-=====
-- clone the repository, then
-````
-cd rocksndiamonds
-````
-then use
-````
-make vitarocks
-````
-or
-````
-make switchrocks
-````
-for rocks&#x27;n&#x27;diamonds, and
-````
-make vitamirror
-````
-or
-````
-make switchmirror
-````
-for mirrormagic.
-
-you need the latest sdl2 vita library from 05-23-2018 or later for this to work. the latest sdl2 library can be downloaded by updating your vitasdk, or here: https://dl.vitasdk.org
-
-changelog
-=====
-1.15 (switch only)
-
-- on switch, add 12.0.0 support. only .nro files changed, data is the same.
-
-1.14 (switch only)
-
-- on switch, add 9.0.0 support
-- on switch, fix .ogg audio playback
-- on switch, fix pointer getting stuck when controlled with physical usb mouse
-
-1.13 (switch only)
-
-- on switch, fix automatically turning on/off vsync on selecting/deselecting game speed: 60 fps mode 
-
-1.12
-
-- fix crash when loading levelsets that change screenmode, such as supaplex (original)
-- on switch, fix slow-down when pressing home button
-- on switch, use 1080p resolution when docked
-
-
-1.11 (switch only)
-
-- on switch, implement on-screen keyboard (only works when launching with nsp injection)
-
-1.10 (switch only)
-
-- fixed problem on switch with too-large screen in docked mode when loading saved config. the workaround was to change window size to 100% and save again. now fullscreen mode should be set to &quot;on&quot; and then this problem does not appear anymore.
-
-1.9switch
-
-- added switch port
-
-1.9
-
-- add &#x27;60 fps&#x27; game speed setting for perfectly smooth motion in some levels on the vita. it works well with the bundled emerald mine levelsets. this mode is 20% faster than the default setting &#x27;normal.&#x27;
-
-- removed slow-down when playing levelsets that use the emerald mine engine with default graphics.
-
-1.8
-
-- map set player focus to r+triangle and r+square for multiplayer games on vitatv (up to 4 players)
-
-1.7
-
-- enabled mp3 music support, used by some custom levelsets
-
-1.6
-
-- support editing multiline textfields in level editor
-
-1.5
-
-- optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @frangarcj for the help).
-- fixed sticky touch inputs and other issues with touch controls
-
-1.4
-
-- fixed screen centering
-- fixed screen scaling so it works for all sizes
-
-1.3
-
-- mirrormagic as separate app. it uses the same codebase as rocks&#x27;n&#x27;diamonds.
-- smoother mouse pointer motion.
-
-1.2
-
-- significant speedup by drawing directly to texture pixels. setting game speed to &#x27;very fast&#x27; actually makes it faster now.
-
-1.1
-
-- implemented mouse pointer controls via right analog stick and front touch. the level editor is fully usable now.
-- improved picture quality for sharper graphics
-
-1.0
-
-- fixed name entry using touch keyboard. it works without any return or backspace keypresses now.
-- fixed graphics corruption of some cartoons on menu screen (updated data.zip)
-
-0.9
-
-- initial vita release">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png" alt="Icono de rocksndiamonds" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · rsn8887/rocksndiamonds</div>
-                      <h2><a href="https://github.com/rsn8887/rocksndiamonds/releases/tag/1.15" target="_blank" rel="noopener">rocksndiamonds</a></h2>
-                      <div class="release-name">Rocks'n'Diamonds and Mirrormagic for Vita (v1.12) and Switch (v1.15)</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.15</span>
-                    <span>2021-05-22 19:09 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.15</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.15</div>
-                  <div class="related"><span>También asociado:</span> mirrormagic</div>
-                  <div class="body markdown-body"><h1>Recent Changes</h1>
-<p>1.15 (Switch only)</p>
-<ul>
-<li>on Switch, add 12.0.0 support. Only .nro files changed, data is the same.</li>
-</ul>
-<h1>Description</h1>
-<p>These are my Vita and Switch ports of Rocks'n'Diamonds and Mirrormagic.</p>
-<p><strong>Rocks'n'Diamonds</strong> is a Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels.</p>
-<p><img src="screenshots/rnd_new_a.jpg" alt="Screenshot of Rocks'n'Diamonds Vita"></p>
-<p><strong>Mirrormagic</strong> is a game by Holger Schemel in the tradition of Deflektor and Mindbender. You guide a laser beam by adjusting mirrors before the time limit runs out.</p>
-<p><img src="screenshots/mm_new_a.jpg" alt="Screenshot of Mirrormagic Vita"></p>
-<p>More information about the games can be found at the homepages for the Windows versions:</p>
-<p><a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/">http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/</a>
-<a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/mirrormagic">http://www.artsoft.org/mirrormagic</a></p>
-<p>And the official manual for Rocks'n'Diamonds is here:</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://www.artsoft.org/rocksndiamonds/manual/index.html">https://www.artsoft.org/rocksndiamonds/manual/index.html</a></p>
-<h1>Thanks</h1>
-<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
-<p>Thanks @FrangarCJ for help with optimizing the rendering.</p>
-<p>Thanks to Holger Schemel for making a great and portable game.</p>
-<p>Thanks to the many devs of VitaSDK for a great development environment.</p>
-<p>Thanks to all the devs of DevKitPro for Switch for a great development suite.</p>
-<h1>Installation (Vita)</h1>
-<ul>
-<li><p>install the vpks</p>
-</li>
-<li><p>extract contents of <code>rocksndiamonds_data.zip</code> and <code>mirrormagic_data.zip</code> and copy them to your Vita's <code>ux0:/data</code> folder. You should have folders <code>ux0:/data/rocksndiamonds</code> and <code>ux0:/data/mirrormagic</code> on your Vita with the files in them.</p>
-</li>
-</ul>
-<h1>Installation (Switch)</h1>
-<ul>
-<li><p>extract <code>rocksndiamonds_data.zip</code> and <code>mirrormagic_data.zip</code> to the folder <code>switch/</code> in the root of your sd card. You should have folders such as <code>switch/rocksndiamonds/levels</code> and <code>switch/mirrormagic/levels</code> and more. Make sure none of the folders or files has the &quot;archive&quot; flag set after copying.</p>
-</li>
-<li><p>copy <code>rocksndiamonds.nro</code> to <code>switch/rocksndiamonds/</code> and <code>mirrormagic.nro</code> to <code>switch/mirrormagic/</code></p>
-</li>
-<li><p>use nsp injection to start the games, otherwise the on-screen keyboard will not work. On SX OS, you can do this by holding down R while launching any installed game to make hbmenu appear.</p>
-</li>
-</ul>
-<h1>Vita/Switch-Exclusive Features</h1>
-<ul>
-<li>game controller mapping including analog joystick mouse controls</li>
-<li>front touch controls with left/right mouse click and drag and drop gestures</li>
-<li>the game runs smooth at the same speed as the desktop versions</li>
-<li>additional level package with thousands of levels as separate download (see 'More Levels')</li>
-<li>auto-hide mouse cursor when using the dpad</li>
-<li>easily switch player focus in multiplayer games using r+triangle and r+square</li>
-<li>60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.</li>
-<li>text entry with Vita/Switch touch keyboard, no physical keyboard or mouse required</li>
-</ul>
-<h1>Vita-Exclusive Features</h1>
-<ul>
-<li>support for bluetooth keyboard and mouse</li>
-</ul>
-<h1>Gamepad Controls (Vita)</h1>
-<p>Dpad or left stick = move player and navigate menus<br>
-right stick = move mouse pointer<br>
-Cross = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)<br>
-Circle = secondary button (drop dynamite)<br>
-Square / L = left mouse button<br>
-Triangle / R = right mouse button<br>
-Select = quit (escape key, also cancels requesters)<br>
-Start = pause (space key)<br>
-R+Triangle = set focus to next player (ALL-&gt;1-&gt;2-&gt;3-&gt;4)<br>
-R+Square = set player focus to previous player (ALL&lt;-1&lt;-2&lt;-3&lt;-4)</p>
-<h1>Gamepad Controls (Switch)</h1>
-<p>Dpad or left stick = move player and navigate menus<br>
-right stick = move mouse pointer<br>
-B = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)<br>
-A = secondary button (drop dynamite)<br>
-Y or L = left mouse button<br>
-X or R = right mouse button<br>
-Minus = quit (escape key, also cancels requesters)<br>
-Plus = pause (space key)<br>
-R+X = set focus to next player (ALL-&gt;1-&gt;2-&gt;3-&gt;4)<br>
-R+Y = set player focus to previous player (ALL&lt;-1&lt;-2&lt;-3&lt;-4)</p>
-<h1>Touch Controls</h1>
-<p>Note: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.</p>
-<p>Single short tap = left mouse click<br>
-Single short tap while holding a second finger down = right mouse click<br>
-Single finger drag = move the mouse pointer<br>
-Dual finger drag = drag'n'drop (left mouse button is held down)<br>
-Three finger drag = drag'n'drop (right mouse button is held down)</p>
-<h1>More Levels for Rocks'n'Diamonds</h1>
-<ul>
-<li><p>More than 50,000 additional Rocks'n'Diamonds levels can be downloaded here: <a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/rocksndiamonds/levels/">http://www.artsoft.org/rocksndiamonds/levels/</a></p>
-</li>
-<li><p>I made a single easy-to-install zip More_Levels_v2.zip (~90 MB). It contains selected additional levels from the above site and is available with the other release files.</p>
-</li>
-<li><p>Just download, unzip, and  transfer to your Vita, so that you have a subfolder <code>ux0:/data/rocksndiamonds/levels/More_Levels</code>. Or transfer to your Switch, so that you have a subfolder <code>switch/rocksndiamonds/levels/More_Levels</code>.</p>
-</li>
-<li><p>FTP transfer of levelsets has to be done using binary transfer mode, not Auto or ASCII . Otherwise some levels will be treated as ASCII with mangled line endings and won't work. This was verified with the Emerald_Mine_Club_original_1 levels and FileZilla FTP.</p>
-</li>
-</ul>
-<h1>Notes</h1>
-<ul>
-<li><p>It is possible to get a wrong screen size on Switch by messing with the options. The solution is to navigate to setup-&gt;graphics and enable Fullscreen mode and set Window size to 100%, then select &quot;save &amp; exit&quot;</p>
-</li>
-<li><p>To load new level sets, go to the level number selection in the menu, and press X (B on Switch). A new screen should open that shows a few levels. Go to the parent dir and into the folder Classic Games. There are many more levels already included in that folder.</p>
-</li>
-<li><p>Sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. This is fixed by simply restarting the game and loading the levelset again.</p>
-</li>
-<li><p>To answer the OK/Cancel dialogs in the game, press select (minus on Switch) to cancel (this is escape), or X (B on Switch) for OK.</p>
-</li>
-<li><p>You can install new level sets for Rocks'n'Diamonds by copying them into ux0:/data/rocksndiamonds/levels on Vita, or /switch/rocksndiamonds/levels on Switch. See the official manual: <a target="_blank" rel="noopener noreferrer" href="https://www.artsoft.org/rocksndiamonds/manual/manual.html#">https://www.artsoft.org/rocksndiamonds/manual/manual.html#</a></p>
-</li>
-<li><p>Similarly, you can install new level sets for Mirrormagic by copying them into ux0:/data/mirrormagic/levels on Vita, and /switch/mirrormagic/levels on Switch.</p>
-</li>
-<li><p>If you mess up some options and want to reset to default, you can delete the folder 'ux0:/data/rocksndiamonds/userdata' and/or 'ux0:/data/mirrormagic/userdata'. On Switch, the folders are '/switch/rocksndiamonds/userdata' and '/switch/mirrormagic/userdata'.</p>
-</li>
-<li><p>For multiplayer team mode in Rocks'n'Diamonds, enable it via Setup-&gt;Game &amp; Menu-&gt;Team-Mode (Multiplayer)-&gt;on. You also have to find make a level that has multiple players. R+Square and R+Triangle (R+Y and R+X on Switch) can be used in-game to change focus between players, see Game Controls. All controllers have to be paired before launching the app, otherwise they will not be recognized by the game.</p>
-</li>
-</ul>
-<h1>Build Instructions</h1>
-<ul>
-<li>clone the repository, then</li>
-</ul>
-<pre><code>cd rocksndiamonds
-</code></pre>
-<p>Then use</p>
-<pre><code>make vitarocks
-</code></pre>
-<p>or</p>
-<pre><code>make switchrocks
-</code></pre>
-<p>for Rocks'n'Diamonds, and</p>
-<pre><code>make vitamirror
-</code></pre>
-<p>or</p>
-<pre><code>make switchmirror
-</code></pre>
-<p>for Mirrormagic.</p>
-<p>You need the latest SDL2 Vita library from 05-23-2018 or later for this to work. The latest SDL2 library can be downloaded by updating your vitasdk, or here: <a target="_blank" rel="noopener noreferrer" href="https://dl.vitasdk.org">https://dl.vitasdk.org</a></p>
-<h1>CHANGELOG</h1>
-<p>1.15 (Switch only)</p>
-<ul>
-<li>on Switch, add 12.0.0 support. Only .nro files changed, data is the same.</li>
-</ul>
-<p>1.14 (Switch only)</p>
-<ul>
-<li>on Switch, add 9.0.0 support</li>
-<li>on Switch, fix .ogg audio playback</li>
-<li>on Switch, fix pointer getting stuck when controlled with physical USB mouse</li>
-</ul>
-<p>1.13 (Switch only)</p>
-<ul>
-<li>on Switch, fix automatically turning on/off VSync on selecting/deselecting Game Speed: 60 fps mode</li>
-</ul>
-<p>1.12</p>
-<ul>
-<li>fix crash when loading levelsets that change screenmode, such as Supaplex (Original)</li>
-<li>on Switch, fix slow-down when pressing home button</li>
-<li>on Switch, use 1080p resolution when docked</li>
-</ul>
-<p>1.11 (Switch only)</p>
-<ul>
-<li>On Switch, implement on-screen keyboard (only works when launching with nsp injection)</li>
-</ul>
-<p>1.10 (Switch only)</p>
-<ul>
-<li>fixed problem on Switch with too-large screen in docked mode when loading saved config. The workaround was to change window size to 100% and save again. Now Fullscreen mode should be set to &quot;On&quot; and then this problem does not appear anymore.</li>
-</ul>
-<p>1.9switch</p>
-<ul>
-<li>added Switch port</li>
-</ul>
-<p>1.9</p>
-<ul>
-<li><p>add '60 fps' game speed setting for perfectly smooth motion in some levels on the Vita. It works well with the bundled Emerald Mine levelsets. This mode is 20% faster than the default setting 'normal.'</p>
-</li>
-<li><p>removed slow-down when playing levelsets that use the Emerald Mine engine with default graphics.</p>
-</li>
-</ul>
-<p>1.8</p>
-<ul>
-<li>map set player focus to r+triangle and r+square for multiplayer games on VitaTV (up to 4 players)</li>
-</ul>
-<p>1.7</p>
-<ul>
-<li>enabled mp3 music support, used by some custom levelsets</li>
-</ul>
-<p>1.6</p>
-<ul>
-<li>support editing multiline textfields in level editor</li>
-</ul>
-<p>1.5</p>
-<ul>
-<li>optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @FrangarCJ for the help).</li>
-<li>fixed sticky touch inputs and other issues with touch controls</li>
-</ul>
-<p>1.4</p>
-<ul>
-<li>fixed screen centering</li>
-<li>fixed screen scaling so it works for all sizes</li>
-</ul>
-<p>1.3</p>
-<ul>
-<li>Mirrormagic as separate app. It uses the same codebase as Rocks'n'Diamonds.</li>
-<li>Smoother mouse pointer motion.</li>
-</ul>
-<p>1.2</p>
-<ul>
-<li>Significant speedup by drawing directly to texture pixels. Setting game speed to 'very fast' actually makes it faster now.</li>
-</ul>
-<p>1.1</p>
-<ul>
-<li>implemented mouse pointer controls via right analog stick and front touch. The level editor is fully usable now.</li>
-<li>improved picture quality for sharper graphics</li>
-</ul>
-<p>1.0</p>
-<ul>
-<li>fixed name entry using touch keyboard. It works without any return or backspace keypresses now.</li>
-<li>fixed graphics corruption of some cartoons on menu screen (updated data.zip)</li>
-</ul>
-<p>0.9</p>
-<ul>
-<li>initial Vita release</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_vita_1.12.vpk" target="_blank" rel="noopener">⬇ mirrormagic_vita_1.12.vpk · 2.6 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic.nro" target="_blank" rel="noopener">mirrormagic.nro · 10.7 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_data.zip" target="_blank" rel="noopener">mirrormagic_data.zip · 1.5 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/More_Levels_v2.zip" target="_blank" rel="noopener">More_Levels_v2.zip · 88.0 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds.nro" target="_blank" rel="noopener">rocksndiamonds.nro · 10.7 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_data.zip" target="_blank" rel="noopener">rocksndiamonds_data.zip · 1.4 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk" target="_blank" rel="noopener">rocksndiamonds_vita_1.12.vpk · 2.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="crashlands crashlands m1s3ry/crashlands-vita v1.0 - initial release v1.0 ports please, follow installation instructions in the readme of this repo.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-crashlands/icon0.png" alt="Icono de Crashlands" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · m1s3ry/crashlands-vita</div>
-                      <h2><a href="https://github.com/m1s3ry/crashlands-vita/releases/tag/v1.0" target="_blank" rel="noopener">Crashlands</a></h2>
-                      <div class="release-name">v1.0 - Initial Release</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-05-20 10:51 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.0</div>
-                  
-                  <div class="body markdown-body"><p>Please, follow installation instructions in the readme of this repo.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands_v1.0.0.KyuHEN.Version.VPK" target="_blank" rel="noopener">⬇ Crashlands_v1.0.0.KyuHEN.Version.VPK · 2.9 MB</a><a class="btn" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Epic.Games.Store.zip" target="_blank" rel="noopener">Crashlands.Vita.Patch.Epic.Games.Store.zip · 46.2 MB</a><a class="btn" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.GoG.1.4.4.zip" target="_blank" rel="noopener">Crashlands.Vita.Patch.GoG.1.4.4.zip · 45.9 MB</a><a class="btn" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Steam.Build.6083635.zip" target="_blank" rel="noopener">Crashlands.Vita.Patch.Steam.Build.6083635.zip · 46.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="worminator 3 worminator 3 ammeir/worminator worminator v1.0 v1.0 ports first version of worminator.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-worminator-3/icon0.png" alt="Icono de Worminator 3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ammeir/worminator</div>
-                      <h2><a href="https://github.com/ammeir/worminator/releases/tag/v1.0" target="_blank" rel="noopener">Worminator 3</a></h2>
-                      <div class="release-name">Worminator v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-05-08 18:42 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>First version of Worminator.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ammeir/worminator/releases/download/v1.0/worminator_v10.zip" target="_blank" rel="noopener">⬇ worminator_v10.zip · 27.7 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-28 02:49 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-28 09:11 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
