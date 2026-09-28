@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">405</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>78</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">403</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>79</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,187 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.2.0 v1.2.0 ports # asphalt 5 hd - ps vita port (v1.2.0) 🏎️💨
+
+**asphalt 5** for ps vita is fully playable from start to finish with physical controls, full
+audio and cutscene video.
+
+### 🆕 what&#x27;s new in v1.2.0
+fixes for the issues reported on github after v1.0 — thanks for the reports!
+* **the left analog stick now steers** (and moves up/down in menus), exactly like the d-pad. the
+  stick was never switched to analog mode, so it always read as centered.
+* **no more crackling in the main menu and results screen.** the mixer no longer jumps the music
+  volume every time a ui sound starts or stops. music volume fades are smooth, stopped sounds fade
+  out in ~5 ms instead of being cut mid-wave, and the limiter no longer flattens music peaks.
+  mixing now runs at 44.1 khz, an exact 2x of the game&#x27;s 22 khz sounds, for a cleaner sound. the
+  sound options menu no longer restarts the song on every frame.
+* **the &quot;you win / you lose&quot; banner can be skipped** with a tap, ❌, start or ⭕. you no longer
+  have to wait for it to go away on its own.
+* **post-race reporter video no longer freezes** for a couple of seconds at the start. audio and
+  video packets are now read in time order.
+* **smoother frame rate in races.** diagnostic logging written to the memory card on every sound
+  start and stick movement caused frame hitches. it&#x27;s gone from the hot paths.
+
+this port uses a custom android wrapper (soloader/falsojni) to run the original armv6 android
+executable natively on the vita, fully hardware-accelerated via `vitagl`.
+
+### ✨ features
+* **full physical controls.** a custom input router bridges the vita&#x27;s buttons with the game&#x27;s
+  native touch engine. it only works with the **touch buttons** control scheme, which is set
+  automatically on a fresh install.
+  * **menus:** **d-pad** or **left analog stick** (up/down). **❌ (cross)** selects, **⭕ (circle)**
+    goes back.
+  * **&quot;you win / you lose&quot; banner:** tap, **❌**, **start** or **⭕** to skip it.
+  * **title screens:** any face button skips.
+  * **racing:**
+    * **d-pad left/right, l/r triggers, or left analog stick** to steer.
+    * **❌ (cross)** for nitro.
+    * **🟥 (square)** to brake / drift.
+    * **start** to pause.
+    * **select** to show / hide the on-screen brake &amp; nitro icons.
+* **custom audio engine.** a 32-bit fixed-point mixer with linear interpolation at 44.1 khz. it
+  follows the engine&#x27;s routing: looped engine and skid sounds track rpm live, music has a
+  dedicated voice that sfx can&#x27;t steal, and a soft limiter keeps busy scenes clean.
+* **hardware-accelerated graphics** via `vitagl`.
+* **post-race flow.** the win/lose banner and the results screens advance with a tap or ❌. held race inputs are released
+  cleanly at the state change.
+
+### ⚠️ known issues
+* only the **touch buttons** control scheme works with physical controls. don&#x27;t switch to tilt or
+  the drag schemes in options.
+* manual standby (power button sleep/resume mid-game) is untested. idling is safe.
+* heavy tracks may drop a few frames at busy moments.
+* the intro trailer needs its `.mp4` in `ux0:data/asphalt5/data/`. otherwise it&#x27;s skipped.
+
+### 🛠️ installation instructions
+1. install `libshacccg.suprx` if you don&#x27;t have it already (required for vitagl).
+2. install the provided `asphalt5.vpk`.
+3. extract the game data files (assets) into `ux0:data/asphalt5/`. *(data files are not
+   provided with this release. you must extract them from your own legally obtained copy of the
+   android game.)*
+4. launch the game and enjoy!
+
+---
+*a huge thanks to the ps vita homebrew community and the vitagl contributors for making this possible! let us know your feedback and bug reports.*">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/asphalt-5-ps-vita/icon0.png" alt="Icono de Asphalt 5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Asphalt-5-Vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.2.0" target="_blank" rel="noopener">Asphalt 5</a></h2>
+                      <div class="release-name">Asphalt 5 HD - PS Vita Port v1.2.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.0</span>
+                    <span>2026-09-28 01:59 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release v1.2.0</div>
+                  
+                  <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port (v1.2.0) 🏎️💨</h1>
+<p><strong>Asphalt 5</strong> for PS Vita is fully playable from start to finish with physical controls, full
+audio and cutscene video.</p>
+<h3>🆕 What's new in v1.2.0</h3>
+<p>Fixes for the issues reported on GitHub after v1.0 — thanks for the reports!</p>
+<ul>
+<li><strong>The left analog stick now steers</strong> (and moves Up/Down in menus), exactly like the D-Pad. The
+stick was never switched to analog mode, so it always read as centered.</li>
+<li><strong>No more crackling in the main menu and results screen.</strong> The mixer no longer jumps the music
+volume every time a UI sound starts or stops. Music volume fades are smooth, stopped sounds fade
+out in ~5 ms instead of being cut mid-wave, and the limiter no longer flattens music peaks.
+Mixing now runs at 44.1 kHz, an exact 2x of the game's 22 kHz sounds, for a cleaner sound. The
+Sound Options menu no longer restarts the song on every frame.</li>
+<li><strong>The &quot;You Win / You Lose&quot; banner can be skipped</strong> with a tap, ❌, Start or ⭕. You no longer
+have to wait for it to go away on its own.</li>
+<li><strong>Post-race reporter video no longer freezes</strong> for a couple of seconds at the start. Audio and
+video packets are now read in time order.</li>
+<li><strong>Smoother frame rate in races.</strong> Diagnostic logging written to the memory card on every sound
+start and stick movement caused frame hitches. It's gone from the hot paths.</li>
+</ul>
+<p>This port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android
+executable natively on the Vita, fully hardware-accelerated via <code>vitaGL</code>.</p>
+<h3>✨ Features</h3>
+<ul>
+<li><strong>Full physical controls.</strong> A custom input router bridges the Vita's buttons with the game's
+native touch engine. It only works with the <strong>Touch Buttons</strong> control scheme, which is set
+automatically on a fresh install.<ul>
+<li><strong>Menus:</strong> <strong>D-Pad</strong> or <strong>Left Analog Stick</strong> (Up/Down). <strong>❌ (Cross)</strong> selects, <strong>⭕ (Circle)</strong>
+goes back.</li>
+<li><strong>&quot;You Win / You Lose&quot; banner:</strong> tap, <strong>❌</strong>, <strong>Start</strong> or <strong>⭕</strong> to skip it.</li>
+<li><strong>Title screens:</strong> any face button skips.</li>
+<li><strong>Racing:</strong><ul>
+<li><strong>D-Pad Left/Right, L/R Triggers, or Left Analog Stick</strong> to steer.</li>
+<li><strong>❌ (Cross)</strong> for nitro.</li>
+<li><strong>🟥 (Square)</strong> to brake / drift.</li>
+<li><strong>Start</strong> to pause.</li>
+<li><strong>Select</strong> to show / hide the on-screen brake &amp; nitro icons.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Custom audio engine.</strong> A 32-bit fixed-point mixer with linear interpolation at 44.1 kHz. It
+follows the engine's routing: looped engine and skid sounds track RPM live, music has a
+dedicated voice that SFX can't steal, and a soft limiter keeps busy scenes clean.</li>
+<li><strong>Hardware-accelerated graphics</strong> via <code>vitaGL</code>.</li>
+<li><strong>Post-race flow.</strong> The win/lose banner and the results screens advance with a tap or ❌. Held race inputs are released
+cleanly at the state change.</li>
+</ul>
+<h3>⚠️ Known Issues</h3>
+<ul>
+<li>Only the <strong>Touch Buttons</strong> control scheme works with physical controls. Don't switch to Tilt or
+the drag schemes in Options.</li>
+<li>Manual standby (power button sleep/resume mid-game) is untested. Idling is safe.</li>
+<li>Heavy tracks may drop a few frames at busy moments.</li>
+<li>The intro trailer needs its <code>.mp4</code> in <code>ux0:data/asphalt5/data/</code>. Otherwise it's skipped.</li>
+</ul>
+<h3>🛠️ Installation Instructions</h3>
+<ol>
+<li>Install <code>libshacccg.suprx</code> if you don't have it already (required for vitaGL).</li>
+<li>Install the provided <code>asphalt5.vpk</code>.</li>
+<li>Extract the game data files (assets) into <code>ux0:data/asphalt5/</code>. <em>(Data files are not
+provided with this release. You must extract them from your own legally obtained copy of the
+Android game.)</em></li>
+<li>Launch the game and enjoy!</li>
+</ol>
+<hr>
+<p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.2.0/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4197">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
+                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
+                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">continuous</span>
+                    <span>2026-09-27 23:51 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
+                  
+                  <div class="body markdown-body"><p>buildnum 4197</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 15.8 KB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 29.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 37.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 29.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 21.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.12 v0.1.12 ports - **perspective floor no longer flickers.** in heavy perspective scenes
   (harrogath&#x27;s gate: ~1.3 mb of glide records per frame) the render ring
   could not hold the frame being sent to the gpu on the second core *and*
@@ -755,33 +936,6 @@ Fix: file read cache misc. fixes</p>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4196">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
-                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
-                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">continuous</span>
-                    <span>2026-09-26 16:33 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
-                  
-                  <div class="body markdown-body"><p>buildnum 4196</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 29.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 37.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 29.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 21.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="pending" data-search="smash melee vita smash melee vita zm2283145/melee-vita smash melee vita 0.8.15 v0.8.15 ports ## changes in vita v0.8.15
 
 - bowser&#x27;s defeat cutscenes, before and after giga bowser, now run at around
@@ -901,162 +1055,6 @@ slowing down.</li>
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/ONElua/AdrenalineBubbleManager/releases/download/6.24/AdrenalineBubbleManager.vpk" target="_blank" rel="noopener">⬇ AdrenalineBubbleManager.vpk · 10.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="asphalt 5 asphalt 5 metalsyntax/asphalt-5-vita asphalt 5 hd - ps vita port v1.1.0 v1.1.0 ports # asphalt 5 hd - ps vita port (v1.1.0) 🏎️💨
-
-**asphalt 5** for ps vita is out of beta. the game is fully playable from start to finish with physical controls, full audio and cutscene video.
-
-this port uses a custom android wrapper (soloader/falsojni) to run the original armv6 android executable natively on the vita, fully hardware-accelerated via `vitagl`.
-
-### 🔧 fixed since the beta
-* **nitro works on a single press.** before, ❌ (cross) often needed several presses unless you
-  were also steering or braking. the engine only reads a nitro press during its 25 hz game-logic
-  step, and on the vita some frames run no step at all, so the press got lost. it&#x27;s now held
-  until the car logic reads it.
-* **the drift skid no longer gets stuck** after a drift ends (before, it kept playing until you
-  paused).
-* **race music no longer plays twice** on top of itself.
-* **scenery ambient loops tamed.** a &quot;revving + skidding&quot; clip tied to some animated track
-  objects looped at full volume from far away and sounded like a phantom car. it now fades out
-  much faster with distance and never goes above 50%.
-* **brake and nitro on-screen icons at ~1% opacity**, since the physical buttons drive them.
-  press **select** during a race to show or hide them.
-* **exit closes the app** from the pause menu and the main menu.
-* **cutscene video at ~30 fps** (was ~10), still skippable with ❌ or start.
-* **no screen-off freeze** while idling in menus.
-* **left analog stick steering**, a sharper internal render resolution (800x480), touch buttons
-  as the default control scheme on a fresh install, and circle no longer duplicating start&#x27;s
-  pause mid-race.
-
-### ✨ features
-* **full physical controls.** a custom input router bridges the vita&#x27;s buttons with the game&#x27;s
-  native touch engine. it only works with the **touch buttons** control scheme, which is set
-  automatically on a fresh install.
-  * **menus:** **d-pad** or **left analog stick** (up/down). **❌ (cross)** selects, **⭕ (circle)**
-    goes back.
-  * **title screens:** any face button skips.
-  * **racing:**
-    * **d-pad left/right, l/r triggers, or left analog stick** to steer.
-    * **❌ (cross)** for nitro.
-    * **🟥 (square)** to brake / drift.
-    * **start** to pause.
-    * **select** to show / hide the on-screen brake &amp; nitro icons.
-* **custom audio engine.** a 32-bit fixed-point mixer with linear interpolation at 48 khz. it
-  follows the engine&#x27;s routing: looped engine and skid sounds track rpm live, music has a
-  dedicated voice that sfx can&#x27;t steal, and a soft limiter keeps busy scenes clean.
-* **hardware-accelerated graphics** via `vitagl`.
-* **post-race flow.** results screens advance with a tap or ❌. held race inputs are released
-  cleanly at the state change.
-
-### ⚠️ known issues
-* only the **touch buttons** control scheme works with physical controls. don&#x27;t switch to tilt or
-  the drag schemes in options.
-* manual standby (power button sleep/resume mid-game) is untested. idling is safe.
-* heavy tracks may drop a few frames at busy moments.
-* the intro trailer needs its `.mp4` in `ux0:data/asphalt5/data/`. otherwise it&#x27;s skipped.
-
-### 🛠️ installation instructions
-1. install `libshacccg.suprx` if you don&#x27;t have it already (required for vitagl).
-2. install the provided `asphalt5.vpk`.
-3. extract the game data files (assets) into `ux0:data/asphalt5/`. *(data files are not
-   provided with this release. you must extract them from your own legally obtained copy of the
-   android game.)*
-4. launch the game and enjoy!
-
----
-*a huge thanks to the ps vita homebrew community and the vitagl contributors for making this possible! let us know your feedback and bug reports.*">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/asphalt-5-ps-vita/icon0.png" alt="Icono de Asphalt 5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Asphalt-5-Vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/tag/v1.1.0" target="_blank" rel="noopener">Asphalt 5</a></h2>
-                      <div class="release-name">Asphalt 5 HD - PS Vita Port v1.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.1.0</span>
-                    <span>2026-09-24 22:05 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0</div>
-                  
-                  <div class="body markdown-body"><h1>Asphalt 5 HD - PS Vita Port (v1.1.0) 🏎️💨</h1>
-<p><strong>Asphalt 5</strong> for PS Vita is out of beta. The game is fully playable from start to finish with physical controls, full audio and cutscene video.</p>
-<p>This port uses a custom Android wrapper (soLoader/FalsoJNI) to run the original ARMv6 Android executable natively on the Vita, fully hardware-accelerated via <code>vitaGL</code>.</p>
-<h3>🔧 Fixed since the Beta</h3>
-<ul>
-<li><strong>Nitro works on a single press.</strong> Before, ❌ (Cross) often needed several presses unless you
-were also steering or braking. The engine only reads a nitro press during its 25 Hz game-logic
-step, and on the Vita some frames run no step at all, so the press got lost. It's now held
-until the car logic reads it.</li>
-<li><strong>The drift skid no longer gets stuck</strong> after a drift ends (before, it kept playing until you
-paused).</li>
-<li><strong>Race music no longer plays twice</strong> on top of itself.</li>
-<li><strong>Scenery ambient loops tamed.</strong> A &quot;revving + skidding&quot; clip tied to some animated track
-objects looped at full volume from far away and sounded like a phantom car. It now fades out
-much faster with distance and never goes above 50%.</li>
-<li><strong>Brake and nitro on-screen icons at ~1% opacity</strong>, since the physical buttons drive them.
-Press <strong>SELECT</strong> during a race to show or hide them.</li>
-<li><strong>Exit closes the app</strong> from the pause menu and the main menu.</li>
-<li><strong>Cutscene video at ~30 FPS</strong> (was ~10), still skippable with ❌ or Start.</li>
-<li><strong>No screen-off freeze</strong> while idling in menus.</li>
-<li><strong>Left analog stick steering</strong>, a sharper internal render resolution (800x480), Touch Buttons
-as the default control scheme on a fresh install, and Circle no longer duplicating Start's
-pause mid-race.</li>
-</ul>
-<h3>✨ Features</h3>
-<ul>
-<li><strong>Full physical controls.</strong> A custom input router bridges the Vita's buttons with the game's
-native touch engine. It only works with the <strong>Touch Buttons</strong> control scheme, which is set
-automatically on a fresh install.<ul>
-<li><strong>Menus:</strong> <strong>D-Pad</strong> or <strong>Left Analog Stick</strong> (Up/Down). <strong>❌ (Cross)</strong> selects, <strong>⭕ (Circle)</strong>
-goes back.</li>
-<li><strong>Title screens:</strong> any face button skips.</li>
-<li><strong>Racing:</strong><ul>
-<li><strong>D-Pad Left/Right, L/R Triggers, or Left Analog Stick</strong> to steer.</li>
-<li><strong>❌ (Cross)</strong> for nitro.</li>
-<li><strong>🟥 (Square)</strong> to brake / drift.</li>
-<li><strong>Start</strong> to pause.</li>
-<li><strong>Select</strong> to show / hide the on-screen brake &amp; nitro icons.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Custom audio engine.</strong> A 32-bit fixed-point mixer with linear interpolation at 48 kHz. It
-follows the engine's routing: looped engine and skid sounds track RPM live, music has a
-dedicated voice that SFX can't steal, and a soft limiter keeps busy scenes clean.</li>
-<li><strong>Hardware-accelerated graphics</strong> via <code>vitaGL</code>.</li>
-<li><strong>Post-race flow.</strong> Results screens advance with a tap or ❌. Held race inputs are released
-cleanly at the state change.</li>
-</ul>
-<h3>⚠️ Known Issues</h3>
-<ul>
-<li>Only the <strong>Touch Buttons</strong> control scheme works with physical controls. Don't switch to Tilt or
-the drag schemes in Options.</li>
-<li>Manual standby (power button sleep/resume mid-game) is untested. Idling is safe.</li>
-<li>Heavy tracks may drop a few frames at busy moments.</li>
-<li>The intro trailer needs its <code>.mp4</code> in <code>ux0:data/asphalt5/data/</code>. Otherwise it's skipped.</li>
-</ul>
-<h3>🛠️ Installation Instructions</h3>
-<ol>
-<li>Install <code>libshacccg.suprx</code> if you don't have it already (required for vitaGL).</li>
-<li>Install the provided <code>asphalt5.vpk</code>.</li>
-<li>Extract the game data files (assets) into <code>ux0:data/asphalt5/</code>. <em>(Data files are not
-provided with this release. You must extract them from your own legally obtained copy of the
-Android game.)</em></li>
-<li>Launch the game and enjoy!</li>
-</ol>
-<hr>
-<p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.1.0/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26296,230 +26294,10 @@ Three finger drag = drag'n'drop (right mouse button is held down)</p>
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="fadetoblack fadetoblack usineur/f2bgl f2bgl for switch 0.3.1 switch-0.3.1 ports ## installation
-
-- copy `f2bgl.nro` to `/switch/f2bgl/` folder.
-- copy datafiles to `/switch/f2bgl/data/`. refer to the readme to know which files/directories are required.
-    - datafiles are **not** provided in this release. grab a copy of the game by your own way.
-    - full cd-rom image is around **450 mb**.
-- you can alternativelty use the datafiles from the demo: [demo.zip](https://github.com/usineur/f2bgl/files/2416683/demo.zip)
-
-
-## controls
-
-* in-game hotkeys
-
-| keys | &amp;#x202f; |
-| --- | --- |
-| left stick / left d-pad | move conrad (run) |
-| hold r + move conrad | walk, step aside (_also in gun mode_) |
-| a | activate / shoot |
-| b | toggle gun mode |
-| y | reload gun |
-| x | jump |
-| zr | use secondary weapon |
-| zl | use item |
-| - | open inventory menu |
-| + | open saveload menu |
-| r3 | quit game |
-
-* inventory menu
-
-| keys | &amp;#x202f; |
-| --- | --- |
-| l | next category |
-| r | consult item |
-| a | select item |
-| ← | previous item |
-| → | next item |
-| - | exit this menu |
-
-* saveload menu
-
-| keys | &amp;#x202f; |
-| --- | --- |
-| ↑ ↓ | toggle save / load mode |
-| ← → | previous / next slot |
-| a | validate |
-| + | exit this menu |
-
-## changelog
-
-http://cyxdown.free.fr/f2b/changes.txt
-
-## credits
-- [grégory montoir](https://github.com/cyxx), for the original engine;
-- everybody behind libnx, sdl2, opengl, mesa, libdrm, ...">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-fadetoblack/icon0.png" alt="Icono de FadeToBlack" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · usineur/f2bgl</div>
-                      <h2><a href="https://github.com/usineur/f2bgl/releases/tag/switch-0.3.1" target="_blank" rel="noopener">FadeToBlack</a></h2>
-                      <div class="release-name">f2bgl for Switch 0.3.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">switch-0.3.1</span>
-                    <span>2021-05-07 21:15 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.ita-1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.ita-1.0</div>
-                  
-                  <div class="body markdown-body"><h2>Installation</h2>
-<ul>
-<li>Copy <code>f2bgl.nro</code> to <code>/switch/f2bgl/</code> folder.</li>
-<li>Copy datafiles to <code>/switch/f2bgl/data/</code>. Refer to the README to know which files/directories are required.<ul>
-<li>Datafiles are <strong>not</strong> provided in this release. Grab a copy of the game by your own way.</li>
-<li>Full CD-Rom image is around <strong>450 Mb</strong>.</li>
-</ul>
-</li>
-<li>You can alternativelty use the datafiles from the demo: <a target="_blank" rel="noopener noreferrer" href="https://github.com/usineur/f2bgl/files/2416683/demo.zip">demo.zip</a></li>
-</ul>
-<h2>Controls</h2>
-<ul>
-<li>In-game hotkeys</li>
-</ul>
-<table>
-<thead>
-<tr>
-  <th>Keys</th>
-  <th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Left stick / Left D-pad</td>
-  <td>Move Conrad (run)</td>
-</tr>
-<tr>
-  <td>Hold R + Move Conrad</td>
-  <td>Walk, step aside (<em>also in gun mode</em>)</td>
-</tr>
-<tr>
-  <td>A</td>
-  <td>Activate / Shoot</td>
-</tr>
-<tr>
-  <td>B</td>
-  <td>Toggle gun mode</td>
-</tr>
-<tr>
-  <td>Y</td>
-  <td>Reload gun</td>
-</tr>
-<tr>
-  <td>X</td>
-  <td>Jump</td>
-</tr>
-<tr>
-  <td>ZR</td>
-  <td>Use secondary weapon</td>
-</tr>
-<tr>
-  <td>ZL</td>
-  <td>Use item</td>
-</tr>
-<tr>
-  <td>-</td>
-  <td>Open inventory menu</td>
-</tr>
-<tr>
-  <td>+</td>
-  <td>Open saveload menu</td>
-</tr>
-<tr>
-  <td>R3</td>
-  <td>Quit game</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Inventory menu</li>
-</ul>
-<table>
-<thead>
-<tr>
-  <th>Keys</th>
-  <th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>L</td>
-  <td>Next category</td>
-</tr>
-<tr>
-  <td>R</td>
-  <td>Consult item</td>
-</tr>
-<tr>
-  <td>A</td>
-  <td>Select item</td>
-</tr>
-<tr>
-  <td>←</td>
-  <td>Previous item</td>
-</tr>
-<tr>
-  <td>→</td>
-  <td>Next item</td>
-</tr>
-<tr>
-  <td>-</td>
-  <td>Exit this menu</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Saveload menu</li>
-</ul>
-<table>
-<thead>
-<tr>
-  <th>Keys</th>
-  <th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>↑ ↓</td>
-  <td>Toggle Save / Load mode</td>
-</tr>
-<tr>
-  <td>← →</td>
-  <td>Previous / Next slot</td>
-</tr>
-<tr>
-  <td>A</td>
-  <td>Validate</td>
-</tr>
-<tr>
-  <td>+</td>
-  <td>Exit this menu</td>
-</tr>
-</tbody>
-</table>
-<h2>Changelog</h2>
-<p><a target="_blank" rel="noopener noreferrer" href="http://cyxdown.free.fr/f2b/CHANGES.txt">http://cyxdown.free.fr/f2b/CHANGES.txt</a></p>
-<h2>Credits</h2>
-<ul>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/cyxx">Grégory Montoir</a>, for the original engine;</li>
-<li>Everybody behind libnx, SDL2, OpenGL, mesa, libdrm, ...</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/usineur/f2bgl/releases/download/switch-0.3.1/f2bgl.nro" target="_blank" rel="noopener">⬇ f2bgl.nro · 7.8 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-27 23:31 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-28 02:49 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
