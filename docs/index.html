@@ -219,88 +219,84 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.13 v0.1.13 ports - **act v stutter gone.** on the scripted harrogath patrol (real console,
-  110 s), frames over 60 ms drop from ~25 to 3 and the frame rate reaches
-  the game&#x27;s own cap: 24.0 → 25.0 fps. the cause was ours: an engine-side
-  25 hz frame cap written for online play also ran in solo (it armed
-  whenever `d2net` was set, which the default config always sets). solo
-  diablo ii already draws exactly once per 40 ms simulation step; the cap
-  waited a little longer than 40 ms every frame, drifted against the game&#x27;s
-  own clock, and the game then skipped a draw every few seconds. the cap is
-  now off by default. **online:** there is no engine cap either anymore —
-  not re-measured online yet; if the game ever runs too fast in a
-  battle.net game, `d2_online_cap=25` in `env.txt` brings the old cap back.
-- **less cpu per frame (~1.6 ms of game-thread work, ~5% of a frame).**
-  the most frequent calls from the game into the runtime (clock reads,
-  critical sections — ~650 per frame) are now served from inside the
-  translated code instead of leaving it and coming back; the glide ring
-  dll copies perspective vertices in line; `wsprintfa` no longer allocates.
-  main core load on the patrol: ~77% → ~74%. proven identical on qemu
-  (pixel-identical image over 4000 frames, critical-section contention
-  test) and measured on console with interleaved passes.
-- **fewer memory-card reads when new content streams in:** a seek now
-  reads 32 kib ahead instead of 8 (~60% fewer card reads on the patrol),
-  no extra ram.
-- **native perspective floor (`d2_f3natif=1`) faster**, still opt-in: it is
-  now served in line and writes its draws directly, another ~1.25 ms per
-  frame on the patrol (0 divergence against the game&#x27;s own code on 168,503
-  compared cells).
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4198">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
+                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
+                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">continuous</span>
+                    <span>2026-09-28 18:44 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
+                  
+                  <div class="body markdown-body"><p>buildnum 4198</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 24.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 24.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.1.15-beta v0.1.15-beta ports - **inventory, stash and character panels are centered by default now.**
+  they used to be anchored to the screen edges, with a wide black gap
+  between two open panels; they now sit together as one 800-wide block
+  (the sgd2freeres model), which makes dragging items between an open
+  inventory and stash easier. `d2_res_panneaux=bords` (or `edges`) in
+  `env.txt` restores the previous edge anchoring.
+
+beta: the anchoring math itself hasn&#x27;t changed and was already
+console-measured before becoming the default, but nobody&#x27;s looked at two
+open panels side by side on this exact build yet. tell us on discord if
+anything looks or clicks wrong.
 
 
 version française : [journal des versions](https://github.com/franckrst/d2vita/blob/main/docs-site/changelog.fr.md).
 
 
-**full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.12...v0.1.13">
+**full changelog**: https://github.com/franckrst/d2vita/compare/v0.1.14-beta...v0.1.15-beta">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
-                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.13" target="_blank" rel="noopener">D2Vita</a></h2>
-                      <div class="release-name">v0.1.13</div>
+                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.1.15-beta" target="_blank" rel="noopener">D2Vita</a></h2>
+                      <div class="release-name">v0.1.15-beta</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v0.1.13</span>
-                    <span>2026-09-28 08:06 UTC</span>
+                    <span class="tag">v0.1.15-beta</span>
+                    <span>2026-09-28 12:50 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 0.1.12</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.12 → release v0.1.13</div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.12 → release v0.1.15-beta</div>
                   
                   <div class="body markdown-body"><ul>
-<li><strong>Act V stutter gone.</strong> On the scripted Harrogath patrol (real console,
-110 s), frames over 60 ms drop from ~25 to 3 and the frame rate reaches
-the game's own cap: 24.0 → 25.0 fps. The cause was ours: an engine-side
-25 Hz frame cap written for online play also ran in solo (it armed
-whenever <code>D2NET</code> was set, which the default config always sets). Solo
-Diablo II already draws exactly once per 40 ms simulation step; the cap
-waited a little longer than 40 ms every frame, drifted against the game's
-own clock, and the game then skipped a draw every few seconds. The cap is
-now off by default. <strong>Online:</strong> there is no engine cap either anymore —
-not re-measured online yet; if the game ever runs too fast in a
-Battle.net game, <code>D2_ONLINE_CAP=25</code> in <code>env.txt</code> brings the old cap back.</li>
-<li><strong>Less CPU per frame (~1.6 ms of game-thread work, ~5% of a frame).</strong>
-The most frequent calls from the game into the runtime (clock reads,
-critical sections — ~650 per frame) are now served from inside the
-translated code instead of leaving it and coming back; the Glide ring
-DLL copies Perspective vertices in line; <code>wsprintfA</code> no longer allocates.
-Main core load on the patrol: ~77% → ~74%. Proven identical on qemu
-(pixel-identical image over 4000 frames, critical-section contention
-test) and measured on console with interleaved passes.</li>
-<li><strong>Fewer memory-card reads when new content streams in:</strong> a seek now
-reads 32 KiB ahead instead of 8 (~60% fewer card reads on the patrol),
-no extra RAM.</li>
-<li><strong>Native Perspective floor (<code>D2_F3NATIF=1</code>) faster</strong>, still opt-in: it is
-now served in line and writes its draws directly, another ~1.25 ms per
-frame on the patrol (0 divergence against the game's own code on 168,503
-compared cells).</li>
+<li><strong>Inventory, stash and character panels are centered by default now.</strong>
+They used to be anchored to the screen edges, with a wide black gap
+between two open panels; they now sit together as one 800-wide block
+(the SGD2FreeRes model), which makes dragging items between an open
+inventory and stash easier. <code>D2_RES_PANNEAUX=bords</code> (or <code>edges</code>) in
+<code>env.txt</code> restores the previous edge anchoring.</li>
 </ul>
+<p>Beta: the anchoring math itself hasn't changed and was already
+console-measured before becoming the default, but nobody's looked at two
+open panels side by side on this exact build yet. Tell us on Discord if
+anything looks or clicks wrong.</p>
 <p>Version française : <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md">journal des versions</a>.</p>
-<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.12...v0.1.13">https://github.com/Franckrst/D2Vita/compare/v0.1.12...v0.1.13</a></p>
+<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.1.14-beta...v0.1.15-beta">https://github.com/Franckrst/D2Vita/compare/v0.1.14-beta...v0.1.15-beta</a></p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.13/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.6 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.1.15-beta/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -563,33 +559,6 @@ Android game.)</em></li>
 <p><em>A huge thanks to the PS Vita homebrew community and the vitaGL contributors for making this possible! Let us know your feedback and bug reports.</em></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Asphalt-5-Vita/releases/download/v1.2.0/asphalt5.vpk" target="_blank" rel="noopener">⬇ asphalt5.vpk · 1.9 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4197">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
-                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
-                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">continuous</span>
-                    <span>2026-09-27 23:51 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
-                  
-                  <div class="body markdown-body"><p>buildnum 4197</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 15.8 KB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 20.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 29.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 37.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 29.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 21.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26150,7 +26119,7 @@ Those are both included as binaries and linked automatically.</p>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-28 09:11 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-09-28 19:01 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

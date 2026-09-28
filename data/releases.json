@@ -1,20 +1,221 @@
 [
   {
     "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "398051562",
-    "tag": "v0.1.13",
-    "name": "v0.1.13",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.13",
-    "published": "2026-09-28T08:06:35Z",
-    "prerelease": false,
+    "repo": "FWGS/xash3d-fwgs",
+    "release_id": "398526776",
+    "tag": "continuous",
+    "name": "Xash3D FWGS Continuous master Build",
+    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
+    "published": "2026-09-28T18:44:28Z",
+    "prerelease": true,
     "draft": false,
-    "body": "\n- **Act V stutter gone.** On the scripted Harrogath patrol (real console,\n  110 s), frames over 60 ms drop from ~25 to 3 and the frame rate reaches\n  the game's own cap: 24.0 → 25.0 fps. The cause was ours: an engine-side\n  25 Hz frame cap written for online play also ran in solo (it armed\n  whenever `D2NET` was set, which the default config always sets). Solo\n  Diablo II already draws exactly once per 40 ms simulation step; the cap\n  waited a little longer than 40 ms every frame, drifted against the game's\n  own clock, and the game then skipped a draw every few seconds. The cap is\n  now off by default. **Online:** there is no engine cap either anymore —\n  not re-measured online yet; if the game ever runs too fast in a\n  Battle.net game, `D2_ONLINE_CAP=25` in `env.txt` brings the old cap back.\n- **Less CPU per frame (~1.6 ms of game-thread work, ~5% of a frame).**\n  The most frequent calls from the game into the runtime (clock reads,\n  critical sections — ~650 per frame) are now served from inside the\n  translated code instead of leaving it and coming back; the Glide ring\n  DLL copies Perspective vertices in line; `wsprintfA` no longer allocates.\n  Main core load on the patrol: ~77% → ~74%. Proven identical on qemu\n  (pixel-identical image over 4000 frames, critical-section contention\n  test) and measured on console with interleaved passes.\n- **Fewer memory-card reads when new content streams in:** a seek now\n  reads 32 KiB ahead instead of 8 (~60% fewer card reads on the patrol),\n  no extra RAM.\n- **Native Perspective floor (`D2_F3NATIF=1`) faster**, still opt-in: it is\n  now served in line and writes its draws directly, another ~1.25 ms per\n  frame on the patrol (0 divergence against the game's own code on 168,503\n  compared cells).\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.12...v0.1.13",
+    "body": "buildnum 4198\n",
+    "assets": [
+      {
+        "name": "su.xash.Engine.Compat.i386.flatpak",
+        "size": 11522424,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
+        "content_type": "application/vnd.flatpak"
+      },
+      {
+        "name": "xash3d-fwgs-amd64.AppImage",
+        "size": 26159608,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-android-mappings.tar.zst",
+        "size": 2602656,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
+        "content_type": "application/zstd"
+      },
+      {
+        "name": "xash3d-fwgs-android.apk",
+        "size": 47622776,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "xash3d-fwgs-apple-amd64.tar.xz",
+        "size": 5377104,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-apple-arm64.tar.xz",
+        "size": 5121896,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-arm64.AppImage",
+        "size": 22166024,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-armhf.AppImage",
+        "size": 21564804,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-i386.AppImage",
+        "size": 26103160,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-ios-arm64.ipa",
+        "size": 5481620,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "xash3d-fwgs-linux-amd64.tar.gz",
+        "size": 28005499,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-arm64.tar.gz",
+        "size": 23794246,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-armhf.tar.gz",
+        "size": 23096077,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-i386.tar.gz",
+        "size": 27991704,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
+        "size": 21573778,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
+        "size": 20105529,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-nswitch.7z",
+        "size": 16441783,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-psvita.7z",
+        "size": 26762113,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xashds-linux-amd64.tar.gz",
+        "size": 3481954,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-arm64.tar.gz",
+        "size": 3416636,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-armhf.tar.gz",
+        "size": 3346011,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-i386.tar.gz",
+        "size": 3424157,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-ppc64el.tar.gz",
+        "size": 3598220,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-riscv64.tar.gz",
+        "size": 3185098,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-win32-amd64.7z",
+        "size": 20065460,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-win32-i386.7z",
+        "size": 21091019,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
+        "content_type": "application/x-7z-compressed"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Xash3D-FWGS",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
+    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "xash3d-fwgs",
+    "homebrew_authors": [
+      "fgsfds",
+      "xash3d-fwgs-team"
+    ],
+    "homebrew_version": "v.continuous",
+    "catalog_apps": [
+      {
+        "id": "xash3d-fwgs",
+        "name": "Xash3D-FWGS",
+        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+        "category": "ports",
+        "description": "Port of Xash3D-FWGS for PSVITA.",
+        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.continuous",
+        "version_date": "2023-10-07",
+        "author_ids": [
+          "fgsfds",
+          "xash3d-fwgs-team"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.continuous",
+    "catalog_version": "v.continuous"
+  },
+  {
+    "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "398246708",
+    "tag": "v0.1.15-beta",
+    "name": "v0.1.15-beta",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.15-beta",
+    "published": "2026-09-28T12:50:53Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "\n- **Inventory, stash and character panels are centered by default now.**\n  They used to be anchored to the screen edges, with a wide black gap\n  between two open panels; they now sit together as one 800-wide block\n  (the SGD2FreeRes model), which makes dragging items between an open\n  inventory and stash easier. `D2_RES_PANNEAUX=bords` (or `edges`) in\n  `env.txt` restores the previous edge anchoring.\n\nBeta: the anchoring math itself hasn't changed and was already\nconsole-measured before becoming the default, but nobody's looked at two\nopen panels side by side on this exact build yet. Tell us on Discord if\nanything looks or clicks wrong.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.14-beta...v0.1.15-beta",
     "assets": [
       {
         "name": "d2vita.vpk",
-        "size": 7943163,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.13/d2vita.vpk",
+        "size": 7952486,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.15-beta/d2vita.vpk",
         "content_type": "application/octet-stream"
       }
     ],
@@ -45,7 +246,7 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.12 → release v0.1.13",
+    "catalog_update_detail": "PSVitaAlive 0.1.12 → release v0.1.15-beta",
     "catalog_version": "0.1.12"
   },
   {
@@ -145,207 +346,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.2.0",
     "catalog_version": "1.2.0"
-  },
-  {
-    "platform": "github",
-    "repo": "FWGS/xash3d-fwgs",
-    "release_id": "397860930",
-    "tag": "continuous",
-    "name": "Xash3D FWGS Continuous master Build",
-    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
-    "published": "2026-09-27T23:51:33Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "buildnum 4197\n",
-    "assets": [
-      {
-        "name": "su.xash.Engine.Compat.i386.flatpak",
-        "size": 16172,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
-        "content_type": "application/vnd.flatpak"
-      },
-      {
-        "name": "xash3d-fwgs-apple-amd64.tar.xz",
-        "size": 5376900,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-apple-arm64.tar.xz",
-        "size": 5120992,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-nswitch.7z",
-        "size": 16437874,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-psvita.7z",
-        "size": 26765067,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-amd64.7z",
-        "size": 20065460,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-i386.7z",
-        "size": 21091019,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-amd64.AppImage",
-        "size": 31222264,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-android-mappings.tar.zst",
-        "size": 2603096,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
-        "content_type": "application/zstd"
-      },
-      {
-        "name": "xash3d-fwgs-android.apk",
-        "size": 38841735,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "xash3d-fwgs-arm64.AppImage",
-        "size": 22059528,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-armhf.AppImage",
-        "size": 21478788,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-i386.AppImage",
-        "size": 31059320,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-ios-arm64.ipa",
-        "size": 5476737,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "xash3d-fwgs-linux-amd64.tar.gz",
-        "size": 33391122,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-arm64.tar.gz",
-        "size": 23702824,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-armhf.tar.gz",
-        "size": 23001940,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-i386.tar.gz",
-        "size": 33311804,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
-        "size": 21493355,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
-        "size": 20025835,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-amd64.tar.gz",
-        "size": 3473162,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-arm64.tar.gz",
-        "size": 3408605,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-armhf.tar.gz",
-        "size": 3335672,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-i386.tar.gz",
-        "size": 3414274,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-ppc64el.tar.gz",
-        "size": 3589458,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-riscv64.tar.gz",
-        "size": 3174756,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Xash3D-FWGS",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
-    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "xash3d-fwgs",
-    "homebrew_authors": [
-      "fgsfds",
-      "xash3d-fwgs-team"
-    ],
-    "homebrew_version": "v.continuous",
-    "catalog_apps": [
-      {
-        "id": "xash3d-fwgs",
-        "name": "Xash3D-FWGS",
-        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-        "category": "ports",
-        "description": "Port of Xash3D-FWGS for PSVITA.",
-        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.continuous",
-        "version_date": "2023-10-07",
-        "author_ids": [
-          "fgsfds",
-          "xash3d-fwgs-team"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.continuous",
-    "catalog_version": "v.continuous"
   },
   {
     "platform": "github",
