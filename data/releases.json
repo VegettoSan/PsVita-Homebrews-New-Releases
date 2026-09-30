@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "399558104",
+    "tag": "v0.1.18-beta",
+    "name": "v0.1.18-beta",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.18-beta",
+    "published": "2026-09-29T21:57:13Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "\n- **New default controller scheme — please test it and give feedback on\n  Discord.** **L** is now the aim assist (hold): in game it acts on the\n  best target (your corpse, what the cursor points at, an enemy in a cone,\n  the nearest chest/door/NPC); in menus, open panels and out of a game it\n  is a plain left click. The left stick only walks, the right stick is a\n  free cursor. **Square** is the item assist (ground labels, D-pad to\n  browse, Cross to pick up). **L + Cross** = inventory, **L + Circle** =\n  automap, **L + Square** = mercenary inventory. Stick speed 18, dead zone\n  0.15. Cross alone no longer clicks in menus — L does. To get the previous\n  scheme back, put `l=lclick` in `controls.txt` (with no other `aim`\n  binding). The aim hooks are now installed by default and their frame-time\n  cost is not measured yet.\n- **Larzuk's add-socket window** now accepts the aim click (it used to\n  target the map behind it). First console test only.\n- **Title screen: the \"Controls\" help button** opens only from its own\n  small tab, no longer from the whole left edge.\n- **Touch offset fixed** in game.\n\nBeta: checked by hand on a console for menus, NPC windows and touch; the\nnew defaults are not tested by the community yet. Includes the 0.1.17-beta\noptions.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n## What's Changed\n* Controller v2: aim-assist scheme and D-pad loot browsing by @Franckrst in https://github.com/Franckrst/D2Vita/pull/14\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.17-beta...v0.1.18-beta",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 7979841,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.18-beta/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.1.13",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+        "version": "0.1.13",
+        "version_date": "2026-09-28",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.13 → release v0.1.18-beta",
+    "catalog_version": "0.1.13"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
     "release_id": "399308248",
     "tag": "continuous",
@@ -353,55 +402,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.79 → release v0.80",
     "catalog_version": "v.0.79"
-  },
-  {
-    "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "398906521",
-    "tag": "v0.1.17-beta",
-    "name": "v0.1.17-beta",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.1.17-beta",
-    "published": "2026-09-29T07:23:24Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "\n- **Two single-player options, both off by default** (add them to\n  `env.txt`):\n  - `D2_RUNEWORDS_LADDER=1`: the 23 ladder-only runewords (Spirit, Insight,\n    Infinity…) can be made in single player.\n  - `D2_RESPEC_UNLIMITED=1`: Akara's \"Reset Stat/Skill Points\" stays\n    available after use, once you have earned it (Den of Evil).\n  Neither acts in TCP/IP, Open Battle.net or realm games, and no game file\n  is changed. They depart from the unmodified game on purpose, which is\n  why they are opt-in.\n\nBeta: both were checked on a real console. Includes the 0.1.16-beta fixes.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.16-beta...v0.1.17-beta",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 7959450,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.1.17-beta/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.1.13",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-        "version": "0.1.13",
-        "version_date": "2026-09-28",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.13 → release v0.1.17-beta",
-    "catalog_version": "0.1.13"
   },
   {
     "platform": "github",
@@ -33246,72 +33246,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.15",
     "catalog_version": "1.15"
-  },
-  {
-    "platform": "github",
-    "repo": "m1s3ry/crashlands-vita",
-    "release_id": "43275770",
-    "tag": "v1.0",
-    "name": "v1.0 - Initial Release",
-    "url": "https://github.com/m1s3ry/crashlands-vita/releases/tag/v1.0",
-    "published": "2021-05-20T10:51:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Please, follow installation instructions in the readme of this repo.",
-    "assets": [
-      {
-        "name": "Crashlands.Vita.Patch.Epic.Games.Store.zip",
-        "size": 48457632,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Epic.Games.Store.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Crashlands.Vita.Patch.GoG.1.4.4.zip",
-        "size": 48128376,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.GoG.1.4.4.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Crashlands.Vita.Patch.Steam.Build.6083635.zip",
-        "size": 48456569,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Steam.Build.6083635.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Crashlands_v1.0.0.KyuHEN.Version.VPK",
-        "size": 3002252,
-        "download_url": "https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands_v1.0.0.KyuHEN.Version.VPK",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "m1s3ry",
-    "homebrew_name": "Crashlands",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-crashlands/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Crashlands for PSVita.",
-    "homebrew_long_description": "Craft, battle, and quest your way through Crashlands, a story-driven Crafting ARPG overflowing with sass! Original game by Butterscotch Shenanigans.\nInstall instructions in Release Page (Github).",
-    "homebrew_id": "crashlands",
-    "homebrew_authors": [
-      "m1s3ry"
-    ],
-    "homebrew_version": "v.1.0.0",
-    "catalog_apps": [
-      {
-        "id": "crashlands",
-        "name": "Crashlands",
-        "icon": "https://archive.org/download/psvitaalive-crashlands/icon0.png",
-        "category": "ports",
-        "description": "Port of Crashlands for PSVita.",
-        "long_description": "Craft, battle, and quest your way through Crashlands, a story-driven Crafting ARPG overflowing with sass! Original game by Butterscotch Shenanigans.\nInstall instructions in Release Page (Github).",
-        "version": "v.1.0.0",
-        "version_date": "2021-05-20",
-        "author_ids": [
-          "m1s3ry"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0",
-    "catalog_version": "v.1.0.0"
   }
 ]
