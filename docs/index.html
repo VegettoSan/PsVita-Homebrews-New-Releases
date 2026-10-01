@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">407</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>77</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,380 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="real racing 2 real racing 2 chuta7x/real-racing-2-vita-port-release real racing 2 public beta v1.0.0 vitaport ports real racing 2 - ps vita (port) - public beta 2
+==============================================
+
+requirements
+- ps vita with henkaku / enso and vitashell.
+- the android v851 game data (mali variant) copied to ux0:data/rr2/
+  (the first time you open the game the files are prepared; it can take a few minutes).
+
+installation
+1. copy rr2vita_public_beta_1.0.0.vpk to the memory card and install it with vitashell.
+   if you have beta 1 installed, install it on top: your save is kept.
+2. open real racing 2 from its bubble.
+
+
+what&#x27;s new since public beta 1
+------------------------------
+
+configurator (new)
+- separate settings app: configurar button in the livearea.
+  (the configurator is in spanish for now.)
+- graphics:
+  · anti-aliasing (msaa): off / 2x / 4x (experimental).
+  · fps cap: 30 or 60.
+- controls:
+  · one button per action: accelerate, brake, pause, camera, look back and back in menus
+    (it warns you if two actions use the same button).
+  · steer with: left stick, d-pad (steering increases gradually while you hold it), stick and d-pad,
+    or tilting the console.
+  · steering sensitivity, stick dead zone, invert direction and on-screen pointer on/off.
+- system:
+  · save and play, save and exit, default values.
+  · game data uninstaller (before deleting anything, it copies your save to ux0:data/rr2_partida_guardada).
+
+performance and graphics
+- smoother: the game no longer waits for the screen refresh on every frame. on the heaviest tracks
+  the average goes from ~47 to ~56 fps and the drops to 22 fps are gone.
+- more memory for graphics (ps vita extended memory mode): no more cars with purple textures or
+  glitches in menus and dialogs on the big tracks.
+- lighter build: without the debugging tools of the test builds.
+
+controls
+- the game goes back to control method b on every launch, even if the saved profile comes with
+  another method (for example, downloaded data) or you change it in the game options.
+
+game
+- you can now change the driver name: the game&#x27;s option opens the ps vita keyboard
+  (accents and ñ included). when you accept, the name is typed into the game automatically.
+
+presentation
+- new boot screen (the screen used to stay black).
+- livearea with the configurar button.
+
+stability
+- if the game closes because of an internal error, it is recorded in ux0:data/rr2/live_debug.log.
+- the log records the settings used on each launch (useful for bug reports).
+
+
+default controls
+----------------
+- left stick: steer (or the d-pad, depending on the configurator).
+- r: accelerate.                  l: brake.
+- triangle: change camera.        circle or d-pad down: look back.
+- start: pause.                   circle in menus: back.
+- menus and pause: the stick moves the pointer and cross taps (select centers it).
+- start + select: quit the game.
+
+
+known bugs
+----------
+- the crowd is not visible.
+- on the heaviest tracks there are still moments below 60 fps: the limit is the ps vita cpu.
+  if you prefer stability, set the 30 fps cap in the configurator.
+- msaa 4x is experimental: it uses more video memory.
+- some screens have the back button in a different position: there circle does nothing (use the
+  pointer or the touch screen).
+- the controls only work with the game&#x27;s control method b (that&#x27;s why the game goes back to b on
+  every launch).
+
+
+planned for next versions
+-------------------------
+- adapt the game&#x27;s other control methods (a, c, d and e) to the ps vita buttons.
+- keep improving performance on the heaviest tracks.
+- check that the pointer can be used on the results screen at the end of a race.
+- make circle also work on screens with the back button in a different position.
+
+
+##############################################################################
+#  español
+##############################################################################
+
+real racing 2 - ps vita (port) - public beta 2
+==============================================
+
+requisitos
+- ps vita con henkaku / enso y vitashell.
+- los datos del juego de android v851 (variante mali) copiados en ux0:data/rr2/
+  (la primera vez que abras el juego se preparan los archivos; puede tardar unos minutos).
+
+instalación
+1. copia rr2vita_public_beta_1.0.0.vpk a la tarjeta e instálalo con vitashell.
+   si tienes la beta 1 instalada, instálalo encima: se conserva tu partida.
+2. abre real racing 2 desde la burbuja.
+
+
+novedades desde la public beta 1
+--------------------------------
+
+configurador (nuevo)
+- aplicación de ajustes aparte: botón configurar en la livearea, o mantén select al abrir el juego.
+- gráficos:
+  · suavizado de bordes (msaa): no / 2x / 4x (experimental).
+  · tope de fps: 30 o 60.
+- controles:
+  · un botón para cada acción: acelerar, frenar, pausa, cámara, mirar atrás y atrás en los menús
+    (avisa si dos acciones usan el mismo botón).
+  · girar con: stick izquierdo, cruceta (el giro aumenta poco a poco al mantenerla), stick y cruceta,
+    o inclinando la consola.
+  · sensibilidad del giro, zona muerta del stick, invertir dirección y flecha en pantalla sí/no.
+- sistema:
+  · guardar y jugar, guardar y salir, valores por defecto.
+  · desinstalador de los datos del juego (antes de borrar, copia tu partida a ux0:data/rr2_partida_guardada).
+
+rendimiento y gráficos
+- más fluidez: el juego ya no espera al refresco de pantalla en cada fotograma. en las pistas más
+  pesadas la media sube de ~47 a ~56 fps y desaparecen las caídas a 22 fps.
+- más memoria para los gráficos (modo de memoria ampliada de la vita): se acabaron los coches con
+  texturas moradas y los fallos en menús y diálogos de las pistas grandes.
+- versión más ligera: sin las herramientas de depuración de las versiones de prueba.
+
+controles
+- el juego vuelve al método de control b en cada arranque, aunque el perfil guardado traiga otro
+  método (por ejemplo, datos descargados) o lo cambies en las opciones del juego.
+
+juego
+- ya se puede cambiar el nombre del piloto: la opción del juego abre el teclado de la vita
+  (con tildes y ñ). al aceptar, el nombre se escribe solo en el juego.
+
+presentación
+- nueva imagen de arranque (antes la pantalla se quedaba en negro).
+- livearea con el botón configurar.
+
+estabilidad
+- si el juego se cierra por un error interno, queda registrado en ux0:data/rr2/live_debug.log.
+- el log anota la configuración usada en cada arranque (útil para reportar fallos).
+
+
+controles por defecto
+---------------------
+- stick izquierdo: girar (o la cruceta, según el configurador).
+- r: acelerar.                    l: frenar.
+- triángulo: cambiar cámara.      círculo o cruceta abajo: mirar atrás.
+- start: pausa.                   círculo en los menús: volver.
+- menús y pausa: el stick mueve la flecha y la cruz pulsa (select la centra).
+- start + select: salir del juego.
+
+
+bugs conocidos
+--------------
+- el público de las gradas no se ve (las texturas de la tribuna salen vacías).
+- en las pistas más pesadas todavía hay momentos por debajo de 60 fps: el límite es la cpu de la vita.
+  si prefieres estabilidad, pon el tope de 30 fps en el configurador.
+- msaa 4x es experimental: usa más memoria de vídeo.
+- algunas pantallas tienen el botón de volver en otra posición: ahí círculo no hace nada (usa la flecha
+  o el táctil).
+- los controles solo funcionan con el método de control b del juego (por eso el juego vuelve a b en
+  cada arranque).
+
+
+pendiente para próximas versiones
+---------------------------------
+- adaptar los demás métodos de control del juego (a, c, d y e) a los botones de la vita.
+- seguir mejorando el rendimiento en las pistas más pesadas.
+- comprobar que la flecha se puede usar en la pantalla de resultados al terminar la carrera.
+- que el botón círculo funcione también en las pantallas con el botón de volver en otra posición.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/real-racing-2-ps-vita/icon0.png" alt="Icono de Real Racing 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · CHUTA7X/Real-Racing-2-Vita-Port-Release</div>
+                      <h2><a href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/tag/VitaPort" target="_blank" rel="noopener">Real Racing 2</a></h2>
+                      <div class="release-name">Real Racing 2 Public beta v1.0.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">VitaPort</span>
+                    <span>2026-10-01 02:28 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.0.1 → release VitaPort</div>
+                  
+                  <div class="body markdown-body"><h1>REAL RACING 2 - PS VITA (PORT) - PUBLIC BETA 2</h1>
+<p>REQUIREMENTS</p>
+<ul>
+<li>PS Vita with HENkaku / Enso and VitaShell.</li>
+<li>The Android v851 game data (MALI variant) copied to ux0:data/rr2/
+(the first time you open the game the files are prepared; it can take a few minutes).</li>
+</ul>
+<p>INSTALLATION</p>
+<ol>
+<li>Copy RR2Vita_Public_Beta_1.0.0.vpk to the memory card and install it with VitaShell.
+If you have Beta 1 installed, install it on top: your save is kept.</li>
+<li>Open Real Racing 2 from its bubble.</li>
+</ol>
+<h2>WHAT'S NEW SINCE PUBLIC BETA 1</h2>
+<p>CONFIGURATOR (new)</p>
+<ul>
+<li>Separate settings app: CONFIGURAR button in the LiveArea.
+(The configurator is in Spanish for now.)</li>
+<li>Graphics:
+· Anti-aliasing (MSAA): Off / 2x / 4x (experimental).
+· FPS cap: 30 or 60.</li>
+<li>Controls:
+· One button per action: accelerate, brake, pause, camera, look back and back in menus
+(it warns you if two actions use the same button).
+· Steer with: left stick, D-pad (steering increases gradually while you hold it), stick and D-pad,
+or tilting the console.
+· Steering sensitivity, stick dead zone, invert direction and on-screen pointer on/off.</li>
+<li>System:
+· Save and play, save and exit, default values.
+· Game data uninstaller (before deleting anything, it copies your save to ux0:data/RR2_partida_guardada).</li>
+</ul>
+<p>PERFORMANCE AND GRAPHICS</p>
+<ul>
+<li>Smoother: the game no longer waits for the screen refresh on every frame. On the heaviest tracks
+the average goes from ~47 to ~56 FPS and the drops to 22 FPS are gone.</li>
+<li>More memory for graphics (PS Vita extended memory mode): no more cars with purple textures or
+glitches in menus and dialogs on the big tracks.</li>
+<li>Lighter build: without the debugging tools of the test builds.</li>
+</ul>
+<p>CONTROLS</p>
+<ul>
+<li>The game goes back to control method B on every launch, even if the saved profile comes with
+another method (for example, downloaded data) or you change it in the game options.</li>
+</ul>
+<p>GAME</p>
+<ul>
+<li>You can now change the driver name: the game's option opens the PS Vita keyboard
+(accents and ñ included). When you accept, the name is typed into the game automatically.</li>
+</ul>
+<p>PRESENTATION</p>
+<ul>
+<li>New boot screen (the screen used to stay black).</li>
+<li>LiveArea with the CONFIGURAR button.</li>
+</ul>
+<p>STABILITY</p>
+<ul>
+<li>If the game closes because of an internal error, it is recorded in ux0:data/rr2/live_debug.log.</li>
+<li>The log records the settings used on each launch (useful for bug reports).</li>
+</ul>
+<h2>DEFAULT CONTROLS</h2>
+<ul>
+<li>Left stick: steer (or the D-pad, depending on the configurator).</li>
+<li>R: accelerate.                  L: brake.</li>
+<li>Triangle: change camera.        Circle or D-pad down: look back.</li>
+<li>START: pause.                   Circle in menus: back.</li>
+<li>Menus and pause: the stick moves the pointer and Cross taps (SELECT centers it).</li>
+<li>START + SELECT: quit the game.</li>
+</ul>
+<h2>KNOWN BUGS</h2>
+<ul>
+<li>The crowd is not visible.</li>
+<li>On the heaviest tracks there are still moments below 60 FPS: the limit is the PS Vita CPU.
+If you prefer stability, set the 30 FPS cap in the configurator.</li>
+<li>MSAA 4x is experimental: it uses more video memory.</li>
+<li>Some screens have the back button in a different position: there Circle does nothing (use the
+pointer or the touch screen).</li>
+<li>The controls only work with the game's control method B (that's why the game goes back to B on
+every launch).</li>
+</ul>
+<h2>PLANNED FOR NEXT VERSIONS</h2>
+<ul>
+<li>Adapt the game's other control methods (A, C, D and E) to the PS Vita buttons.</li>
+<li>Keep improving performance on the heaviest tracks.</li>
+<li>Check that the pointer can be used on the results screen at the end of a race.</li>
+<li>Make Circle also work on screens with the back button in a different position.</li>
+</ul>
+<p>##############################################################################</p>
+<h1>ESPAÑOL</h1>
+<p>##############################################################################</p>
+<h1>REAL RACING 2 - PS VITA (PORT) - PUBLIC BETA 2</h1>
+<p>REQUISITOS</p>
+<ul>
+<li>PS Vita con HENkaku / Enso y VitaShell.</li>
+<li>Los datos del juego de Android v851 (variante MALI) copiados en ux0:data/rr2/
+(la primera vez que abras el juego se preparan los archivos; puede tardar unos minutos).</li>
+</ul>
+<p>INSTALACIÓN</p>
+<ol>
+<li>Copia RR2Vita_Public_Beta_1.0.0.vpk a la tarjeta e instálalo con VitaShell.
+Si tienes la Beta 1 instalada, instálalo encima: se conserva tu partida.</li>
+<li>Abre Real Racing 2 desde la burbuja.</li>
+</ol>
+<h2>NOVEDADES DESDE LA PUBLIC BETA 1</h2>
+<p>CONFIGURADOR (nuevo)</p>
+<ul>
+<li>Aplicación de ajustes aparte: botón CONFIGURAR en la LiveArea, o mantén SELECT al abrir el juego.</li>
+<li>Gráficos:
+· Suavizado de bordes (MSAA): No / 2x / 4x (experimental).
+· Tope de FPS: 30 o 60.</li>
+<li>Controles:
+· Un botón para cada acción: acelerar, frenar, pausa, cámara, mirar atrás y atrás en los menús
+(avisa si dos acciones usan el mismo botón).
+· Girar con: stick izquierdo, cruceta (el giro aumenta poco a poco al mantenerla), stick y cruceta,
+o inclinando la consola.
+· Sensibilidad del giro, zona muerta del stick, invertir dirección y flecha en pantalla sí/no.</li>
+<li>Sistema:
+· Guardar y jugar, guardar y salir, valores por defecto.
+· Desinstalador de los datos del juego (antes de borrar, copia tu partida a ux0:data/RR2_partida_guardada).</li>
+</ul>
+<p>RENDIMIENTO Y GRÁFICOS</p>
+<ul>
+<li>Más fluidez: el juego ya no espera al refresco de pantalla en cada fotograma. En las pistas más
+pesadas la media sube de ~47 a ~56 FPS y desaparecen las caídas a 22 FPS.</li>
+<li>Más memoria para los gráficos (modo de memoria ampliada de la Vita): se acabaron los coches con
+texturas moradas y los fallos en menús y diálogos de las pistas grandes.</li>
+<li>Versión más ligera: sin las herramientas de depuración de las versiones de prueba.</li>
+</ul>
+<p>CONTROLES</p>
+<ul>
+<li>El juego vuelve al método de control B en cada arranque, aunque el perfil guardado traiga otro
+método (por ejemplo, datos descargados) o lo cambies en las opciones del juego.</li>
+</ul>
+<p>JUEGO</p>
+<ul>
+<li>Ya se puede cambiar el nombre del piloto: la opción del juego abre el teclado de la Vita
+(con tildes y ñ). Al aceptar, el nombre se escribe solo en el juego.</li>
+</ul>
+<p>PRESENTACIÓN</p>
+<ul>
+<li>Nueva imagen de arranque (antes la pantalla se quedaba en negro).</li>
+<li>LiveArea con el botón CONFIGURAR.</li>
+</ul>
+<p>ESTABILIDAD</p>
+<ul>
+<li>Si el juego se cierra por un error interno, queda registrado en ux0:data/rr2/live_debug.log.</li>
+<li>El log anota la configuración usada en cada arranque (útil para reportar fallos).</li>
+</ul>
+<h2>CONTROLES POR DEFECTO</h2>
+<ul>
+<li>Stick izquierdo: girar (o la cruceta, según el configurador).</li>
+<li>R: acelerar.                    L: frenar.</li>
+<li>Triángulo: cambiar cámara.      Círculo o cruceta abajo: mirar atrás.</li>
+<li>START: pausa.                   Círculo en los menús: volver.</li>
+<li>Menús y pausa: el stick mueve la flecha y la Cruz pulsa (SELECT la centra).</li>
+<li>START + SELECT: salir del juego.</li>
+</ul>
+<h2>BUGS CONOCIDOS</h2>
+<ul>
+<li>El público de las gradas no se ve (las texturas de la tribuna salen vacías).</li>
+<li>En las pistas más pesadas todavía hay momentos por debajo de 60 FPS: el límite es la CPU de la Vita.
+Si prefieres estabilidad, pon el tope de 30 FPS en el configurador.</li>
+<li>MSAA 4x es experimental: usa más memoria de vídeo.</li>
+<li>Algunas pantallas tienen el botón de volver en otra posición: ahí Círculo no hace nada (usa la flecha
+o el táctil).</li>
+<li>Los controles solo funcionan con el método de control B del juego (por eso el juego vuelve a B en
+cada arranque).</li>
+</ul>
+<h2>PENDIENTE PARA PRÓXIMAS VERSIONES</h2>
+<ul>
+<li>Adaptar los demás métodos de control del juego (A, C, D y E) a los botones de la Vita.</li>
+<li>Seguir mejorando el rendimiento en las pistas más pesadas.</li>
+<li>Comprobar que la flecha se puede usar en la pantalla de resultados al terminar la carrera.</li>
+<li>Que el botón Círculo funcione también en las pantallas con el botón de volver en otra posición.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/download/VitaPort/RR2Vita_Public_Beta_1.0.0.vpk" target="_blank" rel="noopener">⬇ RR2Vita_Public_Beta_1.0.0.vpk · 6.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous new_vgui_support_api build continuous-new_vgui_support_api ports buildnum 4200">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -827,62 +1201,6 @@ to single-player level loads.</li>
 <p>GPLv2 — full source for this build: <a target="_blank" rel="noopener noreferrer" href="https://github.com/NDRWhun/JAVITA">https://github.com/NDRWhun/JAVITA</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/NDRWhun/JAVITA/releases/download/mp_playtest-1.1.0a/JAMPVITA.vpk" target="_blank" rel="noopener">⬇ JAMPVITA.vpk · 4.2 MB</a><a class="btn" href="https://github.com/NDRWhun/JAVITA/releases/download/mp_playtest-1.1.0a/JAVITA.vpk" target="_blank" rel="noopener">JAVITA.vpk · 3.7 MB</a><a class="btn" href="https://github.com/NDRWhun/JAVITA/releases/download/mp_playtest-1.1.0a/texbake.zip" target="_blank" rel="noopener">texbake.zip · 172.4 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="real racing 2 real racing 2 chuta7x/real-racing-2-vita-port-release rr2 public beta v0.0.1 vita-port ports this the public beta, i am so close to the final release but in the meantime you can test this built and help me to find any bugs or request features and tweaks.
-whats on this initial release:
-
-    menu runs 60fps
-    carrer mode and other modes runs between 30 to 60fps with drops (hopefully fix in final versión)
-    100% working audio with no bugs
-    implemented physical controls mapping (method b in game) (more to come in future beta)
-    implemented a cursor for vita&#x27;s with broken touch screen (left stick movement x for click)
-
-!! important !!
-
-you will need to provide your own original and official game data folder for mali graphics card, please do not use powervr, tegra or adreno, my versión only works with mali version you can always take a look at archive.org you may find what you need 
-
-the game folder should look like this ux0/data/rr2/files/...
-the first launched will take a while as the game deploy the files to the paths for better performance this will only happen 1 time. 
-
-if you want to support me and my projects you can always buy a coffee at https://buymeacoffee.com/chuta7x
-you can follow me at https://x.com/chuta141">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/real-racing-2-ps-vita/icon0.png" alt="Icono de Real Racing 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · CHUTA7X/Real-Racing-2-Vita-Port-Release</div>
-                      <h2><a href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/tag/Vita-Port" target="_blank" rel="noopener">Real Racing 2</a></h2>
-                      <div class="release-name">RR2 Public Beta v0.0.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">Vita-Port</span>
-                    <span>2026-09-27 15:32 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.0.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.0.1 → release Vita-Port</div>
-                  
-                  <div class="body markdown-body"><p>This the Public Beta, I am so close to the final release but in the meantime you can test this built and help me to find any bugs or request features and tweaks.
-Whats on this initial release:</p>
-<pre><code>Menu runs 60fps
-Carrer mode and other modes runs between 30 to 60fps with drops (hopefully fix in final versión)
-100% working audio with no bugs
-implemented physical controls mapping (method B in game) (more to come in future Beta)
-implemented a cursor for vita's with broken touch screen (left stick movement X for click)</code></pre>
-<p>!! Important !!</p>
-<p>You will need to provide your own original and official game data folder for MALI graphics card, Please Do not use PowerVR, Tegra or Adreno, my versión only works with MALI version you can always take a look at archive.org you may find what you need</p>
-<p>The game folder should look like this ux0/data/rr2/files/...
-The first launched will take a while as the game deploy the files to the paths for better performance this will only happen 1 time.</p>
-<p>If you want to support me and my projects you can always buy a coffee at <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a>
-You can follow me at <a target="_blank" rel="noopener noreferrer" href="https://x.com/chuta141">https://x.com/chuta141</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/download/Vita-Port/RR2Vita_Public_Beta_v0.0.1.vpk" target="_blank" rel="noopener">⬇ RR2Vita_Public_Beta_v0.0.1.vpk · 4.9 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26627,37 +26945,10 @@ Three finger drag = drag'n'drop (right mouse button is held down)</p>
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="crashlands crashlands m1s3ry/crashlands-vita v1.0 - initial release v1.0 ports please, follow installation instructions in the readme of this repo.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-crashlands/icon0.png" alt="Icono de Crashlands" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · m1s3ry/crashlands-vita</div>
-                      <h2><a href="https://github.com/m1s3ry/crashlands-vita/releases/tag/v1.0" target="_blank" rel="noopener">Crashlands</a></h2>
-                      <div class="release-name">v1.0 - Initial Release</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-05-20 10:51 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.0</div>
-                  
-                  <div class="body markdown-body"><p>Please, follow installation instructions in the readme of this repo.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands_v1.0.0.KyuHEN.Version.VPK" target="_blank" rel="noopener">⬇ Crashlands_v1.0.0.KyuHEN.Version.VPK · 2.9 MB</a><a class="btn" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Epic.Games.Store.zip" target="_blank" rel="noopener">Crashlands.Vita.Patch.Epic.Games.Store.zip · 46.2 MB</a><a class="btn" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.GoG.1.4.4.zip" target="_blank" rel="noopener">Crashlands.Vita.Patch.GoG.1.4.4.zip · 45.9 MB</a><a class="btn" href="https://github.com/m1s3ry/crashlands-vita/releases/download/v1.0/Crashlands.Vita.Patch.Steam.Build.6083635.zip" target="_blank" rel="noopener">Crashlands.Vita.Patch.Steam.Build.6083635.zip · 46.2 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-09-30 21:43 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-01 03:22 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
