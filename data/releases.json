@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "BirchWoodGod/halo-ce-vita",
+    "release_id": "401560141",
+    "tag": "v1.0.1",
+    "name": "Halo CE for PS Vita 1.0.1",
+    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.1",
+    "published": "2026-10-02T05:23:00Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Fixes from the first night of testing. Thanks to everyone who sent crash dumps and reports.\n\n## Fixed\n\n- **Crashes at explosions and grenades.** The Pillar of Autumn's opening explosions, grenades and other big effects could crash the game (C2-12828). The cause was the game's update and render threads touching the same particle effects, effect lights and decals at once. All three are fixed.\n- **Flickering models.** Vehicles, characters and animated props (the cryo pods) could vanish for a frame. The render now sees each object list exactly as the game left it.\n- **Lens flares** were never drawn on the Vita, which also hid the Pillar of Autumn's look-calibration lights (they now flash and turn green as you aim at them).\n- **Skipping cutscenes** with Start skips them instead of replaying them.\n- **Bloom and glow** could stop working after a long session or a few level changes.\n- **The loading screen's picture** is found on the Vita (copy `default.xbe` to `ux0:data/haloce-vita/`).\n- **Multiplayer works on the Vita.** Matches (even alone on Blood Gulch) froze your movement and ended after a few seconds with \"the game host went down\": the Vita's network stack refused the way the game sends player updates. Fixed, with a bigger network memory pool, and the more responsive distributed netcode is now the default. The lobby no longer shows \"Waiting for another player\" over the countdown.\n- **Checkpoints** no longer freeze the game for a second: the save is copied in memory and written to the card in the background. Dying and skipping cutscenes reload faster too.\n- **Loading** a level that has a campaign save is faster (the save was read twice, and its checksum is 5x faster).\n\n## Improved\n\n- Sound mixing is about twice as fast and no longer holds up the game in big fights.\n- An **FPS counter** switch in the settings panel (hold Select + Start), off by default.\n- A **crouch toggle** (settings panel: Crouch, Toggle by default): tap D-pad down to crouch, tap again to stand, and keep moving while crouched.\n- **Sound occlusion** (every 3rd tick by default) and **Sound voices** (a cap on how many sounds play at once, Original by default) settings for big fights.\n\n## Known issues\n\n- Heavy fights (The Silent Cartographer's beach) still drop to the low-to-mid teens; the game's simulation of many soldiers and sounds is the limit. Work continues.\n- Loading a level and some mid-level loading points still pause for a few seconds; memory card reads are being sped up.\n- Split screen needs a second player; ad hoc and online play are not done yet.\n\n## Install / update\n\nInstall `halo.vpk` with VitaShell over the old version; your maps, saves and settings are kept. New install: see the [README](https://github.com/BirchWoodGod/halo-ce-vita#readme).\n\nWhen you report a crash, please attach the files listed in [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n",
+    "assets": [
+      {
+        "name": "halo.vpk",
+        "size": 3143745,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.1/halo.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "BirchWoodGod",
+    "homebrew_name": "Halo CE",
+    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+    "homebrew_id": "halo-ce",
+    "homebrew_authors": [
+      "birchwoodgod"
+    ],
+    "homebrew_version": "1.0.1",
+    "catalog_apps": [
+      {
+        "id": "halo-ce",
+        "name": "Halo CE",
+        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+        "category": "ports",
+        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+        "version": "1.0.1",
+        "version_date": "2026-10-02",
+        "author_ids": [
+          "birchwoodgod"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0.1",
+    "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
     "release_id": "401350644",
     "tag": "continuous-unvendoring",
@@ -140,7 +189,7 @@
     "homebrew_authors": [
       "chuta7x"
     ],
-    "homebrew_version": "0.0.1",
+    "homebrew_version": "1.0.0",
     "catalog_apps": [
       {
         "id": "real-racing-2",
@@ -149,16 +198,16 @@
         "category": "ports",
         "description": "A RR2 vita port based on android HD version.",
         "long_description": "A RR2 vita port based on android HD version.",
-        "version": "0.0.1",
-        "version_date": "2026-09-27",
+        "version": "1.0.0",
+        "version_date": "2026-09-30",
         "author_ids": [
           "chuta7x"
         ]
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.0.1 → release VitaPort",
-    "catalog_version": "0.0.1"
+    "catalog_update_detail": "PSVitaAlive 1.0.0 → release VitaPort",
+    "catalog_version": "1.0.0"
   },
   {
     "platform": "github",

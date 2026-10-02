@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>484</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">407</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>77</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,92 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.0.1 v1.0.1 ports fixes from the first night of testing. thanks to everyone who sent crash dumps and reports.
+
+## fixed
+
+- **crashes at explosions and grenades.** the pillar of autumn&#x27;s opening explosions, grenades and other big effects could crash the game (c2-12828). the cause was the game&#x27;s update and render threads touching the same particle effects, effect lights and decals at once. all three are fixed.
+- **flickering models.** vehicles, characters and animated props (the cryo pods) could vanish for a frame. the render now sees each object list exactly as the game left it.
+- **lens flares** were never drawn on the vita, which also hid the pillar of autumn&#x27;s look-calibration lights (they now flash and turn green as you aim at them).
+- **skipping cutscenes** with start skips them instead of replaying them.
+- **bloom and glow** could stop working after a long session or a few level changes.
+- **the loading screen&#x27;s picture** is found on the vita (copy `default.xbe` to `ux0:data/haloce-vita/`).
+- **multiplayer works on the vita.** matches (even alone on blood gulch) froze your movement and ended after a few seconds with &quot;the game host went down&quot;: the vita&#x27;s network stack refused the way the game sends player updates. fixed, with a bigger network memory pool, and the more responsive distributed netcode is now the default. the lobby no longer shows &quot;waiting for another player&quot; over the countdown.
+- **checkpoints** no longer freeze the game for a second: the save is copied in memory and written to the card in the background. dying and skipping cutscenes reload faster too.
+- **loading** a level that has a campaign save is faster (the save was read twice, and its checksum is 5x faster).
+
+## improved
+
+- sound mixing is about twice as fast and no longer holds up the game in big fights.
+- an **fps counter** switch in the settings panel (hold select + start), off by default.
+- a **crouch toggle** (settings panel: crouch, toggle by default): tap d-pad down to crouch, tap again to stand, and keep moving while crouched.
+- **sound occlusion** (every 3rd tick by default) and **sound voices** (a cap on how many sounds play at once, original by default) settings for big fights.
+
+## known issues
+
+- heavy fights (the silent cartographer&#x27;s beach) still drop to the low-to-mid teens; the game&#x27;s simulation of many soldiers and sounds is the limit. work continues.
+- loading a level and some mid-level loading points still pause for a few seconds; memory card reads are being sped up.
+- split screen needs a second player; ad hoc and online play are not done yet.
+
+## install / update
+
+install `halo.vpk` with vitashell over the old version; your maps, saves and settings are kept. new install: see the [readme](https://github.com/birchwoodgod/halo-ce-vita#readme).
+
+when you report a crash, please attach the files listed in [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png" alt="Icono de Halo CE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · BirchWoodGod/halo-ce-vita</div>
+                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.1" target="_blank" rel="noopener">Halo CE</a></h2>
+                      <div class="release-name">Halo CE for PS Vita 1.0.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0.1</span>
+                    <span>2026-10-02 05:23 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.1</div>
+                  
+                  <div class="body markdown-body"><p>Fixes from the first night of testing. Thanks to everyone who sent crash dumps and reports.</p>
+<h2>Fixed</h2>
+<ul>
+<li><strong>Crashes at explosions and grenades.</strong> The Pillar of Autumn's opening explosions, grenades and other big effects could crash the game (C2-12828). The cause was the game's update and render threads touching the same particle effects, effect lights and decals at once. All three are fixed.</li>
+<li><strong>Flickering models.</strong> Vehicles, characters and animated props (the cryo pods) could vanish for a frame. The render now sees each object list exactly as the game left it.</li>
+<li><strong>Lens flares</strong> were never drawn on the Vita, which also hid the Pillar of Autumn's look-calibration lights (they now flash and turn green as you aim at them).</li>
+<li><strong>Skipping cutscenes</strong> with Start skips them instead of replaying them.</li>
+<li><strong>Bloom and glow</strong> could stop working after a long session or a few level changes.</li>
+<li><strong>The loading screen's picture</strong> is found on the Vita (copy <code>default.xbe</code> to <code>ux0:data/haloce-vita/</code>).</li>
+<li><strong>Multiplayer works on the Vita.</strong> Matches (even alone on Blood Gulch) froze your movement and ended after a few seconds with &quot;the game host went down&quot;: the Vita's network stack refused the way the game sends player updates. Fixed, with a bigger network memory pool, and the more responsive distributed netcode is now the default. The lobby no longer shows &quot;Waiting for another player&quot; over the countdown.</li>
+<li><strong>Checkpoints</strong> no longer freeze the game for a second: the save is copied in memory and written to the card in the background. Dying and skipping cutscenes reload faster too.</li>
+<li><strong>Loading</strong> a level that has a campaign save is faster (the save was read twice, and its checksum is 5x faster).</li>
+</ul>
+<h2>Improved</h2>
+<ul>
+<li>Sound mixing is about twice as fast and no longer holds up the game in big fights.</li>
+<li>An <strong>FPS counter</strong> switch in the settings panel (hold Select + Start), off by default.</li>
+<li>A <strong>crouch toggle</strong> (settings panel: Crouch, Toggle by default): tap D-pad down to crouch, tap again to stand, and keep moving while crouched.</li>
+<li><strong>Sound occlusion</strong> (every 3rd tick by default) and <strong>Sound voices</strong> (a cap on how many sounds play at once, Original by default) settings for big fights.</li>
+</ul>
+<h2>Known issues</h2>
+<ul>
+<li>Heavy fights (The Silent Cartographer's beach) still drop to the low-to-mid teens; the game's simulation of many soldiers and sounds is the limit. Work continues.</li>
+<li>Loading a level and some mid-level loading points still pause for a few seconds; memory card reads are being sped up.</li>
+<li>Split screen needs a second player; ad hoc and online play are not done yet.</li>
+</ul>
+<h2>Install / update</h2>
+<p>Install <code>halo.vpk</code> with VitaShell over the old version; your maps, saves and settings are kept. New install: see the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#readme">README</a>.</p>
+<p>When you report a crash, please attach the files listed in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.1/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous unvendoring build continuous-unvendoring ports buildnum 4201">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -502,9 +588,9 @@ pendiente para próximas versiones
                   <div class="meta">
                     <span class="tag">VitaPort</span>
                     <span>2026-10-01 02:28 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.0.1</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.0.1 → release VitaPort</div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.0 → release VitaPort</div>
                   
                   <div class="body markdown-body"><h1>REAL RACING 2 - PS VITA (PORT) - PUBLIC BETA 2</h1>
 <p>REQUIREMENTS</p>
@@ -26931,7 +27017,7 @@ Three finger drag = drag'n'drop (right mouse button is held down)</p>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-02 00:22 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-02 09:13 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
