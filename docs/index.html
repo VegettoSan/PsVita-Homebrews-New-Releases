@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>481</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">401</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">402</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>80</strong><span>pendientes</span></div>
-        <div class="stat"><strong>473</strong><span>GitHub</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,153 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.0.3 beta 3 v1.0.3-beta.3 ports **testing build.** the third pre-release of 1.0.3. it has been tested on pc and in the vita3k emulator, but not yet on a real vita, so expect rough edges. if you want the stable build, stay on [v1.0.2.2](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.2.2). your saves carry over.
+
+## what&#x27;s new
+
+**multiplayer (system link between vitas)**
+- **the host no longer collapses to a few frames a second.** when the host fell behind, it tried to catch up by running up to 30 game updates in one frame, which made it fall further behind; the joining player saw freezes and teleporting. it now runs at most 2 per frame, as local games do, and the game runs slightly slow under heavy load instead of freezing. the host also skips about a fifth of its per-update work, and checking for new players no longer costs time every frame. thanks to callumblackgames for the two-vita gameplay video that showed this.
+
+**heavy fights**
+- **the game&#x27;s simulation is about 10% faster in big fights** (collision checks, object lists and lookups), with exactly the same gameplay.
+
+**flashlight and lights**
+- **characters and objects no longer flicker between lit and dark under the flashlight.** the render could read the light lists while the game was changing them, and the *object lighting* setting&#x27;s half and third modes kept stale light numbers between updates.
+
+**scopes and effects**
+- **zoom, camouflage and heat haze** now make the gpu wait for the screen copy they read before drawing it, a likely cause of scopes that were black or misaligned at 50% resolution (#15, #17). if it&#x27;s still off, please tell us.
+
+**smoothness**
+- **more even frame pacing at 30 fps**, so your weapon and the world move more evenly (`halo_frame_phase_lock=0` in env.txt turns it off).
+
+**crashes**
+- a crash when a contrail&#x27;s object disappeared mid-frame.
+
+## please test
+
+- **multiplayer between two vitas** (blood gulch, battle creek): host frame rate, teleporting or freezes on the joining vita. if you can, add these lines to `ux0:data/haloce-vita/env.txt` on both vitas and attach both `halo.log` files to an issue:
+  ```
+  halo_frame_timing=150
+  halo_tick_profile=1
+  halo_net_profile=1
+  halo_net_trace=1
+  ```
+- the flashlight on marines and covenant.
+- scoped weapons at 50% render resolution.
+- big fights: is it smoother than beta 2?
+
+## still known
+
+- trees and some covenant shields can flicker at the edges of the screen (beta 2&#x27;s notes list two test switches).
+- very heavy fights still drop frames; a steady 30 fps is planned for 1.1.0.
+
+## install
+
+install `halo.vpk` with vitashell over your current version; maps, saves and settings are kept. to go back, install the v1.0.2.2 vpk the same way.
+
+report problems on the [issue tracker](https://github.com/birchwoodgod/halo-ce-vita/issues) and say you are on **1.0.3-beta.3**. for crashes, attach the files listed in [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png" alt="Icono de Halo CE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · BirchWoodGod/halo-ce-vita</div>
+                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.3" target="_blank" rel="noopener">Halo CE</a></h2>
+                      <div class="release-name">Halo CE for PS Vita 1.0.3 beta 3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0.3-beta.3</span>
+                    <span>2026-10-05 02:29 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.1 → release v1.0.3-beta.3</div>
+                  
+                  <div class="body markdown-body"><p><strong>Testing build.</strong> The third pre-release of 1.0.3. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2">v1.0.2.2</a>. Your saves carry over.</p>
+<h2>What's new</h2>
+<p><strong>Multiplayer (System Link between Vitas)</strong></p>
+<ul>
+<li><strong>The host no longer collapses to a few frames a second.</strong> When the host fell behind, it tried to catch up by running up to 30 game updates in one frame, which made it fall further behind; the joining player saw freezes and teleporting. It now runs at most 2 per frame, as local games do, and the game runs slightly slow under heavy load instead of freezing. The host also skips about a fifth of its per-update work, and checking for new players no longer costs time every frame. Thanks to CallumBlackGames for the two-Vita gameplay video that showed this.</li>
+</ul>
+<p><strong>Heavy fights</strong></p>
+<ul>
+<li><strong>The game's simulation is about 10% faster in big fights</strong> (collision checks, object lists and lookups), with exactly the same gameplay.</li>
+</ul>
+<p><strong>Flashlight and lights</strong></p>
+<ul>
+<li><strong>Characters and objects no longer flicker between lit and dark under the flashlight.</strong> The render could read the light lists while the game was changing them, and the <em>Object lighting</em> setting's Half and Third modes kept stale light numbers between updates.</li>
+</ul>
+<p><strong>Scopes and effects</strong></p>
+<ul>
+<li><strong>Zoom, camouflage and heat haze</strong> now make the GPU wait for the screen copy they read before drawing it, a likely cause of scopes that were black or misaligned at 50% resolution (#15, #17). If it's still off, please tell us.</li>
+</ul>
+<p><strong>Smoothness</strong></p>
+<ul>
+<li><strong>More even frame pacing at 30 fps</strong>, so your weapon and the world move more evenly (<code>HALO_FRAME_PHASE_LOCK=0</code> in env.txt turns it off).</li>
+</ul>
+<p><strong>Crashes</strong></p>
+<ul>
+<li>A crash when a contrail's object disappeared mid-frame.</li>
+</ul>
+<h2>Please test</h2>
+<ul>
+<li><strong>Multiplayer between two Vitas</strong> (Blood Gulch, Battle Creek): host frame rate, teleporting or freezes on the joining Vita. If you can, add these lines to <code>ux0:data/haloce-vita/env.txt</code> on both Vitas and attach both <code>halo.log</code> files to an issue:<pre><code>HALO_FRAME_TIMING=150
+HALO_TICK_PROFILE=1
+HALO_NET_PROFILE=1
+HALO_NET_TRACE=1
+</code></pre>
+</li>
+<li>The flashlight on marines and Covenant.</li>
+<li>Scoped weapons at 50% render resolution.</li>
+<li>Big fights: is it smoother than beta 2?</li>
+</ul>
+<h2>Still known</h2>
+<ul>
+<li>Trees and some Covenant shields can flicker at the edges of the screen (beta 2's notes list two test switches).</li>
+<li>Very heavy fights still drop frames; a steady 30 fps is planned for 1.1.0.</li>
+</ul>
+<h2>Install</h2>
+<p>Install <code>halo.vpk</code> with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.</p>
+<p>Report problems on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue tracker</a> and say you are on <strong>1.0.3-beta.3</strong>. For crashes, attach the files listed in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.3/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 3.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="emu4vita++ emu4vita++ noword/emu4vitaplus v0.81 v0.81 emulators * add a new core hatari.
+* fix bugs.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-emu4vita/icon0.png" alt="Icono de Emu4Vita++" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">EMULATORS · GITHUB · noword/Emu4VitaPlus</div>
+                      <h2><a href="https://github.com/noword/Emu4VitaPlus/releases/tag/v0.81" target="_blank" rel="noopener">Emu4Vita++</a></h2>
+                      <div class="release-name">v0.81</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.81</span>
+                    <span>2026-10-05 00:39 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.79</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.79 → release v0.81</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Add a new core Hatari.</li>
+<li>Fix bugs.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/noword/Emu4VitaPlus/releases/download/v0.81/Emu4VitaPlus_v0.81.vpk" target="_blank" rel="noopener">⬇ Emu4VitaPlus_v0.81.vpk · 191.2 MB</a><a class="btn" href="https://github.com/noword/Emu4VitaPlus/releases/download/v0.81/StandAlones.7z" target="_blank" rel="noopener">StandAlones.7z · 211.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4204">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -241,133 +388,6 @@
                   <div class="body markdown-body"><p>buildnum 4204</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 10.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 44.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 4.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 24.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.0.3 beta 2 v1.0.3-beta.2 ports **testing build.** the second pre-release of 1.0.3, built from your reports on beta 1. it has been tested on pc and in the vita3k emulator, but not yet on a real vita, so expect rough edges. if you want the stable build, stay on [v1.0.2.2](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.2.2). your saves carry over either way.
-
-## fixed
-
-**crashes and freezes**
-- **crash when you drop or switch a weapon**, for example picking up a gun while the plasma rifle is overheated (#14, #16).
-- **crash during fights while taking shield damage**: the hud&#x27;s warning beeps were played at the wrong moment and could pull a sound out from under the game (#20, #21, possibly #19).
-- **crash right after leaving a vehicle**: the &quot;enter vehicle&quot; prompt read a player the game had just changed (#22).
-- **freezes**: a lock around the texture cache could let two parts of the game in at once and then stay locked forever (#18, and likely the freezes in #22).
-
-**checkpoints**
-- **checkpoints that stopped coming, and missing marine reinforcements** (#10). a speed setting updated props in turns, and the turn counter could get stuck, so needles stuck in crates never exploded and the game never thought it was safe to save. thanks to blazered17 for the save file that made this findable.
-
-**freezes when reaching a new area**
-- the game no longer compiles graphics shaders on the vita the first time it sees a surface: 272 of them now ship precompiled with the game. anything missing is compiled in the background instead of freezing the game.
-
-**graphics**
-- **invisible elites no longer show up black**, and glass and effects (warthog windshield, plasma pistol) no longer flicker after a long session: the vita ran out of small graphics surfaces; they now share memory and are reused (#13, #20).
-- **scopes no longer go black** when the zoom&#x27;s first frame isn&#x27;t ready (#15, #17). if it still happens at 50% render resolution, please tell us; 63% avoids it.
-- **no more white squares** on the assault rifle&#x27;s compass or a white flash on the help screen while textures load (#13, #20).
-- **the dropship flies out of the hangar** at the end of the truth and reconciliation (#20).
-- **no black screen when moving into a new section** of a level (#20).
-- **smoother weapon motion**: your weapon and hands are smoothed between game updates (settings panel: *smooth weapon motion*) (#13).
-- water ripples on the silent cartographer: one possible cause of the streaks is fixed (#13, #20); please tell us whether they are gone.
-
-**other**
-- 16:9 movies are shown at 16:9 however they were encoded, and movies larger than the screen are scaled to fit (#8).
-- faster rendering: lens flares cost about half as much, and several smaller savings.
-
-## please test
-
-- fights with lots of shield damage, vehicles (ghost, scorpion), and switching weapons.
-- a long session: do invisible elites still turn black, does the game freeze?
-- zooming with scoped weapons, including at 50% render resolution.
-- the silent cartographer&#x27;s creek water. if the streaks are still there, add `halo_target_chain=0` to `ux0:data/haloce-vita/env.txt` and tell us whether that clears them.
-- 343 guilty spark&#x27;s opening in the water: if the purple haze or dark shapes still block your view, tell us (#23).
-- trees or covenant shields that vanish at the screen&#x27;s edges: try `halo_gxm_wclamp=0`, and separately `halo_cull_radius_scale=3`, in env.txt, and tell us which one helps.
-
-## still known
-
-- trees and some covenant shields can flicker at the edges of the screen (see the test above).
-- very heavy fights still drop frames.
-- cortana&#x27;s hologram colour cycling and flicker in cutscenes is how the xbox game draws her (#23).
-
-## install
-
-install `halo.vpk` with vitashell over your current version; maps, saves and settings are kept. to go back, install the v1.0.2.2 vpk the same way.
-
-report problems on the [issue tracker](https://github.com/birchwoodgod/halo-ce-vita/issues) and say you are on **1.0.3-beta.2**. for crashes, attach the files listed in [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).
-
-thanks to everyone who reported on beta 1: **blazered17**, **benixio**, **duckiexp**, **5ackwood**, **itssamstone**, **kiddrwxssj**, **nxble6**, **maler82** and **andiweli**.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png" alt="Icono de Halo CE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · BirchWoodGod/halo-ce-vita</div>
-                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.2" target="_blank" rel="noopener">Halo CE</a></h2>
-                      <div class="release-name">Halo CE for PS Vita 1.0.3 beta 2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.3-beta.2</span>
-                    <span>2026-10-04 22:07 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.1 → release v1.0.3-beta.2</div>
-                  
-                  <div class="body markdown-body"><p><strong>Testing build.</strong> The second pre-release of 1.0.3, built from your reports on beta 1. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2">v1.0.2.2</a>. Your saves carry over either way.</p>
-<h2>Fixed</h2>
-<p><strong>Crashes and freezes</strong></p>
-<ul>
-<li><strong>Crash when you drop or switch a weapon</strong>, for example picking up a gun while the plasma rifle is overheated (#14, #16).</li>
-<li><strong>Crash during fights while taking shield damage</strong>: the HUD's warning beeps were played at the wrong moment and could pull a sound out from under the game (#20, #21, possibly #19).</li>
-<li><strong>Crash right after leaving a vehicle</strong>: the &quot;enter vehicle&quot; prompt read a player the game had just changed (#22).</li>
-<li><strong>Freezes</strong>: a lock around the texture cache could let two parts of the game in at once and then stay locked forever (#18, and likely the freezes in #22).</li>
-</ul>
-<p><strong>Checkpoints</strong></p>
-<ul>
-<li><strong>Checkpoints that stopped coming, and missing marine reinforcements</strong> (#10). A speed setting updated props in turns, and the turn counter could get stuck, so needles stuck in crates never exploded and the game never thought it was safe to save. Thanks to BlazeRed17 for the save file that made this findable.</li>
-</ul>
-<p><strong>Freezes when reaching a new area</strong></p>
-<ul>
-<li>The game no longer compiles graphics shaders on the Vita the first time it sees a surface: 272 of them now ship precompiled with the game. Anything missing is compiled in the background instead of freezing the game.</li>
-</ul>
-<p><strong>Graphics</strong></p>
-<ul>
-<li><strong>Invisible Elites no longer show up black</strong>, and glass and effects (Warthog windshield, plasma pistol) no longer flicker after a long session: the Vita ran out of small graphics surfaces; they now share memory and are reused (#13, #20).</li>
-<li><strong>Scopes no longer go black</strong> when the zoom's first frame isn't ready (#15, #17). If it still happens at 50% render resolution, please tell us; 63% avoids it.</li>
-<li><strong>No more white squares</strong> on the assault rifle's compass or a white flash on the Help screen while textures load (#13, #20).</li>
-<li><strong>The dropship flies out of the hangar</strong> at the end of The Truth and Reconciliation (#20).</li>
-<li><strong>No black screen when moving into a new section</strong> of a level (#20).</li>
-<li><strong>Smoother weapon motion</strong>: your weapon and hands are smoothed between game updates (settings panel: <em>Smooth weapon motion</em>) (#13).</li>
-<li>Water ripples on The Silent Cartographer: one possible cause of the streaks is fixed (#13, #20); please tell us whether they are gone.</li>
-</ul>
-<p><strong>Other</strong></p>
-<ul>
-<li>16:9 movies are shown at 16:9 however they were encoded, and movies larger than the screen are scaled to fit (#8).</li>
-<li>Faster rendering: lens flares cost about half as much, and several smaller savings.</li>
-</ul>
-<h2>Please test</h2>
-<ul>
-<li>Fights with lots of shield damage, vehicles (Ghost, Scorpion), and switching weapons.</li>
-<li>A long session: do invisible Elites still turn black, does the game freeze?</li>
-<li>Zooming with scoped weapons, including at 50% render resolution.</li>
-<li>The Silent Cartographer's creek water. If the streaks are still there, add <code>HALO_TARGET_CHAIN=0</code> to <code>ux0:data/haloce-vita/env.txt</code> and tell us whether that clears them.</li>
-<li>343 Guilty Spark's opening in the water: if the purple haze or dark shapes still block your view, tell us (#23).</li>
-<li>Trees or Covenant shields that vanish at the screen's edges: try <code>HALO_GXM_WCLAMP=0</code>, and separately <code>HALO_CULL_RADIUS_SCALE=3</code>, in env.txt, and tell us which one helps.</li>
-</ul>
-<h2>Still known</h2>
-<ul>
-<li>Trees and some Covenant shields can flicker at the edges of the screen (see the test above).</li>
-<li>Very heavy fights still drop frames.</li>
-<li>Cortana's hologram colour cycling and flicker in cutscenes is how the Xbox game draws her (#23).</li>
-</ul>
-<h2>Install</h2>
-<p>Install <code>halo.vpk</code> with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.</p>
-<p>Report problems on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue tracker</a> and say you are on <strong>1.0.3-beta.2</strong>. For crashes, attach the files listed in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
-<p>Thanks to everyone who reported on beta 1: <strong>BlazeRed17</strong>, <strong>Benixio</strong>, <strong>DuckiEXP</strong>, <strong>5ackwood</strong>, <strong>ItsSamStone</strong>, <strong>KiddRwxSsj</strong>, <strong>nxble6</strong>, <strong>maler82</strong> and <strong>Andiweli</strong>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.2/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1183,33 +1203,6 @@ fixes the linux appimage so it passes the appimage catalog checks.
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/vita-save-cloud.vpk" target="_blank" rel="noopener">⬇ vita-save-cloud.vpk · 7.7 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub-0.1.10-1.x86_64.rpm" target="_blank" rel="noopener">Save.Sync.Hub-0.1.10-1.x86_64.rpm · 6.1 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_amd64.AppImage" target="_blank" rel="noopener">Save.Sync.Hub_0.1.10_amd64.AppImage · 6.3 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_amd64.deb" target="_blank" rel="noopener">Save.Sync.Hub_0.1.10_amd64.deb · 6.1 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_android.apk" target="_blank" rel="noopener">Save.Sync.Hub_0.1.10_android.apk · 71.9 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_universal.dmg" target="_blank" rel="noopener">Save.Sync.Hub_0.1.10_universal.dmg · 12.8 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_x64-setup.exe" target="_blank" rel="noopener">Save.Sync.Hub_0.1.10_x64-setup.exe · 3.8 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_x64_en-US.msi" target="_blank" rel="noopener">Save.Sync.Hub_0.1.10_x64_en-US.msi · 5.6 MB</a><a class="btn" href="https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_universal.app.tar.gz" target="_blank" rel="noopener">Save.Sync.Hub_universal.app.tar.gz · 12.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="emu4vita++ emu4vita++ noword/emu4vitaplus v0.80 v0.80 emulators fix bugs">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-emu4vita/icon0.png" alt="Icono de Emu4Vita++" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">EMULATORS · GITHUB · noword/Emu4VitaPlus</div>
-                      <h2><a href="https://github.com/noword/Emu4VitaPlus/releases/tag/v0.80" target="_blank" rel="noopener">Emu4Vita++</a></h2>
-                      <div class="release-name">v0.80</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.80</span>
-                    <span>2026-09-29 10:13 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.79</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.79 → release v0.80</div>
-                  
-                  <div class="body markdown-body"><p>fix bugs</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/noword/Emu4VitaPlus/releases/download/v0.80/Emu4VitaPlus_v0.80.vpk" target="_blank" rel="noopener">⬇ Emu4VitaPlus_v0.80.vpk · 187.7 MB</a><a class="btn" href="https://github.com/noword/Emu4VitaPlus/releases/download/v0.80/StandAlones.7z" target="_blank" rel="noopener">StandAlones.7z · 208.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -25655,10 +25648,432 @@ make jumpnbump.vpk -j12
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="enigma enigma rsn8887/enigma enigma vita (v1.11) and switch (v1.16) 1.16 ports changes in this version
+=====
+1.16 (switch only)
+
+- re-compile with 12.0.0 support. updating the .nro file is enough, data is the same.
+- fix crash on switch when loading levels with rubberbands
+
+overview
+=====
+this is my vita and switch port of enigma, a skill/puzzle game inspired by oxyd on the atari st and rock&#x27;n&#x27;roll on the amiga.
+
+![](screenshots/enigma_vita_4.jpg)
+
+the object of the game is to uncover pairs of identically colored oxyd stones. simple? yes. easy? certainly not! hidden traps, vast mazes, laser beams, and, most of all, countless hairy puzzles usually block your direct way to the oxyd stones … if you are new to enigma, you may want to take a look at a few [screenshots](http://www.nongnu.org/enigma/screenshots.html) or peek at the [user manual](http://www.nongnu.org/enigma/manual_1.20/manual/enigma.html).
+
+homepage
+======
+detailed information about the game can be found here:
+http://www.nongnu.org/enigma/index.html
+
+thanks
+======
+thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
+
+thanks to @usineur for his libkbd-vita code for easy use of touch keyboard text entry.
+
+thanks to the developers of vitasdk and other developers on the vita for making this possible, in no particular order: @devnoname120, @theofficialflow, @yifanlu, @rinnegatamante, @cpasjuste, @xyzz, @xerpi, and many others.
+
+thanks to the many developers of the original game, such as the main developers thomas bernhardt, raoul bourquin, siegfried fennig, martin hawlisch, daniel heck, ronald lamprecht, andreas lochmann, petr machata, nobby, nat pryce, jacob scott, sven siggelkow, ralf westram, and many many others.
+
+the full credits are at http://www.nongnu.org/enigma/credits.html .
+
+special thanks to meinolf schneider / amekudzi for the original oxyd games on atari st and pc which inspired enigma.
+
+installation instructions
+=====
+vita:
+- install the .vpk
+- extract the contents of data.zip into ux0:data/
+
+note: i recommend using ftp transfer to copy the files over (~10,000 small files in data.zip). there is one report (thanks @ji11x38) that using the vitashell &quot;select button: usb&quot; option to copy files directly from a macos computer to the vita via usb caused the files to not transfer correctly, causing enigma to crash on startup.
+
+switch:
+- extract the contents of enigma_switch.zip into the `switch` folder on your sd card, so that you have a folder `switch/enigma` with `enigma.nro` and more folders and files inside.
+
+vita/switch-exclusive features
+=====
+- game controller support: analog joystick mouse controls and button mappings
+- front and rear touch controls with left/right mouse click gestures
+- complete level packages with &gt;3,000 levels and pre-calculated preview screenshots
+- bluetooth/usb keyboard and mouse support. the vita supports only a limited number of bt devices, tested working with jelly bean bt keyboard and mouse combo asin:b06y56bbyp and with the standalone jelly comb bluetooth wireless mouse asin:b075hbdwcf. the switch supports only a limited number of usb mice. tested working with logitech m187.
+ 
+controls (controls updated with version 1.08)
+=====
+left analog stick = analog control of the marble and mouse pointer  
+square / y / l-trigger = select menu items, use object in game (left mouse button)  
+triangle / x / r-trigger = cycle through inventory items (right mouse button)  
+cross / a = ok in menu (return)  
+circle / b = back / in-game menu (escape key)  
+start / plus = help screen (f1)  
+select / minus = destroy marble and remove one life (f3)  
+r-trigger + select / r-trigger + minus = restart level (shift-f3)  
+
+dpad in menu = quick-select menu items (arrow keys)  
+dpad left/right in game = quick-change mouse speed  
+dpad up/down in game = cycle through previous messages  
+
+front touch = analog control of the marble and mouse pointer  
+rear touch = analog control of the marble and mouse pointer (vita only)  
+single finger tap = select menu items, use object in game (left mouse button)  
+dual finger tap = cycle through inventory items (right mouse button)  
+
+dual finger tap works by holding one finger down and quickly tapping with a second finger somewhere else.
+
+mouse sensitivity can be adjusted in options or in-game via dpad left/right. the setting affects analog joystick, touch, and real bluetooth/usb mice.
+
+build instructions
+=====
+vita:
+on vita, enigma needs xerces-c and inet. to prepare compilation:
+
+- with a text-editor, load the file $vitasdk/arm-vita-eabi/include/netinet/in.h. inside the file, replace &quot;struct&quot;  with &quot;inline struct&quot; on line 45 and 49.
+- download or clone my xerces-c repo from [here](https://www.github.com/rsn8887/xerces-c) into a folder called xerces, then:
+````
+mkdir build
+cd build
+cmake -dcmake_toolchain_file=$vitasdk/share/vita.toolchain.cmake -dmutex-manager=nothreads -dnetwork=off -dcmake_build_type=release -dsse2=off -dthreads=off -dbuild_shared_libs=off ../xerces/
+
+make -j10
+make install -j10
+````
+you should now have the file 
+````
+$vitasdk/arm-vita-eabi/lib/libxerces-c.a 
+````
+and a whole bunch of header files in 
+````
+$vitasdk/arm-vita-eabi/include/xercesc/
+````
+- clone the enigma repo into a folder called enigma and compile:
+````
+mkdir build
+cd build
+cmake ../enigma/ -dbuild_psp2=on -dcmake_build_type=release
+make enigma.vpk -j10
+````
+
+switch:
+on switch, enigma needs ssl and xerces-c. to prepare compilation:
+
+- download or clone the moonlight-switch repo which contains libopenssl [here](https://www.github.com/kbhomes/moonlight-switch), then:
+````
+cd moonlight-switch/dependencies/switch-openssl
+export moonlight_depdir=$devkitpro/portlibs/switch
+dkp-makepkg
+sudo -e dkp-pacman -u switch-openssl-1.0.2o-1-any.pkg.tar.xz
+````
+
+- download or clone my xerces-c switch branch from [here](https://www.github.com/rsn8887/xerces-c-1) into a folder called xerces (use `git checkout switch` to make sure you are on the switch branch), then:
+````
+cmake -dcmake_toolchain_file=../xerces-c-1/switch.toolchain.cmake -dtranscoder=iconv -dmutex-manager=nothreads -dnetwork=off -dsse2=off -dthreads=off -dbuild_shared_libs=off -dxmlch-type=uint16_t -dulong_max=4294967295 ../xerces-c-1/
+cmake -dcmake_toolchain_file=../xerces-c-1/switch.toolchain.cmake -dtranscoder=iconv -dmutex-manager=nothreads -dnetwork=off -dsse2=off -dthreads=off -dbuild_shared_libs=off -dxmlch-type=uint16_t -dulong_max=4294967295 ../xerces-c-1/
+cmake -dcmake_toolchain_file=../xerces-c-1/switch.toolchain.cmake -dtranscoder=iconv -dmutex-manager=nothreads -dnetwork=off -dsse2=off -dthreads=off -dbuild_shared_libs=off -dxmlch-type=uint16_t -dulong_max=4294967295 ../xerces-c-1/
+
+make -j10
+sudo -e make install
+````
+- (i don&#x27;t know why repeated cmake is neccessary, but it only works that way for me)
+- clone the enigma repo into a folder called enigma and compile:
+````
+mkdir build
+cd build
+cmake ../enigma/ -dbuild_nx=on -dcmake_build_type=release
+make enigma_switch.zip -j10
+````
+
+changelog
+=====
+1.16 (switch only)
+
+- re-compile with 12.0.0 support. updating the .nro file is enough, data is the same.
+- fix crash on switch when loading levels with rubberbands
+
+1.15 (switch only)
+
+- fix crash on switch when loading levels with rubberbands that re-appeared using latest toolchain
+
+1.14 (switch only)
+
+- re-compile with 9.0.0 support
+
+1.13 (switch only)
+
+- fix crash on switch when loading a level that contains rubberbands
+
+1.12 (switch only)
+
+- add switch version
+
+1.11
+
+- improve response to diagonal stick directions
+
+1.10
+
+- improve response to slow finger motion
+
+1.09
+
+- improve controls with bluetooth mouse by re-compiling with latest sdl-vita
+
+1.08
+
+- improve keymap, map left/right mouse buttons also to l/r for better playability. 
+
+1.07
+
+- prevent accidental clicks when moving marble using touch
+
+1.06
+
+- map dpad as arrow keys to quick select menu items and quick-select mouse speed in game
+- map l to &#x27;f1&#x27; (help), x to &#x27;return&#x27; (ok), o to &#x27;esc&#x27; (back)
+- update help texts to reflect vita controller mappings
+
+1.05
+
+- enable touch keyboard in menu, useful for name entry and level search
+- increase smoothness of mouse pointer motion in gui
+- remove the missing translations
+
+1.04
+
+- fix missing soundsets in audio menu
+
+1.03
+
+- updated data.zip to include many more levels with corresponding thumbnail previews and many more sound sets. 
+
+1.02
+
+- decrease default joystick sensitivity (marble moved too fast when controlled with joystick)
+
+1.01
+
+- map r-trigger to &#x27;restart&#x27; and select button to &#x27;kill marble&#x27;
+
+1.00
+
+- initial vita port release based on latest enigma development version">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-enigma/icon0.png" alt="Icono de Enigma" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · rsn8887/Enigma</div>
+                      <h2><a href="https://github.com/rsn8887/Enigma/releases/tag/1.16" target="_blank" rel="noopener">Enigma</a></h2>
+                      <div class="release-name">Enigma Vita (v1.11) and Switch (v1.16)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.16</span>
+                    <span>2021-05-23 02:34 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.16</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.16</div>
+                  
+                  <div class="body markdown-body"><h1>Changes in this version</h1>
+<p>1.16 (Switch only)</p>
+<ul>
+<li>Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.</li>
+<li>Fix crash on Switch when loading levels with rubberbands</li>
+</ul>
+<h1>Overview</h1>
+<p>This is my Vita and Switch port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.</p>
+<p><img src="screenshots/enigma_vita_4.jpg" alt=""></p>
+<p>The object of the game is to uncover pairs of identically colored Oxyd stones. Simple? Yes. Easy? Certainly not! Hidden traps, vast mazes, laser beams, and, most of all, countless hairy puzzles usually block your direct way to the Oxyd stones … If you are new to Enigma, you may want to take a look at a few <a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/screenshots.html">screenshots</a> or peek at the <a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/manual_1.20/manual/enigma.html">user manual</a>.</p>
+<h1>Homepage</h1>
+<p>Detailed information about the game can be found here:
+<a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/index.html">http://www.nongnu.org/enigma/index.html</a></p>
+<h1>Thanks</h1>
+<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
+<p>Thanks to @usineur for his libkbd-vita code for easy use of touch keyboard text entry.</p>
+<p>Thanks to the developers of VitaSDK and other developers on the Vita for making this possible, in no particular order: @devnoname120, @TheOfficialFlow, @yifanlu, @Rinnegatamante, @cpasjuste, @xyzz, @xerpi, and many others.</p>
+<p>Thanks to the many developers of the original game, such as the main developers Thomas Bernhardt, Raoul Bourquin, Siegfried Fennig, Martin Hawlisch, Daniel Heck, Ronald Lamprecht, Andreas Lochmann, Petr Machata, Nobby, Nat Pryce, Jacob Scott, Sven Siggelkow, Ralf Westram, and many many others.</p>
+<p>The full credits are at <a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/credits.html">http://www.nongnu.org/enigma/credits.html</a> .</p>
+<p>Special thanks to Meinolf Schneider / Amekudzi for the original Oxyd games on Atari ST and PC which inspired Enigma.</p>
+<h1>Installation Instructions</h1>
+<p>Vita:</p>
+<ul>
+<li>Install the .vpk</li>
+<li>Extract the contents of data.zip into ux0:data/</li>
+</ul>
+<p>NOTE: I recommend using FTP transfer to copy the files over (~10,000 small files in data.zip). There is one report (thanks @ji11x38) that using the Vitashell &quot;SELECT Button: USB&quot; option to copy files directly from a MacOS computer to the Vita via USB caused the files to not transfer correctly, causing Enigma to crash on startup.</p>
+<p>Switch:</p>
+<ul>
+<li>Extract the contents of Enigma_Switch.zip into the <code>switch</code> folder on your SD card, so that you have a folder <code>switch/enigma</code> with <code>enigma.nro</code> and more folders and files inside.</li>
+</ul>
+<h1>Vita/Switch-exclusive features</h1>
+<ul>
+<li>game controller support: analog joystick mouse controls and button mappings</li>
+<li>front and rear touch controls with left/right mouse click gestures</li>
+<li>complete level packages with &gt;3,000 levels and pre-calculated preview screenshots</li>
+<li>Bluetooth/USB keyboard and mouse support. The Vita supports only a limited number of BT devices, tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. The Switch supports only a limited number of USB mice. Tested working with Logitech M187.</li>
+</ul>
+<h1>Controls (controls updated with version 1.08)</h1>
+<p>Left analog stick = analog control of the marble and mouse pointer<br>
+Square / Y / L-trigger = select menu items, use object in game (left mouse button)<br>
+Triangle / X / R-trigger = cycle through inventory items (right mouse button)<br>
+Cross / A = ok in menu (return)<br>
+Circle / B = back / in-game menu (escape key)<br>
+Start / Plus = help screen (F1)<br>
+Select / Minus = destroy marble and remove one life (F3)<br>
+R-trigger + Select / R-trigger + Minus = restart level (shift-F3)</p>
+<p>Dpad in menu = quick-select menu items (arrow keys)<br>
+Dpad left/right in game = quick-change mouse speed<br>
+Dpad up/down in game = cycle through previous messages</p>
+<p>Front touch = analog control of the marble and mouse pointer<br>
+Rear touch = analog control of the marble and mouse pointer (Vita only)<br>
+Single finger tap = select menu items, use object in game (left mouse button)<br>
+Dual finger tap = cycle through inventory items (right mouse button)</p>
+<p>Dual finger tap works by holding one finger down and quickly tapping with a second finger somewhere else.</p>
+<p>Mouse sensitivity can be adjusted in options or in-game via dpad left/right. The setting affects analog joystick, touch, and real bluetooth/USB mice.</p>
+<h1>Build Instructions</h1>
+<p>Vita:
+On Vita, Enigma needs xerces-c and inet. To prepare compilation:</p>
+<ul>
+<li>with a text-editor, load the file $VITASDK/arm-vita-eabi/include/netinet/in.h. Inside the file, replace &quot;struct&quot;  with &quot;inline struct&quot; on line 45 and 49.</li>
+<li>download or clone my xerces-c repo from <a target="_blank" rel="noopener noreferrer" href="https://www.github.com/rsn8887/xerces-c">here</a> into a folder called xerces, then:</li>
+</ul>
+<pre><code>mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -Dmutex-manager=nothreads -Dnetwork=OFF -DCMAKE_BUILD_TYPE=Release -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF ../xerces/
+
+make -j10
+make install -j10
+</code></pre>
+<p>You should now have the file</p>
+<pre><code>$VITASDK/arm-vita-eabi/lib/libxerces-c.a 
+</code></pre>
+<p>and a whole bunch of header files in</p>
+<pre><code>$VITASDK/arm-vita-eabi/include/xercesc/
+</code></pre>
+<ul>
+<li>Clone the Enigma repo into a folder called Enigma and compile:</li>
+</ul>
+<pre><code>mkdir build
+cd build
+cmake ../Enigma/ -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release
+make enigma.vpk -j10
+</code></pre>
+<p>Switch:
+On Switch, Enigma needs ssl and xerces-c. To prepare compilation:</p>
+<ul>
+<li>download or clone the moonlight-switch repo which contains libopenssl <a target="_blank" rel="noopener noreferrer" href="https://www.github.com/kbhomes/moonlight-switch">here</a>, then:</li>
+</ul>
+<pre><code>cd moonlight-switch/dependencies/switch-openssl
+export MOONLIGHT_DEPDIR=$DEVKITPRO/portlibs/switch
+dkp-makepkg
+sudo -E dkp-pacman -U switch-openssl-1.0.2o-1-any.pkg.tar.xz
+</code></pre>
+<ul>
+<li>download or clone my xerces-c Switch branch from <a target="_blank" rel="noopener noreferrer" href="https://www.github.com/rsn8887/xerces-c-1">here</a> into a folder called xerces (use <code>git checkout switch</code> to make sure you are on the switch branch), then:</li>
+</ul>
+<pre><code>cmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/
+cmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/
+cmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/
+
+make -j10
+sudo -E make install
+</code></pre>
+<ul>
+<li>(I don't know why repeated cmake is neccessary, but it only works that way for me)</li>
+<li>Clone the Enigma repo into a folder called Enigma and compile:</li>
+</ul>
+<pre><code>mkdir build
+cd build
+cmake ../Enigma/ -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release
+make enigma_switch.zip -j10
+</code></pre>
+<h1>Changelog</h1>
+<p>1.16 (Switch only)</p>
+<ul>
+<li>Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.</li>
+<li>Fix crash on Switch when loading levels with rubberbands</li>
+</ul>
+<p>1.15 (Switch only)</p>
+<ul>
+<li>Fix crash on Switch when loading levels with rubberbands that re-appeared using latest toolchain</li>
+</ul>
+<p>1.14 (Switch only)</p>
+<ul>
+<li>Re-compile with 9.0.0 support</li>
+</ul>
+<p>1.13 (Switch only)</p>
+<ul>
+<li>Fix crash on Switch when loading a level that contains rubberbands</li>
+</ul>
+<p>1.12 (Switch only)</p>
+<ul>
+<li>Add Switch version</li>
+</ul>
+<p>1.11</p>
+<ul>
+<li>Improve response to diagonal stick directions</li>
+</ul>
+<p>1.10</p>
+<ul>
+<li>Improve response to slow finger motion</li>
+</ul>
+<p>1.09</p>
+<ul>
+<li>Improve controls with bluetooth mouse by re-compiling with latest SDL-Vita</li>
+</ul>
+<p>1.08</p>
+<ul>
+<li>Improve keymap, map left/right mouse buttons also to L/R for better playability.</li>
+</ul>
+<p>1.07</p>
+<ul>
+<li>prevent accidental clicks when moving marble using touch</li>
+</ul>
+<p>1.06</p>
+<ul>
+<li>map dpad as arrow keys to quick select menu items and quick-select mouse speed in game</li>
+<li>map L to 'F1' (help), X to 'Return' (ok), O to 'ESC' (back)</li>
+<li>update help texts to reflect Vita controller mappings</li>
+</ul>
+<p>1.05</p>
+<ul>
+<li>enable touch keyboard in menu, useful for name entry and level search</li>
+<li>increase smoothness of mouse pointer motion in gui</li>
+<li>remove the missing translations</li>
+</ul>
+<p>1.04</p>
+<ul>
+<li>fix missing soundsets in audio menu</li>
+</ul>
+<p>1.03</p>
+<ul>
+<li>updated data.zip to include many more levels with corresponding thumbnail previews and many more sound sets.</li>
+</ul>
+<p>1.02</p>
+<ul>
+<li>decrease default joystick sensitivity (marble moved too fast when controlled with joystick)</li>
+</ul>
+<p>1.01</p>
+<ul>
+<li>map r-trigger to 'restart' and select button to 'kill marble'</li>
+</ul>
+<p>1.00</p>
+<ul>
+<li>initial Vita port release based on latest Enigma development version</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.11.vpk" target="_blank" rel="noopener">⬇ enigma_1.11.vpk · 5.0 MB</a><a class="btn" href="https://github.com/rsn8887/Enigma/releases/download/1.16/data.zip" target="_blank" rel="noopener">data.zip · 67.0 MB</a><a class="btn" href="https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.16_switch.zip" target="_blank" rel="noopener">enigma_1.16_switch.zip · 72.8 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-04 23:45 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-05 03:18 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
