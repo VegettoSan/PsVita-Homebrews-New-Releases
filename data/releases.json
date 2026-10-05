@@ -1,20 +1,591 @@
 [
   {
     "platform": "github",
+    "repo": "TheXTech/TheXTech",
+    "release_id": "404033578",
+    "tag": "v1.7.4",
+    "name": "TheXTech v1.7.4: A small release, but Big Changes!",
+    "url": "https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4",
+    "published": "2026-10-05T21:01:25Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "This is not a usual update. While it offers several bugfixes and features, it has three significant changes:\r\n- The first release with the official iOS and tvOS support!\r\n- Compiled Haiku binary releases are now available!\r\n- We changing the versioning model!\r\n\r\n# iOS and tvOS support\r\nSince the foundation of the project of TheXTech it was never available at Apple mobile platforms such as iOS. And since this release it's now possible to build and install the engine on iOS-powered devices such as iPhone, iPad, and iPod Touch. However, this doesn't means the game app will be available at the AppStore. Instead it's available in a form of the IPA package that you need to install on your device using the Sideload method or build it from the source code using suitable Xcode kit on your Mac. All the details you can find at the TheXTech's Wiki documentation.\r\n\r\n# Haiku binary releases\r\nBefore this release it was a challenge to build the suitable CI image to automatise producing of binary release for the Haiku platform. And thanks to the [Cross-platform Actions](https://github.com/cross-platform-actions) project, this became easy, and now TheXTech finally has the binary release for the Haiku operating system!\r\n\r\n# Versioning system change\r\nThe old format of versioning of \"1.3.x.y\" was [a major problem for a while](https://github.com/orgs/TheXTech/discussions/353). It sets a lot of limits and prevents to properly release important hotfixes and let several package managers to properly handle them. Since this version the \".3.\" part of the version gets completely removed, and instead of \"1.3.7.4\" we are releasing \"1.7.4\"!\r\n\r\n<img width=\"228\" height=\"88\" alt=\"thextech-1 7 4\" src=\"https://github.com/user-attachments/assets/33d6875c-6856-4ee7-a747-141e41126061\" />\r\n\r\n# Full changelog for 1.7.4\r\n\r\n<details>\r\n\r\n## New features:\r\n\r\n### General\r\n- Versioning system has been changed, now next releases will be done without the \".3.\" midfix (@Wohlstand)\r\n\r\n### Platforms support\r\n- Added support for the iOS platform (@Wohlstand)\r\n- Added support for the tvOS platform (@Wohlstand)\r\n\r\n### Internationalisation\r\n- i18n: On-screen warning messages (such as bitmask render warnings) are now translatable! (@Wohlstand)\r\n\r\n### Controls\r\n- Controls: Added an ability to configure offsets for buttons at the touch-screen controller (@Wohlstand)\r\n\r\n### LunaScript\r\n- LunaScript: Added the \"ShakeScreen\" command to trigger the screen shaking without using of boom blocks (@Wohlstand)\r\n- LunaScript: Added the \"SpawnEffect\" command to spawn a simple static graphical effect (@Wohlstand)\r\n- LunaScript: Added SFX commands \"PlaySFXPausable\", \"PlaySFXSection\", and \"PlaySFXSctPausable\" to allow pause during dialogues and pause menu, and lock at the specific section. (@Wohlstand)\r\n\r\n## New vanilla bugfixes\r\n- Fix SMBX 1.3 bug where items on top of a vehicle could be lost when entering it, guarded by compat flag \"fix-vehicle-item-loss\" [Modern/Classic Mode] (@ds-sloth)\r\n- Fix SMBX 1.3 bug where a climbable NPC spawner (eg, vine top) would deactivate if the player left the section, guarded by compat flag \"fix-npc-camera-logic\" [Modern/Classic Mode] (@ds-sloth, thanks to @Wohlstand for the report)\r\n- Fix SMBX 1.3 bug where the players could disappear if a tape exit was touched while a player was eaten or dead. (@ds-sloth)\r\n\r\n## TheXTech bugfixes\r\n- Fix TheXTech 1.3.6.1 bug where Toothy (NPC ID 50) would sometimes become invisible while the player is holding the toothy pipe (@ds-sloth, thanks to @Liebning for the report)\r\n- Controls: Fixed the problem of touch-screen controller's defaults are not loaded when profile gets just created (@Wohlstand)\r\n- Fixed broken user directory handling on the Haiku (@Wohlstand)\r\n- Fix TheXTech 1.3.7 bug where ghosts could follow the direction of an eaten player instead of the active player. [Modern Mode] (@ds-sloth)\r\n- Fix TheXTech 1.3.5.3 bug where an extra line of pixels was rarely drawn below the player. (@ds-sloth)\r\n- Fix TheXTech 1.3.6.1 bug where fonts could get corrupted after unloading a customized level font. (@ds-sloth, thanks to @ChristianSilvermoon for the report)\r\n- Emscripten: fix TheXTech 1.3.7.3 bug where the game could crash when selecting an episode. (@ds-sloth)\r\n- OpenGL: fix TheXTech 1.3.6.6 bug where the game might hang on exit on some systems. (@ds-sloth)\r\n- Wii: add overscan compensation options (@ds-sloth, thanks to @TheEeveeLovers for the report)\r\n- Vita / PSTV: fix TheXTech bug where multiplayer splitscreen could be rendered incorrectly. (@ds-sloth, thanks to @birtkyle-cell for the report)\r\n- Editor: allow placing NPCs in front of semisolid blocks. (@ds-sloth, thanks to @Trickiy for the report)\r\n- Fixed a bug from TheXTech 1.3.7.3 that caused world map paths to never open when warping to the world map from a sub-hub. (@Wohlstand)\r\n- Fixed a misorder of player start points loaded from LVLX files (They never guarantee a sort by player number, instead they has a Player ID field to distinguish point roles without sorting requirement). (@Wohlstand)\r\n\r\n</details>\r\n\r\n# Known issues\r\n* Audio may be choppy on Old 3DS.\r\n* Texture load stutter is present on Wii.\r\n* The screen may slightly judder during section resizes on 3DS and Wii.\r\n* On 3DS, background texture may start to flashing. (https://github.com/TheXTech/TheXTech/issues/816) (Possibly solved, the primary reason of this is an out of memory).\r\n* On 3DS the crash happens on attempt to quit by the home menu. (https://github.com/TheXTech/TheXTech/issues/738)\r\n* On Windows 10 when running OpenGL with some ~2006 Intel iGPU on laptop, game would crash (possibly fixed).\r\n* On Windows XP SP0 that uses **S3 Savage 4** video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to [random talk of people from the 2000s](https://www.kv.by/forum/forum1000000590.htm) (in Russian) ).\r\n* On Linux/Wayland, Window icon can't be changed while running game. (https://github.com/TheXTech/TheXTech/issues/939)\r\n* On Linux/Wayland, Mouse cursor doesn't gets unlocked from window on toggling windowed mode after fullscreen. (https://github.com/TheXTech/TheXTech/issues/937)\r\n* Editor doesn't supports large fonts (I.e. Chinese, Korean, etc). (https://github.com/TheXTech/TheXTech/issues/884)\r\n* At Web version (Emscripten-built) the framerate may go incorrectly. (https://github.com/TheXTech/TheXTech/issues/851)\r\n* On some hardware, randomly and rare, alpha-channel might me messed up when using OpenGL render backend. (https://github.com/TheXTech/TheXTech/issues/743)\r\n* The LunaDLL's timer gets overlapped with the medals tracker. (https://github.com/TheXTech/TheXTech/issues/1102)\r\n* On iOS devices (iPhone 6S and newer that has the Taptic Engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. To escape this problem it's need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (https://github.com/TheXTech/TheXTech/issues/1189)\r\n",
+    "assets": [
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz",
+        "size": 35127182,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz",
+        "size": 35247769,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz",
+        "size": 36128349,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz",
+        "size": 36215222,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz",
+        "size": 36124535,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz",
+        "size": 35435212,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz",
+        "size": 36026072,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz",
+        "size": 36044375,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz",
+        "size": 36114590,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-macos.dmg",
+        "size": 39115658,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-macos.dmg",
+        "content_type": "application/x-apple-diskimage"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-web.tar.gz",
+        "size": 33346764,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-web.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-win-arm64.7z",
+        "size": 27579965,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win-arm64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-win32.7z",
+        "size": 29497890,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win32.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "adventures-of-demo-thextech-v1.7.4-win64.7z",
+        "size": 29483940,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "moondust-devkit-config-pack-thextech-sdk-v1.7.4.zip",
+        "size": 1478839,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/moondust-devkit-config-pack-thextech-sdk-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz",
+        "size": 45639746,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz",
+        "size": 45765293,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz",
+        "size": 46645348,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz",
+        "size": 46733033,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz",
+        "size": 46641429,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz",
+        "size": 45952715,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz",
+        "size": 46545844,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz",
+        "size": 46563670,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz",
+        "size": 46640568,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-macos.dmg",
+        "size": 50967443,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-macos.dmg",
+        "content_type": "application/x-apple-diskimage"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-web.tar.gz",
+        "size": 43844996,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-web.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-win-arm64.7z",
+        "size": 38044185,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win-arm64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-win32.7z",
+        "size": 39965080,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win32.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "super-mario-bros-x-thextech-v1.7.4-win64.7z",
+        "size": 39948118,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "thextech-3ds-assets-aod-v1.7.4.zip",
+        "size": 60781909,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-assets-aod-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-3ds-assets-smbx13-v1.7.4.zip",
+        "size": 48045837,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-assets-smbx13-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-3ds-v1.7.4.zip",
+        "size": 4227637,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-adventure-of-demo-assets-full-v1.7.4.7z",
+        "size": 24762942,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-adventure-of-demo-assets-full-v1.7.4.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "thextech-android-v1.7.4.apk",
+        "size": 28031554,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-android-v1.7.4.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "thextech-bin-portmaster-v1.7.4-MD5.txt",
+        "size": 56,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-portmaster-v1.7.4-MD5.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "thextech-bin-portmaster-v1.7.4.tar.gz",
+        "size": 4227445,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-portmaster-v1.7.4.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-arm64.flatpak",
+        "size": 3262096,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-arm64.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u14.04-amd64.deb",
+        "size": 4715482,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u14.04-amd64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u14.04-i386.deb",
+        "size": 5318960,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u14.04-i386.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u16.04-amd64.deb",
+        "size": 5589704,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-amd64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u16.04-armhf.deb",
+        "size": 5045714,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-armhf.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u16.04-i386.deb",
+        "size": 6287638,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-i386.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u18.04-amd64.deb",
+        "size": 4979564,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u18.04-amd64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u20.04-aarch64.deb",
+        "size": 4275652,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-aarch64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u20.04-amd64.deb",
+        "size": 4815468,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-amd64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u20.04-armhf.deb",
+        "size": 3916376,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-armhf.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u22.04-aarch64.deb",
+        "size": 4300524,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u22.04-aarch64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u22.04-amd64.deb",
+        "size": 4808164,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u22.04-amd64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-u24.04-amd64.deb",
+        "size": 4861870,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u24.04-amd64.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-bin-v1.7.4-x86-64.flatpak",
+        "size": 3899488,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-x86-64.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-convert-kit-v1.7.4.zip",
+        "size": 7541382,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-convert-kit-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-full-src-v1.7.4.tar.bz2",
+        "size": 45544538,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.tar.bz2",
+        "content_type": "application/x-bzip2"
+      },
+      {
+        "name": "thextech-full-src-v1.7.4.tar.gz",
+        "size": 54631621,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-full-src-v1.7.4.zip",
+        "size": 62959453,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-game-aod-v1.7.4.deb",
+        "size": 25013928,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-aod-v1.7.4.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-game-smbx-1.3-v1.7.4.deb",
+        "size": 38499824,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-smbx-1.3-v1.7.4.deb",
+        "content_type": "application/vnd.debian.binary-package"
+      },
+      {
+        "name": "thextech-game-template-v1.7.4-macOS.zip",
+        "size": 11725576,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-template-v1.7.4-macOS.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-haiku-r1beta6-v1.7.4.hpkg",
+        "size": 4374747,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-haiku-r1beta6-v1.7.4.hpkg",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-ios12-arm64-v1.7.4.ipa",
+        "size": 4086621,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios12-arm64-v1.7.4.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-ios9-armv7-v1.7.4.ipa",
+        "size": 5065915,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios9-armv7-v1.7.4.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-ios9-armv7s-v1.7.4.ipa",
+        "size": 4911622,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios9-armv7s-v1.7.4.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u14.04-amd64.tar.gz",
+        "size": 5108277,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u14.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u14.04-i386.tar.gz",
+        "size": 5231860,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u14.04-i386.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u16.04-amd64.tar.gz",
+        "size": 6110468,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u16.04-armhf.tar.gz",
+        "size": 4956140,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-armhf.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u16.04-i386.tar.gz",
+        "size": 6197631,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-i386.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u18.04-amd64.tar.gz",
+        "size": 6106664,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u18.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u20.04-aarch64.tar.gz",
+        "size": 5418883,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-aarch64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u20.04-amd64.tar.gz",
+        "size": 6011273,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u20.04-armhf.tar.gz",
+        "size": 4927614,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-armhf.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u22.04-aarch64.tar.gz",
+        "size": 5441516,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u22.04-aarch64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u22.04-amd64.tar.gz",
+        "size": 6027798,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u22.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-linux-generic-u24.04-amd64.tar.gz",
+        "size": 6102298,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u24.04-amd64.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-win-arm64.7z",
+        "size": 2764426,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win-arm64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-win32.7z",
+        "size": 4681080,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win32.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "thextech-plain-runtime-v1.7.4-win64.7z",
+        "size": 4665549,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "thextech-sdl2-src-for-wii-v1.7.4.zip",
+        "size": 5123894,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-sdl2-src-for-wii-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-sdl2-wiiu-v1.7.4.zip",
+        "size": 4986388,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-sdl2-wiiu-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-smbx13-assets-full-v1.7.4.7z",
+        "size": 35086327,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-smbx13-assets-full-v1.7.4.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "thextech-switch-v1.7.4.zip",
+        "size": 6395764,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-switch-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-tvos-arm64-v1.7.4.ipa",
+        "size": 4948947,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-tvos-arm64-v1.7.4.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "thextech-vita-v1.7.4.zip",
+        "size": 4772357,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-vita-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-wii-assets-aod-v1.7.4.zip",
+        "size": 21932026,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-assets-aod-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-wii-assets-smbx13-v1.7.4.zip",
+        "size": 29793874,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-assets-smbx13-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-wii-v1.7.4.zip",
+        "size": 3619905,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-wiiu-v1.7.4.zip",
+        "size": 11467600,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wiiu-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-wiki-docs-v1.7.4.zip",
+        "size": 5318525,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wiki-docs-v1.7.4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "VC_redist.arm64.exe",
+        "size": 7029640,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/VC_redist.arm64.exe",
+        "content_type": "application/x-msdownload"
+      }
+    ],
+    "author": "Wohlstand",
+    "homebrew_name": "TheXTech",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Super Mario Bros X for PSVITA.",
+    "homebrew_long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).",
+    "homebrew_id": "thextech",
+    "homebrew_authors": [
+      "thextech-team"
+    ],
+    "homebrew_version": "v.1.3.7.3-1",
+    "catalog_apps": [
+      {
+        "id": "thextech",
+        "name": "TheXTech",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
+        "category": "ports",
+        "description": "Port of Super Mario Bros X for PSVITA.",
+        "long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).",
+        "version": "v.1.3.7.3-1",
+        "version_date": "2025-06-14",
+        "author_ids": [
+          "thextech-team"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.1.3.7.3-1 → release v1.7.4",
+    "catalog_version": "v.1.3.7.3-1"
+  },
+  {
+    "platform": "github",
     "repo": "BirchWoodGod/halo-ce-vita",
-    "release_id": "403317698",
-    "tag": "v1.0.3-beta.3",
-    "name": "Halo CE for PS Vita 1.0.3 beta 3",
-    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.3",
-    "published": "2026-10-05T02:29:24Z",
+    "release_id": "404065929",
+    "tag": "v1.0.3-beta.4",
+    "name": "Halo CE for PS Vita 1.0.3 beta 4",
+    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.4",
+    "published": "2026-10-05T20:05:45Z",
     "prerelease": true,
     "draft": false,
-    "body": "**Testing build.** The third pre-release of 1.0.3. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on [v1.0.2.2](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2). Your saves carry over.\n\n## What's new\n\n**Multiplayer (System Link between Vitas)**\n- **The host no longer collapses to a few frames a second.** When the host fell behind, it tried to catch up by running up to 30 game updates in one frame, which made it fall further behind; the joining player saw freezes and teleporting. It now runs at most 2 per frame, as local games do, and the game runs slightly slow under heavy load instead of freezing. The host also skips about a fifth of its per-update work, and checking for new players no longer costs time every frame. Thanks to CallumBlackGames for the two-Vita gameplay video that showed this.\n\n**Heavy fights**\n- **The game's simulation is about 10% faster in big fights** (collision checks, object lists and lookups), with exactly the same gameplay.\n\n**Flashlight and lights**\n- **Characters and objects no longer flicker between lit and dark under the flashlight.** The render could read the light lists while the game was changing them, and the *Object lighting* setting's Half and Third modes kept stale light numbers between updates.\n\n**Scopes and effects**\n- **Zoom, camouflage and heat haze** now make the GPU wait for the screen copy they read before drawing it, a likely cause of scopes that were black or misaligned at 50% resolution (#15, #17). If it's still off, please tell us.\n\n**Smoothness**\n- **More even frame pacing at 30 fps**, so your weapon and the world move more evenly (`HALO_FRAME_PHASE_LOCK=0` in env.txt turns it off).\n\n**Crashes**\n- A crash when a contrail's object disappeared mid-frame.\n\n## Please test\n\n- **Multiplayer between two Vitas** (Blood Gulch, Battle Creek): host frame rate, teleporting or freezes on the joining Vita. If you can, add these lines to `ux0:data/haloce-vita/env.txt` on both Vitas and attach both `halo.log` files to an issue:\n  ```\n  HALO_FRAME_TIMING=150\n  HALO_TICK_PROFILE=1\n  HALO_NET_PROFILE=1\n  HALO_NET_TRACE=1\n  ```\n- The flashlight on marines and Covenant.\n- Scoped weapons at 50% render resolution.\n- Big fights: is it smoother than beta 2?\n\n## Still known\n\n- Trees and some Covenant shields can flicker at the edges of the screen (beta 2's notes list two test switches).\n- Very heavy fights still drop frames; a steady 30 fps is planned for 1.1.0.\n\n## Install\n\nInstall `halo.vpk` with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.\n\nReport problems on the [issue tracker](https://github.com/BirchWoodGod/halo-ce-vita/issues) and say you are on **1.0.3-beta.3**. For crashes, attach the files listed in [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n",
+    "body": "**Testing build.** The fourth pre-release of 1.0.3, built from your reports on beta 3. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on [v1.0.2.2](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2). Your saves carry over.\n\n## What's new\n\n**Big late-game fights (The Maw, Keyes, Flood vs Covenant)**\n- **Much less work for the GPU when many objects cast shadows.** The single-digit frame rates in these fights came from the GPU, not the simulation: every object shadow was its own little render pass with waits in between. Shadows now share one surface and are drawn in batches (from about 26 GPU passes a frame to about 5), which should also stop shadows and glows going missing late in a session.\n- Lightmaps, bump and detail textures are stored in the GPU's preferred layout, the particle limits match the Xbox's in single player, and character collision does less work.\n\n**Water**\n- **Fixed the water artifacts** on 343 Guilty Spark and likely the multicoloured ocean on The Silent Cartographer (#23, #24): the water's ripple texture is repeated across the surface, and the Vita's GPU wouldn't repeat it in the form we gave it. Thanks to DuckiEXP for finding that `rasterizer_water false` made the artifact go away, which pointed straight at it.\n\n**Invisible Flood**\n- **The cloaked Flood Elites in The Maw are visible again** (they shimmer, as on the Xbox). Late in a session the shimmer effect could run out of GPU surfaces, and the cloaked Flood vanished (beta 1 drew them black) (#26).\n\n**Sound**\n- **Explosions, impacts and shield sounds no longer play late or go missing** (#26): sounds now load ahead of textures, and a sound that's still loading gets a moment to finish instead of being dropped.\n\n**Other**\n- The countdown number in the corner during the final cutscene (and in the menu afterwards) is gone; it was a debug display from the Xbox beta build (#26).\n- More checkpoint diagnostics in `halo.log`, so we can see what holds checkpoints back on long levels (#10).\n\n## Please test\n\n- The late missions with big Flood/Covenant fights and the final Warthog run: frame rate compared with beta 3.\n- 343 Guilty Spark's water and The Silent Cartographer's ocean. **Remove `HALO_TARGET_CHAIN=0` from env.txt if you added it for beta 2/3**: with this bug it makes the water worse.\n- Shadows under characters and vehicles: do they look right?\n- Sounds during fights.\n- Flickering purple shields or glass: if it still happens, try **one** of these lines at a time in `ux0:data/haloce-vita/env.txt` and tell us which one stops it: `HALO_GXM_WCLAMP=0`, `HALO_GXM_RTT_SYNC=0`, `HALO_GXM_SCENE_DRAWS=0`, `HALO_GXM_DEPTH_BIAS=0`.\n\n## Notes\n\n- On the final mission the two scripted checkpoints are only taken when no projectile is in flight anywhere in the map, as in the original game, so they can be missed during a fight.\n- The red lights on some doors that do open are how the original game shows one-sided or script-controlled doors.\n\n## Install\n\nInstall `halo.vpk` with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.\n\nReport problems on the [issue tracker](https://github.com/BirchWoodGod/halo-ce-vita/issues) and say you are on **1.0.3-beta.4**. For crashes, attach the files listed in [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\nThanks to **BlazeRed17** for playing the whole campaign and reporting on every level, and to **Ben**, **DuckiEXP**, **5ackwood** and **aguy4809-art**.\n",
     "assets": [
       {
         "name": "halo.vpk",
-        "size": 3331501,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.3/halo.vpk",
+        "size": 3339493,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.4/halo.vpk",
         "content_type": "application/octet-stream"
       }
     ],
@@ -45,7 +616,7 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.3-beta.3",
+    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.3-beta.4",
     "catalog_version": "1.0.1"
   },
   {
@@ -12905,541 +13476,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.1",
     "catalog_version": "v.1.1"
-  },
-  {
-    "platform": "github",
-    "repo": "TheXTech/TheXTech",
-    "tag": "v1.3.7.3-1",
-    "name": "TheXTech v1.3.7.3-1: A hotfix for 1.3.7.3 release",
-    "url": "https://github.com/TheXTech/TheXTech/releases/tag/v1.3.7.3-1",
-    "published": "2026-06-22T20:49:35Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This is a hotfix release for the 1.3.7.3 since there are serious bugs were been found and were been fixed.\r\n\r\nYou can read details for the original release here: https://github.com/TheXTech/TheXTech/releases/tag/v1.3.7.3\r\n\r\n## Hotfix changelog 1.3.7.3-hotfix1:\r\n- Adjusted the IME start logic to enable it when direct text input is enabled (@ds-sloth)\r\n- Fixed build on FreeBSD (@Wohlstand and also contributed by @Renkoto)\r\n- Fixed behaviour of the MD5 algorithm on Big Endian hardware (@ds-sloth)\r\n- _Fixed a critical bug of checkpoints being reset when re-entering normal level from the hub_ (@Wohlstand)\r\n- Fixed TheXTech bug where medals were incorrectly saved after death in hub worlds (@ds-sloth)\r\n\r\n---\r\nAll the downloads at the official site has been replaced with hotfix builds.",
-    "assets": [
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz",
-        "size": 34358010,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz",
-        "size": 34482191,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz",
-        "size": 35361091,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz",
-        "size": 35447680,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz",
-        "size": 35353746,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz",
-        "size": 34665039,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz",
-        "size": 35261857,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz",
-        "size": 35278442,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz",
-        "size": 35353242,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-macos.dmg",
-        "size": 38433741,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-macos.dmg",
-        "content_type": "application/x-apple-diskimage"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-web.tar.gz",
-        "size": 32557962,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-web.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-win-arm64.7z",
-        "size": 26980199,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-win-arm64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-win32.7z",
-        "size": 28897348,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-win32.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.3.7.3-win64.7z",
-        "size": 28885344,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-win64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "moondust-devkit-config-pack-thextech-sdk-v1.3.7.3.zip",
-        "size": 1472962,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/moondust-devkit-config-pack-thextech-sdk-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz",
-        "size": 45623118,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz",
-        "size": 45750887,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz",
-        "size": 46627197,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz",
-        "size": 46718823,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz",
-        "size": 46623512,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz",
-        "size": 45936721,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz",
-        "size": 46529357,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz",
-        "size": 46543811,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz",
-        "size": 46620769,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-macos.dmg",
-        "size": 50953405,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-macos.dmg",
-        "content_type": "application/x-apple-diskimage"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-web.tar.gz",
-        "size": 43797938,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-web.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-win-arm64.7z",
-        "size": 38015578,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-win-arm64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-win32.7z",
-        "size": 39943699,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-win32.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.3.7.3-win64.7z",
-        "size": 39929122,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-win64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-3ds-assets-aod-v1.3.7.3.zip",
-        "size": 60025376,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-3ds-assets-aod-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-3ds-assets-smbx13-v1.3.7.3.zip",
-        "size": 48012828,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-3ds-assets-smbx13-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-3ds-v1.3.7.3.zip",
-        "size": 4225243,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-3ds-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-adventure-of-demo-assets-full-v1.3.7.3.7z",
-        "size": 24154492,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-adventure-of-demo-assets-full-v1.3.7.3.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-android-v1.3.7.3.apk",
-        "size": 28019728,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-android-v1.3.7.3.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "thextech-bin-portmaster-v1.3.7.3-MD5.txt",
-        "size": 56,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-portmaster-v1.3.7.3-MD5.txt",
-        "content_type": "text/plain"
-      },
-      {
-        "name": "thextech-bin-portmaster-v1.3.7.3.tar.gz",
-        "size": 4225427,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-portmaster-v1.3.7.3.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-arm64.flatpak",
-        "size": 3259536,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-arm64.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u14.04-amd64.deb",
-        "size": 4711836,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u14.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u14.04-i386.deb",
-        "size": 5315480,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u14.04-i386.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u16.04-amd64.deb",
-        "size": 5586850,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u16.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u16.04-armhf.deb",
-        "size": 5043996,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u16.04-armhf.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u16.04-i386.deb",
-        "size": 6284412,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u16.04-i386.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u18.04-amd64.deb",
-        "size": 4977690,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u18.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u20.04-aarch64.deb",
-        "size": 4270150,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u20.04-aarch64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u20.04-amd64.deb",
-        "size": 4813292,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u20.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u20.04-armhf.deb",
-        "size": 3914588,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u20.04-armhf.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u22.04-aarch64.deb",
-        "size": 4297506,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u22.04-aarch64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u22.04-amd64.deb",
-        "size": 4804758,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u22.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-u24.04-amd64.deb",
-        "size": 4861210,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u24.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.3.7.3-x86-64.flatpak",
-        "size": 3897304,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-x86-64.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-convert-kit-v1.3.7.3.zip",
-        "size": 7551386,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-convert-kit-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-full-src-v1.3.7.3.tar.bz2",
-        "size": 44073125,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.tar.bz2",
-        "content_type": "application/x-bzip2"
-      },
-      {
-        "name": "thextech-full-src-v1.3.7.3.tar.gz",
-        "size": 52862317,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-full-src-v1.3.7.3.zip",
-        "size": 61026592,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-game-aod-v1.3.7.3.deb",
-        "size": 24415264,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-game-aod-v1.3.7.3.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-game-smbx-1.3-v1.3.7.3.deb",
-        "size": 38474980,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-game-smbx-1.3-v1.3.7.3.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-game-template-v1.3.7.3-macOS.zip",
-        "size": 11721281,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-game-template-v1.3.7.3-macOS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz",
-        "size": 5107692,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-i386.tar.gz",
-        "size": 5229707,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz",
-        "size": 6110258,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-armhf.tar.gz",
-        "size": 4956208,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-armhf.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-i386.tar.gz",
-        "size": 6198337,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz",
-        "size": 6106095,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz",
-        "size": 5417343,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz",
-        "size": 6013941,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-armhf.tar.gz",
-        "size": 4926025,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-armhf.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-aarch64.tar.gz",
-        "size": 5442037,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz",
-        "size": 6028727,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz",
-        "size": 6102371,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-win-arm64.7z",
-        "size": 2754035,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-win-arm64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-win32.7z",
-        "size": 4678577,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-win32.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.3.7.3-win64.7z",
-        "size": 4662593,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-win64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-sdl2-src-for-wii-v1.3.7.3.zip",
-        "size": 5123894,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-sdl2-src-for-wii-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-sdl2-wiiu-v1.3.7.3.zip",
-        "size": 4986388,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-sdl2-wiiu-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-smbx13-assets-full-v1.3.7.3.7z",
-        "size": 35071551,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-smbx13-assets-full-v1.3.7.3.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-switch-v1.3.7.3.zip",
-        "size": 6390713,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-switch-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-vita-v1.3.7.3.zip",
-        "size": 4871436,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-vita-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wii-assets-aod-v1.3.7.3.zip",
-        "size": 21097211,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wii-assets-aod-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wii-assets-smbx13-v1.3.7.3.zip",
-        "size": 29790917,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wii-assets-smbx13-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wii-v1.3.7.3.zip",
-        "size": 3617665,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wii-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wiiu-v1.3.7.3.zip",
-        "size": 11452574,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wiiu-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wiki-docs-v1.3.7.3.zip",
-        "size": 5302400,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wiki-docs-v1.3.7.3.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "Wohlstand",
-    "homebrew_name": "TheXTech",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Super Mario Bros X for PSVITA.",
-    "homebrew_id": "thextech",
-    "homebrew_authors": [
-      "thextech-team"
-    ],
-    "catalog_apps": [
-      {
-        "id": "thextech",
-        "name": "TheXTech",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
-        "category": "ports",
-        "description": "Port of Super Mario Bros X for PSVITA.",
-        "long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).",
-        "version": "v.1.3.7.3-1",
-        "version_date": "2025-06-14",
-        "author_ids": [
-          "thextech-team"
-        ]
-      }
-    ],
-    "release_id": "343149160",
-    "homebrew_long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).",
-    "homebrew_version": "v.1.3.7.3-1",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.3.7.3-1",
-    "catalog_version": "v.1.3.7.3-1"
   },
   {
     "platform": "github",
@@ -33148,158 +33184,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.16",
     "catalog_version": "1.16"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/cannonball",
-    "release_id": "43416076",
-    "tag": "1.08switchgit-vita/switch-rsn8887",
-    "name": "Cannonball Vita 1.05 / Switch v1.08",
-    "url": "https://github.com/rsn8887/cannonball/releases/tag/1.08switchgit-vita/switch-rsn8887",
-    "published": "2021-05-22T20:18:25Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Recent Changes\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\nOverview\r\n=====\r\nThis is my Vita and Switch port of Cannonball, an enhanced Outrun engine by djyt.\r\n\r\nThanks djyt for writing such a great program and making sure it is easily portable.\r\n\r\nThanks to ScHlAuChi for testing.\r\n\r\nThanks to my Patreon supporters: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nNOTE: Arcade roms for Outrun Version B are required to run this engine. The roms are NOT included in the download (see installation instructions).\r\n\r\n![](screenshots/Cannonball_vita_1.jpg)\r\n\r\nA detailed Manual and FAQ are here:\r\nhttps://github.com/djyt/cannonball/wiki\r\n\r\nSwitch Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Extract the contents of cannonball_switch.zip into the folder `switch/` on your sdcard. You should have a folder `switch/Cannonball_Switch/`.\r\n- Obtain the arcade roms for Outrun Version B and extract them into `switch/Cannonball_Switch/roms`\r\n- Launch the .nro file using your favorite homebrew launcher, enjoy Outrun in almost perfect 60 fps.\r\n- This version of Cannonball is called \"Cannonball_Switch\" to distinguish it from Lantus' port\r\n\r\nSwitch Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nMinus = insert coin  \r\nPlus = start  \r\nY = gas / OK in menu\r\nB = brake\r\nX = change gears  \r\nL = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.\r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nVita Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Install the .vpk\r\n- Extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)\r\n- Obtain the arcade roms for Outrun Version B and extract them into ux0:data/cannonball/roms\r\n- Launch the bubble, enjoy Outrun in almost perfect 60 fps.\r\n\r\nVita Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nL = insert coin  \r\nSquare = start  \r\nTriangle = gas / enter letter on hi-score screen  \r\nCircle = brake  \r\nCross = change gears  \r\nSelect = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.  \r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nNotes about Vita version\r\n=====\r\n- Default difficulty is set to easy, but can be changed to normal or hard in the menu.\r\n- The game runs at full speed with almost constant 60 fps. The exception is some slowdown at the beginning of the race. That slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. The high-resolution hack should not be enabled, it causes too much slow-down.\r\n\r\nRom names\r\n======\r\n````\r\n-------------------------------------------------------------------------------\r\nPlace OutRun Revision B ROMs in this directory.\r\nThey must be named as follows:\r\n-------------------------------------------------------------------------------\r\nepr-10187.88\r\nepr-10327a.76\r\nepr-10328a.75\r\nepr-10329a.58\r\nepr-10330a.57\r\nepr-10380b.133\r\nepr-10381a.132\r\nepr-10382b.118\r\nepr-10383b.117\r\nmpr-10371.9\r\nmpr-10372.13\r\nmpr-10373.10\r\nmpr-10374.14\r\nmpr-10375.11\r\nmpr-10376.15\r\nmpr-10377.12\r\nmpr-10378.16\r\nopr-10185.11\r\nopr-10186.47\r\nopr-10188.71\r\nopr-10189.70\r\nopr-10190.69\r\nopr-10191.68\r\nopr-10192.67\r\nopr-10193.66\r\nopr-10230.104\r\nopr-10231.103\r\nopr-10232.102\r\nopr-10266.101\r\nopr-10267.100\r\nopr-10268.99\r\n\r\n-------------------------------------------------------------------------------\r\nThe original Japanese release of OutRun featured slightly different tracks \r\nand course ordering.\r\n\r\nOptionally, you can include the following files from the Japanese version to\r\nplay these alternate tracks:\r\n-------------------------------------------------------------------------------\r\n\r\nepr-10380.133\r\nepr-10382.118\r\nepr-10381.132\r\nepr-10383.117\r\nepr-10327.76\r\nepr-10329.58\r\nepr-10328.75\r\nepr-10330.57\r\n\r\n-------------------------------------------------------------------------------\r\nFixed Audio Rom (Optional)\r\nhttp://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html\r\n-------------------------------------------------------------------------------\r\n\r\nopr-10188.71f\r\n````\r\n\r\nBuild Instructions\r\n=====\r\nCannonball needs some boost header-only libraries. To prepare compilation:\r\n- Download and extract boost_1_66_0.zip from [here](https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip)\r\n- copy the subfolder boost from that archive to $VITASDK/arm-vita-eabi/include/boost for Vita, or to $DEVKITPRO/portlibs/switch/include/boost for Switch\r\n- you should now have a file $VITASDK/arm-vita-eabi/include/boost/version.hpp, or $DEVKITPRO/portlibs/switch/include/boos/version.hpp and hundreds of other Boost header files.\r\n- Now that boost is installed, proceed to compile cannonball:\r\n````\r\ncd cannonball\r\nmkdir build\r\ncd build\r\n````\r\nthen, for Vita:\r\n````\r\ncmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball.vpk -j10\r\n````\r\nor, for Switch: \r\n````\r\ncmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball_Switch.zip -j10\r\n````\r\n\r\nNote: The Vita source depends on FrangarCJ's Vita2d fbo branch with shader support here: https://github.com/Cpasjuste/vita2dlib/tree/fbo\r\nand FrangarCJ's vita-shader-collection gtu branch here: https://github.com/frangarcj/vita-shader-collection/tree/gtu\r\nThose are both included as binaries and linked automatically.\r\n\r\nChangelog\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\n1.07switch\r\n\r\n- Fix black screen due to linking with latest SDL2\r\n\r\n1.06switch\r\n\r\n- recompiled with 9.0.0 support\r\n\r\n1.05switch\r\n\r\n- added Switch release\r\n\r\n1.05\r\n\r\n- dpad works now if analog=\"off\"\r\n- gas/brake on right stick if analog=\"on\" (digital gas/brake on buttons if analog=\"wheel only\")\r\n\r\n1.04\r\n\r\n- better image quality (less blurry)\r\n- support non-fullscreen modes\r\n\r\n1.03\r\n\r\n- moved menu navigation to the dpad. True analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.\r\n\r\n1.02\r\n\r\n- removed unneccessary temporary files (__MACOSX, .DS_Store) from data.zip \r\n\r\n1.01\r\n\r\n- forgot to include config.xml in data.zip, it is now included\r\n\r\n1.0\r\n\r\n- Initial Vita release",
-    "assets": [
-      {
-        "name": "Cannonball_1.05.vpk",
-        "size": 1123006,
-        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.05.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Cannonball_1.08_Switch.zip",
-        "size": 3153199,
-        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.08_Switch.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "rsn8887",
-    "homebrew_name": "Cannonball",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "OutRun engine for PSVITA.",
-    "homebrew_long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
-    "homebrew_id": "cannonball",
-    "homebrew_authors": [
-      "rsn8887"
-    ],
-    "homebrew_version": "1.08switchgit-vita/switch-rsn8887",
-    "catalog_apps": [
-      {
-        "id": "cannonball",
-        "name": "Cannonball",
-        "icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
-        "category": "ports",
-        "description": "OutRun engine for PSVITA.",
-        "long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
-        "version": "1.08switchgit-vita/switch-rsn8887",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.08switchgit-vita/switch-rsn8887",
-    "catalog_version": "1.08switchgit-vita/switch-rsn8887"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/rocksndiamonds",
-    "release_id": "43415144",
-    "tag": "1.15",
-    "name": "Rocks'n'Diamonds and Mirrormagic for Vita (v1.12) and Switch (v1.15)",
-    "url": "https://github.com/rsn8887/rocksndiamonds/releases/tag/1.15",
-    "published": "2021-05-22T19:09:54Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Recent Changes\r\n======\r\n1.15 (Switch only)\r\n\r\n- on Switch, add 12.0.0 support. Only .nro files changed, data is the same.\r\n\r\nDescription\r\n======\r\nThese are my Vita and Switch ports of Rocks'n'Diamonds and Mirrormagic. \r\n\r\n**Rocks'n'Diamonds** is a Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels.\r\n\r\n![Screenshot of Rocks'n'Diamonds Vita](screenshots/rnd_new_a.jpg)\r\n\r\n**Mirrormagic** is a game by Holger Schemel in the tradition of Deflektor and Mindbender. You guide a laser beam by adjusting mirrors before the time limit runs out.\r\n\r\n![Screenshot of Mirrormagic Vita](screenshots/mm_new_a.jpg)\r\n\r\nMore information about the games can be found at the homepages for the Windows versions:\r\n\r\nhttp://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/\r\nhttp://www.artsoft.org/mirrormagic\r\n\r\nAnd the official manual for Rocks'n'Diamonds is here:\r\n\r\nhttps://www.artsoft.org/rocksndiamonds/manual/index.html\r\n\r\nThanks\r\n======\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nThanks @FrangarCJ for help with optimizing the rendering. \r\n\r\nThanks to Holger Schemel for making a great and portable game.\r\n\r\nThanks to the many devs of VitaSDK for a great development environment.\r\n\r\nThanks to all the devs of DevKitPro for Switch for a great development suite. \r\n\r\nInstallation (Vita)\r\n=====\r\n\r\n- install the vpks\r\n\r\n- extract contents of `rocksndiamonds_data.zip` and `mirrormagic_data.zip` and copy them to your Vita's `ux0:/data` folder. You should have folders `ux0:/data/rocksndiamonds` and `ux0:/data/mirrormagic` on your Vita with the files in them.  \r\n\r\nInstallation (Switch)\r\n=====\r\n\r\n- extract `rocksndiamonds_data.zip` and `mirrormagic_data.zip` to the folder `switch/` in the root of your sd card. You should have folders such as `switch/rocksndiamonds/levels` and `switch/mirrormagic/levels` and more. Make sure none of the folders or files has the \"archive\" flag set after copying.\r\n \r\n- copy `rocksndiamonds.nro` to `switch/rocksndiamonds/` and `mirrormagic.nro` to `switch/mirrormagic/`\r\n\r\n- use nsp injection to start the games, otherwise the on-screen keyboard will not work. On SX OS, you can do this by holding down R while launching any installed game to make hbmenu appear. \r\n\r\nVita/Switch-Exclusive Features\r\n=======\r\n- game controller mapping including analog joystick mouse controls\r\n- front touch controls with left/right mouse click and drag and drop gestures\r\n- the game runs smooth at the same speed as the desktop versions\r\n- additional level package with thousands of levels as separate download (see 'More Levels')\r\n- auto-hide mouse cursor when using the dpad\r\n- easily switch player focus in multiplayer games using r+triangle and r+square\r\n- 60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.\r\n- text entry with Vita/Switch touch keyboard, no physical keyboard or mouse required\r\n\r\nVita-Exclusive Features\r\n========\r\n- support for bluetooth keyboard and mouse\r\n\r\nGamepad Controls (Vita)\r\n======\r\nDpad or left stick = move player and navigate menus  \r\nright stick = move mouse pointer  \r\nCross = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)  \r\nCircle = secondary button (drop dynamite)  \r\nSquare / L = left mouse button  \r\nTriangle / R = right mouse button  \r\nSelect = quit (escape key, also cancels requesters)  \r\nStart = pause (space key)  \r\nR+Triangle = set focus to next player (ALL->1->2->3->4)  \r\nR+Square = set player focus to previous player (ALL<-1<-2<-3<-4)  \r\n\r\nGamepad Controls (Switch)\r\n======\r\nDpad or left stick = move player and navigate menus  \r\nright stick = move mouse pointer  \r\nB = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)  \r\nA = secondary button (drop dynamite)  \r\nY or L = left mouse button  \r\nX or R = right mouse button  \r\nMinus = quit (escape key, also cancels requesters)  \r\nPlus = pause (space key)  \r\nR+X = set focus to next player (ALL->1->2->3->4)  \r\nR+Y = set player focus to previous player (ALL<-1<-2<-3<-4)  \r\n\r\nTouch Controls\r\n=======\r\nNote: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.\r\n\r\nSingle short tap = left mouse click  \r\nSingle short tap while holding a second finger down = right mouse click  \r\nSingle finger drag = move the mouse pointer  \r\nDual finger drag = drag'n'drop (left mouse button is held down)  \r\nThree finger drag = drag'n'drop (right mouse button is held down)  \r\n\r\nMore Levels for Rocks'n'Diamonds\r\n=========\r\n\r\n- More than 50,000 additional Rocks'n'Diamonds levels can be downloaded here: http://www.artsoft.org/rocksndiamonds/levels/\r\n\r\n- I made a single easy-to-install zip More_Levels_v2.zip (~90 MB). It contains selected additional levels from the above site and is available with the other release files.\r\n\r\n- Just download, unzip, and  transfer to your Vita, so that you have a subfolder `ux0:/data/rocksndiamonds/levels/More_Levels`. Or transfer to your Switch, so that you have a subfolder `switch/rocksndiamonds/levels/More_Levels`.\r\n\r\n- FTP transfer of levelsets has to be done using binary transfer mode, not Auto or ASCII . Otherwise some levels will be treated as ASCII with mangled line endings and won't work. This was verified with the Emerald_Mine_Club_original_1 levels and FileZilla FTP.\r\n\r\nNotes\r\n=====\r\n- It is possible to get a wrong screen size on Switch by messing with the options. The solution is to navigate to setup->graphics and enable Fullscreen mode and set Window size to 100%, then select \"save & exit\"\r\n\r\n- To load new level sets, go to the level number selection in the menu, and press X (B on Switch). A new screen should open that shows a few levels. Go to the parent dir and into the folder Classic Games. There are many more levels already included in that folder.\r\n\r\n- Sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. This is fixed by simply restarting the game and loading the levelset again.\r\n\r\n- To answer the OK/Cancel dialogs in the game, press select (minus on Switch) to cancel (this is escape), or X (B on Switch) for OK.\r\n\r\n- You can install new level sets for Rocks'n'Diamonds by copying them into ux0:/data/rocksndiamonds/levels on Vita, or /switch/rocksndiamonds/levels on Switch. See the official manual: https://www.artsoft.org/rocksndiamonds/manual/manual.html#\r\n\r\n- Similarly, you can install new level sets for Mirrormagic by copying them into ux0:/data/mirrormagic/levels on Vita, and /switch/mirrormagic/levels on Switch. \r\n\r\n- If you mess up some options and want to reset to default, you can delete the folder 'ux0:/data/rocksndiamonds/userdata' and/or 'ux0:/data/mirrormagic/userdata'. On Switch, the folders are '/switch/rocksndiamonds/userdata' and '/switch/mirrormagic/userdata'.\r\n\r\n- For multiplayer team mode in Rocks'n'Diamonds, enable it via Setup->Game & Menu->Team-Mode (Multiplayer)->on. You also have to find make a level that has multiple players. R+Square and R+Triangle (R+Y and R+X on Switch) can be used in-game to change focus between players, see Game Controls. All controllers have to be paired before launching the app, otherwise they will not be recognized by the game.\r\n\r\nBuild Instructions\r\n=====\r\n- clone the repository, then\r\n````\r\ncd rocksndiamonds\r\n````\r\nThen use\r\n````\r\nmake vitarocks\r\n````\r\nor\r\n````\r\nmake switchrocks\r\n````\r\nfor Rocks'n'Diamonds, and\r\n````\r\nmake vitamirror\r\n````\r\nor\r\n````\r\nmake switchmirror\r\n````\r\nfor Mirrormagic.\r\n\r\nYou need the latest SDL2 Vita library from 05-23-2018 or later for this to work. The latest SDL2 library can be downloaded by updating your vitasdk, or here: https://dl.vitasdk.org\r\n\r\nCHANGELOG\r\n=====\r\n1.15 (Switch only)\r\n\r\n- on Switch, add 12.0.0 support. Only .nro files changed, data is the same.\r\n\r\n1.14 (Switch only)\r\n\r\n- on Switch, add 9.0.0 support\r\n- on Switch, fix .ogg audio playback\r\n- on Switch, fix pointer getting stuck when controlled with physical USB mouse\r\n\r\n1.13 (Switch only)\r\n\r\n- on Switch, fix automatically turning on/off VSync on selecting/deselecting Game Speed: 60 fps mode \r\n\r\n1.12\r\n\r\n- fix crash when loading levelsets that change screenmode, such as Supaplex (Original)\r\n- on Switch, fix slow-down when pressing home button\r\n- on Switch, use 1080p resolution when docked\r\n\r\n\r\n1.11 (Switch only)\r\n\r\n- On Switch, implement on-screen keyboard (only works when launching with nsp injection)\r\n\r\n1.10 (Switch only)\r\n\r\n- fixed problem on Switch with too-large screen in docked mode when loading saved config. The workaround was to change window size to 100% and save again. Now Fullscreen mode should be set to \"On\" and then this problem does not appear anymore.\r\n\r\n1.9switch\r\n\r\n- added Switch port\r\n\r\n1.9\r\n\r\n- add '60 fps' game speed setting for perfectly smooth motion in some levels on the Vita. It works well with the bundled Emerald Mine levelsets. This mode is 20% faster than the default setting 'normal.'\r\n\r\n- removed slow-down when playing levelsets that use the Emerald Mine engine with default graphics.\r\n\r\n1.8\r\n\r\n- map set player focus to r+triangle and r+square for multiplayer games on VitaTV (up to 4 players)\r\n\r\n1.7\r\n\r\n- enabled mp3 music support, used by some custom levelsets\r\n\r\n1.6\r\n\r\n- support editing multiline textfields in level editor\r\n\r\n1.5\r\n\r\n- optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @FrangarCJ for the help).\r\n- fixed sticky touch inputs and other issues with touch controls\r\n\r\n1.4\r\n\r\n- fixed screen centering\r\n- fixed screen scaling so it works for all sizes\r\n\r\n1.3\r\n\r\n- Mirrormagic as separate app. It uses the same codebase as Rocks'n'Diamonds.\r\n- Smoother mouse pointer motion.\r\n\r\n1.2\r\n\r\n- Significant speedup by drawing directly to texture pixels. Setting game speed to 'very fast' actually makes it faster now.\r\n\r\n1.1\r\n\r\n- implemented mouse pointer controls via right analog stick and front touch. The level editor is fully usable now.\r\n- improved picture quality for sharper graphics\r\n\r\n1.0\r\n\r\n- fixed name entry using touch keyboard. It works without any return or backspace keypresses now.\r\n- fixed graphics corruption of some cartoons on menu screen (updated data.zip)\r\n\r\n0.9\r\n\r\n- initial Vita release\r\n",
-    "assets": [
-      {
-        "name": "mirrormagic.nro",
-        "size": 11255096,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "mirrormagic_data.zip",
-        "size": 1571524,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_data.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "mirrormagic_vita_1.12.vpk",
-        "size": 2742965,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "More_Levels_v2.zip",
-        "size": 92324655,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/More_Levels_v2.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "rocksndiamonds.nro",
-        "size": 11260669,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "rocksndiamonds_data.zip",
-        "size": 1506209,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_data.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "rocksndiamonds_vita_1.12.vpk",
-        "size": 2814410,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "rsn8887",
-    "homebrew_name": "rocksndiamonds",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Rocks'n'Diamonds port for PSVITA.",
-    "homebrew_long_description": "Rocks'n'Diamonds is a scrolling tile-based computer puzzle game that can be described as a combined Boulder Dash, Supaplex, Emerald Mine, and Sokoban clone. It is a free software game under the GPLv2 license created by Artsoft Entertainment and designed by Holger Schemel. For additional level packs, see the release notes at https://github.com/rsn8887/rocksndiamonds/releases/latest",
-    "homebrew_id": "rocksndiamonds",
-    "homebrew_authors": [
-      "rsn8887"
-    ],
-    "homebrew_version": "1.15",
-    "catalog_apps": [
-      {
-        "id": "rocksndiamonds",
-        "name": "rocksndiamonds",
-        "icon": "https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png",
-        "category": "ports",
-        "description": "Rocks'n'Diamonds port for PSVITA.",
-        "long_description": "Rocks'n'Diamonds is a scrolling tile-based computer puzzle game that can be described as a combined Boulder Dash, Supaplex, Emerald Mine, and Sokoban clone. It is a free software game under the GPLv2 license created by Artsoft Entertainment and designed by Holger Schemel. For additional level packs, see the release notes at https://github.com/rsn8887/rocksndiamonds/releases/latest",
-        "version": "1.15",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      },
-      {
-        "id": "mirrormagic",
-        "name": "mirrormagic",
-        "icon": "https://archive.org/download/psvitaalive-mirrormagic/icon0.png",
-        "category": "ports",
-        "description": "Mirrormagic port for PSVITA",
-        "long_description": "Mirrormagic is a game in the tradition of Deflektor and Mindbender written by Holger Schemel. You guide a laser beam by adjusting mirrors before the time limit runs out.",
-        "version": "1.15",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.15",
-    "catalog_version": "1.15"
   }
 ]

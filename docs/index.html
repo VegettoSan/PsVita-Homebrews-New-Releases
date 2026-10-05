@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">404</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>80</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">401</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>81</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,117 +219,292 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.0.3 beta 3 v1.0.3-beta.3 ports **testing build.** the third pre-release of 1.0.3. it has been tested on pc and in the vita3k emulator, but not yet on a real vita, so expect rough edges. if you want the stable build, stay on [v1.0.2.2](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.2.2). your saves carry over.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="thextech thextech thextech/thextech thextech v1.7.4: a small release, but big changes! v1.7.4 ports this is not a usual update. while it offers several bugfixes and features, it has three significant changes:
+- the first release with the official ios and tvos support!
+- compiled haiku binary releases are now available!
+- we changing the versioning model!
+
+# ios and tvos support
+since the foundation of the project of thextech it was never available at apple mobile platforms such as ios. and since this release it&#x27;s now possible to build and install the engine on ios-powered devices such as iphone, ipad, and ipod touch. however, this doesn&#x27;t means the game app will be available at the appstore. instead it&#x27;s available in a form of the ipa package that you need to install on your device using the sideload method or build it from the source code using suitable xcode kit on your mac. all the details you can find at the thextech&#x27;s wiki documentation.
+
+# haiku binary releases
+before this release it was a challenge to build the suitable ci image to automatise producing of binary release for the haiku platform. and thanks to the [cross-platform actions](https://github.com/cross-platform-actions) project, this became easy, and now thextech finally has the binary release for the haiku operating system!
+
+# versioning system change
+the old format of versioning of &quot;1.3.x.y&quot; was [a major problem for a while](https://github.com/orgs/thextech/discussions/353). it sets a lot of limits and prevents to properly release important hotfixes and let several package managers to properly handle them. since this version the &quot;.3.&quot; part of the version gets completely removed, and instead of &quot;1.3.7.4&quot; we are releasing &quot;1.7.4&quot;!
+
+&lt;img width=&quot;228&quot; height=&quot;88&quot; alt=&quot;thextech-1 7 4&quot; src=&quot;https://github.com/user-attachments/assets/33d6875c-6856-4ee7-a747-141e41126061&quot; /&gt;
+
+# full changelog for 1.7.4
+
+&lt;details&gt;
+
+## new features:
+
+### general
+- versioning system has been changed, now next releases will be done without the &quot;.3.&quot; midfix (@wohlstand)
+
+### platforms support
+- added support for the ios platform (@wohlstand)
+- added support for the tvos platform (@wohlstand)
+
+### internationalisation
+- i18n: on-screen warning messages (such as bitmask render warnings) are now translatable! (@wohlstand)
+
+### controls
+- controls: added an ability to configure offsets for buttons at the touch-screen controller (@wohlstand)
+
+### lunascript
+- lunascript: added the &quot;shakescreen&quot; command to trigger the screen shaking without using of boom blocks (@wohlstand)
+- lunascript: added the &quot;spawneffect&quot; command to spawn a simple static graphical effect (@wohlstand)
+- lunascript: added sfx commands &quot;playsfxpausable&quot;, &quot;playsfxsection&quot;, and &quot;playsfxsctpausable&quot; to allow pause during dialogues and pause menu, and lock at the specific section. (@wohlstand)
+
+## new vanilla bugfixes
+- fix smbx 1.3 bug where items on top of a vehicle could be lost when entering it, guarded by compat flag &quot;fix-vehicle-item-loss&quot; [modern/classic mode] (@ds-sloth)
+- fix smbx 1.3 bug where a climbable npc spawner (eg, vine top) would deactivate if the player left the section, guarded by compat flag &quot;fix-npc-camera-logic&quot; [modern/classic mode] (@ds-sloth, thanks to @wohlstand for the report)
+- fix smbx 1.3 bug where the players could disappear if a tape exit was touched while a player was eaten or dead. (@ds-sloth)
+
+## thextech bugfixes
+- fix thextech 1.3.6.1 bug where toothy (npc id 50) would sometimes become invisible while the player is holding the toothy pipe (@ds-sloth, thanks to @liebning for the report)
+- controls: fixed the problem of touch-screen controller&#x27;s defaults are not loaded when profile gets just created (@wohlstand)
+- fixed broken user directory handling on the haiku (@wohlstand)
+- fix thextech 1.3.7 bug where ghosts could follow the direction of an eaten player instead of the active player. [modern mode] (@ds-sloth)
+- fix thextech 1.3.5.3 bug where an extra line of pixels was rarely drawn below the player. (@ds-sloth)
+- fix thextech 1.3.6.1 bug where fonts could get corrupted after unloading a customized level font. (@ds-sloth, thanks to @christiansilvermoon for the report)
+- emscripten: fix thextech 1.3.7.3 bug where the game could crash when selecting an episode. (@ds-sloth)
+- opengl: fix thextech 1.3.6.6 bug where the game might hang on exit on some systems. (@ds-sloth)
+- wii: add overscan compensation options (@ds-sloth, thanks to @theeeveelovers for the report)
+- vita / pstv: fix thextech bug where multiplayer splitscreen could be rendered incorrectly. (@ds-sloth, thanks to @birtkyle-cell for the report)
+- editor: allow placing npcs in front of semisolid blocks. (@ds-sloth, thanks to @trickiy for the report)
+- fixed a bug from thextech 1.3.7.3 that caused world map paths to never open when warping to the world map from a sub-hub. (@wohlstand)
+- fixed a misorder of player start points loaded from lvlx files (they never guarantee a sort by player number, instead they has a player id field to distinguish point roles without sorting requirement). (@wohlstand)
+
+&lt;/details&gt;
+
+# known issues
+* audio may be choppy on old 3ds.
+* texture load stutter is present on wii.
+* the screen may slightly judder during section resizes on 3ds and wii.
+* on 3ds, background texture may start to flashing. (https://github.com/thextech/thextech/issues/816) (possibly solved, the primary reason of this is an out of memory).
+* on 3ds the crash happens on attempt to quit by the home menu. (https://github.com/thextech/thextech/issues/738)
+* on windows 10 when running opengl with some ~2006 intel igpu on laptop, game would crash (possibly fixed).
+* on windows xp sp0 that uses **s3 savage 4** video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to [random talk of people from the 2000s](https://www.kv.by/forum/forum1000000590.htm) (in russian) ).
+* on linux/wayland, window icon can&#x27;t be changed while running game. (https://github.com/thextech/thextech/issues/939)
+* on linux/wayland, mouse cursor doesn&#x27;t gets unlocked from window on toggling windowed mode after fullscreen. (https://github.com/thextech/thextech/issues/937)
+* editor doesn&#x27;t supports large fonts (i.e. chinese, korean, etc). (https://github.com/thextech/thextech/issues/884)
+* at web version (emscripten-built) the framerate may go incorrectly. (https://github.com/thextech/thextech/issues/851)
+* on some hardware, randomly and rare, alpha-channel might me messed up when using opengl render backend. (https://github.com/thextech/thextech/issues/743)
+* the lunadll&#x27;s timer gets overlapped with the medals tracker. (https://github.com/thextech/thextech/issues/1102)
+* on ios devices (iphone 6s and newer that has the taptic engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. to escape this problem it&#x27;s need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (https://github.com/thextech/thextech/issues/1189)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png" alt="Icono de TheXTech" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · TheXTech/TheXTech</div>
+                      <h2><a href="https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4" target="_blank" rel="noopener">TheXTech</a></h2>
+                      <div class="release-name">TheXTech v1.7.4: A small release, but Big Changes!</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.7.4</span>
+                    <span>2026-10-05 21:01 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.3.7.3-1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.3.7.3-1 → release v1.7.4</div>
+                  
+                  <div class="body markdown-body"><p>This is not a usual update. While it offers several bugfixes and features, it has three significant changes:</p>
+<ul>
+<li>The first release with the official iOS and tvOS support!</li>
+<li>Compiled Haiku binary releases are now available!</li>
+<li>We changing the versioning model!</li>
+</ul>
+<h1>iOS and tvOS support</h1>
+<p>Since the foundation of the project of TheXTech it was never available at Apple mobile platforms such as iOS. And since this release it's now possible to build and install the engine on iOS-powered devices such as iPhone, iPad, and iPod Touch. However, this doesn't means the game app will be available at the AppStore. Instead it's available in a form of the IPA package that you need to install on your device using the Sideload method or build it from the source code using suitable Xcode kit on your Mac. All the details you can find at the TheXTech's Wiki documentation.</p>
+<h1>Haiku binary releases</h1>
+<p>Before this release it was a challenge to build the suitable CI image to automatise producing of binary release for the Haiku platform. And thanks to the <a target="_blank" rel="noopener noreferrer" href="https://github.com/cross-platform-actions">Cross-platform Actions</a> project, this became easy, and now TheXTech finally has the binary release for the Haiku operating system!</p>
+<h1>Versioning system change</h1>
+<p>The old format of versioning of &quot;1.3.x.y&quot; was <a target="_blank" rel="noopener noreferrer" href="https://github.com/orgs/TheXTech/discussions/353">a major problem for a while</a>. It sets a lot of limits and prevents to properly release important hotfixes and let several package managers to properly handle them. Since this version the &quot;.3.&quot; part of the version gets completely removed, and instead of &quot;1.3.7.4&quot; we are releasing &quot;1.7.4&quot;!</p>
+<p><img width="228" height="88" alt="thextech-1 7 4" src="https://github.com/user-attachments/assets/33d6875c-6856-4ee7-a747-141e41126061"></p>
+<h1>Full changelog for 1.7.4</h1>
+
+
+
+<h2>New features:</h2>
+<h3>General</h3>
+<ul>
+<li>Versioning system has been changed, now next releases will be done without the &quot;.3.&quot; midfix (@Wohlstand)</li>
+</ul>
+<h3>Platforms support</h3>
+<ul>
+<li>Added support for the iOS platform (@Wohlstand)</li>
+<li>Added support for the tvOS platform (@Wohlstand)</li>
+</ul>
+<h3>Internationalisation</h3>
+<ul>
+<li>i18n: On-screen warning messages (such as bitmask render warnings) are now translatable! (@Wohlstand)</li>
+</ul>
+<h3>Controls</h3>
+<ul>
+<li>Controls: Added an ability to configure offsets for buttons at the touch-screen controller (@Wohlstand)</li>
+</ul>
+<h3>LunaScript</h3>
+<ul>
+<li>LunaScript: Added the &quot;ShakeScreen&quot; command to trigger the screen shaking without using of boom blocks (@Wohlstand)</li>
+<li>LunaScript: Added the &quot;SpawnEffect&quot; command to spawn a simple static graphical effect (@Wohlstand)</li>
+<li>LunaScript: Added SFX commands &quot;PlaySFXPausable&quot;, &quot;PlaySFXSection&quot;, and &quot;PlaySFXSctPausable&quot; to allow pause during dialogues and pause menu, and lock at the specific section. (@Wohlstand)</li>
+</ul>
+<h2>New vanilla bugfixes</h2>
+<ul>
+<li>Fix SMBX 1.3 bug where items on top of a vehicle could be lost when entering it, guarded by compat flag &quot;fix-vehicle-item-loss&quot; [Modern/Classic Mode] (@ds-sloth)</li>
+<li>Fix SMBX 1.3 bug where a climbable NPC spawner (eg, vine top) would deactivate if the player left the section, guarded by compat flag &quot;fix-npc-camera-logic&quot; [Modern/Classic Mode] (@ds-sloth, thanks to @Wohlstand for the report)</li>
+<li>Fix SMBX 1.3 bug where the players could disappear if a tape exit was touched while a player was eaten or dead. (@ds-sloth)</li>
+</ul>
+<h2>TheXTech bugfixes</h2>
+<ul>
+<li>Fix TheXTech 1.3.6.1 bug where Toothy (NPC ID 50) would sometimes become invisible while the player is holding the toothy pipe (@ds-sloth, thanks to @Liebning for the report)</li>
+<li>Controls: Fixed the problem of touch-screen controller's defaults are not loaded when profile gets just created (@Wohlstand)</li>
+<li>Fixed broken user directory handling on the Haiku (@Wohlstand)</li>
+<li>Fix TheXTech 1.3.7 bug where ghosts could follow the direction of an eaten player instead of the active player. [Modern Mode] (@ds-sloth)</li>
+<li>Fix TheXTech 1.3.5.3 bug where an extra line of pixels was rarely drawn below the player. (@ds-sloth)</li>
+<li>Fix TheXTech 1.3.6.1 bug where fonts could get corrupted after unloading a customized level font. (@ds-sloth, thanks to @ChristianSilvermoon for the report)</li>
+<li>Emscripten: fix TheXTech 1.3.7.3 bug where the game could crash when selecting an episode. (@ds-sloth)</li>
+<li>OpenGL: fix TheXTech 1.3.6.6 bug where the game might hang on exit on some systems. (@ds-sloth)</li>
+<li>Wii: add overscan compensation options (@ds-sloth, thanks to @TheEeveeLovers for the report)</li>
+<li>Vita / PSTV: fix TheXTech bug where multiplayer splitscreen could be rendered incorrectly. (@ds-sloth, thanks to @birtkyle-cell for the report)</li>
+<li>Editor: allow placing NPCs in front of semisolid blocks. (@ds-sloth, thanks to @Trickiy for the report)</li>
+<li>Fixed a bug from TheXTech 1.3.7.3 that caused world map paths to never open when warping to the world map from a sub-hub. (@Wohlstand)</li>
+<li>Fixed a misorder of player start points loaded from LVLX files (They never guarantee a sort by player number, instead they has a Player ID field to distinguish point roles without sorting requirement). (@Wohlstand)</li>
+</ul>
+
+
+<h1>Known issues</h1>
+<ul>
+<li>Audio may be choppy on Old 3DS.</li>
+<li>Texture load stutter is present on Wii.</li>
+<li>The screen may slightly judder during section resizes on 3DS and Wii.</li>
+<li>On 3DS, background texture may start to flashing. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/816">https://github.com/TheXTech/TheXTech/issues/816</a>) (Possibly solved, the primary reason of this is an out of memory).</li>
+<li>On 3DS the crash happens on attempt to quit by the home menu. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/738">https://github.com/TheXTech/TheXTech/issues/738</a>)</li>
+<li>On Windows 10 when running OpenGL with some ~2006 Intel iGPU on laptop, game would crash (possibly fixed).</li>
+<li>On Windows XP SP0 that uses <strong>S3 Savage 4</strong> video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to <a target="_blank" rel="noopener noreferrer" href="https://www.kv.by/forum/forum1000000590.htm">random talk of people from the 2000s</a> (in Russian) ).</li>
+<li>On Linux/Wayland, Window icon can't be changed while running game. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/939">https://github.com/TheXTech/TheXTech/issues/939</a>)</li>
+<li>On Linux/Wayland, Mouse cursor doesn't gets unlocked from window on toggling windowed mode after fullscreen. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/937">https://github.com/TheXTech/TheXTech/issues/937</a>)</li>
+<li>Editor doesn't supports large fonts (I.e. Chinese, Korean, etc). (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/884">https://github.com/TheXTech/TheXTech/issues/884</a>)</li>
+<li>At Web version (Emscripten-built) the framerate may go incorrectly. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/851">https://github.com/TheXTech/TheXTech/issues/851</a>)</li>
+<li>On some hardware, randomly and rare, alpha-channel might me messed up when using OpenGL render backend. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/743">https://github.com/TheXTech/TheXTech/issues/743</a>)</li>
+<li>The LunaDLL's timer gets overlapped with the medals tracker. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/1102">https://github.com/TheXTech/TheXTech/issues/1102</a>)</li>
+<li>On iOS devices (iPhone 6S and newer that has the Taptic Engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. To escape this problem it's need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/1189">https://github.com/TheXTech/TheXTech/issues/1189</a>)</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/moondust-devkit-config-pack-thextech-sdk-v1.7.4.zip" target="_blank" rel="noopener">⬇ moondust-devkit-config-pack-thextech-sdk-v1.7.4.zip · 1.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz · 33.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz · 33.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz · 33.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-macos.dmg" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-macos.dmg · 37.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-web.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-web.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win-arm64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-win-arm64.7z · 26.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win32.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-win32.7z · 28.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-win64.7z · 28.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz · 43.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz · 43.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz · 44.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz · 43.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-macos.dmg" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-macos.dmg · 48.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-web.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-web.tar.gz · 41.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win-arm64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-win-arm64.7z · 36.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win32.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-win32.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-win64.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-assets-aod-v1.7.4.zip" target="_blank" rel="noopener">thextech-3ds-assets-aod-v1.7.4.zip · 58.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-assets-smbx13-v1.7.4.zip" target="_blank" rel="noopener">thextech-3ds-assets-smbx13-v1.7.4.zip · 45.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-v1.7.4.zip" target="_blank" rel="noopener">thextech-3ds-v1.7.4.zip · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-adventure-of-demo-assets-full-v1.7.4.7z" target="_blank" rel="noopener">thextech-adventure-of-demo-assets-full-v1.7.4.7z · 23.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-android-v1.7.4.apk" target="_blank" rel="noopener">thextech-android-v1.7.4.apk · 26.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-portmaster-v1.7.4-MD5.txt" target="_blank" rel="noopener">thextech-bin-portmaster-v1.7.4-MD5.txt · 56.0 B</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-portmaster-v1.7.4.tar.gz" target="_blank" rel="noopener">thextech-bin-portmaster-v1.7.4.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-arm64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.7.4-arm64.flatpak · 3.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u14.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u14.04-amd64.deb · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u14.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u14.04-i386.deb · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u16.04-amd64.deb · 5.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u16.04-armhf.deb · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u16.04-i386.deb · 6.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u18.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u18.04-amd64.deb · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u20.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u20.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u20.04-armhf.deb · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u22.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u22.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u22.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u22.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u24.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u24.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-x86-64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.7.4-x86-64.flatpak · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-convert-kit-v1.7.4.zip" target="_blank" rel="noopener">thextech-convert-kit-v1.7.4.zip · 7.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.tar.bz2" target="_blank" rel="noopener">thextech-full-src-v1.7.4.tar.bz2 · 43.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.tar.gz" target="_blank" rel="noopener">thextech-full-src-v1.7.4.tar.gz · 52.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.zip" target="_blank" rel="noopener">thextech-full-src-v1.7.4.zip · 60.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-aod-v1.7.4.deb" target="_blank" rel="noopener">thextech-game-aod-v1.7.4.deb · 23.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-smbx-1.3-v1.7.4.deb" target="_blank" rel="noopener">thextech-game-smbx-1.3-v1.7.4.deb · 36.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-template-v1.7.4-macOS.zip" target="_blank" rel="noopener">thextech-game-template-v1.7.4-macOS.zip · 11.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-haiku-r1beta6-v1.7.4.hpkg" target="_blank" rel="noopener">thextech-haiku-r1beta6-v1.7.4.hpkg · 4.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios12-arm64-v1.7.4.ipa" target="_blank" rel="noopener">thextech-ios12-arm64-v1.7.4.ipa · 3.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios9-armv7-v1.7.4.ipa" target="_blank" rel="noopener">thextech-ios9-armv7-v1.7.4.ipa · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios9-armv7s-v1.7.4.ipa" target="_blank" rel="noopener">thextech-ios9-armv7s-v1.7.4.ipa · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u14.04-amd64.tar.gz · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u14.04-i386.tar.gz · 5.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u16.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u16.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u16.04-i386.tar.gz · 5.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u18.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u20.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u20.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u20.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u22.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u22.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u22.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u24.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win-arm64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-win-arm64.7z · 2.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win32.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-win32.7z · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-win64.7z · 4.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-sdl2-src-for-wii-v1.7.4.zip" target="_blank" rel="noopener">thextech-sdl2-src-for-wii-v1.7.4.zip · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-sdl2-wiiu-v1.7.4.zip" target="_blank" rel="noopener">thextech-sdl2-wiiu-v1.7.4.zip · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-smbx13-assets-full-v1.7.4.7z" target="_blank" rel="noopener">thextech-smbx13-assets-full-v1.7.4.7z · 33.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-switch-v1.7.4.zip" target="_blank" rel="noopener">thextech-switch-v1.7.4.zip · 6.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-tvos-arm64-v1.7.4.ipa" target="_blank" rel="noopener">thextech-tvos-arm64-v1.7.4.ipa · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-vita-v1.7.4.zip" target="_blank" rel="noopener">thextech-vita-v1.7.4.zip · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-assets-aod-v1.7.4.zip" target="_blank" rel="noopener">thextech-wii-assets-aod-v1.7.4.zip · 20.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-assets-smbx13-v1.7.4.zip" target="_blank" rel="noopener">thextech-wii-assets-smbx13-v1.7.4.zip · 28.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-v1.7.4.zip" target="_blank" rel="noopener">thextech-wii-v1.7.4.zip · 3.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wiiu-v1.7.4.zip" target="_blank" rel="noopener">thextech-wiiu-v1.7.4.zip · 10.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wiki-docs-v1.7.4.zip" target="_blank" rel="noopener">thextech-wiki-docs-v1.7.4.zip · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/VC_redist.arm64.exe" target="_blank" rel="noopener">VC_redist.arm64.exe · 6.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.0.3 beta 4 v1.0.3-beta.4 ports **testing build.** the fourth pre-release of 1.0.3, built from your reports on beta 3. it has been tested on pc and in the vita3k emulator, but not yet on a real vita, so expect rough edges. if you want the stable build, stay on [v1.0.2.2](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.2.2). your saves carry over.
 
 ## what&#x27;s new
 
-**multiplayer (system link between vitas)**
-- **the host no longer collapses to a few frames a second.** when the host fell behind, it tried to catch up by running up to 30 game updates in one frame, which made it fall further behind; the joining player saw freezes and teleporting. it now runs at most 2 per frame, as local games do, and the game runs slightly slow under heavy load instead of freezing. the host also skips about a fifth of its per-update work, and checking for new players no longer costs time every frame. thanks to callumblackgames for the two-vita gameplay video that showed this.
+**big late-game fights (the maw, keyes, flood vs covenant)**
+- **much less work for the gpu when many objects cast shadows.** the single-digit frame rates in these fights came from the gpu, not the simulation: every object shadow was its own little render pass with waits in between. shadows now share one surface and are drawn in batches (from about 26 gpu passes a frame to about 5), which should also stop shadows and glows going missing late in a session.
+- lightmaps, bump and detail textures are stored in the gpu&#x27;s preferred layout, the particle limits match the xbox&#x27;s in single player, and character collision does less work.
 
-**heavy fights**
-- **the game&#x27;s simulation is about 10% faster in big fights** (collision checks, object lists and lookups), with exactly the same gameplay.
+**water**
+- **fixed the water artifacts** on 343 guilty spark and likely the multicoloured ocean on the silent cartographer (#23, #24): the water&#x27;s ripple texture is repeated across the surface, and the vita&#x27;s gpu wouldn&#x27;t repeat it in the form we gave it. thanks to duckiexp for finding that `rasterizer_water false` made the artifact go away, which pointed straight at it.
 
-**flashlight and lights**
-- **characters and objects no longer flicker between lit and dark under the flashlight.** the render could read the light lists while the game was changing them, and the *object lighting* setting&#x27;s half and third modes kept stale light numbers between updates.
+**invisible flood**
+- **the cloaked flood elites in the maw are visible again** (they shimmer, as on the xbox). late in a session the shimmer effect could run out of gpu surfaces, and the cloaked flood vanished (beta 1 drew them black) (#26).
 
-**scopes and effects**
-- **zoom, camouflage and heat haze** now make the gpu wait for the screen copy they read before drawing it, a likely cause of scopes that were black or misaligned at 50% resolution (#15, #17). if it&#x27;s still off, please tell us.
+**sound**
+- **explosions, impacts and shield sounds no longer play late or go missing** (#26): sounds now load ahead of textures, and a sound that&#x27;s still loading gets a moment to finish instead of being dropped.
 
-**smoothness**
-- **more even frame pacing at 30 fps**, so your weapon and the world move more evenly (`halo_frame_phase_lock=0` in env.txt turns it off).
-
-**crashes**
-- a crash when a contrail&#x27;s object disappeared mid-frame.
+**other**
+- the countdown number in the corner during the final cutscene (and in the menu afterwards) is gone; it was a debug display from the xbox beta build (#26).
+- more checkpoint diagnostics in `halo.log`, so we can see what holds checkpoints back on long levels (#10).
 
 ## please test
 
-- **multiplayer between two vitas** (blood gulch, battle creek): host frame rate, teleporting or freezes on the joining vita. if you can, add these lines to `ux0:data/haloce-vita/env.txt` on both vitas and attach both `halo.log` files to an issue:
-  ```
-  halo_frame_timing=150
-  halo_tick_profile=1
-  halo_net_profile=1
-  halo_net_trace=1
-  ```
-- the flashlight on marines and covenant.
-- scoped weapons at 50% render resolution.
-- big fights: is it smoother than beta 2?
+- the late missions with big flood/covenant fights and the final warthog run: frame rate compared with beta 3.
+- 343 guilty spark&#x27;s water and the silent cartographer&#x27;s ocean. **remove `halo_target_chain=0` from env.txt if you added it for beta 2/3**: with this bug it makes the water worse.
+- shadows under characters and vehicles: do they look right?
+- sounds during fights.
+- flickering purple shields or glass: if it still happens, try **one** of these lines at a time in `ux0:data/haloce-vita/env.txt` and tell us which one stops it: `halo_gxm_wclamp=0`, `halo_gxm_rtt_sync=0`, `halo_gxm_scene_draws=0`, `halo_gxm_depth_bias=0`.
 
-## still known
+## notes
 
-- trees and some covenant shields can flicker at the edges of the screen (beta 2&#x27;s notes list two test switches).
-- very heavy fights still drop frames; a steady 30 fps is planned for 1.1.0.
+- on the final mission the two scripted checkpoints are only taken when no projectile is in flight anywhere in the map, as in the original game, so they can be missed during a fight.
+- the red lights on some doors that do open are how the original game shows one-sided or script-controlled doors.
 
 ## install
 
 install `halo.vpk` with vitashell over your current version; maps, saves and settings are kept. to go back, install the v1.0.2.2 vpk the same way.
 
-report problems on the [issue tracker](https://github.com/birchwoodgod/halo-ce-vita/issues) and say you are on **1.0.3-beta.3**. for crashes, attach the files listed in [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).">
+report problems on the [issue tracker](https://github.com/birchwoodgod/halo-ce-vita/issues) and say you are on **1.0.3-beta.4**. for crashes, attach the files listed in [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).
+
+thanks to **blazered17** for playing the whole campaign and reporting on every level, and to **ben**, **duckiexp**, **5ackwood** and **aguy4809-art**.">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png" alt="Icono de Halo CE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · BirchWoodGod/halo-ce-vita</div>
-                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.3" target="_blank" rel="noopener">Halo CE</a></h2>
-                      <div class="release-name">Halo CE for PS Vita 1.0.3 beta 3</div>
+                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.4" target="_blank" rel="noopener">Halo CE</a></h2>
+                      <div class="release-name">Halo CE for PS Vita 1.0.3 beta 4</div>
                     </div>
                     <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v1.0.3-beta.3</span>
-                    <span>2026-10-05 02:29 UTC</span>
+                    <span class="tag">v1.0.3-beta.4</span>
+                    <span>2026-10-05 20:05 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 1.0.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.1 → release v1.0.3-beta.3</div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.1 → release v1.0.3-beta.4</div>
                   
-                  <div class="body markdown-body"><p><strong>Testing build.</strong> The third pre-release of 1.0.3. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2">v1.0.2.2</a>. Your saves carry over.</p>
+                  <div class="body markdown-body"><p><strong>Testing build.</strong> The fourth pre-release of 1.0.3, built from your reports on beta 3. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2">v1.0.2.2</a>. Your saves carry over.</p>
 <h2>What's new</h2>
-<p><strong>Multiplayer (System Link between Vitas)</strong></p>
+<p><strong>Big late-game fights (The Maw, Keyes, Flood vs Covenant)</strong></p>
 <ul>
-<li><strong>The host no longer collapses to a few frames a second.</strong> When the host fell behind, it tried to catch up by running up to 30 game updates in one frame, which made it fall further behind; the joining player saw freezes and teleporting. It now runs at most 2 per frame, as local games do, and the game runs slightly slow under heavy load instead of freezing. The host also skips about a fifth of its per-update work, and checking for new players no longer costs time every frame. Thanks to CallumBlackGames for the two-Vita gameplay video that showed this.</li>
+<li><strong>Much less work for the GPU when many objects cast shadows.</strong> The single-digit frame rates in these fights came from the GPU, not the simulation: every object shadow was its own little render pass with waits in between. Shadows now share one surface and are drawn in batches (from about 26 GPU passes a frame to about 5), which should also stop shadows and glows going missing late in a session.</li>
+<li>Lightmaps, bump and detail textures are stored in the GPU's preferred layout, the particle limits match the Xbox's in single player, and character collision does less work.</li>
 </ul>
-<p><strong>Heavy fights</strong></p>
+<p><strong>Water</strong></p>
 <ul>
-<li><strong>The game's simulation is about 10% faster in big fights</strong> (collision checks, object lists and lookups), with exactly the same gameplay.</li>
+<li><strong>Fixed the water artifacts</strong> on 343 Guilty Spark and likely the multicoloured ocean on The Silent Cartographer (#23, #24): the water's ripple texture is repeated across the surface, and the Vita's GPU wouldn't repeat it in the form we gave it. Thanks to DuckiEXP for finding that <code>rasterizer_water false</code> made the artifact go away, which pointed straight at it.</li>
 </ul>
-<p><strong>Flashlight and lights</strong></p>
+<p><strong>Invisible Flood</strong></p>
 <ul>
-<li><strong>Characters and objects no longer flicker between lit and dark under the flashlight.</strong> The render could read the light lists while the game was changing them, and the <em>Object lighting</em> setting's Half and Third modes kept stale light numbers between updates.</li>
+<li><strong>The cloaked Flood Elites in The Maw are visible again</strong> (they shimmer, as on the Xbox). Late in a session the shimmer effect could run out of GPU surfaces, and the cloaked Flood vanished (beta 1 drew them black) (#26).</li>
 </ul>
-<p><strong>Scopes and effects</strong></p>
+<p><strong>Sound</strong></p>
 <ul>
-<li><strong>Zoom, camouflage and heat haze</strong> now make the GPU wait for the screen copy they read before drawing it, a likely cause of scopes that were black or misaligned at 50% resolution (#15, #17). If it's still off, please tell us.</li>
+<li><strong>Explosions, impacts and shield sounds no longer play late or go missing</strong> (#26): sounds now load ahead of textures, and a sound that's still loading gets a moment to finish instead of being dropped.</li>
 </ul>
-<p><strong>Smoothness</strong></p>
+<p><strong>Other</strong></p>
 <ul>
-<li><strong>More even frame pacing at 30 fps</strong>, so your weapon and the world move more evenly (<code>HALO_FRAME_PHASE_LOCK=0</code> in env.txt turns it off).</li>
-</ul>
-<p><strong>Crashes</strong></p>
-<ul>
-<li>A crash when a contrail's object disappeared mid-frame.</li>
+<li>The countdown number in the corner during the final cutscene (and in the menu afterwards) is gone; it was a debug display from the Xbox beta build (#26).</li>
+<li>More checkpoint diagnostics in <code>halo.log</code>, so we can see what holds checkpoints back on long levels (#10).</li>
 </ul>
 <h2>Please test</h2>
 <ul>
-<li><strong>Multiplayer between two Vitas</strong> (Blood Gulch, Battle Creek): host frame rate, teleporting or freezes on the joining Vita. If you can, add these lines to <code>ux0:data/haloce-vita/env.txt</code> on both Vitas and attach both <code>halo.log</code> files to an issue:<pre><code>HALO_FRAME_TIMING=150
-HALO_TICK_PROFILE=1
-HALO_NET_PROFILE=1
-HALO_NET_TRACE=1
-</code></pre>
-</li>
-<li>The flashlight on marines and Covenant.</li>
-<li>Scoped weapons at 50% render resolution.</li>
-<li>Big fights: is it smoother than beta 2?</li>
+<li>The late missions with big Flood/Covenant fights and the final Warthog run: frame rate compared with beta 3.</li>
+<li>343 Guilty Spark's water and The Silent Cartographer's ocean. <strong>Remove <code>HALO_TARGET_CHAIN=0</code> from env.txt if you added it for beta 2/3</strong>: with this bug it makes the water worse.</li>
+<li>Shadows under characters and vehicles: do they look right?</li>
+<li>Sounds during fights.</li>
+<li>Flickering purple shields or glass: if it still happens, try <strong>one</strong> of these lines at a time in <code>ux0:data/haloce-vita/env.txt</code> and tell us which one stops it: <code>HALO_GXM_WCLAMP=0</code>, <code>HALO_GXM_RTT_SYNC=0</code>, <code>HALO_GXM_SCENE_DRAWS=0</code>, <code>HALO_GXM_DEPTH_BIAS=0</code>.</li>
 </ul>
-<h2>Still known</h2>
+<h2>Notes</h2>
 <ul>
-<li>Trees and some Covenant shields can flicker at the edges of the screen (beta 2's notes list two test switches).</li>
-<li>Very heavy fights still drop frames; a steady 30 fps is planned for 1.1.0.</li>
+<li>On the final mission the two scripted checkpoints are only taken when no projectile is in flight anywhere in the map, as in the original game, so they can be missed during a fight.</li>
+<li>The red lights on some doors that do open are how the original game shows one-sided or script-controlled doors.</li>
 </ul>
 <h2>Install</h2>
 <p>Install <code>halo.vpk</code> with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.</p>
-<p>Report problems on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue tracker</a> and say you are on <strong>1.0.3-beta.3</strong>. For crashes, attach the files listed in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
+<p>Report problems on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue tracker</a> and say you are on <strong>1.0.3-beta.4</strong>. For crashes, attach the files listed in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
+<p>Thanks to <strong>BlazeRed17</strong> for playing the whole campaign and reporting on every level, and to <strong>Ben</strong>, <strong>DuckiEXP</strong>, <strong>5ackwood</strong> and <strong>aguy4809-art</strong>.</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.3/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 3.2 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.4/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 3.2 MB</a></div>
                 </div>
               </div>
             </article>
@@ -8952,56 +9127,6 @@ it can be adjusted in graphics.ini in your data folder if you want the game goin
 It can be adjusted in graphics.ini in your data folder if you want the game going a bit faster.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MuukalainenPuhuu/Vita-MH-DH/releases/download/1.1/MHDH.vpk" target="_blank" rel="noopener">⬇ MHDH.vpk · 1.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="thextech thextech thextech/thextech thextech v1.3.7.3-1: a hotfix for 1.3.7.3 release v1.3.7.3-1 ports this is a hotfix release for the 1.3.7.3 since there are serious bugs were been found and were been fixed.
-
-you can read details for the original release here: https://github.com/thextech/thextech/releases/tag/v1.3.7.3
-
-## hotfix changelog 1.3.7.3-hotfix1:
-- adjusted the ime start logic to enable it when direct text input is enabled (@ds-sloth)
-- fixed build on freebsd (@wohlstand and also contributed by @renkoto)
-- fixed behaviour of the md5 algorithm on big endian hardware (@ds-sloth)
-- _fixed a critical bug of checkpoints being reset when re-entering normal level from the hub_ (@wohlstand)
-- fixed thextech bug where medals were incorrectly saved after death in hub worlds (@ds-sloth)
-
----
-all the downloads at the official site has been replaced with hotfix builds.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png" alt="Icono de TheXTech" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · TheXTech/TheXTech</div>
-                      <h2><a href="https://github.com/TheXTech/TheXTech/releases/tag/v1.3.7.3-1" target="_blank" rel="noopener">TheXTech</a></h2>
-                      <div class="release-name">TheXTech v1.3.7.3-1: A hotfix for 1.3.7.3 release</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.3.7.3-1</span>
-                    <span>2026-06-22 20:49 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.3.7.3-1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.3.7.3-1</div>
-                  
-                  <div class="body markdown-body"><p>This is a hotfix release for the 1.3.7.3 since there are serious bugs were been found and were been fixed.</p>
-<p>You can read details for the original release here: <a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/releases/tag/v1.3.7.3">https://github.com/TheXTech/TheXTech/releases/tag/v1.3.7.3</a></p>
-<h2>Hotfix changelog 1.3.7.3-hotfix1:</h2>
-<ul>
-<li>Adjusted the IME start logic to enable it when direct text input is enabled (@ds-sloth)</li>
-<li>Fixed build on FreeBSD (@Wohlstand and also contributed by @Renkoto)</li>
-<li>Fixed behaviour of the MD5 algorithm on Big Endian hardware (@ds-sloth)</li>
-<li><em>Fixed a critical bug of checkpoints being reset when re-entering normal level from the hub</em> (@Wohlstand)</li>
-<li>Fixed TheXTech bug where medals were incorrectly saved after death in hub worlds (@ds-sloth)</li>
-</ul>
-<hr>
-<p>All the downloads at the official site has been replaced with hotfix builds.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/moondust-devkit-config-pack-thextech-sdk-v1.3.7.3.zip" target="_blank" rel="noopener">⬇ moondust-devkit-config-pack-thextech-sdk-v1.3.7.3.zip · 1.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz · 32.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz · 32.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz · 33.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz · 33.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz · 33.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz · 33.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz · 33.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz · 33.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz · 33.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-macos.dmg" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-macos.dmg · 36.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-web.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-web.tar.gz · 31.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-win-arm64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-win-arm64.7z · 25.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-win32.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-win32.7z · 27.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/adventures-of-demo-thextech-v1.3.7.3-win64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.3.7.3-win64.7z · 27.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz · 43.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u14.04-i386.tar.gz · 43.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u16.04-i386.tar.gz · 44.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz · 43.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-macos.dmg" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-macos.dmg · 48.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-web.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-web.tar.gz · 41.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-win-arm64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-win-arm64.7z · 36.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-win32.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-win32.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/super-mario-bros-x-thextech-v1.3.7.3-win64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.3.7.3-win64.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-3ds-assets-aod-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-3ds-assets-aod-v1.3.7.3.zip · 57.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-3ds-assets-smbx13-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-3ds-assets-smbx13-v1.3.7.3.zip · 45.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-3ds-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-3ds-v1.3.7.3.zip · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-adventure-of-demo-assets-full-v1.3.7.3.7z" target="_blank" rel="noopener">thextech-adventure-of-demo-assets-full-v1.3.7.3.7z · 23.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-android-v1.3.7.3.apk" target="_blank" rel="noopener">thextech-android-v1.3.7.3.apk · 26.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-portmaster-v1.3.7.3-MD5.txt" target="_blank" rel="noopener">thextech-bin-portmaster-v1.3.7.3-MD5.txt · 56.0 B</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-portmaster-v1.3.7.3.tar.gz" target="_blank" rel="noopener">thextech-bin-portmaster-v1.3.7.3.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-arm64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-arm64.flatpak · 3.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u14.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u14.04-amd64.deb · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u14.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u14.04-i386.deb · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u16.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u16.04-amd64.deb · 5.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u16.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u16.04-armhf.deb · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u16.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u16.04-i386.deb · 6.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u18.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u18.04-amd64.deb · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u20.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u20.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u20.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u20.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u20.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u20.04-armhf.deb · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u22.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u22.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u22.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u22.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-u24.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-u24.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-bin-v1.3.7.3-x86-64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.3.7.3-x86-64.flatpak · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-convert-kit-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-convert-kit-v1.3.7.3.zip · 7.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.tar.bz2" target="_blank" rel="noopener">thextech-full-src-v1.3.7.3.tar.bz2 · 42.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.tar.gz" target="_blank" rel="noopener">thextech-full-src-v1.3.7.3.tar.gz · 50.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-full-src-v1.3.7.3.zip · 58.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-game-aod-v1.3.7.3.deb" target="_blank" rel="noopener">thextech-game-aod-v1.3.7.3.deb · 23.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-game-smbx-1.3-v1.3.7.3.deb" target="_blank" rel="noopener">thextech-game-smbx-1.3-v1.3.7.3.deb · 36.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-game-template-v1.3.7.3-macOS.zip" target="_blank" rel="noopener">thextech-game-template-v1.3.7.3-macOS.zip · 11.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-amd64.tar.gz · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u14.04-i386.tar.gz · 5.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u16.04-i386.tar.gz · 5.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u18.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u20.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u22.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-linux-generic-u24.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-win-arm64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-win-arm64.7z · 2.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-win32.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-win32.7z · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-plain-runtime-v1.3.7.3-win64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.3.7.3-win64.7z · 4.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-sdl2-src-for-wii-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-sdl2-src-for-wii-v1.3.7.3.zip · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-sdl2-wiiu-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-sdl2-wiiu-v1.3.7.3.zip · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-smbx13-assets-full-v1.3.7.3.7z" target="_blank" rel="noopener">thextech-smbx13-assets-full-v1.3.7.3.7z · 33.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-switch-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-switch-v1.3.7.3.zip · 6.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-vita-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-vita-v1.3.7.3.zip · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wii-assets-aod-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-wii-assets-aod-v1.3.7.3.zip · 20.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wii-assets-smbx13-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-wii-assets-smbx13-v1.3.7.3.zip · 28.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wii-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-wii-v1.3.7.3.zip · 3.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wiiu-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-wiiu-v1.3.7.3.zip · 10.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-wiki-docs-v1.3.7.3.zip" target="_blank" rel="noopener">thextech-wiki-docs-v1.3.7.3.zip · 5.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26070,919 +26195,10 @@ make enigma_switch.zip -j10
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="cannonball cannonball rsn8887/cannonball cannonball vita 1.05 / switch v1.08 1.08switchgit-vita/switch-rsn8887 ports recent changes
-=====
-1.08switch
-
-- recompiled with 12.0.0 support
-
-overview
-=====
-this is my vita and switch port of cannonball, an enhanced outrun engine by djyt.
-
-thanks djyt for writing such a great program and making sure it is easily portable.
-
-thanks to schlauchi for testing.
-
-thanks to my patreon supporters: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
-
-note: arcade roms for outrun version b are required to run this engine. the roms are not included in the download (see installation instructions).
-
-![](screenshots/cannonball_vita_1.jpg)
-
-a detailed manual and faq are here:
-https://github.com/djyt/cannonball/wiki
-
-switch installation instructions
-=====
-arcade roms from outrun version b are required to run this homebrew, they are not included.
-
-- extract the contents of cannonball_switch.zip into the folder `switch/` on your sdcard. you should have a folder `switch/cannonball_switch/`.
-- obtain the arcade roms for outrun version b and extract them into `switch/cannonball_switch/roms`
-- launch the .nro file using your favorite homebrew launcher, enjoy outrun in almost perfect 60 fps.
-- this version of cannonball is called &quot;cannonball_switch&quot; to distinguish it from lantus&#x27; port
-
-switch controls
-=====
-note: buttons can be re-mapped in menu  
-
-minus = insert coin  
-plus = start  
-y = gas / ok in menu
-b = brake
-x = change gears  
-l = change in-game camera   
-r = menu
-dpad = menu navigation and digital steering wheel controls  
-left stick = analog steering wheel if analog is set to on or wheel only, otherwise this is digital.
-right stick = analog gas/brake if analog is set to on  
-
-vita installation instructions
-=====
-arcade roms from outrun version b are required to run this homebrew, they are not included.
-
-- install the .vpk
-- extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)
-- obtain the arcade roms for outrun version b and extract them into ux0:data/cannonball/roms
-- launch the bubble, enjoy outrun in almost perfect 60 fps.
-
-vita controls
-=====
-note: buttons can be re-mapped in menu  
-
-l = insert coin  
-square = start  
-triangle = gas / enter letter on hi-score screen  
-circle = brake  
-cross = change gears  
-select = change in-game camera   
-r = menu
-dpad = menu navigation and digital steering wheel controls  
-left stick = analog steering wheel if analog is set to on or wheel only, otherwise this is digital.  
-right stick = analog gas/brake if analog is set to on  
-
-notes about vita version
-=====
-- default difficulty is set to easy, but can be changed to normal or hard in the menu.
-- the game runs at full speed with almost constant 60 fps. the exception is some slowdown at the beginning of the race. that slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. the high-resolution hack should not be enabled, it causes too much slow-down.
-
-rom names
-======
-````
--------------------------------------------------------------------------------
-place outrun revision b roms in this directory.
-they must be named as follows:
--------------------------------------------------------------------------------
-epr-10187.88
-epr-10327a.76
-epr-10328a.75
-epr-10329a.58
-epr-10330a.57
-epr-10380b.133
-epr-10381a.132
-epr-10382b.118
-epr-10383b.117
-mpr-10371.9
-mpr-10372.13
-mpr-10373.10
-mpr-10374.14
-mpr-10375.11
-mpr-10376.15
-mpr-10377.12
-mpr-10378.16
-opr-10185.11
-opr-10186.47
-opr-10188.71
-opr-10189.70
-opr-10190.69
-opr-10191.68
-opr-10192.67
-opr-10193.66
-opr-10230.104
-opr-10231.103
-opr-10232.102
-opr-10266.101
-opr-10267.100
-opr-10268.99
-
--------------------------------------------------------------------------------
-the original japanese release of outrun featured slightly different tracks 
-and course ordering.
-
-optionally, you can include the following files from the japanese version to
-play these alternate tracks:
--------------------------------------------------------------------------------
-
-epr-10380.133
-epr-10382.118
-epr-10381.132
-epr-10383.117
-epr-10327.76
-epr-10329.58
-epr-10328.75
-epr-10330.57
-
--------------------------------------------------------------------------------
-fixed audio rom (optional)
-http://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html
--------------------------------------------------------------------------------
-
-opr-10188.71f
-````
-
-build instructions
-=====
-cannonball needs some boost header-only libraries. to prepare compilation:
-- download and extract boost_1_66_0.zip from [here](https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip)
-- copy the subfolder boost from that archive to $vitasdk/arm-vita-eabi/include/boost for vita, or to $devkitpro/portlibs/switch/include/boost for switch
-- you should now have a file $vitasdk/arm-vita-eabi/include/boost/version.hpp, or $devkitpro/portlibs/switch/include/boos/version.hpp and hundreds of other boost header files.
-- now that boost is installed, proceed to compile cannonball:
-````
-cd cannonball
-mkdir build
-cd build
-````
-then, for vita:
-````
-cmake -dbuild_psp2=on -dcmake_build_type=release ../cmake
-make cannonball.vpk -j10
-````
-or, for switch: 
-````
-cmake -dbuild_nx=on -dcmake_build_type=release ../cmake
-make cannonball_switch.zip -j10
-````
-
-note: the vita source depends on frangarcj&#x27;s vita2d fbo branch with shader support here: https://github.com/cpasjuste/vita2dlib/tree/fbo
-and frangarcj&#x27;s vita-shader-collection gtu branch here: https://github.com/frangarcj/vita-shader-collection/tree/gtu
-those are both included as binaries and linked automatically.
-
-changelog
-=====
-1.08switch
-
-- recompiled with 12.0.0 support
-
-1.07switch
-
-- fix black screen due to linking with latest sdl2
-
-1.06switch
-
-- recompiled with 9.0.0 support
-
-1.05switch
-
-- added switch release
-
-1.05
-
-- dpad works now if analog=&quot;off&quot;
-- gas/brake on right stick if analog=&quot;on&quot; (digital gas/brake on buttons if analog=&quot;wheel only&quot;)
-
-1.04
-
-- better image quality (less blurry)
-- support non-fullscreen modes
-
-1.03
-
-- moved menu navigation to the dpad. true analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.
-
-1.02
-
-- removed unneccessary temporary files (__macosx, .ds_store) from data.zip 
-
-1.01
-
-- forgot to include config.xml in data.zip, it is now included
-
-1.0
-
-- initial vita release">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-cannonball/icon0.png" alt="Icono de Cannonball" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · rsn8887/cannonball</div>
-                      <h2><a href="https://github.com/rsn8887/cannonball/releases/tag/1.08switchgit-vita/switch-rsn8887" target="_blank" rel="noopener">Cannonball</a></h2>
-                      <div class="release-name">Cannonball Vita 1.05 / Switch v1.08</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.08switchgit-vita/switch-rsn8887</span>
-                    <span>2021-05-22 20:18 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.08switchgit-vita/switch-rsn8887</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.08switchgit-vita/switch-rsn8887</div>
-                  
-                  <div class="body markdown-body"><h1>Recent Changes</h1>
-<p>1.08switch</p>
-<ul>
-<li>recompiled with 12.0.0 support</li>
-</ul>
-<h1>Overview</h1>
-<p>This is my Vita and Switch port of Cannonball, an enhanced Outrun engine by djyt.</p>
-<p>Thanks djyt for writing such a great program and making sure it is easily portable.</p>
-<p>Thanks to ScHlAuChi for testing.</p>
-<p>Thanks to my Patreon supporters: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
-<p>NOTE: Arcade roms for Outrun Version B are required to run this engine. The roms are NOT included in the download (see installation instructions).</p>
-<p><img src="screenshots/Cannonball_vita_1.jpg" alt=""></p>
-<p>A detailed Manual and FAQ are here:
-<a target="_blank" rel="noopener noreferrer" href="https://github.com/djyt/cannonball/wiki">https://github.com/djyt/cannonball/wiki</a></p>
-<h1>Switch Installation Instructions</h1>
-<p>Arcade roms from Outrun version B are required to run this homebrew, they are not included.</p>
-<ul>
-<li>Extract the contents of cannonball_switch.zip into the folder <code>switch/</code> on your sdcard. You should have a folder <code>switch/Cannonball_Switch/</code>.</li>
-<li>Obtain the arcade roms for Outrun Version B and extract them into <code>switch/Cannonball_Switch/roms</code></li>
-<li>Launch the .nro file using your favorite homebrew launcher, enjoy Outrun in almost perfect 60 fps.</li>
-<li>This version of Cannonball is called &quot;Cannonball_Switch&quot; to distinguish it from Lantus' port</li>
-</ul>
-<h1>Switch Controls</h1>
-<p>Note: Buttons can be re-mapped in menu</p>
-<p>Minus = insert coin<br>
-Plus = start<br>
-Y = gas / OK in menu
-B = brake
-X = change gears<br>
-L = change in-game camera<br>
-R = menu
-Dpad = menu navigation and digital steering wheel controls<br>
-Left stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.
-Right stick = analog gas/brake if analog is set to ON</p>
-<h1>Vita Installation Instructions</h1>
-<p>Arcade roms from Outrun version B are required to run this homebrew, they are not included.</p>
-<ul>
-<li>Install the .vpk</li>
-<li>Extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)</li>
-<li>Obtain the arcade roms for Outrun Version B and extract them into ux0:data/cannonball/roms</li>
-<li>Launch the bubble, enjoy Outrun in almost perfect 60 fps.</li>
-</ul>
-<h1>Vita Controls</h1>
-<p>Note: Buttons can be re-mapped in menu</p>
-<p>L = insert coin<br>
-Square = start<br>
-Triangle = gas / enter letter on hi-score screen<br>
-Circle = brake<br>
-Cross = change gears<br>
-Select = change in-game camera<br>
-R = menu
-Dpad = menu navigation and digital steering wheel controls<br>
-Left stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.<br>
-Right stick = analog gas/brake if analog is set to ON</p>
-<h1>Notes about Vita version</h1>
-<ul>
-<li>Default difficulty is set to easy, but can be changed to normal or hard in the menu.</li>
-<li>The game runs at full speed with almost constant 60 fps. The exception is some slowdown at the beginning of the race. That slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. The high-resolution hack should not be enabled, it causes too much slow-down.</li>
-</ul>
-<h1>Rom names</h1>
-<pre><code>-------------------------------------------------------------------------------
-Place OutRun Revision B ROMs in this directory.
-They must be named as follows:
--------------------------------------------------------------------------------
-epr-10187.88
-epr-10327a.76
-epr-10328a.75
-epr-10329a.58
-epr-10330a.57
-epr-10380b.133
-epr-10381a.132
-epr-10382b.118
-epr-10383b.117
-mpr-10371.9
-mpr-10372.13
-mpr-10373.10
-mpr-10374.14
-mpr-10375.11
-mpr-10376.15
-mpr-10377.12
-mpr-10378.16
-opr-10185.11
-opr-10186.47
-opr-10188.71
-opr-10189.70
-opr-10190.69
-opr-10191.68
-opr-10192.67
-opr-10193.66
-opr-10230.104
-opr-10231.103
-opr-10232.102
-opr-10266.101
-opr-10267.100
-opr-10268.99
-
--------------------------------------------------------------------------------
-The original Japanese release of OutRun featured slightly different tracks 
-and course ordering.
-
-Optionally, you can include the following files from the Japanese version to
-play these alternate tracks:
--------------------------------------------------------------------------------
-
-epr-10380.133
-epr-10382.118
-epr-10381.132
-epr-10383.117
-epr-10327.76
-epr-10329.58
-epr-10328.75
-epr-10330.57
-
--------------------------------------------------------------------------------
-Fixed Audio Rom (Optional)
-http://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html
--------------------------------------------------------------------------------
-
-opr-10188.71f
-</code></pre>
-<h1>Build Instructions</h1>
-<p>Cannonball needs some boost header-only libraries. To prepare compilation:</p>
-<ul>
-<li>Download and extract boost_1_66_0.zip from <a target="_blank" rel="noopener noreferrer" href="https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip">here</a></li>
-<li>copy the subfolder boost from that archive to $VITASDK/arm-vita-eabi/include/boost for Vita, or to $DEVKITPRO/portlibs/switch/include/boost for Switch</li>
-<li>you should now have a file $VITASDK/arm-vita-eabi/include/boost/version.hpp, or $DEVKITPRO/portlibs/switch/include/boos/version.hpp and hundreds of other Boost header files.</li>
-<li>Now that boost is installed, proceed to compile cannonball:</li>
-</ul>
-<pre><code>cd cannonball
-mkdir build
-cd build
-</code></pre>
-<p>then, for Vita:</p>
-<pre><code>cmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ../cmake
-make Cannonball.vpk -j10
-</code></pre>
-<p>or, for Switch:</p>
-<pre><code>cmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../cmake
-make Cannonball_Switch.zip -j10
-</code></pre>
-<p>Note: The Vita source depends on FrangarCJ's Vita2d fbo branch with shader support here: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cpasjuste/vita2dlib/tree/fbo">https://github.com/Cpasjuste/vita2dlib/tree/fbo</a>
-and FrangarCJ's vita-shader-collection gtu branch here: <a target="_blank" rel="noopener noreferrer" href="https://github.com/frangarcj/vita-shader-collection/tree/gtu">https://github.com/frangarcj/vita-shader-collection/tree/gtu</a>
-Those are both included as binaries and linked automatically.</p>
-<h1>Changelog</h1>
-<p>1.08switch</p>
-<ul>
-<li>recompiled with 12.0.0 support</li>
-</ul>
-<p>1.07switch</p>
-<ul>
-<li>Fix black screen due to linking with latest SDL2</li>
-</ul>
-<p>1.06switch</p>
-<ul>
-<li>recompiled with 9.0.0 support</li>
-</ul>
-<p>1.05switch</p>
-<ul>
-<li>added Switch release</li>
-</ul>
-<p>1.05</p>
-<ul>
-<li>dpad works now if analog=&quot;off&quot;</li>
-<li>gas/brake on right stick if analog=&quot;on&quot; (digital gas/brake on buttons if analog=&quot;wheel only&quot;)</li>
-</ul>
-<p>1.04</p>
-<ul>
-<li>better image quality (less blurry)</li>
-<li>support non-fullscreen modes</li>
-</ul>
-<p>1.03</p>
-<ul>
-<li>moved menu navigation to the dpad. True analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.</li>
-</ul>
-<p>1.02</p>
-<ul>
-<li>removed unneccessary temporary files (__MACOSX, .DS_Store) from data.zip</li>
-</ul>
-<p>1.01</p>
-<ul>
-<li>forgot to include config.xml in data.zip, it is now included</li>
-</ul>
-<p>1.0</p>
-<ul>
-<li>Initial Vita release</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.05.vpk" target="_blank" rel="noopener">⬇ Cannonball_1.05.vpk · 1.1 MB</a><a class="btn" href="https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.08_Switch.zip" target="_blank" rel="noopener">Cannonball_1.08_Switch.zip · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="rocksndiamonds rocksndiamonds mirrormagic rsn8887/rocksndiamonds rocks&#x27;n&#x27;diamonds and mirrormagic for vita (v1.12) and switch (v1.15) 1.15 ports recent changes
-======
-1.15 (switch only)
-
-- on switch, add 12.0.0 support. only .nro files changed, data is the same.
-
-description
-======
-these are my vita and switch ports of rocks&#x27;n&#x27;diamonds and mirrormagic. 
-
-**rocks&#x27;n&#x27;diamonds** is a boulderdash type game by holger schemel with many unique features, such as the ability to play remade levels from boulderdash, emerald mine and supaplex and many more levels.
-
-![screenshot of rocks&#x27;n&#x27;diamonds vita](screenshots/rnd_new_a.jpg)
-
-**mirrormagic** is a game by holger schemel in the tradition of deflektor and mindbender. you guide a laser beam by adjusting mirrors before the time limit runs out.
-
-![screenshot of mirrormagic vita](screenshots/mm_new_a.jpg)
-
-more information about the games can be found at the homepages for the windows versions:
-
-http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/
-http://www.artsoft.org/mirrormagic
-
-and the official manual for rocks&#x27;n&#x27;diamonds is here:
-
-https://www.artsoft.org/rocksndiamonds/manual/index.html
-
-thanks
-======
-thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
-
-thanks @frangarcj for help with optimizing the rendering. 
-
-thanks to holger schemel for making a great and portable game.
-
-thanks to the many devs of vitasdk for a great development environment.
-
-thanks to all the devs of devkitpro for switch for a great development suite. 
-
-installation (vita)
-=====
-
-- install the vpks
-
-- extract contents of `rocksndiamonds_data.zip` and `mirrormagic_data.zip` and copy them to your vita&#x27;s `ux0:/data` folder. you should have folders `ux0:/data/rocksndiamonds` and `ux0:/data/mirrormagic` on your vita with the files in them.  
-
-installation (switch)
-=====
-
-- extract `rocksndiamonds_data.zip` and `mirrormagic_data.zip` to the folder `switch/` in the root of your sd card. you should have folders such as `switch/rocksndiamonds/levels` and `switch/mirrormagic/levels` and more. make sure none of the folders or files has the &quot;archive&quot; flag set after copying.
- 
-- copy `rocksndiamonds.nro` to `switch/rocksndiamonds/` and `mirrormagic.nro` to `switch/mirrormagic/`
-
-- use nsp injection to start the games, otherwise the on-screen keyboard will not work. on sx os, you can do this by holding down r while launching any installed game to make hbmenu appear. 
-
-vita/switch-exclusive features
-=======
-- game controller mapping including analog joystick mouse controls
-- front touch controls with left/right mouse click and drag and drop gestures
-- the game runs smooth at the same speed as the desktop versions
-- additional level package with thousands of levels as separate download (see &#x27;more levels&#x27;)
-- auto-hide mouse cursor when using the dpad
-- easily switch player focus in multiplayer games using r+triangle and r+square
-- 60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.
-- text entry with vita/switch touch keyboard, no physical keyboard or mouse required
-
-vita-exclusive features
-========
-- support for bluetooth keyboard and mouse
-
-gamepad controls (vita)
-======
-dpad or left stick = move player and navigate menus  
-right stick = move mouse pointer  
-cross = primary button (+ direction for snap action or turning mirrors, also &#x27;ok&#x27; in menu)  
-circle = secondary button (drop dynamite)  
-square / l = left mouse button  
-triangle / r = right mouse button  
-select = quit (escape key, also cancels requesters)  
-start = pause (space key)  
-r+triangle = set focus to next player (all-&gt;1-&gt;2-&gt;3-&gt;4)  
-r+square = set player focus to previous player (all&lt;-1&lt;-2&lt;-3&lt;-4)  
-
-gamepad controls (switch)
-======
-dpad or left stick = move player and navigate menus  
-right stick = move mouse pointer  
-b = primary button (+ direction for snap action or turning mirrors, also &#x27;ok&#x27; in menu)  
-a = secondary button (drop dynamite)  
-y or l = left mouse button  
-x or r = right mouse button  
-minus = quit (escape key, also cancels requesters)  
-plus = pause (space key)  
-r+x = set focus to next player (all-&gt;1-&gt;2-&gt;3-&gt;4)  
-r+y = set player focus to previous player (all&lt;-1&lt;-2&lt;-3&lt;-4)  
-
-touch controls
-=======
-note: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the vita will not erroneously recognize them as a single finger. otherwise the pointer will jump around.
-
-single short tap = left mouse click  
-single short tap while holding a second finger down = right mouse click  
-single finger drag = move the mouse pointer  
-dual finger drag = drag&#x27;n&#x27;drop (left mouse button is held down)  
-three finger drag = drag&#x27;n&#x27;drop (right mouse button is held down)  
-
-more levels for rocks&#x27;n&#x27;diamonds
-=========
-
-- more than 50,000 additional rocks&#x27;n&#x27;diamonds levels can be downloaded here: http://www.artsoft.org/rocksndiamonds/levels/
-
-- i made a single easy-to-install zip more_levels_v2.zip (~90 mb). it contains selected additional levels from the above site and is available with the other release files.
-
-- just download, unzip, and  transfer to your vita, so that you have a subfolder `ux0:/data/rocksndiamonds/levels/more_levels`. or transfer to your switch, so that you have a subfolder `switch/rocksndiamonds/levels/more_levels`.
-
-- ftp transfer of levelsets has to be done using binary transfer mode, not auto or ascii . otherwise some levels will be treated as ascii with mangled line endings and won&#x27;t work. this was verified with the emerald_mine_club_original_1 levels and filezilla ftp.
-
-notes
-=====
-- it is possible to get a wrong screen size on switch by messing with the options. the solution is to navigate to setup-&gt;graphics and enable fullscreen mode and set window size to 100%, then select &quot;save &amp; exit&quot;
-
-- to load new level sets, go to the level number selection in the menu, and press x (b on switch). a new screen should open that shows a few levels. go to the parent dir and into the folder classic games. there are many more levels already included in that folder.
-
-- sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. this is fixed by simply restarting the game and loading the levelset again.
-
-- to answer the ok/cancel dialogs in the game, press select (minus on switch) to cancel (this is escape), or x (b on switch) for ok.
-
-- you can install new level sets for rocks&#x27;n&#x27;diamonds by copying them into ux0:/data/rocksndiamonds/levels on vita, or /switch/rocksndiamonds/levels on switch. see the official manual: https://www.artsoft.org/rocksndiamonds/manual/manual.html#
-
-- similarly, you can install new level sets for mirrormagic by copying them into ux0:/data/mirrormagic/levels on vita, and /switch/mirrormagic/levels on switch. 
-
-- if you mess up some options and want to reset to default, you can delete the folder &#x27;ux0:/data/rocksndiamonds/userdata&#x27; and/or &#x27;ux0:/data/mirrormagic/userdata&#x27;. on switch, the folders are &#x27;/switch/rocksndiamonds/userdata&#x27; and &#x27;/switch/mirrormagic/userdata&#x27;.
-
-- for multiplayer team mode in rocks&#x27;n&#x27;diamonds, enable it via setup-&gt;game &amp; menu-&gt;team-mode (multiplayer)-&gt;on. you also have to find make a level that has multiple players. r+square and r+triangle (r+y and r+x on switch) can be used in-game to change focus between players, see game controls. all controllers have to be paired before launching the app, otherwise they will not be recognized by the game.
-
-build instructions
-=====
-- clone the repository, then
-````
-cd rocksndiamonds
-````
-then use
-````
-make vitarocks
-````
-or
-````
-make switchrocks
-````
-for rocks&#x27;n&#x27;diamonds, and
-````
-make vitamirror
-````
-or
-````
-make switchmirror
-````
-for mirrormagic.
-
-you need the latest sdl2 vita library from 05-23-2018 or later for this to work. the latest sdl2 library can be downloaded by updating your vitasdk, or here: https://dl.vitasdk.org
-
-changelog
-=====
-1.15 (switch only)
-
-- on switch, add 12.0.0 support. only .nro files changed, data is the same.
-
-1.14 (switch only)
-
-- on switch, add 9.0.0 support
-- on switch, fix .ogg audio playback
-- on switch, fix pointer getting stuck when controlled with physical usb mouse
-
-1.13 (switch only)
-
-- on switch, fix automatically turning on/off vsync on selecting/deselecting game speed: 60 fps mode 
-
-1.12
-
-- fix crash when loading levelsets that change screenmode, such as supaplex (original)
-- on switch, fix slow-down when pressing home button
-- on switch, use 1080p resolution when docked
-
-
-1.11 (switch only)
-
-- on switch, implement on-screen keyboard (only works when launching with nsp injection)
-
-1.10 (switch only)
-
-- fixed problem on switch with too-large screen in docked mode when loading saved config. the workaround was to change window size to 100% and save again. now fullscreen mode should be set to &quot;on&quot; and then this problem does not appear anymore.
-
-1.9switch
-
-- added switch port
-
-1.9
-
-- add &#x27;60 fps&#x27; game speed setting for perfectly smooth motion in some levels on the vita. it works well with the bundled emerald mine levelsets. this mode is 20% faster than the default setting &#x27;normal.&#x27;
-
-- removed slow-down when playing levelsets that use the emerald mine engine with default graphics.
-
-1.8
-
-- map set player focus to r+triangle and r+square for multiplayer games on vitatv (up to 4 players)
-
-1.7
-
-- enabled mp3 music support, used by some custom levelsets
-
-1.6
-
-- support editing multiline textfields in level editor
-
-1.5
-
-- optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @frangarcj for the help).
-- fixed sticky touch inputs and other issues with touch controls
-
-1.4
-
-- fixed screen centering
-- fixed screen scaling so it works for all sizes
-
-1.3
-
-- mirrormagic as separate app. it uses the same codebase as rocks&#x27;n&#x27;diamonds.
-- smoother mouse pointer motion.
-
-1.2
-
-- significant speedup by drawing directly to texture pixels. setting game speed to &#x27;very fast&#x27; actually makes it faster now.
-
-1.1
-
-- implemented mouse pointer controls via right analog stick and front touch. the level editor is fully usable now.
-- improved picture quality for sharper graphics
-
-1.0
-
-- fixed name entry using touch keyboard. it works without any return or backspace keypresses now.
-- fixed graphics corruption of some cartoons on menu screen (updated data.zip)
-
-0.9
-
-- initial vita release">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png" alt="Icono de rocksndiamonds" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · rsn8887/rocksndiamonds</div>
-                      <h2><a href="https://github.com/rsn8887/rocksndiamonds/releases/tag/1.15" target="_blank" rel="noopener">rocksndiamonds</a></h2>
-                      <div class="release-name">Rocks'n'Diamonds and Mirrormagic for Vita (v1.12) and Switch (v1.15)</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.15</span>
-                    <span>2021-05-22 19:09 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.15</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.15</div>
-                  <div class="related"><span>También asociado:</span> mirrormagic</div>
-                  <div class="body markdown-body"><h1>Recent Changes</h1>
-<p>1.15 (Switch only)</p>
-<ul>
-<li>on Switch, add 12.0.0 support. Only .nro files changed, data is the same.</li>
-</ul>
-<h1>Description</h1>
-<p>These are my Vita and Switch ports of Rocks'n'Diamonds and Mirrormagic.</p>
-<p><strong>Rocks'n'Diamonds</strong> is a Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels.</p>
-<p><img src="screenshots/rnd_new_a.jpg" alt="Screenshot of Rocks'n'Diamonds Vita"></p>
-<p><strong>Mirrormagic</strong> is a game by Holger Schemel in the tradition of Deflektor and Mindbender. You guide a laser beam by adjusting mirrors before the time limit runs out.</p>
-<p><img src="screenshots/mm_new_a.jpg" alt="Screenshot of Mirrormagic Vita"></p>
-<p>More information about the games can be found at the homepages for the Windows versions:</p>
-<p><a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/">http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/</a>
-<a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/mirrormagic">http://www.artsoft.org/mirrormagic</a></p>
-<p>And the official manual for Rocks'n'Diamonds is here:</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://www.artsoft.org/rocksndiamonds/manual/index.html">https://www.artsoft.org/rocksndiamonds/manual/index.html</a></p>
-<h1>Thanks</h1>
-<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
-<p>Thanks @FrangarCJ for help with optimizing the rendering.</p>
-<p>Thanks to Holger Schemel for making a great and portable game.</p>
-<p>Thanks to the many devs of VitaSDK for a great development environment.</p>
-<p>Thanks to all the devs of DevKitPro for Switch for a great development suite.</p>
-<h1>Installation (Vita)</h1>
-<ul>
-<li><p>install the vpks</p>
-</li>
-<li><p>extract contents of <code>rocksndiamonds_data.zip</code> and <code>mirrormagic_data.zip</code> and copy them to your Vita's <code>ux0:/data</code> folder. You should have folders <code>ux0:/data/rocksndiamonds</code> and <code>ux0:/data/mirrormagic</code> on your Vita with the files in them.</p>
-</li>
-</ul>
-<h1>Installation (Switch)</h1>
-<ul>
-<li><p>extract <code>rocksndiamonds_data.zip</code> and <code>mirrormagic_data.zip</code> to the folder <code>switch/</code> in the root of your sd card. You should have folders such as <code>switch/rocksndiamonds/levels</code> and <code>switch/mirrormagic/levels</code> and more. Make sure none of the folders or files has the &quot;archive&quot; flag set after copying.</p>
-</li>
-<li><p>copy <code>rocksndiamonds.nro</code> to <code>switch/rocksndiamonds/</code> and <code>mirrormagic.nro</code> to <code>switch/mirrormagic/</code></p>
-</li>
-<li><p>use nsp injection to start the games, otherwise the on-screen keyboard will not work. On SX OS, you can do this by holding down R while launching any installed game to make hbmenu appear.</p>
-</li>
-</ul>
-<h1>Vita/Switch-Exclusive Features</h1>
-<ul>
-<li>game controller mapping including analog joystick mouse controls</li>
-<li>front touch controls with left/right mouse click and drag and drop gestures</li>
-<li>the game runs smooth at the same speed as the desktop versions</li>
-<li>additional level package with thousands of levels as separate download (see 'More Levels')</li>
-<li>auto-hide mouse cursor when using the dpad</li>
-<li>easily switch player focus in multiplayer games using r+triangle and r+square</li>
-<li>60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.</li>
-<li>text entry with Vita/Switch touch keyboard, no physical keyboard or mouse required</li>
-</ul>
-<h1>Vita-Exclusive Features</h1>
-<ul>
-<li>support for bluetooth keyboard and mouse</li>
-</ul>
-<h1>Gamepad Controls (Vita)</h1>
-<p>Dpad or left stick = move player and navigate menus<br>
-right stick = move mouse pointer<br>
-Cross = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)<br>
-Circle = secondary button (drop dynamite)<br>
-Square / L = left mouse button<br>
-Triangle / R = right mouse button<br>
-Select = quit (escape key, also cancels requesters)<br>
-Start = pause (space key)<br>
-R+Triangle = set focus to next player (ALL-&gt;1-&gt;2-&gt;3-&gt;4)<br>
-R+Square = set player focus to previous player (ALL&lt;-1&lt;-2&lt;-3&lt;-4)</p>
-<h1>Gamepad Controls (Switch)</h1>
-<p>Dpad or left stick = move player and navigate menus<br>
-right stick = move mouse pointer<br>
-B = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)<br>
-A = secondary button (drop dynamite)<br>
-Y or L = left mouse button<br>
-X or R = right mouse button<br>
-Minus = quit (escape key, also cancels requesters)<br>
-Plus = pause (space key)<br>
-R+X = set focus to next player (ALL-&gt;1-&gt;2-&gt;3-&gt;4)<br>
-R+Y = set player focus to previous player (ALL&lt;-1&lt;-2&lt;-3&lt;-4)</p>
-<h1>Touch Controls</h1>
-<p>Note: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.</p>
-<p>Single short tap = left mouse click<br>
-Single short tap while holding a second finger down = right mouse click<br>
-Single finger drag = move the mouse pointer<br>
-Dual finger drag = drag'n'drop (left mouse button is held down)<br>
-Three finger drag = drag'n'drop (right mouse button is held down)</p>
-<h1>More Levels for Rocks'n'Diamonds</h1>
-<ul>
-<li><p>More than 50,000 additional Rocks'n'Diamonds levels can be downloaded here: <a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/rocksndiamonds/levels/">http://www.artsoft.org/rocksndiamonds/levels/</a></p>
-</li>
-<li><p>I made a single easy-to-install zip More_Levels_v2.zip (~90 MB). It contains selected additional levels from the above site and is available with the other release files.</p>
-</li>
-<li><p>Just download, unzip, and  transfer to your Vita, so that you have a subfolder <code>ux0:/data/rocksndiamonds/levels/More_Levels</code>. Or transfer to your Switch, so that you have a subfolder <code>switch/rocksndiamonds/levels/More_Levels</code>.</p>
-</li>
-<li><p>FTP transfer of levelsets has to be done using binary transfer mode, not Auto or ASCII . Otherwise some levels will be treated as ASCII with mangled line endings and won't work. This was verified with the Emerald_Mine_Club_original_1 levels and FileZilla FTP.</p>
-</li>
-</ul>
-<h1>Notes</h1>
-<ul>
-<li><p>It is possible to get a wrong screen size on Switch by messing with the options. The solution is to navigate to setup-&gt;graphics and enable Fullscreen mode and set Window size to 100%, then select &quot;save &amp; exit&quot;</p>
-</li>
-<li><p>To load new level sets, go to the level number selection in the menu, and press X (B on Switch). A new screen should open that shows a few levels. Go to the parent dir and into the folder Classic Games. There are many more levels already included in that folder.</p>
-</li>
-<li><p>Sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. This is fixed by simply restarting the game and loading the levelset again.</p>
-</li>
-<li><p>To answer the OK/Cancel dialogs in the game, press select (minus on Switch) to cancel (this is escape), or X (B on Switch) for OK.</p>
-</li>
-<li><p>You can install new level sets for Rocks'n'Diamonds by copying them into ux0:/data/rocksndiamonds/levels on Vita, or /switch/rocksndiamonds/levels on Switch. See the official manual: <a target="_blank" rel="noopener noreferrer" href="https://www.artsoft.org/rocksndiamonds/manual/manual.html#">https://www.artsoft.org/rocksndiamonds/manual/manual.html#</a></p>
-</li>
-<li><p>Similarly, you can install new level sets for Mirrormagic by copying them into ux0:/data/mirrormagic/levels on Vita, and /switch/mirrormagic/levels on Switch.</p>
-</li>
-<li><p>If you mess up some options and want to reset to default, you can delete the folder 'ux0:/data/rocksndiamonds/userdata' and/or 'ux0:/data/mirrormagic/userdata'. On Switch, the folders are '/switch/rocksndiamonds/userdata' and '/switch/mirrormagic/userdata'.</p>
-</li>
-<li><p>For multiplayer team mode in Rocks'n'Diamonds, enable it via Setup-&gt;Game &amp; Menu-&gt;Team-Mode (Multiplayer)-&gt;on. You also have to find make a level that has multiple players. R+Square and R+Triangle (R+Y and R+X on Switch) can be used in-game to change focus between players, see Game Controls. All controllers have to be paired before launching the app, otherwise they will not be recognized by the game.</p>
-</li>
-</ul>
-<h1>Build Instructions</h1>
-<ul>
-<li>clone the repository, then</li>
-</ul>
-<pre><code>cd rocksndiamonds
-</code></pre>
-<p>Then use</p>
-<pre><code>make vitarocks
-</code></pre>
-<p>or</p>
-<pre><code>make switchrocks
-</code></pre>
-<p>for Rocks'n'Diamonds, and</p>
-<pre><code>make vitamirror
-</code></pre>
-<p>or</p>
-<pre><code>make switchmirror
-</code></pre>
-<p>for Mirrormagic.</p>
-<p>You need the latest SDL2 Vita library from 05-23-2018 or later for this to work. The latest SDL2 library can be downloaded by updating your vitasdk, or here: <a target="_blank" rel="noopener noreferrer" href="https://dl.vitasdk.org">https://dl.vitasdk.org</a></p>
-<h1>CHANGELOG</h1>
-<p>1.15 (Switch only)</p>
-<ul>
-<li>on Switch, add 12.0.0 support. Only .nro files changed, data is the same.</li>
-</ul>
-<p>1.14 (Switch only)</p>
-<ul>
-<li>on Switch, add 9.0.0 support</li>
-<li>on Switch, fix .ogg audio playback</li>
-<li>on Switch, fix pointer getting stuck when controlled with physical USB mouse</li>
-</ul>
-<p>1.13 (Switch only)</p>
-<ul>
-<li>on Switch, fix automatically turning on/off VSync on selecting/deselecting Game Speed: 60 fps mode</li>
-</ul>
-<p>1.12</p>
-<ul>
-<li>fix crash when loading levelsets that change screenmode, such as Supaplex (Original)</li>
-<li>on Switch, fix slow-down when pressing home button</li>
-<li>on Switch, use 1080p resolution when docked</li>
-</ul>
-<p>1.11 (Switch only)</p>
-<ul>
-<li>On Switch, implement on-screen keyboard (only works when launching with nsp injection)</li>
-</ul>
-<p>1.10 (Switch only)</p>
-<ul>
-<li>fixed problem on Switch with too-large screen in docked mode when loading saved config. The workaround was to change window size to 100% and save again. Now Fullscreen mode should be set to &quot;On&quot; and then this problem does not appear anymore.</li>
-</ul>
-<p>1.9switch</p>
-<ul>
-<li>added Switch port</li>
-</ul>
-<p>1.9</p>
-<ul>
-<li><p>add '60 fps' game speed setting for perfectly smooth motion in some levels on the Vita. It works well with the bundled Emerald Mine levelsets. This mode is 20% faster than the default setting 'normal.'</p>
-</li>
-<li><p>removed slow-down when playing levelsets that use the Emerald Mine engine with default graphics.</p>
-</li>
-</ul>
-<p>1.8</p>
-<ul>
-<li>map set player focus to r+triangle and r+square for multiplayer games on VitaTV (up to 4 players)</li>
-</ul>
-<p>1.7</p>
-<ul>
-<li>enabled mp3 music support, used by some custom levelsets</li>
-</ul>
-<p>1.6</p>
-<ul>
-<li>support editing multiline textfields in level editor</li>
-</ul>
-<p>1.5</p>
-<ul>
-<li>optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @FrangarCJ for the help).</li>
-<li>fixed sticky touch inputs and other issues with touch controls</li>
-</ul>
-<p>1.4</p>
-<ul>
-<li>fixed screen centering</li>
-<li>fixed screen scaling so it works for all sizes</li>
-</ul>
-<p>1.3</p>
-<ul>
-<li>Mirrormagic as separate app. It uses the same codebase as Rocks'n'Diamonds.</li>
-<li>Smoother mouse pointer motion.</li>
-</ul>
-<p>1.2</p>
-<ul>
-<li>Significant speedup by drawing directly to texture pixels. Setting game speed to 'very fast' actually makes it faster now.</li>
-</ul>
-<p>1.1</p>
-<ul>
-<li>implemented mouse pointer controls via right analog stick and front touch. The level editor is fully usable now.</li>
-<li>improved picture quality for sharper graphics</li>
-</ul>
-<p>1.0</p>
-<ul>
-<li>fixed name entry using touch keyboard. It works without any return or backspace keypresses now.</li>
-<li>fixed graphics corruption of some cartoons on menu screen (updated data.zip)</li>
-</ul>
-<p>0.9</p>
-<ul>
-<li>initial Vita release</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_vita_1.12.vpk" target="_blank" rel="noopener">⬇ mirrormagic_vita_1.12.vpk · 2.6 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic.nro" target="_blank" rel="noopener">mirrormagic.nro · 10.7 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_data.zip" target="_blank" rel="noopener">mirrormagic_data.zip · 1.5 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/More_Levels_v2.zip" target="_blank" rel="noopener">More_Levels_v2.zip · 88.0 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds.nro" target="_blank" rel="noopener">rocksndiamonds.nro · 10.7 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_data.zip" target="_blank" rel="noopener">rocksndiamonds_data.zip · 1.4 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk" target="_blank" rel="noopener">rocksndiamonds_vita_1.12.vpk · 2.7 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-05 13:10 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-05 21:45 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
