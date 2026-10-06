@@ -2,19 +2,19 @@
   {
     "platform": "github",
     "repo": "Franckrst/D2Vita",
-    "release_id": "404561564",
-    "tag": "v0.2.1-beta",
-    "name": "v0.2.1-beta",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.1-beta",
-    "published": "2026-10-06T10:05:06Z",
+    "release_id": "405075842",
+    "tag": "v0.2.1-beta2",
+    "name": "v0.2.1-beta2",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.1-beta2",
+    "published": "2026-10-06T19:34:18Z",
     "prerelease": true,
     "draft": false,
-    "body": "\n- **Smoother heavy spell scenes.** A level-99 Sorceress casting Frozen Orb\n  non-stop (dozens of orbs and ice shards on screen, each with its own light)\n  went from ~22 to the game's 25 fps cap on a real console, with ~3 ms of\n  headroom left per frame. Four more pieces of the game's own code now run\n  natively instead of translated x86: the Perspective floor tiles (was\n  opt-in, now on by default), the lighting of missiles, the light-grid\n  rebuild, and the floor texture bind. Every one is checked byte for byte\n  against the game's own result. If something looks wrong, each can be\n  turned off in `env.txt`: `D2_F3NATIF=0`, `NATIVELIGHTDISC=0`,\n  `NATIVELIGHTDYN=0`, `D2_GRIDCACHE=0`, `D2_F3TEXNAT=0`.\n- **Settings panel on the title screen** (the \"Controls\" tab is renamed\n  \"Settings\") gets a third tab, **Game**: resolution, 640 zoom, menu shape,\n  HUD fill, ladder runewords, Akara reset, sound, auto keyboard and its\n  opacity, private servers. Only the options you change are written to\n  `env.txt`; they apply at the next launch.\n\nInstall the whole VPK: the speed-up of the floor texture bind needs the\n`glide3x.dll` shipped inside it (an old one simply falls back, slower).\nValidation: the performance figures are console measurements on the new\nFrozen Orb bench only — the Act V patrol was not re-run with these\ndefaults. The Settings \"Game\" tab is tested on the host only and has **not**\nbeen run on a console yet. Feedback welcome.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.0...v0.2.1-beta",
+    "body": "\nTwo fixes on top of 0.2.1-beta:\n\n- **The music volume is kept.** It was reset to 0 at every launch (D2\n  \"restored\" a volume it had never saved when the window got activated).\n  If yours is at 0, set it once more in Options → Sound; it now stays.\n- **An old kubridge no longer crashes the game at startup.** kubridge\n  before 0.3 is loaded under the same name but lacks what D2Vita uses: the\n  game closed with a C2 error right after launch. D2Vita now shows\n  \"KUBRIDGE PLUGIN TOO OLD (needs v0.3 or later)\" and runs without it.\n  Install kubridge 0.3.1 and reboot to get the full JIT cache back.\n\nValidation: the music fix is checked on console (volume 50 kept, reset to 0\nbefore) and with qemu (keyboard still works). The kubridge check is\nconfirmed on console with kubridge 0.3.1 (still detected and used); the\nold-kubridge case comes from a player's crash dump and was not reproduced\non hardware.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.1-beta...v0.2.1-beta2",
     "assets": [
       {
         "name": "d2vita.vpk",
-        "size": 8021584,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.1-beta/d2vita.vpk",
+        "size": 8024276,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.1-beta2/d2vita.vpk",
         "content_type": "application/octet-stream"
       }
     ],
@@ -45,25 +45,25 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.13 → release v0.2.1-beta",
+    "catalog_update_detail": "PSVitaAlive 0.1.13 → release v0.2.1-beta2",
     "catalog_version": "0.1.13"
   },
   {
     "platform": "github",
     "repo": "BirchWoodGod/halo-ce-vita",
-    "release_id": "404550034",
-    "tag": "v1.0.3-beta.5",
-    "name": "Halo CE for PS Vita 1.0.3 beta 5",
-    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.5",
-    "published": "2026-10-06T09:52:05Z",
+    "release_id": "404934373",
+    "tag": "v1.0.3-beta.6",
+    "name": "Halo CE for PS Vita 1.0.3 beta 6",
+    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.6",
+    "published": "2026-10-06T16:29:03Z",
     "prerelease": true,
     "draft": false,
-    "body": "**Testing build.** The fifth pre-release of 1.0.3, and likely the last before 1.0.3 itself. It has been tested on PC and in the Vita3K emulator, and its performance work was measured on a real Vita. If you want the stable build, stay on [v1.0.2.2](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2). Your saves carry over.\n\n## What's new\n\n**Graphics profiles** (settings panel, hold Select + Start)\n- A new **Profile** row sets several options at once:\n  - **Performance:** 50% render resolution and lighter detail. On a real Vita this took The Silent Cartographer's beach fight from about 18 to 26–30 fps, and Pillar of Autumn's big firefights from about 16 to about 26 fps.\n  - **Balanced:** the defaults, as before.\n  - **Quality:** 100% resolution and full detail, the closest to the Xbox.\n  - Changing any single row shows **Custom**. Rows marked * apply after a restart.\n- **Aspect ratio: 16:9 or 4:3.** 4:3 shows the Xbox's original framing with black bars at the sides.\n- **Upscale filter: Smooth or Sharp.** Sharp keeps low resolutions crisp instead of blurry.\n\n**Fixed**\n- **The Warthog windshield and Covenant energy shields no longer flicker or vanish** (#13, #20, #26). The glass's vertex shader read one leftover value that could be garbage; on the frames where it was, the whole windshield disappeared. Energy barrier domes also stay visible at a distance now.\n- **The cloaked Flood in The Maw no longer tank the frame rate** (#26): the game copied the screen once for every cloaked enemy; it now copies it once per frame.\n- **Sound costs about half as much processor time** in big fights, using the Vita's vector instructions. It should sound the same.\n- **Movies are always scaled to fill the screen** at their own shape, whatever size they were encoded at (#8). The Xbox's own 4:3 movies look as before.\n- **A crash in fights** (seen on The Silent Cartographer) when an object appeared on screen in the same moment its lighting was being worked out; it's also in earlier versions.\n- Drawing characters and vehicles is a little cheaper.\n\n**Other**\n- The README has a **Performance** section with measured frame rates and recommended settings, and a note on **official sources**: the only official downloads are this repository's releases.\n- `halo.log` now records exactly which checkpoint a revert loads and any level restart (#10).\n\n## Please test\n\n- The **Performance** profile in big fights: frame rate and how it looks, also with **4:3** and **Sharp**.\n- Warthog windshields, Covenant energy shields and glass from different angles.\n- The cloaked Flood in The Maw's armory.\n- Sound during big fights.\n- If you converted movies yourself: does yours fill the screen? (640 or 960 wide is safest; 848 wide may still show black on some Vitas. If it does, attach `halo.log`.)\n\n## Still known\n\n- The biggest fights can still drop frames on Balanced and Quality; a steady 30 fps is planned for 1.1.0.\n- Some trees can flicker at the screen's edges.\n\n## Install\n\nInstall `halo.vpk` with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.\n\nReport problems on the [issue tracker](https://github.com/BirchWoodGod/halo-ce-vita/issues) and say you are on **1.0.3-beta.5**. For crashes, attach the files listed in [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\nThanks to **BlazeRed17**, **Ben**, **5ackwood**, **DuckiEXP** and everyone testing the betas.\n",
+    "body": "**Testing build.** The 1.0.3 release candidate. Same as beta 5, plus:\n\n- **Graphics settings apply instantly.** Render resolution, aspect ratio (16:9 / 4:3) and the Performance / Balanced / Quality profiles now change live in the settings panel (hold Select + Start), no restart needed. Expect a short pause (well under half a second) while the screen is rebuilt at the new size. Only *Sound voices* still needs a restart.\n\nIt has been tested on PC and in the Vita3K emulator, including a v1.0.2.2 save loading on it; 1.0.3 itself follows soon. If you want the stable build, stay on [v1.0.2.2](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2). Your saves carry over.\n\n## Please test\n\n- Switch resolution, aspect ratio and profiles during gameplay, while zoomed, in the pause menu and during a cutscene: does each change apply right away and look right?\n- Anything that worked in beta 5 and doesn't here.\n\n## Install\n\nInstall `halo.vpk` with VitaShell over your current version; maps, saves and settings are kept.\n\nReport problems on the [issue tracker](https://github.com/BirchWoodGod/halo-ce-vita/issues) and say you are on **1.0.3-beta.6**.\n",
     "assets": [
       {
         "name": "halo.vpk",
-        "size": 3351951,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.5/halo.vpk",
+        "size": 3355185,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.6/halo.vpk",
         "content_type": "application/octet-stream"
       }
     ],
@@ -94,7 +94,7 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.3-beta.5",
+    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.3-beta.6",
     "catalog_version": "1.0.1"
   },
   {
