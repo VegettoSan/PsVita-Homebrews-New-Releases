@@ -1,6 +1,104 @@
 [
   {
     "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "404561564",
+    "tag": "v0.2.1-beta",
+    "name": "v0.2.1-beta",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.1-beta",
+    "published": "2026-10-06T10:05:06Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "\n- **Smoother heavy spell scenes.** A level-99 Sorceress casting Frozen Orb\n  non-stop (dozens of orbs and ice shards on screen, each with its own light)\n  went from ~22 to the game's 25 fps cap on a real console, with ~3 ms of\n  headroom left per frame. Four more pieces of the game's own code now run\n  natively instead of translated x86: the Perspective floor tiles (was\n  opt-in, now on by default), the lighting of missiles, the light-grid\n  rebuild, and the floor texture bind. Every one is checked byte for byte\n  against the game's own result. If something looks wrong, each can be\n  turned off in `env.txt`: `D2_F3NATIF=0`, `NATIVELIGHTDISC=0`,\n  `NATIVELIGHTDYN=0`, `D2_GRIDCACHE=0`, `D2_F3TEXNAT=0`.\n- **Settings panel on the title screen** (the \"Controls\" tab is renamed\n  \"Settings\") gets a third tab, **Game**: resolution, 640 zoom, menu shape,\n  HUD fill, ladder runewords, Akara reset, sound, auto keyboard and its\n  opacity, private servers. Only the options you change are written to\n  `env.txt`; they apply at the next launch.\n\nInstall the whole VPK: the speed-up of the floor texture bind needs the\n`glide3x.dll` shipped inside it (an old one simply falls back, slower).\nValidation: the performance figures are console measurements on the new\nFrozen Orb bench only — the Act V patrol was not re-run with these\ndefaults. The Settings \"Game\" tab is tested on the host only and has **not**\nbeen run on a console yet. Feedback welcome.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.0...v0.2.1-beta",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 8021584,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.1-beta/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.1.13",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+        "version": "0.1.13",
+        "version_date": "2026-09-28",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.13 → release v0.2.1-beta",
+    "catalog_version": "0.1.13"
+  },
+  {
+    "platform": "github",
+    "repo": "BirchWoodGod/halo-ce-vita",
+    "release_id": "404550034",
+    "tag": "v1.0.3-beta.5",
+    "name": "Halo CE for PS Vita 1.0.3 beta 5",
+    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.5",
+    "published": "2026-10-06T09:52:05Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "**Testing build.** The fifth pre-release of 1.0.3, and likely the last before 1.0.3 itself. It has been tested on PC and in the Vita3K emulator, and its performance work was measured on a real Vita. If you want the stable build, stay on [v1.0.2.2](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2). Your saves carry over.\n\n## What's new\n\n**Graphics profiles** (settings panel, hold Select + Start)\n- A new **Profile** row sets several options at once:\n  - **Performance:** 50% render resolution and lighter detail. On a real Vita this took The Silent Cartographer's beach fight from about 18 to 26–30 fps, and Pillar of Autumn's big firefights from about 16 to about 26 fps.\n  - **Balanced:** the defaults, as before.\n  - **Quality:** 100% resolution and full detail, the closest to the Xbox.\n  - Changing any single row shows **Custom**. Rows marked * apply after a restart.\n- **Aspect ratio: 16:9 or 4:3.** 4:3 shows the Xbox's original framing with black bars at the sides.\n- **Upscale filter: Smooth or Sharp.** Sharp keeps low resolutions crisp instead of blurry.\n\n**Fixed**\n- **The Warthog windshield and Covenant energy shields no longer flicker or vanish** (#13, #20, #26). The glass's vertex shader read one leftover value that could be garbage; on the frames where it was, the whole windshield disappeared. Energy barrier domes also stay visible at a distance now.\n- **The cloaked Flood in The Maw no longer tank the frame rate** (#26): the game copied the screen once for every cloaked enemy; it now copies it once per frame.\n- **Sound costs about half as much processor time** in big fights, using the Vita's vector instructions. It should sound the same.\n- **Movies are always scaled to fill the screen** at their own shape, whatever size they were encoded at (#8). The Xbox's own 4:3 movies look as before.\n- **A crash in fights** (seen on The Silent Cartographer) when an object appeared on screen in the same moment its lighting was being worked out; it's also in earlier versions.\n- Drawing characters and vehicles is a little cheaper.\n\n**Other**\n- The README has a **Performance** section with measured frame rates and recommended settings, and a note on **official sources**: the only official downloads are this repository's releases.\n- `halo.log` now records exactly which checkpoint a revert loads and any level restart (#10).\n\n## Please test\n\n- The **Performance** profile in big fights: frame rate and how it looks, also with **4:3** and **Sharp**.\n- Warthog windshields, Covenant energy shields and glass from different angles.\n- The cloaked Flood in The Maw's armory.\n- Sound during big fights.\n- If you converted movies yourself: does yours fill the screen? (640 or 960 wide is safest; 848 wide may still show black on some Vitas. If it does, attach `halo.log`.)\n\n## Still known\n\n- The biggest fights can still drop frames on Balanced and Quality; a steady 30 fps is planned for 1.1.0.\n- Some trees can flicker at the screen's edges.\n\n## Install\n\nInstall `halo.vpk` with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.\n\nReport problems on the [issue tracker](https://github.com/BirchWoodGod/halo-ce-vita/issues) and say you are on **1.0.3-beta.5**. For crashes, attach the files listed in [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\nThanks to **BlazeRed17**, **Ben**, **5ackwood**, **DuckiEXP** and everyone testing the betas.\n",
+    "assets": [
+      {
+        "name": "halo.vpk",
+        "size": 3351951,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.5/halo.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "BirchWoodGod",
+    "homebrew_name": "Halo CE",
+    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+    "homebrew_id": "halo-ce",
+    "homebrew_authors": [
+      "birchwoodgod"
+    ],
+    "homebrew_version": "1.0.1",
+    "catalog_apps": [
+      {
+        "id": "halo-ce",
+        "name": "Halo CE",
+        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+        "category": "ports",
+        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+        "version": "1.0.1",
+        "version_date": "2026-10-02",
+        "author_ids": [
+          "birchwoodgod"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.3-beta.5",
+    "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "TheXTech/TheXTech",
     "release_id": "404033578",
     "tag": "v1.7.4",
@@ -572,55 +670,6 @@
   },
   {
     "platform": "github",
-    "repo": "BirchWoodGod/halo-ce-vita",
-    "release_id": "404065929",
-    "tag": "v1.0.3-beta.4",
-    "name": "Halo CE for PS Vita 1.0.3 beta 4",
-    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3-beta.4",
-    "published": "2026-10-05T20:05:45Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "**Testing build.** The fourth pre-release of 1.0.3, built from your reports on beta 3. It has been tested on PC and in the Vita3K emulator, but not yet on a real Vita, so expect rough edges. If you want the stable build, stay on [v1.0.2.2](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.2.2). Your saves carry over.\n\n## What's new\n\n**Big late-game fights (The Maw, Keyes, Flood vs Covenant)**\n- **Much less work for the GPU when many objects cast shadows.** The single-digit frame rates in these fights came from the GPU, not the simulation: every object shadow was its own little render pass with waits in between. Shadows now share one surface and are drawn in batches (from about 26 GPU passes a frame to about 5), which should also stop shadows and glows going missing late in a session.\n- Lightmaps, bump and detail textures are stored in the GPU's preferred layout, the particle limits match the Xbox's in single player, and character collision does less work.\n\n**Water**\n- **Fixed the water artifacts** on 343 Guilty Spark and likely the multicoloured ocean on The Silent Cartographer (#23, #24): the water's ripple texture is repeated across the surface, and the Vita's GPU wouldn't repeat it in the form we gave it. Thanks to DuckiEXP for finding that `rasterizer_water false` made the artifact go away, which pointed straight at it.\n\n**Invisible Flood**\n- **The cloaked Flood Elites in The Maw are visible again** (they shimmer, as on the Xbox). Late in a session the shimmer effect could run out of GPU surfaces, and the cloaked Flood vanished (beta 1 drew them black) (#26).\n\n**Sound**\n- **Explosions, impacts and shield sounds no longer play late or go missing** (#26): sounds now load ahead of textures, and a sound that's still loading gets a moment to finish instead of being dropped.\n\n**Other**\n- The countdown number in the corner during the final cutscene (and in the menu afterwards) is gone; it was a debug display from the Xbox beta build (#26).\n- More checkpoint diagnostics in `halo.log`, so we can see what holds checkpoints back on long levels (#10).\n\n## Please test\n\n- The late missions with big Flood/Covenant fights and the final Warthog run: frame rate compared with beta 3.\n- 343 Guilty Spark's water and The Silent Cartographer's ocean. **Remove `HALO_TARGET_CHAIN=0` from env.txt if you added it for beta 2/3**: with this bug it makes the water worse.\n- Shadows under characters and vehicles: do they look right?\n- Sounds during fights.\n- Flickering purple shields or glass: if it still happens, try **one** of these lines at a time in `ux0:data/haloce-vita/env.txt` and tell us which one stops it: `HALO_GXM_WCLAMP=0`, `HALO_GXM_RTT_SYNC=0`, `HALO_GXM_SCENE_DRAWS=0`, `HALO_GXM_DEPTH_BIAS=0`.\n\n## Notes\n\n- On the final mission the two scripted checkpoints are only taken when no projectile is in flight anywhere in the map, as in the original game, so they can be missed during a fight.\n- The red lights on some doors that do open are how the original game shows one-sided or script-controlled doors.\n\n## Install\n\nInstall `halo.vpk` with VitaShell over your current version; maps, saves and settings are kept. To go back, install the v1.0.2.2 VPK the same way.\n\nReport problems on the [issue tracker](https://github.com/BirchWoodGod/halo-ce-vita/issues) and say you are on **1.0.3-beta.4**. For crashes, attach the files listed in [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\nThanks to **BlazeRed17** for playing the whole campaign and reporting on every level, and to **Ben**, **DuckiEXP**, **5ackwood** and **aguy4809-art**.\n",
-    "assets": [
-      {
-        "name": "halo.vpk",
-        "size": 3339493,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.0.3-beta.4/halo.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "BirchWoodGod",
-    "homebrew_name": "Halo CE",
-    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
-    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
-    "homebrew_id": "halo-ce",
-    "homebrew_authors": [
-      "birchwoodgod"
-    ],
-    "homebrew_version": "1.0.1",
-    "catalog_apps": [
-      {
-        "id": "halo-ce",
-        "name": "Halo CE",
-        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
-        "category": "ports",
-        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
-        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
-        "version": "1.0.1",
-        "version_date": "2026-10-02",
-        "author_ids": [
-          "birchwoodgod"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.3-beta.4",
-    "catalog_version": "1.0.1"
-  },
-  {
-    "platform": "github",
     "repo": "noword/Emu4VitaPlus",
     "release_id": "403276942",
     "tag": "v0.81",
@@ -990,55 +1039,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v1.1-rc25 → release v1.1-rc29",
     "catalog_version": "v1.1-rc25"
-  },
-  {
-    "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "402693617",
-    "tag": "v0.2.0",
-    "name": "v0.2.0",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.0",
-    "published": "2026-10-03T21:11:21Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\nFirst release of the 0.2 line: the new controller scheme and the aim assist\nare no longer experimental. Everything below is the sum of the 0.1.14–0.1.22\nbetas since the last stable release (0.1.13); the details are in each beta's\nentry.\n\n- **A new controller scheme with an aim assist.** The right stick is a free\n  cursor; L (the aim button) walks to and attacks the best target — monster\n  nearest the centre of the aim cone, object, item, level exit or your\n  corpse — and does a plain left click when there is none. Hold Square and\n  press L to pick up the highlighted item. Remappable, with an `l+` layer.\n- **The Controls panel on the title screen is an editor.** Reassign any\n  button (plain, with R, with L) and tune the aim cone, monster and object\n  reach (`hostile_reach`), cursor speed, deadzone and walk rings by touch or\n  D-pad; closing it saves only what you changed into `controls.txt`.\n- **`controls.txt` is friendlier:** a fully-commented reference copy ships\n  in the VPK, a bad line is named in `boot_progress.txt`, out-of-range\n  numbers are refused, `diamond=off` hides the aim marker.\n- **Display fixes:** inventory, stash and character panels centered by\n  default, multi-row belts no longer flicker, menus no longer cropped after\n  a game played at 640×480, touch offset fixed in game.\n- **Two optional single-player options** (off by default) — see v0.1.17-beta.\n\nValidation: the pad logic and the panel are covered by host tests (ASan /\nUBSan) and the runtime by the qemu-arm boot gates; the aim assist was\nconfirmed on console in the Den of Evil only, and the Controls\neditor, the cone targeting and the no-target click have **not** been run on\nconsole yet. Feedback welcome.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n## What's Changed\n* Controller v2: aim-assist scheme and D-pad loot browsing by @Franckrst in https://github.com/Franckrst/D2Vita/pull/14\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.1.13...v0.2.0",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 8001016,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.0/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.1.13",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-        "version": "0.1.13",
-        "version_date": "2026-09-28",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.13 → release v0.2.0",
-    "catalog_version": "0.1.13"
   },
   {
     "platform": "github",
@@ -33184,158 +33184,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.16",
     "catalog_version": "1.16"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/cannonball",
-    "release_id": "43416076",
-    "tag": "1.08switchgit-vita/switch-rsn8887",
-    "name": "Cannonball Vita 1.05 / Switch v1.08",
-    "url": "https://github.com/rsn8887/cannonball/releases/tag/1.08switchgit-vita/switch-rsn8887",
-    "published": "2021-05-22T20:18:25Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Recent Changes\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\nOverview\r\n=====\r\nThis is my Vita and Switch port of Cannonball, an enhanced Outrun engine by djyt.\r\n\r\nThanks djyt for writing such a great program and making sure it is easily portable.\r\n\r\nThanks to ScHlAuChi for testing.\r\n\r\nThanks to my Patreon supporters: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nNOTE: Arcade roms for Outrun Version B are required to run this engine. The roms are NOT included in the download (see installation instructions).\r\n\r\n![](screenshots/Cannonball_vita_1.jpg)\r\n\r\nA detailed Manual and FAQ are here:\r\nhttps://github.com/djyt/cannonball/wiki\r\n\r\nSwitch Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Extract the contents of cannonball_switch.zip into the folder `switch/` on your sdcard. You should have a folder `switch/Cannonball_Switch/`.\r\n- Obtain the arcade roms for Outrun Version B and extract them into `switch/Cannonball_Switch/roms`\r\n- Launch the .nro file using your favorite homebrew launcher, enjoy Outrun in almost perfect 60 fps.\r\n- This version of Cannonball is called \"Cannonball_Switch\" to distinguish it from Lantus' port\r\n\r\nSwitch Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nMinus = insert coin  \r\nPlus = start  \r\nY = gas / OK in menu\r\nB = brake\r\nX = change gears  \r\nL = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.\r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nVita Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Install the .vpk\r\n- Extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)\r\n- Obtain the arcade roms for Outrun Version B and extract them into ux0:data/cannonball/roms\r\n- Launch the bubble, enjoy Outrun in almost perfect 60 fps.\r\n\r\nVita Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nL = insert coin  \r\nSquare = start  \r\nTriangle = gas / enter letter on hi-score screen  \r\nCircle = brake  \r\nCross = change gears  \r\nSelect = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.  \r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nNotes about Vita version\r\n=====\r\n- Default difficulty is set to easy, but can be changed to normal or hard in the menu.\r\n- The game runs at full speed with almost constant 60 fps. The exception is some slowdown at the beginning of the race. That slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. The high-resolution hack should not be enabled, it causes too much slow-down.\r\n\r\nRom names\r\n======\r\n````\r\n-------------------------------------------------------------------------------\r\nPlace OutRun Revision B ROMs in this directory.\r\nThey must be named as follows:\r\n-------------------------------------------------------------------------------\r\nepr-10187.88\r\nepr-10327a.76\r\nepr-10328a.75\r\nepr-10329a.58\r\nepr-10330a.57\r\nepr-10380b.133\r\nepr-10381a.132\r\nepr-10382b.118\r\nepr-10383b.117\r\nmpr-10371.9\r\nmpr-10372.13\r\nmpr-10373.10\r\nmpr-10374.14\r\nmpr-10375.11\r\nmpr-10376.15\r\nmpr-10377.12\r\nmpr-10378.16\r\nopr-10185.11\r\nopr-10186.47\r\nopr-10188.71\r\nopr-10189.70\r\nopr-10190.69\r\nopr-10191.68\r\nopr-10192.67\r\nopr-10193.66\r\nopr-10230.104\r\nopr-10231.103\r\nopr-10232.102\r\nopr-10266.101\r\nopr-10267.100\r\nopr-10268.99\r\n\r\n-------------------------------------------------------------------------------\r\nThe original Japanese release of OutRun featured slightly different tracks \r\nand course ordering.\r\n\r\nOptionally, you can include the following files from the Japanese version to\r\nplay these alternate tracks:\r\n-------------------------------------------------------------------------------\r\n\r\nepr-10380.133\r\nepr-10382.118\r\nepr-10381.132\r\nepr-10383.117\r\nepr-10327.76\r\nepr-10329.58\r\nepr-10328.75\r\nepr-10330.57\r\n\r\n-------------------------------------------------------------------------------\r\nFixed Audio Rom (Optional)\r\nhttp://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html\r\n-------------------------------------------------------------------------------\r\n\r\nopr-10188.71f\r\n````\r\n\r\nBuild Instructions\r\n=====\r\nCannonball needs some boost header-only libraries. To prepare compilation:\r\n- Download and extract boost_1_66_0.zip from [here](https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip)\r\n- copy the subfolder boost from that archive to $VITASDK/arm-vita-eabi/include/boost for Vita, or to $DEVKITPRO/portlibs/switch/include/boost for Switch\r\n- you should now have a file $VITASDK/arm-vita-eabi/include/boost/version.hpp, or $DEVKITPRO/portlibs/switch/include/boos/version.hpp and hundreds of other Boost header files.\r\n- Now that boost is installed, proceed to compile cannonball:\r\n````\r\ncd cannonball\r\nmkdir build\r\ncd build\r\n````\r\nthen, for Vita:\r\n````\r\ncmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball.vpk -j10\r\n````\r\nor, for Switch: \r\n````\r\ncmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball_Switch.zip -j10\r\n````\r\n\r\nNote: The Vita source depends on FrangarCJ's Vita2d fbo branch with shader support here: https://github.com/Cpasjuste/vita2dlib/tree/fbo\r\nand FrangarCJ's vita-shader-collection gtu branch here: https://github.com/frangarcj/vita-shader-collection/tree/gtu\r\nThose are both included as binaries and linked automatically.\r\n\r\nChangelog\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\n1.07switch\r\n\r\n- Fix black screen due to linking with latest SDL2\r\n\r\n1.06switch\r\n\r\n- recompiled with 9.0.0 support\r\n\r\n1.05switch\r\n\r\n- added Switch release\r\n\r\n1.05\r\n\r\n- dpad works now if analog=\"off\"\r\n- gas/brake on right stick if analog=\"on\" (digital gas/brake on buttons if analog=\"wheel only\")\r\n\r\n1.04\r\n\r\n- better image quality (less blurry)\r\n- support non-fullscreen modes\r\n\r\n1.03\r\n\r\n- moved menu navigation to the dpad. True analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.\r\n\r\n1.02\r\n\r\n- removed unneccessary temporary files (__MACOSX, .DS_Store) from data.zip \r\n\r\n1.01\r\n\r\n- forgot to include config.xml in data.zip, it is now included\r\n\r\n1.0\r\n\r\n- Initial Vita release",
-    "assets": [
-      {
-        "name": "Cannonball_1.05.vpk",
-        "size": 1123006,
-        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.05.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Cannonball_1.08_Switch.zip",
-        "size": 3153199,
-        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.08_Switch.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "rsn8887",
-    "homebrew_name": "Cannonball",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "OutRun engine for PSVITA.",
-    "homebrew_long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
-    "homebrew_id": "cannonball",
-    "homebrew_authors": [
-      "rsn8887"
-    ],
-    "homebrew_version": "1.08switchgit-vita/switch-rsn8887",
-    "catalog_apps": [
-      {
-        "id": "cannonball",
-        "name": "Cannonball",
-        "icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
-        "category": "ports",
-        "description": "OutRun engine for PSVITA.",
-        "long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
-        "version": "1.08switchgit-vita/switch-rsn8887",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.08switchgit-vita/switch-rsn8887",
-    "catalog_version": "1.08switchgit-vita/switch-rsn8887"
-  },
-  {
-    "platform": "github",
-    "repo": "rsn8887/rocksndiamonds",
-    "release_id": "43415144",
-    "tag": "1.15",
-    "name": "Rocks'n'Diamonds and Mirrormagic for Vita (v1.12) and Switch (v1.15)",
-    "url": "https://github.com/rsn8887/rocksndiamonds/releases/tag/1.15",
-    "published": "2021-05-22T19:09:54Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Recent Changes\r\n======\r\n1.15 (Switch only)\r\n\r\n- on Switch, add 12.0.0 support. Only .nro files changed, data is the same.\r\n\r\nDescription\r\n======\r\nThese are my Vita and Switch ports of Rocks'n'Diamonds and Mirrormagic. \r\n\r\n**Rocks'n'Diamonds** is a Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels.\r\n\r\n![Screenshot of Rocks'n'Diamonds Vita](screenshots/rnd_new_a.jpg)\r\n\r\n**Mirrormagic** is a game by Holger Schemel in the tradition of Deflektor and Mindbender. You guide a laser beam by adjusting mirrors before the time limit runs out.\r\n\r\n![Screenshot of Mirrormagic Vita](screenshots/mm_new_a.jpg)\r\n\r\nMore information about the games can be found at the homepages for the Windows versions:\r\n\r\nhttp://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/\r\nhttp://www.artsoft.org/mirrormagic\r\n\r\nAnd the official manual for Rocks'n'Diamonds is here:\r\n\r\nhttps://www.artsoft.org/rocksndiamonds/manual/index.html\r\n\r\nThanks\r\n======\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nThanks @FrangarCJ for help with optimizing the rendering. \r\n\r\nThanks to Holger Schemel for making a great and portable game.\r\n\r\nThanks to the many devs of VitaSDK for a great development environment.\r\n\r\nThanks to all the devs of DevKitPro for Switch for a great development suite. \r\n\r\nInstallation (Vita)\r\n=====\r\n\r\n- install the vpks\r\n\r\n- extract contents of `rocksndiamonds_data.zip` and `mirrormagic_data.zip` and copy them to your Vita's `ux0:/data` folder. You should have folders `ux0:/data/rocksndiamonds` and `ux0:/data/mirrormagic` on your Vita with the files in them.  \r\n\r\nInstallation (Switch)\r\n=====\r\n\r\n- extract `rocksndiamonds_data.zip` and `mirrormagic_data.zip` to the folder `switch/` in the root of your sd card. You should have folders such as `switch/rocksndiamonds/levels` and `switch/mirrormagic/levels` and more. Make sure none of the folders or files has the \"archive\" flag set after copying.\r\n \r\n- copy `rocksndiamonds.nro` to `switch/rocksndiamonds/` and `mirrormagic.nro` to `switch/mirrormagic/`\r\n\r\n- use nsp injection to start the games, otherwise the on-screen keyboard will not work. On SX OS, you can do this by holding down R while launching any installed game to make hbmenu appear. \r\n\r\nVita/Switch-Exclusive Features\r\n=======\r\n- game controller mapping including analog joystick mouse controls\r\n- front touch controls with left/right mouse click and drag and drop gestures\r\n- the game runs smooth at the same speed as the desktop versions\r\n- additional level package with thousands of levels as separate download (see 'More Levels')\r\n- auto-hide mouse cursor when using the dpad\r\n- easily switch player focus in multiplayer games using r+triangle and r+square\r\n- 60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.\r\n- text entry with Vita/Switch touch keyboard, no physical keyboard or mouse required\r\n\r\nVita-Exclusive Features\r\n========\r\n- support for bluetooth keyboard and mouse\r\n\r\nGamepad Controls (Vita)\r\n======\r\nDpad or left stick = move player and navigate menus  \r\nright stick = move mouse pointer  \r\nCross = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)  \r\nCircle = secondary button (drop dynamite)  \r\nSquare / L = left mouse button  \r\nTriangle / R = right mouse button  \r\nSelect = quit (escape key, also cancels requesters)  \r\nStart = pause (space key)  \r\nR+Triangle = set focus to next player (ALL->1->2->3->4)  \r\nR+Square = set player focus to previous player (ALL<-1<-2<-3<-4)  \r\n\r\nGamepad Controls (Switch)\r\n======\r\nDpad or left stick = move player and navigate menus  \r\nright stick = move mouse pointer  \r\nB = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)  \r\nA = secondary button (drop dynamite)  \r\nY or L = left mouse button  \r\nX or R = right mouse button  \r\nMinus = quit (escape key, also cancels requesters)  \r\nPlus = pause (space key)  \r\nR+X = set focus to next player (ALL->1->2->3->4)  \r\nR+Y = set player focus to previous player (ALL<-1<-2<-3<-4)  \r\n\r\nTouch Controls\r\n=======\r\nNote: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.\r\n\r\nSingle short tap = left mouse click  \r\nSingle short tap while holding a second finger down = right mouse click  \r\nSingle finger drag = move the mouse pointer  \r\nDual finger drag = drag'n'drop (left mouse button is held down)  \r\nThree finger drag = drag'n'drop (right mouse button is held down)  \r\n\r\nMore Levels for Rocks'n'Diamonds\r\n=========\r\n\r\n- More than 50,000 additional Rocks'n'Diamonds levels can be downloaded here: http://www.artsoft.org/rocksndiamonds/levels/\r\n\r\n- I made a single easy-to-install zip More_Levels_v2.zip (~90 MB). It contains selected additional levels from the above site and is available with the other release files.\r\n\r\n- Just download, unzip, and  transfer to your Vita, so that you have a subfolder `ux0:/data/rocksndiamonds/levels/More_Levels`. Or transfer to your Switch, so that you have a subfolder `switch/rocksndiamonds/levels/More_Levels`.\r\n\r\n- FTP transfer of levelsets has to be done using binary transfer mode, not Auto or ASCII . Otherwise some levels will be treated as ASCII with mangled line endings and won't work. This was verified with the Emerald_Mine_Club_original_1 levels and FileZilla FTP.\r\n\r\nNotes\r\n=====\r\n- It is possible to get a wrong screen size on Switch by messing with the options. The solution is to navigate to setup->graphics and enable Fullscreen mode and set Window size to 100%, then select \"save & exit\"\r\n\r\n- To load new level sets, go to the level number selection in the menu, and press X (B on Switch). A new screen should open that shows a few levels. Go to the parent dir and into the folder Classic Games. There are many more levels already included in that folder.\r\n\r\n- Sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. This is fixed by simply restarting the game and loading the levelset again.\r\n\r\n- To answer the OK/Cancel dialogs in the game, press select (minus on Switch) to cancel (this is escape), or X (B on Switch) for OK.\r\n\r\n- You can install new level sets for Rocks'n'Diamonds by copying them into ux0:/data/rocksndiamonds/levels on Vita, or /switch/rocksndiamonds/levels on Switch. See the official manual: https://www.artsoft.org/rocksndiamonds/manual/manual.html#\r\n\r\n- Similarly, you can install new level sets for Mirrormagic by copying them into ux0:/data/mirrormagic/levels on Vita, and /switch/mirrormagic/levels on Switch. \r\n\r\n- If you mess up some options and want to reset to default, you can delete the folder 'ux0:/data/rocksndiamonds/userdata' and/or 'ux0:/data/mirrormagic/userdata'. On Switch, the folders are '/switch/rocksndiamonds/userdata' and '/switch/mirrormagic/userdata'.\r\n\r\n- For multiplayer team mode in Rocks'n'Diamonds, enable it via Setup->Game & Menu->Team-Mode (Multiplayer)->on. You also have to find make a level that has multiple players. R+Square and R+Triangle (R+Y and R+X on Switch) can be used in-game to change focus between players, see Game Controls. All controllers have to be paired before launching the app, otherwise they will not be recognized by the game.\r\n\r\nBuild Instructions\r\n=====\r\n- clone the repository, then\r\n````\r\ncd rocksndiamonds\r\n````\r\nThen use\r\n````\r\nmake vitarocks\r\n````\r\nor\r\n````\r\nmake switchrocks\r\n````\r\nfor Rocks'n'Diamonds, and\r\n````\r\nmake vitamirror\r\n````\r\nor\r\n````\r\nmake switchmirror\r\n````\r\nfor Mirrormagic.\r\n\r\nYou need the latest SDL2 Vita library from 05-23-2018 or later for this to work. The latest SDL2 library can be downloaded by updating your vitasdk, or here: https://dl.vitasdk.org\r\n\r\nCHANGELOG\r\n=====\r\n1.15 (Switch only)\r\n\r\n- on Switch, add 12.0.0 support. Only .nro files changed, data is the same.\r\n\r\n1.14 (Switch only)\r\n\r\n- on Switch, add 9.0.0 support\r\n- on Switch, fix .ogg audio playback\r\n- on Switch, fix pointer getting stuck when controlled with physical USB mouse\r\n\r\n1.13 (Switch only)\r\n\r\n- on Switch, fix automatically turning on/off VSync on selecting/deselecting Game Speed: 60 fps mode \r\n\r\n1.12\r\n\r\n- fix crash when loading levelsets that change screenmode, such as Supaplex (Original)\r\n- on Switch, fix slow-down when pressing home button\r\n- on Switch, use 1080p resolution when docked\r\n\r\n\r\n1.11 (Switch only)\r\n\r\n- On Switch, implement on-screen keyboard (only works when launching with nsp injection)\r\n\r\n1.10 (Switch only)\r\n\r\n- fixed problem on Switch with too-large screen in docked mode when loading saved config. The workaround was to change window size to 100% and save again. Now Fullscreen mode should be set to \"On\" and then this problem does not appear anymore.\r\n\r\n1.9switch\r\n\r\n- added Switch port\r\n\r\n1.9\r\n\r\n- add '60 fps' game speed setting for perfectly smooth motion in some levels on the Vita. It works well with the bundled Emerald Mine levelsets. This mode is 20% faster than the default setting 'normal.'\r\n\r\n- removed slow-down when playing levelsets that use the Emerald Mine engine with default graphics.\r\n\r\n1.8\r\n\r\n- map set player focus to r+triangle and r+square for multiplayer games on VitaTV (up to 4 players)\r\n\r\n1.7\r\n\r\n- enabled mp3 music support, used by some custom levelsets\r\n\r\n1.6\r\n\r\n- support editing multiline textfields in level editor\r\n\r\n1.5\r\n\r\n- optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @FrangarCJ for the help).\r\n- fixed sticky touch inputs and other issues with touch controls\r\n\r\n1.4\r\n\r\n- fixed screen centering\r\n- fixed screen scaling so it works for all sizes\r\n\r\n1.3\r\n\r\n- Mirrormagic as separate app. It uses the same codebase as Rocks'n'Diamonds.\r\n- Smoother mouse pointer motion.\r\n\r\n1.2\r\n\r\n- Significant speedup by drawing directly to texture pixels. Setting game speed to 'very fast' actually makes it faster now.\r\n\r\n1.1\r\n\r\n- implemented mouse pointer controls via right analog stick and front touch. The level editor is fully usable now.\r\n- improved picture quality for sharper graphics\r\n\r\n1.0\r\n\r\n- fixed name entry using touch keyboard. It works without any return or backspace keypresses now.\r\n- fixed graphics corruption of some cartoons on menu screen (updated data.zip)\r\n\r\n0.9\r\n\r\n- initial Vita release\r\n",
-    "assets": [
-      {
-        "name": "mirrormagic.nro",
-        "size": 11255096,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "mirrormagic_data.zip",
-        "size": 1571524,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_data.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "mirrormagic_vita_1.12.vpk",
-        "size": 2742965,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "More_Levels_v2.zip",
-        "size": 92324655,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/More_Levels_v2.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "rocksndiamonds.nro",
-        "size": 11260669,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "rocksndiamonds_data.zip",
-        "size": 1506209,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_data.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "rocksndiamonds_vita_1.12.vpk",
-        "size": 2814410,
-        "download_url": "https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "rsn8887",
-    "homebrew_name": "rocksndiamonds",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Rocks'n'Diamonds port for PSVITA.",
-    "homebrew_long_description": "Rocks'n'Diamonds is a scrolling tile-based computer puzzle game that can be described as a combined Boulder Dash, Supaplex, Emerald Mine, and Sokoban clone. It is a free software game under the GPLv2 license created by Artsoft Entertainment and designed by Holger Schemel. For additional level packs, see the release notes at https://github.com/rsn8887/rocksndiamonds/releases/latest",
-    "homebrew_id": "rocksndiamonds",
-    "homebrew_authors": [
-      "rsn8887"
-    ],
-    "homebrew_version": "1.15",
-    "catalog_apps": [
-      {
-        "id": "rocksndiamonds",
-        "name": "rocksndiamonds",
-        "icon": "https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png",
-        "category": "ports",
-        "description": "Rocks'n'Diamonds port for PSVITA.",
-        "long_description": "Rocks'n'Diamonds is a scrolling tile-based computer puzzle game that can be described as a combined Boulder Dash, Supaplex, Emerald Mine, and Sokoban clone. It is a free software game under the GPLv2 license created by Artsoft Entertainment and designed by Holger Schemel. For additional level packs, see the release notes at https://github.com/rsn8887/rocksndiamonds/releases/latest",
-        "version": "1.15",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      },
-      {
-        "id": "mirrormagic",
-        "name": "mirrormagic",
-        "icon": "https://archive.org/download/psvitaalive-mirrormagic/icon0.png",
-        "category": "ports",
-        "description": "Mirrormagic port for PSVITA",
-        "long_description": "Mirrormagic is a game in the tradition of Deflektor and Mindbender written by Holger Schemel. You guide a laser beam by adjusting mirrors before the time limit runs out.",
-        "version": "1.15",
-        "version_date": "2021-05-22",
-        "author_ids": [
-          "rsn8887"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.15",
-    "catalog_version": "1.15"
   }
 ]
