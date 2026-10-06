@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>482</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">401</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>484</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">403</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>81</strong><span>pendientes</span></div>
-        <div class="stat"><strong>474</strong><span>GitHub</span></div>
+        <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -26195,10 +26195,919 @@ make enigma_switch.zip -j10
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="cannonball cannonball rsn8887/cannonball cannonball vita 1.05 / switch v1.08 1.08switchgit-vita/switch-rsn8887 ports recent changes
+=====
+1.08switch
+
+- recompiled with 12.0.0 support
+
+overview
+=====
+this is my vita and switch port of cannonball, an enhanced outrun engine by djyt.
+
+thanks djyt for writing such a great program and making sure it is easily portable.
+
+thanks to schlauchi for testing.
+
+thanks to my patreon supporters: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
+
+note: arcade roms for outrun version b are required to run this engine. the roms are not included in the download (see installation instructions).
+
+![](screenshots/cannonball_vita_1.jpg)
+
+a detailed manual and faq are here:
+https://github.com/djyt/cannonball/wiki
+
+switch installation instructions
+=====
+arcade roms from outrun version b are required to run this homebrew, they are not included.
+
+- extract the contents of cannonball_switch.zip into the folder `switch/` on your sdcard. you should have a folder `switch/cannonball_switch/`.
+- obtain the arcade roms for outrun version b and extract them into `switch/cannonball_switch/roms`
+- launch the .nro file using your favorite homebrew launcher, enjoy outrun in almost perfect 60 fps.
+- this version of cannonball is called &quot;cannonball_switch&quot; to distinguish it from lantus&#x27; port
+
+switch controls
+=====
+note: buttons can be re-mapped in menu  
+
+minus = insert coin  
+plus = start  
+y = gas / ok in menu
+b = brake
+x = change gears  
+l = change in-game camera   
+r = menu
+dpad = menu navigation and digital steering wheel controls  
+left stick = analog steering wheel if analog is set to on or wheel only, otherwise this is digital.
+right stick = analog gas/brake if analog is set to on  
+
+vita installation instructions
+=====
+arcade roms from outrun version b are required to run this homebrew, they are not included.
+
+- install the .vpk
+- extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)
+- obtain the arcade roms for outrun version b and extract them into ux0:data/cannonball/roms
+- launch the bubble, enjoy outrun in almost perfect 60 fps.
+
+vita controls
+=====
+note: buttons can be re-mapped in menu  
+
+l = insert coin  
+square = start  
+triangle = gas / enter letter on hi-score screen  
+circle = brake  
+cross = change gears  
+select = change in-game camera   
+r = menu
+dpad = menu navigation and digital steering wheel controls  
+left stick = analog steering wheel if analog is set to on or wheel only, otherwise this is digital.  
+right stick = analog gas/brake if analog is set to on  
+
+notes about vita version
+=====
+- default difficulty is set to easy, but can be changed to normal or hard in the menu.
+- the game runs at full speed with almost constant 60 fps. the exception is some slowdown at the beginning of the race. that slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. the high-resolution hack should not be enabled, it causes too much slow-down.
+
+rom names
+======
+````
+-------------------------------------------------------------------------------
+place outrun revision b roms in this directory.
+they must be named as follows:
+-------------------------------------------------------------------------------
+epr-10187.88
+epr-10327a.76
+epr-10328a.75
+epr-10329a.58
+epr-10330a.57
+epr-10380b.133
+epr-10381a.132
+epr-10382b.118
+epr-10383b.117
+mpr-10371.9
+mpr-10372.13
+mpr-10373.10
+mpr-10374.14
+mpr-10375.11
+mpr-10376.15
+mpr-10377.12
+mpr-10378.16
+opr-10185.11
+opr-10186.47
+opr-10188.71
+opr-10189.70
+opr-10190.69
+opr-10191.68
+opr-10192.67
+opr-10193.66
+opr-10230.104
+opr-10231.103
+opr-10232.102
+opr-10266.101
+opr-10267.100
+opr-10268.99
+
+-------------------------------------------------------------------------------
+the original japanese release of outrun featured slightly different tracks 
+and course ordering.
+
+optionally, you can include the following files from the japanese version to
+play these alternate tracks:
+-------------------------------------------------------------------------------
+
+epr-10380.133
+epr-10382.118
+epr-10381.132
+epr-10383.117
+epr-10327.76
+epr-10329.58
+epr-10328.75
+epr-10330.57
+
+-------------------------------------------------------------------------------
+fixed audio rom (optional)
+http://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html
+-------------------------------------------------------------------------------
+
+opr-10188.71f
+````
+
+build instructions
+=====
+cannonball needs some boost header-only libraries. to prepare compilation:
+- download and extract boost_1_66_0.zip from [here](https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip)
+- copy the subfolder boost from that archive to $vitasdk/arm-vita-eabi/include/boost for vita, or to $devkitpro/portlibs/switch/include/boost for switch
+- you should now have a file $vitasdk/arm-vita-eabi/include/boost/version.hpp, or $devkitpro/portlibs/switch/include/boos/version.hpp and hundreds of other boost header files.
+- now that boost is installed, proceed to compile cannonball:
+````
+cd cannonball
+mkdir build
+cd build
+````
+then, for vita:
+````
+cmake -dbuild_psp2=on -dcmake_build_type=release ../cmake
+make cannonball.vpk -j10
+````
+or, for switch: 
+````
+cmake -dbuild_nx=on -dcmake_build_type=release ../cmake
+make cannonball_switch.zip -j10
+````
+
+note: the vita source depends on frangarcj&#x27;s vita2d fbo branch with shader support here: https://github.com/cpasjuste/vita2dlib/tree/fbo
+and frangarcj&#x27;s vita-shader-collection gtu branch here: https://github.com/frangarcj/vita-shader-collection/tree/gtu
+those are both included as binaries and linked automatically.
+
+changelog
+=====
+1.08switch
+
+- recompiled with 12.0.0 support
+
+1.07switch
+
+- fix black screen due to linking with latest sdl2
+
+1.06switch
+
+- recompiled with 9.0.0 support
+
+1.05switch
+
+- added switch release
+
+1.05
+
+- dpad works now if analog=&quot;off&quot;
+- gas/brake on right stick if analog=&quot;on&quot; (digital gas/brake on buttons if analog=&quot;wheel only&quot;)
+
+1.04
+
+- better image quality (less blurry)
+- support non-fullscreen modes
+
+1.03
+
+- moved menu navigation to the dpad. true analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.
+
+1.02
+
+- removed unneccessary temporary files (__macosx, .ds_store) from data.zip 
+
+1.01
+
+- forgot to include config.xml in data.zip, it is now included
+
+1.0
+
+- initial vita release">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-cannonball/icon0.png" alt="Icono de Cannonball" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · rsn8887/cannonball</div>
+                      <h2><a href="https://github.com/rsn8887/cannonball/releases/tag/1.08switchgit-vita/switch-rsn8887" target="_blank" rel="noopener">Cannonball</a></h2>
+                      <div class="release-name">Cannonball Vita 1.05 / Switch v1.08</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.08switchgit-vita/switch-rsn8887</span>
+                    <span>2021-05-22 20:18 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.08switchgit-vita/switch-rsn8887</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.08switchgit-vita/switch-rsn8887</div>
+                  
+                  <div class="body markdown-body"><h1>Recent Changes</h1>
+<p>1.08switch</p>
+<ul>
+<li>recompiled with 12.0.0 support</li>
+</ul>
+<h1>Overview</h1>
+<p>This is my Vita and Switch port of Cannonball, an enhanced Outrun engine by djyt.</p>
+<p>Thanks djyt for writing such a great program and making sure it is easily portable.</p>
+<p>Thanks to ScHlAuChi for testing.</p>
+<p>Thanks to my Patreon supporters: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
+<p>NOTE: Arcade roms for Outrun Version B are required to run this engine. The roms are NOT included in the download (see installation instructions).</p>
+<p><img src="screenshots/Cannonball_vita_1.jpg" alt=""></p>
+<p>A detailed Manual and FAQ are here:
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/djyt/cannonball/wiki">https://github.com/djyt/cannonball/wiki</a></p>
+<h1>Switch Installation Instructions</h1>
+<p>Arcade roms from Outrun version B are required to run this homebrew, they are not included.</p>
+<ul>
+<li>Extract the contents of cannonball_switch.zip into the folder <code>switch/</code> on your sdcard. You should have a folder <code>switch/Cannonball_Switch/</code>.</li>
+<li>Obtain the arcade roms for Outrun Version B and extract them into <code>switch/Cannonball_Switch/roms</code></li>
+<li>Launch the .nro file using your favorite homebrew launcher, enjoy Outrun in almost perfect 60 fps.</li>
+<li>This version of Cannonball is called &quot;Cannonball_Switch&quot; to distinguish it from Lantus' port</li>
+</ul>
+<h1>Switch Controls</h1>
+<p>Note: Buttons can be re-mapped in menu</p>
+<p>Minus = insert coin<br>
+Plus = start<br>
+Y = gas / OK in menu
+B = brake
+X = change gears<br>
+L = change in-game camera<br>
+R = menu
+Dpad = menu navigation and digital steering wheel controls<br>
+Left stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.
+Right stick = analog gas/brake if analog is set to ON</p>
+<h1>Vita Installation Instructions</h1>
+<p>Arcade roms from Outrun version B are required to run this homebrew, they are not included.</p>
+<ul>
+<li>Install the .vpk</li>
+<li>Extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)</li>
+<li>Obtain the arcade roms for Outrun Version B and extract them into ux0:data/cannonball/roms</li>
+<li>Launch the bubble, enjoy Outrun in almost perfect 60 fps.</li>
+</ul>
+<h1>Vita Controls</h1>
+<p>Note: Buttons can be re-mapped in menu</p>
+<p>L = insert coin<br>
+Square = start<br>
+Triangle = gas / enter letter on hi-score screen<br>
+Circle = brake<br>
+Cross = change gears<br>
+Select = change in-game camera<br>
+R = menu
+Dpad = menu navigation and digital steering wheel controls<br>
+Left stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.<br>
+Right stick = analog gas/brake if analog is set to ON</p>
+<h1>Notes about Vita version</h1>
+<ul>
+<li>Default difficulty is set to easy, but can be changed to normal or hard in the menu.</li>
+<li>The game runs at full speed with almost constant 60 fps. The exception is some slowdown at the beginning of the race. That slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. The high-resolution hack should not be enabled, it causes too much slow-down.</li>
+</ul>
+<h1>Rom names</h1>
+<pre><code>-------------------------------------------------------------------------------
+Place OutRun Revision B ROMs in this directory.
+They must be named as follows:
+-------------------------------------------------------------------------------
+epr-10187.88
+epr-10327a.76
+epr-10328a.75
+epr-10329a.58
+epr-10330a.57
+epr-10380b.133
+epr-10381a.132
+epr-10382b.118
+epr-10383b.117
+mpr-10371.9
+mpr-10372.13
+mpr-10373.10
+mpr-10374.14
+mpr-10375.11
+mpr-10376.15
+mpr-10377.12
+mpr-10378.16
+opr-10185.11
+opr-10186.47
+opr-10188.71
+opr-10189.70
+opr-10190.69
+opr-10191.68
+opr-10192.67
+opr-10193.66
+opr-10230.104
+opr-10231.103
+opr-10232.102
+opr-10266.101
+opr-10267.100
+opr-10268.99
+
+-------------------------------------------------------------------------------
+The original Japanese release of OutRun featured slightly different tracks 
+and course ordering.
+
+Optionally, you can include the following files from the Japanese version to
+play these alternate tracks:
+-------------------------------------------------------------------------------
+
+epr-10380.133
+epr-10382.118
+epr-10381.132
+epr-10383.117
+epr-10327.76
+epr-10329.58
+epr-10328.75
+epr-10330.57
+
+-------------------------------------------------------------------------------
+Fixed Audio Rom (Optional)
+http://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html
+-------------------------------------------------------------------------------
+
+opr-10188.71f
+</code></pre>
+<h1>Build Instructions</h1>
+<p>Cannonball needs some boost header-only libraries. To prepare compilation:</p>
+<ul>
+<li>Download and extract boost_1_66_0.zip from <a target="_blank" rel="noopener noreferrer" href="https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip">here</a></li>
+<li>copy the subfolder boost from that archive to $VITASDK/arm-vita-eabi/include/boost for Vita, or to $DEVKITPRO/portlibs/switch/include/boost for Switch</li>
+<li>you should now have a file $VITASDK/arm-vita-eabi/include/boost/version.hpp, or $DEVKITPRO/portlibs/switch/include/boos/version.hpp and hundreds of other Boost header files.</li>
+<li>Now that boost is installed, proceed to compile cannonball:</li>
+</ul>
+<pre><code>cd cannonball
+mkdir build
+cd build
+</code></pre>
+<p>then, for Vita:</p>
+<pre><code>cmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ../cmake
+make Cannonball.vpk -j10
+</code></pre>
+<p>or, for Switch:</p>
+<pre><code>cmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../cmake
+make Cannonball_Switch.zip -j10
+</code></pre>
+<p>Note: The Vita source depends on FrangarCJ's Vita2d fbo branch with shader support here: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cpasjuste/vita2dlib/tree/fbo">https://github.com/Cpasjuste/vita2dlib/tree/fbo</a>
+and FrangarCJ's vita-shader-collection gtu branch here: <a target="_blank" rel="noopener noreferrer" href="https://github.com/frangarcj/vita-shader-collection/tree/gtu">https://github.com/frangarcj/vita-shader-collection/tree/gtu</a>
+Those are both included as binaries and linked automatically.</p>
+<h1>Changelog</h1>
+<p>1.08switch</p>
+<ul>
+<li>recompiled with 12.0.0 support</li>
+</ul>
+<p>1.07switch</p>
+<ul>
+<li>Fix black screen due to linking with latest SDL2</li>
+</ul>
+<p>1.06switch</p>
+<ul>
+<li>recompiled with 9.0.0 support</li>
+</ul>
+<p>1.05switch</p>
+<ul>
+<li>added Switch release</li>
+</ul>
+<p>1.05</p>
+<ul>
+<li>dpad works now if analog=&quot;off&quot;</li>
+<li>gas/brake on right stick if analog=&quot;on&quot; (digital gas/brake on buttons if analog=&quot;wheel only&quot;)</li>
+</ul>
+<p>1.04</p>
+<ul>
+<li>better image quality (less blurry)</li>
+<li>support non-fullscreen modes</li>
+</ul>
+<p>1.03</p>
+<ul>
+<li>moved menu navigation to the dpad. True analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.</li>
+</ul>
+<p>1.02</p>
+<ul>
+<li>removed unneccessary temporary files (__MACOSX, .DS_Store) from data.zip</li>
+</ul>
+<p>1.01</p>
+<ul>
+<li>forgot to include config.xml in data.zip, it is now included</li>
+</ul>
+<p>1.0</p>
+<ul>
+<li>Initial Vita release</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.05.vpk" target="_blank" rel="noopener">⬇ Cannonball_1.05.vpk · 1.1 MB</a><a class="btn" href="https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.08_Switch.zip" target="_blank" rel="noopener">Cannonball_1.08_Switch.zip · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="rocksndiamonds rocksndiamonds mirrormagic rsn8887/rocksndiamonds rocks&#x27;n&#x27;diamonds and mirrormagic for vita (v1.12) and switch (v1.15) 1.15 ports recent changes
+======
+1.15 (switch only)
+
+- on switch, add 12.0.0 support. only .nro files changed, data is the same.
+
+description
+======
+these are my vita and switch ports of rocks&#x27;n&#x27;diamonds and mirrormagic. 
+
+**rocks&#x27;n&#x27;diamonds** is a boulderdash type game by holger schemel with many unique features, such as the ability to play remade levels from boulderdash, emerald mine and supaplex and many more levels.
+
+![screenshot of rocks&#x27;n&#x27;diamonds vita](screenshots/rnd_new_a.jpg)
+
+**mirrormagic** is a game by holger schemel in the tradition of deflektor and mindbender. you guide a laser beam by adjusting mirrors before the time limit runs out.
+
+![screenshot of mirrormagic vita](screenshots/mm_new_a.jpg)
+
+more information about the games can be found at the homepages for the windows versions:
+
+http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/
+http://www.artsoft.org/mirrormagic
+
+and the official manual for rocks&#x27;n&#x27;diamonds is here:
+
+https://www.artsoft.org/rocksndiamonds/manual/index.html
+
+thanks
+======
+thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
+
+thanks @frangarcj for help with optimizing the rendering. 
+
+thanks to holger schemel for making a great and portable game.
+
+thanks to the many devs of vitasdk for a great development environment.
+
+thanks to all the devs of devkitpro for switch for a great development suite. 
+
+installation (vita)
+=====
+
+- install the vpks
+
+- extract contents of `rocksndiamonds_data.zip` and `mirrormagic_data.zip` and copy them to your vita&#x27;s `ux0:/data` folder. you should have folders `ux0:/data/rocksndiamonds` and `ux0:/data/mirrormagic` on your vita with the files in them.  
+
+installation (switch)
+=====
+
+- extract `rocksndiamonds_data.zip` and `mirrormagic_data.zip` to the folder `switch/` in the root of your sd card. you should have folders such as `switch/rocksndiamonds/levels` and `switch/mirrormagic/levels` and more. make sure none of the folders or files has the &quot;archive&quot; flag set after copying.
+ 
+- copy `rocksndiamonds.nro` to `switch/rocksndiamonds/` and `mirrormagic.nro` to `switch/mirrormagic/`
+
+- use nsp injection to start the games, otherwise the on-screen keyboard will not work. on sx os, you can do this by holding down r while launching any installed game to make hbmenu appear. 
+
+vita/switch-exclusive features
+=======
+- game controller mapping including analog joystick mouse controls
+- front touch controls with left/right mouse click and drag and drop gestures
+- the game runs smooth at the same speed as the desktop versions
+- additional level package with thousands of levels as separate download (see &#x27;more levels&#x27;)
+- auto-hide mouse cursor when using the dpad
+- easily switch player focus in multiplayer games using r+triangle and r+square
+- 60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.
+- text entry with vita/switch touch keyboard, no physical keyboard or mouse required
+
+vita-exclusive features
+========
+- support for bluetooth keyboard and mouse
+
+gamepad controls (vita)
+======
+dpad or left stick = move player and navigate menus  
+right stick = move mouse pointer  
+cross = primary button (+ direction for snap action or turning mirrors, also &#x27;ok&#x27; in menu)  
+circle = secondary button (drop dynamite)  
+square / l = left mouse button  
+triangle / r = right mouse button  
+select = quit (escape key, also cancels requesters)  
+start = pause (space key)  
+r+triangle = set focus to next player (all-&gt;1-&gt;2-&gt;3-&gt;4)  
+r+square = set player focus to previous player (all&lt;-1&lt;-2&lt;-3&lt;-4)  
+
+gamepad controls (switch)
+======
+dpad or left stick = move player and navigate menus  
+right stick = move mouse pointer  
+b = primary button (+ direction for snap action or turning mirrors, also &#x27;ok&#x27; in menu)  
+a = secondary button (drop dynamite)  
+y or l = left mouse button  
+x or r = right mouse button  
+minus = quit (escape key, also cancels requesters)  
+plus = pause (space key)  
+r+x = set focus to next player (all-&gt;1-&gt;2-&gt;3-&gt;4)  
+r+y = set player focus to previous player (all&lt;-1&lt;-2&lt;-3&lt;-4)  
+
+touch controls
+=======
+note: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the vita will not erroneously recognize them as a single finger. otherwise the pointer will jump around.
+
+single short tap = left mouse click  
+single short tap while holding a second finger down = right mouse click  
+single finger drag = move the mouse pointer  
+dual finger drag = drag&#x27;n&#x27;drop (left mouse button is held down)  
+three finger drag = drag&#x27;n&#x27;drop (right mouse button is held down)  
+
+more levels for rocks&#x27;n&#x27;diamonds
+=========
+
+- more than 50,000 additional rocks&#x27;n&#x27;diamonds levels can be downloaded here: http://www.artsoft.org/rocksndiamonds/levels/
+
+- i made a single easy-to-install zip more_levels_v2.zip (~90 mb). it contains selected additional levels from the above site and is available with the other release files.
+
+- just download, unzip, and  transfer to your vita, so that you have a subfolder `ux0:/data/rocksndiamonds/levels/more_levels`. or transfer to your switch, so that you have a subfolder `switch/rocksndiamonds/levels/more_levels`.
+
+- ftp transfer of levelsets has to be done using binary transfer mode, not auto or ascii . otherwise some levels will be treated as ascii with mangled line endings and won&#x27;t work. this was verified with the emerald_mine_club_original_1 levels and filezilla ftp.
+
+notes
+=====
+- it is possible to get a wrong screen size on switch by messing with the options. the solution is to navigate to setup-&gt;graphics and enable fullscreen mode and set window size to 100%, then select &quot;save &amp; exit&quot;
+
+- to load new level sets, go to the level number selection in the menu, and press x (b on switch). a new screen should open that shows a few levels. go to the parent dir and into the folder classic games. there are many more levels already included in that folder.
+
+- sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. this is fixed by simply restarting the game and loading the levelset again.
+
+- to answer the ok/cancel dialogs in the game, press select (minus on switch) to cancel (this is escape), or x (b on switch) for ok.
+
+- you can install new level sets for rocks&#x27;n&#x27;diamonds by copying them into ux0:/data/rocksndiamonds/levels on vita, or /switch/rocksndiamonds/levels on switch. see the official manual: https://www.artsoft.org/rocksndiamonds/manual/manual.html#
+
+- similarly, you can install new level sets for mirrormagic by copying them into ux0:/data/mirrormagic/levels on vita, and /switch/mirrormagic/levels on switch. 
+
+- if you mess up some options and want to reset to default, you can delete the folder &#x27;ux0:/data/rocksndiamonds/userdata&#x27; and/or &#x27;ux0:/data/mirrormagic/userdata&#x27;. on switch, the folders are &#x27;/switch/rocksndiamonds/userdata&#x27; and &#x27;/switch/mirrormagic/userdata&#x27;.
+
+- for multiplayer team mode in rocks&#x27;n&#x27;diamonds, enable it via setup-&gt;game &amp; menu-&gt;team-mode (multiplayer)-&gt;on. you also have to find make a level that has multiple players. r+square and r+triangle (r+y and r+x on switch) can be used in-game to change focus between players, see game controls. all controllers have to be paired before launching the app, otherwise they will not be recognized by the game.
+
+build instructions
+=====
+- clone the repository, then
+````
+cd rocksndiamonds
+````
+then use
+````
+make vitarocks
+````
+or
+````
+make switchrocks
+````
+for rocks&#x27;n&#x27;diamonds, and
+````
+make vitamirror
+````
+or
+````
+make switchmirror
+````
+for mirrormagic.
+
+you need the latest sdl2 vita library from 05-23-2018 or later for this to work. the latest sdl2 library can be downloaded by updating your vitasdk, or here: https://dl.vitasdk.org
+
+changelog
+=====
+1.15 (switch only)
+
+- on switch, add 12.0.0 support. only .nro files changed, data is the same.
+
+1.14 (switch only)
+
+- on switch, add 9.0.0 support
+- on switch, fix .ogg audio playback
+- on switch, fix pointer getting stuck when controlled with physical usb mouse
+
+1.13 (switch only)
+
+- on switch, fix automatically turning on/off vsync on selecting/deselecting game speed: 60 fps mode 
+
+1.12
+
+- fix crash when loading levelsets that change screenmode, such as supaplex (original)
+- on switch, fix slow-down when pressing home button
+- on switch, use 1080p resolution when docked
+
+
+1.11 (switch only)
+
+- on switch, implement on-screen keyboard (only works when launching with nsp injection)
+
+1.10 (switch only)
+
+- fixed problem on switch with too-large screen in docked mode when loading saved config. the workaround was to change window size to 100% and save again. now fullscreen mode should be set to &quot;on&quot; and then this problem does not appear anymore.
+
+1.9switch
+
+- added switch port
+
+1.9
+
+- add &#x27;60 fps&#x27; game speed setting for perfectly smooth motion in some levels on the vita. it works well with the bundled emerald mine levelsets. this mode is 20% faster than the default setting &#x27;normal.&#x27;
+
+- removed slow-down when playing levelsets that use the emerald mine engine with default graphics.
+
+1.8
+
+- map set player focus to r+triangle and r+square for multiplayer games on vitatv (up to 4 players)
+
+1.7
+
+- enabled mp3 music support, used by some custom levelsets
+
+1.6
+
+- support editing multiline textfields in level editor
+
+1.5
+
+- optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @frangarcj for the help).
+- fixed sticky touch inputs and other issues with touch controls
+
+1.4
+
+- fixed screen centering
+- fixed screen scaling so it works for all sizes
+
+1.3
+
+- mirrormagic as separate app. it uses the same codebase as rocks&#x27;n&#x27;diamonds.
+- smoother mouse pointer motion.
+
+1.2
+
+- significant speedup by drawing directly to texture pixels. setting game speed to &#x27;very fast&#x27; actually makes it faster now.
+
+1.1
+
+- implemented mouse pointer controls via right analog stick and front touch. the level editor is fully usable now.
+- improved picture quality for sharper graphics
+
+1.0
+
+- fixed name entry using touch keyboard. it works without any return or backspace keypresses now.
+- fixed graphics corruption of some cartoons on menu screen (updated data.zip)
+
+0.9
+
+- initial vita release">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-rocksndiamonds/icon0.png" alt="Icono de rocksndiamonds" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · rsn8887/rocksndiamonds</div>
+                      <h2><a href="https://github.com/rsn8887/rocksndiamonds/releases/tag/1.15" target="_blank" rel="noopener">rocksndiamonds</a></h2>
+                      <div class="release-name">Rocks'n'Diamonds and Mirrormagic for Vita (v1.12) and Switch (v1.15)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.15</span>
+                    <span>2021-05-22 19:09 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.15</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.15</div>
+                  <div class="related"><span>También asociado:</span> mirrormagic</div>
+                  <div class="body markdown-body"><h1>Recent Changes</h1>
+<p>1.15 (Switch only)</p>
+<ul>
+<li>on Switch, add 12.0.0 support. Only .nro files changed, data is the same.</li>
+</ul>
+<h1>Description</h1>
+<p>These are my Vita and Switch ports of Rocks'n'Diamonds and Mirrormagic.</p>
+<p><strong>Rocks'n'Diamonds</strong> is a Boulderdash type game by Holger Schemel with many unique features, such as the ability to play remade levels from Boulderdash, Emerald Mine and Supaplex and many more levels.</p>
+<p><img src="screenshots/rnd_new_a.jpg" alt="Screenshot of Rocks'n'Diamonds Vita"></p>
+<p><strong>Mirrormagic</strong> is a game by Holger Schemel in the tradition of Deflektor and Mindbender. You guide a laser beam by adjusting mirrors before the time limit runs out.</p>
+<p><img src="screenshots/mm_new_a.jpg" alt="Screenshot of Mirrormagic Vita"></p>
+<p>More information about the games can be found at the homepages for the Windows versions:</p>
+<p><a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/">http://www.artsoft.org/2018/04/10/1-rocksndiamonds-4-1-0-0-released/</a>
+<a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/mirrormagic">http://www.artsoft.org/mirrormagic</a></p>
+<p>And the official manual for Rocks'n'Diamonds is here:</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://www.artsoft.org/rocksndiamonds/manual/index.html">https://www.artsoft.org/rocksndiamonds/manual/index.html</a></p>
+<h1>Thanks</h1>
+<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
+<p>Thanks @FrangarCJ for help with optimizing the rendering.</p>
+<p>Thanks to Holger Schemel for making a great and portable game.</p>
+<p>Thanks to the many devs of VitaSDK for a great development environment.</p>
+<p>Thanks to all the devs of DevKitPro for Switch for a great development suite.</p>
+<h1>Installation (Vita)</h1>
+<ul>
+<li><p>install the vpks</p>
+</li>
+<li><p>extract contents of <code>rocksndiamonds_data.zip</code> and <code>mirrormagic_data.zip</code> and copy them to your Vita's <code>ux0:/data</code> folder. You should have folders <code>ux0:/data/rocksndiamonds</code> and <code>ux0:/data/mirrormagic</code> on your Vita with the files in them.</p>
+</li>
+</ul>
+<h1>Installation (Switch)</h1>
+<ul>
+<li><p>extract <code>rocksndiamonds_data.zip</code> and <code>mirrormagic_data.zip</code> to the folder <code>switch/</code> in the root of your sd card. You should have folders such as <code>switch/rocksndiamonds/levels</code> and <code>switch/mirrormagic/levels</code> and more. Make sure none of the folders or files has the &quot;archive&quot; flag set after copying.</p>
+</li>
+<li><p>copy <code>rocksndiamonds.nro</code> to <code>switch/rocksndiamonds/</code> and <code>mirrormagic.nro</code> to <code>switch/mirrormagic/</code></p>
+</li>
+<li><p>use nsp injection to start the games, otherwise the on-screen keyboard will not work. On SX OS, you can do this by holding down R while launching any installed game to make hbmenu appear.</p>
+</li>
+</ul>
+<h1>Vita/Switch-Exclusive Features</h1>
+<ul>
+<li>game controller mapping including analog joystick mouse controls</li>
+<li>front touch controls with left/right mouse click and drag and drop gestures</li>
+<li>the game runs smooth at the same speed as the desktop versions</li>
+<li>additional level package with thousands of levels as separate download (see 'More Levels')</li>
+<li>auto-hide mouse cursor when using the dpad</li>
+<li>easily switch player focus in multiplayer games using r+triangle and r+square</li>
+<li>60 fps mode for smooth scrolling and motion in levels where the system can achieve stable 60 frames per second.</li>
+<li>text entry with Vita/Switch touch keyboard, no physical keyboard or mouse required</li>
+</ul>
+<h1>Vita-Exclusive Features</h1>
+<ul>
+<li>support for bluetooth keyboard and mouse</li>
+</ul>
+<h1>Gamepad Controls (Vita)</h1>
+<p>Dpad or left stick = move player and navigate menus<br>
+right stick = move mouse pointer<br>
+Cross = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)<br>
+Circle = secondary button (drop dynamite)<br>
+Square / L = left mouse button<br>
+Triangle / R = right mouse button<br>
+Select = quit (escape key, also cancels requesters)<br>
+Start = pause (space key)<br>
+R+Triangle = set focus to next player (ALL-&gt;1-&gt;2-&gt;3-&gt;4)<br>
+R+Square = set player focus to previous player (ALL&lt;-1&lt;-2&lt;-3&lt;-4)</p>
+<h1>Gamepad Controls (Switch)</h1>
+<p>Dpad or left stick = move player and navigate menus<br>
+right stick = move mouse pointer<br>
+B = primary button (+ direction for snap action or turning mirrors, also 'ok' in menu)<br>
+A = secondary button (drop dynamite)<br>
+Y or L = left mouse button<br>
+X or R = right mouse button<br>
+Minus = quit (escape key, also cancels requesters)<br>
+Plus = pause (space key)<br>
+R+X = set focus to next player (ALL-&gt;1-&gt;2-&gt;3-&gt;4)<br>
+R+Y = set player focus to previous player (ALL&lt;-1&lt;-2&lt;-3&lt;-4)</p>
+<h1>Touch Controls</h1>
+<p>Note: for multi-touch gestures, the fingers have to be far enough apart from each other, so that the Vita will not erroneously recognize them as a single finger. Otherwise the pointer will jump around.</p>
+<p>Single short tap = left mouse click<br>
+Single short tap while holding a second finger down = right mouse click<br>
+Single finger drag = move the mouse pointer<br>
+Dual finger drag = drag'n'drop (left mouse button is held down)<br>
+Three finger drag = drag'n'drop (right mouse button is held down)</p>
+<h1>More Levels for Rocks'n'Diamonds</h1>
+<ul>
+<li><p>More than 50,000 additional Rocks'n'Diamonds levels can be downloaded here: <a target="_blank" rel="noopener noreferrer" href="http://www.artsoft.org/rocksndiamonds/levels/">http://www.artsoft.org/rocksndiamonds/levels/</a></p>
+</li>
+<li><p>I made a single easy-to-install zip More_Levels_v2.zip (~90 MB). It contains selected additional levels from the above site and is available with the other release files.</p>
+</li>
+<li><p>Just download, unzip, and  transfer to your Vita, so that you have a subfolder <code>ux0:/data/rocksndiamonds/levels/More_Levels</code>. Or transfer to your Switch, so that you have a subfolder <code>switch/rocksndiamonds/levels/More_Levels</code>.</p>
+</li>
+<li><p>FTP transfer of levelsets has to be done using binary transfer mode, not Auto or ASCII . Otherwise some levels will be treated as ASCII with mangled line endings and won't work. This was verified with the Emerald_Mine_Club_original_1 levels and FileZilla FTP.</p>
+</li>
+</ul>
+<h1>Notes</h1>
+<ul>
+<li><p>It is possible to get a wrong screen size on Switch by messing with the options. The solution is to navigate to setup-&gt;graphics and enable Fullscreen mode and set Window size to 100%, then select &quot;save &amp; exit&quot;</p>
+</li>
+<li><p>To load new level sets, go to the level number selection in the menu, and press X (B on Switch). A new screen should open that shows a few levels. Go to the parent dir and into the folder Classic Games. There are many more levels already included in that folder.</p>
+</li>
+<li><p>Sometimes when loading a levelset after loading other level sets one after the other, the game runs out of memory and quits. This is fixed by simply restarting the game and loading the levelset again.</p>
+</li>
+<li><p>To answer the OK/Cancel dialogs in the game, press select (minus on Switch) to cancel (this is escape), or X (B on Switch) for OK.</p>
+</li>
+<li><p>You can install new level sets for Rocks'n'Diamonds by copying them into ux0:/data/rocksndiamonds/levels on Vita, or /switch/rocksndiamonds/levels on Switch. See the official manual: <a target="_blank" rel="noopener noreferrer" href="https://www.artsoft.org/rocksndiamonds/manual/manual.html#">https://www.artsoft.org/rocksndiamonds/manual/manual.html#</a></p>
+</li>
+<li><p>Similarly, you can install new level sets for Mirrormagic by copying them into ux0:/data/mirrormagic/levels on Vita, and /switch/mirrormagic/levels on Switch.</p>
+</li>
+<li><p>If you mess up some options and want to reset to default, you can delete the folder 'ux0:/data/rocksndiamonds/userdata' and/or 'ux0:/data/mirrormagic/userdata'. On Switch, the folders are '/switch/rocksndiamonds/userdata' and '/switch/mirrormagic/userdata'.</p>
+</li>
+<li><p>For multiplayer team mode in Rocks'n'Diamonds, enable it via Setup-&gt;Game &amp; Menu-&gt;Team-Mode (Multiplayer)-&gt;on. You also have to find make a level that has multiple players. R+Square and R+Triangle (R+Y and R+X on Switch) can be used in-game to change focus between players, see Game Controls. All controllers have to be paired before launching the app, otherwise they will not be recognized by the game.</p>
+</li>
+</ul>
+<h1>Build Instructions</h1>
+<ul>
+<li>clone the repository, then</li>
+</ul>
+<pre><code>cd rocksndiamonds
+</code></pre>
+<p>Then use</p>
+<pre><code>make vitarocks
+</code></pre>
+<p>or</p>
+<pre><code>make switchrocks
+</code></pre>
+<p>for Rocks'n'Diamonds, and</p>
+<pre><code>make vitamirror
+</code></pre>
+<p>or</p>
+<pre><code>make switchmirror
+</code></pre>
+<p>for Mirrormagic.</p>
+<p>You need the latest SDL2 Vita library from 05-23-2018 or later for this to work. The latest SDL2 library can be downloaded by updating your vitasdk, or here: <a target="_blank" rel="noopener noreferrer" href="https://dl.vitasdk.org">https://dl.vitasdk.org</a></p>
+<h1>CHANGELOG</h1>
+<p>1.15 (Switch only)</p>
+<ul>
+<li>on Switch, add 12.0.0 support. Only .nro files changed, data is the same.</li>
+</ul>
+<p>1.14 (Switch only)</p>
+<ul>
+<li>on Switch, add 9.0.0 support</li>
+<li>on Switch, fix .ogg audio playback</li>
+<li>on Switch, fix pointer getting stuck when controlled with physical USB mouse</li>
+</ul>
+<p>1.13 (Switch only)</p>
+<ul>
+<li>on Switch, fix automatically turning on/off VSync on selecting/deselecting Game Speed: 60 fps mode</li>
+</ul>
+<p>1.12</p>
+<ul>
+<li>fix crash when loading levelsets that change screenmode, such as Supaplex (Original)</li>
+<li>on Switch, fix slow-down when pressing home button</li>
+<li>on Switch, use 1080p resolution when docked</li>
+</ul>
+<p>1.11 (Switch only)</p>
+<ul>
+<li>On Switch, implement on-screen keyboard (only works when launching with nsp injection)</li>
+</ul>
+<p>1.10 (Switch only)</p>
+<ul>
+<li>fixed problem on Switch with too-large screen in docked mode when loading saved config. The workaround was to change window size to 100% and save again. Now Fullscreen mode should be set to &quot;On&quot; and then this problem does not appear anymore.</li>
+</ul>
+<p>1.9switch</p>
+<ul>
+<li>added Switch port</li>
+</ul>
+<p>1.9</p>
+<ul>
+<li><p>add '60 fps' game speed setting for perfectly smooth motion in some levels on the Vita. It works well with the bundled Emerald Mine levelsets. This mode is 20% faster than the default setting 'normal.'</p>
+</li>
+<li><p>removed slow-down when playing levelsets that use the Emerald Mine engine with default graphics.</p>
+</li>
+</ul>
+<p>1.8</p>
+<ul>
+<li>map set player focus to r+triangle and r+square for multiplayer games on VitaTV (up to 4 players)</li>
+</ul>
+<p>1.7</p>
+<ul>
+<li>enabled mp3 music support, used by some custom levelsets</li>
+</ul>
+<p>1.6</p>
+<ul>
+<li>support editing multiline textfields in level editor</li>
+</ul>
+<p>1.5</p>
+<ul>
+<li>optimized rendering for large speed improvement (1.5x), noticable mostly on the very fast game speed setting (thanks @FrangarCJ for the help).</li>
+<li>fixed sticky touch inputs and other issues with touch controls</li>
+</ul>
+<p>1.4</p>
+<ul>
+<li>fixed screen centering</li>
+<li>fixed screen scaling so it works for all sizes</li>
+</ul>
+<p>1.3</p>
+<ul>
+<li>Mirrormagic as separate app. It uses the same codebase as Rocks'n'Diamonds.</li>
+<li>Smoother mouse pointer motion.</li>
+</ul>
+<p>1.2</p>
+<ul>
+<li>Significant speedup by drawing directly to texture pixels. Setting game speed to 'very fast' actually makes it faster now.</li>
+</ul>
+<p>1.1</p>
+<ul>
+<li>implemented mouse pointer controls via right analog stick and front touch. The level editor is fully usable now.</li>
+<li>improved picture quality for sharper graphics</li>
+</ul>
+<p>1.0</p>
+<ul>
+<li>fixed name entry using touch keyboard. It works without any return or backspace keypresses now.</li>
+<li>fixed graphics corruption of some cartoons on menu screen (updated data.zip)</li>
+</ul>
+<p>0.9</p>
+<ul>
+<li>initial Vita release</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_vita_1.12.vpk" target="_blank" rel="noopener">⬇ mirrormagic_vita_1.12.vpk · 2.6 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic.nro" target="_blank" rel="noopener">mirrormagic.nro · 10.7 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/mirrormagic_data.zip" target="_blank" rel="noopener">mirrormagic_data.zip · 1.5 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/More_Levels_v2.zip" target="_blank" rel="noopener">More_Levels_v2.zip · 88.0 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds.nro" target="_blank" rel="noopener">rocksndiamonds.nro · 10.7 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_data.zip" target="_blank" rel="noopener">rocksndiamonds_data.zip · 1.4 MB</a><a class="btn" href="https://github.com/rsn8887/rocksndiamonds/releases/download/1.15/rocksndiamonds_vita_1.12.vpk" target="_blank" rel="noopener">rocksndiamonds_vita_1.12.vpk · 2.7 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-05 21:45 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-06 04:05 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
