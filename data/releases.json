@@ -1,6 +1,61 @@
 [
   {
     "platform": "github",
+    "repo": "VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita",
+    "release_id": "406489384",
+    "tag": "1.1",
+    "name": "Dragon Ball Tap Battle Ps Vita v1.1",
+    "url": "https://github.com/VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita/releases/tag/1.1",
+    "published": "2026-10-08T06:37:27Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Dragon Ball Tap Battle PS Vita v1.1 --- Universal Mod Support\r\n\r\nThis release expands compatibility with the **original Dragon Ball Tap\r\nBattle game and compatible community mods**, including additional\r\nDragonTap PRIVATE resource formats.\r\n\r\n## What's new\r\n\r\n-   **Universal mod support:** compatible PRIVATE formats can now be\r\n    recognized from the APK itself instead of requiring a hard-coded\r\n    configuration for every mod.\r\n-   **Updated Windows and Web extractors:** newly recognized protected\r\n    profiles automatically receive `dbtb_codec.json` when required.\r\n-   **Improved stability on PS Vita:** lower PAC memory peaks,\r\n    incremental/file-backed AAC/M4A playback, compact GPU texture\r\n    handling, and an adaptive texture-quality policy for especially\r\n    heavy assets.\r\n-   Existing profile selection, LiveArea, audio behavior, and\r\n    independent save files are preserved.\r\n\r\n## Hardware-tested\r\n\r\nThe final build was tested on a real PS Vita with the heavy **dbz mobile\r\nv9** mod.\r\n\r\nCharacter selection, fight startup, victory, and multiple consecutive\r\nbattles worked without reproducing the previous crashes or loading\r\nfreezes.\r\n\r\nThe original game and previously supported mods retain their existing\r\nloading paths. However, **not every community mod has been tested**, so\r\ncompatibility with every mod cannot be guaranteed.\r\n\r\n## Known limitation --- some textures may look blurry\r\n\r\nSome mods use very large or high-resolution sprite atlases, backgrounds,\r\neffects, and UI assets. Loading all of these textures at full resolution\r\ncan exceed the PS Vita's limited system/GPU memory and cause crashes,\r\nfreezes, or `std::bad_alloc`.\r\n\r\nFor stability, v1.1 uses a **generic memory-aware texture policy**.\r\nSelected high-resolution textures can be stored in a compact GPU format\r\nand may have their physical resolution reduced.\r\n\r\nBecause of this, **some textures may look blurry while others remain\r\nsharp**.\r\n\r\nThis is an intentional stability measure. The extractor does **not**\r\ndamage or recompress the original PAC files, and there are **no\r\nmod-specific quality configurations**. Heavy mods may also take longer\r\nto load than the original game or lighter mods.\r\n\r\nImproving the visual quality of these especially heavy assets is planned\r\nas future work. This release keeps the configuration that was confirmed\r\nstable on real hardware.\r\n\r\n## Installation\r\n\r\n### VPK\r\n\r\nInstall `Dragon-Ball-Tap-Battle-PS-Vita-v1.1.vpk` with VitaShell.\r\n\r\nIf you already have a previous version installed, install v1.1 over it.\r\n**Do not uninstall the game first and do not delete your existing\r\nprofile data.**\r\n\r\n### Windows data extractor\r\n\r\n1.  Download and extract `DBTapBattle-Extractor-Windows-v1.1.zip`.\r\n2.  Keep all files from the ZIP together.\r\n3.  Drag your Dragon Ball Tap Battle APK onto\r\n    `Extract_APK_for_Vita.bat`.\r\n4.  Wait until extraction and validation finish.\r\n5.  Copy the generated `data` folder to the root of `ux0:`.\r\n\r\nNo Python, Java, 7-Zip, administrator privileges, or Internet connection\r\nare required while extracting.\r\n\r\n### Web extractor --- Android, desktop, or tablet\r\n\r\nOpen the Web Extractor:\r\n\r\nhttps://vegettosan.github.io/Drag-n-Ball-Tap-Battle-PS-Vita/\r\n\r\n1.  Press **SELECT APK**.\r\n2.  Select your Dragon Ball Tap Battle APK.\r\n3.  Press **EXTRACT DATA FOR PS VITA**.\r\n4.  Download and extract the generated ZIP.\r\n5.  Copy its `data` folder to the root of `ux0:`.\r\n\r\nAPK processing happens locally in your browser. The extractor does not\r\nupload the APK to the project.\r\n\r\nThe final profile path must be:\r\n\r\n`ux0:data/DBTapBattle/profiles/<Profile>/`\r\n\r\nIf the extractor generates `dbtb_codec.json`, keep it in the profile\r\nfolder together with the PAC files.\r\n\r\nFor detailed instructions, see:\r\n\r\nhttps://github.com/VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita/blob/main/docs/INSTALLATION_AND_EXTRACTION.md\r\n\r\n## Reporting mod compatibility issues\r\n\r\nIf a mod crashes, freezes, fails to load, or displays incorrect\r\ngraphics, please open an Issue:\r\n\r\nhttps://github.com/VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita/issues\r\n\r\nPlease include:\r\n\r\n-   VPK version;\r\n-   mod/APK name and version;\r\n-   characters and game mode used;\r\n-   exact steps to reproduce the problem;\r\n-   `runtime.log`;\r\n-   `psp2core*.psp2dmp`, if a crash dump was created.\r\n\r\nPlease **do not upload proprietary APKs or commercial game data**.\r\n\r\n## Package information\r\n\r\n-   **TITLE_ID:** `DBTB01178`\r\n-   **APP_VER:** `01.01`\r\n-   **VPK SHA-256:**\r\n    `9953e8c99ce59a5b4b55dab3ae2caec788c39ffe1edb19a2d4e5833c958ee6bd`\r\n-   **Windows Extractor SHA-256:**\r\n    `148480f1f5447086796eaa66ad3f97a45af7a15b5c32f03eadea929b5c4d44a2`\r\n\r\nThe v1.1 VPK contains the exact same gameplay executable as the\r\nhardware-tested VisualQuality build. Only the VPK version metadata was\r\nchanged from `APP_VER 01.00` to `01.01` for this release.\r\n\r\nThe VPK and extractors do not include the original APK or proprietary\r\ngame data. Use an APK copy that you legally possess and extract its data\r\nlocally.\r\n\r\nFull technical release notes:\r\n\r\nhttps://github.com/VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita/blob/main/docs/RELEASE_v1.1.md\r\n",
+    "assets": [
+      {
+        "name": "DBTapBattle-Extractor-Windows-v1.1.zip",
+        "size": 17228,
+        "download_url": "https://github.com/VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita/releases/download/1.1/DBTapBattle-Extractor-Windows-v1.1.zip",
+        "content_type": "application/x-zip-compressed"
+      },
+      {
+        "name": "Dragon-Ball-Tap-Battle-PS-Vita-v1.1.vpk",
+        "size": 2741098,
+        "download_url": "https://github.com/VegettoSan/Drag-n-Ball-Tap-Battle-PS-Vita/releases/download/1.1/Dragon-Ball-Tap-Battle-PS-Vita-v1.1.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "VegettoSan",
+    "homebrew_name": "Dragon Ball Tap Battle",
+    "homebrew_icon": "https://archive.org/download/dragon-ball-tap-battle-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Dragón Ball Tap Battle Port PS Vita",
+    "homebrew_long_description": "A native PlayStation Vita port of Dragon Ball Tap Battle built with VitaSDK, vitaGL, and the original game core compiled privately for Vita.",
+    "homebrew_id": "dragon-ball-tap-battle",
+    "homebrew_authors": [
+      "vegettosandev"
+    ],
+    "homebrew_version": "1.1",
+    "catalog_apps": [
+      {
+        "id": "dragon-ball-tap-battle",
+        "name": "Dragon Ball Tap Battle",
+        "icon": "https://archive.org/download/dragon-ball-tap-battle-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Dragón Ball Tap Battle Port PS Vita",
+        "long_description": "A native PlayStation Vita port of Dragon Ball Tap Battle built with VitaSDK, vitaGL, and the original game core compiled privately for Vita.",
+        "version": "1.1",
+        "version_date": "2026-10-08",
+        "author_ids": [
+          "vegettosandev"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.1",
+    "catalog_version": "1.1"
+  },
+  {
+    "platform": "github",
     "repo": "kaziema/pmvita",
     "release_id": "406185354",
     "tag": "v0.6.0",
@@ -33190,5 +33245,60 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.16",
     "catalog_version": "1.16"
+  },
+  {
+    "platform": "github",
+    "repo": "rsn8887/cannonball",
+    "release_id": "43416076",
+    "tag": "1.08switchgit-vita/switch-rsn8887",
+    "name": "Cannonball Vita 1.05 / Switch v1.08",
+    "url": "https://github.com/rsn8887/cannonball/releases/tag/1.08switchgit-vita/switch-rsn8887",
+    "published": "2021-05-22T20:18:25Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Recent Changes\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\nOverview\r\n=====\r\nThis is my Vita and Switch port of Cannonball, an enhanced Outrun engine by djyt.\r\n\r\nThanks djyt for writing such a great program and making sure it is easily portable.\r\n\r\nThanks to ScHlAuChi for testing.\r\n\r\nThanks to my Patreon supporters: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nNOTE: Arcade roms for Outrun Version B are required to run this engine. The roms are NOT included in the download (see installation instructions).\r\n\r\n![](screenshots/Cannonball_vita_1.jpg)\r\n\r\nA detailed Manual and FAQ are here:\r\nhttps://github.com/djyt/cannonball/wiki\r\n\r\nSwitch Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Extract the contents of cannonball_switch.zip into the folder `switch/` on your sdcard. You should have a folder `switch/Cannonball_Switch/`.\r\n- Obtain the arcade roms for Outrun Version B and extract them into `switch/Cannonball_Switch/roms`\r\n- Launch the .nro file using your favorite homebrew launcher, enjoy Outrun in almost perfect 60 fps.\r\n- This version of Cannonball is called \"Cannonball_Switch\" to distinguish it from Lantus' port\r\n\r\nSwitch Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nMinus = insert coin  \r\nPlus = start  \r\nY = gas / OK in menu\r\nB = brake\r\nX = change gears  \r\nL = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.\r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nVita Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Install the .vpk\r\n- Extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)\r\n- Obtain the arcade roms for Outrun Version B and extract them into ux0:data/cannonball/roms\r\n- Launch the bubble, enjoy Outrun in almost perfect 60 fps.\r\n\r\nVita Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nL = insert coin  \r\nSquare = start  \r\nTriangle = gas / enter letter on hi-score screen  \r\nCircle = brake  \r\nCross = change gears  \r\nSelect = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.  \r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nNotes about Vita version\r\n=====\r\n- Default difficulty is set to easy, but can be changed to normal or hard in the menu.\r\n- The game runs at full speed with almost constant 60 fps. The exception is some slowdown at the beginning of the race. That slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. The high-resolution hack should not be enabled, it causes too much slow-down.\r\n\r\nRom names\r\n======\r\n````\r\n-------------------------------------------------------------------------------\r\nPlace OutRun Revision B ROMs in this directory.\r\nThey must be named as follows:\r\n-------------------------------------------------------------------------------\r\nepr-10187.88\r\nepr-10327a.76\r\nepr-10328a.75\r\nepr-10329a.58\r\nepr-10330a.57\r\nepr-10380b.133\r\nepr-10381a.132\r\nepr-10382b.118\r\nepr-10383b.117\r\nmpr-10371.9\r\nmpr-10372.13\r\nmpr-10373.10\r\nmpr-10374.14\r\nmpr-10375.11\r\nmpr-10376.15\r\nmpr-10377.12\r\nmpr-10378.16\r\nopr-10185.11\r\nopr-10186.47\r\nopr-10188.71\r\nopr-10189.70\r\nopr-10190.69\r\nopr-10191.68\r\nopr-10192.67\r\nopr-10193.66\r\nopr-10230.104\r\nopr-10231.103\r\nopr-10232.102\r\nopr-10266.101\r\nopr-10267.100\r\nopr-10268.99\r\n\r\n-------------------------------------------------------------------------------\r\nThe original Japanese release of OutRun featured slightly different tracks \r\nand course ordering.\r\n\r\nOptionally, you can include the following files from the Japanese version to\r\nplay these alternate tracks:\r\n-------------------------------------------------------------------------------\r\n\r\nepr-10380.133\r\nepr-10382.118\r\nepr-10381.132\r\nepr-10383.117\r\nepr-10327.76\r\nepr-10329.58\r\nepr-10328.75\r\nepr-10330.57\r\n\r\n-------------------------------------------------------------------------------\r\nFixed Audio Rom (Optional)\r\nhttp://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html\r\n-------------------------------------------------------------------------------\r\n\r\nopr-10188.71f\r\n````\r\n\r\nBuild Instructions\r\n=====\r\nCannonball needs some boost header-only libraries. To prepare compilation:\r\n- Download and extract boost_1_66_0.zip from [here](https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip)\r\n- copy the subfolder boost from that archive to $VITASDK/arm-vita-eabi/include/boost for Vita, or to $DEVKITPRO/portlibs/switch/include/boost for Switch\r\n- you should now have a file $VITASDK/arm-vita-eabi/include/boost/version.hpp, or $DEVKITPRO/portlibs/switch/include/boos/version.hpp and hundreds of other Boost header files.\r\n- Now that boost is installed, proceed to compile cannonball:\r\n````\r\ncd cannonball\r\nmkdir build\r\ncd build\r\n````\r\nthen, for Vita:\r\n````\r\ncmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball.vpk -j10\r\n````\r\nor, for Switch: \r\n````\r\ncmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball_Switch.zip -j10\r\n````\r\n\r\nNote: The Vita source depends on FrangarCJ's Vita2d fbo branch with shader support here: https://github.com/Cpasjuste/vita2dlib/tree/fbo\r\nand FrangarCJ's vita-shader-collection gtu branch here: https://github.com/frangarcj/vita-shader-collection/tree/gtu\r\nThose are both included as binaries and linked automatically.\r\n\r\nChangelog\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\n1.07switch\r\n\r\n- Fix black screen due to linking with latest SDL2\r\n\r\n1.06switch\r\n\r\n- recompiled with 9.0.0 support\r\n\r\n1.05switch\r\n\r\n- added Switch release\r\n\r\n1.05\r\n\r\n- dpad works now if analog=\"off\"\r\n- gas/brake on right stick if analog=\"on\" (digital gas/brake on buttons if analog=\"wheel only\")\r\n\r\n1.04\r\n\r\n- better image quality (less blurry)\r\n- support non-fullscreen modes\r\n\r\n1.03\r\n\r\n- moved menu navigation to the dpad. True analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.\r\n\r\n1.02\r\n\r\n- removed unneccessary temporary files (__MACOSX, .DS_Store) from data.zip \r\n\r\n1.01\r\n\r\n- forgot to include config.xml in data.zip, it is now included\r\n\r\n1.0\r\n\r\n- Initial Vita release",
+    "assets": [
+      {
+        "name": "Cannonball_1.05.vpk",
+        "size": 1123006,
+        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.05.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "Cannonball_1.08_Switch.zip",
+        "size": 3153199,
+        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.08_Switch.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "rsn8887",
+    "homebrew_name": "Cannonball",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "OutRun engine for PSVITA.",
+    "homebrew_long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
+    "homebrew_id": "cannonball",
+    "homebrew_authors": [
+      "rsn8887"
+    ],
+    "homebrew_version": "1.08switchgit-vita/switch-rsn8887",
+    "catalog_apps": [
+      {
+        "id": "cannonball",
+        "name": "Cannonball",
+        "icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
+        "category": "ports",
+        "description": "OutRun engine for PSVITA.",
+        "long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
+        "version": "1.08switchgit-vita/switch-rsn8887",
+        "version_date": "2021-05-22",
+        "author_ids": [
+          "rsn8887"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.08switchgit-vita/switch-rsn8887",
+    "catalog_version": "1.08switchgit-vita/switch-rsn8887"
   }
 ]
