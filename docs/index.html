@@ -219,6 +219,97 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="battleship vita battleship vita robin994/battleship-vita 1.5.2 test build (ps vita) - entry sync 1.5.2 ports ## battleship vita 1.5.2 — adhoc entry synchronization test
+
+**experimental pre-release, based on 1.5.1.** previous builds (`1.5.1` and `1.5-test`) remain available unchanged. both ps vitas must install **this same 1.5.2 vpk** before joining one adhoc lobby.
+
+### changes vs 1.5.1
+
+- **deterministic fighter entry sequence in netplay.** the game previously selected one of three fighter entry timelines with a presentation-only random stream that is not synchronized across peers. this choice actually controls when fighter statuses change; in logs it correlates with the first fighter divergence at frames 120/144. adhoc/modern netplay now selects sequence 0 on both consoles, while offline retains random presentation.
+- **guard null gobj in `gcmovegobjdl`.** prevents a css/display-list null-pointer crash and logs the unexpected call (rate-limited).
+- **guard missing animation keyframes in `syinterpgetfracframe`.** avoids a null-keyframe dereference observed during vita coredump analysis; invalid animation data returns a safe fallback.
+- uses a distinct **netplay build id `1.5.2`** to prevent connecting to incompatible previous test vpks.
+
+no experimental udp-input-frontier or redundancy changes have been reintroduced. rollback window and network packet scheduling are unchanged relative to 1.5.1.
+
+### test priority
+
+1. **adhoc 1v1**, on both vitas, for several consecutive games. confirm both logs show `[netplay][det] deterministic fighter entry focus=0` and no initial `first partition mismatch category=fighter0/fighter1`.
+2. **two humans + one cpu**; confirm character, actions and status stay synchronized.
+3. **two humans + two cpus**; test again for early state divergence.
+
+if a desync remains, please attach both `ssb64.log` files from the same session; if a vita crashes, include the matching `psp2core*.psp2dmp` file. these guards are defensive, and real-hardware stability still requires testing.
+
+### assets
+
+- `battleship.vpk` — vita executable, built with id `1.5.2`.
+- `texture_pack_1x.zip` — lowest resource use.
+- `texture_pack_1.5x.zip` — balanced quality/performance.
+- `texture_pack_2x.zip` — highest texture quality, higher resource use.
+
+texture packs are unchanged from release 1.5.1. install only one texture pack at a time.
+
+### source provenance
+
+- battleship release branch: `release/1.5.2` (commit `bcdb83e8fc36e7c16a96d81113d70f3fbfbd32f6`).
+- `decomp` submodule: `37dacfe57eb28dc9f7628a10dc3ceb6d603642ff` (same-named release branch).
+- `libultraship` and `torch` pinned to their 1.5.1 commits. no in-progress smash remix modifications included.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-battleship-vita/icon0.png" alt="Icono de Battleship Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · robin994/battleship-vita</div>
+                      <h2><a href="https://github.com/robin994/battleship-vita/releases/tag/1.5.2" target="_blank" rel="noopener">Battleship Vita</a></h2>
+                      <div class="release-name">1.5.2 Test Build (PS Vita) - Entry Sync</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.5.2</span>
+                    <span>2026-10-09 07:45 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0 → release 1.5.2</div>
+                  
+                  <div class="body markdown-body"><h2>BattleShip Vita 1.5.2 — AdHoc Entry Synchronization Test</h2>
+<p><strong>Experimental pre-release, based on 1.5.1.</strong> Previous builds (<code>1.5.1</code> and <code>1.5-test</code>) remain available unchanged. Both PS Vitas must install <strong>this same 1.5.2 VPK</strong> before joining one AdHoc lobby.</p>
+<h3>Changes vs 1.5.1</h3>
+<ul>
+<li><strong>Deterministic fighter entry sequence in netplay.</strong> The game previously selected one of three fighter entry timelines with a presentation-only random stream that is not synchronized across peers. This choice actually controls when fighter statuses change; in logs it correlates with the first fighter divergence at frames 120/144. AdHoc/modern netplay now selects sequence 0 on both consoles, while offline retains random presentation.</li>
+<li><strong>Guard null GObj in <code>gcMoveGObjDL</code>.</strong> Prevents a CSS/display-list null-pointer crash and logs the unexpected call (rate-limited).</li>
+<li><strong>Guard missing animation keyframes in <code>syInterpGetFracFrame</code>.</strong> Avoids a null-keyframe dereference observed during Vita coredump analysis; invalid animation data returns a safe fallback.</li>
+<li>Uses a distinct <strong>netplay build ID <code>1.5.2</code></strong> to prevent connecting to incompatible previous test VPKs.</li>
+</ul>
+<p>No experimental UDP-input-frontier or redundancy changes have been reintroduced. Rollback window and network packet scheduling are unchanged relative to 1.5.1.</p>
+<h3>Test priority</h3>
+<ol>
+<li><strong>AdHoc 1v1</strong>, on both Vitas, for several consecutive games. Confirm both logs show <code>[NETPLAY][DET] deterministic fighter entry focus=0</code> and no initial <code>FIRST PARTITION MISMATCH category=fighter0/fighter1</code>.</li>
+<li><strong>Two humans + one CPU</strong>; confirm character, actions and status stay synchronized.</li>
+<li><strong>Two humans + two CPUs</strong>; test again for early state divergence.</li>
+</ol>
+<p>If a desync remains, please attach both <code>ssb64.log</code> files from the same session; if a Vita crashes, include the matching <code>psp2core*.psp2dmp</code> file. These guards are defensive, and real-hardware stability still requires testing.</p>
+<h3>Assets</h3>
+<ul>
+<li><code>battleship.vpk</code> — Vita executable, built with ID <code>1.5.2</code>.</li>
+<li><code>texture_pack_1x.zip</code> — lowest resource use.</li>
+<li><code>texture_pack_1.5x.zip</code> — balanced quality/performance.</li>
+<li><code>texture_pack_2x.zip</code> — highest texture quality, higher resource use.</li>
+</ul>
+<p>Texture packs are unchanged from release 1.5.1. Install only one texture pack at a time.</p>
+<h3>Source provenance</h3>
+<ul>
+<li>BattleShip release branch: <code>release/1.5.2</code> (commit <code>bcdb83e8fc36e7c16a96d81113d70f3fbfbd32f6</code>).</li>
+<li><code>decomp</code> submodule: <code>37dacfe57eb28dc9f7628a10dc3ceb6d603642ff</code> (same-named release branch).</li>
+<li><code>libultraship</code> and <code>torch</code> pinned to their 1.5.1 commits. No in-progress Smash Remix modifications included.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/robin994/battleship-vita/releases/download/1.5.2/battleship.vpk" target="_blank" rel="noopener">⬇ battleship.vpk · 7.2 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5.2/texture_pack_1.5x.zip" target="_blank" rel="noopener">texture_pack_1.5x.zip · 18.8 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5.2/texture_pack_1x.zip" target="_blank" rel="noopener">texture_pack_1x.zip · 9.6 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5.2/texture_pack_2x.zip" target="_blank" rel="noopener">texture_pack_2x.zip · 22.9 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.1.0 beta 2 v1.1.0-beta.2 ports **testing build.** this is the second public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. if you want the stable build, stay on [v1.0.3](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.3). your maps, saves and settings carry over either way. please report what breaks (see the end).
 
 beta 2 fixes the &quot;disc is dirty&quot; exit when joining online, makes the server browser more reliable, and adds official dedicated servers, offline bots, a latency meter and spanish. **everyone on beta 1 should update**: the join fix is on the joining vita&#x27;s side.
@@ -1965,70 +2056,6 @@ cada arranque).</li>
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release/releases/download/VitaPort/RR2Vita_Public_Beta_1.0.0.vpk" target="_blank" rel="noopener">⬇ RR2Vita_Public_Beta_1.0.0.vpk · 6.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="battleship vita battleship vita robin994/battleship-vita 1.5.1 test build (ps vita) 1.5.1 ports ## battleship 1.5.1 - test build
-
-this is a test release focused on ad-hoc/netplay stability and determinism. it does not replace the previous `1.5-test` release.
-
-### main changes
-- improved deterministic cpu selection across both vitas.
-- added rollback-state hardening for fighter topology and attachment restoration.
-- fixed an item-manager state leak between scenes that could cause a state mismatch from frame 0.
-- fixed a rollback crash caused by pause/interface cleanup being replayed during resimulation.
-- added per-partition determinism diagnostics to identify the first real rng/fighter/stage/map/item/weapon divergence.
-
-### test focus
-please test, in this order:
-1. 2 humans + 2 cpus
-2. 2 humans + 1 cpu
-3. 1 vs 1
-
-if a desync or crash occurs, please attach `ssb64.log` and the latest `psp2core` dump if one is generated.
-
-both vitas must use the same vpk for netplay testing.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-battleship-vita/icon0.png" alt="Icono de Battleship Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · robin994/battleship-vita</div>
-                      <h2><a href="https://github.com/robin994/battleship-vita/releases/tag/1.5.1" target="_blank" rel="noopener">Battleship Vita</a></h2>
-                      <div class="release-name">1.5.1 Test Build (PS Vita)</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.5.1</span>
-                    <span>2026-09-30 11:39 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0 → release 1.5.1</div>
-                  
-                  <div class="body markdown-body"><h2>BattleShip 1.5.1 - Test Build</h2>
-<p>This is a test release focused on ad-hoc/netplay stability and determinism. It does not replace the previous <code>1.5-test</code> release.</p>
-<h3>Main changes</h3>
-<ul>
-<li>Improved deterministic CPU selection across both Vitas.</li>
-<li>Added rollback-state hardening for fighter topology and attachment restoration.</li>
-<li>Fixed an item-manager state leak between scenes that could cause a state mismatch from frame 0.</li>
-<li>Fixed a rollback crash caused by pause/interface cleanup being replayed during resimulation.</li>
-<li>Added per-partition determinism diagnostics to identify the first real RNG/fighter/stage/map/item/weapon divergence.</li>
-</ul>
-<h3>Test focus</h3>
-<p>Please test, in this order:</p>
-<ol>
-<li>2 humans + 2 CPUs</li>
-<li>2 humans + 1 CPU</li>
-<li>1 vs 1</li>
-</ol>
-<p>If a desync or crash occurs, please attach <code>ssb64.log</code> and the latest <code>psp2core</code> dump if one is generated.</p>
-<p>Both Vitas must use the same VPK for netplay testing.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/robin994/battleship-vita/releases/download/1.5.1/battleship.vpk" target="_blank" rel="noopener">⬇ battleship.vpk · 7.2 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5.1/texture_pack_1.5x.zip" target="_blank" rel="noopener">texture_pack_1.5x.zip · 18.8 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5.1/texture_pack_1x.zip" target="_blank" rel="noopener">texture_pack_1x.zip · 9.6 MB</a><a class="btn" href="https://github.com/robin994/battleship-vita/releases/download/1.5.1/texture_pack_2x.zip" target="_blank" rel="noopener">texture_pack_2x.zip · 22.9 MB</a></div>
                 </div>
               </div>
             </article>
@@ -26466,7 +26493,7 @@ make enigma_switch.zip -j10
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-09 00:53 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-09 09:51 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

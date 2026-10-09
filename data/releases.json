@@ -1,6 +1,73 @@
 [
   {
     "platform": "github",
+    "repo": "robin994/battleship-vita",
+    "release_id": "407665384",
+    "tag": "1.5.2",
+    "name": "1.5.2 Test Build (PS Vita) - Entry Sync",
+    "url": "https://github.com/robin994/battleship-vita/releases/tag/1.5.2",
+    "published": "2026-10-09T07:45:52Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "## BattleShip Vita 1.5.2 — AdHoc Entry Synchronization Test\n\n**Experimental pre-release, based on 1.5.1.** Previous builds (`1.5.1` and `1.5-test`) remain available unchanged. Both PS Vitas must install **this same 1.5.2 VPK** before joining one AdHoc lobby.\n\n### Changes vs 1.5.1\n\n- **Deterministic fighter entry sequence in netplay.** The game previously selected one of three fighter entry timelines with a presentation-only random stream that is not synchronized across peers. This choice actually controls when fighter statuses change; in logs it correlates with the first fighter divergence at frames 120/144. AdHoc/modern netplay now selects sequence 0 on both consoles, while offline retains random presentation.\n- **Guard null GObj in `gcMoveGObjDL`.** Prevents a CSS/display-list null-pointer crash and logs the unexpected call (rate-limited).\n- **Guard missing animation keyframes in `syInterpGetFracFrame`.** Avoids a null-keyframe dereference observed during Vita coredump analysis; invalid animation data returns a safe fallback.\n- Uses a distinct **netplay build ID `1.5.2`** to prevent connecting to incompatible previous test VPKs.\n\nNo experimental UDP-input-frontier or redundancy changes have been reintroduced. Rollback window and network packet scheduling are unchanged relative to 1.5.1.\n\n### Test priority\n\n1. **AdHoc 1v1**, on both Vitas, for several consecutive games. Confirm both logs show `[NETPLAY][DET] deterministic fighter entry focus=0` and no initial `FIRST PARTITION MISMATCH category=fighter0/fighter1`.\n2. **Two humans + one CPU**; confirm character, actions and status stay synchronized.\n3. **Two humans + two CPUs**; test again for early state divergence.\n\nIf a desync remains, please attach both `ssb64.log` files from the same session; if a Vita crashes, include the matching `psp2core*.psp2dmp` file. These guards are defensive, and real-hardware stability still requires testing.\n\n### Assets\n\n- `battleship.vpk` — Vita executable, built with ID `1.5.2`.\n- `texture_pack_1x.zip` — lowest resource use.\n- `texture_pack_1.5x.zip` — balanced quality/performance.\n- `texture_pack_2x.zip` — highest texture quality, higher resource use.\n\nTexture packs are unchanged from release 1.5.1. Install only one texture pack at a time.\n\n### Source provenance\n\n- BattleShip release branch: `release/1.5.2` (commit `bcdb83e8fc36e7c16a96d81113d70f3fbfbd32f6`).\n- `decomp` submodule: `37dacfe57eb28dc9f7628a10dc3ceb6d603642ff` (same-named release branch).\n- `libultraship` and `torch` pinned to their 1.5.1 commits. No in-progress Smash Remix modifications included.\n",
+    "assets": [
+      {
+        "name": "battleship.vpk",
+        "size": 7499358,
+        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.2/battleship.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "texture_pack_1.5x.zip",
+        "size": 19670108,
+        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.2/texture_pack_1.5x.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "texture_pack_1x.zip",
+        "size": 10098355,
+        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.2/texture_pack_1x.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "texture_pack_2x.zip",
+        "size": 24017373,
+        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.2/texture_pack_2x.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "robin994",
+    "homebrew_name": "Battleship Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-battleship-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Battleship for PSVita.",
+    "homebrew_long_description": "Port of Battleship for PSVita. Battleship is a port of Super Smash Bros based on the decompilation efforts of the game.",
+    "homebrew_id": "battleship-vita",
+    "homebrew_authors": [
+      "robin994"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "battleship-vita",
+        "name": "Battleship Vita",
+        "icon": "https://archive.org/download/psvitaalive-battleship-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Battleship for PSVita.",
+        "long_description": "Port of Battleship for PSVita. Battleship is a port of Super Smash Bros based on the decompilation efforts of the game.",
+        "version": "v.1.0",
+        "version_date": "2026-08-31",
+        "author_ids": [
+          "robin994"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.1.0 → release 1.5.2",
+    "catalog_version": "v.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "BirchWoodGod/halo-ce-vita",
     "release_id": "407353471",
     "tag": "v1.1.0-beta.2",
@@ -1712,73 +1779,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 1.0.0 → release VitaPort",
     "catalog_version": "1.0.0"
-  },
-  {
-    "platform": "github",
-    "repo": "robin994/battleship-vita",
-    "release_id": "399986282",
-    "tag": "1.5.1",
-    "name": "1.5.1 Test Build (PS Vita)",
-    "url": "https://github.com/robin994/battleship-vita/releases/tag/1.5.1",
-    "published": "2026-09-30T11:39:42Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "## BattleShip 1.5.1 - Test Build\n\nThis is a test release focused on ad-hoc/netplay stability and determinism. It does not replace the previous `1.5-test` release.\n\n### Main changes\n- Improved deterministic CPU selection across both Vitas.\n- Added rollback-state hardening for fighter topology and attachment restoration.\n- Fixed an item-manager state leak between scenes that could cause a state mismatch from frame 0.\n- Fixed a rollback crash caused by pause/interface cleanup being replayed during resimulation.\n- Added per-partition determinism diagnostics to identify the first real RNG/fighter/stage/map/item/weapon divergence.\n\n### Test focus\nPlease test, in this order:\n1. 2 humans + 2 CPUs\n2. 2 humans + 1 CPU\n3. 1 vs 1\n\nIf a desync or crash occurs, please attach `ssb64.log` and the latest `psp2core` dump if one is generated.\n\nBoth Vitas must use the same VPK for netplay testing.\n",
-    "assets": [
-      {
-        "name": "battleship.vpk",
-        "size": 7502885,
-        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.1/battleship.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "texture_pack_1.5x.zip",
-        "size": 19670108,
-        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.1/texture_pack_1.5x.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "texture_pack_1x.zip",
-        "size": 10098355,
-        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.1/texture_pack_1x.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "texture_pack_2x.zip",
-        "size": 24017373,
-        "download_url": "https://github.com/robin994/battleship-vita/releases/download/1.5.1/texture_pack_2x.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "robin994",
-    "homebrew_name": "Battleship Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-battleship-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Battleship for PSVita.",
-    "homebrew_long_description": "Port of Battleship for PSVita. Battleship is a port of Super Smash Bros based on the decompilation efforts of the game.",
-    "homebrew_id": "battleship-vita",
-    "homebrew_authors": [
-      "robin994"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "battleship-vita",
-        "name": "Battleship Vita",
-        "icon": "https://archive.org/download/psvitaalive-battleship-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Battleship for PSVita.",
-        "long_description": "Port of Battleship for PSVita. Battleship is a port of Super Smash Bros based on the decompilation efforts of the game.",
-        "version": "v.1.0",
-        "version_date": "2026-08-31",
-        "author_ids": [
-          "robin994"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.0 → release 1.5.1",
-    "catalog_version": "v.1.0"
   },
   {
     "platform": "github",
