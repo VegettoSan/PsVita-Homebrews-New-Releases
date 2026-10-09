@@ -1,6 +1,79 @@
 [
   {
     "platform": "github",
+    "repo": "BirchWoodGod/halo-ce-vita",
+    "release_id": "407353471",
+    "tag": "v1.1.0-beta.2",
+    "name": "Halo CE for PS Vita 1.1.0 beta 2",
+    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.1.0-beta.2",
+    "published": "2026-10-08T23:52:37Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "**Testing build.** This is the second public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. If you want the stable build, stay on [v1.0.3](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3). Your maps, saves and settings carry over either way. Please report what breaks (see the end).\n\nBeta 2 fixes the \"disc is dirty\" exit when joining online, makes the server browser more reliable, and adds official dedicated servers, offline bots, a latency meter and Spanish. **Everyone on beta 1 should update**: the join fix is on the joining Vita's side.\n\n## Set up online play (the PC multiplayer menus)\nThe server browser and online menus come from the PC version's files, so you need them from your own copy of Halo PC:\n\n1. **Get the 3 Halo PC files** (`bitmaps.map`, `sounds.map`, `loc.map`). Pick one:\n   - **Easiest:** copy your **Halo Custom Edition installer** to `ux0:data/haloce-vita/`. Its name must start with `halocesetup` and end in `.exe` (e.g. `halocesetup_en_1.00.exe`), so rename your download if needed. Start the game: it unpacks the 3 files (under a minute), asks whether to delete the installer, then restarts itself.\n   - **Halo MCC on Steam:** copy the 3 files from `steamapps/common/Halo The Master Chief Collection/halo1/maps/custom_edition/` (not the ones directly in `halo1/maps`) to `ux0:data/haloce-vita/maps/`.\n   - **A Halo Custom Edition install:** copy them from its `maps` folder.\n   - Or let the **Windows install tool** (attached below) do it.\n2. In game, hold **Select + Start** to open the settings panel, go to **Multiplayer > Connection: Online**, then restart the game.\n3. In the main menu, open **Multiplayer**: you'll see the server browser (**Join Game > Internet**), **Join by code**, and **Create Game > Internet** to host.\n\nWithout these files you get the original Xbox menus, and can still join a game by its code (settings panel > Multiplayer > Join with a code). New in beta 2: if the online menus don't show up, the settings panel's Multiplayer tab now says why, for example which file is missing and the folder the game looked in, or that a file isn't the Custom Edition one.\n\nFull details: [README: Halo PC files](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.2/README.md#halo-pc-files)\n\n## What's new since beta 1\n\n### Fixes for online play\n\n- **\"Disc is dirty\" right after joining is fixed** ([#37](https://github.com/BirchWoodGod/halo-ce-vita/issues/37), [#36](https://github.com/BirchWoodGod/halo-ce-vita/issues/36)). On beta 1, once all six map cache slots were full (after six different maps), every online join closed the game a second later. The joining Vita now waits for the host's map before loading it. If a map really can't be loaded, you get a message such as \"Couldn't load Battle Creek: beavercreek.map isn't in your maps folder.\" and you go back to the menu, not to the Vita's home screen. You no longer need the beta 1 workaround of deleting `cache000.map`–`cache005.map`.\n- **Scoreboard hardened** (holding Back in a network game): it no longer reads past its list when a player is missing, and draws safely before your player exists ([#36](https://github.com/BirchWoodGod/halo-ce-vita/issues/36)).\n- **The server browser is more reliable.** A public game no longer drops off the list after a connection hiccup: it gets listed again within seconds. The browser now says what's going on instead of \"Looking for public games...\" forever:\n  - **\"Can't reach the online game list - check your internet connection\"** when none of the game list servers can be reached;\n  - **\"No public games right now\"** when the list was reached and is empty.\n  - While you host, the settings panel's Multiplayer tab shows your code and **\"Listed on N of 3 servers\"** (or \"getting listed...\" / \"not listed\").\n- **When the Vita's DNS fails**, internet play uses the last address that worked for each game list server, STUN server and relay (kept in `ux0:data/haloce-vita/data/dns_cache.txt`). It only does this for the servers in the game's own settings.\n- **The project's own relay**: two Vitas that can't reach each other directly (strict or double NAT, mobile networks) now fall back to a relay run by the project. The relay only passes on encrypted game traffic.\n- **A Vita host offers at most 16 players**, as on the Xbox. Before, a game started without choosing Max players (System Link's Y, the Xbox menus) showed up in the browser as \"of 128\".\n- Hosts ignore broken input values (not-a-number or infinite aim and sticks) from modified clients.\n\n### Dedicated servers\n\n- **Official US servers** are up, in the server browser: **US Slayer - Official**, **US Big Team - Official**, **US Oddball - Official** and **US KOTH - Official**. Beta 2's browser marks a dedicated server's game \"(DEDICATED)\".\n- **Run your own**: downloadable server packages for a Linux PC or VPS and for a Raspberry Pi (see \"Dedicated server downloads\" below). Several servers can run on one machine, each on its own port, and they share one map cache. Vitas only: PCs can't join.\n\n### New\n\n- **Offline bots** in Split Screen games: settings panel > Multiplayer > **Bots** (Off, or 1 to 15), with **Bot skill** (Easy to Legendary) and **Bot teams** (Even or Against you). They play Slayer, Team Slayer, CTF, King of the Hill and Oddball on the stock maps. Then start a game from Multiplayer > Split Screen. Bots are for local games only, not online.\n- **Latency meter**: \"Ping 45 ms\" with four bars at the top right in network games (green below 80 ms, yellow below 150, red above), \"Connection problem\" when the host has sent nothing for 2 seconds, and on the host \"Max ping\" (its slowest player). The scoreboard (Select) has a Ping column: the host sees everyone's, and a joining Vita sees its own. Settings panel > Multiplayer > **Latency meter** (On by default).\n- **Spanish**: all of the port's own text (the settings panel, its messages, online play, map sharing, the PC menus' lines) in Spanish. Settings panel > Audio > **Language**: Automatic (follows the Vita's system language, the default), English or Español. Halo's own text comes from your maps: it stays English with the usual NTSC maps.\n\n### Windows install tool\n\n- The tool's **classic look** is back as the default, with a pixelated picture of the game on each page, as testers asked. The newer Windows 11-style look is a **Modern look** checkbox (remembered).\n\n## Install / upgrade\n\n1. Install `halo.vpk` with VitaShell over your current Halo CE (the whole VPK). Your maps, saves and settings are kept. To go back, install the v1.0.3 VPK the same way.\n2. New install: copy your Xbox `maps` folder and `default.xbe` to `ux0:data/haloce-vita/`, or use the Windows install tool. You also need `ur0:data/libshacccg.suprx` (see the [README](https://github.com/BirchWoodGod/halo-ce-vita#install)).\n3. **For online play**, add the Halo PC files (see the top of these notes), then settings panel > Multiplayer > **Connection: Online** and restart.\n4. Recommended: **CapUnlocker** (https://github.com/GrapheneCt/CapUnlocker) for the fourth core.\n\n**Network version 18**, as in beta 1: beta 2 plays online with beta 1 (and the private 1.1.0 test builds 5 to 8), but not with 1.0.3. Please update anyway: the \"disc is dirty\" fix only helps the Vita that joins, so a joiner still on beta 1 can still hit it.\n\n## What to test\n\n- Joining online games, especially after you've played six or more different maps (the \"disc is dirty\" fix).\n- The server browser: are public games listed, do the official US servers show, and do the new messages match what's going on? Hosting: does the panel say \"Listed on N of 3 servers\"?\n- Online play between strict NATs or on mobile data (the relay).\n- The latency meter: does Ping match how the game feels? Do you see \"Connection problem\" when the link drops?\n- Offline bots in Split Screen: each game type, skill and team setting, and your fps with many bots.\n- Spanish: missing or wrong translations, text that doesn't fit.\n- The dedicated server packages on your own PC or Raspberry Pi.\n- The Windows install tool's new look, from your own disc image to a working install: tell us your Windows version and whether every step worked.\n- Anything that worked in beta 1 or 1.0.3 and is broken here: those reports matter most.\n\n## What's been checked on a real Vita\n\n- Online play between Vitas, the server browser, Custom Edition single-player maps, and the Halo CE installer extraction.\n- The dedicated servers with real players: a 7.5-minute game on the official US Slayer server.\n- The Windows install tool on a real Windows PC: a tester ran it end to end and copied 2 GB to the Vita (beta 1's tool; beta 2's new look has run under Wine only).\n- **Not yet checked on hardware**:\n  - offline bots\n  - Spanish\n  - the latency meter\n  - the \"disc is dirty\" join fix (tested on the PC test harness, which reproduces it)\n  - the settings panel's new \"Online menus\" reasons\n\n## Known issues\n\n- Custom Edition maps' Ogg Vorbis sounds are silent.\n- The host gets slower with 3–4 co-op players, since it runs everyone's AI.\n- The Quality profile doesn't hold 30 fps in big fights yet; that's being worked on for the next betas.\n- You can't download a custom map once the match has started: join while the host is in the lobby.\n- Big Custom Edition maps can be slow on the Vita, or too big for its memory.\n- Movies converted wider than 640 pixels (960x544 included) can play with sound only and a black picture ([#38](https://github.com/BirchWoodGod/halo-ce-vita/issues/38)). Keep them 640 wide: the install tool does this, or use the README's ffmpeg command. Fixed for the next beta.\n- Playing several Custom Edition maps in one session can run the Vita out of memory: the game slows down, then can't load the menu (\"this map file is damaged or not supported\") and closes. Restart Halo after a big Custom Edition map. A fix is being worked on for the next beta.\n- Master Chief's body can be missing in The Pillar of Autumn's cryo tube ([#29](https://github.com/BirchWoodGod/halo-ce-vita/issues/29)).\n\n## Reporting a problem\n\nOpen an [issue](https://github.com/BirchWoodGod/halo-ce-vita/issues), say you are on **1.1.0-beta.2**, what you were doing and the mode (Online / Same Wi-Fi / Ad hoc / Co-op / Split Screen with bots / a dedicated server), and attach:\n\n- `ux0:data/haloce-vita/halo.log` and `halo-prev.log`\n- `ux0:data/haloce-vita/data/debug.txt`\n- after a crash, the newest `ux0:data/psp2core-*.psp2dmp`\n\nFor online problems, send the files from every Vita in the game. `halo.log` now also says what the server browser and the game list servers are doing, and why the game went back to the menu or the home screen. The version is on `halo.log`'s first line and in the settings panel under Controls > Advanced. Details: [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\n### Dedicated server downloads (new)\n\nRun your own always-on server for Vitas on a Linux PC, a VPS or a Raspberry Pi. Two downloads are attached below, with their checksums in `SHA256SUMS`:\n\n| Download | For |\n| --- | --- |\n| `halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz` | A 64-bit Linux PC or VPS: Debian 12 or newer, Ubuntu 22.04 or newer (any distribution with glibc 2.35+). The server is a 32-bit program, so add the 32-bit glibc once: `sudo dpkg --add-architecture i386 && sudo apt update && sudo apt install libc6:i386` |\n| `halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz` | A Raspberry Pi 4 (or 3, 5) on Raspberry Pi OS 12 \"Bookworm\" or 13 \"Trixie\". On the 64-bit OS, add the 32-bit glibc once: `sudo dpkg --add-architecture armhf && sudo apt update && sudo apt install libc6:armhf` |\n\nNothing else is needed: SDL3 is built in. Each download holds the server, a quick start (`README-SERVER.md`), the full guide, a commented `init.txt.example`, four example servers (Slayer, Big Team, Oddball, King of the Hill), optional systemd units (one server, or several on one machine with `halo-servers` to manage them) and the licences.\n\n**No game data is included.** Copy the `maps` folder from your own Xbox copy of Halo into the server's folder. Then:\n\n```\ntar xzf halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz\ncd halo-ce-vita-server-1.1.0-beta.2-linux-x86\n./halo-server -path ~/halo-server\n```\n\nThe server shows the code Vitas join with, and lists itself in the server browser unless `sv_public 0`. Full guide: [DEDICATED_SERVER.md](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.2/port/linux/DEDICATED_SERVER.md#download-a-release-build).\n\n**Security:** run the server as an unprivileged user, never as root (the included systemd units do this for you, with the system read-only to it). Open only its UDP port in your firewall and router (2302 by default, one port per server); it needs no other incoming port. It has no remote console and never runs programs or scripts from its files or from players. Check your download against `SHA256SUMS`.\n\n## Assets\n\n- `halo.vpk`: the game\n- `HaloCEVitaInstaller.exe`: the Windows install tool (experimental). It isn't signed, so Windows SmartScreen will warn you (\"More info\" > \"Run anyway\"), and some antivirus programs may flag it wrongly.\n- `halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz`: the dedicated server for a Linux PC or VPS\n- `halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz`: the dedicated server for a Raspberry Pi\n- `SHA256SUMS`: the two server downloads' checksums\n\n**ffmpeg inside the install tool:** `HaloCEVitaInstaller.exe` includes FFmpeg 9.0.2 (gyan.dev's essentials build), licensed under the GNU GPL version 3, like this project. Its LICENSE and README.txt are inside the program. FFmpeg's source: <https://ffmpeg.org/download.html#get-sources> (the release tarball `ffmpeg-9.0.2.tar.xz`); gyan.dev's build notes: <https://www.gyan.dev/ffmpeg/builds/>. More in [README-installer](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.2/tools/installer/README-installer.md#ffmpegs-licence).\n\n",
+    "assets": [
+      {
+        "name": "halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz",
+        "size": 3282323,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz",
+        "size": 3897852,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "halo.vpk",
+        "size": 4231637,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/halo.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "HaloCEVitaInstaller.exe",
+        "size": 50550408,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/HaloCEVitaInstaller.exe",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 234,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "BirchWoodGod",
+    "homebrew_name": "Halo CE",
+    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+    "homebrew_id": "halo-ce",
+    "homebrew_authors": [
+      "birchwoodgod"
+    ],
+    "homebrew_version": "1.0.1",
+    "catalog_apps": [
+      {
+        "id": "halo-ce",
+        "name": "Halo CE",
+        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+        "category": "ports",
+        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+        "version": "1.0.1",
+        "version_date": "2026-10-02",
+        "author_ids": [
+          "birchwoodgod"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.1.0-beta.2",
+    "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "kaziema/pmvita",
     "release_id": "407031602",
     "tag": "v0.6.1",
@@ -234,61 +307,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
     "catalog_version": "v.0.1"
-  },
-  {
-    "platform": "github",
-    "repo": "BirchWoodGod/halo-ce-vita",
-    "release_id": "406946317",
-    "tag": "v1.1.0-beta.1",
-    "name": "Halo CE for PS Vita 1.1.0 beta 1",
-    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.1.0-beta.1",
-    "published": "2026-10-08T14:51:13Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "**Testing build.** This is the first public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. If you want the stable build, stay on [v1.0.3](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3). Your maps, saves and settings carry over either way. Please report what breaks (see the end).\n\n1.1.0 is the multiplayer release: online play with OpenCE's in-game menus, co-op campaign for up to four Vitas, custom maps including Custom Edition ones, and a lot of performance work.\n\n## Set up online play (the PC multiplayer menus)\nThe server browser and online menus come from the PC version's files, so you need them from your own copy of Halo PC:\n\n1. **Get the 3 Halo PC files** (`bitmaps.map`, `sounds.map`, `loc.map`). Pick one:\n   - **Easiest:** copy your **Halo Custom Edition installer** to `ux0:data/haloce-vita/`. Its name must start with `halocesetup` and end in `.exe` (e.g. `halocesetup_en_1.00.exe`), so rename your download if needed. Start the game: it unpacks the 3 files (under a minute), asks whether to delete the installer, then restarts itself.\n   - **Halo MCC on Steam:** copy the 3 files from `steamapps/common/Halo The Master Chief Collection/halo1/maps/custom_edition/` (not the ones directly in `halo1/maps`) to `ux0:data/haloce-vita/maps/`.\n   - **A Halo Custom Edition install:** copy them from its `maps` folder.\n   - Or let the **Windows install tool** (attached below) do it.\n2. In game, hold **Select + Start** to open the settings panel, go to **Multiplayer > Connection: Online**, then restart the game.\n3. In the main menu, open **Multiplayer**: you'll see the server browser (**Join Game > Internet**), **Join by code**, and **Create Game > Internet** to host.\n\nWithout these files you get the original Xbox menus, and can still join a game by its code (settings panel > Multiplayer > Join with a code).\n\nFull details: [README: Halo PC files](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.1/README.md#halo-pc-files)\n\n## What's new since 1.0.3\n\n### Online play\n\n- **Internet play between Vitas** with the PC version's multiplayer screens, ported from OpenCE: a **server browser** of public games (a lock on those with a password), **Join by code**, and **Create Game > Internet** with Server Setup (lobby name, max players, public or private, password). Vitas play only Vitas.\n- **Same Wi-Fi** (system link) and **Ad hoc** (Vitas side by side, no router) too: settings panel (hold Select + Start) > Multiplayer > Connection.\n- These menus need the **Halo PC files** (see Custom maps). Without them you get the original Xbox menus, and can still join a game by its code (settings panel > Multiplayer > Join with a code).\n- **Map sharing**: join a game on a custom map you don't have and the game offers to download it from the host, in the lobby. A dropped download picks up where it stopped. In games from the public server browser it warns you the host is a stranger; Modded maps > Map downloads can turn this off.\n- Hosting while another app holds the network port now shows a message instead of crashing.\n- Several Vitas searching System Link at once all see the game.\n\n### Co-op campaign\n\n- **Up to 4 players** online, on the same Wi-Fi or ad hoc: Campaign, a profile, a level and a difficulty, then **Y** (Play co-op).\n- **Private or Public**: X on the waiting screen (Private by default: joined by its code; Public: listed in the server browser).\n- Everyone votes to skip cutscenes (Start). A dead player watches a teammate and comes back beside one. Co-op never touches your single player save.\n\n### Custom maps\n\n- **Xbox custom maps**, **Custom Edition multiplayer maps**, and **Custom Edition campaign maps** (single player and Firefight maps such as Firefight Airlock), listed in Campaign after The Maw, alone or in co-op. Playing one never touches your campaign save.\n- Custom Edition maps need the **Halo PC files** (`bitmaps.map`, `sounds.map`, `loc.map`) and settings panel > Multiplayer > Modded maps > **PC maps: On**. The easiest way to get the files: copy your Halo Custom Edition installer (named `halocesetup*.exe`) to `ux0:data/haloce-vita/`. The game unpacks the files at the next start, asks before deleting the installer, and restarts itself. You can also copy them from Halo MCC's `halo1/maps/custom_edition` folder or a Custom Edition install.\n\n### Performance and graphics\n\n- **Graphics profiles** (Performance, Balanced, Quality) with new Advanced graphics settings: object shadows, dynamic lights, effects quality, particle density, AI think rate and sound updates, with thanks to **Bruno Santana**, whose modified build showed them.\n- **Frame interpolation** (Graphics, Off by default): up to 60 frames a second between the game's 30 ticks, and it keeps time after a hitch.\n- **Fourth CPU core** with the [CapUnlocker](https://github.com/GrapheneCt/CapUnlocker) plugin: Fourth core helpers (Graphics > Advanced, All async by default) moves background work to core 3, a big help in multiplayer. Without the plugin nothing changes.\n- Fewer lag spikes: textures decoded in the background, no stutter while a map copies in the lobby, and no co-op freezes on the joining Vita over a bumpy connection. `halo.log` now says what caused each stutter.\n- Screen flashes and HUD blending as on the Xbox: Covenant turret hits, teleporters, plasma gauges, HUD meters.\n- Fixed: zoomed scopes in 16:9 (#30), the sun's glow and rays (#31), the disappearing muzzle flash (#32), The Maw's armoury shadows and the cloaked Flood's slowdown (#33).\n\n### Other fixes\n\n- **Movies are optional**: without them the main menu now comes up ready to play (it used to ignore your buttons).\n- Settings that didn't stick after a restart (a damaged `config.toml`) are repaired automatically.\n- Deleting files (profiles, playlists) works on the Vita.\n- The settings panel in tabs, button layout and touch zones in Xbox controller terms, gyro aiming, and optional PlayStation button icons.\n- **Windows install tool (experimental)** (`HaloCEVitaInstaller.exe`, attached below). It takes the maps and `default.xbe` out of your Xbox disc image, converts the movies (optional), gets the Halo PC files and copies everything, the VPK too, to the Vita over VitaShell's FTP. It includes no game data. It isn't signed, so Windows SmartScreen will warn you (\"More info\" > \"Run anyway\"), and some antivirus programs may flag it wrongly. **Testers: please tell us how it goes on your PC** (it ran under Wine here, not yet on a real Windows PC). If it gives you trouble, the manual steps in the README still work.\n\n## Install / upgrade\n\n1. Install `halo.vpk` with VitaShell over your current Halo CE (the whole VPK). Your maps, saves and settings are kept. To go back, install the v1.0.3 VPK the same way.\n2. New install: copy your Xbox `maps` folder and `default.xbe` to `ux0:data/haloce-vita/`, or use the Windows install tool. You also need `ur0:data/libshacccg.suprx` (see the [README](https://github.com/BirchWoodGod/halo-ce-vita#install)).\n3. **For online play**, add the Halo PC files (see Custom maps above), then settings panel > Multiplayer > **Connection: Online** and restart.\n4. Recommended: **CapUnlocker** (https://github.com/GrapheneCt/CapUnlocker) for the fourth core.\n5. The first start after updating takes longer: the shader cache rebuilds once.\n\n**Network version 18**: plays online with the private 1.1.0 test builds 5 to 8, but not with 1.0.3. Everyone on beta 1 is best: co-op for four and Custom Edition campaign maps in co-op need test 7 or later.\n\n## What to test\n\n- Online: the server browser, join by code, hosting with a password, map downloads.\n- Co-op with 3–4 players, Private and Public: tell us the host's fps.\n- Custom Edition campaign maps, alone and in co-op.\n- Ad hoc and Same Wi-Fi between Vitas.\n- Your fps in big fights (FPS counter in the Graphics tab), with and without frame interpolation, and any stutter (send `halo.log`).\n- The Windows install tool (experimental), from your own disc image to a working install: tell us your Windows version and whether every step worked.\n- Anything that worked in 1.0.3 and is broken here: those reports matter most.\n\n## What's been checked on a real Vita\n\n- Online play between two Vitas over the internet, map sharing with resume, co-op campaign online, Custom Edition single-player maps (from Campaign's level list, on this build's code), and the Halo CE installer extraction.\n- **Not yet checked on hardware**:\n  - 3–4 player co-op\n  - the newest lag fixes\n  - the blending fixes\n- The Windows install tool's tests pass on Linux and it ran under Wine; it hasn't been run on a real Windows PC yet.\n\n## Known issues\n\n- You can't download a custom map once the match has started: join while the host is in the lobby.\n- Custom Edition maps' Ogg Vorbis sounds are silent.\n- Big Custom Edition maps can be slow on the Vita or too large for its memory.\n- The host gets slower with 3–4 co-op players, since it runs everyone's AI.\n- Online play can fail between two strict NATs (some mobile and company networks, double NAT).\n- The Quality profile doesn't hold 30 fps in big fights yet; that's being worked on for the next betas.\n- Master Chief's body can be missing in The Pillar of Autumn's cryo tube (#29).\n\n## Coming in 1.1.1\n\nGame chat (quick phrases and typed messages) and voice chat. They change the network protocol, so they come together in 1.1.1.\n\n## Reporting a problem\n\nOpen an [issue](https://github.com/BirchWoodGod/halo-ce-vita/issues), say you are on **1.1.0-beta.1**, what you were doing and the mode (Online / Same Wi-Fi / Ad hoc / Co-op), and attach:\n\n- `ux0:data/haloce-vita/halo.log` and `halo-prev.log`\n- `ux0:data/haloce-vita/data/debug.txt`\n- after a crash, the newest `ux0:data/psp2core-*.psp2dmp`\n\nFor online problems, send the files from every Vita in the game. The version is on `halo.log`'s first line and in the settings panel under Controls > Advanced. Details: [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\n## Assets\n\n- `halo.vpk`: the game\n- `HaloCEVitaInstaller.exe`: the Windows install tool (experimental)\n- `halo-1.1.0-beta.1.elf`: for crash reports\n\n**ffmpeg inside the install tool:** `HaloCEVitaInstaller.exe` includes FFmpeg 9.0.2 (gyan.dev's essentials build), licensed under the GNU GPL version 3, like this project. Its LICENSE and README.txt are inside the program. FFmpeg's source: <https://ffmpeg.org/download.html#get-sources> (the release tarball `ffmpeg-9.0.2.tar.xz`); gyan.dev's build notes: <https://www.gyan.dev/ffmpeg/builds/>. More in [README-installer](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.1/tools/installer/README-installer.md#ffmpegs-licence).\n\n",
-    "assets": [
-      {
-        "name": "halo.vpk",
-        "size": 4159898,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.1/halo.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "HaloCEVitaInstaller.exe",
-        "size": 50283929,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.1/HaloCEVitaInstaller.exe",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "BirchWoodGod",
-    "homebrew_name": "Halo CE",
-    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
-    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
-    "homebrew_id": "halo-ce",
-    "homebrew_authors": [
-      "birchwoodgod"
-    ],
-    "homebrew_version": "1.0.1",
-    "catalog_apps": [
-      {
-        "id": "halo-ce",
-        "name": "Halo CE",
-        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
-        "category": "ports",
-        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
-        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
-        "version": "1.0.1",
-        "version_date": "2026-10-02",
-        "author_ids": [
-          "birchwoodgod"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.1.0-beta.1",
-    "catalog_version": "1.0.1"
   },
   {
     "platform": "github",
@@ -33080,5 +33098,176 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.0.4.0a",
     "catalog_version": "v.0.4.0a"
+  },
+  {
+    "platform": "github",
+    "repo": "m1s3ry/ink-vita",
+    "release_id": "43655762",
+    "tag": "v1.0",
+    "name": "v1.0 - Initial Release",
+    "url": "https://github.com/m1s3ry/ink-vita/releases/tag/v1.0",
+    "published": "2021-05-26T21:12:10Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Follow install instructions in the README. Only Steam version supported.",
+    "assets": [
+      {
+        "name": "INK-v1.0.0_KYUHEN.VPK",
+        "size": 2947781,
+        "download_url": "https://github.com/m1s3ry/ink-vita/releases/download/v1.0/INK-v1.0.0_KYUHEN.VPK",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "INK.Vita.Patch.Steam.Build.1193528.zip",
+        "size": 9211703,
+        "download_url": "https://github.com/m1s3ry/ink-vita/releases/download/v1.0/INK.Vita.Patch.Steam.Build.1193528.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "m1s3ry",
+    "homebrew_name": "INK",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-ink/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "INK port for PSVita",
+    "homebrew_long_description": "INK is a fast-paced platformer about using colorful paint to uncover your surroundings. Defeat all enemies in the room and reach the goal! However, the terrain is invisible, so you need to discover the terrain by physically bumping into it, by performing a double jump or by, well, dying.\nPatch and install instructions in Release Page (Github).",
+    "homebrew_id": "ink",
+    "homebrew_authors": [
+      "m1s3ry"
+    ],
+    "homebrew_version": "v.1.0.0",
+    "catalog_apps": [
+      {
+        "id": "ink",
+        "name": "INK",
+        "icon": "https://archive.org/download/psvitaalive-ink/icon0.png",
+        "category": "ports",
+        "description": "INK port for PSVita",
+        "long_description": "INK is a fast-paced platformer about using colorful paint to uncover your surroundings. Defeat all enemies in the room and reach the goal! However, the terrain is invisible, so you need to discover the terrain by physically bumping into it, by performing a double jump or by, well, dying.\nPatch and install instructions in Release Page (Github).",
+        "version": "v.1.0.0",
+        "version_date": "2021-05-27",
+        "author_ids": [
+          "m1s3ry"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0.0",
+    "catalog_version": "v.1.0.0"
+  },
+  {
+    "platform": "github",
+    "repo": "rsn8887/jumpnbump",
+    "release_id": "43420553",
+    "tag": "1.02",
+    "name": "Jump'n'Bump Vita v1.00 and Switch v1.02",
+    "url": "https://github.com/rsn8887/jumpnbump/releases/tag/1.02",
+    "published": "2021-05-23T03:07:07Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Overview\r\n=====\r\nThis is my Switch and Vita port of the classic multiplayer-only MS-DOS game Jump'n'Bump by Brainchild Design, based on the SDL2 port by @felixhaedicke.\r\n\r\nJump'n'Bump is a simple but addictive multiplayer game. The goal is to stomp as many other rabbits as possible to win the game.\r\n\r\n![](screenshots/jumpnbump_shot_1.png)\r\n\r\nThanks\r\n======\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nThanks to the many developers of the game, such as Mattias Brynervall, Andreas Brynervall, Anders Nilsson, and many more.\r\n\r\nThanks to Felix Haedicke for porting the game to SDL2 and Cmake.\r\n\r\nInstallation Instructions\r\n=====\r\nSwitch:\r\n- Extract the contents of jumpnbump_switch.zip into the `switch` folder on your SD card, so that you have a folder `switch/jumpnbump` with `jumpnbump.nro` inside.\r\n\r\nVita:\r\n- install the .vpk file using Vitashell\r\n\r\nSwitch/Vita-exclusive features\r\n=====\r\n- Split Joycon support (Switch only): To toggle between split and combined Joycons, press L on joycon 1.\r\n- Physical keyboard support via Bluetooth (Vita) and USB (Switch)\r\n\r\nControls\r\n=====\r\nLeft analog stick / Dpad = move the character, up to four controllers are supported  \r\nB / Y / A / X = Jump  \r\nPlus/Minus/Select/Start = ESC (restart game/advance through statistic screens)  \r\nR (on controller 1) = toggle aspect ratio between original (default), 4:3, and 16:9  \r\nL (on controller 1) = toggle split Joycon mode on/off (Switch only)  \r\n\r\nPhysical keyboard controls via Bluetooth (Vita) and USB (Switch):\r\nCursor keys = white rabbit move and jump  \r\na d w = yellow rabbit move and jump  \r\ni j l = gray rabbit move and jump  \r\nKeypad 4 / 8 / 6 = brown rabbit move and jump  \r\n\r\nBuild Instructions\r\n=====\r\nSwitch:\r\n````\r\ncmake -DBUILD_NX=ON -DCMAKE_RELEASE_TYPE=Release\r\nmake jumpnbump_switch.zip -j12\r\n````\r\n\r\nVita:\r\n````\r\ncmake -DBUILD_PSP2=ON -DCMAKE_RELEASE_TYPE=Release\r\nmake jumpnbump.vpk -j12\r\n````\r\n\r\nChangelog\r\n=====\r\nv1.02 (Switch only)\r\n\r\n- Re-compile with 12.0.0 support\r\n\r\nv1.01 (Switch only)\r\n\r\n- Re-compile with 9.0.0 support\r\n\r\nv1.00\r\n\r\n- First release on Switch and Vita",
+    "assets": [
+      {
+        "name": "jumpnbump_1.00.vpk",
+        "size": 1286536,
+        "download_url": "https://github.com/rsn8887/jumpnbump/releases/download/1.02/jumpnbump_1.00.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "jumpnbump_1.02_switch.zip",
+        "size": 3466848,
+        "download_url": "https://github.com/rsn8887/jumpnbump/releases/download/1.02/jumpnbump_1.02_switch.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "rsn8887",
+    "homebrew_name": "JumpNBump",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-jumpnbump/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of JumpNBump for PSVITA.",
+    "homebrew_long_description": "Jump'n'Bump is a simple but addictive multiplayer game. The goal is to stomp as many other rabbits as possible to win the game.",
+    "homebrew_id": "jumpnbump",
+    "homebrew_authors": [
+      "rsn8887"
+    ],
+    "homebrew_version": "1.02",
+    "catalog_apps": [
+      {
+        "id": "jumpnbump",
+        "name": "JumpNBump",
+        "icon": "https://archive.org/download/psvitaalive-jumpnbump/icon0.png",
+        "category": "ports",
+        "description": "Port of JumpNBump for PSVITA.",
+        "long_description": "Jump'n'Bump is a simple but addictive multiplayer game. The goal is to stomp as many other rabbits as possible to win the game.",
+        "version": "1.02",
+        "version_date": "2021-05-23",
+        "author_ids": [
+          "rsn8887"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.02",
+    "catalog_version": "1.02"
+  },
+  {
+    "platform": "github",
+    "repo": "rsn8887/Enigma",
+    "release_id": "43420201",
+    "tag": "1.16",
+    "name": "Enigma Vita (v1.11) and Switch (v1.16)",
+    "url": "https://github.com/rsn8887/Enigma/releases/tag/1.16",
+    "published": "2021-05-23T02:34:40Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Changes in this version\r\n=====\r\n1.16 (Switch only)\r\n\r\n- Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.\r\n- Fix crash on Switch when loading levels with rubberbands\r\n\r\nOverview\r\n=====\r\nThis is my Vita and Switch port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.\r\n\r\n![](screenshots/enigma_vita_4.jpg)\r\n\r\nThe object of the game is to uncover pairs of identically colored Oxyd stones. Simple? Yes. Easy? Certainly not! Hidden traps, vast mazes, laser beams, and, most of all, countless hairy puzzles usually block your direct way to the Oxyd stones … If you are new to Enigma, you may want to take a look at a few [screenshots](http://www.nongnu.org/enigma/screenshots.html) or peek at the [user manual](http://www.nongnu.org/enigma/manual_1.20/manual/enigma.html).\r\n\r\nHomepage\r\n======\r\nDetailed information about the game can be found here:\r\nhttp://www.nongnu.org/enigma/index.html\r\n\r\nThanks\r\n======\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nThanks to @usineur for his libkbd-vita code for easy use of touch keyboard text entry.\r\n\r\nThanks to the developers of VitaSDK and other developers on the Vita for making this possible, in no particular order: @devnoname120, @TheOfficialFlow, @yifanlu, @Rinnegatamante, @cpasjuste, @xyzz, @xerpi, and many others.\r\n\r\nThanks to the many developers of the original game, such as the main developers Thomas Bernhardt, Raoul Bourquin, Siegfried Fennig, Martin Hawlisch, Daniel Heck, Ronald Lamprecht, Andreas Lochmann, Petr Machata, Nobby, Nat Pryce, Jacob Scott, Sven Siggelkow, Ralf Westram, and many many others.\r\n\r\nThe full credits are at http://www.nongnu.org/enigma/credits.html .\r\n\r\nSpecial thanks to Meinolf Schneider / Amekudzi for the original Oxyd games on Atari ST and PC which inspired Enigma.\r\n\r\nInstallation Instructions\r\n=====\r\nVita:\r\n- Install the .vpk\r\n- Extract the contents of data.zip into ux0:data/\r\n\r\nNOTE: I recommend using FTP transfer to copy the files over (~10,000 small files in data.zip). There is one report (thanks @ji11x38) that using the Vitashell \"SELECT Button: USB\" option to copy files directly from a MacOS computer to the Vita via USB caused the files to not transfer correctly, causing Enigma to crash on startup.\r\n\r\nSwitch:\r\n- Extract the contents of Enigma_Switch.zip into the `switch` folder on your SD card, so that you have a folder `switch/enigma` with `enigma.nro` and more folders and files inside.\r\n\r\nVita/Switch-exclusive features\r\n=====\r\n- game controller support: analog joystick mouse controls and button mappings\r\n- front and rear touch controls with left/right mouse click gestures\r\n- complete level packages with >3,000 levels and pre-calculated preview screenshots\r\n- Bluetooth/USB keyboard and mouse support. The Vita supports only a limited number of BT devices, tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. The Switch supports only a limited number of USB mice. Tested working with Logitech M187.\r\n \r\nControls (controls updated with version 1.08)\r\n=====\r\nLeft analog stick = analog control of the marble and mouse pointer  \r\nSquare / Y / L-trigger = select menu items, use object in game (left mouse button)  \r\nTriangle / X / R-trigger = cycle through inventory items (right mouse button)  \r\nCross / A = ok in menu (return)  \r\nCircle / B = back / in-game menu (escape key)  \r\nStart / Plus = help screen (F1)  \r\nSelect / Minus = destroy marble and remove one life (F3)  \r\nR-trigger + Select / R-trigger + Minus = restart level (shift-F3)  \r\n\r\nDpad in menu = quick-select menu items (arrow keys)  \r\nDpad left/right in game = quick-change mouse speed  \r\nDpad up/down in game = cycle through previous messages  \r\n\r\nFront touch = analog control of the marble and mouse pointer  \r\nRear touch = analog control of the marble and mouse pointer (Vita only)  \r\nSingle finger tap = select menu items, use object in game (left mouse button)  \r\nDual finger tap = cycle through inventory items (right mouse button)  \r\n\r\nDual finger tap works by holding one finger down and quickly tapping with a second finger somewhere else.\r\n\r\nMouse sensitivity can be adjusted in options or in-game via dpad left/right. The setting affects analog joystick, touch, and real bluetooth/USB mice.\r\n\r\nBuild Instructions\r\n=====\r\nVita:\r\nOn Vita, Enigma needs xerces-c and inet. To prepare compilation:\r\n\r\n- with a text-editor, load the file $VITASDK/arm-vita-eabi/include/netinet/in.h. Inside the file, replace \"struct\"  with \"inline struct\" on line 45 and 49.\r\n- download or clone my xerces-c repo from [here](https://www.github.com/rsn8887/xerces-c) into a folder called xerces, then:\r\n````\r\nmkdir build\r\ncd build\r\ncmake -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -Dmutex-manager=nothreads -Dnetwork=OFF -DCMAKE_BUILD_TYPE=Release -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF ../xerces/\r\n\r\nmake -j10\r\nmake install -j10\r\n````\r\nYou should now have the file \r\n````\r\n$VITASDK/arm-vita-eabi/lib/libxerces-c.a \r\n````\r\nand a whole bunch of header files in \r\n````\r\n$VITASDK/arm-vita-eabi/include/xercesc/\r\n````\r\n- Clone the Enigma repo into a folder called Enigma and compile:\r\n````\r\nmkdir build\r\ncd build\r\ncmake ../Enigma/ -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release\r\nmake enigma.vpk -j10\r\n````\r\n\r\nSwitch:\r\nOn Switch, Enigma needs ssl and xerces-c. To prepare compilation:\r\n\r\n- download or clone the moonlight-switch repo which contains libopenssl [here](https://www.github.com/kbhomes/moonlight-switch), then:\r\n````\r\ncd moonlight-switch/dependencies/switch-openssl\r\nexport MOONLIGHT_DEPDIR=$DEVKITPRO/portlibs/switch\r\ndkp-makepkg\r\nsudo -E dkp-pacman -U switch-openssl-1.0.2o-1-any.pkg.tar.xz\r\n````\r\n\r\n- download or clone my xerces-c Switch branch from [here](https://www.github.com/rsn8887/xerces-c-1) into a folder called xerces (use `git checkout switch` to make sure you are on the switch branch), then:\r\n````\r\ncmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/\r\ncmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/\r\ncmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/\r\n\r\nmake -j10\r\nsudo -E make install\r\n````\r\n- (I don't know why repeated cmake is neccessary, but it only works that way for me)\r\n- Clone the Enigma repo into a folder called Enigma and compile:\r\n````\r\nmkdir build\r\ncd build\r\ncmake ../Enigma/ -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release\r\nmake enigma_switch.zip -j10\r\n````\r\n\r\nChangelog\r\n=====\r\n1.16 (Switch only)\r\n\r\n- Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.\r\n- Fix crash on Switch when loading levels with rubberbands\r\n\r\n1.15 (Switch only)\r\n\r\n- Fix crash on Switch when loading levels with rubberbands that re-appeared using latest toolchain\r\n\r\n1.14 (Switch only)\r\n\r\n- Re-compile with 9.0.0 support\r\n\r\n1.13 (Switch only)\r\n\r\n- Fix crash on Switch when loading a level that contains rubberbands\r\n\r\n1.12 (Switch only)\r\n\r\n- Add Switch version\r\n\r\n1.11\r\n\r\n- Improve response to diagonal stick directions\r\n\r\n1.10\r\n\r\n- Improve response to slow finger motion\r\n\r\n1.09\r\n\r\n- Improve controls with bluetooth mouse by re-compiling with latest SDL-Vita\r\n\r\n1.08\r\n\r\n- Improve keymap, map left/right mouse buttons also to L/R for better playability. \r\n\r\n1.07\r\n\r\n- prevent accidental clicks when moving marble using touch\r\n\r\n1.06\r\n\r\n- map dpad as arrow keys to quick select menu items and quick-select mouse speed in game\r\n- map L to 'F1' (help), X to 'Return' (ok), O to 'ESC' (back)\r\n- update help texts to reflect Vita controller mappings\r\n\r\n1.05\r\n\r\n- enable touch keyboard in menu, useful for name entry and level search\r\n- increase smoothness of mouse pointer motion in gui\r\n- remove the missing translations\r\n\r\n1.04\r\n\r\n- fix missing soundsets in audio menu\r\n\r\n1.03\r\n\r\n- updated data.zip to include many more levels with corresponding thumbnail previews and many more sound sets. \r\n\r\n1.02\r\n\r\n- decrease default joystick sensitivity (marble moved too fast when controlled with joystick)\r\n\r\n1.01\r\n\r\n- map r-trigger to 'restart' and select button to 'kill marble'\r\n\r\n1.00\r\n\r\n- initial Vita port release based on latest Enigma development version\r\n",
+    "assets": [
+      {
+        "name": "data.zip",
+        "size": 70226743,
+        "download_url": "https://github.com/rsn8887/Enigma/releases/download/1.16/data.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "enigma_1.11.vpk",
+        "size": 5209786,
+        "download_url": "https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.11.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "enigma_1.16_switch.zip",
+        "size": 76358156,
+        "download_url": "https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.16_switch.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "rsn8887",
+    "homebrew_name": "Enigma",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-enigma/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Enigma port for PSVITA",
+    "homebrew_long_description": "Vita port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.",
+    "homebrew_id": "enigma",
+    "homebrew_authors": [
+      "rsn8887"
+    ],
+    "homebrew_version": "1.16",
+    "catalog_apps": [
+      {
+        "id": "enigma",
+        "name": "Enigma",
+        "icon": "https://archive.org/download/psvitaalive-enigma/icon0.png",
+        "category": "ports",
+        "description": "Enigma port for PSVITA",
+        "long_description": "Vita port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.",
+        "version": "1.16",
+        "version_date": "2021-05-23",
+        "author_ids": [
+          "rsn8887"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.16",
+    "catalog_version": "1.16"
   }
 ]

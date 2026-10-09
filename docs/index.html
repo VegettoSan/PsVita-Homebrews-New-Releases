@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>480</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">399</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">402</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>81</strong><span>pendientes</span></div>
-        <div class="stat"><strong>472</strong><span>GitHub</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,304 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.1.0 beta 2 v1.1.0-beta.2 ports **testing build.** this is the second public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. if you want the stable build, stay on [v1.0.3](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.3). your maps, saves and settings carry over either way. please report what breaks (see the end).
+
+beta 2 fixes the &quot;disc is dirty&quot; exit when joining online, makes the server browser more reliable, and adds official dedicated servers, offline bots, a latency meter and spanish. **everyone on beta 1 should update**: the join fix is on the joining vita&#x27;s side.
+
+## set up online play (the pc multiplayer menus)
+the server browser and online menus come from the pc version&#x27;s files, so you need them from your own copy of halo pc:
+
+1. **get the 3 halo pc files** (`bitmaps.map`, `sounds.map`, `loc.map`). pick one:
+   - **easiest:** copy your **halo custom edition installer** to `ux0:data/haloce-vita/`. its name must start with `halocesetup` and end in `.exe` (e.g. `halocesetup_en_1.00.exe`), so rename your download if needed. start the game: it unpacks the 3 files (under a minute), asks whether to delete the installer, then restarts itself.
+   - **halo mcc on steam:** copy the 3 files from `steamapps/common/halo the master chief collection/halo1/maps/custom_edition/` (not the ones directly in `halo1/maps`) to `ux0:data/haloce-vita/maps/`.
+   - **a halo custom edition install:** copy them from its `maps` folder.
+   - or let the **windows install tool** (attached below) do it.
+2. in game, hold **select + start** to open the settings panel, go to **multiplayer &gt; connection: online**, then restart the game.
+3. in the main menu, open **multiplayer**: you&#x27;ll see the server browser (**join game &gt; internet**), **join by code**, and **create game &gt; internet** to host.
+
+without these files you get the original xbox menus, and can still join a game by its code (settings panel &gt; multiplayer &gt; join with a code). new in beta 2: if the online menus don&#x27;t show up, the settings panel&#x27;s multiplayer tab now says why, for example which file is missing and the folder the game looked in, or that a file isn&#x27;t the custom edition one.
+
+full details: [readme: halo pc files](https://github.com/birchwoodgod/halo-ce-vita/blob/v1.1.0-beta.2/readme.md#halo-pc-files)
+
+## what&#x27;s new since beta 1
+
+### fixes for online play
+
+- **&quot;disc is dirty&quot; right after joining is fixed** ([#37](https://github.com/birchwoodgod/halo-ce-vita/issues/37), [#36](https://github.com/birchwoodgod/halo-ce-vita/issues/36)). on beta 1, once all six map cache slots were full (after six different maps), every online join closed the game a second later. the joining vita now waits for the host&#x27;s map before loading it. if a map really can&#x27;t be loaded, you get a message such as &quot;couldn&#x27;t load battle creek: beavercreek.map isn&#x27;t in your maps folder.&quot; and you go back to the menu, not to the vita&#x27;s home screen. you no longer need the beta 1 workaround of deleting `cache000.map`–`cache005.map`.
+- **scoreboard hardened** (holding back in a network game): it no longer reads past its list when a player is missing, and draws safely before your player exists ([#36](https://github.com/birchwoodgod/halo-ce-vita/issues/36)).
+- **the server browser is more reliable.** a public game no longer drops off the list after a connection hiccup: it gets listed again within seconds. the browser now says what&#x27;s going on instead of &quot;looking for public games...&quot; forever:
+  - **&quot;can&#x27;t reach the online game list - check your internet connection&quot;** when none of the game list servers can be reached;
+  - **&quot;no public games right now&quot;** when the list was reached and is empty.
+  - while you host, the settings panel&#x27;s multiplayer tab shows your code and **&quot;listed on n of 3 servers&quot;** (or &quot;getting listed...&quot; / &quot;not listed&quot;).
+- **when the vita&#x27;s dns fails**, internet play uses the last address that worked for each game list server, stun server and relay (kept in `ux0:data/haloce-vita/data/dns_cache.txt`). it only does this for the servers in the game&#x27;s own settings.
+- **the project&#x27;s own relay**: two vitas that can&#x27;t reach each other directly (strict or double nat, mobile networks) now fall back to a relay run by the project. the relay only passes on encrypted game traffic.
+- **a vita host offers at most 16 players**, as on the xbox. before, a game started without choosing max players (system link&#x27;s y, the xbox menus) showed up in the browser as &quot;of 128&quot;.
+- hosts ignore broken input values (not-a-number or infinite aim and sticks) from modified clients.
+
+### dedicated servers
+
+- **official us servers** are up, in the server browser: **us slayer - official**, **us big team - official**, **us oddball - official** and **us koth - official**. beta 2&#x27;s browser marks a dedicated server&#x27;s game &quot;(dedicated)&quot;.
+- **run your own**: downloadable server packages for a linux pc or vps and for a raspberry pi (see &quot;dedicated server downloads&quot; below). several servers can run on one machine, each on its own port, and they share one map cache. vitas only: pcs can&#x27;t join.
+
+### new
+
+- **offline bots** in split screen games: settings panel &gt; multiplayer &gt; **bots** (off, or 1 to 15), with **bot skill** (easy to legendary) and **bot teams** (even or against you). they play slayer, team slayer, ctf, king of the hill and oddball on the stock maps. then start a game from multiplayer &gt; split screen. bots are for local games only, not online.
+- **latency meter**: &quot;ping 45 ms&quot; with four bars at the top right in network games (green below 80 ms, yellow below 150, red above), &quot;connection problem&quot; when the host has sent nothing for 2 seconds, and on the host &quot;max ping&quot; (its slowest player). the scoreboard (select) has a ping column: the host sees everyone&#x27;s, and a joining vita sees its own. settings panel &gt; multiplayer &gt; **latency meter** (on by default).
+- **spanish**: all of the port&#x27;s own text (the settings panel, its messages, online play, map sharing, the pc menus&#x27; lines) in spanish. settings panel &gt; audio &gt; **language**: automatic (follows the vita&#x27;s system language, the default), english or español. halo&#x27;s own text comes from your maps: it stays english with the usual ntsc maps.
+
+### windows install tool
+
+- the tool&#x27;s **classic look** is back as the default, with a pixelated picture of the game on each page, as testers asked. the newer windows 11-style look is a **modern look** checkbox (remembered).
+
+## install / upgrade
+
+1. install `halo.vpk` with vitashell over your current halo ce (the whole vpk). your maps, saves and settings are kept. to go back, install the v1.0.3 vpk the same way.
+2. new install: copy your xbox `maps` folder and `default.xbe` to `ux0:data/haloce-vita/`, or use the windows install tool. you also need `ur0:data/libshacccg.suprx` (see the [readme](https://github.com/birchwoodgod/halo-ce-vita#install)).
+3. **for online play**, add the halo pc files (see the top of these notes), then settings panel &gt; multiplayer &gt; **connection: online** and restart.
+4. recommended: **capunlocker** (https://github.com/graphenect/capunlocker) for the fourth core.
+
+**network version 18**, as in beta 1: beta 2 plays online with beta 1 (and the private 1.1.0 test builds 5 to 8), but not with 1.0.3. please update anyway: the &quot;disc is dirty&quot; fix only helps the vita that joins, so a joiner still on beta 1 can still hit it.
+
+## what to test
+
+- joining online games, especially after you&#x27;ve played six or more different maps (the &quot;disc is dirty&quot; fix).
+- the server browser: are public games listed, do the official us servers show, and do the new messages match what&#x27;s going on? hosting: does the panel say &quot;listed on n of 3 servers&quot;?
+- online play between strict nats or on mobile data (the relay).
+- the latency meter: does ping match how the game feels? do you see &quot;connection problem&quot; when the link drops?
+- offline bots in split screen: each game type, skill and team setting, and your fps with many bots.
+- spanish: missing or wrong translations, text that doesn&#x27;t fit.
+- the dedicated server packages on your own pc or raspberry pi.
+- the windows install tool&#x27;s new look, from your own disc image to a working install: tell us your windows version and whether every step worked.
+- anything that worked in beta 1 or 1.0.3 and is broken here: those reports matter most.
+
+## what&#x27;s been checked on a real vita
+
+- online play between vitas, the server browser, custom edition single-player maps, and the halo ce installer extraction.
+- the dedicated servers with real players: a 7.5-minute game on the official us slayer server.
+- the windows install tool on a real windows pc: a tester ran it end to end and copied 2 gb to the vita (beta 1&#x27;s tool; beta 2&#x27;s new look has run under wine only).
+- **not yet checked on hardware**:
+  - offline bots
+  - spanish
+  - the latency meter
+  - the &quot;disc is dirty&quot; join fix (tested on the pc test harness, which reproduces it)
+  - the settings panel&#x27;s new &quot;online menus&quot; reasons
+
+## known issues
+
+- custom edition maps&#x27; ogg vorbis sounds are silent.
+- the host gets slower with 3–4 co-op players, since it runs everyone&#x27;s ai.
+- the quality profile doesn&#x27;t hold 30 fps in big fights yet; that&#x27;s being worked on for the next betas.
+- you can&#x27;t download a custom map once the match has started: join while the host is in the lobby.
+- big custom edition maps can be slow on the vita, or too big for its memory.
+- movies converted wider than 640 pixels (960x544 included) can play with sound only and a black picture ([#38](https://github.com/birchwoodgod/halo-ce-vita/issues/38)). keep them 640 wide: the install tool does this, or use the readme&#x27;s ffmpeg command. fixed for the next beta.
+- playing several custom edition maps in one session can run the vita out of memory: the game slows down, then can&#x27;t load the menu (&quot;this map file is damaged or not supported&quot;) and closes. restart halo after a big custom edition map. a fix is being worked on for the next beta.
+- master chief&#x27;s body can be missing in the pillar of autumn&#x27;s cryo tube ([#29](https://github.com/birchwoodgod/halo-ce-vita/issues/29)).
+
+## reporting a problem
+
+open an [issue](https://github.com/birchwoodgod/halo-ce-vita/issues), say you are on **1.1.0-beta.2**, what you were doing and the mode (online / same wi-fi / ad hoc / co-op / split screen with bots / a dedicated server), and attach:
+
+- `ux0:data/haloce-vita/halo.log` and `halo-prev.log`
+- `ux0:data/haloce-vita/data/debug.txt`
+- after a crash, the newest `ux0:data/psp2core-*.psp2dmp`
+
+for online problems, send the files from every vita in the game. `halo.log` now also says what the server browser and the game list servers are doing, and why the game went back to the menu or the home screen. the version is on `halo.log`&#x27;s first line and in the settings panel under controls &gt; advanced. details: [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).
+
+### dedicated server downloads (new)
+
+run your own always-on server for vitas on a linux pc, a vps or a raspberry pi. two downloads are attached below, with their checksums in `sha256sums`:
+
+| download | for |
+| --- | --- |
+| `halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz` | a 64-bit linux pc or vps: debian 12 or newer, ubuntu 22.04 or newer (any distribution with glibc 2.35+). the server is a 32-bit program, so add the 32-bit glibc once: `sudo dpkg --add-architecture i386 &amp;&amp; sudo apt update &amp;&amp; sudo apt install libc6:i386` |
+| `halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz` | a raspberry pi 4 (or 3, 5) on raspberry pi os 12 &quot;bookworm&quot; or 13 &quot;trixie&quot;. on the 64-bit os, add the 32-bit glibc once: `sudo dpkg --add-architecture armhf &amp;&amp; sudo apt update &amp;&amp; sudo apt install libc6:armhf` |
+
+nothing else is needed: sdl3 is built in. each download holds the server, a quick start (`readme-server.md`), the full guide, a commented `init.txt.example`, four example servers (slayer, big team, oddball, king of the hill), optional systemd units (one server, or several on one machine with `halo-servers` to manage them) and the licences.
+
+**no game data is included.** copy the `maps` folder from your own xbox copy of halo into the server&#x27;s folder. then:
+
+```
+tar xzf halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz
+cd halo-ce-vita-server-1.1.0-beta.2-linux-x86
+./halo-server -path ~/halo-server
+```
+
+the server shows the code vitas join with, and lists itself in the server browser unless `sv_public 0`. full guide: [dedicated_server.md](https://github.com/birchwoodgod/halo-ce-vita/blob/v1.1.0-beta.2/port/linux/dedicated_server.md#download-a-release-build).
+
+**security:** run the server as an unprivileged user, never as root (the included systemd units do this for you, with the system read-only to it). open only its udp port in your firewall and router (2302 by default, one port per server); it needs no other incoming port. it has no remote console and never runs programs or scripts from its files or from players. check your download against `sha256sums`.
+
+## assets
+
+- `halo.vpk`: the game
+- `halocevitainstaller.exe`: the windows install tool (experimental). it isn&#x27;t signed, so windows smartscreen will warn you (&quot;more info&quot; &gt; &quot;run anyway&quot;), and some antivirus programs may flag it wrongly.
+- `halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz`: the dedicated server for a linux pc or vps
+- `halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz`: the dedicated server for a raspberry pi
+- `sha256sums`: the two server downloads&#x27; checksums
+
+**ffmpeg inside the install tool:** `halocevitainstaller.exe` includes ffmpeg 9.0.2 (gyan.dev&#x27;s essentials build), licensed under the gnu gpl version 3, like this project. its license and readme.txt are inside the program. ffmpeg&#x27;s source: &lt;https://ffmpeg.org/download.html#get-sources&gt; (the release tarball `ffmpeg-9.0.2.tar.xz`); gyan.dev&#x27;s build notes: &lt;https://www.gyan.dev/ffmpeg/builds/&gt;. more in [readme-installer](https://github.com/birchwoodgod/halo-ce-vita/blob/v1.1.0-beta.2/tools/installer/readme-installer.md#ffmpegs-licence).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png" alt="Icono de Halo CE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · BirchWoodGod/halo-ce-vita</div>
+                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.1.0-beta.2" target="_blank" rel="noopener">Halo CE</a></h2>
+                      <div class="release-name">Halo CE for PS Vita 1.1.0 beta 2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.1.0-beta.2</span>
+                    <span>2026-10-08 23:52 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.1 → release v1.1.0-beta.2</div>
+                  
+                  <div class="body markdown-body"><p><strong>Testing build.</strong> This is the second public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. If you want the stable build, stay on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3">v1.0.3</a>. Your maps, saves and settings carry over either way. Please report what breaks (see the end).</p>
+<p>Beta 2 fixes the &quot;disc is dirty&quot; exit when joining online, makes the server browser more reliable, and adds official dedicated servers, offline bots, a latency meter and Spanish. <strong>Everyone on beta 1 should update</strong>: the join fix is on the joining Vita's side.</p>
+<h2>Set up online play (the PC multiplayer menus)</h2>
+<p>The server browser and online menus come from the PC version's files, so you need them from your own copy of Halo PC:</p>
+<ol>
+<li><strong>Get the 3 Halo PC files</strong> (<code>bitmaps.map</code>, <code>sounds.map</code>, <code>loc.map</code>). Pick one:<ul>
+<li><strong>Easiest:</strong> copy your <strong>Halo Custom Edition installer</strong> to <code>ux0:data/haloce-vita/</code>. Its name must start with <code>halocesetup</code> and end in <code>.exe</code> (e.g. <code>halocesetup_en_1.00.exe</code>), so rename your download if needed. Start the game: it unpacks the 3 files (under a minute), asks whether to delete the installer, then restarts itself.</li>
+<li><strong>Halo MCC on Steam:</strong> copy the 3 files from <code>steamapps/common/Halo The Master Chief Collection/halo1/maps/custom_edition/</code> (not the ones directly in <code>halo1/maps</code>) to <code>ux0:data/haloce-vita/maps/</code>.</li>
+<li><strong>A Halo Custom Edition install:</strong> copy them from its <code>maps</code> folder.</li>
+<li>Or let the <strong>Windows install tool</strong> (attached below) do it.</li>
+</ul>
+</li>
+<li>In game, hold <strong>Select + Start</strong> to open the settings panel, go to <strong>Multiplayer &gt; Connection: Online</strong>, then restart the game.</li>
+<li>In the main menu, open <strong>Multiplayer</strong>: you'll see the server browser (<strong>Join Game &gt; Internet</strong>), <strong>Join by code</strong>, and <strong>Create Game &gt; Internet</strong> to host.</li>
+</ol>
+<p>Without these files you get the original Xbox menus, and can still join a game by its code (settings panel &gt; Multiplayer &gt; Join with a code). New in beta 2: if the online menus don't show up, the settings panel's Multiplayer tab now says why, for example which file is missing and the folder the game looked in, or that a file isn't the Custom Edition one.</p>
+<p>Full details: <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.2/README.md#halo-pc-files">README: Halo PC files</a></p>
+<h2>What's new since beta 1</h2>
+<h3>Fixes for online play</h3>
+<ul>
+<li><strong>&quot;Disc is dirty&quot; right after joining is fixed</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues/37">#37</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues/36">#36</a>). On beta 1, once all six map cache slots were full (after six different maps), every online join closed the game a second later. The joining Vita now waits for the host's map before loading it. If a map really can't be loaded, you get a message such as &quot;Couldn't load Battle Creek: beavercreek.map isn't in your maps folder.&quot; and you go back to the menu, not to the Vita's home screen. You no longer need the beta 1 workaround of deleting <code>cache000.map</code>–<code>cache005.map</code>.</li>
+<li><strong>Scoreboard hardened</strong> (holding Back in a network game): it no longer reads past its list when a player is missing, and draws safely before your player exists (<a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues/36">#36</a>).</li>
+<li><strong>The server browser is more reliable.</strong> A public game no longer drops off the list after a connection hiccup: it gets listed again within seconds. The browser now says what's going on instead of &quot;Looking for public games...&quot; forever:<ul>
+<li><strong>&quot;Can't reach the online game list - check your internet connection&quot;</strong> when none of the game list servers can be reached;</li>
+<li><strong>&quot;No public games right now&quot;</strong> when the list was reached and is empty.</li>
+<li>While you host, the settings panel's Multiplayer tab shows your code and <strong>&quot;Listed on N of 3 servers&quot;</strong> (or &quot;getting listed...&quot; / &quot;not listed&quot;).</li>
+</ul>
+</li>
+<li><strong>When the Vita's DNS fails</strong>, internet play uses the last address that worked for each game list server, STUN server and relay (kept in <code>ux0:data/haloce-vita/data/dns_cache.txt</code>). It only does this for the servers in the game's own settings.</li>
+<li><strong>The project's own relay</strong>: two Vitas that can't reach each other directly (strict or double NAT, mobile networks) now fall back to a relay run by the project. The relay only passes on encrypted game traffic.</li>
+<li><strong>A Vita host offers at most 16 players</strong>, as on the Xbox. Before, a game started without choosing Max players (System Link's Y, the Xbox menus) showed up in the browser as &quot;of 128&quot;.</li>
+<li>Hosts ignore broken input values (not-a-number or infinite aim and sticks) from modified clients.</li>
+</ul>
+<h3>Dedicated servers</h3>
+<ul>
+<li><strong>Official US servers</strong> are up, in the server browser: <strong>US Slayer - Official</strong>, <strong>US Big Team - Official</strong>, <strong>US Oddball - Official</strong> and <strong>US KOTH - Official</strong>. Beta 2's browser marks a dedicated server's game &quot;(DEDICATED)&quot;.</li>
+<li><strong>Run your own</strong>: downloadable server packages for a Linux PC or VPS and for a Raspberry Pi (see &quot;Dedicated server downloads&quot; below). Several servers can run on one machine, each on its own port, and they share one map cache. Vitas only: PCs can't join.</li>
+</ul>
+<h3>New</h3>
+<ul>
+<li><strong>Offline bots</strong> in Split Screen games: settings panel &gt; Multiplayer &gt; <strong>Bots</strong> (Off, or 1 to 15), with <strong>Bot skill</strong> (Easy to Legendary) and <strong>Bot teams</strong> (Even or Against you). They play Slayer, Team Slayer, CTF, King of the Hill and Oddball on the stock maps. Then start a game from Multiplayer &gt; Split Screen. Bots are for local games only, not online.</li>
+<li><strong>Latency meter</strong>: &quot;Ping 45 ms&quot; with four bars at the top right in network games (green below 80 ms, yellow below 150, red above), &quot;Connection problem&quot; when the host has sent nothing for 2 seconds, and on the host &quot;Max ping&quot; (its slowest player). The scoreboard (Select) has a Ping column: the host sees everyone's, and a joining Vita sees its own. Settings panel &gt; Multiplayer &gt; <strong>Latency meter</strong> (On by default).</li>
+<li><strong>Spanish</strong>: all of the port's own text (the settings panel, its messages, online play, map sharing, the PC menus' lines) in Spanish. Settings panel &gt; Audio &gt; <strong>Language</strong>: Automatic (follows the Vita's system language, the default), English or Español. Halo's own text comes from your maps: it stays English with the usual NTSC maps.</li>
+</ul>
+<h3>Windows install tool</h3>
+<ul>
+<li>The tool's <strong>classic look</strong> is back as the default, with a pixelated picture of the game on each page, as testers asked. The newer Windows 11-style look is a <strong>Modern look</strong> checkbox (remembered).</li>
+</ul>
+<h2>Install / upgrade</h2>
+<ol>
+<li>Install <code>halo.vpk</code> with VitaShell over your current Halo CE (the whole VPK). Your maps, saves and settings are kept. To go back, install the v1.0.3 VPK the same way.</li>
+<li>New install: copy your Xbox <code>maps</code> folder and <code>default.xbe</code> to <code>ux0:data/haloce-vita/</code>, or use the Windows install tool. You also need <code>ur0:data/libshacccg.suprx</code> (see the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#install">README</a>).</li>
+<li><strong>For online play</strong>, add the Halo PC files (see the top of these notes), then settings panel &gt; Multiplayer &gt; <strong>Connection: Online</strong> and restart.</li>
+<li>Recommended: <strong>CapUnlocker</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/GrapheneCt/CapUnlocker">https://github.com/GrapheneCt/CapUnlocker</a>) for the fourth core.</li>
+</ol>
+<p><strong>Network version 18</strong>, as in beta 1: beta 2 plays online with beta 1 (and the private 1.1.0 test builds 5 to 8), but not with 1.0.3. Please update anyway: the &quot;disc is dirty&quot; fix only helps the Vita that joins, so a joiner still on beta 1 can still hit it.</p>
+<h2>What to test</h2>
+<ul>
+<li>Joining online games, especially after you've played six or more different maps (the &quot;disc is dirty&quot; fix).</li>
+<li>The server browser: are public games listed, do the official US servers show, and do the new messages match what's going on? Hosting: does the panel say &quot;Listed on N of 3 servers&quot;?</li>
+<li>Online play between strict NATs or on mobile data (the relay).</li>
+<li>The latency meter: does Ping match how the game feels? Do you see &quot;Connection problem&quot; when the link drops?</li>
+<li>Offline bots in Split Screen: each game type, skill and team setting, and your fps with many bots.</li>
+<li>Spanish: missing or wrong translations, text that doesn't fit.</li>
+<li>The dedicated server packages on your own PC or Raspberry Pi.</li>
+<li>The Windows install tool's new look, from your own disc image to a working install: tell us your Windows version and whether every step worked.</li>
+<li>Anything that worked in beta 1 or 1.0.3 and is broken here: those reports matter most.</li>
+</ul>
+<h2>What's been checked on a real Vita</h2>
+<ul>
+<li>Online play between Vitas, the server browser, Custom Edition single-player maps, and the Halo CE installer extraction.</li>
+<li>The dedicated servers with real players: a 7.5-minute game on the official US Slayer server.</li>
+<li>The Windows install tool on a real Windows PC: a tester ran it end to end and copied 2 GB to the Vita (beta 1's tool; beta 2's new look has run under Wine only).</li>
+<li><strong>Not yet checked on hardware</strong>:<ul>
+<li>offline bots</li>
+<li>Spanish</li>
+<li>the latency meter</li>
+<li>the &quot;disc is dirty&quot; join fix (tested on the PC test harness, which reproduces it)</li>
+<li>the settings panel's new &quot;Online menus&quot; reasons</li>
+</ul>
+</li>
+</ul>
+<h2>Known issues</h2>
+<ul>
+<li>Custom Edition maps' Ogg Vorbis sounds are silent.</li>
+<li>The host gets slower with 3–4 co-op players, since it runs everyone's AI.</li>
+<li>The Quality profile doesn't hold 30 fps in big fights yet; that's being worked on for the next betas.</li>
+<li>You can't download a custom map once the match has started: join while the host is in the lobby.</li>
+<li>Big Custom Edition maps can be slow on the Vita, or too big for its memory.</li>
+<li>Movies converted wider than 640 pixels (960x544 included) can play with sound only and a black picture (<a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues/38">#38</a>). Keep them 640 wide: the install tool does this, or use the README's ffmpeg command. Fixed for the next beta.</li>
+<li>Playing several Custom Edition maps in one session can run the Vita out of memory: the game slows down, then can't load the menu (&quot;this map file is damaged or not supported&quot;) and closes. Restart Halo after a big Custom Edition map. A fix is being worked on for the next beta.</li>
+<li>Master Chief's body can be missing in The Pillar of Autumn's cryo tube (<a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues/29">#29</a>).</li>
+</ul>
+<h2>Reporting a problem</h2>
+<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue</a>, say you are on <strong>1.1.0-beta.2</strong>, what you were doing and the mode (Online / Same Wi-Fi / Ad hoc / Co-op / Split Screen with bots / a dedicated server), and attach:</p>
+<ul>
+<li><code>ux0:data/haloce-vita/halo.log</code> and <code>halo-prev.log</code></li>
+<li><code>ux0:data/haloce-vita/data/debug.txt</code></li>
+<li>after a crash, the newest <code>ux0:data/psp2core-*.psp2dmp</code></li>
+</ul>
+<p>For online problems, send the files from every Vita in the game. <code>halo.log</code> now also says what the server browser and the game list servers are doing, and why the game went back to the menu or the home screen. The version is on <code>halo.log</code>'s first line and in the settings panel under Controls &gt; Advanced. Details: <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
+<h3>Dedicated server downloads (new)</h3>
+<p>Run your own always-on server for Vitas on a Linux PC, a VPS or a Raspberry Pi. Two downloads are attached below, with their checksums in <code>SHA256SUMS</code>:</p>
+<table>
+<thead>
+<tr>
+  <th>Download</th>
+  <th>For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz</code></td>
+  <td>A 64-bit Linux PC or VPS: Debian 12 or newer, Ubuntu 22.04 or newer (any distribution with glibc 2.35+). The server is a 32-bit program, so add the 32-bit glibc once: <code>sudo dpkg --add-architecture i386 &amp;&amp; sudo apt update &amp;&amp; sudo apt install libc6:i386</code></td>
+</tr>
+<tr>
+  <td><code>halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz</code></td>
+  <td>A Raspberry Pi 4 (or 3, 5) on Raspberry Pi OS 12 &quot;Bookworm&quot; or 13 &quot;Trixie&quot;. On the 64-bit OS, add the 32-bit glibc once: <code>sudo dpkg --add-architecture armhf &amp;&amp; sudo apt update &amp;&amp; sudo apt install libc6:armhf</code></td>
+</tr>
+</tbody>
+</table>
+<p>Nothing else is needed: SDL3 is built in. Each download holds the server, a quick start (<code>README-SERVER.md</code>), the full guide, a commented <code>init.txt.example</code>, four example servers (Slayer, Big Team, Oddball, King of the Hill), optional systemd units (one server, or several on one machine with <code>halo-servers</code> to manage them) and the licences.</p>
+<p><strong>No game data is included.</strong> Copy the <code>maps</code> folder from your own Xbox copy of Halo into the server's folder. Then:</p>
+<pre><code>tar xzf halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz
+cd halo-ce-vita-server-1.1.0-beta.2-linux-x86
+./halo-server -path ~/halo-server
+</code></pre>
+<p>The server shows the code Vitas join with, and lists itself in the server browser unless <code>sv_public 0</code>. Full guide: <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.2/port/linux/DEDICATED_SERVER.md#download-a-release-build">DEDICATED_SERVER.md</a>.</p>
+<p><strong>Security:</strong> run the server as an unprivileged user, never as root (the included systemd units do this for you, with the system read-only to it). Open only its UDP port in your firewall and router (2302 by default, one port per server); it needs no other incoming port. It has no remote console and never runs programs or scripts from its files or from players. Check your download against <code>SHA256SUMS</code>.</p>
+<h2>Assets</h2>
+<ul>
+<li><code>halo.vpk</code>: the game</li>
+<li><code>HaloCEVitaInstaller.exe</code>: the Windows install tool (experimental). It isn't signed, so Windows SmartScreen will warn you (&quot;More info&quot; &gt; &quot;Run anyway&quot;), and some antivirus programs may flag it wrongly.</li>
+<li><code>halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz</code>: the dedicated server for a Linux PC or VPS</li>
+<li><code>halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz</code>: the dedicated server for a Raspberry Pi</li>
+<li><code>SHA256SUMS</code>: the two server downloads' checksums</li>
+</ul>
+<p><strong>ffmpeg inside the install tool:</strong> <code>HaloCEVitaInstaller.exe</code> includes FFmpeg 9.0.2 (gyan.dev's essentials build), licensed under the GNU GPL version 3, like this project. Its LICENSE and README.txt are inside the program. FFmpeg's source: <a target="_blank" rel="noopener noreferrer" href="https://ffmpeg.org/download.html#get-sources">https://ffmpeg.org/download.html#get-sources</a> (the release tarball <code>ffmpeg-9.0.2.tar.xz</code>); gyan.dev's build notes: <a target="_blank" rel="noopener noreferrer" href="https://www.gyan.dev/ffmpeg/builds/">https://www.gyan.dev/ffmpeg/builds/</a>. More in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.2/tools/installer/README-installer.md#ffmpegs-licence">README-installer</a>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 4.0 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.0-beta.2-linux-armhf.tar.gz · 3.1 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.0-beta.2-linux-x86.tar.gz · 3.7 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/HaloCEVitaInstaller.exe" target="_blank" rel="noopener">HaloCEVitaInstaller.exe · 48.2 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.2/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 234.0 B</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="paper mario vita paper mario vita kaziema/pmvita  public beta 0.6.1 v0.6.1 ports # pm0.6.1
 release notes:
 # 0.6.1
@@ -321,261 +619,6 @@ Increased logging for still pending issues</p>
                   <div class="body markdown-body"><p>GitHub Actions build log: <a target="_blank" rel="noopener noreferrer" href="https://github.com/isledecomp/isle-portable/actions/runs/37795313188">https://github.com/isledecomp/isle-portable/actions/runs/37795313188</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk" target="_blank" rel="noopener">⬇ isle.vpk · 6.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk" target="_blank" rel="noopener">app-debug.apk · 13.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk" target="_blank" rel="noopener">app-release.apk · 11.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg" target="_blank" rel="noopener">isle-0.1-Darwin-arm64.dmg · 22.5 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg" target="_blank" rel="noopener">isle-0.1-Darwin-x64.dmg · 23.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz" target="_blank" rel="noopener">isle-0.1-DOS-x86.tar.gz · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz" target="_blank" rel="noopener">isle-0.1-Emscripten-emscripten.tar.gz · 994.2 KB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-FreeBSD-x64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa" target="_blank" rel="noopener">isle-0.1-iOS-arm64.ipa · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-Linux-x64.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip" target="_blank" rel="noopener">isle-0.1-Windows-arm64.zip · 2.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-Windows-x64.tar.gz · 17.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip" target="_blank" rel="noopener">isle-0.1-Windows-x64.zip · 20.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip" target="_blank" rel="noopener">isle-0.1-Windows-x86.zip · 1.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip" target="_blank" rel="noopener">isle-0.1-Xbox_One_Series_XS-x64.zip · 2.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip" target="_blank" rel="noopener">isle-assets.zip · 436.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip" target="_blank" rel="noopener">isle-hdaudio.zip · 284.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx" target="_blank" rel="noopener">isle.3dsx · 2.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia" target="_blank" rel="noopener">isle.cia · 2.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro" target="_blank" rel="noopener">isle.nro · 8.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage" target="_blank" rel="noopener">Isle_Portable-x86_64.AppImage · 29.7 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak" target="_blank" rel="noopener">org.legoisland.Isle.aarch64.flatpak · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak" target="_blank" rel="noopener">org.legoisland.Isle.x86_64.flatpak · 2.5 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="halo ce halo ce birchwoodgod/halo-ce-vita halo ce for ps vita 1.1.0 beta 1 v1.1.0-beta.1 ports **testing build.** this is the first public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. if you want the stable build, stay on [v1.0.3](https://github.com/birchwoodgod/halo-ce-vita/releases/tag/v1.0.3). your maps, saves and settings carry over either way. please report what breaks (see the end).
-
-1.1.0 is the multiplayer release: online play with opence&#x27;s in-game menus, co-op campaign for up to four vitas, custom maps including custom edition ones, and a lot of performance work.
-
-## set up online play (the pc multiplayer menus)
-the server browser and online menus come from the pc version&#x27;s files, so you need them from your own copy of halo pc:
-
-1. **get the 3 halo pc files** (`bitmaps.map`, `sounds.map`, `loc.map`). pick one:
-   - **easiest:** copy your **halo custom edition installer** to `ux0:data/haloce-vita/`. its name must start with `halocesetup` and end in `.exe` (e.g. `halocesetup_en_1.00.exe`), so rename your download if needed. start the game: it unpacks the 3 files (under a minute), asks whether to delete the installer, then restarts itself.
-   - **halo mcc on steam:** copy the 3 files from `steamapps/common/halo the master chief collection/halo1/maps/custom_edition/` (not the ones directly in `halo1/maps`) to `ux0:data/haloce-vita/maps/`.
-   - **a halo custom edition install:** copy them from its `maps` folder.
-   - or let the **windows install tool** (attached below) do it.
-2. in game, hold **select + start** to open the settings panel, go to **multiplayer &gt; connection: online**, then restart the game.
-3. in the main menu, open **multiplayer**: you&#x27;ll see the server browser (**join game &gt; internet**), **join by code**, and **create game &gt; internet** to host.
-
-without these files you get the original xbox menus, and can still join a game by its code (settings panel &gt; multiplayer &gt; join with a code).
-
-full details: [readme: halo pc files](https://github.com/birchwoodgod/halo-ce-vita/blob/v1.1.0-beta.1/readme.md#halo-pc-files)
-
-## what&#x27;s new since 1.0.3
-
-### online play
-
-- **internet play between vitas** with the pc version&#x27;s multiplayer screens, ported from opence: a **server browser** of public games (a lock on those with a password), **join by code**, and **create game &gt; internet** with server setup (lobby name, max players, public or private, password). vitas play only vitas.
-- **same wi-fi** (system link) and **ad hoc** (vitas side by side, no router) too: settings panel (hold select + start) &gt; multiplayer &gt; connection.
-- these menus need the **halo pc files** (see custom maps). without them you get the original xbox menus, and can still join a game by its code (settings panel &gt; multiplayer &gt; join with a code).
-- **map sharing**: join a game on a custom map you don&#x27;t have and the game offers to download it from the host, in the lobby. a dropped download picks up where it stopped. in games from the public server browser it warns you the host is a stranger; modded maps &gt; map downloads can turn this off.
-- hosting while another app holds the network port now shows a message instead of crashing.
-- several vitas searching system link at once all see the game.
-
-### co-op campaign
-
-- **up to 4 players** online, on the same wi-fi or ad hoc: campaign, a profile, a level and a difficulty, then **y** (play co-op).
-- **private or public**: x on the waiting screen (private by default: joined by its code; public: listed in the server browser).
-- everyone votes to skip cutscenes (start). a dead player watches a teammate and comes back beside one. co-op never touches your single player save.
-
-### custom maps
-
-- **xbox custom maps**, **custom edition multiplayer maps**, and **custom edition campaign maps** (single player and firefight maps such as firefight airlock), listed in campaign after the maw, alone or in co-op. playing one never touches your campaign save.
-- custom edition maps need the **halo pc files** (`bitmaps.map`, `sounds.map`, `loc.map`) and settings panel &gt; multiplayer &gt; modded maps &gt; **pc maps: on**. the easiest way to get the files: copy your halo custom edition installer (named `halocesetup*.exe`) to `ux0:data/haloce-vita/`. the game unpacks the files at the next start, asks before deleting the installer, and restarts itself. you can also copy them from halo mcc&#x27;s `halo1/maps/custom_edition` folder or a custom edition install.
-
-### performance and graphics
-
-- **graphics profiles** (performance, balanced, quality) with new advanced graphics settings: object shadows, dynamic lights, effects quality, particle density, ai think rate and sound updates, with thanks to **bruno santana**, whose modified build showed them.
-- **frame interpolation** (graphics, off by default): up to 60 frames a second between the game&#x27;s 30 ticks, and it keeps time after a hitch.
-- **fourth cpu core** with the [capunlocker](https://github.com/graphenect/capunlocker) plugin: fourth core helpers (graphics &gt; advanced, all async by default) moves background work to core 3, a big help in multiplayer. without the plugin nothing changes.
-- fewer lag spikes: textures decoded in the background, no stutter while a map copies in the lobby, and no co-op freezes on the joining vita over a bumpy connection. `halo.log` now says what caused each stutter.
-- screen flashes and hud blending as on the xbox: covenant turret hits, teleporters, plasma gauges, hud meters.
-- fixed: zoomed scopes in 16:9 (#30), the sun&#x27;s glow and rays (#31), the disappearing muzzle flash (#32), the maw&#x27;s armoury shadows and the cloaked flood&#x27;s slowdown (#33).
-
-### other fixes
-
-- **movies are optional**: without them the main menu now comes up ready to play (it used to ignore your buttons).
-- settings that didn&#x27;t stick after a restart (a damaged `config.toml`) are repaired automatically.
-- deleting files (profiles, playlists) works on the vita.
-- the settings panel in tabs, button layout and touch zones in xbox controller terms, gyro aiming, and optional playstation button icons.
-- **windows install tool (experimental)** (`halocevitainstaller.exe`, attached below). it takes the maps and `default.xbe` out of your xbox disc image, converts the movies (optional), gets the halo pc files and copies everything, the vpk too, to the vita over vitashell&#x27;s ftp. it includes no game data. it isn&#x27;t signed, so windows smartscreen will warn you (&quot;more info&quot; &gt; &quot;run anyway&quot;), and some antivirus programs may flag it wrongly. **testers: please tell us how it goes on your pc** (it ran under wine here, not yet on a real windows pc). if it gives you trouble, the manual steps in the readme still work.
-
-## install / upgrade
-
-1. install `halo.vpk` with vitashell over your current halo ce (the whole vpk). your maps, saves and settings are kept. to go back, install the v1.0.3 vpk the same way.
-2. new install: copy your xbox `maps` folder and `default.xbe` to `ux0:data/haloce-vita/`, or use the windows install tool. you also need `ur0:data/libshacccg.suprx` (see the [readme](https://github.com/birchwoodgod/halo-ce-vita#install)).
-3. **for online play**, add the halo pc files (see custom maps above), then settings panel &gt; multiplayer &gt; **connection: online** and restart.
-4. recommended: **capunlocker** (https://github.com/graphenect/capunlocker) for the fourth core.
-5. the first start after updating takes longer: the shader cache rebuilds once.
-
-**network version 18**: plays online with the private 1.1.0 test builds 5 to 8, but not with 1.0.3. everyone on beta 1 is best: co-op for four and custom edition campaign maps in co-op need test 7 or later.
-
-## what to test
-
-- online: the server browser, join by code, hosting with a password, map downloads.
-- co-op with 3–4 players, private and public: tell us the host&#x27;s fps.
-- custom edition campaign maps, alone and in co-op.
-- ad hoc and same wi-fi between vitas.
-- your fps in big fights (fps counter in the graphics tab), with and without frame interpolation, and any stutter (send `halo.log`).
-- the windows install tool (experimental), from your own disc image to a working install: tell us your windows version and whether every step worked.
-- anything that worked in 1.0.3 and is broken here: those reports matter most.
-
-## what&#x27;s been checked on a real vita
-
-- online play between two vitas over the internet, map sharing with resume, co-op campaign online, custom edition single-player maps (from campaign&#x27;s level list, on this build&#x27;s code), and the halo ce installer extraction.
-- **not yet checked on hardware**:
-  - 3–4 player co-op
-  - the newest lag fixes
-  - the blending fixes
-- the windows install tool&#x27;s tests pass on linux and it ran under wine; it hasn&#x27;t been run on a real windows pc yet.
-
-## known issues
-
-- you can&#x27;t download a custom map once the match has started: join while the host is in the lobby.
-- custom edition maps&#x27; ogg vorbis sounds are silent.
-- big custom edition maps can be slow on the vita or too large for its memory.
-- the host gets slower with 3–4 co-op players, since it runs everyone&#x27;s ai.
-- online play can fail between two strict nats (some mobile and company networks, double nat).
-- the quality profile doesn&#x27;t hold 30 fps in big fights yet; that&#x27;s being worked on for the next betas.
-- master chief&#x27;s body can be missing in the pillar of autumn&#x27;s cryo tube (#29).
-
-## coming in 1.1.1
-
-game chat (quick phrases and typed messages) and voice chat. they change the network protocol, so they come together in 1.1.1.
-
-## reporting a problem
-
-open an [issue](https://github.com/birchwoodgod/halo-ce-vita/issues), say you are on **1.1.0-beta.1**, what you were doing and the mode (online / same wi-fi / ad hoc / co-op), and attach:
-
-- `ux0:data/haloce-vita/halo.log` and `halo-prev.log`
-- `ux0:data/haloce-vita/data/debug.txt`
-- after a crash, the newest `ux0:data/psp2core-*.psp2dmp`
-
-for online problems, send the files from every vita in the game. the version is on `halo.log`&#x27;s first line and in the settings panel under controls &gt; advanced. details: [reporting a crash](https://github.com/birchwoodgod/halo-ce-vita#reporting-a-crash-or-a-problem).
-
-## assets
-
-- `halo.vpk`: the game
-- `halocevitainstaller.exe`: the windows install tool (experimental)
-- `halo-1.1.0-beta.1.elf`: for crash reports
-
-**ffmpeg inside the install tool:** `halocevitainstaller.exe` includes ffmpeg 9.0.2 (gyan.dev&#x27;s essentials build), licensed under the gnu gpl version 3, like this project. its license and readme.txt are inside the program. ffmpeg&#x27;s source: &lt;https://ffmpeg.org/download.html#get-sources&gt; (the release tarball `ffmpeg-9.0.2.tar.xz`); gyan.dev&#x27;s build notes: &lt;https://www.gyan.dev/ffmpeg/builds/&gt;. more in [readme-installer](https://github.com/birchwoodgod/halo-ce-vita/blob/v1.1.0-beta.1/tools/installer/readme-installer.md#ffmpegs-licence).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png" alt="Icono de Halo CE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · BirchWoodGod/halo-ce-vita</div>
-                      <h2><a href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.1.0-beta.1" target="_blank" rel="noopener">Halo CE</a></h2>
-                      <div class="release-name">Halo CE for PS Vita 1.1.0 beta 1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.1.0-beta.1</span>
-                    <span>2026-10-08 14:51 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.1 → release v1.1.0-beta.1</div>
-                  
-                  <div class="body markdown-body"><p><strong>Testing build.</strong> This is the first public beta of 1.1.0, for players who want to help test, so expect rough edges, especially online and in co-op. If you want the stable build, stay on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3">v1.0.3</a>. Your maps, saves and settings carry over either way. Please report what breaks (see the end).</p>
-<p>1.1.0 is the multiplayer release: online play with OpenCE's in-game menus, co-op campaign for up to four Vitas, custom maps including Custom Edition ones, and a lot of performance work.</p>
-<h2>Set up online play (the PC multiplayer menus)</h2>
-<p>The server browser and online menus come from the PC version's files, so you need them from your own copy of Halo PC:</p>
-<ol>
-<li><strong>Get the 3 Halo PC files</strong> (<code>bitmaps.map</code>, <code>sounds.map</code>, <code>loc.map</code>). Pick one:<ul>
-<li><strong>Easiest:</strong> copy your <strong>Halo Custom Edition installer</strong> to <code>ux0:data/haloce-vita/</code>. Its name must start with <code>halocesetup</code> and end in <code>.exe</code> (e.g. <code>halocesetup_en_1.00.exe</code>), so rename your download if needed. Start the game: it unpacks the 3 files (under a minute), asks whether to delete the installer, then restarts itself.</li>
-<li><strong>Halo MCC on Steam:</strong> copy the 3 files from <code>steamapps/common/Halo The Master Chief Collection/halo1/maps/custom_edition/</code> (not the ones directly in <code>halo1/maps</code>) to <code>ux0:data/haloce-vita/maps/</code>.</li>
-<li><strong>A Halo Custom Edition install:</strong> copy them from its <code>maps</code> folder.</li>
-<li>Or let the <strong>Windows install tool</strong> (attached below) do it.</li>
-</ul>
-</li>
-<li>In game, hold <strong>Select + Start</strong> to open the settings panel, go to <strong>Multiplayer &gt; Connection: Online</strong>, then restart the game.</li>
-<li>In the main menu, open <strong>Multiplayer</strong>: you'll see the server browser (<strong>Join Game &gt; Internet</strong>), <strong>Join by code</strong>, and <strong>Create Game &gt; Internet</strong> to host.</li>
-</ol>
-<p>Without these files you get the original Xbox menus, and can still join a game by its code (settings panel &gt; Multiplayer &gt; Join with a code).</p>
-<p>Full details: <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.1/README.md#halo-pc-files">README: Halo PC files</a></p>
-<h2>What's new since 1.0.3</h2>
-<h3>Online play</h3>
-<ul>
-<li><strong>Internet play between Vitas</strong> with the PC version's multiplayer screens, ported from OpenCE: a <strong>server browser</strong> of public games (a lock on those with a password), <strong>Join by code</strong>, and <strong>Create Game &gt; Internet</strong> with Server Setup (lobby name, max players, public or private, password). Vitas play only Vitas.</li>
-<li><strong>Same Wi-Fi</strong> (system link) and <strong>Ad hoc</strong> (Vitas side by side, no router) too: settings panel (hold Select + Start) &gt; Multiplayer &gt; Connection.</li>
-<li>These menus need the <strong>Halo PC files</strong> (see Custom maps). Without them you get the original Xbox menus, and can still join a game by its code (settings panel &gt; Multiplayer &gt; Join with a code).</li>
-<li><strong>Map sharing</strong>: join a game on a custom map you don't have and the game offers to download it from the host, in the lobby. A dropped download picks up where it stopped. In games from the public server browser it warns you the host is a stranger; Modded maps &gt; Map downloads can turn this off.</li>
-<li>Hosting while another app holds the network port now shows a message instead of crashing.</li>
-<li>Several Vitas searching System Link at once all see the game.</li>
-</ul>
-<h3>Co-op campaign</h3>
-<ul>
-<li><strong>Up to 4 players</strong> online, on the same Wi-Fi or ad hoc: Campaign, a profile, a level and a difficulty, then <strong>Y</strong> (Play co-op).</li>
-<li><strong>Private or Public</strong>: X on the waiting screen (Private by default: joined by its code; Public: listed in the server browser).</li>
-<li>Everyone votes to skip cutscenes (Start). A dead player watches a teammate and comes back beside one. Co-op never touches your single player save.</li>
-</ul>
-<h3>Custom maps</h3>
-<ul>
-<li><strong>Xbox custom maps</strong>, <strong>Custom Edition multiplayer maps</strong>, and <strong>Custom Edition campaign maps</strong> (single player and Firefight maps such as Firefight Airlock), listed in Campaign after The Maw, alone or in co-op. Playing one never touches your campaign save.</li>
-<li>Custom Edition maps need the <strong>Halo PC files</strong> (<code>bitmaps.map</code>, <code>sounds.map</code>, <code>loc.map</code>) and settings panel &gt; Multiplayer &gt; Modded maps &gt; <strong>PC maps: On</strong>. The easiest way to get the files: copy your Halo Custom Edition installer (named <code>halocesetup*.exe</code>) to <code>ux0:data/haloce-vita/</code>. The game unpacks the files at the next start, asks before deleting the installer, and restarts itself. You can also copy them from Halo MCC's <code>halo1/maps/custom_edition</code> folder or a Custom Edition install.</li>
-</ul>
-<h3>Performance and graphics</h3>
-<ul>
-<li><strong>Graphics profiles</strong> (Performance, Balanced, Quality) with new Advanced graphics settings: object shadows, dynamic lights, effects quality, particle density, AI think rate and sound updates, with thanks to <strong>Bruno Santana</strong>, whose modified build showed them.</li>
-<li><strong>Frame interpolation</strong> (Graphics, Off by default): up to 60 frames a second between the game's 30 ticks, and it keeps time after a hitch.</li>
-<li><strong>Fourth CPU core</strong> with the <a target="_blank" rel="noopener noreferrer" href="https://github.com/GrapheneCt/CapUnlocker">CapUnlocker</a> plugin: Fourth core helpers (Graphics &gt; Advanced, All async by default) moves background work to core 3, a big help in multiplayer. Without the plugin nothing changes.</li>
-<li>Fewer lag spikes: textures decoded in the background, no stutter while a map copies in the lobby, and no co-op freezes on the joining Vita over a bumpy connection. <code>halo.log</code> now says what caused each stutter.</li>
-<li>Screen flashes and HUD blending as on the Xbox: Covenant turret hits, teleporters, plasma gauges, HUD meters.</li>
-<li>Fixed: zoomed scopes in 16:9 (#30), the sun's glow and rays (#31), the disappearing muzzle flash (#32), The Maw's armoury shadows and the cloaked Flood's slowdown (#33).</li>
-</ul>
-<h3>Other fixes</h3>
-<ul>
-<li><strong>Movies are optional</strong>: without them the main menu now comes up ready to play (it used to ignore your buttons).</li>
-<li>Settings that didn't stick after a restart (a damaged <code>config.toml</code>) are repaired automatically.</li>
-<li>Deleting files (profiles, playlists) works on the Vita.</li>
-<li>The settings panel in tabs, button layout and touch zones in Xbox controller terms, gyro aiming, and optional PlayStation button icons.</li>
-<li><strong>Windows install tool (experimental)</strong> (<code>HaloCEVitaInstaller.exe</code>, attached below). It takes the maps and <code>default.xbe</code> out of your Xbox disc image, converts the movies (optional), gets the Halo PC files and copies everything, the VPK too, to the Vita over VitaShell's FTP. It includes no game data. It isn't signed, so Windows SmartScreen will warn you (&quot;More info&quot; &gt; &quot;Run anyway&quot;), and some antivirus programs may flag it wrongly. <strong>Testers: please tell us how it goes on your PC</strong> (it ran under Wine here, not yet on a real Windows PC). If it gives you trouble, the manual steps in the README still work.</li>
-</ul>
-<h2>Install / upgrade</h2>
-<ol>
-<li>Install <code>halo.vpk</code> with VitaShell over your current Halo CE (the whole VPK). Your maps, saves and settings are kept. To go back, install the v1.0.3 VPK the same way.</li>
-<li>New install: copy your Xbox <code>maps</code> folder and <code>default.xbe</code> to <code>ux0:data/haloce-vita/</code>, or use the Windows install tool. You also need <code>ur0:data/libshacccg.suprx</code> (see the <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#install">README</a>).</li>
-<li><strong>For online play</strong>, add the Halo PC files (see Custom maps above), then settings panel &gt; Multiplayer &gt; <strong>Connection: Online</strong> and restart.</li>
-<li>Recommended: <strong>CapUnlocker</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/GrapheneCt/CapUnlocker">https://github.com/GrapheneCt/CapUnlocker</a>) for the fourth core.</li>
-<li>The first start after updating takes longer: the shader cache rebuilds once.</li>
-</ol>
-<p><strong>Network version 18</strong>: plays online with the private 1.1.0 test builds 5 to 8, but not with 1.0.3. Everyone on beta 1 is best: co-op for four and Custom Edition campaign maps in co-op need test 7 or later.</p>
-<h2>What to test</h2>
-<ul>
-<li>Online: the server browser, join by code, hosting with a password, map downloads.</li>
-<li>Co-op with 3–4 players, Private and Public: tell us the host's fps.</li>
-<li>Custom Edition campaign maps, alone and in co-op.</li>
-<li>Ad hoc and Same Wi-Fi between Vitas.</li>
-<li>Your fps in big fights (FPS counter in the Graphics tab), with and without frame interpolation, and any stutter (send <code>halo.log</code>).</li>
-<li>The Windows install tool (experimental), from your own disc image to a working install: tell us your Windows version and whether every step worked.</li>
-<li>Anything that worked in 1.0.3 and is broken here: those reports matter most.</li>
-</ul>
-<h2>What's been checked on a real Vita</h2>
-<ul>
-<li>Online play between two Vitas over the internet, map sharing with resume, co-op campaign online, Custom Edition single-player maps (from Campaign's level list, on this build's code), and the Halo CE installer extraction.</li>
-<li><strong>Not yet checked on hardware</strong>:<ul>
-<li>3–4 player co-op</li>
-<li>the newest lag fixes</li>
-<li>the blending fixes</li>
-</ul>
-</li>
-<li>The Windows install tool's tests pass on Linux and it ran under Wine; it hasn't been run on a real Windows PC yet.</li>
-</ul>
-<h2>Known issues</h2>
-<ul>
-<li>You can't download a custom map once the match has started: join while the host is in the lobby.</li>
-<li>Custom Edition maps' Ogg Vorbis sounds are silent.</li>
-<li>Big Custom Edition maps can be slow on the Vita or too large for its memory.</li>
-<li>The host gets slower with 3–4 co-op players, since it runs everyone's AI.</li>
-<li>Online play can fail between two strict NATs (some mobile and company networks, double NAT).</li>
-<li>The Quality profile doesn't hold 30 fps in big fights yet; that's being worked on for the next betas.</li>
-<li>Master Chief's body can be missing in The Pillar of Autumn's cryo tube (#29).</li>
-</ul>
-<h2>Coming in 1.1.1</h2>
-<p>Game chat (quick phrases and typed messages) and voice chat. They change the network protocol, so they come together in 1.1.1.</p>
-<h2>Reporting a problem</h2>
-<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue</a>, say you are on <strong>1.1.0-beta.1</strong>, what you were doing and the mode (Online / Same Wi-Fi / Ad hoc / Co-op), and attach:</p>
-<ul>
-<li><code>ux0:data/haloce-vita/halo.log</code> and <code>halo-prev.log</code></li>
-<li><code>ux0:data/haloce-vita/data/debug.txt</code></li>
-<li>after a crash, the newest <code>ux0:data/psp2core-*.psp2dmp</code></li>
-</ul>
-<p>For online problems, send the files from every Vita in the game. The version is on <code>halo.log</code>'s first line and in the settings panel under Controls &gt; Advanced. Details: <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem">Reporting a crash</a>.</p>
-<h2>Assets</h2>
-<ul>
-<li><code>halo.vpk</code>: the game</li>
-<li><code>HaloCEVitaInstaller.exe</code>: the Windows install tool (experimental)</li>
-<li><code>halo-1.1.0-beta.1.elf</code>: for crash reports</li>
-</ul>
-<p><strong>ffmpeg inside the install tool:</strong> <code>HaloCEVitaInstaller.exe</code> includes FFmpeg 9.0.2 (gyan.dev's essentials build), licensed under the GNU GPL version 3, like this project. Its LICENSE and README.txt are inside the program. FFmpeg's source: <a target="_blank" rel="noopener noreferrer" href="https://ffmpeg.org/download.html#get-sources">https://ffmpeg.org/download.html#get-sources</a> (the release tarball <code>ffmpeg-9.0.2.tar.xz</code>); gyan.dev's build notes: <a target="_blank" rel="noopener noreferrer" href="https://www.gyan.dev/ffmpeg/builds/">https://www.gyan.dev/ffmpeg/builds/</a>. More in <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.1/tools/installer/README-installer.md#ffmpegs-licence">README-installer</a>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.1/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 4.0 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.1/HaloCEVitaInstaller.exe" target="_blank" rel="noopener">HaloCEVitaInstaller.exe · 48.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -25821,10 +25864,609 @@ Memo: 1037949274</code></pre>
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ink ink m1s3ry/ink-vita v1.0 - initial release v1.0 ports follow install instructions in the readme. only steam version supported.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ink/icon0.png" alt="Icono de INK" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · m1s3ry/ink-vita</div>
+                      <h2><a href="https://github.com/m1s3ry/ink-vita/releases/tag/v1.0" target="_blank" rel="noopener">INK</a></h2>
+                      <div class="release-name">v1.0 - Initial Release</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-05-26 21:12 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0.0</div>
+                  
+                  <div class="body markdown-body"><p>Follow install instructions in the README. Only Steam version supported.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/m1s3ry/ink-vita/releases/download/v1.0/INK-v1.0.0_KYUHEN.VPK" target="_blank" rel="noopener">⬇ INK-v1.0.0_KYUHEN.VPK · 2.8 MB</a><a class="btn" href="https://github.com/m1s3ry/ink-vita/releases/download/v1.0/INK.Vita.Patch.Steam.Build.1193528.zip" target="_blank" rel="noopener">INK.Vita.Patch.Steam.Build.1193528.zip · 8.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="jumpnbump jumpnbump rsn8887/jumpnbump jump&#x27;n&#x27;bump vita v1.00 and switch v1.02 1.02 ports overview
+=====
+this is my switch and vita port of the classic multiplayer-only ms-dos game jump&#x27;n&#x27;bump by brainchild design, based on the sdl2 port by @felixhaedicke.
+
+jump&#x27;n&#x27;bump is a simple but addictive multiplayer game. the goal is to stomp as many other rabbits as possible to win the game.
+
+![](screenshots/jumpnbump_shot_1.png)
+
+thanks
+======
+thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
+
+thanks to the many developers of the game, such as mattias brynervall, andreas brynervall, anders nilsson, and many more.
+
+thanks to felix haedicke for porting the game to sdl2 and cmake.
+
+installation instructions
+=====
+switch:
+- extract the contents of jumpnbump_switch.zip into the `switch` folder on your sd card, so that you have a folder `switch/jumpnbump` with `jumpnbump.nro` inside.
+
+vita:
+- install the .vpk file using vitashell
+
+switch/vita-exclusive features
+=====
+- split joycon support (switch only): to toggle between split and combined joycons, press l on joycon 1.
+- physical keyboard support via bluetooth (vita) and usb (switch)
+
+controls
+=====
+left analog stick / dpad = move the character, up to four controllers are supported  
+b / y / a / x = jump  
+plus/minus/select/start = esc (restart game/advance through statistic screens)  
+r (on controller 1) = toggle aspect ratio between original (default), 4:3, and 16:9  
+l (on controller 1) = toggle split joycon mode on/off (switch only)  
+
+physical keyboard controls via bluetooth (vita) and usb (switch):
+cursor keys = white rabbit move and jump  
+a d w = yellow rabbit move and jump  
+i j l = gray rabbit move and jump  
+keypad 4 / 8 / 6 = brown rabbit move and jump  
+
+build instructions
+=====
+switch:
+````
+cmake -dbuild_nx=on -dcmake_release_type=release
+make jumpnbump_switch.zip -j12
+````
+
+vita:
+````
+cmake -dbuild_psp2=on -dcmake_release_type=release
+make jumpnbump.vpk -j12
+````
+
+changelog
+=====
+v1.02 (switch only)
+
+- re-compile with 12.0.0 support
+
+v1.01 (switch only)
+
+- re-compile with 9.0.0 support
+
+v1.00
+
+- first release on switch and vita">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-jumpnbump/icon0.png" alt="Icono de JumpNBump" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · rsn8887/jumpnbump</div>
+                      <h2><a href="https://github.com/rsn8887/jumpnbump/releases/tag/1.02" target="_blank" rel="noopener">JumpNBump</a></h2>
+                      <div class="release-name">Jump'n'Bump Vita v1.00 and Switch v1.02</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.02</span>
+                    <span>2021-05-23 03:07 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.02</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.02</div>
+                  
+                  <div class="body markdown-body"><h1>Overview</h1>
+<p>This is my Switch and Vita port of the classic multiplayer-only MS-DOS game Jump'n'Bump by Brainchild Design, based on the SDL2 port by @felixhaedicke.</p>
+<p>Jump'n'Bump is a simple but addictive multiplayer game. The goal is to stomp as many other rabbits as possible to win the game.</p>
+<p><img src="screenshots/jumpnbump_shot_1.png" alt=""></p>
+<h1>Thanks</h1>
+<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
+<p>Thanks to the many developers of the game, such as Mattias Brynervall, Andreas Brynervall, Anders Nilsson, and many more.</p>
+<p>Thanks to Felix Haedicke for porting the game to SDL2 and Cmake.</p>
+<h1>Installation Instructions</h1>
+<p>Switch:</p>
+<ul>
+<li>Extract the contents of jumpnbump_switch.zip into the <code>switch</code> folder on your SD card, so that you have a folder <code>switch/jumpnbump</code> with <code>jumpnbump.nro</code> inside.</li>
+</ul>
+<p>Vita:</p>
+<ul>
+<li>install the .vpk file using Vitashell</li>
+</ul>
+<h1>Switch/Vita-exclusive features</h1>
+<ul>
+<li>Split Joycon support (Switch only): To toggle between split and combined Joycons, press L on joycon 1.</li>
+<li>Physical keyboard support via Bluetooth (Vita) and USB (Switch)</li>
+</ul>
+<h1>Controls</h1>
+<p>Left analog stick / Dpad = move the character, up to four controllers are supported<br>
+B / Y / A / X = Jump<br>
+Plus/Minus/Select/Start = ESC (restart game/advance through statistic screens)<br>
+R (on controller 1) = toggle aspect ratio between original (default), 4:3, and 16:9<br>
+L (on controller 1) = toggle split Joycon mode on/off (Switch only)</p>
+<p>Physical keyboard controls via Bluetooth (Vita) and USB (Switch):
+Cursor keys = white rabbit move and jump<br>
+a d w = yellow rabbit move and jump<br>
+i j l = gray rabbit move and jump<br>
+Keypad 4 / 8 / 6 = brown rabbit move and jump</p>
+<h1>Build Instructions</h1>
+<p>Switch:</p>
+<pre><code>cmake -DBUILD_NX=ON -DCMAKE_RELEASE_TYPE=Release
+make jumpnbump_switch.zip -j12
+</code></pre>
+<p>Vita:</p>
+<pre><code>cmake -DBUILD_PSP2=ON -DCMAKE_RELEASE_TYPE=Release
+make jumpnbump.vpk -j12
+</code></pre>
+<h1>Changelog</h1>
+<p>v1.02 (Switch only)</p>
+<ul>
+<li>Re-compile with 12.0.0 support</li>
+</ul>
+<p>v1.01 (Switch only)</p>
+<ul>
+<li>Re-compile with 9.0.0 support</li>
+</ul>
+<p>v1.00</p>
+<ul>
+<li>First release on Switch and Vita</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/jumpnbump/releases/download/1.02/jumpnbump_1.00.vpk" target="_blank" rel="noopener">⬇ jumpnbump_1.00.vpk · 1.2 MB</a><a class="btn" href="https://github.com/rsn8887/jumpnbump/releases/download/1.02/jumpnbump_1.02_switch.zip" target="_blank" rel="noopener">jumpnbump_1.02_switch.zip · 3.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="enigma enigma rsn8887/enigma enigma vita (v1.11) and switch (v1.16) 1.16 ports changes in this version
+=====
+1.16 (switch only)
+
+- re-compile with 12.0.0 support. updating the .nro file is enough, data is the same.
+- fix crash on switch when loading levels with rubberbands
+
+overview
+=====
+this is my vita and switch port of enigma, a skill/puzzle game inspired by oxyd on the atari st and rock&#x27;n&#x27;roll on the amiga.
+
+![](screenshots/enigma_vita_4.jpg)
+
+the object of the game is to uncover pairs of identically colored oxyd stones. simple? yes. easy? certainly not! hidden traps, vast mazes, laser beams, and, most of all, countless hairy puzzles usually block your direct way to the oxyd stones … if you are new to enigma, you may want to take a look at a few [screenshots](http://www.nongnu.org/enigma/screenshots.html) or peek at the [user manual](http://www.nongnu.org/enigma/manual_1.20/manual/enigma.html).
+
+homepage
+======
+detailed information about the game can be found here:
+http://www.nongnu.org/enigma/index.html
+
+thanks
+======
+thanks to my supporters on patreon: andyways, count duckula, jesse harlin, thomas luten, matthew machnee, mored4u, ibrahim fazel poor, radicalr.
+
+thanks to @usineur for his libkbd-vita code for easy use of touch keyboard text entry.
+
+thanks to the developers of vitasdk and other developers on the vita for making this possible, in no particular order: @devnoname120, @theofficialflow, @yifanlu, @rinnegatamante, @cpasjuste, @xyzz, @xerpi, and many others.
+
+thanks to the many developers of the original game, such as the main developers thomas bernhardt, raoul bourquin, siegfried fennig, martin hawlisch, daniel heck, ronald lamprecht, andreas lochmann, petr machata, nobby, nat pryce, jacob scott, sven siggelkow, ralf westram, and many many others.
+
+the full credits are at http://www.nongnu.org/enigma/credits.html .
+
+special thanks to meinolf schneider / amekudzi for the original oxyd games on atari st and pc which inspired enigma.
+
+installation instructions
+=====
+vita:
+- install the .vpk
+- extract the contents of data.zip into ux0:data/
+
+note: i recommend using ftp transfer to copy the files over (~10,000 small files in data.zip). there is one report (thanks @ji11x38) that using the vitashell &quot;select button: usb&quot; option to copy files directly from a macos computer to the vita via usb caused the files to not transfer correctly, causing enigma to crash on startup.
+
+switch:
+- extract the contents of enigma_switch.zip into the `switch` folder on your sd card, so that you have a folder `switch/enigma` with `enigma.nro` and more folders and files inside.
+
+vita/switch-exclusive features
+=====
+- game controller support: analog joystick mouse controls and button mappings
+- front and rear touch controls with left/right mouse click gestures
+- complete level packages with &gt;3,000 levels and pre-calculated preview screenshots
+- bluetooth/usb keyboard and mouse support. the vita supports only a limited number of bt devices, tested working with jelly bean bt keyboard and mouse combo asin:b06y56bbyp and with the standalone jelly comb bluetooth wireless mouse asin:b075hbdwcf. the switch supports only a limited number of usb mice. tested working with logitech m187.
+ 
+controls (controls updated with version 1.08)
+=====
+left analog stick = analog control of the marble and mouse pointer  
+square / y / l-trigger = select menu items, use object in game (left mouse button)  
+triangle / x / r-trigger = cycle through inventory items (right mouse button)  
+cross / a = ok in menu (return)  
+circle / b = back / in-game menu (escape key)  
+start / plus = help screen (f1)  
+select / minus = destroy marble and remove one life (f3)  
+r-trigger + select / r-trigger + minus = restart level (shift-f3)  
+
+dpad in menu = quick-select menu items (arrow keys)  
+dpad left/right in game = quick-change mouse speed  
+dpad up/down in game = cycle through previous messages  
+
+front touch = analog control of the marble and mouse pointer  
+rear touch = analog control of the marble and mouse pointer (vita only)  
+single finger tap = select menu items, use object in game (left mouse button)  
+dual finger tap = cycle through inventory items (right mouse button)  
+
+dual finger tap works by holding one finger down and quickly tapping with a second finger somewhere else.
+
+mouse sensitivity can be adjusted in options or in-game via dpad left/right. the setting affects analog joystick, touch, and real bluetooth/usb mice.
+
+build instructions
+=====
+vita:
+on vita, enigma needs xerces-c and inet. to prepare compilation:
+
+- with a text-editor, load the file $vitasdk/arm-vita-eabi/include/netinet/in.h. inside the file, replace &quot;struct&quot;  with &quot;inline struct&quot; on line 45 and 49.
+- download or clone my xerces-c repo from [here](https://www.github.com/rsn8887/xerces-c) into a folder called xerces, then:
+````
+mkdir build
+cd build
+cmake -dcmake_toolchain_file=$vitasdk/share/vita.toolchain.cmake -dmutex-manager=nothreads -dnetwork=off -dcmake_build_type=release -dsse2=off -dthreads=off -dbuild_shared_libs=off ../xerces/
+
+make -j10
+make install -j10
+````
+you should now have the file 
+````
+$vitasdk/arm-vita-eabi/lib/libxerces-c.a 
+````
+and a whole bunch of header files in 
+````
+$vitasdk/arm-vita-eabi/include/xercesc/
+````
+- clone the enigma repo into a folder called enigma and compile:
+````
+mkdir build
+cd build
+cmake ../enigma/ -dbuild_psp2=on -dcmake_build_type=release
+make enigma.vpk -j10
+````
+
+switch:
+on switch, enigma needs ssl and xerces-c. to prepare compilation:
+
+- download or clone the moonlight-switch repo which contains libopenssl [here](https://www.github.com/kbhomes/moonlight-switch), then:
+````
+cd moonlight-switch/dependencies/switch-openssl
+export moonlight_depdir=$devkitpro/portlibs/switch
+dkp-makepkg
+sudo -e dkp-pacman -u switch-openssl-1.0.2o-1-any.pkg.tar.xz
+````
+
+- download or clone my xerces-c switch branch from [here](https://www.github.com/rsn8887/xerces-c-1) into a folder called xerces (use `git checkout switch` to make sure you are on the switch branch), then:
+````
+cmake -dcmake_toolchain_file=../xerces-c-1/switch.toolchain.cmake -dtranscoder=iconv -dmutex-manager=nothreads -dnetwork=off -dsse2=off -dthreads=off -dbuild_shared_libs=off -dxmlch-type=uint16_t -dulong_max=4294967295 ../xerces-c-1/
+cmake -dcmake_toolchain_file=../xerces-c-1/switch.toolchain.cmake -dtranscoder=iconv -dmutex-manager=nothreads -dnetwork=off -dsse2=off -dthreads=off -dbuild_shared_libs=off -dxmlch-type=uint16_t -dulong_max=4294967295 ../xerces-c-1/
+cmake -dcmake_toolchain_file=../xerces-c-1/switch.toolchain.cmake -dtranscoder=iconv -dmutex-manager=nothreads -dnetwork=off -dsse2=off -dthreads=off -dbuild_shared_libs=off -dxmlch-type=uint16_t -dulong_max=4294967295 ../xerces-c-1/
+
+make -j10
+sudo -e make install
+````
+- (i don&#x27;t know why repeated cmake is neccessary, but it only works that way for me)
+- clone the enigma repo into a folder called enigma and compile:
+````
+mkdir build
+cd build
+cmake ../enigma/ -dbuild_nx=on -dcmake_build_type=release
+make enigma_switch.zip -j10
+````
+
+changelog
+=====
+1.16 (switch only)
+
+- re-compile with 12.0.0 support. updating the .nro file is enough, data is the same.
+- fix crash on switch when loading levels with rubberbands
+
+1.15 (switch only)
+
+- fix crash on switch when loading levels with rubberbands that re-appeared using latest toolchain
+
+1.14 (switch only)
+
+- re-compile with 9.0.0 support
+
+1.13 (switch only)
+
+- fix crash on switch when loading a level that contains rubberbands
+
+1.12 (switch only)
+
+- add switch version
+
+1.11
+
+- improve response to diagonal stick directions
+
+1.10
+
+- improve response to slow finger motion
+
+1.09
+
+- improve controls with bluetooth mouse by re-compiling with latest sdl-vita
+
+1.08
+
+- improve keymap, map left/right mouse buttons also to l/r for better playability. 
+
+1.07
+
+- prevent accidental clicks when moving marble using touch
+
+1.06
+
+- map dpad as arrow keys to quick select menu items and quick-select mouse speed in game
+- map l to &#x27;f1&#x27; (help), x to &#x27;return&#x27; (ok), o to &#x27;esc&#x27; (back)
+- update help texts to reflect vita controller mappings
+
+1.05
+
+- enable touch keyboard in menu, useful for name entry and level search
+- increase smoothness of mouse pointer motion in gui
+- remove the missing translations
+
+1.04
+
+- fix missing soundsets in audio menu
+
+1.03
+
+- updated data.zip to include many more levels with corresponding thumbnail previews and many more sound sets. 
+
+1.02
+
+- decrease default joystick sensitivity (marble moved too fast when controlled with joystick)
+
+1.01
+
+- map r-trigger to &#x27;restart&#x27; and select button to &#x27;kill marble&#x27;
+
+1.00
+
+- initial vita port release based on latest enigma development version">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-enigma/icon0.png" alt="Icono de Enigma" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · rsn8887/Enigma</div>
+                      <h2><a href="https://github.com/rsn8887/Enigma/releases/tag/1.16" target="_blank" rel="noopener">Enigma</a></h2>
+                      <div class="release-name">Enigma Vita (v1.11) and Switch (v1.16)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.16</span>
+                    <span>2021-05-23 02:34 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.16</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.16</div>
+                  
+                  <div class="body markdown-body"><h1>Changes in this version</h1>
+<p>1.16 (Switch only)</p>
+<ul>
+<li>Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.</li>
+<li>Fix crash on Switch when loading levels with rubberbands</li>
+</ul>
+<h1>Overview</h1>
+<p>This is my Vita and Switch port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.</p>
+<p><img src="screenshots/enigma_vita_4.jpg" alt=""></p>
+<p>The object of the game is to uncover pairs of identically colored Oxyd stones. Simple? Yes. Easy? Certainly not! Hidden traps, vast mazes, laser beams, and, most of all, countless hairy puzzles usually block your direct way to the Oxyd stones … If you are new to Enigma, you may want to take a look at a few <a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/screenshots.html">screenshots</a> or peek at the <a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/manual_1.20/manual/enigma.html">user manual</a>.</p>
+<h1>Homepage</h1>
+<p>Detailed information about the game can be found here:
+<a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/index.html">http://www.nongnu.org/enigma/index.html</a></p>
+<h1>Thanks</h1>
+<p>Thanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.</p>
+<p>Thanks to @usineur for his libkbd-vita code for easy use of touch keyboard text entry.</p>
+<p>Thanks to the developers of VitaSDK and other developers on the Vita for making this possible, in no particular order: @devnoname120, @TheOfficialFlow, @yifanlu, @Rinnegatamante, @cpasjuste, @xyzz, @xerpi, and many others.</p>
+<p>Thanks to the many developers of the original game, such as the main developers Thomas Bernhardt, Raoul Bourquin, Siegfried Fennig, Martin Hawlisch, Daniel Heck, Ronald Lamprecht, Andreas Lochmann, Petr Machata, Nobby, Nat Pryce, Jacob Scott, Sven Siggelkow, Ralf Westram, and many many others.</p>
+<p>The full credits are at <a target="_blank" rel="noopener noreferrer" href="http://www.nongnu.org/enigma/credits.html">http://www.nongnu.org/enigma/credits.html</a> .</p>
+<p>Special thanks to Meinolf Schneider / Amekudzi for the original Oxyd games on Atari ST and PC which inspired Enigma.</p>
+<h1>Installation Instructions</h1>
+<p>Vita:</p>
+<ul>
+<li>Install the .vpk</li>
+<li>Extract the contents of data.zip into ux0:data/</li>
+</ul>
+<p>NOTE: I recommend using FTP transfer to copy the files over (~10,000 small files in data.zip). There is one report (thanks @ji11x38) that using the Vitashell &quot;SELECT Button: USB&quot; option to copy files directly from a MacOS computer to the Vita via USB caused the files to not transfer correctly, causing Enigma to crash on startup.</p>
+<p>Switch:</p>
+<ul>
+<li>Extract the contents of Enigma_Switch.zip into the <code>switch</code> folder on your SD card, so that you have a folder <code>switch/enigma</code> with <code>enigma.nro</code> and more folders and files inside.</li>
+</ul>
+<h1>Vita/Switch-exclusive features</h1>
+<ul>
+<li>game controller support: analog joystick mouse controls and button mappings</li>
+<li>front and rear touch controls with left/right mouse click gestures</li>
+<li>complete level packages with &gt;3,000 levels and pre-calculated preview screenshots</li>
+<li>Bluetooth/USB keyboard and mouse support. The Vita supports only a limited number of BT devices, tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. The Switch supports only a limited number of USB mice. Tested working with Logitech M187.</li>
+</ul>
+<h1>Controls (controls updated with version 1.08)</h1>
+<p>Left analog stick = analog control of the marble and mouse pointer<br>
+Square / Y / L-trigger = select menu items, use object in game (left mouse button)<br>
+Triangle / X / R-trigger = cycle through inventory items (right mouse button)<br>
+Cross / A = ok in menu (return)<br>
+Circle / B = back / in-game menu (escape key)<br>
+Start / Plus = help screen (F1)<br>
+Select / Minus = destroy marble and remove one life (F3)<br>
+R-trigger + Select / R-trigger + Minus = restart level (shift-F3)</p>
+<p>Dpad in menu = quick-select menu items (arrow keys)<br>
+Dpad left/right in game = quick-change mouse speed<br>
+Dpad up/down in game = cycle through previous messages</p>
+<p>Front touch = analog control of the marble and mouse pointer<br>
+Rear touch = analog control of the marble and mouse pointer (Vita only)<br>
+Single finger tap = select menu items, use object in game (left mouse button)<br>
+Dual finger tap = cycle through inventory items (right mouse button)</p>
+<p>Dual finger tap works by holding one finger down and quickly tapping with a second finger somewhere else.</p>
+<p>Mouse sensitivity can be adjusted in options or in-game via dpad left/right. The setting affects analog joystick, touch, and real bluetooth/USB mice.</p>
+<h1>Build Instructions</h1>
+<p>Vita:
+On Vita, Enigma needs xerces-c and inet. To prepare compilation:</p>
+<ul>
+<li>with a text-editor, load the file $VITASDK/arm-vita-eabi/include/netinet/in.h. Inside the file, replace &quot;struct&quot;  with &quot;inline struct&quot; on line 45 and 49.</li>
+<li>download or clone my xerces-c repo from <a target="_blank" rel="noopener noreferrer" href="https://www.github.com/rsn8887/xerces-c">here</a> into a folder called xerces, then:</li>
+</ul>
+<pre><code>mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -Dmutex-manager=nothreads -Dnetwork=OFF -DCMAKE_BUILD_TYPE=Release -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF ../xerces/
+
+make -j10
+make install -j10
+</code></pre>
+<p>You should now have the file</p>
+<pre><code>$VITASDK/arm-vita-eabi/lib/libxerces-c.a 
+</code></pre>
+<p>and a whole bunch of header files in</p>
+<pre><code>$VITASDK/arm-vita-eabi/include/xercesc/
+</code></pre>
+<ul>
+<li>Clone the Enigma repo into a folder called Enigma and compile:</li>
+</ul>
+<pre><code>mkdir build
+cd build
+cmake ../Enigma/ -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release
+make enigma.vpk -j10
+</code></pre>
+<p>Switch:
+On Switch, Enigma needs ssl and xerces-c. To prepare compilation:</p>
+<ul>
+<li>download or clone the moonlight-switch repo which contains libopenssl <a target="_blank" rel="noopener noreferrer" href="https://www.github.com/kbhomes/moonlight-switch">here</a>, then:</li>
+</ul>
+<pre><code>cd moonlight-switch/dependencies/switch-openssl
+export MOONLIGHT_DEPDIR=$DEVKITPRO/portlibs/switch
+dkp-makepkg
+sudo -E dkp-pacman -U switch-openssl-1.0.2o-1-any.pkg.tar.xz
+</code></pre>
+<ul>
+<li>download or clone my xerces-c Switch branch from <a target="_blank" rel="noopener noreferrer" href="https://www.github.com/rsn8887/xerces-c-1">here</a> into a folder called xerces (use <code>git checkout switch</code> to make sure you are on the switch branch), then:</li>
+</ul>
+<pre><code>cmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/
+cmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/
+cmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/
+
+make -j10
+sudo -E make install
+</code></pre>
+<ul>
+<li>(I don't know why repeated cmake is neccessary, but it only works that way for me)</li>
+<li>Clone the Enigma repo into a folder called Enigma and compile:</li>
+</ul>
+<pre><code>mkdir build
+cd build
+cmake ../Enigma/ -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release
+make enigma_switch.zip -j10
+</code></pre>
+<h1>Changelog</h1>
+<p>1.16 (Switch only)</p>
+<ul>
+<li>Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.</li>
+<li>Fix crash on Switch when loading levels with rubberbands</li>
+</ul>
+<p>1.15 (Switch only)</p>
+<ul>
+<li>Fix crash on Switch when loading levels with rubberbands that re-appeared using latest toolchain</li>
+</ul>
+<p>1.14 (Switch only)</p>
+<ul>
+<li>Re-compile with 9.0.0 support</li>
+</ul>
+<p>1.13 (Switch only)</p>
+<ul>
+<li>Fix crash on Switch when loading a level that contains rubberbands</li>
+</ul>
+<p>1.12 (Switch only)</p>
+<ul>
+<li>Add Switch version</li>
+</ul>
+<p>1.11</p>
+<ul>
+<li>Improve response to diagonal stick directions</li>
+</ul>
+<p>1.10</p>
+<ul>
+<li>Improve response to slow finger motion</li>
+</ul>
+<p>1.09</p>
+<ul>
+<li>Improve controls with bluetooth mouse by re-compiling with latest SDL-Vita</li>
+</ul>
+<p>1.08</p>
+<ul>
+<li>Improve keymap, map left/right mouse buttons also to L/R for better playability.</li>
+</ul>
+<p>1.07</p>
+<ul>
+<li>prevent accidental clicks when moving marble using touch</li>
+</ul>
+<p>1.06</p>
+<ul>
+<li>map dpad as arrow keys to quick select menu items and quick-select mouse speed in game</li>
+<li>map L to 'F1' (help), X to 'Return' (ok), O to 'ESC' (back)</li>
+<li>update help texts to reflect Vita controller mappings</li>
+</ul>
+<p>1.05</p>
+<ul>
+<li>enable touch keyboard in menu, useful for name entry and level search</li>
+<li>increase smoothness of mouse pointer motion in gui</li>
+<li>remove the missing translations</li>
+</ul>
+<p>1.04</p>
+<ul>
+<li>fix missing soundsets in audio menu</li>
+</ul>
+<p>1.03</p>
+<ul>
+<li>updated data.zip to include many more levels with corresponding thumbnail previews and many more sound sets.</li>
+</ul>
+<p>1.02</p>
+<ul>
+<li>decrease default joystick sensitivity (marble moved too fast when controlled with joystick)</li>
+</ul>
+<p>1.01</p>
+<ul>
+<li>map r-trigger to 'restart' and select button to 'kill marble'</li>
+</ul>
+<p>1.00</p>
+<ul>
+<li>initial Vita port release based on latest Enigma development version</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.11.vpk" target="_blank" rel="noopener">⬇ enigma_1.11.vpk · 5.0 MB</a><a class="btn" href="https://github.com/rsn8887/Enigma/releases/download/1.16/data.zip" target="_blank" rel="noopener">data.zip · 67.0 MB</a><a class="btn" href="https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.16_switch.zip" target="_blank" rel="noopener">enigma_1.16_switch.zip · 72.8 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-08 18:14 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-09 00:53 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
