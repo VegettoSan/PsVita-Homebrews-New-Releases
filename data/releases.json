@@ -33226,5 +33226,121 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.02",
     "catalog_version": "1.02"
+  },
+  {
+    "platform": "github",
+    "repo": "rsn8887/Enigma",
+    "release_id": "43420201",
+    "tag": "1.16",
+    "name": "Enigma Vita (v1.11) and Switch (v1.16)",
+    "url": "https://github.com/rsn8887/Enigma/releases/tag/1.16",
+    "published": "2021-05-23T02:34:40Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Changes in this version\r\n=====\r\n1.16 (Switch only)\r\n\r\n- Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.\r\n- Fix crash on Switch when loading levels with rubberbands\r\n\r\nOverview\r\n=====\r\nThis is my Vita and Switch port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.\r\n\r\n![](screenshots/enigma_vita_4.jpg)\r\n\r\nThe object of the game is to uncover pairs of identically colored Oxyd stones. Simple? Yes. Easy? Certainly not! Hidden traps, vast mazes, laser beams, and, most of all, countless hairy puzzles usually block your direct way to the Oxyd stones … If you are new to Enigma, you may want to take a look at a few [screenshots](http://www.nongnu.org/enigma/screenshots.html) or peek at the [user manual](http://www.nongnu.org/enigma/manual_1.20/manual/enigma.html).\r\n\r\nHomepage\r\n======\r\nDetailed information about the game can be found here:\r\nhttp://www.nongnu.org/enigma/index.html\r\n\r\nThanks\r\n======\r\nThanks to my supporters on Patreon: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nThanks to @usineur for his libkbd-vita code for easy use of touch keyboard text entry.\r\n\r\nThanks to the developers of VitaSDK and other developers on the Vita for making this possible, in no particular order: @devnoname120, @TheOfficialFlow, @yifanlu, @Rinnegatamante, @cpasjuste, @xyzz, @xerpi, and many others.\r\n\r\nThanks to the many developers of the original game, such as the main developers Thomas Bernhardt, Raoul Bourquin, Siegfried Fennig, Martin Hawlisch, Daniel Heck, Ronald Lamprecht, Andreas Lochmann, Petr Machata, Nobby, Nat Pryce, Jacob Scott, Sven Siggelkow, Ralf Westram, and many many others.\r\n\r\nThe full credits are at http://www.nongnu.org/enigma/credits.html .\r\n\r\nSpecial thanks to Meinolf Schneider / Amekudzi for the original Oxyd games on Atari ST and PC which inspired Enigma.\r\n\r\nInstallation Instructions\r\n=====\r\nVita:\r\n- Install the .vpk\r\n- Extract the contents of data.zip into ux0:data/\r\n\r\nNOTE: I recommend using FTP transfer to copy the files over (~10,000 small files in data.zip). There is one report (thanks @ji11x38) that using the Vitashell \"SELECT Button: USB\" option to copy files directly from a MacOS computer to the Vita via USB caused the files to not transfer correctly, causing Enigma to crash on startup.\r\n\r\nSwitch:\r\n- Extract the contents of Enigma_Switch.zip into the `switch` folder on your SD card, so that you have a folder `switch/enigma` with `enigma.nro` and more folders and files inside.\r\n\r\nVita/Switch-exclusive features\r\n=====\r\n- game controller support: analog joystick mouse controls and button mappings\r\n- front and rear touch controls with left/right mouse click gestures\r\n- complete level packages with >3,000 levels and pre-calculated preview screenshots\r\n- Bluetooth/USB keyboard and mouse support. The Vita supports only a limited number of BT devices, tested working with Jelly Bean BT keyboard and mouse combo ASIN:B06Y56BBYP and with the standalone Jelly Comb Bluetooth Wireless Mouse ASIN:B075HBDWCF. The Switch supports only a limited number of USB mice. Tested working with Logitech M187.\r\n \r\nControls (controls updated with version 1.08)\r\n=====\r\nLeft analog stick = analog control of the marble and mouse pointer  \r\nSquare / Y / L-trigger = select menu items, use object in game (left mouse button)  \r\nTriangle / X / R-trigger = cycle through inventory items (right mouse button)  \r\nCross / A = ok in menu (return)  \r\nCircle / B = back / in-game menu (escape key)  \r\nStart / Plus = help screen (F1)  \r\nSelect / Minus = destroy marble and remove one life (F3)  \r\nR-trigger + Select / R-trigger + Minus = restart level (shift-F3)  \r\n\r\nDpad in menu = quick-select menu items (arrow keys)  \r\nDpad left/right in game = quick-change mouse speed  \r\nDpad up/down in game = cycle through previous messages  \r\n\r\nFront touch = analog control of the marble and mouse pointer  \r\nRear touch = analog control of the marble and mouse pointer (Vita only)  \r\nSingle finger tap = select menu items, use object in game (left mouse button)  \r\nDual finger tap = cycle through inventory items (right mouse button)  \r\n\r\nDual finger tap works by holding one finger down and quickly tapping with a second finger somewhere else.\r\n\r\nMouse sensitivity can be adjusted in options or in-game via dpad left/right. The setting affects analog joystick, touch, and real bluetooth/USB mice.\r\n\r\nBuild Instructions\r\n=====\r\nVita:\r\nOn Vita, Enigma needs xerces-c and inet. To prepare compilation:\r\n\r\n- with a text-editor, load the file $VITASDK/arm-vita-eabi/include/netinet/in.h. Inside the file, replace \"struct\"  with \"inline struct\" on line 45 and 49.\r\n- download or clone my xerces-c repo from [here](https://www.github.com/rsn8887/xerces-c) into a folder called xerces, then:\r\n````\r\nmkdir build\r\ncd build\r\ncmake -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake -Dmutex-manager=nothreads -Dnetwork=OFF -DCMAKE_BUILD_TYPE=Release -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF ../xerces/\r\n\r\nmake -j10\r\nmake install -j10\r\n````\r\nYou should now have the file \r\n````\r\n$VITASDK/arm-vita-eabi/lib/libxerces-c.a \r\n````\r\nand a whole bunch of header files in \r\n````\r\n$VITASDK/arm-vita-eabi/include/xercesc/\r\n````\r\n- Clone the Enigma repo into a folder called Enigma and compile:\r\n````\r\nmkdir build\r\ncd build\r\ncmake ../Enigma/ -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release\r\nmake enigma.vpk -j10\r\n````\r\n\r\nSwitch:\r\nOn Switch, Enigma needs ssl and xerces-c. To prepare compilation:\r\n\r\n- download or clone the moonlight-switch repo which contains libopenssl [here](https://www.github.com/kbhomes/moonlight-switch), then:\r\n````\r\ncd moonlight-switch/dependencies/switch-openssl\r\nexport MOONLIGHT_DEPDIR=$DEVKITPRO/portlibs/switch\r\ndkp-makepkg\r\nsudo -E dkp-pacman -U switch-openssl-1.0.2o-1-any.pkg.tar.xz\r\n````\r\n\r\n- download or clone my xerces-c Switch branch from [here](https://www.github.com/rsn8887/xerces-c-1) into a folder called xerces (use `git checkout switch` to make sure you are on the switch branch), then:\r\n````\r\ncmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/\r\ncmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/\r\ncmake -DCMAKE_TOOLCHAIN_FILE=../xerces-c-1/switch.toolchain.cmake -Dtranscoder=iconv -Dmutex-manager=nothreads -Dnetwork=OFF -Dsse2=OFF -Dthreads=OFF -DBUILD_SHARED_LIBS=OFF -Dxmlch-type=uint16_t -DULONG_MAX=4294967295 ../xerces-c-1/\r\n\r\nmake -j10\r\nsudo -E make install\r\n````\r\n- (I don't know why repeated cmake is neccessary, but it only works that way for me)\r\n- Clone the Enigma repo into a folder called Enigma and compile:\r\n````\r\nmkdir build\r\ncd build\r\ncmake ../Enigma/ -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release\r\nmake enigma_switch.zip -j10\r\n````\r\n\r\nChangelog\r\n=====\r\n1.16 (Switch only)\r\n\r\n- Re-compile with 12.0.0 support. Updating the .nro file is enough, data is the same.\r\n- Fix crash on Switch when loading levels with rubberbands\r\n\r\n1.15 (Switch only)\r\n\r\n- Fix crash on Switch when loading levels with rubberbands that re-appeared using latest toolchain\r\n\r\n1.14 (Switch only)\r\n\r\n- Re-compile with 9.0.0 support\r\n\r\n1.13 (Switch only)\r\n\r\n- Fix crash on Switch when loading a level that contains rubberbands\r\n\r\n1.12 (Switch only)\r\n\r\n- Add Switch version\r\n\r\n1.11\r\n\r\n- Improve response to diagonal stick directions\r\n\r\n1.10\r\n\r\n- Improve response to slow finger motion\r\n\r\n1.09\r\n\r\n- Improve controls with bluetooth mouse by re-compiling with latest SDL-Vita\r\n\r\n1.08\r\n\r\n- Improve keymap, map left/right mouse buttons also to L/R for better playability. \r\n\r\n1.07\r\n\r\n- prevent accidental clicks when moving marble using touch\r\n\r\n1.06\r\n\r\n- map dpad as arrow keys to quick select menu items and quick-select mouse speed in game\r\n- map L to 'F1' (help), X to 'Return' (ok), O to 'ESC' (back)\r\n- update help texts to reflect Vita controller mappings\r\n\r\n1.05\r\n\r\n- enable touch keyboard in menu, useful for name entry and level search\r\n- increase smoothness of mouse pointer motion in gui\r\n- remove the missing translations\r\n\r\n1.04\r\n\r\n- fix missing soundsets in audio menu\r\n\r\n1.03\r\n\r\n- updated data.zip to include many more levels with corresponding thumbnail previews and many more sound sets. \r\n\r\n1.02\r\n\r\n- decrease default joystick sensitivity (marble moved too fast when controlled with joystick)\r\n\r\n1.01\r\n\r\n- map r-trigger to 'restart' and select button to 'kill marble'\r\n\r\n1.00\r\n\r\n- initial Vita port release based on latest Enigma development version\r\n",
+    "assets": [
+      {
+        "name": "data.zip",
+        "size": 70226743,
+        "download_url": "https://github.com/rsn8887/Enigma/releases/download/1.16/data.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "enigma_1.11.vpk",
+        "size": 5209786,
+        "download_url": "https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.11.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "enigma_1.16_switch.zip",
+        "size": 76358156,
+        "download_url": "https://github.com/rsn8887/Enigma/releases/download/1.16/enigma_1.16_switch.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "rsn8887",
+    "homebrew_name": "Enigma",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-enigma/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Enigma port for PSVITA",
+    "homebrew_long_description": "Vita port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.",
+    "homebrew_id": "enigma",
+    "homebrew_authors": [
+      "rsn8887"
+    ],
+    "homebrew_version": "1.16",
+    "catalog_apps": [
+      {
+        "id": "enigma",
+        "name": "Enigma",
+        "icon": "https://archive.org/download/psvitaalive-enigma/icon0.png",
+        "category": "ports",
+        "description": "Enigma port for PSVITA",
+        "long_description": "Vita port of Enigma, a skill/puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga.",
+        "version": "1.16",
+        "version_date": "2021-05-23",
+        "author_ids": [
+          "rsn8887"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.16",
+    "catalog_version": "1.16"
+  },
+  {
+    "platform": "github",
+    "repo": "rsn8887/cannonball",
+    "release_id": "43416076",
+    "tag": "1.08switchgit-vita/switch-rsn8887",
+    "name": "Cannonball Vita 1.05 / Switch v1.08",
+    "url": "https://github.com/rsn8887/cannonball/releases/tag/1.08switchgit-vita/switch-rsn8887",
+    "published": "2021-05-22T20:18:25Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Recent Changes\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\nOverview\r\n=====\r\nThis is my Vita and Switch port of Cannonball, an enhanced Outrun engine by djyt.\r\n\r\nThanks djyt for writing such a great program and making sure it is easily portable.\r\n\r\nThanks to ScHlAuChi for testing.\r\n\r\nThanks to my Patreon supporters: Andyways, Count Duckula, Jesse Harlin, Thomas Luten, Matthew Machnee, Mored4u, Ibrahim Fazel Poor, RadicalR.\r\n\r\nNOTE: Arcade roms for Outrun Version B are required to run this engine. The roms are NOT included in the download (see installation instructions).\r\n\r\n![](screenshots/Cannonball_vita_1.jpg)\r\n\r\nA detailed Manual and FAQ are here:\r\nhttps://github.com/djyt/cannonball/wiki\r\n\r\nSwitch Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Extract the contents of cannonball_switch.zip into the folder `switch/` on your sdcard. You should have a folder `switch/Cannonball_Switch/`.\r\n- Obtain the arcade roms for Outrun Version B and extract them into `switch/Cannonball_Switch/roms`\r\n- Launch the .nro file using your favorite homebrew launcher, enjoy Outrun in almost perfect 60 fps.\r\n- This version of Cannonball is called \"Cannonball_Switch\" to distinguish it from Lantus' port\r\n\r\nSwitch Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nMinus = insert coin  \r\nPlus = start  \r\nY = gas / OK in menu\r\nB = brake\r\nX = change gears  \r\nL = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.\r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nVita Installation Instructions\r\n=====\r\nArcade roms from Outrun version B are required to run this homebrew, they are not included.\r\n\r\n- Install the .vpk\r\n- Extract the contents of data.zip into ux0:data/ (it is just two folders and an info file for roms)\r\n- Obtain the arcade roms for Outrun Version B and extract them into ux0:data/cannonball/roms\r\n- Launch the bubble, enjoy Outrun in almost perfect 60 fps.\r\n\r\nVita Controls\r\n=====\r\nNote: Buttons can be re-mapped in menu  \r\n\r\nL = insert coin  \r\nSquare = start  \r\nTriangle = gas / enter letter on hi-score screen  \r\nCircle = brake  \r\nCross = change gears  \r\nSelect = change in-game camera   \r\nR = menu\r\nDpad = menu navigation and digital steering wheel controls  \r\nLeft stick = analog steering wheel if analog is set to ON or WHEEL ONLY, otherwise this is digital.  \r\nRight stick = analog gas/brake if analog is set to ON  \r\n\r\nNotes about Vita version\r\n=====\r\n- Default difficulty is set to easy, but can be changed to normal or hard in the menu.\r\n- The game runs at full speed with almost constant 60 fps. The exception is some slowdown at the beginning of the race. That slowdown can also be eliminated by turning of widescreen mode in the menu, but then the picture is a bit smaller. The high-resolution hack should not be enabled, it causes too much slow-down.\r\n\r\nRom names\r\n======\r\n````\r\n-------------------------------------------------------------------------------\r\nPlace OutRun Revision B ROMs in this directory.\r\nThey must be named as follows:\r\n-------------------------------------------------------------------------------\r\nepr-10187.88\r\nepr-10327a.76\r\nepr-10328a.75\r\nepr-10329a.58\r\nepr-10330a.57\r\nepr-10380b.133\r\nepr-10381a.132\r\nepr-10382b.118\r\nepr-10383b.117\r\nmpr-10371.9\r\nmpr-10372.13\r\nmpr-10373.10\r\nmpr-10374.14\r\nmpr-10375.11\r\nmpr-10376.15\r\nmpr-10377.12\r\nmpr-10378.16\r\nopr-10185.11\r\nopr-10186.47\r\nopr-10188.71\r\nopr-10189.70\r\nopr-10190.69\r\nopr-10191.68\r\nopr-10192.67\r\nopr-10193.66\r\nopr-10230.104\r\nopr-10231.103\r\nopr-10232.102\r\nopr-10266.101\r\nopr-10267.100\r\nopr-10268.99\r\n\r\n-------------------------------------------------------------------------------\r\nThe original Japanese release of OutRun featured slightly different tracks \r\nand course ordering.\r\n\r\nOptionally, you can include the following files from the Japanese version to\r\nplay these alternate tracks:\r\n-------------------------------------------------------------------------------\r\n\r\nepr-10380.133\r\nepr-10382.118\r\nepr-10381.132\r\nepr-10383.117\r\nepr-10327.76\r\nepr-10329.58\r\nepr-10328.75\r\nepr-10330.57\r\n\r\n-------------------------------------------------------------------------------\r\nFixed Audio Rom (Optional)\r\nhttp://reassembler.blogspot.co.uk/2013/01/outrun-original-game-shipped-with.html\r\n-------------------------------------------------------------------------------\r\n\r\nopr-10188.71f\r\n````\r\n\r\nBuild Instructions\r\n=====\r\nCannonball needs some boost header-only libraries. To prepare compilation:\r\n- Download and extract boost_1_66_0.zip from [here](https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip)\r\n- copy the subfolder boost from that archive to $VITASDK/arm-vita-eabi/include/boost for Vita, or to $DEVKITPRO/portlibs/switch/include/boost for Switch\r\n- you should now have a file $VITASDK/arm-vita-eabi/include/boost/version.hpp, or $DEVKITPRO/portlibs/switch/include/boos/version.hpp and hundreds of other Boost header files.\r\n- Now that boost is installed, proceed to compile cannonball:\r\n````\r\ncd cannonball\r\nmkdir build\r\ncd build\r\n````\r\nthen, for Vita:\r\n````\r\ncmake -DBUILD_PSP2=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball.vpk -j10\r\n````\r\nor, for Switch: \r\n````\r\ncmake -DBUILD_NX=ON -DCMAKE_BUILD_TYPE=Release ../cmake\r\nmake Cannonball_Switch.zip -j10\r\n````\r\n\r\nNote: The Vita source depends on FrangarCJ's Vita2d fbo branch with shader support here: https://github.com/Cpasjuste/vita2dlib/tree/fbo\r\nand FrangarCJ's vita-shader-collection gtu branch here: https://github.com/frangarcj/vita-shader-collection/tree/gtu\r\nThose are both included as binaries and linked automatically.\r\n\r\nChangelog\r\n=====\r\n1.08switch\r\n\r\n- recompiled with 12.0.0 support\r\n\r\n1.07switch\r\n\r\n- Fix black screen due to linking with latest SDL2\r\n\r\n1.06switch\r\n\r\n- recompiled with 9.0.0 support\r\n\r\n1.05switch\r\n\r\n- added Switch release\r\n\r\n1.05\r\n\r\n- dpad works now if analog=\"off\"\r\n- gas/brake on right stick if analog=\"on\" (digital gas/brake on buttons if analog=\"wheel only\")\r\n\r\n1.04\r\n\r\n- better image quality (less blurry)\r\n- support non-fullscreen modes\r\n\r\n1.03\r\n\r\n- moved menu navigation to the dpad. True analog steering wheel control can now be enabled in the controls menu, and the menu can still be navigated afterwards.\r\n\r\n1.02\r\n\r\n- removed unneccessary temporary files (__MACOSX, .DS_Store) from data.zip \r\n\r\n1.01\r\n\r\n- forgot to include config.xml in data.zip, it is now included\r\n\r\n1.0\r\n\r\n- Initial Vita release",
+    "assets": [
+      {
+        "name": "Cannonball_1.05.vpk",
+        "size": 1123006,
+        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.05.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "Cannonball_1.08_Switch.zip",
+        "size": 3153199,
+        "download_url": "https://github.com/rsn8887/cannonball/releases/download/1.08switchgit-vita/switch-rsn8887/Cannonball_1.08_Switch.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "rsn8887",
+    "homebrew_name": "Cannonball",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "OutRun engine for PSVITA.",
+    "homebrew_long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
+    "homebrew_id": "cannonball",
+    "homebrew_authors": [
+      "rsn8887"
+    ],
+    "homebrew_version": "1.08switchgit-vita/switch-rsn8887",
+    "catalog_apps": [
+      {
+        "id": "cannonball",
+        "name": "Cannonball",
+        "icon": "https://archive.org/download/psvitaalive-cannonball/icon0.png",
+        "category": "ports",
+        "description": "OutRun engine for PSVITA.",
+        "long_description": "PSVita port of Cannonball, an enhanced Outrun engine by djyt.",
+        "version": "1.08switchgit-vita/switch-rsn8887",
+        "version_date": "2021-05-22",
+        "author_ids": [
+          "rsn8887"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.08switchgit-vita/switch-rsn8887",
+    "catalog_version": "1.08switchgit-vita/switch-rsn8887"
   }
 ]
