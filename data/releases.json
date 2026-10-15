@@ -1,6 +1,91 @@
 [
   {
     "platform": "github",
+    "repo": "BirchWoodGod/halo-ce-vita",
+    "release_id": "413304428",
+    "tag": "v1.1.0",
+    "name": "Halo CE for PS Vita 1.1.0",
+    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.1.0",
+    "published": "2026-10-15T00:39:37Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "**Halo CE for PS Vita 1.1.0.** The first stable 1.1 release. Your maps, saves and settings carry over from 1.0.3 and every 1.1.0 beta: install `halo.vpk` with VitaShell over your current Halo CE.\n\n**Vita to Vita online is still network version 18**, so 1.1.0 plays with betas 1–3. Please update anyway.\n\n## Install\n\n**Already on 1.0.3 or a 1.1.0 beta?** Install this `halo.vpk` with VitaShell over your current Halo CE.\n\n**New install:**\n1. You need a Vita or PS TV on HENkaku/Ensō with [VitaShell](https://github.com/TheOfficialFloW/VitaShell/releases), `ur0:data/libshacccg.suprx` (run [ShaRKF00D](https://github.com/Rinnegatamante/ShaRKF00D/releases) once if it's missing), about 1.5 GB free, and your own **Xbox** copy of Halo: Combat Evolved.\n2. Run `HaloCEVitaInstaller.exe` (attached), or copy the `maps` folder and `default.xbe` from your Xbox disc image (extract it with [extract-xiso](https://github.com/XboxDev/extract-xiso)) to `ux0:data/haloce-vita/` yourself.\n3. Install `halo.vpk` with VitaShell.\n4. **For online play, also install the Halo Custom Edition map files:** `bitmaps.map`, `sounds.map` and `loc.map` from Halo PC. Without them you get the Xbox menus only (no server browser, Create Game > Internet or crossplay). Either:\n   - copy the free Halo Custom Edition installer (`halocesetup_en_1.00.exe`, for example from [HaloMaps](https://www.halomaps.org/hce/detail.cfm?fid=410)) to `ux0:data/haloce-vita/` without running it, and the game takes the 3 files out of it on its next start;\n   - or copy the 3 files from Halo MCC on Steam (`halo1/maps/custom_edition/`) or from a Halo Custom Edition install to `ux0:data/haloce-vita/maps/`;\n   - or let `HaloCEVitaInstaller.exe` do it.\n\n   Then set **Multiplayer > Connection** to **Online** in the settings panel (**Select + D-pad down**) and restart the game.\n\n## What's new since beta 3\n\n### Crossplay with PC (experimental)\n- **New Crossplay switch** (settings panel > Multiplayer). On: your Vita joins PC games and servers running **OpenCE** or **ChupathingyCE** (network version 29, their builds from Oct 14 on). Off: Vita to Vita, as before.\n- With Crossplay on, the Vita only joins; it doesn't host. Big PC games (more than 16 players) ask once before you join.\n- Custom Edition maps: you need the same map as the host in your `maps` folder. If yours is a different version, the game says so.\n- PC co-op works too, marked experimental.\n- Tested in a 32-player PC game: about 25 fps (20–29).\n- DamnationCE servers can't be joined until DamnationCE moves to network version 29.\n\n### Gameplay\n- **First-person legs:** look down and you see Master Chief's legs (settings panel > Graphics, on by default).\n- **Bots got a lot smarter:** they drive Warthogs, Ghosts and Scorpions, take teleporters when it's shorter, pick vantage points, play objectives better, and you can set up a playlist of bot games.\n- Co-op: completed levels are saved to every local profile; the camera no longer flies off the map at the start of a co-op level.\n- Cutscene lip sync matches the sound again on the performance profiles.\n\n### Online\n- **Our own message server** (on the official servers' machine) comes first, so the server browser keeps working when the free public ones go down ([#42](https://github.com/BirchWoodGod/halo-ce-vita/issues/42)).\n- Server browser: scrolling for long lists, and joining a game from the browser joins it straight away.\n- New official server modes: SWAT and Team Snipers.\n- Map share is safer: downloads are checked more strictly, and a shared map's menus can't host, join or touch your profiles.\n\n### Updates\n- **Download updates in the game** (settings panel > General > Check for updates). The game downloads the new `halo.vpk` and checks it against our signature before keeping it in `ux0:data/haloce-vita/update/`; then install it with VitaShell. Nothing is installed for you.\n- Update channel: **Stable** (releases) or **Experimental** (betas too). 1.1.0 starts on Stable, including if you're coming from a beta.\n\n### Fixes\n- Crashes fixed:\n  - a player leaving with a grenade or rocket still live could crash the host or server;\n  - heavily scripted Custom Edition maps (coldsnap) crashed on load;\n  - several crafted-map crashes (vehicle lists, camera tracks, collision models);\n  - several rare crashes from the render thread reading things the game had just removed (vehicle seats in the HUD, weapon HUD and more).\n- Long Custom Edition music plays to the end.\n- Fixes and hardening ported from [OpenCE](https://github.com/OpenCommunityEdition/OpenCE), [ChupathingyCE](https://github.com/ChupathingyCE/chupathingyce) and [DamnationCE](https://github.com/xshxdex98/DamnationCE), thanks to all three. That includes zlib's CVE-2002-0059 fix for map downloads.\n\n### Also new\n- **Settings panel:** **Select + D-pad down** opens it instantly (holding Select + Start still works) ([#44](https://github.com/BirchWoodGod/halo-ce-vita/issues/44)). Controls is now **General** and holds the version and update check; the Graphics tab is reorganised.\n- Profiles: all three use dynamic resolution (Performance from 50%, Balanced from 63%, Quality from 75%).\n- Faster: cheaper AI line of sight and path search, draw records and big-game client updates.\n\n## What to test\n- Crossplay: join OpenCE and ChupathingyCE servers and PC co-op games. How long does the lobby take with a Custom Edition map?\n- Long co-op sessions as host.\n- Bots on every map, with vehicles and teleporters.\n- The in-game update download once 1.1.1 is out.\n\n## Reporting problems\nOpen an [issue](https://github.com/BirchWoodGod/halo-ce-vita/issues) or ask on Discord, and attach `ux0:data/haloce-vita/data/halo.log` (and `halo-prev.log` if the game closed).\n",
+    "assets": [
+      {
+        "name": "halo-ce-vita-server-1.1.0-linux-armhf.tar.gz",
+        "size": 3554097,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-ce-vita-server-1.1.0-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "halo-ce-vita-server-1.1.0-linux-x86.tar.gz",
+        "size": 4190128,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-ce-vita-server-1.1.0-linux-x86.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "halo-update.txt",
+        "size": 215,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-update.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "halo-update.txt.sig",
+        "size": 129,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-update.txt.sig",
+        "content_type": "application/pgp-signature"
+      },
+      {
+        "name": "halo.vpk",
+        "size": 4845377,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "HaloCEVitaInstaller.exe",
+        "size": 50549306,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/HaloCEVitaInstaller.exe",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 220,
+        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "BirchWoodGod",
+    "homebrew_name": "Halo CE",
+    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+    "homebrew_id": "halo-ce",
+    "homebrew_authors": [
+      "birchwoodgod"
+    ],
+    "homebrew_version": "1.1.0",
+    "catalog_apps": [
+      {
+        "id": "halo-ce",
+        "name": "Halo CE",
+        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
+        "category": "ports",
+        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
+        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
+        "version": "1.1.0",
+        "version_date": "2026-10-09",
+        "author_ids": [
+          "birchwoodgod"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.1.0",
+    "catalog_version": "1.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "nzp-team/nzportable",
     "release_id": "411799213",
     "tag": "nightly",
@@ -986,79 +1071,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.43 → release 1.01",
     "catalog_version": "v.0.43"
-  },
-  {
-    "platform": "github",
-    "repo": "BirchWoodGod/halo-ce-vita",
-    "release_id": "408413261",
-    "tag": "v1.1.0-beta.3",
-    "name": "Halo CE for PS Vita 1.1.0 beta 3",
-    "url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.1.0-beta.3",
-    "published": "2026-10-09T23:06:13Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "**Testing build.** The third public beta of 1.1.0, for players who want to help test. If you want the stable build, stay on [v1.0.3](https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3). Your maps, saves and settings carry over either way. Please report what breaks (see the end).\n\nBeta 3 is about stability and speed: the memory leaks behind the Custom Edition crashes are fixed, big Custom Edition maps load without freezing and play their sounds, big fights stutter less, and there's a lot more besides. **Network version 18**, as in betas 1 and 2: all three play online together, but please update.\n\n## Install\n\n**Already on 1.0.3, beta 1 or beta 2?** Install this `halo.vpk` with VitaShell over your current Halo CE. Maps, saves and settings are kept.\n\n**Requirements:** a Vita or PS TV on HENkaku/Ensō with [VitaShell](https://github.com/TheOfficialFloW/VitaShell/releases), `ur0:data/libshacccg.suprx` (run [ShaRKF00D](https://github.com/Rinnegatamante/ShaRKF00D/releases) once if missing), about 1.5 GB free, and your own **Xbox** copy of Halo: Combat Evolved.\n\n**Easy install:** run `HaloCEVitaInstaller.exe` (attached below). It copies your game files, movies and `halo.vpk` to the Vita; then install the VPK with VitaShell.\n\n**Manual install:**\n1. Install `halo.vpk` with VitaShell.\n2. Extract the game files from your Xbox disc image with [extract-xiso](https://github.com/XboxDev/extract-xiso).\n3. Copy the `maps` folder and `default.xbe` to `ux0:data/haloce-vita/`.\n4. Start the game.\n\nRecommended: [CapUnlocker](https://github.com/GrapheneCt/CapUnlocker) for the fourth CPU core.\n\n## Set up online play (optional)\nThe server browser, Join by code and Create Game > Internet come from the PC version of Halo. You need **3 files** from it: `bitmaps.map`, `sounds.map` and `loc.map`. Get them **one** of these ways:\n\n**Option A: the Halo Custom Edition installer (easiest)**\n1. Download the free installer, `halocesetup_en_1.00.exe` (about 170 MB), for example from [HaloMaps](https://www.halomaps.org/hce/detail.cfm?fid=410).\n2. Copy it to `ux0:data/haloce-vita/` on the Vita. Don't run it on a PC. If it has another name, rename it so it starts with `halocesetup` and ends with `.exe`.\n3. Start Halo. It takes the 3 files out of the installer (under a minute), asks whether to delete the installer, and restarts.\n\n**Option B: Halo MCC on Steam.** Copy the 3 files from `steamapps/common/Halo The Master Chief Collection/halo1/maps/custom_edition/` (that folder, not the files directly in `halo1/maps`) to `ux0:data/haloce-vita/maps/`.\n\n**Option C: Halo Custom Edition installed on a PC.** Copy the 3 files from its `maps` folder to `ux0:data/haloce-vita/maps/`.\n\nOr let the **Windows install tool** (attached below) do it.\n\n**Then turn on online play:**\n1. In the game, hold **Select + Start** to open the settings panel.\n2. Go to **Multiplayer** and set **Connection** to **Online**.\n3. Restart the game.\n4. On the main menu, open **Multiplayer**: **Join Game > Internet** is the server browser, **Join by code** joins a friend's code, **Create Game > Internet** hosts.\n\n**If the online menus don't show up**, the settings panel's **Multiplayer** tab says why: which file is missing, the folder the game looked in, or that a file isn't the Custom Edition one. Without the files you get the original Xbox menus, and can still join a game by its code (settings panel > Multiplayer > Join with a code).\n\n## What's new since beta 2\n\n### Crashes and memory\n- **Memory leaks fixed.** After a few Custom Edition maps or resolution changes, the game used to run out of memory: shaders stopped compiling, the menu couldn't load (\"this map file is damaged\"), then it crashed. Video memory now comes back when a map unloads, the shader compiler has memory of its own, and about 16 MB of the renderer moved out of the game's tight 48 MB budget (25 MB used at the menu instead of 42).\n- **A rare crash since beta 1 fixed.** The game's memory allocator wasn't safe when Custom Edition textures loaded in the background at the same moment as the game allocated.\n- Running out of memory now says \"out of memory: restart the game\" instead of \"this map file is damaged\".\n- A crash when a teammate died with the HUD's teammate marker or nav arrow on screen (seen on Boarding Action and Chill Out) is fixed.\n- A rare crash when someone died holding a weapon with a light (like the plasma pistol's glow) on screen is fixed. It was there since 1.0, campaign included.\n\n### Custom Edition maps\n- **Sounds play.** Ogg Vorbis sounds (announcer, dialogue, music, gunfire), sounds that played as static, and 44 kHz sounds that were silent.\n- **No more freeze while loading.** Big maps load in the background with the loading screen drawing (Extinction about 7 s instead of 10).\n- ODST-style HUDs (like Firefight Airlock's visor) fill the screen; HUDs scale as on Halo PC.\n- Models with 44–64 bones load instead of the map being refused; a mistyped shader is fixed instead of refusing the map; the multiplayer pause menu is Resume and Quit.\n- Several fixes ported from [DamnationCE](https://github.com/xshxdex98/DamnationCE) (thanks, xshxdex98).\n\n### Online\n- **Everyone's ping** on the scoreboard (Select) for joining players too. Other players show \"-\" until the host has beta 3.\n- **Split Screen and bot games no longer show in the server browser**, and a listed game whose host never answers is hidden for 5 minutes (it clears out older versions' bot games).\n- **Join a dedicated server's game in progress without its map:** the map downloads first, then you join. (A Vita host offers this from beta 4.)\n- Joining while a dedicated server reloads its lobby lands you in the next lobby instead of bouncing to the menus.\n\n### Speed\n- Big fights stutter less: the AI's choice of where to fight from was up to 3 ms at a time and is now about a third of that, plus cheaper object updates, model drawing, collision, sound and particle checks. Gameplay is identical: every change was checked against the original over tens of thousands of ticks.\n\n### Also new\n- **Check for updates** (settings panel > Controls > Advanced): asks GitHub for the newest version when you press it; nothing is downloaded. Update channel: Experimental (Stable is greyed out until 1.1.0).\n- **Controllers on ports 1–4:** DualShock 4 through DS4Vita and PS TV pads work, with L2/R2 as L/R and L3/R3 as the stick clicks ([#39](https://github.com/BirchWoodGod/halo-ce-vita/issues/39)).\n- **Master Chief's body in the cryo tube** is back, as on the Xbox ([#29](https://github.com/BirchWoodGod/halo-ce-vita/issues/29)).\n- **960x544 movies** show their picture ([#38](https://github.com/BirchWoodGod/halo-ce-vita/issues/38)); attract movies retry instead of giving up.\n- The score hint names your scoreboard button (SELECT) instead of the Xbox's BACK.\n- **Bots on every stock map:** bots now play CTF on Sidewinder and the other big maps (they used to bunch up mid-map), with better King of the Hill and CTF play. A few objectives on Boarding Action, Hang 'em High, Prisoner, Chiron TL34 and Wizard are still out of their reach.\n\n## What to test\n- Long sessions with several Custom Edition maps and resolution changes: does it stay smooth, does the menu always come back?\n- Big Custom Edition maps: loading, sounds, HUDs.\n- Big campaign fights and bots: stutters compared with beta 2.\n- Online: joining, the ping column, the official servers (including joining mid-match).\n- Check for updates, and DS4Vita / PS TV pads.\n\n## What's been checked on a real Vita\n- Campaign (The Silent Cartographer, about 16 minutes) and online play on the official servers (Hang 'em High, Damnation): no crashes, memory back after every map.\n- The memory fix on Custom Edition maps (a bots match on Hugeass): video memory returned when the map unloaded.\n- **Not yet checked on hardware:** several Custom Edition maps back to back, Custom Edition sounds, the cryo tube, DS4Vita / PS TV pads, the update check, and a Vita host's mid-match map downloads (servers only in this beta).\n\n## Known issues\n- Bots can't reach some objectives on Boarding Action (flags), Hang 'em High and Wizard (hill, ball), Prisoner (flags, ball) and Chiron TL34 (hill): those maps' pathfinding data doesn't connect them.\n- The host gets slower with 3–4 co-op players, since it runs everyone's AI.\n- The Quality profile doesn't hold 30 fps in the biggest fights.\n- Map names over 25 characters and more than 128 maps in the list need 1.1.1.\n\n## Reporting a problem\n\nOpen an [issue](https://github.com/BirchWoodGod/halo-ce-vita/issues), say you are on **1.1.0-beta.3**, what you were doing and the mode (Online / Same Wi-Fi / Ad hoc / Co-op / Split Screen with bots / a dedicated server), and attach:\n\n- `ux0:data/haloce-vita/halo.log` and `halo-prev.log`\n- `ux0:data/haloce-vita/data/debug.txt`\n- after a crash, the newest `ux0:data/psp2core-*.psp2dmp`\n\nFor online problems, send the files from every Vita in the game. `halo.log` now also says what the server browser and the game list servers are doing, and why the game went back to the menu or the home screen. The version is on `halo.log`'s first line and in the settings panel under Controls > Advanced. Details: [Reporting a crash](https://github.com/BirchWoodGod/halo-ce-vita#reporting-a-crash-or-a-problem).\n\n### Dedicated server downloads\n\nRun your own always-on server for Vitas on a Linux PC, a VPS or a Raspberry Pi. Two downloads are attached below, with their checksums in `SHA256SUMS`:\n\n| Download | For |\n| --- | --- |\n| `halo-ce-vita-server-1.1.0-beta.3-linux-x86.tar.gz` | A 64-bit Linux PC or VPS: Debian 12 or newer, Ubuntu 22.04 or newer (any distribution with glibc 2.35+). The server is a 32-bit program, so add the 32-bit glibc once: `sudo dpkg --add-architecture i386 && sudo apt update && sudo apt install libc6:i386` |\n| `halo-ce-vita-server-1.1.0-beta.3-linux-armhf.tar.gz` | A Raspberry Pi 4 (or 3, 5) on Raspberry Pi OS 12 \"Bookworm\" or 13 \"Trixie\". On the 64-bit OS, add the 32-bit glibc once: `sudo dpkg --add-architecture armhf && sudo apt update && sudo apt install libc6:armhf` |\n\nNothing else is needed: SDL3 is built in. Each download holds the server, a quick start (`README-SERVER.md`), the full guide, a commented `init.txt.example`, four example servers (Slayer, Big Team, Oddball, King of the Hill), optional systemd units (one server, or several on one machine with `halo-servers` to manage them) and the licences.\n\n**No game data is included.** Copy the `maps` folder from your own Xbox copy of Halo into the server's folder. Then:\n\n```\ntar xzf halo-ce-vita-server-1.1.0-beta.3-linux-x86.tar.gz\ncd halo-ce-vita-server-1.1.0-beta.3-linux-x86\n./halo-server -path ~/halo-server\n```\n\nThe server shows the code Vitas join with, and lists itself in the server browser unless `sv_public 0`. Full guide: [DEDICATED_SERVER.md](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.3/port/linux/DEDICATED_SERVER.md#download-a-release-build).\n\n**Security:** run the server as an unprivileged user, never as root (the included systemd units do this for you, with the system read-only to it). Open only its UDP port in your firewall and router (2302 by default, one port per server); it needs no other incoming port. It has no remote console and never runs programs or scripts from its files or from players. Check your download against `SHA256SUMS`.\n\n## Assets\n\n- `halo.vpk`: the game\n- `HaloCEVitaInstaller.exe`: the Windows install tool (experimental). It isn't signed, so Windows SmartScreen will warn you (\"More info\" > \"Run anyway\"), and some antivirus programs may flag it wrongly.\n- `halo-ce-vita-server-1.1.0-beta.3-linux-x86.tar.gz`: the dedicated server for a Linux PC or VPS\n- `halo-ce-vita-server-1.1.0-beta.3-linux-armhf.tar.gz`: the dedicated server for a Raspberry Pi\n- `SHA256SUMS`: the two server downloads' checksums\n\n**ffmpeg inside the install tool:** `HaloCEVitaInstaller.exe` includes FFmpeg 9.0.2 (gyan.dev's essentials build), licensed under the GNU GPL version 3, like this project. Its LICENSE and README.txt are inside the program. FFmpeg's source: <https://ffmpeg.org/download.html#get-sources> (the release tarball `ffmpeg-9.0.2.tar.xz`); gyan.dev's build notes: <https://www.gyan.dev/ffmpeg/builds/>. More in [README-installer](https://github.com/BirchWoodGod/halo-ce-vita/blob/v1.1.0-beta.3/tools/installer/README-installer.md#ffmpegs-licence).\n\n",
-    "assets": [
-      {
-        "name": "halo-ce-vita-server-1.1.0-beta.3-linux-armhf.tar.gz",
-        "size": 3434075,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.3/halo-ce-vita-server-1.1.0-beta.3-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "halo-ce-vita-server-1.1.0-beta.3-linux-x86.tar.gz",
-        "size": 4058370,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.3/halo-ce-vita-server-1.1.0-beta.3-linux-x86.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "halo.vpk",
-        "size": 4678468,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.3/halo.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "HaloCEVitaInstaller.exe",
-        "size": 50550607,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.3/HaloCEVitaInstaller.exe",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS",
-        "size": 234,
-        "download_url": "https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0-beta.3/SHA256SUMS",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "BirchWoodGod",
-    "homebrew_name": "Halo CE",
-    "homebrew_icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Halo: Combat Evolved for the PS Vita (decomp port)",
-    "homebrew_long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
-    "homebrew_id": "halo-ce",
-    "homebrew_authors": [
-      "birchwoodgod"
-    ],
-    "homebrew_version": "1.1.0",
-    "catalog_apps": [
-      {
-        "id": "halo-ce",
-        "name": "Halo CE",
-        "icon": "https://archive.org/download/halo-ce-ps-vita-direct3d/icon0.png",
-        "category": "ports",
-        "description": "Halo: Combat Evolved for the PS Vita (decomp port)",
-        "long_description": "A native PlayStation Vita port of Halo: Combat Evolved, built from the decompilation of the Xbox game. It is not an emulator: the game's own code is compiled for the Vita's ARM processor, and its Direct3D rendering is translated to the Vita's GPU.",
-        "version": "1.1.0",
-        "version_date": "2026-10-09",
-        "author_ids": [
-          "birchwoodgod"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1.0 → release v1.1.0-beta.3",
-    "catalog_version": "1.1.0"
   },
   {
     "platform": "github",
@@ -33211,60 +33223,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0",
     "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "hatoving/gms-vita-old-instructions",
-    "release_id": "46362638",
-    "tag": "5_FranBowCH4",
-    "name": "Fran Bow: Chapter 4 (Android) - Newer patch",
-    "url": "https://github.com/hatoving/gms-vita-old-instructions/releases/tag/5_FranBowCH4",
-    "published": "2021-07-17T18:24:12Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Patch files for Fran Bow: Chapter 4.\r\n## Changelog\r\n- 1.0: Initial release\r\n\r\nIf you experienced any other bugs, please request an issue on the Issues page.\r\n\r\nNOTE: the VPK will come pretty soon, please be patient!",
-    "assets": [
-      {
-        "name": "FBCH4.vpk",
-        "size": 2854178,
-        "download_url": "https://github.com/hatoving/gms-vita-old-instructions/releases/download/5_FranBowCH4/FBCH4.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Fran.Bow.CH4.Vita.Patch.zip",
-        "size": 366896,
-        "download_url": "https://github.com/hatoving/gms-vita-old-instructions/releases/download/5_FranBowCH4/Fran.Bow.CH4.Vita.Patch.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "hatoving",
-    "homebrew_name": "Fran Bow - Chapter One",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-fran-bow---chapter-one-fbch42117/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "",
-    "homebrew_long_description": "After witnessing the gruesome and mysterious loss of her parents, found dismembered at their home, Fran rushes into the woods, together with her only friend, Mr. Midnight, a black cat that Fran had previously received as a present from her parents.\nIn the forest, Fran goes into shock over the loss of her parents and when she recovers, she's at Oswald Asylum, an oppressive mental institution for children, and Mr. Midnight is nowhere to be found.\nAfter having a dream about her beloved cat, Fran decides to escape from the mental institution to find him and go back home to Aunt Grace, her only living relative. Credits to m1s3ry, Grossleymoo and Killmonday Games.",
-    "homebrew_id": "fran-bow---chapter-one-fbch42117",
-    "homebrew_authors": [
-      "hatoving"
-    ],
-    "homebrew_version": "5_FranBowCH4",
-    "catalog_apps": [
-      {
-        "id": "fran-bow---chapter-one-fbch42117",
-        "name": "Fran Bow - Chapter One",
-        "icon": "https://archive.org/download/psvitaalive-fran-bow---chapter-one-fbch42117/icon0.png",
-        "category": "ports",
-        "description": "",
-        "long_description": "After witnessing the gruesome and mysterious loss of her parents, found dismembered at their home, Fran rushes into the woods, together with her only friend, Mr. Midnight, a black cat that Fran had previously received as a present from her parents.\nIn the forest, Fran goes into shock over the loss of her parents and when she recovers, she's at Oswald Asylum, an oppressive mental institution for children, and Mr. Midnight is nowhere to be found.\nAfter having a dream about her beloved cat, Fran decides to escape from the mental institution to find him and go back home to Aunt Grace, her only living relative. Credits to m1s3ry, Grossleymoo and Killmonday Games.",
-        "version": "5_FranBowCH4",
-        "version_date": "2021-07-17",
-        "author_ids": [
-          "hatoving"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 5_FranBowCH4",
-    "catalog_version": "5_FranBowCH4"
   }
 ]
