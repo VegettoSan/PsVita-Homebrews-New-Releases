@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
         <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>76</strong><span>pendientes</span></div>
-        <div class="stat"><strong>474</strong><span>GitHub</span></div>
+        <div class="stat"><strong>77</strong><span>pendientes</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,133 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita khdays-vita v0.8.0 v0.8.0 ports install `khdays-vita-0.8.0.vpk` over the previous version with vitashell. saves and settings are
+kept.
+
+## new
+
+- **screen layout &quot;left&quot;**: one screen 4:3 on the left over the full height, the other small
+  beside it (`layout = left` / `left_bottom`; touch the small one to swap).
+- **widescreen hud at the edges** (`hud = 2`): the 2d stays 4:3 while the commands, hp and chain
+  sit at the display&#x27;s edges.
+- **60 fps falls back to a steady 30** for a while when the display cannot keep up, instead of
+  running unevenly, then tries 60 again.
+- **lighter dual-3d scenes**: scenes with 3d on both screens lower the 3d resolution while they
+  fall behind.
+
+## experimental
+
+- **single screen** (port menu, screen tab):
+  - before the game, the title&#x27;s menu is shown over a picture. a build can pack one from
+    `assets/titlescreen/bg.png`; otherwise `ux0:data/khdays/menu_bg.png` (or `.jpg`) is used.
+  - dialogue scenes whose bottom screen stays black are shown as the top screen alone, in
+    widescreen. anything on the bottom screen brings your usual layout back.
+  - world / mission selection: the world fills the display, with the mission list beside it.
+- **partner swap** (port menu, new partner tab; set it outside a mission):
+  - in a story mission, touch the partner&#x27;s hud to play as the partner. the ai plays roxas.
+  - the partner keeps its own deck and hp. it gets the stats of roxas&#x27;s weapon and his
+    abilities (dodge roll, glide, scan...).
+  - roxas on the ai fights with the partner&#x27;s weapon stats. options allow him to use his own
+    items and magic (off by default).
+
+## fixed
+
+- **mission 54 crash** on entering the dual blade&#x27;s arena. the same bug was also fixed in the
+  dual blade, blitz spear, stalwart blade, chill ripper and heat saber.
+- **the possessor&#x27;s white flash** when it dies is gone.
+- **loud noise in the camp menu&#x27;s audio.**
+- **garbled or stale sound** in scenes that load another sound archive.
+- **the right-stick camera** no longer swings round by itself during a sideways walk
+  (`camera_follow = 0`).
+- **30 fps pacing**: each game frame is shown as soon as it is ready.
+
+## known issues
+
+- partner swap is experimental: the partner&#x27;s weapon model, combos and animations stay its own,
+  and the hud&#x27;s large and small bars do not swap.
+- the busiest missions at 4x can still drop below 60 fps. keep `dynamic_res = 1` or use
+  `render_scale = 3`.
+- `debug = 1` measures the gpu once a second, which costs a frame each time: keep it at 0 to
+  play.
+- multiplayer is not available.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
+                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.8.0" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
+                      <div class="release-name">khdays-vita v0.8.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.8.0</span>
+                    <span>2026-10-16 02:28 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.7.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.7.0 → release v0.8.0</div>
+                  
+                  <div class="body markdown-body"><p>Install <code>khdays-vita-0.8.0.vpk</code> over the previous version with VitaShell. Saves and settings are
+kept.</p>
+<h2>New</h2>
+<ul>
+<li><strong>Screen layout &quot;left&quot;</strong>: one screen 4:3 on the left over the full height, the other small
+beside it (<code>layout = left</code> / <code>left_bottom</code>; touch the small one to swap).</li>
+<li><strong>Widescreen HUD at the edges</strong> (<code>hud = 2</code>): the 2D stays 4:3 while the commands, HP and chain
+sit at the display's edges.</li>
+<li><strong>60 fps falls back to a steady 30</strong> for a while when the display cannot keep up, instead of
+running unevenly, then tries 60 again.</li>
+<li><strong>Lighter dual-3D scenes</strong>: scenes with 3D on both screens lower the 3D resolution while they
+fall behind.</li>
+</ul>
+<h2>Experimental</h2>
+<ul>
+<li><strong>Single screen</strong> (port menu, SCREEN tab):<ul>
+<li>Before the game, the title's menu is shown over a picture. A build can pack one from
+<code>assets/titlescreen/bg.png</code>; otherwise <code>ux0:data/khdays/menu_bg.png</code> (or <code>.jpg</code>) is used.</li>
+<li>Dialogue scenes whose bottom screen stays black are shown as the top screen alone, in
+widescreen. Anything on the bottom screen brings your usual layout back.</li>
+<li>World / mission selection: the world fills the display, with the mission list beside it.</li>
+</ul>
+</li>
+<li><strong>Partner swap</strong> (port menu, new PARTNER tab; set it outside a mission):<ul>
+<li>In a story mission, touch the partner's HUD to play as the partner. The AI plays Roxas.</li>
+<li>The partner keeps its own deck and HP. It gets the stats of Roxas's weapon and his
+abilities (dodge roll, glide, scan...).</li>
+<li>Roxas on the AI fights with the partner's weapon stats. Options allow him to use his own
+items and magic (off by default).</li>
+</ul>
+</li>
+</ul>
+<h2>Fixed</h2>
+<ul>
+<li><strong>Mission 54 crash</strong> on entering the Dual Blade's arena. The same bug was also fixed in the
+Dual Blade, Blitz Spear, Stalwart Blade, Chill Ripper and Heat Saber.</li>
+<li><strong>The Possessor's white flash</strong> when it dies is gone.</li>
+<li><strong>Loud noise in the camp menu's audio.</strong></li>
+<li><strong>Garbled or stale sound</strong> in scenes that load another sound archive.</li>
+<li><strong>The right-stick camera</strong> no longer swings round by itself during a sideways walk
+(<code>camera_follow = 0</code>).</li>
+<li><strong>30 fps pacing</strong>: each game frame is shown as soon as it is ready.</li>
+</ul>
+<h2>Known issues</h2>
+<ul>
+<li>Partner swap is experimental: the partner's weapon model, combos and animations stay its own,
+and the HUD's large and small bars do not swap.</li>
+<li>The busiest missions at 4x can still drop below 60 fps. Keep <code>dynamic_res = 1</code> or use
+<code>render_scale = 3</code>.</li>
+<li><code>debug = 1</code> measures the GPU once a second, which costs a frame each time: keep it at 0 to
+play.</li>
+<li>Multiplayer is not available.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.8.0/khdays-vita-0.8.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-0.8.0.vpk · 3.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="lego island lego island isledecomp/isle-portable continuous build continuous ports github actions build log: https://github.com/isledecomp/isle-portable/actions/runs/38791491564">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-lego-island/icon0.png" alt="Icono de Lego Island" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -2739,93 +2866,6 @@ open an issue with `ux0:data/kotor/log.txt` attached, and say where in the game 
 <p>Open an issue with <code>ux0:data/kotor/log.txt</code> attached, and say where in the game it happened.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.2/KOTOR-nolog.vpk" target="_blank" rel="noopener">⬇ KOTOR-nolog.vpk · 2.6 MB</a><a class="btn" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.2/KOTOR.vpk" target="_blank" rel="noopener">KOTOR.vpk · 2.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita  khdays-vita v0.7.0 v0.7.0 ports install `khdays-vita-0.7.0.vpk` over the previous version with vitashell. saves and settings are
-kept. the first boot takes a few seconds longer: the shaders are compiled again.
-
-## changed
-
-- **fights with 3d on both screens** (sora on the bottom screen in olympus coliseum): with the
-  single screen on, both screens are shown for the first 10 seconds and the single screen comes
-  back after. the scenery no longer shakes and the 3d no longer jumps between the screens, and
-  the fight runs at full speed (it dropped to about 25-40 fps).
-- **60 fps (experimental) holds its rate in busy scenes.** the 3d is drawn at a lower
-  resolution (down to 2x) while the gpu cannot keep up, and back at the configured one when it
-  can. the screen&#x27;s composition takes less of the gpu.
-- **movies play at a steady 30 fps**, in the 60 fps mode too (they played at about 50).
-- **sound uses about 40% less cpu**: it is mixed at the ds&#x27;s own rate (32 khz), the vita
-  converting it.
-
-## fixed
-
-- hitches when a new area or mission loads: the cartridge dump is read through a 16 mb cache
-  that reads ahead, instead of stopping the game for each piece.
-- the pause menu stuttered for a moment when opened in the 60 fps mode.
-
-## known issues
-
-- the busiest missions can still slow down for a moment: the ds game code itself is near the
-  limit of a vita core there.
-- in 60 fps mode, a few frames in crowded fights still come late, and 2d backgrounds that follow
-  the camera move at 30 fps.
-- `debug = 1` in `config.ini` measures the gpu once a second, which costs a frame each time:
-  keep it at 0 to play.
-- multiplayer is not available.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
-                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.7.0" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
-                      <div class="release-name"> khdays-vita v0.7.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.7.0</span>
-                    <span>2026-10-11 01:28 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.7.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.7.0</div>
-                  
-                  <div class="body markdown-body"><p>Install <code>khdays-vita-0.7.0.vpk</code> over the previous version with VitaShell. Saves and settings are
-kept. The first boot takes a few seconds longer: the shaders are compiled again.</p>
-<h2>Changed</h2>
-<ul>
-<li><strong>Fights with 3D on both screens</strong> (Sora on the bottom screen in Olympus Coliseum): with the
-single screen on, both screens are shown for the first 10 seconds and the single screen comes
-back after. The scenery no longer shakes and the 3D no longer jumps between the screens, and
-the fight runs at full speed (it dropped to about 25-40 fps).</li>
-<li><strong>60 fps (experimental) holds its rate in busy scenes.</strong> The 3D is drawn at a lower
-resolution (down to 2x) while the GPU cannot keep up, and back at the configured one when it
-can. The screen's composition takes less of the GPU.</li>
-<li><strong>Movies play at a steady 30 fps</strong>, in the 60 fps mode too (they played at about 50).</li>
-<li><strong>Sound uses about 40% less CPU</strong>: it is mixed at the DS's own rate (32 kHz), the Vita
-converting it.</li>
-</ul>
-<h2>Fixed</h2>
-<ul>
-<li>Hitches when a new area or mission loads: the cartridge dump is read through a 16 MB cache
-that reads ahead, instead of stopping the game for each piece.</li>
-<li>The pause menu stuttered for a moment when opened in the 60 fps mode.</li>
-</ul>
-<h2>Known issues</h2>
-<ul>
-<li>The busiest missions can still slow down for a moment: the DS game code itself is near the
-limit of a Vita core there.</li>
-<li>In 60 fps mode, a few frames in crowded fights still come late, and 2D backgrounds that follow
-the camera move at 30 fps.</li>
-<li><code>debug = 1</code> in <code>config.ini</code> measures the GPU once a second, which costs a frame each time:
-keep it at 0 to play.</li>
-<li>Multiplayer is not available.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.7.0/khdays-vita-0.7.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-0.7.0.vpk · 3.5 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27545,10 +27585,39 @@ there are still a lot of features to be added, but this is the first viable vers
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="easyvpk easyvpk electric1447/easyvpk easyvpk v2.1.0 v2.1.0 utilities - added lite mode (does not download screenshots, thus loading much faster).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-easyvpk/icon0.png" alt="Icono de EasyVPK" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · Electric1447/EasyVPK</div>
+                      <h2><a href="https://github.com/Electric1447/EasyVPK/releases/tag/v2.1.0" target="_blank" rel="noopener">EasyVPK</a></h2>
+                      <div class="release-name">EasyVPK v2.1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v2.1.0</span>
+                    <span>2021-08-14 22:25 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.2.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.2.1.0</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Added lite mode (does not download screenshots, thus loading much faster).</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Electric1447/EasyVPK/releases/download/v2.1.0/easyvpk.vpk" target="_blank" rel="noopener">⬇ easyvpk.vpk · 2.8 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-15 23:28 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-16 02:29 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

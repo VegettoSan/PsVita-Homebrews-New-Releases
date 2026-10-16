@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "ggdrn/KH-DAYS-VITA",
+    "release_id": "414463000",
+    "tag": "v0.8.0",
+    "name": "khdays-vita v0.8.0",
+    "url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.8.0",
+    "published": "2026-10-16T02:28:16Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Install `khdays-vita-0.8.0.vpk` over the previous version with VitaShell. Saves and settings are\r\nkept.\r\n\r\n## New\r\n\r\n- **Screen layout \"left\"**: one screen 4:3 on the left over the full height, the other small\r\n  beside it (`layout = left` / `left_bottom`; touch the small one to swap).\r\n- **Widescreen HUD at the edges** (`hud = 2`): the 2D stays 4:3 while the commands, HP and chain\r\n  sit at the display's edges.\r\n- **60 fps falls back to a steady 30** for a while when the display cannot keep up, instead of\r\n  running unevenly, then tries 60 again.\r\n- **Lighter dual-3D scenes**: scenes with 3D on both screens lower the 3D resolution while they\r\n  fall behind.\r\n\r\n## Experimental\r\n\r\n- **Single screen** (port menu, SCREEN tab):\r\n  - Before the game, the title's menu is shown over a picture. A build can pack one from\r\n    `assets/titlescreen/bg.png`; otherwise `ux0:data/khdays/menu_bg.png` (or `.jpg`) is used.\r\n  - Dialogue scenes whose bottom screen stays black are shown as the top screen alone, in\r\n    widescreen. Anything on the bottom screen brings your usual layout back.\r\n  - World / mission selection: the world fills the display, with the mission list beside it.\r\n- **Partner swap** (port menu, new PARTNER tab; set it outside a mission):\r\n  - In a story mission, touch the partner's HUD to play as the partner. The AI plays Roxas.\r\n  - The partner keeps its own deck and HP. It gets the stats of Roxas's weapon and his\r\n    abilities (dodge roll, glide, scan...).\r\n  - Roxas on the AI fights with the partner's weapon stats. Options allow him to use his own\r\n    items and magic (off by default).\r\n\r\n## Fixed\r\n\r\n- **Mission 54 crash** on entering the Dual Blade's arena. The same bug was also fixed in the\r\n  Dual Blade, Blitz Spear, Stalwart Blade, Chill Ripper and Heat Saber.\r\n- **The Possessor's white flash** when it dies is gone.\r\n- **Loud noise in the camp menu's audio.**\r\n- **Garbled or stale sound** in scenes that load another sound archive.\r\n- **The right-stick camera** no longer swings round by itself during a sideways walk\r\n  (`camera_follow = 0`).\r\n- **30 fps pacing**: each game frame is shown as soon as it is ready.\r\n\r\n## Known issues\r\n\r\n- Partner swap is experimental: the partner's weapon model, combos and animations stay its own,\r\n  and the HUD's large and small bars do not swap.\r\n- The busiest missions at 4x can still drop below 60 fps. Keep `dynamic_res = 1` or use\r\n  `render_scale = 3`.\r\n- `debug = 1` measures the GPU once a second, which costs a frame each time: keep it at 0 to\r\n  play.\r\n- Multiplayer is not available.",
+    "assets": [
+      {
+        "name": "khdays-vita-0.8.0.vpk",
+        "size": 3956508,
+        "download_url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.8.0/khdays-vita-0.8.0.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "ggdrn",
+    "homebrew_name": "Kingdom Hearts 358/2 Days",
+    "homebrew_icon": "https://archive.org/download/kh-days-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
+    "homebrew_long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
+    "homebrew_id": "kingdom-hearts-358-2-days",
+    "homebrew_authors": [
+      "ggdrn"
+    ],
+    "homebrew_version": "0.7.0",
+    "catalog_apps": [
+      {
+        "id": "kingdom-hearts-358-2-days",
+        "name": "Kingdom Hearts 358/2 Days",
+        "icon": "https://archive.org/download/kh-days-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
+        "long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
+        "version": "0.7.0",
+        "version_date": "2026-10-10",
+        "author_ids": [
+          "ggdrn"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.7.0 → release v0.8.0",
+    "catalog_version": "0.7.0"
+  },
+  {
+    "platform": "github",
     "repo": "isledecomp/isle-portable",
     "release_id": "414214772",
     "tag": "continuous",
@@ -1291,55 +1340,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 0.4.2",
     "catalog_version": "0.4.2"
-  },
-  {
-    "platform": "github",
-    "repo": "ggdrn/KH-DAYS-VITA",
-    "release_id": "409319725",
-    "tag": "v0.7.0",
-    "name": " khdays-vita v0.7.0",
-    "url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.7.0",
-    "published": "2026-10-11T01:28:05Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Install `khdays-vita-0.7.0.vpk` over the previous version with VitaShell. Saves and settings are\r\nkept. The first boot takes a few seconds longer: the shaders are compiled again.\r\n\r\n## Changed\r\n\r\n- **Fights with 3D on both screens** (Sora on the bottom screen in Olympus Coliseum): with the\r\n  single screen on, both screens are shown for the first 10 seconds and the single screen comes\r\n  back after. The scenery no longer shakes and the 3D no longer jumps between the screens, and\r\n  the fight runs at full speed (it dropped to about 25-40 fps).\r\n- **60 fps (experimental) holds its rate in busy scenes.** The 3D is drawn at a lower\r\n  resolution (down to 2x) while the GPU cannot keep up, and back at the configured one when it\r\n  can. The screen's composition takes less of the GPU.\r\n- **Movies play at a steady 30 fps**, in the 60 fps mode too (they played at about 50).\r\n- **Sound uses about 40% less CPU**: it is mixed at the DS's own rate (32 kHz), the Vita\r\n  converting it.\r\n\r\n## Fixed\r\n\r\n- Hitches when a new area or mission loads: the cartridge dump is read through a 16 MB cache\r\n  that reads ahead, instead of stopping the game for each piece.\r\n- The pause menu stuttered for a moment when opened in the 60 fps mode.\r\n\r\n## Known issues\r\n\r\n- The busiest missions can still slow down for a moment: the DS game code itself is near the\r\n  limit of a Vita core there.\r\n- In 60 fps mode, a few frames in crowded fights still come late, and 2D backgrounds that follow\r\n  the camera move at 30 fps.\r\n- `debug = 1` in `config.ini` measures the GPU once a second, which costs a frame each time:\r\n  keep it at 0 to play.\r\n- Multiplayer is not available.",
-    "assets": [
-      {
-        "name": "khdays-vita-0.7.0.vpk",
-        "size": 3721561,
-        "download_url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.7.0/khdays-vita-0.7.0.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ggdrn",
-    "homebrew_name": "Kingdom Hearts 358/2 Days",
-    "homebrew_icon": "https://archive.org/download/kh-days-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
-    "homebrew_long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
-    "homebrew_id": "kingdom-hearts-358-2-days",
-    "homebrew_authors": [
-      "ggdrn"
-    ],
-    "homebrew_version": "0.7.0",
-    "catalog_apps": [
-      {
-        "id": "kingdom-hearts-358-2-days",
-        "name": "Kingdom Hearts 358/2 Days",
-        "icon": "https://archive.org/download/kh-days-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
-        "long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
-        "version": "0.7.0",
-        "version_date": "2026-10-10",
-        "author_ids": [
-          "ggdrn"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.7.0",
-    "catalog_version": "0.7.0"
   },
   {
     "platform": "github",
@@ -33174,5 +33174,56 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.0.1",
     "catalog_version": "v.0.1"
+  },
+  {
+    "platform": "github",
+    "repo": "Electric1447/EasyVPK",
+    "release_id": "47859070",
+    "tag": "v2.1.0",
+    "name": "EasyVPK v2.1.0",
+    "url": "https://github.com/Electric1447/EasyVPK/releases/tag/v2.1.0",
+    "published": "2021-08-14T22:25:15Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Added lite mode (does not download screenshots, thus loading much faster).",
+    "assets": [
+      {
+        "name": "easyvpk.vpk",
+        "size": 2906433,
+        "download_url": "https://github.com/Electric1447/EasyVPK/releases/download/v2.1.0/easyvpk.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Electric1447",
+    "homebrew_name": "EasyVPK",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-easyvpk/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew downloader linked to VitaDB.",
+    "homebrew_long_description": "A lightweighted homebrew downloader that uses VitaDB as source.",
+    "homebrew_id": "easyvpk",
+    "homebrew_authors": [
+      "electric",
+      "then00p"
+    ],
+    "homebrew_version": "v.2.1.0",
+    "catalog_apps": [
+      {
+        "id": "easyvpk",
+        "name": "EasyVPK",
+        "icon": "https://archive.org/download/psvitaalive-easyvpk/icon0.png",
+        "category": "utilities",
+        "description": "Homebrew downloader linked to VitaDB.",
+        "long_description": "A lightweighted homebrew downloader that uses VitaDB as source.",
+        "version": "v.2.1.0",
+        "version_date": "2021-08-15",
+        "author_ids": [
+          "electric",
+          "then00p"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.2.1.0",
+    "catalog_version": "v.2.1.0"
   }
 ]
