@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">405</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>78</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">404</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>79</strong><span>pendientes</span></div>
         <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
@@ -219,6 +219,262 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kotor ii kotor ii pyjabox/vitakotor2 vitakotor2 v0.5.7 v0.5.7 ports # vitakotor2 v0.5.7 — german and italian
+
+this release fixes german and italian, which were swapped, and closes two
+races in the sound mixer. german was tested on a physical vita.
+
+## fixed
+
+**german and italian were swapped**
+([issue #1](https://github.com/pyjabox/vitakotor2/issues/1)). since v0.5.2,
+choosing deutsch ran the game in italian, and italiano ran it in german. only
+the first loading screen was in the right language, and a german patch in
+`dlc/` was never read, because the game looked for the italian folder. the
+loader gave the game the numbering of the talk tables&#x27; headers instead of the
+android app&#x27;s. english, french and spanish were not affected. a language
+already chosen needs no change: if you picked deutsch, the game now starts in
+german. the boot menu now lists italiano before deutsch.
+
+**two rare races in the sound mixer.** a track replayed while the mixer was
+decoding could carry on from where it stopped instead of starting over. a
+stream released while 128 others were waiting to be closed was closed while
+the mixer could still be decoding it.
+
+## also new
+
+- the log now says how often the audio port ran dry, and the least sound it
+  held, in each 10 s window with a problem (`[snd-gap]` lines). this helps
+  with the noise in busy scenes
+  ([issue #5](https://github.com/pyjabox/vitakotor2/issues/5)), which is still
+  open.
+
+## installation
+
+1. install `kotor2.vpk` with vitashell. the title id is `kotr00002`.
+2. create `ux0:data/kotor2/`.
+3. copy from your own copy of the android version **2.0.4**, using the 32-bit
+   libraries from the apk&#x27;s `lib/armeabi-v7a/` folder (the readme lists each
+   file&#x27;s exact size and sha-256):
+   - `libkotor2.so`
+   - `libobbvfs.so`
+   - `libc++_shared.so`
+   - `libminiz.so`
+   - `liblzmalib.so`
+   - `main.213.com.aspyr.swkotorii.obb`
+   - `patch.14.com.aspyr.swkotorii.obb`
+   - the apk `assets/` directory
+4. install and enable `kubridge.skprx`.
+5. place `libshacccg.suprx` in `ur0:data/`.
+6. optionally, mods in `ux0:data/kotor2/mods/` and voice packs in
+   `ux0:data/kotor2/localized/` (see the readme).
+
+**upgrading from v0.5.2 or later:** install the vpk over the old one.
+game data, saves, mods, voice packs, the chosen language and the shader cache
+stay as they are. if you created `ai_mode.txt` to get past a door, you can
+delete it.
+from v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a
+language.
+
+## known issues and limitations
+
+- **the menu before the game is in english.**
+- **mods in another language:** what a mod has only in english shows in
+  english, voice lines added by mods are english (they were never dubbed), and
+  a mod&#x27;s own voice-line and lip-sync files are used instead of a voice pack&#x27;s
+  (tslrcm: 4 lines and the lip sync of 9 areas). details in the readme.
+- **with mods, launches take about 1 s longer** while they are indexed, and the
+  first launch in a new language about 2 s more to build its talk table.
+- **noise behind the sound in busy scenes,** such as telos. the decoders and
+  the mix were checked and are clean; the cause is not known yet
+  ([issue #5](https://github.com/pyjabox/vitakotor2/issues/5)).
+- **about one launch in three takes about 11 s longer,** in the engine&#x27;s scan of
+  `dlc/`. the cause is not known yet.
+- **shorter hitches remain** (usually 0.12–0.23 s, occasionally more) when new
+  content is first read from the memory card, at about 10 mb/s: the minimap&#x27;s
+  first draw, dialogue entries and their voices, creatures spawned by scripts.
+- **loading-screen images** still take about 0.1–0.35 s each.
+- **heavy scenes remain cpu-bound,** mostly in the engine&#x27;s per-object rendering
+  work.
+- **visual changes:** no dynamic shadows and no bloom passes. rooms keep their
+  baked lighting.
+- **idle objects update less often:** idle creatures, placeables, doors and
+  items get their ai update every third frame. nothing was noticed in testing.
+- **one frame of extra latency:** the gl worker lets the game run up to one
+  frame ahead. an object stepping out from cover can appear up to three frames
+  late (occlusion culling).
+- **touch:** only the front touchscreen is used. the game keeps its controller
+  layout, so its touch-only on-screen controls are not shown.
+- **first launch:** it can take about two minutes while archives are scanned
+  and shaders compile, and the loading screen can sit still for much of it.
+- **shader cache:** if a warm launch black-screens, remove
+  `ux0:data/shader_cache/kotr00002/` and relaunch.
+- **no complete playthrough certified yet.** trophies, cloud saves and online
+  features are unavailable.
+
+## switches
+
+create the file in `ux0:data/kotor2/` and relaunch; delete it to go back.
+- `ai_mode.txt` containing `0`: the game&#x27;s own ai loop, with no throttle and no
+  ai caches (slower in busy areas).
+- `touch_mode.txt` containing `0`: buttons only, as in v0.4.2.
+- `loadscreen_mode.txt` containing `0`: black screen until the legal screen, as
+  in v0.4.2.
+- `patcher_mode.txt` containing `0`: vitagl&#x27;s vertex-program requests go
+  straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool
+  stays at 4 mb).
+- `fps_cap.txt` containing `0`: no 30 fps cap. `lockframerate=1` under
+  `[graphics options]` in `swkotor2.ini` then caps again, and `v-sync=0` turns
+  vsync off.
+- `room_distance.txt` containing a distance in metres: rooms beyond it are not
+  drawn (up to about 25% faster where long views open, with distant geometry
+  missing).
+- `glw_mode.txt` containing `0`: vitagl on the game thread, as in v0.2.0.
+- `dxt_mode.txt` containing `0`: dxt textures decoded on the cpu, as in v0.3.0.
+- `mipgen_mode.txt` containing `0`: every mip chain built by the engine, as in
+  v0.3.0.
+
+this release contains no copyrighted game code or data.
+
+`kotor2.vpk` sha-256: `170122bccd91fe27d2d8df33f05110e89a5296b45b2899d21e5c05299bd247a5`">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/VitaKotor2/icon0.png" alt="Icono de KOTOR II" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · pyjabox/VitaKotor2</div>
+                      <h2><a href="https://github.com/pyjabox/VitaKotor2/releases/tag/v0.5.7" target="_blank" rel="noopener">KOTOR II</a></h2>
+                      <div class="release-name">VitaKotor2 v0.5.7</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.5.7</span>
+                    <span>2026-10-16 14:01 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.5.6</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.5.6 → release v0.5.7</div>
+                  
+                  <div class="body markdown-body"><h1>VitaKotor2 v0.5.7 — German and Italian</h1>
+<p>This release fixes German and Italian, which were swapped, and closes two
+races in the sound mixer. German was tested on a physical Vita.</p>
+<h2>Fixed</h2>
+<p><strong>German and Italian were swapped</strong>
+(<a target="_blank" rel="noopener noreferrer" href="https://github.com/pyjabox/VitaKotor2/issues/1">issue #1</a>). Since v0.5.2,
+choosing DEUTSCH ran the game in Italian, and ITALIANO ran it in German. Only
+the first loading screen was in the right language, and a German patch in
+<code>dlc/</code> was never read, because the game looked for the Italian folder. The
+loader gave the game the numbering of the talk tables' headers instead of the
+Android app's. English, French and Spanish were not affected. A language
+already chosen needs no change: if you picked DEUTSCH, the game now starts in
+German. The boot menu now lists ITALIANO before DEUTSCH.</p>
+<p><strong>Two rare races in the sound mixer.</strong> A track replayed while the mixer was
+decoding could carry on from where it stopped instead of starting over. A
+stream released while 128 others were waiting to be closed was closed while
+the mixer could still be decoding it.</p>
+<h2>Also new</h2>
+<ul>
+<li>The log now says how often the audio port ran dry, and the least sound it
+held, in each 10 s window with a problem (<code>[snd-gap]</code> lines). This helps
+with the noise in busy scenes
+(<a target="_blank" rel="noopener noreferrer" href="https://github.com/pyjabox/VitaKotor2/issues/5">issue #5</a>), which is still
+open.</li>
+</ul>
+<h2>Installation</h2>
+<ol>
+<li>Install <code>KOTOR2.vpk</code> with VitaShell. The title ID is <code>KOTR00002</code>.</li>
+<li>Create <code>ux0:data/kotor2/</code>.</li>
+<li>Copy from your own copy of the Android version <strong>2.0.4</strong>, using the 32-bit
+libraries from the APK's <code>lib/armeabi-v7a/</code> folder (the README lists each
+file's exact size and SHA-256):<ul>
+<li><code>libkotor2.so</code></li>
+<li><code>libObbVfs.so</code></li>
+<li><code>libc++_shared.so</code></li>
+<li><code>libminiz.so</code></li>
+<li><code>libLzmaLib.so</code></li>
+<li><code>main.213.com.aspyr.swkotorii.obb</code></li>
+<li><code>patch.14.com.aspyr.swkotorii.obb</code></li>
+<li>the APK <code>assets/</code> directory</li>
+</ul>
+</li>
+<li>Install and enable <code>kubridge.skprx</code>.</li>
+<li>Place <code>libshacccg.suprx</code> in <code>ur0:data/</code>.</li>
+<li>Optionally, mods in <code>ux0:data/kotor2/mods/</code> and voice packs in
+<code>ux0:data/kotor2/localized/</code> (see the README).</li>
+</ol>
+<p><strong>Upgrading from v0.5.2 or later:</strong> install the VPK over the old one.
+Game data, saves, mods, voice packs, the chosen language and the shader cache
+stay as they are. If you created <code>ai_mode.txt</code> to get past a door, you can
+delete it.
+From v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a
+language.</p>
+<h2>Known issues and limitations</h2>
+<ul>
+<li><strong>The menu before the game is in English.</strong></li>
+<li><strong>Mods in another language:</strong> what a mod has only in English shows in
+English, voice lines added by mods are English (they were never dubbed), and
+a mod's own voice-line and lip-sync files are used instead of a voice pack's
+(TSLRCM: 4 lines and the lip sync of 9 areas). Details in the README.</li>
+<li><strong>With mods, launches take about 1 s longer</strong> while they are indexed, and the
+first launch in a new language about 2 s more to build its talk table.</li>
+<li><strong>Noise behind the sound in busy scenes,</strong> such as Telos. The decoders and
+the mix were checked and are clean; the cause is not known yet
+(<a target="_blank" rel="noopener noreferrer" href="https://github.com/pyjabox/VitaKotor2/issues/5">issue #5</a>).</li>
+<li><strong>About one launch in three takes about 11 s longer,</strong> in the engine's scan of
+<code>dlc/</code>. The cause is not known yet.</li>
+<li><strong>Shorter hitches remain</strong> (usually 0.12–0.23 s, occasionally more) when new
+content is first read from the memory card, at about 10 MB/s: the minimap's
+first draw, dialogue entries and their voices, creatures spawned by scripts.</li>
+<li><strong>Loading-screen images</strong> still take about 0.1–0.35 s each.</li>
+<li><strong>Heavy scenes remain CPU-bound,</strong> mostly in the engine's per-object rendering
+work.</li>
+<li><strong>Visual changes:</strong> no dynamic shadows and no bloom passes. Rooms keep their
+baked lighting.</li>
+<li><strong>Idle objects update less often:</strong> idle creatures, placeables, doors and
+items get their AI update every third frame. Nothing was noticed in testing.</li>
+<li><strong>One frame of extra latency:</strong> the GL worker lets the game run up to one
+frame ahead. An object stepping out from cover can appear up to three frames
+late (occlusion culling).</li>
+<li><strong>Touch:</strong> only the front touchscreen is used. The game keeps its controller
+layout, so its touch-only on-screen controls are not shown.</li>
+<li><strong>First launch:</strong> it can take about two minutes while archives are scanned
+and shaders compile, and the loading screen can sit still for much of it.</li>
+<li><strong>Shader cache:</strong> if a warm launch black-screens, remove
+<code>ux0:data/shader_cache/KOTR00002/</code> and relaunch.</li>
+<li><strong>No complete playthrough certified yet.</strong> Trophies, cloud saves and online
+features are unavailable.</li>
+</ul>
+<h2>Switches</h2>
+<p>Create the file in <code>ux0:data/kotor2/</code> and relaunch; delete it to go back.</p>
+<ul>
+<li><code>ai_mode.txt</code> containing <code>0</code>: the game's own AI loop, with no throttle and no
+AI caches (slower in busy areas).</li>
+<li><code>touch_mode.txt</code> containing <code>0</code>: buttons only, as in v0.4.2.</li>
+<li><code>loadscreen_mode.txt</code> containing <code>0</code>: black screen until the legal screen, as
+in v0.4.2.</li>
+<li><code>patcher_mode.txt</code> containing <code>0</code>: vitaGL's vertex-program requests go
+straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool
+stays at 4 MB).</li>
+<li><code>fps_cap.txt</code> containing <code>0</code>: no 30 FPS cap. <code>LockFramerate=1</code> under
+<code>[Graphics Options]</code> in <code>swkotor2.ini</code> then caps again, and <code>V-Sync=0</code> turns
+vsync off.</li>
+<li><code>room_distance.txt</code> containing a distance in metres: rooms beyond it are not
+drawn (up to about 25% faster where long views open, with distant geometry
+missing).</li>
+<li><code>glw_mode.txt</code> containing <code>0</code>: vitaGL on the game thread, as in v0.2.0.</li>
+<li><code>dxt_mode.txt</code> containing <code>0</code>: DXT textures decoded on the CPU, as in v0.3.0.</li>
+<li><code>mipgen_mode.txt</code> containing <code>0</code>: every mip chain built by the engine, as in
+v0.3.0.</li>
+</ul>
+<p>This release contains no copyrighted game code or data.</p>
+<p><code>KOTOR2.vpk</code> SHA-256: <code>170122bccd91fe27d2d8df33f05110e89a5296b45b2899d21e5c05299bd247a5</code></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/pyjabox/VitaKotor2/releases/download/v0.5.7/KOTOR2.vpk" target="_blank" rel="noopener">⬇ KOTOR2.vpk · 2.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4216">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -818,263 +1074,6 @@ open an [issue](https://github.com/birchwoodgod/halo-ce-vita/issues) or ask on d
 <p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue</a> or ask on Discord, and attach <code>ux0:data/haloce-vita/data/halo.log</code> (and <code>halo-prev.log</code> if the game closed).</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 4.6 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-ce-vita-server-1.1.0-linux-armhf.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.0-linux-armhf.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-ce-vita-server-1.1.0-linux-x86.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.0-linux-x86.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-update.txt" target="_blank" rel="noopener">halo-update.txt · 215.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-update.txt.sig" target="_blank" rel="noopener">halo-update.txt.sig · 129.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/HaloCEVitaInstaller.exe" target="_blank" rel="noopener">HaloCEVitaInstaller.exe · 48.2 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 220.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="kotor ii kotor ii pyjabox/vitakotor2 vitakotor2 v0.5.6 v0.5.6 ports # vitakotor2 v0.5.6 — voice packs and busy rooms
-
-this release fixes rooms that stop responding, and saves that come out empty,
-when a voice pack is installed. tested on a physical vita with the french voice
-pack, tslrcm and m4-78ep, on telos.
-
-## fixed
-
-**voice packs no longer make the game run out of files.** in telos&#x27;s apartments,
-after the terminal calls and the conversation that follows, the door stayed
-locked, the bed and the party did nothing, and saving left an empty save
-folder. the game keeps each speaker&#x27;s last voice line open until that speaker
-talks again, and a vita process may hold 64 open files. with a voice pack, each
-line is a file on the memory card, so after enough speakers every new open
-failed: dialogues, scripts, and the save itself. the loader now reads such a
-line into memory and closes the file at once. in that scene, 65 held lines took
-about 2 mb, and no more than 10 files were open at any time. voices from the
-game&#x27;s archive (english) were never affected.
-
-## also new
-
-- the log now keeps writing whatever happens to the files around it, and
-  counts the open files every 30 s (`[fd]` lines). it also lists the busy
-  threads with their core and load (`[cpu]` lines), and logs any failed open
-  other than a missing file.
-- the sound mixer now hands the hardware two buffers in turn. this did not
-  remove the noise heard behind the sound in busy scenes
-  ([issue #5](https://github.com/pyjabox/vitakotor2/issues/5)), which is
-  still open.
-
-## installation
-
-1. install `kotor2.vpk` with vitashell. the title id is `kotr00002`.
-2. create `ux0:data/kotor2/`.
-3. copy from your own copy of the android version **2.0.4**, using the 32-bit
-   libraries from the apk&#x27;s `lib/armeabi-v7a/` folder (the readme lists each
-   file&#x27;s exact size and sha-256):
-   - `libkotor2.so`
-   - `libobbvfs.so`
-   - `libc++_shared.so`
-   - `libminiz.so`
-   - `liblzmalib.so`
-   - `main.213.com.aspyr.swkotorii.obb`
-   - `patch.14.com.aspyr.swkotorii.obb`
-   - the apk `assets/` directory
-4. install and enable `kubridge.skprx`.
-5. place `libshacccg.suprx` in `ur0:data/`.
-6. optionally, mods in `ux0:data/kotor2/mods/` and voice packs in
-   `ux0:data/kotor2/localized/` (see the readme).
-
-**upgrading from v0.5.2 to v0.5.5:** install the vpk over the old one.
-game data, saves, mods, voice packs, the chosen language and the shader cache
-stay as they are. if you created `ai_mode.txt` to get past a door, you can
-delete it.
-from v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a
-language.
-
-## known issues and limitations
-
-- **the menu before the game is in english.**
-- **mods in another language:** what a mod has only in english shows in
-  english, voice lines added by mods are english (they were never dubbed), and
-  a mod&#x27;s own voice-line and lip-sync files are used instead of a voice pack&#x27;s
-  (tslrcm: 4 lines and the lip sync of 9 areas). details in the readme.
-- **with mods, launches take about 1 s longer** while they are indexed, and the
-  first launch in a new language about 2 s more to build its talk table.
-- **noise behind the sound in busy scenes,** such as telos: sound reaches the
-  hardware late while music and voices are being decoded
-  ([issue #5](https://github.com/pyjabox/vitakotor2/issues/5)).
-- **about one launch in three takes about 11 s longer,** in the engine&#x27;s scan of
-  `dlc/`. the cause is not known yet.
-- **shorter hitches remain** (usually 0.12–0.23 s, occasionally more) when new
-  content is first read from the memory card, at about 10 mb/s: the minimap&#x27;s
-  first draw, dialogue entries and their voices, creatures spawned by scripts.
-- **loading-screen images** still take about 0.1–0.35 s each.
-- **heavy scenes remain cpu-bound,** mostly in the engine&#x27;s per-object rendering
-  work.
-- **visual changes:** no dynamic shadows and no bloom passes. rooms keep their
-  baked lighting.
-- **idle objects update less often:** idle creatures, placeables, doors and
-  items get their ai update every third frame. nothing was noticed in testing.
-- **one frame of extra latency:** the gl worker lets the game run up to one
-  frame ahead. an object stepping out from cover can appear up to three frames
-  late (occlusion culling).
-- **touch:** only the front touchscreen is used. the game keeps its controller
-  layout, so its touch-only on-screen controls are not shown.
-- **first launch:** it can take about two minutes while archives are scanned
-  and shaders compile, and the loading screen can sit still for much of it.
-- **shader cache:** if a warm launch black-screens, remove
-  `ux0:data/shader_cache/kotr00002/` and relaunch.
-- **no complete playthrough certified yet.** trophies, cloud saves and online
-  features are unavailable.
-
-## switches
-
-create the file in `ux0:data/kotor2/` and relaunch; delete it to go back.
-- `ai_mode.txt` containing `0`: the game&#x27;s own ai loop, with no throttle and no
-  ai caches (slower in busy areas).
-- `touch_mode.txt` containing `0`: buttons only, as in v0.4.2.
-- `loadscreen_mode.txt` containing `0`: black screen until the legal screen, as
-  in v0.4.2.
-- `patcher_mode.txt` containing `0`: vitagl&#x27;s vertex-program requests go
-  straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool
-  stays at 4 mb).
-- `fps_cap.txt` containing `0`: no 30 fps cap. `lockframerate=1` under
-  `[graphics options]` in `swkotor2.ini` then caps again, and `v-sync=0` turns
-  vsync off.
-- `room_distance.txt` containing a distance in metres: rooms beyond it are not
-  drawn (up to about 25% faster where long views open, with distant geometry
-  missing).
-- `glw_mode.txt` containing `0`: vitagl on the game thread, as in v0.2.0.
-- `dxt_mode.txt` containing `0`: dxt textures decoded on the cpu, as in v0.3.0.
-- `mipgen_mode.txt` containing `0`: every mip chain built by the engine, as in
-  v0.3.0.
-
-this release contains no copyrighted game code or data.
-
-`kotor2.vpk` sha-256: `87a184379b7919ab3fefb47ed9d3febdd55f321c8643230e2b7b4469ac8b6f26`">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/VitaKotor2/icon0.png" alt="Icono de KOTOR II" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · pyjabox/VitaKotor2</div>
-                      <h2><a href="https://github.com/pyjabox/VitaKotor2/releases/tag/v0.5.6" target="_blank" rel="noopener">KOTOR II</a></h2>
-                      <div class="release-name">VitaKotor2 v0.5.6</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.5.6</span>
-                    <span>2026-10-14 22:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.5.6</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.5.6</div>
-                  
-                  <div class="body markdown-body"><h1>VitaKotor2 v0.5.6 — voice packs and busy rooms</h1>
-<p>This release fixes rooms that stop responding, and saves that come out empty,
-when a voice pack is installed. Tested on a physical Vita with the French voice
-pack, TSLRCM and M4-78EP, on Telos.</p>
-<h2>Fixed</h2>
-<p><strong>Voice packs no longer make the game run out of files.</strong> In Telos's apartments,
-after the terminal calls and the conversation that follows, the door stayed
-locked, the bed and the party did nothing, and saving left an empty save
-folder. The game keeps each speaker's last voice line open until that speaker
-talks again, and a Vita process may hold 64 open files. With a voice pack, each
-line is a file on the memory card, so after enough speakers every new open
-failed: dialogues, scripts, and the save itself. The loader now reads such a
-line into memory and closes the file at once. In that scene, 65 held lines took
-about 2 MB, and no more than 10 files were open at any time. Voices from the
-game's archive (English) were never affected.</p>
-<h2>Also new</h2>
-<ul>
-<li>The log now keeps writing whatever happens to the files around it, and
-counts the open files every 30 s (<code>[fd]</code> lines). It also lists the busy
-threads with their core and load (<code>[cpu]</code> lines), and logs any failed open
-other than a missing file.</li>
-<li>The sound mixer now hands the hardware two buffers in turn. This did not
-remove the noise heard behind the sound in busy scenes
-(<a target="_blank" rel="noopener noreferrer" href="https://github.com/pyjabox/VitaKotor2/issues/5">issue #5</a>), which is
-still open.</li>
-</ul>
-<h2>Installation</h2>
-<ol>
-<li>Install <code>KOTOR2.vpk</code> with VitaShell. The title ID is <code>KOTR00002</code>.</li>
-<li>Create <code>ux0:data/kotor2/</code>.</li>
-<li>Copy from your own copy of the Android version <strong>2.0.4</strong>, using the 32-bit
-libraries from the APK's <code>lib/armeabi-v7a/</code> folder (the README lists each
-file's exact size and SHA-256):<ul>
-<li><code>libkotor2.so</code></li>
-<li><code>libObbVfs.so</code></li>
-<li><code>libc++_shared.so</code></li>
-<li><code>libminiz.so</code></li>
-<li><code>libLzmaLib.so</code></li>
-<li><code>main.213.com.aspyr.swkotorii.obb</code></li>
-<li><code>patch.14.com.aspyr.swkotorii.obb</code></li>
-<li>the APK <code>assets/</code> directory</li>
-</ul>
-</li>
-<li>Install and enable <code>kubridge.skprx</code>.</li>
-<li>Place <code>libshacccg.suprx</code> in <code>ur0:data/</code>.</li>
-<li>Optionally, mods in <code>ux0:data/kotor2/mods/</code> and voice packs in
-<code>ux0:data/kotor2/localized/</code> (see the README).</li>
-</ol>
-<p><strong>Upgrading from v0.5.2 to v0.5.5:</strong> install the VPK over the old one.
-Game data, saves, mods, voice packs, the chosen language and the shader cache
-stay as they are. If you created <code>ai_mode.txt</code> to get past a door, you can
-delete it.
-From v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a
-language.</p>
-<h2>Known issues and limitations</h2>
-<ul>
-<li><strong>The menu before the game is in English.</strong></li>
-<li><strong>Mods in another language:</strong> what a mod has only in English shows in
-English, voice lines added by mods are English (they were never dubbed), and
-a mod's own voice-line and lip-sync files are used instead of a voice pack's
-(TSLRCM: 4 lines and the lip sync of 9 areas). Details in the README.</li>
-<li><strong>With mods, launches take about 1 s longer</strong> while they are indexed, and the
-first launch in a new language about 2 s more to build its talk table.</li>
-<li><strong>Noise behind the sound in busy scenes,</strong> such as Telos: sound reaches the
-hardware late while music and voices are being decoded
-(<a target="_blank" rel="noopener noreferrer" href="https://github.com/pyjabox/VitaKotor2/issues/5">issue #5</a>).</li>
-<li><strong>About one launch in three takes about 11 s longer,</strong> in the engine's scan of
-<code>dlc/</code>. The cause is not known yet.</li>
-<li><strong>Shorter hitches remain</strong> (usually 0.12–0.23 s, occasionally more) when new
-content is first read from the memory card, at about 10 MB/s: the minimap's
-first draw, dialogue entries and their voices, creatures spawned by scripts.</li>
-<li><strong>Loading-screen images</strong> still take about 0.1–0.35 s each.</li>
-<li><strong>Heavy scenes remain CPU-bound,</strong> mostly in the engine's per-object rendering
-work.</li>
-<li><strong>Visual changes:</strong> no dynamic shadows and no bloom passes. Rooms keep their
-baked lighting.</li>
-<li><strong>Idle objects update less often:</strong> idle creatures, placeables, doors and
-items get their AI update every third frame. Nothing was noticed in testing.</li>
-<li><strong>One frame of extra latency:</strong> the GL worker lets the game run up to one
-frame ahead. An object stepping out from cover can appear up to three frames
-late (occlusion culling).</li>
-<li><strong>Touch:</strong> only the front touchscreen is used. The game keeps its controller
-layout, so its touch-only on-screen controls are not shown.</li>
-<li><strong>First launch:</strong> it can take about two minutes while archives are scanned
-and shaders compile, and the loading screen can sit still for much of it.</li>
-<li><strong>Shader cache:</strong> if a warm launch black-screens, remove
-<code>ux0:data/shader_cache/KOTR00002/</code> and relaunch.</li>
-<li><strong>No complete playthrough certified yet.</strong> Trophies, cloud saves and online
-features are unavailable.</li>
-</ul>
-<h2>Switches</h2>
-<p>Create the file in <code>ux0:data/kotor2/</code> and relaunch; delete it to go back.</p>
-<ul>
-<li><code>ai_mode.txt</code> containing <code>0</code>: the game's own AI loop, with no throttle and no
-AI caches (slower in busy areas).</li>
-<li><code>touch_mode.txt</code> containing <code>0</code>: buttons only, as in v0.4.2.</li>
-<li><code>loadscreen_mode.txt</code> containing <code>0</code>: black screen until the legal screen, as
-in v0.4.2.</li>
-<li><code>patcher_mode.txt</code> containing <code>0</code>: vitaGL's vertex-program requests go
-straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool
-stays at 4 MB).</li>
-<li><code>fps_cap.txt</code> containing <code>0</code>: no 30 FPS cap. <code>LockFramerate=1</code> under
-<code>[Graphics Options]</code> in <code>swkotor2.ini</code> then caps again, and <code>V-Sync=0</code> turns
-vsync off.</li>
-<li><code>room_distance.txt</code> containing a distance in metres: rooms beyond it are not
-drawn (up to about 25% faster where long views open, with distant geometry
-missing).</li>
-<li><code>glw_mode.txt</code> containing <code>0</code>: vitaGL on the game thread, as in v0.2.0.</li>
-<li><code>dxt_mode.txt</code> containing <code>0</code>: DXT textures decoded on the CPU, as in v0.3.0.</li>
-<li><code>mipgen_mode.txt</code> containing <code>0</code>: every mip chain built by the engine, as in
-v0.3.0.</li>
-</ul>
-<p>This release contains no copyrighted game code or data.</p>
-<p><code>KOTOR2.vpk</code> SHA-256: <code>87a184379b7919ab3fefb47ed9d3febdd55f321c8643230e2b7b4469ac8b6f26</code></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/pyjabox/VitaKotor2/releases/download/v0.5.6/KOTOR2.vpk" target="_blank" rel="noopener">⬇ KOTOR2.vpk · 2.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27635,7 +27634,7 @@ there are still a lot of features to be added, but this is the first viable vers
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-16 13:39 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-16 18:33 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
