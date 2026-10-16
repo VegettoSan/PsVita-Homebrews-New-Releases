@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">406</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>77</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">404</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>78</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,225 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="mario kart wii mario kart wii boomannotjeff/mkwiita 1.3.0 1.3.0 ports # mkw vita 1.3.0
+
+progression and licenses, a settings screen in the livearea, and battle upgrades.
+
+&gt;[!important]
+&gt;**you must rebuild your game files.** the menus now have new text baked in from your disc (license names, &quot;locked&quot;, &quot;unlocked!&quot;), so your current `ux0:data/mkw` files aren&#x27;t enough. run `build game files.bat` from this release&#x27;s source code, then copy `build\vita\data\mkw\` to your vita again. if you kept your build folder from 1.2.0, only the changed steps run, which takes a few minutes instead of the full build.
+
+
+## what&#x27;s new
+
+### licenses and progression
+
+- **licenses.** pick an empty slot on the license page and the vita&#x27;s keyboard asks for a name. each of the four licenses keeps its own unlocks, best times and ghosts.
+&gt;[!important]
+&gt;**don&#x27;t want to unlock things?** open settings from the livearea and turn on **unlock everything**. every character, vehicle, cup and mirror opens for every license, exactly like before. turn it off any time to get each license&#x27;s own progress back.
+- **unlock everything as on the wii.** new licenses start with the original roster. characters, karts, bikes, cups and mirror open the same way they do on the wii: cup wins, 1-star ranks, time trial courses played and expert staff ghosts. full list: [ign&#x27;s mario kart wii unlockables](https://www.ign.com/wikis/mario-kart-wii/unlockables).
+- **cups.** star and special cup, leaf and lightning cup open after trophies in the cups before them, in each class.
+- **mirror and the karts/bikes switch.** mirror opens after winning every 150cc cup. bikes in 50cc and karts in 100cc open after a trophy in every cup of that class.
+- **expert staff ghosts.** your time trial times are checked against each course&#x27;s real expert unlock time, read from your disc. unlocking them counts toward funky kong, baby luigi, tiny titan and the rest.
+- **locked and unlocked.** locked choices are dimmed and say &quot;locked&quot;. new unlocks pop up with &quot;unlocked!&quot; when you&#x27;re back in the menus.
+- **your old times stay.** best times and ghosts from 1.2.0 move into the first license you create.
+
+### settings
+
+tap the new **settings** button under start on the game&#x27;s livearea. close the game first.
+
+- **presets:**
+  - **performance:** a steady 60 fps.
+  - **default:** 45-60 fps with everything on.
+  - **quality:** 2x resolution with every effect at a locked 30 fps.
+  - the preset shows **custom** when you change things yourself.
+- **resolution** from 1 to 2. type a value or step it with left/right. the game restarts by itself to apply it.
+- **framerate, shadows, bloom, particles, object detail and minimap style.**
+- **unlock everything, delete a license, and reset to defaults.**
+- **save and start** or **save and exit.** circle leaves without saving.
+
+### battle
+
+- **random teams.** teams are shuffled at the start of every set, so you&#x27;re no longer always red. cpus, homing shells and name tags all follow the new teams.
+- **thicker team outlines** around the faces on the minimap.
+
+### coin runners
+
+- **hits drop coins.** getting hit drops up to 3 coins (or all you have). they fly out of your kart and anyone can grab them, cpus included. untaken coins vanish after 10 seconds.
+- **coins on the minimap.** every coin on the ground is a yellow dot. taken coins disappear until they respawn.
+- **coin sound.** picking up a coin plays the coin sound.
+- **half the starting coins.** each arena starts with half as many coins as before.
+
+### also new
+
+- **what&#x27;s new pop-up.** a one-time screen before the opening shows what each new version adds.
+
+## known limitations
+
+- **staff ghosts:** you can&#x27;t race or watch them yet (in progress). their times already count toward unlocks.
+- **ranks:** grand prix star ranks are estimated from your points.
+- **dropped coins:** they don&#x27;t check for walls or ledges, so one dropped next to a wall can end up inside it.
+- **settings button:** it only works when the game is closed.
+
+## install
+
+1. install `mkw.vpk` (attached below) with vitashell.
+2. rebuild your game files:
+   - get the source with git:
+     ```
+     git clone https://github.com/boomannotjeff/mkwiita.git
+     cd mkwiita
+     ```
+     already cloned? run `git pull` in that folder instead.
+   - run `build game files.bat`, which doesn&#x27;t need vitasdk, and drag in your mario kart wii (usa) disc image. if you kept your build folder, only the changed steps run.
+3. copy the contents of `build\vita\data\mkw\` to `ux0:data/mkw/`. your best times and ghosts stay and move into your first license.
+4. make sure `ur0:data/libshacccg.suprx` exists (run sharkf00d once).
+
+the vpk and the game files must come from the same release. the 1.3.0 vpk doesn&#x27;t work with 1.2.0 game files, or the other way round.
+
+the vpk contains no nintendo game files. please don&#x27;t share your built game files.
+
+## building it yourself
+- `build mkw vita.bat` builds the game files and the vpk (needs vitasdk).
+- `build game files.bat` builds only the game files.
+- see [building.md](building.md) for details.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/mkwiita/icon0.png" alt="Icono de Mario Kart Wii" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · boomannotjeff/mkwiita</div>
+                      <h2><a href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.3.0" target="_blank" rel="noopener">Mario Kart Wii</a></h2>
+                      <div class="release-name">1.3.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.3.0</span>
+                    <span>2026-10-16 07:04 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.2.0 → release 1.3.0</div>
+                  
+                  <div class="body markdown-body"><h1>MKW Vita 1.3.0</h1>
+<p>Progression and licenses, a Settings screen in the LiveArea, and Battle upgrades.</p>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>You must rebuild your game files.</strong> The menus now have new text baked in from your disc (license names, &quot;Locked&quot;, &quot;Unlocked!&quot;), so your current <code>ux0:data/mkw</code> files aren't enough. Run <code>Build Game Files.bat</code> from this release's source code, then copy <code>build\vita\data\mkw\</code> to your Vita again. If you kept your build folder from 1.2.0, only the changed steps run, which takes a few minutes instead of the full build.</p>
+</blockquote>
+<h2>What's new</h2>
+<h3>Licenses and progression</h3>
+<ul>
+<li><strong>Licenses.</strong> Pick an empty slot on the License page and the Vita's keyboard asks for a name. Each of the four licenses keeps its own unlocks, best times and ghosts.</li>
+</ul>
+<ul>
+<li><strong>Unlock everything as on the Wii.</strong> New licenses start with the original roster. Characters, karts, bikes, cups and Mirror open the same way they do on the Wii: cup wins, 1-star ranks, Time Trial courses played and expert staff ghosts. Full list: <a target="_blank" rel="noopener noreferrer" href="https://www.ign.com/wikis/mario-kart-wii/Unlockables">IGN's Mario Kart Wii unlockables</a>.</li>
+<li><strong>Cups.</strong> Star and Special Cup, Leaf and Lightning Cup open after trophies in the cups before them, in each class.</li>
+<li><strong>Mirror and the karts/bikes switch.</strong> Mirror opens after winning every 150cc cup. Bikes in 50cc and karts in 100cc open after a trophy in every cup of that class.</li>
+<li><strong>Expert staff ghosts.</strong> Your Time Trial times are checked against each course's real expert unlock time, read from your disc. Unlocking them counts toward Funky Kong, Baby Luigi, Tiny Titan and the rest.</li>
+<li><strong>Locked and Unlocked.</strong> Locked choices are dimmed and say &quot;Locked&quot;. New unlocks pop up with &quot;Unlocked!&quot; when you're back in the menus.</li>
+<li><strong>Your old times stay.</strong> Best times and ghosts from 1.2.0 move into the first license you create.</li>
+</ul>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>Don't want to unlock things?</strong> Open Settings from the LiveArea and turn on <strong>Unlock Everything</strong>. Every character, vehicle, cup and Mirror opens for every license, exactly like before. Turn it off any time to get each license's own progress back.</p>
+</blockquote>
+<h3>Settings</h3>
+<p>Tap the new <strong>Settings</strong> button under Start on the game's LiveArea. Close the game first.</p>
+<ul>
+<li><strong>Presets:</strong><ul>
+<li><strong>Performance:</strong> a steady 60 FPS.</li>
+<li><strong>Default:</strong> 45-60 FPS with everything on.</li>
+<li><strong>Quality:</strong> 2x resolution with every effect at a locked 30 FPS.</li>
+<li>The preset shows <strong>Custom</strong> when you change things yourself.</li>
+</ul>
+</li>
+<li><strong>Resolution</strong> from 1 to 2. Type a value or step it with left/right. The game restarts by itself to apply it.</li>
+<li><strong>Framerate, shadows, bloom, particles, object detail and minimap style.</strong></li>
+<li><strong>Unlock Everything, delete a license, and Reset to Defaults.</strong></li>
+<li><strong>Save and Start</strong> or <strong>Save and Exit.</strong> Circle leaves without saving.</li>
+</ul>
+<h3>Battle</h3>
+<ul>
+<li><strong>Random teams.</strong> Teams are shuffled at the start of every set, so you're no longer always red. CPUs, homing shells and name tags all follow the new teams.</li>
+<li><strong>Thicker team outlines</strong> around the faces on the minimap.</li>
+</ul>
+<h3>Coin Runners</h3>
+<ul>
+<li><strong>Hits drop coins.</strong> Getting hit drops up to 3 coins (or all you have). They fly out of your kart and anyone can grab them, CPUs included. Untaken coins vanish after 10 seconds.</li>
+<li><strong>Coins on the minimap.</strong> Every coin on the ground is a yellow dot. Taken coins disappear until they respawn.</li>
+<li><strong>Coin sound.</strong> Picking up a coin plays the coin sound.</li>
+<li><strong>Half the starting coins.</strong> Each arena starts with half as many coins as before.</li>
+</ul>
+<h3>Also new</h3>
+<ul>
+<li><strong>What's new pop-up.</strong> A one-time screen before the opening shows what each new version adds.</li>
+</ul>
+<h2>Known limitations</h2>
+<ul>
+<li><strong>Staff ghosts:</strong> you can't race or watch them yet (in progress). Their times already count toward unlocks.</li>
+<li><strong>Ranks:</strong> Grand Prix star ranks are estimated from your points.</li>
+<li><strong>Dropped coins:</strong> they don't check for walls or ledges, so one dropped next to a wall can end up inside it.</li>
+<li><strong>Settings button:</strong> it only works when the game is closed.</li>
+</ul>
+<h2>Install</h2>
+<ol>
+<li>Install <code>mkw.vpk</code> (attached below) with VitaShell.</li>
+<li>Rebuild your game files:<ul>
+<li><p>Get the source with Git:</p>
+<pre><code>git clone https://github.com/boomannotjeff/mkwiita.git
+cd mkwiita
+</code></pre>
+<p>Already cloned? Run <code>git pull</code> in that folder instead.</p>
+</li>
+<li><p>Run <code>Build Game Files.bat</code>, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image. If you kept your build folder, only the changed steps run.</p>
+</li>
+</ul>
+</li>
+<li>Copy the contents of <code>build\vita\data\mkw\</code> to <code>ux0:data/mkw/</code>. Your best times and ghosts stay and move into your first license.</li>
+<li>Make sure <code>ur0:data/libshacccg.suprx</code> exists (run ShaRKF00D once).</li>
+</ol>
+<p>The VPK and the game files must come from the same release. The 1.3.0 VPK doesn't work with 1.2.0 game files, or the other way round.</p>
+<p>The VPK contains no Nintendo game files. Please don't share your built game files.</p>
+<h2>Building it yourself</h2>
+<ul>
+<li><code>Build MKW Vita.bat</code> builds the game files and the VPK (needs VitaSDK).</li>
+<li><code>Build Game Files.bat</code> builds only the game files.</li>
+<li>See <a target="_blank" rel="noopener noreferrer" href="BUILDING.md">BUILDING.md</a> for details.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.3.0/mkw.vpk" target="_blank" rel="noopener">⬇ mkw.vpk · 2.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4216">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
+                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
+                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">continuous</span>
+                    <span>2026-10-16 06:52 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
+                  
+                  <div class="body markdown-body"><p>buildnum 4216</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 10.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita khdays-vita v0.8.0 v0.8.0 ports install `khdays-vita-0.8.0.vpk` over the previous version with vitashell. saves and settings are
 kept.
 
@@ -430,207 +649,6 @@ report anything odd on Battle.net.</p>
 <p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.2.1...v0.2.2-beta">https://github.com/Franckrst/D2Vita/compare/v0.2.1...v0.2.2-beta</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.2.2-beta/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4215">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
-                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
-                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">continuous</span>
-                    <span>2026-10-15 16:16 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
-                  
-                  <div class="body markdown-body"><p>buildnum 4215</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 10.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="mario kart wii mario kart wii boomannotjeff/mkwiita 1.2.0 1.2.0 ports ## mkw vita 1.2.0
-
-mirror mode, the grand prix award ceremony, and battle mode.
-
-&gt; [!important]
-&gt; **you must rebuild your game files.** the new ceremony graphics and the battle arena maps come from your disc, so your current `ux0:data/mkw` files aren&#x27;t enough. run `build game files.bat` from this release&#x27;s source code, then copy `build\vita\data\mkw\` to your vita again (your best times stay). if you kept your build folder from 1.1.0, only the changed steps run, which takes a few minutes instead of the full build.
-
-### what&#x27;s new
-
-**mirror mode**
-- **mirror grand prix works.** the whole picture is flipped while the hud stays readable, and the steering, the course map, the name tags and the sound all follow.
-
-**grand prix award ceremony**
-- **the winning run.** after the last race the top three drive the victory road in their own karts, filmed by the course&#x27;s own cameras, until the camera pans up to the sky.
-- **the podium.** confetti falls, with &quot;congratulations!&quot;, the cup and your rank. if you didn&#x27;t place, you get &quot;better luck next time!&quot; instead.
-- **final standings.** all twelve racers&#x27; totals in two columns with your row highlighted, plus &quot;you got 1st place!&quot;.
-- press a to skip ahead to the standings, then a again to leave.
-
-**battle (playable, still in progress)**
-- **balloon battle and coin runners** on all ten arenas, 6 red vs 6 blue.
-- **battle hud:** the red–blue team score, your points or coins, and +1/−1 popups.
-- **arena map** with a countdown timer from 3:00. every racer&#x27;s face has a team-coloured outline.
-- **team-coloured balloons and name tags.** your teammates&#x27; items don&#x27;t cost you balloons.
-- **balloon rules:**
-  - popping an enemy&#x27;s balloon scores a point.
-  - losing your last balloon costs one.
-  - falling off costs a balloon.
-  - a mushroom or star bump steals one.
-- **cpus** roam each arena and hunt the other team.
-- **battles come in sets of two** with running totals, and the results are coloured by team.
-
-**races**
-- **grand prix starting grid:** after the first race, everyone starts where they finished the last one, so finish 12th and you start 12th. the first race starts you at the back, as on the wii. vs sets do the same.
-- **blooper ink** now paints every inked racer black, you included.
-
-**fixes**
-- toad&#x27;s factory: the falling crates are visible (before, you could hit them but not see them).
-- delfino pier loads in battle instead of asking you to choose another course.
-
-### known limitations
-- **battle:**
-  - there&#x27;s no team-introduction shot.
-  - vehicles aren&#x27;t team-coloured.
-  - the cpus are simpler than on the wii.
-  - some rules (item odds, battles per set) are approximated.
-- **ceremony:** the rank grade is estimated from your points.
-
-### install
-
-1. install `mkw.vpk` (attached below) with vitashell.
-2. **rebuild your game files.**
-   - get the source with git:
-     ```
-     git clone https://github.com/boomannotjeff/mkwiita.git
-     cd mkwiita
-     ```
-     already cloned? run `git pull` in that folder instead.
-   - run **`build game files.bat`**, which doesn&#x27;t need vitasdk, and drag in your mario kart wii (usa) disc image.
-   - if you kept your build folder, only the changed steps run.
-3. copy the contents of `build\vita\data\mkw\` to `ux0:data/mkw/`. your best times stay.
-4. make sure `ur0:data/libshacccg.suprx` exists (run sharkf00d once).
-
-the vpk contains no nintendo game files. please don&#x27;t share your built game files.
-
-### building it yourself
-- `build mkw vita.bat` builds the game files and the vpk (needs vitasdk). updating an existing clone is fine: it refreshes the bundled physics engine&#x27;s patch automatically.
-- `build game files.bat` builds only the game files.
-- see [building.md](building.md) for details.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/mkwiita/icon0.png" alt="Icono de Mario Kart Wii" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · boomannotjeff/mkwiita</div>
-                      <h2><a href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.2.0" target="_blank" rel="noopener">Mario Kart Wii</a></h2>
-                      <div class="release-name">1.2.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.2.0</span>
-                    <span>2026-10-15 06:04 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.2.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.2.0</div>
-                  
-                  <div class="body markdown-body"><h2>MKW Vita 1.2.0</h2>
-<p>Mirror mode, the Grand Prix award ceremony, and Battle mode.</p>
-<blockquote>
-<p>[!IMPORTANT]
-<strong>You must rebuild your game files.</strong> The new ceremony graphics and the battle arena maps come from your disc, so your current <code>ux0:data/mkw</code> files aren't enough. Run <code>Build Game Files.bat</code> from this release's source code, then copy <code>build\vita\data\mkw\</code> to your Vita again (your best times stay). If you kept your build folder from 1.1.0, only the changed steps run, which takes a few minutes instead of the full build.</p>
-</blockquote>
-<h3>What's new</h3>
-<p><strong>Mirror mode</strong></p>
-<ul>
-<li><strong>Mirror Grand Prix works.</strong> The whole picture is flipped while the HUD stays readable, and the steering, the course map, the name tags and the sound all follow.</li>
-</ul>
-<p><strong>Grand Prix award ceremony</strong></p>
-<ul>
-<li><strong>The winning run.</strong> After the last race the top three drive the victory road in their own karts, filmed by the course's own cameras, until the camera pans up to the sky.</li>
-<li><strong>The podium.</strong> Confetti falls, with &quot;Congratulations!&quot;, the cup and your rank. If you didn't place, you get &quot;Better luck next time!&quot; instead.</li>
-<li><strong>Final standings.</strong> All twelve racers' totals in two columns with your row highlighted, plus &quot;You got 1st place!&quot;.</li>
-<li>Press A to skip ahead to the standings, then A again to leave.</li>
-</ul>
-<p><strong>Battle (playable, still in progress)</strong></p>
-<ul>
-<li><strong>Balloon Battle and Coin Runners</strong> on all ten arenas, 6 red vs 6 blue.</li>
-<li><strong>Battle HUD:</strong> the red–blue team score, your points or coins, and +1/−1 popups.</li>
-<li><strong>Arena map</strong> with a countdown timer from 3:00. Every racer's face has a team-coloured outline.</li>
-<li><strong>Team-coloured balloons and name tags.</strong> Your teammates' items don't cost you balloons.</li>
-<li><strong>Balloon rules:</strong><ul>
-<li>Popping an enemy's balloon scores a point.</li>
-<li>Losing your last balloon costs one.</li>
-<li>Falling off costs a balloon.</li>
-<li>A Mushroom or Star bump steals one.</li>
-</ul>
-</li>
-<li><strong>CPUs</strong> roam each arena and hunt the other team.</li>
-<li><strong>Battles come in sets of two</strong> with running totals, and the results are coloured by team.</li>
-</ul>
-<p><strong>Races</strong></p>
-<ul>
-<li><strong>Grand Prix starting grid:</strong> after the first race, everyone starts where they finished the last one, so finish 12th and you start 12th. The first race starts you at the back, as on the Wii. VS sets do the same.</li>
-<li><strong>Blooper ink</strong> now paints every inked racer black, you included.</li>
-</ul>
-<p><strong>Fixes</strong></p>
-<ul>
-<li>Toad's Factory: the falling crates are visible (before, you could hit them but not see them).</li>
-<li>Delfino Pier loads in battle instead of asking you to choose another course.</li>
-</ul>
-<h3>Known limitations</h3>
-<ul>
-<li><strong>Battle:</strong><ul>
-<li>There's no team-introduction shot.</li>
-<li>Vehicles aren't team-coloured.</li>
-<li>The CPUs are simpler than on the Wii.</li>
-<li>Some rules (item odds, battles per set) are approximated.</li>
-</ul>
-</li>
-<li><strong>Ceremony:</strong> the rank grade is estimated from your points.</li>
-</ul>
-<h3>Install</h3>
-<ol>
-<li>Install <code>mkw.vpk</code> (attached below) with VitaShell.</li>
-<li><strong>Rebuild your game files.</strong><ul>
-<li><p>Get the source with Git:</p>
-<pre><code>git clone https://github.com/boomannotjeff/mkwiita.git
-cd mkwiita
-</code></pre>
-<p>Already cloned? Run <code>git pull</code> in that folder instead.</p>
-</li>
-<li><p>Run <strong><code>Build Game Files.bat</code></strong>, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image.</p>
-</li>
-<li><p>If you kept your build folder, only the changed steps run.</p>
-</li>
-</ul>
-</li>
-<li>Copy the contents of <code>build\vita\data\mkw\</code> to <code>ux0:data/mkw/</code>. Your best times stay.</li>
-<li>Make sure <code>ur0:data/libshacccg.suprx</code> exists (run ShaRKF00D once).</li>
-</ol>
-<p>The VPK contains no Nintendo game files. Please don't share your built game files.</p>
-<h3>Building it yourself</h3>
-<ul>
-<li><code>Build MKW Vita.bat</code> builds the game files and the VPK (needs VitaSDK). Updating an existing clone is fine: it refreshes the bundled physics engine's patch automatically.</li>
-<li><code>Build Game Files.bat</code> builds only the game files.</li>
-<li>See <a target="_blank" rel="noopener noreferrer" href="BUILDING.md">BUILDING.md</a> for details.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.2.0/mkw.vpk" target="_blank" rel="noopener">⬇ mkw.vpk · 2.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27585,39 +27603,10 @@ there are still a lot of features to be added, but this is the first viable vers
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="easyvpk easyvpk electric1447/easyvpk easyvpk v2.1.0 v2.1.0 utilities - added lite mode (does not download screenshots, thus loading much faster).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-easyvpk/icon0.png" alt="Icono de EasyVPK" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · Electric1447/EasyVPK</div>
-                      <h2><a href="https://github.com/Electric1447/EasyVPK/releases/tag/v2.1.0" target="_blank" rel="noopener">EasyVPK</a></h2>
-                      <div class="release-name">EasyVPK v2.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v2.1.0</span>
-                    <span>2021-08-14 22:25 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.2.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.2.1.0</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Added lite mode (does not download screenshots, thus loading much faster).</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Electric1447/EasyVPK/releases/download/v2.1.0/easyvpk.vpk" target="_blank" rel="noopener">⬇ easyvpk.vpk · 2.8 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-16 02:29 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-16 07:45 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

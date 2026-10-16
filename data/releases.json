@@ -1,6 +1,256 @@
 [
   {
     "platform": "github",
+    "repo": "boomannotjeff/mkwiita",
+    "release_id": "414645785",
+    "tag": "1.3.0",
+    "name": "1.3.0",
+    "url": "https://github.com/boomannotjeff/mkwiita/releases/tag/1.3.0",
+    "published": "2026-10-16T07:04:05Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# MKW Vita 1.3.0\r\n\r\nProgression and licenses, a Settings screen in the LiveArea, and Battle upgrades.\r\n\r\n>[!IMPORTANT]\r\n>**You must rebuild your game files.** The menus now have new text baked in from your disc (license names, \"Locked\", \"Unlocked!\"), so your current `ux0:data/mkw` files aren't enough. Run `Build Game Files.bat` from this release's source code, then copy `build\\vita\\data\\mkw\\` to your Vita again. If you kept your build folder from 1.2.0, only the changed steps run, which takes a few minutes instead of the full build.\r\n\r\n\r\n## What's new\r\n\r\n### Licenses and progression\r\n\r\n- **Licenses.** Pick an empty slot on the License page and the Vita's keyboard asks for a name. Each of the four licenses keeps its own unlocks, best times and ghosts.\r\n>[!IMPORTANT]\r\n>**Don't want to unlock things?** Open Settings from the LiveArea and turn on **Unlock Everything**. Every character, vehicle, cup and Mirror opens for every license, exactly like before. Turn it off any time to get each license's own progress back.\r\n- **Unlock everything as on the Wii.** New licenses start with the original roster. Characters, karts, bikes, cups and Mirror open the same way they do on the Wii: cup wins, 1-star ranks, Time Trial courses played and expert staff ghosts. Full list: [IGN's Mario Kart Wii unlockables](https://www.ign.com/wikis/mario-kart-wii/Unlockables).\r\n- **Cups.** Star and Special Cup, Leaf and Lightning Cup open after trophies in the cups before them, in each class.\r\n- **Mirror and the karts/bikes switch.** Mirror opens after winning every 150cc cup. Bikes in 50cc and karts in 100cc open after a trophy in every cup of that class.\r\n- **Expert staff ghosts.** Your Time Trial times are checked against each course's real expert unlock time, read from your disc. Unlocking them counts toward Funky Kong, Baby Luigi, Tiny Titan and the rest.\r\n- **Locked and Unlocked.** Locked choices are dimmed and say \"Locked\". New unlocks pop up with \"Unlocked!\" when you're back in the menus.\r\n- **Your old times stay.** Best times and ghosts from 1.2.0 move into the first license you create.\r\n\r\n### Settings\r\n\r\nTap the new **Settings** button under Start on the game's LiveArea. Close the game first.\r\n\r\n- **Presets:**\r\n  - **Performance:** a steady 60 FPS.\r\n  - **Default:** 45-60 FPS with everything on.\r\n  - **Quality:** 2x resolution with every effect at a locked 30 FPS.\r\n  - The preset shows **Custom** when you change things yourself.\r\n- **Resolution** from 1 to 2. Type a value or step it with left/right. The game restarts by itself to apply it.\r\n- **Framerate, shadows, bloom, particles, object detail and minimap style.**\r\n- **Unlock Everything, delete a license, and Reset to Defaults.**\r\n- **Save and Start** or **Save and Exit.** Circle leaves without saving.\r\n\r\n### Battle\r\n\r\n- **Random teams.** Teams are shuffled at the start of every set, so you're no longer always red. CPUs, homing shells and name tags all follow the new teams.\r\n- **Thicker team outlines** around the faces on the minimap.\r\n\r\n### Coin Runners\r\n\r\n- **Hits drop coins.** Getting hit drops up to 3 coins (or all you have). They fly out of your kart and anyone can grab them, CPUs included. Untaken coins vanish after 10 seconds.\r\n- **Coins on the minimap.** Every coin on the ground is a yellow dot. Taken coins disappear until they respawn.\r\n- **Coin sound.** Picking up a coin plays the coin sound.\r\n- **Half the starting coins.** Each arena starts with half as many coins as before.\r\n\r\n### Also new\r\n\r\n- **What's new pop-up.** A one-time screen before the opening shows what each new version adds.\r\n\r\n## Known limitations\r\n\r\n- **Staff ghosts:** you can't race or watch them yet (in progress). Their times already count toward unlocks.\r\n- **Ranks:** Grand Prix star ranks are estimated from your points.\r\n- **Dropped coins:** they don't check for walls or ledges, so one dropped next to a wall can end up inside it.\r\n- **Settings button:** it only works when the game is closed.\r\n\r\n## Install\r\n\r\n1. Install `mkw.vpk` (attached below) with VitaShell.\r\n2. Rebuild your game files:\r\n   - Get the source with Git:\r\n     ```\r\n     git clone https://github.com/boomannotjeff/mkwiita.git\r\n     cd mkwiita\r\n     ```\r\n     Already cloned? Run `git pull` in that folder instead.\r\n   - Run `Build Game Files.bat`, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image. If you kept your build folder, only the changed steps run.\r\n3. Copy the contents of `build\\vita\\data\\mkw\\` to `ux0:data/mkw/`. Your best times and ghosts stay and move into your first license.\r\n4. Make sure `ur0:data/libshacccg.suprx` exists (run ShaRKF00D once).\r\n\r\nThe VPK and the game files must come from the same release. The 1.3.0 VPK doesn't work with 1.2.0 game files, or the other way round.\r\n\r\nThe VPK contains no Nintendo game files. Please don't share your built game files.\r\n\r\n## Building it yourself\r\n- `Build MKW Vita.bat` builds the game files and the VPK (needs VitaSDK).\r\n- `Build Game Files.bat` builds only the game files.\r\n- See [BUILDING.md](BUILDING.md) for details.\r\n",
+    "assets": [
+      {
+        "name": "mkw.vpk",
+        "size": 2323406,
+        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.3.0/mkw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "boomannotjeff",
+    "homebrew_name": "Mario Kart Wii",
+    "homebrew_icon": "https://archive.org/download/mkwiita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
+    "homebrew_long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
+    "homebrew_id": "mario-kart-wii",
+    "homebrew_authors": [
+      "boomannotjeff"
+    ],
+    "homebrew_version": "1.2.0",
+    "catalog_apps": [
+      {
+        "id": "mario-kart-wii",
+        "name": "Mario Kart Wii",
+        "icon": "https://archive.org/download/mkwiita/icon0.png",
+        "category": "ports",
+        "description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
+        "long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
+        "version": "1.2.0",
+        "version_date": "2026-10-15",
+        "author_ids": [
+          "boomannotjeff"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.2.0 → release 1.3.0",
+    "catalog_version": "1.2.0"
+  },
+  {
+    "platform": "github",
+    "repo": "FWGS/xash3d-fwgs",
+    "release_id": "414639046",
+    "tag": "continuous",
+    "name": "Xash3D FWGS Continuous master Build",
+    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
+    "published": "2026-10-16T06:52:36Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "buildnum 4216\n",
+    "assets": [
+      {
+        "name": "su.xash.Engine.Compat.i386.flatpak",
+        "size": 11314400,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
+        "content_type": "application/vnd.flatpak"
+      },
+      {
+        "name": "xash3d-fwgs-amd64.AppImage",
+        "size": 26278392,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-android-mappings.tar.zst",
+        "size": 2609632,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
+        "content_type": "application/zstd"
+      },
+      {
+        "name": "xash3d-fwgs-android.apk",
+        "size": 47161396,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "xash3d-fwgs-apple-amd64.tar.xz",
+        "size": 5450932,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-apple-arm64.tar.xz",
+        "size": 5193832,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-arm64.AppImage",
+        "size": 22252040,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-armhf.AppImage",
+        "size": 21671300,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-i386.AppImage",
+        "size": 26209656,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-ios-arm64.ipa",
+        "size": 5565546,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "xash3d-fwgs-linux-amd64.tar.gz",
+        "size": 28113790,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-arm64.tar.gz",
+        "size": 23909782,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-armhf.tar.gz",
+        "size": 23212031,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-i386.tar.gz",
+        "size": 28116390,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
+        "size": 21680897,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
+        "size": 20221766,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-nswitch.7z",
+        "size": 16464018,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-win32-amd64.7z",
+        "size": 16049037,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-win32-i386.7z",
+        "size": 18044565,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xashds-linux-amd64.tar.gz",
+        "size": 3465980,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-arm64.tar.gz",
+        "size": 3401669,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-armhf.tar.gz",
+        "size": 3328045,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-i386.tar.gz",
+        "size": 3412488,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-ppc64el.tar.gz",
+        "size": 3583709,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-riscv64.tar.gz",
+        "size": 3169492,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-psvita.7z",
+        "size": 26762382,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z",
+        "content_type": "application/x-7z-compressed"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Xash3D-FWGS",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
+    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "xash3d-fwgs",
+    "homebrew_authors": [
+      "fgsfds",
+      "xash3d-fwgs-team"
+    ],
+    "homebrew_version": "v.continuous",
+    "catalog_apps": [
+      {
+        "id": "xash3d-fwgs",
+        "name": "Xash3D-FWGS",
+        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+        "category": "ports",
+        "description": "Port of Xash3D-FWGS for PSVITA.",
+        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.continuous",
+        "version_date": "2023-10-07",
+        "author_ids": [
+          "fgsfds",
+          "xash3d-fwgs-team"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.continuous",
+    "catalog_version": "v.continuous"
+  },
+  {
+    "platform": "github",
     "repo": "ggdrn/KH-DAYS-VITA",
     "release_id": "414463000",
     "tag": "v0.8.0",
@@ -277,256 +527,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 0.2.1 → release v0.2.2-beta",
     "catalog_version": "0.2.1"
-  },
-  {
-    "platform": "github",
-    "repo": "FWGS/xash3d-fwgs",
-    "release_id": "414018792",
-    "tag": "continuous",
-    "name": "Xash3D FWGS Continuous master Build",
-    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
-    "published": "2026-10-15T16:16:26Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "buildnum 4215\n",
-    "assets": [
-      {
-        "name": "su.xash.Engine.Compat.i386.flatpak",
-        "size": 11318688,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
-        "content_type": "application/vnd.flatpak"
-      },
-      {
-        "name": "xash3d-fwgs-amd64.AppImage",
-        "size": 26278392,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-android-mappings.tar.zst",
-        "size": 2609840,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
-        "content_type": "application/zstd"
-      },
-      {
-        "name": "xash3d-fwgs-android.apk",
-        "size": 47161309,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "xash3d-fwgs-apple-amd64.tar.xz",
-        "size": 5450608,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-apple-arm64.tar.xz",
-        "size": 5192840,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-arm64.AppImage",
-        "size": 22252040,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-armhf.AppImage",
-        "size": 21671300,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-i386.AppImage",
-        "size": 26209656,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-ios-arm64.ipa",
-        "size": 5565587,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "xash3d-fwgs-linux-amd64.tar.gz",
-        "size": 28113832,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-arm64.tar.gz",
-        "size": 23909622,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-armhf.tar.gz",
-        "size": 23211887,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-i386.tar.gz",
-        "size": 28116915,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
-        "size": 21680921,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
-        "size": 20221984,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-nswitch.7z",
-        "size": 16463288,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-psvita.7z",
-        "size": 26762382,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-amd64.7z",
-        "size": 16040000,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-i386.7z",
-        "size": 17860348,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xashds-linux-amd64.tar.gz",
-        "size": 3465979,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-arm64.tar.gz",
-        "size": 3401666,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-armhf.tar.gz",
-        "size": 3328042,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-i386.tar.gz",
-        "size": 3412491,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-ppc64el.tar.gz",
-        "size": 3583735,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-riscv64.tar.gz",
-        "size": 3169491,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Xash3D-FWGS",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
-    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "xash3d-fwgs",
-    "homebrew_authors": [
-      "fgsfds",
-      "xash3d-fwgs-team"
-    ],
-    "homebrew_version": "v.continuous",
-    "catalog_apps": [
-      {
-        "id": "xash3d-fwgs",
-        "name": "Xash3D-FWGS",
-        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-        "category": "ports",
-        "description": "Port of Xash3D-FWGS for PSVITA.",
-        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.continuous",
-        "version_date": "2023-10-07",
-        "author_ids": [
-          "fgsfds",
-          "xash3d-fwgs-team"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.continuous",
-    "catalog_version": "v.continuous"
-  },
-  {
-    "platform": "github",
-    "repo": "boomannotjeff/mkwiita",
-    "release_id": "413468287",
-    "tag": "1.2.0",
-    "name": "1.2.0",
-    "url": "https://github.com/boomannotjeff/mkwiita/releases/tag/1.2.0",
-    "published": "2026-10-15T06:04:46Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## MKW Vita 1.2.0\r\n\r\nMirror mode, the Grand Prix award ceremony, and Battle mode.\r\n\r\n> [!IMPORTANT]\r\n> **You must rebuild your game files.** The new ceremony graphics and the battle arena maps come from your disc, so your current `ux0:data/mkw` files aren't enough. Run `Build Game Files.bat` from this release's source code, then copy `build\\vita\\data\\mkw\\` to your Vita again (your best times stay). If you kept your build folder from 1.1.0, only the changed steps run, which takes a few minutes instead of the full build.\r\n\r\n### What's new\r\n\r\n**Mirror mode**\r\n- **Mirror Grand Prix works.** The whole picture is flipped while the HUD stays readable, and the steering, the course map, the name tags and the sound all follow.\r\n\r\n**Grand Prix award ceremony**\r\n- **The winning run.** After the last race the top three drive the victory road in their own karts, filmed by the course's own cameras, until the camera pans up to the sky.\r\n- **The podium.** Confetti falls, with \"Congratulations!\", the cup and your rank. If you didn't place, you get \"Better luck next time!\" instead.\r\n- **Final standings.** All twelve racers' totals in two columns with your row highlighted, plus \"You got 1st place!\".\r\n- Press A to skip ahead to the standings, then A again to leave.\r\n\r\n**Battle (playable, still in progress)**\r\n- **Balloon Battle and Coin Runners** on all ten arenas, 6 red vs 6 blue.\r\n- **Battle HUD:** the red–blue team score, your points or coins, and +1/−1 popups.\r\n- **Arena map** with a countdown timer from 3:00. Every racer's face has a team-coloured outline.\r\n- **Team-coloured balloons and name tags.** Your teammates' items don't cost you balloons.\r\n- **Balloon rules:**\r\n  - Popping an enemy's balloon scores a point.\r\n  - Losing your last balloon costs one.\r\n  - Falling off costs a balloon.\r\n  - A Mushroom or Star bump steals one.\r\n- **CPUs** roam each arena and hunt the other team.\r\n- **Battles come in sets of two** with running totals, and the results are coloured by team.\r\n\r\n**Races**\r\n- **Grand Prix starting grid:** after the first race, everyone starts where they finished the last one, so finish 12th and you start 12th. The first race starts you at the back, as on the Wii. VS sets do the same.\r\n- **Blooper ink** now paints every inked racer black, you included.\r\n\r\n**Fixes**\r\n- Toad's Factory: the falling crates are visible (before, you could hit them but not see them).\r\n- Delfino Pier loads in battle instead of asking you to choose another course.\r\n\r\n### Known limitations\r\n- **Battle:**\r\n  - There's no team-introduction shot.\r\n  - Vehicles aren't team-coloured.\r\n  - The CPUs are simpler than on the Wii.\r\n  - Some rules (item odds, battles per set) are approximated.\r\n- **Ceremony:** the rank grade is estimated from your points.\r\n\r\n### Install\r\n\r\n1. Install `mkw.vpk` (attached below) with VitaShell.\r\n2. **Rebuild your game files.**\r\n   - Get the source with Git:\r\n     ```\r\n     git clone https://github.com/boomannotjeff/mkwiita.git\r\n     cd mkwiita\r\n     ```\r\n     Already cloned? Run `git pull` in that folder instead.\r\n   - Run **`Build Game Files.bat`**, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image.\r\n   - If you kept your build folder, only the changed steps run.\r\n3. Copy the contents of `build\\vita\\data\\mkw\\` to `ux0:data/mkw/`. Your best times stay.\r\n4. Make sure `ur0:data/libshacccg.suprx` exists (run ShaRKF00D once).\r\n\r\nThe VPK contains no Nintendo game files. Please don't share your built game files.\r\n\r\n### Building it yourself\r\n- `Build MKW Vita.bat` builds the game files and the VPK (needs VitaSDK). Updating an existing clone is fine: it refreshes the bundled physics engine's patch automatically.\r\n- `Build Game Files.bat` builds only the game files.\r\n- See [BUILDING.md](BUILDING.md) for details.\r\n",
-    "assets": [
-      {
-        "name": "mkw.vpk",
-        "size": 2243274,
-        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.2.0/mkw.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "boomannotjeff",
-    "homebrew_name": "Mario Kart Wii",
-    "homebrew_icon": "https://archive.org/download/mkwiita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
-    "homebrew_long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
-    "homebrew_id": "mario-kart-wii",
-    "homebrew_authors": [
-      "boomannotjeff"
-    ],
-    "homebrew_version": "1.2.0",
-    "catalog_apps": [
-      {
-        "id": "mario-kart-wii",
-        "name": "Mario Kart Wii",
-        "icon": "https://archive.org/download/mkwiita/icon0.png",
-        "category": "ports",
-        "description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
-        "long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
-        "version": "1.2.0",
-        "version_date": "2026-10-15",
-        "author_ids": [
-          "boomannotjeff"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.2.0",
-    "catalog_version": "1.2.0"
   },
   {
     "platform": "github",
@@ -33174,56 +33174,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.0.1",
     "catalog_version": "v.0.1"
-  },
-  {
-    "platform": "github",
-    "repo": "Electric1447/EasyVPK",
-    "release_id": "47859070",
-    "tag": "v2.1.0",
-    "name": "EasyVPK v2.1.0",
-    "url": "https://github.com/Electric1447/EasyVPK/releases/tag/v2.1.0",
-    "published": "2021-08-14T22:25:15Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Added lite mode (does not download screenshots, thus loading much faster).",
-    "assets": [
-      {
-        "name": "easyvpk.vpk",
-        "size": 2906433,
-        "download_url": "https://github.com/Electric1447/EasyVPK/releases/download/v2.1.0/easyvpk.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Electric1447",
-    "homebrew_name": "EasyVPK",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-easyvpk/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew downloader linked to VitaDB.",
-    "homebrew_long_description": "A lightweighted homebrew downloader that uses VitaDB as source.",
-    "homebrew_id": "easyvpk",
-    "homebrew_authors": [
-      "electric",
-      "then00p"
-    ],
-    "homebrew_version": "v.2.1.0",
-    "catalog_apps": [
-      {
-        "id": "easyvpk",
-        "name": "EasyVPK",
-        "icon": "https://archive.org/download/psvitaalive-easyvpk/icon0.png",
-        "category": "utilities",
-        "description": "Homebrew downloader linked to VitaDB.",
-        "long_description": "A lightweighted homebrew downloader that uses VitaDB as source.",
-        "version": "v.2.1.0",
-        "version_date": "2021-08-15",
-        "author_ids": [
-          "electric",
-          "then00p"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.2.1.0",
-    "catalog_version": "v.2.1.0"
   }
 ]
