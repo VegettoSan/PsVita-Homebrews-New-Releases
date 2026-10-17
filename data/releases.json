@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "415843246",
+    "tag": "v0.2.3-beta",
+    "name": "v0.2.3-beta",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.3-beta",
+    "published": "2026-10-17T14:19:54Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "\n- **No more sound crackle in crowded fights.** With 10+ sounds at once\n  (Frost Nova in a pack, Baal's Throne) the mix went past full scale and was\n  clipped; an output limiter now lowers the whole mix for a moment instead.\n  `D2_SONLIMIT=0` in `env.txt` restores the old behaviour.\n- **No more sound dropouts in heavy scenes**: the audio thread moved to a\n  core where the graphics flush no longer delays it (`D2_SONCPU=1` restores\n  the old placement).\n- **Short presses are no longer lost when the frame rate drops**: every\n  button and touch change between two slow frames is now seen, and a quick\n  tap of the aim button attacks/clicks once.\n\nValidation: sound — console (limiter: 7 passes, clipped samples\n~49 000–500 000 → 16–399 per pass; audio core: 6 Baal's Throne passes, late\nsound packets 2/47 → 0/0; no fps cost on the Act V patrol). Controls — host\ntests and qemu with a simulated slow game (12/12 presses seen at ~3–5 fps,\nwas 4/12); **not yet tested on a console**, please report how it feels.\nFreezing sound and the Maggot Lair freeze were not reproduced.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.2-beta...v0.2.3-beta",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 8083949,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.3-beta/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.2.1",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
+        "version": "0.2.1",
+        "version_date": "2026-10-09",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.2.1 → release v0.2.3-beta",
+    "catalog_version": "0.2.1"
+  },
+  {
+    "platform": "github",
     "repo": "bucanero/apollo-vita",
     "release_id": "415343169",
     "tag": "v2.4.0",
@@ -631,55 +680,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
     "catalog_version": "v.0.1"
-  },
-  {
-    "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "414156962",
-    "tag": "v0.2.2-beta",
-    "name": "v0.2.2-beta",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.2-beta",
-    "published": "2026-10-15T18:50:24Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "\n- **More headroom in crowded fights.** The game's locks and clock reads\n  (thousands per frame) no longer go through the runtime's global lock when\n  nothing else holds them: each call is 3–4× cheaper on a real console.\n  The Act V patrol needs 6 % less work per frame (22.7 → 21.3 ms); in heavy\n  scenes such as Baal's Throne with `/players 8` the saving is larger in\n  absolute terms (estimated ~3 ms per frame), which turns into fps where\n  the game was dropping below 25. If anything looks wrong, add\n  `D2_FASTSYNC=0` to `env.txt`.\n\nValidation: console (microbench and 3 vs 3 Act V patrol passes; the Throne\npasses did not land on comparable scenes, so the heavy-scene figure is an\nestimate); qemu (identical pixels and clock sequence). Online play was only\nchecked against a local test server (login, lobby, game creation): please\nreport anything odd on Battle.net.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.1...v0.2.2-beta",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 8055591,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.2-beta/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.2.1",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.",
-        "version": "0.2.1",
-        "version_date": "2026-10-09",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.2.1 → release v0.2.2-beta",
-    "catalog_version": "0.2.1"
   },
   {
     "platform": "github",

@@ -219,6 +219,74 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.2.3-beta v0.2.3-beta ports - **no more sound crackle in crowded fights.** with 10+ sounds at once
+  (frost nova in a pack, baal&#x27;s throne) the mix went past full scale and was
+  clipped; an output limiter now lowers the whole mix for a moment instead.
+  `d2_sonlimit=0` in `env.txt` restores the old behaviour.
+- **no more sound dropouts in heavy scenes**: the audio thread moved to a
+  core where the graphics flush no longer delays it (`d2_soncpu=1` restores
+  the old placement).
+- **short presses are no longer lost when the frame rate drops**: every
+  button and touch change between two slow frames is now seen, and a quick
+  tap of the aim button attacks/clicks once.
+
+validation: sound — console (limiter: 7 passes, clipped samples
+~49 000–500 000 → 16–399 per pass; audio core: 6 baal&#x27;s throne passes, late
+sound packets 2/47 → 0/0; no fps cost on the act v patrol). controls — host
+tests and qemu with a simulated slow game (12/12 presses seen at ~3–5 fps,
+was 4/12); **not yet tested on a console**, please report how it feels.
+freezing sound and the maggot lair freeze were not reproduced.
+
+
+version française : [journal des versions](https://github.com/franckrst/d2vita/blob/main/docs-site/changelog.fr.md).
+
+
+**full changelog**: https://github.com/franckrst/d2vita/compare/v0.2.2-beta...v0.2.3-beta">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
+                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.2.3-beta" target="_blank" rel="noopener">D2Vita</a></h2>
+                      <div class="release-name">v0.2.3-beta</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.2.3-beta</span>
+                    <span>2026-10-17 14:19 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.2.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.2.1 → release v0.2.3-beta</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li><strong>No more sound crackle in crowded fights.</strong> With 10+ sounds at once
+(Frost Nova in a pack, Baal's Throne) the mix went past full scale and was
+clipped; an output limiter now lowers the whole mix for a moment instead.
+<code>D2_SONLIMIT=0</code> in <code>env.txt</code> restores the old behaviour.</li>
+<li><strong>No more sound dropouts in heavy scenes</strong>: the audio thread moved to a
+core where the graphics flush no longer delays it (<code>D2_SONCPU=1</code> restores
+the old placement).</li>
+<li><strong>Short presses are no longer lost when the frame rate drops</strong>: every
+button and touch change between two slow frames is now seen, and a quick
+tap of the aim button attacks/clicks once.</li>
+</ul>
+<p>Validation: sound — console (limiter: 7 passes, clipped samples
+~49 000–500 000 → 16–399 per pass; audio core: 6 Baal's Throne passes, late
+sound packets 2/47 → 0/0; no fps cost on the Act V patrol). Controls — host
+tests and qemu with a simulated slow game (12/12 presses seen at ~3–5 fps,
+was 4/12); <strong>not yet tested on a console</strong>, please report how it feels.
+Freezing sound and the Maggot Lair freeze were not reproduced.</p>
+<p>Version française : <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md">journal des versions</a>.</p>
+<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.2.2-beta...v0.2.3-beta">https://github.com/Franckrst/D2Vita/compare/v0.2.2-beta...v0.2.3-beta</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.2.3-beta/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="apollo save tool apollo save tool bucanero/apollo-vita apollo save tool v2.4.0 v2.4.0 utilities ### added
 
 * manage dreamcast virtual memory card images (vmu)
@@ -1025,68 +1093,6 @@ play.</li>
                   <div class="body markdown-body"><p>GitHub Actions build log: <a target="_blank" rel="noopener noreferrer" href="https://github.com/isledecomp/isle-portable/actions/runs/38791491564">https://github.com/isledecomp/isle-portable/actions/runs/38791491564</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk" target="_blank" rel="noopener">⬇ isle.vpk · 6.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk" target="_blank" rel="noopener">app-debug.apk · 13.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk" target="_blank" rel="noopener">app-release.apk · 12.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg" target="_blank" rel="noopener">isle-0.1-Darwin-arm64.dmg · 22.5 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg" target="_blank" rel="noopener">isle-0.1-Darwin-x64.dmg · 23.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz" target="_blank" rel="noopener">isle-0.1-DOS-x86.tar.gz · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz" target="_blank" rel="noopener">isle-0.1-Emscripten-emscripten.tar.gz · 995.3 KB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-FreeBSD-x64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa" target="_blank" rel="noopener">isle-0.1-iOS-arm64.ipa · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-Linux-x64.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip" target="_blank" rel="noopener">isle-0.1-Windows-arm64.zip · 2.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-Windows-x64.tar.gz · 17.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip" target="_blank" rel="noopener">isle-0.1-Windows-x64.zip · 20.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip" target="_blank" rel="noopener">isle-0.1-Windows-x86.zip · 1.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip" target="_blank" rel="noopener">isle-0.1-Xbox_One_Series_XS-x64.zip · 2.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip" target="_blank" rel="noopener">isle-assets.zip · 436.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip" target="_blank" rel="noopener">isle-hdaudio.zip · 284.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx" target="_blank" rel="noopener">isle.3dsx · 2.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia" target="_blank" rel="noopener">isle.cia · 2.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro" target="_blank" rel="noopener">isle.nro · 8.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage" target="_blank" rel="noopener">Isle_Portable-x86_64.AppImage · 29.7 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak" target="_blank" rel="noopener">org.legoisland.Isle.aarch64.flatpak · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak" target="_blank" rel="noopener">org.legoisland.Isle.x86_64.flatpak · 2.5 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.2.2-beta v0.2.2-beta ports - **more headroom in crowded fights.** the game&#x27;s locks and clock reads
-  (thousands per frame) no longer go through the runtime&#x27;s global lock when
-  nothing else holds them: each call is 3–4× cheaper on a real console.
-  the act v patrol needs 6 % less work per frame (22.7 → 21.3 ms); in heavy
-  scenes such as baal&#x27;s throne with `/players 8` the saving is larger in
-  absolute terms (estimated ~3 ms per frame), which turns into fps where
-  the game was dropping below 25. if anything looks wrong, add
-  `d2_fastsync=0` to `env.txt`.
-
-validation: console (microbench and 3 vs 3 act v patrol passes; the throne
-passes did not land on comparable scenes, so the heavy-scene figure is an
-estimate); qemu (identical pixels and clock sequence). online play was only
-checked against a local test server (login, lobby, game creation): please
-report anything odd on battle.net.
-
-
-version française : [journal des versions](https://github.com/franckrst/d2vita/blob/main/docs-site/changelog.fr.md).
-
-
-**full changelog**: https://github.com/franckrst/d2vita/compare/v0.2.1...v0.2.2-beta">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/D2Vita/newicon0.png" alt="Icono de D2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Franckrst/D2Vita</div>
-                      <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.2.2-beta" target="_blank" rel="noopener">D2Vita</a></h2>
-                      <div class="release-name">v0.2.2-beta</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.2.2-beta</span>
-                    <span>2026-10-15 18:50 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.2.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.2.1 → release v0.2.2-beta</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li><strong>More headroom in crowded fights.</strong> The game's locks and clock reads
-(thousands per frame) no longer go through the runtime's global lock when
-nothing else holds them: each call is 3–4× cheaper on a real console.
-The Act V patrol needs 6 % less work per frame (22.7 → 21.3 ms); in heavy
-scenes such as Baal's Throne with <code>/players 8</code> the saving is larger in
-absolute terms (estimated ~3 ms per frame), which turns into fps where
-the game was dropping below 25. If anything looks wrong, add
-<code>D2_FASTSYNC=0</code> to <code>env.txt</code>.</li>
-</ul>
-<p>Validation: console (microbench and 3 vs 3 Act V patrol passes; the Throne
-passes did not land on comparable scenes, so the heavy-scene figure is an
-estimate); qemu (identical pixels and clock sequence). Online play was only
-checked against a local test server (login, lobby, game creation): please
-report anything odd on Battle.net.</p>
-<p>Version française : <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md">journal des versions</a>.</p>
-<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Franckrst/D2Vita/compare/v0.2.1...v0.2.2-beta">https://github.com/Franckrst/D2Vita/compare/v0.2.1...v0.2.2-beta</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Franckrst/D2Vita/releases/download/v0.2.2-beta/d2vita.vpk" target="_blank" rel="noopener">⬇ d2vita.vpk · 7.7 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27666,7 +27672,7 @@ there are still a lot of features to be added, but this is the first viable vers
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-17 12:37 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-17 17:40 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
