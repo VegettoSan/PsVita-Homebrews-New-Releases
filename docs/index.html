@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">405</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>79</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">403</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>80</strong><span>pendientes</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,106 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kotor kotor scoobydouche/vitakotor vitakotor v0.4.3 — more apks welcome v0.4.3 ports # vitakotor v0.4.3 — more apks welcome
+
+a compatibility release. the port now runs with the 1.0.7 / 1.0.71 android apk as well as 1.0.10, and the readme says which apk versions work.
+
+## what changed
+
+- **the 1.0.7 / 1.0.71 apk now works.** its game libraries are an older build than 1.0.10&#x27;s. the loader now provides the five extra functions that build needs, and finds its movie code by content instead of at a fixed address. tested on hardware: main menu, saves, the equip and abilities screens, movies with sound, and the mods menu.
+
+- **1.0.9 build 54 is confirmed to work.** its game libraries are byte-for-byte the same as 1.0.10&#x27;s.
+
+- **which apk do i have?** look inside `lib/armeabi-v7a/` in the apk. if it has `libfmod.so`, it works. if it has `libfmodex.so` and `libgnustl_shared.so` instead, it is the amazon underground build, which does not. the readme has the full table, and `tools/check_apk.py` checks an apk on a pc without needing a vita.
+
+- **the mod-set menu now says &quot;mods button&quot;** instead of &quot;google play button&quot;.
+
+- **a rare sound-related crash is closed off.** one of the loader&#x27;s diagnostic hooks could crash if the game ever played a sound that had not been fully set up. that hook is now skipped. nothing you hear changes.
+
+- **kotor-nolog.vpk**: an optional build with diagnostic logging disabled. install it in place of `kotor.vpk` if you prefer not to have a log file written.
+
+## updating
+
+install `kotor.vpk` over your current one. your files in `ux0:data/kotor/`, your saves and your mods stay as they are. to switch apk versions, replace the four `.so` files in `ux0:data/kotor/` with the ones from the other apk.
+
+## honest limits
+
+- **the amazon underground apk (1.0.9, `com.aspyr.swkotor.underground`) does not work.** it is an older build with a different sound engine and c++ runtime, and supporting it would be a separate port. use the google play apk.
+
+- **1.0.71 was tested for one session, not a full playthrough.** the parts the port changes were checked, but a long run on it has not been done yet.
+
+- **the rare crash after an area-change auto-save** (issue #12) is still open.
+
+## everything else from v0.4.2 still applies
+
+griff spawns in the sand people enclave, texture quality is picked from the mods button, busy areas have 96 sound channels, and frames are locked to 30 fps.
+
+## you need your own copy of the game
+
+this is a loader, not a game. it needs the android release&#x27;s `main` and `patch` `.obb` files, which you must own.
+
+## something broken?
+
+open an issue with `ux0:data/kotor/log.txt` attached, and say where in the game it happened.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/VitaKotor/icon0.png" alt="Icono de KOTOR" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ScoobyDouche/VitaKotor</div>
+                      <h2><a href="https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.4.3" target="_blank" rel="noopener">KOTOR</a></h2>
+                      <div class="release-name">VitaKotor v0.4.3 — more apks welcome</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.4.3</span>
+                    <span>2026-10-17 00:45 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.4.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.4.2 → release v0.4.3</div>
+                  
+                  <div class="body markdown-body"><h1>VitaKotor v0.4.3 — more apks welcome</h1>
+<p>A compatibility release. The port now runs with the 1.0.7 / 1.0.71 Android APK as well as 1.0.10, and the README says which APK versions work.</p>
+<h2>What changed</h2>
+<ul>
+<li><p><strong>The 1.0.7 / 1.0.71 APK now works.</strong> Its game libraries are an older build than 1.0.10's. The loader now provides the five extra functions that build needs, and finds its movie code by content instead of at a fixed address. Tested on hardware: main menu, saves, the Equip and Abilities screens, movies with sound, and the MODS menu.</p>
+</li>
+<li><p><strong>1.0.9 build 54 is confirmed to work.</strong> Its game libraries are byte-for-byte the same as 1.0.10's.</p>
+</li>
+<li><p><strong>Which APK do I have?</strong> Look inside <code>lib/armeabi-v7a/</code> in the APK. If it has <code>libfmod.so</code>, it works. If it has <code>libfmodex.so</code> and <code>libgnustl_shared.so</code> instead, it is the Amazon Underground build, which does not. The README has the full table, and <code>tools/check_apk.py</code> checks an APK on a PC without needing a Vita.</p>
+</li>
+<li><p><strong>The mod-set menu now says &quot;MODS button&quot;</strong> instead of &quot;Google Play button&quot;.</p>
+</li>
+<li><p><strong>A rare sound-related crash is closed off.</strong> One of the loader's diagnostic hooks could crash if the game ever played a sound that had not been fully set up. That hook is now skipped. Nothing you hear changes.</p>
+</li>
+<li><p><strong>KOTOR-nolog.vpk</strong>: an optional build with diagnostic logging disabled. Install it in place of <code>KOTOR.vpk</code> if you prefer not to have a log file written.</p>
+</li>
+</ul>
+<h2>Updating</h2>
+<p>Install <code>KOTOR.vpk</code> over your current one. Your files in <code>ux0:data/kotor/</code>, your saves and your mods stay as they are. To switch APK versions, replace the four <code>.so</code> files in <code>ux0:data/kotor/</code> with the ones from the other APK.</p>
+<h2>Honest limits</h2>
+<ul>
+<li><p><strong>The Amazon Underground APK (1.0.9, <code>com.aspyr.swkotor.underground</code>) does not work.</strong> It is an older build with a different sound engine and C++ runtime, and supporting it would be a separate port. Use the Google Play APK.</p>
+</li>
+<li><p><strong>1.0.71 was tested for one session, not a full playthrough.</strong> The parts the port changes were checked, but a long run on it has not been done yet.</p>
+</li>
+<li><p><strong>The rare crash after an area-change auto-save</strong> (issue #12) is still open.</p>
+</li>
+</ul>
+<h2>Everything else from v0.4.2 still applies</h2>
+<p>Griff spawns in the Sand People Enclave, texture quality is picked from the MODS button, busy areas have 96 sound channels, and frames are locked to 30 fps.</p>
+<h2>You need your own copy of the game</h2>
+<p>This is a loader, not a game. It needs the Android release's <code>main</code> and <code>patch</code> <code>.obb</code> files, which you must own.</p>
+<h2>Something broken?</h2>
+<p>Open an issue with <code>ux0:data/kotor/log.txt</code> attached, and say where in the game it happened.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.3/KOTOR-nolog.vpk" target="_blank" rel="noopener">⬇ KOTOR-nolog.vpk · 2.6 MB</a><a class="btn" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.3/KOTOR.vpk" target="_blank" rel="noopener">KOTOR.vpk · 2.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="kotor ii kotor ii pyjabox/vitakotor2 vitakotor2 v0.5.7 v0.5.7 ports # vitakotor2 v0.5.7 — german and italian
 
 this release fixes german and italian, which were swapped, and closes two
@@ -2783,106 +2883,6 @@ see the [readme](https://github.com/jwfeniello/castle-of-illusion-vita#installat
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/jimbob4000/RetroFlow-Launcher/releases/download/v8.5.0/RetroFlow_v8.5.0.vpk" target="_blank" rel="noopener">⬇ RetroFlow_v8.5.0.vpk · 13.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="kotor kotor scoobydouche/vitakotor vitakotor v0.4.2 — griff comes home v0.4.2 ports # vitakotor v0.4.2 — griff comes home
-
-a fix release. griff now turns up in the sand people enclave, texture quality can be picked from the mods button, and busy areas no longer run out of sound channels.
-
-## what changed
-
-- **griff spawns in the sand people enclave even if you opened their chests first.** this bug is in the original game. the enclave remembers &quot;griff has been spawned&quot; and &quot;you were warned about stealing&quot; in the same switch, so opening one of their chests before asking czerka about griff made the game think he was already there. the port now patches the two chest scripts in memory as the game loads them, so the warning uses its own switch. no game files are shipped, and a mod that replaces those scripts is left untouched.
-
-- **texture quality is selectable from the mods button.** after choosing a mod set, a second list offers **16-bit, faster** or **32-bit, sharper**. the choice is saved and applies on that same boot. 16-bit stays the default. it can also be set by hand as `texturebits=16` or `texturebits=32` in the `[vita options]` section of `swkotor.ini`.
-
-- **busy areas no longer run out of sound channels.** the game asked for 40 channels, and crowded fights could fill all of them. when that happened, a line of dialogue could replay over and over with no one talking. the port now gives the game 96 channels. across about an hour of play the most in use at once was 28.
-
-- **kotor-nolog.vpk**: an optional build with diagnostic logging disabled. install it in place of `kotor.vpk` if you prefer not to have a log file written.
-
-## updating
-
-install `kotor.vpk` over your current one. your files in `ux0:data/kotor/`, your saves and your mods stay as they are.
-
-## honest limits
-
-- **a save that already lost griff is not repaired.** the fix stops the problem from happening, but if you opened a sand people chest before talking to czerka in an existing save, griff will still be missing in that save. open an issue with the save attached and it can be fixed by hand.
-
-- **32-bit textures use most of the vita&#x27;s video memory.** on tatooine they ran at the same speed as 16-bit but left under 1 mb of video memory free, against about 29 mb with 16-bit. past that point textures are kept in slower ram. they have not yet been tried in the biggest areas, such as taris and dantooine.
-
-- **the sound channel fix has not yet been tested in the fight where the repeating line was first heard,** the sith base on manaan. it ran cleanly everywhere it was played.
-
-- **30 fps is a cap, not a promise.** busy places, such as taris&#x27;s upper city and undercity with a crowd, or the dantooine ruins, still drop to around 20 fps.
-
-- sith armour can still turn a bright solid colour.
-
-## everything else from v0.4.1 still applies
-
-frames are locked to 30 fps, grass stands still unless `grasswind=1`, mods load from the memory card, and the mods button switches between mod sets.
-
-## you need your own copy of the game
-
-this is a loader, not a game. it needs the android release&#x27;s `main` and `patch` `.obb` files, which you must own.
-
-## something broken?
-
-open an issue with `ux0:data/kotor/log.txt` attached, and say where in the game it happened.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/VitaKotor/icon0.png" alt="Icono de KOTOR" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ScoobyDouche/VitaKotor</div>
-                      <h2><a href="https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.4.2" target="_blank" rel="noopener">KOTOR</a></h2>
-                      <div class="release-name">VitaKotor v0.4.2 — griff comes home</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.4.2</span>
-                    <span>2026-10-11 03:07 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.4.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.4.2</div>
-                  
-                  <div class="body markdown-body"><h1>VitaKotor v0.4.2 — griff comes home</h1>
-<p>A fix release. Griff now turns up in the Sand People Enclave, texture quality can be picked from the MODS button, and busy areas no longer run out of sound channels.</p>
-<h2>What changed</h2>
-<ul>
-<li><p><strong>Griff spawns in the Sand People Enclave even if you opened their chests first.</strong> This bug is in the original game. The Enclave remembers &quot;Griff has been spawned&quot; and &quot;you were warned about stealing&quot; in the same switch, so opening one of their chests before asking Czerka about Griff made the game think he was already there. The port now patches the two chest scripts in memory as the game loads them, so the warning uses its own switch. No game files are shipped, and a mod that replaces those scripts is left untouched.</p>
-</li>
-<li><p><strong>Texture quality is selectable from the MODS button.</strong> After choosing a mod set, a second list offers <strong>16-bit, faster</strong> or <strong>32-bit, sharper</strong>. The choice is saved and applies on that same boot. 16-bit stays the default. It can also be set by hand as <code>TextureBits=16</code> or <code>TextureBits=32</code> in the <code>[Vita Options]</code> section of <code>swkotor.ini</code>.</p>
-</li>
-<li><p><strong>Busy areas no longer run out of sound channels.</strong> The game asked for 40 channels, and crowded fights could fill all of them. When that happened, a line of dialogue could replay over and over with no one talking. The port now gives the game 96 channels. Across about an hour of play the most in use at once was 28.</p>
-</li>
-<li><p><strong>KOTOR-nolog.vpk</strong>: an optional build with diagnostic logging disabled. Install it in place of <code>KOTOR.vpk</code> if you prefer not to have a log file written.</p>
-</li>
-</ul>
-<h2>Updating</h2>
-<p>Install <code>KOTOR.vpk</code> over your current one. Your files in <code>ux0:data/kotor/</code>, your saves and your mods stay as they are.</p>
-<h2>Honest limits</h2>
-<ul>
-<li><p><strong>A save that already lost Griff is not repaired.</strong> The fix stops the problem from happening, but if you opened a Sand People chest before talking to Czerka in an existing save, Griff will still be missing in that save. Open an issue with the save attached and it can be fixed by hand.</p>
-</li>
-<li><p><strong>32-bit textures use most of the Vita's video memory.</strong> On Tatooine they ran at the same speed as 16-bit but left under 1 MB of video memory free, against about 29 MB with 16-bit. Past that point textures are kept in slower RAM. They have not yet been tried in the biggest areas, such as Taris and Dantooine.</p>
-</li>
-<li><p><strong>The sound channel fix has not yet been tested in the fight where the repeating line was first heard,</strong> the Sith base on Manaan. It ran cleanly everywhere it was played.</p>
-</li>
-<li><p><strong>30 fps is a cap, not a promise.</strong> Busy places, such as Taris's Upper City and Undercity with a crowd, or the Dantooine ruins, still drop to around 20 fps.</p>
-</li>
-<li><p>Sith armour can still turn a bright solid colour.</p>
-</li>
-</ul>
-<h2>Everything else from v0.4.1 still applies</h2>
-<p>Frames are locked to 30 fps, grass stands still unless <code>GrassWind=1</code>, mods load from the memory card, and the MODS button switches between mod sets.</p>
-<h2>You need your own copy of the game</h2>
-<p>This is a loader, not a game. It needs the Android release's <code>main</code> and <code>patch</code> <code>.obb</code> files, which you must own.</p>
-<h2>Something broken?</h2>
-<p>Open an issue with <code>ux0:data/kotor/log.txt</code> attached, and say where in the game it happened.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.2/KOTOR-nolog.vpk" target="_blank" rel="noopener">⬇ KOTOR-nolog.vpk · 2.6 MB</a><a class="btn" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.2/KOTOR.vpk" target="_blank" rel="noopener">KOTOR.vpk · 2.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27631,62 +27631,10 @@ there are still a lot of features to be added, but this is the first viable vers
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="applocker applocker anthj/applocker applocker v1.2 v1.2 utilities easily lock and unlock you apps, ideal for use with kids or adults who like to mess where they shouldnt..
-
-        this app gives you 3 extra levels of security :
-  
-        - simple (analogue and trigger combo unlock)
-        - difficult (konami code unlock)
-        - high (app cannot be unlocked with a combo)
-
-to bypass the standard lock :
-hold the left analogue to the left, the right analogue to the right and press both l + r triggers at the same time....
-
-to bypass the konami code lock :
-press up, up, down, down, left, right, left, right, x, o
-
-
-if you have selected to fully lock an app then the combos wont bypass the locks">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-applocker/icon0.png" alt="Icono de AppLocker" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/AppLocker</div>
-                      <h2><a href="https://github.com/AntHJ/AppLocker/releases/tag/v1.2" target="_blank" rel="noopener">AppLocker</a></h2>
-                      <div class="release-name">AppLocker v1.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.2</span>
-                    <span>2021-08-14 17:17 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.2</div>
-                  
-                  <div class="body markdown-body"><p>Easily Lock and Unlock you apps, ideal for use with kids or adults who like to mess where they shouldnt..</p>
-<pre><code>    This app gives you 3 extra levels of security :
-
-    - Simple (Analogue and Trigger combo unlock)
-    - Difficult (Konami code unlock)
-    - High (App cannot be unlocked with a combo)</code></pre>
-<p>To bypass the standard lock :
-Hold the Left analogue to the left, the right analogue to the right and press both L + R triggers at the same time....</p>
-<p>To bypass the Konami code lock :
-Press Up, Up, Down, Down, Left, Right, Left, Right, X, O</p>
-<p>If you have selected to FULLY LOCK an app then the combos wont bypass the locks</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/AppLocker/releases/download/v1.2/AppLocker-v1.2.vpk" target="_blank" rel="noopener">⬇ AppLocker-v1.2.vpk · 3.4 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-16 23:10 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-17 02:21 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

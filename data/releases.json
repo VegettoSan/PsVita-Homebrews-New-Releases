@@ -1,6 +1,61 @@
 [
   {
     "platform": "github",
+    "repo": "ScoobyDouche/VitaKotor",
+    "release_id": "415495009",
+    "tag": "v0.4.3",
+    "name": "VitaKotor v0.4.3 — more apks welcome",
+    "url": "https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.4.3",
+    "published": "2026-10-17T00:45:12Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# VitaKotor v0.4.3 — more apks welcome\n\nA compatibility release. The port now runs with the 1.0.7 / 1.0.71 Android APK as well as 1.0.10, and the README says which APK versions work.\n\n## What changed\n\n- **The 1.0.7 / 1.0.71 APK now works.** Its game libraries are an older build than 1.0.10's. The loader now provides the five extra functions that build needs, and finds its movie code by content instead of at a fixed address. Tested on hardware: main menu, saves, the Equip and Abilities screens, movies with sound, and the MODS menu.\n\n- **1.0.9 build 54 is confirmed to work.** Its game libraries are byte-for-byte the same as 1.0.10's.\n\n- **Which APK do I have?** Look inside `lib/armeabi-v7a/` in the APK. If it has `libfmod.so`, it works. If it has `libfmodex.so` and `libgnustl_shared.so` instead, it is the Amazon Underground build, which does not. The README has the full table, and `tools/check_apk.py` checks an APK on a PC without needing a Vita.\n\n- **The mod-set menu now says \"MODS button\"** instead of \"Google Play button\".\n\n- **A rare sound-related crash is closed off.** One of the loader's diagnostic hooks could crash if the game ever played a sound that had not been fully set up. That hook is now skipped. Nothing you hear changes.\n\n- **KOTOR-nolog.vpk**: an optional build with diagnostic logging disabled. Install it in place of `KOTOR.vpk` if you prefer not to have a log file written.\n\n## Updating\n\nInstall `KOTOR.vpk` over your current one. Your files in `ux0:data/kotor/`, your saves and your mods stay as they are. To switch APK versions, replace the four `.so` files in `ux0:data/kotor/` with the ones from the other APK.\n\n## Honest limits\n\n- **The Amazon Underground APK (1.0.9, `com.aspyr.swkotor.underground`) does not work.** It is an older build with a different sound engine and C++ runtime, and supporting it would be a separate port. Use the Google Play APK.\n\n- **1.0.71 was tested for one session, not a full playthrough.** The parts the port changes were checked, but a long run on it has not been done yet.\n\n- **The rare crash after an area-change auto-save** (issue #12) is still open.\n\n## Everything else from v0.4.2 still applies\n\nGriff spawns in the Sand People Enclave, texture quality is picked from the MODS button, busy areas have 96 sound channels, and frames are locked to 30 fps.\n\n## You need your own copy of the game\n\nThis is a loader, not a game. It needs the Android release's `main` and `patch` `.obb` files, which you must own.\n\n## Something broken?\n\nOpen an issue with `ux0:data/kotor/log.txt` attached, and say where in the game it happened.\n",
+    "assets": [
+      {
+        "name": "KOTOR-nolog.vpk",
+        "size": 2701283,
+        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.3/KOTOR-nolog.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "KOTOR.vpk",
+        "size": 2711423,
+        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.3/KOTOR.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "ScoobyDouche",
+    "homebrew_name": "KOTOR",
+    "homebrew_icon": "https://archive.org/download/VitaKotor/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
+    "homebrew_long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.",
+    "homebrew_id": "kotor",
+    "homebrew_authors": [
+      "scoobydouche"
+    ],
+    "homebrew_version": "0.4.2",
+    "catalog_apps": [
+      {
+        "id": "kotor",
+        "name": "KOTOR",
+        "icon": "https://archive.org/download/VitaKotor/icon0.png",
+        "category": "ports",
+        "description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
+        "long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.",
+        "version": "0.4.2",
+        "version_date": "2026-10-10",
+        "author_ids": [
+          "scoobydouche"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.4.2 → release v0.4.3",
+    "catalog_version": "0.4.2"
+  },
+  {
+    "platform": "github",
     "repo": "pyjabox/VitaKotor2",
     "release_id": "415027052",
     "tag": "v0.5.7",
@@ -1285,61 +1340,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.8.3.0 → release v8.5.0",
     "catalog_version": "v.8.3.0"
-  },
-  {
-    "platform": "github",
-    "repo": "ScoobyDouche/VitaKotor",
-    "release_id": "409369476",
-    "tag": "v0.4.2",
-    "name": "VitaKotor v0.4.2 — griff comes home",
-    "url": "https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.4.2",
-    "published": "2026-10-11T03:07:32Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# VitaKotor v0.4.2 — griff comes home\n\nA fix release. Griff now turns up in the Sand People Enclave, texture quality can be picked from the MODS button, and busy areas no longer run out of sound channels.\n\n## What changed\n\n- **Griff spawns in the Sand People Enclave even if you opened their chests first.** This bug is in the original game. The Enclave remembers \"Griff has been spawned\" and \"you were warned about stealing\" in the same switch, so opening one of their chests before asking Czerka about Griff made the game think he was already there. The port now patches the two chest scripts in memory as the game loads them, so the warning uses its own switch. No game files are shipped, and a mod that replaces those scripts is left untouched.\n\n- **Texture quality is selectable from the MODS button.** After choosing a mod set, a second list offers **16-bit, faster** or **32-bit, sharper**. The choice is saved and applies on that same boot. 16-bit stays the default. It can also be set by hand as `TextureBits=16` or `TextureBits=32` in the `[Vita Options]` section of `swkotor.ini`.\n\n- **Busy areas no longer run out of sound channels.** The game asked for 40 channels, and crowded fights could fill all of them. When that happened, a line of dialogue could replay over and over with no one talking. The port now gives the game 96 channels. Across about an hour of play the most in use at once was 28.\n\n- **KOTOR-nolog.vpk**: an optional build with diagnostic logging disabled. Install it in place of `KOTOR.vpk` if you prefer not to have a log file written.\n\n## Updating\n\nInstall `KOTOR.vpk` over your current one. Your files in `ux0:data/kotor/`, your saves and your mods stay as they are.\n\n## Honest limits\n\n- **A save that already lost Griff is not repaired.** The fix stops the problem from happening, but if you opened a Sand People chest before talking to Czerka in an existing save, Griff will still be missing in that save. Open an issue with the save attached and it can be fixed by hand.\n\n- **32-bit textures use most of the Vita's video memory.** On Tatooine they ran at the same speed as 16-bit but left under 1 MB of video memory free, against about 29 MB with 16-bit. Past that point textures are kept in slower RAM. They have not yet been tried in the biggest areas, such as Taris and Dantooine.\n\n- **The sound channel fix has not yet been tested in the fight where the repeating line was first heard,** the Sith base on Manaan. It ran cleanly everywhere it was played.\n\n- **30 fps is a cap, not a promise.** Busy places, such as Taris's Upper City and Undercity with a crowd, or the Dantooine ruins, still drop to around 20 fps.\n\n- Sith armour can still turn a bright solid colour.\n\n## Everything else from v0.4.1 still applies\n\nFrames are locked to 30 fps, grass stands still unless `GrassWind=1`, mods load from the memory card, and the MODS button switches between mod sets.\n\n## You need your own copy of the game\n\nThis is a loader, not a game. It needs the Android release's `main` and `patch` `.obb` files, which you must own.\n\n## Something broken?\n\nOpen an issue with `ux0:data/kotor/log.txt` attached, and say where in the game it happened.\n",
-    "assets": [
-      {
-        "name": "KOTOR-nolog.vpk",
-        "size": 2706290,
-        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.2/KOTOR-nolog.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "KOTOR.vpk",
-        "size": 2719092,
-        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.4.2/KOTOR.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ScoobyDouche",
-    "homebrew_name": "KOTOR",
-    "homebrew_icon": "https://archive.org/download/VitaKotor/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
-    "homebrew_long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.",
-    "homebrew_id": "kotor",
-    "homebrew_authors": [
-      "scoobydouche"
-    ],
-    "homebrew_version": "0.4.2",
-    "catalog_apps": [
-      {
-        "id": "kotor",
-        "name": "KOTOR",
-        "icon": "https://archive.org/download/VitaKotor/icon0.png",
-        "category": "ports",
-        "description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
-        "long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.",
-        "version": "0.4.2",
-        "version_date": "2026-10-10",
-        "author_ids": [
-          "scoobydouche"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.4.2",
-    "catalog_version": "0.4.2"
   },
   {
     "platform": "github",
@@ -33225,54 +33225,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.2.1.0",
     "catalog_version": "v.2.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "AntHJ/AppLocker",
-    "release_id": "47855094",
-    "tag": "v1.2",
-    "name": "AppLocker v1.2",
-    "url": "https://github.com/AntHJ/AppLocker/releases/tag/v1.2",
-    "published": "2021-08-14T17:17:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Easily Lock and Unlock you apps, ideal for use with kids or adults who like to mess where they shouldnt..\r\n\r\n        This app gives you 3 extra levels of security :\r\n  \r\n        - Simple (Analogue and Trigger combo unlock)\r\n        - Difficult (Konami code unlock)\r\n        - High (App cannot be unlocked with a combo)\r\n\r\nTo bypass the standard lock :\r\nHold the Left analogue to the left, the right analogue to the right and press both L + R triggers at the same time....\r\n\r\nTo bypass the Konami code lock :\r\nPress Up, Up, Down, Down, Left, Right, Left, Right, X, O\r\n\r\n\r\nIf you have selected to FULLY LOCK an app then the combos wont bypass the locks",
-    "assets": [
-      {
-        "name": "AppLocker-v1.2.vpk",
-        "size": 3591941,
-        "download_url": "https://github.com/AntHJ/AppLocker/releases/download/v1.2/AppLocker-v1.2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "AntHJ",
-    "homebrew_name": "AppLocker",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-applocker/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Lock and Unlock your apps quickly and easily",
-    "homebrew_long_description": "You can now Lock and Unlock access to your Vitas apps. Pressing X on your selected app will create a lock that is bypassable by a combo, Pressing Square will FULLY lock the app so it cannot be bypassed, and Pressing O will remove the app lock.\nTo bypass the lock : Hold the left analogue left, the right analogue right and press both L + R triggers all at the same time..",
-    "homebrew_id": "applocker",
-    "homebrew_authors": [
-      "anthj"
-    ],
-    "homebrew_version": "v.1.2",
-    "catalog_apps": [
-      {
-        "id": "applocker",
-        "name": "AppLocker",
-        "icon": "https://archive.org/download/psvitaalive-applocker/icon0.png",
-        "category": "utilities",
-        "description": "Lock and Unlock your apps quickly and easily",
-        "long_description": "You can now Lock and Unlock access to your Vitas apps. Pressing X on your selected app will create a lock that is bypassable by a combo, Pressing Square will FULLY lock the app so it cannot be bypassed, and Pressing O will remove the app lock.\nTo bypass the lock : Hold the left analogue left, the right analogue right and press both L + R triggers all at the same time..",
-        "version": "v.1.2",
-        "version_date": "2021-08-14",
-        "author_ids": [
-          "anthj"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2",
-    "catalog_version": "v.1.2"
   }
 ]
