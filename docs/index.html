@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">399</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>480</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">396</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>84</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>472</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,264 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="thextech thextech thextech/thextech thextech v1.7.4.1: a quick update with fixes and limits breaking v1.7.4.1 ports when this update was supposed to be a small hotfix that fixes two small but annoying bugs, it also introduces the ability to use several graphics without cropping to original sizes. for example, bgo, some effects, terrain cells at the world map, scenery objects, and level points, now can have any size as big as you want. this only will work for levels and episodes are made for thextech. when playing episodes saved with old formats, they will have exactly same limits as before this update. however, objects of custom ranges will be expandable with no matter of the level or episode format.
+
+## showcases
+### world map
+#### before
+&lt;details&gt;
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-52-11&quot; src=&quot;https://github.com/user-attachments/assets/de72432d-af1e-457e-967b-17b24096dee2&quot; /&gt;
+
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-52-14&quot; src=&quot;https://github.com/user-attachments/assets/f627ea33-1aae-4098-b81d-040de9fa114c&quot; /&gt;
+
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-52-37&quot; src=&quot;https://github.com/user-attachments/assets/0730cd84-a309-4cfa-a9ec-1a93ec1a6a1f&quot; /&gt;
+
+&lt;/details&gt;
+
+#### after
+
+&lt;details&gt;
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-50-31&quot; src=&quot;https://github.com/user-attachments/assets/14ea8d37-01e7-4bb4-af6f-8b2bbdb53f9e&quot; /&gt;
+
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-50-54&quot; src=&quot;https://github.com/user-attachments/assets/1b9fc98c-79b2-4393-b92d-4bff7677684a&quot; /&gt;
+
+[scr_2026-10-17_20-51-37.webm](https://github.com/user-attachments/assets/1f7076c4-8514-4acb-9d81-cc37881d323e)
+
+&lt;/details&gt;
+
+### levels
+#### before
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-52-55&quot; src=&quot;https://github.com/user-attachments/assets/61eab815-2b27-44be-b1c5-0dd2227871d2&quot; /&gt;
+
+#### after
+&lt;img width=&quot;800&quot; height=&quot;600&quot; alt=&quot;scr_2026-10-17_20-51-18&quot; src=&quot;https://github.com/user-attachments/assets/c9fa1e61-f821-4713-8d5e-ce17047654c3&quot; /&gt;
+
+## demo
+a small demo episode that shows the work of new graphics behaviour: [large objects test.zip](https://github.com/user-attachments/files/33630575/large.objects.test.zip)
+
+# full changelog for 1.7.4.1
+
+&lt;details&gt;
+
+## new features:
+
+### behaviour changes
+- custom asset packs: effect dimensions are now loaded from the asset pack graphics. this fixes the appearance of player death effects in several asset packs. (@ds-sloth)
+- episodes targeting thextech: world map tile and scene dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)
+- episodes targeting thextech: bgo dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)
+- custom range (level-33 and above): world map level dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)
+
+## thextech bugfixes
+- fix thextech 1.3.7.1 bug where a stack of static npcs would only partially despawn, causing the upper npcs to fall (@ds-sloth, thanks to @liebning for the report)
+- fix thextech 1.3.7.3 bug where level music would not play on a level without a player start point, where the player starts at a warp in section 0 (@ds-sloth, thanks to @wohlstand for the report)
+
+&lt;/details&gt;
+
+# known issues
+* audio may be choppy on old 3ds.
+* texture load stutter is present on wii.
+* the screen may slightly judder during section resizes on 3ds and wii.
+* on 3ds, background texture may start to flashing. (https://github.com/thextech/thextech/issues/816) (possibly solved, the primary reason of this is an out of memory).
+* on 3ds the crash happens on attempt to quit by the home menu. (https://github.com/thextech/thextech/issues/738)
+* on windows 10 when running opengl with some ~2006 intel igpu on laptop, game would crash (possibly fixed).
+* on windows xp sp0 that uses **s3 savage 4** video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to [random talk of people from the 2000s](https://www.kv.by/forum/forum1000000590.htm) (in russian) ).
+* on linux/wayland, window icon can&#x27;t be changed while running game. (https://github.com/thextech/thextech/issues/939)
+* on linux/wayland, mouse cursor doesn&#x27;t gets unlocked from window on toggling windowed mode after fullscreen. (https://github.com/thextech/thextech/issues/937)
+* editor doesn&#x27;t supports large fonts (i.e. chinese, korean, etc). (https://github.com/thextech/thextech/issues/884)
+* at web version (emscripten-built) the framerate may go incorrectly. (https://github.com/thextech/thextech/issues/851)
+* on some hardware, randomly and rare, alpha-channel might me messed up when using opengl render backend. (https://github.com/thextech/thextech/issues/743)
+* the lunadll&#x27;s timer gets overlapped with the medals tracker. (https://github.com/thextech/thextech/issues/1102)
+* on ios devices (iphone 6s and newer that has the taptic engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. to escape this problem it&#x27;s need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (https://github.com/thextech/thextech/issues/1189)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png" alt="Icono de TheXTech" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · TheXTech/TheXTech</div>
+                      <h2><a href="https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4.1" target="_blank" rel="noopener">TheXTech</a></h2>
+                      <div class="release-name">TheXTech v1.7.4.1: A quick update with fixes and limits breaking</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.7.4.1</span>
+                    <span>2026-10-18 17:26 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.3.7.3-1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.3.7.3-1 → release v1.7.4.1</div>
+                  
+                  <div class="body markdown-body"><p>When this update was supposed to be a small hotfix that fixes two small but annoying bugs, it also introduces the ability to use several graphics without cropping to original sizes. For example, BGO, some effects, terrain cells at the world map, scenery objects, and level points, now can have any size as big as you want. This only will work for levels and episodes are made for TheXTech. When playing episodes saved with old formats, they will have exactly same limits as before this update. However, objects of custom ranges will be expandable with no matter of the level or episode format.</p>
+<h2>Showcases</h2>
+<h3>World map</h3>
+<h4>Before</h4>
+
+
+<img width="800" height="600" alt="Scr_2026-10-17_20-52-11" src="https://github.com/user-attachments/assets/de72432d-af1e-457e-967b-17b24096dee2">
+
+<p><img width="800" height="600" alt="Scr_2026-10-17_20-52-14" src="https://github.com/user-attachments/assets/f627ea33-1aae-4098-b81d-040de9fa114c"></p>
+<p><img width="800" height="600" alt="Scr_2026-10-17_20-52-37" src="https://github.com/user-attachments/assets/0730cd84-a309-4cfa-a9ec-1a93ec1a6a1f"></p>
+
+
+<h4>After</h4>
+
+
+<img width="800" height="600" alt="Scr_2026-10-17_20-50-31" src="https://github.com/user-attachments/assets/14ea8d37-01e7-4bb4-af6f-8b2bbdb53f9e">
+
+<p><img width="800" height="600" alt="Scr_2026-10-17_20-50-54" src="https://github.com/user-attachments/assets/1b9fc98c-79b2-4393-b92d-4bff7677684a"></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/1f7076c4-8514-4acb-9d81-cc37881d323e">Scr_2026-10-17_20-51-37.webm</a></p>
+
+
+<h3>Levels</h3>
+<h4>Before</h4>
+<p><img width="800" height="600" alt="Scr_2026-10-17_20-52-55" src="https://github.com/user-attachments/assets/61eab815-2b27-44be-b1c5-0dd2227871d2"></p>
+<h4>After</h4>
+<p><img width="800" height="600" alt="Scr_2026-10-17_20-51-18" src="https://github.com/user-attachments/assets/c9fa1e61-f821-4713-8d5e-ce17047654c3"></p>
+<h2>Demo</h2>
+<p>A small demo episode that shows the work of new graphics behaviour: <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/files/33630575/Large.Objects.Test.zip">Large Objects Test.zip</a></p>
+<h1>Full changelog for 1.7.4.1</h1>
+
+
+
+<h2>New features:</h2>
+<h3>Behaviour changes</h3>
+<ul>
+<li>Custom asset packs: effect dimensions are now loaded from the asset pack graphics. This fixes the appearance of player death effects in several asset packs. (@ds-sloth)</li>
+<li>Episodes targeting TheXTech: world map tile and scene dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)</li>
+<li>Episodes targeting TheXTech: BGO dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)</li>
+<li>Custom range (level-33 and above): world map level dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)</li>
+</ul>
+<h2>TheXTech bugfixes</h2>
+<ul>
+<li>Fix TheXTech 1.3.7.1 bug where a stack of static NPCs would only partially despawn, causing the upper NPCs to fall (@ds-sloth, thanks to @Liebning for the report)</li>
+<li>Fix TheXTech 1.3.7.3 bug where level music would not play on a level without a player start point, where the player starts at a warp in Section 0 (@ds-sloth, thanks to @Wohlstand for the report)</li>
+</ul>
+
+
+<h1>Known issues</h1>
+<ul>
+<li>Audio may be choppy on Old 3DS.</li>
+<li>Texture load stutter is present on Wii.</li>
+<li>The screen may slightly judder during section resizes on 3DS and Wii.</li>
+<li>On 3DS, background texture may start to flashing. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/816">https://github.com/TheXTech/TheXTech/issues/816</a>) (Possibly solved, the primary reason of this is an out of memory).</li>
+<li>On 3DS the crash happens on attempt to quit by the home menu. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/738">https://github.com/TheXTech/TheXTech/issues/738</a>)</li>
+<li>On Windows 10 when running OpenGL with some ~2006 Intel iGPU on laptop, game would crash (possibly fixed).</li>
+<li>On Windows XP SP0 that uses <strong>S3 Savage 4</strong> video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to <a target="_blank" rel="noopener noreferrer" href="https://www.kv.by/forum/forum1000000590.htm">random talk of people from the 2000s</a> (in Russian) ).</li>
+<li>On Linux/Wayland, Window icon can't be changed while running game. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/939">https://github.com/TheXTech/TheXTech/issues/939</a>)</li>
+<li>On Linux/Wayland, Mouse cursor doesn't gets unlocked from window on toggling windowed mode after fullscreen. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/937">https://github.com/TheXTech/TheXTech/issues/937</a>)</li>
+<li>Editor doesn't supports large fonts (I.e. Chinese, Korean, etc). (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/884">https://github.com/TheXTech/TheXTech/issues/884</a>)</li>
+<li>At Web version (Emscripten-built) the framerate may go incorrectly. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/851">https://github.com/TheXTech/TheXTech/issues/851</a>)</li>
+<li>On some hardware, randomly and rare, alpha-channel might me messed up when using OpenGL render backend. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/743">https://github.com/TheXTech/TheXTech/issues/743</a>)</li>
+<li>The LunaDLL's timer gets overlapped with the medals tracker. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/1102">https://github.com/TheXTech/TheXTech/issues/1102</a>)</li>
+<li>On iOS devices (iPhone 6S and newer that has the Taptic Engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. To escape this problem it's need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/1189">https://github.com/TheXTech/TheXTech/issues/1189</a>)</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/moondust-devkit-config-pack-thextech-sdk-v1.7.4.1.zip" target="_blank" rel="noopener">⬇ moondust-devkit-config-pack-thextech-sdk-v1.7.4.1.zip · 1.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz · 33.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz · 33.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz · 33.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-macos.dmg" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-macos.dmg · 37.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-web.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-web.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-win-arm64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-win-arm64.7z · 26.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-win32.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-win32.7z · 28.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-win64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4.1-win64.7z · 28.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz · 43.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz · 43.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz · 44.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz · 43.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-macos.dmg" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-macos.dmg · 48.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-web.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-web.tar.gz · 41.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-win-arm64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-win-arm64.7z · 36.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-win32.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-win32.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-win64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4.1-win64.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-3ds-assets-aod-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-3ds-assets-aod-v1.7.4.1.zip · 58.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-3ds-assets-smbx13-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-3ds-assets-smbx13-v1.7.4.1.zip · 45.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-3ds-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-3ds-v1.7.4.1.zip · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-adventure-of-demo-assets-full-v1.7.4.1.7z" target="_blank" rel="noopener">thextech-adventure-of-demo-assets-full-v1.7.4.1.7z · 23.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-android-v1.7.4.1.apk" target="_blank" rel="noopener">thextech-android-v1.7.4.1.apk · 26.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-portmaster-v1.7.4.1-MD5.txt" target="_blank" rel="noopener">thextech-bin-portmaster-v1.7.4.1-MD5.txt · 56.0 B</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-portmaster-v1.7.4.1.tar.gz" target="_blank" rel="noopener">thextech-bin-portmaster-v1.7.4.1.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-arm64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-arm64.flatpak · 3.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u14.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u14.04-amd64.deb · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u14.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u14.04-i386.deb · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u16.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u16.04-amd64.deb · 5.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u16.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u16.04-armhf.deb · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u16.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u16.04-i386.deb · 6.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u18.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u18.04-amd64.deb · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u20.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u20.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u20.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u20.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u20.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u20.04-armhf.deb · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u22.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u22.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u22.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u22.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u24.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-u24.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-x86-64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.7.4.1-x86-64.flatpak · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-convert-kit-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-convert-kit-v1.7.4.1.zip · 7.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-full-src-v1.7.4.1.tar.bz2" target="_blank" rel="noopener">thextech-full-src-v1.7.4.1.tar.bz2 · 43.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-full-src-v1.7.4.1.tar.gz" target="_blank" rel="noopener">thextech-full-src-v1.7.4.1.tar.gz · 52.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-full-src-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-full-src-v1.7.4.1.zip · 60.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-game-aod-v1.7.4.1.deb" target="_blank" rel="noopener">thextech-game-aod-v1.7.4.1.deb · 23.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-game-smbx-1.3-v1.7.4.1.deb" target="_blank" rel="noopener">thextech-game-smbx-1.3-v1.7.4.1.deb · 36.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-game-template-v1.7.4.1-macOS.zip" target="_blank" rel="noopener">thextech-game-template-v1.7.4.1-macOS.zip · 11.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-haiku-r1beta6-x86_64-v1.7.4.1.hpkg" target="_blank" rel="noopener">thextech-haiku-r1beta6-x86_64-v1.7.4.1.hpkg · 4.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-ios12-arm64-v1.7.4.1.ipa" target="_blank" rel="noopener">thextech-ios12-arm64-v1.7.4.1.ipa · 3.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-ios9-armv7-v1.7.4.1.ipa" target="_blank" rel="noopener">thextech-ios9-armv7-v1.7.4.1.ipa · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-ios9-armv7s-v1.7.4.1.ipa" target="_blank" rel="noopener">thextech-ios9-armv7s-v1.7.4.1.ipa · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-i386.tar.gz · 5.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-i386.tar.gz · 5.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-win-arm64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-win-arm64.7z · 2.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-win32.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-win32.7z · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-win64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4.1-win64.7z · 4.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-sdl2-src-for-wii-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-sdl2-src-for-wii-v1.7.4.1.zip · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-sdl2-wiiu-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-sdl2-wiiu-v1.7.4.1.zip · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-smbx13-assets-full-v1.7.4.1.7z" target="_blank" rel="noopener">thextech-smbx13-assets-full-v1.7.4.1.7z · 33.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-switch-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-switch-v1.7.4.1.zip · 6.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-tvos-arm64-v1.7.4.1.ipa" target="_blank" rel="noopener">thextech-tvos-arm64-v1.7.4.1.ipa · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-vita-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-vita-v1.7.4.1.zip · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wii-assets-aod-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-wii-assets-aod-v1.7.4.1.zip · 20.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wii-assets-smbx13-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-wii-assets-smbx13-v1.7.4.1.zip · 28.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wii-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-wii-v1.7.4.1.zip · 3.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wiiu-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-wiiu-v1.7.4.1.zip · 10.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wiki-docs-v1.7.4.1.zip" target="_blank" rel="noopener">thextech-wiki-docs-v1.7.4.1.zip · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/VC_redist.arm64.exe" target="_blank" rel="noopener">VC_redist.arm64.exe · 6.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita khdays-vita v0.9.0 v0.9.0 ports install `khdays-vita-0.9.0.vpk` over the previous version with vitashell. saves and settings are
+kept.
+
+## new
+
+- **cutscenes with 3d on both screens** run at full speed: each screen keeps its own picture
+  instead of a gpu copy at every frame. the 3d stays at `render_scale`, and the dialogue box no
+  longer shakes.
+- **60 fps runs as fast as the gpu allows** (40-60 in heavy fights) instead of falling back to a
+  steady 30.
+- **mission mode enemy hp**: original (3x), 2.5x, 2x, 1.5x or story.
+
+## experimental
+
+- **single screen**:
+  - out of the field, scenes show the top screen alone in widescreen. when the bottom screen
+    plays something (a movie, sora&#x27;s 3d), it fades in centred over it at 70% size and half
+    opacity, and fades out when it ends.
+  - in the field, a new hud laid out for one screen: mission panel and hearts top left, enemy
+    health, map and sigils top right.
+  - more selection pages (mission confirmation, day list) use the world-and-list layout.
+- **widescreen hud at the edges** (`hud = 2`): item notices now move to the edges too.
+
+## fixed
+
+- **crash on day 255** (the scene that seats the party).
+
+## known issues
+
+- **60 fps bottleneck in single screen mode.** the new single screen compositing (the field hud
+  pieces, the panels and the 2d smoothing over the whole display) is heavy on the gpu: in busy
+  areas the 60 fps mode often stays around 30-40. two-screen layouts reach 60 more easily;
+  `filter_2d = 0` or `fps = 30` also help.
+- partner swap is experimental: the partner&#x27;s weapon model, combos and animations stay its own.
+- `debug = 1` measures the gpu once a second, which costs a frame each time: keep it at 0 to
+  play.
+- multiplayer is not available.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
+                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.9.0" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
+                      <div class="release-name">khdays-vita v0.9.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.9.0</span>
+                    <span>2026-10-18 17:00 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.7.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.7.0 → release v0.9.0</div>
+                  
+                  <div class="body markdown-body"><p>Install <code>khdays-vita-0.9.0.vpk</code> over the previous version with VitaShell. Saves and settings are
+kept.</p>
+<h2>New</h2>
+<ul>
+<li><strong>Cutscenes with 3D on both screens</strong> run at full speed: each screen keeps its own picture
+instead of a GPU copy at every frame. The 3D stays at <code>render_scale</code>, and the dialogue box no
+longer shakes.</li>
+<li><strong>60 fps runs as fast as the GPU allows</strong> (40-60 in heavy fights) instead of falling back to a
+steady 30.</li>
+<li><strong>Mission Mode enemy HP</strong>: Original (3x), 2.5x, 2x, 1.5x or Story.</li>
+</ul>
+<h2>Experimental</h2>
+<ul>
+<li><strong>Single screen</strong>:<ul>
+<li>Out of the field, scenes show the top screen alone in widescreen. When the bottom screen
+plays something (a movie, Sora's 3D), it fades in centred over it at 70% size and half
+opacity, and fades out when it ends.</li>
+<li>In the field, a new HUD laid out for one screen: mission panel and hearts top left, enemy
+health, map and sigils top right.</li>
+<li>More selection pages (mission confirmation, day list) use the world-and-list layout.</li>
+</ul>
+</li>
+<li><strong>Widescreen HUD at the edges</strong> (<code>hud = 2</code>): item notices now move to the edges too.</li>
+</ul>
+<h2>Fixed</h2>
+<ul>
+<li><strong>Crash on day 255</strong> (the scene that seats the party).</li>
+</ul>
+<h2>Known issues</h2>
+<ul>
+<li><strong>60 fps bottleneck in single screen mode.</strong> The new single screen compositing (the field HUD
+pieces, the panels and the 2D smoothing over the whole display) is heavy on the GPU: in busy
+areas the 60 fps mode often stays around 30-40. Two-screen layouts reach 60 more easily;
+<code>filter_2d = 0</code> or <code>fps = 30</code> also help.</li>
+<li>Partner swap is experimental: the partner's weapon model, combos and animations stay its own.</li>
+<li><code>debug = 1</code> measures the GPU once a second, which costs a frame each time: keep it at 0 to
+play.</li>
+<li>Multiplayer is not available.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.9.0/khdays-vita-0.9.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-0.9.0.vpk · 3.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4218">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -233,14 +491,150 @@
                   </div>
                   <div class="meta">
                     <span class="tag">continuous</span>
-                    <span>2026-10-18 12:25 UTC</span>
+                    <span>2026-10-18 15:48 UTC</span>
                     <span class="catalog-version">PSVitaAlive: v.continuous</span>
                   </div>
                   <div class="catalog-detail">PSVitaAlive v.continuous</div>
                   
                   <div class="body markdown-body"><p>buildnum 4218</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 10.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="real racing 3 real racing 3 chuta7x/real-racing-3-port-release real racing 3 updt 3.6.1 update3.6.1 ports # real racing 3 v3.6.1 — vita edition
+
+**🇪🇸 español** · [english below](#-english)
+
+actualización de corrección de la v3.6.0.
+
+### 🔧 arreglos
+- **eventos con vídeo de presentación (como le mans):** ya no se quedan en pantalla negra. el vídeo se salta y el evento se abre con normalidad.
+- **configurador → pestaña actualizar:** vuelven a aparecer **buscar actualizaciones** y **avisar de versiones nuevas**. en la v3.6.0 esas filas salían con otros nombres y no funcionaban.
+
+### 🔄 cómo actualizar
+- **si tienes la v3.6.0:** no tienes que hacer nada. el juego busca solo y te avisa al abrirlo; puede tardar hasta un día.
+  - ¿la quieres ya? en vitashell renombra `ux0:data/rr3360/actualizacion.txt` (por ejemplo a `actualizacion_vieja.txt`). luego abre el juego con wifi, espera un minuto en el menú, ciérralo y vuelve a abrirlo.
+- **si tienes la public beta 2.0.0 (1.4.0):** te llega directamente la v3.6.1, con todo lo nuevo de la 3.6.0.
+  1. la consola se reinicia una vez.
+  2. al abrir el juego, descarga de archive.org los datos que faltan (unos 1,6 gb).
+  3. tu partida se conserva.
+- **instalación manual:**
+  - `rr3_v3.6.1_reemplaza_la_1.4.0.vpk` sustituye a la 1.4.0.
+  - `rr3_v3.6.1_junto_a_la_1.4.0.vpk` se instala aparte, sin tocar la 1.4.0.
+
+todas las novedades de la 3.6.0 (coches, circuitos, modo libre, cámaras, gráficos, 12 idiomas, configurador y actualizador) están en la release **v3.6.0**.
+
+ningún archivo de ea incluido. real racing 3 es propiedad de electronic arts.
+
+☕ ¿te gusta el port? ayúdame a llegar a la meta para una ps vita nueva: https://buymeacoffee.com/chuta7x
+
+---
+
+## 🇬🇧 english
+
+bug-fix update for v3.6.0.
+
+### 🔧 fixes
+- **events with an intro video (such as le mans):** they no longer get stuck on a black screen. the video is skipped and the event opens normally.
+- **configurator → update tab:** **check for updates** and **notify about new versions** are back. in v3.6.0 those rows showed other names and did not work.
+
+### 🔄 how to update
+- **if you have v3.6.0:** nothing to do. the game checks by itself and tells you when you open it; it can take up to a day.
+  - want it now? in vitashell rename `ux0:data/rr3360/actualizacion.txt` (e.g. to `actualizacion_vieja.txt`). then open the game with wi-fi, wait one minute in the menu, close it and open it again.
+- **if you have public beta 2.0.0 (1.4.0):** you get v3.6.1 directly, with everything new from 3.6.0.
+  1. the console restarts once.
+  2. when you open the game, it downloads the missing data from archive.org (about 1.6 gb).
+  3. your save is kept.
+- **manual install:**
+  - `rr3_v3.6.1_reemplaza_la_1.4.0.vpk` replaces 1.4.0.
+  - `rr3_v3.6.1_junto_a_la_1.4.0.vpk` installs separately, without touching 1.4.0.
+
+all of 3.6.0&#x27;s new features (cars, tracks, free mode, cameras, graphics, 12 languages, configurator and updater) are listed in the **v3.6.0** release.
+
+no ea files included. real racing 3 is owned by electronic arts.
+
+☕ enjoying the port? help me reach my goal for a new ps vita: https://buymeacoffee.com/chuta7x">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/real-racing-3-port-for-ps-vita/icon0.png" alt="Icono de Real Racing 3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · CHUTA7X/Real-Racing-3-Port-Release</div>
+                      <h2><a href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/tag/Update3.6.1" target="_blank" rel="noopener">Real Racing 3</a></h2>
+                      <div class="release-name">Real Racing 3 Updt 3.6.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">Update3.6.1</span>
+                    <span>2026-10-18 15:22 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.1 → release Update3.6.1</div>
+                  
+                  <div class="body markdown-body"><h1>Real Racing 3 v3.6.1 — Vita Edition</h1>
+<p><strong>🇪🇸 Español</strong> · <a target="_blank" rel="noopener noreferrer" href="#-english">English below</a></p>
+<p>Actualización de corrección de la v3.6.0.</p>
+<h3>🔧 Arreglos</h3>
+<ul>
+<li><strong>Eventos con vídeo de presentación (como Le Mans):</strong> ya no se quedan en pantalla negra. El vídeo se salta y el evento se abre con normalidad.</li>
+<li><strong>Configurador → pestaña ACTUALIZAR:</strong> vuelven a aparecer <strong>Buscar actualizaciones</strong> y <strong>Avisar de versiones nuevas</strong>. En la v3.6.0 esas filas salían con otros nombres y no funcionaban.</li>
+</ul>
+<h3>🔄 Cómo actualizar</h3>
+<ul>
+<li><strong>Si tienes la v3.6.0:</strong> no tienes que hacer nada. El juego busca solo y te avisa al abrirlo; puede tardar hasta un día.<ul>
+<li>¿La quieres ya? En VitaShell renombra <code>ux0:data/RR3360/actualizacion.txt</code> (por ejemplo a <code>actualizacion_vieja.txt</code>). Luego abre el juego con wifi, espera un minuto en el menú, ciérralo y vuelve a abrirlo.</li>
+</ul>
+</li>
+<li><strong>Si tienes la Public Beta 2.0.0 (1.4.0):</strong> te llega directamente la v3.6.1, con todo lo nuevo de la 3.6.0.<ol>
+<li>La consola se reinicia una vez.</li>
+<li>Al abrir el juego, descarga de archive.org los datos que faltan (unos 1,6 GB).</li>
+<li>Tu partida se conserva.</li>
+</ol>
+</li>
+<li><strong>Instalación manual:</strong><ul>
+<li><code>RR3_v3.6.1_reemplaza_la_1.4.0.vpk</code> sustituye a la 1.4.0.</li>
+<li><code>RR3_v3.6.1_junto_a_la_1.4.0.vpk</code> se instala aparte, sin tocar la 1.4.0.</li>
+</ul>
+</li>
+</ul>
+<p>Todas las novedades de la 3.6.0 (coches, circuitos, modo libre, cámaras, gráficos, 12 idiomas, configurador y actualizador) están en la release <strong>v3.6.0</strong>.</p>
+<p>Ningún archivo de EA incluido. Real Racing 3 es propiedad de Electronic Arts.</p>
+<p>☕ ¿Te gusta el port? Ayúdame a llegar a la meta para una PS Vita nueva: <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a></p>
+<hr>
+<h2>🇬🇧 English</h2>
+<p>Bug-fix update for v3.6.0.</p>
+<h3>🔧 Fixes</h3>
+<ul>
+<li><strong>Events with an intro video (such as Le Mans):</strong> they no longer get stuck on a black screen. The video is skipped and the event opens normally.</li>
+<li><strong>Configurator → UPDATE tab:</strong> <strong>Check for updates</strong> and <strong>Notify about new versions</strong> are back. In v3.6.0 those rows showed other names and did not work.</li>
+</ul>
+<h3>🔄 How to update</h3>
+<ul>
+<li><strong>If you have v3.6.0:</strong> nothing to do. The game checks by itself and tells you when you open it; it can take up to a day.<ul>
+<li>Want it now? In VitaShell rename <code>ux0:data/RR3360/actualizacion.txt</code> (e.g. to <code>actualizacion_vieja.txt</code>). Then open the game with Wi-Fi, wait one minute in the menu, close it and open it again.</li>
+</ul>
+</li>
+<li><strong>If you have Public Beta 2.0.0 (1.4.0):</strong> you get v3.6.1 directly, with everything new from 3.6.0.<ol>
+<li>The console restarts once.</li>
+<li>When you open the game, it downloads the missing data from archive.org (about 1.6 GB).</li>
+<li>Your save is kept.</li>
+</ol>
+</li>
+<li><strong>Manual install:</strong><ul>
+<li><code>RR3_v3.6.1_reemplaza_la_1.4.0.vpk</code> replaces 1.4.0.</li>
+<li><code>RR3_v3.6.1_junto_a_la_1.4.0.vpk</code> installs separately, without touching 1.4.0.</li>
+</ul>
+</li>
+</ul>
+<p>All of 3.6.0's new features (cars, tracks, free mode, cameras, graphics, 12 languages, configurator and updater) are listed in the <strong>v3.6.0</strong> release.</p>
+<p>No EA files included. Real Racing 3 is owned by Electronic Arts.</p>
+<p>☕ Enjoying the port? Help me reach my goal for a new PS Vita: <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.1/RR3_v3.6.1_junto_a_la_1.4.0.vpk" target="_blank" rel="noopener">⬇ RR3_v3.6.1_junto_a_la_1.4.0.vpk · 8.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.1/configurador.bin" target="_blank" rel="noopener">configurador.bin · 3.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.1/eboot.bin" target="_blank" rel="noopener">eboot.bin · 1.5 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.1/RR3_v3.6.1_reemplaza_la_1.4.0.vpk" target="_blank" rel="noopener">RR3_v3.6.1_reemplaza_la_1.4.0.vpk · 8.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.1/rr3_version_7.txt" target="_blank" rel="noopener">rr3_version_7.txt · 1.0 KB</a></div>
                 </div>
               </div>
             </article>
@@ -655,404 +1049,6 @@ before installing, ensure your ps vita has:
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Inotia3-vita/releases/download/1.02/inotia3.vpk" target="_blank" rel="noopener">⬇ inotia3.vpk · 1.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="real racing 3 real racing 3 chuta7x/real-racing-3-port-release real racing 3 vita edition v3.6.0  release ports # real racing 3 v3.6.0 — vita edition
-
-**🇪🇸 español** · [english below](#-english)
-
-el port da el salto de la **1.4.0 a la 3.6.0**: mucho más contenido oficial, un modo libre, cámaras nuevas, mejores gráficos y rendimiento, 12 idiomas, y un configurador y un actualizador propios.
-
-### 🏁 contenido oficial nuevo
-- **de 82 a 128 coches** y **de 11 a 16 circuitos**.
-- **circuitos nuevos:** le mans, monza, nürburgring, richmond (óvalo nascar) y porsche leipzig.
-- **marcas nuevas:** aston martin, maserati, renault, toyota, hyundai, ariel, caterham, ktm y spada.
-- **algunos de los coches:**
-  - ferrari f40, enzo y laferrari, y tres fórmula 1 de ferrari.
-  - lamborghini miura, countach y veneno.
-  - mclaren p1, porsche 918 spyder y bugatti veyron vitesse.
-  - prototipos de le mans (porsche 919, audi r18, toyota ts040) y los nascar.
-
-### 🆓 modo libre (nuevo)
-- pulsa **select** en los menús y aparece **modo libre: sí**.
-- cualquier carrera de copa se corre **solo, sin rivales y a 20 vueltas**, en la pista de ese evento.
-- ideal para practicar, probar coches o grabar vídeos. otro select lo apaga.
-
-### 🎥 cámaras nuevas
-- **persecución con el stick derecho:**
-  - izquierda y derecha giran alrededor del coche hasta verlo de frente, y la cámara vuelve sola al soltar;
-  - arriba y abajo eligen entre **5 distancias**, que quedan guardadas.
-- **cabina:** gira la cabeza con el stick derecho, hasta 80° a cada lado.
-- los **rivales se ven en los retrovisores** de la cabina.
-
-### ✨ mejoras gráficas y de rendimiento
-- el juego usa **dos núcleos** de la vita: uno juega y el otro dibuja.
-- **perfil ps vita:** 30 fps estables en carrera y **menús a 60**. el perfil **rendimiento** apunta a 60.
-- **suavizado fxaa** y **resolución dinámica** opcional.
-- **reflejos de los coches** más ligeros, con la opción de brillo simple.
-- **vinilos** visibles en tu coche.
-- **daños a la vista** opcionales: más visibles ×2 o ×3, sin cambiar cómo se conduce.
-- **línea de trazada** sobre la pista: verde, amarilla o roja según haya que frenar.
-- **contador de fps** propio.
-- **cargas mucho más rápidas** (arranque de 71 a 45 s; entrada al menú de 44 a 18 s) y menos tirones en carrera.
-- juego **sin conexión**: misiones de la historia accesibles, mejoras sin esperas y sin avisos de «conéctate».
-
-### 🌍 12 idiomas
-- **disponibles:** español, inglés, francés, italiano, alemán, portugués, neerlandés, ruso, japonés, coreano, chino simplificado y chino tradicional.
-- el juego y el configurador **detectan solos el idioma de la consola**; también se puede elegir a mano.
-
-### ⚙️ configurador
-botón **configurar** en la livearea (o select mantenido al arrancar):
-- **gráficos:**
-  - perfiles ps vita, rendimiento, equilibrado, alto y personalizado;
-  - resolución, tope de fps, fxaa, reflejos, daños, trazada, coches por carrera y contador de fps.
-- **detalle:** cada parte del perfil personalizado.
-- **mando:**
-  - distribución a, b o personalizada;
-  - sensibilidad, zona muerta, invertir e inclinación.
-- **sonido:** volumen del motor de tu coche.
-- **actualizar:** buscar versiones nuevas y elegir si te avisa.
-- **sistema:**
-  - **nombre del piloto** con el teclado de la vita, en lugar de «invitado»;
-  - idioma;
-  - desinstalar.
-
-### 🔄 actualizador
-- el juego busca versiones nuevas en github (una vez al día o desde **actualizar**) y las instala solo. cada archivo se comprueba con sha-256.
-- **desde la 1.4.0 (public beta 2.0.0)** esta versión llega como actualización:
-  1. acepta y se completa la instalación.
-  2. pulsa ✕ para reiniciar la consola una vez.
-  3. al abrir el juego, baja de archive.org los datos que faltan: **~1,6 gb** desde la 1.4.0 o ~2,2 gb desde cero.
-- la descarga:
-  - va por 4 conexiones y se reanuda sola si se cae;
-  - se puede parar y seguir otro día;
-  - **tu partida se conserva**.
-- deja el cargador puesto: la pantalla se atenúa, pero la consola no se suspende.
-
-### 📦 instalación
-- **tienes la public beta 2.0.0:** no hace falta nada. abre el juego o ve a configurar → actualizar → buscar actualizaciones.
-- **`rr3_v3.6.0_reemplaza_la_1.4.0.vpk`:** convierte tu 1.4.0 en la 3.6.0, aprovechando sus datos y tu partida.
-- **`rr3_v3.6.0_junto_a_la_1.4.0.vpk`:** instala la 3.6.0 aparte («rr3 v3.6.0») sin tocar la 1.4.0. necesitas ~3,2 gb libres de más.
-
-### ⚠️ ten en cuenta
-- el primer arranque prepara los shaders y tarda varios minutos, solo esa vez.
-- no hay funciones en línea: multijugador, torneos, tienda ni nube.
-- ningún vpk incluye archivos de ea. real racing 3 es propiedad de electronic arts.
-
-☕ **¿te gusta el port?** ayúdame a llegar a la meta para una ps vita nueva: https://buymeacoffee.com/chuta7x
-
----
-
-## 🇬🇧 english
-
-the port jumps from **1.4.0 to 3.6.0**: lots more official content, a free mode, new cameras, better graphics and performance, 12 languages, and its own configurator and updater.
-
-### 🏁 new official content
-- **from 82 to 128 cars** and **from 11 to 16 tracks**.
-- **new tracks:** le mans, monza, nürburgring, richmond (nascar oval) and porsche leipzig.
-- **new brands:** aston martin, maserati, renault, toyota, hyundai, ariel, caterham, ktm and spada.
-- **some of the cars:**
-  - ferrari f40, enzo and laferrari, plus three ferrari formula 1 cars.
-  - lamborghini miura, countach and veneno.
-  - mclaren p1, porsche 918 spyder and bugatti veyron vitesse.
-  - le mans prototypes (porsche 919, audi r18, toyota ts040) and the nascars.
-
-### 🆓 free mode (new)
-- press **select** in the menus and **free mode: on** appears.
-- any cup race is then driven **alone, with no opponents, over 20 laps**, on that event&#x27;s track.
-- great for practice, trying cars or recording videos. press select again to turn it off.
-
-### 🎥 new cameras
-- **chase camera on the right stick:**
-  - left and right orbit around the car until you see its front, and the camera returns when released;
-  - up and down choose between **5 distances**, which are saved.
-- **cockpit:** turn your head with the right stick, up to 80° each way.
-- **opponents show up in the cockpit mirrors.**
-
-### ✨ graphics and performance
-- the game uses **two of the vita&#x27;s cores**: one runs the game, the other draws.
-- **ps vita profile:** stable 30 fps in races and **menus at 60**. the **performance** profile aims for 60.
-- **fxaa anti-aliasing** and optional **dynamic resolution**.
-- lighter **car reflections**, with a simple-gloss option.
-- **vinyls** now show on your car.
-- optional **visible damage**: ×2 or ×3 more visible, without changing how the car drives.
-- **racing line** on the track: green, yellow or red depending on when to brake.
-- built-in **fps counter**.
-- **much faster loading** (boot from 71 to 45 s; menu entry from 44 to 18 s) and less stutter in races.
-- **offline play**: story missions available, upgrades with no waiting, and no &quot;please connect&quot; prompts.
-
-### 🌍 12 languages
-- **available:** spanish, english, french, italian, german, portuguese, dutch, russian, japanese, korean, simplified chinese and traditional chinese.
-- the game and the configurator **detect your console&#x27;s language automatically**; you can also pick one by hand.
-
-### ⚙️ configurator
-**configure** button in the livearea (or hold select at boot):
-- **graphics:**
-  - ps vita, performance, balanced, high and custom profiles;
-  - resolution, fps limit, fxaa, reflections, damage, racing line, cars per race and fps counter.
-- **detail:** every part of the custom profile.
-- **controls:**
-  - layout a, b or custom;
-  - sensitivity, dead zone, invert and tilt.
-- **sound:** your car&#x27;s engine volume.
-- **update:** check for new versions and choose whether to be notified.
-- **system:**
-  - **driver name** with the vita keyboard, instead of &quot;guest&quot;;
-  - language;
-  - uninstall.
-
-### 🔄 updater
-- the game checks github for new versions (once a day or from **update**) and installs them by itself. every file is verified with sha-256.
-- **from 1.4.0 (public beta 2.0.0)** this version arrives as an update:
-  1. accept it and the installation completes.
-  2. press ✕ to restart the console once.
-  3. when you open the game, it downloads the missing data from archive.org: **~1.6 gb** from 1.4.0, or ~2.2 gb from scratch.
-- the download:
-  - uses 4 connections and resumes by itself if it drops;
-  - can be stopped and continued another day;
-  - **keeps your save**.
-- keep the charger plugged in: the screen dims, but the console does not go to sleep.
-
-### 📦 installation
-- **you have public beta 2.0.0:** nothing to do. open the game or go to configure → update → check for updates.
-- **`rr3_v3.6.0_reemplaza_la_1.4.0.vpk`** (replaces 1.4.0): turns your 1.4.0 into 3.6.0, reusing its data and your save.
-- **`rr3_v3.6.0_junto_a_la_1.4.0.vpk`** (next to 1.4.0): installs 3.6.0 separately (&quot;rr3 v3.6.0&quot;) without touching 1.4.0. you need ~3.2 gb of extra free space.
-
-### ⚠️ please note
-- the first launch prepares the shaders and takes several minutes, only that one time.
-- there are no online features: multiplayer, tournaments, store or cloud.
-- no vpk includes ea files. real racing 3 is owned by electronic arts.
-
-☕ **enjoying the port?** help me reach my goal for a new ps vita: https://buymeacoffee.com/chuta7x">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/real-racing-3-port-for-ps-vita/icon0.png" alt="Icono de Real Racing 3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · CHUTA7X/Real-Racing-3-Port-Release</div>
-                      <h2><a href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/tag/Release" target="_blank" rel="noopener">Real Racing 3</a></h2>
-                      <div class="release-name">Real Racing 3 Vita Edition v3.6.0 </div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">Release</span>
-                    <span>2026-10-18 04:13 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.1 → release Release</div>
-                  
-                  <div class="body markdown-body"><h1>Real Racing 3 v3.6.0 — Vita Edition</h1>
-<p><strong>🇪🇸 Español</strong> · <a target="_blank" rel="noopener noreferrer" href="#-english">English below</a></p>
-<p>El port da el salto de la <strong>1.4.0 a la 3.6.0</strong>: mucho más contenido oficial, un modo libre, cámaras nuevas, mejores gráficos y rendimiento, 12 idiomas, y un configurador y un actualizador propios.</p>
-<h3>🏁 Contenido oficial nuevo</h3>
-<ul>
-<li><strong>De 82 a 128 coches</strong> y <strong>de 11 a 16 circuitos</strong>.</li>
-<li><strong>Circuitos nuevos:</strong> Le Mans, Monza, Nürburgring, Richmond (óvalo NASCAR) y Porsche Leipzig.</li>
-<li><strong>Marcas nuevas:</strong> Aston Martin, Maserati, Renault, Toyota, Hyundai, Ariel, Caterham, KTM y Spada.</li>
-<li><strong>Algunos de los coches:</strong><ul>
-<li>Ferrari F40, Enzo y LaFerrari, y tres Fórmula 1 de Ferrari.</li>
-<li>Lamborghini Miura, Countach y Veneno.</li>
-<li>McLaren P1, Porsche 918 Spyder y Bugatti Veyron Vitesse.</li>
-<li>Prototipos de Le Mans (Porsche 919, Audi R18, Toyota TS040) y los NASCAR.</li>
-</ul>
-</li>
-</ul>
-<h3>🆓 Modo libre (nuevo)</h3>
-<ul>
-<li>Pulsa <strong>SELECT</strong> en los menús y aparece <strong>MODO LIBRE: SÍ</strong>.</li>
-<li>Cualquier carrera de copa se corre <strong>solo, sin rivales y a 20 vueltas</strong>, en la pista de ese evento.</li>
-<li>Ideal para practicar, probar coches o grabar vídeos. Otro SELECT lo apaga.</li>
-</ul>
-<h3>🎥 Cámaras nuevas</h3>
-<ul>
-<li><strong>Persecución con el stick derecho:</strong><ul>
-<li>izquierda y derecha giran alrededor del coche hasta verlo de frente, y la cámara vuelve sola al soltar;</li>
-<li>arriba y abajo eligen entre <strong>5 distancias</strong>, que quedan guardadas.</li>
-</ul>
-</li>
-<li><strong>Cabina:</strong> gira la cabeza con el stick derecho, hasta 80° a cada lado.</li>
-<li>Los <strong>rivales se ven en los retrovisores</strong> de la cabina.</li>
-</ul>
-<h3>✨ Mejoras gráficas y de rendimiento</h3>
-<ul>
-<li>El juego usa <strong>dos núcleos</strong> de la Vita: uno juega y el otro dibuja.</li>
-<li><strong>Perfil PS Vita:</strong> 30 FPS estables en carrera y <strong>menús a 60</strong>. El perfil <strong>Rendimiento</strong> apunta a 60.</li>
-<li><strong>Suavizado FXAA</strong> y <strong>resolución dinámica</strong> opcional.</li>
-<li><strong>Reflejos de los coches</strong> más ligeros, con la opción de brillo simple.</li>
-<li><strong>Vinilos</strong> visibles en tu coche.</li>
-<li><strong>Daños a la vista</strong> opcionales: más visibles ×2 o ×3, sin cambiar cómo se conduce.</li>
-<li><strong>Línea de trazada</strong> sobre la pista: verde, amarilla o roja según haya que frenar.</li>
-<li><strong>Contador de FPS</strong> propio.</li>
-<li><strong>Cargas mucho más rápidas</strong> (arranque de 71 a 45 s; entrada al menú de 44 a 18 s) y menos tirones en carrera.</li>
-<li>Juego <strong>sin conexión</strong>: misiones de la historia accesibles, mejoras sin esperas y sin avisos de «conéctate».</li>
-</ul>
-<h3>🌍 12 idiomas</h3>
-<ul>
-<li><strong>Disponibles:</strong> español, inglés, francés, italiano, alemán, portugués, neerlandés, ruso, japonés, coreano, chino simplificado y chino tradicional.</li>
-<li>El juego y el configurador <strong>detectan solos el idioma de la consola</strong>; también se puede elegir a mano.</li>
-</ul>
-<h3>⚙️ Configurador</h3>
-<p>Botón <strong>CONFIGURAR</strong> en la LiveArea (o SELECT mantenido al arrancar):</p>
-<ul>
-<li><strong>GRÁFICOS:</strong><ul>
-<li>perfiles PS Vita, Rendimiento, Equilibrado, Alto y Personalizado;</li>
-<li>resolución, tope de FPS, FXAA, reflejos, daños, trazada, coches por carrera y contador de FPS.</li>
-</ul>
-</li>
-<li><strong>DETALLE:</strong> cada parte del perfil Personalizado.</li>
-<li><strong>MANDO:</strong><ul>
-<li>distribución A, B o personalizada;</li>
-<li>sensibilidad, zona muerta, invertir e inclinación.</li>
-</ul>
-</li>
-<li><strong>SONIDO:</strong> volumen del motor de tu coche.</li>
-<li><strong>ACTUALIZAR:</strong> buscar versiones nuevas y elegir si te avisa.</li>
-<li><strong>SISTEMA:</strong><ul>
-<li><strong>nombre del piloto</strong> con el teclado de la Vita, en lugar de «Invitado»;</li>
-<li>idioma;</li>
-<li>desinstalar.</li>
-</ul>
-</li>
-</ul>
-<h3>🔄 Actualizador</h3>
-<ul>
-<li>El juego busca versiones nuevas en GitHub (una vez al día o desde <strong>ACTUALIZAR</strong>) y las instala solo. Cada archivo se comprueba con SHA-256.</li>
-<li><strong>Desde la 1.4.0 (Public Beta 2.0.0)</strong> esta versión llega como actualización:<ol>
-<li>Acepta y se completa la instalación.</li>
-<li>Pulsa ✕ para reiniciar la consola una vez.</li>
-<li>Al abrir el juego, baja de archive.org los datos que faltan: <strong>~1,6 GB</strong> desde la 1.4.0 o ~2,2 GB desde cero.</li>
-</ol>
-</li>
-<li>La descarga:<ul>
-<li>va por 4 conexiones y se reanuda sola si se cae;</li>
-<li>se puede parar y seguir otro día;</li>
-<li><strong>tu partida se conserva</strong>.</li>
-</ul>
-</li>
-<li>Deja el cargador puesto: la pantalla se atenúa, pero la consola no se suspende.</li>
-</ul>
-<h3>📦 Instalación</h3>
-<ul>
-<li><strong>Tienes la Public Beta 2.0.0:</strong> no hace falta nada. Abre el juego o ve a CONFIGURAR → ACTUALIZAR → Buscar actualizaciones.</li>
-<li><strong><code>RR3_v3.6.0_reemplaza_la_1.4.0.vpk</code>:</strong> convierte tu 1.4.0 en la 3.6.0, aprovechando sus datos y tu partida.</li>
-<li><strong><code>RR3_v3.6.0_junto_a_la_1.4.0.vpk</code>:</strong> instala la 3.6.0 aparte («RR3 v3.6.0») sin tocar la 1.4.0. Necesitas ~3,2 GB libres de más.</li>
-</ul>
-<h3>⚠️ Ten en cuenta</h3>
-<ul>
-<li>El primer arranque prepara los shaders y tarda varios minutos, solo esa vez.</li>
-<li>No hay funciones en línea: multijugador, torneos, tienda ni nube.</li>
-<li>Ningún VPK incluye archivos de EA. Real Racing 3 es propiedad de Electronic Arts.</li>
-</ul>
-<p>☕ <strong>¿Te gusta el port?</strong> Ayúdame a llegar a la meta para una PS Vita nueva: <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a></p>
-<hr>
-<h2>🇬🇧 English</h2>
-<p>The port jumps from <strong>1.4.0 to 3.6.0</strong>: lots more official content, a free mode, new cameras, better graphics and performance, 12 languages, and its own configurator and updater.</p>
-<h3>🏁 New official content</h3>
-<ul>
-<li><strong>From 82 to 128 cars</strong> and <strong>from 11 to 16 tracks</strong>.</li>
-<li><strong>New tracks:</strong> Le Mans, Monza, Nürburgring, Richmond (NASCAR oval) and Porsche Leipzig.</li>
-<li><strong>New brands:</strong> Aston Martin, Maserati, Renault, Toyota, Hyundai, Ariel, Caterham, KTM and Spada.</li>
-<li><strong>Some of the cars:</strong><ul>
-<li>Ferrari F40, Enzo and LaFerrari, plus three Ferrari Formula 1 cars.</li>
-<li>Lamborghini Miura, Countach and Veneno.</li>
-<li>McLaren P1, Porsche 918 Spyder and Bugatti Veyron Vitesse.</li>
-<li>Le Mans prototypes (Porsche 919, Audi R18, Toyota TS040) and the NASCARs.</li>
-</ul>
-</li>
-</ul>
-<h3>🆓 Free mode (new)</h3>
-<ul>
-<li>Press <strong>SELECT</strong> in the menus and <strong>FREE MODE: ON</strong> appears.</li>
-<li>Any cup race is then driven <strong>alone, with no opponents, over 20 laps</strong>, on that event's track.</li>
-<li>Great for practice, trying cars or recording videos. Press SELECT again to turn it off.</li>
-</ul>
-<h3>🎥 New cameras</h3>
-<ul>
-<li><strong>Chase camera on the right stick:</strong><ul>
-<li>left and right orbit around the car until you see its front, and the camera returns when released;</li>
-<li>up and down choose between <strong>5 distances</strong>, which are saved.</li>
-</ul>
-</li>
-<li><strong>Cockpit:</strong> turn your head with the right stick, up to 80° each way.</li>
-<li><strong>Opponents show up in the cockpit mirrors.</strong></li>
-</ul>
-<h3>✨ Graphics and performance</h3>
-<ul>
-<li>The game uses <strong>two of the Vita's cores</strong>: one runs the game, the other draws.</li>
-<li><strong>PS Vita profile:</strong> stable 30 FPS in races and <strong>menus at 60</strong>. The <strong>Performance</strong> profile aims for 60.</li>
-<li><strong>FXAA anti-aliasing</strong> and optional <strong>dynamic resolution</strong>.</li>
-<li>Lighter <strong>car reflections</strong>, with a simple-gloss option.</li>
-<li><strong>Vinyls</strong> now show on your car.</li>
-<li>Optional <strong>visible damage</strong>: ×2 or ×3 more visible, without changing how the car drives.</li>
-<li><strong>Racing line</strong> on the track: green, yellow or red depending on when to brake.</li>
-<li>Built-in <strong>FPS counter</strong>.</li>
-<li><strong>Much faster loading</strong> (boot from 71 to 45 s; menu entry from 44 to 18 s) and less stutter in races.</li>
-<li><strong>Offline play</strong>: story missions available, upgrades with no waiting, and no &quot;please connect&quot; prompts.</li>
-</ul>
-<h3>🌍 12 languages</h3>
-<ul>
-<li><strong>Available:</strong> Spanish, English, French, Italian, German, Portuguese, Dutch, Russian, Japanese, Korean, Simplified Chinese and Traditional Chinese.</li>
-<li>The game and the configurator <strong>detect your console's language automatically</strong>; you can also pick one by hand.</li>
-</ul>
-<h3>⚙️ Configurator</h3>
-<p><strong>CONFIGURE</strong> button in the LiveArea (or hold SELECT at boot):</p>
-<ul>
-<li><strong>GRAPHICS:</strong><ul>
-<li>PS Vita, Performance, Balanced, High and Custom profiles;</li>
-<li>resolution, FPS limit, FXAA, reflections, damage, racing line, cars per race and FPS counter.</li>
-</ul>
-</li>
-<li><strong>DETAIL:</strong> every part of the Custom profile.</li>
-<li><strong>CONTROLS:</strong><ul>
-<li>layout A, B or custom;</li>
-<li>sensitivity, dead zone, invert and tilt.</li>
-</ul>
-</li>
-<li><strong>SOUND:</strong> your car's engine volume.</li>
-<li><strong>UPDATE:</strong> check for new versions and choose whether to be notified.</li>
-<li><strong>SYSTEM:</strong><ul>
-<li><strong>driver name</strong> with the Vita keyboard, instead of &quot;Guest&quot;;</li>
-<li>language;</li>
-<li>uninstall.</li>
-</ul>
-</li>
-</ul>
-<h3>🔄 Updater</h3>
-<ul>
-<li>The game checks GitHub for new versions (once a day or from <strong>UPDATE</strong>) and installs them by itself. Every file is verified with SHA-256.</li>
-<li><strong>From 1.4.0 (Public Beta 2.0.0)</strong> this version arrives as an update:<ol>
-<li>Accept it and the installation completes.</li>
-<li>Press ✕ to restart the console once.</li>
-<li>When you open the game, it downloads the missing data from archive.org: <strong>~1.6 GB</strong> from 1.4.0, or ~2.2 GB from scratch.</li>
-</ol>
-</li>
-<li>The download:<ul>
-<li>uses 4 connections and resumes by itself if it drops;</li>
-<li>can be stopped and continued another day;</li>
-<li><strong>keeps your save</strong>.</li>
-</ul>
-</li>
-<li>Keep the charger plugged in: the screen dims, but the console does not go to sleep.</li>
-</ul>
-<h3>📦 Installation</h3>
-<ul>
-<li><strong>You have Public Beta 2.0.0:</strong> nothing to do. Open the game or go to CONFIGURE → UPDATE → Check for updates.</li>
-<li><strong><code>RR3_v3.6.0_reemplaza_la_1.4.0.vpk</code></strong> (replaces 1.4.0): turns your 1.4.0 into 3.6.0, reusing its data and your save.</li>
-<li><strong><code>RR3_v3.6.0_junto_a_la_1.4.0.vpk</code></strong> (next to 1.4.0): installs 3.6.0 separately (&quot;RR3 v3.6.0&quot;) without touching 1.4.0. You need ~3.2 GB of extra free space.</li>
-</ul>
-<h3>⚠️ Please note</h3>
-<ul>
-<li>The first launch prepares the shaders and takes several minutes, only that one time.</li>
-<li>There are no online features: multiplayer, tournaments, store or cloud.</li>
-<li>No VPK includes EA files. Real Racing 3 is owned by Electronic Arts.</li>
-</ul>
-<p>☕ <strong>Enjoying the port?</strong> Help me reach my goal for a new PS Vita: <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Release/RR3_v3.6.0.sola.vpk" target="_blank" rel="noopener">⬇ RR3_v3.6.0.sola.vpk · 8.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Release/configurador.bin" target="_blank" rel="noopener">configurador.bin · 3.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Release/eboot.bin" target="_blank" rel="noopener">eboot.bin · 1.5 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Release/RR3_v3.6.0_reemplaza_la_1.4.0.vpk" target="_blank" rel="noopener">RR3_v3.6.0_reemplaza_la_1.4.0.vpk · 8.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Release/rr3_version_6.txt" target="_blank" rel="noopener">rr3_version_6.txt · 1003.0 B</a></div>
                 </div>
               </div>
             </article>
@@ -1927,133 +1923,6 @@ cd mkwiita
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.3.0/mkw.vpk" target="_blank" rel="noopener">⬇ mkw.vpk · 2.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita khdays-vita v0.8.0 v0.8.0 ports install `khdays-vita-0.8.0.vpk` over the previous version with vitashell. saves and settings are
-kept.
-
-## new
-
-- **screen layout &quot;left&quot;**: one screen 4:3 on the left over the full height, the other small
-  beside it (`layout = left` / `left_bottom`; touch the small one to swap).
-- **widescreen hud at the edges** (`hud = 2`): the 2d stays 4:3 while the commands, hp and chain
-  sit at the display&#x27;s edges.
-- **60 fps falls back to a steady 30** for a while when the display cannot keep up, instead of
-  running unevenly, then tries 60 again.
-- **lighter dual-3d scenes**: scenes with 3d on both screens lower the 3d resolution while they
-  fall behind.
-
-## experimental
-
-- **single screen** (port menu, screen tab):
-  - before the game, the title&#x27;s menu is shown over a picture. a build can pack one from
-    `assets/titlescreen/bg.png`; otherwise `ux0:data/khdays/menu_bg.png` (or `.jpg`) is used.
-  - dialogue scenes whose bottom screen stays black are shown as the top screen alone, in
-    widescreen. anything on the bottom screen brings your usual layout back.
-  - world / mission selection: the world fills the display, with the mission list beside it.
-- **partner swap** (port menu, new partner tab; set it outside a mission):
-  - in a story mission, touch the partner&#x27;s hud to play as the partner. the ai plays roxas.
-  - the partner keeps its own deck and hp. it gets the stats of roxas&#x27;s weapon and his
-    abilities (dodge roll, glide, scan...).
-  - roxas on the ai fights with the partner&#x27;s weapon stats. options allow him to use his own
-    items and magic (off by default).
-
-## fixed
-
-- **mission 54 crash** on entering the dual blade&#x27;s arena. the same bug was also fixed in the
-  dual blade, blitz spear, stalwart blade, chill ripper and heat saber.
-- **the possessor&#x27;s white flash** when it dies is gone.
-- **loud noise in the camp menu&#x27;s audio.**
-- **garbled or stale sound** in scenes that load another sound archive.
-- **the right-stick camera** no longer swings round by itself during a sideways walk
-  (`camera_follow = 0`).
-- **30 fps pacing**: each game frame is shown as soon as it is ready.
-
-## known issues
-
-- partner swap is experimental: the partner&#x27;s weapon model, combos and animations stay its own,
-  and the hud&#x27;s large and small bars do not swap.
-- the busiest missions at 4x can still drop below 60 fps. keep `dynamic_res = 1` or use
-  `render_scale = 3`.
-- `debug = 1` measures the gpu once a second, which costs a frame each time: keep it at 0 to
-  play.
-- multiplayer is not available.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
-                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.8.0" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
-                      <div class="release-name">khdays-vita v0.8.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.8.0</span>
-                    <span>2026-10-16 02:28 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.7.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.7.0 → release v0.8.0</div>
-                  
-                  <div class="body markdown-body"><p>Install <code>khdays-vita-0.8.0.vpk</code> over the previous version with VitaShell. Saves and settings are
-kept.</p>
-<h2>New</h2>
-<ul>
-<li><strong>Screen layout &quot;left&quot;</strong>: one screen 4:3 on the left over the full height, the other small
-beside it (<code>layout = left</code> / <code>left_bottom</code>; touch the small one to swap).</li>
-<li><strong>Widescreen HUD at the edges</strong> (<code>hud = 2</code>): the 2D stays 4:3 while the commands, HP and chain
-sit at the display's edges.</li>
-<li><strong>60 fps falls back to a steady 30</strong> for a while when the display cannot keep up, instead of
-running unevenly, then tries 60 again.</li>
-<li><strong>Lighter dual-3D scenes</strong>: scenes with 3D on both screens lower the 3D resolution while they
-fall behind.</li>
-</ul>
-<h2>Experimental</h2>
-<ul>
-<li><strong>Single screen</strong> (port menu, SCREEN tab):<ul>
-<li>Before the game, the title's menu is shown over a picture. A build can pack one from
-<code>assets/titlescreen/bg.png</code>; otherwise <code>ux0:data/khdays/menu_bg.png</code> (or <code>.jpg</code>) is used.</li>
-<li>Dialogue scenes whose bottom screen stays black are shown as the top screen alone, in
-widescreen. Anything on the bottom screen brings your usual layout back.</li>
-<li>World / mission selection: the world fills the display, with the mission list beside it.</li>
-</ul>
-</li>
-<li><strong>Partner swap</strong> (port menu, new PARTNER tab; set it outside a mission):<ul>
-<li>In a story mission, touch the partner's HUD to play as the partner. The AI plays Roxas.</li>
-<li>The partner keeps its own deck and HP. It gets the stats of Roxas's weapon and his
-abilities (dodge roll, glide, scan...).</li>
-<li>Roxas on the AI fights with the partner's weapon stats. Options allow him to use his own
-items and magic (off by default).</li>
-</ul>
-</li>
-</ul>
-<h2>Fixed</h2>
-<ul>
-<li><strong>Mission 54 crash</strong> on entering the Dual Blade's arena. The same bug was also fixed in the
-Dual Blade, Blitz Spear, Stalwart Blade, Chill Ripper and Heat Saber.</li>
-<li><strong>The Possessor's white flash</strong> when it dies is gone.</li>
-<li><strong>Loud noise in the camp menu's audio.</strong></li>
-<li><strong>Garbled or stale sound</strong> in scenes that load another sound archive.</li>
-<li><strong>The right-stick camera</strong> no longer swings round by itself during a sideways walk
-(<code>camera_follow = 0</code>).</li>
-<li><strong>30 fps pacing</strong>: each game frame is shown as soon as it is ready.</li>
-</ul>
-<h2>Known issues</h2>
-<ul>
-<li>Partner swap is experimental: the partner's weapon model, combos and animations stay its own,
-and the HUD's large and small bars do not swap.</li>
-<li>The busiest missions at 4x can still drop below 60 fps. Keep <code>dynamic_res = 1</code> or use
-<code>render_scale = 3</code>.</li>
-<li><code>debug = 1</code> measures the GPU once a second, which costs a frame each time: keep it at 0 to
-play.</li>
-<li>Multiplayer is not available.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.8.0/khdays-vita-0.8.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-0.8.0.vpk · 3.8 MB</a></div>
                 </div>
               </div>
             </article>
@@ -4861,190 +4730,6 @@ ur0:tai/NoTrpDrm.suprx
 </ol>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/download/v01.45/popclassic-v01.46.vpk" target="_blank" rel="noopener">⬇ popclassic-v01.46.vpk · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="thextech thextech thextech/thextech thextech v1.7.4: a small release, but big changes! v1.7.4 ports this is not a usual update. while it offers several bugfixes and features, it has three significant changes:
-- the first release with the official ios and tvos support!
-- compiled haiku binary releases are now available!
-- we changing the versioning model!
-
-# ios and tvos support
-since the foundation of the project of thextech it was never available at apple mobile platforms such as ios. and since this release it&#x27;s now possible to build and install the engine on ios-powered devices such as iphone, ipad, and ipod touch. however, this doesn&#x27;t means the game app will be available at the appstore. instead it&#x27;s available in a form of the ipa package that you need to install on your device using the sideload method or build it from the source code using suitable xcode kit on your mac. all the details you can find at the thextech&#x27;s wiki documentation.
-
-# haiku binary releases
-before this release it was a challenge to build the suitable ci image to automatise producing of binary release for the haiku platform. and thanks to the [cross-platform actions](https://github.com/cross-platform-actions) project, this became easy, and now thextech finally has the binary release for the haiku operating system!
-
-# versioning system change
-the old format of versioning of &quot;1.3.x.y&quot; was [a major problem for a while](https://github.com/orgs/thextech/discussions/353). it sets a lot of limits and prevents to properly release important hotfixes and let several package managers to properly handle them. since this version the &quot;.3.&quot; part of the version gets completely removed, and instead of &quot;1.3.7.4&quot; we are releasing &quot;1.7.4&quot;!
-
-&lt;img width=&quot;228&quot; height=&quot;88&quot; alt=&quot;thextech-1 7 4&quot; src=&quot;https://github.com/user-attachments/assets/33d6875c-6856-4ee7-a747-141e41126061&quot; /&gt;
-
-# full changelog for 1.7.4
-
-&lt;details&gt;
-
-## new features:
-
-### general
-- versioning system has been changed, now next releases will be done without the &quot;.3.&quot; midfix (@wohlstand)
-
-### platforms support
-- added support for the ios platform (@wohlstand)
-- added support for the tvos platform (@wohlstand)
-
-### internationalisation
-- i18n: on-screen warning messages (such as bitmask render warnings) are now translatable! (@wohlstand)
-
-### controls
-- controls: added an ability to configure offsets for buttons at the touch-screen controller (@wohlstand)
-
-### lunascript
-- lunascript: added the &quot;shakescreen&quot; command to trigger the screen shaking without using of boom blocks (@wohlstand)
-- lunascript: added the &quot;spawneffect&quot; command to spawn a simple static graphical effect (@wohlstand)
-- lunascript: added sfx commands &quot;playsfxpausable&quot;, &quot;playsfxsection&quot;, and &quot;playsfxsctpausable&quot; to allow pause during dialogues and pause menu, and lock at the specific section. (@wohlstand)
-
-## new vanilla bugfixes
-- fix smbx 1.3 bug where items on top of a vehicle could be lost when entering it, guarded by compat flag &quot;fix-vehicle-item-loss&quot; [modern/classic mode] (@ds-sloth)
-- fix smbx 1.3 bug where a climbable npc spawner (eg, vine top) would deactivate if the player left the section, guarded by compat flag &quot;fix-npc-camera-logic&quot; [modern/classic mode] (@ds-sloth, thanks to @wohlstand for the report)
-- fix smbx 1.3 bug where the players could disappear if a tape exit was touched while a player was eaten or dead. (@ds-sloth)
-
-## thextech bugfixes
-- fix thextech 1.3.6.1 bug where toothy (npc id 50) would sometimes become invisible while the player is holding the toothy pipe (@ds-sloth, thanks to @liebning for the report)
-- controls: fixed the problem of touch-screen controller&#x27;s defaults are not loaded when profile gets just created (@wohlstand)
-- fixed broken user directory handling on the haiku (@wohlstand)
-- fix thextech 1.3.7 bug where ghosts could follow the direction of an eaten player instead of the active player. [modern mode] (@ds-sloth)
-- fix thextech 1.3.5.3 bug where an extra line of pixels was rarely drawn below the player. (@ds-sloth)
-- fix thextech 1.3.6.1 bug where fonts could get corrupted after unloading a customized level font. (@ds-sloth, thanks to @christiansilvermoon for the report)
-- emscripten: fix thextech 1.3.7.3 bug where the game could crash when selecting an episode. (@ds-sloth)
-- opengl: fix thextech 1.3.6.6 bug where the game might hang on exit on some systems. (@ds-sloth)
-- wii: add overscan compensation options (@ds-sloth, thanks to @theeeveelovers for the report)
-- vita / pstv: fix thextech bug where multiplayer splitscreen could be rendered incorrectly. (@ds-sloth, thanks to @birtkyle-cell for the report)
-- editor: allow placing npcs in front of semisolid blocks. (@ds-sloth, thanks to @trickiy for the report)
-- fixed a bug from thextech 1.3.7.3 that caused world map paths to never open when warping to the world map from a sub-hub. (@wohlstand)
-- fixed a misorder of player start points loaded from lvlx files (they never guarantee a sort by player number, instead they has a player id field to distinguish point roles without sorting requirement). (@wohlstand)
-
-&lt;/details&gt;
-
-# known issues
-* audio may be choppy on old 3ds.
-* texture load stutter is present on wii.
-* the screen may slightly judder during section resizes on 3ds and wii.
-* on 3ds, background texture may start to flashing. (https://github.com/thextech/thextech/issues/816) (possibly solved, the primary reason of this is an out of memory).
-* on 3ds the crash happens on attempt to quit by the home menu. (https://github.com/thextech/thextech/issues/738)
-* on windows 10 when running opengl with some ~2006 intel igpu on laptop, game would crash (possibly fixed).
-* on windows xp sp0 that uses **s3 savage 4** video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to [random talk of people from the 2000s](https://www.kv.by/forum/forum1000000590.htm) (in russian) ).
-* on linux/wayland, window icon can&#x27;t be changed while running game. (https://github.com/thextech/thextech/issues/939)
-* on linux/wayland, mouse cursor doesn&#x27;t gets unlocked from window on toggling windowed mode after fullscreen. (https://github.com/thextech/thextech/issues/937)
-* editor doesn&#x27;t supports large fonts (i.e. chinese, korean, etc). (https://github.com/thextech/thextech/issues/884)
-* at web version (emscripten-built) the framerate may go incorrectly. (https://github.com/thextech/thextech/issues/851)
-* on some hardware, randomly and rare, alpha-channel might me messed up when using opengl render backend. (https://github.com/thextech/thextech/issues/743)
-* the lunadll&#x27;s timer gets overlapped with the medals tracker. (https://github.com/thextech/thextech/issues/1102)
-* on ios devices (iphone 6s and newer that has the taptic engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. to escape this problem it&#x27;s need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (https://github.com/thextech/thextech/issues/1189)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png" alt="Icono de TheXTech" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · TheXTech/TheXTech</div>
-                      <h2><a href="https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4" target="_blank" rel="noopener">TheXTech</a></h2>
-                      <div class="release-name">TheXTech v1.7.4: A small release, but Big Changes!</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.7.4</span>
-                    <span>2026-10-05 21:01 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.3.7.3-1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.3.7.3-1 → release v1.7.4</div>
-                  
-                  <div class="body markdown-body"><p>This is not a usual update. While it offers several bugfixes and features, it has three significant changes:</p>
-<ul>
-<li>The first release with the official iOS and tvOS support!</li>
-<li>Compiled Haiku binary releases are now available!</li>
-<li>We changing the versioning model!</li>
-</ul>
-<h1>iOS and tvOS support</h1>
-<p>Since the foundation of the project of TheXTech it was never available at Apple mobile platforms such as iOS. And since this release it's now possible to build and install the engine on iOS-powered devices such as iPhone, iPad, and iPod Touch. However, this doesn't means the game app will be available at the AppStore. Instead it's available in a form of the IPA package that you need to install on your device using the Sideload method or build it from the source code using suitable Xcode kit on your Mac. All the details you can find at the TheXTech's Wiki documentation.</p>
-<h1>Haiku binary releases</h1>
-<p>Before this release it was a challenge to build the suitable CI image to automatise producing of binary release for the Haiku platform. And thanks to the <a target="_blank" rel="noopener noreferrer" href="https://github.com/cross-platform-actions">Cross-platform Actions</a> project, this became easy, and now TheXTech finally has the binary release for the Haiku operating system!</p>
-<h1>Versioning system change</h1>
-<p>The old format of versioning of &quot;1.3.x.y&quot; was <a target="_blank" rel="noopener noreferrer" href="https://github.com/orgs/TheXTech/discussions/353">a major problem for a while</a>. It sets a lot of limits and prevents to properly release important hotfixes and let several package managers to properly handle them. Since this version the &quot;.3.&quot; part of the version gets completely removed, and instead of &quot;1.3.7.4&quot; we are releasing &quot;1.7.4&quot;!</p>
-<p><img width="228" height="88" alt="thextech-1 7 4" src="https://github.com/user-attachments/assets/33d6875c-6856-4ee7-a747-141e41126061"></p>
-<h1>Full changelog for 1.7.4</h1>
-
-
-
-<h2>New features:</h2>
-<h3>General</h3>
-<ul>
-<li>Versioning system has been changed, now next releases will be done without the &quot;.3.&quot; midfix (@Wohlstand)</li>
-</ul>
-<h3>Platforms support</h3>
-<ul>
-<li>Added support for the iOS platform (@Wohlstand)</li>
-<li>Added support for the tvOS platform (@Wohlstand)</li>
-</ul>
-<h3>Internationalisation</h3>
-<ul>
-<li>i18n: On-screen warning messages (such as bitmask render warnings) are now translatable! (@Wohlstand)</li>
-</ul>
-<h3>Controls</h3>
-<ul>
-<li>Controls: Added an ability to configure offsets for buttons at the touch-screen controller (@Wohlstand)</li>
-</ul>
-<h3>LunaScript</h3>
-<ul>
-<li>LunaScript: Added the &quot;ShakeScreen&quot; command to trigger the screen shaking without using of boom blocks (@Wohlstand)</li>
-<li>LunaScript: Added the &quot;SpawnEffect&quot; command to spawn a simple static graphical effect (@Wohlstand)</li>
-<li>LunaScript: Added SFX commands &quot;PlaySFXPausable&quot;, &quot;PlaySFXSection&quot;, and &quot;PlaySFXSctPausable&quot; to allow pause during dialogues and pause menu, and lock at the specific section. (@Wohlstand)</li>
-</ul>
-<h2>New vanilla bugfixes</h2>
-<ul>
-<li>Fix SMBX 1.3 bug where items on top of a vehicle could be lost when entering it, guarded by compat flag &quot;fix-vehicle-item-loss&quot; [Modern/Classic Mode] (@ds-sloth)</li>
-<li>Fix SMBX 1.3 bug where a climbable NPC spawner (eg, vine top) would deactivate if the player left the section, guarded by compat flag &quot;fix-npc-camera-logic&quot; [Modern/Classic Mode] (@ds-sloth, thanks to @Wohlstand for the report)</li>
-<li>Fix SMBX 1.3 bug where the players could disappear if a tape exit was touched while a player was eaten or dead. (@ds-sloth)</li>
-</ul>
-<h2>TheXTech bugfixes</h2>
-<ul>
-<li>Fix TheXTech 1.3.6.1 bug where Toothy (NPC ID 50) would sometimes become invisible while the player is holding the toothy pipe (@ds-sloth, thanks to @Liebning for the report)</li>
-<li>Controls: Fixed the problem of touch-screen controller's defaults are not loaded when profile gets just created (@Wohlstand)</li>
-<li>Fixed broken user directory handling on the Haiku (@Wohlstand)</li>
-<li>Fix TheXTech 1.3.7 bug where ghosts could follow the direction of an eaten player instead of the active player. [Modern Mode] (@ds-sloth)</li>
-<li>Fix TheXTech 1.3.5.3 bug where an extra line of pixels was rarely drawn below the player. (@ds-sloth)</li>
-<li>Fix TheXTech 1.3.6.1 bug where fonts could get corrupted after unloading a customized level font. (@ds-sloth, thanks to @ChristianSilvermoon for the report)</li>
-<li>Emscripten: fix TheXTech 1.3.7.3 bug where the game could crash when selecting an episode. (@ds-sloth)</li>
-<li>OpenGL: fix TheXTech 1.3.6.6 bug where the game might hang on exit on some systems. (@ds-sloth)</li>
-<li>Wii: add overscan compensation options (@ds-sloth, thanks to @TheEeveeLovers for the report)</li>
-<li>Vita / PSTV: fix TheXTech bug where multiplayer splitscreen could be rendered incorrectly. (@ds-sloth, thanks to @birtkyle-cell for the report)</li>
-<li>Editor: allow placing NPCs in front of semisolid blocks. (@ds-sloth, thanks to @Trickiy for the report)</li>
-<li>Fixed a bug from TheXTech 1.3.7.3 that caused world map paths to never open when warping to the world map from a sub-hub. (@Wohlstand)</li>
-<li>Fixed a misorder of player start points loaded from LVLX files (They never guarantee a sort by player number, instead they has a Player ID field to distinguish point roles without sorting requirement). (@Wohlstand)</li>
-</ul>
-
-
-<h1>Known issues</h1>
-<ul>
-<li>Audio may be choppy on Old 3DS.</li>
-<li>Texture load stutter is present on Wii.</li>
-<li>The screen may slightly judder during section resizes on 3DS and Wii.</li>
-<li>On 3DS, background texture may start to flashing. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/816">https://github.com/TheXTech/TheXTech/issues/816</a>) (Possibly solved, the primary reason of this is an out of memory).</li>
-<li>On 3DS the crash happens on attempt to quit by the home menu. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/738">https://github.com/TheXTech/TheXTech/issues/738</a>)</li>
-<li>On Windows 10 when running OpenGL with some ~2006 Intel iGPU on laptop, game would crash (possibly fixed).</li>
-<li>On Windows XP SP0 that uses <strong>S3 Savage 4</strong> video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to <a target="_blank" rel="noopener noreferrer" href="https://www.kv.by/forum/forum1000000590.htm">random talk of people from the 2000s</a> (in Russian) ).</li>
-<li>On Linux/Wayland, Window icon can't be changed while running game. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/939">https://github.com/TheXTech/TheXTech/issues/939</a>)</li>
-<li>On Linux/Wayland, Mouse cursor doesn't gets unlocked from window on toggling windowed mode after fullscreen. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/937">https://github.com/TheXTech/TheXTech/issues/937</a>)</li>
-<li>Editor doesn't supports large fonts (I.e. Chinese, Korean, etc). (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/884">https://github.com/TheXTech/TheXTech/issues/884</a>)</li>
-<li>At Web version (Emscripten-built) the framerate may go incorrectly. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/851">https://github.com/TheXTech/TheXTech/issues/851</a>)</li>
-<li>On some hardware, randomly and rare, alpha-channel might me messed up when using OpenGL render backend. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/743">https://github.com/TheXTech/TheXTech/issues/743</a>)</li>
-<li>The LunaDLL's timer gets overlapped with the medals tracker. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/1102">https://github.com/TheXTech/TheXTech/issues/1102</a>)</li>
-<li>On iOS devices (iPhone 6S and newer that has the Taptic Engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. To escape this problem it's need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (<a target="_blank" rel="noopener noreferrer" href="https://github.com/TheXTech/TheXTech/issues/1189">https://github.com/TheXTech/TheXTech/issues/1189</a>)</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/moondust-devkit-config-pack-thextech-sdk-v1.7.4.zip" target="_blank" rel="noopener">⬇ moondust-devkit-config-pack-thextech-sdk-v1.7.4.zip · 1.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz · 33.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz · 33.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz · 34.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz · 33.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz · 34.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-macos.dmg" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-macos.dmg · 37.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-web.tar.gz" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-web.tar.gz · 31.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win-arm64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-win-arm64.7z · 26.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win32.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-win32.7z · 28.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/adventures-of-demo-thextech-v1.7.4-win64.7z" target="_blank" rel="noopener">adventures-of-demo-thextech-v1.7.4-win64.7z · 28.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-amd64.tar.gz · 43.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u14.04-i386.tar.gz · 43.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u16.04-i386.tar.gz · 44.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u18.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-aarch64.tar.gz · 43.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u20.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u22.04-amd64.tar.gz · 44.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-linux-generic-u24.04-amd64.tar.gz · 44.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-macos.dmg" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-macos.dmg · 48.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-web.tar.gz" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-web.tar.gz · 41.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win-arm64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-win-arm64.7z · 36.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win32.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-win32.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/super-mario-bros-x-thextech-v1.7.4-win64.7z" target="_blank" rel="noopener">super-mario-bros-x-thextech-v1.7.4-win64.7z · 38.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-assets-aod-v1.7.4.zip" target="_blank" rel="noopener">thextech-3ds-assets-aod-v1.7.4.zip · 58.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-assets-smbx13-v1.7.4.zip" target="_blank" rel="noopener">thextech-3ds-assets-smbx13-v1.7.4.zip · 45.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-3ds-v1.7.4.zip" target="_blank" rel="noopener">thextech-3ds-v1.7.4.zip · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-adventure-of-demo-assets-full-v1.7.4.7z" target="_blank" rel="noopener">thextech-adventure-of-demo-assets-full-v1.7.4.7z · 23.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-android-v1.7.4.apk" target="_blank" rel="noopener">thextech-android-v1.7.4.apk · 26.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-portmaster-v1.7.4-MD5.txt" target="_blank" rel="noopener">thextech-bin-portmaster-v1.7.4-MD5.txt · 56.0 B</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-portmaster-v1.7.4.tar.gz" target="_blank" rel="noopener">thextech-bin-portmaster-v1.7.4.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-arm64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.7.4-arm64.flatpak · 3.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u14.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u14.04-amd64.deb · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u14.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u14.04-i386.deb · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u16.04-amd64.deb · 5.3 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u16.04-armhf.deb · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u16.04-i386.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u16.04-i386.deb · 6.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u18.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u18.04-amd64.deb · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u20.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u20.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u20.04-armhf.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u20.04-armhf.deb · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u22.04-aarch64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u22.04-aarch64.deb · 4.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u22.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u22.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-u24.04-amd64.deb" target="_blank" rel="noopener">thextech-bin-v1.7.4-u24.04-amd64.deb · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-bin-v1.7.4-x86-64.flatpak" target="_blank" rel="noopener">thextech-bin-v1.7.4-x86-64.flatpak · 3.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-convert-kit-v1.7.4.zip" target="_blank" rel="noopener">thextech-convert-kit-v1.7.4.zip · 7.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.tar.bz2" target="_blank" rel="noopener">thextech-full-src-v1.7.4.tar.bz2 · 43.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.tar.gz" target="_blank" rel="noopener">thextech-full-src-v1.7.4.tar.gz · 52.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-full-src-v1.7.4.zip" target="_blank" rel="noopener">thextech-full-src-v1.7.4.zip · 60.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-aod-v1.7.4.deb" target="_blank" rel="noopener">thextech-game-aod-v1.7.4.deb · 23.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-smbx-1.3-v1.7.4.deb" target="_blank" rel="noopener">thextech-game-smbx-1.3-v1.7.4.deb · 36.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-game-template-v1.7.4-macOS.zip" target="_blank" rel="noopener">thextech-game-template-v1.7.4-macOS.zip · 11.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-haiku-r1beta6-v1.7.4.hpkg" target="_blank" rel="noopener">thextech-haiku-r1beta6-v1.7.4.hpkg · 4.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios12-arm64-v1.7.4.ipa" target="_blank" rel="noopener">thextech-ios12-arm64-v1.7.4.ipa · 3.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios9-armv7-v1.7.4.ipa" target="_blank" rel="noopener">thextech-ios9-armv7-v1.7.4.ipa · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-ios9-armv7s-v1.7.4.ipa" target="_blank" rel="noopener">thextech-ios9-armv7s-v1.7.4.ipa · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u14.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u14.04-amd64.tar.gz · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u14.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u14.04-i386.tar.gz · 5.0 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u16.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u16.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u16.04-i386.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u16.04-i386.tar.gz · 5.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u18.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u18.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u20.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u20.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u20.04-armhf.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u20.04-armhf.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u22.04-aarch64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u22.04-aarch64.tar.gz · 5.2 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u22.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u22.04-amd64.tar.gz · 5.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-linux-generic-u24.04-amd64.tar.gz" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-linux-generic-u24.04-amd64.tar.gz · 5.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win-arm64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-win-arm64.7z · 2.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win32.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-win32.7z · 4.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-plain-runtime-v1.7.4-win64.7z" target="_blank" rel="noopener">thextech-plain-runtime-v1.7.4-win64.7z · 4.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-sdl2-src-for-wii-v1.7.4.zip" target="_blank" rel="noopener">thextech-sdl2-src-for-wii-v1.7.4.zip · 4.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-sdl2-wiiu-v1.7.4.zip" target="_blank" rel="noopener">thextech-sdl2-wiiu-v1.7.4.zip · 4.8 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-smbx13-assets-full-v1.7.4.7z" target="_blank" rel="noopener">thextech-smbx13-assets-full-v1.7.4.7z · 33.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-switch-v1.7.4.zip" target="_blank" rel="noopener">thextech-switch-v1.7.4.zip · 6.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-tvos-arm64-v1.7.4.ipa" target="_blank" rel="noopener">thextech-tvos-arm64-v1.7.4.ipa · 4.7 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-vita-v1.7.4.zip" target="_blank" rel="noopener">thextech-vita-v1.7.4.zip · 4.6 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-assets-aod-v1.7.4.zip" target="_blank" rel="noopener">thextech-wii-assets-aod-v1.7.4.zip · 20.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-assets-smbx13-v1.7.4.zip" target="_blank" rel="noopener">thextech-wii-assets-smbx13-v1.7.4.zip · 28.4 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wii-v1.7.4.zip" target="_blank" rel="noopener">thextech-wii-v1.7.4.zip · 3.5 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wiiu-v1.7.4.zip" target="_blank" rel="noopener">thextech-wiiu-v1.7.4.zip · 10.9 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/thextech-wiki-docs-v1.7.4.zip" target="_blank" rel="noopener">thextech-wiki-docs-v1.7.4.zip · 5.1 MB</a><a class="btn" href="https://github.com/TheXTech/TheXTech/releases/download/v1.7.4/VC_redist.arm64.exe" target="_blank" rel="noopener">VC_redist.arm64.exe · 6.7 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27915,108 +27600,10 @@ edit: updated 31/10/21">
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="gta: sa vita gta: sa vita theofficialflow/gtasa_vita gta: sa vita v2.1 v2.1 ports ### v2.1
-
-- changed some button actions to on press (e.g. jump).
-- made minor improvements. thanks to adjutantt.
-- updated to latest vitagl.
-
-follow the instructions at https://github.com/theofficialflow/gtasa_vita/blob/master/readme.md.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-gta-sa-vita/icon0.png" alt="Icono de GTA: SA Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · TheOfficialFloW/gtasa_vita</div>
-                      <h2><a href="https://github.com/TheOfficialFloW/gtasa_vita/releases/tag/v2.1" target="_blank" rel="noopener">GTA: SA Vita</a></h2>
-                      <div class="release-name">GTA: SA Vita v2.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v2.1</span>
-                    <span>2021-08-28 13:28 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.2.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.2.1</div>
-                  
-                  <div class="body markdown-body"><h3>v2.1</h3>
-<ul>
-<li>Changed some button actions to on press (e.g. jump).</li>
-<li>Made minor improvements. Thanks to adjutantt.</li>
-<li>Updated to latest vitaGL.</li>
-</ul>
-<p>Follow the instructions at <a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/gtasa_vita/blob/master/README.md">https://github.com/TheOfficialFloW/gtasa_vita/blob/master/README.md</a>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/TheOfficialFloW/gtasa_vita/releases/download/v2.1/GTASA.vpk" target="_blank" rel="noopener">⬇ GTASA.vpk · 1.4 MB</a><a class="btn" href="https://github.com/TheOfficialFloW/gtasa_vita/releases/download/v2.1/gamefiles.zip" target="_blank" rel="noopener">gamefiles.zip · 13.5 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="cybershot cybershot semvdh/cybershot-psvita first version v0.1 games # the first version is out!
-
-there are still a lot of features to be added, but this is the first viable version">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-cybershot/icon0.png" alt="Icono de Cybershot" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">GAMES · GITHUB · SemvdH/cybershot-PSVita</div>
-                      <h2><a href="https://github.com/SemvdH/cybershot-PSVita/releases/tag/v0.1" target="_blank" rel="noopener">Cybershot</a></h2>
-                      <div class="release-name">First version</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1</span>
-                    <span>2021-08-27 20:12 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.1</div>
-                  
-                  <div class="body markdown-body"><h1>The first version is out!</h1>
-<p>There are still a lot of features to be added, but this is the first viable version</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/SemvdH/cybershot-PSVita/releases/download/v0.1/cybershot.vpk" target="_blank" rel="noopener">⬇ cybershot.vpk · 81.6 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="easyvpk easyvpk electric1447/easyvpk easyvpk v2.1.0 v2.1.0 utilities - added lite mode (does not download screenshots, thus loading much faster).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-easyvpk/icon0.png" alt="Icono de EasyVPK" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · Electric1447/EasyVPK</div>
-                      <h2><a href="https://github.com/Electric1447/EasyVPK/releases/tag/v2.1.0" target="_blank" rel="noopener">EasyVPK</a></h2>
-                      <div class="release-name">EasyVPK v2.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v2.1.0</span>
-                    <span>2021-08-14 22:25 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.2.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.2.1.0</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Added lite mode (does not download screenshots, thus loading much faster).</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Electric1447/EasyVPK/releases/download/v2.1.0/easyvpk.vpk" target="_blank" rel="noopener">⬇ easyvpk.vpk · 2.8 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-18 12:54 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-18 17:42 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
