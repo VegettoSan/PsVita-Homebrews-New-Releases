@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">399</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>84</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">398</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>85</strong><span>pendientes</span></div>
         <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
@@ -219,6 +219,356 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="psvitaalive store psvitaalive store vegettosan/psvitaalive psvita alive store 02.13 02.13 utilities # psvitaalive 02.13
+
+version **02.13** introduces a completely redesigned keyboard system, expanded catalog filtering, improved installed-game detection, and important installation stability improvements.
+
+this release focuses on making psvitaalive more stable, easier to navigate, and more reliable when managing homebrew, ps vita, psp, and ps1 content.
+
+## what&#x27;s new
+
+### new built-in keyboard
+
+- completely replaced the native playstation vita keyboard with a custom keyboard developed specifically for psvitaalive.
+- eliminated the unstable native ime interaction that caused repeated crashes when opening the search keyboard.
+- introduced an english qwerty keyboard with dedicated number and special-character layouts.
+- added full navigation using the d-pad, left analog stick, and touchscreen.
+- added a dedicated right-side column containing shift, delete, cancel, and ok.
+- implemented persistent shift mode, allowing users to switch between uppercase and lowercase letters.
+- added automatic character deletion when holding the delete button or square.
+- added smooth opening and closing animations.
+- integrated the keyboard with the currently selected color theme.
+- kept the catalog visible behind the keyboard using a translucent modal background.
+- localized keyboard titles, buttons, and instructions across all eight supported interface languages.
+- extended the new keyboard to custom zip extraction destination paths.
+
+the new keyboard operates directly through vita2d, without relying on sony&#x27;s native ime for text input.
+
+### new catalog filtering system
+
+- introduced a dedicated filtering panel accessible through the square button in the full catalog.
+- added category filters for homebrew applications.
+- added genre filters for ps vita, psp, and ps1 games.
+- added filtering for applications containing game files or data files.
+- added dlc filtering for supported game catalogs.
+- added support for combining category, genre, installation-status, and text-search filters.
+- improved filter navigation using physical controls and touchscreen.
+- added scrolling support for filter menus with multiple options.
+- improved filter button visibility, positioning, and text readability.
+- added localized filter names and descriptions across all eight supported languages.
+- automatically reset active filters when switching between catalogs.
+
+available category and genre filters are optimized for each catalog.
+
+### installed applications and games
+
+- expanded installed-content detection across all four catalogs.
+- added an **installed** filter for homebrew, ps vita, psp, and ps1.
+- added **updates available** and **version not recognized** filters for homebrew.
+- improved detection of installed ps vita games through livearea.
+- added detection of psp installations through livearea and supported adrenaline folders.
+- added support for identifying psp iso, cso, and eboot.pbp installations.
+- improved ps1 installation detection, including compatible pbp content identifiers.
+- added support for checking installations across available storage partitions.
+- improved compatibility with regional title ids and alternative game identifiers.
+- optimized installed-content scanning to reduce unnecessary filesystem operations.
+- preserved conservative update detection when installed homebrew versions cannot be reliably identified.
+
+commercial game detection focuses on installation presence rather than attempting to determine game update versions.
+
+### battery indicator and interface improvements
+
+- added a battery indicator to the main catalog header.
+- displayed the current battery percentage alongside a visual battery icon.
+- added battery charging and low-battery indicators.
+- integrated battery information into the existing oled screen protection mode.
+- improved header alignment between the search bar, filter button, battery indicator, and clock.
+- optimized battery polling to avoid unnecessary system calls.
+- improved touchscreen alignment and interface responsiveness.
+- maintained compatibility with existing color themes, font styles, and language settings.
+
+### zip installation and extraction improvements
+
+- fixed an issue where certain game files and data files zip archives could be incorrectly detected as vpk packages.
+- improved installation routing to ensure these archives are extracted to their intended destinations instead of being sent to the vpk installer.
+- added stronger validation for missing or invalid extraction destinations.
+- improved handling of zip archives containing files that already exist in the destination.
+- added temporary-file replacement and backup handling to protect existing files during extraction errors.
+- improved cancellation behavior during archive downloads, extraction, and installation.
+- prevented cancelled operations from being incorrectly reported as installation failures.
+- improved handling of invalid vpk and zip archives to avoid unnecessary retries.
+- preserved downloaded zip archives for recovery when applicable.
+
+### storage and installation reliability
+
+- improved free-space calculations based on the actual installation type.
+- reduced unnecessary storage requirements when downloading compressed zip archives.
+- improved storage checks for game files and data files.
+- corrected size handling when secondary download links do not provide a file size.
+- improved storage preflight behavior for system-managed pkg installations.
+- added more appropriate storage margins for plugin downloads.
+- improved installation retry handling and cancellation synchronization.
+- reduced unnecessary retry attempts for permanently invalid archives.
+- added automated regression tests for archive routing, installation retries, and storage calculations.
+
+these improvements help prevent incorrect low-storage warnings while maintaining safety checks during extraction and installation.
+
+### performance and stability
+
+- removed obsolete bulk-image startup download behavior.
+- improved resource management around catalog navigation and text input.
+- reduced unnecessary background activity while the custom keyboard is open.
+- improved interface stability by removing the native ime lifecycle from text input.
+- maintained the existing image-cache system and optimized catalog navigation.
+- improved compatibility with existing installation and download workflows.
+- updated internal documentation and regression testing procedures.
+
+### localization and catalog updates
+
+- updated interface translations across english, spanish, french, german, italian, portuguese (brazil), portuguese (portugal), and russian.
+- added localized keyboard controls, filter options, and installation-status labels.
+- added new homebrew catalog entries and developer profiles.
+- updated selected application metadata and download information.
+- maintained compatibility with the existing psvitaalive catalog architecture.
+
+## installation
+
+download **psvitaalive.vpk** from the release assets and install it using vitashell.
+
+version **02.13** can be installed directly over an existing psvitaalive installation. a fresh installation is not required.
+
+existing settings, cached catalogs, and compatible downloaded data are preserved.
+
+## compatibility
+
+psvitaalive continues to support playstation vita and playstation tv, including existing homebrew installation workflows and supported ps vita, psp, and ps1 content management features.
+
+the new built-in keyboard uses an english qwerty character layout while adapting its interface labels to the selected language.
+
+installation detection and archive extraction behavior may vary depending on the content format, storage configuration, and installed system plugins.
+
+some installation and storage improvements require additional validation across different hardware and archive configurations.
+
+---
+
+**psvitaalive 02.13** represents a major improvement in user interaction, catalog management, and installation reliability.
+
+the introduction of the custom keyboard removes the unstable native text-input workflow and provides a consistent interface designed specifically for psvitaalive.
+
+thank you to everyone who continues to support the project through testing, feedback, bug reports, and contributions.
+
+your support helps keep the playstation vita community alive.
+
+**full changelog:** https://github.com/vegettosan/psvitaalive/compare/02.12...main">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png" alt="Icono de PSVitaAlive Store" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · VegettoSan/PSVitaAlive</div>
+                      <h2><a href="https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.13" target="_blank" rel="noopener">PSVitaAlive Store</a></h2>
+                      <div class="release-name">PsVita Alive Store 02.13</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">02.13</span>
+                    <span>2026-10-21 05:27 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 02.13</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive oficial · 02.13</div>
+                  
+                  <div class="body markdown-body"><h1>PSVitaAlive 02.13</h1>
+<p>Version <strong>02.13</strong> introduces a completely redesigned keyboard system, expanded catalog filtering, improved installed-game detection, and important installation stability improvements.</p>
+<p>This release focuses on making PSVitaAlive more stable, easier to navigate, and more reliable when managing Homebrew, PS Vita, PSP, and PS1 content.</p>
+<h2>What's New</h2>
+<h3>New Built-in Keyboard</h3>
+<ul>
+<li>Completely replaced the native PlayStation Vita keyboard with a custom keyboard developed specifically for PSVitaAlive.</li>
+<li>Eliminated the unstable native IME interaction that caused repeated crashes when opening the search keyboard.</li>
+<li>Introduced an English QWERTY keyboard with dedicated number and special-character layouts.</li>
+<li>Added full navigation using the D-pad, left analog stick, and touchscreen.</li>
+<li>Added a dedicated right-side column containing SHIFT, Delete, Cancel, and OK.</li>
+<li>Implemented persistent SHIFT mode, allowing users to switch between uppercase and lowercase letters.</li>
+<li>Added automatic character deletion when holding the Delete button or Square.</li>
+<li>Added smooth opening and closing animations.</li>
+<li>Integrated the keyboard with the currently selected color theme.</li>
+<li>Kept the catalog visible behind the keyboard using a translucent modal background.</li>
+<li>Localized keyboard titles, buttons, and instructions across all eight supported interface languages.</li>
+<li>Extended the new keyboard to custom ZIP extraction destination paths.</li>
+</ul>
+<p>The new keyboard operates directly through vita2d, without relying on Sony's native IME for text input.</p>
+<h3>New Catalog Filtering System</h3>
+<ul>
+<li>Introduced a dedicated filtering panel accessible through the Square button in the full catalog.</li>
+<li>Added category filters for Homebrew applications.</li>
+<li>Added genre filters for PS Vita, PSP, and PS1 games.</li>
+<li>Added filtering for applications containing Game Files or Data Files.</li>
+<li>Added DLC filtering for supported game catalogs.</li>
+<li>Added support for combining category, genre, installation-status, and text-search filters.</li>
+<li>Improved filter navigation using physical controls and touchscreen.</li>
+<li>Added scrolling support for filter menus with multiple options.</li>
+<li>Improved filter button visibility, positioning, and text readability.</li>
+<li>Added localized filter names and descriptions across all eight supported languages.</li>
+<li>Automatically reset active filters when switching between catalogs.</li>
+</ul>
+<p>Available category and genre filters are optimized for each catalog.</p>
+<h3>Installed Applications and Games</h3>
+<ul>
+<li>Expanded installed-content detection across all four catalogs.</li>
+<li>Added an <strong>Installed</strong> filter for Homebrew, PS Vita, PSP, and PS1.</li>
+<li>Added <strong>Updates Available</strong> and <strong>Version Not Recognized</strong> filters for Homebrew.</li>
+<li>Improved detection of installed PS Vita games through LiveArea.</li>
+<li>Added detection of PSP installations through LiveArea and supported Adrenaline folders.</li>
+<li>Added support for identifying PSP ISO, CSO, and EBOOT.PBP installations.</li>
+<li>Improved PS1 installation detection, including compatible PBP content identifiers.</li>
+<li>Added support for checking installations across available storage partitions.</li>
+<li>Improved compatibility with regional Title IDs and alternative game identifiers.</li>
+<li>Optimized installed-content scanning to reduce unnecessary filesystem operations.</li>
+<li>Preserved conservative update detection when installed Homebrew versions cannot be reliably identified.</li>
+</ul>
+<p>Commercial game detection focuses on installation presence rather than attempting to determine game update versions.</p>
+<h3>Battery Indicator and Interface Improvements</h3>
+<ul>
+<li>Added a battery indicator to the main catalog header.</li>
+<li>Displayed the current battery percentage alongside a visual battery icon.</li>
+<li>Added battery charging and low-battery indicators.</li>
+<li>Integrated battery information into the existing OLED screen protection mode.</li>
+<li>Improved header alignment between the search bar, filter button, battery indicator, and clock.</li>
+<li>Optimized battery polling to avoid unnecessary system calls.</li>
+<li>Improved touchscreen alignment and interface responsiveness.</li>
+<li>Maintained compatibility with existing color themes, font styles, and language settings.</li>
+</ul>
+<h3>ZIP Installation and Extraction Improvements</h3>
+<ul>
+<li>Fixed an issue where certain Game Files and Data Files ZIP archives could be incorrectly detected as VPK packages.</li>
+<li>Improved installation routing to ensure these archives are extracted to their intended destinations instead of being sent to the VPK installer.</li>
+<li>Added stronger validation for missing or invalid extraction destinations.</li>
+<li>Improved handling of ZIP archives containing files that already exist in the destination.</li>
+<li>Added temporary-file replacement and backup handling to protect existing files during extraction errors.</li>
+<li>Improved cancellation behavior during archive downloads, extraction, and installation.</li>
+<li>Prevented cancelled operations from being incorrectly reported as installation failures.</li>
+<li>Improved handling of invalid VPK and ZIP archives to avoid unnecessary retries.</li>
+<li>Preserved downloaded ZIP archives for recovery when applicable.</li>
+</ul>
+<h3>Storage and Installation Reliability</h3>
+<ul>
+<li>Improved free-space calculations based on the actual installation type.</li>
+<li>Reduced unnecessary storage requirements when downloading compressed ZIP archives.</li>
+<li>Improved storage checks for Game Files and Data Files.</li>
+<li>Corrected size handling when secondary download links do not provide a file size.</li>
+<li>Improved storage preflight behavior for system-managed PKG installations.</li>
+<li>Added more appropriate storage margins for plugin downloads.</li>
+<li>Improved installation retry handling and cancellation synchronization.</li>
+<li>Reduced unnecessary retry attempts for permanently invalid archives.</li>
+<li>Added automated regression tests for archive routing, installation retries, and storage calculations.</li>
+</ul>
+<p>These improvements help prevent incorrect low-storage warnings while maintaining safety checks during extraction and installation.</p>
+<h3>Performance and Stability</h3>
+<ul>
+<li>Removed obsolete bulk-image startup download behavior.</li>
+<li>Improved resource management around catalog navigation and text input.</li>
+<li>Reduced unnecessary background activity while the custom keyboard is open.</li>
+<li>Improved interface stability by removing the native IME lifecycle from text input.</li>
+<li>Maintained the existing image-cache system and optimized catalog navigation.</li>
+<li>Improved compatibility with existing installation and download workflows.</li>
+<li>Updated internal documentation and regression testing procedures.</li>
+</ul>
+<h3>Localization and Catalog Updates</h3>
+<ul>
+<li>Updated interface translations across English, Spanish, French, German, Italian, Portuguese (Brazil), Portuguese (Portugal), and Russian.</li>
+<li>Added localized keyboard controls, filter options, and installation-status labels.</li>
+<li>Added new Homebrew catalog entries and developer profiles.</li>
+<li>Updated selected application metadata and download information.</li>
+<li>Maintained compatibility with the existing PSVitaAlive catalog architecture.</li>
+</ul>
+<h2>Installation</h2>
+<p>Download <strong>PSVitaAlive.vpk</strong> from the release assets and install it using VitaShell.</p>
+<p>Version <strong>02.13</strong> can be installed directly over an existing PSVitaAlive installation. A fresh installation is not required.</p>
+<p>Existing settings, cached catalogs, and compatible downloaded data are preserved.</p>
+<h2>Compatibility</h2>
+<p>PSVitaAlive continues to support PlayStation Vita and PlayStation TV, including existing Homebrew installation workflows and supported PS Vita, PSP, and PS1 content management features.</p>
+<p>The new built-in keyboard uses an English QWERTY character layout while adapting its interface labels to the selected language.</p>
+<p>Installation detection and archive extraction behavior may vary depending on the content format, storage configuration, and installed system plugins.</p>
+<p>Some installation and storage improvements require additional validation across different hardware and archive configurations.</p>
+<hr>
+<p><strong>PSVitaAlive 02.13</strong> represents a major improvement in user interaction, catalog management, and installation reliability.</p>
+<p>The introduction of the custom keyboard removes the unstable native text-input workflow and provides a consistent interface designed specifically for PSVitaAlive.</p>
+<p>Thank you to everyone who continues to support the project through testing, feedback, bug reports, and contributions.</p>
+<p>Your support helps keep the PlayStation Vita community alive.</p>
+<p><strong>Full Changelog:</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/VegettoSan/PSVitaAlive/compare/02.12...main">https://github.com/VegettoSan/PSVitaAlive/compare/02.12...main</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/VegettoSan/PSVitaAlive/releases/download/02.13/PSVitaAlive.vpk" target="_blank" rel="noopener">⬇ PSVitaAlive.vpk · 9.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="conker&#x27;s bad fur day conker&#x27;s bad fur day henrykun55/conker-vita v1.2.0 v1.2.0 ports ## v1.2.0
+
+**the vita&#x27;s buttons in the game**
+- every n64 button picture the game draws (speech bubbles, tutorials, the hint book, menus, the stick on the game-select screen, the b-pads carved in windy) is now the vita control bound to that button, at the same size, as if the game were made for the vita. remap a button and its picture follows.
+
+**new menu**
+- the port&#x27;s menu now opens with **select twice** (it was start + select) and is organised in pages: picture, buttons, sticks and aiming, game, cheats.
+- **aim with the camera stick** (off by default): while aiming, the right stick aims.
+- **aiming left/right and up/down** can each be inverted (up/down inverted, as the original, by default).
+- **skip intro**, and **cheats**: infinite health, infinite lives, max cash.
+
+**fixes and performance**
+- things behind no longer show through close geometry (windy&#x27;s ladder over the red beam, missing rails, and similar spots at some camera angles).
+- the game&#x27;s audio microcode reimplemented natively, bit-exact with the original and much lighter on the cpu.
+- faster vertex processing in the renderer.
+- speech bubble text no longer runs past the bubble in any language.
+- fixed a crash leaving spooky and a halt in windy with the 60 fps option on; windy&#x27;s beehive smoke no longer crashes.
+
+updating keeps your saves and settings. on 1.0.0 or 1.1.0 the game offers this update at start-up (needs enable unsafe homebrew).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/conker-vita/icon0.png" alt="Icono de Conker's Bad Fur Day" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · HenryKun55/conker-vita</div>
+                      <h2><a href="https://github.com/HenryKun55/conker-vita/releases/tag/v1.2.0" target="_blank" rel="noopener">Conker's Bad Fur Day</a></h2>
+                      <div class="release-name">v1.2.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.0</span>
+                    <span>2026-10-21 04:41 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release v1.2.0</div>
+                  
+                  <div class="body markdown-body"><h2>v1.2.0</h2>
+<p><strong>The Vita's buttons in the game</strong></p>
+<ul>
+<li>Every N64 button picture the game draws (speech bubbles, tutorials, the hint book, menus, the stick on the game-select screen, the B-pads carved in Windy) is now the Vita control bound to that button, at the same size, as if the game were made for the Vita. Remap a button and its picture follows.</li>
+</ul>
+<p><strong>New menu</strong></p>
+<ul>
+<li>The port's menu now opens with <strong>SELECT twice</strong> (it was START + SELECT) and is organised in pages: Picture, Buttons, Sticks and aiming, Game, Cheats.</li>
+<li><strong>Aim with the camera stick</strong> (off by default): while aiming, the right stick aims.</li>
+<li><strong>Aiming left/right and up/down</strong> can each be inverted (up/down inverted, as the original, by default).</li>
+<li><strong>Skip intro</strong>, and <strong>cheats</strong>: infinite health, infinite lives, max cash.</li>
+</ul>
+<p><strong>Fixes and performance</strong></p>
+<ul>
+<li>Things behind no longer show through close geometry (Windy's ladder over the red beam, missing rails, and similar spots at some camera angles).</li>
+<li>The game's audio microcode reimplemented natively, bit-exact with the original and much lighter on the CPU.</li>
+<li>Faster vertex processing in the renderer.</li>
+<li>Speech bubble text no longer runs past the bubble in any language.</li>
+<li>Fixed a crash leaving Spooky and a halt in Windy with the 60 fps option on; Windy's beehive smoke no longer crashes.</li>
+</ul>
+<p>Updating keeps your saves and settings. On 1.0.0 or 1.1.0 the game offers this update at start-up (needs Enable Unsafe Homebrew).</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/HenryKun55/conker-vita/releases/download/v1.2.0/conker.vpk" target="_blank" rel="noopener">⬇ conker.vpk · 8.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.1-beta1 1.3.1-beta1 ports test build for #14 (crash or freeze during police chases).
 
 - fixes a race between the audio thread and the police radio that could crash or freeze the game during chases.
@@ -238,9 +588,9 @@ no new game files are needed.">
                   <div class="meta">
                     <span class="tag">1.3.1-beta1</span>
                     <span>2026-10-21 01:46 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release 1.3.1-beta1</div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.3.1-beta1</div>
                   
                   <div class="body markdown-body"><p>Test build for #14 (crash or freeze during police chases).</p>
 <ul>
@@ -527,197 +877,6 @@ You can install it manually from <strong>Windows, macOS (Intel or Apple Silicon)
                   <div class="body markdown-body"><p>buildnum 4219</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 25.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="psvitaalive store psvitaalive store vegettosan/psvitaalive psvitaalive store 02.12 02.12 utilities # psvitaalive 02.12
-
-version **02.12** introduces major improvements to zip archive compatibility, installation recovery, storage management, and overall installation reliability.
-
-this release focuses on resolving extraction issues affecting homebrew ports with deeply nested directories, allowing users to recover previously downloaded zip archives without downloading them again, and improving automatic cleanup after successful installations.
-
-## what&#x27;s new
-
-### zip extraction and deep directory compatibility
-
-- fixed zip extraction issues affecting homebrew ports with deeply nested folder structures.
-- implemented a new directory staging system to work around playstation vita filesystem limitations.
-- added automatic detection and special handling of deeply nested zip archive entries.
-- improved compatibility with large zip and zip64 archives containing complex directory structures.
-- preserved original file paths and directory structures during extraction.
-- added safer directory validation to prevent accidental overwriting of existing user data.
-- improved error handling and recovery when directory operations cannot be completed.
-
-the new extraction system has been successfully tested on real playstation vita hardware with **the simpsons: hit &amp; run**, extracting 3,877 archive entries, including 56 files located in deeply nested directories. the game was confirmed to launch successfully after extraction.
-
-### zip recovery and offline installation
-
-- added a new **recovered zips** section to application details.
-- previously downloaded zip archives can now be extracted again without requiring another download.
-- each available zip archive appears as a separate selectable button displaying its filename.
-- added support for selecting and recovering multiple saved zip archives associated with the same application.
-- improved recovery navigation using both touchscreen and physical controls.
-- added automatic archive validation before starting recovery.
-- improved application and title id matching to prevent selecting archives belonging to other applications.
-- preserved the original extraction destination when retrying previously downloaded archives.
-- improved recovery handling for interrupted or failed extraction operations.
-
-### automatic archive cleanup and storage management
-
-- improved automatic cleanup of zip archives after successful extraction.
-- successfully installed zip archives and their recovery metadata are now removed when appropriate.
-- failed installations preserve the downloaded archive for later recovery.
-- prevented unrelated saved archives from being accidentally deleted.
-- improved cleanup handling when deep-directory extraction is required.
-- reduced unnecessary storage usage caused by successfully extracted archives remaining on the memory card.
-- maintained compatibility with zip archives preserved by previous psvitaalive versions.
-
-### download integrity and performance
-
-- optimized file assembly for parallel downloads using larger bounded buffers.
-- improved sha-1 checksum processing during multipart downloads.
-- reduced redundant file reading during archive verification.
-- improved handling of large downloads and archive processing.
-- preserved existing download integrity checks and automatic fallback mechanisms.
-- maintained compatibility with the adaptive download system introduced in version 02.11.
-
-### interface and usability improvements
-
-- added contextual recovery options directly to application details.
-- improved the layout of installation and recovery controls.
-- added dynamic interface adjustments when multiple saved zip archives are available.
-- improved scrolling, focus handling, and touchscreen interaction.
-- updated localization strings across all eight supported interface languages.
-- improved recovery diagnostics and installation status reporting.
-
-### additional changes
-
-- general stability and installation reliability improvements.
-- internal zip extraction and file management optimizations.
-- improved protection against invalid archive paths and unsafe filesystem operations.
-- homebrew catalog additions and metadata updates.
-- continued compatibility with existing download, installation, and recovery workflows.
-
-## installation
-
-download **psvitaalive.vpk** from the release assets and install it using vitashell.
-
-version 02.12 can be installed over an existing psvitaalive installation without requiring a fresh setup.
-
-existing settings and compatible cached data are preserved.
-
-## compatibility
-
-psvitaalive continues to support playstation vita and playstation tv, including existing homebrew installation workflows and supported psp, ps1, and ps vita content management features.
-
-the new deep-directory extraction improvements have been validated with specific archives on real hardware. compatibility may vary depending on archive structure, existing destination files, and storage conditions.
-
-zip archives are preserved when extraction fails, allowing recovery without unnecessarily repeating large downloads.
-
----
-
-**psvitaalive 02.12** focuses on making homebrew installation safer, more reliable, and more convenient, especially for large game ports and archives containing complex directory structures.
-
-thank you to the developers, contributors, testers, and playstation vita community members who continue to support the project through feedback, testing, and issue reports.
-
-your support helps keep the playstation vita community alive!">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png" alt="Icono de PSVitaAlive Store" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · VegettoSan/PSVitaAlive</div>
-                      <h2><a href="https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.12" target="_blank" rel="noopener">PSVitaAlive Store</a></h2>
-                      <div class="release-name">PSVitaAlive Store 02.12</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">02.12</span>
-                    <span>2026-10-19 07:02 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 02.12</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive oficial · 02.12</div>
-                  
-                  <div class="body markdown-body"><h1>PSVitaAlive 02.12</h1>
-<p>Version <strong>02.12</strong> introduces major improvements to ZIP archive compatibility, installation recovery, storage management, and overall installation reliability.</p>
-<p>This release focuses on resolving extraction issues affecting Homebrew ports with deeply nested directories, allowing users to recover previously downloaded ZIP archives without downloading them again, and improving automatic cleanup after successful installations.</p>
-<h2>What's New</h2>
-<h3>ZIP Extraction and Deep Directory Compatibility</h3>
-<ul>
-<li>Fixed ZIP extraction issues affecting Homebrew ports with deeply nested folder structures.</li>
-<li>Implemented a new directory staging system to work around PlayStation Vita filesystem limitations.</li>
-<li>Added automatic detection and special handling of deeply nested ZIP archive entries.</li>
-<li>Improved compatibility with large ZIP and ZIP64 archives containing complex directory structures.</li>
-<li>Preserved original file paths and directory structures during extraction.</li>
-<li>Added safer directory validation to prevent accidental overwriting of existing user data.</li>
-<li>Improved error handling and recovery when directory operations cannot be completed.</li>
-</ul>
-<p>The new extraction system has been successfully tested on real PlayStation Vita hardware with <strong>The Simpsons: Hit &amp; Run</strong>, extracting 3,877 archive entries, including 56 files located in deeply nested directories. The game was confirmed to launch successfully after extraction.</p>
-<h3>ZIP Recovery and Offline Installation</h3>
-<ul>
-<li>Added a new <strong>Recovered ZIPs</strong> section to application details.</li>
-<li>Previously downloaded ZIP archives can now be extracted again without requiring another download.</li>
-<li>Each available ZIP archive appears as a separate selectable button displaying its filename.</li>
-<li>Added support for selecting and recovering multiple saved ZIP archives associated with the same application.</li>
-<li>Improved recovery navigation using both touchscreen and physical controls.</li>
-<li>Added automatic archive validation before starting recovery.</li>
-<li>Improved application and Title ID matching to prevent selecting archives belonging to other applications.</li>
-<li>Preserved the original extraction destination when retrying previously downloaded archives.</li>
-<li>Improved recovery handling for interrupted or failed extraction operations.</li>
-</ul>
-<h3>Automatic Archive Cleanup and Storage Management</h3>
-<ul>
-<li>Improved automatic cleanup of ZIP archives after successful extraction.</li>
-<li>Successfully installed ZIP archives and their recovery metadata are now removed when appropriate.</li>
-<li>Failed installations preserve the downloaded archive for later recovery.</li>
-<li>Prevented unrelated saved archives from being accidentally deleted.</li>
-<li>Improved cleanup handling when deep-directory extraction is required.</li>
-<li>Reduced unnecessary storage usage caused by successfully extracted archives remaining on the memory card.</li>
-<li>Maintained compatibility with ZIP archives preserved by previous PSVitaAlive versions.</li>
-</ul>
-<h3>Download Integrity and Performance</h3>
-<ul>
-<li>Optimized file assembly for parallel downloads using larger bounded buffers.</li>
-<li>Improved SHA-1 checksum processing during multipart downloads.</li>
-<li>Reduced redundant file reading during archive verification.</li>
-<li>Improved handling of large downloads and archive processing.</li>
-<li>Preserved existing download integrity checks and automatic fallback mechanisms.</li>
-<li>Maintained compatibility with the adaptive download system introduced in version 02.11.</li>
-</ul>
-<h3>Interface and Usability Improvements</h3>
-<ul>
-<li>Added contextual recovery options directly to application details.</li>
-<li>Improved the layout of installation and recovery controls.</li>
-<li>Added dynamic interface adjustments when multiple saved ZIP archives are available.</li>
-<li>Improved scrolling, focus handling, and touchscreen interaction.</li>
-<li>Updated localization strings across all eight supported interface languages.</li>
-<li>Improved recovery diagnostics and installation status reporting.</li>
-</ul>
-<h3>Additional Changes</h3>
-<ul>
-<li>General stability and installation reliability improvements.</li>
-<li>Internal ZIP extraction and file management optimizations.</li>
-<li>Improved protection against invalid archive paths and unsafe filesystem operations.</li>
-<li>Homebrew catalog additions and metadata updates.</li>
-<li>Continued compatibility with existing download, installation, and recovery workflows.</li>
-</ul>
-<h2>Installation</h2>
-<p>Download <strong>PSVitaAlive.vpk</strong> from the release assets and install it using VitaShell.</p>
-<p>Version 02.12 can be installed over an existing PSVitaAlive installation without requiring a fresh setup.</p>
-<p>Existing settings and compatible cached data are preserved.</p>
-<h2>Compatibility</h2>
-<p>PSVitaAlive continues to support PlayStation Vita and PlayStation TV, including existing Homebrew installation workflows and supported PSP, PS1, and PS Vita content management features.</p>
-<p>The new deep-directory extraction improvements have been validated with specific archives on real hardware. Compatibility may vary depending on archive structure, existing destination files, and storage conditions.</p>
-<p>ZIP archives are preserved when extraction fails, allowing recovery without unnecessarily repeating large downloads.</p>
-<hr>
-<p><strong>PSVitaAlive 02.12</strong> focuses on making Homebrew installation safer, more reliable, and more convenient, especially for large game ports and archives containing complex directory structures.</p>
-<p>Thank you to the developers, contributors, testers, and PlayStation Vita community members who continue to support the project through feedback, testing, and issue reports.</p>
-<p>Your support helps keep the PlayStation Vita community alive!</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/VegettoSan/PSVitaAlive/releases/download/02.12/PSVitaAlive.vpk" target="_blank" rel="noopener">⬇ PSVitaAlive.vpk · 9.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -2608,67 +2767,6 @@ open an [issue](https://github.com/birchwoodgod/halo-ce-vita/issues) or ask on d
 <p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/BirchWoodGod/halo-ce-vita/issues">issue</a> or ask on Discord, and attach <code>ux0:data/haloce-vita/data/halo.log</code> (and <code>halo-prev.log</code> if the game closed).</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo.vpk" target="_blank" rel="noopener">⬇ halo.vpk · 4.6 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-ce-vita-server-1.1.0-linux-armhf.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.0-linux-armhf.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-ce-vita-server-1.1.0-linux-x86.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.0-linux-x86.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-update.txt" target="_blank" rel="noopener">halo-update.txt · 215.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/halo-update.txt.sig" target="_blank" rel="noopener">halo-update.txt.sig · 129.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/HaloCEVitaInstaller.exe" target="_blank" rel="noopener">HaloCEVitaInstaller.exe · 48.2 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.0/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 220.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="conker&#x27;s bad fur day conker&#x27;s bad fur day henrykun55/conker-vita v1.1.0 v1.1.0 ports ## v1.1.0
-
-**translations redone, faithful to the game**
-- all five translations (português, español, français, deutsch, italiano) rewritten to follow the original: swearing only where the game swears (the censorship option turns it into the game&#x27;s symbols), with local slang and accents for the farmhands, the cavemen, birdy, the professor and the rest.
-- text that was still in english is translated now: birdy the scarecrow, the queen bee, the professor and the panther king, berri&#x27;s answerphone, the great mighty poo, the tutorial book pages, menus, the legal screen and the credits.
-- the text language now follows your vita&#x27;s system language (it used to start in portuguese for everyone) until you pick one in the menu.
-- censorship is off by default.
-
-**optional up to 60 fps**
-- new &quot;frame rate&quot; option in the port menu (start + select): up to 60 fps by drawing a frame between each two of the game&#x27;s, where there&#x27;s time for it. off by default: shadows, footprints and dust still move at 30.
-
-**fixes**
-- no more freeze after a stall (e.g. taking a screenshot).
-- smoother frame pacing.
-- a short &quot;what&#x27;s new&quot; note on the boot screen, shown once.
-
-updating keeps your saves and settings. if you&#x27;re on 1.0.0, the game offers this update at start-up (needs enable unsafe homebrew).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/conker-vita/icon0.png" alt="Icono de Conker's Bad Fur Day" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · HenryKun55/conker-vita</div>
-                      <h2><a href="https://github.com/HenryKun55/conker-vita/releases/tag/v1.1.0" target="_blank" rel="noopener">Conker's Bad Fur Day</a></h2>
-                      <div class="release-name">v1.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.1.0</span>
-                    <span>2026-10-14 18:12 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0</div>
-                  
-                  <div class="body markdown-body"><h2>v1.1.0</h2>
-<p><strong>Translations redone, faithful to the game</strong></p>
-<ul>
-<li>All five translations (Português, Español, Français, Deutsch, Italiano) rewritten to follow the original: swearing only where the game swears (the censorship option turns it into the game's symbols), with local slang and accents for the farmhands, the cavemen, Birdy, the Professor and the rest.</li>
-<li>Text that was still in English is translated now: Birdy the scarecrow, the Queen Bee, the Professor and the Panther King, Berri's answerphone, the Great Mighty Poo, the tutorial book pages, menus, the legal screen and the credits.</li>
-<li>The text language now follows your Vita's system language (it used to start in Portuguese for everyone) until you pick one in the menu.</li>
-<li>Censorship is off by default.</li>
-</ul>
-<p><strong>Optional up to 60 fps</strong></p>
-<ul>
-<li>New &quot;Frame rate&quot; option in the port menu (START + SELECT): up to 60 fps by drawing a frame between each two of the game's, where there's time for it. Off by default: shadows, footprints and dust still move at 30.</li>
-</ul>
-<p><strong>Fixes</strong></p>
-<ul>
-<li>No more freeze after a stall (e.g. taking a screenshot).</li>
-<li>Smoother frame pacing.</li>
-<li>A short &quot;what's new&quot; note on the boot screen, shown once.</li>
-</ul>
-<p>Updating keeps your saves and settings. If you're on 1.0.0, the game offers this update at start-up (needs Enable Unsafe Homebrew).</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/HenryKun55/conker-vita/releases/download/v1.1.0/conker.vpk" target="_blank" rel="noopener">⬇ conker.vpk · 8.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27744,7 +27842,7 @@ Or Here -&gt; <a target="_blank" rel="noopener noreferrer" href="https://nomnomn
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-21 02:43 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-21 08:10 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

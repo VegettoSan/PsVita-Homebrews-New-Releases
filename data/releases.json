@@ -1,6 +1,104 @@
 [
   {
     "platform": "github",
+    "repo": "VegettoSan/PSVitaAlive",
+    "release_id": "419189819",
+    "tag": "02.13",
+    "name": "PsVita Alive Store 02.13",
+    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.13",
+    "published": "2026-10-21T05:27:33Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# PSVitaAlive 02.13\r\n\r\nVersion **02.13** introduces a completely redesigned keyboard system, expanded catalog filtering, improved installed-game detection, and important installation stability improvements.\r\n\r\nThis release focuses on making PSVitaAlive more stable, easier to navigate, and more reliable when managing Homebrew, PS Vita, PSP, and PS1 content.\r\n\r\n## What's New\r\n\r\n### New Built-in Keyboard\r\n\r\n- Completely replaced the native PlayStation Vita keyboard with a custom keyboard developed specifically for PSVitaAlive.\r\n- Eliminated the unstable native IME interaction that caused repeated crashes when opening the search keyboard.\r\n- Introduced an English QWERTY keyboard with dedicated number and special-character layouts.\r\n- Added full navigation using the D-pad, left analog stick, and touchscreen.\r\n- Added a dedicated right-side column containing SHIFT, Delete, Cancel, and OK.\r\n- Implemented persistent SHIFT mode, allowing users to switch between uppercase and lowercase letters.\r\n- Added automatic character deletion when holding the Delete button or Square.\r\n- Added smooth opening and closing animations.\r\n- Integrated the keyboard with the currently selected color theme.\r\n- Kept the catalog visible behind the keyboard using a translucent modal background.\r\n- Localized keyboard titles, buttons, and instructions across all eight supported interface languages.\r\n- Extended the new keyboard to custom ZIP extraction destination paths.\r\n\r\nThe new keyboard operates directly through vita2d, without relying on Sony's native IME for text input.\r\n\r\n### New Catalog Filtering System\r\n\r\n- Introduced a dedicated filtering panel accessible through the Square button in the full catalog.\r\n- Added category filters for Homebrew applications.\r\n- Added genre filters for PS Vita, PSP, and PS1 games.\r\n- Added filtering for applications containing Game Files or Data Files.\r\n- Added DLC filtering for supported game catalogs.\r\n- Added support for combining category, genre, installation-status, and text-search filters.\r\n- Improved filter navigation using physical controls and touchscreen.\r\n- Added scrolling support for filter menus with multiple options.\r\n- Improved filter button visibility, positioning, and text readability.\r\n- Added localized filter names and descriptions across all eight supported languages.\r\n- Automatically reset active filters when switching between catalogs.\r\n\r\nAvailable category and genre filters are optimized for each catalog.\r\n\r\n### Installed Applications and Games\r\n\r\n- Expanded installed-content detection across all four catalogs.\r\n- Added an **Installed** filter for Homebrew, PS Vita, PSP, and PS1.\r\n- Added **Updates Available** and **Version Not Recognized** filters for Homebrew.\r\n- Improved detection of installed PS Vita games through LiveArea.\r\n- Added detection of PSP installations through LiveArea and supported Adrenaline folders.\r\n- Added support for identifying PSP ISO, CSO, and EBOOT.PBP installations.\r\n- Improved PS1 installation detection, including compatible PBP content identifiers.\r\n- Added support for checking installations across available storage partitions.\r\n- Improved compatibility with regional Title IDs and alternative game identifiers.\r\n- Optimized installed-content scanning to reduce unnecessary filesystem operations.\r\n- Preserved conservative update detection when installed Homebrew versions cannot be reliably identified.\r\n\r\nCommercial game detection focuses on installation presence rather than attempting to determine game update versions.\r\n\r\n### Battery Indicator and Interface Improvements\r\n\r\n- Added a battery indicator to the main catalog header.\r\n- Displayed the current battery percentage alongside a visual battery icon.\r\n- Added battery charging and low-battery indicators.\r\n- Integrated battery information into the existing OLED screen protection mode.\r\n- Improved header alignment between the search bar, filter button, battery indicator, and clock.\r\n- Optimized battery polling to avoid unnecessary system calls.\r\n- Improved touchscreen alignment and interface responsiveness.\r\n- Maintained compatibility with existing color themes, font styles, and language settings.\r\n\r\n### ZIP Installation and Extraction Improvements\r\n\r\n- Fixed an issue where certain Game Files and Data Files ZIP archives could be incorrectly detected as VPK packages.\r\n- Improved installation routing to ensure these archives are extracted to their intended destinations instead of being sent to the VPK installer.\r\n- Added stronger validation for missing or invalid extraction destinations.\r\n- Improved handling of ZIP archives containing files that already exist in the destination.\r\n- Added temporary-file replacement and backup handling to protect existing files during extraction errors.\r\n- Improved cancellation behavior during archive downloads, extraction, and installation.\r\n- Prevented cancelled operations from being incorrectly reported as installation failures.\r\n- Improved handling of invalid VPK and ZIP archives to avoid unnecessary retries.\r\n- Preserved downloaded ZIP archives for recovery when applicable.\r\n\r\n### Storage and Installation Reliability\r\n\r\n- Improved free-space calculations based on the actual installation type.\r\n- Reduced unnecessary storage requirements when downloading compressed ZIP archives.\r\n- Improved storage checks for Game Files and Data Files.\r\n- Corrected size handling when secondary download links do not provide a file size.\r\n- Improved storage preflight behavior for system-managed PKG installations.\r\n- Added more appropriate storage margins for plugin downloads.\r\n- Improved installation retry handling and cancellation synchronization.\r\n- Reduced unnecessary retry attempts for permanently invalid archives.\r\n- Added automated regression tests for archive routing, installation retries, and storage calculations.\r\n\r\nThese improvements help prevent incorrect low-storage warnings while maintaining safety checks during extraction and installation.\r\n\r\n### Performance and Stability\r\n\r\n- Removed obsolete bulk-image startup download behavior.\r\n- Improved resource management around catalog navigation and text input.\r\n- Reduced unnecessary background activity while the custom keyboard is open.\r\n- Improved interface stability by removing the native IME lifecycle from text input.\r\n- Maintained the existing image-cache system and optimized catalog navigation.\r\n- Improved compatibility with existing installation and download workflows.\r\n- Updated internal documentation and regression testing procedures.\r\n\r\n### Localization and Catalog Updates\r\n\r\n- Updated interface translations across English, Spanish, French, German, Italian, Portuguese (Brazil), Portuguese (Portugal), and Russian.\r\n- Added localized keyboard controls, filter options, and installation-status labels.\r\n- Added new Homebrew catalog entries and developer profiles.\r\n- Updated selected application metadata and download information.\r\n- Maintained compatibility with the existing PSVitaAlive catalog architecture.\r\n\r\n## Installation\r\n\r\nDownload **PSVitaAlive.vpk** from the release assets and install it using VitaShell.\r\n\r\nVersion **02.13** can be installed directly over an existing PSVitaAlive installation. A fresh installation is not required.\r\n\r\nExisting settings, cached catalogs, and compatible downloaded data are preserved.\r\n\r\n## Compatibility\r\n\r\nPSVitaAlive continues to support PlayStation Vita and PlayStation TV, including existing Homebrew installation workflows and supported PS Vita, PSP, and PS1 content management features.\r\n\r\nThe new built-in keyboard uses an English QWERTY character layout while adapting its interface labels to the selected language.\r\n\r\nInstallation detection and archive extraction behavior may vary depending on the content format, storage configuration, and installed system plugins.\r\n\r\nSome installation and storage improvements require additional validation across different hardware and archive configurations.\r\n\r\n---\r\n\r\n**PSVitaAlive 02.13** represents a major improvement in user interaction, catalog management, and installation reliability.\r\n\r\nThe introduction of the custom keyboard removes the unstable native text-input workflow and provides a consistent interface designed specifically for PSVitaAlive.\r\n\r\nThank you to everyone who continues to support the project through testing, feedback, bug reports, and contributions.\r\n\r\nYour support helps keep the PlayStation Vita community alive.\r\n\r\n**Full Changelog:** https://github.com/VegettoSan/PSVitaAlive/compare/02.12...main",
+    "assets": [
+      {
+        "name": "PSVitaAlive.vpk",
+        "size": 9585043,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.13/PSVitaAlive.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "VegettoSan",
+    "homebrew_name": "PSVitaAlive Store",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
+    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+    "homebrew_id": "psvitaalive-store",
+    "homebrew_authors": [
+      "vegettosan"
+    ],
+    "homebrew_version": "02.13",
+    "catalog_apps": [
+      {
+        "id": "psvitaalive-store",
+        "name": "PSVitaAlive Store",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+        "category": "utilities",
+        "description": "Homebrew store and catalog for PlayStation Vita.",
+        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+        "version": "02.13",
+        "version_date": "2026-10-21",
+        "author_ids": [
+          "vegettosan"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive oficial · 02.13",
+    "catalog_version": "02.13"
+  },
+  {
+    "platform": "github",
+    "repo": "HenryKun55/conker-vita",
+    "release_id": "419166329",
+    "tag": "v1.2.0",
+    "name": "v1.2.0",
+    "url": "https://github.com/HenryKun55/conker-vita/releases/tag/v1.2.0",
+    "published": "2026-10-21T04:41:06Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## v1.2.0\n\n**The Vita's buttons in the game**\n- Every N64 button picture the game draws (speech bubbles, tutorials, the hint book, menus, the stick on the game-select screen, the B-pads carved in Windy) is now the Vita control bound to that button, at the same size, as if the game were made for the Vita. Remap a button and its picture follows.\n\n**New menu**\n- The port's menu now opens with **SELECT twice** (it was START + SELECT) and is organised in pages: Picture, Buttons, Sticks and aiming, Game, Cheats.\n- **Aim with the camera stick** (off by default): while aiming, the right stick aims.\n- **Aiming left/right and up/down** can each be inverted (up/down inverted, as the original, by default).\n- **Skip intro**, and **cheats**: infinite health, infinite lives, max cash.\n\n**Fixes and performance**\n- Things behind no longer show through close geometry (Windy's ladder over the red beam, missing rails, and similar spots at some camera angles).\n- The game's audio microcode reimplemented natively, bit-exact with the original and much lighter on the CPU.\n- Faster vertex processing in the renderer.\n- Speech bubble text no longer runs past the bubble in any language.\n- Fixed a crash leaving Spooky and a halt in Windy with the 60 fps option on; Windy's beehive smoke no longer crashes.\n\nUpdating keeps your saves and settings. On 1.0.0 or 1.1.0 the game offers this update at start-up (needs Enable Unsafe Homebrew).\n",
+    "assets": [
+      {
+        "name": "conker.vpk",
+        "size": 8569582,
+        "download_url": "https://github.com/HenryKun55/conker-vita/releases/download/v1.2.0/conker.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "HenryKun55",
+    "homebrew_name": "Conker's Bad Fur Day",
+    "homebrew_icon": "https://archive.org/download/conker-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Conker's Bad Fur Day native PS Vita port",
+    "homebrew_long_description": "Conker's Bad Fur Day (Rare, 2001) running natively on the PS Vita / PS TV. This is not an emulator: the N64 game was statically recompiled to C with N64Recomp (based on CBFD-Recompiled) and built for the Vita, with the N64's graphics drawn by a renderer written for the Vita's GPU (sceGxm) and the audio microcode running on the Vita's CPU.",
+    "homebrew_id": "conker-s-bad-fur-day",
+    "homebrew_authors": [
+      "henrykun55"
+    ],
+    "homebrew_version": "1.1.0",
+    "catalog_apps": [
+      {
+        "id": "conker-s-bad-fur-day",
+        "name": "Conker's Bad Fur Day",
+        "icon": "https://archive.org/download/conker-vita/icon0.png",
+        "category": "ports",
+        "description": "Conker's Bad Fur Day native PS Vita port",
+        "long_description": "Conker's Bad Fur Day (Rare, 2001) running natively on the PS Vita / PS TV. This is not an emulator: the N64 game was statically recompiled to C with N64Recomp (based on CBFD-Recompiled) and built for the Vita, with the N64's graphics drawn by a renderer written for the Vita's GPU (sceGxm) and the audio microcode running on the Vita's CPU.",
+        "version": "1.1.0",
+        "version_date": "2026-10-14",
+        "author_ids": [
+          "henrykun55"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.1.0 → release v1.2.0",
+    "catalog_version": "1.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "germanalvarez15/nfsmw-vita",
     "release_id": "419055707",
     "tag": "1.3.1-beta1",
@@ -28,7 +126,7 @@
     "homebrew_authors": [
       "germanalvarez15"
     ],
-    "homebrew_version": "1.1.0",
+    "homebrew_version": "1.3.0",
     "catalog_apps": [
       {
         "id": "nfs-most-wanted",
@@ -37,7 +135,7 @@
         "category": "ports",
         "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
         "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-        "version": "1.1.0",
+        "version": "1.3.0",
         "version_date": "2026-10-20",
         "author_ids": [
           "germanalvarez15"
@@ -45,8 +143,8 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1.0 → release 1.3.1-beta1",
-    "catalog_version": "1.1.0"
+    "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.3.1-beta1",
+    "catalog_version": "1.3.0"
   },
   {
     "platform": "github",
@@ -570,55 +668,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.continuous",
     "catalog_version": "v.continuous"
-  },
-  {
-    "platform": "github",
-    "repo": "VegettoSan/PSVitaAlive",
-    "release_id": "416995715",
-    "tag": "02.12",
-    "name": "PSVitaAlive Store 02.12",
-    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.12",
-    "published": "2026-10-19T07:02:46Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# PSVitaAlive 02.12\r\n\r\nVersion **02.12** introduces major improvements to ZIP archive compatibility, installation recovery, storage management, and overall installation reliability.\r\n\r\nThis release focuses on resolving extraction issues affecting Homebrew ports with deeply nested directories, allowing users to recover previously downloaded ZIP archives without downloading them again, and improving automatic cleanup after successful installations.\r\n\r\n## What's New\r\n\r\n### ZIP Extraction and Deep Directory Compatibility\r\n\r\n- Fixed ZIP extraction issues affecting Homebrew ports with deeply nested folder structures.\r\n- Implemented a new directory staging system to work around PlayStation Vita filesystem limitations.\r\n- Added automatic detection and special handling of deeply nested ZIP archive entries.\r\n- Improved compatibility with large ZIP and ZIP64 archives containing complex directory structures.\r\n- Preserved original file paths and directory structures during extraction.\r\n- Added safer directory validation to prevent accidental overwriting of existing user data.\r\n- Improved error handling and recovery when directory operations cannot be completed.\r\n\r\nThe new extraction system has been successfully tested on real PlayStation Vita hardware with **The Simpsons: Hit & Run**, extracting 3,877 archive entries, including 56 files located in deeply nested directories. The game was confirmed to launch successfully after extraction.\r\n\r\n### ZIP Recovery and Offline Installation\r\n\r\n- Added a new **Recovered ZIPs** section to application details.\r\n- Previously downloaded ZIP archives can now be extracted again without requiring another download.\r\n- Each available ZIP archive appears as a separate selectable button displaying its filename.\r\n- Added support for selecting and recovering multiple saved ZIP archives associated with the same application.\r\n- Improved recovery navigation using both touchscreen and physical controls.\r\n- Added automatic archive validation before starting recovery.\r\n- Improved application and Title ID matching to prevent selecting archives belonging to other applications.\r\n- Preserved the original extraction destination when retrying previously downloaded archives.\r\n- Improved recovery handling for interrupted or failed extraction operations.\r\n\r\n### Automatic Archive Cleanup and Storage Management\r\n\r\n- Improved automatic cleanup of ZIP archives after successful extraction.\r\n- Successfully installed ZIP archives and their recovery metadata are now removed when appropriate.\r\n- Failed installations preserve the downloaded archive for later recovery.\r\n- Prevented unrelated saved archives from being accidentally deleted.\r\n- Improved cleanup handling when deep-directory extraction is required.\r\n- Reduced unnecessary storage usage caused by successfully extracted archives remaining on the memory card.\r\n- Maintained compatibility with ZIP archives preserved by previous PSVitaAlive versions.\r\n\r\n### Download Integrity and Performance\r\n\r\n- Optimized file assembly for parallel downloads using larger bounded buffers.\r\n- Improved SHA-1 checksum processing during multipart downloads.\r\n- Reduced redundant file reading during archive verification.\r\n- Improved handling of large downloads and archive processing.\r\n- Preserved existing download integrity checks and automatic fallback mechanisms.\r\n- Maintained compatibility with the adaptive download system introduced in version 02.11.\r\n\r\n### Interface and Usability Improvements\r\n\r\n- Added contextual recovery options directly to application details.\r\n- Improved the layout of installation and recovery controls.\r\n- Added dynamic interface adjustments when multiple saved ZIP archives are available.\r\n- Improved scrolling, focus handling, and touchscreen interaction.\r\n- Updated localization strings across all eight supported interface languages.\r\n- Improved recovery diagnostics and installation status reporting.\r\n\r\n### Additional Changes\r\n\r\n- General stability and installation reliability improvements.\r\n- Internal ZIP extraction and file management optimizations.\r\n- Improved protection against invalid archive paths and unsafe filesystem operations.\r\n- Homebrew catalog additions and metadata updates.\r\n- Continued compatibility with existing download, installation, and recovery workflows.\r\n\r\n## Installation\r\n\r\nDownload **PSVitaAlive.vpk** from the release assets and install it using VitaShell.\r\n\r\nVersion 02.12 can be installed over an existing PSVitaAlive installation without requiring a fresh setup.\r\n\r\nExisting settings and compatible cached data are preserved.\r\n\r\n## Compatibility\r\n\r\nPSVitaAlive continues to support PlayStation Vita and PlayStation TV, including existing Homebrew installation workflows and supported PSP, PS1, and PS Vita content management features.\r\n\r\nThe new deep-directory extraction improvements have been validated with specific archives on real hardware. Compatibility may vary depending on archive structure, existing destination files, and storage conditions.\r\n\r\nZIP archives are preserved when extraction fails, allowing recovery without unnecessarily repeating large downloads.\r\n\r\n---\r\n\r\n**PSVitaAlive 02.12** focuses on making Homebrew installation safer, more reliable, and more convenient, especially for large game ports and archives containing complex directory structures.\r\n\r\nThank you to the developers, contributors, testers, and PlayStation Vita community members who continue to support the project through feedback, testing, and issue reports.\r\n\r\nYour support helps keep the PlayStation Vita community alive!",
-    "assets": [
-      {
-        "name": "PSVitaAlive.vpk",
-        "size": 9566980,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.12/PSVitaAlive.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VegettoSan",
-    "homebrew_name": "PSVitaAlive Store",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
-    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-    "homebrew_id": "psvitaalive-store",
-    "homebrew_authors": [
-      "vegettosan"
-    ],
-    "homebrew_version": "02.12",
-    "catalog_apps": [
-      {
-        "id": "psvitaalive-store",
-        "name": "PSVitaAlive Store",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-        "category": "utilities",
-        "description": "Homebrew store and catalog for PlayStation Vita.",
-        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-        "version": "02.12",
-        "version_date": "2026-10-19",
-        "author_ids": [
-          "vegettosan"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive oficial · 02.12",
-    "catalog_version": "02.12"
   },
   {
     "platform": "github",
@@ -2076,55 +2125,6 @@
         "version_date": "2026-10-09",
         "author_ids": [
           "birchwoodgod"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.1.0",
-    "catalog_version": "1.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "HenryKun55/conker-vita",
-    "release_id": "413034074",
-    "tag": "v1.1.0",
-    "name": "v1.1.0",
-    "url": "https://github.com/HenryKun55/conker-vita/releases/tag/v1.1.0",
-    "published": "2026-10-14T18:12:38Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## v1.1.0\n\n**Translations redone, faithful to the game**\n- All five translations (Português, Español, Français, Deutsch, Italiano) rewritten to follow the original: swearing only where the game swears (the censorship option turns it into the game's symbols), with local slang and accents for the farmhands, the cavemen, Birdy, the Professor and the rest.\n- Text that was still in English is translated now: Birdy the scarecrow, the Queen Bee, the Professor and the Panther King, Berri's answerphone, the Great Mighty Poo, the tutorial book pages, menus, the legal screen and the credits.\n- The text language now follows your Vita's system language (it used to start in Portuguese for everyone) until you pick one in the menu.\n- Censorship is off by default.\n\n**Optional up to 60 fps**\n- New \"Frame rate\" option in the port menu (START + SELECT): up to 60 fps by drawing a frame between each two of the game's, where there's time for it. Off by default: shadows, footprints and dust still move at 30.\n\n**Fixes**\n- No more freeze after a stall (e.g. taking a screenshot).\n- Smoother frame pacing.\n- A short \"what's new\" note on the boot screen, shown once.\n\nUpdating keeps your saves and settings. If you're on 1.0.0, the game offers this update at start-up (needs Enable Unsafe Homebrew).\n",
-    "assets": [
-      {
-        "name": "conker.vpk",
-        "size": 8520453,
-        "download_url": "https://github.com/HenryKun55/conker-vita/releases/download/v1.1.0/conker.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "HenryKun55",
-    "homebrew_name": "Conker's Bad Fur Day",
-    "homebrew_icon": "https://archive.org/download/conker-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Conker's Bad Fur Day native PS Vita port",
-    "homebrew_long_description": "Conker's Bad Fur Day (Rare, 2001) running natively on the PS Vita / PS TV. This is not an emulator: the N64 game was statically recompiled to C with N64Recomp (based on CBFD-Recompiled) and built for the Vita, with the N64's graphics drawn by a renderer written for the Vita's GPU (sceGxm) and the audio microcode running on the Vita's CPU.",
-    "homebrew_id": "conker-s-bad-fur-day",
-    "homebrew_authors": [
-      "henrykun55"
-    ],
-    "homebrew_version": "1.1.0",
-    "catalog_apps": [
-      {
-        "id": "conker-s-bad-fur-day",
-        "name": "Conker's Bad Fur Day",
-        "icon": "https://archive.org/download/conker-vita/icon0.png",
-        "category": "ports",
-        "description": "Conker's Bad Fur Day native PS Vita port",
-        "long_description": "Conker's Bad Fur Day (Rare, 2001) running natively on the PS Vita / PS TV. This is not an emulator: the N64 game was statically recompiled to C with N64Recomp (based on CBFD-Recompiled) and built for the Vita, with the N64's graphics drawn by a renderer written for the Vita's GPU (sceGxm) and the audio microcode running on the Vita's CPU.",
-        "version": "1.1.0",
-        "version_date": "2026-10-14",
-        "author_ids": [
-          "henrykun55"
         ]
       }
     ],
