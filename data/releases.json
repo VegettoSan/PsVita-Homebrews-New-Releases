@@ -1,6 +1,110 @@
 [
   {
     "platform": "github",
+    "repo": "ggdrn/KH-DAYS-VITA",
+    "release_id": "420005252",
+    "tag": "1.0",
+    "name": "1.0.0 — Release",
+    "url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/1.0",
+    "published": "2026-10-21T20:08:00Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Release 1.0 with OFF, SIMPLE and DETAIL single-screen modes.\r\n\r\n## Changes\r\n\r\n- Fixed the post-credits save-scene descriptor and restored the cleared-game save flow, Theater Mode and Zero Gear unlock path.\r\n- Added linked-ELF validation and diagnostic logging for the ending save scene.\r\n- Fixed the mostly black display that could occur after pausing and resuming the final Riku battle.\r\n- Fixed the brief widescreen 4:3 HUD corruption when opening the L shortcut.\r\n- Fixed the temporary stretched Darkside tentacle geometry in Holo-Mission: Two Keys.\r\n- Extended the pause dim overlay across the widescreen side borders, including cutscene menus with Continue / Skip.\r\n- Added three single-screen choices: OFF, SIMPLE and DETAIL.\r\n- SIMPLE uses static panels with fewer 2D texture effects and filters for better performance.\r\n- DETAIL keeps richer HUD composition, detailed 2D filtering and effects for a more immersive experience at a higher rendering cost.\r\n- Added mode-change logging and optimized DETAIL by skipping smoothing for pixels discarded by HUD masks.\r\n\r\n## Performance findings\r\n\r\nThe supplied performance log contains menu transitions, scene changes and different layouts, so it does not provide a controlled OFF/SIMPLE/DETAIL comparison. CPU percentages are thread-group measurements, not total hardware utilization, and GPU completion time is not a direct utilization percentage.\r\n\r\nThe existing port already requests the configured maximum clocks. Increasing thread activity to 100% would not guarantee more frames and could harm audio and synchronization. The log now records the effective clocks for verification.\r\n\r\n## Validation\r\n\r\n- Native Vita build completed successfully.\r\n- Post-link ending-scene check passed.\r\n- Composition, ending-link and GX3D host tests passed.\r\n- The VPK archive passed integrity validation.\r\n- Real Vita testing is still required for performance and the cutscene Continue / Skip overlay.\r\n\r\n## Test procedure\r\n\r\nUse the same mission, resolution, HUD and filter settings. Warm the DETAIL shader cache once, then test OFF, SIMPLE and DETAIL for at least 20 seconds each with the menu closed. Repeat with debug logging disabled. During a cutscene, test Continue and Skip in all three modes and confirm that the side borders dim and return to normal after closing the pause menu.",
+    "assets": [
+      {
+        "name": "khdays-vita-1.0.0.vpk",
+        "size": 3978235,
+        "download_url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/download/1.0/khdays-vita-1.0.0.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "ggdrn",
+    "homebrew_name": "Kingdom Hearts 358/2 Days",
+    "homebrew_icon": "https://archive.org/download/kh-days-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
+    "homebrew_long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
+    "homebrew_id": "kingdom-hearts-358-2-days",
+    "homebrew_authors": [
+      "ggdrn"
+    ],
+    "homebrew_version": "0.7.0",
+    "catalog_apps": [
+      {
+        "id": "kingdom-hearts-358-2-days",
+        "name": "Kingdom Hearts 358/2 Days",
+        "icon": "https://archive.org/download/kh-days-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
+        "long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
+        "version": "0.7.0",
+        "version_date": "2026-10-10",
+        "author_ids": [
+          "ggdrn"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.7.0 → release 1.0",
+    "catalog_version": "0.7.0"
+  },
+  {
+    "platform": "github",
+    "repo": "Grarak/mh3-wii",
+    "release_id": "419976979",
+    "tag": "0.2.1",
+    "name": "0.2.1",
+    "url": "https://github.com/Grarak/mh3-wii/releases/tag/0.2.1",
+    "published": "2026-10-21T19:39:57Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Fixed eggs breaking on area change\r\n- Fixed armour preview crash\r\n- Fixed cluster ammunition firing crash\r\n- Fixed loading crash after suspending system\r\n- Fixed shading in online lobby\r\n- Fixed shading of Ceadeus\r\n- Fixed water shimmer animation moving too quickly\r\n- Fixed performance drops when spinning with hammer underwater\r\n- Minor performance improvements\r\n- Implemented wiimote pointer with touchscreen inputs\r\n- Added 30fps framelimit\r\n- Fixed broken animations in some cutscenes\r\n- Added `PV` prefix in online name",
+    "assets": [
+      {
+        "name": "mh3-vita.vpk",
+        "size": 18773688,
+        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.2.1/mh3-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "MH3_do_not_download.elf",
+        "size": 138682108,
+        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.2.1/MH3_do_not_download.elf",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Grarak",
+    "homebrew_name": "Monster Hunter Tri",
+    "homebrew_icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Monster Hunter Tri for the PS Vita.",
+    "homebrew_long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
+    "homebrew_id": "monster-hunter-tri",
+    "homebrew_authors": [
+      "grarak"
+    ],
+    "homebrew_version": "0.1",
+    "catalog_apps": [
+      {
+        "id": "monster-hunter-tri",
+        "name": "Monster Hunter Tri",
+        "icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Monster Hunter Tri for the PS Vita.",
+        "long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
+        "version": "0.1",
+        "version_date": "2026-10-12",
+        "author_ids": [
+          "grarak"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1 → release 0.2.1",
+    "catalog_version": "0.1"
+  },
+  {
+    "platform": "github",
     "repo": "nzp-team/nzportable",
     "release_id": "419777135",
     "tag": "nightly",
@@ -194,55 +298,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 3.6.2 → release Update3.6.3",
     "catalog_version": "3.6.2"
-  },
-  {
-    "platform": "github",
-    "repo": "ggdrn/KH-DAYS-VITA",
-    "release_id": "419676164",
-    "tag": "v0.9.3",
-    "name": "khdays-vita v0.9.3",
-    "url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.9.3",
-    "published": "2026-10-21T14:48:46Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Install `khdays-vita-0.9.3.vpk` over the previous version with VitaShell. Saves and settings are\r\nkept.\r\n\r\n## Fixed\r\n\r\n- The post-credits scene opens the correct save screen and writes the cleared-game save. Theater\r\n  Mode and the Zero Gear unlock are available after completing the story.\r\n- Resuming from the pause menu during the final Riku battle no longer resets its dual-screen\r\n  presentation, which could leave most of the fight black.\r\n- In widescreen with the `hud = 1` 4:3 HUD, opening the shortcut with L no longer flashes a\r\n  corrupted top section of the interface. The transition now finishes its HUD picture before it\r\n  is displayed.\r\n- Fixed the temporary stretched geometry on Darkside in Holo-Mission **Two Keys** in widescreen.\r\n  The 3D projection is now fixed for a complete frame, so a display-screen switch cannot apply\r\n  different horizontal scales to adjacent model vertices. Position tests used by the target marker\r\n  use that same frame projection.\r\n\r\n## Known issues\r\n\r\n- Partner swap is experimental: the partner's weapon model, combos and animations stay its own.\r\n- Multiplayer is not available.",
-    "assets": [
-      {
-        "name": "khdays-vita-0.9.3.vpk",
-        "size": 3975797,
-        "download_url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.9.3/khdays-vita-0.9.3.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ggdrn",
-    "homebrew_name": "Kingdom Hearts 358/2 Days",
-    "homebrew_icon": "https://archive.org/download/kh-days-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
-    "homebrew_long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
-    "homebrew_id": "kingdom-hearts-358-2-days",
-    "homebrew_authors": [
-      "ggdrn"
-    ],
-    "homebrew_version": "0.7.0",
-    "catalog_apps": [
-      {
-        "id": "kingdom-hearts-358-2-days",
-        "name": "Kingdom Hearts 358/2 Days",
-        "icon": "https://archive.org/download/kh-days-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
-        "long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.",
-        "version": "0.7.0",
-        "version_date": "2026-10-10",
-        "author_ids": [
-          "ggdrn"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.7.0 → release v0.9.3",
-    "catalog_version": "0.7.0"
   },
   {
     "platform": "github",
@@ -2339,61 +2394,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 2.0",
     "catalog_version": "2.0"
-  },
-  {
-    "platform": "github",
-    "repo": "Grarak/mh3-wii",
-    "release_id": "410253119",
-    "tag": "0.1",
-    "name": "0.1",
-    "url": "https://github.com/Grarak/mh3-wii/releases/tag/0.1",
-    "published": "2026-10-12T06:24:46Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Initial release",
-    "assets": [
-      {
-        "name": "mh3-vita.vpk",
-        "size": 18308898,
-        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.1/mh3-vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "MH3_do_not_download.elf",
-        "size": 114269680,
-        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.1/MH3_do_not_download.elf",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Grarak",
-    "homebrew_name": "Monster Hunter Tri",
-    "homebrew_icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Monster Hunter Tri for the PS Vita.",
-    "homebrew_long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
-    "homebrew_id": "monster-hunter-tri",
-    "homebrew_authors": [
-      "grarak"
-    ],
-    "homebrew_version": "0.1",
-    "catalog_apps": [
-      {
-        "id": "monster-hunter-tri",
-        "name": "Monster Hunter Tri",
-        "icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "Monster Hunter Tri for the PS Vita.",
-        "long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
-        "version": "0.1",
-        "version_date": "2026-10-12",
-        "author_ids": [
-          "grarak"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.1",
-    "catalog_version": "0.1"
   },
   {
     "platform": "github",
@@ -33169,5 +33169,66 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.00",
     "catalog_version": "v.1.00"
+  },
+  {
+    "platform": "github",
+    "repo": "LukeZGD/DDLC-LOVE",
+    "release_id": "49645832",
+    "tag": "v1.2.3",
+    "name": "v1.2.3",
+    "url": "https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.2.3",
+    "published": "2021-09-16T07:03:42Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "**v1.2.3 Release:**\r\n- This release is for the PS Vita, PSP, and LÖVE versions. For other systems, [go to v1.1.9](https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.1.9)\r\n\r\n**v1.2.3 Changes:**\r\n- Update script-ch30.lua\r\n- Add back PSP support\r\n\r\n**Notes:**\r\n- Final release. With better ways to play DDLC on Switch and Vita platforms, DDLC-LOVE is no longer needed, and it will not be updated anymore.\r\n- For the PS Vita, I recommend using [Doki-Doki-Literature-Club-Vita](https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita) instead of DDLC-LOVE for the full desktop version (in Ren'Py) with support for mods.\r\n- For the Switch, support Team Salvato and buy DDLC Plus! The original DDLC (in Ren'Py) can also be run with Switchroot Ubuntu or Android with support for mods.",
+    "assets": [
+      {
+        "name": "DDLC-LOVE-PSP.zip",
+        "size": 87496174,
+        "download_url": "https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE-PSP.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "DDLC-LOVE.love",
+        "size": 104002404,
+        "download_url": "https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.love",
+        "content_type": "application/x-love-game"
+      },
+      {
+        "name": "DDLC-LOVE.vpk",
+        "size": 82065242,
+        "download_url": "https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "LukeZGD",
+    "homebrew_name": "DDLC-LOVE",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-ddlc-love/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Doki Doki Literature Club for PSVITA.",
+    "homebrew_long_description": "DDLC-LOVE is a Doki Doki Literature Club port programmed in Lua for the Nintendo Switch, 3DS, Sony PS Vita, PSP, and PS3!",
+    "homebrew_id": "ddlc-love",
+    "homebrew_authors": [
+      "lukezgd"
+    ],
+    "homebrew_version": "v1.2.3",
+    "catalog_apps": [
+      {
+        "id": "ddlc-love",
+        "name": "DDLC-LOVE",
+        "icon": "https://archive.org/download/psvitaalive-ddlc-love/icon0.png",
+        "category": "ports",
+        "description": "Port of Doki Doki Literature Club for PSVITA.",
+        "long_description": "DDLC-LOVE is a Doki Doki Literature Club port programmed in Lua for the Nintendo Switch, 3DS, Sony PS Vita, PSP, and PS3!",
+        "version": "v1.2.3",
+        "version_date": "2021-09-16",
+        "author_ids": [
+          "lukezgd"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v1.2.3",
+    "catalog_version": "v1.2.3"
   }
 ]

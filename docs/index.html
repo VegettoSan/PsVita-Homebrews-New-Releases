@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
         <div class="stat"><strong class="green">395</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>86</strong><span>pendientes</span></div>
-        <div class="stat"><strong>473</strong><span>GitHub</span></div>
+        <div class="stat"><strong>87</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,143 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita 1.0.0 — release 1.0 ports release 1.0 with off, simple and detail single-screen modes.
+
+## changes
+
+- fixed the post-credits save-scene descriptor and restored the cleared-game save flow, theater mode and zero gear unlock path.
+- added linked-elf validation and diagnostic logging for the ending save scene.
+- fixed the mostly black display that could occur after pausing and resuming the final riku battle.
+- fixed the brief widescreen 4:3 hud corruption when opening the l shortcut.
+- fixed the temporary stretched darkside tentacle geometry in holo-mission: two keys.
+- extended the pause dim overlay across the widescreen side borders, including cutscene menus with continue / skip.
+- added three single-screen choices: off, simple and detail.
+- simple uses static panels with fewer 2d texture effects and filters for better performance.
+- detail keeps richer hud composition, detailed 2d filtering and effects for a more immersive experience at a higher rendering cost.
+- added mode-change logging and optimized detail by skipping smoothing for pixels discarded by hud masks.
+
+## performance findings
+
+the supplied performance log contains menu transitions, scene changes and different layouts, so it does not provide a controlled off/simple/detail comparison. cpu percentages are thread-group measurements, not total hardware utilization, and gpu completion time is not a direct utilization percentage.
+
+the existing port already requests the configured maximum clocks. increasing thread activity to 100% would not guarantee more frames and could harm audio and synchronization. the log now records the effective clocks for verification.
+
+## validation
+
+- native vita build completed successfully.
+- post-link ending-scene check passed.
+- composition, ending-link and gx3d host tests passed.
+- the vpk archive passed integrity validation.
+- real vita testing is still required for performance and the cutscene continue / skip overlay.
+
+## test procedure
+
+use the same mission, resolution, hud and filter settings. warm the detail shader cache once, then test off, simple and detail for at least 20 seconds each with the menu closed. repeat with debug logging disabled. during a cutscene, test continue and skip in all three modes and confirm that the side borders dim and return to normal after closing the pause menu.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
+                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/1.0" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
+                      <div class="release-name">1.0.0 — Release</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.0</span>
+                    <span>2026-10-21 20:08 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.7.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.7.0 → release 1.0</div>
+                  
+                  <div class="body markdown-body"><p>Release 1.0 with OFF, SIMPLE and DETAIL single-screen modes.</p>
+<h2>Changes</h2>
+<ul>
+<li>Fixed the post-credits save-scene descriptor and restored the cleared-game save flow, Theater Mode and Zero Gear unlock path.</li>
+<li>Added linked-ELF validation and diagnostic logging for the ending save scene.</li>
+<li>Fixed the mostly black display that could occur after pausing and resuming the final Riku battle.</li>
+<li>Fixed the brief widescreen 4:3 HUD corruption when opening the L shortcut.</li>
+<li>Fixed the temporary stretched Darkside tentacle geometry in Holo-Mission: Two Keys.</li>
+<li>Extended the pause dim overlay across the widescreen side borders, including cutscene menus with Continue / Skip.</li>
+<li>Added three single-screen choices: OFF, SIMPLE and DETAIL.</li>
+<li>SIMPLE uses static panels with fewer 2D texture effects and filters for better performance.</li>
+<li>DETAIL keeps richer HUD composition, detailed 2D filtering and effects for a more immersive experience at a higher rendering cost.</li>
+<li>Added mode-change logging and optimized DETAIL by skipping smoothing for pixels discarded by HUD masks.</li>
+</ul>
+<h2>Performance findings</h2>
+<p>The supplied performance log contains menu transitions, scene changes and different layouts, so it does not provide a controlled OFF/SIMPLE/DETAIL comparison. CPU percentages are thread-group measurements, not total hardware utilization, and GPU completion time is not a direct utilization percentage.</p>
+<p>The existing port already requests the configured maximum clocks. Increasing thread activity to 100% would not guarantee more frames and could harm audio and synchronization. The log now records the effective clocks for verification.</p>
+<h2>Validation</h2>
+<ul>
+<li>Native Vita build completed successfully.</li>
+<li>Post-link ending-scene check passed.</li>
+<li>Composition, ending-link and GX3D host tests passed.</li>
+<li>The VPK archive passed integrity validation.</li>
+<li>Real Vita testing is still required for performance and the cutscene Continue / Skip overlay.</li>
+</ul>
+<h2>Test procedure</h2>
+<p>Use the same mission, resolution, HUD and filter settings. Warm the DETAIL shader cache once, then test OFF, SIMPLE and DETAIL for at least 20 seconds each with the menu closed. Repeat with debug logging disabled. During a cutscene, test Continue and Skip in all three modes and confirm that the side borders dim and return to normal after closing the pause menu.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/1.0/khdays-vita-1.0.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-1.0.0.vpk · 3.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="monster hunter tri monster hunter tri grarak/mh3-wii 0.2.1 0.2.1 ports - fixed eggs breaking on area change
+- fixed armour preview crash
+- fixed cluster ammunition firing crash
+- fixed loading crash after suspending system
+- fixed shading in online lobby
+- fixed shading of ceadeus
+- fixed water shimmer animation moving too quickly
+- fixed performance drops when spinning with hammer underwater
+- minor performance improvements
+- implemented wiimote pointer with touchscreen inputs
+- added 30fps framelimit
+- fixed broken animations in some cutscenes
+- added `pv` prefix in online name">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png" alt="Icono de Monster Hunter Tri" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Grarak/mh3-wii</div>
+                      <h2><a href="https://github.com/Grarak/mh3-wii/releases/tag/0.2.1" target="_blank" rel="noopener">Monster Hunter Tri</a></h2>
+                      <div class="release-name">0.2.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">0.2.1</span>
+                    <span>2026-10-21 19:39 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1 → release 0.2.1</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Fixed eggs breaking on area change</li>
+<li>Fixed armour preview crash</li>
+<li>Fixed cluster ammunition firing crash</li>
+<li>Fixed loading crash after suspending system</li>
+<li>Fixed shading in online lobby</li>
+<li>Fixed shading of Ceadeus</li>
+<li>Fixed water shimmer animation moving too quickly</li>
+<li>Fixed performance drops when spinning with hammer underwater</li>
+<li>Minor performance improvements</li>
+<li>Implemented wiimote pointer with touchscreen inputs</li>
+<li>Added 30fps framelimit</li>
+<li>Fixed broken animations in some cutscenes</li>
+<li>Added <code>PV</code> prefix in online name</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.1/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 17.9 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.1/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 132.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="nazi zombies portable nazi zombies portable nzp-team/nzportable 2.0.0-indev+20261021161251 nightly ports this is a nightly generated automagically. nightlies are generated at 3am est if changes are made to any component of the project in the past 24 hours. be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.
 changes in the following areas have been made since the last nightly:
 * quakec (game code)
@@ -405,73 +542,6 @@ no vpk includes ea files. real racing 3 is property of electronic arts.
 <p>☕ <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/RR3_v3.6.3_junto_a_la_1.4.0.vpk" target="_blank" rel="noopener">⬇ RR3_v3.6.3_junto_a_la_1.4.0.vpk · 8.2 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/configurador.bin" target="_blank" rel="noopener">configurador.bin · 3.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/eboot.bin" target="_blank" rel="noopener">eboot.bin · 1.5 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/RR3_v3.6.3_LGPL.zip" target="_blank" rel="noopener">RR3_v3.6.3_LGPL.zip · 251.9 KB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/RR3_v3.6.3_reemplaza_la_1.4.0.vpk" target="_blank" rel="noopener">RR3_v3.6.3_reemplaza_la_1.4.0.vpk · 8.2 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/rr3_version_9.txt" target="_blank" rel="noopener">rr3_version_9.txt · 1.0 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita khdays-vita v0.9.3 v0.9.3 ports install `khdays-vita-0.9.3.vpk` over the previous version with vitashell. saves and settings are
-kept.
-
-## fixed
-
-- the post-credits scene opens the correct save screen and writes the cleared-game save. theater
-  mode and the zero gear unlock are available after completing the story.
-- resuming from the pause menu during the final riku battle no longer resets its dual-screen
-  presentation, which could leave most of the fight black.
-- in widescreen with the `hud = 1` 4:3 hud, opening the shortcut with l no longer flashes a
-  corrupted top section of the interface. the transition now finishes its hud picture before it
-  is displayed.
-- fixed the temporary stretched geometry on darkside in holo-mission **two keys** in widescreen.
-  the 3d projection is now fixed for a complete frame, so a display-screen switch cannot apply
-  different horizontal scales to adjacent model vertices. position tests used by the target marker
-  use that same frame projection.
-
-## known issues
-
-- partner swap is experimental: the partner&#x27;s weapon model, combos and animations stay its own.
-- multiplayer is not available.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
-                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/v0.9.3" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
-                      <div class="release-name">khdays-vita v0.9.3</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.9.3</span>
-                    <span>2026-10-21 14:48 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.7.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.7.0 → release v0.9.3</div>
-                  
-                  <div class="body markdown-body"><p>Install <code>khdays-vita-0.9.3.vpk</code> over the previous version with VitaShell. Saves and settings are
-kept.</p>
-<h2>Fixed</h2>
-<ul>
-<li>The post-credits scene opens the correct save screen and writes the cleared-game save. Theater
-Mode and the Zero Gear unlock are available after completing the story.</li>
-<li>Resuming from the pause menu during the final Riku battle no longer resets its dual-screen
-presentation, which could leave most of the fight black.</li>
-<li>In widescreen with the <code>hud = 1</code> 4:3 HUD, opening the shortcut with L no longer flashes a
-corrupted top section of the interface. The transition now finishes its HUD picture before it
-is displayed.</li>
-<li>Fixed the temporary stretched geometry on Darkside in Holo-Mission <strong>Two Keys</strong> in widescreen.
-The 3D projection is now fixed for a complete frame, so a display-screen switch cannot apply
-different horizontal scales to adjacent model vertices. Position tests used by the target marker
-use that same frame projection.</li>
-</ul>
-<h2>Known issues</h2>
-<ul>
-<li>Partner swap is experimental: the partner's weapon model, combos and animations stay its own.</li>
-<li>Multiplayer is not available.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/v0.9.3/khdays-vita-0.9.3.vpk" target="_blank" rel="noopener">⬇ khdays-vita-0.9.3.vpk · 3.8 MB</a></div>
                 </div>
               </div>
             </article>
@@ -2969,33 +3039,6 @@ and that&#x27;s all i think!">
 <p>And that's all I think!</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/fr3dsp/sonic-r-vita/releases/download/v2.0/sonicr_vita.vpk" target="_blank" rel="noopener">⬇ sonicr_vita.vpk · 4.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="monster hunter tri monster hunter tri grarak/mh3-wii 0.1 0.1 ports initial release">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png" alt="Icono de Monster Hunter Tri" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Grarak/mh3-wii</div>
-                      <h2><a href="https://github.com/Grarak/mh3-wii/releases/tag/0.1" target="_blank" rel="noopener">Monster Hunter Tri</a></h2>
-                      <div class="release-name">0.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">0.1</span>
-                    <span>2026-10-12 06:24 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1</div>
-                  
-                  <div class="body markdown-body"><p>Initial release</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.1/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 17.5 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.1/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 109.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27691,10 +27734,61 @@ Or Here -&gt; <a target="_blank" rel="noopener noreferrer" href="https://nomnomn
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ddlc-love ddlc-love lukezgd/ddlc-love v1.2.3 v1.2.3 ports **v1.2.3 release:**
+- this release is for the ps vita, psp, and löve versions. for other systems, [go to v1.1.9](https://github.com/lukezgd/ddlc-love/releases/tag/v1.1.9)
+
+**v1.2.3 changes:**
+- update script-ch30.lua
+- add back psp support
+
+**notes:**
+- final release. with better ways to play ddlc on switch and vita platforms, ddlc-love is no longer needed, and it will not be updated anymore.
+- for the ps vita, i recommend using [doki-doki-literature-club-vita](https://github.com/sonicmastr/doki-doki-literature-club-vita) instead of ddlc-love for the full desktop version (in ren&#x27;py) with support for mods.
+- for the switch, support team salvato and buy ddlc plus! the original ddlc (in ren&#x27;py) can also be run with switchroot ubuntu or android with support for mods.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ddlc-love/icon0.png" alt="Icono de DDLC-LOVE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · LukeZGD/DDLC-LOVE</div>
+                      <h2><a href="https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.2.3" target="_blank" rel="noopener">DDLC-LOVE</a></h2>
+                      <div class="release-name">v1.2.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.3</span>
+                    <span>2021-09-16 07:03 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v1.2.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v1.2.3</div>
+                  
+                  <div class="body markdown-body"><p><strong>v1.2.3 Release:</strong></p>
+<ul>
+<li>This release is for the PS Vita, PSP, and LÖVE versions. For other systems, <a target="_blank" rel="noopener noreferrer" href="https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.1.9">go to v1.1.9</a></li>
+</ul>
+<p><strong>v1.2.3 Changes:</strong></p>
+<ul>
+<li>Update script-ch30.lua</li>
+<li>Add back PSP support</li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>Final release. With better ways to play DDLC on Switch and Vita platforms, DDLC-LOVE is no longer needed, and it will not be updated anymore.</li>
+<li>For the PS Vita, I recommend using <a target="_blank" rel="noopener noreferrer" href="https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita">Doki-Doki-Literature-Club-Vita</a> instead of DDLC-LOVE for the full desktop version (in Ren'Py) with support for mods.</li>
+<li>For the Switch, support Team Salvato and buy DDLC Plus! The original DDLC (in Ren'Py) can also be run with Switchroot Ubuntu or Android with support for mods.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.vpk" target="_blank" rel="noopener">⬇ DDLC-LOVE.vpk · 78.3 MB</a><a class="btn" href="https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE-PSP.zip" target="_blank" rel="noopener">DDLC-LOVE-PSP.zip · 83.4 MB</a><a class="btn" href="https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.love" target="_blank" rel="noopener">DDLC-LOVE.love · 99.2 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-21 19:03 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-21 23:51 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
