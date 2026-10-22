@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">397</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>87</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">393</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>89</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,276 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="mario kart wii mario kart wii boomannotjeff/mkwiita 1.4.0 1.4.0 ports # mkw vita 1.4.0
+
+bug fixes from the issue tracker, better items and effects, an award ceremony in vs, and smaller game files.
+
+&gt;[!important]
+&gt;**you must rebuild your game files.** the texture conversion and the packs changed, so most of the build runs again even if you kept your build folder from 1.3.0. run `build game files.bat` from this release&#x27;s source code, then copy `build\vita\data\mkw\` to your vita again.
+&gt;
+&gt;**delete the old `.pak` files and the `models` folder in `ux0:data/mkw/` before copying.** some ftp clients write over an existing file without shortening it, which leaves black menus and missing textures.
+
+
+## what&#x27;s new
+
+### fixed issues
+
+- **standstill mini-turbo** ([#4](https://github.com/boomannotjeff/mkwiita/issues/4)). holding r and cross while stopped now shows the smoke while it charges, then the sparks once it&#x27;s ready.
+- **items** ([#7](https://github.com/boomannotjeff/mkwiita/issues/7)):
+  - **blooper ink** fades faster while you boost, and a mushroom fades it out instead of popping it off.
+  - **dropped bananas** land and stay when you get hit, instead of sliding away forever.
+  - **triple shells** stay steady around you during a wheelie.
+  - **shrunk racers** get flattened when you run into them after a lightning.
+- **gba shy guy beach bombs** ([#9](https://github.com/boomannotjeff/mkwiita/issues/9)). the explosions are the right size again and no longer cover the sky.
+- **blue shell and wheelies** ([#13](https://github.com/boomannotjeff/mkwiita/issues/13)). a wheelie no longer lets you escape a blue shell.
+
+### items and effects
+
+- **blooper.** you now see the blooper itself before it inks you.
+- **blue shell.** it circles in front of the leader before diving, instead of out of view above them.
+- **red shell.** it no longer passes its target and comes back to hit them from the front.
+- **explosions.** the shy guy beach cannonballs, bowser&#x27;s castle fireballs and moonview highway&#x27;s bob-omb cars explode like a real bob-omb, not as a plain ball.
+- **fire.** flame pillars, fire snakes and the bowser&#x27;s castle fireball glow and fade like fire, instead of solid cylinders and balls.
+
+### racing
+
+- **rosalina&#x27;s luma.** her luma now floats along with her, as on the wii, in karts and on bikes, for you and the cpus. it follows the kart the way the original does: over hops, through cannons and zippers, and it shrinks or grows with lightning and mega mushrooms.
+- **tilt in the air.** stick up and down tilts your kart in the air, as on the wii. ghosts record it too.
+- **lightning pose.** the hit pose only plays during the spin, not for the whole time you&#x27;re small.
+- **standing wheelie.** holding a wheelie while stopped no longer makes the driver&#x27;s head bob back and forth.
+- **pause.** continue resumes right away. the race isn&#x27;t reloaded anymore.
+
+the luma, the tilt and the lightning pose are adapted from [mkw-3ds 0.6.0](https://github.com/minibandit/mkw-3ds/releases/tag/v0.6.0) (thanks epic0522 and minibandit).
+
+### menus
+
+- **award ceremony in vs.** after the last race of a vs set you now get the podium too, without the trophy and rank, which are for grand prix only. this isn&#x27;t in the original game.
+- **skipping the ceremony** during the winning run no longer leaves a black screen.
+- **full-screen menus.** the menus, title screen and movies now fill the whole screen. they had black bars at the top and bottom, left over from the 3ds screen.
+- **title screen and main menu.** the original widescreen art at the right proportions, instead of a stretched 4:3 crop.
+
+### smaller and faster
+
+- **smaller game files.** about 1.9 gb instead of 2.85 gb: identical files in the packs are stored once.
+- **faster builds.** each texture is converted once, even when many models use it, and temporary folders are deleted when a step is done (about 1.2 gb less on your pc).
+- **retro rewind vpk.** building it yourself now makes `mkw-retro-rewind.vpk`.
+
+everything above is in the retro rewind edition too.
+
+## known limitations
+
+- **fire:** no heat-shimmer yet, and the flame pillars&#x27; extra glow layer is missing.
+- **blooper and blue shell:** their positions on screen are set by eye and may still be adjusted.
+- **rosalina&#x27;s luma:** only in races for now, not in the menus or the award ceremony.
+- **staff ghosts:** you can&#x27;t race or watch them yet (in progress). their times already count toward unlocks.
+
+## install
+
+1. install `mkw.vpk` (attached below) with vitashell.
+2. rebuild your game files:
+   - get the source with git:
+     ```
+     git clone https://github.com/boomannotjeff/mkwiita.git
+     cd mkwiita
+     ```
+     already cloned? run `git pull` in that folder instead.
+   - run `build game files.bat`, which doesn&#x27;t need vitasdk, and drag in your mario kart wii (usa) disc image.
+3. on the vita, delete the old `.pak` files and the `models` folder in `ux0:data/mkw/`.
+4. copy the contents of `build\vita\data\mkw\` to `ux0:data/mkw/`. your licenses, times and ghosts stay.
+5. make sure `ur0:data/libshacccg.suprx` exists (run sharkf00d once).
+
+the vpk and the game files must come from the same release. the 1.4.0 vpk doesn&#x27;t work with 1.3.0 game files, or the other way round.
+
+the vpk contains no nintendo game files. please don&#x27;t share your built game files.
+
+## building it yourself
+- `build mkw vita.bat` builds the game files and the vpk (needs vitasdk).
+- `build game files.bat` builds only the game files.
+- see [building.md](building.md) for details.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/mkwiita/icon0.png" alt="Icono de Mario Kart Wii" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · boomannotjeff/mkwiita</div>
+                      <h2><a href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0" target="_blank" rel="noopener">Mario Kart Wii</a></h2>
+                      <div class="release-name">1.4.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.4.0</span>
+                    <span>2026-10-22 05:07 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.4.0</div>
+                  
+                  <div class="body markdown-body"><h1>MKW Vita 1.4.0</h1>
+<p>Bug fixes from the issue tracker, better items and effects, an award ceremony in VS, and smaller game files.</p>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>You must rebuild your game files.</strong> The texture conversion and the packs changed, so most of the build runs again even if you kept your build folder from 1.3.0. Run <code>Build Game Files.bat</code> from this release's source code, then copy <code>build\vita\data\mkw\</code> to your Vita again.</p>
+<p><strong>Delete the old <code>.pak</code> files and the <code>models</code> folder in <code>ux0:data/mkw/</code> before copying.</strong> Some FTP clients write over an existing file without shortening it, which leaves black menus and missing textures.</p>
+</blockquote>
+<h2>What's new</h2>
+<h3>Fixed issues</h3>
+<ul>
+<li><strong>Standstill mini-turbo</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/4">#4</a>). Holding R and Cross while stopped now shows the smoke while it charges, then the sparks once it's ready.</li>
+<li><strong>Items</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/7">#7</a>):<ul>
+<li><strong>Blooper ink</strong> fades faster while you boost, and a Mushroom fades it out instead of popping it off.</li>
+<li><strong>Dropped bananas</strong> land and stay when you get hit, instead of sliding away forever.</li>
+<li><strong>Triple shells</strong> stay steady around you during a wheelie.</li>
+<li><strong>Shrunk racers</strong> get flattened when you run into them after a Lightning.</li>
+</ul>
+</li>
+<li><strong>GBA Shy Guy Beach bombs</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/9">#9</a>). The explosions are the right size again and no longer cover the sky.</li>
+<li><strong>Blue Shell and wheelies</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/13">#13</a>). A wheelie no longer lets you escape a Blue Shell.</li>
+</ul>
+<h3>Items and effects</h3>
+<ul>
+<li><strong>Blooper.</strong> You now see the Blooper itself before it inks you.</li>
+<li><strong>Blue Shell.</strong> It circles in front of the leader before diving, instead of out of view above them.</li>
+<li><strong>Red Shell.</strong> It no longer passes its target and comes back to hit them from the front.</li>
+<li><strong>Explosions.</strong> The Shy Guy Beach cannonballs, Bowser's Castle fireballs and Moonview Highway's Bob-omb cars explode like a real Bob-omb, not as a plain ball.</li>
+<li><strong>Fire.</strong> Flame pillars, Fire Snakes and the Bowser's Castle fireball glow and fade like fire, instead of solid cylinders and balls.</li>
+</ul>
+<h3>Racing</h3>
+<ul>
+<li><strong>Rosalina's Luma.</strong> Her Luma now floats along with her, as on the Wii, in karts and on bikes, for you and the CPUs. It follows the kart the way the original does: over hops, through cannons and zippers, and it shrinks or grows with Lightning and Mega Mushrooms.</li>
+<li><strong>Tilt in the air.</strong> Stick up and down tilts your kart in the air, as on the Wii. Ghosts record it too.</li>
+<li><strong>Lightning pose.</strong> The hit pose only plays during the spin, not for the whole time you're small.</li>
+<li><strong>Standing wheelie.</strong> Holding a wheelie while stopped no longer makes the driver's head bob back and forth.</li>
+<li><strong>Pause.</strong> Continue resumes right away. The race isn't reloaded anymore.</li>
+</ul>
+<p>The Luma, the tilt and the Lightning pose are adapted from <a target="_blank" rel="noopener noreferrer" href="https://github.com/MiniBandit/MKW-3DS/releases/tag/v0.6.0">MKW-3DS 0.6.0</a> (thanks Epic0522 and MiniBandit).</p>
+<h3>Menus</h3>
+<ul>
+<li><strong>Award ceremony in VS.</strong> After the last race of a VS set you now get the podium too, without the trophy and rank, which are for Grand Prix only. This isn't in the original game.</li>
+<li><strong>Skipping the ceremony</strong> during the winning run no longer leaves a black screen.</li>
+<li><strong>Full-screen menus.</strong> The menus, title screen and movies now fill the whole screen. They had black bars at the top and bottom, left over from the 3DS screen.</li>
+<li><strong>Title screen and main menu.</strong> The original widescreen art at the right proportions, instead of a stretched 4:3 crop.</li>
+</ul>
+<h3>Smaller and faster</h3>
+<ul>
+<li><strong>Smaller game files.</strong> About 1.9 GB instead of 2.85 GB: identical files in the packs are stored once.</li>
+<li><strong>Faster builds.</strong> Each texture is converted once, even when many models use it, and temporary folders are deleted when a step is done (about 1.2 GB less on your PC).</li>
+<li><strong>Retro Rewind VPK.</strong> Building it yourself now makes <code>mkw-retro-rewind.vpk</code>.</li>
+</ul>
+<p>Everything above is in the Retro Rewind edition too.</p>
+<h2>Known limitations</h2>
+<ul>
+<li><strong>Fire:</strong> no heat-shimmer yet, and the flame pillars' extra glow layer is missing.</li>
+<li><strong>Blooper and Blue Shell:</strong> their positions on screen are set by eye and may still be adjusted.</li>
+<li><strong>Rosalina's Luma:</strong> only in races for now, not in the menus or the award ceremony.</li>
+<li><strong>Staff ghosts:</strong> you can't race or watch them yet (in progress). Their times already count toward unlocks.</li>
+</ul>
+<h2>Install</h2>
+<ol>
+<li>Install <code>mkw.vpk</code> (attached below) with VitaShell.</li>
+<li>Rebuild your game files:<ul>
+<li><p>Get the source with Git:</p>
+<pre><code>git clone https://github.com/boomannotjeff/mkwiita.git
+cd mkwiita
+</code></pre>
+<p>Already cloned? Run <code>git pull</code> in that folder instead.</p>
+</li>
+<li><p>Run <code>Build Game Files.bat</code>, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image.</p>
+</li>
+</ul>
+</li>
+<li>On the Vita, delete the old <code>.pak</code> files and the <code>models</code> folder in <code>ux0:data/mkw/</code>.</li>
+<li>Copy the contents of <code>build\vita\data\mkw\</code> to <code>ux0:data/mkw/</code>. Your licenses, times and ghosts stay.</li>
+<li>Make sure <code>ur0:data/libshacccg.suprx</code> exists (run ShaRKF00D once).</li>
+</ol>
+<p>The VPK and the game files must come from the same release. The 1.4.0 VPK doesn't work with 1.3.0 game files, or the other way round.</p>
+<p>The VPK contains no Nintendo game files. Please don't share your built game files.</p>
+<h2>Building it yourself</h2>
+<ul>
+<li><code>Build MKW Vita.bat</code> builds the game files and the VPK (needs VitaSDK).</li>
+<li><code>Build Game Files.bat</code> builds only the game files.</li>
+<li>See <a target="_blank" rel="noopener noreferrer" href="BUILDING.md">BUILDING.md</a> for details.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw-retro-rewind.vpk" target="_blank" rel="noopener">⬇ mkw-retro-rewind.vpk · 2.4 MB</a><a class="btn" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw.vpk" target="_blank" rel="noopener">mkw.vpk · 2.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="prince of persia classic prince of persia classic metalsyntax/prince-of-persia-classic-psvita-port prince of persia classic — ps vita port v01.50 v01.50 ports # v01.50 — full simplified chinese text
+
+**fixes missing characters when playing in chinese.**
+
+---
+
+## 🇪🇸 novedades
+
+### texto en chino completo
+- al jugar en chino faltaban caracteres en menús y textos. el juego usa `msmincho.ttf` (fuente japonesa), que no tiene 198 de los 700 caracteres de chino simplificado del juego; en android el sistema los completaba, en la vita quedaban en blanco.
+- se agrega una fuente de respaldo (`notoserifsc-subset.otf`, noto serif sc, licencia ofl) que solo se usa para los caracteres que la fuente original no tiene. el resto del texto se sigue dibujando con la fuente original.
+
+### instalación
+1. instala `popclassic.vpk` con vitashell (se conservan las partidas guardadas).
+
+---
+
+## 🇬🇧 release notes
+
+### full chinese text
+- some characters were missing when playing in chinese. the game uses `msmincho.ttf` (a japanese font) that lacks 198 of the game&#x27;s 700 simplified chinese characters; android filled them from system fonts, on vita they were blank.
+- added a fallback font (`notoserifsc-subset.otf`, noto serif sc, ofl license) used only for characters the original font lacks. all other text still renders with the original font.
+
+### installation
+1. install `popclassic.vpk` with vitashell (save data is kept).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/ppc-psvita/icon0.png" alt="Icono de Prince of Persia Classic" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/prince-of-persia-classic-psvita-port</div>
+                      <h2><a href="https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.50" target="_blank" rel="noopener">Prince of Persia Classic</a></h2>
+                      <div class="release-name">Prince of Persia Classic — PS Vita Port v01.50</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v01.50</span>
+                    <span>2026-10-22 03:10 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 01.45</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 01.45 → release v01.50</div>
+                  
+                  <div class="body markdown-body"><h1>v01.50 — Full Simplified Chinese Text</h1>
+<p><strong>Fixes missing characters when playing in Chinese.</strong></p>
+<hr>
+<h2>🇪🇸 Novedades</h2>
+<h3>Texto en chino completo</h3>
+<ul>
+<li>Al jugar en chino faltaban caracteres en menús y textos. El juego usa <code>msmincho.ttf</code> (fuente japonesa), que no tiene 198 de los 700 caracteres de chino simplificado del juego; en Android el sistema los completaba, en la Vita quedaban en blanco.</li>
+<li>Se agrega una fuente de respaldo (<code>NotoSerifSC-Subset.otf</code>, Noto Serif SC, licencia OFL) que solo se usa para los caracteres que la fuente original no tiene. El resto del texto se sigue dibujando con la fuente original.</li>
+</ul>
+<h3>Instalación</h3>
+<ol>
+<li>Instala <code>popclassic.vpk</code> con VitaShell (se conservan las partidas guardadas).</li>
+</ol>
+<hr>
+<h2>🇬🇧 Release Notes</h2>
+<h3>Full Chinese text</h3>
+<ul>
+<li>Some characters were missing when playing in Chinese. The game uses <code>msmincho.ttf</code> (a Japanese font) that lacks 198 of the game's 700 Simplified Chinese characters; Android filled them from system fonts, on Vita they were blank.</li>
+<li>Added a fallback font (<code>NotoSerifSC-Subset.otf</code>, Noto Serif SC, OFL license) used only for characters the original font lacks. All other text still renders with the original font.</li>
+</ul>
+<h3>Installation</h3>
+<ol>
+<li>Install <code>popclassic.vpk</code> with VitaShell (save data is kept).</li>
+</ol>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/download/v01.50/popclassic-v01.50.vpk" target="_blank" rel="noopener">⬇ popclassic-v01.50.vpk · 3.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita 1.0.0 — release 1.0 ports release 1.0 with off, simple and detail single-screen modes.
 
 ## changes
@@ -2406,198 +2676,6 @@ v0.3.0.</li>
 <p><code>KOTOR2.vpk</code> SHA-256: <code>170122bccd91fe27d2d8df33f05110e89a5296b45b2899d21e5c05299bd247a5</code></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/pyjabox/VitaKotor2/releases/download/v0.5.7/KOTOR2.vpk" target="_blank" rel="noopener">⬇ KOTOR2.vpk · 2.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="mario kart wii mario kart wii boomannotjeff/mkwiita 1.3.0 1.3.0 ports # mkw vita 1.3.0
-
-progression and licenses, a settings screen in the livearea, and battle upgrades.
-
-&gt;[!important]
-&gt;**you must rebuild your game files.** the menus now have new text baked in from your disc (license names, &quot;locked&quot;, &quot;unlocked!&quot;), so your current `ux0:data/mkw` files aren&#x27;t enough. run `build game files.bat` from this release&#x27;s source code, then copy `build\vita\data\mkw\` to your vita again. if you kept your build folder from 1.2.0, only the changed steps run, which takes a few minutes instead of the full build.
-
-
-## what&#x27;s new
-
-### licenses and progression
-
-- **licenses.** pick an empty slot on the license page and the vita&#x27;s keyboard asks for a name. each of the four licenses keeps its own unlocks, best times and ghosts.
-&gt;[!important]
-&gt;**don&#x27;t want to unlock things?** open settings from the livearea and turn on **unlock everything**. every character, vehicle, cup and mirror opens for every license, exactly like before. turn it off any time to get each license&#x27;s own progress back.
-- **unlock everything as on the wii.** new licenses start with the original roster. characters, karts, bikes, cups and mirror open the same way they do on the wii: cup wins, 1-star ranks, time trial courses played and expert staff ghosts. full list: [ign&#x27;s mario kart wii unlockables](https://www.ign.com/wikis/mario-kart-wii/unlockables).
-- **cups.** star and special cup, leaf and lightning cup open after trophies in the cups before them, in each class.
-- **mirror and the karts/bikes switch.** mirror opens after winning every 150cc cup. bikes in 50cc and karts in 100cc open after a trophy in every cup of that class.
-- **expert staff ghosts.** your time trial times are checked against each course&#x27;s real expert unlock time, read from your disc. unlocking them counts toward funky kong, baby luigi, tiny titan and the rest.
-- **locked and unlocked.** locked choices are dimmed and say &quot;locked&quot;. new unlocks pop up with &quot;unlocked!&quot; when you&#x27;re back in the menus.
-- **your old times stay.** best times and ghosts from 1.2.0 move into the first license you create.
-
-### settings
-
-tap the new **settings** button under start on the game&#x27;s livearea. close the game first.
-
-- **presets:**
-  - **performance:** a steady 60 fps.
-  - **default:** 45-60 fps with everything on.
-  - **quality:** 2x resolution with every effect at a locked 30 fps.
-  - the preset shows **custom** when you change things yourself.
-- **resolution** from 1 to 2. type a value or step it with left/right. the game restarts by itself to apply it.
-- **framerate, shadows, bloom, particles, object detail and minimap style.**
-- **unlock everything, delete a license, and reset to defaults.**
-- **save and start** or **save and exit.** circle leaves without saving.
-
-### battle
-
-- **random teams.** teams are shuffled at the start of every set, so you&#x27;re no longer always red. cpus, homing shells and name tags all follow the new teams.
-- **thicker team outlines** around the faces on the minimap.
-
-### coin runners
-
-- **hits drop coins.** getting hit drops up to 3 coins (or all you have). they fly out of your kart and anyone can grab them, cpus included. untaken coins vanish after 10 seconds.
-- **coins on the minimap.** every coin on the ground is a yellow dot. taken coins disappear until they respawn.
-- **coin sound.** picking up a coin plays the coin sound.
-- **half the starting coins.** each arena starts with half as many coins as before.
-
-### also new
-
-- **what&#x27;s new pop-up.** a one-time screen before the opening shows what each new version adds.
-
-## known limitations
-
-- **staff ghosts:** you can&#x27;t race or watch them yet (in progress). their times already count toward unlocks.
-- **ranks:** grand prix star ranks are estimated from your points.
-- **dropped coins:** they don&#x27;t check for walls or ledges, so one dropped next to a wall can end up inside it.
-- **settings button:** it only works when the game is closed.
-
-## install
-
-1. install `mkw.vpk` (attached below) with vitashell.
-2. rebuild your game files:
-   - get the source with git:
-     ```
-     git clone https://github.com/boomannotjeff/mkwiita.git
-     cd mkwiita
-     ```
-     already cloned? run `git pull` in that folder instead.
-   - run `build game files.bat`, which doesn&#x27;t need vitasdk, and drag in your mario kart wii (usa) disc image. if you kept your build folder, only the changed steps run.
-3. copy the contents of `build\vita\data\mkw\` to `ux0:data/mkw/`. your best times and ghosts stay and move into your first license.
-4. make sure `ur0:data/libshacccg.suprx` exists (run sharkf00d once).
-
-the vpk and the game files must come from the same release. the 1.3.0 vpk doesn&#x27;t work with 1.2.0 game files, or the other way round.
-
-the vpk contains no nintendo game files. please don&#x27;t share your built game files.
-
-## building it yourself
-- `build mkw vita.bat` builds the game files and the vpk (needs vitasdk).
-- `build game files.bat` builds only the game files.
-- see [building.md](building.md) for details.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/mkwiita/icon0.png" alt="Icono de Mario Kart Wii" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · boomannotjeff/mkwiita</div>
-                      <h2><a href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.3.0" target="_blank" rel="noopener">Mario Kart Wii</a></h2>
-                      <div class="release-name">1.3.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.3.0</span>
-                    <span>2026-10-16 07:04 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.0</div>
-                  
-                  <div class="body markdown-body"><h1>MKW Vita 1.3.0</h1>
-<p>Progression and licenses, a Settings screen in the LiveArea, and Battle upgrades.</p>
-<blockquote>
-<p>[!IMPORTANT]
-<strong>You must rebuild your game files.</strong> The menus now have new text baked in from your disc (license names, &quot;Locked&quot;, &quot;Unlocked!&quot;), so your current <code>ux0:data/mkw</code> files aren't enough. Run <code>Build Game Files.bat</code> from this release's source code, then copy <code>build\vita\data\mkw\</code> to your Vita again. If you kept your build folder from 1.2.0, only the changed steps run, which takes a few minutes instead of the full build.</p>
-</blockquote>
-<h2>What's new</h2>
-<h3>Licenses and progression</h3>
-<ul>
-<li><strong>Licenses.</strong> Pick an empty slot on the License page and the Vita's keyboard asks for a name. Each of the four licenses keeps its own unlocks, best times and ghosts.</li>
-</ul>
-<ul>
-<li><strong>Unlock everything as on the Wii.</strong> New licenses start with the original roster. Characters, karts, bikes, cups and Mirror open the same way they do on the Wii: cup wins, 1-star ranks, Time Trial courses played and expert staff ghosts. Full list: <a target="_blank" rel="noopener noreferrer" href="https://www.ign.com/wikis/mario-kart-wii/Unlockables">IGN's Mario Kart Wii unlockables</a>.</li>
-<li><strong>Cups.</strong> Star and Special Cup, Leaf and Lightning Cup open after trophies in the cups before them, in each class.</li>
-<li><strong>Mirror and the karts/bikes switch.</strong> Mirror opens after winning every 150cc cup. Bikes in 50cc and karts in 100cc open after a trophy in every cup of that class.</li>
-<li><strong>Expert staff ghosts.</strong> Your Time Trial times are checked against each course's real expert unlock time, read from your disc. Unlocking them counts toward Funky Kong, Baby Luigi, Tiny Titan and the rest.</li>
-<li><strong>Locked and Unlocked.</strong> Locked choices are dimmed and say &quot;Locked&quot;. New unlocks pop up with &quot;Unlocked!&quot; when you're back in the menus.</li>
-<li><strong>Your old times stay.</strong> Best times and ghosts from 1.2.0 move into the first license you create.</li>
-</ul>
-<blockquote>
-<p>[!IMPORTANT]
-<strong>Don't want to unlock things?</strong> Open Settings from the LiveArea and turn on <strong>Unlock Everything</strong>. Every character, vehicle, cup and Mirror opens for every license, exactly like before. Turn it off any time to get each license's own progress back.</p>
-</blockquote>
-<h3>Settings</h3>
-<p>Tap the new <strong>Settings</strong> button under Start on the game's LiveArea. Close the game first.</p>
-<ul>
-<li><strong>Presets:</strong><ul>
-<li><strong>Performance:</strong> a steady 60 FPS.</li>
-<li><strong>Default:</strong> 45-60 FPS with everything on.</li>
-<li><strong>Quality:</strong> 2x resolution with every effect at a locked 30 FPS.</li>
-<li>The preset shows <strong>Custom</strong> when you change things yourself.</li>
-</ul>
-</li>
-<li><strong>Resolution</strong> from 1 to 2. Type a value or step it with left/right. The game restarts by itself to apply it.</li>
-<li><strong>Framerate, shadows, bloom, particles, object detail and minimap style.</strong></li>
-<li><strong>Unlock Everything, delete a license, and Reset to Defaults.</strong></li>
-<li><strong>Save and Start</strong> or <strong>Save and Exit.</strong> Circle leaves without saving.</li>
-</ul>
-<h3>Battle</h3>
-<ul>
-<li><strong>Random teams.</strong> Teams are shuffled at the start of every set, so you're no longer always red. CPUs, homing shells and name tags all follow the new teams.</li>
-<li><strong>Thicker team outlines</strong> around the faces on the minimap.</li>
-</ul>
-<h3>Coin Runners</h3>
-<ul>
-<li><strong>Hits drop coins.</strong> Getting hit drops up to 3 coins (or all you have). They fly out of your kart and anyone can grab them, CPUs included. Untaken coins vanish after 10 seconds.</li>
-<li><strong>Coins on the minimap.</strong> Every coin on the ground is a yellow dot. Taken coins disappear until they respawn.</li>
-<li><strong>Coin sound.</strong> Picking up a coin plays the coin sound.</li>
-<li><strong>Half the starting coins.</strong> Each arena starts with half as many coins as before.</li>
-</ul>
-<h3>Also new</h3>
-<ul>
-<li><strong>What's new pop-up.</strong> A one-time screen before the opening shows what each new version adds.</li>
-</ul>
-<h2>Known limitations</h2>
-<ul>
-<li><strong>Staff ghosts:</strong> you can't race or watch them yet (in progress). Their times already count toward unlocks.</li>
-<li><strong>Ranks:</strong> Grand Prix star ranks are estimated from your points.</li>
-<li><strong>Dropped coins:</strong> they don't check for walls or ledges, so one dropped next to a wall can end up inside it.</li>
-<li><strong>Settings button:</strong> it only works when the game is closed.</li>
-</ul>
-<h2>Install</h2>
-<ol>
-<li>Install <code>mkw.vpk</code> (attached below) with VitaShell.</li>
-<li>Rebuild your game files:<ul>
-<li><p>Get the source with Git:</p>
-<pre><code>git clone https://github.com/boomannotjeff/mkwiita.git
-cd mkwiita
-</code></pre>
-<p>Already cloned? Run <code>git pull</code> in that folder instead.</p>
-</li>
-<li><p>Run <code>Build Game Files.bat</code>, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image. If you kept your build folder, only the changed steps run.</p>
-</li>
-</ul>
-</li>
-<li>Copy the contents of <code>build\vita\data\mkw\</code> to <code>ux0:data/mkw/</code>. Your best times and ghosts stay and move into your first license.</li>
-<li>Make sure <code>ur0:data/libshacccg.suprx</code> exists (run ShaRKF00D once).</li>
-</ol>
-<p>The VPK and the game files must come from the same release. The 1.3.0 VPK doesn't work with 1.2.0 game files, or the other way round.</p>
-<p>The VPK contains no Nintendo game files. Please don't share your built game files.</p>
-<h2>Building it yourself</h2>
-<ul>
-<li><code>Build MKW Vita.bat</code> builds the game files and the VPK (needs VitaSDK).</li>
-<li><code>Build Game Files.bat</code> builds only the game files.</li>
-<li>See <a target="_blank" rel="noopener noreferrer" href="BUILDING.md">BUILDING.md</a> for details.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.3.0/mkw.vpk" target="_blank" rel="noopener">⬇ mkw.vpk · 2.2 MB</a></div>
                 </div>
               </div>
             </article>
@@ -4972,165 +5050,6 @@ if there is one) with a note on what you were doing.</p>
 <img width="960" height="544" alt="2026-10-07-014611" src="https://github.com/user-attachments/assets/962bf2ad-7249-4c5f-ab93-eb371442b0cb"></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/kaziema/gevita/releases/download/1.0/GE007Vita.vpk" target="_blank" rel="noopener">⬇ GE007Vita.vpk · 2.1 MB</a><a class="btn" href="https://github.com/kaziema/gevita/releases/download/1.0/GE007Vita.vpk.sha256" target="_blank" rel="noopener">GE007Vita.vpk.sha256 · 80.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="prince of persia classic prince of persia classic metalsyntax/prince-of-persia-classic-psvita-port prince of persia classic — ps vita port v01.45 v01.45 ports # in-game controls remapping overlay, exit crash fix &amp; native trophies
-
-## 🇪🇸 novedades y características
-
-### 1. menú overlay de configuración de controles en juego (start + select)
-- **overlay integrado**: presiona **start + select** en cualquier momento para pausar el juego y abrir el menú flotante en pantalla sin salir de la partida.
-- **remapeo completo de acciones**: cambia las asignaciones de salto, ataque, agacharse, defensa, interacción, trepar y movimiento.
-- **controles flexibles**:
-  - presiona **cruz** sobre una acción para reemplazar su botón.
-  - presiona **cuadrado** para añadir un botón secundario (asignación múltiple).
-  - presiona **triángulo** para desasignar/limpiar una acción.
-  - presiona **círculo** o selecciona &quot;save and close&quot; para guardar y continuar jugando.
-- **calibración de zona muerta (analog deadzone)**: ajusta la sensibilidad de la palanca izquierda directamente desde el menú con las flechas izquierda/derecha.
-- **soporte para panel táctil trasero y pstv**:
-  - cuadrantes traseros asignables: `l2` (superior izq), `r2` (superior der), `l3` (inferior izq), `r3` (inferior der).
-  - reconocimiento nativo de gatillos l2/r2 físicos en playstation tv (dualshock 3 y dualshock 4).
-- **persistencia bidireccional (`controls.txt`)**: todas las configuraciones se guardan y leen automáticamente desde `ux0:data/popclassic/controls.txt`.
-
-### 2. solución al crash al salir del juego (botón salir / x)
-- se corrigió el cuelgue / core dump del sistema al seleccionar **&quot;sí&quot;** en el cuadro de confirmación de salida del juego.
-- se implementó la llamada nativa a `cocos2dxactivity_terminateprocess` con `scekernelexitprocess(0)`, cerrando el juego limpiamente hacia el livearea.
-
-### 3. sistema de trofeos ps vita (en desarrollo / work in progress)
-- se ha integrado la infraestructura nativa (`scenptrophy`) y el paquete de 18 trofeos (`popc00001_00/trophy.trp`) con platino exclusivo.
-- **estado actual**: los trofeos **aún no se muestran ni se instalan en la consola** debido a un error del diálogo del sistema (`0x800204c4`). se está trabajando activamente en la solución para una próxima actualización.
-
----
-
-## 🇬🇧 release notes
-
-### 1. in-game controls remapping overlay (start + select)
-- **built-in overlay menu**: press **start + select** at any time to open the configuration menu directly over the paused game.
-- **full action remapping**:
-  - **cross**: replace binding.
-  - **square**: add secondary binding.
-  - **triangle**: clear action binding.
-  - **circle / start**: save and close.
-- **analog deadzone calibration**: fine-tune analog stick sensitivity with d-pad left/right.
-- **rear touch quadrants &amp; pstv**: full support for vita rear touch quadrants (`l2`, `r2`, `l3`, `r3`) and native pstv dualshock triggers.
-- **persistent storage**: bidirectional reading and writing from `ux0:data/popclassic/controls.txt`.
-
-### 2. in-game exit crash fix
-- fixed a segmentation fault / data abort occurring when confirming exit in the game&#x27;s confirmation dialog.
-- intercepted `cocos2dxactivity_terminateprocess` via falsojni to gracefully exit to livearea via `scekernelexitprocess(0)`.
-
-### 3. ps vita trophies (work in progress)
-- native trophy subsystem structure and 18-trophy pack (`trophy.trp`) are implemented in code.
-- **current status**: trophies do **not work/install yet on device** (system setup dialog error `0x800204c4`). actively being worked on for the next update.
-
----
-
-### installation instructions
-1. install `popclassic.vpk` using vitashell.
-2. required plugins in `ur0:tai/config.txt`:
-   ```ini
-   *kernel
-   ur0:tai/kubridge.skprx
-   ur0:tai/fd_fix.skprx
-
-   *main
-   ur0:tai/notrpdrm.suprx
-   ```
-3. reboot the console if `notrpdrm` was just added or changed.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/ppc-psvita/icon0.png" alt="Icono de Prince of Persia Classic" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/prince-of-persia-classic-psvita-port</div>
-                      <h2><a href="https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.45" target="_blank" rel="noopener">Prince of Persia Classic</a></h2>
-                      <div class="release-name">Prince of Persia Classic — PS Vita Port v01.45</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v01.45</span>
-                    <span>2026-10-06 21:40 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 01.45</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 01.45</div>
-                  
-                  <div class="body markdown-body"><h1>In-Game Controls Remapping Overlay, Exit Crash Fix &amp; Native Trophies</h1>
-<h2>🇪🇸 Novedades y Características</h2>
-<h3>1. Menú Overlay de Configuración de Controles en Juego (START + SELECT)</h3>
-<ul>
-<li><strong>Overlay integrado</strong>: Presiona <strong>START + SELECT</strong> en cualquier momento para pausar el juego y abrir el menú flotante en pantalla sin salir de la partida.</li>
-<li><strong>Remapeo completo de acciones</strong>: Cambia las asignaciones de salto, ataque, agacharse, defensa, interacción, trepar y movimiento.</li>
-<li><strong>Controles flexibles</strong>:<ul>
-<li>Presiona <strong>Cruz</strong> sobre una acción para reemplazar su botón.</li>
-<li>Presiona <strong>Cuadrado</strong> para añadir un botón secundario (asignación múltiple).</li>
-<li>Presiona <strong>Triángulo</strong> para desasignar/limpiar una acción.</li>
-<li>Presiona <strong>Círculo</strong> o selecciona &quot;Save and Close&quot; para guardar y continuar jugando.</li>
-</ul>
-</li>
-<li><strong>Calibración de Zona Muerta (Analog Deadzone)</strong>: Ajusta la sensibilidad de la palanca izquierda directamente desde el menú con las flechas Izquierda/Derecha.</li>
-<li><strong>Soporte para Panel Táctil Trasero y PSTV</strong>:<ul>
-<li>Cuadrantes traseros asignables: <code>L2</code> (superior izq), <code>R2</code> (superior der), <code>L3</code> (inferior izq), <code>R3</code> (inferior der).</li>
-<li>Reconocimiento nativo de gatillos L2/R2 físicos en PlayStation TV (DualShock 3 y DualShock 4).</li>
-</ul>
-</li>
-<li><strong>Persistencia bidireccional (<code>controls.txt</code>)</strong>: Todas las configuraciones se guardan y leen automáticamente desde <code>ux0:data/popclassic/controls.txt</code>.</li>
-</ul>
-<h3>2. Solución al Crash al Salir del Juego (Botón Salir / X)</h3>
-<ul>
-<li>Se corrigió el cuelgue / core dump del sistema al seleccionar <strong>&quot;Sí&quot;</strong> en el cuadro de confirmación de salida del juego.</li>
-<li>Se implementó la llamada nativa a <code>Cocos2dxActivity_terminateProcess</code> con <code>sceKernelExitProcess(0)</code>, cerrando el juego limpiamente hacia el LiveArea.</li>
-</ul>
-<h3>3. Sistema de Trofeos PS Vita (En desarrollo / Work in Progress)</h3>
-<ul>
-<li>Se ha integrado la infraestructura nativa (<code>SceNpTrophy</code>) y el paquete de 18 trofeos (<code>POPC00001_00/TROPHY.TRP</code>) con Platino exclusivo.</li>
-<li><strong>Estado actual</strong>: Los trofeos <strong>aún no se muestran ni se instalan en la consola</strong> debido a un error del diálogo del sistema (<code>0x800204C4</code>). Se está trabajando activamente en la solución para una próxima actualización.</li>
-</ul>
-<hr>
-<h2>🇬🇧 Release Notes</h2>
-<h3>1. In-Game Controls Remapping Overlay (START + SELECT)</h3>
-<ul>
-<li><strong>Built-in Overlay Menu</strong>: Press <strong>START + SELECT</strong> at any time to open the configuration menu directly over the paused game.</li>
-<li><strong>Full Action Remapping</strong>:<ul>
-<li><strong>Cross</strong>: Replace binding.</li>
-<li><strong>Square</strong>: Add secondary binding.</li>
-<li><strong>Triangle</strong>: Clear action binding.</li>
-<li><strong>Circle / Start</strong>: Save and close.</li>
-</ul>
-</li>
-<li><strong>Analog Deadzone Calibration</strong>: Fine-tune analog stick sensitivity with D-Pad Left/Right.</li>
-<li><strong>Rear Touch Quadrants &amp; PSTV</strong>: Full support for Vita rear touch quadrants (<code>L2</code>, <code>R2</code>, <code>L3</code>, <code>R3</code>) and native PSTV DualShock triggers.</li>
-<li><strong>Persistent Storage</strong>: Bidirectional reading and writing from <code>ux0:data/popclassic/controls.txt</code>.</li>
-</ul>
-<h3>2. In-Game Exit Crash Fix</h3>
-<ul>
-<li>Fixed a segmentation fault / data abort occurring when confirming exit in the game's confirmation dialog.</li>
-<li>Intercepted <code>Cocos2dxActivity_terminateProcess</code> via FalsoJNI to gracefully exit to LiveArea via <code>sceKernelExitProcess(0)</code>.</li>
-</ul>
-<h3>3. PS Vita Trophies (Work in Progress)</h3>
-<ul>
-<li>Native trophy subsystem structure and 18-trophy pack (<code>TROPHY.TRP</code>) are implemented in code.</li>
-<li><strong>Current status</strong>: Trophies do <strong>not work/install yet on device</strong> (system setup dialog error <code>0x800204C4</code>). Actively being worked on for the next update.</li>
-</ul>
-<hr>
-<h3>Installation Instructions</h3>
-<ol>
-<li>Install <code>popclassic.vpk</code> using VitaShell.</li>
-<li>Required plugins in <code>ur0:tai/config.txt</code>:<pre><code class="language-ini">*KERNEL
-ur0:tai/kubridge.skprx
-ur0:tai/fd_fix.skprx
-
-*main
-ur0:tai/NoTrpDrm.suprx
-</code></pre>
-</li>
-<li>Reboot the console if <code>NoTrpDrm</code> was just added or changed.</li>
-</ol>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/download/v01.45/popclassic-v01.46.vpk" target="_blank" rel="noopener">⬇ popclassic-v01.46.vpk · 3.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27785,69 +27704,10 @@ Or Here -&gt; <a target="_blank" rel="noopener noreferrer" href="https://nomnomn
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="doki doki literature club vita doki doki literature club vita sonicmastr/doki-doki-literature-club-vita doki doki literature club vita v1.01 ports install instructions in readme">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-doki-doki-literature-club-vita/icon0.png" alt="Icono de Doki Doki Literature Club Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · SonicMastr/Doki-Doki-Literature-Club-Vita</div>
-                      <h2><a href="https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/tag/v1.01" target="_blank" rel="noopener">Doki Doki Literature Club Vita</a></h2>
-                      <div class="release-name">Doki Doki Literature Club Vita</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.01</span>
-                    <span>2021-09-15 23:20 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v1.01</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v1.01</div>
-                  
-                  <div class="body markdown-body"><p>Install Instructions in README</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/download/v1.01/Doki.Doki.Literature.Club-01.01.vpk" target="_blank" rel="noopener">⬇ Doki.Doki.Literature.Club-01.01.vpk · 16.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="gemrb gemrb northfear/gemrb-vita v0.8.8-vita.7 v0.8.8-vita.7 ports - improved rendering performance (updated to latest sdl 1.2 with hardware acceleration)
-
-edit: updated 31/10/21">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-gemrb/icon0.png" alt="Icono de GemRB" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Northfear/gemrb-vita</div>
-                      <h2><a href="https://github.com/Northfear/gemrb-vita/releases/tag/v0.8.8-vita.7" target="_blank" rel="noopener">GemRB</a></h2>
-                      <div class="release-name">v0.8.8-vita.7</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.8.8-vita.7</span>
-                    <span>2021-09-01 11:57 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.8.8-vita.7</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.8.8-vita.7</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Improved rendering performance (updated to latest SDL 1.2 with hardware acceleration)</li>
-</ul>
-<p>Edit: Updated 31/10/21</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb.vpk" target="_blank" rel="noopener">⬇ gemrb.vpk · 4.7 MB</a><a class="btn" href="https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb_data.zip" target="_blank" rel="noopener">gemrb_data.zip · 1.2 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-22 02:41 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-22 08:10 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

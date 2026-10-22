@@ -1,6 +1,112 @@
 [
   {
     "platform": "github",
+    "repo": "boomannotjeff/mkwiita",
+    "release_id": "420327542",
+    "tag": "1.4.0",
+    "name": "1.4.0",
+    "url": "https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0",
+    "published": "2026-10-22T05:07:09Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# MKW Vita 1.4.0\r\n\r\nBug fixes from the issue tracker, better items and effects, an award ceremony in VS, and smaller game files.\r\n\r\n>[!IMPORTANT]\r\n>**You must rebuild your game files.** The texture conversion and the packs changed, so most of the build runs again even if you kept your build folder from 1.3.0. Run `Build Game Files.bat` from this release's source code, then copy `build\\vita\\data\\mkw\\` to your Vita again.\r\n>\r\n>**Delete the old `.pak` files and the `models` folder in `ux0:data/mkw/` before copying.** Some FTP clients write over an existing file without shortening it, which leaves black menus and missing textures.\r\n\r\n\r\n## What's new\r\n\r\n### Fixed issues\r\n\r\n- **Standstill mini-turbo** ([#4](https://github.com/boomannotjeff/mkwiita/issues/4)). Holding R and Cross while stopped now shows the smoke while it charges, then the sparks once it's ready.\r\n- **Items** ([#7](https://github.com/boomannotjeff/mkwiita/issues/7)):\r\n  - **Blooper ink** fades faster while you boost, and a Mushroom fades it out instead of popping it off.\r\n  - **Dropped bananas** land and stay when you get hit, instead of sliding away forever.\r\n  - **Triple shells** stay steady around you during a wheelie.\r\n  - **Shrunk racers** get flattened when you run into them after a Lightning.\r\n- **GBA Shy Guy Beach bombs** ([#9](https://github.com/boomannotjeff/mkwiita/issues/9)). The explosions are the right size again and no longer cover the sky.\r\n- **Blue Shell and wheelies** ([#13](https://github.com/boomannotjeff/mkwiita/issues/13)). A wheelie no longer lets you escape a Blue Shell.\r\n\r\n### Items and effects\r\n\r\n- **Blooper.** You now see the Blooper itself before it inks you.\r\n- **Blue Shell.** It circles in front of the leader before diving, instead of out of view above them.\r\n- **Red Shell.** It no longer passes its target and comes back to hit them from the front.\r\n- **Explosions.** The Shy Guy Beach cannonballs, Bowser's Castle fireballs and Moonview Highway's Bob-omb cars explode like a real Bob-omb, not as a plain ball.\r\n- **Fire.** Flame pillars, Fire Snakes and the Bowser's Castle fireball glow and fade like fire, instead of solid cylinders and balls.\r\n\r\n### Racing\r\n\r\n- **Rosalina's Luma.** Her Luma now floats along with her, as on the Wii, in karts and on bikes, for you and the CPUs. It follows the kart the way the original does: over hops, through cannons and zippers, and it shrinks or grows with Lightning and Mega Mushrooms.\r\n- **Tilt in the air.** Stick up and down tilts your kart in the air, as on the Wii. Ghosts record it too.\r\n- **Lightning pose.** The hit pose only plays during the spin, not for the whole time you're small.\r\n- **Standing wheelie.** Holding a wheelie while stopped no longer makes the driver's head bob back and forth.\r\n- **Pause.** Continue resumes right away. The race isn't reloaded anymore.\r\n\r\nThe Luma, the tilt and the Lightning pose are adapted from [MKW-3DS 0.6.0](https://github.com/MiniBandit/MKW-3DS/releases/tag/v0.6.0) (thanks Epic0522 and MiniBandit).\r\n\r\n### Menus\r\n\r\n- **Award ceremony in VS.** After the last race of a VS set you now get the podium too, without the trophy and rank, which are for Grand Prix only. This isn't in the original game.\r\n- **Skipping the ceremony** during the winning run no longer leaves a black screen.\r\n- **Full-screen menus.** The menus, title screen and movies now fill the whole screen. They had black bars at the top and bottom, left over from the 3DS screen.\r\n- **Title screen and main menu.** The original widescreen art at the right proportions, instead of a stretched 4:3 crop.\r\n\r\n### Smaller and faster\r\n\r\n- **Smaller game files.** About 1.9 GB instead of 2.85 GB: identical files in the packs are stored once.\r\n- **Faster builds.** Each texture is converted once, even when many models use it, and temporary folders are deleted when a step is done (about 1.2 GB less on your PC).\r\n- **Retro Rewind VPK.** Building it yourself now makes `mkw-retro-rewind.vpk`.\r\n\r\nEverything above is in the Retro Rewind edition too.\r\n\r\n## Known limitations\r\n\r\n- **Fire:** no heat-shimmer yet, and the flame pillars' extra glow layer is missing.\r\n- **Blooper and Blue Shell:** their positions on screen are set by eye and may still be adjusted.\r\n- **Rosalina's Luma:** only in races for now, not in the menus or the award ceremony.\r\n- **Staff ghosts:** you can't race or watch them yet (in progress). Their times already count toward unlocks.\r\n\r\n## Install\r\n\r\n1. Install `mkw.vpk` (attached below) with VitaShell.\r\n2. Rebuild your game files:\r\n   - Get the source with Git:\r\n     ```\r\n     git clone https://github.com/boomannotjeff/mkwiita.git\r\n     cd mkwiita\r\n     ```\r\n     Already cloned? Run `git pull` in that folder instead.\r\n   - Run `Build Game Files.bat`, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image.\r\n3. On the Vita, delete the old `.pak` files and the `models` folder in `ux0:data/mkw/`.\r\n4. Copy the contents of `build\\vita\\data\\mkw\\` to `ux0:data/mkw/`. Your licenses, times and ghosts stay.\r\n5. Make sure `ur0:data/libshacccg.suprx` exists (run ShaRKF00D once).\r\n\r\nThe VPK and the game files must come from the same release. The 1.4.0 VPK doesn't work with 1.3.0 game files, or the other way round.\r\n\r\nThe VPK contains no Nintendo game files. Please don't share your built game files.\r\n\r\n## Building it yourself\r\n- `Build MKW Vita.bat` builds the game files and the VPK (needs VitaSDK).\r\n- `Build Game Files.bat` builds only the game files.\r\n- See [BUILDING.md](BUILDING.md) for details.\r\n",
+    "assets": [
+      {
+        "name": "mkw-retro-rewind.vpk",
+        "size": 2484328,
+        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw-retro-rewind.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "mkw.vpk",
+        "size": 2322642,
+        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "boomannotjeff",
+    "homebrew_name": "Mario Kart Wii",
+    "homebrew_icon": "https://archive.org/download/mkwiita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
+    "homebrew_long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
+    "homebrew_id": "mario-kart-wii",
+    "homebrew_authors": [
+      "boomannotjeff"
+    ],
+    "homebrew_version": "1.3.0",
+    "catalog_apps": [
+      {
+        "id": "mario-kart-wii",
+        "name": "Mario Kart Wii",
+        "icon": "https://archive.org/download/mkwiita/icon0.png",
+        "category": "ports",
+        "description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
+        "long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
+        "version": "1.3.0",
+        "version_date": "2026-10-16",
+        "author_ids": [
+          "boomannotjeff"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.4.0",
+    "catalog_version": "1.3.0"
+  },
+  {
+    "platform": "github",
+    "repo": "MetalSyntax/prince-of-persia-classic-psvita-port",
+    "release_id": "420267435",
+    "tag": "v01.50",
+    "name": "Prince of Persia Classic — PS Vita Port v01.50",
+    "url": "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.50",
+    "published": "2026-10-22T03:10:38Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# v01.50 — Full Simplified Chinese Text\r\n\r\n**Fixes missing characters when playing in Chinese.**\r\n\r\n---\r\n\r\n## 🇪🇸 Novedades\r\n\r\n### Texto en chino completo\r\n- Al jugar en chino faltaban caracteres en menús y textos. El juego usa `msmincho.ttf` (fuente japonesa), que no tiene 198 de los 700 caracteres de chino simplificado del juego; en Android el sistema los completaba, en la Vita quedaban en blanco.\r\n- Se agrega una fuente de respaldo (`NotoSerifSC-Subset.otf`, Noto Serif SC, licencia OFL) que solo se usa para los caracteres que la fuente original no tiene. El resto del texto se sigue dibujando con la fuente original.\r\n\r\n### Instalación\r\n1. Instala `popclassic.vpk` con VitaShell (se conservan las partidas guardadas).\r\n\r\n---\r\n\r\n## 🇬🇧 Release Notes\r\n\r\n### Full Chinese text\r\n- Some characters were missing when playing in Chinese. The game uses `msmincho.ttf` (a Japanese font) that lacks 198 of the game's 700 Simplified Chinese characters; Android filled them from system fonts, on Vita they were blank.\r\n- Added a fallback font (`NotoSerifSC-Subset.otf`, Noto Serif SC, OFL license) used only for characters the original font lacks. All other text still renders with the original font.\r\n\r\n### Installation\r\n1. Install `popclassic.vpk` with VitaShell (save data is kept).\r\n",
+    "assets": [
+      {
+        "name": "popclassic-v01.50.vpk",
+        "size": 3325244,
+        "download_url": "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/download/v01.50/popclassic-v01.50.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "Prince of Persia Classic",
+    "homebrew_icon": "https://archive.org/download/ppc-psvita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita homebrew port/wrapper for Prince of Persia Classic (Android), originally published by Ubisoft for Android,built on soloader-boilerplate.",
+    "homebrew_long_description": "Prince of Persia Classic is a 2012 release for Android and iOS devices that recreates the levels of the legendary 1989 classic game with modernized 3D graphics",
+    "homebrew_id": "prince-of-persia-classic",
+    "homebrew_authors": [
+      "claude-ai",
+      "metalsyntax"
+    ],
+    "homebrew_version": "01.45",
+    "catalog_apps": [
+      {
+        "id": "prince-of-persia-classic",
+        "name": "Prince of Persia Classic",
+        "icon": "https://archive.org/download/ppc-psvita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita homebrew port/wrapper for Prince of Persia Classic (Android), originally published by Ubisoft for Android,built on soloader-boilerplate.",
+        "long_description": "Prince of Persia Classic is a 2012 release for Android and iOS devices that recreates the levels of the legendary 1989 classic game with modernized 3D graphics",
+        "version": "01.45",
+        "version_date": "2026-10-06",
+        "author_ids": [
+          "claude-ai",
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 01.45 → release v01.50",
+    "catalog_version": "01.45"
+  },
+  {
+    "platform": "github",
     "repo": "ggdrn/KH-DAYS-VITA",
     "release_id": "420005252",
     "tag": "1.0",
@@ -2061,55 +2167,6 @@
   },
   {
     "platform": "github",
-    "repo": "boomannotjeff/mkwiita",
-    "release_id": "414645785",
-    "tag": "1.3.0",
-    "name": "1.3.0",
-    "url": "https://github.com/boomannotjeff/mkwiita/releases/tag/1.3.0",
-    "published": "2026-10-16T07:04:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# MKW Vita 1.3.0\r\n\r\nProgression and licenses, a Settings screen in the LiveArea, and Battle upgrades.\r\n\r\n>[!IMPORTANT]\r\n>**You must rebuild your game files.** The menus now have new text baked in from your disc (license names, \"Locked\", \"Unlocked!\"), so your current `ux0:data/mkw` files aren't enough. Run `Build Game Files.bat` from this release's source code, then copy `build\\vita\\data\\mkw\\` to your Vita again. If you kept your build folder from 1.2.0, only the changed steps run, which takes a few minutes instead of the full build.\r\n\r\n\r\n## What's new\r\n\r\n### Licenses and progression\r\n\r\n- **Licenses.** Pick an empty slot on the License page and the Vita's keyboard asks for a name. Each of the four licenses keeps its own unlocks, best times and ghosts.\r\n>[!IMPORTANT]\r\n>**Don't want to unlock things?** Open Settings from the LiveArea and turn on **Unlock Everything**. Every character, vehicle, cup and Mirror opens for every license, exactly like before. Turn it off any time to get each license's own progress back.\r\n- **Unlock everything as on the Wii.** New licenses start with the original roster. Characters, karts, bikes, cups and Mirror open the same way they do on the Wii: cup wins, 1-star ranks, Time Trial courses played and expert staff ghosts. Full list: [IGN's Mario Kart Wii unlockables](https://www.ign.com/wikis/mario-kart-wii/Unlockables).\r\n- **Cups.** Star and Special Cup, Leaf and Lightning Cup open after trophies in the cups before them, in each class.\r\n- **Mirror and the karts/bikes switch.** Mirror opens after winning every 150cc cup. Bikes in 50cc and karts in 100cc open after a trophy in every cup of that class.\r\n- **Expert staff ghosts.** Your Time Trial times are checked against each course's real expert unlock time, read from your disc. Unlocking them counts toward Funky Kong, Baby Luigi, Tiny Titan and the rest.\r\n- **Locked and Unlocked.** Locked choices are dimmed and say \"Locked\". New unlocks pop up with \"Unlocked!\" when you're back in the menus.\r\n- **Your old times stay.** Best times and ghosts from 1.2.0 move into the first license you create.\r\n\r\n### Settings\r\n\r\nTap the new **Settings** button under Start on the game's LiveArea. Close the game first.\r\n\r\n- **Presets:**\r\n  - **Performance:** a steady 60 FPS.\r\n  - **Default:** 45-60 FPS with everything on.\r\n  - **Quality:** 2x resolution with every effect at a locked 30 FPS.\r\n  - The preset shows **Custom** when you change things yourself.\r\n- **Resolution** from 1 to 2. Type a value or step it with left/right. The game restarts by itself to apply it.\r\n- **Framerate, shadows, bloom, particles, object detail and minimap style.**\r\n- **Unlock Everything, delete a license, and Reset to Defaults.**\r\n- **Save and Start** or **Save and Exit.** Circle leaves without saving.\r\n\r\n### Battle\r\n\r\n- **Random teams.** Teams are shuffled at the start of every set, so you're no longer always red. CPUs, homing shells and name tags all follow the new teams.\r\n- **Thicker team outlines** around the faces on the minimap.\r\n\r\n### Coin Runners\r\n\r\n- **Hits drop coins.** Getting hit drops up to 3 coins (or all you have). They fly out of your kart and anyone can grab them, CPUs included. Untaken coins vanish after 10 seconds.\r\n- **Coins on the minimap.** Every coin on the ground is a yellow dot. Taken coins disappear until they respawn.\r\n- **Coin sound.** Picking up a coin plays the coin sound.\r\n- **Half the starting coins.** Each arena starts with half as many coins as before.\r\n\r\n### Also new\r\n\r\n- **What's new pop-up.** A one-time screen before the opening shows what each new version adds.\r\n\r\n## Known limitations\r\n\r\n- **Staff ghosts:** you can't race or watch them yet (in progress). Their times already count toward unlocks.\r\n- **Ranks:** Grand Prix star ranks are estimated from your points.\r\n- **Dropped coins:** they don't check for walls or ledges, so one dropped next to a wall can end up inside it.\r\n- **Settings button:** it only works when the game is closed.\r\n\r\n## Install\r\n\r\n1. Install `mkw.vpk` (attached below) with VitaShell.\r\n2. Rebuild your game files:\r\n   - Get the source with Git:\r\n     ```\r\n     git clone https://github.com/boomannotjeff/mkwiita.git\r\n     cd mkwiita\r\n     ```\r\n     Already cloned? Run `git pull` in that folder instead.\r\n   - Run `Build Game Files.bat`, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image. If you kept your build folder, only the changed steps run.\r\n3. Copy the contents of `build\\vita\\data\\mkw\\` to `ux0:data/mkw/`. Your best times and ghosts stay and move into your first license.\r\n4. Make sure `ur0:data/libshacccg.suprx` exists (run ShaRKF00D once).\r\n\r\nThe VPK and the game files must come from the same release. The 1.3.0 VPK doesn't work with 1.2.0 game files, or the other way round.\r\n\r\nThe VPK contains no Nintendo game files. Please don't share your built game files.\r\n\r\n## Building it yourself\r\n- `Build MKW Vita.bat` builds the game files and the VPK (needs VitaSDK).\r\n- `Build Game Files.bat` builds only the game files.\r\n- See [BUILDING.md](BUILDING.md) for details.\r\n",
-    "assets": [
-      {
-        "name": "mkw.vpk",
-        "size": 2323406,
-        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.3.0/mkw.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "boomannotjeff",
-    "homebrew_name": "Mario Kart Wii",
-    "homebrew_icon": "https://archive.org/download/mkwiita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
-    "homebrew_long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
-    "homebrew_id": "mario-kart-wii",
-    "homebrew_authors": [
-      "boomannotjeff"
-    ],
-    "homebrew_version": "1.3.0",
-    "catalog_apps": [
-      {
-        "id": "mario-kart-wii",
-        "name": "Mario Kart Wii",
-        "icon": "https://archive.org/download/mkwiita/icon0.png",
-        "category": "ports",
-        "description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
-        "long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
-        "version": "1.3.0",
-        "version_date": "2026-10-16",
-        "author_ids": [
-          "boomannotjeff"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.3.0",
-    "catalog_version": "1.3.0"
-  },
-  {
-    "platform": "github",
     "repo": "BirchWoodGod/halo-ce-vita",
     "release_id": "413304428",
     "tag": "v1.1.0",
@@ -3273,57 +3330,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.0",
     "catalog_version": "1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "MetalSyntax/prince-of-persia-classic-psvita-port",
-    "release_id": "405163421",
-    "tag": "v01.45",
-    "name": "Prince of Persia Classic — PS Vita Port v01.45",
-    "url": "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.45",
-    "published": "2026-10-06T21:40:47Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# In-Game Controls Remapping Overlay, Exit Crash Fix & Native Trophies\r\n\r\n## 🇪🇸 Novedades y Características\r\n\r\n### 1. Menú Overlay de Configuración de Controles en Juego (START + SELECT)\r\n- **Overlay integrado**: Presiona **START + SELECT** en cualquier momento para pausar el juego y abrir el menú flotante en pantalla sin salir de la partida.\r\n- **Remapeo completo de acciones**: Cambia las asignaciones de salto, ataque, agacharse, defensa, interacción, trepar y movimiento.\r\n- **Controles flexibles**:\r\n  - Presiona **Cruz** sobre una acción para reemplazar su botón.\r\n  - Presiona **Cuadrado** para añadir un botón secundario (asignación múltiple).\r\n  - Presiona **Triángulo** para desasignar/limpiar una acción.\r\n  - Presiona **Círculo** o selecciona \"Save and Close\" para guardar y continuar jugando.\r\n- **Calibración de Zona Muerta (Analog Deadzone)**: Ajusta la sensibilidad de la palanca izquierda directamente desde el menú con las flechas Izquierda/Derecha.\r\n- **Soporte para Panel Táctil Trasero y PSTV**:\r\n  - Cuadrantes traseros asignables: `L2` (superior izq), `R2` (superior der), `L3` (inferior izq), `R3` (inferior der).\r\n  - Reconocimiento nativo de gatillos L2/R2 físicos en PlayStation TV (DualShock 3 y DualShock 4).\r\n- **Persistencia bidireccional (`controls.txt`)**: Todas las configuraciones se guardan y leen automáticamente desde `ux0:data/popclassic/controls.txt`.\r\n\r\n### 2. Solución al Crash al Salir del Juego (Botón Salir / X)\r\n- Se corrigió el cuelgue / core dump del sistema al seleccionar **\"Sí\"** en el cuadro de confirmación de salida del juego.\r\n- Se implementó la llamada nativa a `Cocos2dxActivity_terminateProcess` con `sceKernelExitProcess(0)`, cerrando el juego limpiamente hacia el LiveArea.\r\n\r\n### 3. Sistema de Trofeos PS Vita (En desarrollo / Work in Progress)\r\n- Se ha integrado la infraestructura nativa (`SceNpTrophy`) y el paquete de 18 trofeos (`POPC00001_00/TROPHY.TRP`) con Platino exclusivo.\r\n- **Estado actual**: Los trofeos **aún no se muestran ni se instalan en la consola** debido a un error del diálogo del sistema (`0x800204C4`). Se está trabajando activamente en la solución para una próxima actualización.\r\n\r\n---\r\n\r\n## 🇬🇧 Release Notes\r\n\r\n### 1. In-Game Controls Remapping Overlay (START + SELECT)\r\n- **Built-in Overlay Menu**: Press **START + SELECT** at any time to open the configuration menu directly over the paused game.\r\n- **Full Action Remapping**:\r\n  - **Cross**: Replace binding.\r\n  - **Square**: Add secondary binding.\r\n  - **Triangle**: Clear action binding.\r\n  - **Circle / Start**: Save and close.\r\n- **Analog Deadzone Calibration**: Fine-tune analog stick sensitivity with D-Pad Left/Right.\r\n- **Rear Touch Quadrants & PSTV**: Full support for Vita rear touch quadrants (`L2`, `R2`, `L3`, `R3`) and native PSTV DualShock triggers.\r\n- **Persistent Storage**: Bidirectional reading and writing from `ux0:data/popclassic/controls.txt`.\r\n\r\n### 2. In-Game Exit Crash Fix\r\n- Fixed a segmentation fault / data abort occurring when confirming exit in the game's confirmation dialog.\r\n- Intercepted `Cocos2dxActivity_terminateProcess` via FalsoJNI to gracefully exit to LiveArea via `sceKernelExitProcess(0)`.\r\n\r\n### 3. PS Vita Trophies (Work in Progress)\r\n- Native trophy subsystem structure and 18-trophy pack (`TROPHY.TRP`) are implemented in code.\r\n- **Current status**: Trophies do **not work/install yet on device** (system setup dialog error `0x800204C4`). Actively being worked on for the next update.\r\n\r\n---\r\n\r\n### Installation Instructions\r\n1. Install `popclassic.vpk` using VitaShell.\r\n2. Required plugins in `ur0:tai/config.txt`:\r\n   ```ini\r\n   *KERNEL\r\n   ur0:tai/kubridge.skprx\r\n   ur0:tai/fd_fix.skprx\r\n\r\n   *main\r\n   ur0:tai/NoTrpDrm.suprx\r\n   ```\r\n3. Reboot the console if `NoTrpDrm` was just added or changed.\r\n",
-    "assets": [
-      {
-        "name": "popclassic-v01.46.vpk",
-        "size": 3109501,
-        "download_url": "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/download/v01.45/popclassic-v01.46.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MetalSyntax",
-    "homebrew_name": "Prince of Persia Classic",
-    "homebrew_icon": "https://archive.org/download/ppc-psvita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "PS Vita homebrew port/wrapper for Prince of Persia Classic (Android), originally published by Ubisoft for Android,built on soloader-boilerplate.",
-    "homebrew_long_description": "Prince of Persia Classic is a 2012 release for Android and iOS devices that recreates the levels of the legendary 1989 classic game with modernized 3D graphics",
-    "homebrew_id": "prince-of-persia-classic",
-    "homebrew_authors": [
-      "claude-ai",
-      "metalsyntax"
-    ],
-    "homebrew_version": "01.45",
-    "catalog_apps": [
-      {
-        "id": "prince-of-persia-classic",
-        "name": "Prince of Persia Classic",
-        "icon": "https://archive.org/download/ppc-psvita/icon0.png",
-        "category": "ports",
-        "description": "PS Vita homebrew port/wrapper for Prince of Persia Classic (Android), originally published by Ubisoft for Android,built on soloader-boilerplate.",
-        "long_description": "Prince of Persia Classic is a 2012 release for Android and iOS devices that recreates the levels of the legendary 1989 classic game with modernized 3D graphics",
-        "version": "01.45",
-        "version_date": "2026-10-06",
-        "author_ids": [
-          "claude-ai",
-          "metalsyntax"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 01.45",
-    "catalog_version": "01.45"
   },
   {
     "platform": "github",
@@ -33230,109 +33236,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v1.2.3",
     "catalog_version": "v1.2.3"
-  },
-  {
-    "platform": "github",
-    "repo": "SonicMastr/Doki-Doki-Literature-Club-Vita",
-    "release_id": "49637990",
-    "tag": "v1.01",
-    "name": "Doki Doki Literature Club Vita",
-    "url": "https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/tag/v1.01",
-    "published": "2021-09-15T23:20:48Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Install Instructions in README",
-    "assets": [
-      {
-        "name": "Doki.Doki.Literature.Club-01.01.vpk",
-        "size": 17191800,
-        "download_url": "https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/download/v1.01/Doki.Doki.Literature.Club-01.01.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SonicMastr",
-    "homebrew_name": "Doki Doki Literature Club Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-doki-doki-literature-club-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Doki Doki Literature Club for PSVITA.",
-    "homebrew_long_description": "Port of Doki Doki Literature Club! for PSVITA running under renpy.\nDoki Doki Literature Club! (DDLC) is a 2017 freeware visual novel developed by American independent game studio Team Salvato.",
-    "homebrew_id": "doki-doki-literature-club-vita",
-    "homebrew_authors": [
-      "sonicmastr"
-    ],
-    "homebrew_version": "v1.01",
-    "catalog_apps": [
-      {
-        "id": "doki-doki-literature-club-vita",
-        "name": "Doki Doki Literature Club Vita",
-        "icon": "https://archive.org/download/psvitaalive-doki-doki-literature-club-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Doki Doki Literature Club for PSVITA.",
-        "long_description": "Port of Doki Doki Literature Club! for PSVITA running under renpy.\nDoki Doki Literature Club! (DDLC) is a 2017 freeware visual novel developed by American independent game studio Team Salvato.",
-        "version": "v1.01",
-        "version_date": "2021-09-15",
-        "author_ids": [
-          "sonicmastr"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.01",
-    "catalog_version": "v1.01"
-  },
-  {
-    "platform": "github",
-    "repo": "Northfear/gemrb-vita",
-    "release_id": "48809759",
-    "tag": "v0.8.8-vita.7",
-    "name": "v0.8.8-vita.7",
-    "url": "https://github.com/Northfear/gemrb-vita/releases/tag/v0.8.8-vita.7",
-    "published": "2021-09-01T11:57:18Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Improved rendering performance (updated to latest SDL 1.2 with hardware acceleration)\r\n\r\nEdit: Updated 31/10/21",
-    "assets": [
-      {
-        "name": "gemrb.vpk",
-        "size": 4949129,
-        "download_url": "https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "gemrb_data.zip",
-        "size": 1304666,
-        "download_url": "https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb_data.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "Northfear",
-    "homebrew_name": "GemRB",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-gemrb/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of GemRB for PSVITA/PSTV.",
-    "homebrew_long_description": "GemRB is a portable open-source implementation of BiowareÃ¢â‚¬â„¢s 8 Infinity Engine versions allowing to run the BaldurÃ¢â‚¬â„¢s Gate, Icewind Dale and Planescape: Torment games, their expansions and mods.",
-    "homebrew_id": "gemrb",
-    "homebrew_authors": [
-      "northfear"
-    ],
-    "homebrew_version": "v.0.8.8-vita.7",
-    "catalog_apps": [
-      {
-        "id": "gemrb",
-        "name": "GemRB",
-        "icon": "https://archive.org/download/psvitaalive-gemrb/icon0.png",
-        "category": "ports",
-        "description": "Port of GemRB for PSVITA/PSTV.",
-        "long_description": "GemRB is a portable open-source implementation of BiowareÃ¢â‚¬â„¢s 8 Infinity Engine versions allowing to run the BaldurÃ¢â‚¬â„¢s Gate, Icewind Dale and Planescape: Torment games, their expansions and mods.",
-        "version": "v.0.8.8-vita.7",
-        "version_date": "2021-10-31",
-        "author_ids": [
-          "northfear"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.8.8-vita.7",
-    "catalog_version": "v.0.8.8-vita.7"
   }
 ]
