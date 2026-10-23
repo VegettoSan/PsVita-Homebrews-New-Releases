@@ -1,6 +1,165 @@
 [
   {
     "platform": "github",
+    "repo": "VegettoSan/PSVitaAlive",
+    "release_id": "421571346",
+    "tag": "02.14",
+    "name": "02.14",
+    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.14",
+    "published": "2026-10-23T07:59:46Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# PSVitaAlive 02.14\r\n\r\nVersion **02.14** introduces major download optimizations, faster ZIP/VPK extraction, improved error handling, and a refreshed website interface.\r\n\r\nThis release focuses on reducing unnecessary processing during large downloads, improving installation reliability, providing clearer information when external download services fail, and making PSVitaAlive more efficient on PlayStation Vita hardware.\r\n\r\n## What's New\r\n\r\n### Download Performance Improvements\r\n\r\n- Improved adaptive parallel downloading for supported VPK, ZIP, Game Files, and Data Files.\r\n- Added direct extraction support for compatible ZIP/VPK archives downloaded in multiple parts.\r\n- Eliminated unnecessary file assembly before extraction for supported segmented archives.\r\n- Removed redundant full-file SHA-1 processing from the optimized direct-extraction workflow.\r\n- Reduced unnecessary storage operations and processing overhead during large installations.\r\n- Improved handling of ZIP64 archives and large file offsets.\r\n- Optimized Archive.org server selection and HTTP range requests.\r\n- Reduced redundant network probes when selecting download servers.\r\n- Improved automatic fallback behavior when optimized downloading is unavailable.\r\n- Maintained compatibility with existing standard download and installation methods.\r\n\r\nThese changes help reduce installation preparation time and unnecessary storage activity, particularly when working with large Homebrew ports.\r\n\r\n### ZIP and VPK Extraction Optimizations\r\n\r\n- Introduced a bounded directory cache to reduce repetitive filesystem checks during extraction.\r\n- Improved extraction efficiency for archives containing hundreds or thousands of small files.\r\n- Added optimized exclusive file creation for new files.\r\n- Reduced unnecessary filesystem metadata operations.\r\n- Preserved safe replacement procedures for existing files.\r\n- Maintained existing CRC validation, ZIP64 compatibility, deep-directory support, and cancellation handling.\r\n- Added lightweight extraction performance diagnostics.\r\n- Improved compatibility with complex archive structures.\r\n\r\nThe new extraction optimizations were tested on real PlayStation Vita hardware using Gun Bros, successfully installing and extracting the application and its associated Game Files.\r\n\r\nAdditional compatibility and regression testing will continue in future updates.\r\n\r\n### Archive.org Connectivity Improvements\r\n\r\n- Added automatic connectivity checks for Archive.org during application startup.\r\n- Introduced informative warnings when Archive.org cannot be reached.\r\n- Improved detection of unavailable download sources.\r\n- Added clearer explanations when external download services experience connection problems.\r\n- Improved distinction between temporary server problems and permanently unavailable files.\r\n- Reduced unnecessary retries when a download source repeatedly fails before transferring data.\r\n- Preserved recovery behavior for interrupted downloads and temporary network failures.\r\n- Added recommendations to try alternative download sources when available.\r\n\r\nConnectivity warnings indicate that a service cannot be reached from the current connection and do not necessarily mean the entire service is offline.\r\n\r\n### Improved Error Messages and Diagnostics\r\n\r\n- Introduced a more informative error presentation system for failed downloads and installations.\r\n- Added clearer explanations for network errors, HTTP failures, TLS problems, and unavailable files.\r\n- Improved error reporting for MediaFire downloads.\r\n- Added specific messages for insufficient storage space and filesystem errors.\r\n- Improved identification of corrupted archives, unsafe extraction paths, and unsupported formats.\r\n- Added more useful recommendations to help users understand possible solutions.\r\n- Reduced unnecessary error-report prompts for common network and server problems.\r\n- Preserved technical diagnostic information for troubleshooting.\r\n\r\nError messages are now designed to help users understand what went wrong and what they can try next.\r\n\r\n### Website Improvements\r\n\r\n- Refreshed the PSVitaAlive website with more compact and responsive application cards.\r\n- Improved catalog layouts for Homebrew, PS Vita, PSP, and PS1.\r\n- Redesigned application detail pages for better readability.\r\n- Improved developer profile pages and author listings.\r\n- Refined category cards and navigation.\r\n- Improved download link presentation and recommended download indicators.\r\n- Added clearer display of download information, extraction destinations, and plugin-related details.\r\n- Improved spacing, alignment, typography, and mobile responsiveness.\r\n- Maintained the existing dark interface and green accent design.\r\n\r\n### Localization Improvements\r\n\r\n- Added translations for new download warnings, installation errors, and recovery instructions.\r\n- Updated interface messages across all eight supported languages:\r\n  - English\r\n  - Spanish\r\n  - French\r\n  - German\r\n  - Italian\r\n  - Portuguese (Brazil)\r\n  - Portuguese (Portugal)\r\n  - Russian\r\n\r\n### Stability and Internal Improvements\r\n\r\n- Improved synchronization between download completion and installation.\r\n- Optimized filesystem operations during archive extraction.\r\n- Improved handling of interrupted and failed download requests.\r\n- Expanded automated regression tests for segmented archives, download failures, extraction caching, and error classification.\r\n- Improved internal diagnostics and resource management.\r\n- Added new Homebrew catalog entries and developer profiles.\r\n- Updated selected application metadata and download links.\r\n- Additional bug fixes and performance improvements.\r\n\r\n## Installation\r\n\r\nDownload **PSVitaAlive.vpk** from the release assets and install it using VitaShell.\r\n\r\nExisting users can update directly from a previous version without uninstalling PSVitaAlive.\r\n\r\nThe application also supports automatic updates through its built-in update system.\r\n\r\nExisting settings and compatible cached data are preserved.\r\n\r\n## Compatibility and Notes\r\n\r\nPSVitaAlive continues to support PlayStation Vita and PlayStation TV.\r\n\r\n- Download performance depends on the hosting provider, network conditions, and storage configuration.\r\n- Optimized direct extraction is used only for compatible archive downloads. Standard downloading remains available as a fallback.\r\n- Some Homebrew ports require additional Game Files or Data Files that may not yet be available in the catalog.\r\n- Availability of external download sources is not controlled by PSVitaAlive.\r\n- Extraction improvements have been tested on real hardware, but compatibility may vary across different archives and storage devices.\r\n\r\nIf you encounter an issue, please report it and include your `session.log` file whenever possible.\r\n\r\n---\r\n\r\n## Thank You\r\n\r\nThank you to all developers, contributors, testers, and PlayStation Vita community members who continue to support PSVitaAlive.\r\n\r\nYour feedback, bug reports, and hardware testing help improve the project with every release.\r\n\r\n**PSVitaAlive 02.14** continues our goal of providing a free, reliable, and modern platform for discovering, downloading, installing, and preserving PlayStation Vita Homebrew.\r\n\r\nThank you for helping keep the PlayStation Vita community alive!\r\n\r\n**Website:** https://vegettosan.github.io/PSVitaAlive/\r\n\r\n**Full Changelog:** https://github.com/VegettoSan/PSVitaAlive/compare/02.13...main",
+    "assets": [
+      {
+        "name": "PSVitaAlive.vpk",
+        "size": 9593317,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.14/PSVitaAlive.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "VegettoSan",
+    "homebrew_name": "PSVitaAlive Store",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
+    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+    "homebrew_id": "psvitaalive-store",
+    "homebrew_authors": [
+      "vegettosan"
+    ],
+    "homebrew_version": "02.14",
+    "catalog_apps": [
+      {
+        "id": "psvitaalive-store",
+        "name": "PSVitaAlive Store",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+        "category": "utilities",
+        "description": "Homebrew store and catalog for PlayStation Vita.",
+        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+        "version": "02.14",
+        "version_date": "2026-10-23",
+        "author_ids": [
+          "vegettosan"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive oficial · 02.14",
+    "catalog_version": "02.14"
+  },
+  {
+    "platform": "github",
+    "repo": "boomannotjeff/mkwiita",
+    "release_id": "421549098",
+    "tag": "1.4.1",
+    "name": "1.4.1",
+    "url": "https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.1",
+    "published": "2026-10-23T07:18:51Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# MKW Vita 1.4.1\r\n\r\nFixes for bike animations, items left on the ground, the Wario Bike and Coin Runners. Only the VPK changes: your 1.4.0 game files keep working.\r\n\r\n>[!NOTE]\r\n>**Coming from 1.4.0? Just install the new VPK.** 1.4.1 uses the same game files, so there's nothing to rebuild or copy.\r\n>\r\n>Coming from 1.3.0 or older? Rebuild your game files as described in the [1.4.0 release](https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0).\r\n\r\n\r\n## What's new\r\n\r\n### Fixed issues\r\n\r\n- **Mixed-up bike animations** ([#20](https://github.com/boomannotjeff/mkwiita/issues/20)):\r\n  - Riders only flail their legs when a cannon shoots them out. Ramps, jump pads, boost ramps and tricks keep the normal riding pose.\r\n  - The Flame Runner and the other inside-drift bikes lean into a drift instead of sticking a leg out.\r\n- **Items on the ground** ([#21](https://github.com/boomannotjeff/mkwiita/issues/21)). Dropped items land and stay where they fall. They play their landing sound once and aren't pushed around anymore.\r\n\r\n### Racing\r\n\r\n- **Wario Bike.** The handlebars and the front of the bike no longer float off it. This affected every large character on it, Funky Kong included.\r\n- **Time Trial ghosts.** Ghosts stay centred when you race or watch them, instead of drifting off to the side.\r\n\r\n### Battle\r\n\r\n- **Coin Runners.** Half as many coins on the ground at the start.\r\n- **Minimap.** The coins are smaller dots.\r\n\r\n### Menus\r\n\r\n- **Stick diagonals.** Pushing the stick diagonally no longer moves the cursor and changes the page at the same time.\r\n- **Retro Rewind cup pages.** The text no longer disappears when you change page with the stick.\r\n- **Random courses.** Random picks change from race to race, instead of repeating.\r\n- **Main menu.** \"Single Player\", \"Multiplayer\" and the other titles are white like on the Wii, without the flash.\r\n\r\nEverything above is in the Retro Rewind edition too.\r\n\r\n## Install\r\n\r\n1. Install `mkw.vpk` (or `mkw-retro-rewind.vpk`), attached below, with VitaShell.\r\n2. That's it if you're on 1.4.0. From an older release, rebuild your game files first (see the [1.4.0 release](https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0)).\r\n3. Make sure `ur0:data/libshacccg.suprx` exists (run ShaRKF00D once).\r\n\r\nYour licenses, times and ghosts stay.\r\n\r\nThe VPK contains no Nintendo game files. Please don't share your built game files.\r\n\r\n## Building it yourself\r\n- `Build MKW Vita.bat` builds the game files and the VPK (needs VitaSDK).\r\n- `Build Game Files.bat` builds only the game files.\r\n- See [BUILDING.md](BUILDING.md) for details.\r\n",
+    "assets": [
+      {
+        "name": "mkw-retro-rewind.vpk",
+        "size": 2483743,
+        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.4.1/mkw-retro-rewind.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "mkw.vpk",
+        "size": 2323494,
+        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.4.1/mkw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "boomannotjeff",
+    "homebrew_name": "Mario Kart Wii",
+    "homebrew_icon": "https://archive.org/download/mkwiita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
+    "homebrew_long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
+    "homebrew_id": "mario-kart-wii",
+    "homebrew_authors": [
+      "boomannotjeff"
+    ],
+    "homebrew_version": "1.3.0",
+    "catalog_apps": [
+      {
+        "id": "mario-kart-wii",
+        "name": "Mario Kart Wii",
+        "icon": "https://archive.org/download/mkwiita/icon0.png",
+        "category": "ports",
+        "description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
+        "long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
+        "version": "1.3.0",
+        "version_date": "2026-10-16",
+        "author_ids": [
+          "boomannotjeff"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.4.1",
+    "catalog_version": "1.3.0"
+  },
+  {
+    "platform": "github",
+    "repo": "Grarak/mh3-wii",
+    "release_id": "421537110",
+    "tag": "0.2.2",
+    "name": "0.2.2",
+    "url": "https://github.com/Grarak/mh3-wii/releases/tag/0.2.2",
+    "published": "2026-10-23T07:04:14Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Fixed online connection with save files exceeding 5 characters in their names",
+    "assets": [
+      {
+        "name": "mh3-vita.vpk",
+        "size": 18773761,
+        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.2.2/mh3-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "MH3_do_not_download.elf",
+        "size": 138683036,
+        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.2.2/MH3_do_not_download.elf",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Grarak",
+    "homebrew_name": "Monster Hunter Tri",
+    "homebrew_icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Monster Hunter Tri for the PS Vita.",
+    "homebrew_long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
+    "homebrew_id": "monster-hunter-tri",
+    "homebrew_authors": [
+      "grarak"
+    ],
+    "homebrew_version": "0.1",
+    "catalog_apps": [
+      {
+        "id": "monster-hunter-tri",
+        "name": "Monster Hunter Tri",
+        "icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Monster Hunter Tri for the PS Vita.",
+        "long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
+        "version": "0.1",
+        "version_date": "2026-10-12",
+        "author_ids": [
+          "grarak"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1 → release 0.2.2",
+    "catalog_version": "0.1"
+  },
+  {
+    "platform": "github",
     "repo": "josephinoo/vitaForge",
     "release_id": "421280219",
     "tag": "v0.1.6",
@@ -96,6 +255,55 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.3.2",
     "catalog_version": "1.3.0"
+  },
+  {
+    "platform": "github",
+    "repo": "arielxflores/Tenkaichi3Decomp-Vita",
+    "release_id": "421202892",
+    "tag": "v1.0",
+    "name": "1.0",
+    "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.0",
+    "published": "2026-10-22T21:06:09Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "First release.\n\n- Install `Tenkaichi3Decomp-Vita.vpk` with VitaShell.\n- Copy `SLUS_216.78`, `BIN` and `DATA` from your own disc image of the USA release (SLUS-21678) to\n  `ux0:data/bt3/disc/`, as described under [Game files](https://github.com/arielxflores/Tenkaichi3Decomp-Vita#game-files).\n- `libshacccg.suprx` must be extracted to `ur0:data/`. The [CapUnlocker](https://github.com/GrapheneCt/CapUnlocker)\n  plugin is recommended (it lets the game use the fourth CPU core).\n",
+    "assets": [
+      {
+        "name": "Tenkaichi3Decomp-Vita.vpk",
+        "size": 2591322,
+        "download_url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.0/Tenkaichi3Decomp-Vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "arielxflores",
+    "homebrew_name": "Dragon Ball Z: BT3",
+    "homebrew_icon": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3, based on Tenkaichi3Decomp",
+    "homebrew_long_description": "A native PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3 (PlayStation 2, USA release, SLUS-21678), based on z3xox's Tenkaichi3Decomp, the PC port built on the BT3-Decompiled decompilation. The game's own code is compiled for the Vita, with a renderer for the Vita's GPU (vitaGL), sound, touch and controls written for the handheld. It is not an emulator.",
+    "homebrew_id": "dragon-ball-z-bt3",
+    "homebrew_authors": [
+      "arielxflores"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "dragon-ball-z-bt3",
+        "name": "Dragon Ball Z: BT3",
+        "icon": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3, based on Tenkaichi3Decomp",
+        "long_description": "A native PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3 (PlayStation 2, USA release, SLUS-21678), based on z3xox's Tenkaichi3Decomp, the PC port built on the BT3-Decompiled decompilation. The game's own code is compiled for the Vita, with a renderer for the Vita's GPU (vitaGL), sound, touch and controls written for the handheld. It is not an emulator.",
+        "version": "1.0",
+        "version_date": "2026-10-23",
+        "author_ids": [
+          "arielxflores"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0",
+    "catalog_version": "1.0"
   },
   {
     "platform": "github",
@@ -265,58 +473,52 @@
   },
   {
     "platform": "github",
-    "repo": "boomannotjeff/mkwiita",
-    "release_id": "420327542",
-    "tag": "1.4.0",
-    "name": "1.4.0",
-    "url": "https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0",
-    "published": "2026-10-22T05:07:09Z",
+    "repo": "LargeVegetable/source-engine",
+    "release_id": "420298360",
+    "tag": "v0.1.1-beta",
+    "name": "Half-Life 2 for PS Vita 0.1.1-beta",
+    "url": "https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.1-beta",
+    "published": "2026-10-22T04:09:55Z",
     "prerelease": false,
     "draft": false,
-    "body": "# MKW Vita 1.4.0\r\n\r\nBug fixes from the issue tracker, better items and effects, an award ceremony in VS, and smaller game files.\r\n\r\n>[!IMPORTANT]\r\n>**You must rebuild your game files.** The texture conversion and the packs changed, so most of the build runs again even if you kept your build folder from 1.3.0. Run `Build Game Files.bat` from this release's source code, then copy `build\\vita\\data\\mkw\\` to your Vita again.\r\n>\r\n>**Delete the old `.pak` files and the `models` folder in `ux0:data/mkw/` before copying.** Some FTP clients write over an existing file without shortening it, which leaves black menus and missing textures.\r\n\r\n\r\n## What's new\r\n\r\n### Fixed issues\r\n\r\n- **Standstill mini-turbo** ([#4](https://github.com/boomannotjeff/mkwiita/issues/4)). Holding R and Cross while stopped now shows the smoke while it charges, then the sparks once it's ready.\r\n- **Items** ([#7](https://github.com/boomannotjeff/mkwiita/issues/7)):\r\n  - **Blooper ink** fades faster while you boost, and a Mushroom fades it out instead of popping it off.\r\n  - **Dropped bananas** land and stay when you get hit, instead of sliding away forever.\r\n  - **Triple shells** stay steady around you during a wheelie.\r\n  - **Shrunk racers** get flattened when you run into them after a Lightning.\r\n- **GBA Shy Guy Beach bombs** ([#9](https://github.com/boomannotjeff/mkwiita/issues/9)). The explosions are the right size again and no longer cover the sky.\r\n- **Blue Shell and wheelies** ([#13](https://github.com/boomannotjeff/mkwiita/issues/13)). A wheelie no longer lets you escape a Blue Shell.\r\n\r\n### Items and effects\r\n\r\n- **Blooper.** You now see the Blooper itself before it inks you.\r\n- **Blue Shell.** It circles in front of the leader before diving, instead of out of view above them.\r\n- **Red Shell.** It no longer passes its target and comes back to hit them from the front.\r\n- **Explosions.** The Shy Guy Beach cannonballs, Bowser's Castle fireballs and Moonview Highway's Bob-omb cars explode like a real Bob-omb, not as a plain ball.\r\n- **Fire.** Flame pillars, Fire Snakes and the Bowser's Castle fireball glow and fade like fire, instead of solid cylinders and balls.\r\n\r\n### Racing\r\n\r\n- **Rosalina's Luma.** Her Luma now floats along with her, as on the Wii, in karts and on bikes, for you and the CPUs. It follows the kart the way the original does: over hops, through cannons and zippers, and it shrinks or grows with Lightning and Mega Mushrooms.\r\n- **Tilt in the air.** Stick up and down tilts your kart in the air, as on the Wii. Ghosts record it too.\r\n- **Lightning pose.** The hit pose only plays during the spin, not for the whole time you're small.\r\n- **Standing wheelie.** Holding a wheelie while stopped no longer makes the driver's head bob back and forth.\r\n- **Pause.** Continue resumes right away. The race isn't reloaded anymore.\r\n\r\nThe Luma, the tilt and the Lightning pose are adapted from [MKW-3DS 0.6.0](https://github.com/MiniBandit/MKW-3DS/releases/tag/v0.6.0) (thanks Epic0522 and MiniBandit).\r\n\r\n### Menus\r\n\r\n- **Award ceremony in VS.** After the last race of a VS set you now get the podium too, without the trophy and rank, which are for Grand Prix only. This isn't in the original game.\r\n- **Skipping the ceremony** during the winning run no longer leaves a black screen.\r\n- **Full-screen menus.** The menus, title screen and movies now fill the whole screen. They had black bars at the top and bottom, left over from the 3DS screen.\r\n- **Title screen and main menu.** The original widescreen art at the right proportions, instead of a stretched 4:3 crop.\r\n\r\n### Smaller and faster\r\n\r\n- **Smaller game files.** About 1.9 GB instead of 2.85 GB: identical files in the packs are stored once.\r\n- **Faster builds.** Each texture is converted once, even when many models use it, and temporary folders are deleted when a step is done (about 1.2 GB less on your PC).\r\n- **Retro Rewind VPK.** Building it yourself now makes `mkw-retro-rewind.vpk`.\r\n\r\nEverything above is in the Retro Rewind edition too.\r\n\r\n## Known limitations\r\n\r\n- **Fire:** no heat-shimmer yet, and the flame pillars' extra glow layer is missing.\r\n- **Blooper and Blue Shell:** their positions on screen are set by eye and may still be adjusted.\r\n- **Rosalina's Luma:** only in races for now, not in the menus or the award ceremony.\r\n- **Staff ghosts:** you can't race or watch them yet (in progress). Their times already count toward unlocks.\r\n\r\n## Install\r\n\r\n1. Install `mkw.vpk` (attached below) with VitaShell.\r\n2. Rebuild your game files:\r\n   - Get the source with Git:\r\n     ```\r\n     git clone https://github.com/boomannotjeff/mkwiita.git\r\n     cd mkwiita\r\n     ```\r\n     Already cloned? Run `git pull` in that folder instead.\r\n   - Run `Build Game Files.bat`, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image.\r\n3. On the Vita, delete the old `.pak` files and the `models` folder in `ux0:data/mkw/`.\r\n4. Copy the contents of `build\\vita\\data\\mkw\\` to `ux0:data/mkw/`. Your licenses, times and ghosts stay.\r\n5. Make sure `ur0:data/libshacccg.suprx` exists (run ShaRKF00D once).\r\n\r\nThe VPK and the game files must come from the same release. The 1.4.0 VPK doesn't work with 1.3.0 game files, or the other way round.\r\n\r\nThe VPK contains no Nintendo game files. Please don't share your built game files.\r\n\r\n## Building it yourself\r\n- `Build MKW Vita.bat` builds the game files and the VPK (needs VitaSDK).\r\n- `Build Game Files.bat` builds only the game files.\r\n- See [BUILDING.md](BUILDING.md) for details.\r\n",
+    "body": "Fixes for new installs, and a much faster first launch.\r\n\r\n**Download `hl2_vita-0.1.1-beta.zip` below** and install `hl2_vita.vpk` over 0.1.0: your saves and settings stay, and the controls below are corrected automatically. New to the port? Follow [INSTALL_VITA.md](https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md).\r\n\r\n### Fixed\r\n\r\n- **The analog sticks didn't work on a new install** until Options > Controls > Restore Default Controls ([#4](https://github.com/LargeVegetable/source-engine/issues/4)).\r\n\r\n\r\n### Faster first launch\r\n\r\n- **First launch to the main menu is much faster at around 1-2 mins** (it was about 7-10 minutes before), and **about 1-2 minutes to the first map** (up to 24 minutes before). Shaders are now compiled when they're first needed instead of all at once, and the shader cache no longer creates hundreds of folders up front.\r\n- **The trade-off here is that brief hitches will appear upon first load of a map or when an effect is used for the first time.** Each new shader takes about half a second to compile on the Vita, so the first minutes of a brand new install - and each subsequent new area - can pause for a moment, sometimes a few seconds. Every shader is compiled only once and kept in `ux0:data/shader_cache/`. This seems like a fair trade-off compared to the half-hour long initial load times where the engine compiled **everything** upfront. Removing these hitches is the next big item on my list.\r\n\r\n### Also new\r\n\r\n- **Gyro aiming** ([#3](https://github.com/LargeVegetable/source-engine/issues/3)): turn and tilt the Vita to aim, on top of the right stick. Off by default; turn it on and set its sensitivity in Options > Controls.\r\n- **The touchscreen's left and right halves can be assigned to any action** in Options > Controls. They work in game only; in the menus you tap as usual.\r\n- **The rear touchpad's right half sprints by default.** The left half still crouches.\r\n- **Loads are a little shorter:** the engine log no longer writes every line to the memory card on its own, and the lightmap rebuild runs under the loading screen.\r\n- **Better bug reports:** `engine.log` now keeps the last five sessions, like the boot log, and README_VITA.md lists what to include (firmware, model, storage, plugins).\r\n\r\n### Known issues\r\n\r\n- First-time shader hitches, described above.\r\n- Rarely, the game can crash while loading the next map. Save often.\r\n- Cube map reflections are off, and the intro videos don't play.\r\n- Suspend and resume are lightly tested.\r\n- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.\r\n- Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.\r\n\r\n### Reporting bugs\r\n\r\nOpen an [issue](https://github.com/LargeVegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.\r\n\r\nNot affiliated with or endorsed by Valve or Sony. Free, and it must stay free.\r\n\r\nSHA-256 of the zip: `4d875af76c343eddf19cf8efff4fb7c1563085213d7e79c6c150651d91d78c42`\r\n",
     "assets": [
       {
-        "name": "mkw-retro-rewind.vpk",
-        "size": 2484328,
-        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw-retro-rewind.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "mkw.vpk",
-        "size": 2322642,
-        "download_url": "https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw.vpk",
-        "content_type": "application/octet-stream"
+        "name": "hl2_vita-0.1.1-beta.zip",
+        "size": 20124925,
+        "download_url": "https://github.com/LargeVegetable/source-engine/releases/download/v0.1.1-beta/hl2_vita-0.1.1-beta.zip",
+        "content_type": "application/zip"
       }
     ],
-    "author": "boomannotjeff",
-    "homebrew_name": "Mario Kart Wii",
-    "homebrew_icon": "https://archive.org/download/mkwiita/icon0.png",
+    "author": "LargeVegetable",
+    "homebrew_name": "Half-Life 2",
+    "homebrew_icon": "https://archive.org/download/half-life-2-for-ps-vita/icon0.png",
     "homebrew_category": "ports",
-    "homebrew_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
-    "homebrew_long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
-    "homebrew_id": "mario-kart-wii",
+    "homebrew_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
+    "homebrew_long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
+    "homebrew_id": "half-life-2",
     "homebrew_authors": [
-      "boomannotjeff"
+      "largevegetable"
     ],
-    "homebrew_version": "1.3.0",
+    "homebrew_version": "0.1.1",
     "catalog_apps": [
       {
-        "id": "mario-kart-wii",
-        "name": "Mario Kart Wii",
-        "icon": "https://archive.org/download/mkwiita/icon0.png",
+        "id": "half-life-2",
+        "name": "Half-Life 2",
+        "icon": "https://archive.org/download/half-life-2-for-ps-vita/icon0.png",
         "category": "ports",
-        "description": "A native PlayStation Vita port of MiniBandit's MKW-3DS",
-        "long_description": "A native PlayStation Vita port of MiniBandit's MKW-3DS, a 1:1 recreation of Mario Kart Wii for the Nintendo 3DS. It's a port of that 3DS recreation, not of the Wii game: no Wii code runs.",
-        "version": "1.3.0",
-        "version_date": "2026-10-16",
+        "description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
+        "long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
+        "version": "0.1.1",
+        "version_date": "2026-10-21",
         "author_ids": [
-          "boomannotjeff"
+          "largevegetable"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.4.0",
-    "catalog_version": "1.3.0"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.1.1",
+    "catalog_version": "0.1.1"
   },
   {
     "platform": "github",
@@ -420,58 +622,70 @@
   },
   {
     "platform": "github",
-    "repo": "Grarak/mh3-wii",
-    "release_id": "419976979",
-    "tag": "0.2.1",
-    "name": "0.2.1",
-    "url": "https://github.com/Grarak/mh3-wii/releases/tag/0.2.1",
-    "published": "2026-10-21T19:39:57Z",
+    "repo": "lukebrl/ssx-vita",
+    "release_id": "419989197",
+    "tag": "v1.1.1",
+    "name": "SSX-Vita v1.1.1",
+    "url": "https://github.com/lukebrl/ssx-vita/releases/tag/v1.1.1",
+    "published": "2026-10-21T19:50:15Z",
     "prerelease": false,
     "draft": false,
-    "body": "- Fixed eggs breaking on area change\r\n- Fixed armour preview crash\r\n- Fixed cluster ammunition firing crash\r\n- Fixed loading crash after suspending system\r\n- Fixed shading in online lobby\r\n- Fixed shading of Ceadeus\r\n- Fixed water shimmer animation moving too quickly\r\n- Fixed performance drops when spinning with hammer underwater\r\n- Minor performance improvements\r\n- Implemented wiimote pointer with touchscreen inputs\r\n- Added 30fps framelimit\r\n- Fixed broken animations in some cutscenes\r\n- Added `PV` prefix in online name",
+    "body": "## SSX (2012) for PS Vita - v1.1.1\r\n\r\n### Fixed\r\n- **The game could crash at every start** if it had been closed (or had crashed) while building the shader cache during the first start. A damaged cache is now detected and repaired automatically: only the affected shaders are built again, then the game starts normally.\r\n\r\n### Install / update\r\n- Install the new `ssx_vita.vpk` over the old one. No need to rebuild the game data if you already have them.\r\n- If your game currently crashes at startup, this update fixes it, no need to delete anything.",
     "assets": [
       {
-        "name": "mh3-vita.vpk",
-        "size": 18773688,
-        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.2.1/mh3-vita.vpk",
-        "content_type": "application/octet-stream"
+        "name": "ssx-datatool-linux.tar.gz",
+        "size": 78091885,
+        "download_url": "https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx-datatool-linux.tar.gz",
+        "content_type": "application/gzip"
       },
       {
-        "name": "MH3_do_not_download.elf",
-        "size": 138682108,
-        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.2.1/MH3_do_not_download.elf",
+        "name": "ssx-datatool-macos.zip",
+        "size": 41061909,
+        "download_url": "https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx-datatool-macos.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "ssx-datatool-windows.exe",
+        "size": 61453352,
+        "download_url": "https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx-datatool-windows.exe",
+        "content_type": "application/x-msdos-program"
+      },
+      {
+        "name": "ssx_vita.vpk",
+        "size": 2718188,
+        "download_url": "https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx_vita.vpk",
         "content_type": "application/octet-stream"
       }
     ],
-    "author": "Grarak",
-    "homebrew_name": "Monster Hunter Tri",
-    "homebrew_icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+    "author": "lukebrl",
+    "homebrew_name": "SSX (2012)",
+    "homebrew_icon": "https://archive.org/download/ssx-2012-ps-vita/icon0.png",
     "homebrew_category": "ports",
-    "homebrew_description": "Monster Hunter Tri for the PS Vita.",
-    "homebrew_long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
-    "homebrew_id": "monster-hunter-tri",
+    "homebrew_description": "Unofficial port of SSX (2012, Android) to the PS Vita",
+    "homebrew_long_description": "An unofficial port of EA's SSX (the 2012 Android version, ssx-v0_0_8430.apk) to the PS Vita.\n\nThe game's own ARM code runs unmodified on the Vita through a so loader: this project provides everything Android would provide around it (the C library, OpenGL ES through vitaGL, the Java side of the app) and patches the game where the Vita needs it.",
+    "homebrew_id": "ssx-2012",
     "homebrew_authors": [
-      "grarak"
+      "lukebrl"
     ],
-    "homebrew_version": "0.1",
+    "homebrew_version": "1.1.1",
     "catalog_apps": [
       {
-        "id": "monster-hunter-tri",
-        "name": "Monster Hunter Tri",
-        "icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+        "id": "ssx-2012",
+        "name": "SSX (2012)",
+        "icon": "https://archive.org/download/ssx-2012-ps-vita/icon0.png",
         "category": "ports",
-        "description": "Monster Hunter Tri for the PS Vita.",
-        "long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.",
-        "version": "0.1",
-        "version_date": "2026-10-12",
+        "description": "Unofficial port of SSX (2012, Android) to the PS Vita",
+        "long_description": "An unofficial port of EA's SSX (the 2012 Android version, ssx-v0_0_8430.apk) to the PS Vita.\n\nThe game's own ARM code runs unmodified on the Vita through a so loader: this project provides everything Android would provide around it (the C library, OpenGL ES through vitaGL, the Java side of the app) and patches the game where the Vita needs it.",
+        "version": "1.1.1",
+        "version_date": "2026-10-22",
         "author_ids": [
-          "grarak"
+          "lukebrl"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1 → release 0.2.1",
-    "catalog_version": "0.1"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.1.1",
+    "catalog_version": "1.1.1"
   },
   {
     "platform": "github",
@@ -811,55 +1025,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.continuous",
     "catalog_version": "v.continuous"
-  },
-  {
-    "platform": "github",
-    "repo": "VegettoSan/PSVitaAlive",
-    "release_id": "419189819",
-    "tag": "02.13",
-    "name": "PsVita Alive Store 02.13",
-    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.13",
-    "published": "2026-10-21T05:27:33Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# PSVitaAlive 02.13\r\n\r\nVersion **02.13** introduces a completely redesigned keyboard system, expanded catalog filtering, improved installed-game detection, and important installation stability improvements.\r\n\r\nThis release focuses on making PSVitaAlive more stable, easier to navigate, and more reliable when managing Homebrew, PS Vita, PSP, and PS1 content.\r\n\r\n## What's New\r\n\r\n### New Built-in Keyboard\r\n\r\n- Completely replaced the native PlayStation Vita keyboard with a custom keyboard developed specifically for PSVitaAlive.\r\n- Eliminated the unstable native IME interaction that caused repeated crashes when opening the search keyboard.\r\n- Introduced an English QWERTY keyboard with dedicated number and special-character layouts.\r\n- Added full navigation using the D-pad, left analog stick, and touchscreen.\r\n- Added a dedicated right-side column containing SHIFT, Delete, Cancel, and OK.\r\n- Implemented persistent SHIFT mode, allowing users to switch between uppercase and lowercase letters.\r\n- Added automatic character deletion when holding the Delete button or Square.\r\n- Added smooth opening and closing animations.\r\n- Integrated the keyboard with the currently selected color theme.\r\n- Kept the catalog visible behind the keyboard using a translucent modal background.\r\n- Localized keyboard titles, buttons, and instructions across all eight supported interface languages.\r\n- Extended the new keyboard to custom ZIP extraction destination paths.\r\n\r\nThe new keyboard operates directly through vita2d, without relying on Sony's native IME for text input.\r\n\r\n### New Catalog Filtering System\r\n\r\n- Introduced a dedicated filtering panel accessible through the Square button in the full catalog.\r\n- Added category filters for Homebrew applications.\r\n- Added genre filters for PS Vita, PSP, and PS1 games.\r\n- Added filtering for applications containing Game Files or Data Files.\r\n- Added DLC filtering for supported game catalogs.\r\n- Added support for combining category, genre, installation-status, and text-search filters.\r\n- Improved filter navigation using physical controls and touchscreen.\r\n- Added scrolling support for filter menus with multiple options.\r\n- Improved filter button visibility, positioning, and text readability.\r\n- Added localized filter names and descriptions across all eight supported languages.\r\n- Automatically reset active filters when switching between catalogs.\r\n\r\nAvailable category and genre filters are optimized for each catalog.\r\n\r\n### Installed Applications and Games\r\n\r\n- Expanded installed-content detection across all four catalogs.\r\n- Added an **Installed** filter for Homebrew, PS Vita, PSP, and PS1.\r\n- Added **Updates Available** and **Version Not Recognized** filters for Homebrew.\r\n- Improved detection of installed PS Vita games through LiveArea.\r\n- Added detection of PSP installations through LiveArea and supported Adrenaline folders.\r\n- Added support for identifying PSP ISO, CSO, and EBOOT.PBP installations.\r\n- Improved PS1 installation detection, including compatible PBP content identifiers.\r\n- Added support for checking installations across available storage partitions.\r\n- Improved compatibility with regional Title IDs and alternative game identifiers.\r\n- Optimized installed-content scanning to reduce unnecessary filesystem operations.\r\n- Preserved conservative update detection when installed Homebrew versions cannot be reliably identified.\r\n\r\nCommercial game detection focuses on installation presence rather than attempting to determine game update versions.\r\n\r\n### Battery Indicator and Interface Improvements\r\n\r\n- Added a battery indicator to the main catalog header.\r\n- Displayed the current battery percentage alongside a visual battery icon.\r\n- Added battery charging and low-battery indicators.\r\n- Integrated battery information into the existing OLED screen protection mode.\r\n- Improved header alignment between the search bar, filter button, battery indicator, and clock.\r\n- Optimized battery polling to avoid unnecessary system calls.\r\n- Improved touchscreen alignment and interface responsiveness.\r\n- Maintained compatibility with existing color themes, font styles, and language settings.\r\n\r\n### ZIP Installation and Extraction Improvements\r\n\r\n- Fixed an issue where certain Game Files and Data Files ZIP archives could be incorrectly detected as VPK packages.\r\n- Improved installation routing to ensure these archives are extracted to their intended destinations instead of being sent to the VPK installer.\r\n- Added stronger validation for missing or invalid extraction destinations.\r\n- Improved handling of ZIP archives containing files that already exist in the destination.\r\n- Added temporary-file replacement and backup handling to protect existing files during extraction errors.\r\n- Improved cancellation behavior during archive downloads, extraction, and installation.\r\n- Prevented cancelled operations from being incorrectly reported as installation failures.\r\n- Improved handling of invalid VPK and ZIP archives to avoid unnecessary retries.\r\n- Preserved downloaded ZIP archives for recovery when applicable.\r\n\r\n### Storage and Installation Reliability\r\n\r\n- Improved free-space calculations based on the actual installation type.\r\n- Reduced unnecessary storage requirements when downloading compressed ZIP archives.\r\n- Improved storage checks for Game Files and Data Files.\r\n- Corrected size handling when secondary download links do not provide a file size.\r\n- Improved storage preflight behavior for system-managed PKG installations.\r\n- Added more appropriate storage margins for plugin downloads.\r\n- Improved installation retry handling and cancellation synchronization.\r\n- Reduced unnecessary retry attempts for permanently invalid archives.\r\n- Added automated regression tests for archive routing, installation retries, and storage calculations.\r\n\r\nThese improvements help prevent incorrect low-storage warnings while maintaining safety checks during extraction and installation.\r\n\r\n### Performance and Stability\r\n\r\n- Removed obsolete bulk-image startup download behavior.\r\n- Improved resource management around catalog navigation and text input.\r\n- Reduced unnecessary background activity while the custom keyboard is open.\r\n- Improved interface stability by removing the native IME lifecycle from text input.\r\n- Maintained the existing image-cache system and optimized catalog navigation.\r\n- Improved compatibility with existing installation and download workflows.\r\n- Updated internal documentation and regression testing procedures.\r\n\r\n### Localization and Catalog Updates\r\n\r\n- Updated interface translations across English, Spanish, French, German, Italian, Portuguese (Brazil), Portuguese (Portugal), and Russian.\r\n- Added localized keyboard controls, filter options, and installation-status labels.\r\n- Added new Homebrew catalog entries and developer profiles.\r\n- Updated selected application metadata and download information.\r\n- Maintained compatibility with the existing PSVitaAlive catalog architecture.\r\n\r\n## Installation\r\n\r\nDownload **PSVitaAlive.vpk** from the release assets and install it using VitaShell.\r\n\r\nVersion **02.13** can be installed directly over an existing PSVitaAlive installation. A fresh installation is not required.\r\n\r\nExisting settings, cached catalogs, and compatible downloaded data are preserved.\r\n\r\n## Compatibility\r\n\r\nPSVitaAlive continues to support PlayStation Vita and PlayStation TV, including existing Homebrew installation workflows and supported PS Vita, PSP, and PS1 content management features.\r\n\r\nThe new built-in keyboard uses an English QWERTY character layout while adapting its interface labels to the selected language.\r\n\r\nInstallation detection and archive extraction behavior may vary depending on the content format, storage configuration, and installed system plugins.\r\n\r\nSome installation and storage improvements require additional validation across different hardware and archive configurations.\r\n\r\n---\r\n\r\n**PSVitaAlive 02.13** represents a major improvement in user interaction, catalog management, and installation reliability.\r\n\r\nThe introduction of the custom keyboard removes the unstable native text-input workflow and provides a consistent interface designed specifically for PSVitaAlive.\r\n\r\nThank you to everyone who continues to support the project through testing, feedback, bug reports, and contributions.\r\n\r\nYour support helps keep the PlayStation Vita community alive.\r\n\r\n**Full Changelog:** https://github.com/VegettoSan/PSVitaAlive/compare/02.12...main",
-    "assets": [
-      {
-        "name": "PSVitaAlive.vpk",
-        "size": 9585043,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.13/PSVitaAlive.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VegettoSan",
-    "homebrew_name": "PSVitaAlive Store",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
-    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-    "homebrew_id": "psvitaalive-store",
-    "homebrew_authors": [
-      "vegettosan"
-    ],
-    "homebrew_version": "02.13",
-    "catalog_apps": [
-      {
-        "id": "psvitaalive-store",
-        "name": "PSVitaAlive Store",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-        "category": "utilities",
-        "description": "Homebrew store and catalog for PlayStation Vita.",
-        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-        "version": "02.13",
-        "version_date": "2026-10-21",
-        "author_ids": [
-          "vegettosan"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive oficial · 02.13",
-    "catalog_version": "02.13"
   },
   {
     "platform": "github",
@@ -33077,268 +33242,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0",
     "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "suicvne/SpaceCadetPinball_Vita",
-    "release_id": "50359662",
-    "tag": "Release_1.1.1_VitaBuild_2",
-    "name": "Release_1.1.1_VitaBuild_2",
-    "url": "https://github.com/suicvne/SpaceCadetPinball_Vita/releases/tag/Release_1.1.1_VitaBuild_2",
-    "published": "2021-09-28T22:10:28Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This is the second public Vita Build of 3D Space Cadet Pinball (from Win95/98/XP originally).\r\nBy me, this build will be referred to as \"Vita Build 2\" or VB2.\r\n\r\n**NOTICE**\r\nIn order for the game to run, you will need to place your legally obtained data files from your preferred version of Windows into \r\n```\r\nux0:data/SpaceCadetPinball\r\n```\r\n\r\nAll the MIDI files and sound config files should be copied.\r\n\r\nThis version changes the following:\r\n\r\n```\r\n- Rip out SDL_Mixer in favor or SDL_Mixer_X (by Wohlstand: https://github.com/WohlSoft/SDL-Mixer-X)\r\n   - TODO: Fully switch license to GPLv3 & ensure licenses are visible in app. \r\n- Update ImGui implementation to latest version\r\n- Allow ImGui SDL renderer to create and destroy font textures (adding support for custom fonts)\r\n- Fix MIDI Loading by initializing SDL_Mixer with proper MIDI flags. \r\n- Added custom Win95 style including SIL Open Font W95FA by FontsArena (https://fontsarena.com/w95fa-by-fontsarena/)\r\n   - Please leave suggestions for further themes, I would love to add the options! \r\n- Add new menu for switching MIDI Device Emulator on-the-fly between libADLMIDI and libOPNMIDI\r\n  - Also adds menus for switching libADLMIDI emulator and sound banks (again, on the fly!). There are at least 78 sound banks to choose from. \r\n  - All of these new options are saved and remembered as part of the game's native saving system.\r\n- Bind DPad Left and Right to table bump left/right\r\n- Bind DPad down to table bump down. \r\n- Attempt to add a short button delay to avoid menu chaos on the Vita\r\n```\r\n![2021-09-28-180856](https://user-images.githubusercontent.com/861492/135172515-1937e332-77fd-407d-a5e3-39af1b2f019e.jpg)\r\n![2021-09-28-180617](https://user-images.githubusercontent.com/861492/135172535-5536bb8f-87e9-4a4c-b738-8b29add59776.jpg)\r\n![2021-09-28-180639](https://user-images.githubusercontent.com/861492/135172521-15b6f54a-af34-4751-8967-ecda240f55a0.jpg)\r\n\r\n\r\n",
-    "assets": [
-      {
-        "name": "SpaceCadetPinballVita_VB2.vpk",
-        "size": 2773484,
-        "download_url": "https://github.com/suicvne/SpaceCadetPinball_Vita/releases/download/Release_1.1.1_VitaBuild_2/SpaceCadetPinballVita_VB2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "suicvne",
-    "homebrew_name": "Space Cadet Pinball Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-space-cadet-pinball-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Space Cadet for PSVITA.",
-    "homebrew_long_description": "Port of Space Cadet, popular pinball game bundled with Windows XP.",
-    "homebrew_id": "space-cadet-pinball-vita",
-    "homebrew_authors": [
-      "axiom"
-    ],
-    "homebrew_version": "v.1.1.1-VB2",
-    "catalog_apps": [
-      {
-        "id": "space-cadet-pinball-vita",
-        "name": "Space Cadet Pinball Vita",
-        "icon": "https://archive.org/download/psvitaalive-space-cadet-pinball-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Space Cadet for PSVITA.",
-        "long_description": "Port of Space Cadet, popular pinball game bundled with Windows XP.",
-        "version": "v.1.1.1-VB2",
-        "version_date": "2021-09-29",
-        "author_ids": [
-          "axiom"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.1.1-VB2 → release Release_1.1.1_VitaBuild_2",
-    "catalog_version": "v.1.1.1-VB2"
-  },
-  {
-    "platform": "github",
-    "repo": "SonicMastr/Contract-Demon-Vita",
-    "release_id": "49715702",
-    "tag": "v1.0",
-    "name": "Contract Demon Vita ",
-    "url": "https://github.com/SonicMastr/Contract-Demon-Vita/releases/tag/v1.0",
-    "published": "2021-09-17T00:26:54Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Instructions in README\r\n\r\nSupport the Creator Here -> https://www.patreon.com/nomnomnami\r\nOr Here -> https://nomnomnami.itch.io",
-    "assets": [
-      {
-        "name": "Contract.Demon-01.00.vpk",
-        "size": 14300706,
-        "download_url": "https://github.com/SonicMastr/Contract-Demon-Vita/releases/download/v1.0/Contract.Demon-01.00.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SonicMastr",
-    "homebrew_name": "Contract Demon Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-contract-demon-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Contract Demon for PSVITA/PSTV.",
-    "homebrew_long_description": "Port of Contract Demon for PSVITA/PSTV.\nCONTRACT DEMON is a visual novel created for NaNoRenO 2019. an angel summons a demon, and they end up... in love?! it takes 20-30 minutes to read through the story. there are no choices or alternate endings.",
-    "homebrew_id": "contract-demon-vita",
-    "homebrew_authors": [
-      "sonicmastr"
-    ],
-    "homebrew_version": "v.1.00",
-    "catalog_apps": [
-      {
-        "id": "contract-demon-vita",
-        "name": "Contract Demon Vita",
-        "icon": "https://archive.org/download/psvitaalive-contract-demon-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Contract Demon for PSVITA/PSTV.",
-        "long_description": "Port of Contract Demon for PSVITA/PSTV.\nCONTRACT DEMON is a visual novel created for NaNoRenO 2019. an angel summons a demon, and they end up... in love?! it takes 20-30 minutes to read through the story. there are no choices or alternate endings.",
-        "version": "v.1.00",
-        "version_date": "2021-09-17",
-        "author_ids": [
-          "sonicmastr"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.00",
-    "catalog_version": "v.1.00"
-  },
-  {
-    "platform": "github",
-    "repo": "LukeZGD/DDLC-LOVE",
-    "release_id": "49645832",
-    "tag": "v1.2.3",
-    "name": "v1.2.3",
-    "url": "https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.2.3",
-    "published": "2021-09-16T07:03:42Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "**v1.2.3 Release:**\r\n- This release is for the PS Vita, PSP, and LÖVE versions. For other systems, [go to v1.1.9](https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.1.9)\r\n\r\n**v1.2.3 Changes:**\r\n- Update script-ch30.lua\r\n- Add back PSP support\r\n\r\n**Notes:**\r\n- Final release. With better ways to play DDLC on Switch and Vita platforms, DDLC-LOVE is no longer needed, and it will not be updated anymore.\r\n- For the PS Vita, I recommend using [Doki-Doki-Literature-Club-Vita](https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita) instead of DDLC-LOVE for the full desktop version (in Ren'Py) with support for mods.\r\n- For the Switch, support Team Salvato and buy DDLC Plus! The original DDLC (in Ren'Py) can also be run with Switchroot Ubuntu or Android with support for mods.",
-    "assets": [
-      {
-        "name": "DDLC-LOVE-PSP.zip",
-        "size": 87496174,
-        "download_url": "https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "DDLC-LOVE.love",
-        "size": 104002404,
-        "download_url": "https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.love",
-        "content_type": "application/x-love-game"
-      },
-      {
-        "name": "DDLC-LOVE.vpk",
-        "size": 82065242,
-        "download_url": "https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "LukeZGD",
-    "homebrew_name": "DDLC-LOVE",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-ddlc-love/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Doki Doki Literature Club for PSVITA.",
-    "homebrew_long_description": "DDLC-LOVE is a Doki Doki Literature Club port programmed in Lua for the Nintendo Switch, 3DS, Sony PS Vita, PSP, and PS3!",
-    "homebrew_id": "ddlc-love",
-    "homebrew_authors": [
-      "lukezgd"
-    ],
-    "homebrew_version": "v1.2.3",
-    "catalog_apps": [
-      {
-        "id": "ddlc-love",
-        "name": "DDLC-LOVE",
-        "icon": "https://archive.org/download/psvitaalive-ddlc-love/icon0.png",
-        "category": "ports",
-        "description": "Port of Doki Doki Literature Club for PSVITA.",
-        "long_description": "DDLC-LOVE is a Doki Doki Literature Club port programmed in Lua for the Nintendo Switch, 3DS, Sony PS Vita, PSP, and PS3!",
-        "version": "v1.2.3",
-        "version_date": "2021-09-16",
-        "author_ids": [
-          "lukezgd"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.2.3",
-    "catalog_version": "v1.2.3"
-  },
-  {
-    "platform": "github",
-    "repo": "SonicMastr/Doki-Doki-Literature-Club-Vita",
-    "release_id": "49637990",
-    "tag": "v1.01",
-    "name": "Doki Doki Literature Club Vita",
-    "url": "https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/tag/v1.01",
-    "published": "2021-09-15T23:20:48Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Install Instructions in README",
-    "assets": [
-      {
-        "name": "Doki.Doki.Literature.Club-01.01.vpk",
-        "size": 17191800,
-        "download_url": "https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/download/v1.01/Doki.Doki.Literature.Club-01.01.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SonicMastr",
-    "homebrew_name": "Doki Doki Literature Club Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-doki-doki-literature-club-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Doki Doki Literature Club for PSVITA.",
-    "homebrew_long_description": "Port of Doki Doki Literature Club! for PSVITA running under renpy.\nDoki Doki Literature Club! (DDLC) is a 2017 freeware visual novel developed by American independent game studio Team Salvato.",
-    "homebrew_id": "doki-doki-literature-club-vita",
-    "homebrew_authors": [
-      "sonicmastr"
-    ],
-    "homebrew_version": "v1.01",
-    "catalog_apps": [
-      {
-        "id": "doki-doki-literature-club-vita",
-        "name": "Doki Doki Literature Club Vita",
-        "icon": "https://archive.org/download/psvitaalive-doki-doki-literature-club-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Doki Doki Literature Club for PSVITA.",
-        "long_description": "Port of Doki Doki Literature Club! for PSVITA running under renpy.\nDoki Doki Literature Club! (DDLC) is a 2017 freeware visual novel developed by American independent game studio Team Salvato.",
-        "version": "v1.01",
-        "version_date": "2021-09-15",
-        "author_ids": [
-          "sonicmastr"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.01",
-    "catalog_version": "v1.01"
-  },
-  {
-    "platform": "github",
-    "repo": "Northfear/gemrb-vita",
-    "release_id": "48809759",
-    "tag": "v0.8.8-vita.7",
-    "name": "v0.8.8-vita.7",
-    "url": "https://github.com/Northfear/gemrb-vita/releases/tag/v0.8.8-vita.7",
-    "published": "2021-09-01T11:57:18Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Improved rendering performance (updated to latest SDL 1.2 with hardware acceleration)\r\n\r\nEdit: Updated 31/10/21",
-    "assets": [
-      {
-        "name": "gemrb.vpk",
-        "size": 4949129,
-        "download_url": "https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "gemrb_data.zip",
-        "size": 1304666,
-        "download_url": "https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb_data.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "Northfear",
-    "homebrew_name": "GemRB",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-gemrb/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of GemRB for PSVITA/PSTV.",
-    "homebrew_long_description": "GemRB is a portable open-source implementation of BiowareÃ¢â‚¬â„¢s 8 Infinity Engine versions allowing to run the BaldurÃ¢â‚¬â„¢s Gate, Icewind Dale and Planescape: Torment games, their expansions and mods.",
-    "homebrew_id": "gemrb",
-    "homebrew_authors": [
-      "northfear"
-    ],
-    "homebrew_version": "v.0.8.8-vita.7",
-    "catalog_apps": [
-      {
-        "id": "gemrb",
-        "name": "GemRB",
-        "icon": "https://archive.org/download/psvitaalive-gemrb/icon0.png",
-        "category": "ports",
-        "description": "Port of GemRB for PSVITA/PSTV.",
-        "long_description": "GemRB is a portable open-source implementation of BiowareÃ¢â‚¬â„¢s 8 Infinity Engine versions allowing to run the BaldurÃ¢â‚¬â„¢s Gate, Icewind Dale and Planescape: Torment games, their expansions and mods.",
-        "version": "v.0.8.8-vita.7",
-        "version_date": "2021-10-31",
-        "author_ids": [
-          "northfear"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.8.8-vita.7",
-    "catalog_version": "v.0.8.8-vita.7"
   }
 ]

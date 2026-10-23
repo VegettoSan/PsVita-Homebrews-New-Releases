@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">395</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>89</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">394</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>88</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,439 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="psvitaalive store psvitaalive store vegettosan/psvitaalive 02.14 02.14 utilities # psvitaalive 02.14
+
+version **02.14** introduces major download optimizations, faster zip/vpk extraction, improved error handling, and a refreshed website interface.
+
+this release focuses on reducing unnecessary processing during large downloads, improving installation reliability, providing clearer information when external download services fail, and making psvitaalive more efficient on playstation vita hardware.
+
+## what&#x27;s new
+
+### download performance improvements
+
+- improved adaptive parallel downloading for supported vpk, zip, game files, and data files.
+- added direct extraction support for compatible zip/vpk archives downloaded in multiple parts.
+- eliminated unnecessary file assembly before extraction for supported segmented archives.
+- removed redundant full-file sha-1 processing from the optimized direct-extraction workflow.
+- reduced unnecessary storage operations and processing overhead during large installations.
+- improved handling of zip64 archives and large file offsets.
+- optimized archive.org server selection and http range requests.
+- reduced redundant network probes when selecting download servers.
+- improved automatic fallback behavior when optimized downloading is unavailable.
+- maintained compatibility with existing standard download and installation methods.
+
+these changes help reduce installation preparation time and unnecessary storage activity, particularly when working with large homebrew ports.
+
+### zip and vpk extraction optimizations
+
+- introduced a bounded directory cache to reduce repetitive filesystem checks during extraction.
+- improved extraction efficiency for archives containing hundreds or thousands of small files.
+- added optimized exclusive file creation for new files.
+- reduced unnecessary filesystem metadata operations.
+- preserved safe replacement procedures for existing files.
+- maintained existing crc validation, zip64 compatibility, deep-directory support, and cancellation handling.
+- added lightweight extraction performance diagnostics.
+- improved compatibility with complex archive structures.
+
+the new extraction optimizations were tested on real playstation vita hardware using gun bros, successfully installing and extracting the application and its associated game files.
+
+additional compatibility and regression testing will continue in future updates.
+
+### archive.org connectivity improvements
+
+- added automatic connectivity checks for archive.org during application startup.
+- introduced informative warnings when archive.org cannot be reached.
+- improved detection of unavailable download sources.
+- added clearer explanations when external download services experience connection problems.
+- improved distinction between temporary server problems and permanently unavailable files.
+- reduced unnecessary retries when a download source repeatedly fails before transferring data.
+- preserved recovery behavior for interrupted downloads and temporary network failures.
+- added recommendations to try alternative download sources when available.
+
+connectivity warnings indicate that a service cannot be reached from the current connection and do not necessarily mean the entire service is offline.
+
+### improved error messages and diagnostics
+
+- introduced a more informative error presentation system for failed downloads and installations.
+- added clearer explanations for network errors, http failures, tls problems, and unavailable files.
+- improved error reporting for mediafire downloads.
+- added specific messages for insufficient storage space and filesystem errors.
+- improved identification of corrupted archives, unsafe extraction paths, and unsupported formats.
+- added more useful recommendations to help users understand possible solutions.
+- reduced unnecessary error-report prompts for common network and server problems.
+- preserved technical diagnostic information for troubleshooting.
+
+error messages are now designed to help users understand what went wrong and what they can try next.
+
+### website improvements
+
+- refreshed the psvitaalive website with more compact and responsive application cards.
+- improved catalog layouts for homebrew, ps vita, psp, and ps1.
+- redesigned application detail pages for better readability.
+- improved developer profile pages and author listings.
+- refined category cards and navigation.
+- improved download link presentation and recommended download indicators.
+- added clearer display of download information, extraction destinations, and plugin-related details.
+- improved spacing, alignment, typography, and mobile responsiveness.
+- maintained the existing dark interface and green accent design.
+
+### localization improvements
+
+- added translations for new download warnings, installation errors, and recovery instructions.
+- updated interface messages across all eight supported languages:
+  - english
+  - spanish
+  - french
+  - german
+  - italian
+  - portuguese (brazil)
+  - portuguese (portugal)
+  - russian
+
+### stability and internal improvements
+
+- improved synchronization between download completion and installation.
+- optimized filesystem operations during archive extraction.
+- improved handling of interrupted and failed download requests.
+- expanded automated regression tests for segmented archives, download failures, extraction caching, and error classification.
+- improved internal diagnostics and resource management.
+- added new homebrew catalog entries and developer profiles.
+- updated selected application metadata and download links.
+- additional bug fixes and performance improvements.
+
+## installation
+
+download **psvitaalive.vpk** from the release assets and install it using vitashell.
+
+existing users can update directly from a previous version without uninstalling psvitaalive.
+
+the application also supports automatic updates through its built-in update system.
+
+existing settings and compatible cached data are preserved.
+
+## compatibility and notes
+
+psvitaalive continues to support playstation vita and playstation tv.
+
+- download performance depends on the hosting provider, network conditions, and storage configuration.
+- optimized direct extraction is used only for compatible archive downloads. standard downloading remains available as a fallback.
+- some homebrew ports require additional game files or data files that may not yet be available in the catalog.
+- availability of external download sources is not controlled by psvitaalive.
+- extraction improvements have been tested on real hardware, but compatibility may vary across different archives and storage devices.
+
+if you encounter an issue, please report it and include your `session.log` file whenever possible.
+
+---
+
+## thank you
+
+thank you to all developers, contributors, testers, and playstation vita community members who continue to support psvitaalive.
+
+your feedback, bug reports, and hardware testing help improve the project with every release.
+
+**psvitaalive 02.14** continues our goal of providing a free, reliable, and modern platform for discovering, downloading, installing, and preserving playstation vita homebrew.
+
+thank you for helping keep the playstation vita community alive!
+
+**website:** https://vegettosan.github.io/psvitaalive/
+
+**full changelog:** https://github.com/vegettosan/psvitaalive/compare/02.13...main">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png" alt="Icono de PSVitaAlive Store" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · VegettoSan/PSVitaAlive</div>
+                      <h2><a href="https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.14" target="_blank" rel="noopener">PSVitaAlive Store</a></h2>
+                      <div class="release-name">02.14</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">02.14</span>
+                    <span>2026-10-23 07:59 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 02.14</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive oficial · 02.14</div>
+                  
+                  <div class="body markdown-body"><h1>PSVitaAlive 02.14</h1>
+<p>Version <strong>02.14</strong> introduces major download optimizations, faster ZIP/VPK extraction, improved error handling, and a refreshed website interface.</p>
+<p>This release focuses on reducing unnecessary processing during large downloads, improving installation reliability, providing clearer information when external download services fail, and making PSVitaAlive more efficient on PlayStation Vita hardware.</p>
+<h2>What's New</h2>
+<h3>Download Performance Improvements</h3>
+<ul>
+<li>Improved adaptive parallel downloading for supported VPK, ZIP, Game Files, and Data Files.</li>
+<li>Added direct extraction support for compatible ZIP/VPK archives downloaded in multiple parts.</li>
+<li>Eliminated unnecessary file assembly before extraction for supported segmented archives.</li>
+<li>Removed redundant full-file SHA-1 processing from the optimized direct-extraction workflow.</li>
+<li>Reduced unnecessary storage operations and processing overhead during large installations.</li>
+<li>Improved handling of ZIP64 archives and large file offsets.</li>
+<li>Optimized Archive.org server selection and HTTP range requests.</li>
+<li>Reduced redundant network probes when selecting download servers.</li>
+<li>Improved automatic fallback behavior when optimized downloading is unavailable.</li>
+<li>Maintained compatibility with existing standard download and installation methods.</li>
+</ul>
+<p>These changes help reduce installation preparation time and unnecessary storage activity, particularly when working with large Homebrew ports.</p>
+<h3>ZIP and VPK Extraction Optimizations</h3>
+<ul>
+<li>Introduced a bounded directory cache to reduce repetitive filesystem checks during extraction.</li>
+<li>Improved extraction efficiency for archives containing hundreds or thousands of small files.</li>
+<li>Added optimized exclusive file creation for new files.</li>
+<li>Reduced unnecessary filesystem metadata operations.</li>
+<li>Preserved safe replacement procedures for existing files.</li>
+<li>Maintained existing CRC validation, ZIP64 compatibility, deep-directory support, and cancellation handling.</li>
+<li>Added lightweight extraction performance diagnostics.</li>
+<li>Improved compatibility with complex archive structures.</li>
+</ul>
+<p>The new extraction optimizations were tested on real PlayStation Vita hardware using Gun Bros, successfully installing and extracting the application and its associated Game Files.</p>
+<p>Additional compatibility and regression testing will continue in future updates.</p>
+<h3>Archive.org Connectivity Improvements</h3>
+<ul>
+<li>Added automatic connectivity checks for Archive.org during application startup.</li>
+<li>Introduced informative warnings when Archive.org cannot be reached.</li>
+<li>Improved detection of unavailable download sources.</li>
+<li>Added clearer explanations when external download services experience connection problems.</li>
+<li>Improved distinction between temporary server problems and permanently unavailable files.</li>
+<li>Reduced unnecessary retries when a download source repeatedly fails before transferring data.</li>
+<li>Preserved recovery behavior for interrupted downloads and temporary network failures.</li>
+<li>Added recommendations to try alternative download sources when available.</li>
+</ul>
+<p>Connectivity warnings indicate that a service cannot be reached from the current connection and do not necessarily mean the entire service is offline.</p>
+<h3>Improved Error Messages and Diagnostics</h3>
+<ul>
+<li>Introduced a more informative error presentation system for failed downloads and installations.</li>
+<li>Added clearer explanations for network errors, HTTP failures, TLS problems, and unavailable files.</li>
+<li>Improved error reporting for MediaFire downloads.</li>
+<li>Added specific messages for insufficient storage space and filesystem errors.</li>
+<li>Improved identification of corrupted archives, unsafe extraction paths, and unsupported formats.</li>
+<li>Added more useful recommendations to help users understand possible solutions.</li>
+<li>Reduced unnecessary error-report prompts for common network and server problems.</li>
+<li>Preserved technical diagnostic information for troubleshooting.</li>
+</ul>
+<p>Error messages are now designed to help users understand what went wrong and what they can try next.</p>
+<h3>Website Improvements</h3>
+<ul>
+<li>Refreshed the PSVitaAlive website with more compact and responsive application cards.</li>
+<li>Improved catalog layouts for Homebrew, PS Vita, PSP, and PS1.</li>
+<li>Redesigned application detail pages for better readability.</li>
+<li>Improved developer profile pages and author listings.</li>
+<li>Refined category cards and navigation.</li>
+<li>Improved download link presentation and recommended download indicators.</li>
+<li>Added clearer display of download information, extraction destinations, and plugin-related details.</li>
+<li>Improved spacing, alignment, typography, and mobile responsiveness.</li>
+<li>Maintained the existing dark interface and green accent design.</li>
+</ul>
+<h3>Localization Improvements</h3>
+<ul>
+<li>Added translations for new download warnings, installation errors, and recovery instructions.</li>
+<li>Updated interface messages across all eight supported languages:<ul>
+<li>English</li>
+<li>Spanish</li>
+<li>French</li>
+<li>German</li>
+<li>Italian</li>
+<li>Portuguese (Brazil)</li>
+<li>Portuguese (Portugal)</li>
+<li>Russian</li>
+</ul>
+</li>
+</ul>
+<h3>Stability and Internal Improvements</h3>
+<ul>
+<li>Improved synchronization between download completion and installation.</li>
+<li>Optimized filesystem operations during archive extraction.</li>
+<li>Improved handling of interrupted and failed download requests.</li>
+<li>Expanded automated regression tests for segmented archives, download failures, extraction caching, and error classification.</li>
+<li>Improved internal diagnostics and resource management.</li>
+<li>Added new Homebrew catalog entries and developer profiles.</li>
+<li>Updated selected application metadata and download links.</li>
+<li>Additional bug fixes and performance improvements.</li>
+</ul>
+<h2>Installation</h2>
+<p>Download <strong>PSVitaAlive.vpk</strong> from the release assets and install it using VitaShell.</p>
+<p>Existing users can update directly from a previous version without uninstalling PSVitaAlive.</p>
+<p>The application also supports automatic updates through its built-in update system.</p>
+<p>Existing settings and compatible cached data are preserved.</p>
+<h2>Compatibility and Notes</h2>
+<p>PSVitaAlive continues to support PlayStation Vita and PlayStation TV.</p>
+<ul>
+<li>Download performance depends on the hosting provider, network conditions, and storage configuration.</li>
+<li>Optimized direct extraction is used only for compatible archive downloads. Standard downloading remains available as a fallback.</li>
+<li>Some Homebrew ports require additional Game Files or Data Files that may not yet be available in the catalog.</li>
+<li>Availability of external download sources is not controlled by PSVitaAlive.</li>
+<li>Extraction improvements have been tested on real hardware, but compatibility may vary across different archives and storage devices.</li>
+</ul>
+<p>If you encounter an issue, please report it and include your <code>session.log</code> file whenever possible.</p>
+<hr>
+<h2>Thank You</h2>
+<p>Thank you to all developers, contributors, testers, and PlayStation Vita community members who continue to support PSVitaAlive.</p>
+<p>Your feedback, bug reports, and hardware testing help improve the project with every release.</p>
+<p><strong>PSVitaAlive 02.14</strong> continues our goal of providing a free, reliable, and modern platform for discovering, downloading, installing, and preserving PlayStation Vita Homebrew.</p>
+<p>Thank you for helping keep the PlayStation Vita community alive!</p>
+<p><strong>Website:</strong> <a target="_blank" rel="noopener noreferrer" href="https://vegettosan.github.io/PSVitaAlive/">https://vegettosan.github.io/PSVitaAlive/</a></p>
+<p><strong>Full Changelog:</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/VegettoSan/PSVitaAlive/compare/02.13...main">https://github.com/VegettoSan/PSVitaAlive/compare/02.13...main</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/VegettoSan/PSVitaAlive/releases/download/02.14/PSVitaAlive.vpk" target="_blank" rel="noopener">⬇ PSVitaAlive.vpk · 9.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="mario kart wii mario kart wii boomannotjeff/mkwiita 1.4.1 1.4.1 ports # mkw vita 1.4.1
+
+fixes for bike animations, items left on the ground, the wario bike and coin runners. only the vpk changes: your 1.4.0 game files keep working.
+
+&gt;[!note]
+&gt;**coming from 1.4.0? just install the new vpk.** 1.4.1 uses the same game files, so there&#x27;s nothing to rebuild or copy.
+&gt;
+&gt;coming from 1.3.0 or older? rebuild your game files as described in the [1.4.0 release](https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0).
+
+
+## what&#x27;s new
+
+### fixed issues
+
+- **mixed-up bike animations** ([#20](https://github.com/boomannotjeff/mkwiita/issues/20)):
+  - riders only flail their legs when a cannon shoots them out. ramps, jump pads, boost ramps and tricks keep the normal riding pose.
+  - the flame runner and the other inside-drift bikes lean into a drift instead of sticking a leg out.
+- **items on the ground** ([#21](https://github.com/boomannotjeff/mkwiita/issues/21)). dropped items land and stay where they fall. they play their landing sound once and aren&#x27;t pushed around anymore.
+
+### racing
+
+- **wario bike.** the handlebars and the front of the bike no longer float off it. this affected every large character on it, funky kong included.
+- **time trial ghosts.** ghosts stay centred when you race or watch them, instead of drifting off to the side.
+
+### battle
+
+- **coin runners.** half as many coins on the ground at the start.
+- **minimap.** the coins are smaller dots.
+
+### menus
+
+- **stick diagonals.** pushing the stick diagonally no longer moves the cursor and changes the page at the same time.
+- **retro rewind cup pages.** the text no longer disappears when you change page with the stick.
+- **random courses.** random picks change from race to race, instead of repeating.
+- **main menu.** &quot;single player&quot;, &quot;multiplayer&quot; and the other titles are white like on the wii, without the flash.
+
+everything above is in the retro rewind edition too.
+
+## install
+
+1. install `mkw.vpk` (or `mkw-retro-rewind.vpk`), attached below, with vitashell.
+2. that&#x27;s it if you&#x27;re on 1.4.0. from an older release, rebuild your game files first (see the [1.4.0 release](https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0)).
+3. make sure `ur0:data/libshacccg.suprx` exists (run sharkf00d once).
+
+your licenses, times and ghosts stay.
+
+the vpk contains no nintendo game files. please don&#x27;t share your built game files.
+
+## building it yourself
+- `build mkw vita.bat` builds the game files and the vpk (needs vitasdk).
+- `build game files.bat` builds only the game files.
+- see [building.md](building.md) for details.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/mkwiita/icon0.png" alt="Icono de Mario Kart Wii" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · boomannotjeff/mkwiita</div>
+                      <h2><a href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.1" target="_blank" rel="noopener">Mario Kart Wii</a></h2>
+                      <div class="release-name">1.4.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.4.1</span>
+                    <span>2026-10-23 07:18 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.4.1</div>
+                  
+                  <div class="body markdown-body"><h1>MKW Vita 1.4.1</h1>
+<p>Fixes for bike animations, items left on the ground, the Wario Bike and Coin Runners. Only the VPK changes: your 1.4.0 game files keep working.</p>
+<blockquote>
+<p>[!NOTE]
+<strong>Coming from 1.4.0? Just install the new VPK.</strong> 1.4.1 uses the same game files, so there's nothing to rebuild or copy.</p>
+<p>Coming from 1.3.0 or older? Rebuild your game files as described in the <a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0">1.4.0 release</a>.</p>
+</blockquote>
+<h2>What's new</h2>
+<h3>Fixed issues</h3>
+<ul>
+<li><strong>Mixed-up bike animations</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/20">#20</a>):<ul>
+<li>Riders only flail their legs when a cannon shoots them out. Ramps, jump pads, boost ramps and tricks keep the normal riding pose.</li>
+<li>The Flame Runner and the other inside-drift bikes lean into a drift instead of sticking a leg out.</li>
+</ul>
+</li>
+<li><strong>Items on the ground</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/21">#21</a>). Dropped items land and stay where they fall. They play their landing sound once and aren't pushed around anymore.</li>
+</ul>
+<h3>Racing</h3>
+<ul>
+<li><strong>Wario Bike.</strong> The handlebars and the front of the bike no longer float off it. This affected every large character on it, Funky Kong included.</li>
+<li><strong>Time Trial ghosts.</strong> Ghosts stay centred when you race or watch them, instead of drifting off to the side.</li>
+</ul>
+<h3>Battle</h3>
+<ul>
+<li><strong>Coin Runners.</strong> Half as many coins on the ground at the start.</li>
+<li><strong>Minimap.</strong> The coins are smaller dots.</li>
+</ul>
+<h3>Menus</h3>
+<ul>
+<li><strong>Stick diagonals.</strong> Pushing the stick diagonally no longer moves the cursor and changes the page at the same time.</li>
+<li><strong>Retro Rewind cup pages.</strong> The text no longer disappears when you change page with the stick.</li>
+<li><strong>Random courses.</strong> Random picks change from race to race, instead of repeating.</li>
+<li><strong>Main menu.</strong> &quot;Single Player&quot;, &quot;Multiplayer&quot; and the other titles are white like on the Wii, without the flash.</li>
+</ul>
+<p>Everything above is in the Retro Rewind edition too.</p>
+<h2>Install</h2>
+<ol>
+<li>Install <code>mkw.vpk</code> (or <code>mkw-retro-rewind.vpk</code>), attached below, with VitaShell.</li>
+<li>That's it if you're on 1.4.0. From an older release, rebuild your game files first (see the <a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0">1.4.0 release</a>).</li>
+<li>Make sure <code>ur0:data/libshacccg.suprx</code> exists (run ShaRKF00D once).</li>
+</ol>
+<p>Your licenses, times and ghosts stay.</p>
+<p>The VPK contains no Nintendo game files. Please don't share your built game files.</p>
+<h2>Building it yourself</h2>
+<ul>
+<li><code>Build MKW Vita.bat</code> builds the game files and the VPK (needs VitaSDK).</li>
+<li><code>Build Game Files.bat</code> builds only the game files.</li>
+<li>See <a target="_blank" rel="noopener noreferrer" href="BUILDING.md">BUILDING.md</a> for details.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.4.1/mkw-retro-rewind.vpk" target="_blank" rel="noopener">⬇ mkw-retro-rewind.vpk · 2.4 MB</a><a class="btn" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.4.1/mkw.vpk" target="_blank" rel="noopener">mkw.vpk · 2.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="monster hunter tri monster hunter tri grarak/mh3-wii 0.2.2 0.2.2 ports - fixed online connection with save files exceeding 5 characters in their names">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png" alt="Icono de Monster Hunter Tri" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Grarak/mh3-wii</div>
+                      <h2><a href="https://github.com/Grarak/mh3-wii/releases/tag/0.2.2" target="_blank" rel="noopener">Monster Hunter Tri</a></h2>
+                      <div class="release-name">0.2.2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">0.2.2</span>
+                    <span>2026-10-23 07:04 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1 → release 0.2.2</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Fixed online connection with save files exceeding 5 characters in their names</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.2/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 17.9 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.2/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 132.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="vitaforge vitaforge josephinoo/vitaforge vitaforge v0.1.6 v0.1.6 utilities ## highlights
 
 • clearer installation progress: download → verify → extract → install
@@ -359,6 +792,46 @@ no new game files are needed. install the new `nfsmw.vpk`.">
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="dragon ball z: bt3 dragon ball z: bt3 arielxflores/tenkaichi3decomp-vita 1.0 v1.0 ports first release.
+
+- install `tenkaichi3decomp-vita.vpk` with vitashell.
+- copy `slus_216.78`, `bin` and `data` from your own disc image of the usa release (slus-21678) to
+  `ux0:data/bt3/disc/`, as described under [game files](https://github.com/arielxflores/tenkaichi3decomp-vita#game-files).
+- `libshacccg.suprx` must be extracted to `ur0:data/`. the [capunlocker](https://github.com/graphenect/capunlocker)
+  plugin is recommended (it lets the game use the fourth cpu core).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png" alt="Icono de Dragon Ball Z: BT3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · arielxflores/Tenkaichi3Decomp-Vita</div>
+                      <h2><a href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.0" target="_blank" rel="noopener">Dragon Ball Z: BT3</a></h2>
+                      <div class="release-name">1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2026-10-22 21:06 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0</div>
+                  
+                  <div class="body markdown-body"><p>First release.</p>
+<ul>
+<li>Install <code>Tenkaichi3Decomp-Vita.vpk</code> with VitaShell.</li>
+<li>Copy <code>SLUS_216.78</code>, <code>BIN</code> and <code>DATA</code> from your own disc image of the USA release (SLUS-21678) to
+<code>ux0:data/bt3/disc/</code>, as described under <a target="_blank" rel="noopener noreferrer" href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita#game-files">Game files</a>.</li>
+<li><code>libshacccg.suprx</code> must be extracted to <code>ur0:data/</code>. The <a target="_blank" rel="noopener noreferrer" href="https://github.com/GrapheneCt/CapUnlocker">CapUnlocker</a>
+plugin is recommended (it lets the game use the fourth CPU core).</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.0/Tenkaichi3Decomp-Vita.vpk" target="_blank" rel="noopener">⬇ Tenkaichi3Decomp-Vita.vpk · 2.5 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="openmw vita openmw vita thelostpantheon/openmw openmw - ps vita release (v2.4) v2.4 ports - fixed a crash at boot on consoles without kubridge.
   - custom controls now persist across restarts.
   - files copied from a mac no longer cause errors (the hidden ._ duplicates are ignored).
@@ -457,197 +930,96 @@ Installation Instructions:</p>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="mario kart wii mario kart wii boomannotjeff/mkwiita 1.4.0 1.4.0 ports # mkw vita 1.4.0
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.1-beta v0.1.1-beta ports fixes for new installs, and a much faster first launch.
 
-bug fixes from the issue tracker, better items and effects, an award ceremony in vs, and smaller game files.
+**download `hl2_vita-0.1.1-beta.zip` below** and install `hl2_vita.vpk` over 0.1.0: your saves and settings stay, and the controls below are corrected automatically. new to the port? follow [install_vita.md](https://github.com/largevegetable/source-engine/blob/vita/install_vita.md).
 
-&gt;[!important]
-&gt;**you must rebuild your game files.** the texture conversion and the packs changed, so most of the build runs again even if you kept your build folder from 1.3.0. run `build game files.bat` from this release&#x27;s source code, then copy `build\vita\data\mkw\` to your vita again.
-&gt;
-&gt;**delete the old `.pak` files and the `models` folder in `ux0:data/mkw/` before copying.** some ftp clients write over an existing file without shortening it, which leaves black menus and missing textures.
+### fixed
+
+- **the analog sticks didn&#x27;t work on a new install** until options &gt; controls &gt; restore default controls ([#4](https://github.com/largevegetable/source-engine/issues/4)).
 
 
-## what&#x27;s new
+### faster first launch
 
-### fixed issues
+- **first launch to the main menu is much faster at around 1-2 mins** (it was about 7-10 minutes before), and **about 1-2 minutes to the first map** (up to 24 minutes before). shaders are now compiled when they&#x27;re first needed instead of all at once, and the shader cache no longer creates hundreds of folders up front.
+- **the trade-off here is that brief hitches will appear upon first load of a map or when an effect is used for the first time.** each new shader takes about half a second to compile on the vita, so the first minutes of a brand new install - and each subsequent new area - can pause for a moment, sometimes a few seconds. every shader is compiled only once and kept in `ux0:data/shader_cache/`. this seems like a fair trade-off compared to the half-hour long initial load times where the engine compiled **everything** upfront. removing these hitches is the next big item on my list.
 
-- **standstill mini-turbo** ([#4](https://github.com/boomannotjeff/mkwiita/issues/4)). holding r and cross while stopped now shows the smoke while it charges, then the sparks once it&#x27;s ready.
-- **items** ([#7](https://github.com/boomannotjeff/mkwiita/issues/7)):
-  - **blooper ink** fades faster while you boost, and a mushroom fades it out instead of popping it off.
-  - **dropped bananas** land and stay when you get hit, instead of sliding away forever.
-  - **triple shells** stay steady around you during a wheelie.
-  - **shrunk racers** get flattened when you run into them after a lightning.
-- **gba shy guy beach bombs** ([#9](https://github.com/boomannotjeff/mkwiita/issues/9)). the explosions are the right size again and no longer cover the sky.
-- **blue shell and wheelies** ([#13](https://github.com/boomannotjeff/mkwiita/issues/13)). a wheelie no longer lets you escape a blue shell.
+### also new
 
-### items and effects
+- **gyro aiming** ([#3](https://github.com/largevegetable/source-engine/issues/3)): turn and tilt the vita to aim, on top of the right stick. off by default; turn it on and set its sensitivity in options &gt; controls.
+- **the touchscreen&#x27;s left and right halves can be assigned to any action** in options &gt; controls. they work in game only; in the menus you tap as usual.
+- **the rear touchpad&#x27;s right half sprints by default.** the left half still crouches.
+- **loads are a little shorter:** the engine log no longer writes every line to the memory card on its own, and the lightmap rebuild runs under the loading screen.
+- **better bug reports:** `engine.log` now keeps the last five sessions, like the boot log, and readme_vita.md lists what to include (firmware, model, storage, plugins).
 
-- **blooper.** you now see the blooper itself before it inks you.
-- **blue shell.** it circles in front of the leader before diving, instead of out of view above them.
-- **red shell.** it no longer passes its target and comes back to hit them from the front.
-- **explosions.** the shy guy beach cannonballs, bowser&#x27;s castle fireballs and moonview highway&#x27;s bob-omb cars explode like a real bob-omb, not as a plain ball.
-- **fire.** flame pillars, fire snakes and the bowser&#x27;s castle fireball glow and fade like fire, instead of solid cylinders and balls.
+### known issues
 
-### racing
+- first-time shader hitches, described above.
+- rarely, the game can crash while loading the next map. save often.
+- cube map reflections are off, and the intro videos don&#x27;t play.
+- suspend and resume are lightly tested.
+- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.
+- half-life 2 only: no episodes, lost coast, multiplayer or mods.
 
-- **rosalina&#x27;s luma.** her luma now floats along with her, as on the wii, in karts and on bikes, for you and the cpus. it follows the kart the way the original does: over hops, through cannons and zippers, and it shrinks or grows with lightning and mega mushrooms.
-- **tilt in the air.** stick up and down tilts your kart in the air, as on the wii. ghosts record it too.
-- **lightning pose.** the hit pose only plays during the spin, not for the whole time you&#x27;re small.
-- **standing wheelie.** holding a wheelie while stopped no longer makes the driver&#x27;s head bob back and forth.
-- **pause.** continue resumes right away. the race isn&#x27;t reloaded anymore.
+### reporting bugs
 
-the luma, the tilt and the lightning pose are adapted from [mkw-3ds 0.6.0](https://github.com/minibandit/mkw-3ds/releases/tag/v0.6.0) (thanks epic0522 and minibandit).
+open an [issue](https://github.com/largevegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, where you were in the game, and the version (top right of the menus). readme_vita.md has the details.
 
-### menus
+not affiliated with or endorsed by valve or sony. free, and it must stay free.
 
-- **award ceremony in vs.** after the last race of a vs set you now get the podium too, without the trophy and rank, which are for grand prix only. this isn&#x27;t in the original game.
-- **skipping the ceremony** during the winning run no longer leaves a black screen.
-- **full-screen menus.** the menus, title screen and movies now fill the whole screen. they had black bars at the top and bottom, left over from the 3ds screen.
-- **title screen and main menu.** the original widescreen art at the right proportions, instead of a stretched 4:3 crop.
-
-### smaller and faster
-
-- **smaller game files.** about 1.9 gb instead of 2.85 gb: identical files in the packs are stored once.
-- **faster builds.** each texture is converted once, even when many models use it, and temporary folders are deleted when a step is done (about 1.2 gb less on your pc).
-- **retro rewind vpk.** building it yourself now makes `mkw-retro-rewind.vpk`.
-
-everything above is in the retro rewind edition too.
-
-## known limitations
-
-- **fire:** no heat-shimmer yet, and the flame pillars&#x27; extra glow layer is missing.
-- **blooper and blue shell:** their positions on screen are set by eye and may still be adjusted.
-- **rosalina&#x27;s luma:** only in races for now, not in the menus or the award ceremony.
-- **staff ghosts:** you can&#x27;t race or watch them yet (in progress). their times already count toward unlocks.
-
-## install
-
-1. install `mkw.vpk` (attached below) with vitashell.
-2. rebuild your game files:
-   - get the source with git:
-     ```
-     git clone https://github.com/boomannotjeff/mkwiita.git
-     cd mkwiita
-     ```
-     already cloned? run `git pull` in that folder instead.
-   - run `build game files.bat`, which doesn&#x27;t need vitasdk, and drag in your mario kart wii (usa) disc image.
-3. on the vita, delete the old `.pak` files and the `models` folder in `ux0:data/mkw/`.
-4. copy the contents of `build\vita\data\mkw\` to `ux0:data/mkw/`. your licenses, times and ghosts stay.
-5. make sure `ur0:data/libshacccg.suprx` exists (run sharkf00d once).
-
-the vpk and the game files must come from the same release. the 1.4.0 vpk doesn&#x27;t work with 1.3.0 game files, or the other way round.
-
-the vpk contains no nintendo game files. please don&#x27;t share your built game files.
-
-## building it yourself
-- `build mkw vita.bat` builds the game files and the vpk (needs vitasdk).
-- `build game files.bat` builds only the game files.
-- see [building.md](building.md) for details.">
+sha-256 of the zip: `4d875af76c343eddf19cf8efff4fb7c1563085213d7e79c6c150651d91d78c42`">
               <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/mkwiita/icon0.png" alt="Icono de Mario Kart Wii" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/half-life-2-for-ps-vita/icon0.png" alt="Icono de Half-Life 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · boomannotjeff/mkwiita</div>
-                      <h2><a href="https://github.com/boomannotjeff/mkwiita/releases/tag/1.4.0" target="_blank" rel="noopener">Mario Kart Wii</a></h2>
-                      <div class="release-name">1.4.0</div>
+                      <div class="eyebrow">PORTS · GITHUB · LargeVegetable/source-engine</div>
+                      <h2><a href="https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.1-beta" target="_blank" rel="noopener">Half-Life 2</a></h2>
+                      <div class="release-name">Half-Life 2 for PS Vita 0.1.1-beta</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">1.4.0</span>
-                    <span>2026-10-22 05:07 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
+                    <span class="tag">v0.1.1-beta</span>
+                    <span>2026-10-22 04:09 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.4.0</div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.1</div>
                   
-                  <div class="body markdown-body"><h1>MKW Vita 1.4.0</h1>
-<p>Bug fixes from the issue tracker, better items and effects, an award ceremony in VS, and smaller game files.</p>
-<blockquote>
-<p>[!IMPORTANT]
-<strong>You must rebuild your game files.</strong> The texture conversion and the packs changed, so most of the build runs again even if you kept your build folder from 1.3.0. Run <code>Build Game Files.bat</code> from this release's source code, then copy <code>build\vita\data\mkw\</code> to your Vita again.</p>
-<p><strong>Delete the old <code>.pak</code> files and the <code>models</code> folder in <code>ux0:data/mkw/</code> before copying.</strong> Some FTP clients write over an existing file without shortening it, which leaves black menus and missing textures.</p>
-</blockquote>
-<h2>What's new</h2>
-<h3>Fixed issues</h3>
+                  <div class="body markdown-body"><p>Fixes for new installs, and a much faster first launch.</p>
+<p><strong>Download <code>hl2_vita-0.1.1-beta.zip</code> below</strong> and install <code>hl2_vita.vpk</code> over 0.1.0: your saves and settings stay, and the controls below are corrected automatically. New to the port? Follow <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md">INSTALL_VITA.md</a>.</p>
+<h3>Fixed</h3>
 <ul>
-<li><strong>Standstill mini-turbo</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/4">#4</a>). Holding R and Cross while stopped now shows the smoke while it charges, then the sparks once it's ready.</li>
-<li><strong>Items</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/7">#7</a>):<ul>
-<li><strong>Blooper ink</strong> fades faster while you boost, and a Mushroom fades it out instead of popping it off.</li>
-<li><strong>Dropped bananas</strong> land and stay when you get hit, instead of sliding away forever.</li>
-<li><strong>Triple shells</strong> stay steady around you during a wheelie.</li>
-<li><strong>Shrunk racers</strong> get flattened when you run into them after a Lightning.</li>
+<li><strong>The analog sticks didn't work on a new install</strong> until Options &gt; Controls &gt; Restore Default Controls (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/4">#4</a>).</li>
 </ul>
-</li>
-<li><strong>GBA Shy Guy Beach bombs</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/9">#9</a>). The explosions are the right size again and no longer cover the sky.</li>
-<li><strong>Blue Shell and wheelies</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/boomannotjeff/mkwiita/issues/13">#13</a>). A wheelie no longer lets you escape a Blue Shell.</li>
-</ul>
-<h3>Items and effects</h3>
+<h3>Faster first launch</h3>
 <ul>
-<li><strong>Blooper.</strong> You now see the Blooper itself before it inks you.</li>
-<li><strong>Blue Shell.</strong> It circles in front of the leader before diving, instead of out of view above them.</li>
-<li><strong>Red Shell.</strong> It no longer passes its target and comes back to hit them from the front.</li>
-<li><strong>Explosions.</strong> The Shy Guy Beach cannonballs, Bowser's Castle fireballs and Moonview Highway's Bob-omb cars explode like a real Bob-omb, not as a plain ball.</li>
-<li><strong>Fire.</strong> Flame pillars, Fire Snakes and the Bowser's Castle fireball glow and fade like fire, instead of solid cylinders and balls.</li>
+<li><strong>First launch to the main menu is much faster at around 1-2 mins</strong> (it was about 7-10 minutes before), and <strong>about 1-2 minutes to the first map</strong> (up to 24 minutes before). Shaders are now compiled when they're first needed instead of all at once, and the shader cache no longer creates hundreds of folders up front.</li>
+<li><strong>The trade-off here is that brief hitches will appear upon first load of a map or when an effect is used for the first time.</strong> Each new shader takes about half a second to compile on the Vita, so the first minutes of a brand new install - and each subsequent new area - can pause for a moment, sometimes a few seconds. Every shader is compiled only once and kept in <code>ux0:data/shader_cache/</code>. This seems like a fair trade-off compared to the half-hour long initial load times where the engine compiled <strong>everything</strong> upfront. Removing these hitches is the next big item on my list.</li>
 </ul>
-<h3>Racing</h3>
+<h3>Also new</h3>
 <ul>
-<li><strong>Rosalina's Luma.</strong> Her Luma now floats along with her, as on the Wii, in karts and on bikes, for you and the CPUs. It follows the kart the way the original does: over hops, through cannons and zippers, and it shrinks or grows with Lightning and Mega Mushrooms.</li>
-<li><strong>Tilt in the air.</strong> Stick up and down tilts your kart in the air, as on the Wii. Ghosts record it too.</li>
-<li><strong>Lightning pose.</strong> The hit pose only plays during the spin, not for the whole time you're small.</li>
-<li><strong>Standing wheelie.</strong> Holding a wheelie while stopped no longer makes the driver's head bob back and forth.</li>
-<li><strong>Pause.</strong> Continue resumes right away. The race isn't reloaded anymore.</li>
+<li><strong>Gyro aiming</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/3">#3</a>): turn and tilt the Vita to aim, on top of the right stick. Off by default; turn it on and set its sensitivity in Options &gt; Controls.</li>
+<li><strong>The touchscreen's left and right halves can be assigned to any action</strong> in Options &gt; Controls. They work in game only; in the menus you tap as usual.</li>
+<li><strong>The rear touchpad's right half sprints by default.</strong> The left half still crouches.</li>
+<li><strong>Loads are a little shorter:</strong> the engine log no longer writes every line to the memory card on its own, and the lightmap rebuild runs under the loading screen.</li>
+<li><strong>Better bug reports:</strong> <code>engine.log</code> now keeps the last five sessions, like the boot log, and README_VITA.md lists what to include (firmware, model, storage, plugins).</li>
 </ul>
-<p>The Luma, the tilt and the Lightning pose are adapted from <a target="_blank" rel="noopener noreferrer" href="https://github.com/MiniBandit/MKW-3DS/releases/tag/v0.6.0">MKW-3DS 0.6.0</a> (thanks Epic0522 and MiniBandit).</p>
-<h3>Menus</h3>
+<h3>Known issues</h3>
 <ul>
-<li><strong>Award ceremony in VS.</strong> After the last race of a VS set you now get the podium too, without the trophy and rank, which are for Grand Prix only. This isn't in the original game.</li>
-<li><strong>Skipping the ceremony</strong> during the winning run no longer leaves a black screen.</li>
-<li><strong>Full-screen menus.</strong> The menus, title screen and movies now fill the whole screen. They had black bars at the top and bottom, left over from the 3DS screen.</li>
-<li><strong>Title screen and main menu.</strong> The original widescreen art at the right proportions, instead of a stretched 4:3 crop.</li>
+<li>First-time shader hitches, described above.</li>
+<li>Rarely, the game can crash while loading the next map. Save often.</li>
+<li>Cube map reflections are off, and the intro videos don't play.</li>
+<li>Suspend and resume are lightly tested.</li>
+<li>kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.</li>
+<li>Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.</li>
 </ul>
-<h3>Smaller and faster</h3>
-<ul>
-<li><strong>Smaller game files.</strong> About 1.9 GB instead of 2.85 GB: identical files in the packs are stored once.</li>
-<li><strong>Faster builds.</strong> Each texture is converted once, even when many models use it, and temporary folders are deleted when a step is done (about 1.2 GB less on your PC).</li>
-<li><strong>Retro Rewind VPK.</strong> Building it yourself now makes <code>mkw-retro-rewind.vpk</code>.</li>
-</ul>
-<p>Everything above is in the Retro Rewind edition too.</p>
-<h2>Known limitations</h2>
-<ul>
-<li><strong>Fire:</strong> no heat-shimmer yet, and the flame pillars' extra glow layer is missing.</li>
-<li><strong>Blooper and Blue Shell:</strong> their positions on screen are set by eye and may still be adjusted.</li>
-<li><strong>Rosalina's Luma:</strong> only in races for now, not in the menus or the award ceremony.</li>
-<li><strong>Staff ghosts:</strong> you can't race or watch them yet (in progress). Their times already count toward unlocks.</li>
-</ul>
-<h2>Install</h2>
-<ol>
-<li>Install <code>mkw.vpk</code> (attached below) with VitaShell.</li>
-<li>Rebuild your game files:<ul>
-<li><p>Get the source with Git:</p>
-<pre><code>git clone https://github.com/boomannotjeff/mkwiita.git
-cd mkwiita
-</code></pre>
-<p>Already cloned? Run <code>git pull</code> in that folder instead.</p>
-</li>
-<li><p>Run <code>Build Game Files.bat</code>, which doesn't need VitaSDK, and drag in your Mario Kart Wii (USA) disc image.</p>
-</li>
-</ul>
-</li>
-<li>On the Vita, delete the old <code>.pak</code> files and the <code>models</code> folder in <code>ux0:data/mkw/</code>.</li>
-<li>Copy the contents of <code>build\vita\data\mkw\</code> to <code>ux0:data/mkw/</code>. Your licenses, times and ghosts stay.</li>
-<li>Make sure <code>ur0:data/libshacccg.suprx</code> exists (run ShaRKF00D once).</li>
-</ol>
-<p>The VPK and the game files must come from the same release. The 1.4.0 VPK doesn't work with 1.3.0 game files, or the other way round.</p>
-<p>The VPK contains no Nintendo game files. Please don't share your built game files.</p>
-<h2>Building it yourself</h2>
-<ul>
-<li><code>Build MKW Vita.bat</code> builds the game files and the VPK (needs VitaSDK).</li>
-<li><code>Build Game Files.bat</code> builds only the game files.</li>
-<li>See <a target="_blank" rel="noopener noreferrer" href="BUILDING.md">BUILDING.md</a> for details.</li>
-</ul>
+<h3>Reporting bugs</h3>
+<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues">issue</a> with <code>ux0:data/hl2_vita_boot.txt</code>, <code>ux0:data/halflife2/engine.log</code>, <code>crash.log</code> if there is one, your firmware and model, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.</p>
+<p>Not affiliated with or endorsed by Valve or Sony. Free, and it must stay free.</p>
+<p>SHA-256 of the zip: <code>4d875af76c343eddf19cf8efff4fb7c1563085213d7e79c6c150651d91d78c42</code></p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw-retro-rewind.vpk" target="_blank" rel="noopener">⬇ mkw-retro-rewind.vpk · 2.4 MB</a><a class="btn" href="https://github.com/boomannotjeff/mkwiita/releases/download/1.4.0/mkw.vpk" target="_blank" rel="noopener">mkw.vpk · 2.2 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/LargeVegetable/source-engine/releases/download/v0.1.1-beta/hl2_vita-0.1.1-beta.zip" target="_blank" rel="noopener">⬇ hl2_vita-0.1.1-beta.zip · 19.2 MB</a></div>
                 </div>
               </div>
             </article>
@@ -811,54 +1183,44 @@ use the same mission, resolution, hud and filter settings. warm the detail shade
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="monster hunter tri monster hunter tri grarak/mh3-wii 0.2.1 0.2.1 ports - fixed eggs breaking on area change
-- fixed armour preview crash
-- fixed cluster ammunition firing crash
-- fixed loading crash after suspending system
-- fixed shading in online lobby
-- fixed shading of ceadeus
-- fixed water shimmer animation moving too quickly
-- fixed performance drops when spinning with hammer underwater
-- minor performance improvements
-- implemented wiimote pointer with touchscreen inputs
-- added 30fps framelimit
-- fixed broken animations in some cutscenes
-- added `pv` prefix in online name">
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ssx (2012) ssx (2012) lukebrl/ssx-vita ssx-vita v1.1.1 v1.1.1 ports ## ssx (2012) for ps vita - v1.1.1
+
+### fixed
+- **the game could crash at every start** if it had been closed (or had crashed) while building the shader cache during the first start. a damaged cache is now detected and repaired automatically: only the affected shaders are built again, then the game starts normally.
+
+### install / update
+- install the new `ssx_vita.vpk` over the old one. no need to rebuild the game data if you already have them.
+- if your game currently crashes at startup, this update fixes it, no need to delete anything.">
               <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png" alt="Icono de Monster Hunter Tri" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/ssx-2012-ps-vita/icon0.png" alt="Icono de SSX (2012)" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Grarak/mh3-wii</div>
-                      <h2><a href="https://github.com/Grarak/mh3-wii/releases/tag/0.2.1" target="_blank" rel="noopener">Monster Hunter Tri</a></h2>
-                      <div class="release-name">0.2.1</div>
+                      <div class="eyebrow">PORTS · GITHUB · lukebrl/ssx-vita</div>
+                      <h2><a href="https://github.com/lukebrl/ssx-vita/releases/tag/v1.1.1" target="_blank" rel="noopener">SSX (2012)</a></h2>
+                      <div class="release-name">SSX-Vita v1.1.1</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">0.2.1</span>
-                    <span>2026-10-21 19:39 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1</span>
+                    <span class="tag">v1.1.1</span>
+                    <span>2026-10-21 19:50 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1 → release 0.2.1</div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.1</div>
                   
-                  <div class="body markdown-body"><ul>
-<li>Fixed eggs breaking on area change</li>
-<li>Fixed armour preview crash</li>
-<li>Fixed cluster ammunition firing crash</li>
-<li>Fixed loading crash after suspending system</li>
-<li>Fixed shading in online lobby</li>
-<li>Fixed shading of Ceadeus</li>
-<li>Fixed water shimmer animation moving too quickly</li>
-<li>Fixed performance drops when spinning with hammer underwater</li>
-<li>Minor performance improvements</li>
-<li>Implemented wiimote pointer with touchscreen inputs</li>
-<li>Added 30fps framelimit</li>
-<li>Fixed broken animations in some cutscenes</li>
-<li>Added <code>PV</code> prefix in online name</li>
+                  <div class="body markdown-body"><h2>SSX (2012) for PS Vita - v1.1.1</h2>
+<h3>Fixed</h3>
+<ul>
+<li><strong>The game could crash at every start</strong> if it had been closed (or had crashed) while building the shader cache during the first start. A damaged cache is now detected and repaired automatically: only the affected shaders are built again, then the game starts normally.</li>
+</ul>
+<h3>Install / update</h3>
+<ul>
+<li>Install the new <code>ssx_vita.vpk</code> over the old one. No need to rebuild the game data if you already have them.</li>
+<li>If your game currently crashes at startup, this update fixes it, no need to delete anything.</li>
 </ul>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.1/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 17.9 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.1/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 132.3 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx_vita.vpk" target="_blank" rel="noopener">⬇ ssx_vita.vpk · 2.6 MB</a><a class="btn" href="https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx-datatool-linux.tar.gz" target="_blank" rel="noopener">ssx-datatool-linux.tar.gz · 74.5 MB</a><a class="btn" href="https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx-datatool-macos.zip" target="_blank" rel="noopener">ssx-datatool-macos.zip · 39.2 MB</a><a class="btn" href="https://github.com/lukebrl/ssx-vita/releases/download/v1.1.1/ssx-datatool-windows.exe" target="_blank" rel="noopener">ssx-datatool-windows.exe · 58.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1131,291 +1493,6 @@ built with ❤️ for the ps vita community over 3+ months of design and develop
                   <div class="body markdown-body"><p>buildnum 4221</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 22.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-psvita.7z" target="_blank" rel="noopener">xash3d-fwgs-psvita.7z · 26.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="psvitaalive store psvitaalive store vegettosan/psvitaalive psvita alive store 02.13 02.13 utilities # psvitaalive 02.13
-
-version **02.13** introduces a completely redesigned keyboard system, expanded catalog filtering, improved installed-game detection, and important installation stability improvements.
-
-this release focuses on making psvitaalive more stable, easier to navigate, and more reliable when managing homebrew, ps vita, psp, and ps1 content.
-
-## what&#x27;s new
-
-### new built-in keyboard
-
-- completely replaced the native playstation vita keyboard with a custom keyboard developed specifically for psvitaalive.
-- eliminated the unstable native ime interaction that caused repeated crashes when opening the search keyboard.
-- introduced an english qwerty keyboard with dedicated number and special-character layouts.
-- added full navigation using the d-pad, left analog stick, and touchscreen.
-- added a dedicated right-side column containing shift, delete, cancel, and ok.
-- implemented persistent shift mode, allowing users to switch between uppercase and lowercase letters.
-- added automatic character deletion when holding the delete button or square.
-- added smooth opening and closing animations.
-- integrated the keyboard with the currently selected color theme.
-- kept the catalog visible behind the keyboard using a translucent modal background.
-- localized keyboard titles, buttons, and instructions across all eight supported interface languages.
-- extended the new keyboard to custom zip extraction destination paths.
-
-the new keyboard operates directly through vita2d, without relying on sony&#x27;s native ime for text input.
-
-### new catalog filtering system
-
-- introduced a dedicated filtering panel accessible through the square button in the full catalog.
-- added category filters for homebrew applications.
-- added genre filters for ps vita, psp, and ps1 games.
-- added filtering for applications containing game files or data files.
-- added dlc filtering for supported game catalogs.
-- added support for combining category, genre, installation-status, and text-search filters.
-- improved filter navigation using physical controls and touchscreen.
-- added scrolling support for filter menus with multiple options.
-- improved filter button visibility, positioning, and text readability.
-- added localized filter names and descriptions across all eight supported languages.
-- automatically reset active filters when switching between catalogs.
-
-available category and genre filters are optimized for each catalog.
-
-### installed applications and games
-
-- expanded installed-content detection across all four catalogs.
-- added an **installed** filter for homebrew, ps vita, psp, and ps1.
-- added **updates available** and **version not recognized** filters for homebrew.
-- improved detection of installed ps vita games through livearea.
-- added detection of psp installations through livearea and supported adrenaline folders.
-- added support for identifying psp iso, cso, and eboot.pbp installations.
-- improved ps1 installation detection, including compatible pbp content identifiers.
-- added support for checking installations across available storage partitions.
-- improved compatibility with regional title ids and alternative game identifiers.
-- optimized installed-content scanning to reduce unnecessary filesystem operations.
-- preserved conservative update detection when installed homebrew versions cannot be reliably identified.
-
-commercial game detection focuses on installation presence rather than attempting to determine game update versions.
-
-### battery indicator and interface improvements
-
-- added a battery indicator to the main catalog header.
-- displayed the current battery percentage alongside a visual battery icon.
-- added battery charging and low-battery indicators.
-- integrated battery information into the existing oled screen protection mode.
-- improved header alignment between the search bar, filter button, battery indicator, and clock.
-- optimized battery polling to avoid unnecessary system calls.
-- improved touchscreen alignment and interface responsiveness.
-- maintained compatibility with existing color themes, font styles, and language settings.
-
-### zip installation and extraction improvements
-
-- fixed an issue where certain game files and data files zip archives could be incorrectly detected as vpk packages.
-- improved installation routing to ensure these archives are extracted to their intended destinations instead of being sent to the vpk installer.
-- added stronger validation for missing or invalid extraction destinations.
-- improved handling of zip archives containing files that already exist in the destination.
-- added temporary-file replacement and backup handling to protect existing files during extraction errors.
-- improved cancellation behavior during archive downloads, extraction, and installation.
-- prevented cancelled operations from being incorrectly reported as installation failures.
-- improved handling of invalid vpk and zip archives to avoid unnecessary retries.
-- preserved downloaded zip archives for recovery when applicable.
-
-### storage and installation reliability
-
-- improved free-space calculations based on the actual installation type.
-- reduced unnecessary storage requirements when downloading compressed zip archives.
-- improved storage checks for game files and data files.
-- corrected size handling when secondary download links do not provide a file size.
-- improved storage preflight behavior for system-managed pkg installations.
-- added more appropriate storage margins for plugin downloads.
-- improved installation retry handling and cancellation synchronization.
-- reduced unnecessary retry attempts for permanently invalid archives.
-- added automated regression tests for archive routing, installation retries, and storage calculations.
-
-these improvements help prevent incorrect low-storage warnings while maintaining safety checks during extraction and installation.
-
-### performance and stability
-
-- removed obsolete bulk-image startup download behavior.
-- improved resource management around catalog navigation and text input.
-- reduced unnecessary background activity while the custom keyboard is open.
-- improved interface stability by removing the native ime lifecycle from text input.
-- maintained the existing image-cache system and optimized catalog navigation.
-- improved compatibility with existing installation and download workflows.
-- updated internal documentation and regression testing procedures.
-
-### localization and catalog updates
-
-- updated interface translations across english, spanish, french, german, italian, portuguese (brazil), portuguese (portugal), and russian.
-- added localized keyboard controls, filter options, and installation-status labels.
-- added new homebrew catalog entries and developer profiles.
-- updated selected application metadata and download information.
-- maintained compatibility with the existing psvitaalive catalog architecture.
-
-## installation
-
-download **psvitaalive.vpk** from the release assets and install it using vitashell.
-
-version **02.13** can be installed directly over an existing psvitaalive installation. a fresh installation is not required.
-
-existing settings, cached catalogs, and compatible downloaded data are preserved.
-
-## compatibility
-
-psvitaalive continues to support playstation vita and playstation tv, including existing homebrew installation workflows and supported ps vita, psp, and ps1 content management features.
-
-the new built-in keyboard uses an english qwerty character layout while adapting its interface labels to the selected language.
-
-installation detection and archive extraction behavior may vary depending on the content format, storage configuration, and installed system plugins.
-
-some installation and storage improvements require additional validation across different hardware and archive configurations.
-
----
-
-**psvitaalive 02.13** represents a major improvement in user interaction, catalog management, and installation reliability.
-
-the introduction of the custom keyboard removes the unstable native text-input workflow and provides a consistent interface designed specifically for psvitaalive.
-
-thank you to everyone who continues to support the project through testing, feedback, bug reports, and contributions.
-
-your support helps keep the playstation vita community alive.
-
-**full changelog:** https://github.com/vegettosan/psvitaalive/compare/02.12...main">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png" alt="Icono de PSVitaAlive Store" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · VegettoSan/PSVitaAlive</div>
-                      <h2><a href="https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.13" target="_blank" rel="noopener">PSVitaAlive Store</a></h2>
-                      <div class="release-name">PsVita Alive Store 02.13</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">02.13</span>
-                    <span>2026-10-21 05:27 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 02.13</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive oficial · 02.13</div>
-                  
-                  <div class="body markdown-body"><h1>PSVitaAlive 02.13</h1>
-<p>Version <strong>02.13</strong> introduces a completely redesigned keyboard system, expanded catalog filtering, improved installed-game detection, and important installation stability improvements.</p>
-<p>This release focuses on making PSVitaAlive more stable, easier to navigate, and more reliable when managing Homebrew, PS Vita, PSP, and PS1 content.</p>
-<h2>What's New</h2>
-<h3>New Built-in Keyboard</h3>
-<ul>
-<li>Completely replaced the native PlayStation Vita keyboard with a custom keyboard developed specifically for PSVitaAlive.</li>
-<li>Eliminated the unstable native IME interaction that caused repeated crashes when opening the search keyboard.</li>
-<li>Introduced an English QWERTY keyboard with dedicated number and special-character layouts.</li>
-<li>Added full navigation using the D-pad, left analog stick, and touchscreen.</li>
-<li>Added a dedicated right-side column containing SHIFT, Delete, Cancel, and OK.</li>
-<li>Implemented persistent SHIFT mode, allowing users to switch between uppercase and lowercase letters.</li>
-<li>Added automatic character deletion when holding the Delete button or Square.</li>
-<li>Added smooth opening and closing animations.</li>
-<li>Integrated the keyboard with the currently selected color theme.</li>
-<li>Kept the catalog visible behind the keyboard using a translucent modal background.</li>
-<li>Localized keyboard titles, buttons, and instructions across all eight supported interface languages.</li>
-<li>Extended the new keyboard to custom ZIP extraction destination paths.</li>
-</ul>
-<p>The new keyboard operates directly through vita2d, without relying on Sony's native IME for text input.</p>
-<h3>New Catalog Filtering System</h3>
-<ul>
-<li>Introduced a dedicated filtering panel accessible through the Square button in the full catalog.</li>
-<li>Added category filters for Homebrew applications.</li>
-<li>Added genre filters for PS Vita, PSP, and PS1 games.</li>
-<li>Added filtering for applications containing Game Files or Data Files.</li>
-<li>Added DLC filtering for supported game catalogs.</li>
-<li>Added support for combining category, genre, installation-status, and text-search filters.</li>
-<li>Improved filter navigation using physical controls and touchscreen.</li>
-<li>Added scrolling support for filter menus with multiple options.</li>
-<li>Improved filter button visibility, positioning, and text readability.</li>
-<li>Added localized filter names and descriptions across all eight supported languages.</li>
-<li>Automatically reset active filters when switching between catalogs.</li>
-</ul>
-<p>Available category and genre filters are optimized for each catalog.</p>
-<h3>Installed Applications and Games</h3>
-<ul>
-<li>Expanded installed-content detection across all four catalogs.</li>
-<li>Added an <strong>Installed</strong> filter for Homebrew, PS Vita, PSP, and PS1.</li>
-<li>Added <strong>Updates Available</strong> and <strong>Version Not Recognized</strong> filters for Homebrew.</li>
-<li>Improved detection of installed PS Vita games through LiveArea.</li>
-<li>Added detection of PSP installations through LiveArea and supported Adrenaline folders.</li>
-<li>Added support for identifying PSP ISO, CSO, and EBOOT.PBP installations.</li>
-<li>Improved PS1 installation detection, including compatible PBP content identifiers.</li>
-<li>Added support for checking installations across available storage partitions.</li>
-<li>Improved compatibility with regional Title IDs and alternative game identifiers.</li>
-<li>Optimized installed-content scanning to reduce unnecessary filesystem operations.</li>
-<li>Preserved conservative update detection when installed Homebrew versions cannot be reliably identified.</li>
-</ul>
-<p>Commercial game detection focuses on installation presence rather than attempting to determine game update versions.</p>
-<h3>Battery Indicator and Interface Improvements</h3>
-<ul>
-<li>Added a battery indicator to the main catalog header.</li>
-<li>Displayed the current battery percentage alongside a visual battery icon.</li>
-<li>Added battery charging and low-battery indicators.</li>
-<li>Integrated battery information into the existing OLED screen protection mode.</li>
-<li>Improved header alignment between the search bar, filter button, battery indicator, and clock.</li>
-<li>Optimized battery polling to avoid unnecessary system calls.</li>
-<li>Improved touchscreen alignment and interface responsiveness.</li>
-<li>Maintained compatibility with existing color themes, font styles, and language settings.</li>
-</ul>
-<h3>ZIP Installation and Extraction Improvements</h3>
-<ul>
-<li>Fixed an issue where certain Game Files and Data Files ZIP archives could be incorrectly detected as VPK packages.</li>
-<li>Improved installation routing to ensure these archives are extracted to their intended destinations instead of being sent to the VPK installer.</li>
-<li>Added stronger validation for missing or invalid extraction destinations.</li>
-<li>Improved handling of ZIP archives containing files that already exist in the destination.</li>
-<li>Added temporary-file replacement and backup handling to protect existing files during extraction errors.</li>
-<li>Improved cancellation behavior during archive downloads, extraction, and installation.</li>
-<li>Prevented cancelled operations from being incorrectly reported as installation failures.</li>
-<li>Improved handling of invalid VPK and ZIP archives to avoid unnecessary retries.</li>
-<li>Preserved downloaded ZIP archives for recovery when applicable.</li>
-</ul>
-<h3>Storage and Installation Reliability</h3>
-<ul>
-<li>Improved free-space calculations based on the actual installation type.</li>
-<li>Reduced unnecessary storage requirements when downloading compressed ZIP archives.</li>
-<li>Improved storage checks for Game Files and Data Files.</li>
-<li>Corrected size handling when secondary download links do not provide a file size.</li>
-<li>Improved storage preflight behavior for system-managed PKG installations.</li>
-<li>Added more appropriate storage margins for plugin downloads.</li>
-<li>Improved installation retry handling and cancellation synchronization.</li>
-<li>Reduced unnecessary retry attempts for permanently invalid archives.</li>
-<li>Added automated regression tests for archive routing, installation retries, and storage calculations.</li>
-</ul>
-<p>These improvements help prevent incorrect low-storage warnings while maintaining safety checks during extraction and installation.</p>
-<h3>Performance and Stability</h3>
-<ul>
-<li>Removed obsolete bulk-image startup download behavior.</li>
-<li>Improved resource management around catalog navigation and text input.</li>
-<li>Reduced unnecessary background activity while the custom keyboard is open.</li>
-<li>Improved interface stability by removing the native IME lifecycle from text input.</li>
-<li>Maintained the existing image-cache system and optimized catalog navigation.</li>
-<li>Improved compatibility with existing installation and download workflows.</li>
-<li>Updated internal documentation and regression testing procedures.</li>
-</ul>
-<h3>Localization and Catalog Updates</h3>
-<ul>
-<li>Updated interface translations across English, Spanish, French, German, Italian, Portuguese (Brazil), Portuguese (Portugal), and Russian.</li>
-<li>Added localized keyboard controls, filter options, and installation-status labels.</li>
-<li>Added new Homebrew catalog entries and developer profiles.</li>
-<li>Updated selected application metadata and download information.</li>
-<li>Maintained compatibility with the existing PSVitaAlive catalog architecture.</li>
-</ul>
-<h2>Installation</h2>
-<p>Download <strong>PSVitaAlive.vpk</strong> from the release assets and install it using VitaShell.</p>
-<p>Version <strong>02.13</strong> can be installed directly over an existing PSVitaAlive installation. A fresh installation is not required.</p>
-<p>Existing settings, cached catalogs, and compatible downloaded data are preserved.</p>
-<h2>Compatibility</h2>
-<p>PSVitaAlive continues to support PlayStation Vita and PlayStation TV, including existing Homebrew installation workflows and supported PS Vita, PSP, and PS1 content management features.</p>
-<p>The new built-in keyboard uses an English QWERTY character layout while adapting its interface labels to the selected language.</p>
-<p>Installation detection and archive extraction behavior may vary depending on the content format, storage configuration, and installed system plugins.</p>
-<p>Some installation and storage improvements require additional validation across different hardware and archive configurations.</p>
-<hr>
-<p><strong>PSVitaAlive 02.13</strong> represents a major improvement in user interaction, catalog management, and installation reliability.</p>
-<p>The introduction of the custom keyboard removes the unstable native text-input workflow and provides a consistent interface designed specifically for PSVitaAlive.</p>
-<p>Thank you to everyone who continues to support the project through testing, feedback, bug reports, and contributions.</p>
-<p>Your support helps keep the PlayStation Vita community alive.</p>
-<p><strong>Full Changelog:</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/VegettoSan/PSVitaAlive/compare/02.12...main">https://github.com/VegettoSan/PSVitaAlive/compare/02.12...main</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/VegettoSan/PSVitaAlive/releases/download/02.13/PSVitaAlive.vpk" target="_blank" rel="noopener">⬇ PSVitaAlive.vpk · 9.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27539,233 +27616,10 @@ When in doubt, make sure to check the hash of the files to guarantee the files a
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="space cadet pinball vita space cadet pinball vita suicvne/spacecadetpinball_vita release_1.1.1_vitabuild_2 release_1.1.1_vitabuild_2 ports this is the second public vita build of 3d space cadet pinball (from win95/98/xp originally).
-by me, this build will be referred to as &quot;vita build 2&quot; or vb2.
-
-**notice**
-in order for the game to run, you will need to place your legally obtained data files from your preferred version of windows into 
-```
-ux0:data/spacecadetpinball
-```
-
-all the midi files and sound config files should be copied.
-
-this version changes the following:
-
-```
-- rip out sdl_mixer in favor or sdl_mixer_x (by wohlstand: https://github.com/wohlsoft/sdl-mixer-x)
-   - todo: fully switch license to gplv3 &amp; ensure licenses are visible in app. 
-- update imgui implementation to latest version
-- allow imgui sdl renderer to create and destroy font textures (adding support for custom fonts)
-- fix midi loading by initializing sdl_mixer with proper midi flags. 
-- added custom win95 style including sil open font w95fa by fontsarena (https://fontsarena.com/w95fa-by-fontsarena/)
-   - please leave suggestions for further themes, i would love to add the options! 
-- add new menu for switching midi device emulator on-the-fly between libadlmidi and libopnmidi
-  - also adds menus for switching libadlmidi emulator and sound banks (again, on the fly!). there are at least 78 sound banks to choose from. 
-  - all of these new options are saved and remembered as part of the game&#x27;s native saving system.
-- bind dpad left and right to table bump left/right
-- bind dpad down to table bump down. 
-- attempt to add a short button delay to avoid menu chaos on the vita
-```
-![2021-09-28-180856](https://user-images.githubusercontent.com/861492/135172515-1937e332-77fd-407d-a5e3-39af1b2f019e.jpg)
-![2021-09-28-180617](https://user-images.githubusercontent.com/861492/135172535-5536bb8f-87e9-4a4c-b738-8b29add59776.jpg)
-![2021-09-28-180639](https://user-images.githubusercontent.com/861492/135172521-15b6f54a-af34-4751-8967-ecda240f55a0.jpg)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-space-cadet-pinball-vita/icon0.png" alt="Icono de Space Cadet Pinball Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · suicvne/SpaceCadetPinball_Vita</div>
-                      <h2><a href="https://github.com/suicvne/SpaceCadetPinball_Vita/releases/tag/Release_1.1.1_VitaBuild_2" target="_blank" rel="noopener">Space Cadet Pinball Vita</a></h2>
-                      <div class="release-name">Release_1.1.1_VitaBuild_2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">Release_1.1.1_VitaBuild_2</span>
-                    <span>2021-09-28 22:10 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.1.1-VB2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.1.1-VB2 → release Release_1.1.1_VitaBuild_2</div>
-                  
-                  <div class="body markdown-body"><p>This is the second public Vita Build of 3D Space Cadet Pinball (from Win95/98/XP originally).
-By me, this build will be referred to as &quot;Vita Build 2&quot; or VB2.</p>
-<p><strong>NOTICE</strong>
-In order for the game to run, you will need to place your legally obtained data files from your preferred version of Windows into</p>
-<pre><code>ux0:data/SpaceCadetPinball
-</code></pre>
-<p>All the MIDI files and sound config files should be copied.</p>
-<p>This version changes the following:</p>
-<pre><code>- Rip out SDL_Mixer in favor or SDL_Mixer_X (by Wohlstand: https://github.com/WohlSoft/SDL-Mixer-X)
-   - TODO: Fully switch license to GPLv3 &amp; ensure licenses are visible in app. 
-- Update ImGui implementation to latest version
-- Allow ImGui SDL renderer to create and destroy font textures (adding support for custom fonts)
-- Fix MIDI Loading by initializing SDL_Mixer with proper MIDI flags. 
-- Added custom Win95 style including SIL Open Font W95FA by FontsArena (https://fontsarena.com/w95fa-by-fontsarena/)
-   - Please leave suggestions for further themes, I would love to add the options! 
-- Add new menu for switching MIDI Device Emulator on-the-fly between libADLMIDI and libOPNMIDI
-  - Also adds menus for switching libADLMIDI emulator and sound banks (again, on the fly!). There are at least 78 sound banks to choose from. 
-  - All of these new options are saved and remembered as part of the game's native saving system.
-- Bind DPad Left and Right to table bump left/right
-- Bind DPad down to table bump down. 
-- Attempt to add a short button delay to avoid menu chaos on the Vita
-</code></pre>
-<p><img src="https://user-images.githubusercontent.com/861492/135172515-1937e332-77fd-407d-a5e3-39af1b2f019e.jpg" alt="2021-09-28-180856">
-<img src="https://user-images.githubusercontent.com/861492/135172535-5536bb8f-87e9-4a4c-b738-8b29add59776.jpg" alt="2021-09-28-180617">
-<img src="https://user-images.githubusercontent.com/861492/135172521-15b6f54a-af34-4751-8967-ecda240f55a0.jpg" alt="2021-09-28-180639"></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/suicvne/SpaceCadetPinball_Vita/releases/download/Release_1.1.1_VitaBuild_2/SpaceCadetPinballVita_VB2.vpk" target="_blank" rel="noopener">⬇ SpaceCadetPinballVita_VB2.vpk · 2.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="contract demon vita contract demon vita sonicmastr/contract-demon-vita contract demon vita  v1.0 ports instructions in readme
-
-support the creator here -&gt; https://www.patreon.com/nomnomnami
-or here -&gt; https://nomnomnami.itch.io">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-contract-demon-vita/icon0.png" alt="Icono de Contract Demon Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · SonicMastr/Contract-Demon-Vita</div>
-                      <h2><a href="https://github.com/SonicMastr/Contract-Demon-Vita/releases/tag/v1.0" target="_blank" rel="noopener">Contract Demon Vita</a></h2>
-                      <div class="release-name">Contract Demon Vita </div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-09-17 00:26 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.00</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.00</div>
-                  
-                  <div class="body markdown-body"><p>Instructions in README</p>
-<p>Support the Creator Here -&gt; <a target="_blank" rel="noopener noreferrer" href="https://www.patreon.com/nomnomnami">https://www.patreon.com/nomnomnami</a>
-Or Here -&gt; <a target="_blank" rel="noopener noreferrer" href="https://nomnomnami.itch.io">https://nomnomnami.itch.io</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/SonicMastr/Contract-Demon-Vita/releases/download/v1.0/Contract.Demon-01.00.vpk" target="_blank" rel="noopener">⬇ Contract.Demon-01.00.vpk · 13.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ddlc-love ddlc-love lukezgd/ddlc-love v1.2.3 v1.2.3 ports **v1.2.3 release:**
-- this release is for the ps vita, psp, and löve versions. for other systems, [go to v1.1.9](https://github.com/lukezgd/ddlc-love/releases/tag/v1.1.9)
-
-**v1.2.3 changes:**
-- update script-ch30.lua
-- add back psp support
-
-**notes:**
-- final release. with better ways to play ddlc on switch and vita platforms, ddlc-love is no longer needed, and it will not be updated anymore.
-- for the ps vita, i recommend using [doki-doki-literature-club-vita](https://github.com/sonicmastr/doki-doki-literature-club-vita) instead of ddlc-love for the full desktop version (in ren&#x27;py) with support for mods.
-- for the switch, support team salvato and buy ddlc plus! the original ddlc (in ren&#x27;py) can also be run with switchroot ubuntu or android with support for mods.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ddlc-love/icon0.png" alt="Icono de DDLC-LOVE" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · LukeZGD/DDLC-LOVE</div>
-                      <h2><a href="https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.2.3" target="_blank" rel="noopener">DDLC-LOVE</a></h2>
-                      <div class="release-name">v1.2.3</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.2.3</span>
-                    <span>2021-09-16 07:03 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v1.2.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v1.2.3</div>
-                  
-                  <div class="body markdown-body"><p><strong>v1.2.3 Release:</strong></p>
-<ul>
-<li>This release is for the PS Vita, PSP, and LÖVE versions. For other systems, <a target="_blank" rel="noopener noreferrer" href="https://github.com/LukeZGD/DDLC-LOVE/releases/tag/v1.1.9">go to v1.1.9</a></li>
-</ul>
-<p><strong>v1.2.3 Changes:</strong></p>
-<ul>
-<li>Update script-ch30.lua</li>
-<li>Add back PSP support</li>
-</ul>
-<p><strong>Notes:</strong></p>
-<ul>
-<li>Final release. With better ways to play DDLC on Switch and Vita platforms, DDLC-LOVE is no longer needed, and it will not be updated anymore.</li>
-<li>For the PS Vita, I recommend using <a target="_blank" rel="noopener noreferrer" href="https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita">Doki-Doki-Literature-Club-Vita</a> instead of DDLC-LOVE for the full desktop version (in Ren'Py) with support for mods.</li>
-<li>For the Switch, support Team Salvato and buy DDLC Plus! The original DDLC (in Ren'Py) can also be run with Switchroot Ubuntu or Android with support for mods.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.vpk" target="_blank" rel="noopener">⬇ DDLC-LOVE.vpk · 78.3 MB</a><a class="btn" href="https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE-PSP.zip" target="_blank" rel="noopener">DDLC-LOVE-PSP.zip · 83.4 MB</a><a class="btn" href="https://github.com/LukeZGD/DDLC-LOVE/releases/download/v1.2.3/DDLC-LOVE.love" target="_blank" rel="noopener">DDLC-LOVE.love · 99.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="doki doki literature club vita doki doki literature club vita sonicmastr/doki-doki-literature-club-vita doki doki literature club vita v1.01 ports install instructions in readme">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-doki-doki-literature-club-vita/icon0.png" alt="Icono de Doki Doki Literature Club Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · SonicMastr/Doki-Doki-Literature-Club-Vita</div>
-                      <h2><a href="https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/tag/v1.01" target="_blank" rel="noopener">Doki Doki Literature Club Vita</a></h2>
-                      <div class="release-name">Doki Doki Literature Club Vita</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.01</span>
-                    <span>2021-09-15 23:20 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v1.01</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v1.01</div>
-                  
-                  <div class="body markdown-body"><p>Install Instructions in README</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/SonicMastr/Doki-Doki-Literature-Club-Vita/releases/download/v1.01/Doki.Doki.Literature.Club-01.01.vpk" target="_blank" rel="noopener">⬇ Doki.Doki.Literature.Club-01.01.vpk · 16.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="gemrb gemrb northfear/gemrb-vita v0.8.8-vita.7 v0.8.8-vita.7 ports - improved rendering performance (updated to latest sdl 1.2 with hardware acceleration)
-
-edit: updated 31/10/21">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-gemrb/icon0.png" alt="Icono de GemRB" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Northfear/gemrb-vita</div>
-                      <h2><a href="https://github.com/Northfear/gemrb-vita/releases/tag/v0.8.8-vita.7" target="_blank" rel="noopener">GemRB</a></h2>
-                      <div class="release-name">v0.8.8-vita.7</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.8.8-vita.7</span>
-                    <span>2021-09-01 11:57 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.8.8-vita.7</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.8.8-vita.7</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Improved rendering performance (updated to latest SDL 1.2 with hardware acceleration)</li>
-</ul>
-<p>Edit: Updated 31/10/21</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb.vpk" target="_blank" rel="noopener">⬇ gemrb.vpk · 4.7 MB</a><a class="btn" href="https://github.com/Northfear/gemrb-vita/releases/download/v0.8.8-vita.7/gemrb_data.zip" target="_blank" rel="noopener">gemrb_data.zip · 1.2 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-23 02:45 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-23 08:08 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
