@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
         <div class="stat"><strong class="green">393</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>88</strong><span>pendientes</span></div>
-        <div class="stat"><strong>473</strong><span>GitHub</span></div>
+        <div class="stat"><strong>89</strong><span>pendientes</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,151 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="ff3-vita ff3-vita frangarcj/ff3_vita ff3 vita v1.2.5 v1.2.5 ports ## new options
+selectable from the configurator:
+- **aspect ratio** (#15): 16:9 (default), 4:3, 2:1 and 21:9. 4:3 shows more of the scene vertically, while 2:1 and 21:9 show more horizontally, with black bars filling the rest of the screen. the opening movie and the postfx effects still use the whole screen.
+- **swap cross/circle** (#11): circle confirms and cross cancels.
+
+## fixes
+- spanish: character names are shown again instead of &quot;?p1???&quot; and &quot;?p???&quot; (#5). the game&#x27;s spanish texts for controller play have these name tags broken; the port now restores them.
+- korean: the party gets korean default names (루네스, 아르크, 레피아, 잉거스) (#12).
+- korean, japanese and chinese: character names can now be typed in those scripts. the keyboard used to be limited to latin characters (#12).
+
+## other changes
+- bump app version to 1.2.5 (sfo 01.25).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ff3-vita/icon0.png" alt="Icono de FF3-Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · frangarcj/ff3_vita</div>
+                      <h2><a href="https://github.com/frangarcj/ff3_vita/releases/tag/v1.2.5" target="_blank" rel="noopener">FF3-Vita</a></h2>
+                      <div class="release-name">FF3 Vita v1.2.5</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.5</span>
+                    <span>2026-10-24 11:19 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.2.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.2.3 → release v1.2.5</div>
+                  
+                  <div class="body markdown-body"><h2>New options</h2>
+<p>Selectable from the Configurator:</p>
+<ul>
+<li><strong>Aspect Ratio</strong> (#15): 16:9 (default), 4:3, 2:1 and 21:9. 4:3 shows more of the scene vertically, while 2:1 and 21:9 show more horizontally, with black bars filling the rest of the screen. The opening movie and the PostFX effects still use the whole screen.</li>
+<li><strong>Swap Cross/Circle</strong> (#11): Circle confirms and Cross cancels.</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>Spanish: character names are shown again instead of &quot;?P1???&quot; and &quot;?P???&quot; (#5). The game's Spanish texts for controller play have these name tags broken; the port now restores them.</li>
+<li>Korean: the party gets Korean default names (루네스, 아르크, 레피아, 잉거스) (#12).</li>
+<li>Korean, Japanese and Chinese: character names can now be typed in those scripts. The keyboard used to be limited to Latin characters (#12).</li>
+</ul>
+<h2>Other changes</h2>
+<ul>
+<li>Bump app version to 1.2.5 (SFO 01.25).</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/frangarcj/ff3_vita/releases/download/v1.2.5/FF3.vpk" target="_blank" rel="noopener">⬇ FF3.vpk · 17.4 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="gmca gmca thcolin/gamepad-media-center-aggregator gmca v1.3.1 v1.3.1 utilities ### fixed
+
+- **play uses the version picked on a movie (#96).** on a movie with several
+  versions, play started the first accessible one whatever the version
+  selector showed, on plex, jellyfin and emby.
+- **the video info screen no longer shows tokens or passwords.** the url and
+  play method lines mask `x-plex-token`, `api_key` and `apikey`, and the
+  user and password of ftp and sftp addresses, so a screenshot of that screen
+  can be shared. mpv still gets the full address.
+- **plex: remote playback refused with http 403 (#88).** plex refuses remote
+  playback from third-party apps when the account has neither plex pass nor
+  remote watch pass. a dialog now names that rule, instead of a retry into a
+  transcode ending on &quot;mpv -13&quot;. a download refused the same way says so in
+  the downloads tab.
+- **server addresses that don&#x27;t resolve (#57).** adding a jellyfin or emby
+  server or a remote whose host doesn&#x27;t resolve names the host and asks for
+  its ipv4 address. on switch and vita, a `.local` address is refused before
+  the request, since neither has an mdns resolver.
+- **ps4 fixes from @amansingh909 (#91, #92, #93, #94, #95).**
+  - initialized globals no longer read as zero, and two threads starting
+    the same static no longer abort the app.
+  - network timeouts fire again: they counted cpu time, so a server that
+    didn&#x27;t answer kept the app waiting.
+  - a closed connection no longer kills the app (sigpipe).
+  - the system keyboard confirms with the console&#x27;s enter button.
+  - text subtitles (srt, vtt, ssa/ass) are drawn.
+  - the files tab lists folders, and the usb drives mounted before gmca
+    starts (#97).
+  - hdr video plays instead of a blue screen, and a bigger audio buffer
+    keeps the sound from going choppy.
+
+
+![download](https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.3.1/total?label=downloads)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-gmca/icon0.png" alt="Icono de GMCA" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · thcolin/gamepad-media-center-aggregator</div>
+                      <h2><a href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/tag/v1.3.1" target="_blank" rel="noopener">GMCA</a></h2>
+                      <div class="release-name">GMCA v1.3.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.3.1</span>
+                    <span>2026-10-24 10:11 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v1.1.0 → release v1.3.1</div>
+                  
+                  <div class="body markdown-body"><h3>Fixed</h3>
+<ul>
+<li><strong>Play uses the version picked on a movie (#96).</strong> On a movie with several
+versions, Play started the first accessible one whatever the Version
+selector showed, on Plex, Jellyfin and Emby.</li>
+<li><strong>The video info screen no longer shows tokens or passwords.</strong> The Url and
+play method lines mask <code>X-Plex-Token</code>, <code>api_key</code> and <code>ApiKey</code>, and the
+user and password of FTP and SFTP addresses, so a screenshot of that screen
+can be shared. mpv still gets the full address.</li>
+<li><strong>Plex: remote playback refused with HTTP 403 (#88).</strong> Plex refuses remote
+playback from third-party apps when the account has neither Plex Pass nor
+Remote Watch Pass. A dialog now names that rule, instead of a retry into a
+transcode ending on &quot;mpv -13&quot;. A download refused the same way says so in
+the Downloads tab.</li>
+<li><strong>Server addresses that don't resolve (#57).</strong> Adding a Jellyfin or Emby
+server or a remote whose host doesn't resolve names the host and asks for
+its IPv4 address. On Switch and Vita, a <code>.local</code> address is refused before
+the request, since neither has an mDNS resolver.</li>
+<li><strong>PS4 fixes from @amansingh909 (#91, #92, #93, #94, #95).</strong><ul>
+<li>Initialized globals no longer read as zero, and two threads starting
+the same static no longer abort the app.</li>
+<li>Network timeouts fire again: they counted CPU time, so a server that
+didn't answer kept the app waiting.</li>
+<li>A closed connection no longer kills the app (SIGPIPE).</li>
+<li>The system keyboard confirms with the console's enter button.</li>
+<li>Text subtitles (SRT, VTT, SSA/ASS) are drawn.</li>
+<li>The Files tab lists folders, and the USB drives mounted before GMCA
+starts (#97).</li>
+<li>HDR video plays instead of a blue screen, and a bigger audio buffer
+keeps the sound from going choppy.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.3.1/total?label=Downloads" alt="download"></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA.vpk" target="_blank" rel="noopener">⬇ GMCA.vpk · 14.0 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/gmca-1.3.1-1-x86_64.pkg.tar.zst" target="_blank" rel="noopener">gmca-1.3.1-1-x86_64.pkg.tar.zst · 7.9 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-arm64-v8a.apk" target="_blank" rel="noopener">GMCA-arm64-v8a.apk · 19.2 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-armeabi-v7a.apk" target="_blank" rel="noopener">GMCA-armeabi-v7a.apk · 18.4 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-Linux-aarch64-gl-248.flatpak" target="_blank" rel="noopener">GMCA-Linux-aarch64-gl-248.flatpak · 14.3 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-Linux-aarch64-gles2-248.flatpak" target="_blank" rel="noopener">GMCA-Linux-aarch64-gles2-248.flatpak · 14.3 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-Linux-x86_64-gl-248.flatpak" target="_blank" rel="noopener">GMCA-Linux-x86_64-gl-248.flatpak · 15.4 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-macOS-Intel-248.dmg" target="_blank" rel="noopener">GMCA-macOS-Intel-248.dmg · 25.7 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-macOS-Silicon-248.dmg" target="_blank" rel="noopener">GMCA-macOS-Silicon-248.dmg · 24.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-windows-arm64-248.7z" target="_blank" rel="noopener">GMCA-windows-arm64-248.7z · 18.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-windows-x64-248.7z" target="_blank" rel="noopener">GMCA-windows-x64-248.7z · 22.5 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-windows-x86-248.7z" target="_blank" rel="noopener">GMCA-windows-x86-248.7z · 22.7 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA.nro" target="_blank" rel="noopener">GMCA.nro · 29.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/IV0001-GMCA00000_00-GMCA000000002900.pkg" target="_blank" rel="noopener">IV0001-GMCA00000_00-GMCA000000002900.pkg · 59.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="mario strikers charged mario strikers charged cboc-vita-lab/strikers-charged-vita mario strikers charged 1.1 v1.1 ports the performance update.
 
 **smoother play**
@@ -7050,112 +7195,6 @@ Has been tested moderately. It shouldn't crash in any menus and is able to go in
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="gmca gmca thcolin/gamepad-media-center-aggregator gmca v1.3.0 v1.3.0 utilities ### added
-
-- **playback speed and repeat in the player settings (#68).** the cogwheel
-  menu has a playback speed selector, from 0.5x to 2.0x, and a repeat
-  selector: off, this video, or whole list when the player has a list (the
-  episodes of a show, the videos of a remote folder). both last until the
-  player closes, and carry over from one episode to the next.
-- **maximum transcoding resolution (#67).** settings &gt; transcode can cap the
-  transcode at 4k, 1440p, 1080p, 720p or 480p, for plex, jellyfin and emby.
-  &quot;also limit direct play&quot; transcodes a source larger than that limit instead
-  of playing it directly.
-
-### fixed
-
-- **emby: external subtitles, avatars, anime libraries and album covers
-  (#65).** sidecar subtitles load on emby, and on jellyfin when the server
-  gives no delivery url. the profile avatar of jellyfin and emby users is
-  shown after the next sign-in. mixed-content libraries, the usual type for
-  anime, are listed in the sidebar. album covers are requested resized, so
-  emby no longer sends the original multi-megabyte image.
-- **emby: transcoding failed with an http 400 (#67).** the transcode request
-  now sends the selected media source instead of the item id.
-- **jellyfin and emby servers could stay offline after a restart (#77).** the
-  reconnect check now calls the server api instead of the web page, which a
-  proxy or a server setup can refuse while sign-in works.
-- **downloads: posters and queue (#73).** every queued episode shows its
-  poster, not only the running one. thumbnails are written through a
-  temporary file, and interrupted downloads resume once the server is
-  reachable instead of waiting for a new download.
-- **a video no longer loops because a song was on repeat.** each video
-  session starts with mpv&#x27;s loop settings cleared.
-
-### changed
-
-- **switch: 4k sources are transcoded to 1080p by default (#67).** new
-  installs and existing ones get the 1080p limit with &quot;also limit direct
-  play&quot; on. set the limit to auto to play 4k files directly again. other
-  platforms keep auto.
-
-
-![download](https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.3.0/total?label=downloads)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-gmca/icon0.png" alt="Icono de GMCA" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · thcolin/gamepad-media-center-aggregator</div>
-                      <h2><a href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/tag/v1.3.0" target="_blank" rel="noopener">GMCA</a></h2>
-                      <div class="release-name">GMCA v1.3.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.3.0</span>
-                    <span>2026-09-24 10:06 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v1.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v1.1.0 → release v1.3.0</div>
-                  
-                  <div class="body markdown-body"><h3>Added</h3>
-<ul>
-<li><strong>Playback speed and repeat in the player settings (#68).</strong> The cogwheel
-menu has a Playback Speed selector, from 0.5x to 2.0x, and a Repeat
-selector: Off, This video, or Whole list when the player has a list (the
-episodes of a show, the videos of a remote folder). Both last until the
-player closes, and carry over from one episode to the next.</li>
-<li><strong>Maximum transcoding resolution (#67).</strong> Settings &gt; Transcode can cap the
-transcode at 4K, 1440p, 1080p, 720p or 480p, for Plex, Jellyfin and Emby.
-&quot;Also limit direct play&quot; transcodes a source larger than that limit instead
-of playing it directly.</li>
-</ul>
-<h3>Fixed</h3>
-<ul>
-<li><strong>Emby: external subtitles, avatars, Anime libraries and album covers
-(#65).</strong> Sidecar subtitles load on Emby, and on Jellyfin when the server
-gives no delivery URL. The profile avatar of Jellyfin and Emby users is
-shown after the next sign-in. Mixed-content libraries, the usual type for
-Anime, are listed in the sidebar. Album covers are requested resized, so
-Emby no longer sends the original multi-megabyte image.</li>
-<li><strong>Emby: transcoding failed with an HTTP 400 (#67).</strong> The transcode request
-now sends the selected media source instead of the item id.</li>
-<li><strong>Jellyfin and Emby servers could stay offline after a restart (#77).</strong> The
-reconnect check now calls the server API instead of the web page, which a
-proxy or a server setup can refuse while sign-in works.</li>
-<li><strong>Downloads: posters and queue (#73).</strong> Every queued episode shows its
-poster, not only the running one. Thumbnails are written through a
-temporary file, and interrupted downloads resume once the server is
-reachable instead of waiting for a new download.</li>
-<li><strong>A video no longer loops because a song was on repeat.</strong> Each video
-session starts with mpv's loop settings cleared.</li>
-</ul>
-<h3>Changed</h3>
-<ul>
-<li><strong>Switch: 4K sources are transcoded to 1080p by default (#67).</strong> New
-installs and existing ones get the 1080p limit with &quot;Also limit direct
-play&quot; on. Set the limit to Auto to play 4K files directly again. Other
-platforms keep Auto.</li>
-</ul>
-<p><img src="https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.3.0/total?label=Downloads" alt="download"></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA.vpk" target="_blank" rel="noopener">⬇ GMCA.vpk · 14.0 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/gmca-1.3.0-1-x86_64.pkg.tar.zst" target="_blank" rel="noopener">gmca-1.3.0-1-x86_64.pkg.tar.zst · 7.9 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-arm64-v8a.apk" target="_blank" rel="noopener">GMCA-arm64-v8a.apk · 19.2 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-armeabi-v7a.apk" target="_blank" rel="noopener">GMCA-armeabi-v7a.apk · 18.4 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-Linux-aarch64-gl-206.flatpak" target="_blank" rel="noopener">GMCA-Linux-aarch64-gl-206.flatpak · 14.3 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-Linux-aarch64-gles2-206.flatpak" target="_blank" rel="noopener">GMCA-Linux-aarch64-gles2-206.flatpak · 14.2 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-Linux-x86_64-gl-206.flatpak" target="_blank" rel="noopener">GMCA-Linux-x86_64-gl-206.flatpak · 15.4 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-macOS-Intel-206.dmg" target="_blank" rel="noopener">GMCA-macOS-Intel-206.dmg · 25.7 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-macOS-Silicon-206.dmg" target="_blank" rel="noopener">GMCA-macOS-Silicon-206.dmg · 24.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-windows-arm64-206.7z" target="_blank" rel="noopener">GMCA-windows-arm64-206.7z · 18.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-windows-x64-206.7z" target="_blank" rel="noopener">GMCA-windows-x64-206.7z · 22.5 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-windows-x86-206.7z" target="_blank" rel="noopener">GMCA-windows-x86-206.7z · 22.7 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA.nro" target="_blank" rel="noopener">GMCA.nro · 29.0 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/IV0001-GMCA00000_00-GMCA000000002800.pkg" target="_blank" rel="noopener">IV0001-GMCA00000_00-GMCA000000002800.pkg · 59.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="sssplayer sssplayer sergiossantiago/sssplayer sssplayer 1.1.34 v1.1.34 media **latest: 1.1.34** — download `sssplayer-1.1.34.vpk`
 
 ### fix
@@ -13138,33 +13177,6 @@ Sound Library by the SoLoud Team</p>
                   <div class="body markdown-body"><p>Port of Maze of Galious for PSVita.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/withLogic/mog-vita/releases/download/v1.0/mog.vpk" target="_blank" rel="noopener">⬇ mog.vpk · 2.3 MB</a><a class="btn" href="https://github.com/withLogic/mog-vita/releases/download/v1.0/data.zip" target="_blank" rel="noopener">data.zip · 32.8 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ff3-vita ff3-vita frangarcj/ff3_vita v1.2.3 v1.2.3 ports port of final fantasy 3 (3d remake) for psvita.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ff3-vita/icon0.png" alt="Icono de FF3-Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · frangarcj/ff3_vita</div>
-                      <h2><a href="https://github.com/frangarcj/ff3_vita/releases/tag/v1.2.3" target="_blank" rel="noopener">FF3-Vita</a></h2>
-                      <div class="release-name">v1.2.3</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.2.3</span>
-                    <span>2026-06-11 21:18 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.2.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.2.3</div>
-                  
-                  <div class="body markdown-body"><p>Port of Final Fantasy 3 (3D Remake) for PSVITA.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/frangarcj/ff3_vita/releases/download/v1.2.3/FF3.vpk" target="_blank" rel="noopener">⬇ FF3.vpk · 17.3 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27817,10 +27829,39 @@ When in doubt, make sure to check the hash of the files to guarantee the files a
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ff5-vita ff5-vita frangarcj/ff5_vita final fantasy v vita 1.0 v1.0 ports - initial release">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-ff5-vita/icon0.png" alt="Icono de FF5-Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · frangarcj/ff5_vita</div>
+                      <h2><a href="https://github.com/frangarcj/ff5_vita/releases/tag/v1.0" target="_blank" rel="noopener">FF5-Vita</a></h2>
+                      <div class="release-name">Final Fantasy V Vita 1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0</span>
+                    <span>2021-10-08 16:57 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Initial Release</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/frangarcj/ff5_vita/releases/download/v1.0/FF5.vpk" target="_blank" rel="noopener">⬇ FF5.vpk · 15.8 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-24 07:47 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-24 13:01 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

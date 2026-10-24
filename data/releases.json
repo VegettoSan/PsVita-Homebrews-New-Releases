@@ -1,6 +1,186 @@
 [
   {
     "platform": "github",
+    "repo": "frangarcj/ff3_vita",
+    "release_id": "422686107",
+    "tag": "v1.2.5",
+    "name": "FF3 Vita v1.2.5",
+    "url": "https://github.com/frangarcj/ff3_vita/releases/tag/v1.2.5",
+    "published": "2026-10-24T11:19:05Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## New options\nSelectable from the Configurator:\n- **Aspect Ratio** (#15): 16:9 (default), 4:3, 2:1 and 21:9. 4:3 shows more of the scene vertically, while 2:1 and 21:9 show more horizontally, with black bars filling the rest of the screen. The opening movie and the PostFX effects still use the whole screen.\n- **Swap Cross/Circle** (#11): Circle confirms and Cross cancels.\n\n## Fixes\n- Spanish: character names are shown again instead of \"?P1???\" and \"?P???\" (#5). The game's Spanish texts for controller play have these name tags broken; the port now restores them.\n- Korean: the party gets Korean default names (루네스, 아르크, 레피아, 잉거스) (#12).\n- Korean, Japanese and Chinese: character names can now be typed in those scripts. The keyboard used to be limited to Latin characters (#12).\n\n## Other changes\n- Bump app version to 1.2.5 (SFO 01.25).\n",
+    "assets": [
+      {
+        "name": "FF3.vpk",
+        "size": 18288841,
+        "download_url": "https://github.com/frangarcj/ff3_vita/releases/download/v1.2.5/FF3.vpk",
+        "content_type": "binary/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "FF3-Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-ff3-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Final Fantasy 3 (3D Remake) for PSVITA.",
+    "homebrew_long_description": "This is a wrapper/port of Final Fantasy 3 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nDonation Link: https://ko-fi.com/frangar\n\n- PsVitaAlive -",
+    "homebrew_id": "ff3-vita",
+    "homebrew_authors": [
+      "frangarcj",
+      "rinnegatamante",
+      "theflow"
+    ],
+    "homebrew_version": "v.1.2.3",
+    "catalog_apps": [
+      {
+        "id": "ff3-vita",
+        "name": "FF3-Vita",
+        "icon": "https://archive.org/download/psvitaalive-ff3-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Final Fantasy 3 (3D Remake) for PSVITA.",
+        "long_description": "This is a wrapper/port of Final Fantasy 3 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nDonation Link: https://ko-fi.com/frangar\n\n- PsVitaAlive -",
+        "version": "v.1.2.3",
+        "version_date": "2026-06-11",
+        "author_ids": [
+          "frangarcj",
+          "rinnegatamante",
+          "theflow"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.1.2.3 → release v1.2.5",
+    "catalog_version": "v.1.2.3"
+  },
+  {
+    "platform": "github",
+    "repo": "thcolin/gamepad-media-center-aggregator",
+    "release_id": "422655302",
+    "tag": "v1.3.1",
+    "name": "GMCA v1.3.1",
+    "url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/tag/v1.3.1",
+    "published": "2026-10-24T10:11:56Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n### Fixed\n\n- **Play uses the version picked on a movie (#96).** On a movie with several\n  versions, Play started the first accessible one whatever the Version\n  selector showed, on Plex, Jellyfin and Emby.\n- **The video info screen no longer shows tokens or passwords.** The Url and\n  play method lines mask `X-Plex-Token`, `api_key` and `ApiKey`, and the\n  user and password of FTP and SFTP addresses, so a screenshot of that screen\n  can be shared. mpv still gets the full address.\n- **Plex: remote playback refused with HTTP 403 (#88).** Plex refuses remote\n  playback from third-party apps when the account has neither Plex Pass nor\n  Remote Watch Pass. A dialog now names that rule, instead of a retry into a\n  transcode ending on \"mpv -13\". A download refused the same way says so in\n  the Downloads tab.\n- **Server addresses that don't resolve (#57).** Adding a Jellyfin or Emby\n  server or a remote whose host doesn't resolve names the host and asks for\n  its IPv4 address. On Switch and Vita, a `.local` address is refused before\n  the request, since neither has an mDNS resolver.\n- **PS4 fixes from @amansingh909 (#91, #92, #93, #94, #95).**\n  - Initialized globals no longer read as zero, and two threads starting\n    the same static no longer abort the app.\n  - Network timeouts fire again: they counted CPU time, so a server that\n    didn't answer kept the app waiting.\n  - A closed connection no longer kills the app (SIGPIPE).\n  - The system keyboard confirms with the console's enter button.\n  - Text subtitles (SRT, VTT, SSA/ASS) are drawn.\n  - The Files tab lists folders, and the USB drives mounted before GMCA\n    starts (#97).\n  - HDR video plays instead of a blue screen, and a bigger audio buffer\n    keeps the sound from going choppy.\n\n\n![download](https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.3.1/total?label=Downloads)\n",
+    "assets": [
+      {
+        "name": "gmca-1.3.1-1-x86_64.pkg.tar.zst",
+        "size": 8253373,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/gmca-1.3.1-1-x86_64.pkg.tar.zst",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "GMCA-arm64-v8a.apk",
+        "size": 20125348,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-arm64-v8a.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "GMCA-armeabi-v7a.apk",
+        "size": 19251978,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-armeabi-v7a.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "GMCA-Linux-aarch64-gl-248.flatpak",
+        "size": 14972448,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-Linux-aarch64-gl-248.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "GMCA-Linux-aarch64-gles2-248.flatpak",
+        "size": 14956296,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-Linux-aarch64-gles2-248.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "GMCA-Linux-x86_64-gl-248.flatpak",
+        "size": 16177800,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-Linux-x86_64-gl-248.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "GMCA-macOS-Intel-248.dmg",
+        "size": 26917462,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-macOS-Intel-248.dmg",
+        "content_type": "application/x-apple-diskimage"
+      },
+      {
+        "name": "GMCA-macOS-Silicon-248.dmg",
+        "size": 25285379,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-macOS-Silicon-248.dmg",
+        "content_type": "application/x-apple-diskimage"
+      },
+      {
+        "name": "GMCA-windows-arm64-248.7z",
+        "size": 18954684,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-windows-arm64-248.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "GMCA-windows-x64-248.7z",
+        "size": 23610747,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-windows-x64-248.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "GMCA-windows-x86-248.7z",
+        "size": 23844189,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA-windows-x86-248.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "GMCA.nro",
+        "size": 30461913,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA.nro",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "GMCA.vpk",
+        "size": 14639403,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/GMCA.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "IV0001-GMCA00000_00-GMCA000000002900.pkg",
+        "size": 62455808,
+        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.1/IV0001-GMCA00000_00-GMCA000000002900.pkg",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "GMCA",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-gmca/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Media center client for PSVita.",
+    "homebrew_long_description": "GMCA is one native, controller-first client. Point it at any media center â€” Plex, Jellyfin, Emby or Stremio â€” and run it on any device you left in a drawer: Nintendo Switch, PS Vita or a Raspberry Pi wired to the TV. The interface never changes; only the accent colour and the tabs follow your server.",
+    "homebrew_id": "gmca",
+    "homebrew_authors": [
+      "thcolin"
+    ],
+    "homebrew_version": "v1.1.0",
+    "catalog_apps": [
+      {
+        "id": "gmca",
+        "name": "GMCA",
+        "icon": "https://archive.org/download/psvitaalive-gmca/icon0.png",
+        "category": "utilities",
+        "description": "Media center client for PSVita.",
+        "long_description": "GMCA is one native, controller-first client. Point it at any media center â€” Plex, Jellyfin, Emby or Stremio â€” and run it on any device you left in a drawer: Nintendo Switch, PS Vita or a Raspberry Pi wired to the TV. The interface never changes; only the accent colour and the tabs follow your server.",
+        "version": "v1.1.0",
+        "version_date": "2026-07-17",
+        "author_ids": [
+          "thcolin"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v1.1.0 → release v1.3.1",
+    "catalog_version": "v1.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "CBOC-Vita-Lab/strikers-charged-vita",
     "release_id": "422591166",
     "tag": "v1.1",
@@ -4365,133 +4545,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.0",
     "catalog_version": "1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "thcolin/gamepad-media-center-aggregator",
-    "release_id": "395550835",
-    "tag": "v1.3.0",
-    "name": "GMCA v1.3.0",
-    "url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/tag/v1.3.0",
-    "published": "2026-09-24T10:06:23Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\n### Added\n\n- **Playback speed and repeat in the player settings (#68).** The cogwheel\n  menu has a Playback Speed selector, from 0.5x to 2.0x, and a Repeat\n  selector: Off, This video, or Whole list when the player has a list (the\n  episodes of a show, the videos of a remote folder). Both last until the\n  player closes, and carry over from one episode to the next.\n- **Maximum transcoding resolution (#67).** Settings > Transcode can cap the\n  transcode at 4K, 1440p, 1080p, 720p or 480p, for Plex, Jellyfin and Emby.\n  \"Also limit direct play\" transcodes a source larger than that limit instead\n  of playing it directly.\n\n### Fixed\n\n- **Emby: external subtitles, avatars, Anime libraries and album covers\n  (#65).** Sidecar subtitles load on Emby, and on Jellyfin when the server\n  gives no delivery URL. The profile avatar of Jellyfin and Emby users is\n  shown after the next sign-in. Mixed-content libraries, the usual type for\n  Anime, are listed in the sidebar. Album covers are requested resized, so\n  Emby no longer sends the original multi-megabyte image.\n- **Emby: transcoding failed with an HTTP 400 (#67).** The transcode request\n  now sends the selected media source instead of the item id.\n- **Jellyfin and Emby servers could stay offline after a restart (#77).** The\n  reconnect check now calls the server API instead of the web page, which a\n  proxy or a server setup can refuse while sign-in works.\n- **Downloads: posters and queue (#73).** Every queued episode shows its\n  poster, not only the running one. Thumbnails are written through a\n  temporary file, and interrupted downloads resume once the server is\n  reachable instead of waiting for a new download.\n- **A video no longer loops because a song was on repeat.** Each video\n  session starts with mpv's loop settings cleared.\n\n### Changed\n\n- **Switch: 4K sources are transcoded to 1080p by default (#67).** New\n  installs and existing ones get the 1080p limit with \"Also limit direct\n  play\" on. Set the limit to Auto to play 4K files directly again. Other\n  platforms keep Auto.\n\n\n![download](https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.3.0/total?label=Downloads)\n",
-    "assets": [
-      {
-        "name": "gmca-1.3.0-1-x86_64.pkg.tar.zst",
-        "size": 8245636,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/gmca-1.3.0-1-x86_64.pkg.tar.zst",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "GMCA-arm64-v8a.apk",
-        "size": 20116499,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-arm64-v8a.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "GMCA-armeabi-v7a.apk",
-        "size": 19243114,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-armeabi-v7a.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "GMCA-Linux-aarch64-gl-206.flatpak",
-        "size": 14954584,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-Linux-aarch64-gl-206.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "GMCA-Linux-aarch64-gles2-206.flatpak",
-        "size": 14926880,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-Linux-aarch64-gles2-206.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "GMCA-Linux-x86_64-gl-206.flatpak",
-        "size": 16155096,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-Linux-x86_64-gl-206.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "GMCA-macOS-Intel-206.dmg",
-        "size": 26911911,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-macOS-Intel-206.dmg",
-        "content_type": "application/x-apple-diskimage"
-      },
-      {
-        "name": "GMCA-macOS-Silicon-206.dmg",
-        "size": 25277058,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-macOS-Silicon-206.dmg",
-        "content_type": "application/x-apple-diskimage"
-      },
-      {
-        "name": "GMCA-windows-arm64-206.7z",
-        "size": 18974791,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-windows-arm64-206.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "GMCA-windows-x64-206.7z",
-        "size": 23600141,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-windows-x64-206.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "GMCA-windows-x86-206.7z",
-        "size": 23832355,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA-windows-x86-206.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "GMCA.nro",
-        "size": 30454281,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "GMCA.vpk",
-        "size": 14629280,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/GMCA.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "IV0001-GMCA00000_00-GMCA000000002800.pkg",
-        "size": 62455808,
-        "download_url": "https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.3.0/IV0001-GMCA00000_00-GMCA000000002800.pkg",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "GMCA",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-gmca/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Media center client for PSVita.",
-    "homebrew_long_description": "GMCA is one native, controller-first client. Point it at any media center â€” Plex, Jellyfin, Emby or Stremio â€” and run it on any device you left in a drawer: Nintendo Switch, PS Vita or a Raspberry Pi wired to the TV. The interface never changes; only the accent colour and the tabs follow your server.",
-    "homebrew_id": "gmca",
-    "homebrew_authors": [
-      "thcolin"
-    ],
-    "homebrew_version": "v1.1.0",
-    "catalog_apps": [
-      {
-        "id": "gmca",
-        "name": "GMCA",
-        "icon": "https://archive.org/download/psvitaalive-gmca/icon0.png",
-        "category": "utilities",
-        "description": "Media center client for PSVita.",
-        "long_description": "GMCA is one native, controller-first client. Point it at any media center â€” Plex, Jellyfin, Emby or Stremio â€” and run it on any device you left in a drawer: Nintendo Switch, PS Vita or a Raspberry Pi wired to the TV. The interface never changes; only the accent colour and the tabs follow your server.",
-        "version": "v1.1.0",
-        "version_date": "2026-07-17",
-        "author_ids": [
-          "thcolin"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v1.1.0 → release v1.3.0",
-    "catalog_version": "v1.1.0"
   },
   {
     "platform": "github",
@@ -15306,59 +15359,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0",
     "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "frangarcj/ff3_vita",
-    "release_id": "338255373",
-    "tag": "v1.2.3",
-    "name": "v1.2.3",
-    "url": "https://github.com/frangarcj/ff3_vita/releases/tag/v1.2.3",
-    "published": "2026-06-11T21:18:46Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "FF3.vpk",
-        "size": 18180699,
-        "download_url": "https://github.com/frangarcj/ff3_vita/releases/download/v1.2.3/FF3.vpk",
-        "content_type": "binary/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "FF3-Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-ff3-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Final Fantasy 3 (3D Remake) for PSVITA.",
-    "homebrew_id": "ff3-vita",
-    "homebrew_authors": [
-      "frangarcj",
-      "rinnegatamante",
-      "theflow"
-    ],
-    "catalog_apps": [
-      {
-        "id": "ff3-vita",
-        "name": "FF3-Vita",
-        "icon": "https://archive.org/download/psvitaalive-ff3-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Final Fantasy 3 (3D Remake) for PSVITA.",
-        "long_description": "This is a wrapper/port of Final Fantasy 3 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nDonation Link: https://ko-fi.com/frangar\n\n- PsVitaAlive -",
-        "version": "v.1.2.3",
-        "version_date": "2026-06-11",
-        "author_ids": [
-          "frangarcj",
-          "rinnegatamante",
-          "theflow"
-        ]
-      }
-    ],
-    "homebrew_long_description": "This is a wrapper/port of Final Fantasy 3 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nDonation Link: https://ko-fi.com/frangar\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.2.3",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2.3",
-    "catalog_version": "v.1.2.3"
   },
   {
     "platform": "github",
@@ -33189,5 +33189,58 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0.0",
     "catalog_version": "v.1.0.0"
+  },
+  {
+    "platform": "github",
+    "repo": "frangarcj/ff5_vita",
+    "release_id": "51049578",
+    "tag": "v1.0",
+    "name": "Final Fantasy V Vita 1.0",
+    "url": "https://github.com/frangarcj/ff5_vita/releases/tag/v1.0",
+    "published": "2021-10-08T16:57:11Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Initial Release",
+    "assets": [
+      {
+        "name": "FF5.vpk",
+        "size": 16548837,
+        "download_url": "https://github.com/frangarcj/ff5_vita/releases/download/v1.0/FF5.vpk",
+        "content_type": "binary/octet-stream"
+      }
+    ],
+    "author": "frangarcj",
+    "homebrew_name": "FF5-Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-ff5-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Final Fantasy V for PSVITA.",
+    "homebrew_long_description": "This is a wrapper/port of Final Fantasy V Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\n\n- PsVitaAlive -",
+    "homebrew_id": "ff5-vita",
+    "homebrew_authors": [
+      "frangarcj",
+      "rinnegatamante",
+      "theflow"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "ff5-vita",
+        "name": "FF5-Vita",
+        "icon": "https://archive.org/download/psvitaalive-ff5-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Final Fantasy V for PSVITA.",
+        "long_description": "This is a wrapper/port of Final Fantasy V Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\n\n- PsVitaAlive -",
+        "version": "v.1.0",
+        "version_date": "2021-10-08",
+        "author_ids": [
+          "frangarcj",
+          "rinnegatamante",
+          "theflow"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0"
   }
 ]
