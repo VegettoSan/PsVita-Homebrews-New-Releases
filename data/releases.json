@@ -1,6 +1,250 @@
 [
   {
     "platform": "github",
+    "repo": "VegettoSan/PSVitaAlive",
+    "release_id": "423191338",
+    "tag": "02.15",
+    "name": "PsVita Alive Store 02.15",
+    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.15",
+    "published": "2026-10-25T06:38:13Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# PSVitaAlive 02.15\r\n\r\nVersion 02.15 introduces significant improvements to plugin management, the Install All system, ZIP/VPK extraction, and overall installation reliability.\r\n\r\nThis update focuses on giving users more control over plugin installations, improving recovery from failed operations, reducing unnecessary storage usage, and providing clearer progress information throughout the application.\r\n\r\n## What's New\r\n\r\n### Improved Plugin Management\r\n\r\n- Added individual confirmation dialogs before installing plugins provided through Homebrew catalog links.\r\n- Introduced plugin requirement classifications: **Required**, **Optional**, and **Not Specified**.\r\n- Users can now choose whether to install or skip each catalog plugin.\r\n- Improved detection of installed plugins by checking their active taiHEN configuration instead of relying only on the presence of a plugin file.\r\n- Added an optional reinstall prompt when a plugin is already installed but its version cannot be verified.\r\n- Improved plugin replacement safety using temporary staging, backups, and recovery procedures if installation fails.\r\n- Updated plugin-related messages and dialogs across all eight supported languages.\r\n\r\n### Install All Improvements\r\n\r\nThe Install All system has received major reliability and usability improvements.\r\n\r\n- Added individual plugin selection and confirmation before starting batch installations.\r\n- Improved handling of installations containing multiple VPK, Game Files, Data Files, and plugin downloads.\r\n- Install All can now continue processing remaining installation steps when an individual step fails.\r\n- Added a detailed final installation report displaying completed, failed, skipped, already installed, and recovered operations.\r\n- Improved tracking of successfully installed plugins.\r\n- Plugin restart recommendations are now handled after the installation queue finishes, preventing premature interruptions.\r\n- Fixed an issue where changing installed-app filters during installation could affect the active installation queue.\r\n- Improved installation progress handling and interface stability.\r\n\r\n### Automatic ZIP Recovery\r\n\r\n- Added automatic ZIP preservation after extraction failures during Install All.\r\n- A 10-second countdown now appears before automatically preserving a recoverable ZIP archive.\r\n- Once recovery succeeds, Install All can continue processing the remaining installation steps.\r\n- Users can review preserved ZIP archives from the final installation report.\r\n- Added options to keep or safely delete recovered archives.\r\n- Added an additional confirmation before permanently deleting preserved ZIP files.\r\n- Improved recovery metadata validation to prevent unintended deletion of unrelated files.\r\n\r\nThese improvements help prevent unnecessary repeated downloads, especially when working with large Homebrew game files.\r\n\r\n### ZIP and VPK Extraction Improvements\r\n\r\n- Optimized extraction when archive entries replace existing files.\r\n- Removed unnecessary temporary backup copies during supported in-place file replacements.\r\n- Reduced additional storage requirements for compatible overwrite operations.\r\n- Improved available-space calculations by accounting for reusable space occupied by existing files.\r\n- Added protection against archive entries overwriting the source ZIP/VPK or its segmented download files.\r\n- Improved detection of filename collisions on case-insensitive storage.\r\n- Improved cleanup behavior following extraction failures.\r\n- Added clearer diagnostics when an interrupted overwrite may leave an incomplete destination file.\r\n- Preserved compatibility with existing ZIP64 handling, deep-directory extraction, and segmented archive workflows.\r\n\r\n### Startup Storage Maintenance\r\n\r\n- Added automatic detection and cleanup of abandoned download jobs during application startup.\r\n- Introduced a visible maintenance progress indicator before catalog initialization.\r\n- Improved cleanup of incomplete, cancelled, and failed downloads.\r\n- Added safeguards for explicitly preserved ZIP archives and certain legacy recovery files.\r\n- Improved cleanup procedures for interrupted download assembly operations.\r\n\r\n### Catalog Synchronization Improvements\r\n\r\n- Added a new visual progress indicator for catalog synchronization.\r\n- Improved status messages when downloading and applying catalog updates.\r\n- Added notifications when a catalog update finishes successfully.\r\n- Improved feedback during background catalog refreshes.\r\n- Preserved normal catalog interaction during supported background synchronization operations.\r\n\r\n### Localization and Stability\r\n\r\n- Added new translations for plugin management, installation confirmation, recovery options, and batch installation reports.\r\n- Improved interface consistency across English, Spanish, French, German, Italian, Portuguese (Brazil), Portuguese (Portugal), and Russian.\r\n- Improved installation lifecycle management and recovery handling.\r\n- Added additional automated regression coverage for startup download cleanup.\r\n- Various internal stability, filesystem, and user interface improvements.\r\n\r\n## Installation\r\n\r\nDownload **PSVitaAlive.vpk** from the release assets and install it using VitaShell.\r\n\r\nExisting users can update directly from a previous version without uninstalling PSVitaAlive.\r\n\r\nAutomatic updates are also supported through the application's built-in update system.\r\n\r\nExisting settings and compatible cached data are preserved.\r\n\r\n## Compatibility and Important Notes\r\n\r\nPSVitaAlive continues to support PlayStation Vita and PlayStation TV.\r\n\r\n- Plugin installations may require restarting the console before changes take effect.\r\n- An installed plugin with an unknown version is not necessarily outdated. Reinstallation remains optional.\r\n- Skipping a plugin marked as required may prevent the associated Homebrew from functioning correctly.\r\n- Automatic ZIP preservation applies to supported recoverable failures during Install All.\r\n- In-place file replacement reduces additional storage usage, but an interrupted overwrite may leave an incomplete destination file.\r\n- External download availability and performance depend on hosting providers and network conditions.\r\n- Compatibility may vary depending on installed plugins, archive structures, and storage configurations.\r\n\r\nIf you encounter a problem, please report it and include your `session.log` file whenever possible.\r\n\r\n---\r\n\r\n## Thank You\r\n\r\nThank you to all Homebrew developers, contributors, testers, and PlayStation Vita community members who continue supporting PSVitaAlive.\r\n\r\nYour feedback and bug reports help make the application more reliable with every release.\r\n\r\nPSVitaAlive 02.15 continues our commitment to providing a **free, open, and modern Homebrew platform** for discovering, downloading, installing, updating, and preserving PlayStation Vita software.\r\n\r\n**Thank you for helping keep the PlayStation Vita community alive!**\r\n\r\nWebsite: https://vegettosan.github.io/PSVitaAlive/\r\n\r\n**Full Changelog:** https://github.com/VegettoSan/PSVitaAlive/compare/02.14...main",
+    "assets": [
+      {
+        "name": "PSVitaAlive.vpk",
+        "size": 9628526,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.15/PSVitaAlive.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "VegettoSan",
+    "homebrew_name": "PSVitaAlive Store",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
+    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+    "homebrew_id": "psvitaalive-store",
+    "homebrew_authors": [
+      "vegettosan"
+    ],
+    "homebrew_version": "02.15",
+    "catalog_apps": [
+      {
+        "id": "psvitaalive-store",
+        "name": "PSVitaAlive Store",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+        "category": "utilities",
+        "description": "Homebrew store and catalog for PlayStation Vita.",
+        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+        "version": "02.15",
+        "version_date": "2026-10-25",
+        "author_ids": [
+          "vegettosan"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive oficial · 02.15",
+    "catalog_version": "02.15"
+  },
+  {
+    "platform": "github",
+    "repo": "TheLostPantheon/ArxLibertatis",
+    "release_id": "423136395",
+    "tag": "v2.0",
+    "name": "Arx Libertatis - 2.0",
+    "url": "https://github.com/TheLostPantheon/ArxLibertatis/releases/tag/v2.0",
+    "published": "2026-10-25T03:59:44Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Substantially better performance (40-60fps)\r\n- Substantially better view distance",
+    "assets": [
+      {
+        "name": "arx-vita.vpk",
+        "size": 4151997,
+        "download_url": "https://github.com/TheLostPantheon/ArxLibertatis/releases/download/v2.0/arx-vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "TheLostPantheon",
+    "homebrew_name": "Arx Libertatis",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-arx-libertatis/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Arx Fatalis to PSVita.",
+    "homebrew_long_description": "Arx Libertatis is an open-source reimplementation of the Arx Fatalis engine, ported to PS Vita via vitaGL. Explore the dungeons of Arx as you fight, sneak, and cast your way through a full-length RPG with an immersive underground world.\n\n- PsVitaAlive -",
+    "homebrew_id": "arx-libertatis",
+    "homebrew_authors": [
+      "kingtorro"
+    ],
+    "homebrew_version": "v.1.003",
+    "catalog_apps": [
+      {
+        "id": "arx-libertatis",
+        "name": "Arx Libertatis",
+        "icon": "https://archive.org/download/psvitaalive-arx-libertatis/icon0.png",
+        "category": "ports",
+        "description": "Port of Arx Fatalis to PSVita.",
+        "long_description": "Arx Libertatis is an open-source reimplementation of the Arx Fatalis engine, ported to PS Vita via vitaGL. Explore the dungeons of Arx as you fight, sneak, and cast your way through a full-length RPG with an immersive underground world.\n\n- PsVitaAlive -",
+        "version": "v.1.003",
+        "version_date": "2026-02-17",
+        "author_ids": [
+          "kingtorro"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.1.003 → release v2.0",
+    "catalog_version": "v.1.003"
+  },
+  {
+    "platform": "github",
+    "repo": "TheXTech/TheXTech",
+    "release_id": "423099116",
+    "tag": "v1.7.4.2-hotfix",
+    "name": "TheXTech v1.7.4.2: A hotfix for 3DS and Wii",
+    "url": "https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4.2-hotfix",
+    "published": "2026-10-25T02:34:30Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "After the previous releases v1.7.4 and v1.7.4.1, the critical bug was discovered on 3DS and Wii platforms that makes some effects being invisible. The suitable builds were been replaced at the previous v1.7.4.1's page as other platforms weren't affected by this problem.\r\n\r\nThis post contains Nintendo 3DS and Nintendo Wii only builds, for other platforms, you can download packages [at the main post here](https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4.1). Also, all the binaries had been updated at the main post to prevent users downloading faulty builds without knowlege of that.\r\n\r\n# Hotfix changelog for 1.7.4.2\r\n- 3DS / Wii: fix TheXTech 1.7.4.1 bug where NPC death effects would not display incorrectly. (@ds-sloth, thanks to @Wohlstand for the report)\r\n",
+    "assets": [
+      {
+        "name": "thextech-3ds-v1.7.4.2.zip",
+        "size": 4227140,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.2-hotfix/thextech-3ds-v1.7.4.2.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-full-src-v1.7.4.2.tar.bz2",
+        "size": 45544310,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.2-hotfix/thextech-full-src-v1.7.4.2.tar.bz2",
+        "content_type": "application/x-bzip2"
+      },
+      {
+        "name": "thextech-full-src-v1.7.4.2.tar.gz",
+        "size": 54636777,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.2-hotfix/thextech-full-src-v1.7.4.2.tar.gz",
+        "content_type": "application/gzip"
+      },
+      {
+        "name": "thextech-full-src-v1.7.4.2.zip",
+        "size": 62963566,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.2-hotfix/thextech-full-src-v1.7.4.2.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-sdl2-src-for-wii-v1.7.4.2.zip",
+        "size": 5123894,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.2-hotfix/thextech-sdl2-src-for-wii-v1.7.4.2.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "thextech-wii-v1.7.4.2.zip",
+        "size": 3618681,
+        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.2-hotfix/thextech-wii-v1.7.4.2.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "Wohlstand",
+    "homebrew_name": "TheXTech",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Super Mario Bros X for PSVITA.",
+    "homebrew_long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).\n\n- PsVitaAlive -",
+    "homebrew_id": "thextech",
+    "homebrew_authors": [
+      "thextech-team"
+    ],
+    "homebrew_version": "v.1.3.7.3-1",
+    "catalog_apps": [
+      {
+        "id": "thextech",
+        "name": "TheXTech",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
+        "category": "ports",
+        "description": "Port of Super Mario Bros X for PSVITA.",
+        "long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).\n\n- PsVitaAlive -",
+        "version": "v.1.3.7.3-1",
+        "version_date": "2025-06-14",
+        "author_ids": [
+          "thextech-team"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.1.3.7.3-1 → release v1.7.4.2-hotfix",
+    "catalog_version": "v.1.3.7.3-1"
+  },
+  {
+    "platform": "github",
+    "repo": "CBOC-Vita-Lab/galaxy-vita",
+    "release_id": "423025420",
+    "tag": "v1.0",
+    "name": "Super Mario Galaxy 1.0",
+    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v1.0",
+    "published": "2026-10-24T22:47:59Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Super Mario Galaxy, running natively on the PS Vita. No emulator, no streaming: the game's own code rebuilt for the Vita's processor and GPU.\n\n**Touch controls, built for the Vita**\n- Rear touch Star Bit aiming: slide a finger on the back pad and the pointer glides like a laptop trackpad, with your thumbs still on the sticks. Resting fingers are ignored. Turn it on in the pause menu with Triangle.\n- The front screen is your Wii pointer: touch and Star Bits fly to you, tap to talk or choose, hold still to grab Pull Stars.\n- Tilt to steer the Star Ball and the Manta ray; spin with Square or R.\n- A settings panel in the pause menu: camera zoom and rear touch.\n\n**How smooth it is** (measured with this release on a PS Vita; fps = new pictures per second, 60 is the most the screen shows)\n- Good Egg Galaxy: 51 fps on average (41 to 56)\n- Comet Observatory, the busiest place in the game: 43 fps on average (32 to 55)\n- Quiet moments and menus: 60 fps\n- Stutters longer than a tenth of a second while playing: 0\n- Full game speed: when a moment is too busy, a picture is skipped instead of the game slowing down\n- 1,131 graphics effects compiled ahead of time; up to 960×544 with automatic anti-aliasing\n\n**Install:** the easiest way is CBOC Vita Installer (pick Super Mario Galaxy, choose your disc image, press Install). Or install `Galaxy-Vita.vpk` with VitaShell and copy your prepared game files to `ux0:data/smg/game/`; see INSTALL.md.\n\nYou need your own Super Mario Galaxy disc (Wii, USA, RMGE01). Unofficial fan project, not affiliated with Nintendo or Sony.\n",
+    "assets": [
+      {
+        "name": "cboc-release.json",
+        "size": 1208,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/cboc-release.json",
+        "content_type": "application/json"
+      },
+      {
+        "name": "Galaxy-Vita-install.zip",
+        "size": 15116085,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/Galaxy-Vita-install.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Galaxy-Vita.vpk",
+        "size": 6160169,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/Galaxy-Vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 558980,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "CBOC-Vita",
+    "homebrew_name": "Super Mario Galaxy",
+    "homebrew_icon": "https://archive.org/download/smg-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+    "homebrew_id": "super-mario-galaxy",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "super-mario-galaxy",
+        "name": "Super Mario Galaxy",
+        "icon": "https://archive.org/download/smg-vita/icon0.png",
+        "category": "ports",
+        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+        "version": "1.0",
+        "version_date": "2026-10-25",
+        "author_ids": [
+          "cboc-vita-lab"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
     "repo": "TheLostPantheon/openmw",
     "release_id": "422976479",
     "tag": "v2.4.1",
@@ -554,6 +798,61 @@
   },
   {
     "platform": "github",
+    "repo": "Cynostial/wonderboy-vita",
+    "release_id": "421888815",
+    "tag": "v0.35-rc1",
+    "name": "Wonder Boy: The Dragon's Trap - Vita 0.35-rc1",
+    "url": "https://github.com/Cynostial/wonderboy-vita/releases/tag/v0.35-rc1",
+    "published": "2026-10-23T13:40:32Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Unofficial PlayStation Vita port of **Wonder Boy: The Dragon's Trap**, based on the Android ARMv7 version.\n\nDownload **wonderboy-vita-0.35-rc1.zip** below. It contains the Vita application, logo, and license notices. Installation instructions are in the [README](https://github.com/Cynostial/wonderboy-vita/blob/v0.35-rc1/README.md). GitHub's automatic source archives are for development.\n\n### Installation\n\n1. Install `wonderboy.vpk` through VitaShell. The port requires **kubridge** and **libshacccg.suprx**; see the README for setup.\n2. Place exactly one supported Android **1.1.0 / version code 105 / ARMv7 APK** and its **main.103 OBB** in `ux0:data/wonderboy/import/`. Any filenames work with the `.apk` and `.obb` extensions.\n3. Launch Wonder Boy and press **START** to prepare the files. Press **START** again at **Ready to play**.\n\nAllow about **3 GB free before copying the inputs**. APK, OBB, and Android game libraries are not included. Compatibility with files currently delivered by Google Play has not been verified; check the supported files in the README.\n\n### Features\n\n- Physical Vita controls and PlayStation button prompts; both touch panels disabled.\n- On-device import with pause/resume, verification, and optional confirmed removal of the APK and OBB afterward.\n- Skippable intros, modern/retro graphics and audio switching, and an optional bottom-left FPS counter that starts disabled.\n- Frame-pacing improvements and restored central LiveArea artwork.\n\n### Release-candidate status\n\nGameplay has been tested on a real Vita. Occasional stalls and frame-time spikes remain; a locked 60 FPS throughout the entire game has not been verified. Final clean-install and post-village save/resume checks remain pending.\n\nFor updates, install the new VPK over the existing app and preserve `ux0:data/wonderboy/`. There is no automatic updater.\n\nReport problems through [GitHub Issues](https://github.com/Cynostial/wonderboy-vita/issues), including the port version, device/firmware, location, and reproduction steps. Copy `ux0:data/wonderboy/run.log` after closing the app and before launching again.\n\n### Checksum\n\nSHA-256 of `wonderboy-vita-0.35-rc1.zip`:\n\n```text\n7e0a3f9e0dedd13d4b439d89106786d7e2567a550f2b1aebecf48bcc0e716699\n```\n\nThanks to Lizardcube, Dotemu, the original Wonder Boy team, and the contributors to VitaSDK, VitaGL, soLoader, kubridge, SDL, and the bundled libraries. See the README and included licenses for credits.\n",
+    "assets": [
+      {
+        "name": "wonderboy-vita-0.35-rc1.zip",
+        "size": 10291545,
+        "download_url": "https://github.com/Cynostial/wonderboy-vita/releases/download/v0.35-rc1/wonderboy-vita-0.35-rc1.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "wonderboy-vita-0.35-rc1.zip.sha256",
+        "size": 95,
+        "download_url": "https://github.com/Cynostial/wonderboy-vita/releases/download/v0.35-rc1/wonderboy-vita-0.35-rc1.zip.sha256",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Cynostial",
+    "homebrew_name": "Wonder Boy: The Dragon's Trap",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/categories/icons/ports.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Wonder Boy: The Dragon's Trap on PS Vita",
+    "homebrew_long_description": "Wonder Boy: The Dragon's Trap on PS Vita, with physical controls, an on-device APK/OBB importer, and support for switching between modern and retro graphics and audio.",
+    "homebrew_id": "wonder-boy-the-dragon-s-trap",
+    "homebrew_authors": [
+      "cynostial"
+    ],
+    "homebrew_version": "0.35rc1",
+    "catalog_apps": [
+      {
+        "id": "wonder-boy-the-dragon-s-trap",
+        "name": "Wonder Boy: The Dragon's Trap",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/categories/icons/ports.png",
+        "category": "ports",
+        "description": "Wonder Boy: The Dragon's Trap on PS Vita",
+        "long_description": "Wonder Boy: The Dragon's Trap on PS Vita, with physical controls, an on-device APK/OBB importer, and support for switching between modern and retro graphics and audio.",
+        "version": "0.35rc1",
+        "version_date": "2026-10-23",
+        "author_ids": [
+          "cynostial"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.35rc1",
+    "catalog_version": "0.35rc1"
+  },
+  {
+    "platform": "github",
     "repo": "VegettoSan/Hungry-Shark-Evolution-Ps-Vita",
     "release_id": "421576692",
     "tag": "01.00",
@@ -600,55 +899,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 01.00",
     "catalog_version": "01.00"
-  },
-  {
-    "platform": "github",
-    "repo": "VegettoSan/PSVitaAlive",
-    "release_id": "421571346",
-    "tag": "02.14",
-    "name": "02.14",
-    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.14",
-    "published": "2026-10-23T07:59:46Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# PSVitaAlive 02.14\r\n\r\nVersion **02.14** introduces major download optimizations, faster ZIP/VPK extraction, improved error handling, and a refreshed website interface.\r\n\r\nThis release focuses on reducing unnecessary processing during large downloads, improving installation reliability, providing clearer information when external download services fail, and making PSVitaAlive more efficient on PlayStation Vita hardware.\r\n\r\n## What's New\r\n\r\n### Download Performance Improvements\r\n\r\n- Improved adaptive parallel downloading for supported VPK, ZIP, Game Files, and Data Files.\r\n- Added direct extraction support for compatible ZIP/VPK archives downloaded in multiple parts.\r\n- Eliminated unnecessary file assembly before extraction for supported segmented archives.\r\n- Removed redundant full-file SHA-1 processing from the optimized direct-extraction workflow.\r\n- Reduced unnecessary storage operations and processing overhead during large installations.\r\n- Improved handling of ZIP64 archives and large file offsets.\r\n- Optimized Archive.org server selection and HTTP range requests.\r\n- Reduced redundant network probes when selecting download servers.\r\n- Improved automatic fallback behavior when optimized downloading is unavailable.\r\n- Maintained compatibility with existing standard download and installation methods.\r\n\r\nThese changes help reduce installation preparation time and unnecessary storage activity, particularly when working with large Homebrew ports.\r\n\r\n### ZIP and VPK Extraction Optimizations\r\n\r\n- Introduced a bounded directory cache to reduce repetitive filesystem checks during extraction.\r\n- Improved extraction efficiency for archives containing hundreds or thousands of small files.\r\n- Added optimized exclusive file creation for new files.\r\n- Reduced unnecessary filesystem metadata operations.\r\n- Preserved safe replacement procedures for existing files.\r\n- Maintained existing CRC validation, ZIP64 compatibility, deep-directory support, and cancellation handling.\r\n- Added lightweight extraction performance diagnostics.\r\n- Improved compatibility with complex archive structures.\r\n\r\nThe new extraction optimizations were tested on real PlayStation Vita hardware using Gun Bros, successfully installing and extracting the application and its associated Game Files.\r\n\r\nAdditional compatibility and regression testing will continue in future updates.\r\n\r\n### Archive.org Connectivity Improvements\r\n\r\n- Added automatic connectivity checks for Archive.org during application startup.\r\n- Introduced informative warnings when Archive.org cannot be reached.\r\n- Improved detection of unavailable download sources.\r\n- Added clearer explanations when external download services experience connection problems.\r\n- Improved distinction between temporary server problems and permanently unavailable files.\r\n- Reduced unnecessary retries when a download source repeatedly fails before transferring data.\r\n- Preserved recovery behavior for interrupted downloads and temporary network failures.\r\n- Added recommendations to try alternative download sources when available.\r\n\r\nConnectivity warnings indicate that a service cannot be reached from the current connection and do not necessarily mean the entire service is offline.\r\n\r\n### Improved Error Messages and Diagnostics\r\n\r\n- Introduced a more informative error presentation system for failed downloads and installations.\r\n- Added clearer explanations for network errors, HTTP failures, TLS problems, and unavailable files.\r\n- Improved error reporting for MediaFire downloads.\r\n- Added specific messages for insufficient storage space and filesystem errors.\r\n- Improved identification of corrupted archives, unsafe extraction paths, and unsupported formats.\r\n- Added more useful recommendations to help users understand possible solutions.\r\n- Reduced unnecessary error-report prompts for common network and server problems.\r\n- Preserved technical diagnostic information for troubleshooting.\r\n\r\nError messages are now designed to help users understand what went wrong and what they can try next.\r\n\r\n### Website Improvements\r\n\r\n- Refreshed the PSVitaAlive website with more compact and responsive application cards.\r\n- Improved catalog layouts for Homebrew, PS Vita, PSP, and PS1.\r\n- Redesigned application detail pages for better readability.\r\n- Improved developer profile pages and author listings.\r\n- Refined category cards and navigation.\r\n- Improved download link presentation and recommended download indicators.\r\n- Added clearer display of download information, extraction destinations, and plugin-related details.\r\n- Improved spacing, alignment, typography, and mobile responsiveness.\r\n- Maintained the existing dark interface and green accent design.\r\n\r\n### Localization Improvements\r\n\r\n- Added translations for new download warnings, installation errors, and recovery instructions.\r\n- Updated interface messages across all eight supported languages:\r\n  - English\r\n  - Spanish\r\n  - French\r\n  - German\r\n  - Italian\r\n  - Portuguese (Brazil)\r\n  - Portuguese (Portugal)\r\n  - Russian\r\n\r\n### Stability and Internal Improvements\r\n\r\n- Improved synchronization between download completion and installation.\r\n- Optimized filesystem operations during archive extraction.\r\n- Improved handling of interrupted and failed download requests.\r\n- Expanded automated regression tests for segmented archives, download failures, extraction caching, and error classification.\r\n- Improved internal diagnostics and resource management.\r\n- Added new Homebrew catalog entries and developer profiles.\r\n- Updated selected application metadata and download links.\r\n- Additional bug fixes and performance improvements.\r\n\r\n## Installation\r\n\r\nDownload **PSVitaAlive.vpk** from the release assets and install it using VitaShell.\r\n\r\nExisting users can update directly from a previous version without uninstalling PSVitaAlive.\r\n\r\nThe application also supports automatic updates through its built-in update system.\r\n\r\nExisting settings and compatible cached data are preserved.\r\n\r\n## Compatibility and Notes\r\n\r\nPSVitaAlive continues to support PlayStation Vita and PlayStation TV.\r\n\r\n- Download performance depends on the hosting provider, network conditions, and storage configuration.\r\n- Optimized direct extraction is used only for compatible archive downloads. Standard downloading remains available as a fallback.\r\n- Some Homebrew ports require additional Game Files or Data Files that may not yet be available in the catalog.\r\n- Availability of external download sources is not controlled by PSVitaAlive.\r\n- Extraction improvements have been tested on real hardware, but compatibility may vary across different archives and storage devices.\r\n\r\nIf you encounter an issue, please report it and include your `session.log` file whenever possible.\r\n\r\n---\r\n\r\n## Thank You\r\n\r\nThank you to all developers, contributors, testers, and PlayStation Vita community members who continue to support PSVitaAlive.\r\n\r\nYour feedback, bug reports, and hardware testing help improve the project with every release.\r\n\r\n**PSVitaAlive 02.14** continues our goal of providing a free, reliable, and modern platform for discovering, downloading, installing, and preserving PlayStation Vita Homebrew.\r\n\r\nThank you for helping keep the PlayStation Vita community alive!\r\n\r\n**Website:** https://vegettosan.github.io/PSVitaAlive/\r\n\r\n**Full Changelog:** https://github.com/VegettoSan/PSVitaAlive/compare/02.13...main",
-    "assets": [
-      {
-        "name": "PSVitaAlive.vpk",
-        "size": 9593317,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.14/PSVitaAlive.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VegettoSan",
-    "homebrew_name": "PSVitaAlive Store",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
-    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-    "homebrew_id": "psvitaalive-store",
-    "homebrew_authors": [
-      "vegettosan"
-    ],
-    "homebrew_version": "02.14",
-    "catalog_apps": [
-      {
-        "id": "psvitaalive-store",
-        "name": "PSVitaAlive Store",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-        "category": "utilities",
-        "description": "Homebrew store and catalog for PlayStation Vita.",
-        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-        "version": "02.14",
-        "version_date": "2026-10-23",
-        "author_ids": [
-          "vegettosan"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive oficial · 02.14",
-    "catalog_version": "02.14"
   },
   {
     "platform": "github",
@@ -1559,577 +1809,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.78",
     "catalog_version": "v.0.69"
-  },
-  {
-    "platform": "github",
-    "repo": "TheXTech/TheXTech",
-    "release_id": "416513684",
-    "tag": "v1.7.4.1",
-    "name": "TheXTech v1.7.4.1: A quick update with fixes and limits breaking",
-    "url": "https://github.com/TheXTech/TheXTech/releases/tag/v1.7.4.1",
-    "published": "2026-10-18T17:26:09Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "When this update was supposed to be a small hotfix that fixes two small but annoying bugs, it also introduces the ability to use several graphics without cropping to original sizes. For example, BGO, some effects, terrain cells at the world map, scenery objects, and level points, now can have any size as big as you want. This only will work for levels and episodes are made for TheXTech. When playing episodes saved with old formats, they will have exactly same limits as before this update. However, objects of custom ranges will be expandable with no matter of the level or episode format.\r\n\r\n## Showcases\r\n### World map\r\n#### Before\r\n<details>\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-52-11\" src=\"https://github.com/user-attachments/assets/de72432d-af1e-457e-967b-17b24096dee2\" />\r\n\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-52-14\" src=\"https://github.com/user-attachments/assets/f627ea33-1aae-4098-b81d-040de9fa114c\" />\r\n\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-52-37\" src=\"https://github.com/user-attachments/assets/0730cd84-a309-4cfa-a9ec-1a93ec1a6a1f\" />\r\n\r\n</details>\r\n\r\n#### After\r\n\r\n<details>\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-50-31\" src=\"https://github.com/user-attachments/assets/14ea8d37-01e7-4bb4-af6f-8b2bbdb53f9e\" />\r\n\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-50-54\" src=\"https://github.com/user-attachments/assets/1b9fc98c-79b2-4393-b92d-4bff7677684a\" />\r\n\r\n[Scr_2026-10-17_20-51-37.webm](https://github.com/user-attachments/assets/1f7076c4-8514-4acb-9d81-cc37881d323e)\r\n\r\n</details>\r\n\r\n### Levels\r\n#### Before\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-52-55\" src=\"https://github.com/user-attachments/assets/61eab815-2b27-44be-b1c5-0dd2227871d2\" />\r\n\r\n#### After\r\n<img width=\"800\" height=\"600\" alt=\"Scr_2026-10-17_20-51-18\" src=\"https://github.com/user-attachments/assets/c9fa1e61-f821-4713-8d5e-ce17047654c3\" />\r\n\r\n## Demo\r\nA small demo episode that shows the work of new graphics behaviour: [Large Objects Test.zip](https://github.com/user-attachments/files/33630575/Large.Objects.Test.zip)\r\n\r\n# Full changelog for 1.7.4.1\r\n\r\n<details>\r\n\r\n## New features:\r\n\r\n### Behaviour changes\r\n- Custom asset packs: effect dimensions are now loaded from the asset pack graphics. This fixes the appearance of player death effects in several asset packs. (@ds-sloth)\r\n- Episodes targeting TheXTech: world map tile and scene dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)\r\n- Episodes targeting TheXTech: BGO dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)\r\n- Custom range (level-33 and above): world map level dimensions are now loaded from the asset pack / episode graphics. (@ds-sloth)\r\n\r\n## TheXTech bugfixes\r\n- Fix TheXTech 1.3.7.1 bug where a stack of static NPCs would only partially despawn, causing the upper NPCs to fall (@ds-sloth, thanks to @Liebning for the report)\r\n- Fix TheXTech 1.3.7.3 bug where level music would not play on a level without a player start point, where the player starts at a warp in Section 0 (@ds-sloth, thanks to @Wohlstand for the report)\r\n\r\n</details>\r\n\r\n# Known issues\r\n* Audio may be choppy on Old 3DS.\r\n* Texture load stutter is present on Wii.\r\n* The screen may slightly judder during section resizes on 3DS and Wii.\r\n* On 3DS, background texture may start to flashing. (https://github.com/TheXTech/TheXTech/issues/816) (Possibly solved, the primary reason of this is an out of memory).\r\n* On 3DS the crash happens on attempt to quit by the home menu. (https://github.com/TheXTech/TheXTech/issues/738)\r\n* On Windows 10 when running OpenGL with some ~2006 Intel iGPU on laptop, game would crash (possibly fixed).\r\n* On Windows XP SP0 that uses **S3 Savage 4** video card is impossible to dynamically switch video modes: the game just crashes (blame video drivers by theme selves as they were always very bad, according to [random talk of people from the 2000s](https://www.kv.by/forum/forum1000000590.htm) (in Russian) ).\r\n* On Linux/Wayland, Window icon can't be changed while running game. (https://github.com/TheXTech/TheXTech/issues/939)\r\n* On Linux/Wayland, Mouse cursor doesn't gets unlocked from window on toggling windowed mode after fullscreen. (https://github.com/TheXTech/TheXTech/issues/937)\r\n* Editor doesn't supports large fonts (I.e. Chinese, Korean, etc). (https://github.com/TheXTech/TheXTech/issues/884)\r\n* At Web version (Emscripten-built) the framerate may go incorrectly. (https://github.com/TheXTech/TheXTech/issues/851)\r\n* On some hardware, randomly and rare, alpha-channel might me messed up when using OpenGL render backend. (https://github.com/TheXTech/TheXTech/issues/743)\r\n* The LunaDLL's timer gets overlapped with the medals tracker. (https://github.com/TheXTech/TheXTech/issues/1102)\r\n* On iOS devices (iPhone 6S and newer that has the Taptic Engine equipped), when the tactile vibration is activated while playing using touch screen, the device might start to infinitely buzz at any random moment. To escape this problem it's need to switch from the game app to any other or to the main screen using home button or the home bar (depending on the device model) and wait when vibration will stop, and then, return to the game. (https://github.com/TheXTech/TheXTech/issues/1189)\r\n",
-    "assets": [
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz",
-        "size": 35129600,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz",
-        "size": 35256326,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz",
-        "size": 36109262,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz",
-        "size": 36192940,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz",
-        "size": 36102605,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz",
-        "size": 35445673,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz",
-        "size": 36040332,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz",
-        "size": 36050722,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz",
-        "size": 36128278,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-macos.dmg",
-        "size": 39142441,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-macos.dmg",
-        "content_type": "application/x-apple-diskimage"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-web.tar.gz",
-        "size": 33357840,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-web.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-win-arm64.7z",
-        "size": 27582792,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-win-arm64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-win32.7z",
-        "size": 29502767,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-win32.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "adventures-of-demo-thextech-v1.7.4.1-win64.7z",
-        "size": 29488897,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/adventures-of-demo-thextech-v1.7.4.1-win64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "moondust-devkit-config-pack-thextech-sdk-v1.7.4.1.zip",
-        "size": 1478839,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/moondust-devkit-config-pack-thextech-sdk-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz",
-        "size": 45672360,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz",
-        "size": 45798013,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u14.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz",
-        "size": 46652966,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz",
-        "size": 46734225,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u16.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz",
-        "size": 46645684,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz",
-        "size": 45986107,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz",
-        "size": 46580525,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz",
-        "size": 46594503,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz",
-        "size": 46672095,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-macos.dmg",
-        "size": 50978365,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-macos.dmg",
-        "content_type": "application/x-apple-diskimage"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-web.tar.gz",
-        "size": 43867546,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-web.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-win-arm64.7z",
-        "size": 38059877,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-win-arm64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-win32.7z",
-        "size": 39980133,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-win32.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "super-mario-bros-x-thextech-v1.7.4.1-win64.7z",
-        "size": 39966360,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/super-mario-bros-x-thextech-v1.7.4.1-win64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-3ds-assets-aod-v1.7.4.1.zip",
-        "size": 60789065,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-3ds-assets-aod-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-3ds-assets-smbx13-v1.7.4.1.zip",
-        "size": 48054389,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-3ds-assets-smbx13-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-3ds-v1.7.4.1.zip",
-        "size": 4227012,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-3ds-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-adventure-of-demo-assets-full-v1.7.4.1.7z",
-        "size": 24788773,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-adventure-of-demo-assets-full-v1.7.4.1.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-android-v1.7.4.1.apk",
-        "size": 28032503,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-android-v1.7.4.1.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "thextech-bin-portmaster-v1.7.4.1-MD5.txt",
-        "size": 56,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-portmaster-v1.7.4.1-MD5.txt",
-        "content_type": "text/plain"
-      },
-      {
-        "name": "thextech-bin-portmaster-v1.7.4.1.tar.gz",
-        "size": 4226974,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-portmaster-v1.7.4.1.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-arm64.flatpak",
-        "size": 3262368,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-arm64.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u14.04-amd64.deb",
-        "size": 4715050,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u14.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u14.04-i386.deb",
-        "size": 5317392,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u14.04-i386.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u16.04-amd64.deb",
-        "size": 5566992,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u16.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u16.04-armhf.deb",
-        "size": 5031382,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u16.04-armhf.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u16.04-i386.deb",
-        "size": 6257318,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u16.04-i386.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u18.04-amd64.deb",
-        "size": 4955224,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u18.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u20.04-aarch64.deb",
-        "size": 4274668,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u20.04-aarch64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u20.04-amd64.deb",
-        "size": 4815020,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u20.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u20.04-armhf.deb",
-        "size": 3915110,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u20.04-armhf.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u22.04-aarch64.deb",
-        "size": 4300520,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u22.04-aarch64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u22.04-amd64.deb",
-        "size": 4807604,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u22.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-u24.04-amd64.deb",
-        "size": 4861794,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-u24.04-amd64.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-bin-v1.7.4.1-x86-64.flatpak",
-        "size": 3898976,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-bin-v1.7.4.1-x86-64.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-convert-kit-v1.7.4.1.zip",
-        "size": 7541382,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-convert-kit-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-full-src-v1.7.4.1.tar.bz2",
-        "size": 45547209,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-full-src-v1.7.4.1.tar.bz2",
-        "content_type": "application/x-bzip2"
-      },
-      {
-        "name": "thextech-full-src-v1.7.4.1.tar.gz",
-        "size": 54633598,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-full-src-v1.7.4.1.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-full-src-v1.7.4.1.zip",
-        "size": 62963488,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-full-src-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-game-aod-v1.7.4.1.deb",
-        "size": 25032076,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-game-aod-v1.7.4.1.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-game-smbx-1.3-v1.7.4.1.deb",
-        "size": 38532924,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-game-smbx-1.3-v1.7.4.1.deb",
-        "content_type": "application/vnd.debian.binary-package"
-      },
-      {
-        "name": "thextech-game-template-v1.7.4.1-macOS.zip",
-        "size": 11727434,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-game-template-v1.7.4.1-macOS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-haiku-r1beta6-x86_64-v1.7.4.1.hpkg",
-        "size": 4372633,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-haiku-r1beta6-x86_64-v1.7.4.1.hpkg",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-ios12-arm64-v1.7.4.1.ipa",
-        "size": 4086203,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-ios12-arm64-v1.7.4.1.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-ios9-armv7-v1.7.4.1.ipa",
-        "size": 5065970,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-ios9-armv7-v1.7.4.1.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-ios9-armv7s-v1.7.4.1.ipa",
-        "size": 4911530,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-ios9-armv7s-v1.7.4.1.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz",
-        "size": 5106289,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-i386.tar.gz",
-        "size": 5229021,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u14.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz",
-        "size": 6084962,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-armhf.tar.gz",
-        "size": 4942553,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-armhf.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-i386.tar.gz",
-        "size": 6167639,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u16.04-i386.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz",
-        "size": 6077029,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u18.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz",
-        "size": 5418443,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz",
-        "size": 6011658,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-armhf.tar.gz",
-        "size": 4923717,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u20.04-armhf.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-aarch64.tar.gz",
-        "size": 5441342,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-aarch64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz",
-        "size": 6027094,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u22.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz",
-        "size": 6102715,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-linux-generic-u24.04-amd64.tar.gz",
-        "content_type": "application/gzip"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-win-arm64.7z",
-        "size": 2763172,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-win-arm64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-win32.7z",
-        "size": 4680339,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-win32.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-plain-runtime-v1.7.4.1-win64.7z",
-        "size": 4664990,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-plain-runtime-v1.7.4.1-win64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-sdl2-src-for-wii-v1.7.4.1.zip",
-        "size": 5123894,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-sdl2-src-for-wii-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-sdl2-wiiu-v1.7.4.1.zip",
-        "size": 4986388,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-sdl2-wiiu-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-smbx13-assets-full-v1.7.4.1.7z",
-        "size": 35103458,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-smbx13-assets-full-v1.7.4.1.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "thextech-switch-v1.7.4.1.zip",
-        "size": 6393774,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-switch-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-tvos-arm64-v1.7.4.1.ipa",
-        "size": 4948736,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-tvos-arm64-v1.7.4.1.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "thextech-vita-v1.7.4.1.zip",
-        "size": 4771727,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-vita-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wii-assets-aod-v1.7.4.1.zip",
-        "size": 21930995,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wii-assets-aod-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wii-assets-smbx13-v1.7.4.1.zip",
-        "size": 29820242,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wii-assets-smbx13-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wii-v1.7.4.1.zip",
-        "size": 3618074,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wii-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wiiu-v1.7.4.1.zip",
-        "size": 11464590,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wiiu-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "thextech-wiki-docs-v1.7.4.1.zip",
-        "size": 5319045,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/thextech-wiki-docs-v1.7.4.1.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "VC_redist.arm64.exe",
-        "size": 7029640,
-        "download_url": "https://github.com/TheXTech/TheXTech/releases/download/v1.7.4.1/VC_redist.arm64.exe",
-        "content_type": "application/x-msdownload"
-      }
-    ],
-    "author": "Wohlstand",
-    "homebrew_name": "TheXTech",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Super Mario Bros X for PSVITA.",
-    "homebrew_long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).\n\n- PsVitaAlive -",
-    "homebrew_id": "thextech",
-    "homebrew_authors": [
-      "thextech-team"
-    ],
-    "homebrew_version": "v.1.3.7.3-1",
-    "catalog_apps": [
-      {
-        "id": "thextech",
-        "name": "TheXTech",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0727-thextech.png",
-        "category": "ports",
-        "description": "Port of Super Mario Bros X for PSVITA.",
-        "long_description": "Port of an old VB6 engine, purely written in C++. It completely reproduces the old SMBX 1.3 engine (aside from it's Editor), includes many of its logical bugs (critical bugs that lead the game to crash or freeze got fixed).\n\n- PsVitaAlive -",
-        "version": "v.1.3.7.3-1",
-        "version_date": "2025-06-14",
-        "author_ids": [
-          "thextech-team"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.3.7.3-1 → release v1.7.4.1",
-    "catalog_version": "v.1.3.7.3-1"
   },
   {
     "platform": "github",
@@ -17487,55 +17166,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.00",
     "catalog_version": "v.1.00"
-  },
-  {
-    "platform": "github",
-    "repo": "TheLostPantheon/ArxLibertatis",
-    "release_id": "287089697",
-    "tag": "v1.003",
-    "name": "Arx Libertatis - PS Vita 1.003",
-    "url": "https://github.com/TheLostPantheon/ArxLibertatis/releases/tag/v1.003",
-    "published": "2026-02-17T05:37:08Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "**Additional Improvements and Fixes**\r\n\r\n- Multi Language Support\r\n- Performance Flags for VitaGl recommended by Rinnegatamante\r\n- Settings Menu Background fix/icon fix\r\n- MiniMap character position Fix\r\n\r\n**Additional Vita Options**\r\n- Toggle Magic Option\r\n- Lock Fps option",
-    "assets": [
-      {
-        "name": "arx.vpk",
-        "size": 3586848,
-        "download_url": "https://github.com/TheLostPantheon/ArxLibertatis/releases/download/v1.003/arx.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "TheLostPantheon",
-    "homebrew_name": "Arx Libertatis",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-arx-libertatis/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Arx Fatalis to PSVita.",
-    "homebrew_id": "arx-libertatis",
-    "homebrew_authors": [
-      "kingtorro"
-    ],
-    "catalog_apps": [
-      {
-        "id": "arx-libertatis",
-        "name": "Arx Libertatis",
-        "icon": "https://archive.org/download/psvitaalive-arx-libertatis/icon0.png",
-        "category": "ports",
-        "description": "Port of Arx Fatalis to PSVita.",
-        "long_description": "Arx Libertatis is an open-source reimplementation of the Arx Fatalis engine, ported to PS Vita via vitaGL. Explore the dungeons of Arx as you fight, sneak, and cast your way through a full-length RPG with an immersive underground world.\n\n- PsVitaAlive -",
-        "version": "v.1.003",
-        "version_date": "2026-02-17",
-        "author_ids": [
-          "kingtorro"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Arx Libertatis is an open-source reimplementation of the Arx Fatalis engine, ported to PS Vita via vitaGL. Explore the dungeons of Arx as you fight, sneak, and cast your way through a full-length RPG with an immersive underground world.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.003",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.003",
-    "catalog_version": "v.1.003"
   },
   {
     "platform": "github",
@@ -33134,211 +32764,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.4",
     "catalog_version": "v.1.4"
-  },
-  {
-    "platform": "github",
-    "repo": "MDashK/cook-serve-delicious-vita",
-    "release_id": "51110661",
-    "tag": "v1.0.0",
-    "name": "v1.0.0",
-    "url": "https://github.com/MDashK/cook-serve-delicious-vita/releases/tag/v1.0.0",
-    "published": "2021-10-11T00:41:23Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Please make sure you follow the instructions present in the ReadMe file.\r\nDon't forget to download both the files (VPK and ZIP package).\r\n**Only the Steam version of the game is supported with the provided patch.**\r\nWhen in doubt, make sure to check the hash of the files to guarantee the files are correct.",
-    "assets": [
-      {
-        "name": "CookServeDelicious-PSVita-Patch.zip",
-        "size": 61755444,
-        "download_url": "https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CookServeDelicious-PSVita-Patch.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "CSDLICIUS.VPK",
-        "size": 3189944,
-        "download_url": "https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CSDLICIUS.VPK",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MDashK",
-    "homebrew_name": "Cook, Serve, Delicious! Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-cook-serve-delicious-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Cook, Serve, Delicious! for PSVITA.",
-    "homebrew_long_description": "Cook, Serve, Delicious is a hardcore restaurant sim, one of the few in its genre that gives the players total control over where they want to take their restaurant.\nThe game centers on an old, worn down restaurant in the SherriSoda Tower, which was once the heart of the building but closed down as business (and tenants) dropped to an all time low. But with the local economy rising back up and occupancy reaching its maximum, SherriSoda Tower has decided to bring back the old Cook, Serve, Delicious restaurant, and has given you complete control to bring it back to its old five star status of world class dining.\nInstructions on how to patch and install the game provided in the release page (Github).\n\n- PsVitaAlive -",
-    "homebrew_id": "cook-serve-delicious-vita",
-    "homebrew_authors": [
-      "mdashk"
-    ],
-    "homebrew_version": "v.1.0.0",
-    "catalog_apps": [
-      {
-        "id": "cook-serve-delicious-vita",
-        "name": "Cook, Serve, Delicious! Vita",
-        "icon": "https://archive.org/download/psvitaalive-cook-serve-delicious-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Cook, Serve, Delicious! for PSVITA.",
-        "long_description": "Cook, Serve, Delicious is a hardcore restaurant sim, one of the few in its genre that gives the players total control over where they want to take their restaurant.\nThe game centers on an old, worn down restaurant in the SherriSoda Tower, which was once the heart of the building but closed down as business (and tenants) dropped to an all time low. But with the local economy rising back up and occupancy reaching its maximum, SherriSoda Tower has decided to bring back the old Cook, Serve, Delicious restaurant, and has given you complete control to bring it back to its old five star status of world class dining.\nInstructions on how to patch and install the game provided in the release page (Github).\n\n- PsVitaAlive -",
-        "version": "v.1.0.0",
-        "version_date": "2021-10-11",
-        "author_ids": [
-          "mdashk"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0",
-    "catalog_version": "v.1.0.0"
-  },
-  {
-    "platform": "github",
-    "repo": "frangarcj/ff5_vita",
-    "release_id": "51049578",
-    "tag": "v1.0",
-    "name": "Final Fantasy V Vita 1.0",
-    "url": "https://github.com/frangarcj/ff5_vita/releases/tag/v1.0",
-    "published": "2021-10-08T16:57:11Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Initial Release",
-    "assets": [
-      {
-        "name": "FF5.vpk",
-        "size": 16548837,
-        "download_url": "https://github.com/frangarcj/ff5_vita/releases/download/v1.0/FF5.vpk",
-        "content_type": "binary/octet-stream"
-      }
-    ],
-    "author": "frangarcj",
-    "homebrew_name": "FF5-Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-ff5-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Final Fantasy V for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Final Fantasy V Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\n\n- PsVitaAlive -",
-    "homebrew_id": "ff5-vita",
-    "homebrew_authors": [
-      "frangarcj",
-      "rinnegatamante",
-      "theflow"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "ff5-vita",
-        "name": "FF5-Vita",
-        "icon": "https://archive.org/download/psvitaalive-ff5-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Final Fantasy V for PSVITA.",
-        "long_description": "This is a wrapper/port of Final Fantasy V Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2021-10-08",
-        "author_ids": [
-          "frangarcj",
-          "rinnegatamante",
-          "theflow"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "Electry/nfshp_vita",
-    "release_id": "50701627",
-    "tag": "v1.0",
-    "name": "v1.0",
-    "url": "https://github.com/Electry/nfshp_vita/releases/tag/v1.0",
-    "published": "2021-10-03T15:50:10Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "NFSHP.vpk",
-        "size": 1728466,
-        "download_url": "https://github.com/Electry/nfshp_vita/releases/download/v1.0/NFSHP.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Electry",
-    "homebrew_name": "NFSHP Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-nfshp-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Need for Speed: Hot Pursuit for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Need for Speed: Hot Pursuit Android for the PS Vita.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run.\n\n- PsVitaAlive -",
-    "homebrew_id": "nfshp-vita",
-    "homebrew_authors": [
-      "electry"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "nfshp-vita",
-        "name": "NFSHP Vita",
-        "icon": "https://archive.org/download/psvitaalive-nfshp-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Need for Speed: Hot Pursuit for PSVITA.",
-        "long_description": "This is a wrapper/port of Need for Speed: Hot Pursuit Android for the PS Vita.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2024-01-05",
-        "author_ids": [
-          "electry"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "suicvne/SpaceCadetPinball_Vita",
-    "release_id": "50359662",
-    "tag": "Release_1.1.1_VitaBuild_2",
-    "name": "Release_1.1.1_VitaBuild_2",
-    "url": "https://github.com/suicvne/SpaceCadetPinball_Vita/releases/tag/Release_1.1.1_VitaBuild_2",
-    "published": "2021-09-28T22:10:28Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This is the second public Vita Build of 3D Space Cadet Pinball (from Win95/98/XP originally).\r\nBy me, this build will be referred to as \"Vita Build 2\" or VB2.\r\n\r\n**NOTICE**\r\nIn order for the game to run, you will need to place your legally obtained data files from your preferred version of Windows into \r\n```\r\nux0:data/SpaceCadetPinball\r\n```\r\n\r\nAll the MIDI files and sound config files should be copied.\r\n\r\nThis version changes the following:\r\n\r\n```\r\n- Rip out SDL_Mixer in favor or SDL_Mixer_X (by Wohlstand: https://github.com/WohlSoft/SDL-Mixer-X)\r\n   - TODO: Fully switch license to GPLv3 & ensure licenses are visible in app. \r\n- Update ImGui implementation to latest version\r\n- Allow ImGui SDL renderer to create and destroy font textures (adding support for custom fonts)\r\n- Fix MIDI Loading by initializing SDL_Mixer with proper MIDI flags. \r\n- Added custom Win95 style including SIL Open Font W95FA by FontsArena (https://fontsarena.com/w95fa-by-fontsarena/)\r\n   - Please leave suggestions for further themes, I would love to add the options! \r\n- Add new menu for switching MIDI Device Emulator on-the-fly between libADLMIDI and libOPNMIDI\r\n  - Also adds menus for switching libADLMIDI emulator and sound banks (again, on the fly!). There are at least 78 sound banks to choose from. \r\n  - All of these new options are saved and remembered as part of the game's native saving system.\r\n- Bind DPad Left and Right to table bump left/right\r\n- Bind DPad down to table bump down. \r\n- Attempt to add a short button delay to avoid menu chaos on the Vita\r\n```\r\n![2021-09-28-180856](https://user-images.githubusercontent.com/861492/135172515-1937e332-77fd-407d-a5e3-39af1b2f019e.jpg)\r\n![2021-09-28-180617](https://user-images.githubusercontent.com/861492/135172535-5536bb8f-87e9-4a4c-b738-8b29add59776.jpg)\r\n![2021-09-28-180639](https://user-images.githubusercontent.com/861492/135172521-15b6f54a-af34-4751-8967-ecda240f55a0.jpg)\r\n\r\n\r\n",
-    "assets": [
-      {
-        "name": "SpaceCadetPinballVita_VB2.vpk",
-        "size": 2773484,
-        "download_url": "https://github.com/suicvne/SpaceCadetPinball_Vita/releases/download/Release_1.1.1_VitaBuild_2/SpaceCadetPinballVita_VB2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "suicvne",
-    "homebrew_name": "Space Cadet Pinball Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-space-cadet-pinball-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Space Cadet for PSVITA.",
-    "homebrew_long_description": "Port of Space Cadet, popular pinball game bundled with Windows XP.\n\n- PsVitaAlive -",
-    "homebrew_id": "space-cadet-pinball-vita",
-    "homebrew_authors": [
-      "axiom"
-    ],
-    "homebrew_version": "v.1.1.1-VB2",
-    "catalog_apps": [
-      {
-        "id": "space-cadet-pinball-vita",
-        "name": "Space Cadet Pinball Vita",
-        "icon": "https://archive.org/download/psvitaalive-space-cadet-pinball-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Space Cadet for PSVITA.",
-        "long_description": "Port of Space Cadet, popular pinball game bundled with Windows XP.\n\n- PsVitaAlive -",
-        "version": "v.1.1.1-VB2",
-        "version_date": "2021-09-29",
-        "author_ids": [
-          "axiom"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.1.1-VB2 → release Release_1.1.1_VitaBuild_2",
-    "catalog_version": "v.1.1.1-VB2"
   }
 ]
