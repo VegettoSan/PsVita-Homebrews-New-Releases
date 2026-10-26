@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">392</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>482</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">391</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>91</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>474</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,167 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="deltarune vita deltarune vita wolffsroom/deltarunevita deltarune vita v0.79 (internal development build) v0.79 ports &lt;img src=&quot;https://deltarune.wiki/images/friend_overworld_vision.gif?cb=exya2v&amp;h=thumb.php&amp;f=friend_overworld_vision.gif&quot; alt=&quot;friend overworld&quot; width=&quot;120&quot;&gt;
+
+&gt; [!warning]
+&gt; this is an internal development pre-release, not a release candidate. bugs, visual differences, performance drops, freezes, and gpu crashes may still occur on real hardware.
+
+**included build: v0.79-1.** this release merges the public vitagl line with the native gxm work that was tested privately after v0.78 (builds v0.78-12 to v0.78-16). the previous development release was [v0.78](https://github.com/wolffsroom/deltarunevita/releases/tag/v0.78).
+
+## highlights
+
+### native gxm stability
+
+* fixed the gpu crashes on room changes in chapters 2, 3 and 5. deleted textures were released after four nanovg flushes instead of four presented frames, so borders and atlases replaced on room entry could be freed while the gpu was still sampling them.
+* the main thread now has a 4 mib stack (gml calls run recursively), and the c heap stays at 128 mib so textures and surfaces keep enough memory.
+* `draw_primitive_*`, vertex colours, textured primitives and `vertex_submit` are implemented. the chapter 3 videogame minigame no longer aborts with c2-12828-1. other unsupported states are logged and skipped instead of closing the game.
+* alpha-only write masks are expressed with equivalent blend factors, and the application surface is made opaque before it is shown, as gamemaker does. this fixes the black wall in the chapter 3 green room.
+* surfaces may be up to 4096 px per side.
+
+### native gxm features now matching vitagl
+
+* the per-room deltarune rules that only existed in the vitagl runner now also run on gxm: the spanish translation no longer shows a black screen, and the flowey tower and castle reflections use the reduced update cadence.
+* atlases load from the shared `texture-cache` (`.r444`). when a chapter has no cache yet, it is generated once, with the loading screen and progress bar, before gameplay starts. `gxm-r444-cache.txt` containing `0` disables the cache for testing.
+* native (np) trophies, the in-game trophy popup, screen filters (scanlines, sharp bilinear, dithering, vhs), collision masks with the object inspector, debug dev captures in `devlogs/chapter n/` and the &quot;new diagnostic log&quot; archive work on gxm.
+* playstation button prompts, left-stick movement, the game over &quot;give up&quot; exit and vitagl&#x27;s border rules (no border before the chapter menu, on menus or on game over).
+* the chapter 3 board camera grayscale effect (`shd_grayscalesand`) has a native shader.
+* text line spacing, `\r\n` handling, font scale and ascender offset follow the gl renderers. snapshots of surfaces keep their colours (no pink text in the chapter 0 transition), and the opening video uses five decoder buffers.
+* new diagnostics in `native-gxm-probe.log`: a stall watchdog, memory telemetry, room entry and first-frame costs, draw-time breakdown and blend variants.
+
+### chapter 5
+
+* `global.opti_mode` is seeded when a save is loaded past the cliffs, so the final battle no longer skips the tower&#x27;s draw path.
+
+### known issues
+
+* the flowey tower can still be invisible on native gxm, and changing scenery in the final battle still drops frames.
+* music may not resume after some chapter 1 battles on native gxm.
+* some rooms run below the fps target on native gxm (chapter 3 ranking hub and minigames, chapter 4 `room_dw_castle_tv`).
+
+## installation
+
+1. install `deltarune-v0.79.internal-build-test.vpk` with vitashell.
+2. keep your prepared game data in `ux0:data/deltarune/deltarunevita/`.
+3. choose vitagl or native gxm in game settings → graphics → graphics api.
+
+## testing / bug reports
+
+please include `ux0:data/deltarune/deltarunevita/native-gxm-probe.log` (gxm), `butterscotch-probe.log`, any `psp2core-*.psp2dmp`, the chapter and the room name.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-deltarune-vita/icon0.png" alt="Icono de Deltarune Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · WolffsRoom/DeltaruneVita</div>
+                      <h2><a href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.79" target="_blank" rel="noopener">Deltarune Vita</a></h2>
+                      <div class="release-name">Deltarune Vita v0.79 (Internal Development Build)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.79</span>
+                    <span>2026-10-26 04:06 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.69</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.69 → release v0.79</div>
+                  
+                  <div class="body markdown-body"><img src="https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&amp;h=thumb.php&amp;f=FRIEND_overworld_vision.gif" alt="Friend Overworld" width="120">
+
+<blockquote>
+<p>[!WARNING]
+This is an internal development pre-release, not a release candidate. Bugs, visual differences, performance drops, freezes, and GPU crashes may still occur on real hardware.</p>
+</blockquote>
+<p><strong>Included build: v0.79-1.</strong> This release merges the public VitaGL line with the Native GXM work that was tested privately after v0.78 (builds v0.78-12 to v0.78-16). The previous development release was <a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.78">v0.78</a>.</p>
+<h2>Highlights</h2>
+<h3>Native GXM stability</h3>
+<ul>
+<li>Fixed the GPU crashes on room changes in Chapters 2, 3 and 5. Deleted textures were released after four NanoVG flushes instead of four presented frames, so borders and atlases replaced on room entry could be freed while the GPU was still sampling them.</li>
+<li>The main thread now has a 4 MiB stack (GML calls run recursively), and the C heap stays at 128 MiB so textures and surfaces keep enough memory.</li>
+<li><code>draw_primitive_*</code>, vertex colours, textured primitives and <code>vertex_submit</code> are implemented. The Chapter 3 videogame minigame no longer aborts with C2-12828-1. Other unsupported states are logged and skipped instead of closing the game.</li>
+<li>Alpha-only write masks are expressed with equivalent blend factors, and the application surface is made opaque before it is shown, as GameMaker does. This fixes the black wall in the Chapter 3 green room.</li>
+<li>Surfaces may be up to 4096 px per side.</li>
+</ul>
+<h3>Native GXM features now matching VitaGL</h3>
+<ul>
+<li>The per-room DELTARUNE rules that only existed in the VitaGL runner now also run on GXM: the Spanish translation no longer shows a black screen, and the Flowey tower and castle reflections use the reduced update cadence.</li>
+<li>Atlases load from the shared <code>texture-cache</code> (<code>.r444</code>). When a chapter has no cache yet, it is generated once, with the loading screen and progress bar, before gameplay starts. <code>gxm-r444-cache.txt</code> containing <code>0</code> disables the cache for testing.</li>
+<li>Native (NP) trophies, the in-game trophy popup, screen filters (Scanlines, Sharp Bilinear, Dithering, VHS), collision masks with the object inspector, Debug DEV captures in <code>devlogs/chapter N/</code> and the &quot;New diagnostic log&quot; archive work on GXM.</li>
+<li>PlayStation button prompts, left-stick movement, the Game Over &quot;Give up&quot; exit and VitaGL's border rules (no border before the chapter menu, on menus or on Game Over).</li>
+<li>The Chapter 3 board camera grayscale effect (<code>shd_grayscalesand</code>) has a native shader.</li>
+<li>Text line spacing, <code>\r\n</code> handling, font scale and ascender offset follow the GL renderers. Snapshots of surfaces keep their colours (no pink text in the Chapter 0 transition), and the opening video uses five decoder buffers.</li>
+<li>New diagnostics in <code>native-gxm-probe.log</code>: a stall watchdog, memory telemetry, room entry and first-frame costs, draw-time breakdown and blend variants.</li>
+</ul>
+<h3>Chapter 5</h3>
+<ul>
+<li><code>global.opti_mode</code> is seeded when a save is loaded past the cliffs, so the final battle no longer skips the tower's draw path.</li>
+</ul>
+<h3>Known issues</h3>
+<ul>
+<li>The Flowey tower can still be invisible on Native GXM, and changing scenery in the final battle still drops frames.</li>
+<li>Music may not resume after some Chapter 1 battles on Native GXM.</li>
+<li>Some rooms run below the FPS target on Native GXM (Chapter 3 ranking hub and minigames, Chapter 4 <code>room_dw_castle_tv</code>).</li>
+</ul>
+<h2>Installation</h2>
+<ol>
+<li>Install <code>Deltarune-v0.79.Internal-Build-Test.vpk</code> with VitaShell.</li>
+<li>Keep your prepared game data in <code>ux0:data/deltarune/deltarunevita/</code>.</li>
+<li>Choose VitaGL or Native GXM in Game Settings → Graphics → Graphics API.</li>
+</ol>
+<h2>Testing / bug reports</h2>
+<p>Please include <code>ux0:data/deltarune/deltarunevita/native-gxm-probe.log</code> (GXM), <code>butterscotch-probe.log</code>, any <code>psp2core-*.psp2dmp</code>, the chapter and the room name.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.79/Deltarune-v0.79.Internal-Build-Test.vpk" target="_blank" rel="noopener">⬇ Deltarune-v0.79.Internal-Build-Test.vpk · 8.1 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.79/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 106.0 B</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.4 1.3.4 ports - fixes the crash when entering a shop or the safe house after a long session (#23): the game has 32 mb more memory.
+- the flickering of buildings at fixed spots of the map, such as diamond &amp; union, is much less noticeable.
+- better frame rate in races: the car lighting is shared better between the cpu cores.
+- prevents a crash in the sound code that could happen when a police car appears in a race.
+- if the game freezes for 20 seconds, it now closes itself and leaves a crash file (`psp2core` in `ux0:data/`). if that happens, please attach it to an issue together with `ux0:data/nfsmw/nfsmw.log`.
+
+**tip:** the game runs noticeably better with the cpu at 500 mhz using an overclocking plugin. it drains the battery faster and makes the vita run warmer; see the readme.
+
+## updating from 1.3.3
+
+no new game files are needed. install the new `nfsmw.vpk`.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.4" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.3.4</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.3.4</span>
+                    <span>2026-10-26 02:31 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.3.4</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Fixes the crash when entering a shop or the safe house after a long session (#23): the game has 32 MB more memory.</li>
+<li>The flickering of buildings at fixed spots of the map, such as Diamond &amp; Union, is much less noticeable.</li>
+<li>Better frame rate in races: the car lighting is shared better between the CPU cores.</li>
+<li>Prevents a crash in the sound code that could happen when a police car appears in a race.</li>
+<li>If the game freezes for 20 seconds, it now closes itself and leaves a crash file (<code>psp2core</code> in <code>ux0:data/</code>). If that happens, please attach it to an issue together with <code>ux0:data/nfsmw/nfsmw.log</code>.</li>
+</ul>
+<p><strong>Tip:</strong> the game runs noticeably better with the CPU at 500 MHz using an overclocking plugin. It drains the battery faster and makes the Vita run warmer; see the README.</p>
+<h2>Updating from 1.3.3</h2>
+<p>No new game files are needed. Install the new <code>nfsmw.vpk</code>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.4/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 4.4 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="vitadb downloader vitadb downloader rinnegatamante/vitadb-downloader v.2.8 v.2.8 utilities - severely improved download times by optimizing ssl cryptographic resolutions and fine-tuning download buffer sizes. (up to 2x faster)
 - replaced vibecoded apps icon with a robot icon.
 - severely reduced booting times with several optimizations in hot paths of the app and caching repeated calculations where possible.
@@ -1486,43 +1647,6 @@ updating keeps your saves and settings. on 1.0.0-1.2.0 the game offers this upda
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.4-beta1 1.3.4-beta1 ports test build for #23 (crash when entering a shop or jumping to the safe house after a long session).
-
-- everything in 1.3.3.
-- the game&#x27;s memory heap grows from 224 mb to 256 mb, taken from graphics memory that was never used. a long session could run out of memory when entering a shop.
-
-no new game files are needed.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.4-beta1" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.3.4-beta1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.3.4-beta1</span>
-                    <span>2026-10-24 02:27 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.3.4-beta1</div>
-                  
-                  <div class="body markdown-body"><p>Test build for #23 (crash when entering a shop or jumping to the safe house after a long session).</p>
-<ul>
-<li>Everything in 1.3.3.</li>
-<li>The game's memory heap grows from 224 MB to 256 MB, taken from graphics memory that was never used. A long session could run out of memory when entering a shop.</li>
-</ul>
-<p>No new game files are needed.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.4-beta1/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 4.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="wonder boy: the dragon&#x27;s trap wonder boy: the dragon&#x27;s trap cynostial/wonderboy-vita wonder boy: the dragon&#x27;s trap - vita 0.35-rc1 v0.35-rc1 ports unofficial playstation vita port of **wonder boy: the dragon&#x27;s trap**, based on the android armv7 version.
 
 download **wonderboy-vita-0.35-rc1.zip** below. it contains the vita application, logo, and license notices. installation instructions are in the [readme](https://github.com/cynostial/wonderboy-vita/blob/v0.35-rc1/readme.md). github&#x27;s automatic source archives are for development.
@@ -2501,163 +2625,6 @@ to make the performance monitoring more enjoyable, i build a fresh one from the 
 <p>To make the performance monitoring more enjoyable, I build a fresh one from the ground up. You can activate it either in the video settings or cycle all overlay modes by pressing L+R+Select</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9e/ladxhd-vita-importer-2.0.9e-macos-universal.zip" target="_blank" rel="noopener">⬇ ladxhd-vita-importer-2.0.9e-macos-universal.zip · 51.8 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9e/ladxhd-vita-importer-2.0.9e-linux-arm64.tar.gz" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9e-linux-arm64.tar.gz · 27.8 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9e/ladxhd-vita-importer-2.0.9e-linux-x86_64.tar.gz" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9e-linux-x86_64.tar.gz · 28.4 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9e/ladxhd-vita-importer-2.0.9e-windows-arm64.zip" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9e-windows-arm64.zip · 25.1 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9e/ladxhd-vita-importer-2.0.9e-windows-x86_64.zip" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9e-windows-x86_64.zip · 31.1 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9e/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 566.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="deltarune vita deltarune vita wolffsroom/deltarunevita deltarune vita v0.78 (internal development build) v0.78 ports &lt;img src=&quot;https://deltarune.wiki/images/friend_overworld_vision.gif?cb=exya2v&amp;h=thumb.php&amp;f=friend_overworld_vision.gif&quot; alt=&quot;friend overworld&quot; width=&quot;120&quot;&gt;
-
-&gt; [!warning]
-&gt; this is an internal development pre-release, not a release candidate. bugs, visual differences, performance drops, freezes, and gpu crashes may still occur on real hardware.
-
-this release consolidates the internal v0.76 and v0.77 development lines and the current v0.78 work. the last public development release was [v0.75](https://github.com/wolffsroom/deltarunevita/releases/tag/v0.75).
-
-## highlights
-
-### v0.76 - automatic renderer and gpu fallbacks
-
-* added **automatic** as the default renderer policy. chapter 3 selects the proven legacy-gl backend because round 2 repeatedly gpu-crashed under modern-gl; the other chapters retain modern-gl and its wider shader support.
-* kept chapter 3 shaders available outside the affected path while adding room-specific rgba uploads, shader fallbacks, resident pages, frame-boundary eviction, and transition barriers for the gameshow/board rooms.
-* hardened modern-gl texture, surface, uniform, and retired-resource lifetime management across room changes and room navigator jumps.
-* preserved the v0.75 bc3/dxt5 work, garden/flowey fixes, border cleanup, and chapter 5 video support while continuing to tune memory limits from hardware logs.
-
-### v0.77 - experimental-gl, chapter fixes, and loading
-
-#### renderer and settings
-
-* added **experimental-gl**, an opt-in mode that keeps legacy-gl&#x27;s stable texture, surface, batching, and lifetime paths while enabling an audited programmable shader bridge. unsupported or failed effects fall back to the regular textured path.
-* expanded the game settings descriptions, renderer diagnostics, fps policies, texture profiles, screen filters, and restart handling.
-* improved 30 fps pacing so a late vblank does not add an extra 16.7 ms delay to the software deadline.
-
-#### chapters 2–5
-
-* chapter 2 mansion transitions now reserve room for large surfaces and trim their texture working set before memory-heavy doors.
-* chapter 3 received centered minigame composition, reduced redundant monitor copies, corrected quiz palettes, rhythm input/audio-clock fixes, safer round 2 loading, faster battle entry, finale border rules, visible music prompts and knight attacks, and shorter checkpoint retries after defeat.
-* chapter 4 fountain/black-border rules and audited shader coverage were extended through the experimental bridge.
-* chapter 5 town shadows were restored in experimental-gl; castle town, cliffs, garden battles, flowey video, room navigator transitions, and the final battle received targeted memory and workload policies.
-* the final flowey tower keeps all structural layers visible and reuses its expensive composition at a reduced update cadence. garden petals, border fades, duplicated tp presentation, and missing scene textures received dedicated fixes.
-
-#### shared presentation and stability
-
-* battle dialogue glyphs now sample atlas texel centers, restoring the bottom pixel line in chapters 1–5.
-* chapter loading appears before trophy setup and `data.win` parsing instead of leaving a long black screen.
-* room changes synchronize and collect outgoing gpu resources at safe boundaries; recently reloaded atlases receive a short stability window to reduce eviction/reload loops.
-* returning to the chapter selector, entering borderless rooms, and scripted border changes now fade to black without leaking the previous room&#x27;s frame.
-
-### v0.78 - startup, livearea, and native gxm research
-
-* added the new 18-second opening video and converted it to the vita-compatible contract: h.264/avc constrained baseline level 3.1, 960×544 at 30 fps, `yuv420p`, and aac stereo at 48 khz. the last frame hold and fade-out remain active.
-* vitagrafix/vgi no longer disables video playback. the safety fallback is limited to usb audio/video capture plugins that directly compete with the hardware video path.
-* added early native validation for required game data and `libshacccg.suprx`, with readable diagnostics instead of silent startup failure.
-* updated the livearea icon, background, and startup image from the new asset set; the old `pic0` overlay is no longer included.
-* the chapter 0 footer and package version now report **v0.78**.
-
-## native gxm project
-
-v0.78 also started a separate **native gxm** renderer project intended to eventually replace vitagl. the laboratory uses `scegxm` directly, embedded gxp shaders, and a separate title id so it cannot overwrite the playable release.
-
-the research progressed from direct gxm presentation to the real butterscotch parser, vm, runner, texture pages, bitmap fonts, surfaces, audio, chapter switching, shader adaptations, and real chapter 0/3/5 scenes. the current gxm44 milestone focuses on rgba4444 alpha/color correctness and has hardware/emulator comparison captures.
-
-&gt; [!important]
-&gt; native gxm remains experimental and is **not** the renderer used by the attached playable vpk. it does not yet provide full visual, shader, video, performance, or chapter parity. the production build continues to use vitagl through automatic, legacy-gl, modern-gl, and experimental-gl.
-
-## installation
-
-1. install **`deltarune-v0.78.internal-build-test.vpk`** with vitashell. the internal build marker in `butterscotch-probe.log` should report **v0.78-4**.
-2. keep the prepared game data at `ux0:data/deltarune/deltarunevita/`.
-3. if the two chapter 5 videos are not already installed, use the existing **`deltarune-v0.75-chapter5-videos.zip`** from the [v0.75 pre-release](https://github.com/wolffsroom/deltarunevita/releases/tag/v0.75) and copy its `chapter5` directory into the data directory.
-4. install `libshacccg.suprx` at `ur0:data/libshacccg.suprx`. the game now reports this dependency clearly when it is absent.
-5. use `sha256sums.txt` to verify the download.
-
-## testing / bug reports
-
-report problems through the [issues page](https://github.com/wolffsroom/deltarunevita/issues). include the internal build, chapter, room, language, renderer, shader setting, and `butterscotch-probe.log`. attach the corresponding `.psp2dmp` for crashes or gpu crashes.
-
-_official commercial deltarune game data, music and chapter video files are not distributed with this release._">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-deltarune-vita/icon0.png" alt="Icono de Deltarune Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · WolffsRoom/DeltaruneVita</div>
-                      <h2><a href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.78" target="_blank" rel="noopener">Deltarune Vita</a></h2>
-                      <div class="release-name">Deltarune Vita v0.78 (Internal Development Build)</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.78</span>
-                    <span>2026-10-19 01:05 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.69</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.69 → release v0.78</div>
-                  
-                  <div class="body markdown-body"><img src="https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&amp;h=thumb.php&amp;f=FRIEND_overworld_vision.gif" alt="Friend Overworld" width="120">
-
-<blockquote>
-<p>[!WARNING]
-This is an internal development pre-release, not a release candidate. Bugs, visual differences, performance drops, freezes, and GPU crashes may still occur on real hardware.</p>
-</blockquote>
-<p>This release consolidates the internal v0.76 and v0.77 development lines and the current v0.78 work. The last public development release was <a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.75">v0.75</a>.</p>
-<h2>Highlights</h2>
-<h3>v0.76 - Automatic renderer and GPU fallbacks</h3>
-<ul>
-<li>Added <strong>Automatic</strong> as the default renderer policy. Chapter 3 selects the proven Legacy-GL backend because Round 2 repeatedly GPU-crashed under Modern-GL; the other chapters retain Modern-GL and its wider shader support.</li>
-<li>Kept Chapter 3 shaders available outside the affected path while adding room-specific RGBA uploads, shader fallbacks, resident pages, frame-boundary eviction, and transition barriers for the gameshow/board rooms.</li>
-<li>Hardened Modern-GL texture, surface, uniform, and retired-resource lifetime management across room changes and Room Navigator jumps.</li>
-<li>Preserved the v0.75 BC3/DXT5 work, Garden/Flowey fixes, border cleanup, and Chapter 5 video support while continuing to tune memory limits from hardware logs.</li>
-</ul>
-<h3>v0.77 - Experimental-GL, chapter fixes, and loading</h3>
-<h4>Renderer and settings</h4>
-<ul>
-<li>Added <strong>Experimental-GL</strong>, an opt-in mode that keeps Legacy-GL's stable texture, surface, batching, and lifetime paths while enabling an audited programmable shader bridge. Unsupported or failed effects fall back to the regular textured path.</li>
-<li>Expanded the Game Settings descriptions, renderer diagnostics, FPS policies, texture profiles, screen filters, and restart handling.</li>
-<li>Improved 30 FPS pacing so a late VBlank does not add an extra 16.7 ms delay to the software deadline.</li>
-</ul>
-<h4>Chapters 2–5</h4>
-<ul>
-<li>Chapter 2 Mansion transitions now reserve room for large surfaces and trim their texture working set before memory-heavy doors.</li>
-<li>Chapter 3 received centered minigame composition, reduced redundant monitor copies, corrected quiz palettes, rhythm input/audio-clock fixes, safer Round 2 loading, faster battle entry, finale border rules, visible music prompts and Knight attacks, and shorter checkpoint retries after defeat.</li>
-<li>Chapter 4 fountain/black-border rules and audited shader coverage were extended through the Experimental bridge.</li>
-<li>Chapter 5 Town shadows were restored in Experimental-GL; Castle Town, cliffs, Garden battles, Flowey video, Room Navigator transitions, and the final battle received targeted memory and workload policies.</li>
-<li>The final Flowey tower keeps all structural layers visible and reuses its expensive composition at a reduced update cadence. Garden petals, border fades, duplicated TP presentation, and missing scene textures received dedicated fixes.</li>
-</ul>
-<h4>Shared presentation and stability</h4>
-<ul>
-<li>Battle dialogue glyphs now sample atlas texel centers, restoring the bottom pixel line in Chapters 1–5.</li>
-<li>Chapter loading appears before trophy setup and <code>data.win</code> parsing instead of leaving a long black screen.</li>
-<li>Room changes synchronize and collect outgoing GPU resources at safe boundaries; recently reloaded atlases receive a short stability window to reduce eviction/reload loops.</li>
-<li>Returning to the chapter selector, entering borderless rooms, and scripted border changes now fade to black without leaking the previous room's frame.</li>
-</ul>
-<h3>v0.78 - startup, LiveArea, and Native GXM research</h3>
-<ul>
-<li>Added the new 18-second opening video and converted it to the Vita-compatible contract: H.264/AVC Constrained Baseline level 3.1, 960×544 at 30 FPS, <code>yuv420p</code>, and AAC stereo at 48 kHz. The last frame hold and fade-out remain active.</li>
-<li>VitaGrafix/VGi no longer disables video playback. The safety fallback is limited to USB audio/video capture plugins that directly compete with the hardware video path.</li>
-<li>Added early native validation for required game data and <code>libshacccg.suprx</code>, with readable diagnostics instead of silent startup failure.</li>
-<li>Updated the LiveArea icon, background, and startup image from the new asset set; the old <code>pic0</code> overlay is no longer included.</li>
-<li>The Chapter 0 footer and package version now report <strong>v0.78</strong>.</li>
-</ul>
-<h2>Native GXM project</h2>
-<p>v0.78 also started a separate <strong>Native GXM</strong> renderer project intended to eventually replace VitaGL. The laboratory uses <code>sceGxm</code> directly, embedded GXP shaders, and a separate Title ID so it cannot overwrite the playable release.</p>
-<p>The research progressed from direct GXM presentation to the real Butterscotch parser, VM, Runner, texture pages, bitmap fonts, surfaces, audio, chapter switching, shader adaptations, and real Chapter 0/3/5 scenes. The current GXM44 milestone focuses on RGBA4444 alpha/color correctness and has hardware/emulator comparison captures.</p>
-<blockquote>
-<p>[!IMPORTANT]
-Native GXM remains experimental and is <strong>not</strong> the renderer used by the attached playable VPK. It does not yet provide full visual, shader, video, performance, or chapter parity. The production build continues to use VitaGL through Automatic, Legacy-GL, Modern-GL, and Experimental-GL.</p>
-</blockquote>
-<h2>Installation</h2>
-<ol>
-<li>Install <strong><code>Deltarune-v0.78.Internal-Build-Test.vpk</code></strong> with VitaShell. The internal build marker in <code>butterscotch-probe.log</code> should report <strong>v0.78-4</strong>.</li>
-<li>Keep the prepared game data at <code>ux0:data/deltarune/deltarunevita/</code>.</li>
-<li>If the two Chapter 5 videos are not already installed, use the existing <strong><code>Deltarune-v0.75-Chapter5-Videos.zip</code></strong> from the <a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.75">v0.75 pre-release</a> and copy its <code>chapter5</code> directory into the data directory.</li>
-<li>Install <code>libshacccg.suprx</code> at <code>ur0:data/libshacccg.suprx</code>. The game now reports this dependency clearly when it is absent.</li>
-<li>Use <code>SHA256SUMS.txt</code> to verify the download.</li>
-</ol>
-<h2>Testing / bug reports</h2>
-<p>Report problems through the <a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita/issues">Issues page</a>. Include the internal build, chapter, room, language, renderer, shader setting, and <code>butterscotch-probe.log</code>. Attach the corresponding <code>.psp2dmp</code> for crashes or GPU crashes.</p>
-<p><em>Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release.</em></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.78/Deltarune-v0.78.Internal-Build-Test.vpk" target="_blank" rel="noopener">⬇ Deltarune-v0.78.Internal-Build-Test.vpk · 6.7 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.78/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 107.0 B</a></div>
                 </div>
               </div>
             </article>
@@ -27772,43 +27739,10 @@ When in doubt, make sure to check the hash of the files to guarantee the files a
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="cook, serve, delicious! vita cook, serve, delicious! vita mdashk/cook-serve-delicious-vita v1.0.0 v1.0.0 ports please make sure you follow the instructions present in the readme file.
-don&#x27;t forget to download both the files (vpk and zip package).
-**only the steam version of the game is supported with the provided patch.**
-when in doubt, make sure to check the hash of the files to guarantee the files are correct.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-cook-serve-delicious-vita/icon0.png" alt="Icono de Cook, Serve, Delicious! Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MDashK/cook-serve-delicious-vita</div>
-                      <h2><a href="https://github.com/MDashK/cook-serve-delicious-vita/releases/tag/v1.0.0" target="_blank" rel="noopener">Cook, Serve, Delicious! Vita</a></h2>
-                      <div class="release-name">v1.0.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.0</span>
-                    <span>2021-10-11 00:41 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.0</div>
-                  
-                  <div class="body markdown-body"><p>Please make sure you follow the instructions present in the ReadMe file.
-Don't forget to download both the files (VPK and ZIP package).
-<strong>Only the Steam version of the game is supported with the provided patch.</strong>
-When in doubt, make sure to check the hash of the files to guarantee the files are correct.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CSDLICIUS.VPK" target="_blank" rel="noopener">⬇ CSDLICIUS.VPK · 3.0 MB</a><a class="btn" href="https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CookServeDelicious-PSVita-Patch.zip" target="_blank" rel="noopener">CookServeDelicious-PSVita-Patch.zip · 58.9 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-26 02:31 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-26 08:20 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

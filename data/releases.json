@@ -1,6 +1,110 @@
 [
   {
     "platform": "github",
+    "repo": "WolffsRoom/DeltaruneVita",
+    "release_id": "423848718",
+    "tag": "v0.79",
+    "name": "Deltarune Vita v0.79 (Internal Development Build)",
+    "url": "https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.79",
+    "published": "2026-10-26T04:06:39Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "<img src=\"https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&h=thumb.php&f=FRIEND_overworld_vision.gif\" alt=\"Friend Overworld\" width=\"120\">\n\n> [!WARNING]\n> This is an internal development pre-release, not a release candidate. Bugs, visual differences, performance drops, freezes, and GPU crashes may still occur on real hardware.\n\n**Included build: v0.79-1.** This release merges the public VitaGL line with the Native GXM work that was tested privately after v0.78 (builds v0.78-12 to v0.78-16). The previous development release was [v0.78](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.78).\n\n## Highlights\n\n### Native GXM stability\n\n* Fixed the GPU crashes on room changes in Chapters 2, 3 and 5. Deleted textures were released after four NanoVG flushes instead of four presented frames, so borders and atlases replaced on room entry could be freed while the GPU was still sampling them.\n* The main thread now has a 4 MiB stack (GML calls run recursively), and the C heap stays at 128 MiB so textures and surfaces keep enough memory.\n* `draw_primitive_*`, vertex colours, textured primitives and `vertex_submit` are implemented. The Chapter 3 videogame minigame no longer aborts with C2-12828-1. Other unsupported states are logged and skipped instead of closing the game.\n* Alpha-only write masks are expressed with equivalent blend factors, and the application surface is made opaque before it is shown, as GameMaker does. This fixes the black wall in the Chapter 3 green room.\n* Surfaces may be up to 4096 px per side.\n\n### Native GXM features now matching VitaGL\n\n* The per-room DELTARUNE rules that only existed in the VitaGL runner now also run on GXM: the Spanish translation no longer shows a black screen, and the Flowey tower and castle reflections use the reduced update cadence.\n* Atlases load from the shared `texture-cache` (`.r444`). When a chapter has no cache yet, it is generated once, with the loading screen and progress bar, before gameplay starts. `gxm-r444-cache.txt` containing `0` disables the cache for testing.\n* Native (NP) trophies, the in-game trophy popup, screen filters (Scanlines, Sharp Bilinear, Dithering, VHS), collision masks with the object inspector, Debug DEV captures in `devlogs/chapter N/` and the \"New diagnostic log\" archive work on GXM.\n* PlayStation button prompts, left-stick movement, the Game Over \"Give up\" exit and VitaGL's border rules (no border before the chapter menu, on menus or on Game Over).\n* The Chapter 3 board camera grayscale effect (`shd_grayscalesand`) has a native shader.\n* Text line spacing, `\\r\\n` handling, font scale and ascender offset follow the GL renderers. Snapshots of surfaces keep their colours (no pink text in the Chapter 0 transition), and the opening video uses five decoder buffers.\n* New diagnostics in `native-gxm-probe.log`: a stall watchdog, memory telemetry, room entry and first-frame costs, draw-time breakdown and blend variants.\n\n### Chapter 5\n\n* `global.opti_mode` is seeded when a save is loaded past the cliffs, so the final battle no longer skips the tower's draw path.\n\n### Known issues\n\n* The Flowey tower can still be invisible on Native GXM, and changing scenery in the final battle still drops frames.\n* Music may not resume after some Chapter 1 battles on Native GXM.\n* Some rooms run below the FPS target on Native GXM (Chapter 3 ranking hub and minigames, Chapter 4 `room_dw_castle_tv`).\n\n## Installation\n\n1. Install `Deltarune-v0.79.Internal-Build-Test.vpk` with VitaShell.\n2. Keep your prepared game data in `ux0:data/deltarune/deltarunevita/`.\n3. Choose VitaGL or Native GXM in Game Settings → Graphics → Graphics API.\n\n## Testing / bug reports\n\nPlease include `ux0:data/deltarune/deltarunevita/native-gxm-probe.log` (GXM), `butterscotch-probe.log`, any `psp2core-*.psp2dmp`, the chapter and the room name.\n",
+    "assets": [
+      {
+        "name": "Deltarune-v0.79.Internal-Build-Test.vpk",
+        "size": 8504532,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.79/Deltarune-v0.79.Internal-Build-Test.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 106,
+        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.79/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      }
+    ],
+    "author": "WolffsRoom",
+    "homebrew_name": "Deltarune Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Deltarune for PSVita.",
+    "homebrew_long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.\n\n- PsVitaAlive -",
+    "homebrew_id": "deltarune-vita",
+    "homebrew_authors": [
+      "chatgpt-ai"
+    ],
+    "homebrew_version": "v.0.69",
+    "catalog_apps": [
+      {
+        "id": "deltarune-vita",
+        "name": "Deltarune Vita",
+        "icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Deltarune for PSVita.",
+        "long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.\n\n- PsVitaAlive -",
+        "version": "v.0.69",
+        "version_date": "2026-07-27",
+        "author_ids": [
+          "chatgpt-ai"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.79",
+    "catalog_version": "v.0.69"
+  },
+  {
+    "platform": "github",
+    "repo": "germanalvarez15/nfsmw-vita",
+    "release_id": "423804772",
+    "tag": "1.3.4",
+    "name": "1.3.4",
+    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.4",
+    "published": "2026-10-26T02:31:37Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Fixes the crash when entering a shop or the safe house after a long session (#23): the game has 32 MB more memory.\n- The flickering of buildings at fixed spots of the map, such as Diamond & Union, is much less noticeable.\n- Better frame rate in races: the car lighting is shared better between the CPU cores.\n- Prevents a crash in the sound code that could happen when a police car appears in a race.\n- If the game freezes for 20 seconds, it now closes itself and leaves a crash file (`psp2core` in `ux0:data/`). If that happens, please attach it to an issue together with `ux0:data/nfsmw/nfsmw.log`.\n\n**Tip:** the game runs noticeably better with the CPU at 500 MHz using an overclocking plugin. It drains the battery faster and makes the Vita run warmer; see the README.\n\n## Updating from 1.3.3\n\nNo new game files are needed. Install the new `nfsmw.vpk`.\n",
+    "assets": [
+      {
+        "name": "nfsmw.vpk",
+        "size": 4633195,
+        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.4/nfsmw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "germanalvarez15",
+    "homebrew_name": "NFS Most Wanted",
+    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+    "homebrew_id": "nfs-most-wanted",
+    "homebrew_authors": [
+      "germanalvarez15"
+    ],
+    "homebrew_version": "1.3.0",
+    "catalog_apps": [
+      {
+        "id": "nfs-most-wanted",
+        "name": "NFS Most Wanted",
+        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+        "category": "ports",
+        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+        "version": "1.3.0",
+        "version_date": "2026-10-20",
+        "author_ids": [
+          "germanalvarez15"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.3.4",
+    "catalog_version": "1.3.0"
+  },
+  {
+    "platform": "github",
     "repo": "Rinnegatamante/VitaDB-Downloader",
     "release_id": "423730531",
     "tag": "v.2.8",
@@ -1060,55 +1164,6 @@
   },
   {
     "platform": "github",
-    "repo": "germanalvarez15/nfsmw-vita",
-    "release_id": "422467186",
-    "tag": "1.3.4-beta1",
-    "name": "1.3.4-beta1",
-    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.4-beta1",
-    "published": "2026-10-24T02:27:50Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Test build for #23 (crash when entering a shop or jumping to the safe house after a long session).\n\n- Everything in 1.3.3.\n- The game's memory heap grows from 224 MB to 256 MB, taken from graphics memory that was never used. A long session could run out of memory when entering a shop.\n\nNo new game files are needed.\n",
-    "assets": [
-      {
-        "name": "nfsmw.vpk",
-        "size": 4627983,
-        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.4-beta1/nfsmw.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "germanalvarez15",
-    "homebrew_name": "NFS Most Wanted",
-    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-    "homebrew_id": "nfs-most-wanted",
-    "homebrew_authors": [
-      "germanalvarez15"
-    ],
-    "homebrew_version": "1.3.0",
-    "catalog_apps": [
-      {
-        "id": "nfs-most-wanted",
-        "name": "NFS Most Wanted",
-        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-        "category": "ports",
-        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-        "version": "1.3.0",
-        "version_date": "2026-10-20",
-        "author_ids": [
-          "germanalvarez15"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.3.0 → release 1.3.4-beta1",
-    "catalog_version": "1.3.0"
-  },
-  {
-    "platform": "github",
     "repo": "Cynostial/wonderboy-vita",
     "release_id": "421888815",
     "tag": "v0.35-rc1",
@@ -1864,61 +1919,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 2.0.9",
     "catalog_version": "2.0.9"
-  },
-  {
-    "platform": "github",
-    "repo": "WolffsRoom/DeltaruneVita",
-    "release_id": "416810111",
-    "tag": "v0.78",
-    "name": "Deltarune Vita v0.78 (Internal Development Build)",
-    "url": "https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.78",
-    "published": "2026-10-19T01:05:04Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "<img src=\"https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&h=thumb.php&f=FRIEND_overworld_vision.gif\" alt=\"Friend Overworld\" width=\"120\">\r\n\r\n> [!WARNING]\r\n> This is an internal development pre-release, not a release candidate. Bugs, visual differences, performance drops, freezes, and GPU crashes may still occur on real hardware.\r\n\r\nThis release consolidates the internal v0.76 and v0.77 development lines and the current v0.78 work. The last public development release was [v0.75](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.75).\r\n\r\n## Highlights\r\n\r\n### v0.76 - Automatic renderer and GPU fallbacks\r\n\r\n* Added **Automatic** as the default renderer policy. Chapter 3 selects the proven Legacy-GL backend because Round 2 repeatedly GPU-crashed under Modern-GL; the other chapters retain Modern-GL and its wider shader support.\r\n* Kept Chapter 3 shaders available outside the affected path while adding room-specific RGBA uploads, shader fallbacks, resident pages, frame-boundary eviction, and transition barriers for the gameshow/board rooms.\r\n* Hardened Modern-GL texture, surface, uniform, and retired-resource lifetime management across room changes and Room Navigator jumps.\r\n* Preserved the v0.75 BC3/DXT5 work, Garden/Flowey fixes, border cleanup, and Chapter 5 video support while continuing to tune memory limits from hardware logs.\r\n\r\n### v0.77 - Experimental-GL, chapter fixes, and loading\r\n\r\n#### Renderer and settings\r\n\r\n* Added **Experimental-GL**, an opt-in mode that keeps Legacy-GL's stable texture, surface, batching, and lifetime paths while enabling an audited programmable shader bridge. Unsupported or failed effects fall back to the regular textured path.\r\n* Expanded the Game Settings descriptions, renderer diagnostics, FPS policies, texture profiles, screen filters, and restart handling.\r\n* Improved 30 FPS pacing so a late VBlank does not add an extra 16.7 ms delay to the software deadline.\r\n\r\n#### Chapters 2–5\r\n\r\n* Chapter 2 Mansion transitions now reserve room for large surfaces and trim their texture working set before memory-heavy doors.\r\n* Chapter 3 received centered minigame composition, reduced redundant monitor copies, corrected quiz palettes, rhythm input/audio-clock fixes, safer Round 2 loading, faster battle entry, finale border rules, visible music prompts and Knight attacks, and shorter checkpoint retries after defeat.\r\n* Chapter 4 fountain/black-border rules and audited shader coverage were extended through the Experimental bridge.\r\n* Chapter 5 Town shadows were restored in Experimental-GL; Castle Town, cliffs, Garden battles, Flowey video, Room Navigator transitions, and the final battle received targeted memory and workload policies.\r\n* The final Flowey tower keeps all structural layers visible and reuses its expensive composition at a reduced update cadence. Garden petals, border fades, duplicated TP presentation, and missing scene textures received dedicated fixes.\r\n\r\n#### Shared presentation and stability\r\n\r\n* Battle dialogue glyphs now sample atlas texel centers, restoring the bottom pixel line in Chapters 1–5.\r\n* Chapter loading appears before trophy setup and `data.win` parsing instead of leaving a long black screen.\r\n* Room changes synchronize and collect outgoing GPU resources at safe boundaries; recently reloaded atlases receive a short stability window to reduce eviction/reload loops.\r\n* Returning to the chapter selector, entering borderless rooms, and scripted border changes now fade to black without leaking the previous room's frame.\r\n\r\n### v0.78 - startup, LiveArea, and Native GXM research\r\n\r\n* Added the new 18-second opening video and converted it to the Vita-compatible contract: H.264/AVC Constrained Baseline level 3.1, 960×544 at 30 FPS, `yuv420p`, and AAC stereo at 48 kHz. The last frame hold and fade-out remain active.\r\n* VitaGrafix/VGi no longer disables video playback. The safety fallback is limited to USB audio/video capture plugins that directly compete with the hardware video path.\r\n* Added early native validation for required game data and `libshacccg.suprx`, with readable diagnostics instead of silent startup failure.\r\n* Updated the LiveArea icon, background, and startup image from the new asset set; the old `pic0` overlay is no longer included.\r\n* The Chapter 0 footer and package version now report **v0.78**.\r\n\r\n## Native GXM project\r\n\r\nv0.78 also started a separate **Native GXM** renderer project intended to eventually replace VitaGL. The laboratory uses `sceGxm` directly, embedded GXP shaders, and a separate Title ID so it cannot overwrite the playable release.\r\n\r\nThe research progressed from direct GXM presentation to the real Butterscotch parser, VM, Runner, texture pages, bitmap fonts, surfaces, audio, chapter switching, shader adaptations, and real Chapter 0/3/5 scenes. The current GXM44 milestone focuses on RGBA4444 alpha/color correctness and has hardware/emulator comparison captures.\r\n\r\n> [!IMPORTANT]\r\n> Native GXM remains experimental and is **not** the renderer used by the attached playable VPK. It does not yet provide full visual, shader, video, performance, or chapter parity. The production build continues to use VitaGL through Automatic, Legacy-GL, Modern-GL, and Experimental-GL.\r\n\r\n## Installation\r\n\r\n1. Install **`Deltarune-v0.78.Internal-Build-Test.vpk`** with VitaShell. The internal build marker in `butterscotch-probe.log` should report **v0.78-4**.\r\n2. Keep the prepared game data at `ux0:data/deltarune/deltarunevita/`.\r\n3. If the two Chapter 5 videos are not already installed, use the existing **`Deltarune-v0.75-Chapter5-Videos.zip`** from the [v0.75 pre-release](https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.75) and copy its `chapter5` directory into the data directory.\r\n4. Install `libshacccg.suprx` at `ur0:data/libshacccg.suprx`. The game now reports this dependency clearly when it is absent.\r\n5. Use `SHA256SUMS.txt` to verify the download.\r\n\r\n## Testing / bug reports\r\n\r\nReport problems through the [Issues page](https://github.com/WolffsRoom/DeltaruneVita/issues). Include the internal build, chapter, room, language, renderer, shader setting, and `butterscotch-probe.log`. Attach the corresponding `.psp2dmp` for crashes or GPU crashes.\r\n\r\n_Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release._",
-    "assets": [
-      {
-        "name": "Deltarune-v0.78.Internal-Build-Test.vpk",
-        "size": 7045005,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.78/Deltarune-v0.78.Internal-Build-Test.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 107,
-        "download_url": "https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.78/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      }
-    ],
-    "author": "WolffsRoom",
-    "homebrew_name": "Deltarune Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Deltarune for PSVita.",
-    "homebrew_long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.\n\n- PsVitaAlive -",
-    "homebrew_id": "deltarune-vita",
-    "homebrew_authors": [
-      "chatgpt-ai"
-    ],
-    "homebrew_version": "v.0.69",
-    "catalog_apps": [
-      {
-        "id": "deltarune-vita",
-        "name": "Deltarune Vita",
-        "icon": "https://archive.org/download/psvitaalive-deltarune-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Deltarune for PSVita.",
-        "long_description": "An unofficial port of DELTARUNE Chapters 1-5 for the PlayStation Vita.\n\n- PsVitaAlive -",
-        "version": "v.0.69",
-        "version_date": "2026-07-27",
-        "author_ids": [
-          "chatgpt-ai"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.78",
-    "catalog_version": "v.0.69"
   },
   {
     "platform": "github",
@@ -32764,60 +32764,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.4",
     "catalog_version": "v.1.4"
-  },
-  {
-    "platform": "github",
-    "repo": "MDashK/cook-serve-delicious-vita",
-    "release_id": "51110661",
-    "tag": "v1.0.0",
-    "name": "v1.0.0",
-    "url": "https://github.com/MDashK/cook-serve-delicious-vita/releases/tag/v1.0.0",
-    "published": "2021-10-11T00:41:23Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Please make sure you follow the instructions present in the ReadMe file.\r\nDon't forget to download both the files (VPK and ZIP package).\r\n**Only the Steam version of the game is supported with the provided patch.**\r\nWhen in doubt, make sure to check the hash of the files to guarantee the files are correct.",
-    "assets": [
-      {
-        "name": "CookServeDelicious-PSVita-Patch.zip",
-        "size": 61755444,
-        "download_url": "https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CookServeDelicious-PSVita-Patch.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "CSDLICIUS.VPK",
-        "size": 3189944,
-        "download_url": "https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CSDLICIUS.VPK",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MDashK",
-    "homebrew_name": "Cook, Serve, Delicious! Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-cook-serve-delicious-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Cook, Serve, Delicious! for PSVITA.",
-    "homebrew_long_description": "Cook, Serve, Delicious is a hardcore restaurant sim, one of the few in its genre that gives the players total control over where they want to take their restaurant.\nThe game centers on an old, worn down restaurant in the SherriSoda Tower, which was once the heart of the building but closed down as business (and tenants) dropped to an all time low. But with the local economy rising back up and occupancy reaching its maximum, SherriSoda Tower has decided to bring back the old Cook, Serve, Delicious restaurant, and has given you complete control to bring it back to its old five star status of world class dining.\nInstructions on how to patch and install the game provided in the release page (Github).\n\n- PsVitaAlive -",
-    "homebrew_id": "cook-serve-delicious-vita",
-    "homebrew_authors": [
-      "mdashk"
-    ],
-    "homebrew_version": "v.1.0.0",
-    "catalog_apps": [
-      {
-        "id": "cook-serve-delicious-vita",
-        "name": "Cook, Serve, Delicious! Vita",
-        "icon": "https://archive.org/download/psvitaalive-cook-serve-delicious-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Cook, Serve, Delicious! for PSVITA.",
-        "long_description": "Cook, Serve, Delicious is a hardcore restaurant sim, one of the few in its genre that gives the players total control over where they want to take their restaurant.\nThe game centers on an old, worn down restaurant in the SherriSoda Tower, which was once the heart of the building but closed down as business (and tenants) dropped to an all time low. But with the local economy rising back up and occupancy reaching its maximum, SherriSoda Tower has decided to bring back the old Cook, Serve, Delicious restaurant, and has given you complete control to bring it back to its old five star status of world class dining.\nInstructions on how to patch and install the game provided in the release page (Github).\n\n- PsVitaAlive -",
-        "version": "v.1.0.0",
-        "version_date": "2021-10-11",
-        "author_ids": [
-          "mdashk"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0",
-    "catalog_version": "v.1.0.0"
   }
 ]
