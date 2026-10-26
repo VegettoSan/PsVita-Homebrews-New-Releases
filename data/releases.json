@@ -1,6 +1,171 @@
 [
   {
     "platform": "github",
+    "repo": "LargeVegetable/source-engine",
+    "release_id": "424779727",
+    "tag": "v0.1.2-beta",
+    "name": "Half-Life 2 for PS Vita 0.1.2-beta",
+    "url": "https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.2-beta",
+    "published": "2026-10-26T21:18:07Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Shader preparation, new options, and fixes for two physics crashes.\r\n\r\n**Download `hl2_vita-0.1.2-beta.zip` below** and install `hl2_vita.vpk` over your current version: your saves and settings stay. New to the port? Follow [INSTALL_VITA.md](https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md).\r\n\r\n### New\r\n\r\n- **Shader pre-compilation, in the main menu** ([#7](https://github.com/LargeVegetable/source-engine/issues/7)): compiles every shader the game uses ahead of time, so play no longer pauses the first time an effect or area appears. It takes about 20 minutes the first time (a few minutes if run again later), with a progress bar and an estimate of the time left. Keep the Vita plugged in; the screen may dim or flicker while it works. Hold ○ to stop: progress is kept, and Continue picks up where it left off. Restart the game when it's done. **Coming from 0.1.0 or the 0.1.0 hotfix?** This build can't reuse the shaders those versions compiled, so delete `ux0:data/shader_cache/` to free the space before preparing. Shaders compiled by 0.1.1 are kept and reused. If you choose not to pre-compile shaders, the game will compile on-demand and hitches will occur.\r\n- **Field of view** ([#10](https://github.com/LargeVegetable/source-engine/issues/10)): Options > Video, from 55 to 90. 75 is the default, and used to be the lowest.\r\n- **Look acceleration on/off** ([#11](https://github.com/LargeVegetable/source-engine/issues/11)): Options > Controls. Off, the view turns in proportion to how far the right stick is pushed, without the slow start and the speed-up.\r\n- **Button driving for the airboat and jeep/buggy thing**: Options > Controls > Vehicle controls > Cross & circle. ✕ accelerates and ○ brakes and reverses; the left stick still steers, and the handbrake moves to the rear touchpad's left half.\r\n- **Unlock all chapters**: press △ in New Game.\r\n\r\n### Fixed\r\n\r\n- **Physics crashes in Route Kanal and Water Hazard** ([#6](https://github.com/LargeVegetable/source-engine/issues/6), [#12](https://github.com/LargeVegetable/source-engine/issues/12)): the physics engine could corrupt its own bookkeeping and crash on the next level change or reload, or mid-fight. The step that corrupted it is now blocked, and an object whose physics break down is held in place instead of taking the game with it. If you still get a crash there, please send your logs.\r\n- Closing the game while a shader was being saved could leave a damaged file that crashed later sessions.\r\n- Controls carried over from 0.1.0: triangle and the rear touchpad no longer stay bound to multiplayer commands that do nothing.\r\n\r\n### Known issues\r\n\r\n- Rarely, the game can crash or stop responding while loading the next map ([#5](https://github.com/LargeVegetable/source-engine/issues/5)). If it freezes, wait a minute before closing it: it writes a report to the boot log. Save often.\r\n- Cube map reflections are off, and the intro videos don't play.\r\n- Suspend and resume are lightly tested.\r\n- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.\r\n- Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.\r\n\r\n### Reporting bugs\r\n\r\nOpen an [issue](https://github.com/LargeVegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.\r\n\r\nNot affiliated with or endorsed by Valve or Sony. Free, and it must stay free.\r\n\r\nSHA-256 of the zip: `edbfd586029ae99d22cf6e124c79c91db6127281dc376cada9218503c8226c75`\r\n",
+    "assets": [
+      {
+        "name": "hl2_vita-0.1.2-beta.zip",
+        "size": 20151938,
+        "download_url": "https://github.com/LargeVegetable/source-engine/releases/download/v0.1.2-beta/hl2_vita-0.1.2-beta.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "LargeVegetable",
+    "homebrew_name": "Half-Life 2",
+    "homebrew_icon": "https://archive.org/download/half-life-2-for-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
+    "homebrew_long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine\n\n- PsVitaAlive -",
+    "homebrew_id": "half-life-2",
+    "homebrew_authors": [
+      "largevegetable"
+    ],
+    "homebrew_version": "0.1.1",
+    "catalog_apps": [
+      {
+        "id": "half-life-2",
+        "name": "Half-Life 2",
+        "icon": "https://archive.org/download/half-life-2-for-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
+        "long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine\n\n- PsVitaAlive -",
+        "version": "0.1.1",
+        "version_date": "2026-10-21",
+        "author_ids": [
+          "largevegetable"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.1 → release v0.1.2-beta",
+    "catalog_version": "0.1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "josephinoo/vitaForge",
+    "release_id": "424482247",
+    "tag": "v0.1.9",
+    "name": "VitaForge v0.1.9",
+    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.9",
+    "published": "2026-10-26T16:19:39Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Highlights\r\n\r\n• Multi-language game data install flow with PC QR code helper and Vita direct download\r\n• Redesigned settings screen featuring 20 WCAG AA high-contrast themes and palette swatches\r\n• Full physical D-pad navigation in game/app detail view (author, screenshots, dependencies)\r\n• Smooth right-stick analog scrolling and A-Z quick letter jump\r\n• Live battery percentage and real-time clock in the footer status bar\r\n• Touch target ergonomics enlarged to 34–38px for comfortable 5\" Vita screen use\r\n• LiveArea background optimized to 840x500 8-bit indexed colormap (28 KiB) for real hardware compatibility\r\n\r\n## Game Data & Installation\r\n\r\n• Multi-language support for games with language-specific data packs (e.g. DBZ Shin Budokai 2)\r\n• Dual installation options: direct download on Vita or quick QR code flow for transfer from PC via VitaShell (USB / FTP)\r\n• Automatic UX layout adjustments preventing text overflow on data install dialogs\r\n\r\n## Themes & Settings\r\n\r\n• 20 curated themes meeting WCAG AA contrast standards (Catppuccin Mocha, Gruvbox, Tokyo Night, Nord, OLED Black, and more)\r\n• Visual palette swatches on theme selector for instant preview\r\n• Atomic mutex-protected settings persistence to prevent file corruption\r\n\r\n## Controls & Ergonomics\r\n\r\n• Full D-pad navigation across all interactive elements in the Detail view\r\n• Right analog stick scrolling for effortless browsing of long descriptions and catalogs\r\n• A-Z quick jump to navigate catalogs alphabetically with shoulder triggers / D-pad\r\n• Touch targets expanded to 34–38px to prevent mis-taps on the touchscreen\r\n\r\n## Interface & System\r\n\r\n• Battery level percentage and real-time clock integrated into the footer\r\n• Official LiveArea paper background rebuilt to strict SceShell specs (840x500, 8-bit indexed palette, Mode P)\r\n• Integrated v0.1.9 visual tag on LiveArea screen\r\n\r\n## Technical\r\n\r\n• Version 0.1.9 / APP_VER 01.09\r\n• 147 unit tests passing\r\n",
+    "assets": [
+      {
+        "name": "vitaforge.vpk",
+        "size": 5424955,
+        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.9/vitaforge.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "josephinoo",
+    "homebrew_name": "VitaForge",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store client.",
+    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "vitaforge",
+    "homebrew_authors": [
+      "josephinoo"
+    ],
+    "homebrew_version": "v.0.1.1",
+    "catalog_apps": [
+      {
+        "id": "vitaforge",
+        "name": "VitaForge",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+        "category": "utilities",
+        "description": "Homebrew store client.",
+        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.0.1.1",
+        "version_date": "2026-08-11",
+        "author_ids": [
+          "josephinoo"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.9",
+    "catalog_version": "v.0.1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "CBOC-Vita-Lab/galaxy-vita",
+    "release_id": "424451280",
+    "tag": "v1.1",
+    "name": "Super Mario Galaxy 1.1",
+    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v1.1",
+    "published": "2026-10-26T15:52:34Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Super Mario Galaxy 1.1 brings better-looking eyes, a new Settings menu, game-language selection and a clearer start-up to PS Vita. Still native: no emulator and no streaming.\n\n## Mario's eyes are back\n\nMario's eyes now show and blink normally with the optional HD textures. The colour fix also restores his blue eyes without the HD pack, while the rest of your HD textures stay in place.\n\n## Make it yours\n\nOpen **Settings** from the game's LiveArea screen, before launching or while playing. The menu uses the game's own fonts and gives you:\n\n- **Button remapping** for the Vita and for a PlayStation controller on PS TV, with controller pictures to make each binding easy to find.\n- **Picture-rate options:** Up to 60 FPS, 30 FPS and the new **Steady 30** profile.\n- **Dynamic quality** and **reduced motion** settings.\n\nYour choices are saved. When a change needs a restart, the menu offers one.\n\n**Steady 30** is an opt-in profile that adjusts resolution and effects quality to favour steadier frame pacing over the highest picture rate.\n\n## Play in your language\n\nChoose the game language in **Settings**, using the languages included in your own game files. Language selection now sits alongside your controls and picture settings, so you can set it up in the same place.\n\n## A friendlier start\n\nA title-screen loading picture and progress bar show what is happening instead of leaving you guessing. A rare start-up file-handle crash is guarded, slow loading gets a clearer message, and the loading log is more useful when tracking down a problem.\n\n## Better controls and sound\n\nCustom button layouts no longer trap you in the pause menu. Unsupported saved controller profiles fall back to usable defaults, and the Settings menu no longer keeps reopening after Return or Restart.\n\nAudio mixing now uses the Vita's vector unit more efficiently while keeping the sound bit-for-bit the same.\n\n## Updating from 1.0\n\nInstall the new VPK over your existing copy. **Your saves are kept.** The first launch after updating can take a little longer while the game prepares its updated shaders.\n\n[Download the VPK](https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/latest/download/Galaxy-Vita.vpk) | [Download the install ZIP](https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/latest/download/Galaxy-Vita-install.zip)\n\nFor a fresh install, [CBOC Vita Installer](https://github.com/CBOC-Vita-Lab/vita-installer/releases/latest) handles preparation and transfer from your own Wii disc image. No game files are supplied.\n\n",
+    "assets": [
+      {
+        "name": "cboc-release.json",
+        "size": 1354,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/cboc-release.json",
+        "content_type": "application/json"
+      },
+      {
+        "name": "Galaxy-Vita-install.zip",
+        "size": 17056222,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/Galaxy-Vita-install.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Galaxy-Vita.vpk",
+        "size": 6973544,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/Galaxy-Vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 575165,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/SHA256SUMS",
+        "content_type": "text/plain"
+      }
+    ],
+    "author": "CBOC-Vita",
+    "homebrew_name": "Super Mario Galaxy",
+    "homebrew_icon": "https://archive.org/download/smg-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+    "homebrew_id": "super-mario-galaxy",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "super-mario-galaxy",
+        "name": "Super Mario Galaxy",
+        "icon": "https://archive.org/download/smg-vita/icon0.png",
+        "category": "ports",
+        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+        "version": "1.0",
+        "version_date": "2026-10-25",
+        "author_ids": [
+          "cboc-vita-lab"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.1",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
     "release_id": "424357198",
     "tag": "continuous",
@@ -652,73 +817,6 @@
   },
   {
     "platform": "github",
-    "repo": "CBOC-Vita-Lab/galaxy-vita",
-    "release_id": "423025420",
-    "tag": "v1.0",
-    "name": "Super Mario Galaxy 1.0",
-    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v1.0",
-    "published": "2026-10-24T22:47:59Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Super Mario Galaxy, running natively on the PS Vita. No emulator, no streaming: the game's own code rebuilt for the Vita's processor and GPU.\n\n**Touch controls, built for the Vita**\n- Rear touch Star Bit aiming: slide a finger on the back pad and the pointer glides like a laptop trackpad, with your thumbs still on the sticks. Resting fingers are ignored. Turn it on in the pause menu with Triangle.\n- The front screen is your Wii pointer: touch and Star Bits fly to you, tap to talk or choose, hold still to grab Pull Stars.\n- Tilt to steer the Star Ball and the Manta ray; spin with Square or R.\n- A settings panel in the pause menu: camera zoom and rear touch.\n\n**How smooth it is** (measured with this release on a PS Vita; fps = new pictures per second, 60 is the most the screen shows)\n- Good Egg Galaxy: 51 fps on average (41 to 56)\n- Comet Observatory, the busiest place in the game: 43 fps on average (32 to 55)\n- Quiet moments and menus: 60 fps\n- Stutters longer than a tenth of a second while playing: 0\n- Full game speed: when a moment is too busy, a picture is skipped instead of the game slowing down\n- 1,131 graphics effects compiled ahead of time; up to 960×544 with automatic anti-aliasing\n\n**Install:** the easiest way is CBOC Vita Installer (pick Super Mario Galaxy, choose your disc image, press Install). Or install `Galaxy-Vita.vpk` with VitaShell and copy your prepared game files to `ux0:data/smg/game/`; see INSTALL.md.\n\nYou need your own Super Mario Galaxy disc (Wii, USA, RMGE01). Unofficial fan project, not affiliated with Nintendo or Sony.\n",
-    "assets": [
-      {
-        "name": "cboc-release.json",
-        "size": 1208,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/cboc-release.json",
-        "content_type": "application/json"
-      },
-      {
-        "name": "Galaxy-Vita-install.zip",
-        "size": 15116085,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/Galaxy-Vita-install.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Galaxy-Vita.vpk",
-        "size": 6160169,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/Galaxy-Vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS",
-        "size": 558980,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/SHA256SUMS",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "CBOC-Vita",
-    "homebrew_name": "Super Mario Galaxy",
-    "homebrew_icon": "https://archive.org/download/smg-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-    "homebrew_id": "super-mario-galaxy",
-    "homebrew_authors": [
-      "cboc-vita-lab"
-    ],
-    "homebrew_version": "1.0",
-    "catalog_apps": [
-      {
-        "id": "super-mario-galaxy",
-        "name": "Super Mario Galaxy",
-        "icon": "https://archive.org/download/smg-vita/icon0.png",
-        "category": "ports",
-        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-        "version": "1.0",
-        "version_date": "2026-10-25",
-        "author_ids": [
-          "cboc-vita-lab"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0",
-    "catalog_version": "1.0"
-  },
-  {
-    "platform": "github",
     "repo": "TheLostPantheon/openmw",
     "release_id": "422976479",
     "tag": "v2.4.1",
@@ -765,55 +863,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.2.2 → release v2.4.1",
     "catalog_version": "v.2.2"
-  },
-  {
-    "platform": "github",
-    "repo": "josephinoo/vitaForge",
-    "release_id": "422948139",
-    "tag": "v0.1.8",
-    "name": "VitaForge v0.1.8",
-    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.8",
-    "published": "2026-10-24T19:54:44Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Highlights\r\n\r\n• Much faster game data extraction\r\n• Plugins can now be installed directly (fixes #29), including Wi-Fi Turbo and LiveArea NoLimits\r\n• Full translations for English, Spanish, French, Italian and Portuguese\r\n• New high-quality Lucide icons\r\n\r\n## Downloads & installation\r\n\r\n• Sequential streaming ZIP extractor: no more long \"Preparing extraction\" wait\r\n• MD5 verification runs in parallel with the download\r\n• Plugins install to the right taiHEN config section (ux0 or ur0); a reboot is requested afterwards\r\n• Plugins still being validated show a friendly message instead of failing\r\n\r\n## Interface\r\n\r\n• Game data badge on tiles of apps that include game data\r\n• Plugin tiles no longer show the grey placeholder icon\r\n• Install progress, steps and notifications are fully translated\r\n• System language detection fixed for French, Italian and Portuguese\r\n\r\n## Technical\r\n\r\n• Timestamps in all logs\r\n• Version 0.1.8 / APP_VER 01.08\r\n\r\n## Update testing\r\n\r\n• Draft releases are not returned by GitHub's releases/latest endpoint\r\n• After publishing, test the update prompt from an older installed version\r\n• An installed 0.1.8 build will not offer to update to the same version\r\n",
-    "assets": [
-      {
-        "name": "vitaforge.vpk",
-        "size": 5388520,
-        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.8/vitaforge.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "josephinoo",
-    "homebrew_name": "VitaForge",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store client.",
-    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "vitaforge",
-    "homebrew_authors": [
-      "josephinoo"
-    ],
-    "homebrew_version": "v.0.1.1",
-    "catalog_apps": [
-      {
-        "id": "vitaforge",
-        "name": "VitaForge",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-        "category": "utilities",
-        "description": "Homebrew store client.",
-        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.0.1.1",
-        "version_date": "2026-08-11",
-        "author_ids": [
-          "josephinoo"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.8",
-    "catalog_version": "v.0.1.1"
   },
   {
     "platform": "github",
@@ -1545,55 +1594,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive Nightly",
     "catalog_version": "Nightly"
-  },
-  {
-    "platform": "github",
-    "repo": "LargeVegetable/source-engine",
-    "release_id": "420298360",
-    "tag": "v0.1.1-beta",
-    "name": "Half-Life 2 for PS Vita 0.1.1-beta",
-    "url": "https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.1-beta",
-    "published": "2026-10-22T04:09:55Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Fixes for new installs, and a much faster first launch.\r\n\r\n**Download `hl2_vita-0.1.1-beta.zip` below** and install `hl2_vita.vpk` over 0.1.0: your saves and settings stay, and the controls below are corrected automatically. New to the port? Follow [INSTALL_VITA.md](https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md).\r\n\r\n### Fixed\r\n\r\n- **The analog sticks didn't work on a new install** until Options > Controls > Restore Default Controls ([#4](https://github.com/LargeVegetable/source-engine/issues/4)).\r\n\r\n\r\n### Faster first launch\r\n\r\n- **First launch to the main menu is much faster at around 1-2 mins** (it was about 7-10 minutes before), and **about 1-2 minutes to the first map** (up to 24 minutes before). Shaders are now compiled when they're first needed instead of all at once, and the shader cache no longer creates hundreds of folders up front.\r\n- **The trade-off here is that brief hitches will appear upon first load of a map or when an effect is used for the first time.** Each new shader takes about half a second to compile on the Vita, so the first minutes of a brand new install - and each subsequent new area - can pause for a moment, sometimes a few seconds. Every shader is compiled only once and kept in `ux0:data/shader_cache/`. This seems like a fair trade-off compared to the half-hour long initial load times where the engine compiled **everything** upfront. Removing these hitches is the next big item on my list.\r\n\r\n### Also new\r\n\r\n- **Gyro aiming** ([#3](https://github.com/LargeVegetable/source-engine/issues/3)): turn and tilt the Vita to aim, on top of the right stick. Off by default; turn it on and set its sensitivity in Options > Controls.\r\n- **The touchscreen's left and right halves can be assigned to any action** in Options > Controls. They work in game only; in the menus you tap as usual.\r\n- **The rear touchpad's right half sprints by default.** The left half still crouches.\r\n- **Loads are a little shorter:** the engine log no longer writes every line to the memory card on its own, and the lightmap rebuild runs under the loading screen.\r\n- **Better bug reports:** `engine.log` now keeps the last five sessions, like the boot log, and README_VITA.md lists what to include (firmware, model, storage, plugins).\r\n\r\n### Known issues\r\n\r\n- First-time shader hitches, described above.\r\n- Rarely, the game can crash while loading the next map. Save often.\r\n- Cube map reflections are off, and the intro videos don't play.\r\n- Suspend and resume are lightly tested.\r\n- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.\r\n- Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.\r\n\r\n### Reporting bugs\r\n\r\nOpen an [issue](https://github.com/LargeVegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.\r\n\r\nNot affiliated with or endorsed by Valve or Sony. Free, and it must stay free.\r\n\r\nSHA-256 of the zip: `4d875af76c343eddf19cf8efff4fb7c1563085213d7e79c6c150651d91d78c42`\r\n",
-    "assets": [
-      {
-        "name": "hl2_vita-0.1.1-beta.zip",
-        "size": 20124925,
-        "download_url": "https://github.com/LargeVegetable/source-engine/releases/download/v0.1.1-beta/hl2_vita-0.1.1-beta.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "LargeVegetable",
-    "homebrew_name": "Half-Life 2",
-    "homebrew_icon": "https://archive.org/download/half-life-2-for-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
-    "homebrew_long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine\n\n- PsVitaAlive -",
-    "homebrew_id": "half-life-2",
-    "homebrew_authors": [
-      "largevegetable"
-    ],
-    "homebrew_version": "0.1.1",
-    "catalog_apps": [
-      {
-        "id": "half-life-2",
-        "name": "Half-Life 2",
-        "icon": "https://archive.org/download/half-life-2-for-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
-        "long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine\n\n- PsVitaAlive -",
-        "version": "0.1.1",
-        "version_date": "2026-10-21",
-        "author_ids": [
-          "largevegetable"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.1.1",
-    "catalog_version": "0.1.1"
   },
   {
     "platform": "github",
@@ -32709,60 +32709,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0.0",
     "catalog_version": "v.1.0.0"
-  },
-  {
-    "platform": "github",
-    "repo": "DRok17/QuickLaunch-Installer",
-    "release_id": "51157566",
-    "tag": "v1.4",
-    "name": "QuickLaunch Installer v1.4",
-    "url": "https://github.com/DRok17/QuickLaunch-Installer/releases/tag/v1.4",
-    "published": "2021-10-11T17:19:58Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Added Edit Menu for in-application customization\r\n- Added more UI elements for ease of use.",
-    "assets": [
-      {
-        "name": "data.zip",
-        "size": 2118498,
-        "download_url": "https://github.com/DRok17/QuickLaunch-Installer/releases/download/v1.4/data.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "QLINSTLPP.vpk",
-        "size": 4161531,
-        "download_url": "https://github.com/DRok17/QuickLaunch-Installer/releases/download/v1.4/QLINSTLPP.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "DRok17",
-    "homebrew_name": "QuickLaunch Installer",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-quicklaunch-installer/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Customizer for Quick Menu shortcuts.",
-    "homebrew_long_description": "QuickLaunch Installer allows you to customize the quick menu shortcuts of your Livearea.",
-    "homebrew_id": "quicklaunch-installer",
-    "homebrew_authors": [
-      "drok17"
-    ],
-    "homebrew_version": "v.1.4",
-    "catalog_apps": [
-      {
-        "id": "quicklaunch-installer",
-        "name": "QuickLaunch Installer",
-        "icon": "https://archive.org/download/psvitaalive-quicklaunch-installer/icon0.png",
-        "category": "utilities",
-        "description": "Customizer for Quick Menu shortcuts.",
-        "long_description": "QuickLaunch Installer allows you to customize the quick menu shortcuts of your Livearea.",
-        "version": "v.1.4",
-        "version_date": "2021-10-11",
-        "author_ids": [
-          "drok17"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.4",
-    "catalog_version": "v.1.4"
   }
 ]

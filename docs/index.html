@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>482</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">391</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>91</strong><span>pendientes</span></div>
-        <div class="stat"><strong>474</strong><span>GitHub</span></div>
+        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">388</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>93</strong><span>pendientes</span></div>
+        <div class="stat"><strong>473</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,271 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.2-beta v0.1.2-beta ports shader preparation, new options, and fixes for two physics crashes.
+
+**download `hl2_vita-0.1.2-beta.zip` below** and install `hl2_vita.vpk` over your current version: your saves and settings stay. new to the port? follow [install_vita.md](https://github.com/largevegetable/source-engine/blob/vita/install_vita.md).
+
+### new
+
+- **shader pre-compilation, in the main menu** ([#7](https://github.com/largevegetable/source-engine/issues/7)): compiles every shader the game uses ahead of time, so play no longer pauses the first time an effect or area appears. it takes about 20 minutes the first time (a few minutes if run again later), with a progress bar and an estimate of the time left. keep the vita plugged in; the screen may dim or flicker while it works. hold ○ to stop: progress is kept, and continue picks up where it left off. restart the game when it&#x27;s done. **coming from 0.1.0 or the 0.1.0 hotfix?** this build can&#x27;t reuse the shaders those versions compiled, so delete `ux0:data/shader_cache/` to free the space before preparing. shaders compiled by 0.1.1 are kept and reused. if you choose not to pre-compile shaders, the game will compile on-demand and hitches will occur.
+- **field of view** ([#10](https://github.com/largevegetable/source-engine/issues/10)): options &gt; video, from 55 to 90. 75 is the default, and used to be the lowest.
+- **look acceleration on/off** ([#11](https://github.com/largevegetable/source-engine/issues/11)): options &gt; controls. off, the view turns in proportion to how far the right stick is pushed, without the slow start and the speed-up.
+- **button driving for the airboat and jeep/buggy thing**: options &gt; controls &gt; vehicle controls &gt; cross &amp; circle. ✕ accelerates and ○ brakes and reverses; the left stick still steers, and the handbrake moves to the rear touchpad&#x27;s left half.
+- **unlock all chapters**: press △ in new game.
+
+### fixed
+
+- **physics crashes in route kanal and water hazard** ([#6](https://github.com/largevegetable/source-engine/issues/6), [#12](https://github.com/largevegetable/source-engine/issues/12)): the physics engine could corrupt its own bookkeeping and crash on the next level change or reload, or mid-fight. the step that corrupted it is now blocked, and an object whose physics break down is held in place instead of taking the game with it. if you still get a crash there, please send your logs.
+- closing the game while a shader was being saved could leave a damaged file that crashed later sessions.
+- controls carried over from 0.1.0: triangle and the rear touchpad no longer stay bound to multiplayer commands that do nothing.
+
+### known issues
+
+- rarely, the game can crash or stop responding while loading the next map ([#5](https://github.com/largevegetable/source-engine/issues/5)). if it freezes, wait a minute before closing it: it writes a report to the boot log. save often.
+- cube map reflections are off, and the intro videos don&#x27;t play.
+- suspend and resume are lightly tested.
+- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.
+- half-life 2 only: no episodes, lost coast, multiplayer or mods.
+
+### reporting bugs
+
+open an [issue](https://github.com/largevegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). readme_vita.md has the details.
+
+not affiliated with or endorsed by valve or sony. free, and it must stay free.
+
+sha-256 of the zip: `edbfd586029ae99d22cf6e124c79c91db6127281dc376cada9218503c8226c75`">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/half-life-2-for-ps-vita/icon0.png" alt="Icono de Half-Life 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · LargeVegetable/source-engine</div>
+                      <h2><a href="https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.2-beta" target="_blank" rel="noopener">Half-Life 2</a></h2>
+                      <div class="release-name">Half-Life 2 for PS Vita 0.1.2-beta</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.2-beta</span>
+                    <span>2026-10-26 21:18 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.1 → release v0.1.2-beta</div>
+                  
+                  <div class="body markdown-body"><p>Shader preparation, new options, and fixes for two physics crashes.</p>
+<p><strong>Download <code>hl2_vita-0.1.2-beta.zip</code> below</strong> and install <code>hl2_vita.vpk</code> over your current version: your saves and settings stay. New to the port? Follow <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md">INSTALL_VITA.md</a>.</p>
+<h3>New</h3>
+<ul>
+<li><strong>Shader pre-compilation, in the main menu</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/7">#7</a>): compiles every shader the game uses ahead of time, so play no longer pauses the first time an effect or area appears. It takes about 20 minutes the first time (a few minutes if run again later), with a progress bar and an estimate of the time left. Keep the Vita plugged in; the screen may dim or flicker while it works. Hold ○ to stop: progress is kept, and Continue picks up where it left off. Restart the game when it's done. <strong>Coming from 0.1.0 or the 0.1.0 hotfix?</strong> This build can't reuse the shaders those versions compiled, so delete <code>ux0:data/shader_cache/</code> to free the space before preparing. Shaders compiled by 0.1.1 are kept and reused. If you choose not to pre-compile shaders, the game will compile on-demand and hitches will occur.</li>
+<li><strong>Field of view</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/10">#10</a>): Options &gt; Video, from 55 to 90. 75 is the default, and used to be the lowest.</li>
+<li><strong>Look acceleration on/off</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/11">#11</a>): Options &gt; Controls. Off, the view turns in proportion to how far the right stick is pushed, without the slow start and the speed-up.</li>
+<li><strong>Button driving for the airboat and jeep/buggy thing</strong>: Options &gt; Controls &gt; Vehicle controls &gt; Cross &amp; circle. ✕ accelerates and ○ brakes and reverses; the left stick still steers, and the handbrake moves to the rear touchpad's left half.</li>
+<li><strong>Unlock all chapters</strong>: press △ in New Game.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li><strong>Physics crashes in Route Kanal and Water Hazard</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/6">#6</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/12">#12</a>): the physics engine could corrupt its own bookkeeping and crash on the next level change or reload, or mid-fight. The step that corrupted it is now blocked, and an object whose physics break down is held in place instead of taking the game with it. If you still get a crash there, please send your logs.</li>
+<li>Closing the game while a shader was being saved could leave a damaged file that crashed later sessions.</li>
+<li>Controls carried over from 0.1.0: triangle and the rear touchpad no longer stay bound to multiplayer commands that do nothing.</li>
+</ul>
+<h3>Known issues</h3>
+<ul>
+<li>Rarely, the game can crash or stop responding while loading the next map (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/5">#5</a>). If it freezes, wait a minute before closing it: it writes a report to the boot log. Save often.</li>
+<li>Cube map reflections are off, and the intro videos don't play.</li>
+<li>Suspend and resume are lightly tested.</li>
+<li>kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.</li>
+<li>Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.</li>
+</ul>
+<h3>Reporting bugs</h3>
+<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues">issue</a> with <code>ux0:data/hl2_vita_boot.txt</code>, <code>ux0:data/halflife2/engine.log</code>, <code>crash.log</code> if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.</p>
+<p>Not affiliated with or endorsed by Valve or Sony. Free, and it must stay free.</p>
+<p>SHA-256 of the zip: <code>edbfd586029ae99d22cf6e124c79c91db6127281dc376cada9218503c8226c75</code></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/LargeVegetable/source-engine/releases/download/v0.1.2-beta/hl2_vita-0.1.2-beta.zip" target="_blank" rel="noopener">⬇ hl2_vita-0.1.2-beta.zip · 19.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="vitaforge vitaforge josephinoo/vitaforge vitaforge v0.1.9 v0.1.9 utilities ## highlights
+
+• multi-language game data install flow with pc qr code helper and vita direct download
+• redesigned settings screen featuring 20 wcag aa high-contrast themes and palette swatches
+• full physical d-pad navigation in game/app detail view (author, screenshots, dependencies)
+• smooth right-stick analog scrolling and a-z quick letter jump
+• live battery percentage and real-time clock in the footer status bar
+• touch target ergonomics enlarged to 34–38px for comfortable 5&quot; vita screen use
+• livearea background optimized to 840x500 8-bit indexed colormap (28 kib) for real hardware compatibility
+
+## game data &amp; installation
+
+• multi-language support for games with language-specific data packs (e.g. dbz shin budokai 2)
+• dual installation options: direct download on vita or quick qr code flow for transfer from pc via vitashell (usb / ftp)
+• automatic ux layout adjustments preventing text overflow on data install dialogs
+
+## themes &amp; settings
+
+• 20 curated themes meeting wcag aa contrast standards (catppuccin mocha, gruvbox, tokyo night, nord, oled black, and more)
+• visual palette swatches on theme selector for instant preview
+• atomic mutex-protected settings persistence to prevent file corruption
+
+## controls &amp; ergonomics
+
+• full d-pad navigation across all interactive elements in the detail view
+• right analog stick scrolling for effortless browsing of long descriptions and catalogs
+• a-z quick jump to navigate catalogs alphabetically with shoulder triggers / d-pad
+• touch targets expanded to 34–38px to prevent mis-taps on the touchscreen
+
+## interface &amp; system
+
+• battery level percentage and real-time clock integrated into the footer
+• official livearea paper background rebuilt to strict sceshell specs (840x500, 8-bit indexed palette, mode p)
+• integrated v0.1.9 visual tag on livearea screen
+
+## technical
+
+• version 0.1.9 / app_ver 01.09
+• 147 unit tests passing">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png" alt="Icono de VitaForge" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · josephinoo/vitaForge</div>
+                      <h2><a href="https://github.com/josephinoo/vitaForge/releases/tag/v0.1.9" target="_blank" rel="noopener">VitaForge</a></h2>
+                      <div class="release-name">VitaForge v0.1.9</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.9</span>
+                    <span>2026-10-26 16:19 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.1.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.1.1 → release v0.1.9</div>
+                  
+                  <div class="body markdown-body"><h2>Highlights</h2>
+<p>• Multi-language game data install flow with PC QR code helper and Vita direct download
+• Redesigned settings screen featuring 20 WCAG AA high-contrast themes and palette swatches
+• Full physical D-pad navigation in game/app detail view (author, screenshots, dependencies)
+• Smooth right-stick analog scrolling and A-Z quick letter jump
+• Live battery percentage and real-time clock in the footer status bar
+• Touch target ergonomics enlarged to 34–38px for comfortable 5&quot; Vita screen use
+• LiveArea background optimized to 840x500 8-bit indexed colormap (28 KiB) for real hardware compatibility</p>
+<h2>Game Data &amp; Installation</h2>
+<p>• Multi-language support for games with language-specific data packs (e.g. DBZ Shin Budokai 2)
+• Dual installation options: direct download on Vita or quick QR code flow for transfer from PC via VitaShell (USB / FTP)
+• Automatic UX layout adjustments preventing text overflow on data install dialogs</p>
+<h2>Themes &amp; Settings</h2>
+<p>• 20 curated themes meeting WCAG AA contrast standards (Catppuccin Mocha, Gruvbox, Tokyo Night, Nord, OLED Black, and more)
+• Visual palette swatches on theme selector for instant preview
+• Atomic mutex-protected settings persistence to prevent file corruption</p>
+<h2>Controls &amp; Ergonomics</h2>
+<p>• Full D-pad navigation across all interactive elements in the Detail view
+• Right analog stick scrolling for effortless browsing of long descriptions and catalogs
+• A-Z quick jump to navigate catalogs alphabetically with shoulder triggers / D-pad
+• Touch targets expanded to 34–38px to prevent mis-taps on the touchscreen</p>
+<h2>Interface &amp; System</h2>
+<p>• Battery level percentage and real-time clock integrated into the footer
+• Official LiveArea paper background rebuilt to strict SceShell specs (840x500, 8-bit indexed palette, Mode P)
+• Integrated v0.1.9 visual tag on LiveArea screen</p>
+<h2>Technical</h2>
+<p>• Version 0.1.9 / APP_VER 01.09
+• 147 unit tests passing</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/josephinoo/vitaForge/releases/download/v0.1.9/vitaforge.vpk" target="_blank" rel="noopener">⬇ vitaforge.vpk · 5.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="super mario galaxy super mario galaxy cboc-vita-lab/galaxy-vita super mario galaxy 1.1 v1.1 ports super mario galaxy 1.1 brings better-looking eyes, a new settings menu, game-language selection and a clearer start-up to ps vita. still native: no emulator and no streaming.
+
+## mario&#x27;s eyes are back
+
+mario&#x27;s eyes now show and blink normally with the optional hd textures. the colour fix also restores his blue eyes without the hd pack, while the rest of your hd textures stay in place.
+
+## make it yours
+
+open **settings** from the game&#x27;s livearea screen, before launching or while playing. the menu uses the game&#x27;s own fonts and gives you:
+
+- **button remapping** for the vita and for a playstation controller on ps tv, with controller pictures to make each binding easy to find.
+- **picture-rate options:** up to 60 fps, 30 fps and the new **steady 30** profile.
+- **dynamic quality** and **reduced motion** settings.
+
+your choices are saved. when a change needs a restart, the menu offers one.
+
+**steady 30** is an opt-in profile that adjusts resolution and effects quality to favour steadier frame pacing over the highest picture rate.
+
+## play in your language
+
+choose the game language in **settings**, using the languages included in your own game files. language selection now sits alongside your controls and picture settings, so you can set it up in the same place.
+
+## a friendlier start
+
+a title-screen loading picture and progress bar show what is happening instead of leaving you guessing. a rare start-up file-handle crash is guarded, slow loading gets a clearer message, and the loading log is more useful when tracking down a problem.
+
+## better controls and sound
+
+custom button layouts no longer trap you in the pause menu. unsupported saved controller profiles fall back to usable defaults, and the settings menu no longer keeps reopening after return or restart.
+
+audio mixing now uses the vita&#x27;s vector unit more efficiently while keeping the sound bit-for-bit the same.
+
+## updating from 1.0
+
+install the new vpk over your existing copy. **your saves are kept.** the first launch after updating can take a little longer while the game prepares its updated shaders.
+
+[download the vpk](https://github.com/cboc-vita-lab/galaxy-vita/releases/latest/download/galaxy-vita.vpk) | [download the install zip](https://github.com/cboc-vita-lab/galaxy-vita/releases/latest/download/galaxy-vita-install.zip)
+
+for a fresh install, [cboc vita installer](https://github.com/cboc-vita-lab/vita-installer/releases/latest) handles preparation and transfer from your own wii disc image. no game files are supplied.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/smg-vita/icon0.png" alt="Icono de Super Mario Galaxy" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · CBOC-Vita-Lab/galaxy-vita</div>
+                      <h2><a href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v1.1" target="_blank" rel="noopener">Super Mario Galaxy</a></h2>
+                      <div class="release-name">Super Mario Galaxy 1.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.1</span>
+                    <span>2026-10-26 15:52 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0 → release v1.1</div>
+                  
+                  <div class="body markdown-body"><p>Super Mario Galaxy 1.1 brings better-looking eyes, a new Settings menu, game-language selection and a clearer start-up to PS Vita. Still native: no emulator and no streaming.</p>
+<h2>Mario's eyes are back</h2>
+<p>Mario's eyes now show and blink normally with the optional HD textures. The colour fix also restores his blue eyes without the HD pack, while the rest of your HD textures stay in place.</p>
+<h2>Make it yours</h2>
+<p>Open <strong>Settings</strong> from the game's LiveArea screen, before launching or while playing. The menu uses the game's own fonts and gives you:</p>
+<ul>
+<li><strong>Button remapping</strong> for the Vita and for a PlayStation controller on PS TV, with controller pictures to make each binding easy to find.</li>
+<li><strong>Picture-rate options:</strong> Up to 60 FPS, 30 FPS and the new <strong>Steady 30</strong> profile.</li>
+<li><strong>Dynamic quality</strong> and <strong>reduced motion</strong> settings.</li>
+</ul>
+<p>Your choices are saved. When a change needs a restart, the menu offers one.</p>
+<p><strong>Steady 30</strong> is an opt-in profile that adjusts resolution and effects quality to favour steadier frame pacing over the highest picture rate.</p>
+<h2>Play in your language</h2>
+<p>Choose the game language in <strong>Settings</strong>, using the languages included in your own game files. Language selection now sits alongside your controls and picture settings, so you can set it up in the same place.</p>
+<h2>A friendlier start</h2>
+<p>A title-screen loading picture and progress bar show what is happening instead of leaving you guessing. A rare start-up file-handle crash is guarded, slow loading gets a clearer message, and the loading log is more useful when tracking down a problem.</p>
+<h2>Better controls and sound</h2>
+<p>Custom button layouts no longer trap you in the pause menu. Unsupported saved controller profiles fall back to usable defaults, and the Settings menu no longer keeps reopening after Return or Restart.</p>
+<p>Audio mixing now uses the Vita's vector unit more efficiently while keeping the sound bit-for-bit the same.</p>
+<h2>Updating from 1.0</h2>
+<p>Install the new VPK over your existing copy. <strong>Your saves are kept.</strong> The first launch after updating can take a little longer while the game prepares its updated shaders.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/latest/download/Galaxy-Vita.vpk">Download the VPK</a> | <a target="_blank" rel="noopener noreferrer" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/latest/download/Galaxy-Vita-install.zip">Download the install ZIP</a></p>
+<p>For a fresh install, <a target="_blank" rel="noopener noreferrer" href="https://github.com/CBOC-Vita-Lab/vita-installer/releases/latest">CBOC Vita Installer</a> handles preparation and transfer from your own Wii disc image. No game files are supplied.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/Galaxy-Vita.vpk" target="_blank" rel="noopener">⬇ Galaxy-Vita.vpk · 6.7 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/cboc-release.json" target="_blank" rel="noopener">cboc-release.json · 1.3 KB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/Galaxy-Vita-install.zip" target="_blank" rel="noopener">Galaxy-Vita-install.zip · 16.3 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 561.7 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4226">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -973,69 +1238,6 @@ this post contains nintendo 3ds and nintendo wii only builds, for other platform
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="super mario galaxy super mario galaxy cboc-vita-lab/galaxy-vita super mario galaxy 1.0 v1.0 ports super mario galaxy, running natively on the ps vita. no emulator, no streaming: the game&#x27;s own code rebuilt for the vita&#x27;s processor and gpu.
-
-**touch controls, built for the vita**
-- rear touch star bit aiming: slide a finger on the back pad and the pointer glides like a laptop trackpad, with your thumbs still on the sticks. resting fingers are ignored. turn it on in the pause menu with triangle.
-- the front screen is your wii pointer: touch and star bits fly to you, tap to talk or choose, hold still to grab pull stars.
-- tilt to steer the star ball and the manta ray; spin with square or r.
-- a settings panel in the pause menu: camera zoom and rear touch.
-
-**how smooth it is** (measured with this release on a ps vita; fps = new pictures per second, 60 is the most the screen shows)
-- good egg galaxy: 51 fps on average (41 to 56)
-- comet observatory, the busiest place in the game: 43 fps on average (32 to 55)
-- quiet moments and menus: 60 fps
-- stutters longer than a tenth of a second while playing: 0
-- full game speed: when a moment is too busy, a picture is skipped instead of the game slowing down
-- 1,131 graphics effects compiled ahead of time; up to 960×544 with automatic anti-aliasing
-
-**install:** the easiest way is cboc vita installer (pick super mario galaxy, choose your disc image, press install). or install `galaxy-vita.vpk` with vitashell and copy your prepared game files to `ux0:data/smg/game/`; see install.md.
-
-you need your own super mario galaxy disc (wii, usa, rmge01). unofficial fan project, not affiliated with nintendo or sony.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/smg-vita/icon0.png" alt="Icono de Super Mario Galaxy" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · CBOC-Vita-Lab/galaxy-vita</div>
-                      <h2><a href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v1.0" target="_blank" rel="noopener">Super Mario Galaxy</a></h2>
-                      <div class="release-name">Super Mario Galaxy 1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2026-10-24 22:47 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0</div>
-                  
-                  <div class="body markdown-body"><p>Super Mario Galaxy, running natively on the PS Vita. No emulator, no streaming: the game's own code rebuilt for the Vita's processor and GPU.</p>
-<p><strong>Touch controls, built for the Vita</strong></p>
-<ul>
-<li>Rear touch Star Bit aiming: slide a finger on the back pad and the pointer glides like a laptop trackpad, with your thumbs still on the sticks. Resting fingers are ignored. Turn it on in the pause menu with Triangle.</li>
-<li>The front screen is your Wii pointer: touch and Star Bits fly to you, tap to talk or choose, hold still to grab Pull Stars.</li>
-<li>Tilt to steer the Star Ball and the Manta ray; spin with Square or R.</li>
-<li>A settings panel in the pause menu: camera zoom and rear touch.</li>
-</ul>
-<p><strong>How smooth it is</strong> (measured with this release on a PS Vita; fps = new pictures per second, 60 is the most the screen shows)</p>
-<ul>
-<li>Good Egg Galaxy: 51 fps on average (41 to 56)</li>
-<li>Comet Observatory, the busiest place in the game: 43 fps on average (32 to 55)</li>
-<li>Quiet moments and menus: 60 fps</li>
-<li>Stutters longer than a tenth of a second while playing: 0</li>
-<li>Full game speed: when a moment is too busy, a picture is skipped instead of the game slowing down</li>
-<li>1,131 graphics effects compiled ahead of time; up to 960×544 with automatic anti-aliasing</li>
-</ul>
-<p><strong>Install:</strong> the easiest way is CBOC Vita Installer (pick Super Mario Galaxy, choose your disc image, press Install). Or install <code>Galaxy-Vita.vpk</code> with VitaShell and copy your prepared game files to <code>ux0:data/smg/game/</code>; see INSTALL.md.</p>
-<p>You need your own Super Mario Galaxy disc (Wii, USA, RMGE01). Unofficial fan project, not affiliated with Nintendo or Sony.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/Galaxy-Vita.vpk" target="_blank" rel="noopener">⬇ Galaxy-Vita.vpk · 5.9 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/cboc-release.json" target="_blank" rel="noopener">cboc-release.json · 1.2 KB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/Galaxy-Vita-install.zip" target="_blank" rel="noopener">Galaxy-Vita-install.zip · 14.4 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.0/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 545.9 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="pending" data-search="openmw vita openmw vita thelostpantheon/openmw openmw - ps vita release (v2.4.1) v2.4.1 ports - better crash safety for some users">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-openmw-vita/icon0.png" alt="Icono de OpenMW Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -1060,84 +1262,6 @@ you need your own super mario galaxy disc (wii, usa, rmge01). unofficial fan pro
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/TheLostPantheon/openmw/releases/download/v2.4.1/openmw-2.4.1.vpk" target="_blank" rel="noopener">⬇ openmw-2.4.1.vpk · 167.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="vitaforge vitaforge josephinoo/vitaforge vitaforge v0.1.8 v0.1.8 utilities ## highlights
-
-• much faster game data extraction
-• plugins can now be installed directly (fixes #29), including wi-fi turbo and livearea nolimits
-• full translations for english, spanish, french, italian and portuguese
-• new high-quality lucide icons
-
-## downloads &amp; installation
-
-• sequential streaming zip extractor: no more long &quot;preparing extraction&quot; wait
-• md5 verification runs in parallel with the download
-• plugins install to the right taihen config section (ux0 or ur0); a reboot is requested afterwards
-• plugins still being validated show a friendly message instead of failing
-
-## interface
-
-• game data badge on tiles of apps that include game data
-• plugin tiles no longer show the grey placeholder icon
-• install progress, steps and notifications are fully translated
-• system language detection fixed for french, italian and portuguese
-
-## technical
-
-• timestamps in all logs
-• version 0.1.8 / app_ver 01.08
-
-## update testing
-
-• draft releases are not returned by github&#x27;s releases/latest endpoint
-• after publishing, test the update prompt from an older installed version
-• an installed 0.1.8 build will not offer to update to the same version">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png" alt="Icono de VitaForge" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · josephinoo/vitaForge</div>
-                      <h2><a href="https://github.com/josephinoo/vitaForge/releases/tag/v0.1.8" target="_blank" rel="noopener">VitaForge</a></h2>
-                      <div class="release-name">VitaForge v0.1.8</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.8</span>
-                    <span>2026-10-24 19:54 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.1.1 → release v0.1.8</div>
-                  
-                  <div class="body markdown-body"><h2>Highlights</h2>
-<p>• Much faster game data extraction
-• Plugins can now be installed directly (fixes #29), including Wi-Fi Turbo and LiveArea NoLimits
-• Full translations for English, Spanish, French, Italian and Portuguese
-• New high-quality Lucide icons</p>
-<h2>Downloads &amp; installation</h2>
-<p>• Sequential streaming ZIP extractor: no more long &quot;Preparing extraction&quot; wait
-• MD5 verification runs in parallel with the download
-• Plugins install to the right taiHEN config section (ux0 or ur0); a reboot is requested afterwards
-• Plugins still being validated show a friendly message instead of failing</p>
-<h2>Interface</h2>
-<p>• Game data badge on tiles of apps that include game data
-• Plugin tiles no longer show the grey placeholder icon
-• Install progress, steps and notifications are fully translated
-• System language detection fixed for French, Italian and Portuguese</p>
-<h2>Technical</h2>
-<p>• Timestamps in all logs
-• Version 0.1.8 / APP_VER 01.08</p>
-<h2>Update testing</h2>
-<p>• Draft releases are not returned by GitHub's releases/latest endpoint
-• After publishing, test the update prompt from an older installed version
-• An installed 0.1.8 build will not offer to update to the same version</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/josephinoo/vitaForge/releases/download/v0.1.8/vitaforge.vpk" target="_blank" rel="noopener">⬇ vitaforge.vpk · 5.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -2155,101 +2279,6 @@ Installation Instructions:</p>
 <p>You can also play the WebGL version at <a target="_blank" rel="noopener noreferrer" href="https://nzp.gay/">https://nzp.gay/</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-3ds.zip" target="_blank" rel="noopener">⬇ nzportable-3ds.zip · 61.8 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt" target="_blank" rel="noopener">build-version.txt · 27.0 B</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux32.zip" target="_blank" rel="noopener">nzportable-linux32.zip · 70.6 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip" target="_blank" rel="noopener">nzportable-linux64.zip · 70.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip" target="_blank" rel="noopener">nzportable-linuxarm64.zip · 70.6 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarmhf.zip" target="_blank" rel="noopener">nzportable-linuxarmhf.zip · 70.6 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-nspire.zip" target="_blank" rel="noopener">nzportable-nspire.zip · 24.0 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-psp.zip" target="_blank" rel="noopener">nzportable-psp.zip · 61.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-switch.zip" target="_blank" rel="noopener">nzportable-switch.zip · 73.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-vita.zip" target="_blank" rel="noopener">nzportable-vita.zip · 72.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win32.zip" target="_blank" rel="noopener">nzportable-win32.zip · 74.2 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win64.zip" target="_blank" rel="noopener">nzportable-win64.zip · 74.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.1-beta v0.1.1-beta ports fixes for new installs, and a much faster first launch.
-
-**download `hl2_vita-0.1.1-beta.zip` below** and install `hl2_vita.vpk` over 0.1.0: your saves and settings stay, and the controls below are corrected automatically. new to the port? follow [install_vita.md](https://github.com/largevegetable/source-engine/blob/vita/install_vita.md).
-
-### fixed
-
-- **the analog sticks didn&#x27;t work on a new install** until options &gt; controls &gt; restore default controls ([#4](https://github.com/largevegetable/source-engine/issues/4)).
-
-
-### faster first launch
-
-- **first launch to the main menu is much faster at around 1-2 mins** (it was about 7-10 minutes before), and **about 1-2 minutes to the first map** (up to 24 minutes before). shaders are now compiled when they&#x27;re first needed instead of all at once, and the shader cache no longer creates hundreds of folders up front.
-- **the trade-off here is that brief hitches will appear upon first load of a map or when an effect is used for the first time.** each new shader takes about half a second to compile on the vita, so the first minutes of a brand new install - and each subsequent new area - can pause for a moment, sometimes a few seconds. every shader is compiled only once and kept in `ux0:data/shader_cache/`. this seems like a fair trade-off compared to the half-hour long initial load times where the engine compiled **everything** upfront. removing these hitches is the next big item on my list.
-
-### also new
-
-- **gyro aiming** ([#3](https://github.com/largevegetable/source-engine/issues/3)): turn and tilt the vita to aim, on top of the right stick. off by default; turn it on and set its sensitivity in options &gt; controls.
-- **the touchscreen&#x27;s left and right halves can be assigned to any action** in options &gt; controls. they work in game only; in the menus you tap as usual.
-- **the rear touchpad&#x27;s right half sprints by default.** the left half still crouches.
-- **loads are a little shorter:** the engine log no longer writes every line to the memory card on its own, and the lightmap rebuild runs under the loading screen.
-- **better bug reports:** `engine.log` now keeps the last five sessions, like the boot log, and readme_vita.md lists what to include (firmware, model, storage, plugins).
-
-### known issues
-
-- first-time shader hitches, described above.
-- rarely, the game can crash while loading the next map. save often.
-- cube map reflections are off, and the intro videos don&#x27;t play.
-- suspend and resume are lightly tested.
-- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.
-- half-life 2 only: no episodes, lost coast, multiplayer or mods.
-
-### reporting bugs
-
-open an [issue](https://github.com/largevegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, where you were in the game, and the version (top right of the menus). readme_vita.md has the details.
-
-not affiliated with or endorsed by valve or sony. free, and it must stay free.
-
-sha-256 of the zip: `4d875af76c343eddf19cf8efff4fb7c1563085213d7e79c6c150651d91d78c42`">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/half-life-2-for-ps-vita/icon0.png" alt="Icono de Half-Life 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · LargeVegetable/source-engine</div>
-                      <h2><a href="https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.1-beta" target="_blank" rel="noopener">Half-Life 2</a></h2>
-                      <div class="release-name">Half-Life 2 for PS Vita 0.1.1-beta</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.1-beta</span>
-                    <span>2026-10-22 04:09 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.1</div>
-                  
-                  <div class="body markdown-body"><p>Fixes for new installs, and a much faster first launch.</p>
-<p><strong>Download <code>hl2_vita-0.1.1-beta.zip</code> below</strong> and install <code>hl2_vita.vpk</code> over 0.1.0: your saves and settings stay, and the controls below are corrected automatically. New to the port? Follow <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md">INSTALL_VITA.md</a>.</p>
-<h3>Fixed</h3>
-<ul>
-<li><strong>The analog sticks didn't work on a new install</strong> until Options &gt; Controls &gt; Restore Default Controls (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/4">#4</a>).</li>
-</ul>
-<h3>Faster first launch</h3>
-<ul>
-<li><strong>First launch to the main menu is much faster at around 1-2 mins</strong> (it was about 7-10 minutes before), and <strong>about 1-2 minutes to the first map</strong> (up to 24 minutes before). Shaders are now compiled when they're first needed instead of all at once, and the shader cache no longer creates hundreds of folders up front.</li>
-<li><strong>The trade-off here is that brief hitches will appear upon first load of a map or when an effect is used for the first time.</strong> Each new shader takes about half a second to compile on the Vita, so the first minutes of a brand new install - and each subsequent new area - can pause for a moment, sometimes a few seconds. Every shader is compiled only once and kept in <code>ux0:data/shader_cache/</code>. This seems like a fair trade-off compared to the half-hour long initial load times where the engine compiled <strong>everything</strong> upfront. Removing these hitches is the next big item on my list.</li>
-</ul>
-<h3>Also new</h3>
-<ul>
-<li><strong>Gyro aiming</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/3">#3</a>): turn and tilt the Vita to aim, on top of the right stick. Off by default; turn it on and set its sensitivity in Options &gt; Controls.</li>
-<li><strong>The touchscreen's left and right halves can be assigned to any action</strong> in Options &gt; Controls. They work in game only; in the menus you tap as usual.</li>
-<li><strong>The rear touchpad's right half sprints by default.</strong> The left half still crouches.</li>
-<li><strong>Loads are a little shorter:</strong> the engine log no longer writes every line to the memory card on its own, and the lightmap rebuild runs under the loading screen.</li>
-<li><strong>Better bug reports:</strong> <code>engine.log</code> now keeps the last five sessions, like the boot log, and README_VITA.md lists what to include (firmware, model, storage, plugins).</li>
-</ul>
-<h3>Known issues</h3>
-<ul>
-<li>First-time shader hitches, described above.</li>
-<li>Rarely, the game can crash while loading the next map. Save often.</li>
-<li>Cube map reflections are off, and the intro videos don't play.</li>
-<li>Suspend and resume are lightly tested.</li>
-<li>kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.</li>
-<li>Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.</li>
-</ul>
-<h3>Reporting bugs</h3>
-<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues">issue</a> with <code>ux0:data/hl2_vita_boot.txt</code>, <code>ux0:data/halflife2/engine.log</code>, <code>crash.log</code> if there is one, your firmware and model, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.</p>
-<p>Not affiliated with or endorsed by Valve or Sony. Free, and it must stay free.</p>
-<p>SHA-256 of the zip: <code>4d875af76c343eddf19cf8efff4fb7c1563085213d7e79c6c150651d91d78c42</code></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/LargeVegetable/source-engine/releases/download/v0.1.1-beta/hl2_vita-0.1.1-beta.zip" target="_blank" rel="noopener">⬇ hl2_vita-0.1.1-beta.zip · 19.2 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27696,41 +27725,10 @@ When in doubt, make sure to check the hash of the files to guarantee the files a
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="quicklaunch installer quicklaunch installer drok17/quicklaunch-installer quicklaunch installer v1.4 v1.4 utilities - added edit menu for in-application customization
-- added more ui elements for ease of use.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-quicklaunch-installer/icon0.png" alt="Icono de QuickLaunch Installer" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · DRok17/QuickLaunch-Installer</div>
-                      <h2><a href="https://github.com/DRok17/QuickLaunch-Installer/releases/tag/v1.4" target="_blank" rel="noopener">QuickLaunch Installer</a></h2>
-                      <div class="release-name">QuickLaunch Installer v1.4</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.4</span>
-                    <span>2021-10-11 17:19 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.4</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.4</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Added Edit Menu for in-application customization</li>
-<li>Added more UI elements for ease of use.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/DRok17/QuickLaunch-Installer/releases/download/v1.4/QLINSTLPP.vpk" target="_blank" rel="noopener">⬇ QLINSTLPP.vpk · 4.0 MB</a><a class="btn" href="https://github.com/DRok17/QuickLaunch-Installer/releases/download/v1.4/data.zip" target="_blank" rel="noopener">data.zip · 2.0 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-26 15:40 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-26 22:08 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
