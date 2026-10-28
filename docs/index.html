@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">390</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>93</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>480</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">385</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>95</strong><span>pendientes</span></div>
+        <div class="stat"><strong>472</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,278 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita the impossible game — ps vita port v1.2.1 v1.2.0 ports # the impossible game — ps vita port v1.2.1
+
+a critical bugfix and universal compatibility release for **the impossible game** on playstation vita and playstation tv.
+
+this update resolves the regression in v1.2.0 where worlds rendered as blank white rectangles and audio was completely silent, while preserving full dynamic support for both the **base game** and the **level pack**.
+
+---
+
+## 🚨 critical fixes in v1.2.1
+
+### 1. fix for white worlds / missing textures
+- **stack alignment fix in `impossiblegame_initgame`**: in previous builds, passing `fps` as a `jfloat` under modern hardfp toolchains caused the compiler to place it in vfp register `s0`, skipping a stack slot. `libimpossible.so` (compiled under softfp aapcs) expected `fps` at `[sp, 4]`, which shifted the texture id arguments: the main texture atlas (`gametextures.png`) received the second texture id and the second received garbage, leaving game textures unbound and rendering obstacles and background as blank white quads. passing `fps` as a 32-bit bitcasted word preserves exact stack layout.
+- **fixed-function gles1 float bridge**: calls to `glcolor4f`, `glclearcolor`, `gltexenvf`, `glpointsize`, `gltranslatef`, and `glrotatef` from `libimpossible.so` now pass through softfp-to-hardfp integer bridge wrappers, ensuring color and transform values are correctly delivered to vitagl.
+
+### 2. fix for total audio silence
+- **abi mismatch in math functions**: `stb_vorbis` was passing float arguments in integer registers (`r0-r3`), while vitasdk gcc 15 `libm.a` (`sin`, `cos`, `pow`, `floor`) expected them in vfp registers (`s0-s15`). this resulted in math functions reading uninitialized registers and returning nans/0, causing audio decoding to output total silence.
+- rebuilding the project natively with `-mfloat-abi=hard` and linking against hardfp runtime libraries completely restores bgm and sfx audio playback.
+
+### 3. abi bridge wrappers (`source/dynlib.c`)
+- implemented dedicated softfp-to-hardfp bridge wrappers for all 10 external float functions imported by `libimpossible.so`:
+  - math: `sinf`, `cosf`, `truncf`, `round`
+  - gles1: `glclearcolor`, `glcolor4f`, `gltexenvf`, `glpointsize`, `gltranslatef`, `glrotatef`
+- removed `-wl,--no-warn-mismatch` entirely from cmake; all project components now compile and link cleanly with `-mfloat-abi=hard`.
+
+---
+
+## ✨ features &amp; universal compatibility (from v1.2.0)
+
+- **universal apk auto-detection**:
+  - dynamically resolves jni exports with automatic fallback between the level pack prefix (`java_com_flukedude_impossiblegamelevelpack_*`) and the base game prefix (`java_com_flukedude_impossiblegame_*`).
+  - drop in either `05133-the-impossible-1.5.2.apk` (2 levels) or `05133-impossible-level-pack.apk` (5 levels) — no code changes or separate builds needed.
+- **adaptive menus &amp; ui**:
+  - **base game mode (2 levels)**: automatically displays the original 2-button level selector (fire aura &amp; original xbox level) and restricts stats &amp; medals to 3 subpages, eliminating missing texture errors.
+  - **level pack mode (5 levels)**: automatically enables the full 5-level grid and 6 subpages for medals and stats.
+- **bounded save synchronization**:
+  - syncs up to 6 medals / 2 levels when running the base game, and 12 medals / 5 levels with the level pack.
+- **toolchain modernization**:
+  - full compatibility with modern vitasdk (gcc 15.2.0 / c23 standards).
+  - resolved `atomic_var_init` deprecation in `logger.c`.
+  - corrected return types in falsojni (`getprimitivearraycritical`, `jda_sizeof`).
+- **persistent diagnostics logging**:
+  - file logger (`ux0:data/theimpossiblegame/logs/log_xxx.log`) enabled unconditionally for runtime diagnostics.
+
+---
+
+## 📋 requirements
+
+- ps vita / ps tv running custom firmware (**henkaku** or **enso**), firmware 3.60/3.65+.
+- [**kubridge**](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin (`ur0:tai/config.txt`).
+- [**libshacccg.suprx**](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
+- a legally obtained copy of:
+  - **the impossible game** for android (`05133-the-impossible-1.5.2.apk`), **or**
+  - **the impossible game: level pack** (`05133-impossible-level-pack.apk`).
+
+---
+
+## 📦 installation instructions
+
+1. install `theimpossiblegame.vpk` on your ps vita using vitashell.
+2. open your legally obtained `.apk` using any zip tool (7-zip, winrar, etc.):
+   - copy `lib/armeabi-v7a/libimpossible.so` to `ux0:data/theimpossiblegame/libimpossible.so`.
+   - copy the `assets/` folder to `ux0:data/theimpossiblegame/assets/`.
+   - copy the `res/` folder to `ux0:data/theimpossiblegame/res/`.
+3. *(optional)* if you own the **level pack** (`05133-impossible-level-pack.apk`), simply copy and overwrite `libimpossible.so` and merge the `assets/` and `res/` folders into `ux0:data/theimpossiblegame/`. the game will automatically detect all 5 levels.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.2.0" target="_blank" rel="noopener">The Impossible Game</a></h2>
+                      <div class="release-name">The Impossible Game — PS Vita Port v1.2.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.0</span>
+                    <span>2026-10-27 23:56 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release v1.2.0</div>
+                  
+                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.2.1</h1>
+<p>A critical bugfix and universal compatibility release for <strong>The Impossible Game</strong> on PlayStation Vita and PlayStation TV.</p>
+<p>This update resolves the regression in v1.2.0 where worlds rendered as blank white rectangles and audio was completely silent, while preserving full dynamic support for both the <strong>Base Game</strong> and the <strong>Level Pack</strong>.</p>
+<hr>
+<h2>🚨 Critical Fixes in v1.2.1</h2>
+<h3>1. Fix for White Worlds / Missing Textures</h3>
+<ul>
+<li><strong>Stack Alignment Fix in <code>ImpossibleGame_initGame</code></strong>: In previous builds, passing <code>fps</code> as a <code>jfloat</code> under modern hardfp toolchains caused the compiler to place it in VFP register <code>s0</code>, skipping a stack slot. <code>libimpossible.so</code> (compiled under softfp AAPCS) expected <code>fps</code> at <code>[sp, 4]</code>, which shifted the texture ID arguments: the main texture atlas (<code>gametextures.png</code>) received the second texture ID and the second received garbage, leaving game textures unbound and rendering obstacles and background as blank white quads. Passing <code>fps</code> as a 32-bit bitcasted word preserves exact stack layout.</li>
+<li><strong>Fixed-Function GLES1 Float Bridge</strong>: Calls to <code>glColor4f</code>, <code>glClearColor</code>, <code>glTexEnvf</code>, <code>glPointSize</code>, <code>glTranslatef</code>, and <code>glRotatef</code> from <code>libimpossible.so</code> now pass through softfp-to-hardfp integer bridge wrappers, ensuring color and transform values are correctly delivered to VitaGL.</li>
+</ul>
+<h3>2. Fix for Total Audio Silence</h3>
+<ul>
+<li><strong>ABI Mismatch in Math Functions</strong>: <code>stb_vorbis</code> was passing float arguments in integer registers (<code>r0-r3</code>), while VitaSDK GCC 15 <code>libm.a</code> (<code>sin</code>, <code>cos</code>, <code>pow</code>, <code>floor</code>) expected them in VFP registers (<code>s0-s15</code>). This resulted in math functions reading uninitialized registers and returning NaNs/0, causing audio decoding to output total silence.</li>
+<li>Rebuilding the project natively with <code>-mfloat-abi=hard</code> and linking against hardfp runtime libraries completely restores BGM and SFX audio playback.</li>
+</ul>
+<h3>3. ABI Bridge Wrappers (<code>source/dynlib.c</code>)</h3>
+<ul>
+<li>Implemented dedicated softfp-to-hardfp bridge wrappers for all 10 external float functions imported by <code>libimpossible.so</code>:<ul>
+<li>Math: <code>sinf</code>, <code>cosf</code>, <code>truncf</code>, <code>round</code></li>
+<li>GLES1: <code>glClearColor</code>, <code>glColor4f</code>, <code>glTexEnvf</code>, <code>glPointSize</code>, <code>glTranslatef</code>, <code>glRotatef</code></li>
+</ul>
+</li>
+<li>Removed <code>-Wl,--no-warn-mismatch</code> entirely from CMake; all project components now compile and link cleanly with <code>-mfloat-abi=hard</code>.</li>
+</ul>
+<hr>
+<h2>✨ Features &amp; Universal Compatibility (from v1.2.0)</h2>
+<ul>
+<li><strong>Universal APK Auto-Detection</strong>:<ul>
+<li>Dynamically resolves JNI exports with automatic fallback between the Level Pack prefix (<code>Java_com_flukedude_impossiblegamelevelpack_*</code>) and the Base Game prefix (<code>Java_com_flukedude_impossiblegame_*</code>).</li>
+<li>Drop in either <code>05133-the-impossible-1.5.2.apk</code> (2 levels) or <code>05133-Impossible-Level-Pack.apk</code> (5 levels) — no code changes or separate builds needed.</li>
+</ul>
+</li>
+<li><strong>Adaptive Menus &amp; UI</strong>:<ul>
+<li><strong>Base Game Mode (2 levels)</strong>: Automatically displays the original 2-button level selector (Fire Aura &amp; Original Xbox Level) and restricts Stats &amp; Medals to 3 subpages, eliminating missing texture errors.</li>
+<li><strong>Level Pack Mode (5 levels)</strong>: Automatically enables the full 5-level grid and 6 subpages for Medals and Stats.</li>
+</ul>
+</li>
+<li><strong>Bounded Save Synchronization</strong>:<ul>
+<li>Syncs up to 6 medals / 2 levels when running the base game, and 12 medals / 5 levels with the Level Pack.</li>
+</ul>
+</li>
+<li><strong>Toolchain Modernization</strong>:<ul>
+<li>Full compatibility with modern VitaSDK (GCC 15.2.0 / C23 standards).</li>
+<li>Resolved <code>ATOMIC_VAR_INIT</code> deprecation in <code>logger.c</code>.</li>
+<li>Corrected return types in FalsoJNI (<code>GetPrimitiveArrayCritical</code>, <code>jda_sizeof</code>).</li>
+</ul>
+</li>
+<li><strong>Persistent Diagnostics Logging</strong>:<ul>
+<li>File logger (<code>ux0:data/theimpossiblegame/logs/log_XXX.log</code>) enabled unconditionally for runtime diagnostics.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>📋 Requirements</h2>
+<ul>
+<li>PS Vita / PS TV running Custom Firmware (<strong>HENkaku</strong> or <strong>Enso</strong>), firmware 3.60/3.65+.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><strong>kubridge</strong></a> installed as a kernel plugin (<code>ur0:tai/config.txt</code>).</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><strong>libshacccg.suprx</strong></a> installed in <code>ur0:data/</code>.</li>
+<li>A legally obtained copy of:<ul>
+<li><strong>The Impossible Game</strong> for Android (<code>05133-the-impossible-1.5.2.apk</code>), <strong>OR</strong></li>
+<li><strong>The Impossible Game: Level Pack</strong> (<code>05133-Impossible-Level-Pack.apk</code>).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>📦 Installation Instructions</h2>
+<ol>
+<li>Install <code>theimpossiblegame.vpk</code> on your PS Vita using VitaShell.</li>
+<li>Open your legally obtained <code>.apk</code> using any zip tool (7-Zip, WinRAR, etc.):<ul>
+<li>Copy <code>lib/armeabi-v7a/libimpossible.so</code> to <code>ux0:data/theimpossiblegame/libimpossible.so</code>.</li>
+<li>Copy the <code>assets/</code> folder to <code>ux0:data/theimpossiblegame/assets/</code>.</li>
+<li>Copy the <code>res/</code> folder to <code>ux0:data/theimpossiblegame/res/</code>.</li>
+</ul>
+</li>
+<li><em>(Optional)</em> If you own the <strong>Level Pack</strong> (<code>05133-Impossible-Level-Pack.apk</code>), simply copy and overwrite <code>libimpossible.so</code> and merge the <code>assets/</code> and <code>res/</code> folders into <code>ux0:data/theimpossiblegame/</code>. The game will automatically detect all 5 levels.</li>
+</ol>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.2.0/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 844.1 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="opennow vita opennow vita opencloudgaming/opennow-vita opennow vita v0.3.3 v0.3.3 utilities [0.3.3] - 2026-10-27
+fixes launches stuck on &quot;waiting for offer sdp&quot; and lets you skip the server picker.
+
+### added
+
+- **server selection mode** in settings → stream → server region: *ask every game*, *automatic*, or a fixed region. automatic and fixed regions launch straight away without the picker (#25).
+- **en / es / fr / ru strings** for the new option.
+
+### fixed
+
+- sessions stuck at **3/3 ready** with &quot;waiting for offer sdp from gfn server...&quot; — updated client identity and signaling so gfn sends the offer again (#27).
+- queue ads are now cancelled instead of played.
+- decoder keeps going when the avcdec sysmodule reports a non-fatal load error.
+
+### changed
+
+- **vita `app_ver=00.33`**.
+
+**note:** if you had a fixed server picked before, choose it again once in settings (the new default is *ask every game*).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-opennow-vita/icon0.png" alt="Icono de OpenNow Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · OpenCloudGaming/OpenNOW-vita</div>
+                      <h2><a href="https://github.com/OpenCloudGaming/OpenNOW-vita/releases/tag/v0.3.3" target="_blank" rel="noopener">OpenNow Vita</a></h2>
+                      <div class="release-name">OpenNOW Vita v0.3.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.3.3</span>
+                    <span>2026-10-27 22:54 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.3.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.3.2 → release v0.3.3</div>
+                  
+                  <div class="body markdown-body"><p>[0.3.3] - 2026-10-27
+Fixes launches stuck on &quot;Waiting for offer SDP&quot; and lets you skip the server picker.</p>
+<h3>Added</h3>
+<ul>
+<li><strong>Server selection mode</strong> in Settings → Stream → Server region: <em>Ask every game</em>, <em>Automatic</em>, or a fixed region. Automatic and fixed regions launch straight away without the picker (#25).</li>
+<li><strong>EN / ES / FR / RU strings</strong> for the new option.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Sessions stuck at <strong>3/3 Ready</strong> with &quot;Waiting for offer SDP from GFN server...&quot; — updated client identity and signaling so GFN sends the offer again (#27).</li>
+<li>Queue ads are now cancelled instead of played.</li>
+<li>Decoder keeps going when the AVCDEC sysmodule reports a non-fatal load error.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li><strong>Vita <code>APP_VER=00.33</code></strong>.</li>
+</ul>
+<p><strong>Note:</strong> if you had a fixed server picked before, choose it again once in Settings (the new default is <em>Ask every game</em>).</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/OpenCloudGaming/OpenNOW-vita/releases/download/v0.3.3/opennow-vita.vpk" target="_blank" rel="noopener">⬇ opennow-vita.vpk · 9.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.5 1.3.5 ports - fixes the crash right after the race against bull (the black mercedes) in the prologue (#45, #51). it happened when some sound files were missing from `ux0:data/nfsmw/`.
+- at startup the game now checks that all the sound files are there. if any is missing, it says which one; run the latest `scripts/extract-game-data.py` again and copy the new files to `ux0:data/nfsmw/`.
+- pursuit breakers play their crash sound, and the speedbreaker plays its start sound again.
+- menu sounds: moving up, down, left and right plays the right sound, and several missing menu sounds are back (#18).
+- smoother sound output, with fewer crackles and cuts.
+- if the game freezes, hold **l + r + select** for 3 seconds: it closes and leaves a crash file (`psp2core` in `ux0:data/`). please attach it to an issue together with `ux0:data/nfsmw/nfsmw.log`. after 20 seconds frozen it still does this by itself.
+
+## updating from 1.3.4
+
+no new game files are needed. install the new `nfsmw.vpk`. if the game warns about missing sound files at startup, re-run the extraction script as described above.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.5" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.3.5</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.3.5</span>
+                    <span>2026-10-27 22:44 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.3.5</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Fixes the crash right after the race against Bull (the black Mercedes) in the prologue (#45, #51). It happened when some sound files were missing from <code>ux0:data/nfsmw/</code>.</li>
+<li>At startup the game now checks that all the sound files are there. If any is missing, it says which one; run the latest <code>scripts/extract-game-data.py</code> again and copy the new files to <code>ux0:data/nfsmw/</code>.</li>
+<li>Pursuit breakers play their crash sound, and the speedbreaker plays its start sound again.</li>
+<li>Menu sounds: moving up, down, left and right plays the right sound, and several missing menu sounds are back (#18).</li>
+<li>Smoother sound output, with fewer crackles and cuts.</li>
+<li>If the game freezes, hold <strong>L + R + Select</strong> for 3 seconds: it closes and leaves a crash file (<code>psp2core</code> in <code>ux0:data/</code>). Please attach it to an issue together with <code>ux0:data/nfsmw/nfsmw.log</code>. After 20 seconds frozen it still does this by itself.</li>
+</ul>
+<h2>Updating from 1.3.4</h2>
+<p>No new game files are needed. Install the new <code>nfsmw.vpk</code>. If the game warns about missing sound files at startup, re-run the extraction script as described above.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.5/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 4.4 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="vitarps5 vitarps5 mauricio-gg/vitaki-vitarps5 vitarps5 v4.2.2-beta.1 v4.2.2-beta.1 utilities &gt; **beta: this is a test build, not the stable release.** it is a pre-release for testing and logging is turned on.
 &gt; the log file is in `ux0:data/vita-chiaki/` and is named like `&lt;number&gt;_vitarps5-testing.log`.
 &gt; to report a problem, open a github issue on this repository and attach the log.
@@ -708,52 +980,6 @@ This is an internal development pre-release, not a release candidate. Bugs, visu
 <p>Please include <code>ux0:data/deltarune/deltarunevita/native-gxm-probe.log</code> (GXM), <code>butterscotch-probe.log</code>, any <code>psp2core-*.psp2dmp</code>, the chapter and the room name.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.79/Deltarune-v0.79.Internal-Build-Test.vpk" target="_blank" rel="noopener">⬇ Deltarune-v0.79.Internal-Build-Test.vpk · 8.1 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.79/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 106.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.4 1.3.4 ports - fixes the crash when entering a shop or the safe house after a long session (#23): the game has 32 mb more memory.
-- the flickering of buildings at fixed spots of the map, such as diamond &amp; union, is much less noticeable.
-- better frame rate in races: the car lighting is shared better between the cpu cores.
-- prevents a crash in the sound code that could happen when a police car appears in a race.
-- if the game freezes for 20 seconds, it now closes itself and leaves a crash file (`psp2core` in `ux0:data/`). if that happens, please attach it to an issue together with `ux0:data/nfsmw/nfsmw.log`.
-
-**tip:** the game runs noticeably better with the cpu at 500 mhz using an overclocking plugin. it drains the battery faster and makes the vita run warmer; see the readme.
-
-## updating from 1.3.3
-
-no new game files are needed. install the new `nfsmw.vpk`.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.4" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.3.4</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.3.4</span>
-                    <span>2026-10-26 02:31 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.0 → release 1.3.4</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Fixes the crash when entering a shop or the safe house after a long session (#23): the game has 32 MB more memory.</li>
-<li>The flickering of buildings at fixed spots of the map, such as Diamond &amp; Union, is much less noticeable.</li>
-<li>Better frame rate in races: the car lighting is shared better between the CPU cores.</li>
-<li>Prevents a crash in the sound code that could happen when a police car appears in a race.</li>
-<li>If the game freezes for 20 seconds, it now closes itself and leaves a crash file (<code>psp2core</code> in <code>ux0:data/</code>). If that happens, please attach it to an issue together with <code>ux0:data/nfsmw/nfsmw.log</code>.</li>
-</ul>
-<p><strong>Tip:</strong> the game runs noticeably better with the CPU at 500 MHz using an overclocking plugin. It drains the battery faster and makes the Vita run warmer; see the README.</p>
-<h2>Updating from 1.3.3</h2>
-<p>No new game files are needed. Install the new <code>nfsmw.vpk</code>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.4/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 4.4 MB</a></div>
                 </div>
               </div>
             </article>
@@ -7453,136 +7679,6 @@ need for speed and its original game content belong to their respective owners. 
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita the impossible game — ps vita port v1.1.0 v.1.1.0 ports # the impossible game — ps vita port v1.1.0
-
-adds full support for the official **level pack** add-on (3 extra levels), on top of the
-playable base port from v1.0.0. runs `libimpossible.so` directly on arm via a *soloader* +
-*falsojni*, with opengl es 1.1 (fixed-function pipeline) rendering through vitagl.
-
-## ✨ what&#x27;s new
-
-- **5 levels playable**: the 2 base levels (fire aura, original xbox level) plus the 3 levels
-  from the official level pack (chaoz fantasy, heaven, phazd) — confirmed working on real
-  hardware with audio, input, and save data.
-- **level pack `.so` support**: the loader now resolves the level pack&#x27;s
-  `libimpossible.so` (same 11 jni exports, `impossiblegamelevelpack` symbol prefix instead of
-  `impossiblegame`) — no source changes needed to swap between the base and level pack `.so`.
-- **save data expanded**: 6 → 12 medals, 2 → 5 levels of practice/no-flag progress tracking.
-- **menu scaled to 5 levels**: level select grew from 2 to 5 buttons (3+2 grid with a back
-  button), stats and medals screens grew from 3 to 6 subpages each.
-- **per-level music**: added `bgm_soundtrack2/3/4` for chaoz fantasy/heaven/phazd; the 2 base
-  levels keep using the original `soundtrack.ogg`.
-
-## ⚠️ known issues / pending work
-
-- none currently open. the level pack&#x27;s `statspage4/5/6.png` assets only ship at their original
-  mdpi resolution (no landscape crop like the base game&#x27;s stats pages) — a minor, cosmetic
-  sharpness difference only, not a functional issue.
-- updating an existing install resets `save.dat` (the save layout grew to fit 5 levels / 12
-  medals) — expected, not a bug.
-
-## 📋 requirements
-
-- ps vita / ps tv running custom firmware (henkaku or enso), firmware 3.60/3.65+.
-- [`kubridge`](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin.
-- [`libshacccg.suprx`](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
-- a legally obtained copy of **the impossible game** for android
-  (`05133-the-impossible-1.5.2.apk`, package `com.flukedude.impossiblegame`).
-- *(optional, for the 3 extra levels)* a legally obtained copy of the **level pack** add-on
-  (`05133-impossible-level-pack.apk`, package `com.flukedude.impossiblegamelevelpack`).
-
-## 📦 installation
-
-1. install `theimpossiblegame.vpk` with vitashell.
-2. copy the contents of `ux0_data/theimpossiblegame/` to `ux0:data/theimpossiblegame/` on
-   the console (see `readme.md` for the full file layout).
-3. **for the 3 extra levels**: unzip `05133-impossible-level-pack.apk` on your pc and merge its
-   `.so`, `soundtrack2/3/4.ogg`, and level-select/stats/medals pngs into
-   `ux0:data/theimpossiblegame/` — see the
-   [level pack installation](readme.md#-level-pack-installation-5-levels-optional) section in
-   `readme.md` for the exact file list and paths. without this step, the game still runs fine
-   with just the 2 base levels.
-
----
-
-see `readme.md` for the full port description, and `port_progress.md` for the bug-by-bug
-diagnosis log (every fix confirmed on real hardware, no guessing).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v.1.1.0" target="_blank" rel="noopener">The Impossible Game</a></h2>
-                      <div class="release-name">The Impossible Game — PS Vita Port v1.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v.1.1.0</span>
-                    <span>2026-09-21 01:27 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0</div>
-                  
-                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.1.0</h1>
-<p>Adds full support for the official <strong>Level Pack</strong> add-on (3 extra levels), on top of the
-playable base port from v1.0.0. Runs <code>libimpossible.so</code> directly on ARM via a <em>soloader</em> +
-<em>FalsoJNI</em>, with OpenGL ES 1.1 (fixed-function pipeline) rendering through vitaGL.</p>
-<h2>✨ What's New</h2>
-<ul>
-<li><strong>5 levels playable</strong>: the 2 base levels (Fire Aura, Original Xbox Level) plus the 3 levels
-from the official Level Pack (Chaoz Fantasy, Heaven, Phazd) — confirmed working on real
-hardware with audio, input, and save data.</li>
-<li><strong>Level Pack <code>.so</code> support</strong>: the loader now resolves the Level Pack's
-<code>libimpossible.so</code> (same 11 JNI exports, <code>impossiblegamelevelpack</code> symbol prefix instead of
-<code>impossiblegame</code>) — no source changes needed to swap between the base and Level Pack <code>.so</code>.</li>
-<li><strong>Save data expanded</strong>: 6 → 12 medals, 2 → 5 levels of practice/no-flag progress tracking.</li>
-<li><strong>Menu scaled to 5 levels</strong>: level select grew from 2 to 5 buttons (3+2 grid with a back
-button), Stats and Medals screens grew from 3 to 6 subpages each.</li>
-<li><strong>Per-level music</strong>: added <code>BGM_SOUNDTRACK2/3/4</code> for Chaoz Fantasy/Heaven/Phazd; the 2 base
-levels keep using the original <code>soundtrack.ogg</code>.</li>
-</ul>
-<h2>⚠️ Known Issues / Pending Work</h2>
-<ul>
-<li>None currently open. The Level Pack's <code>statspage4/5/6.png</code> assets only ship at their original
-mdpi resolution (no landscape crop like the base game's stats pages) — a minor, cosmetic
-sharpness difference only, not a functional issue.</li>
-<li>Updating an existing install resets <code>save.dat</code> (the save layout grew to fit 5 levels / 12
-medals) — expected, not a bug.</li>
-</ul>
-<h2>📋 Requirements</h2>
-<ul>
-<li>PS Vita / PS TV running Custom Firmware (HENkaku or Enso), firmware 3.60/3.65+.</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><code>kubridge</code></a> installed as a kernel plugin.</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><code>libshacccg.suprx</code></a> installed in <code>ur0:data/</code>.</li>
-<li>A legally obtained copy of <strong>The Impossible Game</strong> for Android
-(<code>05133-the-impossible-1.5.2.apk</code>, package <code>com.flukedude.impossiblegame</code>).</li>
-<li><em>(Optional, for the 3 extra levels)</em> A legally obtained copy of the <strong>Level Pack</strong> add-on
-(<code>05133-Impossible-Level-Pack.apk</code>, package <code>com.flukedude.impossiblegamelevelpack</code>).</li>
-</ul>
-<h2>📦 Installation</h2>
-<ol>
-<li>Install <code>theimpossiblegame.vpk</code> with VitaShell.</li>
-<li>Copy the contents of <code>ux0_data/theimpossiblegame/</code> to <code>ux0:data/theimpossiblegame/</code> on
-the console (see <code>README.md</code> for the full file layout).</li>
-<li><strong>For the 3 extra levels</strong>: unzip <code>05133-Impossible-Level-Pack.apk</code> on your PC and merge its
-<code>.so</code>, <code>soundtrack2/3/4.ogg</code>, and level-select/stats/medals PNGs into
-<code>ux0:data/theimpossiblegame/</code> — see the
-<a target="_blank" rel="noopener noreferrer" href="README.md#-level-pack-installation-5-levels-optional">Level Pack Installation</a> section in
-<code>README.md</code> for the exact file list and paths. Without this step, the game still runs fine
-with just the 2 base levels.</li>
-</ol>
-<hr>
-<p>See <code>README.md</code> for the full port description, and <code>port_progress.md</code> for the bug-by-bug
-diagnosis log (every fix confirmed on real hardware, no guessing).</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v.1.1.0/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 783.0 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="jk2vita jk2vita ndrwhun/jk2vita jk2 vita 1.0.1 release-1.0.1 ports # jk2vita 1.0.1
 
 bug-fix release. install over 1.0; settings, saves and the texture cache are kept.
@@ -10579,89 +10675,6 @@ Screen filter inspired by Luma3DS Rosalina (<a target="_blank" rel="noopener nor
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/ONElua/AutoPlugin2/releases/download/2.19/AutoPlugin2.vpk" target="_blank" rel="noopener">⬇ AutoPlugin2.vpk · 11.8 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="opennow vita opennow vita opencloudgaming/opennow-vita opennow vita v0.3.2 v0.3.2 utilities [0.3.2] - 2026-08-16
-a bigger streaming and free-tier release: in-stream keyboard and settings, ads that actually finish, a region picker before launch, and a more stable decode path.
-
-### added
-
-- **in-stream on-screen keyboard** with sticky shift / ctrl / alt and chord support, replacing the old ime path so you can type without leaving the stream.
-- **settings modal** with tabs for stream quality, controls, region, language, color depth, session timer, and per-game control profiles.
-- **controls hint** and an in-stream controls modal with front/back vita diagrams.
-- **session timer overlay** driven by membership tier (free / priority).
-- **queue ads lifecycle** (start → progress → finish) so free sessions no longer time out waiting on ads.
-- **server / region picker** with latency probes and queue stats before launch.
-- **provider-aware cloudmatch base url discovery. (partial)**.
-- **lighter japanese font subset** (~1.8 mb) for catalog titles.
-- **en / es strings** for the new settings and launch ui.
-- **file logging** for stream diagnostics.
-
-### changed
-
-- **async h.264 decode** with jitter-adaptive rtp reorder.
-- **adaptive bitrate ceiling**, **16-bit default color depth**, and frame pacing improvements.
-- **vita `app_ver=00.32`** kept in sync with the cargo version.
-- **multi-zone active-session cleanup** that survives one zone flaking.
-
-### fixed
-
-- settings cache **self-deadlock** on the first prefs write.
-- membership tier now **persists after token refresh** without clobbering refreshed tokens.
-- avoid cloning full settings on the **per-frame control path**.
-- **utf-8-safe** ad id log truncation.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-opennow-vita/icon0.png" alt="Icono de OpenNow Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · OpenCloudGaming/OpenNOW-vita</div>
-                      <h2><a href="https://github.com/OpenCloudGaming/OpenNOW-vita/releases/tag/v0.3.2" target="_blank" rel="noopener">OpenNow Vita</a></h2>
-                      <div class="release-name">OpenNOW Vita v0.3.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.3.2</span>
-                    <span>2026-08-16 11:45 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.3.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.3.2</div>
-                  
-                  <div class="body markdown-body"><p>[0.3.2] - 2026-08-16
-A bigger streaming and Free-tier release: in-stream keyboard and settings, ads that actually finish, a region picker before launch, and a more stable decode path.</p>
-<h3>Added</h3>
-<ul>
-<li><strong>In-stream on-screen keyboard</strong> with sticky Shift / Ctrl / Alt and chord support, replacing the old IME path so you can type without leaving the stream.</li>
-<li><strong>Settings modal</strong> with tabs for stream quality, controls, region, language, color depth, session timer, and per-game control profiles.</li>
-<li><strong>Controls hint</strong> and an in-stream controls modal with front/back Vita diagrams.</li>
-<li><strong>Session timer overlay</strong> driven by membership tier (Free / Priority).</li>
-<li><strong>Queue ads lifecycle</strong> (Start → progress → Finish) so Free sessions no longer time out waiting on ads.</li>
-<li><strong>Server / region picker</strong> with latency probes and queue stats before launch.</li>
-<li><strong>Provider-aware CloudMatch base URL discovery. (Partial)</strong>.</li>
-<li><strong>Lighter Japanese font subset</strong> (~1.8 MB) for catalog titles.</li>
-<li><strong>EN / ES strings</strong> for the new settings and launch UI.</li>
-<li><strong>File logging</strong> for stream diagnostics.</li>
-</ul>
-<h3>Changed</h3>
-<ul>
-<li><strong>Async H.264 decode</strong> with jitter-adaptive RTP reorder.</li>
-<li><strong>Adaptive bitrate ceiling</strong>, <strong>16-bit default color depth</strong>, and frame pacing improvements.</li>
-<li><strong>Vita <code>APP_VER=00.32</code></strong> kept in sync with the Cargo version.</li>
-<li><strong>Multi-zone active-session cleanup</strong> that survives one zone flaking.</li>
-</ul>
-<h3>Fixed</h3>
-<ul>
-<li>Settings cache <strong>self-deadlock</strong> on the first prefs write.</li>
-<li>Membership tier now <strong>persists after token refresh</strong> without clobbering refreshed tokens.</li>
-<li>Avoid cloning full settings on the <strong>per-frame control path</strong>.</li>
-<li><strong>UTF-8-safe</strong> ad id log truncation.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/OpenCloudGaming/OpenNOW-vita/releases/download/v0.3.2/opennow-vita.vpk" target="_blank" rel="noopener">⬇ opennow-vita.vpk · 9.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -27599,107 +27612,10 @@ This is the PS Vita Homebrew version, but there is also a Windows and Nintendo W
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="galactic missile defense galactic missile defense mdashk/galactic-missile-defense-vita v1.0.0 v1.0.0 ports please make sure you follow the instructions present in the readme file.
-don&#x27;t forget to download both the files (vpk and zip package).
-**only the steam version of the game is supported with the provided patch.**
-when in doubt, make sure to check the hash of the files to guarantee the files are correct.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-galactic-missile-defense/icon0.png" alt="Icono de Galactic Missile Defense" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MDashK/Galactic-Missile-Defense-Vita</div>
-                      <h2><a href="https://github.com/MDashK/Galactic-Missile-Defense-Vita/releases/tag/v1.0.0" target="_blank" rel="noopener">Galactic Missile Defense</a></h2>
-                      <div class="release-name">v1.0.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.0</span>
-                    <span>2021-10-17 20:50 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.0</div>
-                  
-                  <div class="body markdown-body"><p>Please make sure you follow the instructions present in the ReadMe file.
-Don't forget to download both the files (VPK and ZIP package).
-<strong>Only the Steam version of the game is supported with the provided patch.</strong>
-When in doubt, make sure to check the hash of the files to guarantee the files are correct.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MDashK/Galactic-Missile-Defense-Vita/releases/download/v1.0.0/GAMIDEF00.VPK" target="_blank" rel="noopener">⬇ GAMIDEF00.VPK · 4.8 MB</a><a class="btn" href="https://github.com/MDashK/Galactic-Missile-Defense-Vita/releases/download/v1.0.0/Galactic-Missile-Defense-Vita-Patch.zip" target="_blank" rel="noopener">Galactic-Missile-Defense-Vita-Patch.zip · 40.9 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="quicklaunch installer quicklaunch installer drok17/quicklaunch-installer quicklaunch installer v1.4 v1.4 utilities - added edit menu for in-application customization
-- added more ui elements for ease of use.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-quicklaunch-installer/icon0.png" alt="Icono de QuickLaunch Installer" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · DRok17/QuickLaunch-Installer</div>
-                      <h2><a href="https://github.com/DRok17/QuickLaunch-Installer/releases/tag/v1.4" target="_blank" rel="noopener">QuickLaunch Installer</a></h2>
-                      <div class="release-name">QuickLaunch Installer v1.4</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.4</span>
-                    <span>2021-10-11 17:19 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.4</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.4</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Added Edit Menu for in-application customization</li>
-<li>Added more UI elements for ease of use.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/DRok17/QuickLaunch-Installer/releases/download/v1.4/QLINSTLPP.vpk" target="_blank" rel="noopener">⬇ QLINSTLPP.vpk · 4.0 MB</a><a class="btn" href="https://github.com/DRok17/QuickLaunch-Installer/releases/download/v1.4/data.zip" target="_blank" rel="noopener">data.zip · 2.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="cook, serve, delicious! vita cook, serve, delicious! vita mdashk/cook-serve-delicious-vita v1.0.0 v1.0.0 ports please make sure you follow the instructions present in the readme file.
-don&#x27;t forget to download both the files (vpk and zip package).
-**only the steam version of the game is supported with the provided patch.**
-when in doubt, make sure to check the hash of the files to guarantee the files are correct.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-cook-serve-delicious-vita/icon0.png" alt="Icono de Cook, Serve, Delicious! Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MDashK/cook-serve-delicious-vita</div>
-                      <h2><a href="https://github.com/MDashK/cook-serve-delicious-vita/releases/tag/v1.0.0" target="_blank" rel="noopener">Cook, Serve, Delicious! Vita</a></h2>
-                      <div class="release-name">v1.0.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.0</span>
-                    <span>2021-10-11 00:41 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.0</div>
-                  
-                  <div class="body markdown-body"><p>Please make sure you follow the instructions present in the ReadMe file.
-Don't forget to download both the files (VPK and ZIP package).
-<strong>Only the Steam version of the game is supported with the provided patch.</strong>
-When in doubt, make sure to check the hash of the files to guarantee the files are correct.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CSDLICIUS.VPK" target="_blank" rel="noopener">⬇ CSDLICIUS.VPK · 3.0 MB</a><a class="btn" href="https://github.com/MDashK/cook-serve-delicious-vita/releases/download/v1.0.0/CookServeDelicious-PSVita-Patch.zip" target="_blank" rel="noopener">CookServeDelicious-PSVita-Patch.zip · 58.9 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-27 21:39 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-28 03:19 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
