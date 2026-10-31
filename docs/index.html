@@ -194,11 +194,11 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">401</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>82</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
-        <div class="stat"><strong>8</strong><span>GitLab</span></div>
+        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">398</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>83</strong><span>pendientes</span></div>
+        <div class="stat"><strong>472</strong><span>GitHub</span></div>
+        <div class="stat"><strong>9</strong><span>GitLab</span></div>
       </div>
     </section>
   </header>
@@ -219,6 +219,156 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.3-beta v0.1.3-beta ports water reflections, sharper textures, smoother lighting, and nine community fixes.
+
+**download `hl2_vita-0.1.3-beta.zip` below** and install `hl2_vita.vpk` over your current version: your saves, settings and compiled shaders stay. the new water needs a few new shaders: they compile the first time water appears, or choose prepare shaders &gt; prepare again in the main menu. new to the port? follow [install_vita.md](https://github.com/largevegetable/source-engine/blob/vita/install_vita.md).
+
+### new
+
+- **texture detail** (options &gt; video): medium is now the default texture setting. it makes walls, floors and characters sharper. the low setting uses less video memory and looks like 0.1.2. a change applies at the next map or save load.
+- **water reflections**: water reflects the sky and its surroundings instead of being dark and flat. the reflections come from pre-made cube maps, so they don&#x27;t show characters or moving objects.
+- **water splashes are back**, with their sound, from objects, the buggy&#x27;s wheels and bullets. bullet splashes are thinned out (one every quarter second, nearby only) to keep their cost down.
+- **smoother lighting on characters and objects**: it now changes gradually as they move between light and shade, instead of in steps. muzzle flashes, the flashlight and explosions still light them instantly.
+
+### fixed
+
+- **music resumes when you load a save** made while music was playing. loading also no longer warns that the save file is suspect. saves made with 0.1.2 benefit too.
+- **a likely cause of freezes while loading the next map** ([#5](https://github.com/largevegetable/source-engine/issues/5)) is fixed ([#14](https://github.com/largevegetable/source-engine/pull/14)).
+- **playing right after prepare shaders could crash** a few minutes in; preparing shouldn&#x27;t cause this any more ([#17](https://github.com/largevegetable/source-engine/pull/17)). restarting the game after preparing is still recommended.
+- **no more stutter a few words into g-man&#x27;s opening speech**: long voice lines and large sounds now play in pieces instead of loading whole ([#16](https://github.com/largevegetable/source-engine/pull/16)).
+- **a short freeze when kleiner first appears** in the opening is gone; the same fix covers breen, eli and the vortigaunts set up the same way later ([#15](https://github.com/largevegetable/source-engine/pull/15)).
+
+### faster
+
+- background threads now sleep when they have nothing to do instead of checking for work every millisecond ([#19](https://github.com/largevegetable/source-engine/pull/19)), and drawing skips a needless system call each time it locks a material ([#20](https://github.com/largevegetable/source-engine/pull/20)), for a slightly higher frame rate.
+- game data now loads in the background on the second processor core instead of the busy main one, so sounds and models arrive sooner and hold up the game less often ([#21](https://github.com/largevegetable/source-engine/pull/21)).
+- saving is faster, so the pause at autosaves is shorter: 193 ms down to 144 ms on one train station map ([#23](https://github.com/largevegetable/source-engine/pull/23)).
+- the menu font is read once at startup instead of ten times, saving about half a second and some memory ([#22](https://github.com/largevegetable/source-engine/pull/22)).
+
+### thanks
+
+thanks to [highda](https://github.com/highda) for all nine of the changes linked above, each one carefully measured and tested on a vita.
+
+### known issues
+
+- rarely, the game can crash or freeze while loading the next map. if it freezes, wait a minute before closing it: it writes a report to the boot log. save often.
+- cube map reflections are off on surfaces other than water, and the intro videos don&#x27;t play.
+- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.
+- half-life 2 only: no episodes, lost coast, multiplayer or mods.
+
+### reporting bugs
+
+open an [issue](https://github.com/largevegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). readme_vita.md has the details.
+
+not affiliated with or endorsed by valve or sony. free, and it must stay free.
+
+sha-256 of the zip: `be1dd4eb481ca8c0c8d42f8fe9d3332ed976578a8818080cb16812408f0d1dc0`">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/half-life-2-for-ps-vita/icon0.png" alt="Icono de Half-Life 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · LargeVegetable/source-engine</div>
+                      <h2><a href="https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.3-beta" target="_blank" rel="noopener">Half-Life 2</a></h2>
+                      <div class="release-name">Half-Life 2 for PS Vita 0.1.3-beta</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.3-beta</span>
+                    <span>2026-10-31 02:55 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.2 → release v0.1.3-beta</div>
+                  
+                  <div class="body markdown-body"><p>Water reflections, sharper textures, smoother lighting, and nine community fixes.</p>
+<p><strong>Download <code>hl2_vita-0.1.3-beta.zip</code> below</strong> and install <code>hl2_vita.vpk</code> over your current version: your saves, settings and compiled shaders stay. The new water needs a few new shaders: they compile the first time water appears, or choose Prepare shaders &gt; Prepare again in the main menu. New to the port? Follow <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md">INSTALL_VITA.md</a>.</p>
+<h3>New</h3>
+<ul>
+<li><strong>Texture detail</strong> (Options &gt; Video): Medium is now the default texture setting. It makes walls, floors and characters sharper. The low setting uses less video memory and looks like 0.1.2. A change applies at the next map or save load.</li>
+<li><strong>Water reflections</strong>: water reflects the sky and its surroundings instead of being dark and flat. The reflections come from pre-made cube maps, so they don't show characters or moving objects.</li>
+<li><strong>Water splashes are back</strong>, with their sound, from objects, the buggy's wheels and bullets. Bullet splashes are thinned out (one every quarter second, nearby only) to keep their cost down.</li>
+<li><strong>Smoother lighting on characters and objects</strong>: it now changes gradually as they move between light and shade, instead of in steps. Muzzle flashes, the flashlight and explosions still light them instantly.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li><strong>Music resumes when you load a save</strong> made while music was playing. Loading also no longer warns that the save file is suspect. Saves made with 0.1.2 benefit too.</li>
+<li><strong>A likely cause of freezes while loading the next map</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/5">#5</a>) is fixed (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/14">#14</a>).</li>
+<li><strong>Playing right after Prepare shaders could crash</strong> a few minutes in; preparing shouldn't cause this any more (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/17">#17</a>). Restarting the game after preparing is still recommended.</li>
+<li><strong>No more stutter a few words into G-Man's opening speech</strong>: long voice lines and large sounds now play in pieces instead of loading whole (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/16">#16</a>).</li>
+<li><strong>A short freeze when Kleiner first appears</strong> in the opening is gone; the same fix covers Breen, Eli and the Vortigaunts set up the same way later (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/15">#15</a>).</li>
+</ul>
+<h3>Faster</h3>
+<ul>
+<li>Background threads now sleep when they have nothing to do instead of checking for work every millisecond (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/19">#19</a>), and drawing skips a needless system call each time it locks a material (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/20">#20</a>), for a slightly higher frame rate.</li>
+<li>Game data now loads in the background on the second processor core instead of the busy main one, so sounds and models arrive sooner and hold up the game less often (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/21">#21</a>).</li>
+<li>Saving is faster, so the pause at autosaves is shorter: 193 ms down to 144 ms on one train station map (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/23">#23</a>).</li>
+<li>The menu font is read once at startup instead of ten times, saving about half a second and some memory (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/pull/22">#22</a>).</li>
+</ul>
+<h3>Thanks</h3>
+<p>Thanks to <a target="_blank" rel="noopener noreferrer" href="https://github.com/highda">highda</a> for all nine of the changes linked above, each one carefully measured and tested on a Vita.</p>
+<h3>Known issues</h3>
+<ul>
+<li>Rarely, the game can crash or freeze while loading the next map. If it freezes, wait a minute before closing it: it writes a report to the boot log. Save often.</li>
+<li>Cube map reflections are off on surfaces other than water, and the intro videos don't play.</li>
+<li>kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.</li>
+<li>Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.</li>
+</ul>
+<h3>Reporting bugs</h3>
+<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues">issue</a> with <code>ux0:data/hl2_vita_boot.txt</code>, <code>ux0:data/halflife2/engine.log</code>, <code>crash.log</code> if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.</p>
+<p>Not affiliated with or endorsed by Valve or Sony. Free, and it must stay free.</p>
+<p>SHA-256 of the zip: <code>be1dd4eb481ca8c0c8d42f8fe9d3332ed976578a8818080cb16812408f0d1dc0</code></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/LargeVegetable/source-engine/releases/download/v0.1.3-beta/hl2_vita-0.1.3-beta.zip" target="_blank" rel="noopener">⬇ hl2_vita-0.1.3-beta.zip · 19.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.9 1.3.9 ports ## fixes
+
+- **stuck sounds and sound crashes** (#74, #78, #87). i found the root cause: on the vita, the lock that should keep the sound mixer and the game apart treated both as the same thread, so the two could change the same sounds at once. this left the engine stuck at full revs or the brakes and the police siren playing nonstop, cut off collision and skid sounds, and crashed the game after some races. the lock now uses the vita&#x27;s own threads, and the logs from testers&#x27; races came back clean.
+- **cars are fast again** (#80, #83). 1.3.8 lost game time whenever a frame took longer than 33 ms, so the cars accelerated and turned more slowly and felt heavy. the frame rate stays the same.
+- **menu sounds in game** (#86, #87). the pause menu, the map and the messages play their sounds again. 1.3.8 muted every sound while the game was paused.
+- **showcase camera** (#70, #91). rotate the car with the right stick, and zoom with l (out) and r (in).
+
+## updating from 1.3.8
+
+no new game files are needed. install the new `nfsmw.vpk`. your saves are not changed.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.9" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.3.9</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.3.9</span>
+                    <span>2026-10-30 23:26 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.7</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.7 → release 1.3.9</div>
+                  
+                  <div class="body markdown-body"><h2>Fixes</h2>
+<ul>
+<li><strong>Stuck sounds and sound crashes</strong> (#74, #78, #87). I found the root cause: on the Vita, the lock that should keep the sound mixer and the game apart treated both as the same thread, so the two could change the same sounds at once. This left the engine stuck at full revs or the brakes and the police siren playing nonstop, cut off collision and skid sounds, and crashed the game after some races. The lock now uses the Vita's own threads, and the logs from testers' races came back clean.</li>
+<li><strong>Cars are fast again</strong> (#80, #83). 1.3.8 lost game time whenever a frame took longer than 33 ms, so the cars accelerated and turned more slowly and felt heavy. The frame rate stays the same.</li>
+<li><strong>Menu sounds in game</strong> (#86, #87). The pause menu, the map and the messages play their sounds again. 1.3.8 muted every sound while the game was paused.</li>
+<li><strong>Showcase camera</strong> (#70, #91). Rotate the car with the right stick, and zoom with L (out) and R (in).</li>
+</ul>
+<h2>Updating from 1.3.8</h2>
+<p>No new game files are needed. Install the new <code>nfsmw.vpk</code>. Your saves are not changed.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.9/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4230">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -241,84 +391,6 @@
                   <div class="body markdown-body"><p>buildnum 4230</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/harbour-xash3d-fwgs.aarch64.rpm" target="_blank" rel="noopener">⬇ harbour-xash3d-fwgs.aarch64.rpm · 17.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/harbour-xash3d-fwgs.armv7hl.rpm" target="_blank" rel="noopener">harbour-xash3d-fwgs.armv7hl.rpm · 17.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">su.xash.Engine.Compat.i386.flatpak · 11.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.8 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 26.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 23.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 26.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 20.7 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 15.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 17.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.8 1.3.8 ports ## performance
-
-- **steady 30 fps** (#63). the game makes fewer draw calls, has a fixed time budget each frame for lighting the cars, updates car reflections less often, and skips the extra full-screen pass when no effect needs it. loading track sections from the memory card no longer holds up the frame being drawn.
-
-## new video options (options &gt; video)
-
-- **car reflections:** *static* (recommended), *dynamic* or *off* (#5). *static* refreshes the reflection a little at a time, which costs much less. *dynamic* refreshes it every frame.
-- **speed blur:** the blur and smear at high speed. it is now **off by default**; turn it on if you want it, but it costs frame rate.
-- the recommended values show **(rec.)**: 640x368, 30 fps, static reflections.
-
-## car lights
-
-- **light flares** on headlights, brake lights and reverse lights, like on the ps2.
-- **police sirens** flash red, blue and white (#67).
-- **nitrous:** the tail lights leave a glowing streak while nos is on.
-
-## fixes
-
-- **custom gauges no longer locks the game** (#61, #71, #73). one of the gauge packs was extracted from the disc under another file name, and the screen waited for it forever with the controls off. no need to extract the game files again.
-- **crash in races with many collisions** (#78). the sound system could hand the memory of a sound that was still playing to a new one, which led to cut-off collision and skid sounds, a stuck horn, and then a crash. this may also fix sounds that keep playing, like the police siren after a pursuit (#74); please tell us if you still hear it.
-- **drag races with custom controls:** you can change lanes again (#72, #75, #76).
-- **drag races:** hitting traffic at high speed totals your car and shows the race results, like on the ps2 (#76).
-- fixed the crash after *press start* in 1.3.8-beta1 with car light glow off (#82).
-
-## updating from 1.3.7
-
-no new game files are needed. install the new `nfsmw.vpk`. your saves are not changed. speed blur starts off even if you never changed it, and the reflections start on *static*.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.8" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.3.8</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.3.8</span>
-                    <span>2026-10-30 15:10 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.7</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.7 → release 1.3.8</div>
-                  
-                  <div class="body markdown-body"><h2>Performance</h2>
-<ul>
-<li><strong>Steady 30 FPS</strong> (#63). The game makes fewer draw calls, has a fixed time budget each frame for lighting the cars, updates car reflections less often, and skips the extra full-screen pass when no effect needs it. Loading track sections from the memory card no longer holds up the frame being drawn.</li>
-</ul>
-<h2>New video options (Options &gt; Video)</h2>
-<ul>
-<li><strong>Car Reflections:</strong> <em>Static</em> (recommended), <em>Dynamic</em> or <em>Off</em> (#5). <em>Static</em> refreshes the reflection a little at a time, which costs much less. <em>Dynamic</em> refreshes it every frame.</li>
-<li><strong>Speed Blur:</strong> the blur and smear at high speed. It is now <strong>off by default</strong>; turn it on if you want it, but it costs frame rate.</li>
-<li>The recommended values show <strong>(Rec.)</strong>: 640x368, 30 FPS, Static reflections.</li>
-</ul>
-<h2>Car lights</h2>
-<ul>
-<li><strong>Light flares</strong> on headlights, brake lights and reverse lights, like on the PS2.</li>
-<li><strong>Police sirens</strong> flash red, blue and white (#67).</li>
-<li><strong>Nitrous:</strong> the tail lights leave a glowing streak while NOS is on.</li>
-</ul>
-<h2>Fixes</h2>
-<ul>
-<li><strong>Custom Gauges no longer locks the game</strong> (#61, #71, #73). One of the gauge packs was extracted from the disc under another file name, and the screen waited for it forever with the controls off. No need to extract the game files again.</li>
-<li><strong>Crash in races with many collisions</strong> (#78). The sound system could hand the memory of a sound that was still playing to a new one, which led to cut-off collision and skid sounds, a stuck horn, and then a crash. This may also fix sounds that keep playing, like the police siren after a pursuit (#74); please tell us if you still hear it.</li>
-<li><strong>Drag races with custom controls:</strong> you can change lanes again (#72, #75, #76).</li>
-<li><strong>Drag races:</strong> hitting traffic at high speed totals your car and shows the race results, like on the PS2 (#76).</li>
-<li>Fixed the crash after <em>Press START</em> in 1.3.8-beta1 with Car Light Glow off (#82).</li>
-</ul>
-<h2>Updating from 1.3.7</h2>
-<p>No new game files are needed. Install the new <code>nfsmw.vpk</code>. Your saves are not changed. Speed Blur starts off even if you never changed it, and the reflections start on <em>Static</em>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.3.8/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1870,92 +1942,6 @@ built by github actions from this repo and scanned with windows defender.">
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.2-beta v0.1.2-beta ports shader preparation, new options, and fixes for two physics crashes.
-
-**download `hl2_vita-0.1.2-beta.zip` below** and install `hl2_vita.vpk` over your current version: your saves and settings stay. new to the port? follow [install_vita.md](https://github.com/largevegetable/source-engine/blob/vita/install_vita.md).
-
-### new
-
-- **shader pre-compilation, in the main menu** ([#7](https://github.com/largevegetable/source-engine/issues/7)): compiles every shader the game uses ahead of time, so play no longer pauses the first time an effect or area appears. it takes about 20 minutes the first time (a few minutes if run again later), with a progress bar and an estimate of the time left. keep the vita plugged in; the screen may dim or flicker while it works. hold ○ to stop: progress is kept, and continue picks up where it left off. restart the game when it&#x27;s done. **coming from 0.1.0 or the 0.1.0 hotfix?** this build can&#x27;t reuse the shaders those versions compiled, so delete `ux0:data/shader_cache/` to free the space before preparing. shaders compiled by 0.1.1 are kept and reused. if you choose not to pre-compile shaders, the game will compile on-demand and hitches will occur.
-- **field of view** ([#10](https://github.com/largevegetable/source-engine/issues/10)): options &gt; video, from 55 to 90. 75 is the default, and used to be the lowest.
-- **look acceleration on/off** ([#11](https://github.com/largevegetable/source-engine/issues/11)): options &gt; controls. off, the view turns in proportion to how far the right stick is pushed, without the slow start and the speed-up.
-- **button driving for the airboat and jeep/buggy thing**: options &gt; controls &gt; vehicle controls &gt; cross &amp; circle. ✕ accelerates and ○ brakes and reverses; the left stick still steers, and the handbrake moves to the rear touchpad&#x27;s left half.
-- **unlock all chapters**: press △ in new game.
-
-### fixed
-
-- **physics crashes in route kanal and water hazard** ([#6](https://github.com/largevegetable/source-engine/issues/6), [#12](https://github.com/largevegetable/source-engine/issues/12)): the physics engine could corrupt its own bookkeeping and crash on the next level change or reload, or mid-fight. the step that corrupted it is now blocked, and an object whose physics break down is held in place instead of taking the game with it. if you still get a crash there, please send your logs.
-- closing the game while a shader was being saved could leave a damaged file that crashed later sessions.
-- controls carried over from 0.1.0: triangle and the rear touchpad no longer stay bound to multiplayer commands that do nothing.
-
-### known issues
-
-- rarely, the game can crash or stop responding while loading the next map ([#5](https://github.com/largevegetable/source-engine/issues/5)). if it freezes, wait a minute before closing it: it writes a report to the boot log. save often.
-- cube map reflections are off, and the intro videos don&#x27;t play.
-- suspend and resume are lightly tested.
-- kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.
-- half-life 2 only: no episodes, lost coast, multiplayer or mods.
-
-### reporting bugs
-
-open an [issue](https://github.com/largevegetable/source-engine/issues) with `ux0:data/hl2_vita_boot.txt`, `ux0:data/halflife2/engine.log`, `crash.log` if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). readme_vita.md has the details.
-
-not affiliated with or endorsed by valve or sony. free, and it must stay free.
-
-sha-256 of the zip: `edbfd586029ae99d22cf6e124c79c91db6127281dc376cada9218503c8226c75`">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/half-life-2-for-ps-vita/icon0.png" alt="Icono de Half-Life 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · LargeVegetable/source-engine</div>
-                      <h2><a href="https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.2-beta" target="_blank" rel="noopener">Half-Life 2</a></h2>
-                      <div class="release-name">Half-Life 2 for PS Vita 0.1.2-beta</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.2-beta</span>
-                    <span>2026-10-26 21:18 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.2</div>
-                  
-                  <div class="body markdown-body"><p>Shader preparation, new options, and fixes for two physics crashes.</p>
-<p><strong>Download <code>hl2_vita-0.1.2-beta.zip</code> below</strong> and install <code>hl2_vita.vpk</code> over your current version: your saves and settings stay. New to the port? Follow <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md">INSTALL_VITA.md</a>.</p>
-<h3>New</h3>
-<ul>
-<li><strong>Shader pre-compilation, in the main menu</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/7">#7</a>): compiles every shader the game uses ahead of time, so play no longer pauses the first time an effect or area appears. It takes about 20 minutes the first time (a few minutes if run again later), with a progress bar and an estimate of the time left. Keep the Vita plugged in; the screen may dim or flicker while it works. Hold ○ to stop: progress is kept, and Continue picks up where it left off. Restart the game when it's done. <strong>Coming from 0.1.0 or the 0.1.0 hotfix?</strong> This build can't reuse the shaders those versions compiled, so delete <code>ux0:data/shader_cache/</code> to free the space before preparing. Shaders compiled by 0.1.1 are kept and reused. If you choose not to pre-compile shaders, the game will compile on-demand and hitches will occur.</li>
-<li><strong>Field of view</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/10">#10</a>): Options &gt; Video, from 55 to 90. 75 is the default, and used to be the lowest.</li>
-<li><strong>Look acceleration on/off</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/11">#11</a>): Options &gt; Controls. Off, the view turns in proportion to how far the right stick is pushed, without the slow start and the speed-up.</li>
-<li><strong>Button driving for the airboat and jeep/buggy thing</strong>: Options &gt; Controls &gt; Vehicle controls &gt; Cross &amp; circle. ✕ accelerates and ○ brakes and reverses; the left stick still steers, and the handbrake moves to the rear touchpad's left half.</li>
-<li><strong>Unlock all chapters</strong>: press △ in New Game.</li>
-</ul>
-<h3>Fixed</h3>
-<ul>
-<li><strong>Physics crashes in Route Kanal and Water Hazard</strong> (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/6">#6</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/12">#12</a>): the physics engine could corrupt its own bookkeeping and crash on the next level change or reload, or mid-fight. The step that corrupted it is now blocked, and an object whose physics break down is held in place instead of taking the game with it. If you still get a crash there, please send your logs.</li>
-<li>Closing the game while a shader was being saved could leave a damaged file that crashed later sessions.</li>
-<li>Controls carried over from 0.1.0: triangle and the rear touchpad no longer stay bound to multiplayer commands that do nothing.</li>
-</ul>
-<h3>Known issues</h3>
-<ul>
-<li>Rarely, the game can crash or stop responding while loading the next map (<a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues/5">#5</a>). If it freezes, wait a minute before closing it: it writes a report to the boot log. Save often.</li>
-<li>Cube map reflections are off, and the intro videos don't play.</li>
-<li>Suspend and resume are lightly tested.</li>
-<li>kubridge has known offsets only for firmware 3.60 and 3.65; on others it warns that crashes may occur.</li>
-<li>Half-Life 2 only: no Episodes, Lost Coast, multiplayer or mods.</li>
-</ul>
-<h3>Reporting bugs</h3>
-<p>Open an <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/issues">issue</a> with <code>ux0:data/hl2_vita_boot.txt</code>, <code>ux0:data/halflife2/engine.log</code>, <code>crash.log</code> if there is one, your firmware and model, any plugins you run, where you were in the game, and the version (top right of the menus). README_VITA.md has the details.</p>
-<p>Not affiliated with or endorsed by Valve or Sony. Free, and it must stay free.</p>
-<p>SHA-256 of the zip: <code>edbfd586029ae99d22cf6e124c79c91db6127281dc376cada9218503c8226c75</code></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/LargeVegetable/source-engine/releases/download/v0.1.2-beta/hl2_vita-0.1.2-beta.zip" target="_blank" rel="noopener">⬇ hl2_vita-0.1.2-beta.zip · 19.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="super mario galaxy super mario galaxy cboc-vita-lab/galaxy-vita super mario galaxy 1.1 v1.1 ports super mario galaxy 1.1 brings better-looking eyes, a new settings menu, game-language selection and a clearer start-up to ps vita. still native: no emulator and no streaming.
 
 ## mario&#x27;s eyes are back
@@ -3324,6 +3310,186 @@ for more information, see the [readme](https://github.com/vegettosan/hungry-shar
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.2/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 17.9 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.2.2/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 132.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="gitlab" data-catalog="uptodate" data-search="nba 2k16 nba 2k16 sexcurrybeats/nba2k16-vita nba 2k16 vita v0.2 v0.2 ports # nba 2k16 vita v0.2
+
+nba 2k16 comes to ps vita as an offline port of the android game, with physical controls, optional rear-touch triggers, touchscreen menus, commentary, crowd and court audio, and local saves.
+
+quick game, blacktop, season and mycareer are available. see the known issues below for current limitations.
+
+## changes in v0.2
+
+- smoother settings-list scrolling, including access to the last video settings row.
+- a fixed vita graphics preset that prevents unsupported crowd and sideline options from being enabled accidentally.
+- improved cache handling under memory pressure to reduce gameplay hitches, with bounded recovery instead of a busy wait.
+- rear-touch l2/r2 disabled by default, with an optional configuration file to enable them. physical l/r, sticks and front touch remain available. see [controls](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/v0.2/readme.md#controls).
+- selected-folder iff mods without replacing the original obb, including native roster save/load workflows.
+- vpk-only updates from prepared v0.1 installations; compatible graphics caches are retained.
+
+## download and install
+
+**first install: choose `nba2k16vita_v0.2-setup.zip` from the release assets.** it contains the vpk, windows data helper, graphics cache and offline instructions. no build tools or manual apk extraction are needed.
+
+you need a homebrew-enabled vita with vitashell, `kubridge.skprx` and `libshacccg.suprx`; a windows pc with windows powershell 5.1; and your own **nba 2k16 android 0.0.29 armv7 apk** plus the matching **`main.29.com.t2ksports.nba2k16android.obb`** (2,127,425,536 bytes). have at least 3 gb free on the pc for preparation and 3 gb free on `ux0:`, with additional room for saves and caches.
+
+1. extract the entire setup zip to a writable local windows folder and run **`prepare nba 2k16 data.bat`**.
+2. select your apk and obb. wait for **`ready to copy`**.
+3. copy the **contents** of `nba 2k16 vita prepared\ux0\` to `ux0:` using vitashell usb or ftp.
+4. for usb transfers, safely eject the vita drive on the pc and press **circle in vitashell** to leave usb mode. install **`ux0:nba2k16vita_v0.2.vpk`**, then launch **nba 2k16**.
+
+read the [installation guide](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/v0.2/docs/installing.md) for plugin setup, folder examples and troubleshooting. the setup zip includes `start_here.txt`. a macos/linux preparation helper is not included.
+
+downloading the release and installing missing vita dependencies can require internet access. preparing your game files and playing are offline.
+
+**other apk packaging:** accepted if all five required armv7 libraries match the supported build. other native game versions and different obb data are untested and unsupported in v0.2. the helper checks contents automatically; a matching filename alone is not enough.
+
+## release assets
+
+| file | use |
+|---|---|
+| [`nba2k16vita_v0.2-setup.zip`](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/nba2k16vita_v0.2-setup.zip) | recommended first install: vpk, windows helper, graphics cache and instructions. |
+| [`nba2k16vita_v0.2.vpk`](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/nba2k16vita_v0.2.vpk) | application only, for an update or already-prepared data. |
+| [`nba2k16-vita-v0.2-source.zip`](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/nba2k16-vita-v0.2-source.zip) | matching source and build instructions for developers. |
+| [`sha256sums.txt`](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/sha256sums.txt) | sha-256 checksums for the release downloads, including optional starter mods. |
+
+the downloads do not include an apk, obb or original android game libraries. a prepared graphics cache is included. supply your own legally obtained game files.
+
+## known issues
+
+- crowd and sideline rendering can show corrupted colors and cause audio dropouts or stalls. v0.2 keeps these options off with a fixed graphics preset
+
+- blacktop can intermittently freeze after confirming **quit then yes**. if it stays frozen, press ps, close nba 2k16 from its livearea, and reopen the app
+- brief hitches can occur during games. replays can run slowly
+- game loading and some menu transitions, including opening quick game, can be slow. the included graphics cache reduces first-use loading; uncached content can take longer
+- a team logo can be missing from the season calendar. some net effects can be missed
+
+## graphics settings
+
+v0.2 fixes stadium and player to **ultra low**, with reflection, shadow, crowd and sideline **off**. video settings remains available for viewing, but its values cannot be changed. crowd audio remains enabled. optional graphics can return after their rendering and performance issues are resolved.
+
+## updating and reporting problems
+
+back up **`ux0:data/nba2k16/internal/`**, then install the newer vpk over the old one. keep the game-data folder and saves; re-prepare data only when release notes ask you to.
+
+v0.2 reuses the existing cache: an already prepared v0.1 installation needs only the newer vpk. keep installed mods and both cache directories. a fresh installation uses the complete setup zip.
+
+each subfolder in `ux0:data/nba2k16/mods/` is one mod pack; `active.txt` selects the one folder to load. a pack can contain one replacement or a collection. to use mods together, combine compatible files in one simple pack or use the combined starter package. see [modding](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/main/docs/modding.md#how-mod-packs-work) for examples and setup. desktop editing and mod management in 2kvenuelab are separate from the port release.
+
+report problems through [gitlab issues](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/issues), including the port version, vita model, mode, steps to reproduce and any error message. include `loader.log` if available, after checking it for personal information. do not upload game files or saves.
+
+project direction and hardware testing: **spliffcurrybeats**. thanks to the soloader, vitagl, falsojni, falsondk, opensl es, faad2 and vita homebrew contributors. see the [readme](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/v0.2/readme.md) for controls, credits and licenses. this project is not affiliated with 2k or sony.
+
+## optional starter mods
+
+- [native aba ball over the nba ball](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/starter_aba.zip).
+- [la fitness over rooftop blacktop](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/starter_la_fitness.zip).
+- [both replacements together](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/starter_aba_la_fitness.zip).
+
+extract the selected package and follow the [mod installation guide](https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/main/docs/modding.md#starter-mods). only one mod folder is selected at a time; use the combined package for both replacements. starter mods are optional and contain no roster changes.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nba-2k16-android-port-for-playstation-vita/icon0.png" alt="Icono de NBA 2K16" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITLAB · sexcurrybeats/nba2k16-vita</div>
+                      <h2><a href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2" target="_blank" rel="noopener">NBA 2K16</a></h2>
+                      <div class="release-name">NBA 2K16 Vita v0.2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.2</span>
+                    <span>2026-10-22 22:33 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.2</div>
+                  
+                  <div class="body markdown-body"><h1>NBA 2K16 Vita v0.2</h1>
+<p>NBA 2K16 comes to PS Vita as an offline port of the Android game, with physical controls, optional rear-touch triggers, touchscreen menus, commentary, crowd and court audio, and local saves.</p>
+<p>Quick Game, Blacktop, Season and MyCareer are available. See the known issues below for current limitations.</p>
+<h2>Changes in v0.2</h2>
+<ul>
+<li>Smoother settings-list scrolling, including access to the last Video Settings row.</li>
+<li>A fixed Vita graphics preset that prevents unsupported crowd and sideline options from being enabled accidentally.</li>
+<li>Improved cache handling under memory pressure to reduce gameplay hitches, with bounded recovery instead of a busy wait.</li>
+<li>Rear-touch L2/R2 disabled by default, with an optional configuration file to enable them. Physical L/R, sticks and front touch remain available. See <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/v0.2/README.md#controls">Controls</a>.</li>
+<li>Selected-folder IFF mods without replacing the original OBB, including native roster Save/Load workflows.</li>
+<li>VPK-only updates from prepared v0.1 installations; compatible graphics caches are retained.</li>
+</ul>
+<h2>Download and install</h2>
+<p><strong>First install: choose <code>NBA2K16Vita_v0.2-setup.zip</code> from the release assets.</strong> It contains the VPK, Windows data helper, graphics cache and offline instructions. No build tools or manual APK extraction are needed.</p>
+<p>You need a homebrew-enabled Vita with VitaShell, <code>kubridge.skprx</code> and <code>libshacccg.suprx</code>; a Windows PC with Windows PowerShell 5.1; and your own <strong>NBA 2K16 Android 0.0.29 ARMv7 APK</strong> plus the matching <strong><code>main.29.com.t2ksports.nba2k16android.obb</code></strong> (2,127,425,536 bytes). Have at least 3 GB free on the PC for preparation and 3 GB free on <code>ux0:</code>, with additional room for saves and caches.</p>
+<ol>
+<li>Extract the entire setup ZIP to a writable local Windows folder and run <strong><code>Prepare NBA 2K16 Data.bat</code></strong>.</li>
+<li>Select your APK and OBB. Wait for <strong><code>READY TO COPY</code></strong>.</li>
+<li>Copy the <strong>contents</strong> of <code>NBA 2K16 Vita Prepared\ux0\</code> to <code>ux0:</code> using VitaShell USB or FTP.</li>
+<li>For USB transfers, safely eject the Vita drive on the PC and press <strong>Circle in VitaShell</strong> to leave USB mode. Install <strong><code>ux0:NBA2K16Vita_v0.2.vpk</code></strong>, then launch <strong>NBA 2K16</strong>.</li>
+</ol>
+<p>Read the <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/v0.2/docs/INSTALLING.md">installation guide</a> for plugin setup, folder examples and troubleshooting. The setup ZIP includes <code>START_HERE.txt</code>. A macOS/Linux preparation helper is not included.</p>
+<p>Downloading the release and installing missing Vita dependencies can require internet access. Preparing your game files and playing are offline.</p>
+<p><strong>Other APK packaging:</strong> accepted if all five required ARMv7 libraries match the supported build. Other native game versions and different OBB data are untested and unsupported in v0.2. The helper checks contents automatically; a matching filename alone is not enough.</p>
+<h2>Release assets</h2>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/NBA2K16Vita_v0.2-setup.zip"><code>NBA2K16Vita_v0.2-setup.zip</code></a></td>
+  <td>Recommended first install: VPK, Windows helper, graphics cache and instructions.</td>
+</tr>
+<tr>
+  <td><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/NBA2K16Vita_v0.2.vpk"><code>NBA2K16Vita_v0.2.vpk</code></a></td>
+  <td>Application only, for an update or already-prepared data.</td>
+</tr>
+<tr>
+  <td><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/nba2k16-vita-v0.2-source.zip"><code>nba2k16-vita-v0.2-source.zip</code></a></td>
+  <td>Matching source and build instructions for developers.</td>
+</tr>
+<tr>
+  <td><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/SHA256SUMS.txt"><code>SHA256SUMS.txt</code></a></td>
+  <td>SHA-256 checksums for the release downloads, including optional starter mods.</td>
+</tr>
+</tbody>
+</table>
+<p>The downloads do not include an APK, OBB or original Android game libraries. A prepared graphics cache is included. Supply your own legally obtained game files.</p>
+<h2>Known issues</h2>
+<ul>
+<li><p>Crowd and sideline rendering can show corrupted colors and cause audio dropouts or stalls. v0.2 keeps these options Off with a fixed graphics preset</p>
+</li>
+<li><p>Blacktop can intermittently freeze after confirming <strong>Quit then Yes</strong>. If it stays frozen, press PS, close NBA 2K16 from its LiveArea, and reopen the app</p>
+</li>
+<li><p>Brief hitches can occur during games. Replays can run slowly</p>
+</li>
+<li><p>Game loading and some menu transitions, including opening Quick Game, can be slow. The included graphics cache reduces first-use loading; uncached content can take longer</p>
+</li>
+<li><p>A team logo can be missing from the Season calendar. Some net effects can be missed</p>
+</li>
+</ul>
+<h2>Graphics settings</h2>
+<p>v0.2 fixes Stadium and Player to <strong>Ultra Low</strong>, with Reflection, Shadow, Crowd and Sideline <strong>Off</strong>. Video Settings remains available for viewing, but its values cannot be changed. Crowd audio remains enabled. Optional graphics can return after their rendering and performance issues are resolved.</p>
+<h2>Updating and reporting problems</h2>
+<p>Back up <strong><code>ux0:data/nba2k16/internal/</code></strong>, then install the newer VPK over the old one. Keep the game-data folder and saves; re-prepare data only when release notes ask you to.</p>
+<p>v0.2 reuses the existing cache: an already prepared v0.1 installation needs only the newer VPK. Keep installed mods and both cache directories. A fresh installation uses the complete setup ZIP.</p>
+<p>Each subfolder in <code>ux0:data/nba2k16/mods/</code> is one mod pack; <code>active.txt</code> selects the one folder to load. A pack can contain one replacement or a collection. To use mods together, combine compatible files in one simple pack or use the combined starter package. See <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/main/docs/MODDING.md#how-mod-packs-work">Modding</a> for examples and setup. Desktop editing and mod management in 2KVenueLAB are separate from the port release.</p>
+<p>Report problems through <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/issues">GitLab Issues</a>, including the port version, Vita model, mode, steps to reproduce and any error message. Include <code>loader.log</code> if available, after checking it for personal information. Do not upload game files or saves.</p>
+<p>Project direction and hardware testing: <strong>SpliffCurryBeats</strong>. Thanks to the soloader, VitaGL, FalsoJNI, FalsoNDK, OpenSL ES, FAAD2 and Vita homebrew contributors. See the <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/v0.2/README.md">README</a> for controls, credits and licenses. This project is not affiliated with 2K or Sony.</p>
+<h2>Optional starter mods</h2>
+<ul>
+<li><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/starter_aba.zip">Native ABA ball over the NBA ball</a>.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/starter_la_fitness.zip">LA Fitness over Rooftop Blacktop</a>.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/releases/v0.2/downloads/starter_aba_la_fitness.zip">Both replacements together</a>.</li>
+</ul>
+<p>Extract the selected package and follow the <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/main/docs/MODDING.md#starter-mods">mod installation guide</a>. Only one mod folder is selected at a time; use the combined package for both replacements. Starter mods are optional and contain no roster changes.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/NBA2K16Vita_v0%2E2%2Evpk" target="_blank" rel="noopener">⬇ NBA2K16Vita_v0.2.vpk</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/SHA256SUMS%2Etxt" target="_blank" rel="noopener">SHA256SUMS.txt</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/starter_aba_la_fitness%2Ezip" target="_blank" rel="noopener">starter_aba_la_fitness.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/starter_la_fitness%2Ezip" target="_blank" rel="noopener">starter_la_fitness.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/starter_aba%2Ezip" target="_blank" rel="noopener">starter_aba.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/nba2k16-vita-v0%2E2-source%2Ezip" target="_blank" rel="noopener">nba2k16-vita-v0.2-source.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/NBA2K16Vita_v0%2E2-setup%2Ezip" target="_blank" rel="noopener">NBA2K16Vita_v0.2-setup.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.tar" target="_blank" rel="noopener">source.tar</a></div>
                 </div>
               </div>
             </article>
@@ -15271,6 +15437,33 @@ please refer to the github release page for detailed information.">
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/Rinnegatamante/Starship/releases/download/v.1.0/Starship.vpk" target="_blank" rel="noopener">⬇ Starship.vpk · 5.8 MB</a><a class="btn" href="https://github.com/Rinnegatamante/Starship/releases/download/v.1.0/starship.zip" target="_blank" rel="noopener">starship.zip · 29.5 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="zombieville usa 2 zombieville usa 2 aj170/zombievilleusa2-psvita-port hotfix for data files, no need to manually add, just install vpk and enjoy 1.01 ports no need to manually add /app files, just install vpk and enjoy">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/zombieville-usa-2-psvita-port/icon0.png" alt="Icono de Zombieville USA 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · AJ170/ZombievilleUSA2-PSVita-Port</div>
+                      <h2><a href="https://github.com/AJ170/ZombievilleUSA2-PSVita-Port/releases/tag/1.01" target="_blank" rel="noopener">Zombieville USA 2</a></h2>
+                      <div class="release-name">hotfix for data files, no need to manually add, just install vpk and enjoy</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.01</span>
+                    <span>2026-04-18 01:53 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.01</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.01</div>
+                  
+                  <div class="body markdown-body"><p>no need to manually add /app files, just install vpk and enjoy</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/AJ170/ZombievilleUSA2-PSVita-Port/releases/download/1.01/ZUSA2.vpk" target="_blank" rel="noopener">⬇ ZUSA2.vpk · 158.2 MB</a></div>
                 </div>
               </div>
             </article>
@@ -28217,238 +28410,10 @@ https://github.com/codiak101/registryprofiler#readme">
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="custom livearea custom livearea anthj/custom-livearea v1.0 v1.0 utilities # custom livearea
-
-![pic](https://github.com/anthj/custom-livearea/blob/main/custom%20la1.jpg)
-
-------
-what can it do?
-------
-- change bubble images
-- change page and start button images
-- rename bubbles
-- hide stock bubbles
-
-------
-why?
-------
-using custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.
-
-![pic](https://github.com/anthj/custom-livearea/blob/main/custom%20la2.jpg)
-
-------
-
-more details
-------
-
-if you have created your custom bubble images and/or names you can backup the customlivearea folder to transfer it to another system or just keep it somewhere safe.. then you are able to scan this folder to re apply your settings if you ever need to..
-
-------
-
-if you need to reset everything you can choose to delete custom image and name data or just reset the information,  leaving the custom files.. you can also choose to delete the app.db with resets everything including your bubble layout
-
-------
-
-* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)
-
-thanks to :
-* rin and gl33ntwine for their help getting me unstuck a few times..
-* marcus b for the inspiration">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-custom-livearea/icon0.png" alt="Icono de Custom LiveArea" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Custom-LiveArea</div>
-                      <h2><a href="https://github.com/AntHJ/Custom-LiveArea/releases/tag/v1.0" target="_blank" rel="noopener">Custom LiveArea</a></h2>
-                      <div class="release-name">v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-12-12 07:41 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><h1>Custom LiveArea</h1>
-<p><img src="https://github.com/AntHJ/Custom-LiveArea/blob/main/Custom%20LA1.jpg" alt="pic"></p>
-<hr>
-<h2>What can it do?</h2>
-<ul>
-<li>Change bubble images</li>
-<li>Change Page and start button images</li>
-<li>Rename bubbles</li>
-<li>Hide stock bubbles</li>
-</ul>
-<hr>
-<h2>Why?</h2>
-<p>Using custom themes is good fun but your limited to only being able to change the stock app bubbles, but now you can customise a whole lot more.</p>
-<p><img src="https://github.com/AntHJ/Custom-LiveArea/blob/main/Custom%20LA2.jpg" alt="pic"></p>
-<hr>
-<h2>More details</h2>
-<p>If you have created your custom bubble images and/or names you can backup the CustomLiveArea folder to transfer it to another system or just keep it somewhere safe.. then you are able to scan this folder to re apply your settings if you ever need to..</p>
-<hr>
-<p>If you need to reset everything you can choose to delete custom image and name data or just reset the information,  leaving the custom files.. you can also choose to delete the app.db with resets everything including your bubble layout</p>
-<hr>
-<ul>
-<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
-</ul>
-<p>Thanks to :</p>
-<ul>
-<li>Rin and gl33ntwine for their help getting me unstuck a few times..</li>
-<li>Marcus B for the inspiration</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Custom-LiveArea/releases/download/v1.0/Custom.LiveArea.vpk" target="_blank" rel="noopener">⬇ Custom.LiveArea.vpk · 4.8 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="bubble recall bubble recall anthj/bubble-recall bubble recall v1.0 utilities # bubble recall
-
-![pic](https://github.com/anthj/bubble-recall/blob/main/bubble%20recall.jpg)
-
-------
-easily backup and restore your bubble layout.. this is useful for 2 reasons..
-1. if you have a custom vita build that you often transfer onto other systems you probably know that neatly arranging your apps every time is tedious and time consuming.. well, this will save your custom layout so it can be restored onto other systems.
-
-2. if you often swap systems such as going from the vita to a pstv or vice-versa, you will often loose the neat bubble layout you created.. this will help swap from system to system by saving and restoring the layout .
-
-------
-
-* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-bubble-recall/icon0.png" alt="Icono de Bubble Recall" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Bubble-Recall</div>
-                      <h2><a href="https://github.com/AntHJ/Bubble-Recall/releases/tag/v1.0" target="_blank" rel="noopener">Bubble Recall</a></h2>
-                      <div class="release-name">Bubble Recall</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-12-12 07:37 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><h1>Bubble Recall</h1>
-<p><img src="https://github.com/AntHJ/Bubble-Recall/blob/main/Bubble%20Recall.jpg" alt="pic"></p>
-<hr>
-<p>Easily backup and restore your bubble layout.. this is useful for 2 reasons..</p>
-<ol>
-<li><p>If you have a custom Vita build that you often transfer onto other systems you probably know that neatly arranging your apps every time is tedious and time consuming.. well, this will save your custom layout so it can be restored onto other systems.</p>
-</li>
-<li><p>if you often swap systems such as going from the Vita to a PSTV or vice-versa, you will often loose the neat bubble layout you created.. this will help swap from system to system by saving and restoring the layout .</p>
-</li>
-</ol>
-<hr>
-<ul>
-<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Bubble-Recall/releases/download/v1.0/Bubble.Recall.vpk" target="_blank" rel="noopener">⬇ Bubble.Recall.vpk · 3.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="stock app remover stock app remover anthj/stock-app-remover v1.0 v1.0 utilities # stock app remover
-![pic](https://github.com/anthj/stock-app-remover/blob/main/stock%20app%20remover.jpg)
-
-------
-hide apps
-------
-
-simply select your desired app and press the start button, this app will then hide your chosen bubbles and the system will reboot.. 
-
-------
-show apps
-------
-
-to restore the apps simply do the same.. restored bubbles will apear on the same page / folder as you have the app itself so make sure there is space around it, or male a folder with just this app in it
-
-------
-
-* utilises lua player plus vita (lpp-vita). [learn more.](https://github.com/rinnegatamante/lpp-vita)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-stock-app-remover/icon0.png" alt="Icono de Stock App Remover" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/Stock-App-Remover</div>
-                      <h2><a href="https://github.com/AntHJ/Stock-App-Remover/releases/tag/v1.0" target="_blank" rel="noopener">Stock App Remover</a></h2>
-                      <div class="release-name">v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2021-12-12 07:29 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><h1>Stock App Remover</h1>
-<p><img src="https://github.com/AntHJ/Stock-App-Remover/blob/main/Stock%20App%20Remover.jpg" alt="pic"></p>
-<hr>
-<h2>Hide apps</h2>
-<p>Simply select your desired app and press the start button, this app will then hide your chosen bubbles and the system will reboot..</p>
-<hr>
-<h2>Show apps</h2>
-<p>To restore the apps simply do the same.. Restored bubbles will apear on the same page / folder as you have the app itself so make sure there is space around it, or male a folder with just this app in it</p>
-<hr>
-<ul>
-<li>Utilises Lua Player Plus Vita (lpp-vita). <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/lpp-vita">Learn more.</a></li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/Stock-App-Remover/releases/download/v1.0/Stock.App.Remover.vpk" target="_blank" rel="noopener">⬇ Stock.App.Remover.vpk · 4.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="a super small shmup a super small shmup island-games/a-super-small-shmup a super small shmup v1.02 v1.02 games - updated to the latest version of libbartender.
-- small fixes.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-a-super-small-shmup/icon0.png" alt="Icono de A Super Small SHMUP" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">GAMES · GITHUB · island-games/A-Super-Small-Shmup</div>
-                      <h2><a href="https://github.com/island-games/A-Super-Small-Shmup/releases/tag/v1.02" target="_blank" rel="noopener">A Super Small SHMUP</a></h2>
-                      <div class="release-name">A Super Small SHMUP v1.02</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.02</span>
-                    <span>2021-12-02 07:41 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.02</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.02</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Updated to the latest version of LibBartender.</li>
-<li>Small fixes.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/island-games/A-Super-Small-Shmup/releases/download/v1.02/ASUPERSMALLSHMUP.vpk" target="_blank" rel="noopener">⬇ ASUPERSMALLSHMUP.vpk · 2.6 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-30 21:50 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-10-31 03:29 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
