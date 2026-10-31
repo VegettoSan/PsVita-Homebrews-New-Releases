@@ -1,6 +1,104 @@
 [
   {
     "platform": "github",
+    "repo": "Franckrst/D2Vita",
+    "release_id": "429885371",
+    "tag": "v0.2.3",
+    "name": "v0.2.3",
+    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.3",
+    "published": "2026-10-31T11:11:01Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\nStable release of the 0.2.2 and 0.2.3 betas (details in their entries\nbelow).\n\n- **More headroom in crowded fights**: the game's locks and clock reads are\n  3–4× cheaper on a real console (Act V patrol: 6 % less work per frame).\n- **No more sound crackle or dropouts** in crowded fights (output limiter,\n  audio thread moved off the graphics core).\n- **Short presses are no longer lost when the frame rate drops**, and a\n  quick tap of the aim button attacks/clicks once (reported fixed by a\n  player on console with 0.2.3-beta).\n- The app version shown by the Vita now follows the release (`APP_VER`\n  00.23 instead of 00.00).\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.1...v0.2.3",
+    "assets": [
+      {
+        "name": "d2vita.vpk",
+        "size": 8083946,
+        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.3/d2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "D2Vita",
+    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.\n\n- PsVitaAlive -",
+    "homebrew_id": "d2vita",
+    "homebrew_authors": [
+      "franckrst"
+    ],
+    "homebrew_version": "0.2.1",
+    "catalog_apps": [
+      {
+        "id": "d2vita",
+        "name": "D2Vita",
+        "icon": "https://archive.org/download/D2Vita/newicon0.png",
+        "category": "ports",
+        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
+        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.\n\n- PsVitaAlive -",
+        "version": "0.2.1",
+        "version_date": "2026-10-09",
+        "author_ids": [
+          "franckrst"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.2.1 → release v0.2.3",
+    "catalog_version": "0.2.1"
+  },
+  {
+    "platform": "github",
+    "repo": "MetalSyntax/N.O.V.A-2-vita",
+    "release_id": "429732726",
+    "tag": "v1.0.2",
+    "name": "N.O.V.A 2 Vita v1.0.2",
+    "url": "https://github.com/MetalSyntax/N.O.V.A-2-vita/releases/tag/v1.0.2",
+    "published": "2026-10-31T05:00:24Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# N.O.V.A 2 Vita v1.0.2\n\nThis is a wrapper/port of **N.O.V.A. 2 – Near Orbit Vanguard Alliance HD** (Gameloft) for the PS Vita.\n\n## Changelog\n\n- v1.0.2: Exit fix.\n  - **Exiting from the main menu now returns to the LiveArea.** The game's exit button\n    calls Android's `GLGame.Exit()`, which the port left empty, so the game froze on a\n    black screen. It now closes the app like on Android.\n  - **If the game suddenly crashes at boot after working fine before**, check that\n    `ux0:data/nova2/libnova2.so` is intact by copying it again from the APK\n    (`lib/armeabi-v7a/libnova2.so`). On my own console, 56 KB of that file got corrupted\n    on the memory card, which made the game crash at startup with no code change.\n    The same kind of corruption can also damage the `.gla` data files or the saves.\n\n- v1.0.1: Save hotfix.\n  - **Progress now saves on a fresh install.** The game saves to its Android data folder,\n    which the port maps to `ux0:data/nova2/saves/`. The game never creates that folder\n    (on Android it always exists), and the old README said it was created automatically.\n    If it was missing, every save failed silently, so after a restart there was only\n    \"New Game\" and no \"Continue\". The port now creates `ux0:data/nova2/saves/` at startup.\n  - **Already playing?** Just install the new VPK. If `ux0:data/nova2/saves/` already\n    existed on your card, your progress was being saved and is kept.\n  - Note: like on Android, the game only saves at checkpoints and when a level is finished,\n    not when pausing or quitting.\n\n- v1.0: Initial release.\n  - **Plays at 60 FPS at native 960x544**, 1:1 with the Vita screen. The engine is given the\n    real resolution, so the 3D game and HUD fill the screen without scaling. The static 800x480\n    loading/title backgrounds are stretched to fullscreen at sprite level.\n  - **Intro video plays unconverted.** `GLVideo.mp4` (H.264 Baseline 640x360 @ 60 fps + AAC\n    44.1 kHz) is played exactly as shipped with the game. SceAvPlayer refuses this file, so the\n    port uses its own MP4 demuxer with the Vita's **hardware H.264 decoder** (`sceAvcdec`) and\n    software AAC audio. Skip it with Cross or Start.\n  - **Full physical controls.** Every visible HUD button is mapped to a physical button, using\n    the button positions read from the game's own code:\n    - Left stick: move. Right stick: camera.\n    - R: fire (hold). L: special power. Cross: jump.\n    - Circle: reload. Triangle / D-Pad Up: next weapon. D-Pad Down: previous weapon.\n    - D-Pad Left / Right: change special power. Square: grenade. Start: pause.\n  - **Virtual touch controls at 1% opacity.** The joystick, fire, jump and special-power buttons\n    are nearly invisible but still respond to touch. The HUD that shows ammo and grenades stays\n    fully visible.\n  - **Smooth camera with adjustable sensitivity.** The right stick works like a continuous finger\n    drag: hold it to keep turning, light tilt for precise aiming. Press **Select + D-Pad Up/Down**\n    to set the sensitivity (1-10, default 4). A bar at the top of the screen shows the level, and\n    the setting is saved in `ux0:data/nova2/camera_sens.txt`.\n  - **Performance fixes.** Removed per-frame log writes and per-sound log spam. Added a negative\n    cache for missing files: the engine looks for a loose `.wav` that does not exist before every\n    footstep or gunshot, and that used to stall a frame each time.\n  - Software ATC texture decoding, Vox audio through `sceAudioOut`, Gameloft DRM bypassed, and\n    save/data paths remapped to `ux0:data/nova2/`.\n\n## Setup Instructions\n\nIn order to properly install the game, you'll need to extract the data from the original Android game.\n\n1. Install the `kubridge` and `fd_fix` plugins on your PS Vita.\n2. Install `libshacccg.suprx`, if you don't have it already, by following [this guide](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).\n3. Obtain the original APK of N.O.V.A. 2 HD (`NOVA-2-HD-v1-0-5.apk`) and its game data folder (`/sdcard/gameloft/games/GloftN2HP/` from an Android device where the game was installed and run once).\n4. Extract the `.apk` using any zip extractor.\n5. Place `libnova2.so` (from `lib/armeabi-v7a/` inside the APK) in `ux0:data/nova2/`.\n6. Place `assets/data.save` from the APK in `ux0:data/nova2/assets/`, and the APK's `res/raw/` files in `ux0:data/nova2/res/raw/`.\n7. Copy the whole `GloftN2HP/` data folder (the `.gla` files, `sounds_hi.glza`, `oconf.bar`, `GLVideo.mp4`, ...) to `ux0:data/nova2/GloftN2HP/`.\n8. Download and install `nova2.vpk` on your PS Vita.\n\n`libStormGLOFT.so` and `libmthook.so` are not needed.\n\n## Controls\n\n- **Left Analog** - Move\n- **Right Analog** - Camera (hold to keep turning; light tilt = precise aim)\n- **R** - Fire (hold)\n- **L** - Use special power\n- **Cross** - Jump\n- **Circle** - Reload\n- **Triangle / D-Pad Up** - Next weapon\n- **D-Pad Down** - Previous weapon\n- **D-Pad Left / Right** - Change special power\n- **Square** - Grenade\n- **Start** - Pause\n- **Select + D-Pad Up / Down** - Camera sensitivity (1-10)\n- **Touch Screen** - Original touch controls (drawn at 1% opacity)\n\n## Known Issues\n\n- Only the boot intro video is supported. Any later video request is skipped.\n- Pause, weapon and grenade touch spots were measured from screenshots (they are 3D HUD nodes). If one of them misses on your console, please report it with a log.\n- Very heavy combat may still show small hitches on slow memory cards (sound effects are streamed from `sounds_hi.glza`).\n\n## Troubleshooting\n\n**\"Looks like you haven't installed the data files\" on boot:** `ux0:data/nova2/libnova2.so` is missing or in the wrong folder.\n\n**Black screen / crash while loading:** check that `ux0:data/nova2/GloftN2HP/` contains all the `.gla` files and `sounds_hi.glza`, and that `kubridge`, `fd_fix` and `libshacccg.suprx` are installed.\n\n**If it still crashes**, please report it with:\n\n1. The newest `ux0:data/nova2/logs/nova2_NNNN.log` (from the time of the crash; do not delete it).\n2. The newest `ux0:data/psp2core-*-eboot.bin.psp2dmp` core dump.\n3. A note on exactly when it happens (boot, intro, menu, which level).\n\n## Credits\n\n- TheFloW for the `so_loader` wrapper and Android porting boilerplate.\n- Rinnegatamante for `vitaGL` and porting tools.\n- v-atamanenko for `FalsoJNI` and the soloader boilerplate.\n- Gameloft for the original game.\n",
+    "assets": [
+      {
+        "name": "nova2.vpk",
+        "size": 2077288,
+        "download_url": "https://github.com/MetalSyntax/N.O.V.A-2-vita/releases/download/v1.0.2/nova2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "NOVA 2 HD",
+    "homebrew_icon": "https://archive.org/download/n.o.v.a-2-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Android to PS Vita port of Gameloft's N.O.V.A 2",
+    "homebrew_long_description": "N.O.V.A. 2 is Gameloft's sci-fi first-person shooter, originally released for Android as NOVA-2-HD-v1-0-5.apk (package com.gameloft.android.GAND.GloftN2HP). This port runs the compiled native library (libnova2.so, armeabi-v7a) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 2.0 rendering backend.",
+    "homebrew_id": "nova-2-hd",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "nova-2-hd",
+        "name": "NOVA 2 HD",
+        "icon": "https://archive.org/download/n.o.v.a-2-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Android to PS Vita port of Gameloft's N.O.V.A 2",
+        "long_description": "N.O.V.A. 2 is Gameloft's sci-fi first-person shooter, originally released for Android as NOVA-2-HD-v1-0-5.apk (package com.gameloft.android.GAND.GloftN2HP). This port runs the compiled native library (libnova2.so, armeabi-v7a) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 2.0 rendering backend.",
+        "version": "1.0",
+        "version_date": "2026-09-26",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.0.2",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
     "repo": "LargeVegetable/source-engine",
     "release_id": "429681462",
     "tag": "v0.1.3-beta",
@@ -77,7 +175,7 @@
     "homebrew_authors": [
       "germanalvarez15"
     ],
-    "homebrew_version": "1.3.7",
+    "homebrew_version": "1.3.8",
     "catalog_apps": [
       {
         "id": "nfs-most-wanted",
@@ -86,16 +184,16 @@
         "category": "ports",
         "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
         "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-        "version": "1.3.7",
-        "version_date": "2026-10-29",
+        "version": "1.3.8",
+        "version_date": "2026-10-30",
         "author_ids": [
           "germanalvarez15"
         ]
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.3.7 → release 1.3.9",
-    "catalog_version": "1.3.7"
+    "catalog_update_detail": "PSVitaAlive 1.3.8 → release 1.3.9",
+    "catalog_version": "1.3.8"
   },
   {
     "platform": "github",
@@ -306,6 +404,121 @@
   },
   {
     "platform": "github",
+    "repo": "menaman123/TwinsanityEvolved",
+    "release_id": "429022948",
+    "tag": "v0.9.1",
+    "name": "TwinsanityEvolved v0.9.1",
+    "url": "https://github.com/menaman123/TwinsanityEvolved/releases/tag/v0.9.1",
+    "published": "2026-10-30T15:06:22Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# TwinsanityEvolved 0.9.1 -- what's new\n\nCrash Twinsanity as a native game for Windows, macOS, Linux and the PS Vita: the twinsanity-reversed decompilation running\non the NativeEE engine. **No game data is included: you play with your own disc image.**\n\n## New in 0.9.1\n\n- **Skip in-game cutscenes with X.** A cutscene played from its cutscene file can now be skipped the first time you see\n  it, not only on a second viewing (a skipped cutscene counts as seen). Scripted scenes that have a skip of their own\n  in the game's level scripts (switched off in the original release) now end when you press X; scripted scenes without\n  one still play to their end.\n- **Drowning in 10th Dimension:** a dark Crash-shaped shadow no longer shows under the water while he sinks (the real\n  game shows none there).\n- **High and uncapped frame rates:** objects are no longer briefly paired with their neighbours between pictures, no\n  gap opens at the bottom of the screen while running and the shadows no longer draw thin lines.\n- **Frames between pictures are off by default.** The smoothing frames the game adds between its own pictures at high\n  frame rates are now off unless you turn them on (`video.interp = on` in `ps2r.ini`); they also resume correctly\n  after loading a save state.\n\nSave states made with 0.9.0 do not load in 0.9.1 (a save state belongs to the build that made it); memory card saves\nare not affected.\n\n## Install\n\n1. Download the zip for your system from this release (the table at the end names each file), or the launcher (see\n   Play below), which does every step for you.\n2. Unzip it anywhere, on any drive (Windows: right-click the zip > *Properties* > tick **Unblock** first, so SmartScreen\n   does not warn about the unsigned program).\n3. Run `twinsanityevolved` (`twinsanityevolved.exe` on Windows; on macOS, the first time, right-click it > **Open**). The\n   first time it asks for your disc image: your own Crash Twinsanity `.iso`, the European (PAL) or the North American disc.\n\nNothing is installed and nothing else is downloaded. Requirements: a graphics driver with OpenGL 4.1 (any current NVIDIA,\nAMD, Intel or Apple GPU); keyboard and mouse or a gamepad (Space = cross, Left Shift = square, right mouse = circle,\nE = triangle, W A S D = left stick, mouse = camera, Y = start, Tab = select).\n\n## Play\n\n- **The launcher installs the finished game.** It no longer makes the game from its source on your computer: it\n  downloads the game for your system from the newest release, checks it against the release's checksums and puts it in your game folder. Its\n  first run is one sheet of four questions -- where your game is, where it should live, where you will play (this\n  computer, a PS Vita or another computer), then the download with its size and speed -- with Back on every step and\n  nothing to type.\n- **It finds your disc for you.** It looks in Downloads, Desktop, Documents, its own folder and any removable drive, and\n  recognises the disc by what is on it (see Discs). Drop the file on the window if it is somewhere else. A disc you remove\n  from the list stays off it on later searches.\n- **One game folder holds everything.** `~/Games/Crash Twinsanity` (`%USERPROFILE%\\Games\\Crash Twinsanity` on Windows)\n  unless you choose another: the game, your settings (`ps2r.ini`), your memory cards (`memcards`) and your mods (`mods`).\n  Move the folder and everything moves with it: the game reads the `ps2r.ini` beside it first (on macOS, beside the app).\n- **Pages: Games, Mods, Settings, About.** Games shows your discs, each with **Play** and, when a new version is out,\n  **Update**; an update never overwrites your settings, saves or mods. Settings is the game's own Options in plain words --\n  the same `ps2r.ini` the in-game menu writes, so a change in one is a change in the other. About can remove what the\n  launcher keeps and says what it could not remove.\n- **Launchers for every desktop.** A portable zip for Windows, a `.dmg` for macOS and, new, an AppImage for Linux.\n- Quitting the launcher during a download is safe: nothing half-downloaded is left in your game folder.\n- Every release zip also holds the mod tool and the Arabic language pack (see Mods and Languages).\n\n- **Save states:** F5 saves the running game to `savestates/slot0.ps2st` in the game folder and F8 loads it back where it\n  was; the game says so on screen. On the PS Vita the folder is `ux0:data/twinsanity/savestates/`.\n\n## Discs\n\n- **The European (PAL) disc** (SLES-52568) plays as before.\n- **The North American disc plays** (SLUS-20909 v2.00, the \"Action Pack\" release): choose it and play. It runs at 60\n  frames a second (its console's rate), in English with its own voices and movies, and keeps its own memory card\n  (`memcards-SLUS-20909` beside `memcards`), so the two discs never overwrite each other's saves. Its program's own code\n  changes are played the European way.\n- **Every disc is identified by its content**, compared with the known dumps of the original discs (redump.org): the\n  launcher shows `PAL · original disc`, `NTSC-U · original disc`, `PAL · modified disc` (the original program with other\n  files, such as a translation patch -- it plays like the original) or `PAL · unrecognised version` (accepted with a\n  warning). It reads the whole image once, a few seconds, and remembers the answer. The game checks the size at every\n  start; `--verify-disc` checks the whole image.\n- The Japanese disc and the first North American release (v1.00) are recognised but **not playable in this version**:\n  each needs an address map, which `twinsanityevolved-modtool region-map` makes from the two discs for someone who has\n  both.\n\n## Mods\n\n- **Mods packaged as Mod Crates are supported** -- the community's usual shape (a `.zip` or a folder with\n  `ModCrateInfo.txt`, `layer0/` and `layer1/`), including large ones of over a gigabyte (about half a minute to add). The\n  author's notes are shown under the mod.\n- **Also taken as they are shipped:** a patched disc image (only the files that differ from your disc are kept), an\n  xdelta, PPF or BPS patch made against the original disc, a folder of files laid out like the disc (or a loose\n  `CRASH.BD` + `CRASH.BH`), and one file of the game's archive passed around on its own (such as a `Default.rm2`), placed\n  by its name.\n- **The launcher's Mods page:** drop a mod on the page (or **Add a mod…**) and it is added to your mods folder; each mod\n  has a switch, a line saying what it changes and its region; drag the mods into order (the lower one wins where two\n  change the same file); **Remove** deletes one after asking. Adding a mod you already have (a new version) asks first,\n  then replaces it and keeps its switch and its place. A change takes effect the next time the game starts.\n- **The mod tool** (`twinsanityevolved-modtool`, in every zip) does the same on the command line: `import`, `inspect`\n  (what a file is, without adding it) and `verify` (every file of a mod checked byte for byte).\n- **A mod is checked against your disc.** A mod records the disc it was made over; the game leaves out a mod made for\n  another disc and says so in its log, and the Mods page says \"Left out on this disc: made for the North American disc.\"\n  where that applies. A loose archive file made for the other release is refused when you add it.\n- While any mod is on, the game saves to its own memory card (`memcards-mods`): your normal saves are never touched.\n- In the game, OPTIONS > MODS now lists the built-in mods (level select, speedrun mode); the mods of your mods folder are\n  switched on the launcher's Mods page.\n- **What cannot apply:** code changes in a mod's modified game program (its data changes -- tables, texts, numbers -- do\n  apply; the code changes are listed under the mod); Crate Mod Loader's game-code settings (a crate carrying\n  `ModCrateSettings.txt` is refused with the reason; settings a crate's notes ask for are named in a warning); xdelta\n  patches made with secondary compression; RAR / 7-Zip archives, CHD / CSO / ECM images, `.cue` sheets, UPS / IPS patches;\n  emulator texture packs and cheat codes.\n\n- **Where a mod is switched:** a mod that changes the disc's files is switched on and off in the launcher only and is in\n  place when the game starts; the game's own OPTIONS > MODS page keeps the two built-in mods (level select, speedrun mode),\n  which work while you play. A mod made for the other region's disc is left out, and the launcher's row says so.\n- **On the PS Vita** the switch is the `mods.<id>.enabled` line in `ux0:data/twinsanity/ps2r.ini` (the launcher writes it\n  into the PS Vita folder; VitaShell's text editor changes it on the console); the mod's files stay on the card either way,\n  and modded saves live on their own memory card (`memcards-mods/`).\n\n## Languages\n\n- **The text and the speech are two settings:** GAME OPTIONS > TEXT LANGUAGE and SPEECH LANGUAGE (and the launcher's\n  Settings). Any text with any speech: Portuguese text with Spanish voices, Arabic text with French voices. The text\n  languages are recognised by what the disc's text banks contain, so on a translated disc \"english\" is still English. The\n  movies' sound and the title cards follow the speech. An older `game.language` setting keeps working.\n- **Arabic:** every menu, notice and hint (305 texts, our own translation), drawn right to left in Arabic letters made in\n  the game's lettering style. It comes with every zip and the launcher places it in your mods folder; there is nothing to\n  switch on: TEXT LANGUAGE offers **arabic** after the disc's languages. It translates the European disc's English texts\n  and is offered on a disc that carries them (not on the North American disc); the speech is any language your disc\n  speaks.\n\n- **A language pack is not a mod:** the Arabic text is one entry of the TEXT LANGUAGE row, like French or German; it has no\n  switch anywhere and never moves your saves to the modded memory card.\n\n## PS Vita\n\n- **A PS Vita package in every release** (`twinsanityevolved-<version>-vita.vpk`): install it with VitaShell, copy your\n  disc image to `ux0:data/twinsanity/game.iso`, and make sure the system's shader library `ur0:data/libshacccg.suprx` is\n  present (the usual homebrew step). The package carries the game's GPU programs ready-made, so the first start does not\n  stop to prepare them.\n- **The launcher makes a ready-to-copy PS Vita folder** in your game folder (`vita/`: the package, the steps, and\n  `ux0/data/twinsanity/` with your settings, the language pack and the mods you switched on). Two disc images can sit side\n  by side on the console; `ux0:data/twinsanity/disc-image.txt` names the one the game starts. The North American disc\n  plays on the PS Vita too (at 60). Mods are added on a computer and copied over.\n- **The PAL console's 50 Hz game loop by default:** the game ticks 50 times a second as the PAL game did. GAME RATE in\n  Options > graphic options switches between `60` and `50 hz (pal)` from the next start.\n- **FRAME RATE auto:** the game runs at the full rate while it keeps up and otherwise holds a steady 25 (at 50 Hz) or 30\n  (at 60 Hz) frames a second, so the picture moves evenly instead of swinging; `60` / `30` (`50` / `25`) fix the rate.\n- **Fixed on the PS Vita:** the movies play (the boot logos and the story movies did not play at all); the intro movie\n  of a new game is no longer corrupted; shadows are drawn; the title sequence's iceberg and logo draw cleanly; Cavern\n  Catastrophe's puzzle crystals are visible; at 50 Hz the game no longer runs in slow motion with the sound running ahead\n  of it; the GAME RATE setting takes effect.\n- **Faster:** the drawing, the GPU work per picture, the geometry and the game code itself were all made quicker,\n  measured scene by scene.\n- **Still limited:** the heaviest levels and fights fall back to a steady 25 (at 50 Hz) or 30 (at 60 Hz; 20 in the very\n  heaviest scenes) frames a second; importing mods is done on a computer.\n\n## The launcher keeps itself up to date\n\n- The launcher checks the releases when it starts (and from About): a newer launcher is offered on the Games page with one\n  button; it downloads it, checks it against the release's SHA256SUMS, swaps itself and reopens. Your games, settings, saves\n  and mods are not touched. The game's own **Update** button is unchanged. On the PS Vita the Installed list's **Update**\n  fetches the new package into the PS Vita folder for you to install with VitaShell.\n- The Mods page explains the PS Vita: switch mods here, press **Make the PS Vita folder**, copy `ux0/data/twinsanity` to the\n  card. The folder's README names the disc file to copy and how two discs (European and North American) live side by side.\n\n## PS Vita: faster in the heavy levels\n\n- The refractive ice's frame copies (Ice Climb) are taken only when needed and only for the region drawn since the last\n  one, with the same pictures: on the emulator the copy passes' pixels per picture fell from 6.1 M to 0.27 M.\n- **A second PS Vita package to try:** `twinsanityevolved-<version>-vita-native.vpk` runs the game's code natively on the\n  console's ARM processor instead of through a translation layer. In the emulator it is identical in game state, sound and\n  picture sequence to the main package on every tested route, and its hot functions have about half the instructions; how\n  much faster the console runs it is what the console's own log tells. Same title: installing it replaces the program and\n  keeps `ux0:data/twinsanity/`; reinstall the main package to go back. The main package stays the proven one until the\n  console's figures make the native one the default.\n\n## Fixes\n\n- Depth: surfaces drawn on top of other surfaces -- the light patterns on cave walls, the ripple rings around floating ice,\n  decals -- no longer flicker or vanish in pieces as the camera moves. The game's depth values are kept exactly (the PS2's\n  24-bit depth) instead of being rounded, so the depth test gives the PS2's answer everywhere (every system).\n- PS Vita: entering a new area or loading a level no longer stalls the picture for whole frames: a chunk's textures are\n  decoded and its meshes prepared in the background as the chunk arrives, instead of in the first frame that shows it.\n- At 50 Hz (`game rate: 50 hz (pal)`), on every system, the game no longer plays in slow motion: the game and its sound\n  run at real speed at 50 and at 60.\n- A settings file holding the game folder's own keys (`paths.memcards`, `paths.mods`, `mods.order`) is read instead of\n  being refused whole.\n- A disc this version cannot play is refused at the start with a sentence saying why, instead of failing on a missing\n  file.\n- An update by the launcher keeps an older game folder's language setting (`game.language`).\n\n## The files of v0.9.1\n\n| For | File |\n|---|---|\n| Windows 10 / 11 (64-bit) | `twinsanityevolved-v0.9.1-windows-x64.zip` |\n| macOS, Apple silicon | `twinsanityevolved-v0.9.1-macos-arm64.zip` |\n| macOS, Intel | `twinsanityevolved-v0.9.1-macos-x86_64.zip` |\n| Linux x86_64 | `twinsanityevolved-v0.9.1-linux-x86_64.zip` |\n| Linux ARM64 | `twinsanityevolved-v0.9.1-linux-aarch64.zip` |\n| PS Vita (install with VitaShell) | `twinsanityevolved-v0.9.1-vita.vpk` |\n| PS Vita, the game's code compiled natively for its processor (to try; same title, installs over the other) | `twinsanityevolved-v0.9.1-vita-native.vpk` |\n| The launcher for Windows | `twinsanityevolved-launcher-windows-x64.zip` |\n| The launcher for macOS (Apple silicon) | `twinsanityevolved-launcher-macos-arm64.dmg` |\n| The launcher for Linux x86_64 | `twinsanityevolved-launcher-linux-x86_64.AppImage` |\n| The launcher for macOS (Apple silicon), the file it updates itself from | `twinsanityevolved-launcher-v0.9.1-macos-arm64.zip` |\n\nNo file of this release contains game data: every one passes the repository's asset scan.\n\n### Checksums (SHA256SUMS)\n\n| File | SHA-256 |\n|---|---|\n| twinsanityevolved-launcher-v0.9.1-macos-arm64.zip | `e4e0a3767c1b5becb6fdc73da2bdb89554d21a277d89781d082a336fc1416b38` |\n| twinsanityevolved-launcher-windows-x64.zip | `07648645a6acc26bea1ae12b26184f8326bef74cb29de2645824152fd347383b` |\n| twinsanityevolved-v0.9.1-linux-aarch64.zip | `af5362f1629ddddf2d755c0b2d72b11982ba0640d1beffec532c84faa7c72b2c` |\n| twinsanityevolved-v0.9.1-linux-x86_64.zip | `32dc4f1bf9b32c9aed41d2fc50a53c43f364607b176243b4a728140090f8b07c` |\n| twinsanityevolved-v0.9.1-macos-arm64.zip | `2d7ed517192a5216ad276a65fa34af7ddc15bf517bca37e00f7923452b497097` |\n| twinsanityevolved-v0.9.1-macos-x86_64.zip | `8fd3e16f04e0aa582e93454fec3226033f580a46399439d7a23cdfb99b40a8c9` |\n| twinsanityevolved-v0.9.1-windows-x64.zip | `0065be0da6f9d3e1bde857f03131624b134745c801729ce8146d6e8d32454248` |\n| twinsanityevolved-v0.9.1-vita-native.vpk | `7681bfef3688f9a5bfca11b917beb0ef792bc63209ced644c20359ad7de735b2` |\n| twinsanityevolved-v0.9.1-vita.vpk | `e161ce8e349609860db3aabfb286a28f44484c13371e53d61283db244c93257e` |\n| twinsanityevolved-launcher-macos-arm64.dmg | `31b563854414827ffb406e2b5964b0e9d0d93e6a3026501e279b7103c710c0d9` |\n| twinsanityevolved-launcher-linux-x86_64.AppImage | `0f30b43df9795fa15ab2a1117be8dcedab6d82c931d3ca925c9ff9636fe73c08` |\n",
+    "assets": [
+      {
+        "name": "SHA256SUMS",
+        "size": 1217,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "twinsanityevolved-launcher-linux-x86_64.AppImage",
+        "size": 32578040,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-launcher-linux-x86_64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "twinsanityevolved-launcher-macos-arm64.dmg",
+        "size": 26189864,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-launcher-macos-arm64.dmg",
+        "content_type": "application/x-apple-diskimage"
+      },
+      {
+        "name": "twinsanityevolved-launcher-v0.9.1-macos-arm64.zip",
+        "size": 23040544,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-launcher-v0.9.1-macos-arm64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "twinsanityevolved-launcher-windows-x64.zip",
+        "size": 44990769,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-launcher-windows-x64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-linux-aarch64.zip",
+        "size": 7255787,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-linux-aarch64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-linux-x86_64.zip",
+        "size": 7526990,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-linux-x86_64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-macos-arm64.zip",
+        "size": 6010409,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-macos-arm64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-macos-x86_64.zip",
+        "size": 7330058,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-macos-x86_64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-vita-native.vpk",
+        "size": 4783051,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-vita-native.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-vita.vpk",
+        "size": 5398007,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "twinsanityevolved-v0.9.1-windows-x64.zip",
+        "size": 12026569,
+        "download_url": "https://github.com/menaman123/TwinsanityEvolved/releases/download/v0.9.1/twinsanityevolved-v0.9.1-windows-x64.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "TwinsanityEvolved",
+    "homebrew_icon": "https://archive.org/download/twinsanityevolved-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native Ps Vita port of Crash Twinsanity",
+    "homebrew_long_description": "Native Ps Vita port of Crash Twinsanity",
+    "homebrew_id": "twinsanityevolved",
+    "homebrew_authors": [
+      "menaman123"
+    ],
+    "homebrew_version": "0.9.1",
+    "catalog_apps": [
+      {
+        "id": "twinsanityevolved",
+        "name": "TwinsanityEvolved",
+        "icon": "https://archive.org/download/twinsanityevolved-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Native Ps Vita port of Crash Twinsanity",
+        "long_description": "Native Ps Vita port of Crash Twinsanity",
+        "version": "0.9.1",
+        "version_date": "2026-10-30",
+        "author_ids": [
+          "menaman123"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.9.1",
+    "catalog_version": "0.9.1"
+  },
+  {
+    "platform": "github",
     "repo": "mauricio-gg/vitaki-vitarps5",
     "release_id": "429156538",
     "tag": "v4.2.2-beta.2",
@@ -499,6 +712,85 @@
   },
   {
     "platform": "github",
+    "repo": "vallfrr/sh4vita",
+    "release_id": "428876067",
+    "tag": "v1.0.1",
+    "name": "v1.0.1",
+    "url": "https://github.com/vallfrr/sh4vita/releases/tag/v1.0.1",
+    "published": "2026-10-30T10:00:58Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Fixes for crashes and freezes that show up after long play sessions. Same files and installation as v1.0.0: only `sh4vita.vpk` changes (the `eboot.bin` inside). The data preparers are unchanged. If you already prepared your game files, you do not need to do it again: install the new VPK over the old one with VitaShell and keep `ux0:data/sh4/` (saves included).\r\n\r\n## What changed\r\n\r\n- **Memory:** the game kept every unread SDL input event in memory, about 4.6 MB of the host heap after 25 minutes. They are now discarded.\r\n- **Out of memory in long sessions:** the game's own linear memory reservation is now 56 MiB instead of 64 (the highest use we measured was 47.5 MiB). This avoids `guest memory exhausted` crashes seen after about 50 minutes, for example in the hospital. If a scene ever misbehaves, `SH4_ARENA_MB=64` in `ux0:data/sh4/env.txt` restores the original size.\r\n- **Render freeze:** fixed a race between two threads sending drawing commands, which could freeze the game after 1 to 2 hours. A watchdog now also releases stranded commands.\r\n\r\n## Files\r\n\r\n| File | For |\r\n|---|---|\r\n| `sh4vita.vpk` | PS Vita (install with VitaShell) |\r\n| `sh4prep-windows.exe` | Windows |\r\n| `sh4prep-macos-app.zip` | macOS, Apple Silicon: run with double-click app |\r\n| `sh4prep-macos` | macOS, Apple Silicon: run with terminal version |\r\n| `sh4prep-linux-x86_64.AppImage` | Linux x86-64: run with double-click version |\r\n| `sh4prep-linux` | Linux x86-64: run with terminal version |\r\n\r\nSHA-256 of `sh4vita.vpk`: `1ba609c01dc004435386a2ed7314db7246f3160ae4b3291c2f5796102918ec88`\r\n\r\nFull installation steps are in the [README](https://github.com/vallfrr/sh4vita#install). You need your own copy of Silent Hill 4 from GOG (\"1.0 gog v5\"); no game file is included.\r\n\r\n## Known limitations\r\n\r\n- The long-session freeze fix was tested for about four hours of continuous play. Please save often.\r\n- If you get a full-console freeze, please open an issue with `sh4log.txt` and `sh4log.txt.01` from `ux0:data/sh4/`.\r\n- Continue on the title screen stays greyed out: use Load.\r\n- Heavy scenes can drop below 30 fps; the first visit to a room can pause for about a second.\r\n\r\nThe code is under GPL-3.0 (see `LICENSE`). The source of this release is the tag `v1.0.1` of this repository.\r\n",
+    "assets": [
+      {
+        "name": "sh4prep-linux",
+        "size": 8839000,
+        "download_url": "https://github.com/vallfrr/sh4vita/releases/download/v1.0.1/sh4prep-linux",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "sh4prep-linux-x86_64.AppImage",
+        "size": 4233720,
+        "download_url": "https://github.com/vallfrr/sh4vita/releases/download/v1.0.1/sh4prep-linux-x86_64.AppImage",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "sh4prep-macos",
+        "size": 5557136,
+        "download_url": "https://github.com/vallfrr/sh4vita/releases/download/v1.0.1/sh4prep-macos",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "sh4prep-macos-app.zip",
+        "size": 2427912,
+        "download_url": "https://github.com/vallfrr/sh4vita/releases/download/v1.0.1/sh4prep-macos-app.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "sh4prep-windows.exe",
+        "size": 6433280,
+        "download_url": "https://github.com/vallfrr/sh4vita/releases/download/v1.0.1/sh4prep-windows.exe",
+        "content_type": "application/x-msdos-program"
+      },
+      {
+        "name": "sh4vita.vpk",
+        "size": 5773319,
+        "download_url": "https://github.com/vallfrr/sh4vita/releases/download/v1.0.1/sh4vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Silent Hill 4: The Room",
+    "homebrew_icon": "https://archive.org/download/silent-hill-4-the-room-for-playstationvita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of the latest GOG PC version of Silent Hill 4: The Room to the PS Vita. You may use your own copy of the game.",
+    "homebrew_long_description": "Port of the latest GOG PC version of Silent Hill 4: The Room to the PS Vita. You may use your own copy of the game.",
+    "homebrew_id": "silent-hill-4-the-room",
+    "homebrew_authors": [
+      "vallfrr"
+    ],
+    "homebrew_version": "1.0.1",
+    "catalog_apps": [
+      {
+        "id": "silent-hill-4-the-room",
+        "name": "Silent Hill 4: The Room",
+        "icon": "https://archive.org/download/silent-hill-4-the-room-for-playstationvita/icon0.png",
+        "category": "ports",
+        "description": "Port of the latest GOG PC version of Silent Hill 4: The Room to the PS Vita. You may use your own copy of the game.",
+        "long_description": "Port of the latest GOG PC version of Silent Hill 4: The Room to the PS Vita. You may use your own copy of the game.",
+        "version": "1.0.1",
+        "version_date": "2026-10-30",
+        "author_ids": [
+          "vallfrr"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0.1",
+    "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "ggdrn/METEOR-VII-VITA",
     "release_id": "428569280",
     "tag": "v1.0",
@@ -526,7 +818,7 @@
     "homebrew_authors": [
       "ggdrn"
     ],
-    "homebrew_version": "0.09.00",
+    "homebrew_version": "1.0",
     "catalog_apps": [
       {
         "id": "final-fantasy-vii",
@@ -535,16 +827,65 @@
         "category": "ports",
         "description": "Port de Final Fantasy VII - Android Legacy para o VITA",
         "long_description": "A loader that runs the native library of the Android version of FINAL FANTASY VII (v1.0.29) on the PlayStation Vita, without emulation: the original ARMv7 .so runs directly on the CPU, with the Android system calls redirected to their Vita equivalents.",
-        "version": "0.09.00",
-        "version_date": "2026-10-25",
+        "version": "1.0",
+        "version_date": "2026-10-30",
         "author_ids": [
           "ggdrn"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.09.00 → release v1.0",
-    "catalog_version": "0.09.00"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "Brendonm17/Open-Nectar-Vita",
+    "release_id": "428558978",
+    "tag": "v0.0.1",
+    "name": "Pikmin Vita v0.0.1",
+    "url": "https://github.com/Brendonm17/Open-Nectar-Vita/releases/tag/v0.0.1",
+    "published": "2026-10-30T01:25:17Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Pikmin for PS Vita v0.0.1\r\n\r\nFirst PS Vita release of Open Nectar, a native port of Pikmin built on the decompilation.\r\n\r\nYou need your own Pikmin (USA) disc image. No game data is included.\r\n\r\n## Install\r\n\r\n1. Install `Pikmin-Vita-v1.0.vpk` with VitaShell.\r\n2. Copy your Pikmin (USA) disc image to `ux0:data/Pikmin/`.\r\n   Supported: `.iso`, `.gcm`, `.rvz`, `.wia`, Dolphin `.ciso`.\r\n3. Launch Pikmin from the home screen.\r\n\r\nRequirements: HENkaku/Ensō, game ID `GPIE01` (revision 1), about 1.5 GB free on `ux0:`.\r\n\r\n## Features\r\n\r\n- Full game, all areas, 30 fps target\r\n- 16:9 widescreen\r\n- Attract movies and cutscenes with full audio\r\n- Saves are standard GameCube `.gci` files in `ux0:data/Pikmin/`, compatible with Dolphin and real hardware\r\n- Loads disc images directly, including compressed RVZ\r\n- Vita button prompts and an in-game options menu\r\n\r\n## Known issues\r\n\r\n- Materials without a baked shader fall back to a slower generic one, or outright break. send me log and .bin filesgenerated from game\r\n\r\n## Reporting problems\r\n\r\nPlease attach `ux0:data/Pikmin/nectar.log`. If you can, also attach\r\n`ux0:data/Pikmin/tev_keys.bin` and `ux0:data/Pikmin/vs_keys.bin` so missing shaders can be added.\r\n\r\n## Credits\r\n\r\nOpen Nectar and the Pikmin decompilation projects.\r\nRinnegatamente for VitaGL.\r\nPikmin is a trademark of Nintendo. This project is not affiliated with Nintendo or Sony.",
+    "assets": [
+      {
+        "name": "Pikmin-Vita-v0.0.1.vpk",
+        "size": 3718676,
+        "download_url": "https://github.com/Brendonm17/Open-Nectar-Vita/releases/download/v0.0.1/Pikmin-Vita-v0.0.1.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Brendonm17",
+    "homebrew_name": "Pikmin",
+    "homebrew_icon": "https://archive.org/download/open-nectar/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita release of Open Nectar, a native port of Pikmin built on the decompilation.",
+    "homebrew_long_description": "PS Vita release of Open Nectar, a native port of Pikmin built on the decompilation.",
+    "homebrew_id": "pikmin",
+    "homebrew_authors": [
+      "bren"
+    ],
+    "homebrew_version": "0.0.1",
+    "catalog_apps": [
+      {
+        "id": "pikmin",
+        "name": "Pikmin",
+        "icon": "https://archive.org/download/open-nectar/icon0.png",
+        "category": "ports",
+        "description": "PS Vita release of Open Nectar, a native port of Pikmin built on the decompilation.",
+        "long_description": "PS Vita release of Open Nectar, a native port of Pikmin built on the decompilation.",
+        "version": "0.0.1",
+        "version_date": "2026-10-29",
+        "author_ids": [
+          "bren"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.0.1",
+    "catalog_version": "0.0.1"
   },
   {
     "platform": "github",
@@ -2904,55 +3245,6 @@
   },
   {
     "platform": "github",
-    "repo": "Franckrst/D2Vita",
-    "release_id": "415843246",
-    "tag": "v0.2.3-beta",
-    "name": "v0.2.3-beta",
-    "url": "https://github.com/Franckrst/D2Vita/releases/tag/v0.2.3-beta",
-    "published": "2026-10-17T14:19:54Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "\n- **No more sound crackle in crowded fights.** With 10+ sounds at once\n  (Frost Nova in a pack, Baal's Throne) the mix went past full scale and was\n  clipped; an output limiter now lowers the whole mix for a moment instead.\n  `D2_SONLIMIT=0` in `env.txt` restores the old behaviour.\n- **No more sound dropouts in heavy scenes**: the audio thread moved to a\n  core where the graphics flush no longer delays it (`D2_SONCPU=1` restores\n  the old placement).\n- **Short presses are no longer lost when the frame rate drops**: every\n  button and touch change between two slow frames is now seen, and a quick\n  tap of the aim button attacks/clicks once.\n\nValidation: sound — console (limiter: 7 passes, clipped samples\n~49 000–500 000 → 16–399 per pass; audio core: 6 Baal's Throne passes, late\nsound packets 2/47 → 0/0; no fps cost on the Act V patrol). Controls — host\ntests and qemu with a simulated slow game (12/12 presses seen at ~3–5 fps,\nwas 4/12); **not yet tested on a console**, please report how it feels.\nFreezing sound and the Maggot Lair freeze were not reproduced.\n\n\nVersion française : [journal des versions](https://github.com/Franckrst/D2Vita/blob/main/docs-site/changelog.fr.md).\n\n\n**Full Changelog**: https://github.com/Franckrst/D2Vita/compare/v0.2.2-beta...v0.2.3-beta",
-    "assets": [
-      {
-        "name": "d2vita.vpk",
-        "size": 8083949,
-        "download_url": "https://github.com/Franckrst/D2Vita/releases/download/v0.2.3-beta/d2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "D2Vita",
-    "homebrew_icon": "https://archive.org/download/D2Vita/newicon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-    "homebrew_long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.\n\n- PsVitaAlive -",
-    "homebrew_id": "d2vita",
-    "homebrew_authors": [
-      "franckrst"
-    ],
-    "homebrew_version": "0.2.1",
-    "catalog_apps": [
-      {
-        "id": "d2vita",
-        "name": "D2Vita",
-        "icon": "https://archive.org/download/D2Vita/newicon0.png",
-        "category": "ports",
-        "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
-        "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.\n\n- PsVitaAlive -",
-        "version": "0.2.1",
-        "version_date": "2026-10-09",
-        "author_ids": [
-          "franckrst"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.2.1 → release v0.2.3-beta",
-    "catalog_version": "0.2.1"
-  },
-  {
-    "platform": "github",
     "repo": "bucanero/apollo-vita",
     "release_id": "415343169",
     "tag": "v2.4.0",
@@ -4791,55 +5083,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.4.0",
     "catalog_version": "1.4.0"
-  },
-  {
-    "platform": "github",
-    "repo": "MetalSyntax/N.O.V.A-2-vita",
-    "release_id": "397487463",
-    "tag": "v1.0",
-    "name": "N.O.V.A 2 Vita v1.0",
-    "url": "https://github.com/MetalSyntax/N.O.V.A-2-vita/releases/tag/v1.0",
-    "published": "2026-09-27T03:03:42Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# N.O.V.A 2 Vita v1.0\r\n\r\nThis is a wrapper/port of **N.O.V.A. 2 – Near Orbit Vanguard Alliance HD** (Gameloft) for the PS Vita.\r\n\r\n## Changelog\r\n\r\n- v1.0: Initial release.\r\n  - **Plays at 60 FPS at native 960x544**, 1:1 with the Vita screen. The engine is given the\r\n    real resolution, so the 3D game and HUD fill the screen without scaling. The static 800x480\r\n    loading/title backgrounds are stretched to fullscreen at sprite level.\r\n  - **Intro video plays unconverted.** `GLVideo.mp4` (H.264 Baseline 640x360 @ 60 fps + AAC\r\n    44.1 kHz) is played exactly as shipped with the game. SceAvPlayer refuses this file, so the\r\n    port uses its own MP4 demuxer with the Vita's **hardware H.264 decoder** (`sceAvcdec`) and\r\n    software AAC audio. Skip it with Cross or Start.\r\n  - **Full physical controls.** Every visible HUD button is mapped to a physical button, using\r\n    the button positions read from the game's own code:\r\n    - Left stick: move. Right stick: camera.\r\n    - R: fire (hold). L: special power. Cross: jump.\r\n    - Circle: reload. Triangle / D-Pad Up: next weapon. D-Pad Down: previous weapon.\r\n    - D-Pad Left / Right: change special power. Square: grenade. Start: pause.\r\n  - **Virtual touch controls at 1% opacity.** The joystick, fire, jump and special-power buttons\r\n    are nearly invisible but still respond to touch. The HUD that shows ammo and grenades stays\r\n    fully visible.\r\n  - **Smooth camera with adjustable sensitivity.** The right stick works like a continuous finger\r\n    drag: hold it to keep turning, light tilt for precise aiming. Press **Select + D-Pad Up/Down**\r\n    to set the sensitivity (1-10, default 4). A bar at the top of the screen shows the level, and\r\n    the setting is saved in `ux0:data/nova2/camera_sens.txt`.\r\n  - **Performance fixes.** Removed per-frame log writes and per-sound log spam. Added a negative\r\n    cache for missing files: the engine looks for a loose `.wav` that does not exist before every\r\n    footstep or gunshot, and that used to stall a frame each time.\r\n  - Software ATC texture decoding, Vox audio through `sceAudioOut`, Gameloft DRM bypassed, and\r\n    save/data paths remapped to `ux0:data/nova2/`.\r\n\r\n## Setup Instructions\r\n\r\nIn order to properly install the game, you'll need to extract the data from the original Android game.\r\n\r\n1. Install the `kubridge` and `fd_fix` plugins on your PS Vita.\r\n2. Install `libshacccg.suprx`, if you don't have it already, by following [this guide](https://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).\r\n3. Obtain the original APK of N.O.V.A. 2 HD (`NOVA-2-HD-v1-0-5.apk`) and its game data folder (`/sdcard/gameloft/games/GloftN2HP/` from an Android device where the game was installed and run once).\r\n4. Extract the `.apk` using any zip extractor.\r\n5. Place `libnova2.so` (from `lib/armeabi-v7a/` inside the APK) in `ux0:data/nova2/`.\r\n6. Place `assets/data.save` from the APK in `ux0:data/nova2/assets/`, and the APK's `res/raw/` files in `ux0:data/nova2/res/raw/`.\r\n7. Copy the whole `GloftN2HP/` data folder (the `.gla` files, `sounds_hi.glza`, `oconf.bar`, `GLVideo.mp4`, ...) to `ux0:data/nova2/GloftN2HP/`.\r\n8. Download and install `nova2.vpk` on your PS Vita.\r\n\r\n`libStormGLOFT.so` and `libmthook.so` are not needed.\r\n\r\n## Controls\r\n\r\n- **Left Analog** - Move\r\n- **Right Analog** - Camera (hold to keep turning; light tilt = precise aim)\r\n- **R** - Fire (hold)\r\n- **L** - Use special power\r\n- **Cross** - Jump\r\n- **Circle** - Reload\r\n- **Triangle / D-Pad Up** - Next weapon\r\n- **D-Pad Down** - Previous weapon\r\n- **D-Pad Left / Right** - Change special power\r\n- **Square** - Grenade\r\n- **Start** - Pause\r\n- **Select + D-Pad Up / Down** - Camera sensitivity (1-10)\r\n- **Touch Screen** - Original touch controls (drawn at 1% opacity)\r\n\r\n## Known Issues\r\n\r\n- Only the boot intro video is supported. Any later video request is skipped.\r\n- Pause, weapon and grenade touch spots were measured from screenshots (they are 3D HUD nodes). If one of them misses on your console, please report it with a log.\r\n- Very heavy combat may still show small hitches on slow memory cards (sound effects are streamed from `sounds_hi.glza`).\r\n\r\n## Troubleshooting\r\n\r\n**\"Looks like you haven't installed the data files\" on boot:** `ux0:data/nova2/libnova2.so` is missing or in the wrong folder.\r\n\r\n**Black screen / crash while loading:** check that `ux0:data/nova2/GloftN2HP/` contains all the `.gla` files and `sounds_hi.glza`, and that `kubridge`, `fd_fix` and `libshacccg.suprx` are installed.\r\n\r\n**If it still crashes**, please report it with:\r\n\r\n1. The newest `ux0:data/nova2/logs/nova2_NNNN.log` (from the time of the crash; do not delete it).\r\n2. The newest `ux0:data/psp2core-*-eboot.bin.psp2dmp` core dump.\r\n3. A note on exactly when it happens (boot, intro, menu, which level).\r\n\r\n## Credits\r\n\r\n- TheFloW for the `so_loader` wrapper and Android porting boilerplate.\r\n- Rinnegatamante for `vitaGL` and porting tools.\r\n- v-atamanenko for `FalsoJNI` and the soloader boilerplate.\r\n- Gameloft for the original game.\r\n",
-    "assets": [
-      {
-        "name": "nova2.vpk",
-        "size": 2077413,
-        "download_url": "https://github.com/MetalSyntax/N.O.V.A-2-vita/releases/download/v1.0/nova2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MetalSyntax",
-    "homebrew_name": "NOVA 2 HD",
-    "homebrew_icon": "https://archive.org/download/n.o.v.a-2-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Android to PS Vita port of Gameloft's N.O.V.A 2",
-    "homebrew_long_description": "N.O.V.A. 2 is Gameloft's sci-fi first-person shooter, originally released for Android as NOVA-2-HD-v1-0-5.apk (package com.gameloft.android.GAND.GloftN2HP). This port runs the compiled native library (libnova2.so, armeabi-v7a) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 2.0 rendering backend.",
-    "homebrew_id": "nova-2-hd",
-    "homebrew_authors": [
-      "metalsyntax"
-    ],
-    "homebrew_version": "1.0",
-    "catalog_apps": [
-      {
-        "id": "nova-2-hd",
-        "name": "NOVA 2 HD",
-        "icon": "https://archive.org/download/n.o.v.a-2-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Android to PS Vita port of Gameloft's N.O.V.A 2",
-        "long_description": "N.O.V.A. 2 is Gameloft's sci-fi first-person shooter, originally released for Android as NOVA-2-HD-v1-0-5.apk (package com.gameloft.android.GAND.GloftN2HP). This port runs the compiled native library (libnova2.so, armeabi-v7a) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 2.0 rendering backend.",
-        "version": "1.0",
-        "version_date": "2026-09-26",
-        "author_ids": [
-          "metalsyntax"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0",
-    "catalog_version": "1.0"
   },
   {
     "platform": "github",
@@ -16418,6 +16661,55 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.1",
     "catalog_version": "v.1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "AJ170/COMZombies-PSVita-Port",
+    "release_id": "320538107",
+    "tag": "1.01",
+    "name": "Call of Mini Zombies PSVita Port",
+    "url": "https://github.com/AJ170/COMZombies-PSVita-Port/releases/tag/1.01",
+    "published": "2026-05-11T15:00:49Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Fixed the globalization issue so now this port works on any system language.\r\n- adjusted movement speed\r\n\r\nIMPORTANT:\r\ncreate a folder called \"comZombiesOffline\" in ux0:data\r\nshould look like ux0:/data/comZombiesOffline/\r\n\r\nControls:\r\ntriangle - Change Weapons\r\nsquare - Shoot\r\nR1 - Shoot\r\nDPad Left - Consume Item 1\r\nDPad Right - Consume Item 2\r\nLeft Joystick - Move Character\r\nRight Joystick - Move Camera\r\nStart Button - Pause's Game\r\n\r\nIMPORTANT:\r\ncreate a folder called \"comZombiesOffline\" in ux0:data\r\nshould look like ux0:/data/comZombiesOffline/",
+    "assets": [
+      {
+        "name": "CoMZombies_v1.01.vpk",
+        "size": 183003352,
+        "download_url": "https://github.com/AJ170/COMZombies-PSVita-Port/releases/download/1.01/CoMZombies_v1.01.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AJ170",
+    "homebrew_name": "Call of Mini Zombies",
+    "homebrew_icon": "https://archive.org/download/call-of-mini-zombies-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Call of Mini Zombies Ps Vita Port",
+    "homebrew_long_description": "Call of Mini Zombies Ps Vita Port",
+    "homebrew_id": "call-of-mini-zombies",
+    "homebrew_authors": [
+      "aj170"
+    ],
+    "homebrew_version": "1.01",
+    "catalog_apps": [
+      {
+        "id": "call-of-mini-zombies",
+        "name": "Call of Mini Zombies",
+        "icon": "https://archive.org/download/call-of-mini-zombies-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Call of Mini Zombies Ps Vita Port",
+        "long_description": "Call of Mini Zombies Ps Vita Port",
+        "version": "1.01",
+        "version_date": "2026-05-11",
+        "author_ids": [
+          "aj170"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.01",
+    "catalog_version": "1.01"
   },
   {
     "platform": "github",
@@ -32627,201 +32919,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0",
     "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "VMHoss/Innyume-Vita",
-    "release_id": "56274179",
-    "tag": "1.8",
-    "name": "Version 1.8",
-    "url": "https://github.com/VMHoss/Innyume-Vita/releases/tag/1.8",
-    "published": "2022-01-02T15:38:35Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Managed to mend nearly all of the navigation problems that the AI encounters.\r\n",
-    "assets": [
-      {
-        "name": "Innyume_1_8.vpk",
-        "size": 45866181,
-        "download_url": "https://github.com/VMHoss/Innyume-Vita/releases/download/1.8/Innyume_1_8.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VMHoss",
-    "homebrew_name": "Innyume",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-innyume/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Innyume for PSVITA.",
-    "homebrew_id": "innyume",
-    "homebrew_authors": [
-      "4dsworks"
-    ],
-    "catalog_apps": [
-      {
-        "id": "innyume",
-        "name": "Innyume",
-        "icon": "https://archive.org/download/psvitaalive-innyume/icon0.png",
-        "category": "ports",
-        "description": "Port of Innyume for PSVITA.",
-        "long_description": "Port of Innyume, a japanese horror game where you are chased by smiley faces.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-        "version": "v.1.8",
-        "version_date": "2022-01-02",
-        "author_ids": [
-          "4dsworks"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Port of Innyume, a japanese horror game where you are chased by smiley faces.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.8",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.8",
-    "catalog_version": "v.1.8"
-  },
-  {
-    "platform": "github",
-    "repo": "sharkwouter/panel-pop",
-    "release_id": "56052005",
-    "tag": "0.0.3-psp",
-    "name": "Panel-Pop 0.0.3 PSP Beta",
-    "url": "https://github.com/sharkwouter/panel-pop/releases/tag/0.0.3-psp",
-    "published": "2021-12-27T21:00:32Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "It runs a bit slow, but it is playable. Will do a full release once the performance improves. This does not require custom firmware to run.",
-    "assets": [
-      {
-        "name": "panel-pop-psp.zip",
-        "size": 12675513,
-        "download_url": "https://github.com/sharkwouter/panel-pop/releases/download/0.0.3-psp/panel-pop-psp.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "sharkwouter",
-    "homebrew_name": "PanelPop",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-panelpop/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "PanelPop port for PSVITA/PSTV.",
-    "homebrew_id": "panelpop",
-    "homebrew_authors": [
-      "sharkwouter"
-    ],
-    "catalog_apps": [
-      {
-        "id": "panelpop",
-        "name": "PanelPop",
-        "icon": "https://archive.org/download/psvitaalive-panelpop/icon0.png",
-        "category": "ports",
-        "description": "PanelPop port for PSVITA/PSTV.",
-        "long_description": "A Panel de Pon / Tetris Attack / Puzzle League clone.\n\n- PsVitaAlive -",
-        "version": "v.0.0.3",
-        "version_date": "2020-12-12",
-        "author_ids": [
-          "sharkwouter"
-        ]
-      }
-    ],
-    "homebrew_long_description": "A Panel de Pon / Tetris Attack / Puzzle League clone.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.0.0.3",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.0.3",
-    "catalog_version": "v.0.0.3"
-  },
-  {
-    "platform": "github",
-    "repo": "Northfear/Commander-Genius",
-    "release_id": "55569153",
-    "tag": "v3.0.9-vita.2",
-    "name": "v3.0.9-vita.2",
-    "url": "https://github.com/Northfear/Commander-Genius/releases/tag/v3.0.9-vita.2",
-    "published": "2021-12-17T19:11:58Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Version bump",
-    "assets": [
-      {
-        "name": "CommanderGenius.vpk",
-        "size": 3865398,
-        "download_url": "https://github.com/Northfear/Commander-Genius/releases/download/v3.0.9-vita.2/CommanderGenius.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Northfear",
-    "homebrew_name": "Commander Genius",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-commander-genius/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Commander Genius for PSVITA.",
-    "homebrew_id": "commander-genius",
-    "homebrew_authors": [
-      "northfear"
-    ],
-    "catalog_apps": [
-      {
-        "id": "commander-genius",
-        "name": "Commander Genius",
-        "icon": "https://archive.org/download/psvitaalive-commander-genius/icon0.png",
-        "category": "ports",
-        "description": "Port of Commander Genius for PSVITA.",
-        "long_description": "Port of Commander Genius for PSVITA/PSTV. Commander Genius is an open-source clone of Commander Keen (1-6, Dreams) which allows you to play these episodes and some of the mods made for them.\n\n- PsVitaAlive -",
-        "version": "v.3.0.9-vita.2",
-        "version_date": "2021-12-17",
-        "author_ids": [
-          "northfear"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Port of Commander Genius for PSVITA/PSTV. Commander Genius is an open-source clone of Commander Keen (1-6, Dreams) which allows you to play these episodes and some of the mods made for them.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.3.0.9-vita.2",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.3.0.9-vita.2",
-    "catalog_version": "v.3.0.9-vita.2"
-  },
-  {
-    "platform": "github",
-    "repo": "VitaHEX-Games/Consolepedia-3D",
-    "release_id": "55396203",
-    "tag": "v0.32",
-    "name": "Consolepedia 3D PS4 Hotfix Version 0.32",
-    "url": "https://github.com/VitaHEX-Games/Consolepedia-3D/releases/tag/v0.32",
-    "published": "2021-12-15T19:35:52Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Hotfix version 0.32 for PS4 only\r\n\r\n- Fixed HDR\r\n- Disabled \"trial version\" message\r\n",
-    "assets": [
-      {
-        "name": "Consolepedia3D_0.32-PS4.pkg",
-        "size": 253886464,
-        "download_url": "https://github.com/VitaHEX-Games/Consolepedia-3D/releases/download/v0.32/Consolepedia3D_0.32-PS4.pkg",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VitaHEX-Games",
-    "homebrew_name": "Consolepedia 3D",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-consolepedia-3d/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Virtual encyclopedia of game systems.",
-    "homebrew_long_description": "Consolepedia 3D is a virtual encyclopedia of game systems. From Atari to Nintendo and PlayStation all with with detailed 3D models of each system with information about the history, specifications and their best selling games.\nConsolepedia 3D features detailed 3d models where you can take a close look and also learn about it's history through the years. You can also see the top-5 best selling games for each system with the original box art.",
-    "homebrew_id": "consolepedia-3d",
-    "homebrew_authors": [
-      "vitahex-games"
-    ],
-    "homebrew_version": "v.0.3",
-    "catalog_apps": [
-      {
-        "id": "consolepedia-3d",
-        "name": "Consolepedia 3D",
-        "icon": "https://archive.org/download/psvitaalive-consolepedia-3d/icon0.png",
-        "category": "utilities",
-        "description": "Virtual encyclopedia of game systems.",
-        "long_description": "Consolepedia 3D is a virtual encyclopedia of game systems. From Atari to Nintendo and PlayStation all with with detailed 3D models of each system with information about the history, specifications and their best selling games.\nConsolepedia 3D features detailed 3d models where you can take a close look and also learn about it's history through the years. You can also see the top-5 best selling games for each system with the original box art.",
-        "version": "v.0.3",
-        "version_date": "2020-10-05",
-        "author_ids": [
-          "vitahex-games"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.3 → release v0.32",
-    "catalog_version": "v.0.3"
   }
 ]
