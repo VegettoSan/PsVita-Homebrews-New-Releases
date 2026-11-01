@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>482</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">399</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>83</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">398</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>84</strong><span>pendientes</span></div>
         <div class="stat"><strong>473</strong><span>GitHub</span></div>
         <div class="stat"><strong>9</strong><span>GitLab</span></div>
       </div>
@@ -219,6 +219,105 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kotor kotor scoobydouche/vitakotor vitakotor v0.5.1-multicore.2 — tuned for every graphics option on v0.5.1-multicore.2 ports a test pre-release from the `multicore` branch, aimed at playing with shadows, grass, frame buffer and 32-bit textures all on. it builds on multicore.1: the ai now runs alongside the 3d scene far more of the time, and one graphics stall the port caused itself is gone.
+
+## what changed
+
+- **the ai waits far less for the scene.** in multicore.1 the ai often had to stop partway and wait for the drawing to finish, mostly when it started a character animation or loaded a script. animations are now queued and played the moment the drawing is done, and script loading shares the game&#x27;s resource manager through a lock instead of stopping. in the upper city the wait after each frame&#x27;s drawing dropped from 3.8 ms to 2.0 ms; in the lower city to 0.2 ms.
+
+- **a texture update no longer stalls the frame.** the game updates one texture every frame, and each update made the game core wait for the graphics core to finish everything before it: up to 3 ms a frame. it is now queued like every other draw call.
+
+- **new option: `shadowdistance`.** how far away, in metres, creatures still cast shadows when shadows is on. the default is the original `35`; `20` saves about 1 ms in the upper city crowds.
+
+- **kotor-nolog.vpk**: an optional build with diagnostic logging disabled. install it in place of `kotor.vpk` if you prefer not to have a log file written.
+
+### what to expect
+
+with every graphics option on and 32-bit textures, the taris lower city now averages about 34 ms a frame, right at the edge of the 30 fps lock: most frames make it, some show for an extra refresh. the upper city south crowds still run at about 17 fps and the undercity at about 19: those areas draw 500 to 800 objects a frame, and that work is the game&#x27;s own code on one core, whatever the settings. with framelock at 30, frames that miss the lock are shown for an extra refresh; `framelock=20` gives an even 20 in those areas if you prefer steady to fast.
+
+## updating
+
+install `kotor.vpk` over your current one. your files in `ux0:data/kotor/`, your saves and your mods stay as they are. if anything goes wrong, set `serveroverlap=0` under `[vita options]` in `swkotor.ini`, or reinstall multicore.1 or v0.5.0 from the releases page.
+
+## honest limits
+
+- **tested for one evening in taris.** several sessions in the upper city, lower city and undercity with every graphics option on, with no crashes. the last small widening of the animation and lock changes has not been played yet.
+
+- **32-bit textures fill the vita&#x27;s video memory** in the busy taris areas, and the rest spills into regular memory. it has not caused trouble so far, but the bigger outdoor areas have not been tried at 32-bit.
+
+- **mod sets have not been tried with this build.**
+
+- **the loading screen runs twice when you load a save** (issue #13), and **the rare crash after an area-change auto-save** (issue #12) is still open.
+
+## everything else from multicore.1 still applies
+
+the ai runs on its own core while the scene draws, the graphics calls run on another, and `serveroverlap=0` turns the ai overlap off.
+
+## you need your own copy of the game
+
+this is a loader, not a game. it needs the android release&#x27;s `main` and `patch` `.obb` files, which you must own.
+
+## something broken?
+
+open an issue with `ux0:data/kotor/log.txt` attached, say where in the game it happened, and whether it still happens with `serveroverlap=0`.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/VitaKotor/icon0.png" alt="Icono de KOTOR" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ScoobyDouche/VitaKotor</div>
+                      <h2><a href="https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.5.1-multicore.2" target="_blank" rel="noopener">KOTOR</a></h2>
+                      <div class="release-name">VitaKotor v0.5.1-multicore.2 — tuned for every graphics option on</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.5.1-multicore.2</span>
+                    <span>2026-11-01 00:44 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.5.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.5.0 → release v0.5.1-multicore.2</div>
+                  
+                  <div class="body markdown-body"><p>A test pre-release from the <code>multicore</code> branch, aimed at playing with Shadows, Grass, Frame Buffer and 32-bit textures all on. It builds on multicore.1: the AI now runs alongside the 3D scene far more of the time, and one graphics stall the port caused itself is gone.</p>
+<h2>What changed</h2>
+<ul>
+<li><p><strong>The AI waits far less for the scene.</strong> In multicore.1 the AI often had to stop partway and wait for the drawing to finish, mostly when it started a character animation or loaded a script. Animations are now queued and played the moment the drawing is done, and script loading shares the game's resource manager through a lock instead of stopping. In the Upper City the wait after each frame's drawing dropped from 3.8 ms to 2.0 ms; in the Lower City to 0.2 ms.</p>
+</li>
+<li><p><strong>A texture update no longer stalls the frame.</strong> The game updates one texture every frame, and each update made the game core wait for the graphics core to finish everything before it: up to 3 ms a frame. It is now queued like every other draw call.</p>
+</li>
+<li><p><strong>New option: <code>ShadowDistance</code>.</strong> How far away, in metres, creatures still cast shadows when Shadows is on. The default is the original <code>35</code>; <code>20</code> saves about 1 ms in the Upper City crowds.</p>
+</li>
+<li><p><strong>KOTOR-nolog.vpk</strong>: an optional build with diagnostic logging disabled. Install it in place of <code>KOTOR.vpk</code> if you prefer not to have a log file written.</p>
+</li>
+</ul>
+<h3>What to expect</h3>
+<p>With every graphics option on and 32-bit textures, the Taris Lower City now averages about 34 ms a frame, right at the edge of the 30 fps lock: most frames make it, some show for an extra refresh. The Upper City South crowds still run at about 17 fps and the Undercity at about 19: those areas draw 500 to 800 objects a frame, and that work is the game's own code on one core, whatever the settings. With FrameLock at 30, frames that miss the lock are shown for an extra refresh; <code>FrameLock=20</code> gives an even 20 in those areas if you prefer steady to fast.</p>
+<h2>Updating</h2>
+<p>Install <code>KOTOR.vpk</code> over your current one. Your files in <code>ux0:data/kotor/</code>, your saves and your mods stay as they are. If anything goes wrong, set <code>ServerOverlap=0</code> under <code>[Vita Options]</code> in <code>swkotor.ini</code>, or reinstall multicore.1 or v0.5.0 from the releases page.</p>
+<h2>Honest limits</h2>
+<ul>
+<li><p><strong>Tested for one evening in Taris.</strong> Several sessions in the Upper City, Lower City and Undercity with every graphics option on, with no crashes. The last small widening of the animation and lock changes has not been played yet.</p>
+</li>
+<li><p><strong>32-bit textures fill the Vita's video memory</strong> in the busy Taris areas, and the rest spills into regular memory. It has not caused trouble so far, but the bigger outdoor areas have not been tried at 32-bit.</p>
+</li>
+<li><p><strong>Mod sets have not been tried with this build.</strong></p>
+</li>
+<li><p><strong>The loading screen runs twice when you load a save</strong> (issue #13), and <strong>the rare crash after an area-change auto-save</strong> (issue #12) is still open.</p>
+</li>
+</ul>
+<h2>Everything else from multicore.1 still applies</h2>
+<p>The AI runs on its own core while the scene draws, the graphics calls run on another, and <code>ServerOverlap=0</code> turns the AI overlap off.</p>
+<h2>You need your own copy of the game</h2>
+<p>This is a loader, not a game. It needs the Android release's <code>main</code> and <code>patch</code> <code>.obb</code> files, which you must own.</p>
+<h2>Something broken?</h2>
+<p>Open an issue with <code>ux0:data/kotor/log.txt</code> attached, say where in the game it happened, and whether it still happens with <code>ServerOverlap=0</code>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.1-multicore.2/KOTOR-nolog.vpk" target="_blank" rel="noopener">⬇ KOTOR-nolog.vpk · 2.6 MB</a><a class="btn" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.1-multicore.2/KOTOR.vpk" target="_blank" rel="noopener">KOTOR.vpk · 2.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="resident evil code: veronica x resident evil code: veronica x rinnegatamante/recvx_vita v.1.2 v.1.2 ports - updated to latest vitagl commit.
 - further optimized the whole game, reducing cpu workload by up to 12%.
 - fixed a bug causing misaligned text in the memory card selection when using languages different from english.
@@ -3902,116 +4001,6 @@ to do.</li>
 <a target="_blank" rel="noopener noreferrer" href="docs/TECHNICAL.md#version-11-changes">Technical Notes</a>.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/Strikers-Charged-Vita.vpk" target="_blank" rel="noopener">⬇ Strikers-Charged-Vita.vpk · 3.8 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/cboc-release.json" target="_blank" rel="noopener">cboc-release.json · 1.4 KB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 276.0 B</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/Strikers-Charged-Vita-install.zip" target="_blank" rel="noopener">Strikers-Charged-Vita-install.zip · 12.3 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="kotor kotor scoobydouche/vitakotor vitakotor v0.5.0 — a second core for the graphics v0.5.0 ports # vitakotor v0.5.0 — a second core for the graphics
-
-a pre-release. the game&#x27;s graphics calls now run on their own cpu core, which makes busy scenes faster and smoother. it has had one evening of testing, so it is marked pre-release until more people have played on it.
-
-## what changed
-
-- **the graphics calls run on a second core.** until now the core running the game also did all of vitagl&#x27;s work for every object it drew, several hundred times a frame in busy areas. that work now goes to a thread on another core, and the game core moves on to the next object. in the upper city and the endar spire fights each busy frame takes about a tenth less time, and motion feels smoother.
-
-- **setup mistakes show a message instead of a black screen.** a missing `kubridge`, `libshacccg`, `.so` file or `.obb` now opens a message box saying what is missing and where it goes.
-
-- **16-bit textures could come out corrupted** when the game re-uploaded a texture, or updated one on a texture unit it had not just bound. fixed.
-
-- **smaller fixes**: the missing-obb message is shorter, and a few internal clean-ups in the loader&#x27;s hooks and thread handling.
-
-- **kotor-nolog.vpk**: an optional build with diagnostic logging disabled. install it in place of `kotor.vpk` if you prefer not to have a log file written.
-
-### why only a tenth
-
-the graphics library was not most of the frame. most of a busy frame is the game&#x27;s own code working out what is on screen and preparing each object, and that still runs on one core. psvshell will still show that core at 100%: it is doing more frames in the same time, not less work. what this release moves off it is everything the port itself controls.
-
-## updating
-
-install `kotor.vpk` over your current one. your files in `ux0:data/kotor/`, your saves and your mods stay as they are. if anything goes wrong, v0.4.3 is still on the releases page and installs the same way.
-
-## honest limits
-
-- **tested for one evening, not a playthrough.** several sessions in the taris upper city and save loads, with no crashes and nothing wrong on screen. the rest of the game has not been played on this build yet, which is why it is a pre-release.
-
-- **mod sets have not been tried with this build.**
-
-- **busy areas still sit near 20 fps** with a crowd on screen; the remaining time is the game&#x27;s own code.
-
-- **the loading screen runs twice when you load a save** (issue #13). it fills once without a tip, then again quickly with one. it happens in v0.4.3 too, and the save loads normally.
-
-- **the rare crash after an area-change auto-save** (issue #12) is still open.
-
-## everything else from v0.4.3 still applies
-
-the 1.0.10, 1.0.9 build 54 and 1.0.7 / 1.0.71 apks work, griff spawns in the sand people enclave, texture quality is picked from the mods button, busy areas have 96 sound channels, and frames are locked to 30 fps.
-
-## you need your own copy of the game
-
-this is a loader, not a game. it needs the android release&#x27;s `main` and `patch` `.obb` files, which you must own.
-
-## something broken?
-
-open an issue with `ux0:data/kotor/log.txt` attached, and say where in the game it happened.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/VitaKotor/icon0.png" alt="Icono de KOTOR" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ScoobyDouche/VitaKotor</div>
-                      <h2><a href="https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.5.0" target="_blank" rel="noopener">KOTOR</a></h2>
-                      <div class="release-name">VitaKotor v0.5.0 — a second core for the graphics</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.5.0</span>
-                    <span>2026-10-24 03:29 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.5.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.5.0</div>
-                  
-                  <div class="body markdown-body"><h1>VitaKotor v0.5.0 — a second core for the graphics</h1>
-<p>A pre-release. The game's graphics calls now run on their own CPU core, which makes busy scenes faster and smoother. It has had one evening of testing, so it is marked pre-release until more people have played on it.</p>
-<h2>What changed</h2>
-<ul>
-<li><p><strong>The graphics calls run on a second core.</strong> Until now the core running the game also did all of vitaGL's work for every object it drew, several hundred times a frame in busy areas. That work now goes to a thread on another core, and the game core moves on to the next object. In the Upper City and the Endar Spire fights each busy frame takes about a tenth less time, and motion feels smoother.</p>
-</li>
-<li><p><strong>Setup mistakes show a message instead of a black screen.</strong> A missing <code>kubridge</code>, <code>libshacccg</code>, <code>.so</code> file or <code>.obb</code> now opens a message box saying what is missing and where it goes.</p>
-</li>
-<li><p><strong>16-bit textures could come out corrupted</strong> when the game re-uploaded a texture, or updated one on a texture unit it had not just bound. Fixed.</p>
-</li>
-<li><p><strong>Smaller fixes</strong>: the missing-OBB message is shorter, and a few internal clean-ups in the loader's hooks and thread handling.</p>
-</li>
-<li><p><strong>KOTOR-nolog.vpk</strong>: an optional build with diagnostic logging disabled. Install it in place of <code>KOTOR.vpk</code> if you prefer not to have a log file written.</p>
-</li>
-</ul>
-<h3>Why only a tenth</h3>
-<p>The graphics library was not most of the frame. Most of a busy frame is the game's own code working out what is on screen and preparing each object, and that still runs on one core. PSVshell will still show that core at 100%: it is doing more frames in the same time, not less work. What this release moves off it is everything the port itself controls.</p>
-<h2>Updating</h2>
-<p>Install <code>KOTOR.vpk</code> over your current one. Your files in <code>ux0:data/kotor/</code>, your saves and your mods stay as they are. If anything goes wrong, v0.4.3 is still on the releases page and installs the same way.</p>
-<h2>Honest limits</h2>
-<ul>
-<li><p><strong>Tested for one evening, not a playthrough.</strong> Several sessions in the Taris Upper City and save loads, with no crashes and nothing wrong on screen. The rest of the game has not been played on this build yet, which is why it is a pre-release.</p>
-</li>
-<li><p><strong>Mod sets have not been tried with this build.</strong></p>
-</li>
-<li><p><strong>Busy areas still sit near 20 fps</strong> with a crowd on screen; the remaining time is the game's own code.</p>
-</li>
-<li><p><strong>The loading screen runs twice when you load a save</strong> (issue #13). It fills once without a tip, then again quickly with one. It happens in v0.4.3 too, and the save loads normally.</p>
-</li>
-<li><p><strong>The rare crash after an area-change auto-save</strong> (issue #12) is still open.</p>
-</li>
-</ul>
-<h2>Everything else from v0.4.3 still applies</h2>
-<p>The 1.0.10, 1.0.9 build 54 and 1.0.7 / 1.0.71 APKs work, Griff spawns in the Sand People Enclave, texture quality is picked from the MODS button, busy areas have 96 sound channels, and frames are locked to 30 fps.</p>
-<h2>You need your own copy of the game</h2>
-<p>This is a loader, not a game. It needs the Android release's <code>main</code> and <code>patch</code> <code>.obb</code> files, which you must own.</p>
-<h2>Something broken?</h2>
-<p>Open an issue with <code>ux0:data/kotor/log.txt</code> attached, and say where in the game it happened.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.0/KOTOR-nolog.vpk" target="_blank" rel="noopener">⬇ KOTOR-nolog.vpk · 2.6 MB</a><a class="btn" href="https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.0/KOTOR.vpk" target="_blank" rel="noopener">KOTOR.vpk · 2.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -29199,7 +29188,7 @@ https://github.com/codiak101/registryprofiler#readme">
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-10-31 23:53 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-01 03:34 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
