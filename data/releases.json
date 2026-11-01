@@ -1,6 +1,340 @@
 [
   {
     "platform": "github",
+    "repo": "vogtmh/ladxhd-vita",
+    "release_id": "430536151",
+    "tag": "v2.0.9h",
+    "name": "v2.0.9h - speed like a pegasus",
+    "url": "https://github.com/vogtmh/ladxhd-vita/releases/tag/v2.0.9h",
+    "published": "2026-11-01T11:27:25Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Changes\r\n\r\n- Fixed a crash on every door with dynamic shadows turned off (sprite shadows). Link's shadow tried to remove itself from the previous map after that map had already been unloaded. This is the \"every door crashes after the Dungeon 3 bell\" report.\r\n- Fixed stutters of almost a second in Dungeon 3, 6 and 8. The Dodongo Snakes created a new collision box every frame, and every box stayed attached to the snake, so the game produced more and more temporary data the longer you stayed in the dungeon. After a few minutes the memory was full and the game had to clean up in the middle of play. This bug is also in the original game.\r\n- With dynamic shadows turned off (sprite shadows), the overworld no longer produces temporary data on every frame: each shadow created a new position object per frame just to copy its coordinates. This also led to clean-ups during play in longer sessions.\r\n- The overworld no longer gets slower the longer you play. Monkeys from the bridge piled up on every return to the overworld, and leftover enemy shadows were still processed every frame after their enemy was gone. The frame rate on the overworld now stays at 60 fps over long sessions.\r\n- The overworld now also stays in memory while you are in a dungeon, not only in houses and caves. Coming back from a dungeon or after an instrument restores it instead of loading it again (about 0.26 s instead of about 0.4 s on the Vita).\r\n- The last eight houses, caves and dungeon rooms you visited are kept ready, so going back into them loads faster. Long sessions need fewer garbage collections (9 instead of 13 in a full stress test, 6.8 s instead of 10.9 s in total).\r\n- Menus and the inventory now run at a steady 60 fps. While the game is paused, the world is drawn once and reused instead of being redrawn every frame.\r\n- The map in the inventory is shown larger: it grows to the biggest size that fits on the screen.\r\n- Button prompts use the Vita labels by default (face symbols, L/R, Select/Start).\r\n- Saves are safer: the previous save is kept as a backup and used automatically if a save file is missing or damaged. A failing autosave no longer stops the door transition.\r\n- The intro now starts at 60 fps right away instead of running at 30 fps for the first seconds.\r\n- Writing the log no longer causes short stutters; it is written in the background.\r\n- Colour correction and the pixel grid no longer switch the whole frame to the PC rendering path. The pixel grid is drawn as an overlay on top of the frame.\r\n- New for testers: Cheats > Stress Test plays through all dungeons, every overworld door, the whole overworld and repeated save loads, cycling through several settings and game scales, and writes a summary with frame rates per setting and scale to the log. It also stays 30 seconds in the busiest room of every dungeon and warns when normal play produces more than 2 KB of temporary data per frame. Saving is blocked while it runs and your settings are restored afterwards.\r\n\r\n## Known Limitations\r\n\r\n- At game scale 1x the overworld runs at 30 fps. That scale shows nine times as much of the world as 3x, which is more than the Vita's CPU and GPU can draw at 60 fps. Houses, caves and dungeons run at 60 fps at 1x.\r\n- With colour correction turned on, the game runs at 30 fps. The correction is an extra full-screen pass that costs about 8 ms of GPU time per frame.\r\n",
+    "assets": [
+      {
+        "name": "ladxhd-vita-importer-2.0.9h-linux-arm64.tar.gz",
+        "size": 29188180,
+        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-linux-arm64.tar.gz",
+        "content_type": "application/x-gzip"
+      },
+      {
+        "name": "ladxhd-vita-importer-2.0.9h-linux-x86_64.tar.gz",
+        "size": 29888065,
+        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-linux-x86_64.tar.gz",
+        "content_type": "application/x-gzip"
+      },
+      {
+        "name": "ladxhd-vita-importer-2.0.9h-macos-universal.zip",
+        "size": 54422148,
+        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-macos-universal.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "ladxhd-vita-importer-2.0.9h-windows-arm64.zip",
+        "size": 26442945,
+        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-windows-arm64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "ladxhd-vita-importer-2.0.9h-windows-x86_64.zip",
+        "size": 32641792,
+        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-windows-x86_64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 566,
+        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/SHA256SUMS.txt",
+        "content_type": "text/plain"
+      }
+    ],
+    "author": "vogtmh",
+    "homebrew_name": "Link's Awakening DX HD",
+    "homebrew_icon": "https://archive.org/download/ladxhd-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A LADXHD port for the PS Vita",
+    "homebrew_long_description": "A LADXHD port for the PS Vita\n\n- PsVitaAlive -",
+    "homebrew_id": "link-s-awakening-dx-hd",
+    "homebrew_authors": [
+      "vogtmh"
+    ],
+    "homebrew_version": "2.0.9",
+    "catalog_apps": [
+      {
+        "id": "link-s-awakening-dx-hd",
+        "name": "Link's Awakening DX HD",
+        "icon": "https://archive.org/download/ladxhd-vita/icon0.png",
+        "category": "ports",
+        "description": "A LADXHD port for the PS Vita",
+        "long_description": "A LADXHD port for the PS Vita\n\n- PsVitaAlive -",
+        "version": "2.0.9",
+        "version_date": "2026-10-17",
+        "author_ids": [
+          "vogtmh"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 2.0.9",
+    "catalog_version": "2.0.9"
+  },
+  {
+    "platform": "github",
+    "repo": "mauricio-gg/vitaki-vitarps5",
+    "release_id": "430505029",
+    "tag": "v4.2.2",
+    "name": "VitaRPS5 v4.2.2",
+    "url": "https://github.com/mauricio-gg/vitaki-vitarps5/releases/tag/v4.2.2",
+    "published": "2026-11-01T10:22:47Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# VitaRPS5 v4.2.2\n\n**Enhanced PlayStation 5 Remote Play for PS Vita**\n\nBuilt with modern UI, optimized performance, and quality-of-life improvements.\n\n## 📦 Installation\n\n1. Download `VitaRPS5-v4.2.2.vpk` below\n   (Permanent link to the newest version: https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/VitaRPS5-latest.vpk)\n2. Transfer to your PS Vita (via USB or FTP)\n3. Install using VitaShell (press X on the VPK file)\n4. Launch from LiveArea\n\n## What's Changed\n\n### Features\n\n- **mic:** send the Vita microphone to the PS5, with a setting and mute during play (#474) ([#475](https://github.com/mauricio-gg/vitaki-vitarps5/pull/475))\n- **video:** 720p and 1080p streaming, 1080p at 30 fps, 10 Mbps step, remove Force 30 FPS (#473) ([#476](https://github.com/mauricio-gg/vitaki-vitarps5/pull/476))\n- **input:** two-finger hold presses the touchpad click until a finger lifts ([#468](https://github.com/mauricio-gg/vitaki-vitarps5/pull/468))\n- **config:** encrypt console pairing keys at rest, remove plain-text token storage (#464) ([#465](https://github.com/mauricio-gg/vitaki-vitarps5/pull/465))\n- **debug:** Input test panel over the stream (#458) ([#459](https://github.com/mauricio-gg/vitaki-vitarps5/pull/459))\n\n### Fixes\n\n- **input:** a front touch keeps the zone it started in until lifted (#460) ([#463](https://github.com/mauricio-gg/vitaki-vitarps5/pull/463))\n- **input:** send motion in the DualSense frame via the orientation tracker, add Motion Deadband setting (#455) ([#461](https://github.com/mauricio-gg/vitaki-vitarps5/pull/461))\n- **input:** hold the touchpad click 50 ms with the finger on the pad, add two-finger tap click (#454) ([#457](https://github.com/mauricio-gg/vitaki-vitarps5/pull/457))\n\n## 🛠️ Build Information\n\n- **Build System:** Docker + VitaSDK\n- **Version:** v4.2.2\n- **Commit:** e0a2fe8da71779c3c9ccb7f7d59a68b4a53c013d\n- **Build Date:** 2026-11-01\n\n## 🙏 Thanks\n\nThanks to @sunapplelko-coder for testing the v4.2.2 betas on their Vita.\n\n---\n\nBuilt with ❤️ for the PS Vita community over 3+ months of design and development.\n\n☕ **Support development:** [Buy Me a Coffee](https://buymeacoffee.com/solidem)\n",
+    "assets": [
+      {
+        "name": "VitaRPS5-latest.vpk",
+        "size": 3557791,
+        "download_url": "https://github.com/mauricio-gg/vitaki-vitarps5/releases/download/v4.2.2/VitaRPS5-latest.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "VitaRPS5-v4.2.2.vpk",
+        "size": 3557791,
+        "download_url": "https://github.com/mauricio-gg/vitaki-vitarps5/releases/download/v4.2.2/VitaRPS5-v4.2.2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "VitaRPS5",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-vitarps5/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "PS5 streaming application for PSVita.",
+    "homebrew_long_description": "This is a fork built on top of ywnico's excellent vitaki-fork, which itself is based on AAGaming00's Vitaki.\nCredit where it's due: ywnico did the vast majority of the hard work, implementing audio, controls, external network support, wakeup functionality, and numerous critical fixes. AAGaming did the foundational work of porting Chiaki to PS Vita. This fork simply adds UI enhancements and quality-of-life improvements on top of their solid foundation.",
+    "homebrew_id": "vitarps5",
+    "homebrew_authors": [
+      "claude-ai",
+      "ywnico",
+      "aagaming"
+    ],
+    "homebrew_version": "v.3.1.0",
+    "catalog_apps": [
+      {
+        "id": "vitarps5",
+        "name": "VitaRPS5",
+        "icon": "https://archive.org/download/psvitaalive-vitarps5/icon0.png",
+        "category": "utilities",
+        "description": "PS5 streaming application for PSVita.",
+        "long_description": "This is a fork built on top of ywnico's excellent vitaki-fork, which itself is based on AAGaming00's Vitaki.\nCredit where it's due: ywnico did the vast majority of the hard work, implementing audio, controls, external network support, wakeup functionality, and numerous critical fixes. AAGaming did the foundational work of porting Chiaki to PS Vita. This fork simply adds UI enhancements and quality-of-life improvements on top of their solid foundation.",
+        "version": "v.3.1.0",
+        "version_date": "2026-03-05",
+        "author_ids": [
+          "claude-ai",
+          "ywnico",
+          "aagaming"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.3.1.0 → release v4.2.2",
+    "catalog_version": "v.3.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "ScratchEverywhere/ScratchEverywhere",
+    "release_id": "430433662",
+    "tag": "1.3",
+    "name": "Release 1.3",
+    "url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/tag/1.3",
+    "published": "2026-11-01T09:02:42Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Xbox\r\n- SE! has been ported to the original Xbox!\r\n- Featuring a custom renderer, complete with HD A/V, Pen and Sprite effect support!\r\n  - SDL3 renderer is also available as a fallback (though will be removed in a future release)\r\n- Port by @MikeDev101\r\n\r\n## Runtime Changes\r\n- Added a new **Bytecode runtime**\r\n  - Bytecode is a much smaller and faster way of executing Scratch projects!\r\n  - Projects ran with bytecode runs **~2.25x faster** than 1.2.1, and consumes less RAM!\r\n  - Bytecode is on by default for all projects, and can be changed in Project settings.\r\n- Added support for `Loudness` blocks\r\n  - This is the last block we didn't support, so with that we now support EVERY Scratch block!\r\n- Added the ability to switch renderer, input and audio backends\r\n   - Useful for testing, and for computers that may not support a certain backend\r\n   - These can be changed in Main Menu settings\r\n- Monitors now have an improved look on PC\r\n- Made audio more performant and use less resources\r\n\r\n## Menu Changes\r\n- New spOooOoky theme! (please ignore the fact that it's now November)\r\n   - New menu music by @Dogo6647 as always\r\n\r\n## Wii U Changes\r\n- Added a new GX2 Renderer\r\n  - This adds support for both Sprite effects and dual screen support!\r\n  - Dual screen mode requires your project to be the same resolution as 3DS's dual screen mode (400x480).\r\n- Added a Wii U specific audio backend\r\n\r\n## NDS Changes\r\n- Audio has been re-enabled!\r\n  - Currently NDS only supports playing `.wav` files.\r\n- The NDS exclusive chiptune menu music is back\r\n\r\n## Windows Changes\r\n- Added new Direct3D 9 Renderer\r\n  - This renderer will be the new default for Windows going forward.\r\n\r\n## Nintendo Switch & PS4 Changes\r\n- Added support for OpenGL Core\r\n  - This now means that Sprite effects are now supported on these platforms.\r\n\r\n## 3DS Changes\r\n- Fix bottom screen cursor mapping\r\n- Fix Pen rendering on dual screen mode\r\n\r\n## PSP Changes\r\n- Update renderer to SDL3\r\n  - Fixes text and Pen rendering, and should overall be more performant\r\n\r\n## PS Vita Changes\r\n- Fix app crashing on startup\r\n\r\n## Wii Changes\r\n- Fix app crashing on startup\r\n\r\nThis release was brought to you by: @NateXS, @gradylink, @NishiOwO, @luarpri, @MikeDev101, @Dogo6647, @Mistium, @ZacharyLeahan, and @PwLDev",
+    "assets": [
+      {
+        "name": "scratch-3ds.3dsx",
+        "size": 9862056,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-3ds.3dsx",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-3ds.cia",
+        "size": 7926720,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-3ds.cia",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-ds.nds",
+        "size": 10997248,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-ds.nds",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-gamecube.zip",
+        "size": 6205638,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-gamecube.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "scratch-libretro.so",
+        "size": 10507496,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-libretro.so",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-linux",
+        "size": 20337712,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-linux",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-macOS",
+        "size": 34883239,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-macOS",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-nx.nro",
+        "size": 25164687,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-nx.nro",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-ps4.pkg",
+        "size": 71696384,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-ps4.pkg",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-psp.zip",
+        "size": 5985754,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-psp.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "scratch-vita.vpk",
+        "size": 11553368,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-webos.ipk",
+        "size": 10772686,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-webos.ipk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-wii.zip",
+        "size": 10615772,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-wii.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "scratch-wiiu.zip",
+        "size": 30626296,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-wiiu.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "scratch-windows-installer.exe",
+        "size": 13318243,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-windows-installer.exe",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-windows.exe",
+        "size": 25216155,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-windows.exe",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "scratch-xbox.zip",
+        "size": 13086546,
+        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-xbox.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "NateXS",
+    "homebrew_name": "Scratch Everywhere!",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-scratch-everywhere/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Custom Scratch Runtime made in C++.",
+    "homebrew_long_description": "A work-in-progress runtime made in C++ aimed to bring most Scratch 3 projects over to 6-8th-generation console and handheld platforms (and more).",
+    "homebrew_id": "scratch-everywhere",
+    "homebrew_authors": [
+      "dogo6647",
+      "natexs"
+    ],
+    "homebrew_version": "Beta Build 40",
+    "catalog_apps": [
+      {
+        "id": "scratch-everywhere",
+        "name": "Scratch Everywhere!",
+        "icon": "https://archive.org/download/psvitaalive-scratch-everywhere/icon0.png",
+        "category": "utilities",
+        "description": "Custom Scratch Runtime made in C++.",
+        "long_description": "A work-in-progress runtime made in C++ aimed to bring most Scratch 3 projects over to 6-8th-generation console and handheld platforms (and more).",
+        "version": "Beta Build 40",
+        "version_date": "2026-04-26",
+        "author_ids": [
+          "dogo6647",
+          "natexs"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive Beta Build 40",
+    "catalog_version": "Beta Build 40"
+  },
+  {
+    "platform": "github",
+    "repo": "tchisholm20/starfox-adventures-vita",
+    "release_id": "430415178",
+    "tag": "v0.1.1",
+    "name": "Star Fox Adventures for PS Vita - v0.1.1 (2026-11-01)",
+    "url": "https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.1",
+    "published": "2026-11-01T07:00:53Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Bug-fix update for the native PS Vita port of Star Fox Adventures. Video: https://youtu.be/RpsG4do0GE8\n\n**Work in progress.** It's playable, but expect bugs, and not every part of the game has been tested yet.\n\n**No game data is included.** You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, `GSAE01`) as a full, uncompressed `.iso`. See the [README](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.\n\n### Fixed\n- **DarkIce Mines staying locked in orbit (shown with an X).** The Arwing never offered to trade Fuel Cells to unlock a destination, so DarkIce Mines, CloudRunner Fortress, Walled City and Dragon Rock could not be unlocked. The trade now appears at the Arwing in ThornTail Hollow (5 Fuel Cells for DarkIce Mines).\n- **A grey box around Fox in DarkIce Mines.** The port ignored the game's face-culling setting, so the inside of two placeholder sky models (which the original hides by culling) was drawn as a grey box that followed Fox. Culling is now applied the way the game requests it.\n- **The pause menu map not showing where you are.** It did not recognise the current area, so areas were never marked as visited, and in most areas opening the map overwrote other pause-menu data.\n- **Tricky's ability icons missing from the pause menu.**\n- **The camera flying away from Fox during fights** (lock-on combat, e.g. SharpClaws in ThornTail Hollow and Krazoa Palace).\n- **A blue void that froze Fox on the way to Cape Claw.** It happened after a fight where the camera had flown away: the camera's position had loaded the wrong area, and the Cape Claw passage then had no room to load.\n- **The SharpClaws not appearing after you pick up the staff.** The ambush now starts the first time you walk into the arena, and Krystal's head no longer appears as a cube in the scene before it.\n- **Shaders being disabled after closing the game.** Closing the game while a shader was compiling could disable that shader for good. A shader is now only disabled if the game fails on it twice in a row.\n\n### Changed\n- 1003 pre-compiled shaders are included, up from 274, covering more of the game (LightFoot Village, Cape Claw, the staff arena, SnowHorn Wastes). Areas whose shaders are included no longer need to compile them on the first visit, which removes the missing and flashing objects seen there in v0.1.0.\n- Faster start-up: the title menu is ready in about 18 seconds instead of about 27 (one launch each, measured on a PCH-2000). The first launch after installing is not faster; it prepares some textures once and saves them to the memory card.\n- New LiveArea artwork, prepared by [u/Either-Version-9577](https://www.reddit.com/user/Either-Version-9577/): the full-width box illustration, and the logo on the start button. Thank you!\n\n### Install / update\n1. Install `StarFoxAdventures.vpk` with VitaShell (over the old version is fine; your save and settings are kept).\n2. New install only: copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).\n3. Launch.\n\nNeeds custom firmware (HENkaku / Enso) and `ur0:data/libshacccg.suprx`.\n\n### Known issues\n- The first visit to an area whose shaders are not included can show missing or dark objects for a minute or two while they compile.\n- ThornTail Hollow and SnowHorn Wastes run below 30 fps in places.\n- Fox and Tricky do not cast the soft round shadow under their feet that the original draws.\n- Short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.\n- The boot logos are not shown yet.\n- Holding L to recentre the camera can briefly dip the view.\n- Distant foliage can look white.\n\n### Checksums (SHA-256)\n- `StarFoxAdventures-Vita-2026-11-01.zip`: `6407305fbef33fd7bfbff34a89229e90274040bad111b3ab7dae6c8eaea01b6d`\n- `StarFoxAdventures.vpk`: `b486d0fdf64fa9e89e1a2d7585f310e750275926c018b5789558312e13a77899`\n- `eboot.bin` (inside the vpk): `01fb897ca936498aec0de047d851c01215f123aaecf0a8f30a3c2d2730112697`\n\nProblems: open an issue with `ux0:data/stairfax_game.txt` attached.\n\n### Credits\nBuilt on the [Star Fox Adventures decompilation](https://github.com/zcanann/SFA-Decomp) (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's [PC port branch](https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued). Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). The full source and the library details are in this repository: see [CREDITS.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md).\n",
+    "assets": [
+      {
+        "name": "StarFoxAdventures-Vita-2026-11-01.zip",
+        "size": 7027847,
+        "download_url": "https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.1/StarFoxAdventures-Vita-2026-11-01.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "tchisholm20",
+    "homebrew_name": "Star Fox Adventures",
+    "homebrew_icon": "https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Star Fox Adventures for PS Vita: a native port",
+    "homebrew_long_description": "A native PS Vita port of Star Fox Adventures (GameCube), built on the Star Fox Adventures decompilation and its PC port branch (Cassieandstuff/SFA-Decomp@pc-port-continued), with a graphics backend written for the Vita's GPU.",
+    "homebrew_id": "star-fox-adventures",
+    "homebrew_authors": [
+      "tchisholm20"
+    ],
+    "homebrew_version": "0.1.0",
+    "catalog_apps": [
+      {
+        "id": "star-fox-adventures",
+        "name": "Star Fox Adventures",
+        "icon": "https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Star Fox Adventures for PS Vita: a native port",
+        "long_description": "A native PS Vita port of Star Fox Adventures (GameCube), built on the Star Fox Adventures decompilation and its PC port branch (Cassieandstuff/SFA-Decomp@pc-port-continued), with a graphics backend written for the Vita's GPU.",
+        "version": "0.1.0",
+        "version_date": "2026-10-28",
+        "author_ids": [
+          "tchisholm20"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.0 → release v0.1.1",
+    "catalog_version": "0.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "ScoobyDouche/VitaKotor",
     "release_id": "430278838",
     "tag": "v0.5.1-multicore.2",
@@ -89,7 +423,7 @@
     "homebrew_authors": [
       "rinnegatamante"
     ],
-    "homebrew_version": "1.1",
+    "homebrew_version": "1.2",
     "catalog_apps": [
       {
         "id": "resident-evil-code-veronica-x",
@@ -98,16 +432,16 @@
         "category": "ports",
         "description": "Port of Resident Evil: Code Veronica X for PSVita based off the decompilation of the PS2 version.",
         "long_description": "Port of Resident Evil: Code Veronica X for PSVita based off the decompilation of the PS2 version.",
-        "version": "1.1",
-        "version_date": "2026-10-29",
+        "version": "1.2",
+        "version_date": "2026-10-31",
         "author_ids": [
           "rinnegatamante"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1 → release v.1.2",
-    "catalog_version": "1.1"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.2",
+    "catalog_version": "1.2"
   },
   {
     "platform": "github",
@@ -228,6 +562,79 @@
   },
   {
     "platform": "github",
+    "repo": "danicannt/dw-vita",
+    "release_id": "429940426",
+    "tag": "v0.1.0-test",
+    "name": "Digimon World PS Vita Test Build 0.1.",
+    "url": "https://github.com/danicannt/dw-vita/releases/tag/v0.1.0-test",
+    "published": "2026-10-31T13:00:04Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "First public playable test build for PS Vita.",
+    "assets": [
+      {
+        "name": "dw1-hd-backgrounds.dw1hd",
+        "size": 185425175,
+        "download_url": "https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-backgrounds.dw1hd",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "dw1-hd-movies.dw1hd",
+        "size": 29538645,
+        "download_url": "https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-movies.dw1hd",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "dw1-hd-objects.dw1hd",
+        "size": 24908724,
+        "download_url": "https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-objects.dw1hd",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "dw1-hd-unlocker.zip",
+        "size": 8621,
+        "download_url": "https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-unlocker.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "dw1-vita.vpk",
+        "size": 2823560,
+        "download_url": "https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "danicannt",
+    "homebrew_name": "Digimon World",
+    "homebrew_icon": "https://archive.org/download/digimon-world-ps-vita-port/icon0.jpg",
+    "homebrew_category": "ports",
+    "homebrew_description": "Digimon World — PS Vita Port",
+    "homebrew_long_description": "A native port of Digimon World (PlayStation, 1999 — US version) for PS Vita and PS TV.",
+    "homebrew_id": "digimon-world",
+    "homebrew_authors": [
+      "danicannt"
+    ],
+    "homebrew_version": "0.1.0",
+    "catalog_apps": [
+      {
+        "id": "digimon-world",
+        "name": "Digimon World",
+        "icon": "https://archive.org/download/digimon-world-ps-vita-port/icon0.jpg",
+        "category": "ports",
+        "description": "Digimon World — PS Vita Port",
+        "long_description": "A native port of Digimon World (PlayStation, 1999 — US version) for PS Vita and PS TV.",
+        "version": "0.1.0",
+        "version_date": "2026-10-31",
+        "author_ids": [
+          "danicannt"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.1.0",
+    "catalog_version": "0.1.0"
+  },
+  {
+    "platform": "github",
     "repo": "Franckrst/D2Vita",
     "release_id": "429885371",
     "tag": "v0.2.3",
@@ -255,7 +662,7 @@
     "homebrew_authors": [
       "franckrst"
     ],
-    "homebrew_version": "0.2.1",
+    "homebrew_version": "0.2.3",
     "catalog_apps": [
       {
         "id": "d2vita",
@@ -264,16 +671,16 @@
         "category": "ports",
         "description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.",
         "long_description": "Port of Diablo II: Lord of Destruction to the PlayStation Vita.\n\nTarget: 960×544 · classic renderer.\nStrategy: run the genuine Diablo II: LoD 1.14d Game.exe through a Win32/x86 runtime (PE loader + import bridge + an x86→ARMv7 dynarec derived from Box86), shimming only the OS layer — run Diablo, don't rewrite Diablo. An earlier clean-room D2MOO+Ghidra-decompilation approach was abandoned before it shipped anything.\nStatus: boots and plays solo (Rogue Encampment) on real Vita hardware; online play (realm → character → game → act) proven end-to-end on console, including against official Battle.net. See ROADMAP.md for what's done and what's open.\n\n- PsVitaAlive -",
-        "version": "0.2.1",
-        "version_date": "2026-10-09",
+        "version": "0.2.3",
+        "version_date": "2026-10-31",
         "author_ids": [
           "franckrst"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.2.1 → release v0.2.3",
-    "catalog_version": "0.2.1"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.2.3",
+    "catalog_version": "0.2.3"
   },
   {
     "platform": "github",
@@ -304,7 +711,7 @@
     "homebrew_authors": [
       "metalsyntax"
     ],
-    "homebrew_version": "1.0",
+    "homebrew_version": "1.0.2",
     "catalog_apps": [
       {
         "id": "nova-2-hd",
@@ -313,16 +720,16 @@
         "category": "ports",
         "description": "Android to PS Vita port of Gameloft's N.O.V.A 2",
         "long_description": "N.O.V.A. 2 is Gameloft's sci-fi first-person shooter, originally released for Android as NOVA-2-HD-v1-0-5.apk (package com.gameloft.android.GAND.GloftN2HP). This port runs the compiled native library (libnova2.so, armeabi-v7a) from the Android release directly on the PS Vita's ARM Cortex-A9 processor, using a dynamic loader (soloader) and an Android environment emulation layer (FalsoJNI), with vitaGL providing the GLES 2.0 rendering backend.",
-        "version": "1.0",
-        "version_date": "2026-09-26",
+        "version": "1.0.2",
+        "version_date": "2026-10-31",
         "author_ids": [
           "metalsyntax"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.0.2",
-    "catalog_version": "1.0"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0.2",
+    "catalog_version": "1.0.2"
   },
   {
     "platform": "github",
@@ -353,7 +760,7 @@
     "homebrew_authors": [
       "largevegetable"
     ],
-    "homebrew_version": "0.1.2",
+    "homebrew_version": "0.1.3",
     "catalog_apps": [
       {
         "id": "half-life-2",
@@ -362,16 +769,16 @@
         "category": "ports",
         "description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine",
         "long_description": "Half-Life 2 for PS Vita: an unofficial port on nillerusr's Source engine\n\n- PsVitaAlive -",
-        "version": "0.1.2",
-        "version_date": "2026-10-26",
+        "version": "0.1.3",
+        "version_date": "2026-10-31",
         "author_ids": [
           "largevegetable"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.2 → release v0.1.3-beta",
-    "catalog_version": "0.1.2"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.1.3",
+    "catalog_version": "0.1.3"
   },
   {
     "platform": "github",
@@ -402,7 +809,7 @@
     "homebrew_authors": [
       "germanalvarez15"
     ],
-    "homebrew_version": "1.3.8",
+    "homebrew_version": "1.3.9",
     "catalog_apps": [
       {
         "id": "nfs-most-wanted",
@@ -411,16 +818,16 @@
         "category": "ports",
         "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
         "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-        "version": "1.3.8",
+        "version": "1.3.9",
         "version_date": "2026-10-30",
         "author_ids": [
           "germanalvarez15"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.3.8 → release 1.3.9",
-    "catalog_version": "1.3.8"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.3.9",
+    "catalog_version": "1.3.9"
   },
   {
     "platform": "github",
@@ -746,138 +1153,6 @@
   },
   {
     "platform": "github",
-    "repo": "mauricio-gg/vitaki-vitarps5",
-    "release_id": "429156538",
-    "tag": "v4.2.2-beta.2",
-    "name": "VitaRPS5 v4.2.2-beta.2",
-    "url": "https://github.com/mauricio-gg/vitaki-vitarps5/releases/tag/v4.2.2-beta.2",
-    "published": "2026-10-30T14:56:11Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "> **Beta: this is a test build, not the stable release.** It is a pre-release for testing and logging is turned on.\n> The log file is in `ux0:data/vita-chiaki/` and is named like `<number>_vitarps5-testing.log`.\n> To report a problem, open a GitHub issue on this repository and attach the log.\n\n## What to test in this beta\n\n- **Microphone (new).** Turn it on in Settings > Controls > Microphone, which is off by default. Mute during play by tapping the mic button at the bottom centre of the screen, or by holding L + R + Select. You can hide that button with \"Display mic button on-screen\". **Please check that people actually hear you:** join a party chat with a friend, or play a game with voice chat, and tell us whether they heard you and how you sounded.\n- **720p and 1080p streams (new).** Choose them in Settings > Video > Quality Preset. The Vita shrinks the bigger picture to its screen, so it looks sharper than 540p, especially text.\n  - 720p works at 30 or 60 fps.\n  - **1080p is experimental.** It always runs at 30 fps, because the Vita can't decode 1080p any faster. It is also more sensitive to Wi-Fi hiccups, which show up as short freezes or smearing. If you see smearing, turn off \"Motion during loss\" in Settings > Advanced. For most games, 720p is the recommended choice.\n  - New \"Extreme (≈10 Mbps)\" Latency Mode step, for strong home Wi-Fi.\n- **Two-finger hold on the front screen** keeps the touchpad click pressed until you lift a finger. Use it for long-press actions like the map in The Witcher 3 or Cyberpunk 2077.\n- **Removed:** the \"Force 30 FPS Output\" setting. Use FPS Target 30 instead.\n\nWhen reporting, say which resolution, frame rate and Latency Mode you used, and attach the log.\n\n# VitaRPS5 v4.2.2-beta.2\n\n**Enhanced PlayStation 5 Remote Play for PS Vita**\n\nBuilt with modern UI, optimized performance, and quality-of-life improvements.\n\n## 📦 Installation\n\n1. Download `VitaRPS5-v4.2.2-beta.2.vpk` below\n   (Permanent link to the newest version: https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/VitaRPS5-latest.vpk)\n2. Transfer to your PS Vita (via USB or FTP)\n3. Install using VitaShell (press X on the VPK file)\n4. Launch from LiveArea\n\n## What's Changed\n\n### Features\n\n- **mic:** send the Vita microphone to the PS5, with a setting and mute during play (#474) ([#475](https://github.com/mauricio-gg/vitaki-vitarps5/pull/475))\n- **video:** 720p and 1080p streaming, 1080p at 30 fps, 10 Mbps step, remove Force 30 FPS (#473) ([#476](https://github.com/mauricio-gg/vitaki-vitarps5/pull/476))\n- **input:** two-finger hold presses the touchpad click until a finger lifts ([#468](https://github.com/mauricio-gg/vitaki-vitarps5/pull/468))\n- **config:** encrypt console pairing keys at rest, remove plain-text token storage (#464) ([#465](https://github.com/mauricio-gg/vitaki-vitarps5/pull/465))\n- **debug:** Input test panel over the stream (#458) ([#459](https://github.com/mauricio-gg/vitaki-vitarps5/pull/459))\n\n### Fixes\n\n- **input:** a front touch keeps the zone it started in until lifted (#460) ([#463](https://github.com/mauricio-gg/vitaki-vitarps5/pull/463))\n- **input:** send motion in the DualSense frame via the orientation tracker, add Motion Deadband setting (#455) ([#461](https://github.com/mauricio-gg/vitaki-vitarps5/pull/461))\n- **input:** hold the touchpad click 50 ms with the finger on the pad, add two-finger tap click (#454) ([#457](https://github.com/mauricio-gg/vitaki-vitarps5/pull/457))\n\n## 🛠️ Build Information\n\n- **Build System:** Docker + VitaSDK\n- **Version:** v4.2.2-beta.2\n- **Commit:** e0a2fe8da71779c3c9ccb7f7d59a68b4a53c013d\n- **Build Date:** 2026-10-30\n\n---\n\nBuilt with ❤️ for the PS Vita community over 3+ months of design and development.\n\n☕ **Support development:** [Buy Me a Coffee](https://buymeacoffee.com/solidem)\n\n",
-    "assets": [
-      {
-        "name": "VitaRPS5-v4.2.2-beta.2.vpk",
-        "size": 3557699,
-        "download_url": "https://github.com/mauricio-gg/vitaki-vitarps5/releases/download/v4.2.2-beta.2/VitaRPS5-v4.2.2-beta.2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "VitaRPS5",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-vitarps5/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "PS5 streaming application for PSVita.",
-    "homebrew_long_description": "This is a fork built on top of ywnico's excellent vitaki-fork, which itself is based on AAGaming00's Vitaki.\nCredit where it's due: ywnico did the vast majority of the hard work, implementing audio, controls, external network support, wakeup functionality, and numerous critical fixes. AAGaming did the foundational work of porting Chiaki to PS Vita. This fork simply adds UI enhancements and quality-of-life improvements on top of their solid foundation.",
-    "homebrew_id": "vitarps5",
-    "homebrew_authors": [
-      "claude-ai",
-      "ywnico",
-      "aagaming"
-    ],
-    "homebrew_version": "v.3.1.0",
-    "catalog_apps": [
-      {
-        "id": "vitarps5",
-        "name": "VitaRPS5",
-        "icon": "https://archive.org/download/psvitaalive-vitarps5/icon0.png",
-        "category": "utilities",
-        "description": "PS5 streaming application for PSVita.",
-        "long_description": "This is a fork built on top of ywnico's excellent vitaki-fork, which itself is based on AAGaming00's Vitaki.\nCredit where it's due: ywnico did the vast majority of the hard work, implementing audio, controls, external network support, wakeup functionality, and numerous critical fixes. AAGaming did the foundational work of porting Chiaki to PS Vita. This fork simply adds UI enhancements and quality-of-life improvements on top of their solid foundation.",
-        "version": "v.3.1.0",
-        "version_date": "2026-03-05",
-        "author_ids": [
-          "claude-ai",
-          "ywnico",
-          "aagaming"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.3.1.0 → release v4.2.2-beta.2",
-    "catalog_version": "v.3.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "vogtmh/ladxhd-vita",
-    "release_id": "429067290",
-    "tag": "v2.0.9g",
-    "name": "v2.0.9g - A clean cut",
-    "url": "https://github.com/vogtmh/ladxhd-vita/releases/tag/v2.0.9g",
-    "published": "2026-10-30T13:32:35Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# LADXHD Vita 2.0.9g\r\n\r\n## Changes\r\n\r\n- Cutting bushes and grass no longer drops the frame rate. Removing objects (bushes, leaves, respawners) searched the whole overworld object list on every removal; it now finds them almost immediately.\r\n- Playing no longer fills up memory while standing around. The game used to produce about 1 MB of temporary data per second (AI triggers, UI drawing, music buffers, animation names); this is now close to zero, so memory stays flat during normal play.\r\n- Leaving a house produces much less temporary data (about 3–4 MB instead of about 10 MB), and fences and small stones are no longer rebuilt every time.\r\n- The data that stays in memory with the overworld loaded is about 20% smaller, which makes each garbage collection faster (about 0.55 s instead of about 1 s on the overworld).\r\n- The game now uses a 256 MB heap instead of 192 MB, leaving more room before a collection is needed. Collections still run behind the black screen after loading the overworld and, every few house visits, when entering a house.\r\n- The start of the intro no longer stutters and crackles. The render targets are now created during the black screen at startup instead of when the intro music starts.",
-    "assets": [
-      {
-        "name": "ladxhd-vita-importer-2.0.9g-linux-arm64.tar.gz",
-        "size": 29119878,
-        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-linux-arm64.tar.gz",
-        "content_type": "application/x-gzip"
-      },
-      {
-        "name": "ladxhd-vita-importer-2.0.9g-linux-x86_64.tar.gz",
-        "size": 29817719,
-        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-linux-x86_64.tar.gz",
-        "content_type": "application/x-gzip"
-      },
-      {
-        "name": "ladxhd-vita-importer-2.0.9g-macos-universal.zip",
-        "size": 54281625,
-        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-macos-universal.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "ladxhd-vita-importer-2.0.9g-windows-arm64.zip",
-        "size": 26372293,
-        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-windows-arm64.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "ladxhd-vita-importer-2.0.9g-windows-x86_64.zip",
-        "size": 32571870,
-        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-windows-x86_64.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 566,
-        "download_url": "https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/SHA256SUMS.txt",
-        "content_type": "text/plain"
-      }
-    ],
-    "author": "vogtmh",
-    "homebrew_name": "Link's Awakening DX HD",
-    "homebrew_icon": "https://archive.org/download/ladxhd-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A LADXHD port for the PS Vita",
-    "homebrew_long_description": "A LADXHD port for the PS Vita\n\n- PsVitaAlive -",
-    "homebrew_id": "link-s-awakening-dx-hd",
-    "homebrew_authors": [
-      "vogtmh"
-    ],
-    "homebrew_version": "2.0.9",
-    "catalog_apps": [
-      {
-        "id": "link-s-awakening-dx-hd",
-        "name": "Link's Awakening DX HD",
-        "icon": "https://archive.org/download/ladxhd-vita/icon0.png",
-        "category": "ports",
-        "description": "A LADXHD port for the PS Vita",
-        "long_description": "A LADXHD port for the PS Vita\n\n- PsVitaAlive -",
-        "version": "2.0.9",
-        "version_date": "2026-10-17",
-        "author_ids": [
-          "vogtmh"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 2.0.9",
-    "catalog_version": "2.0.9"
-  },
-  {
-    "platform": "github",
     "repo": "spyro-98/VitaMediaDeck",
     "release_id": "428874400",
     "tag": "1.4.4",
@@ -1116,52 +1391,101 @@
   },
   {
     "platform": "github",
-    "repo": "tchisholm20/starfox-adventures-vita",
-    "release_id": "426780876",
-    "tag": "v0.1.0",
-    "name": "Star Fox Adventures for PS Vita - 2026-10-28",
-    "url": "https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.0",
-    "published": "2026-10-29T03:14:27Z",
+    "repo": "KiddRwxSsj/batman-aom-vita",
+    "release_id": "428216034",
+    "tag": "1.0",
+    "name": "Batman: Arkham Origins 1.0 Vita",
+    "url": "https://github.com/KiddRwxSsj/batman-aom-vita/releases/tag/1.0",
+    "published": "2026-10-29T17:58:00Z",
     "prerelease": false,
     "draft": false,
-    "body": "First public build of the native PS Vita port of Star Fox Adventures. Video: https://youtu.be/RpsG4do0GE8\n\n**Work in progress.** This is an early build. It's playable, but expect bugs, and not every part of the game has been tested yet.\n\n**No game data is included.** You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, `GSAE01`) as a full, uncompressed `.iso`. See the [README](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.\n\n### Install\n1. Install `StarFoxAdventures.vpk` with VitaShell.\n2. Copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).\n3. Launch.\n\nNeeds custom firmware (HENkaku / Enso) and `ur0:data/libshacccg.suprx`.\n\n### What to expect\n- 640x368 upscaled, **capped at 30 fps**. Most areas hold a steady 30; ThornTail Hollow, the busiest area, can dip below it.\n- **Meant to be played overclocked.** The video was recorded with the CPU at 500 MHz using an overclocking plugin. Without one, the game runs at the standard maximum, 444 MHz.\n- 274 pre-compiled shaders are included. Any other shader compiles in the background the first time it's needed; the game keeps running.\n\n### Known issues\n- The camera can fly away from Fox during some fights.\n- Fox and Tricky do not cast the soft round shadow under their feet that the original draws.\n- Short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.\n- The boot logos are not shown yet.\n- Holding L to recentre the camera can briefly dip the view.\n\n### Checksums (SHA-256)\n- `StarFoxAdventures-Vita-2026-10-28.zip`: `cefb15df62ac618b09c35cf721df4032cfb2f288c8e65be000a716d39326fd51`\n- `StarFoxAdventures.vpk`: `c2f515f1a053b1ce80fb8f7f0f6225fb1f0c03bf16204a1e7ab05bc3d373ac23`\n- `eboot.bin` (inside the vpk): `25d0ce0c2e3ea77cf085d267720c09baf7e16ee2b952ab5d74150c6779c6b6f7`\n\nProblems: open an issue with `ux0:data/stairfax_game.txt` attached.\n\n### Credits\nBuilt on the [Star Fox Adventures decompilation](https://github.com/zcanann/SFA-Decomp) (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's [PC port branch](https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued). Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). The full source and the library details are in this repository: see [CREDITS.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md).\n",
+    "body": "First Release",
     "assets": [
       {
-        "name": "StarFoxAdventures-Vita-2026-10-28.zip",
-        "size": 5725469,
-        "download_url": "https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.0/StarFoxAdventures-Vita-2026-10-28.zip",
-        "content_type": "application/zip"
+        "name": "batmanarkhamoriginsvita1.0.vpk",
+        "size": 1241059,
+        "download_url": "https://github.com/KiddRwxSsj/batman-aom-vita/releases/download/1.0/batmanarkhamoriginsvita1.0.vpk",
+        "content_type": "application/octet-stream"
       }
     ],
-    "author": "tchisholm20",
-    "homebrew_name": "Star Fox Adventures",
-    "homebrew_icon": "https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png",
+    "author": "KiddRwxSsj",
+    "homebrew_name": "Batman Arkham Origins",
+    "homebrew_icon": "https://archive.org/download/batman-arkham-origins-ps-vita/icon0.png",
     "homebrew_category": "ports",
-    "homebrew_description": "Star Fox Adventures for PS Vita: a native port",
-    "homebrew_long_description": "A native PS Vita port of Star Fox Adventures (GameCube), built on the Star Fox Adventures decompilation and its PC port branch (Cassieandstuff/SFA-Decomp@pc-port-continued), with a graphics backend written for the Vita's GPU.",
-    "homebrew_id": "star-fox-adventures",
+    "homebrew_description": "Arkham Origins mobile on the PS Vita, ported from the Android version.",
+    "homebrew_long_description": "A port of the Android version of Batman: Arkham Origins (the mobile fighting game) to the PS Vita. It runs the game's original code natively, nothing is emulated.",
+    "homebrew_id": "batman-arkham-origins",
     "homebrew_authors": [
-      "tchisholm20"
+      "kiddrwxssj"
     ],
-    "homebrew_version": "0.1.0",
+    "homebrew_version": "1.0",
     "catalog_apps": [
       {
-        "id": "star-fox-adventures",
-        "name": "Star Fox Adventures",
-        "icon": "https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png",
+        "id": "batman-arkham-origins",
+        "name": "Batman Arkham Origins",
+        "icon": "https://archive.org/download/batman-arkham-origins-ps-vita/icon0.png",
         "category": "ports",
-        "description": "Star Fox Adventures for PS Vita: a native port",
-        "long_description": "A native PS Vita port of Star Fox Adventures (GameCube), built on the Star Fox Adventures decompilation and its PC port branch (Cassieandstuff/SFA-Decomp@pc-port-continued), with a graphics backend written for the Vita's GPU.",
-        "version": "0.1.0",
-        "version_date": "2026-10-28",
+        "description": "Arkham Origins mobile on the PS Vita, ported from the Android version.",
+        "long_description": "A port of the Android version of Batman: Arkham Origins (the mobile fighting game) to the PS Vita. It runs the game's original code natively, nothing is emulated.",
+        "version": "1.0",
+        "version_date": "2026-10-29",
         "author_ids": [
-          "tchisholm20"
+          "kiddrwxssj"
         ]
       }
     ],
     "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.1.0",
-    "catalog_version": "0.1.0"
+    "catalog_update_detail": "PSVitaAlive 1.0",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "KiddRwxSsj/batman-acl-vita",
+    "release_id": "428214697",
+    "tag": "1.0",
+    "name": "Batman: Arkham City Lockdown 1.0 Vita",
+    "url": "https://github.com/KiddRwxSsj/batman-acl-vita/releases/tag/1.0",
+    "published": "2026-10-29T17:56:54Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "First Release",
+    "assets": [
+      {
+        "name": "aclockdownvita1.0.vpk",
+        "size": 966360,
+        "download_url": "https://github.com/KiddRwxSsj/batman-acl-vita/releases/download/1.0/aclockdownvita1.0.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "KiddRwxSsj",
+    "homebrew_name": "Batman AC Lockdown",
+    "homebrew_icon": "https://archive.org/download/batman-arkham-city-lockdown-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita so-loader port of Batman: Arkham City Lockdown (Android)",
+    "homebrew_long_description": "A port of the Android version of Batman: Arkham City Lockdown to the PS Vita. It runs the game's original code natively, nothing is emulated.",
+    "homebrew_id": "batman-ac-lockdown",
+    "homebrew_authors": [
+      "kiddrwxssj"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "batman-ac-lockdown",
+        "name": "Batman AC Lockdown",
+        "icon": "https://archive.org/download/batman-arkham-city-lockdown-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita so-loader port of Batman: Arkham City Lockdown (Android)",
+        "long_description": "A port of the Android version of Batman: Arkham City Lockdown to the PS Vita. It runs the game's original code natively, nothing is emulated.",
+        "version": "1.0",
+        "version_date": "2026-10-29",
+        "author_ids": [
+          "kiddrwxssj"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.0",
+    "catalog_version": "1.0"
   },
   {
     "platform": "github",
@@ -2272,6 +2596,103 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v1.1.0 → release v1.4.0",
     "catalog_version": "v1.1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "Zeusthenen/Ignition-Vita",
+    "release_id": "422692913",
+    "tag": "v1.1",
+    "name": "Ignition Vita v1.1",
+    "url": "https://github.com/Zeusthenen/Ignition-Vita/releases/tag/v1.1",
+    "published": "2026-10-24T11:35:06Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Ignition Vita v1.1\r\n\r\n*(Español primero · English below)*\r\n\r\n## 🇪🇸 Español\r\n\r\n**Ignition Vita** es un port no oficial, de aficionados y sin ánimo de lucro, de *Ignition* (1997) para **PlayStation Vita**.\r\n\r\n> **Este paquete NO contiene el juego.** Debes aportar los archivos de tu propia copia legal de *Ignition*. El proyecto no está afiliado ni respaldado por los propietarios de *Ignition* ni por Sony.\r\n\r\n### Novedades de v1.1\r\n\r\n- Corregido el cuelgue que podía producirse al terminar un campeonato y restaurado su avance normal.\r\n- Corregidos el desbloqueo y la persistencia de vehículos, dificultades y pistas.\r\n- Verificados en una PS Vita real: primer campeonato completo, coche **Banana**, dificultad **Amateur** y una pista adicional, conservados tras guardar y reiniciar.\r\n- Carrera rápida y Persecución terminan correctamente y vuelven al menú.\r\n- Guardado atómico: el progreso se escribe primero en un archivo temporal para reducir el riesgo de corrupción.\r\n- Controles predeterminados mejorados: **✕ acelera** y **□ frena / marcha atrás**.\r\n- Los botones de Vita pueden configurarse desde **Opciones → Jugador 1 → Configurar teclado** y las asignaciones persisten al reiniciar.\r\n- Diversas mejoras de estabilidad. Objetivo de 30 FPS, con posibles caídas en zonas exigentes.\r\n\r\n### Actualización desde v1.0\r\n\r\n1. Haz una copia de seguridad de ux0:data/ignition/ign_3dfx.btz.\r\n2. Instala IgnitionVita_v1.1.vpk encima de la versión anterior con VitaShell y homebrew inseguro activado.\r\n3. No borres ux0:data/ignition/: ahí están los datos del juego, progreso y opciones.\r\n\r\n### Limitaciones conocidas\r\n\r\n- Pantalla dividida y multijugador online/en red están visibles pero desactivados.\r\n- Los campeonatos posteriores al primero usan la misma ruta de progresión, pero sus premios no se han verificado uno por uno.\r\n- PlayStation TV no está probado.\r\n\r\n### Verificación\r\n\r\n- VPK: IgnitionVita_v1.1.vpk\r\n- Tamaño: 2.136.458 bytes\r\n- SHA-256: fda91c1b687c7b5e76e9ec2e7b95668d93350ba7d54092dec7bf68b7a1795d50\r\n- Código fuente correspondiente: IgnitionVita_v1.1_corresponding-source.tar.xz\r\n- SHA-256 del paquete de fuentes: 290701fffba027dd8a902e0f12bf1ce71d275f932690d98d73c3c22572a24d27\r\n\r\nPara informar de errores, abre un *Issue* e incluye modelo de Vita, modo, pista, vehículo, dificultad, frecuencia, pasos para reproducir y los logs de ux0:data/ignition/logs. No adjuntes archivos del juego.\r\n\r\n---\r\n\r\n## 🇬🇧 English\r\n\r\n**Ignition Vita** is an unofficial, fan-made, non-commercial port of *Ignition* (1997) to **PlayStation Vita**.\r\n\r\n> **This package does NOT contain the game.** You must provide files from your own legal copy of *Ignition*. The project is not affiliated with or endorsed by the owners of *Ignition* or Sony.\r\n\r\n### What is new in v1.1\r\n\r\n- Fixed the crash that could occur at the end of a championship and restored normal championship progression.\r\n- Fixed unlocking and persistence of vehicles, difficulties and tracks.\r\n- Verified on real PS Vita hardware: first championship completion, **Banana** car, **Amateur** difficulty and one additional track, all retained after saving and restarting.\r\n- Quick Race and Chase now finish correctly and return to the menu.\r\n- Atomic saves: progress is written to a temporary file first to reduce corruption risk.\r\n- Improved defaults: **✕ accelerates** and **□ brakes / reverses**.\r\n- Vita buttons can be remapped through **Options → Player 1 → Keyboard config**, and assignments persist after restarting.\r\n- Several stability improvements. The target is 30 FPS, with possible drops in demanding areas.\r\n\r\n### Updating from v1.0\r\n\r\n1. Back up ux0:data/ignition/ign_3dfx.btz.\r\n2. Install IgnitionVita_v1.1.vpk over the previous version with VitaShell and unsafe homebrew enabled.\r\n3. Do not delete ux0:data/ignition/: it contains game data, progress and settings.\r\n\r\n### Known limitations\r\n\r\n- Split screen and online/network multiplayer remain visible but disabled.\r\n- Later championships use the same progression path, but their rewards have not been individually verified end to end.\r\n- PlayStation TV has not been tested.\r\n\r\n### Verification\r\n\r\n- VPK: IgnitionVita_v1.1.vpk\r\n- Size: 2,136,458 bytes\r\n- SHA-256: fda91c1b687c7b5e76e9ec2e7b95668d93350ba7d54092dec7bf68b7a1795d50\r\n- Corresponding source: IgnitionVita_v1.1_corresponding-source.tar.xz\r\n- Source package SHA-256: 290701fffba027dd8a902e0f12bf1ce71d275f932690d98d73c3c22572a24d27\r\n\r\nPlease report reproducible problems through *Issues* with your Vita model, mode, track, vehicle, difficulty, clock frequency, exact steps and logs from ux0:data/ignition/logs. Do not attach game files.\r\n\r\nFull source, licenses and detailed documentation: https://github.com/Zeusthenen/Ignition-Vita\r\n",
+    "assets": [
+      {
+        "name": "HASHES.txt",
+        "size": 651,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/HASHES.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "IgnitionVita_v1.1.vpk",
+        "size": 2136458,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/IgnitionVita_v1.1.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "IgnitionVita_v1.1_corresponding-source.tar.xz",
+        "size": 30619864,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/IgnitionVita_v1.1_corresponding-source.tar.xz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "LGPL_COMPLIANCE.md",
+        "size": 14543,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/LGPL_COMPLIANCE.md",
+        "content_type": "text/markdown"
+      },
+      {
+        "name": "LICENSE",
+        "size": 4903,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/LICENSE",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 200,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/SHA256SUMS.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "SHA256SUMS_SOURCES.txt",
+        "size": 1595,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/SHA256SUMS_SOURCES.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "SOURCE_MANIFEST.md",
+        "size": 13370,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/SOURCE_MANIFEST.md",
+        "content_type": "text/markdown"
+      },
+      {
+        "name": "THIRD_PARTY_NOTICES.md",
+        "size": 11881,
+        "download_url": "https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/THIRD_PARTY_NOTICES.md",
+        "content_type": "text/markdown"
+      }
+    ],
+    "author": "Zeusthenen",
+    "homebrew_name": "Ignition Vita",
+    "homebrew_icon": "https://archive.org/download/ignition-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Unofficial PlayStation Vita port of Ignition (1997)",
+    "homebrew_long_description": "Ignition (1997) is a PC arcade racing game. Ignition Vita lets you play the original Windows game on a PlayStation Vita.\n\nIt is not a rewrite or a remake. The port loads the original Ign_3dfx.exe (the 3dfx/Glide version of the game), runs its x86 code on the Vita through a dynamic recompiler (x86 → ARMv7), and provides, in native Vita code, everything the executable expects from Windows: files, timers, DirectInput, DirectSound, the Windows message loop, MCI CD audio and the Glide 3D API (translated to OpenGL calls on the Vita's GPU with vitaGL).",
+    "homebrew_id": "ignition-vita",
+    "homebrew_authors": [
+      "zeusthenen"
+    ],
+    "homebrew_version": "1.1",
+    "catalog_apps": [
+      {
+        "id": "ignition-vita",
+        "name": "Ignition Vita",
+        "icon": "https://archive.org/download/ignition-vita/icon0.png",
+        "category": "ports",
+        "description": "Unofficial PlayStation Vita port of Ignition (1997)",
+        "long_description": "Ignition (1997) is a PC arcade racing game. Ignition Vita lets you play the original Windows game on a PlayStation Vita.\n\nIt is not a rewrite or a remake. The port loads the original Ign_3dfx.exe (the 3dfx/Glide version of the game), runs its x86 code on the Vita through a dynamic recompiler (x86 → ARMv7), and provides, in native Vita code, everything the executable expects from Windows: files, timers, DirectInput, DirectSound, the Windows message loop, MCI CD audio and the Glide 3D API (translated to OpenGL calls on the Vita's GPU with vitaGL).",
+        "version": "1.1",
+        "version_date": "2026-10-24",
+        "author_ids": [
+          "zeusthenen"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.1",
+    "catalog_version": "1.1"
   },
   {
     "platform": "github",
@@ -4219,147 +4640,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 0.6.1",
     "catalog_version": "0.6.1"
-  },
-  {
-    "platform": "github",
-    "repo": "ScratchEverywhere/ScratchEverywhere",
-    "release_id": "406052747",
-    "tag": "1.2.1",
-    "name": "Release 1.2.1",
-    "url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/tag/1.2.1",
-    "published": "2026-10-07T18:41:23Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This is an emergency release fixing a stack overflow bug in Release 1.2 that caused several platforms to crash upon launch.\r\n\r\n## Runtime Changes\r\n\r\n- Load the SB2 specmap using the heap instead of the stack\r\n- Added an `exit project` block; you can find it here: https://scratchbox.dev/project/K26OtTN2WDJ9\r\n\r\n## Windows Changes\r\n\r\n- Fixed the installer's shortcut path\r\n- Fixed the default project path when Scratch Everywhere! is installed to an unwritable location (e.g., when using the installer)",
-    "assets": [
-      {
-        "name": "scratch-3ds.3dsx",
-        "size": 8632264,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-3ds.3dsx",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "scratch-3ds.cia",
-        "size": 6812608,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-3ds.cia",
-        "content_type": "application/x-ctr-cia"
-      },
-      {
-        "name": "scratch-ds.nds",
-        "size": 5915136,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-ds.nds",
-        "content_type": "application/vnd.nintendo.nitro.rom"
-      },
-      {
-        "name": "scratch-gamecube.zip",
-        "size": 5246087,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-gamecube.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "scratch-libretro.so",
-        "size": 11124488,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-libretro.so",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "scratch-linux",
-        "size": 22678232,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-linux",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "scratch-macos",
-        "size": 42957639,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-macos",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "scratch-nx.nro",
-        "size": 23889723,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-nx.nro",
-        "content_type": "application/x-nx-nro"
-      },
-      {
-        "name": "scratch-ps4.pkg",
-        "size": 23592960,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-ps4.pkg",
-        "content_type": "application/x-xar"
-      },
-      {
-        "name": "scratch-psp.zip",
-        "size": 4807280,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-psp.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "scratch-vita.vpk",
-        "size": 10859228,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "scratch-webos.ipk",
-        "size": 9801386,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-webos.ipk",
-        "content_type": "application/vnd.shana.informed.package"
-      },
-      {
-        "name": "scratch-wii.zip",
-        "size": 9619542,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-wii.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "scratch-wiiu.zip",
-        "size": 23728851,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-wiiu.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "scratch-windows-installer.exe",
-        "size": 10506532,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-windows-installer.exe",
-        "content_type": "application/x-msdownload"
-      },
-      {
-        "name": "scratch-windows.exe",
-        "size": 26364671,
-        "download_url": "https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-windows.exe",
-        "content_type": "application/x-msdownload"
-      }
-    ],
-    "author": "gradylink",
-    "homebrew_name": "Scratch Everywhere!",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-scratch-everywhere/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Custom Scratch Runtime made in C++.",
-    "homebrew_long_description": "A work-in-progress runtime made in C++ aimed to bring most Scratch 3 projects over to 6-8th-generation console and handheld platforms (and more).",
-    "homebrew_id": "scratch-everywhere",
-    "homebrew_authors": [
-      "dogo6647",
-      "natexs"
-    ],
-    "homebrew_version": "Beta Build 40",
-    "catalog_apps": [
-      {
-        "id": "scratch-everywhere",
-        "name": "Scratch Everywhere!",
-        "icon": "https://archive.org/download/psvitaalive-scratch-everywhere/icon0.png",
-        "category": "utilities",
-        "description": "Custom Scratch Runtime made in C++.",
-        "long_description": "A work-in-progress runtime made in C++ aimed to bring most Scratch 3 projects over to 6-8th-generation console and handheld platforms (and more).",
-        "version": "Beta Build 40",
-        "version_date": "2026-04-26",
-        "author_ids": [
-          "dogo6647",
-          "natexs"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive Beta Build 40",
-    "catalog_version": "Beta Build 40"
   },
   {
     "platform": "github",
@@ -32569,398 +32849,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.0",
     "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "l0wigh/Heboris-Vita",
-    "release_id": "57604034",
-    "tag": "v1.0.0-Vita",
-    "name": "Heboris Vita",
-    "url": "https://github.com/l0wigh/Heboris-Vita/releases/tag/v1.0.0-Vita",
-    "published": "2022-01-20T19:09:58Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "First release of Heboris-Vita",
-    "assets": [
-      {
-        "name": "Heboris-Vita.vpk",
-        "size": 13369282,
-        "download_url": "https://github.com/l0wigh/Heboris-Vita/releases/download/v1.0.0-Vita/Heboris-Vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "l0wigh",
-    "homebrew_name": "Heboris-Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-heboris-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Heboris for PSVITA.",
-    "homebrew_id": "heboris-vita",
-    "homebrew_authors": [
-      "l0wigh"
-    ],
-    "catalog_apps": [
-      {
-        "id": "heboris-vita",
-        "name": "Heboris-Vita",
-        "icon": "https://archive.org/download/psvitaalive-heboris-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Heboris for PSVITA.",
-        "long_description": "Vita port of Heboris, a Tetris clone.\nThis port is based on the Heboris SDL2 source code.\n\n- PsVitaAlive -",
-        "version": "v.1.0.0-Vita",
-        "version_date": "2022-01-20",
-        "author_ids": [
-          "l0wigh"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Vita port of Heboris, a Tetris clone.\nThis port is based on the Heboris SDL2 source code.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.0.0-Vita",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0-Vita",
-    "catalog_version": "v.1.0.0-Vita"
-  },
-  {
-    "platform": "github",
-    "repo": "m1s3ry/gato-roboto-vita",
-    "release_id": "57594797",
-    "tag": "v1.0.1",
-    "name": "v1.0.1- GOG Version support added",
-    "url": "https://github.com/m1s3ry/gato-roboto-vita/releases/tag/v1.0.1",
-    "published": "2022-01-20T17:11:54Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "GOG version support added. Thanks to Dominik Kozaczko for the key",
-    "assets": [
-      {
-        "name": "Gato.Roboto.-.PS.Vita.Patch.GoG.Version.zip",
-        "size": 28091973,
-        "download_url": "https://github.com/m1s3ry/gato-roboto-vita/releases/download/v1.0.1/Gato.Roboto.-.PS.Vita.Patch.GoG.Version.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Gato.Roboto.-.PS.Vita.Patch.Steam.Build.4120259.zip",
-        "size": 28058511,
-        "download_url": "https://github.com/m1s3ry/gato-roboto-vita/releases/download/v1.0.1/Gato.Roboto.-.PS.Vita.Patch.Steam.Build.4120259.zip",
-        "content_type": "application/x-zip-compressed"
-      },
-      {
-        "name": "Gato_Roboto_v1.0.0.VPK",
-        "size": 2859705,
-        "download_url": "https://github.com/m1s3ry/gato-roboto-vita/releases/download/v1.0.1/Gato_Roboto_v1.0.0.VPK",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "m1s3ry",
-    "homebrew_name": "Gato Roboto",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-gato-roboto/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Gato Roboto for PSVITA.",
-    "homebrew_id": "gato-roboto",
-    "homebrew_authors": [
-      "m1s3ry"
-    ],
-    "catalog_apps": [
-      {
-        "id": "gato-roboto",
-        "name": "Gato Roboto",
-        "icon": "https://archive.org/download/psvitaalive-gato-roboto/icon0.png",
-        "category": "ports",
-        "description": "Port of Gato Roboto for PSVITA.",
-        "long_description": "Patch and install instructions in Release Page (Github). Original game by DoinkSoft. Pounce inside of your cozy armored mech and set off on a dangerous trek through an alien underworld full of irritable creatures and treacherous obstacles in a valiant effort to save your stranded captain and his crashed spaceship.\n\n- PsVitaAlive -",
-        "version": "v1.0.1",
-        "version_date": "2022-01-20",
-        "author_ids": [
-          "m1s3ry"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Patch and install instructions in Release Page (Github). Original game by DoinkSoft. Pounce inside of your cozy armored mech and set off on a dangerous trek through an alien underworld full of irritable creatures and treacherous obstacles in a valiant effort to save your stranded captain and his crashed spaceship.\n\n- PsVitaAlive -",
-    "homebrew_version": "v1.0.1",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.0.1",
-    "catalog_version": "v1.0.1"
-  },
-  {
-    "platform": "github",
-    "repo": "v-atamanenko/sdl2sand",
-    "tag": "1.0",
-    "name": "SDL2Sand 1.0",
-    "url": "https://github.com/v-atamanenko/sdl2sand/releases/tag/1.0",
-    "published": "2022-01-20T13:25:45Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "sdlsand.vpk",
-        "size": 654139,
-        "download_url": "https://github.com/v-atamanenko/sdl2sand/releases/download/1.0/sdlsand.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "v-atamanenko",
-    "homebrew_name": "SDL2Sand",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-sdl2sand/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of SDL2Sand for PSVITA.",
-    "homebrew_id": "sdl2sand",
-    "homebrew_authors": [
-      "gl33ntwine"
-    ],
-    "catalog_apps": [
-      {
-        "id": "sdl2sand",
-        "name": "SDL2Sand",
-        "icon": "https://archive.org/download/psvitaalive-sdl2sand/icon0.png",
-        "category": "ports",
-        "description": "Port of SDL2Sand for PSVITA.",
-        "long_description": "SDL2Sand is another implementation of the now-classic Falling Sand Game, old-school and minimalistic. The game simulates different particles (such as sand, water, oil or fire) interacting with each other. Freedom is given to the player to experiment with different materials in a sandbox environment.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-01-20",
-        "author_ids": [
-          "gl33ntwine"
-        ]
-      }
-    ],
-    "release_id": "57574645",
-    "homebrew_long_description": "SDL2Sand is another implementation of the now-classic Falling Sand Game, old-school and minimalistic. The game simulates different particles (such as sand, water, oil or fire) interacting with each other. Freedom is given to the player to experiment with different materials in a sandbox environment.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.0",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "v-atamanenko/blues-vita",
-    "tag": "1.0",
-    "name": "blues-vita 1.0",
-    "url": "https://github.com/v-atamanenko/blues-vita/releases/tag/1.0",
-    "published": "2022-01-17T01:41:21Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "**Note:** Prehistorik 2 is still available for purchase on [Steam](https://store.steampowered.com/app/749140/Prehistorik_2/) and [GoG](https://www.gog.com/game/prehistorik_12). For this game, only the **free DEMO** data is included. To play the full game, purchase it in one of the stores and replace all files in `ux0:app/PREHIST01/data` with the data files of your own copy (data files are those of *.SQZ and *.TRK formats)",
-    "assets": [
-      {
-        "name": "bb-jukebox.vpk",
-        "size": 1308847,
-        "download_url": "https://github.com/v-atamanenko/blues-vita/releases/download/1.0/bb-jukebox.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "blues.vpk",
-        "size": 1205494,
-        "download_url": "https://github.com/v-atamanenko/blues-vita/releases/download/1.0/blues.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "prehistorik-2.vpk",
-        "size": 1118947,
-        "download_url": "https://github.com/v-atamanenko/blues-vita/releases/download/1.0/prehistorik-2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "v-atamanenko",
-    "homebrew_name": "Prehistorik 2",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-prehistorik-2/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Prehistorik 2 for PSVITA.",
-    "homebrew_id": "prehistorik-2",
-    "homebrew_authors": [
-      "gl33ntwine"
-    ],
-    "catalog_apps": [
-      {
-        "id": "prehistorik-2",
-        "name": "Prehistorik 2",
-        "icon": "https://archive.org/download/psvitaalive-prehistorik-2/icon0.png",
-        "category": "ports",
-        "description": "Port of Prehistorik 2 for PSVITA.",
-        "long_description": "Prehistorik 2 is a platformer where you control a neanderthal who must march through hostile pre-historic environments seeking food and keeping himself safe. Use your club to crush animal enemies, many of which then release bonus items to collect. Other bonus items are located around the levels, while yet more can be found by using your club creatively and adventurously.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-01-17",
-        "author_ids": [
-          "gl33ntwine"
-        ]
-      },
-      {
-        "id": "the-blues-brothers-jukebox-adventure",
-        "name": "The Blues Brothers: Jukebox Adventure",
-        "icon": "https://archive.org/download/psvitaalive-the-blues-brothers-jukebox-adventure/icon0.png",
-        "category": "ports",
-        "description": "Port of The Blues Brothers: Jukebox Adventure for PSVITA.",
-        "long_description": "Jukebox Adventure is the sequel to The Blues Brothers. Once again, the player has to choose a favourite Blues Brother and take him through different side-scrolling platform levels. He needs to collect records and use them as defence by throwing them towards enemies. There are also power-ups that can be gathered until the jukebox to progress to the next level is found.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-01-17",
-        "author_ids": [
-          "gl33ntwine"
-        ]
-      },
-      {
-        "id": "the-blues-brothers",
-        "name": "The Blues Brothers",
-        "icon": "https://archive.org/download/psvitaalive-the-blues-brothers/icon0.png",
-        "category": "ports",
-        "description": "Port of The Blues Brothers for PSVITA.",
-        "long_description": "The Blues Brothers is a 1991 platformer based on the self-titled band. You control either Jake or Elwood to evade police on your way to a blues concert. Throughout the 6 fun levels the game offers, your only weapons are agility and throwable crates.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-01-17",
-        "author_ids": [
-          "gl33ntwine"
-        ]
-      }
-    ],
-    "release_id": "57239566",
-    "homebrew_long_description": "Prehistorik 2 is a platformer where you control a neanderthal who must march through hostile pre-historic environments seeking food and keeping himself safe. Use your club to crush animal enemies, many of which then release bonus items to collect. Other bonus items are located around the levels, while yet more can be found by using your club creatively and adventurously.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.0",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "withLogic/waterCloset",
-    "tag": "v1.0",
-    "name": "v1.0",
-    "url": "https://github.com/withLogic/waterCloset/releases/tag/v1.0",
-    "published": "2022-01-09T03:34:31Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "watercloset.vpk",
-        "size": 10180722,
-        "download_url": "https://github.com/withLogic/waterCloset/releases/download/v1.0/watercloset.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "withLogic",
-    "homebrew_name": "Water Closet",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-water-closet/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Puzzle platform game for PSVITA.",
-    "homebrew_id": "water-closet",
-    "homebrew_authors": [
-      "withlogic"
-    ],
-    "catalog_apps": [
-      {
-        "id": "water-closet",
-        "name": "Water Closet",
-        "icon": "https://archive.org/download/psvitaalive-water-closet/icon0.png",
-        "category": "ports",
-        "description": "Puzzle platform game for PSVITA.",
-        "long_description": "Water Closet (AKA WC) is a (somewhat ridiculous) 2D platform puzzle game. Guide Walter Chambers through a series of stages as he attempts to return home from a bizarre world that he has become trapped in.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-01-09",
-        "author_ids": [
-          "withlogic"
-        ]
-      }
-    ],
-    "release_id": "56678550",
-    "homebrew_long_description": "Water Closet (AKA WC) is a (somewhat ridiculous) 2D platform puzzle game. Guide Walter Chambers through a series of stages as he attempts to return home from a bizarre world that he has become trapped in.\n\n- PsVitaAlive -",
-    "homebrew_version": "v.1.0",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "Codiak101/RegistryProfiler",
-    "release_id": "56673652",
-    "tag": "v1.0",
-    "name": "App 2022 Codiak",
-    "url": "https://github.com/Codiak101/RegistryProfiler/releases/tag/v1.0",
-    "published": "2022-01-08T23:00:58Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "README:\r\nhttps://github.com/Codiak101/RegistryProfiler#readme",
-    "assets": [
-      {
-        "name": "RegistryProfiler.vpk",
-        "size": 1710335,
-        "download_url": "https://github.com/Codiak101/RegistryProfiler/releases/download/v1.0/RegistryProfiler.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Codiak101",
-    "homebrew_name": "Registry Profiler",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-registry-profiler/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Registry editor for PSVITA.",
-    "homebrew_id": "registry-profiler",
-    "homebrew_authors": [
-      "codiak101"
-    ],
-    "catalog_apps": [
-      {
-        "id": "registry-profiler",
-        "name": "Registry Profiler",
-        "icon": "https://archive.org/download/psvitaalive-registry-profiler/icon0.png",
-        "category": "utilities",
-        "description": "Registry editor for PSVITA.",
-        "long_description": "This app allows certain registry values like the ones for brightness & volume to change and saved into profiles. The first menu gives the options to manage the profiles stored in a created file. When the app is first launched it saves a default profile of the device's current values along with any others later created. The horizontal menu gives the registry categories each containing the settings, some are checkboxes and others are number entries.",
-        "version": "v.1.0",
-        "version_date": "2022-01-09",
-        "author_ids": [
-          "codiak101"
-        ]
-      }
-    ],
-    "homebrew_long_description": "This app allows certain registry values like the ones for brightness & volume to change and saved into profiles. The first menu gives the options to manage the profiles stored in a created file. When the app is first launched it saves a default profile of the device's current values along with any others later created. The horizontal menu gives the registry categories each containing the settings, some are checkboxes and others are number entries.",
-    "homebrew_version": "v.1.0",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "VMHoss/Innyume-Vita",
-    "release_id": "56274179",
-    "tag": "1.8",
-    "name": "Version 1.8",
-    "url": "https://github.com/VMHoss/Innyume-Vita/releases/tag/1.8",
-    "published": "2022-01-02T15:38:35Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Managed to mend nearly all of the navigation problems that the AI encounters.\r\n",
-    "assets": [
-      {
-        "name": "Innyume_1_8.vpk",
-        "size": 45866181,
-        "download_url": "https://github.com/VMHoss/Innyume-Vita/releases/download/1.8/Innyume_1_8.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "VMHoss",
-    "homebrew_name": "Innyume",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-innyume/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Innyume for PSVITA.",
-    "homebrew_long_description": "Port of Innyume, a japanese horror game where you are chased by smiley faces.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-    "homebrew_id": "innyume",
-    "homebrew_authors": [
-      "4dsworks"
-    ],
-    "homebrew_version": "v.1.8",
-    "catalog_apps": [
-      {
-        "id": "innyume",
-        "name": "Innyume",
-        "icon": "https://archive.org/download/psvitaalive-innyume/icon0.png",
-        "category": "ports",
-        "description": "Port of Innyume for PSVITA.",
-        "long_description": "Port of Innyume, a japanese horror game where you are chased by smiley faces.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-        "version": "v.1.8",
-        "version_date": "2022-01-02",
-        "author_ids": [
-          "4dsworks"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.8",
-    "catalog_version": "v.1.8"
   }
 ]

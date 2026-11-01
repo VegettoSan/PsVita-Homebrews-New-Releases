@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>482</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">398</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>84</strong><span>pendientes</span></div>
-        <div class="stat"><strong>473</strong><span>GitHub</span></div>
+        <div class="stat"><strong>479</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">399</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>80</strong><span>pendientes</span></div>
+        <div class="stat"><strong>470</strong><span>GitHub</span></div>
         <div class="stat"><strong>9</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,470 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="link&#x27;s awakening dx hd link&#x27;s awakening dx hd vogtmh/ladxhd-vita v2.0.9h - speed like a pegasus v2.0.9h ports ## changes
+
+- fixed a crash on every door with dynamic shadows turned off (sprite shadows). link&#x27;s shadow tried to remove itself from the previous map after that map had already been unloaded. this is the &quot;every door crashes after the dungeon 3 bell&quot; report.
+- fixed stutters of almost a second in dungeon 3, 6 and 8. the dodongo snakes created a new collision box every frame, and every box stayed attached to the snake, so the game produced more and more temporary data the longer you stayed in the dungeon. after a few minutes the memory was full and the game had to clean up in the middle of play. this bug is also in the original game.
+- with dynamic shadows turned off (sprite shadows), the overworld no longer produces temporary data on every frame: each shadow created a new position object per frame just to copy its coordinates. this also led to clean-ups during play in longer sessions.
+- the overworld no longer gets slower the longer you play. monkeys from the bridge piled up on every return to the overworld, and leftover enemy shadows were still processed every frame after their enemy was gone. the frame rate on the overworld now stays at 60 fps over long sessions.
+- the overworld now also stays in memory while you are in a dungeon, not only in houses and caves. coming back from a dungeon or after an instrument restores it instead of loading it again (about 0.26 s instead of about 0.4 s on the vita).
+- the last eight houses, caves and dungeon rooms you visited are kept ready, so going back into them loads faster. long sessions need fewer garbage collections (9 instead of 13 in a full stress test, 6.8 s instead of 10.9 s in total).
+- menus and the inventory now run at a steady 60 fps. while the game is paused, the world is drawn once and reused instead of being redrawn every frame.
+- the map in the inventory is shown larger: it grows to the biggest size that fits on the screen.
+- button prompts use the vita labels by default (face symbols, l/r, select/start).
+- saves are safer: the previous save is kept as a backup and used automatically if a save file is missing or damaged. a failing autosave no longer stops the door transition.
+- the intro now starts at 60 fps right away instead of running at 30 fps for the first seconds.
+- writing the log no longer causes short stutters; it is written in the background.
+- colour correction and the pixel grid no longer switch the whole frame to the pc rendering path. the pixel grid is drawn as an overlay on top of the frame.
+- new for testers: cheats &gt; stress test plays through all dungeons, every overworld door, the whole overworld and repeated save loads, cycling through several settings and game scales, and writes a summary with frame rates per setting and scale to the log. it also stays 30 seconds in the busiest room of every dungeon and warns when normal play produces more than 2 kb of temporary data per frame. saving is blocked while it runs and your settings are restored afterwards.
+
+## known limitations
+
+- at game scale 1x the overworld runs at 30 fps. that scale shows nine times as much of the world as 3x, which is more than the vita&#x27;s cpu and gpu can draw at 60 fps. houses, caves and dungeons run at 60 fps at 1x.
+- with colour correction turned on, the game runs at 30 fps. the correction is an extra full-screen pass that costs about 8 ms of gpu time per frame.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/ladxhd-vita/icon0.png" alt="Icono de Link's Awakening DX HD" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · vogtmh/ladxhd-vita</div>
+                      <h2><a href="https://github.com/vogtmh/ladxhd-vita/releases/tag/v2.0.9h" target="_blank" rel="noopener">Link's Awakening DX HD</a></h2>
+                      <div class="release-name">v2.0.9h - speed like a pegasus</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v2.0.9h</span>
+                    <span>2026-11-01 11:27 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 2.0.9</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 2.0.9</div>
+                  
+                  <div class="body markdown-body"><h2>Changes</h2>
+<ul>
+<li>Fixed a crash on every door with dynamic shadows turned off (sprite shadows). Link's shadow tried to remove itself from the previous map after that map had already been unloaded. This is the &quot;every door crashes after the Dungeon 3 bell&quot; report.</li>
+<li>Fixed stutters of almost a second in Dungeon 3, 6 and 8. The Dodongo Snakes created a new collision box every frame, and every box stayed attached to the snake, so the game produced more and more temporary data the longer you stayed in the dungeon. After a few minutes the memory was full and the game had to clean up in the middle of play. This bug is also in the original game.</li>
+<li>With dynamic shadows turned off (sprite shadows), the overworld no longer produces temporary data on every frame: each shadow created a new position object per frame just to copy its coordinates. This also led to clean-ups during play in longer sessions.</li>
+<li>The overworld no longer gets slower the longer you play. Monkeys from the bridge piled up on every return to the overworld, and leftover enemy shadows were still processed every frame after their enemy was gone. The frame rate on the overworld now stays at 60 fps over long sessions.</li>
+<li>The overworld now also stays in memory while you are in a dungeon, not only in houses and caves. Coming back from a dungeon or after an instrument restores it instead of loading it again (about 0.26 s instead of about 0.4 s on the Vita).</li>
+<li>The last eight houses, caves and dungeon rooms you visited are kept ready, so going back into them loads faster. Long sessions need fewer garbage collections (9 instead of 13 in a full stress test, 6.8 s instead of 10.9 s in total).</li>
+<li>Menus and the inventory now run at a steady 60 fps. While the game is paused, the world is drawn once and reused instead of being redrawn every frame.</li>
+<li>The map in the inventory is shown larger: it grows to the biggest size that fits on the screen.</li>
+<li>Button prompts use the Vita labels by default (face symbols, L/R, Select/Start).</li>
+<li>Saves are safer: the previous save is kept as a backup and used automatically if a save file is missing or damaged. A failing autosave no longer stops the door transition.</li>
+<li>The intro now starts at 60 fps right away instead of running at 30 fps for the first seconds.</li>
+<li>Writing the log no longer causes short stutters; it is written in the background.</li>
+<li>Colour correction and the pixel grid no longer switch the whole frame to the PC rendering path. The pixel grid is drawn as an overlay on top of the frame.</li>
+<li>New for testers: Cheats &gt; Stress Test plays through all dungeons, every overworld door, the whole overworld and repeated save loads, cycling through several settings and game scales, and writes a summary with frame rates per setting and scale to the log. It also stays 30 seconds in the busiest room of every dungeon and warns when normal play produces more than 2 KB of temporary data per frame. Saving is blocked while it runs and your settings are restored afterwards.</li>
+</ul>
+<h2>Known Limitations</h2>
+<ul>
+<li>At game scale 1x the overworld runs at 30 fps. That scale shows nine times as much of the world as 3x, which is more than the Vita's CPU and GPU can draw at 60 fps. Houses, caves and dungeons run at 60 fps at 1x.</li>
+<li>With colour correction turned on, the game runs at 30 fps. The correction is an extra full-screen pass that costs about 8 ms of GPU time per frame.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-macos-universal.zip" target="_blank" rel="noopener">⬇ ladxhd-vita-importer-2.0.9h-macos-universal.zip · 51.9 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-linux-arm64.tar.gz" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9h-linux-arm64.tar.gz · 27.8 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-linux-x86_64.tar.gz" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9h-linux-x86_64.tar.gz · 28.5 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-windows-arm64.zip" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9h-windows-arm64.zip · 25.2 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/ladxhd-vita-importer-2.0.9h-windows-x86_64.zip" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9h-windows-x86_64.zip · 31.1 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9h/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 566.0 B</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="vitarps5 vitarps5 mauricio-gg/vitaki-vitarps5 vitarps5 v4.2.2 v4.2.2 utilities # vitarps5 v4.2.2
+
+**enhanced playstation 5 remote play for ps vita**
+
+built with modern ui, optimized performance, and quality-of-life improvements.
+
+## 📦 installation
+
+1. download `vitarps5-v4.2.2.vpk` below
+   (permanent link to the newest version: https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/vitarps5-latest.vpk)
+2. transfer to your ps vita (via usb or ftp)
+3. install using vitashell (press x on the vpk file)
+4. launch from livearea
+
+## what&#x27;s changed
+
+### features
+
+- **mic:** send the vita microphone to the ps5, with a setting and mute during play (#474) ([#475](https://github.com/mauricio-gg/vitaki-vitarps5/pull/475))
+- **video:** 720p and 1080p streaming, 1080p at 30 fps, 10 mbps step, remove force 30 fps (#473) ([#476](https://github.com/mauricio-gg/vitaki-vitarps5/pull/476))
+- **input:** two-finger hold presses the touchpad click until a finger lifts ([#468](https://github.com/mauricio-gg/vitaki-vitarps5/pull/468))
+- **config:** encrypt console pairing keys at rest, remove plain-text token storage (#464) ([#465](https://github.com/mauricio-gg/vitaki-vitarps5/pull/465))
+- **debug:** input test panel over the stream (#458) ([#459](https://github.com/mauricio-gg/vitaki-vitarps5/pull/459))
+
+### fixes
+
+- **input:** a front touch keeps the zone it started in until lifted (#460) ([#463](https://github.com/mauricio-gg/vitaki-vitarps5/pull/463))
+- **input:** send motion in the dualsense frame via the orientation tracker, add motion deadband setting (#455) ([#461](https://github.com/mauricio-gg/vitaki-vitarps5/pull/461))
+- **input:** hold the touchpad click 50 ms with the finger on the pad, add two-finger tap click (#454) ([#457](https://github.com/mauricio-gg/vitaki-vitarps5/pull/457))
+
+## 🛠️ build information
+
+- **build system:** docker + vitasdk
+- **version:** v4.2.2
+- **commit:** e0a2fe8da71779c3c9ccb7f7d59a68b4a53c013d
+- **build date:** 2026-11-01
+
+## 🙏 thanks
+
+thanks to @sunapplelko-coder for testing the v4.2.2 betas on their vita.
+
+---
+
+built with ❤️ for the ps vita community over 3+ months of design and development.
+
+☕ **support development:** [buy me a coffee](https://buymeacoffee.com/solidem)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-vitarps5/icon0.png" alt="Icono de VitaRPS5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · mauricio-gg/vitaki-vitarps5</div>
+                      <h2><a href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/tag/v4.2.2" target="_blank" rel="noopener">VitaRPS5</a></h2>
+                      <div class="release-name">VitaRPS5 v4.2.2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v4.2.2</span>
+                    <span>2026-11-01 10:22 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.3.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.3.1.0 → release v4.2.2</div>
+                  
+                  <div class="body markdown-body"><h1>VitaRPS5 v4.2.2</h1>
+<p><strong>Enhanced PlayStation 5 Remote Play for PS Vita</strong></p>
+<p>Built with modern UI, optimized performance, and quality-of-life improvements.</p>
+<h2>📦 Installation</h2>
+<ol>
+<li>Download <code>VitaRPS5-v4.2.2.vpk</code> below
+(Permanent link to the newest version: <a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/VitaRPS5-latest.vpk">https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/VitaRPS5-latest.vpk</a>)</li>
+<li>Transfer to your PS Vita (via USB or FTP)</li>
+<li>Install using VitaShell (press X on the VPK file)</li>
+<li>Launch from LiveArea</li>
+</ol>
+<h2>What's Changed</h2>
+<h3>Features</h3>
+<ul>
+<li><strong>mic:</strong> send the Vita microphone to the PS5, with a setting and mute during play (#474) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/475">#475</a>)</li>
+<li><strong>video:</strong> 720p and 1080p streaming, 1080p at 30 fps, 10 Mbps step, remove Force 30 FPS (#473) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/476">#476</a>)</li>
+<li><strong>input:</strong> two-finger hold presses the touchpad click until a finger lifts (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/468">#468</a>)</li>
+<li><strong>config:</strong> encrypt console pairing keys at rest, remove plain-text token storage (#464) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/465">#465</a>)</li>
+<li><strong>debug:</strong> Input test panel over the stream (#458) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/459">#459</a>)</li>
+</ul>
+<h3>Fixes</h3>
+<ul>
+<li><strong>input:</strong> a front touch keeps the zone it started in until lifted (#460) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/463">#463</a>)</li>
+<li><strong>input:</strong> send motion in the DualSense frame via the orientation tracker, add Motion Deadband setting (#455) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/461">#461</a>)</li>
+<li><strong>input:</strong> hold the touchpad click 50 ms with the finger on the pad, add two-finger tap click (#454) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/457">#457</a>)</li>
+</ul>
+<h2>🛠️ Build Information</h2>
+<ul>
+<li><strong>Build System:</strong> Docker + VitaSDK</li>
+<li><strong>Version:</strong> v4.2.2</li>
+<li><strong>Commit:</strong> e0a2fe8da71779c3c9ccb7f7d59a68b4a53c013d</li>
+<li><strong>Build Date:</strong> 2026-11-01</li>
+</ul>
+<h2>🙏 Thanks</h2>
+<p>Thanks to @sunapplelko-coder for testing the v4.2.2 betas on their Vita.</p>
+<hr>
+<p>Built with ❤️ for the PS Vita community over 3+ months of design and development.</p>
+<p>☕ <strong>Support development:</strong> <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/solidem">Buy Me a Coffee</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/download/v4.2.2/VitaRPS5-latest.vpk" target="_blank" rel="noopener">⬇ VitaRPS5-latest.vpk · 3.4 MB</a><a class="btn" href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/download/v4.2.2/VitaRPS5-v4.2.2.vpk" target="_blank" rel="noopener">VitaRPS5-v4.2.2.vpk · 3.4 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="scratch everywhere! scratch everywhere! scratcheverywhere/scratcheverywhere release 1.3 1.3 utilities ## xbox
+- se! has been ported to the original xbox!
+- featuring a custom renderer, complete with hd a/v, pen and sprite effect support!
+  - sdl3 renderer is also available as a fallback (though will be removed in a future release)
+- port by @mikedev101
+
+## runtime changes
+- added a new **bytecode runtime**
+  - bytecode is a much smaller and faster way of executing scratch projects!
+  - projects ran with bytecode runs **~2.25x faster** than 1.2.1, and consumes less ram!
+  - bytecode is on by default for all projects, and can be changed in project settings.
+- added support for `loudness` blocks
+  - this is the last block we didn&#x27;t support, so with that we now support every scratch block!
+- added the ability to switch renderer, input and audio backends
+   - useful for testing, and for computers that may not support a certain backend
+   - these can be changed in main menu settings
+- monitors now have an improved look on pc
+- made audio more performant and use less resources
+
+## menu changes
+- new spoooooky theme! (please ignore the fact that it&#x27;s now november)
+   - new menu music by @dogo6647 as always
+
+## wii u changes
+- added a new gx2 renderer
+  - this adds support for both sprite effects and dual screen support!
+  - dual screen mode requires your project to be the same resolution as 3ds&#x27;s dual screen mode (400x480).
+- added a wii u specific audio backend
+
+## nds changes
+- audio has been re-enabled!
+  - currently nds only supports playing `.wav` files.
+- the nds exclusive chiptune menu music is back
+
+## windows changes
+- added new direct3d 9 renderer
+  - this renderer will be the new default for windows going forward.
+
+## nintendo switch &amp; ps4 changes
+- added support for opengl core
+  - this now means that sprite effects are now supported on these platforms.
+
+## 3ds changes
+- fix bottom screen cursor mapping
+- fix pen rendering on dual screen mode
+
+## psp changes
+- update renderer to sdl3
+  - fixes text and pen rendering, and should overall be more performant
+
+## ps vita changes
+- fix app crashing on startup
+
+## wii changes
+- fix app crashing on startup
+
+this release was brought to you by: @natexs, @gradylink, @nishiowo, @luarpri, @mikedev101, @dogo6647, @mistium, @zacharyleahan, and @pwldev">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-scratch-everywhere/icon0.png" alt="Icono de Scratch Everywhere!" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · ScratchEverywhere/ScratchEverywhere</div>
+                      <h2><a href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/tag/1.3" target="_blank" rel="noopener">Scratch Everywhere!</a></h2>
+                      <div class="release-name">Release 1.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.3</span>
+                    <span>2026-11-01 09:02 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: Beta Build 40</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive Beta Build 40</div>
+                  
+                  <div class="body markdown-body"><h2>Xbox</h2>
+<ul>
+<li>SE! has been ported to the original Xbox!</li>
+<li>Featuring a custom renderer, complete with HD A/V, Pen and Sprite effect support!<ul>
+<li>SDL3 renderer is also available as a fallback (though will be removed in a future release)</li>
+</ul>
+</li>
+<li>Port by @MikeDev101</li>
+</ul>
+<h2>Runtime Changes</h2>
+<ul>
+<li>Added a new <strong>Bytecode runtime</strong><ul>
+<li>Bytecode is a much smaller and faster way of executing Scratch projects!</li>
+<li>Projects ran with bytecode runs <strong>~2.25x faster</strong> than 1.2.1, and consumes less RAM!</li>
+<li>Bytecode is on by default for all projects, and can be changed in Project settings.</li>
+</ul>
+</li>
+<li>Added support for <code>Loudness</code> blocks<ul>
+<li>This is the last block we didn't support, so with that we now support EVERY Scratch block!</li>
+</ul>
+</li>
+<li>Added the ability to switch renderer, input and audio backends<ul>
+<li>Useful for testing, and for computers that may not support a certain backend</li>
+<li>These can be changed in Main Menu settings</li>
+</ul>
+</li>
+<li>Monitors now have an improved look on PC</li>
+<li>Made audio more performant and use less resources</li>
+</ul>
+<h2>Menu Changes</h2>
+<ul>
+<li>New spOooOoky theme! (please ignore the fact that it's now November)<ul>
+<li>New menu music by @Dogo6647 as always</li>
+</ul>
+</li>
+</ul>
+<h2>Wii U Changes</h2>
+<ul>
+<li>Added a new GX2 Renderer<ul>
+<li>This adds support for both Sprite effects and dual screen support!</li>
+<li>Dual screen mode requires your project to be the same resolution as 3DS's dual screen mode (400x480).</li>
+</ul>
+</li>
+<li>Added a Wii U specific audio backend</li>
+</ul>
+<h2>NDS Changes</h2>
+<ul>
+<li>Audio has been re-enabled!<ul>
+<li>Currently NDS only supports playing <code>.wav</code> files.</li>
+</ul>
+</li>
+<li>The NDS exclusive chiptune menu music is back</li>
+</ul>
+<h2>Windows Changes</h2>
+<ul>
+<li>Added new Direct3D 9 Renderer<ul>
+<li>This renderer will be the new default for Windows going forward.</li>
+</ul>
+</li>
+</ul>
+<h2>Nintendo Switch &amp; PS4 Changes</h2>
+<ul>
+<li>Added support for OpenGL Core<ul>
+<li>This now means that Sprite effects are now supported on these platforms.</li>
+</ul>
+</li>
+</ul>
+<h2>3DS Changes</h2>
+<ul>
+<li>Fix bottom screen cursor mapping</li>
+<li>Fix Pen rendering on dual screen mode</li>
+</ul>
+<h2>PSP Changes</h2>
+<ul>
+<li>Update renderer to SDL3<ul>
+<li>Fixes text and Pen rendering, and should overall be more performant</li>
+</ul>
+</li>
+</ul>
+<h2>PS Vita Changes</h2>
+<ul>
+<li>Fix app crashing on startup</li>
+</ul>
+<h2>Wii Changes</h2>
+<ul>
+<li>Fix app crashing on startup</li>
+</ul>
+<p>This release was brought to you by: @NateXS, @gradylink, @NishiOwO, @luarpri, @MikeDev101, @Dogo6647, @Mistium, @ZacharyLeahan, and @PwLDev</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-vita.vpk" target="_blank" rel="noopener">⬇ scratch-vita.vpk · 11.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-3ds.3dsx" target="_blank" rel="noopener">scratch-3ds.3dsx · 9.4 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-3ds.cia" target="_blank" rel="noopener">scratch-3ds.cia · 7.6 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-ds.nds" target="_blank" rel="noopener">scratch-ds.nds · 10.5 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-gamecube.zip" target="_blank" rel="noopener">scratch-gamecube.zip · 5.9 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-libretro.so" target="_blank" rel="noopener">scratch-libretro.so · 10.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-linux" target="_blank" rel="noopener">scratch-linux · 19.4 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-macOS" target="_blank" rel="noopener">scratch-macOS · 33.3 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-nx.nro" target="_blank" rel="noopener">scratch-nx.nro · 24.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-ps4.pkg" target="_blank" rel="noopener">scratch-ps4.pkg · 68.4 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-psp.zip" target="_blank" rel="noopener">scratch-psp.zip · 5.7 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-webos.ipk" target="_blank" rel="noopener">scratch-webos.ipk · 10.3 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-wii.zip" target="_blank" rel="noopener">scratch-wii.zip · 10.1 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-wiiu.zip" target="_blank" rel="noopener">scratch-wiiu.zip · 29.2 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-windows-installer.exe" target="_blank" rel="noopener">scratch-windows-installer.exe · 12.7 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-windows.exe" target="_blank" rel="noopener">scratch-windows.exe · 24.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.3/scratch-xbox.zip" target="_blank" rel="noopener">scratch-xbox.zip · 12.5 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita star fox adventures for ps vita - v0.1.1 (2026-11-01) v0.1.1 ports bug-fix update for the native ps vita port of star fox adventures. video: https://youtu.be/rpsg4do0ge8
+
+**work in progress.** it&#x27;s playable, but expect bugs, and not every part of the game has been tested yet.
+
+**no game data is included.** you need a disc image of your own copy of star fox adventures (gamecube, usa, rev 1, `gsae01`) as a full, uncompressed `.iso`. see the [readme](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.
+
+### fixed
+- **darkice mines staying locked in orbit (shown with an x).** the arwing never offered to trade fuel cells to unlock a destination, so darkice mines, cloudrunner fortress, walled city and dragon rock could not be unlocked. the trade now appears at the arwing in thorntail hollow (5 fuel cells for darkice mines).
+- **a grey box around fox in darkice mines.** the port ignored the game&#x27;s face-culling setting, so the inside of two placeholder sky models (which the original hides by culling) was drawn as a grey box that followed fox. culling is now applied the way the game requests it.
+- **the pause menu map not showing where you are.** it did not recognise the current area, so areas were never marked as visited, and in most areas opening the map overwrote other pause-menu data.
+- **tricky&#x27;s ability icons missing from the pause menu.**
+- **the camera flying away from fox during fights** (lock-on combat, e.g. sharpclaws in thorntail hollow and krazoa palace).
+- **a blue void that froze fox on the way to cape claw.** it happened after a fight where the camera had flown away: the camera&#x27;s position had loaded the wrong area, and the cape claw passage then had no room to load.
+- **the sharpclaws not appearing after you pick up the staff.** the ambush now starts the first time you walk into the arena, and krystal&#x27;s head no longer appears as a cube in the scene before it.
+- **shaders being disabled after closing the game.** closing the game while a shader was compiling could disable that shader for good. a shader is now only disabled if the game fails on it twice in a row.
+
+### changed
+- 1003 pre-compiled shaders are included, up from 274, covering more of the game (lightfoot village, cape claw, the staff arena, snowhorn wastes). areas whose shaders are included no longer need to compile them on the first visit, which removes the missing and flashing objects seen there in v0.1.0.
+- faster start-up: the title menu is ready in about 18 seconds instead of about 27 (one launch each, measured on a pch-2000). the first launch after installing is not faster; it prepares some textures once and saves them to the memory card.
+- new livearea artwork, prepared by [u/either-version-9577](https://www.reddit.com/user/either-version-9577/): the full-width box illustration, and the logo on the start button. thank you!
+
+### install / update
+1. install `starfoxadventures.vpk` with vitashell (over the old version is fine; your save and settings are kept).
+2. new install only: copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).
+3. launch.
+
+needs custom firmware (henkaku / enso) and `ur0:data/libshacccg.suprx`.
+
+### known issues
+- the first visit to an area whose shaders are not included can show missing or dark objects for a minute or two while they compile.
+- thorntail hollow and snowhorn wastes run below 30 fps in places.
+- fox and tricky do not cast the soft round shadow under their feet that the original draws.
+- short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.
+- the boot logos are not shown yet.
+- holding l to recentre the camera can briefly dip the view.
+- distant foliage can look white.
+
+### checksums (sha-256)
+- `starfoxadventures-vita-2026-11-01.zip`: `6407305fbef33fd7bfbff34a89229e90274040bad111b3ab7dae6c8eaea01b6d`
+- `starfoxadventures.vpk`: `b486d0fdf64fa9e89e1a2d7585f310e750275926c018b5789558312e13a77899`
+- `eboot.bin` (inside the vpk): `01fb897ca936498aec0de047d851c01215f123aaecf0a8f30a3c2d2730112697`
+
+problems: open an issue with `ux0:data/stairfax_game.txt` attached.
+
+### credits
+built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-decomp) (zachary canann, jack price-burns and contributors) and cassieandstuff&#x27;s [pc port branch](https://github.com/cassieandstuff/sfa-decomp/tree/pc-port-continued). uses vitagl, vitashark and math-neon (rinnegatamante, lgpl-3.0) and sceshacccgext (bythos14, lgpl-2.1). the full source and the library details are in this repository: see [credits.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/credits.md).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png" alt="Icono de Star Fox Adventures" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · tchisholm20/starfox-adventures-vita</div>
+                      <h2><a href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.1" target="_blank" rel="noopener">Star Fox Adventures</a></h2>
+                      <div class="release-name">Star Fox Adventures for PS Vita - v0.1.1 (2026-11-01)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.1</span>
+                    <span>2026-11-01 07:00 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.0 → release v0.1.1</div>
+                  
+                  <div class="body markdown-body"><p>Bug-fix update for the native PS Vita port of Star Fox Adventures. Video: <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/RpsG4do0GE8">https://youtu.be/RpsG4do0GE8</a></p>
+<p><strong>Work in progress.</strong> It's playable, but expect bugs, and not every part of the game has been tested yet.</p>
+<p><strong>No game data is included.</strong> You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, <code>GSAE01</code>) as a full, uncompressed <code>.iso</code>. See the <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita#readme">README</a> for details.</p>
+<h3>Fixed</h3>
+<ul>
+<li><strong>DarkIce Mines staying locked in orbit (shown with an X).</strong> The Arwing never offered to trade Fuel Cells to unlock a destination, so DarkIce Mines, CloudRunner Fortress, Walled City and Dragon Rock could not be unlocked. The trade now appears at the Arwing in ThornTail Hollow (5 Fuel Cells for DarkIce Mines).</li>
+<li><strong>A grey box around Fox in DarkIce Mines.</strong> The port ignored the game's face-culling setting, so the inside of two placeholder sky models (which the original hides by culling) was drawn as a grey box that followed Fox. Culling is now applied the way the game requests it.</li>
+<li><strong>The pause menu map not showing where you are.</strong> It did not recognise the current area, so areas were never marked as visited, and in most areas opening the map overwrote other pause-menu data.</li>
+<li><strong>Tricky's ability icons missing from the pause menu.</strong></li>
+<li><strong>The camera flying away from Fox during fights</strong> (lock-on combat, e.g. SharpClaws in ThornTail Hollow and Krazoa Palace).</li>
+<li><strong>A blue void that froze Fox on the way to Cape Claw.</strong> It happened after a fight where the camera had flown away: the camera's position had loaded the wrong area, and the Cape Claw passage then had no room to load.</li>
+<li><strong>The SharpClaws not appearing after you pick up the staff.</strong> The ambush now starts the first time you walk into the arena, and Krystal's head no longer appears as a cube in the scene before it.</li>
+<li><strong>Shaders being disabled after closing the game.</strong> Closing the game while a shader was compiling could disable that shader for good. A shader is now only disabled if the game fails on it twice in a row.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>1003 pre-compiled shaders are included, up from 274, covering more of the game (LightFoot Village, Cape Claw, the staff arena, SnowHorn Wastes). Areas whose shaders are included no longer need to compile them on the first visit, which removes the missing and flashing objects seen there in v0.1.0.</li>
+<li>Faster start-up: the title menu is ready in about 18 seconds instead of about 27 (one launch each, measured on a PCH-2000). The first launch after installing is not faster; it prepares some textures once and saves them to the memory card.</li>
+<li>New LiveArea artwork, prepared by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Either-Version-9577/">u/Either-Version-9577</a>: the full-width box illustration, and the logo on the start button. Thank you!</li>
+</ul>
+<h3>Install / update</h3>
+<ol>
+<li>Install <code>StarFoxAdventures.vpk</code> with VitaShell (over the old version is fine; your save and settings are kept).</li>
+<li>New install only: copy your disc image to <code>ux0:data/stairfax/sfa_rev1.iso</code> (create the folder if needed).</li>
+<li>Launch.</li>
+</ol>
+<p>Needs custom firmware (HENkaku / Enso) and <code>ur0:data/libshacccg.suprx</code>.</p>
+<h3>Known issues</h3>
+<ul>
+<li>The first visit to an area whose shaders are not included can show missing or dark objects for a minute or two while they compile.</li>
+<li>ThornTail Hollow and SnowHorn Wastes run below 30 fps in places.</li>
+<li>Fox and Tricky do not cast the soft round shadow under their feet that the original draws.</li>
+<li>Short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.</li>
+<li>The boot logos are not shown yet.</li>
+<li>Holding L to recentre the camera can briefly dip the view.</li>
+<li>Distant foliage can look white.</li>
+</ul>
+<h3>Checksums (SHA-256)</h3>
+<ul>
+<li><code>StarFoxAdventures-Vita-2026-11-01.zip</code>: <code>6407305fbef33fd7bfbff34a89229e90274040bad111b3ab7dae6c8eaea01b6d</code></li>
+<li><code>StarFoxAdventures.vpk</code>: <code>b486d0fdf64fa9e89e1a2d7585f310e750275926c018b5789558312e13a77899</code></li>
+<li><code>eboot.bin</code> (inside the vpk): <code>01fb897ca936498aec0de047d851c01215f123aaecf0a8f30a3c2d2730112697</code></li>
+</ul>
+<p>Problems: open an issue with <code>ux0:data/stairfax_game.txt</code> attached.</p>
+<h3>Credits</h3>
+<p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.1/StarFoxAdventures-Vita-2026-11-01.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-11-01.zip · 6.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="kotor kotor scoobydouche/vitakotor vitakotor v0.5.1-multicore.2 — tuned for every graphics option on v0.5.1-multicore.2 ports a test pre-release from the `multicore` branch, aimed at playing with shadows, grass, frame buffer and 32-bit textures all on. it builds on multicore.1: the ai now runs alongside the 3d scene far more of the time, and one graphics stall the port caused itself is gone.
 
 ## what changed
@@ -318,7 +782,7 @@ open an issue with `ux0:data/kotor/log.txt` attached, say where in the game it h
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="resident evil code: veronica x resident evil code: veronica x rinnegatamante/recvx_vita v.1.2 v.1.2 ports - updated to latest vitagl commit.
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="resident evil code: veronica x resident evil code: veronica x rinnegatamante/recvx_vita v.1.2 v.1.2 ports - updated to latest vitagl commit.
 - further optimized the whole game, reducing cpu workload by up to 12%.
 - fixed a bug causing misaligned text in the memory card selection when using languages different from english.
 - added italian localization support.
@@ -346,14 +810,14 @@ open an issue with `ux0:data/kotor/log.txt` attached, say where in the game it h
                       <h2><a href="https://github.com/Rinnegatamante/recvx_vita/releases/tag/v.1.2" target="_blank" rel="noopener">Resident Evil Code: Veronica X</a></h2>
                       <div class="release-name">v.1.2</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v.1.2</span>
                     <span>2026-10-31 23:09 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1 → release v.1.2</div>
+                  <div class="catalog-detail">PSVitaAlive 1.2</div>
                   
                   <div class="body markdown-body"><ul>
 <li>Updated to latest vitaGL commit.</li>
@@ -440,7 +904,34 @@ Installation Instructions:</p>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="d2vita d2vita franckrst/d2vita v0.2.3 v0.2.3 ports stable release of the 0.2.2 and 0.2.3 betas (details in their entries
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="digimon world digimon world danicannt/dw-vita digimon world ps vita test build 0.1. v0.1.0-test ports first public playable test build for ps vita.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/digimon-world-ps-vita-port/icon0.jpg" alt="Icono de Digimon World" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · danicannt/dw-vita</div>
+                      <h2><a href="https://github.com/danicannt/dw-vita/releases/tag/v0.1.0-test" target="_blank" rel="noopener">Digimon World</a></h2>
+                      <div class="release-name">Digimon World PS Vita Test Build 0.1.</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.1.0-test</span>
+                    <span>2026-10-31 13:00 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.0</div>
+                  
+                  <div class="body markdown-body"><p>First public playable test build for PS Vita.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-vita.vpk" target="_blank" rel="noopener">⬇ dw1-vita.vpk · 2.7 MB</a><a class="btn" href="https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-backgrounds.dw1hd" target="_blank" rel="noopener">dw1-hd-backgrounds.dw1hd · 176.8 MB</a><a class="btn" href="https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-movies.dw1hd" target="_blank" rel="noopener">dw1-hd-movies.dw1hd · 28.2 MB</a><a class="btn" href="https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-objects.dw1hd" target="_blank" rel="noopener">dw1-hd-objects.dw1hd · 23.8 MB</a><a class="btn" href="https://github.com/danicannt/dw-vita/releases/download/v0.1.0-test/dw1-hd-unlocker.zip" target="_blank" rel="noopener">dw1-hd-unlocker.zip · 8.4 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="d2vita d2vita franckrst/d2vita v0.2.3 v0.2.3 ports stable release of the 0.2.2 and 0.2.3 betas (details in their entries
 below).
 
 - **more headroom in crowded fights**: the game&#x27;s locks and clock reads are
@@ -467,14 +958,14 @@ version française : [journal des versions](https://github.com/franckrst/d2vita/
                       <h2><a href="https://github.com/Franckrst/D2Vita/releases/tag/v0.2.3" target="_blank" rel="noopener">D2Vita</a></h2>
                       <div class="release-name">v0.2.3</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v0.2.3</span>
                     <span>2026-10-31 11:11 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.2.1</span>
+                    <span class="catalog-version">PSVitaAlive: 0.2.3</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.2.1 → release v0.2.3</div>
+                  <div class="catalog-detail">PSVitaAlive 0.2.3</div>
                   
                   <div class="body markdown-body"><p>Stable release of the 0.2.2 and 0.2.3 betas (details in their entries
 below).</p>
@@ -498,7 +989,7 @@ player on console with 0.2.3-beta).</li>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nova 2 hd nova 2 hd metalsyntax/n.o.v.a-2-vita n.o.v.a 2 vita v1.0.2 v1.0.2 ports # n.o.v.a 2 vita v1.0.2
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="nova 2 hd nova 2 hd metalsyntax/n.o.v.a-2-vita n.o.v.a 2 vita v1.0.2 v1.0.2 ports # n.o.v.a 2 vita v1.0.2
 
 this is a wrapper/port of **n.o.v.a. 2 – near orbit vanguard alliance hd** (gameloft) for the ps vita.
 
@@ -616,14 +1107,14 @@ in order to properly install the game, you&#x27;ll need to extract the data from
                       <h2><a href="https://github.com/MetalSyntax/N.O.V.A-2-vita/releases/tag/v1.0.2" target="_blank" rel="noopener">NOVA 2 HD</a></h2>
                       <div class="release-name">N.O.V.A 2 Vita v1.0.2</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v1.0.2</span>
                     <span>2026-10-31 05:00 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.2</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0 → release v1.0.2</div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.2</div>
                   
                   <div class="body markdown-body"><h1>N.O.V.A 2 Vita v1.0.2</h1>
 <p>This is a wrapper/port of <strong>N.O.V.A. 2 – Near Orbit Vanguard Alliance HD</strong> (Gameloft) for the PS Vita.</p>
@@ -744,7 +1235,7 @@ save/data paths remapped to <code>ux0:data/nova2/</code>.</li>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.3-beta v0.1.3-beta ports water reflections, sharper textures, smoother lighting, and nine community fixes.
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="half-life 2 half-life 2 largevegetable/source-engine half-life 2 for ps vita 0.1.3-beta v0.1.3-beta ports water reflections, sharper textures, smoother lighting, and nine community fixes.
 
 **download `hl2_vita-0.1.3-beta.zip` below** and install `hl2_vita.vpk` over your current version: your saves, settings and compiled shaders stay. the new water needs a few new shaders: they compile the first time water appears, or choose prepare shaders &gt; prepare again in the main menu. new to the port? follow [install_vita.md](https://github.com/largevegetable/source-engine/blob/vita/install_vita.md).
 
@@ -797,14 +1288,14 @@ sha-256 of the zip: `be1dd4eb481ca8c0c8d42f8fe9d3332ed976578a8818080cb16812408f0
                       <h2><a href="https://github.com/LargeVegetable/source-engine/releases/tag/v0.1.3-beta" target="_blank" rel="noopener">Half-Life 2</a></h2>
                       <div class="release-name">Half-Life 2 for PS Vita 0.1.3-beta</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">v0.1.3-beta</span>
                     <span>2026-10-31 02:55 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.2</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.3</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.2 → release v0.1.3-beta</div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.3</div>
                   
                   <div class="body markdown-body"><p>Water reflections, sharper textures, smoother lighting, and nine community fixes.</p>
 <p><strong>Download <code>hl2_vita-0.1.3-beta.zip</code> below</strong> and install <code>hl2_vita.vpk</code> over your current version: your saves, settings and compiled shaders stay. The new water needs a few new shaders: they compile the first time water appears, or choose Prepare shaders &gt; Prepare again in the main menu. New to the port? Follow <a target="_blank" rel="noopener noreferrer" href="https://github.com/LargeVegetable/source-engine/blob/vita/INSTALL_VITA.md">INSTALL_VITA.md</a>.</p>
@@ -850,7 +1341,7 @@ sha-256 of the zip: `be1dd4eb481ca8c0c8d42f8fe9d3332ed976578a8818080cb16812408f0
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.9 1.3.9 ports ## fixes
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.3.9 1.3.9 ports ## fixes
 
 - **stuck sounds and sound crashes** (#74, #78, #87). i found the root cause: on the vita, the lock that should keep the sound mixer and the game apart treated both as the same thread, so the two could change the same sounds at once. this left the engine stuck at full revs or the brakes and the police siren playing nonstop, cut off collision and skid sounds, and crashed the game after some races. the lock now uses the vita&#x27;s own threads, and the logs from testers&#x27; races came back clean.
 - **cars are fast again** (#80, #83). 1.3.8 lost game time whenever a frame took longer than 33 ms, so the cars accelerated and turned more slowly and felt heavy. the frame rate stays the same.
@@ -869,14 +1360,14 @@ no new game files are needed. install the new `nfsmw.vpk`. your saves are not ch
                       <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.3.9" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
                       <div class="release-name">1.3.9</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">1.3.9</span>
                     <span>2026-10-30 23:26 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.3.8</span>
+                    <span class="catalog-version">PSVitaAlive: 1.3.9</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.3.8 → release 1.3.9</div>
+                  <div class="catalog-detail">PSVitaAlive 1.3.9</div>
                   
                   <div class="body markdown-body"><h2>Fixes</h2>
 <ul>
@@ -1468,188 +1959,6 @@ file.</li>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="vitarps5 vitarps5 mauricio-gg/vitaki-vitarps5 vitarps5 v4.2.2-beta.2 v4.2.2-beta.2 utilities &gt; **beta: this is a test build, not the stable release.** it is a pre-release for testing and logging is turned on.
-&gt; the log file is in `ux0:data/vita-chiaki/` and is named like `&lt;number&gt;_vitarps5-testing.log`.
-&gt; to report a problem, open a github issue on this repository and attach the log.
-
-## what to test in this beta
-
-- **microphone (new).** turn it on in settings &gt; controls &gt; microphone, which is off by default. mute during play by tapping the mic button at the bottom centre of the screen, or by holding l + r + select. you can hide that button with &quot;display mic button on-screen&quot;. **please check that people actually hear you:** join a party chat with a friend, or play a game with voice chat, and tell us whether they heard you and how you sounded.
-- **720p and 1080p streams (new).** choose them in settings &gt; video &gt; quality preset. the vita shrinks the bigger picture to its screen, so it looks sharper than 540p, especially text.
-  - 720p works at 30 or 60 fps.
-  - **1080p is experimental.** it always runs at 30 fps, because the vita can&#x27;t decode 1080p any faster. it is also more sensitive to wi-fi hiccups, which show up as short freezes or smearing. if you see smearing, turn off &quot;motion during loss&quot; in settings &gt; advanced. for most games, 720p is the recommended choice.
-  - new &quot;extreme (≈10 mbps)&quot; latency mode step, for strong home wi-fi.
-- **two-finger hold on the front screen** keeps the touchpad click pressed until you lift a finger. use it for long-press actions like the map in the witcher 3 or cyberpunk 2077.
-- **removed:** the &quot;force 30 fps output&quot; setting. use fps target 30 instead.
-
-when reporting, say which resolution, frame rate and latency mode you used, and attach the log.
-
-# vitarps5 v4.2.2-beta.2
-
-**enhanced playstation 5 remote play for ps vita**
-
-built with modern ui, optimized performance, and quality-of-life improvements.
-
-## 📦 installation
-
-1. download `vitarps5-v4.2.2-beta.2.vpk` below
-   (permanent link to the newest version: https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/vitarps5-latest.vpk)
-2. transfer to your ps vita (via usb or ftp)
-3. install using vitashell (press x on the vpk file)
-4. launch from livearea
-
-## what&#x27;s changed
-
-### features
-
-- **mic:** send the vita microphone to the ps5, with a setting and mute during play (#474) ([#475](https://github.com/mauricio-gg/vitaki-vitarps5/pull/475))
-- **video:** 720p and 1080p streaming, 1080p at 30 fps, 10 mbps step, remove force 30 fps (#473) ([#476](https://github.com/mauricio-gg/vitaki-vitarps5/pull/476))
-- **input:** two-finger hold presses the touchpad click until a finger lifts ([#468](https://github.com/mauricio-gg/vitaki-vitarps5/pull/468))
-- **config:** encrypt console pairing keys at rest, remove plain-text token storage (#464) ([#465](https://github.com/mauricio-gg/vitaki-vitarps5/pull/465))
-- **debug:** input test panel over the stream (#458) ([#459](https://github.com/mauricio-gg/vitaki-vitarps5/pull/459))
-
-### fixes
-
-- **input:** a front touch keeps the zone it started in until lifted (#460) ([#463](https://github.com/mauricio-gg/vitaki-vitarps5/pull/463))
-- **input:** send motion in the dualsense frame via the orientation tracker, add motion deadband setting (#455) ([#461](https://github.com/mauricio-gg/vitaki-vitarps5/pull/461))
-- **input:** hold the touchpad click 50 ms with the finger on the pad, add two-finger tap click (#454) ([#457](https://github.com/mauricio-gg/vitaki-vitarps5/pull/457))
-
-## 🛠️ build information
-
-- **build system:** docker + vitasdk
-- **version:** v4.2.2-beta.2
-- **commit:** e0a2fe8da71779c3c9ccb7f7d59a68b4a53c013d
-- **build date:** 2026-10-30
-
----
-
-built with ❤️ for the ps vita community over 3+ months of design and development.
-
-☕ **support development:** [buy me a coffee](https://buymeacoffee.com/solidem)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-vitarps5/icon0.png" alt="Icono de VitaRPS5" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · mauricio-gg/vitaki-vitarps5</div>
-                      <h2><a href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/tag/v4.2.2-beta.2" target="_blank" rel="noopener">VitaRPS5</a></h2>
-                      <div class="release-name">VitaRPS5 v4.2.2-beta.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v4.2.2-beta.2</span>
-                    <span>2026-10-30 14:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.3.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.3.1.0 → release v4.2.2-beta.2</div>
-                  
-                  <div class="body markdown-body"><blockquote>
-<p><strong>Beta: this is a test build, not the stable release.</strong> It is a pre-release for testing and logging is turned on.
-The log file is in <code>ux0:data/vita-chiaki/</code> and is named like <code>&lt;number&gt;_vitarps5-testing.log</code>.
-To report a problem, open a GitHub issue on this repository and attach the log.</p>
-</blockquote>
-<h2>What to test in this beta</h2>
-<ul>
-<li><strong>Microphone (new).</strong> Turn it on in Settings &gt; Controls &gt; Microphone, which is off by default. Mute during play by tapping the mic button at the bottom centre of the screen, or by holding L + R + Select. You can hide that button with &quot;Display mic button on-screen&quot;. <strong>Please check that people actually hear you:</strong> join a party chat with a friend, or play a game with voice chat, and tell us whether they heard you and how you sounded.</li>
-<li><strong>720p and 1080p streams (new).</strong> Choose them in Settings &gt; Video &gt; Quality Preset. The Vita shrinks the bigger picture to its screen, so it looks sharper than 540p, especially text.<ul>
-<li>720p works at 30 or 60 fps.</li>
-<li><strong>1080p is experimental.</strong> It always runs at 30 fps, because the Vita can't decode 1080p any faster. It is also more sensitive to Wi-Fi hiccups, which show up as short freezes or smearing. If you see smearing, turn off &quot;Motion during loss&quot; in Settings &gt; Advanced. For most games, 720p is the recommended choice.</li>
-<li>New &quot;Extreme (≈10 Mbps)&quot; Latency Mode step, for strong home Wi-Fi.</li>
-</ul>
-</li>
-<li><strong>Two-finger hold on the front screen</strong> keeps the touchpad click pressed until you lift a finger. Use it for long-press actions like the map in The Witcher 3 or Cyberpunk 2077.</li>
-<li><strong>Removed:</strong> the &quot;Force 30 FPS Output&quot; setting. Use FPS Target 30 instead.</li>
-</ul>
-<p>When reporting, say which resolution, frame rate and Latency Mode you used, and attach the log.</p>
-<h1>VitaRPS5 v4.2.2-beta.2</h1>
-<p><strong>Enhanced PlayStation 5 Remote Play for PS Vita</strong></p>
-<p>Built with modern UI, optimized performance, and quality-of-life improvements.</p>
-<h2>📦 Installation</h2>
-<ol>
-<li>Download <code>VitaRPS5-v4.2.2-beta.2.vpk</code> below
-(Permanent link to the newest version: <a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/VitaRPS5-latest.vpk">https://github.com/mauricio-gg/vitaki-vitarps5/releases/latest/download/VitaRPS5-latest.vpk</a>)</li>
-<li>Transfer to your PS Vita (via USB or FTP)</li>
-<li>Install using VitaShell (press X on the VPK file)</li>
-<li>Launch from LiveArea</li>
-</ol>
-<h2>What's Changed</h2>
-<h3>Features</h3>
-<ul>
-<li><strong>mic:</strong> send the Vita microphone to the PS5, with a setting and mute during play (#474) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/475">#475</a>)</li>
-<li><strong>video:</strong> 720p and 1080p streaming, 1080p at 30 fps, 10 Mbps step, remove Force 30 FPS (#473) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/476">#476</a>)</li>
-<li><strong>input:</strong> two-finger hold presses the touchpad click until a finger lifts (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/468">#468</a>)</li>
-<li><strong>config:</strong> encrypt console pairing keys at rest, remove plain-text token storage (#464) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/465">#465</a>)</li>
-<li><strong>debug:</strong> Input test panel over the stream (#458) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/459">#459</a>)</li>
-</ul>
-<h3>Fixes</h3>
-<ul>
-<li><strong>input:</strong> a front touch keeps the zone it started in until lifted (#460) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/463">#463</a>)</li>
-<li><strong>input:</strong> send motion in the DualSense frame via the orientation tracker, add Motion Deadband setting (#455) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/461">#461</a>)</li>
-<li><strong>input:</strong> hold the touchpad click 50 ms with the finger on the pad, add two-finger tap click (#454) (<a target="_blank" rel="noopener noreferrer" href="https://github.com/mauricio-gg/vitaki-vitarps5/pull/457">#457</a>)</li>
-</ul>
-<h2>🛠️ Build Information</h2>
-<ul>
-<li><strong>Build System:</strong> Docker + VitaSDK</li>
-<li><strong>Version:</strong> v4.2.2-beta.2</li>
-<li><strong>Commit:</strong> e0a2fe8da71779c3c9ccb7f7d59a68b4a53c013d</li>
-<li><strong>Build Date:</strong> 2026-10-30</li>
-</ul>
-<hr>
-<p>Built with ❤️ for the PS Vita community over 3+ months of design and development.</p>
-<p>☕ <strong>Support development:</strong> <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/solidem">Buy Me a Coffee</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/mauricio-gg/vitaki-vitarps5/releases/download/v4.2.2-beta.2/VitaRPS5-v4.2.2-beta.2.vpk" target="_blank" rel="noopener">⬇ VitaRPS5-v4.2.2-beta.2.vpk · 3.4 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="link&#x27;s awakening dx hd link&#x27;s awakening dx hd vogtmh/ladxhd-vita v2.0.9g - a clean cut v2.0.9g ports # ladxhd vita 2.0.9g
-
-## changes
-
-- cutting bushes and grass no longer drops the frame rate. removing objects (bushes, leaves, respawners) searched the whole overworld object list on every removal; it now finds them almost immediately.
-- playing no longer fills up memory while standing around. the game used to produce about 1 mb of temporary data per second (ai triggers, ui drawing, music buffers, animation names); this is now close to zero, so memory stays flat during normal play.
-- leaving a house produces much less temporary data (about 3–4 mb instead of about 10 mb), and fences and small stones are no longer rebuilt every time.
-- the data that stays in memory with the overworld loaded is about 20% smaller, which makes each garbage collection faster (about 0.55 s instead of about 1 s on the overworld).
-- the game now uses a 256 mb heap instead of 192 mb, leaving more room before a collection is needed. collections still run behind the black screen after loading the overworld and, every few house visits, when entering a house.
-- the start of the intro no longer stutters and crackles. the render targets are now created during the black screen at startup instead of when the intro music starts.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/ladxhd-vita/icon0.png" alt="Icono de Link's Awakening DX HD" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · vogtmh/ladxhd-vita</div>
-                      <h2><a href="https://github.com/vogtmh/ladxhd-vita/releases/tag/v2.0.9g" target="_blank" rel="noopener">Link's Awakening DX HD</a></h2>
-                      <div class="release-name">v2.0.9g - A clean cut</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v2.0.9g</span>
-                    <span>2026-10-30 13:32 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 2.0.9</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 2.0.9</div>
-                  
-                  <div class="body markdown-body"><h1>LADXHD Vita 2.0.9g</h1>
-<h2>Changes</h2>
-<ul>
-<li>Cutting bushes and grass no longer drops the frame rate. Removing objects (bushes, leaves, respawners) searched the whole overworld object list on every removal; it now finds them almost immediately.</li>
-<li>Playing no longer fills up memory while standing around. The game used to produce about 1 MB of temporary data per second (AI triggers, UI drawing, music buffers, animation names); this is now close to zero, so memory stays flat during normal play.</li>
-<li>Leaving a house produces much less temporary data (about 3–4 MB instead of about 10 MB), and fences and small stones are no longer rebuilt every time.</li>
-<li>The data that stays in memory with the overworld loaded is about 20% smaller, which makes each garbage collection faster (about 0.55 s instead of about 1 s on the overworld).</li>
-<li>The game now uses a 256 MB heap instead of 192 MB, leaving more room before a collection is needed. Collections still run behind the black screen after loading the overworld and, every few house visits, when entering a house.</li>
-<li>The start of the intro no longer stutters and crackles. The render targets are now created during the black screen at startup instead of when the intro music starts.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-macos-universal.zip" target="_blank" rel="noopener">⬇ ladxhd-vita-importer-2.0.9g-macos-universal.zip · 51.8 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-linux-arm64.tar.gz" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9g-linux-arm64.tar.gz · 27.8 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-linux-x86_64.tar.gz" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9g-linux-x86_64.tar.gz · 28.4 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-windows-arm64.zip" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9g-windows-arm64.zip · 25.2 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/ladxhd-vita-importer-2.0.9g-windows-x86_64.zip" target="_blank" rel="noopener">ladxhd-vita-importer-2.0.9g-windows-x86_64.zip · 31.1 MB</a><a class="btn" href="https://github.com/vogtmh/ladxhd-vita/releases/download/v2.0.9g/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 566.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="pending" data-search="vitamediadeck vitamediadeck spyro-98/vitamediadeck vitamediadeck 1.4.4 beta 1.4.4 media ## vitamediadeck 1.4.4 beta
 
 download **vitamediadeck-1.4.4-beta.vpk** below and install it with vitashell. the bubble is named **vitamediadeck beta 1.4.4**.
@@ -2058,93 +2367,55 @@ Pikmin is a trademark of Nintendo. This project is not affiliated with Nintendo 
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita star fox adventures for ps vita - 2026-10-28 v0.1.0 ports first public build of the native ps vita port of star fox adventures. video: https://youtu.be/rpsg4do0ge8
-
-**work in progress.** this is an early build. it&#x27;s playable, but expect bugs, and not every part of the game has been tested yet.
-
-**no game data is included.** you need a disc image of your own copy of star fox adventures (gamecube, usa, rev 1, `gsae01`) as a full, uncompressed `.iso`. see the [readme](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.
-
-### install
-1. install `starfoxadventures.vpk` with vitashell.
-2. copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).
-3. launch.
-
-needs custom firmware (henkaku / enso) and `ur0:data/libshacccg.suprx`.
-
-### what to expect
-- 640x368 upscaled, **capped at 30 fps**. most areas hold a steady 30; thorntail hollow, the busiest area, can dip below it.
-- **meant to be played overclocked.** the video was recorded with the cpu at 500 mhz using an overclocking plugin. without one, the game runs at the standard maximum, 444 mhz.
-- 274 pre-compiled shaders are included. any other shader compiles in the background the first time it&#x27;s needed; the game keeps running.
-
-### known issues
-- the camera can fly away from fox during some fights.
-- fox and tricky do not cast the soft round shadow under their feet that the original draws.
-- short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.
-- the boot logos are not shown yet.
-- holding l to recentre the camera can briefly dip the view.
-
-### checksums (sha-256)
-- `starfoxadventures-vita-2026-10-28.zip`: `cefb15df62ac618b09c35cf721df4032cfb2f288c8e65be000a716d39326fd51`
-- `starfoxadventures.vpk`: `c2f515f1a053b1ce80fb8f7f0f6225fb1f0c03bf16204a1e7ab05bc3d373ac23`
-- `eboot.bin` (inside the vpk): `25d0ce0c2e3ea77cf085d267720c09baf7e16ee2b952ab5d74150c6779c6b6f7`
-
-problems: open an issue with `ux0:data/stairfax_game.txt` attached.
-
-### credits
-built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-decomp) (zachary canann, jack price-burns and contributors) and cassieandstuff&#x27;s [pc port branch](https://github.com/cassieandstuff/sfa-decomp/tree/pc-port-continued). uses vitagl, vitashark and math-neon (rinnegatamante, lgpl-3.0) and sceshacccgext (bythos14, lgpl-2.1). the full source and the library details are in this repository: see [credits.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/credits.md).">
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="batman arkham origins batman arkham origins kiddrwxssj/batman-aom-vita batman: arkham origins 1.0 vita 1.0 ports first release">
               <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png" alt="Icono de Star Fox Adventures" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/batman-arkham-origins-ps-vita/icon0.png" alt="Icono de Batman Arkham Origins" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · tchisholm20/starfox-adventures-vita</div>
-                      <h2><a href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.0" target="_blank" rel="noopener">Star Fox Adventures</a></h2>
-                      <div class="release-name">Star Fox Adventures for PS Vita - 2026-10-28</div>
+                      <div class="eyebrow">PORTS · GITHUB · KiddRwxSsj/batman-aom-vita</div>
+                      <h2><a href="https://github.com/KiddRwxSsj/batman-aom-vita/releases/tag/1.0" target="_blank" rel="noopener">Batman Arkham Origins</a></h2>
+                      <div class="release-name">Batman: Arkham Origins 1.0 Vita</div>
                     </div>
                     <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v0.1.0</span>
-                    <span>2026-10-29 03:14 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.0</span>
+                    <span class="tag">1.0</span>
+                    <span>2026-10-29 17:58 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.0</div>
+                  <div class="catalog-detail">PSVitaAlive 1.0</div>
                   
-                  <div class="body markdown-body"><p>First public build of the native PS Vita port of Star Fox Adventures. Video: <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/RpsG4do0GE8">https://youtu.be/RpsG4do0GE8</a></p>
-<p><strong>Work in progress.</strong> This is an early build. It's playable, but expect bugs, and not every part of the game has been tested yet.</p>
-<p><strong>No game data is included.</strong> You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, <code>GSAE01</code>) as a full, uncompressed <code>.iso</code>. See the <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita#readme">README</a> for details.</p>
-<h3>Install</h3>
-<ol>
-<li>Install <code>StarFoxAdventures.vpk</code> with VitaShell.</li>
-<li>Copy your disc image to <code>ux0:data/stairfax/sfa_rev1.iso</code> (create the folder if needed).</li>
-<li>Launch.</li>
-</ol>
-<p>Needs custom firmware (HENkaku / Enso) and <code>ur0:data/libshacccg.suprx</code>.</p>
-<h3>What to expect</h3>
-<ul>
-<li>640x368 upscaled, <strong>capped at 30 fps</strong>. Most areas hold a steady 30; ThornTail Hollow, the busiest area, can dip below it.</li>
-<li><strong>Meant to be played overclocked.</strong> The video was recorded with the CPU at 500 MHz using an overclocking plugin. Without one, the game runs at the standard maximum, 444 MHz.</li>
-<li>274 pre-compiled shaders are included. Any other shader compiles in the background the first time it's needed; the game keeps running.</li>
-</ul>
-<h3>Known issues</h3>
-<ul>
-<li>The camera can fly away from Fox during some fights.</li>
-<li>Fox and Tricky do not cast the soft round shadow under their feet that the original draws.</li>
-<li>Short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.</li>
-<li>The boot logos are not shown yet.</li>
-<li>Holding L to recentre the camera can briefly dip the view.</li>
-</ul>
-<h3>Checksums (SHA-256)</h3>
-<ul>
-<li><code>StarFoxAdventures-Vita-2026-10-28.zip</code>: <code>cefb15df62ac618b09c35cf721df4032cfb2f288c8e65be000a716d39326fd51</code></li>
-<li><code>StarFoxAdventures.vpk</code>: <code>c2f515f1a053b1ce80fb8f7f0f6225fb1f0c03bf16204a1e7ab05bc3d373ac23</code></li>
-<li><code>eboot.bin</code> (inside the vpk): <code>25d0ce0c2e3ea77cf085d267720c09baf7e16ee2b952ab5d74150c6779c6b6f7</code></li>
-</ul>
-<p>Problems: open an issue with <code>ux0:data/stairfax_game.txt</code> attached.</p>
-<h3>Credits</h3>
-<p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+                  <div class="body markdown-body"><p>First Release</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.0/StarFoxAdventures-Vita-2026-10-28.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-10-28.zip · 5.5 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/KiddRwxSsj/batman-aom-vita/releases/download/1.0/batmanarkhamoriginsvita1.0.vpk" target="_blank" rel="noopener">⬇ batmanarkhamoriginsvita1.0.vpk · 1.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="batman ac lockdown batman ac lockdown kiddrwxssj/batman-acl-vita batman: arkham city lockdown 1.0 vita 1.0 ports first release">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/batman-arkham-city-lockdown-ps-vita/icon0.png" alt="Icono de Batman AC Lockdown" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · KiddRwxSsj/batman-acl-vita</div>
+                      <h2><a href="https://github.com/KiddRwxSsj/batman-acl-vita/releases/tag/1.0" target="_blank" rel="noopener">Batman AC Lockdown</a></h2>
+                      <div class="release-name">Batman: Arkham City Lockdown 1.0 Vita</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.0</span>
+                    <span>2026-10-29 17:56 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0</div>
+                  
+                  <div class="body markdown-body"><p>First Release</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/KiddRwxSsj/batman-acl-vita/releases/download/1.0/aclockdownvita1.0.vpk" target="_blank" rel="noopener">⬇ aclockdownvita1.0.vpk · 943.7 KB</a></div>
                 </div>
               </div>
             </article>
@@ -3794,6 +4065,194 @@ with <code>/</code> is refused, so the access token cannot be sent to another ho
 <p><img src="https://img.shields.io/github/downloads/thcolin/gamepad-media-center-aggregator/v1.4.0/total?label=Downloads" alt="download"></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA.vpk" target="_blank" rel="noopener">⬇ GMCA.vpk · 14.2 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/gmca-1.4.0-1-x86_64.pkg.tar.zst" target="_blank" rel="noopener">gmca-1.4.0-1-x86_64.pkg.tar.zst · 8.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-arm64-v8a.apk" target="_blank" rel="noopener">GMCA-arm64-v8a.apk · 19.5 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-armeabi-v7a.apk" target="_blank" rel="noopener">GMCA-armeabi-v7a.apk · 18.6 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-Linux-aarch64-gl-269.flatpak" target="_blank" rel="noopener">GMCA-Linux-aarch64-gl-269.flatpak · 14.6 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-Linux-aarch64-gles2-269.flatpak" target="_blank" rel="noopener">GMCA-Linux-aarch64-gles2-269.flatpak · 14.5 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-Linux-x86_64-gl-269.flatpak" target="_blank" rel="noopener">GMCA-Linux-x86_64-gl-269.flatpak · 15.7 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-macOS-Intel-269.dmg" target="_blank" rel="noopener">GMCA-macOS-Intel-269.dmg · 26.0 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-macOS-Silicon-269.dmg" target="_blank" rel="noopener">GMCA-macOS-Silicon-269.dmg · 24.4 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-windows-arm64-269.7z" target="_blank" rel="noopener">GMCA-windows-arm64-269.7z · 18.3 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-windows-x64-269.7z" target="_blank" rel="noopener">GMCA-windows-x64-269.7z · 22.8 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA-windows-x86-269.7z" target="_blank" rel="noopener">GMCA-windows-x86-269.7z · 23.1 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/GMCA.nro" target="_blank" rel="noopener">GMCA.nro · 29.4 MB</a><a class="btn" href="https://github.com/thcolin/gamepad-media-center-aggregator/releases/download/v1.4.0/IV0001-GMCA00000_00-GMCA000000003000.pkg" target="_blank" rel="noopener">IV0001-GMCA00000_00-GMCA000000003000.pkg · 59.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="ignition vita ignition vita zeusthenen/ignition-vita ignition vita v1.1 v1.1 ports # ignition vita v1.1
+
+*(español primero · english below)*
+
+## 🇪🇸 español
+
+**ignition vita** es un port no oficial, de aficionados y sin ánimo de lucro, de *ignition* (1997) para **playstation vita**.
+
+&gt; **este paquete no contiene el juego.** debes aportar los archivos de tu propia copia legal de *ignition*. el proyecto no está afiliado ni respaldado por los propietarios de *ignition* ni por sony.
+
+### novedades de v1.1
+
+- corregido el cuelgue que podía producirse al terminar un campeonato y restaurado su avance normal.
+- corregidos el desbloqueo y la persistencia de vehículos, dificultades y pistas.
+- verificados en una ps vita real: primer campeonato completo, coche **banana**, dificultad **amateur** y una pista adicional, conservados tras guardar y reiniciar.
+- carrera rápida y persecución terminan correctamente y vuelven al menú.
+- guardado atómico: el progreso se escribe primero en un archivo temporal para reducir el riesgo de corrupción.
+- controles predeterminados mejorados: **✕ acelera** y **□ frena / marcha atrás**.
+- los botones de vita pueden configurarse desde **opciones → jugador 1 → configurar teclado** y las asignaciones persisten al reiniciar.
+- diversas mejoras de estabilidad. objetivo de 30 fps, con posibles caídas en zonas exigentes.
+
+### actualización desde v1.0
+
+1. haz una copia de seguridad de ux0:data/ignition/ign_3dfx.btz.
+2. instala ignitionvita_v1.1.vpk encima de la versión anterior con vitashell y homebrew inseguro activado.
+3. no borres ux0:data/ignition/: ahí están los datos del juego, progreso y opciones.
+
+### limitaciones conocidas
+
+- pantalla dividida y multijugador online/en red están visibles pero desactivados.
+- los campeonatos posteriores al primero usan la misma ruta de progresión, pero sus premios no se han verificado uno por uno.
+- playstation tv no está probado.
+
+### verificación
+
+- vpk: ignitionvita_v1.1.vpk
+- tamaño: 2.136.458 bytes
+- sha-256: fda91c1b687c7b5e76e9ec2e7b95668d93350ba7d54092dec7bf68b7a1795d50
+- código fuente correspondiente: ignitionvita_v1.1_corresponding-source.tar.xz
+- sha-256 del paquete de fuentes: 290701fffba027dd8a902e0f12bf1ce71d275f932690d98d73c3c22572a24d27
+
+para informar de errores, abre un *issue* e incluye modelo de vita, modo, pista, vehículo, dificultad, frecuencia, pasos para reproducir y los logs de ux0:data/ignition/logs. no adjuntes archivos del juego.
+
+---
+
+## 🇬🇧 english
+
+**ignition vita** is an unofficial, fan-made, non-commercial port of *ignition* (1997) to **playstation vita**.
+
+&gt; **this package does not contain the game.** you must provide files from your own legal copy of *ignition*. the project is not affiliated with or endorsed by the owners of *ignition* or sony.
+
+### what is new in v1.1
+
+- fixed the crash that could occur at the end of a championship and restored normal championship progression.
+- fixed unlocking and persistence of vehicles, difficulties and tracks.
+- verified on real ps vita hardware: first championship completion, **banana** car, **amateur** difficulty and one additional track, all retained after saving and restarting.
+- quick race and chase now finish correctly and return to the menu.
+- atomic saves: progress is written to a temporary file first to reduce corruption risk.
+- improved defaults: **✕ accelerates** and **□ brakes / reverses**.
+- vita buttons can be remapped through **options → player 1 → keyboard config**, and assignments persist after restarting.
+- several stability improvements. the target is 30 fps, with possible drops in demanding areas.
+
+### updating from v1.0
+
+1. back up ux0:data/ignition/ign_3dfx.btz.
+2. install ignitionvita_v1.1.vpk over the previous version with vitashell and unsafe homebrew enabled.
+3. do not delete ux0:data/ignition/: it contains game data, progress and settings.
+
+### known limitations
+
+- split screen and online/network multiplayer remain visible but disabled.
+- later championships use the same progression path, but their rewards have not been individually verified end to end.
+- playstation tv has not been tested.
+
+### verification
+
+- vpk: ignitionvita_v1.1.vpk
+- size: 2,136,458 bytes
+- sha-256: fda91c1b687c7b5e76e9ec2e7b95668d93350ba7d54092dec7bf68b7a1795d50
+- corresponding source: ignitionvita_v1.1_corresponding-source.tar.xz
+- source package sha-256: 290701fffba027dd8a902e0f12bf1ce71d275f932690d98d73c3c22572a24d27
+
+please report reproducible problems through *issues* with your vita model, mode, track, vehicle, difficulty, clock frequency, exact steps and logs from ux0:data/ignition/logs. do not attach game files.
+
+full source, licenses and detailed documentation: https://github.com/zeusthenen/ignition-vita">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/ignition-vita/icon0.png" alt="Icono de Ignition Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Zeusthenen/Ignition-Vita</div>
+                      <h2><a href="https://github.com/Zeusthenen/Ignition-Vita/releases/tag/v1.1" target="_blank" rel="noopener">Ignition Vita</a></h2>
+                      <div class="release-name">Ignition Vita v1.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.1</span>
+                    <span>2026-10-24 11:35 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1</div>
+                  
+                  <div class="body markdown-body"><h1>Ignition Vita v1.1</h1>
+<p><em>(Español primero · English below)</em></p>
+<h2>🇪🇸 Español</h2>
+<p><strong>Ignition Vita</strong> es un port no oficial, de aficionados y sin ánimo de lucro, de <em>Ignition</em> (1997) para <strong>PlayStation Vita</strong>.</p>
+<blockquote>
+<p><strong>Este paquete NO contiene el juego.</strong> Debes aportar los archivos de tu propia copia legal de <em>Ignition</em>. El proyecto no está afiliado ni respaldado por los propietarios de <em>Ignition</em> ni por Sony.</p>
+</blockquote>
+<h3>Novedades de v1.1</h3>
+<ul>
+<li>Corregido el cuelgue que podía producirse al terminar un campeonato y restaurado su avance normal.</li>
+<li>Corregidos el desbloqueo y la persistencia de vehículos, dificultades y pistas.</li>
+<li>Verificados en una PS Vita real: primer campeonato completo, coche <strong>Banana</strong>, dificultad <strong>Amateur</strong> y una pista adicional, conservados tras guardar y reiniciar.</li>
+<li>Carrera rápida y Persecución terminan correctamente y vuelven al menú.</li>
+<li>Guardado atómico: el progreso se escribe primero en un archivo temporal para reducir el riesgo de corrupción.</li>
+<li>Controles predeterminados mejorados: <strong>✕ acelera</strong> y <strong>□ frena / marcha atrás</strong>.</li>
+<li>Los botones de Vita pueden configurarse desde <strong>Opciones → Jugador 1 → Configurar teclado</strong> y las asignaciones persisten al reiniciar.</li>
+<li>Diversas mejoras de estabilidad. Objetivo de 30 FPS, con posibles caídas en zonas exigentes.</li>
+</ul>
+<h3>Actualización desde v1.0</h3>
+<ol>
+<li>Haz una copia de seguridad de ux0:data/ignition/ign_3dfx.btz.</li>
+<li>Instala IgnitionVita_v1.1.vpk encima de la versión anterior con VitaShell y homebrew inseguro activado.</li>
+<li>No borres ux0:data/ignition/: ahí están los datos del juego, progreso y opciones.</li>
+</ol>
+<h3>Limitaciones conocidas</h3>
+<ul>
+<li>Pantalla dividida y multijugador online/en red están visibles pero desactivados.</li>
+<li>Los campeonatos posteriores al primero usan la misma ruta de progresión, pero sus premios no se han verificado uno por uno.</li>
+<li>PlayStation TV no está probado.</li>
+</ul>
+<h3>Verificación</h3>
+<ul>
+<li>VPK: IgnitionVita_v1.1.vpk</li>
+<li>Tamaño: 2.136.458 bytes</li>
+<li>SHA-256: fda91c1b687c7b5e76e9ec2e7b95668d93350ba7d54092dec7bf68b7a1795d50</li>
+<li>Código fuente correspondiente: IgnitionVita_v1.1_corresponding-source.tar.xz</li>
+<li>SHA-256 del paquete de fuentes: 290701fffba027dd8a902e0f12bf1ce71d275f932690d98d73c3c22572a24d27</li>
+</ul>
+<p>Para informar de errores, abre un <em>Issue</em> e incluye modelo de Vita, modo, pista, vehículo, dificultad, frecuencia, pasos para reproducir y los logs de ux0:data/ignition/logs. No adjuntes archivos del juego.</p>
+<hr>
+<h2>🇬🇧 English</h2>
+<p><strong>Ignition Vita</strong> is an unofficial, fan-made, non-commercial port of <em>Ignition</em> (1997) to <strong>PlayStation Vita</strong>.</p>
+<blockquote>
+<p><strong>This package does NOT contain the game.</strong> You must provide files from your own legal copy of <em>Ignition</em>. The project is not affiliated with or endorsed by the owners of <em>Ignition</em> or Sony.</p>
+</blockquote>
+<h3>What is new in v1.1</h3>
+<ul>
+<li>Fixed the crash that could occur at the end of a championship and restored normal championship progression.</li>
+<li>Fixed unlocking and persistence of vehicles, difficulties and tracks.</li>
+<li>Verified on real PS Vita hardware: first championship completion, <strong>Banana</strong> car, <strong>Amateur</strong> difficulty and one additional track, all retained after saving and restarting.</li>
+<li>Quick Race and Chase now finish correctly and return to the menu.</li>
+<li>Atomic saves: progress is written to a temporary file first to reduce corruption risk.</li>
+<li>Improved defaults: <strong>✕ accelerates</strong> and <strong>□ brakes / reverses</strong>.</li>
+<li>Vita buttons can be remapped through <strong>Options → Player 1 → Keyboard config</strong>, and assignments persist after restarting.</li>
+<li>Several stability improvements. The target is 30 FPS, with possible drops in demanding areas.</li>
+</ul>
+<h3>Updating from v1.0</h3>
+<ol>
+<li>Back up ux0:data/ignition/ign_3dfx.btz.</li>
+<li>Install IgnitionVita_v1.1.vpk over the previous version with VitaShell and unsafe homebrew enabled.</li>
+<li>Do not delete ux0:data/ignition/: it contains game data, progress and settings.</li>
+</ol>
+<h3>Known limitations</h3>
+<ul>
+<li>Split screen and online/network multiplayer remain visible but disabled.</li>
+<li>Later championships use the same progression path, but their rewards have not been individually verified end to end.</li>
+<li>PlayStation TV has not been tested.</li>
+</ul>
+<h3>Verification</h3>
+<ul>
+<li>VPK: IgnitionVita_v1.1.vpk</li>
+<li>Size: 2,136,458 bytes</li>
+<li>SHA-256: fda91c1b687c7b5e76e9ec2e7b95668d93350ba7d54092dec7bf68b7a1795d50</li>
+<li>Corresponding source: IgnitionVita_v1.1_corresponding-source.tar.xz</li>
+<li>Source package SHA-256: 290701fffba027dd8a902e0f12bf1ce71d275f932690d98d73c3c22572a24d27</li>
+</ul>
+<p>Please report reproducible problems through <em>Issues</em> with your Vita model, mode, track, vehicle, difficulty, clock frequency, exact steps and logs from ux0:data/ignition/logs. Do not attach game files.</p>
+<p>Full source, licenses and detailed documentation: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Zeusthenen/Ignition-Vita">https://github.com/Zeusthenen/Ignition-Vita</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/IgnitionVita_v1.1.vpk" target="_blank" rel="noopener">⬇ IgnitionVita_v1.1.vpk · 2.0 MB</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/HASHES.txt" target="_blank" rel="noopener">HASHES.txt · 651.0 B</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/IgnitionVita_v1.1_corresponding-source.tar.xz" target="_blank" rel="noopener">IgnitionVita_v1.1_corresponding-source.tar.xz · 29.2 MB</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/LGPL_COMPLIANCE.md" target="_blank" rel="noopener">LGPL_COMPLIANCE.md · 14.2 KB</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/LICENSE" target="_blank" rel="noopener">LICENSE · 4.8 KB</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 200.0 B</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/SHA256SUMS_SOURCES.txt" target="_blank" rel="noopener">SHA256SUMS_SOURCES.txt · 1.6 KB</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/SOURCE_MANIFEST.md" target="_blank" rel="noopener">SOURCE_MANIFEST.md · 13.1 KB</a><a class="btn" href="https://github.com/Zeusthenen/Ignition-Vita/releases/download/v1.1/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener">THIRD_PARTY_NOTICES.md · 11.6 KB</a></div>
                 </div>
               </div>
             </article>
@@ -7500,53 +7959,6 @@ To check that a mod loaded, open ux0:data/papership/log.txt and look for the lin
 Increased logging for still pending issues</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/kaziema/pmvita/releases/download/v0.6.1/PaperMarioVita.vpk" target="_blank" rel="noopener">⬇ PaperMarioVita.vpk · 7.6 MB</a><a class="btn" href="https://github.com/kaziema/pmvita/releases/download/v0.6.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 85.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="scratch everywhere! scratch everywhere! scratcheverywhere/scratcheverywhere release 1.2.1 1.2.1 utilities this is an emergency release fixing a stack overflow bug in release 1.2 that caused several platforms to crash upon launch.
-
-## runtime changes
-
-- load the sb2 specmap using the heap instead of the stack
-- added an `exit project` block; you can find it here: https://scratchbox.dev/project/k26ottn2wdj9
-
-## windows changes
-
-- fixed the installer&#x27;s shortcut path
-- fixed the default project path when scratch everywhere! is installed to an unwritable location (e.g., when using the installer)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-scratch-everywhere/icon0.png" alt="Icono de Scratch Everywhere!" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · ScratchEverywhere/ScratchEverywhere</div>
-                      <h2><a href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/tag/1.2.1" target="_blank" rel="noopener">Scratch Everywhere!</a></h2>
-                      <div class="release-name">Release 1.2.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.2.1</span>
-                    <span>2026-10-07 18:41 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: Beta Build 40</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive Beta Build 40</div>
-                  
-                  <div class="body markdown-body"><p>This is an emergency release fixing a stack overflow bug in Release 1.2 that caused several platforms to crash upon launch.</p>
-<h2>Runtime Changes</h2>
-<ul>
-<li>Load the SB2 specmap using the heap instead of the stack</li>
-<li>Added an <code>exit project</code> block; you can find it here: <a target="_blank" rel="noopener noreferrer" href="https://scratchbox.dev/project/K26OtTN2WDJ9">https://scratchbox.dev/project/K26OtTN2WDJ9</a></li>
-</ul>
-<h2>Windows Changes</h2>
-<ul>
-<li>Fixed the installer's shortcut path</li>
-<li>Fixed the default project path when Scratch Everywhere! is installed to an unwritable location (e.g., when using the installer)</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-vita.vpk" target="_blank" rel="noopener">⬇ scratch-vita.vpk · 10.4 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-3ds.3dsx" target="_blank" rel="noopener">scratch-3ds.3dsx · 8.2 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-3ds.cia" target="_blank" rel="noopener">scratch-3ds.cia · 6.5 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-ds.nds" target="_blank" rel="noopener">scratch-ds.nds · 5.6 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-gamecube.zip" target="_blank" rel="noopener">scratch-gamecube.zip · 5.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-libretro.so" target="_blank" rel="noopener">scratch-libretro.so · 10.6 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-linux" target="_blank" rel="noopener">scratch-linux · 21.6 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-macos" target="_blank" rel="noopener">scratch-macos · 41.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-nx.nro" target="_blank" rel="noopener">scratch-nx.nro · 22.8 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-ps4.pkg" target="_blank" rel="noopener">scratch-ps4.pkg · 22.5 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-psp.zip" target="_blank" rel="noopener">scratch-psp.zip · 4.6 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-webos.ipk" target="_blank" rel="noopener">scratch-webos.ipk · 9.3 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-wii.zip" target="_blank" rel="noopener">scratch-wii.zip · 9.2 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-wiiu.zip" target="_blank" rel="noopener">scratch-wiiu.zip · 22.6 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-windows-installer.exe" target="_blank" rel="noopener">scratch-windows-installer.exe · 10.0 MB</a><a class="btn" href="https://github.com/ScratchEverywhere/ScratchEverywhere/releases/download/1.2.1/scratch-windows.exe" target="_blank" rel="noopener">scratch-windows.exe · 25.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -28994,201 +29406,10 @@ lemme know if i messed up anywhere...">
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="heboris-vita heboris-vita l0wigh/heboris-vita heboris vita v1.0.0-vita ports first release of heboris-vita">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-heboris-vita/icon0.png" alt="Icono de Heboris-Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · l0wigh/Heboris-Vita</div>
-                      <h2><a href="https://github.com/l0wigh/Heboris-Vita/releases/tag/v1.0.0-Vita" target="_blank" rel="noopener">Heboris-Vita</a></h2>
-                      <div class="release-name">Heboris Vita</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.0-Vita</span>
-                    <span>2022-01-20 19:09 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.0-Vita</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.0-Vita</div>
-                  
-                  <div class="body markdown-body"><p>First release of Heboris-Vita</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/l0wigh/Heboris-Vita/releases/download/v1.0.0-Vita/Heboris-Vita.vpk" target="_blank" rel="noopener">⬇ Heboris-Vita.vpk · 12.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="gato roboto gato roboto m1s3ry/gato-roboto-vita v1.0.1- gog version support added v1.0.1 ports gog version support added. thanks to dominik kozaczko for the key">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-gato-roboto/icon0.png" alt="Icono de Gato Roboto" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · m1s3ry/gato-roboto-vita</div>
-                      <h2><a href="https://github.com/m1s3ry/gato-roboto-vita/releases/tag/v1.0.1" target="_blank" rel="noopener">Gato Roboto</a></h2>
-                      <div class="release-name">v1.0.1- GOG Version support added</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0.1</span>
-                    <span>2022-01-20 17:11 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v1.0.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v1.0.1</div>
-                  
-                  <div class="body markdown-body"><p>GOG version support added. Thanks to Dominik Kozaczko for the key</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/m1s3ry/gato-roboto-vita/releases/download/v1.0.1/Gato_Roboto_v1.0.0.VPK" target="_blank" rel="noopener">⬇ Gato_Roboto_v1.0.0.VPK · 2.7 MB</a><a class="btn" href="https://github.com/m1s3ry/gato-roboto-vita/releases/download/v1.0.1/Gato.Roboto.-.PS.Vita.Patch.GoG.Version.zip" target="_blank" rel="noopener">Gato.Roboto.-.PS.Vita.Patch.GoG.Version.zip · 26.8 MB</a><a class="btn" href="https://github.com/m1s3ry/gato-roboto-vita/releases/download/v1.0.1/Gato.Roboto.-.PS.Vita.Patch.Steam.Build.4120259.zip" target="_blank" rel="noopener">Gato.Roboto.-.PS.Vita.Patch.Steam.Build.4120259.zip · 26.8 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="sdl2sand sdl2sand v-atamanenko/sdl2sand sdl2sand 1.0 1.0 ports port of sdl2sand for psvita.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-sdl2sand/icon0.png" alt="Icono de SDL2Sand" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · v-atamanenko/sdl2sand</div>
-                      <h2><a href="https://github.com/v-atamanenko/sdl2sand/releases/tag/1.0" target="_blank" rel="noopener">SDL2Sand</a></h2>
-                      <div class="release-name">SDL2Sand 1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.0</span>
-                    <span>2022-01-20 13:25 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>Port of SDL2Sand for PSVITA.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/v-atamanenko/sdl2sand/releases/download/1.0/sdlsand.vpk" target="_blank" rel="noopener">⬇ sdlsand.vpk · 638.8 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="prehistorik 2 prehistorik 2 the blues brothers: jukebox adventure the blues brothers v-atamanenko/blues-vita blues-vita 1.0 1.0 ports **note:** prehistorik 2 is still available for purchase on [steam](https://store.steampowered.com/app/749140/prehistorik_2/) and [gog](https://www.gog.com/game/prehistorik_12). for this game, only the **free demo** data is included. to play the full game, purchase it in one of the stores and replace all files in `ux0:app/prehist01/data` with the data files of your own copy (data files are those of *.sqz and *.trk formats)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-prehistorik-2/icon0.png" alt="Icono de Prehistorik 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · v-atamanenko/blues-vita</div>
-                      <h2><a href="https://github.com/v-atamanenko/blues-vita/releases/tag/1.0" target="_blank" rel="noopener">Prehistorik 2</a></h2>
-                      <div class="release-name">blues-vita 1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.0</span>
-                    <span>2022-01-17 01:41 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  <div class="related"><span>También asociado:</span> The Blues Brothers: Jukebox Adventure · The Blues Brothers</div>
-                  <div class="body markdown-body"><p><strong>Note:</strong> Prehistorik 2 is still available for purchase on <a target="_blank" rel="noopener noreferrer" href="https://store.steampowered.com/app/749140/Prehistorik_2/">Steam</a> and <a target="_blank" rel="noopener noreferrer" href="https://www.gog.com/game/prehistorik_12">GoG</a>. For this game, only the <strong>free DEMO</strong> data is included. To play the full game, purchase it in one of the stores and replace all files in <code>ux0:app/PREHIST01/data</code> with the data files of your own copy (data files are those of *.SQZ and *.TRK formats)</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/v-atamanenko/blues-vita/releases/download/1.0/bb-jukebox.vpk" target="_blank" rel="noopener">⬇ bb-jukebox.vpk · 1.2 MB</a><a class="btn" href="https://github.com/v-atamanenko/blues-vita/releases/download/1.0/blues.vpk" target="_blank" rel="noopener">blues.vpk · 1.1 MB</a><a class="btn" href="https://github.com/v-atamanenko/blues-vita/releases/download/1.0/prehistorik-2.vpk" target="_blank" rel="noopener">prehistorik-2.vpk · 1.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="water closet water closet withlogic/watercloset v1.0 v1.0 ports puzzle platform game for psvita.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-water-closet/icon0.png" alt="Icono de Water Closet" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · withLogic/waterCloset</div>
-                      <h2><a href="https://github.com/withLogic/waterCloset/releases/tag/v1.0" target="_blank" rel="noopener">Water Closet</a></h2>
-                      <div class="release-name">v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2022-01-09 03:34 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>Puzzle platform game for PSVITA.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/withLogic/waterCloset/releases/download/v1.0/watercloset.vpk" target="_blank" rel="noopener">⬇ watercloset.vpk · 9.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="registry profiler registry profiler codiak101/registryprofiler app 2022 codiak v1.0 utilities readme:
-https://github.com/codiak101/registryprofiler#readme">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-registry-profiler/icon0.png" alt="Icono de Registry Profiler" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · Codiak101/RegistryProfiler</div>
-                      <h2><a href="https://github.com/Codiak101/RegistryProfiler/releases/tag/v1.0" target="_blank" rel="noopener">Registry Profiler</a></h2>
-                      <div class="release-name">App 2022 Codiak</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2022-01-08 23:00 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>README:
-<a target="_blank" rel="noopener noreferrer" href="https://github.com/Codiak101/RegistryProfiler#readme">https://github.com/Codiak101/RegistryProfiler#readme</a></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Codiak101/RegistryProfiler/releases/download/v1.0/RegistryProfiler.vpk" target="_blank" rel="noopener">⬇ RegistryProfiler.vpk · 1.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="innyume innyume vmhoss/innyume-vita version 1.8 1.8 ports managed to mend nearly all of the navigation problems that the ai encounters.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-innyume/icon0.png" alt="Icono de Innyume" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · VMHoss/Innyume-Vita</div>
-                      <h2><a href="https://github.com/VMHoss/Innyume-Vita/releases/tag/1.8" target="_blank" rel="noopener">Innyume</a></h2>
-                      <div class="release-name">Version 1.8</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.8</span>
-                    <span>2022-01-02 15:38 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.8</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.8</div>
-                  
-                  <div class="body markdown-body"><p>Managed to mend nearly all of the navigation problems that the AI encounters.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/VMHoss/Innyume-Vita/releases/download/1.8/Innyume_1_8.vpk" target="_blank" rel="noopener">⬇ Innyume_1_8.vpk · 43.7 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-01 03:34 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-01 12:25 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
