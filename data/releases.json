@@ -1,6 +1,116 @@
 [
   {
     "platform": "github",
+    "repo": "pyjabox/VitaKotor2",
+    "release_id": "433030987",
+    "tag": "v0.5.8",
+    "name": "VitaKotor2 v0.5.8",
+    "url": "https://github.com/pyjabox/VitaKotor2/releases/tag/v0.5.8",
+    "published": "2026-11-03T17:47:07Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# VitaKotor2 v0.5.8 — More cores, and long sessions fixed\n\nThis release puts the Vita's other two cores to work: the AI now runs beside\nthe drawing, and the game's GL translation runs on the GL worker. It also\nfixes saving and the save list failing after a long session with a voice\npack, and a crash in Telos's cantina. The new threading was played for\nseveral hours on a physical Vita; the two last fixes were checked in Vita3K.\n\n## Faster\n\nHardware, Telos; each change was measured on and off in alternating 10 s\nwindows.\n- **The AI runs on core 1 while the scene is drawn:** 22.3 against 19.5 FPS.\n  Wherever the AI reaches into the client side, it waits for the drawing to\n  end, so the two never touch the same data.\n- **The game's GL translation (ASLgl) runs on the GL worker:** 18.4 against\n  14.6 FPS.\n- **Text widths are cached, and animated textures (water, ripples) are rebuilt\n  on core 1:** 21.5 against 17.5 FPS.\n- **Smaller savings:** light lists without repeated scans (about 1.5 ms a\n  frame), and creatures not drawn in a frame animated one frame in three\n  (about 0.7 ms).\n- **A periodic hitch in Telos:** a creature with no clear path re-planned it\n  every few seconds, about 110 ms a try. Searches that fail on the walkmesh\n  alone are now remembered until the next load: worst frames of 60–92 ms\n  instead of 165–194 ms.\n- **Large fights:** compiled scripts stay in memory instead of being read\n  again on every run. In the battle of Khoonda on Dantooine (TSLRCM, 20+\n  fighters; [issue #4](https://github.com/pyjabox/VitaKotor2/issues/4)) this\n  halves the AI's work: 55% more creatures are updated each frame, and frames\n  take 158 instead of 192 ms. The battle is still slow (see below).\n\n## Fixed\n\n**Saving, the save list and the voices failing after a long session with a\nvoice pack.** After one to two hours, saving failed, Load Game listed no\nsaves, and the voices switched to English. The game forgets to close the file\nof every dialogue line it plays. v0.5.6 kept loose voice lines in RAM, which\nonly delayed the problem: after about 512 lines, all 64 files a Vita app may\nhold were taken. The loader now closes what the game forgets. Voices from\nthe game's archive (English) leaked too, more slowly.\n\n**A crash in Telos's cantina,** which looked like a black screen at 30 FPS\nwith no sound, and made saves in that module look as if they would not load.\nThe game asked the loader for a C library function by name (`wcslen`), which\nthe loader did not provide. Saves made there were never damaged.\n\n## Installation\n\n1. Install `KOTOR2.vpk` with VitaShell. The title ID is `KOTR00002`.\n2. Create `ux0:data/kotor2/`.\n3. Copy from your own copy of the Android version **2.0.4**, using the 32-bit\n   libraries from the APK's `lib/armeabi-v7a/` folder (the README lists each\n   file's exact size and SHA-256):\n   - `libkotor2.so`\n   - `libObbVfs.so`\n   - `libc++_shared.so`\n   - `libminiz.so`\n   - `libLzmaLib.so`\n   - `main.213.com.aspyr.swkotorii.obb`\n   - `patch.14.com.aspyr.swkotorii.obb`\n   - the APK `assets/` directory\n4. Install and enable `kubridge.skprx`.\n5. Place `libshacccg.suprx` in `ur0:data/`.\n6. Optionally, mods in `ux0:data/kotor2/mods/` and voice packs in\n   `ux0:data/kotor2/localized/` (see the README).\n\n**Upgrading from v0.5.2 or later:** install the VPK over the old one.\nGame data, saves, mods, voice packs, the chosen language and the shader cache\nstay as they are.\nFrom v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a\nlanguage.\n\n## Known issues and limitations\n\n- **Very large fights are slow:** the battle of Khoonda with TSLRCM runs at\n  about 6 FPS. The engine gives its AI 10 ms a frame; in such fights that runs\n  out, and creatures of lower priority act only every few frames, so some\n  seem idle. `ai_mode.txt` containing a number of milliseconds (1 to 65)\n  raises the budget, at a cost in frame rate.\n- **The menu before the game is in English.**\n- **Mods in another language:** what a mod has only in English shows in\n  English, voice lines added by mods are English (they were never dubbed), and\n  a mod's own voice-line and lip-sync files are used instead of a voice pack's\n  (TSLRCM: 4 lines and the lip sync of 9 areas). Details in the README.\n- **With mods, launches take about 1 s longer** while they are indexed, and the\n  first launch in a new language about 2 s more to build its talk table.\n- **Noise behind the sound in busy scenes,** such as Telos. The decoders and\n  the mix were checked and are clean; the cause is not known yet\n  ([issue #5](https://github.com/pyjabox/VitaKotor2/issues/5)).\n- **About one launch in three takes about 11 s longer,** in the engine's scan of\n  `dlc/`. The cause is not known yet.\n- **Shorter hitches remain** (usually 0.12–0.23 s, occasionally more) when new\n  content is first read from the memory card, at about 10 MB/s: the minimap's\n  first draw, dialogue entries and their voices, creatures spawned by scripts.\n- **Loading-screen images** still take about 0.1–0.35 s each.\n- **Heavy scenes remain CPU-bound,** mostly in the engine's per-object rendering\n  work.\n- **Visual changes:** no dynamic shadows and no bloom passes. Rooms keep their\n  baked lighting.\n- **Idle objects update less often:** idle creatures, placeables, doors and\n  items get their AI update every third frame, and creatures not drawn in a\n  frame are animated one frame in three. Nothing was noticed in testing.\n- **One frame of extra latency:** the GL worker lets the game run up to one\n  frame ahead, and the AI's decisions reach the screen one frame later. An\n  object stepping out from cover can appear up to three frames late\n  (occlusion culling).\n- **Touch:** only the front touchscreen is used. The game keeps its controller\n  layout, so its touch-only on-screen controls are not shown.\n- **First launch:** it can take about two minutes while archives are scanned\n  and shaders compile, and the loading screen can sit still for much of it.\n- **Shader cache:** if a warm launch black-screens, remove\n  `ux0:data/shader_cache/KOTR00002/` and relaunch.\n- **No complete playthrough certified yet.** Trophies, cloud saves and online\n  features are unavailable.\n\n## Switches\n\nCreate the file in `ux0:data/kotor2/` and relaunch; delete it to go back.\n- **New:** each of these files containing `0` turns one v0.5.8 change off,\n  going back to how v0.5.7 did it:\n  - `ai_thread.txt`: the AI on the game thread.\n  - `aslw_mode.txt`: ASLgl on the game thread.\n  - `offload_mode.txt`: text widths and animated textures on the game thread.\n  - `scene_mode.txt`: the engine's own light lists, and every creature\n    animated every frame.\n  - `path_mode.txt`: no failed path search remembered.\n  - `script_mode.txt`: scripts read from the archive on every run.\n- `ai_mode.txt` containing `0`: the game's own AI loop, with no throttle and no\n  AI caches (slower in busy areas). Containing a number from 1 to 65: the AI's\n  time budget in milliseconds (the engine's is 10).\n- `touch_mode.txt` containing `0`: buttons only, as in v0.4.2.\n- `loadscreen_mode.txt` containing `0`: black screen until the legal screen, as\n  in v0.4.2.\n- `patcher_mode.txt` containing `0`: vitaGL's vertex-program requests go\n  straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool\n  stays at 4 MB).\n- `fps_cap.txt` containing `0`: no 30 FPS cap. `LockFramerate=1` under\n  `[Graphics Options]` in `swkotor2.ini` then caps again, and `V-Sync=0` turns\n  vsync off.\n- `room_distance.txt` containing a distance in metres: rooms beyond it are not\n  drawn (up to about 25% faster where long views open, with distant geometry\n  missing).\n- `glw_mode.txt` containing `0`: vitaGL on the game thread, as in v0.2.0.\n- `dxt_mode.txt` containing `0`: DXT textures decoded on the CPU, as in v0.3.0.\n- `mipgen_mode.txt` containing `0`: every mip chain built by the engine, as in\n  v0.3.0.\n\nThis release contains no copyrighted game code or data.\n\n`KOTOR2.vpk` SHA-256: `a8dddf4ac000e38afd25dd07afcf5421443cd0be99ee6520ecc6643204f66950`\n",
+    "assets": [
+      {
+        "name": "KOTOR2.vpk",
+        "size": 2138556,
+        "download_url": "https://github.com/pyjabox/VitaKotor2/releases/download/v0.5.8/KOTOR2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "pyjabox",
+    "homebrew_name": "KOTOR II",
+    "homebrew_icon": "https://archive.org/download/VitaKotor2/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
+    "homebrew_long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
+    "homebrew_id": "kotor-ii",
+    "homebrew_authors": [
+      "pyjabox"
+    ],
+    "homebrew_version": "0.5.7",
+    "catalog_apps": [
+      {
+        "id": "kotor-ii",
+        "name": "KOTOR II",
+        "icon": "https://archive.org/download/VitaKotor2/icon0.png",
+        "category": "ports",
+        "description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
+        "long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
+        "version": "0.5.7",
+        "version_date": "2026-10-16",
+        "author_ids": [
+          "pyjabox"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.5.7 → release v0.5.8",
+    "catalog_version": "0.5.7"
+  },
+  {
+    "platform": "github",
+    "repo": "voidchecksam/BuckshotRoulettePortable-BSHT",
+    "release_id": "432728530",
+    "tag": "v1.0.3",
+    "name": "BSHT-Vita v1.0.3",
+    "url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/tag/v1.0.3",
+    "published": "2026-11-03T13:24:11Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "BSHT-Vita v1.0.3. One hotfix.\n\n- **Cursor picks the wrong item when stealing with adrenaline.** Hovering a tall item (beer, handcuffs) lifts it up, and then it sat in front of the next bracket and kept stealing the pick. On a controller the bracket now picks the item it's on. Thanks to the guy who reported it (and found the beer case too), legend.\n\nAlready on v1.0.2 data? Just install the new vpk, no need to extract again. Still on data from v1.0.0 or v1.0.1? Run the new `bsht-extract` on your copy once and replace `ux0:data/bsht/game/`, that's for v1.0.2's shell fix.\n\n| File | What it is |\n|---|---|\n| `BuckshotRoulettePortable-BSHT-v1.0.3.vpk` | the game for the Vita |\n| `bsht-extract-v1.0.3-windows.zip` | the tool that converts your copy (Windows 10 or newer) |\n| `bsht-desktop-v1.0.3-windows.zip` | the same port on Windows |\n\nBuilt by GitHub Actions from this repo.\n",
+    "assets": [
+      {
+        "name": "bsht-desktop-v1.0.3-windows.zip",
+        "size": 2699580,
+        "download_url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/download/v1.0.3/bsht-desktop-v1.0.3-windows.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "bsht-extract-v1.0.3-windows.zip",
+        "size": 57124818,
+        "download_url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/download/v1.0.3/bsht-extract-v1.0.3-windows.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "BuckshotRoulettePortable-BSHT-v1.0.3.vpk",
+        "size": 2793570,
+        "download_url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/download/v1.0.3/BuckshotRoulettePortable-BSHT-v1.0.3.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "voidchecksam",
+    "homebrew_name": "Buckshot Roulette",
+    "homebrew_icon": "https://archive.org/download/buckshot-roulette-portable-bsht-for-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A native C++ port(able) of Buckshot Roulette. General Release of Liability on the Vita",
+    "homebrew_long_description": "Affectionately shortened to BSHT-Vita, with BSHT-PSP soon! (im aware bsht might be shorthand for bullshit but bear w me)\n\nThis is a native port of the goat Mike Klubnika's Buckshot Roulette to the PS Vita. 60 fps bayybbeeeeeee",
+    "homebrew_id": "buckshot-roulette",
+    "homebrew_authors": [
+      "voidchecksam"
+    ],
+    "homebrew_version": "1.0.2",
+    "catalog_apps": [
+      {
+        "id": "buckshot-roulette",
+        "name": "Buckshot Roulette",
+        "icon": "https://archive.org/download/buckshot-roulette-portable-bsht-for-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "A native C++ port(able) of Buckshot Roulette. General Release of Liability on the Vita",
+        "long_description": "Affectionately shortened to BSHT-Vita, with BSHT-PSP soon! (im aware bsht might be shorthand for bullshit but bear w me)\n\nThis is a native port of the goat Mike Klubnika's Buckshot Roulette to the PS Vita. 60 fps bayybbeeeeeee",
+        "version": "1.0.2",
+        "version_date": "2026-10-26",
+        "author_ids": [
+          "voidchecksam"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.2 → release v1.0.3",
+    "catalog_version": "1.0.2"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
     "release_id": "432356399",
     "tag": "continuous",
@@ -2619,67 +2729,6 @@
   },
   {
     "platform": "github",
-    "repo": "voidchecksam/BuckshotRoulettePortable-BSHT",
-    "release_id": "424984397",
-    "tag": "v1.0.2",
-    "name": "BSHT-Vita v1.0.2",
-    "url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/tag/v1.0.2",
-    "published": "2026-10-27T02:49:49Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "BSHT-Vita v1.0.2. Two fixes.\n\n- **Black screen and crash at boot.** A broken shader cache could stop the game from starting. It now checks the cache at boot and deletes any broken files, so no more renaming `ux0:data/shader_cache/BSHT00016` by hand.\n- **Shells seem discolored.** The magnifying glass showed grey or white shells. They're red and blue again, and adrenaline doesn't wash them out anymore.\n\nExtracted with v1.0.0 or v1.0.1? Run the new `bsht-extract` on your copy again and replace `ux0:data/bsht/game/`. Part of the shell fix lives in the extracted data, so the new vpk alone only gets you half of it.\n\n| File | What it is |\n|---|---|\n| `BuckshotRoulettePortable-BSHT-v1.0.2.vpk` | the game for the Vita |\n| `bsht-extract-v1.0.2-windows.zip` | the tool that converts your copy (Windows 10 or newer) |\n| `bsht-desktop-v1.0.2-windows.zip` | the same port on Windows |\n\nBuilt by GitHub Actions from this repo and scanned with Windows Defender.\n",
-    "assets": [
-      {
-        "name": "bsht-desktop-v1.0.2-windows.zip",
-        "size": 2698149,
-        "download_url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/download/v1.0.2/bsht-desktop-v1.0.2-windows.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "bsht-extract-v1.0.2-windows.zip",
-        "size": 57123424,
-        "download_url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/download/v1.0.2/bsht-extract-v1.0.2-windows.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "BuckshotRoulettePortable-BSHT-v1.0.2.vpk",
-        "size": 2791974,
-        "download_url": "https://github.com/voidchecksam/BuckshotRoulettePortable-BSHT/releases/download/v1.0.2/BuckshotRoulettePortable-BSHT-v1.0.2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "voidchecksam",
-    "homebrew_name": "Buckshot Roulette",
-    "homebrew_icon": "https://archive.org/download/buckshot-roulette-portable-bsht-for-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A native C++ port(able) of Buckshot Roulette. General Release of Liability on the Vita",
-    "homebrew_long_description": "Affectionately shortened to BSHT-Vita, with BSHT-PSP soon! (im aware bsht might be shorthand for bullshit but bear w me)\n\nThis is a native port of the goat Mike Klubnika's Buckshot Roulette to the PS Vita. 60 fps bayybbeeeeeee",
-    "homebrew_id": "buckshot-roulette",
-    "homebrew_authors": [
-      "voidchecksam"
-    ],
-    "homebrew_version": "1.0.2",
-    "catalog_apps": [
-      {
-        "id": "buckshot-roulette",
-        "name": "Buckshot Roulette",
-        "icon": "https://archive.org/download/buckshot-roulette-portable-bsht-for-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "A native C++ port(able) of Buckshot Roulette. General Release of Liability on the Vita",
-        "long_description": "Affectionately shortened to BSHT-Vita, with BSHT-PSP soon! (im aware bsht might be shorthand for bullshit but bear w me)\n\nThis is a native port of the goat Mike Klubnika's Buckshot Roulette to the PS Vita. 60 fps bayybbeeeeeee",
-        "version": "1.0.2",
-        "version_date": "2026-10-26",
-        "author_ids": [
-          "voidchecksam"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0.2",
-    "catalog_version": "1.0.2"
-  },
-  {
-    "platform": "github",
     "repo": "josephinoo/vitaForge",
     "release_id": "424822207",
     "tag": "v0.1.10",
@@ -4427,55 +4476,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.2.3.2 → release v2.4.0",
     "catalog_version": "v.2.3.2"
-  },
-  {
-    "platform": "github",
-    "repo": "pyjabox/VitaKotor2",
-    "release_id": "415027052",
-    "tag": "v0.5.7",
-    "name": "VitaKotor2 v0.5.7",
-    "url": "https://github.com/pyjabox/VitaKotor2/releases/tag/v0.5.7",
-    "published": "2026-10-16T14:01:14Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# VitaKotor2 v0.5.7 — German and Italian\n\nThis release fixes German and Italian, which were swapped, and closes two\nraces in the sound mixer. German was tested on a physical Vita.\n\n## Fixed\n\n**German and Italian were swapped**\n([issue #1](https://github.com/pyjabox/VitaKotor2/issues/1)). Since v0.5.2,\nchoosing DEUTSCH ran the game in Italian, and ITALIANO ran it in German. Only\nthe first loading screen was in the right language, and a German patch in\n`dlc/` was never read, because the game looked for the Italian folder. The\nloader gave the game the numbering of the talk tables' headers instead of the\nAndroid app's. English, French and Spanish were not affected. A language\nalready chosen needs no change: if you picked DEUTSCH, the game now starts in\nGerman. The boot menu now lists ITALIANO before DEUTSCH.\n\n**Two rare races in the sound mixer.** A track replayed while the mixer was\ndecoding could carry on from where it stopped instead of starting over. A\nstream released while 128 others were waiting to be closed was closed while\nthe mixer could still be decoding it.\n\n## Also new\n\n- The log now says how often the audio port ran dry, and the least sound it\n  held, in each 10 s window with a problem (`[snd-gap]` lines). This helps\n  with the noise in busy scenes\n  ([issue #5](https://github.com/pyjabox/VitaKotor2/issues/5)), which is still\n  open.\n\n## Installation\n\n1. Install `KOTOR2.vpk` with VitaShell. The title ID is `KOTR00002`.\n2. Create `ux0:data/kotor2/`.\n3. Copy from your own copy of the Android version **2.0.4**, using the 32-bit\n   libraries from the APK's `lib/armeabi-v7a/` folder (the README lists each\n   file's exact size and SHA-256):\n   - `libkotor2.so`\n   - `libObbVfs.so`\n   - `libc++_shared.so`\n   - `libminiz.so`\n   - `libLzmaLib.so`\n   - `main.213.com.aspyr.swkotorii.obb`\n   - `patch.14.com.aspyr.swkotorii.obb`\n   - the APK `assets/` directory\n4. Install and enable `kubridge.skprx`.\n5. Place `libshacccg.suprx` in `ur0:data/`.\n6. Optionally, mods in `ux0:data/kotor2/mods/` and voice packs in\n   `ux0:data/kotor2/localized/` (see the README).\n\n**Upgrading from v0.5.2 or later:** install the VPK over the old one.\nGame data, saves, mods, voice packs, the chosen language and the shader cache\nstay as they are. If you created `ai_mode.txt` to get past a door, you can\ndelete it.\nFrom v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a\nlanguage.\n\n## Known issues and limitations\n\n- **The menu before the game is in English.**\n- **Mods in another language:** what a mod has only in English shows in\n  English, voice lines added by mods are English (they were never dubbed), and\n  a mod's own voice-line and lip-sync files are used instead of a voice pack's\n  (TSLRCM: 4 lines and the lip sync of 9 areas). Details in the README.\n- **With mods, launches take about 1 s longer** while they are indexed, and the\n  first launch in a new language about 2 s more to build its talk table.\n- **Noise behind the sound in busy scenes,** such as Telos. The decoders and\n  the mix were checked and are clean; the cause is not known yet\n  ([issue #5](https://github.com/pyjabox/VitaKotor2/issues/5)).\n- **About one launch in three takes about 11 s longer,** in the engine's scan of\n  `dlc/`. The cause is not known yet.\n- **Shorter hitches remain** (usually 0.12–0.23 s, occasionally more) when new\n  content is first read from the memory card, at about 10 MB/s: the minimap's\n  first draw, dialogue entries and their voices, creatures spawned by scripts.\n- **Loading-screen images** still take about 0.1–0.35 s each.\n- **Heavy scenes remain CPU-bound,** mostly in the engine's per-object rendering\n  work.\n- **Visual changes:** no dynamic shadows and no bloom passes. Rooms keep their\n  baked lighting.\n- **Idle objects update less often:** idle creatures, placeables, doors and\n  items get their AI update every third frame. Nothing was noticed in testing.\n- **One frame of extra latency:** the GL worker lets the game run up to one\n  frame ahead. An object stepping out from cover can appear up to three frames\n  late (occlusion culling).\n- **Touch:** only the front touchscreen is used. The game keeps its controller\n  layout, so its touch-only on-screen controls are not shown.\n- **First launch:** it can take about two minutes while archives are scanned\n  and shaders compile, and the loading screen can sit still for much of it.\n- **Shader cache:** if a warm launch black-screens, remove\n  `ux0:data/shader_cache/KOTR00002/` and relaunch.\n- **No complete playthrough certified yet.** Trophies, cloud saves and online\n  features are unavailable.\n\n## Switches\n\nCreate the file in `ux0:data/kotor2/` and relaunch; delete it to go back.\n- `ai_mode.txt` containing `0`: the game's own AI loop, with no throttle and no\n  AI caches (slower in busy areas).\n- `touch_mode.txt` containing `0`: buttons only, as in v0.4.2.\n- `loadscreen_mode.txt` containing `0`: black screen until the legal screen, as\n  in v0.4.2.\n- `patcher_mode.txt` containing `0`: vitaGL's vertex-program requests go\n  straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool\n  stays at 4 MB).\n- `fps_cap.txt` containing `0`: no 30 FPS cap. `LockFramerate=1` under\n  `[Graphics Options]` in `swkotor2.ini` then caps again, and `V-Sync=0` turns\n  vsync off.\n- `room_distance.txt` containing a distance in metres: rooms beyond it are not\n  drawn (up to about 25% faster where long views open, with distant geometry\n  missing).\n- `glw_mode.txt` containing `0`: vitaGL on the game thread, as in v0.2.0.\n- `dxt_mode.txt` containing `0`: DXT textures decoded on the CPU, as in v0.3.0.\n- `mipgen_mode.txt` containing `0`: every mip chain built by the engine, as in\n  v0.3.0.\n\nThis release contains no copyrighted game code or data.\n\n`KOTOR2.vpk` SHA-256: `170122bccd91fe27d2d8df33f05110e89a5296b45b2899d21e5c05299bd247a5`\n\n",
-    "assets": [
-      {
-        "name": "KOTOR2.vpk",
-        "size": 2050830,
-        "download_url": "https://github.com/pyjabox/VitaKotor2/releases/download/v0.5.7/KOTOR2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "pyjabox",
-    "homebrew_name": "KOTOR II",
-    "homebrew_icon": "https://archive.org/download/VitaKotor2/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
-    "homebrew_long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
-    "homebrew_id": "kotor-ii",
-    "homebrew_authors": [
-      "pyjabox"
-    ],
-    "homebrew_version": "0.5.7",
-    "catalog_apps": [
-      {
-        "id": "kotor-ii",
-        "name": "KOTOR II",
-        "icon": "https://archive.org/download/VitaKotor2/icon0.png",
-        "category": "ports",
-        "description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
-        "long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
-        "version": "0.5.7",
-        "version_date": "2026-10-16",
-        "author_ids": [
-          "pyjabox"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.5.7",
-    "catalog_version": "0.5.7"
   },
   {
     "platform": "github",
@@ -32965,54 +32965,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.11",
     "catalog_version": "v.1.11"
-  },
-  {
-    "platform": "github",
-    "repo": "Northfear/rottexpr-vita",
-    "release_id": "63441071",
-    "tag": "v1.0-vita.1",
-    "name": "v1.0-vita.1",
-    "url": "https://github.com/Northfear/rottexpr-vita/releases/tag/v1.0-vita.1",
-    "published": "2022-04-02T11:58:03Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Initial PS Vita release",
-    "assets": [
-      {
-        "name": "rottexpr.vpk",
-        "size": 4232041,
-        "download_url": "https://github.com/Northfear/rottexpr-vita/releases/download/v1.0-vita.1/rottexpr.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Northfear",
-    "homebrew_name": "rottexpr-vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-rottexpr-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Rise of the Triad for PSVITA.",
-    "homebrew_id": "rottexpr-vita",
-    "homebrew_authors": [
-      "northfear"
-    ],
-    "catalog_apps": [
-      {
-        "id": "rottexpr-vita",
-        "name": "rottexpr-vita",
-        "icon": "https://archive.org/download/psvitaalive-rottexpr-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Rise of the Triad for PSVITA.",
-        "long_description": "Port of rottexpr, a source port of Rise of the Triad with improvements and new features based off of the icculus Rise of the Triad source port release.\n\n- PsVitaAlive -",
-        "version": "v1.0-vita.1",
-        "version_date": "2022-04-02",
-        "author_ids": [
-          "northfear"
-        ]
-      }
-    ],
-    "homebrew_long_description": "Port of rottexpr, a source port of Rise of the Triad with improvements and new features based off of the icculus Rise of the Triad source port release.\n\n- PsVitaAlive -",
-    "homebrew_version": "v1.0-vita.1",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.0-vita.1",
-    "catalog_version": "v1.0-vita.1"
   }
 ]
