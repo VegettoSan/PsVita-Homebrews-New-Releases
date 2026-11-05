@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">400</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>83</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>477</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">390</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>87</strong><span>pendientes</span></div>
+        <div class="stat"><strong>469</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,114 +219,760 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita star fox adventures for ps vita - v0.1.2 (2026-11-05) v0.1.2 ports bug-fix and performance update for the native ps vita port of star fox adventures.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita star fox adventures for ps vita - v0.1.3 (2026-11-05) v0.1.3 ports new livearea layout for the native ps vita port of star fox adventures. the game itself is the same as [v0.1.2](https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.2).
 
 **work in progress.** it&#x27;s playable, but expect bugs.
 
 **no game data is included.** you need a disc image of your own copy of star fox adventures (gamecube, usa, rev 1, `gsae01`) as a full, uncompressed `.iso`. see the [readme](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.
 
-### fixed
-- **galdon invisible or untextured.** the boss has more bones than the port allowed (over 64), and parts of its effects copy the depth buffer in a format the port did not handle. galdon now draws fully textured. the fight runs at about 27 fps (37 ms a frame, pch-2000, standing facing him).
-- **crash or a big cube in moon mountain pass.** some settings of the creatures that burrow out of the ground were read with their bytes reversed, so killing one dropped a placeholder cube (or crashed) instead of a moon seed. they now drop the moon seed, and the same fix corrects their respawn timer and some lightfoot village settings.
-- **regular short hitches while playing.** shader and file loading that used to stall the game while it read the memory card now happens in the background. in volcano force point, pauses over 100 ms went from about 7.7 a minute to about 1.2 a minute (pch-2000).
-- **slow pause menu.** the pause menu waited on the gpu every frame; in thorntail hollow a frame took about 70 ms with it open, now about 40 ms (measured on a pch-2000, 2026-11-01).
-
 ### changed
-- 2028 pre-compiled shaders are included, up from 1003. they come from play-testing (cloudrunner fortress, volcano force point, moon mountain pass) and from visiting every area in an emulator and compiling what it found on a pch-2000. fewer areas should show missing or flashing objects on the first visit.
-- the game now writes a small per-frame timing log (`ux0:data/stairfax/frames.bin`) so slowdowns can be reported with numbers. to turn it off, put a file `ux0:data/stairfax/frames_log.txt` containing `0`.
+- new livearea layout by u/either-version-9577: the full artwork fills the bubble&#x27;s page and the star fox adventures logo is the launch button (tap it to start the game). thanks again for the artwork and the layout!
 
 ### install / update
-1. install `starfoxadventures.vpk` with vitashell (over the old version is fine; your save and settings are kept).
+1. install `starfoxadventures.vpk` with vitashell (over the old version is fine; your save and settings are kept). the install can take several minutes because of the pre-compiled shaders.
 2. new install only: copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).
 3. launch.
 
 needs custom firmware (henkaku / enso) and `ur0:data/libshacccg.suprx`.
 
-### known issues
-- an area whose shaders are not included can show missing or dark objects for a minute or two on the first visit while they compile.
-- thorntail hollow and snowhorn wastes run below 30 fps in places.
-- fox&#x27;s and tricky&#x27;s shadows are turned off for now: they were drawn too long and offset in evening light, and not at all in daylight. to try them anyway, put a file `ux0:data/stairfax/char_shadow.txt` containing `1`.
-- short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.
-- the boot logos are not shown yet.
-- holding l to recentre the camera can briefly dip the view.
-- distant foliage can look white.
+known issues are unchanged from v0.1.2 (see its release notes and the readme).
 
 ### checksums (sha-256)
-- `starfoxadventures-vita-2026-11-04.zip`: `080657e0974dcbf18e6826c5ca895a2fb978018c0a4b294678616ea2fc090db8`
-- `starfoxadventures.vpk`: `2715ad1a036fdb7781820fce69bb6180529f4d099fedf60d5672c613753bafe0`
-- `eboot.bin` (inside the vpk): `4743a5d29d54fb00bd73d35ec92b8854ae876ab07c2e8eeed015e9514694405f`
+- `starfoxadventures-vita-2026-11-05.zip`: `70bd36a30ee66b04a65834e47cd333aa3b0af7b867b371eb40d3271490bd2ddc`
+- `starfoxadventures.vpk`: `cf84ad751fcfb4838b20c1415a4bb85f3c3b608a675fd2c7f7fd8a55242bfa16`
+- `eboot.bin` (inside the vpk, same as v0.1.2): `4743a5d29d54fb00bd73d35ec92b8854ae876ab07c2e8eeed015e9514694405f`
 
 problems: open an issue with `ux0:data/stairfax_game.txt` attached (and `ux0:data/stairfax/frames.bin` for a slowdown).
 
 ### credits
-built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-decomp) (zachary canann, jack price-burns and contributors) and cassieandstuff&#x27;s [pc port branch](https://github.com/cassieandstuff/sfa-decomp/tree/pc-port-continued). uses vitagl, vitashark and math-neon (rinnegatamante, lgpl-3.0) and sceshacccgext (bythos14, lgpl-2.1). the full source and the library details are in this repository: see [credits.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/credits.md).">
+built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-decomp) (zachary canann, jack price-burns and contributors) and cassieandstuff&#x27;s [pc port branch](https://github.com/cassieandstuff/sfa-decomp/tree/pc-port-continued). uses vitagl, vitashark and math-neon (rinnegatamante, lgpl-3.0) and sceshacccgext (bythos14, lgpl-2.1). livearea artwork and layout by [u/either-version-9577](https://www.reddit.com/user/either-version-9577/). the full source and the library details are in this repository: see [credits.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/credits.md).">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png" alt="Icono de Star Fox Adventures" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · tchisholm20/starfox-adventures-vita</div>
-                      <h2><a href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.2" target="_blank" rel="noopener">Star Fox Adventures</a></h2>
-                      <div class="release-name">Star Fox Adventures for PS Vita - v0.1.2 (2026-11-05)</div>
+                      <h2><a href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.3" target="_blank" rel="noopener">Star Fox Adventures</a></h2>
+                      <div class="release-name">Star Fox Adventures for PS Vita - v0.1.3 (2026-11-05)</div>
                     </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v0.1.2</span>
-                    <span>2026-11-05 06:20 UTC</span>
+                    <span class="tag">v0.1.3</span>
+                    <span>2026-11-05 17:42 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 0.1.2</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.2</div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.2 → release v0.1.3</div>
                   
-                  <div class="body markdown-body"><p>Bug-fix and performance update for the native PS Vita port of Star Fox Adventures.</p>
+                  <div class="body markdown-body"><p>New LiveArea layout for the native PS Vita port of Star Fox Adventures. The game itself is the same as <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.2">v0.1.2</a>.</p>
 <p><strong>Work in progress.</strong> It's playable, but expect bugs.</p>
 <p><strong>No game data is included.</strong> You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, <code>GSAE01</code>) as a full, uncompressed <code>.iso</code>. See the <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita#readme">README</a> for details.</p>
-<h3>Fixed</h3>
-<ul>
-<li><strong>Galdon invisible or untextured.</strong> The boss has more bones than the port allowed (over 64), and parts of its effects copy the depth buffer in a format the port did not handle. Galdon now draws fully textured. The fight runs at about 27 fps (37 ms a frame, PCH-2000, standing facing him).</li>
-<li><strong>Crash or a big cube in Moon Mountain Pass.</strong> Some settings of the creatures that burrow out of the ground were read with their bytes reversed, so killing one dropped a placeholder cube (or crashed) instead of a Moon Seed. They now drop the Moon Seed, and the same fix corrects their respawn timer and some Lightfoot Village settings.</li>
-<li><strong>Regular short hitches while playing.</strong> Shader and file loading that used to stall the game while it read the memory card now happens in the background. In Volcano Force Point, pauses over 100 ms went from about 7.7 a minute to about 1.2 a minute (PCH-2000).</li>
-<li><strong>Slow pause menu.</strong> The pause menu waited on the GPU every frame; in ThornTail Hollow a frame took about 70 ms with it open, now about 40 ms (measured on a PCH-2000, 2026-11-01).</li>
-</ul>
 <h3>Changed</h3>
 <ul>
-<li>2028 pre-compiled shaders are included, up from 1003. They come from play-testing (CloudRunner Fortress, Volcano Force Point, Moon Mountain Pass) and from visiting every area in an emulator and compiling what it found on a PCH-2000. Fewer areas should show missing or flashing objects on the first visit.</li>
-<li>The game now writes a small per-frame timing log (<code>ux0:data/stairfax/frames.bin</code>) so slowdowns can be reported with numbers. To turn it off, put a file <code>ux0:data/stairfax/frames_log.txt</code> containing <code>0</code>.</li>
+<li>New LiveArea layout by u/Either-Version-9577: the full artwork fills the bubble's page and the Star Fox Adventures logo is the launch button (tap it to start the game). Thanks again for the artwork and the layout!</li>
 </ul>
 <h3>Install / update</h3>
 <ol>
-<li>Install <code>StarFoxAdventures.vpk</code> with VitaShell (over the old version is fine; your save and settings are kept).</li>
+<li>Install <code>StarFoxAdventures.vpk</code> with VitaShell (over the old version is fine; your save and settings are kept). The install can take several minutes because of the pre-compiled shaders.</li>
 <li>New install only: copy your disc image to <code>ux0:data/stairfax/sfa_rev1.iso</code> (create the folder if needed).</li>
 <li>Launch.</li>
 </ol>
 <p>Needs custom firmware (HENkaku / Enso) and <code>ur0:data/libshacccg.suprx</code>.</p>
-<h3>Known issues</h3>
-<ul>
-<li>An area whose shaders are not included can show missing or dark objects for a minute or two on the first visit while they compile.</li>
-<li>ThornTail Hollow and SnowHorn Wastes run below 30 fps in places.</li>
-<li>Fox's and Tricky's shadows are turned off for now: they were drawn too long and offset in evening light, and not at all in daylight. To try them anyway, put a file <code>ux0:data/stairfax/char_shadow.txt</code> containing <code>1</code>.</li>
-<li>Short pauses when loading a new area or starting some cutscenes; the opening cutscene stutters for its first few seconds.</li>
-<li>The boot logos are not shown yet.</li>
-<li>Holding L to recentre the camera can briefly dip the view.</li>
-<li>Distant foliage can look white.</li>
-</ul>
+<p>Known issues are unchanged from v0.1.2 (see its release notes and the README).</p>
 <h3>Checksums (SHA-256)</h3>
 <ul>
-<li><code>StarFoxAdventures-Vita-2026-11-04.zip</code>: <code>080657e0974dcbf18e6826c5ca895a2fb978018c0a4b294678616ea2fc090db8</code></li>
-<li><code>StarFoxAdventures.vpk</code>: <code>2715ad1a036fdb7781820fce69bb6180529f4d099fedf60d5672c613753bafe0</code></li>
-<li><code>eboot.bin</code> (inside the vpk): <code>4743a5d29d54fb00bd73d35ec92b8854ae876ab07c2e8eeed015e9514694405f</code></li>
+<li><code>StarFoxAdventures-Vita-2026-11-05.zip</code>: <code>70bd36a30ee66b04a65834e47cd333aa3b0af7b867b371eb40d3271490bd2ddc</code></li>
+<li><code>StarFoxAdventures.vpk</code>: <code>cf84ad751fcfb4838b20c1415a4bb85f3c3b608a675fd2c7f7fd8a55242bfa16</code></li>
+<li><code>eboot.bin</code> (inside the vpk, same as v0.1.2): <code>4743a5d29d54fb00bd73d35ec92b8854ae876ab07c2e8eeed015e9514694405f</code></li>
 </ul>
 <p>Problems: open an issue with <code>ux0:data/stairfax_game.txt</code> attached (and <code>ux0:data/stairfax/frames.bin</code> for a slowdown).</p>
 <h3>Credits</h3>
-<p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+<p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). LiveArea artwork and layout by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Either-Version-9577/">u/Either-Version-9577</a>. The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.2/StarFoxAdventures-Vita-2026-11-04.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-11-04.zip · 8.4 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.3/StarFoxAdventures-Vita-2026-11-05.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-11-05.zip · 8.4 MB</a></div>
                 </div>
               </div>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="nazi zombies portable nazi zombies portable nzp-team/nzportable 2.0.0-indev+20261105040407 nightly ports this is a nightly generated automagically. nightlies are generated at 3am est if changes are made to any component of the project in the past 24 hours. be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="final fantasy vii final fantasy vii ggdrn/meteor-vii-vita final fantasy vii for ps vita — v1.2.0 v1.2.0 ports this update adds selectable encounter calculation multipliers to the port menu,
+with separate field and world-map handling, saved settings and runtime diagnostics.
+
+## what&#x27;s new
+
+- **gameplay &gt; encounter rate** replaces the on/off option with **0 (off)**,
+  **1 (normal)**, **2x** and **4x**. changes apply without restarting the game.
+- field encounters scale their probability parameter during the original check,
+  then restore it. world-map encounters scale the original effective rate after
+  the game&#x27;s enemy lure/away calculation. movement speed is unchanged.
+- the selected setting is saved in `ux0:data/ffvii-vita/cheats.txt`. existing
+  `encounters 0` and `encounters 1` configurations remain compatible; the default
+  is normal.
+- the optional android touch button still shows on/off. turning encounters back
+  on resumes the last active multiplier during the current session. restarting
+  with off saved resets the next activation to normal.
+- **encounters button: show/hide** remains independent of the encounter rate.
+- runtime logs now include the selected factor, field/world hook call counts
+  and the original/effective rates, making device reports easier to verify.
+- if multiplier hooks are unavailable for an unsupported library layout, the
+  menu falls back to off/normal.
+
+## how 2x and 4x behave
+
+**these labels multiply the game&#x27;s encounter calculation parameters, not the
+number of battles per minute or per distance traveled.** the original game
+accumulates danger and uses random checks, so battle frequency is not linear.
+
+a deterministic arm simulation of 10,000 world-map checks on the same terrain,
+modeling a battle return by resetting danger, produced:
+
+| setting | encounters | relative to normal |
+| --- | ---: | ---: |
+| 1 (normal) | 1,005 | 1.00× |
+| 2x | 1,459 | 1.45× |
+| 4x | 2,096 | 2.09× |
+
+these are simulation results for one setup, not guarantees for other areas or
+hardware measurements. a first device log confirmed hook installation, but did
+not record enough information to verify the active rate during walking.
+confirmation of the frequency changes on vita remains pending.
+
+## update / installation
+
+install **`ff7_vita_v1.2.0.vpk`** with vitashell over the previous version.
+keep existing game data and settings; back up `ux0:data/ffvii-vita/save/` before
+updating. no replacement apk or obb is needed.
+
+new installations require a homebrew-enabled ps vita, `kubridge.skprx`,
+`libshacccg.suprx`, and the user&#x27;s own android final fantasy vii **v1.0.29**
+data, copied intact to:
+
+```text
+ux0:data/ffvii-vita/base.apk
+ux0:data/ffvii-vita/main.30.com.square_enix.android_googleplay.ffvii.obb
+```
+
+see [the installation guide](https://github.com/ggdrn/meteor-vii-vita/blob/main/docs/data.md).
+
+## controls
+
+hold **l + r** and press **start** to open the port menu. select **gameplay**
+with **l/r**, select **encounter rate** with **up/down**, then use **left/right**
+or **cross** to cycle settings. press **circle** to close.
+
+## validation and known limitations
+
+- host tests cover rate selection, settings compatibility and persistence,
+  touch off/on behavior, independent button visibility, field rate restoration
+  and world-map multiplication.
+- arm tests verify the original field probability comparison, enemy lure/away
+  rates and the world-map danger accumulation/random comparison.
+- release build and package checks passed; the vpk contains no game data.
+- multipliers retain the original encounter rules. on-device frequency and
+  transition validation remain pending.
+- snowboard music remains silent. some scenes may expose background or geometry
+  limitations in widescreen; switch back to 4:3 if needed.
+
+see [the validation record](release-v1.2.0-validation.md). for bug reports, include
+the location, selected encounter rate, steps to reproduce, and
+`ux0:data/ffvii-vita/logs.txt` plus `logs_anterior.txt`. to test rate handling,
+walk in the same area with normal and 4x before collecting the logs.
+
+## credits
+
+port by **gustavo garcia (ggdrn)**, with ai-assisted development.
+thanks to the contributors behind soloader-boilerplate, so-util, falsojni,
+vitagl, vitasdk, kubridge and the vita homebrew community.
+
+the vpk contains the port only. game data must be supplied by the user.
+final fantasy vii © square enix. this project is not affiliated with or endorsed
+by square enix.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/meteor-vii-vita/icon0%20New.png" alt="Icono de FINAL FANTASY VII" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ggdrn/METEOR-VII-VITA</div>
+                      <h2><a href="https://github.com/ggdrn/METEOR-VII-VITA/releases/tag/v1.2.0" target="_blank" rel="noopener">FINAL FANTASY VII</a></h2>
+                      <div class="release-name">FINAL FANTASY VII for PS Vita — v1.2.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.0</span>
+                    <span>2026-11-05 15:52 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release v1.2.0</div>
+                  
+                  <div class="body markdown-body"><p>This update adds selectable encounter calculation multipliers to the port menu,
+with separate field and world-map handling, saved settings and runtime diagnostics.</p>
+<h2>What's new</h2>
+<ul>
+<li><strong>Gameplay &gt; ENCOUNTER RATE</strong> replaces the ON/OFF option with <strong>0 (OFF)</strong>,
+<strong>1 (NORMAL)</strong>, <strong>2X</strong> and <strong>4X</strong>. Changes apply without restarting the game.</li>
+<li>Field encounters scale their probability parameter during the original check,
+then restore it. World-map encounters scale the original effective rate after
+the game's Enemy Lure/Away calculation. Movement speed is unchanged.</li>
+<li>The selected setting is saved in <code>ux0:data/ffvii-vita/cheats.txt</code>. Existing
+<code>encounters 0</code> and <code>encounters 1</code> configurations remain compatible; the default
+is NORMAL.</li>
+<li>The optional Android touch button still shows ON/OFF. Turning encounters back
+on resumes the last active multiplier during the current session. Restarting
+with OFF saved resets the next activation to NORMAL.</li>
+<li><strong>ENCOUNTERS BUTTON: SHOW/HIDE</strong> remains independent of the encounter rate.</li>
+<li>Runtime logs now include the selected factor, field/world hook call counts
+and the original/effective rates, making device reports easier to verify.</li>
+<li>If multiplier hooks are unavailable for an unsupported library layout, the
+menu falls back to OFF/NORMAL.</li>
+</ul>
+<h2>How 2X and 4X behave</h2>
+<p><strong>These labels multiply the game's encounter calculation parameters, not the
+number of battles per minute or per distance traveled.</strong> The original game
+accumulates danger and uses random checks, so battle frequency is not linear.</p>
+<p>A deterministic ARM simulation of 10,000 world-map checks on the same terrain,
+modeling a battle return by resetting danger, produced:</p>
+<table>
+<thead>
+<tr>
+  <th>Setting</th>
+  <th>Encounters</th>
+  <th>Relative to NORMAL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1 (NORMAL)</td>
+  <td>1,005</td>
+  <td>1.00×</td>
+</tr>
+<tr>
+  <td>2X</td>
+  <td>1,459</td>
+  <td>1.45×</td>
+</tr>
+<tr>
+  <td>4X</td>
+  <td>2,096</td>
+  <td>2.09×</td>
+</tr>
+</tbody>
+</table>
+<p>These are simulation results for one setup, not guarantees for other areas or
+hardware measurements. A first device log confirmed hook installation, but did
+not record enough information to verify the active rate during walking.
+Confirmation of the frequency changes on Vita remains pending.</p>
+<h2>Update / installation</h2>
+<p>Install <strong><code>ff7_vita_v1.2.0.vpk</code></strong> with VitaShell over the previous version.
+Keep existing game data and settings; back up <code>ux0:data/ffvii-vita/save/</code> before
+updating. No replacement APK or OBB is needed.</p>
+<p>New installations require a homebrew-enabled PS Vita, <code>kubridge.skprx</code>,
+<code>libshacccg.suprx</code>, and the user's own Android FINAL FANTASY VII <strong>v1.0.29</strong>
+data, copied intact to:</p>
+<pre><code class="language-text">ux0:data/ffvii-vita/base.apk
+ux0:data/ffvii-vita/main.30.com.square_enix.android_googleplay.FFVII.obb
+</code></pre>
+<p>See <a target="_blank" rel="noopener noreferrer" href="https://github.com/ggdrn/METEOR-VII-VITA/blob/main/docs/DATA.md">the installation guide</a>.</p>
+<h2>Controls</h2>
+<p>Hold <strong>L + R</strong> and press <strong>Start</strong> to open the port menu. Select <strong>Gameplay</strong>
+with <strong>L/R</strong>, select <strong>ENCOUNTER RATE</strong> with <strong>Up/Down</strong>, then use <strong>Left/Right</strong>
+or <strong>Cross</strong> to cycle settings. Press <strong>Circle</strong> to close.</p>
+<h2>Validation and known limitations</h2>
+<ul>
+<li>Host tests cover rate selection, settings compatibility and persistence,
+touch OFF/ON behavior, independent button visibility, field rate restoration
+and world-map multiplication.</li>
+<li>ARM tests verify the original field probability comparison, Enemy Lure/Away
+rates and the world-map danger accumulation/random comparison.</li>
+<li>Release build and package checks passed; the VPK contains no game data.</li>
+<li>Multipliers retain the original encounter rules. On-device frequency and
+transition validation remain pending.</li>
+<li>Snowboard music remains silent. Some scenes may expose background or geometry
+limitations in widescreen; switch back to 4:3 if needed.</li>
+</ul>
+<p>See <a target="_blank" rel="noopener noreferrer" href="RELEASE-v1.2.0-VALIDATION.md">the validation record</a>. For bug reports, include
+the location, selected encounter rate, steps to reproduce, and
+<code>ux0:data/ffvii-vita/logs.txt</code> plus <code>logs_anterior.txt</code>. To test rate handling,
+walk in the same area with NORMAL and 4X before collecting the logs.</p>
+<h2>Credits</h2>
+<p>Port by <strong>Gustavo Garcia (ggdrn)</strong>, with AI-assisted development.
+Thanks to the contributors behind soloader-boilerplate, so-util, FalsoJNI,
+vitaGL, VitaSDK, kubridge and the Vita homebrew community.</p>
+<p>The VPK contains the port only. Game data must be supplied by the user.
+FINAL FANTASY VII © SQUARE ENIX. This project is not affiliated with or endorsed
+by Square Enix.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/METEOR-VII-VITA/releases/download/v1.2.0/ff7_vita_v1.2.0.vpk" target="_blank" rel="noopener">⬇ ff7_vita_v1.2.0.vpk · 3.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="carnivores ice age carnivores ice age metalsyntax/carnivores-ice-age-vita carnivores: ice age for ps vita — v1.2 v1.2.0 ports # carnivores: ice age for ps vita — v1.2
+
+ps vita port of *carnivores: ice age* (android 1.5.4). this version adds native ps vita trophies and fixes the
+menu cursor jumping the wrong way.
+
+**the game files are not included.** you need your own android apk (1.5.4, `armeabi`) and, for zones 2–5, its
+google play expansion file. installation, controls and options are in the [readme](readme.md).
+
+## download
+
+- `carnivoresiceage.vpk` — install with vitashell (over v1.1 is fine, save data is kept).
+
+requires `kubridge.skprx` and `libshacccg.suprx` (sharkbr33d). trophies need `notrpdrm.suprx` under `*main`.
+
+## what&#x27;s new in v1.2
+
+- **native ps vita trophies**: the game&#x27;s 18 achievements (first blood, sharpshooter, marathoner, collector…)
+  plus platinum, with the system notification. progress from v1.1 save data counts. without notrpdrm the game
+  runs as before with trophies off. on the first launch the screen stays black for a few seconds while the
+  trophies install.
+- **fixed: menu cursor moving the wrong way.** pressing left / right in a vertical list could jump to the
+  button above or below. the cursor now only moves to buttons that are really in the pressed direction;
+  up / down still reach corner buttons such as back.
+
+## what works
+
+- boot, menus, hunting in all five zones (with the obb), weapons, calls, map, binoculars, save data.
+- physical controls for everything, menus included, plus the original touch controls.
+- audio (fmod) through the vita&#x27;s audio output.
+
+## highlights
+
+- **right-stick camera** that feeds the game&#x27;s own camera input: fast and independent of the frame rate
+  (`look_sensitivity` in `config.txt`, 10–400 %).
+- **fpu instead of software floating point** for both the game and fmod (the apk is old `armeabi` code).
+  initial load: ~31 s → ~17 s.
+- **no freeze on missing weapons**: without the obb the shotgun has no model; such a weapon keeps its stats
+  and uses another weapon&#x27;s model instead of locking up the game.
+- in-game touch buttons drawn at 1 % opacity (`hud_opacity`, 0–100) since every one has a physical button;
+  the compass stays fully visible. circle is the animal call.
+- settings in `ux0:data/carnivoresiceage/config.txt`: language, content packs, camera speed / inversion,
+  anti-aliasing (`msaa`), fps / timing log (`show_fps`).
+
+## known issues
+
+- 3d scenes run well below 60 fps (menus run at 60). try `msaa 0`.
+- without the obb only the first zone is available and the shotgun uses another weapon&#x27;s model.
+- online features (facebook, google play games, ads, purchases) are disabled.
+- no in-game exit dialog: quit with the ps button.
+
+## reporting bugs
+
+open an issue with `ux0:data/carnivoresiceage/logs/carnivoresiceage_nnn.log` (the newest one) and, for a crash,
+the `.psp2dmp` file from `ux0:data/`. `engine_log 1` in `config.txt` adds the game&#x27;s own messages.
+
+## credits
+
+soloader-boilerplate and falsojni (volodymyr atamanenko, after theflow and rinnegatamante), vitagl and vitashark
+(rinnegatamante), kubridge (theflow). *carnivores: ice age* © tatem games; this project is not affiliated with
+tatem games.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/carnivores-ice-age-ps-vita-port/icon0.png" alt="Icono de Carnivores Ice Age" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Carnivores-Ice-Age-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Carnivores-Ice-Age-vita/releases/tag/v1.2.0" target="_blank" rel="noopener">Carnivores Ice Age</a></h2>
+                      <div class="release-name">Carnivores: Ice Age for PS Vita — v1.2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.0</span>
+                    <span>2026-11-05 15:45 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1 → release v1.2.0</div>
+                  
+                  <div class="body markdown-body"><h1>Carnivores: Ice Age for PS Vita — v1.2</h1>
+<p>PS Vita port of <em>Carnivores: Ice Age</em> (Android 1.5.4). This version adds native PS Vita trophies and fixes the
+menu cursor jumping the wrong way.</p>
+<p><strong>The game files are not included.</strong> You need your own Android APK (1.5.4, <code>armeabi</code>) and, for zones 2–5, its
+Google Play expansion file. Installation, controls and options are in the <a target="_blank" rel="noopener noreferrer" href="README.md">README</a>.</p>
+<h2>Download</h2>
+<ul>
+<li><code>carnivoresiceage.vpk</code> — install with VitaShell (over v1.1 is fine, save data is kept).</li>
+</ul>
+<p>Requires <code>kubridge.skprx</code> and <code>libshacccg.suprx</code> (ShaRKBR33D). Trophies need <code>NoTrpDrm.suprx</code> under <code>*main</code>.</p>
+<h2>What's new in v1.2</h2>
+<ul>
+<li><strong>Native PS Vita trophies</strong>: the game's 18 achievements (First Blood, Sharpshooter, Marathoner, Collector…)
+plus Platinum, with the system notification. Progress from v1.1 save data counts. Without NoTrpDrm the game
+runs as before with trophies off. On the first launch the screen stays black for a few seconds while the
+trophies install.</li>
+<li><strong>Fixed: menu cursor moving the wrong way.</strong> Pressing Left / Right in a vertical list could jump to the
+button above or below. The cursor now only moves to buttons that are really in the pressed direction;
+Up / Down still reach corner buttons such as Back.</li>
+</ul>
+<h2>What works</h2>
+<ul>
+<li>Boot, menus, hunting in all five zones (with the OBB), weapons, calls, map, binoculars, save data.</li>
+<li>Physical controls for everything, menus included, plus the original touch controls.</li>
+<li>Audio (FMOD) through the Vita's audio output.</li>
+</ul>
+<h2>Highlights</h2>
+<ul>
+<li><strong>Right-stick camera</strong> that feeds the game's own camera input: fast and independent of the frame rate
+(<code>look_sensitivity</code> in <code>config.txt</code>, 10–400 %).</li>
+<li><strong>FPU instead of software floating point</strong> for both the game and FMOD (the APK is old <code>armeabi</code> code).
+Initial load: ~31 s → ~17 s.</li>
+<li><strong>No freeze on missing weapons</strong>: without the OBB the shotgun has no model; such a weapon keeps its stats
+and uses another weapon's model instead of locking up the game.</li>
+<li>In-game touch buttons drawn at 1 % opacity (<code>hud_opacity</code>, 0–100) since every one has a physical button;
+the compass stays fully visible. Circle is the animal call.</li>
+<li>Settings in <code>ux0:data/carnivoresiceage/config.txt</code>: language, content packs, camera speed / inversion,
+anti-aliasing (<code>msaa</code>), FPS / timing log (<code>show_fps</code>).</li>
+</ul>
+<h2>Known issues</h2>
+<ul>
+<li>3D scenes run well below 60 FPS (menus run at 60). Try <code>msaa 0</code>.</li>
+<li>Without the OBB only the first zone is available and the shotgun uses another weapon's model.</li>
+<li>Online features (Facebook, Google Play Games, ads, purchases) are disabled.</li>
+<li>No in-game exit dialog: quit with the PS button.</li>
+</ul>
+<h2>Reporting bugs</h2>
+<p>Open an issue with <code>ux0:data/carnivoresiceage/logs/carnivoresiceage_NNN.log</code> (the newest one) and, for a crash,
+the <code>.psp2dmp</code> file from <code>ux0:data/</code>. <code>engine_log 1</code> in <code>config.txt</code> adds the game's own messages.</p>
+<h2>Credits</h2>
+<p>soloader-boilerplate and FalsoJNI (Volodymyr Atamanenko, after TheFloW and Rinnegatamante), vitaGL and vitaShaRK
+(Rinnegatamante), kubridge (TheFloW). <em>Carnivores: Ice Age</em> © Tatem Games; this project is not affiliated with
+Tatem Games.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Carnivores-Ice-Age-vita/releases/download/v1.2.0/carnivoresiceage.vpk" target="_blank" rel="noopener">⬇ carnivoresiceage.vpk · 1.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="carnivores dinosaur hunter carnivores dinosaur hunter metalsyntax/carnivores-dinosaur-hunter-vita carnivores: dinosaur hunter — ps vita · v1.2.0 &quot;trophies&quot; v1.2.0 ports **native ps vita trophies, and the game boots again with notrpdrm installed.**
+
+## what&#x27;s new since v1.1.0
+
+### trophies
+- **26 native ps vita trophies**: the game&#x27;s 25 awards (first blood, t-rex hunter, william tell,
+  guru...) plus a platinum. they install on first launch and unlock with the system notification.
+  requires `notrpdrm.suprx` under `*main` in `ur0:tai/config.txt` (reboot after editing).
+- **fixed: with notrpdrm installed the game didn&#x27;t boot.** v1.0.0 and v1.1.0 shipped without a
+  trophy pack; with the plugin, the trophy setup step had nothing to install and never finished.
+  the pack now ships in the vpk, and trophy setup is skipped (the game boots without trophies) if
+  the pack is missing or setup takes longer than 30 seconds.
+- without notrpdrm the game runs as before, with trophies off.
+
+### menus
+- the button-navigation highlight is now four translucent white corner marks instead of a filled
+  yellow box that covered the item.
+
+## requirements
+
+- ps vita / ps tv with henkaku/enso (3.60–3.74 with a kernel plugin loader).
+- `kubridge.skprx` in `*kernel` of your taihen config.
+- `libshacccg.suprx` in `ur0:data/` (use sharkbr33d).
+- optional, for trophies: `notrpdrm.suprx` under `*main` in your taihen config.
+- your own copy of the game apk (android **1.3.1**, `com.tatem.dinhunter`, `armeabi`).
+
+not compatible: **carnivores: dinosaur hunter hd** (`com.tatem.dinhunterhd`, 1.6.5) and its obb
+(`main.423.com.tatem.dinhunterhd.obb`). that is a newer opengl es 2 engine with a different
+asset layout and formats; this port can&#x27;t use any of it.
+
+## install / upgrade
+
+1. install `carnivoresdinosaurhunter.vpk` with vitashell (over an earlier version is fine: saves and
+   packs are kept). install the full vpk, not just `eboot.bin`: the trophy pack lives in
+   `sce_sys/`.
+2. create `ux0:data/carnivoresdinosaurhunter/` and copy into it:
+   - the apk, named `carnivoresdinosaurhunter.apk`
+   - `libdinhunter.so` and `libfmodex.so` from the apk&#x27;s `lib/armeabi/`
+   - optional, the two content packs (separate apps on android):
+     `carnivoresbundleone.apk` renamed to `bundle1.apk` and `carnivoresbundletwo.apk` renamed to
+     `bundle2.apk`
+3. launch. the first load takes about 30 seconds on a static screen; that is normal.
+
+a `controls.txt` from v1.0.0 is replaced by the new defaults on first boot.
+
+## controls
+
+| vita | action |
+|---|---|
+| touch screen | original touch controls |
+| left stick | move |
+| right stick | look (frame-rate independent) |
+| r | fire (draws a holstered weapon first) / take photo |
+| cross | jump |
+| square | draw / holster weapon |
+| triangle | next weapon |
+| l | binoculars |
+| circle / d-pad up | call dinosaurs |
+| select / d-pad down | map |
+| d-pad left / right | weapon list / photo zoom in |
+| start | pause / back |
+| start + select | ps vita controls &amp; camera menu (select alone in menus) |
+
+## options
+
+most are in the in-game menu (start + select). by hand, in
+`ux0:data/carnivoresdinosaurhunter/config.txt`: `look_sensitivity` (10–400), `invert_look_y`,
+`invert_look_x`, `swap_sticks`, `msaa` (0 off / 1 2x / 2 4x), `hud_opacity` (0–100, default 1),
+`engine_log`, `vfp_float`. see the readme for details.
+
+## what works (confirmed on hardware)
+
+- boot, full asset loading straight from the apk, menus at 60 fps.
+- map loading and hunting in the 3d maps; a tester reports 30–60 fps while hunting.
+- fmod music and sound effects.
+- content packs (**pack 1**: areas 3–4 + sniper rifle; **pack 2**: area 6 + double-barrel shotgun
+  + crossbow), unlocked only when their apk is present.
+- saved games load on the next boot.
+- touch screen with the original controls, left/right stick movement and camera.
+
+## earlier fixes (v1.0.0)
+
+five bugs stood between the apk and a playable game, each found on real hardware:
+
+- **the game couldn&#x27;t read its own apk.** with scelibc i/o, `fopen`/`fread` went to scelibc while
+  `fseeko`/`ftello`/`clearerr` still went to newlib with a scelibc `file*`, so libzip computed a
+  garbage archive size and every asset came back &quot;not found&quot;. those three now go through the
+  scelibc bridge too.
+- **permanent black screen at 60 fps.** the prebuilt `libvitagl.a` in vitasdk is not built with
+  `softfp_abi=1`, but the loader is softfp, so gxm&#x27;s viewport received its floats in the wrong
+  registers and every draw, even plain clears, landed off screen. vitagl is now vendored and built
+  with the softfp abi.
+- **gpu crash as soon as a hunt started.** vitagl&#x27;s `draw_speedhack` hands vertex arrays above a
+  size threshold straight from game memory to the gpu. menu sprites are small and got copied, but
+  the terrain is not, and the gpu faulted reading memory it has no mapping for. the speedhack is off.
+- **black screen on the second launch.** the engine opens its save file and never closes it, so once
+  a save exists the apk gets a different `file*`. the libzip inside the game was built for android
+  and checks `ferror()` by reading a bionic `file` field directly; on a scelibc `file` that field
+  is meaningless. with the first `file` it happened to read as &quot;no error&quot;, with any other one the
+  archive failed to open and nothing loaded. the five inlined checks are patched out. this is also
+  what lets the content-pack apks open next to the main one.
+- **crash in fmod when a sound file is missing.** `sounds_addsound()` doesn&#x27;t check whether the
+  file was found, and passed leftover stack data to fmod as the sound buffer. a missing file now
+  gives fmod an empty buffer, which it rejects cleanly.
+
+performance work:
+
+- the engine is `armeabi` (armv5te), so all of its float/double math goes through libgcc&#x27;s software
+  emulation. 32 of those helpers are redirected to the vita&#x27;s vfp; every hook was checked against
+  the real `.so` with objdump.
+- the engine&#x27;s own logging is dropped before formatting (it wrote several lines per asset while
+  loading and forced memory card flushes).
+- msaa off by default, release build, vitagl with error checking off and ffp shader cache on.
+
+## known issues
+
+- **black screen while trophies install (first launch with notrpdrm).** the screen stays black for
+  a while with no progress indicator before the game starts. don&#x27;t close the game or turn the
+  console off during this step. a loading screen for it is planned.
+- **frame rate:** 20–30 fps has been reported while hunting, dropping when dinosaurs are on screen.
+  not fixed yet; it needs profiling on hardware first.
+- trophy unlocks and the platinum have not yet been checked one by one on hardware; please report
+  any award that shows in game but doesn&#x27;t pop the trophy.
+- the first load is a ~30 s static screen with no progress indicator.
+- many `fmod error &#x27;an invalid parameter...&#x27;` messages while loading dinosaur sounds. they don&#x27;t
+  crash, but some sounds may be missing.
+- the fmod missing-sound fix has not been through a very long session yet.
+- exiting is done from the ps button (the android &quot;exit?&quot; dialog from the main menu is skipped).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/carnivores-dinosaur-hunter-ps-vita-port/icon0.png" alt="Icono de Carnivores Dinosaur Hunter" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Carnivores-Dinosaur-Hunter-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita/releases/tag/v1.2.0" target="_blank" rel="noopener">Carnivores Dinosaur Hunter</a></h2>
+                      <div class="release-name">Carnivores: Dinosaur Hunter — PS Vita · v1.2.0 "Trophies"</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.0</span>
+                    <span>2026-11-05 15:22 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.1.0 → release v1.2.0</div>
+                  
+                  <div class="body markdown-body"><p><strong>Native PS Vita trophies, and the game boots again with NoTrpDrm installed.</strong></p>
+<h2>What's new since v1.1.0</h2>
+<h3>Trophies</h3>
+<ul>
+<li><strong>26 native PS Vita trophies</strong>: the game's 25 awards (First Blood, T-Rex Hunter, William Tell,
+Guru...) plus a Platinum. They install on first launch and unlock with the system notification.
+Requires <code>NoTrpDrm.suprx</code> under <code>*main</code> in <code>ur0:tai/config.txt</code> (reboot after editing).</li>
+<li><strong>Fixed: with NoTrpDrm installed the game didn't boot.</strong> v1.0.0 and v1.1.0 shipped without a
+trophy pack; with the plugin, the trophy setup step had nothing to install and never finished.
+The pack now ships in the VPK, and trophy setup is skipped (the game boots without trophies) if
+the pack is missing or setup takes longer than 30 seconds.</li>
+<li>Without NoTrpDrm the game runs as before, with trophies off.</li>
+</ul>
+<h3>Menus</h3>
+<ul>
+<li>The button-navigation highlight is now four translucent white corner marks instead of a filled
+yellow box that covered the item.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>PS Vita / PS TV with HENkaku/Enso (3.60–3.74 with a kernel plugin loader).</li>
+<li><code>kubridge.skprx</code> in <code>*KERNEL</code> of your taiHEN config.</li>
+<li><code>libshacccg.suprx</code> in <code>ur0:data/</code> (use ShaRKBR33D).</li>
+<li>Optional, for trophies: <code>NoTrpDrm.suprx</code> under <code>*main</code> in your taiHEN config.</li>
+<li>Your own copy of the game APK (Android <strong>1.3.1</strong>, <code>com.tatem.dinhunter</code>, <code>armeabi</code>).</li>
+</ul>
+<p>Not compatible: <strong>Carnivores: Dinosaur Hunter HD</strong> (<code>com.tatem.dinhunterhd</code>, 1.6.5) and its OBB
+(<code>main.423.com.tatem.dinhunterhd.obb</code>). That is a newer OpenGL ES 2 engine with a different
+asset layout and formats; this port can't use any of it.</p>
+<h2>Install / upgrade</h2>
+<ol>
+<li>Install <code>carnivoresdinosaurhunter.vpk</code> with VitaShell (over an earlier version is fine: saves and
+packs are kept). Install the full VPK, not just <code>eboot.bin</code>: the trophy pack lives in
+<code>sce_sys/</code>.</li>
+<li>Create <code>ux0:data/carnivoresdinosaurhunter/</code> and copy into it:<ul>
+<li>the APK, named <code>CarnivoresDinosaurHunter.apk</code></li>
+<li><code>libdinHunter.so</code> and <code>libfmodex.so</code> from the APK's <code>lib/armeabi/</code></li>
+<li>optional, the two content packs (separate apps on Android):
+<code>CarnivoresBundleOne.apk</code> renamed to <code>bundle1.apk</code> and <code>CarnivoresBundleTwo.apk</code> renamed to
+<code>bundle2.apk</code></li>
+</ul>
+</li>
+<li>Launch. The first load takes about 30 seconds on a static screen; that is normal.</li>
+</ol>
+<p>A <code>controls.txt</code> from v1.0.0 is replaced by the new defaults on first boot.</p>
+<h2>Controls</h2>
+<table>
+<thead>
+<tr>
+  <th>Vita</th>
+  <th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Touch screen</td>
+  <td>Original touch controls</td>
+</tr>
+<tr>
+  <td>Left stick</td>
+  <td>Move</td>
+</tr>
+<tr>
+  <td>Right stick</td>
+  <td>Look (frame-rate independent)</td>
+</tr>
+<tr>
+  <td>R</td>
+  <td>Fire (draws a holstered weapon first) / take photo</td>
+</tr>
+<tr>
+  <td>Cross</td>
+  <td>Jump</td>
+</tr>
+<tr>
+  <td>Square</td>
+  <td>Draw / holster weapon</td>
+</tr>
+<tr>
+  <td>Triangle</td>
+  <td>Next weapon</td>
+</tr>
+<tr>
+  <td>L</td>
+  <td>Binoculars</td>
+</tr>
+<tr>
+  <td>Circle / D-pad up</td>
+  <td>Call dinosaurs</td>
+</tr>
+<tr>
+  <td>Select / D-pad down</td>
+  <td>Map</td>
+</tr>
+<tr>
+  <td>D-pad left / right</td>
+  <td>Weapon list / photo zoom in</td>
+</tr>
+<tr>
+  <td>Start</td>
+  <td>Pause / back</td>
+</tr>
+<tr>
+  <td>Start + Select</td>
+  <td>PS Vita controls &amp; camera menu (Select alone in menus)</td>
+</tr>
+</tbody>
+</table>
+<h2>Options</h2>
+<p>Most are in the in-game menu (Start + Select). By hand, in
+<code>ux0:data/carnivoresdinosaurhunter/config.txt</code>: <code>look_sensitivity</code> (10–400), <code>invert_look_y</code>,
+<code>invert_look_x</code>, <code>swap_sticks</code>, <code>msaa</code> (0 off / 1 2x / 2 4x), <code>hud_opacity</code> (0–100, default 1),
+<code>engine_log</code>, <code>vfp_float</code>. See the README for details.</p>
+<h2>What works (confirmed on hardware)</h2>
+<ul>
+<li>Boot, full asset loading straight from the APK, menus at 60 FPS.</li>
+<li>Map loading and hunting in the 3D maps; a tester reports 30–60 FPS while hunting.</li>
+<li>FMOD music and sound effects.</li>
+<li>Content packs (<strong>Pack 1</strong>: areas 3–4 + sniper rifle; <strong>Pack 2</strong>: area 6 + double-barrel shotgun<ul>
+<li>crossbow), unlocked only when their APK is present.</li>
+</ul>
+</li>
+<li>Saved games load on the next boot.</li>
+<li>Touch screen with the original controls, left/right stick movement and camera.</li>
+</ul>
+<h2>Earlier fixes (v1.0.0)</h2>
+<p>Five bugs stood between the APK and a playable game, each found on real hardware:</p>
+<ul>
+<li><strong>The game couldn't read its own APK.</strong> With SceLibc I/O, <code>fopen</code>/<code>fread</code> went to SceLibc while
+<code>fseeko</code>/<code>ftello</code>/<code>clearerr</code> still went to newlib with a SceLibc <code>FILE*</code>, so libzip computed a
+garbage archive size and every asset came back &quot;not found&quot;. Those three now go through the
+SceLibc bridge too.</li>
+<li><strong>Permanent black screen at 60 FPS.</strong> The prebuilt <code>libvitaGL.a</code> in VitaSDK is not built with
+<code>SOFTFP_ABI=1</code>, but the loader is softfp, so GXM's viewport received its floats in the wrong
+registers and every draw, even plain clears, landed off screen. vitaGL is now vendored and built
+with the softfp ABI.</li>
+<li><strong>GPU crash as soon as a hunt started.</strong> vitaGL's <code>DRAW_SPEEDHACK</code> hands vertex arrays above a
+size threshold straight from game memory to the GPU. Menu sprites are small and got copied, but
+the terrain is not, and the GPU faulted reading memory it has no mapping for. The speedhack is off.</li>
+<li><strong>Black screen on the second launch.</strong> The engine opens its save file and never closes it, so once
+a save exists the APK gets a different <code>FILE*</code>. The libzip inside the game was built for Android
+and checks <code>ferror()</code> by reading a bionic <code>FILE</code> field directly; on a SceLibc <code>FILE</code> that field
+is meaningless. With the first <code>FILE</code> it happened to read as &quot;no error&quot;, with any other one the
+archive failed to open and nothing loaded. The five inlined checks are patched out. This is also
+what lets the content-pack APKs open next to the main one.</li>
+<li><strong>Crash in FMOD when a sound file is missing.</strong> <code>Sounds_AddSound()</code> doesn't check whether the
+file was found, and passed leftover stack data to FMOD as the sound buffer. A missing file now
+gives FMOD an empty buffer, which it rejects cleanly.</li>
+</ul>
+<p>Performance work:</p>
+<ul>
+<li>The engine is <code>armeabi</code> (ARMv5TE), so all of its float/double math goes through libgcc's software
+emulation. 32 of those helpers are redirected to the Vita's VFP; every hook was checked against
+the real <code>.so</code> with objdump.</li>
+<li>The engine's own logging is dropped before formatting (it wrote several lines per asset while
+loading and forced memory card flushes).</li>
+<li>MSAA off by default, Release build, vitaGL with error checking off and FFP shader cache on.</li>
+</ul>
+<h2>Known issues</h2>
+<ul>
+<li><strong>Black screen while trophies install (first launch with NoTrpDrm).</strong> The screen stays black for
+a while with no progress indicator before the game starts. Don't close the game or turn the
+console off during this step. A loading screen for it is planned.</li>
+<li><strong>Frame rate:</strong> 20–30 FPS has been reported while hunting, dropping when dinosaurs are on screen.
+Not fixed yet; it needs profiling on hardware first.</li>
+<li>Trophy unlocks and the Platinum have not yet been checked one by one on hardware; please report
+any award that shows in game but doesn't pop the trophy.</li>
+<li>The first load is a ~30 s static screen with no progress indicator.</li>
+<li>Many <code>FMOD error 'An invalid parameter...'</code> messages while loading dinosaur sounds. They don't
+crash, but some sounds may be missing.</li>
+<li>The FMOD missing-sound fix has not been through a very long session yet.</li>
+<li>Exiting is done from the PS button (the Android &quot;Exit?&quot; dialog from the main menu is skipped).</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita/releases/download/v1.2.0/carnivoresdinosaurhunter.vpk" target="_blank" rel="noopener">⬇ carnivoresdinosaurhunter.vpk · 1.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="nazi zombies portable nazi zombies portable nzp-team/nzportable 2.0.0-indev+20261105151946 nightly ports this is a nightly generated automagically. nightlies are generated at 3am est if changes are made to any component of the project in the past 24 hours. be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.
 changes in the following areas have been made since the last nightly:
 * game assets
 * vril (engine)
@@ -351,13 +997,13 @@ you can also play the webgl version at https://nzp.gay/">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · nzp-team/nzportable</div>
                       <h2><a href="https://github.com/nzp-team/nzportable/releases/tag/nightly" target="_blank" rel="noopener">Nazi Zombies Portable</a></h2>
-                      <div class="release-name">2.0.0-indev+20261105040407</div>
+                      <div class="release-name">2.0.0-indev+20261105151946</div>
                     </div>
                     <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">nightly</span>
-                    <span>2026-11-05 04:05 UTC</span>
+                    <span>2026-11-05 15:22 UTC</span>
                     <span class="catalog-version">PSVitaAlive: Nightly</span>
                   </div>
                   <div class="catalog-detail">PSVitaAlive Nightly</div>
@@ -382,6 +1028,97 @@ Installation Instructions:</p>
 <p>You can also play the WebGL version at <a target="_blank" rel="noopener noreferrer" href="https://nzp.gay/">https://nzp.gay/</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-3ds.zip" target="_blank" rel="noopener">⬇ nzportable-3ds.zip · 61.9 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt" target="_blank" rel="noopener">build-version.txt · 27.0 B</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux32.zip" target="_blank" rel="noopener">nzportable-linux32.zip · 70.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip" target="_blank" rel="noopener">nzportable-linux64.zip · 70.8 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip" target="_blank" rel="noopener">nzportable-linuxarm64.zip · 70.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarmhf.zip" target="_blank" rel="noopener">nzportable-linuxarmhf.zip · 70.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-nspire.zip" target="_blank" rel="noopener">nzportable-nspire.zip · 24.0 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps4.zip" target="_blank" rel="noopener">nzportable-ps4.zip · 76.1 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-psp.zip" target="_blank" rel="noopener">nzportable-psp.zip · 61.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-switch.zip" target="_blank" rel="noopener">nzportable-switch.zip · 73.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-vita.zip" target="_blank" rel="noopener">nzportable-vita.zip · 72.7 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win32.zip" target="_blank" rel="noopener">nzportable-win32.zip · 74.3 MB</a><a class="btn" href="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win64.zip" target="_blank" rel="noopener">nzportable-win64.zip · 74.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="gitlab" data-catalog="pending" data-search="bombsquad vita (alpha version) bombsquad vita (alpha version) sexcurrybeats/bombsquad-vita bombsquad vita alpha 0.95 v0.95-alpha ports bombsquad 1.8.7 on ps vita: a much faster start-up with a picture instead of a black screen, and the app now updates itself.
+
+## install
+
+1. install bombsquad-vita-alpha-0.95.vpk with vitashell (it installs over alpha 0.9 or 0.8)
+2. launch with wi-fi on. on a first install, press x to download bombsquad from its official server
+
+needs kubridge.skprx, libshacccg.suprx, the correct date and time, and about 400 mb free. see the readme for details and known issues.
+
+`app-update.txt` and `eboot.bin` are what the app downloads when it updates itself. you don&#x27;t need to install them by hand.
+
+### much faster start-up
+
+- the menu appears in about 30 seconds instead of about 54, measured on a vita memory card. the first launch after an install takes a few seconds longer while it saves its start-up caches
+- the bubble&#x27;s picture stays on screen with moving dots until the menu is ready, instead of a black screen
+- python no longer reads every game module twice, generated code is kept between launches, and the game&#x27;s check of its cached assets takes about 1.5 seconds instead of 6
+- a launch that fails to start clears these caches, so they can&#x27;t cause a second failure
+
+### app updates
+
+- the app now updates itself: once a day on launch it checks its gitlab releases, and if you accept it downloads the new program, checks its size and sha-256, swaps it in and restarts
+- a new version that doesn&#x27;t finish starting is replaced by the previous one automatically and isn&#x27;t offered again
+- this is the last vpk you need to install by hand, unless a later release changes the bubble&#x27;s art
+
+### faster installs and updates
+
+- the install takes about 2 minutes instead of 6: game data goes into one archive instead of also being written as about 2300 loose files
+- interrupted downloads continue from the partial archive
+- updates and rollbacks keep the game&#x27;s downloaded assets (about 140 mb), so they aren&#x27;t downloaded again and the game reaches the menu in under a minute after an install instead of over six
+- new bombsquad releases are checked for once a day instead of on every launch, which saves about a second
+
+```text
+bombsquad-vita-alpha-0.95.vpk
+sha-256 37cc2f23ebe351284e5802085be7c700b7c92bc214ed1833d766793d53d28d95
+```">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/bombsquad-vita/icon0.png" alt="Icono de BombSquad Vita (Alpha Version)" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITLAB · sexcurrybeats/bombsquad-vita</div>
+                      <h2><a href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/releases/v0.95-alpha" target="_blank" rel="noopener">BombSquad Vita (Alpha Version)</a></h2>
+                      <div class="release-name">BombSquad Vita Alpha 0.95</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.95-alpha</span>
+                    <span>2026-11-05 10:17 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.9</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.9 → release v0.95-alpha</div>
+                  
+                  <div class="body markdown-body"><p>BombSquad 1.8.7 on PS Vita: a much faster start-up with a picture instead of a black screen, and the app now updates itself.</p>
+<h2>Install</h2>
+<ol>
+<li>Install BombSquad-Vita-Alpha-0.95.vpk with VitaShell (it installs over Alpha 0.9 or 0.8)</li>
+<li>Launch with Wi-Fi on. On a first install, press X to download BombSquad from its official server</li>
+</ol>
+<p>Needs kubridge.skprx, libshacccg.suprx, the correct date and time, and about 400 MB free. See the README for details and known issues.</p>
+<p><code>app-update.txt</code> and <code>eboot.bin</code> are what the app downloads when it updates itself. You don't need to install them by hand.</p>
+<h3>Much faster start-up</h3>
+<ul>
+<li>The menu appears in about 30 seconds instead of about 54, measured on a Vita memory card. The first launch after an install takes a few seconds longer while it saves its start-up caches</li>
+<li>The bubble's picture stays on screen with moving dots until the menu is ready, instead of a black screen</li>
+<li>Python no longer reads every game module twice, generated code is kept between launches, and the game's check of its cached assets takes about 1.5 seconds instead of 6</li>
+<li>A launch that fails to start clears these caches, so they can't cause a second failure</li>
+</ul>
+<h3>App updates</h3>
+<ul>
+<li>The app now updates itself: once a day on launch it checks its GitLab releases, and if you accept it downloads the new program, checks its size and SHA-256, swaps it in and restarts</li>
+<li>A new version that doesn't finish starting is replaced by the previous one automatically and isn't offered again</li>
+<li>This is the last VPK you need to install by hand, unless a later release changes the bubble's art</li>
+</ul>
+<h3>Faster installs and updates</h3>
+<ul>
+<li>The install takes about 2 minutes instead of 6: game data goes into one archive instead of also being written as about 2300 loose files</li>
+<li>Interrupted downloads continue from the partial archive</li>
+<li>Updates and rollbacks keep the game's downloaded assets (about 140 MB), so they aren't downloaded again and the game reaches the menu in under a minute after an install instead of over six</li>
+<li>New BombSquad releases are checked for once a day instead of on every launch, which saves about a second</li>
+</ul>
+<pre><code class="language-text">BombSquad-Vita-Alpha-0.95.vpk
+SHA-256 37CC2F23EBE351284E5802085BE7C700B7C92BC214ED1833D766793D53D28D95
+</code></pre>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://gitlab.com/-/project/85397156/uploads/412a075f1189af12485afc57f8c8a000/BombSquad-Vita-Alpha-0.95.vpk" target="_blank" rel="noopener">⬇ BombSquad-Vita-Alpha-0.95.vpk</a><a class="btn" href="https://gitlab.com/-/project/85397156/uploads/d2e11c2f3fe75e23718c0297b83c647f/eboot.bin" target="_blank" rel="noopener">eboot.bin</a><a class="btn" href="https://gitlab.com/-/project/85397156/uploads/9877a1c5e07386664263ae31853df9dc/app-update.txt" target="_blank" rel="noopener">app-update.txt</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.95-alpha/bombsquad-vita-v0.95-alpha.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.95-alpha/bombsquad-vita-v0.95-alpha.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.95-alpha/bombsquad-vita-v0.95-alpha.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.95-alpha/bombsquad-vita-v0.95-alpha.tar" target="_blank" rel="noopener">source.tar</a></div>
                 </div>
               </div>
             </article>
@@ -1063,136 +1800,6 @@ no new game files are needed. install the new `nfsmw.vpk`. your saves and your `
 <p>No new game files are needed. Install the new <code>nfsmw.vpk</code>. Your saves and your <code>config.ini</code> (your buttons included) are not changed.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.4.2/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="gitlab" data-catalog="uptodate" data-search="bombsquad vita (alpha version) bombsquad vita (alpha version) sexcurrybeats/bombsquad-vita bombsquad vita alpha 0.9 v0.9-alpha ports bombsquad 1.8.7 on ps vita, installed and kept up to date from the vita itself.
-
-## install
-
-1. install bombsquad-vita-alpha-0.9.vpk with vitashell (it installs over alpha 0.8)
-2. launch with wi-fi on and press x to download bombsquad from its official server
-
-needs kubridge.skprx, libshacccg.suprx, the correct date and time, and about 400 mb free. see the readme for details and known issues.
-
-### bombsquad version
-
-- runs bombsquad 1.8.7 (build 23089) instead of 1.7.62
-- no longer tied to one exact release: hooks are found by name, and a downloaded engine is checked for every import, hook target and callback the loader needs before it is accepted
-
-### installing and updating
-
-- the vita downloads the game itself from `files.ballistica.net` on first launch. no pc preparation or apk handling is needed, and no game files are distributed with the port
-- only the armv7 engine and game data are fetched from the official apk, about 78 mb of its 166 mb, over https with certificate checks (bearssl, let&#x27;s encrypt roots)
-- new bombsquad releases are offered at launch. the previous version is kept, and a launch that fails to start offers to go back
-- hold select at start-up to reinstall the latest release or return to the previous one
-- interrupted downloads continue where they stopped; an interrupted version switch is completed or undone on the next launch
-- game files stay within the vita&#x27;s folder depth limit; releases nested too deeply are refused before downloading
-
-### performance
-
-- tested at 60 fps with up to 8 players. the five-player slowdown in 1.7.62 came from game logic and physics; bombsquad 1.8 simulates character limbs outside the main simulation
-- boot reaches the running game in about 30 seconds instead of about 48: logs are written to the card in batches, and compiled shaders are cached per title after the first launch
-- menus no longer stall when the game handles an internal c++ exception
-
-### fixes
-
-- `lseek64` was a stub returning 0, so python could not read its standard library from the game archive
-- paths that python made absolute (`/data/.../ux0:data/...`) are resolved, which fixes the game&#x27;s own asset downloads
-- file-open errors now report the real error number, which fixes python&#x27;s start-up path checks
-- condition-variable waits use the clock the game requested
-- the shader cache no longer saves shaders that failed to compile, checks every cached entry before loading it, and writes entries atomically
-- release calls added by later bombsquad versions are recorded and answered with a safe default instead of failing the start-up
-
-### diagnostics
-
-- a failed start saves the python exception and traceback to `boot_error.private.txt` and the game&#x27;s own output to `boot_stderr.private.txt`
-- logs from the previous launch are kept as `.prev`, and an old log no longer blocks the next launch
-- the error screen no longer flickers behind the dialog
-
-### other
-
-- new data location: `ux0:data/bs18` for settings and mods, `ux0:data/bs18g` for the game
-- livearea uses the borderless artwork
-- the windows apk preparation helper is removed; it is no longer needed
-
-```text
-bombsquad-vita-alpha-0.9.vpk
-sha-256 42e776f13db63b642af8c8c36372d8f7b1d5ccd7a587995c02b4b9507c2ce63a
-```">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/bombsquad-vita/icon0.png" alt="Icono de BombSquad Vita (Alpha Version)" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITLAB · sexcurrybeats/bombsquad-vita</div>
-                      <h2><a href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/releases/v0.9-alpha" target="_blank" rel="noopener">BombSquad Vita (Alpha Version)</a></h2>
-                      <div class="release-name">BombSquad Vita Alpha 0.9</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.9-alpha</span>
-                    <span>2026-11-05 01:48 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.9</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.9</div>
-                  
-                  <div class="body markdown-body"><p>BombSquad 1.8.7 on PS Vita, installed and kept up to date from the Vita itself.</p>
-<h2>Install</h2>
-<ol>
-<li>Install BombSquad-Vita-Alpha-0.9.vpk with VitaShell (it installs over Alpha 0.8)</li>
-<li>Launch with Wi-Fi on and press X to download BombSquad from its official server</li>
-</ol>
-<p>Needs kubridge.skprx, libshacccg.suprx, the correct date and time, and about 400 MB free. See the README for details and known issues.</p>
-<h3>BombSquad version</h3>
-<ul>
-<li>Runs BombSquad 1.8.7 (build 23089) instead of 1.7.62</li>
-<li>No longer tied to one exact release: hooks are found by name, and a downloaded engine is checked for every import, hook target and callback the loader needs before it is accepted</li>
-</ul>
-<h3>Installing and updating</h3>
-<ul>
-<li>The Vita downloads the game itself from <code>files.ballistica.net</code> on first launch. No PC preparation or APK handling is needed, and no game files are distributed with the port</li>
-<li>Only the ARMv7 engine and game data are fetched from the official APK, about 78 MB of its 166 MB, over HTTPS with certificate checks (BearSSL, Let's Encrypt roots)</li>
-<li>New BombSquad releases are offered at launch. The previous version is kept, and a launch that fails to start offers to go back</li>
-<li>Hold SELECT at start-up to reinstall the latest release or return to the previous one</li>
-<li>Interrupted downloads continue where they stopped; an interrupted version switch is completed or undone on the next launch</li>
-<li>Game files stay within the Vita's folder depth limit; releases nested too deeply are refused before downloading</li>
-</ul>
-<h3>Performance</h3>
-<ul>
-<li>Tested at 60 FPS with up to 8 players. The five-player slowdown in 1.7.62 came from game logic and physics; BombSquad 1.8 simulates character limbs outside the main simulation</li>
-<li>Boot reaches the running game in about 30 seconds instead of about 48: logs are written to the card in batches, and compiled shaders are cached per title after the first launch</li>
-<li>Menus no longer stall when the game handles an internal C++ exception</li>
-</ul>
-<h3>Fixes</h3>
-<ul>
-<li><code>lseek64</code> was a stub returning 0, so Python could not read its standard library from the game archive</li>
-<li>Paths that Python made absolute (<code>/data/.../ux0:data/...</code>) are resolved, which fixes the game's own asset downloads</li>
-<li>File-open errors now report the real error number, which fixes Python's start-up path checks</li>
-<li>Condition-variable waits use the clock the game requested</li>
-<li>The shader cache no longer saves shaders that failed to compile, checks every cached entry before loading it, and writes entries atomically</li>
-<li>Release calls added by later BombSquad versions are recorded and answered with a safe default instead of failing the start-up</li>
-</ul>
-<h3>Diagnostics</h3>
-<ul>
-<li>A failed start saves the Python exception and traceback to <code>boot_error.private.txt</code> and the game's own output to <code>boot_stderr.private.txt</code></li>
-<li>Logs from the previous launch are kept as <code>.prev</code>, and an old log no longer blocks the next launch</li>
-<li>The error screen no longer flickers behind the dialog</li>
-</ul>
-<h3>Other</h3>
-<ul>
-<li>New data location: <code>ux0:data/bs18</code> for settings and mods, <code>ux0:data/bs18g</code> for the game</li>
-<li>LiveArea uses the borderless artwork</li>
-<li>The Windows APK preparation helper is removed; it is no longer needed</li>
-</ul>
-<pre><code class="language-text">BombSquad-Vita-Alpha-0.9.vpk
-SHA-256 42E776F13DB63B642AF8C8C36372D8F7B1D5CCD7A587995C02B4B9507C2CE63A
-</code></pre>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://gitlab.com/-/project/85397156/uploads/f94ae92cc608077e11380b4e3ffb5276/BombSquad-Vita-Alpha-0.9.vpk" target="_blank" rel="noopener">⬇ BombSquad-Vita-Alpha-0.9.vpk</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.9-alpha/bombsquad-vita-v0.9-alpha.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.9-alpha/bombsquad-vita-v0.9-alpha.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.9-alpha/bombsquad-vita-v0.9-alpha.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/bombsquad-vita/-/archive/v0.9-alpha/bombsquad-vita-v0.9-alpha.tar" target="_blank" rel="noopener">source.tar</a></div>
                 </div>
               </div>
             </article>
@@ -1986,135 +2593,6 @@ server of version 40 or more (the game says so).</li>
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-ce-vita-1.1.2-vita.vpk" target="_blank" rel="noopener">⬇ halo-ce-vita-1.1.2-vita.vpk · 6.6 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-ce-vita-1.1.2-pc-linux.tar.gz" target="_blank" rel="noopener">halo-ce-vita-1.1.2-pc-linux.tar.gz · 16.7 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-ce-vita-1.1.2-pc-windows.zip" target="_blank" rel="noopener">halo-ce-vita-1.1.2-pc-windows.zip · 6.8 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-ce-vita-server-1.1.2-linux-armhf.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.2-linux-armhf.tar.gz · 4.0 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-ce-vita-server-1.1.2-linux-x86.tar.gz" target="_blank" rel="noopener">halo-ce-vita-server-1.1.2-linux-x86.tar.gz · 4.7 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-update-pc.txt" target="_blank" rel="noopener">halo-update-pc.txt · 397.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-update-pc.txt.sig" target="_blank" rel="noopener">halo-update-pc.txt.sig · 129.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-update.txt" target="_blank" rel="noopener">halo-update.txt · 234.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/halo-update.txt.sig" target="_blank" rel="noopener">halo-update.txt.sig · 129.0 B</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/HaloCEVitaInstaller.exe" target="_blank" rel="noopener">HaloCEVitaInstaller.exe · 48.6 MB</a><a class="btn" href="https://github.com/BirchWoodGod/halo-ce-vita/releases/download/v1.1.2/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 947.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="final fantasy vii final fantasy vii ggdrn/meteor-vii-vita final fantasy vii for ps vita — v1.1.0 v1.1.0 ports this update adds direct control over random encounters and an option to hide the
-android encounter button for a cleaner screen.
-
-## what&#x27;s new
-
-- **gameplay &gt; random encounters: on/off** controls random encounters directly
-  from the port menu, including while the on-screen button is hidden.
-- **gameplay &gt; encounters button: show/hide** shows or hides the touch button.
-  hiding it also removes its touch target and leaves the encounter setting unchanged.
-- the menu and on-screen button share the same encounter state. changes apply
-  immediately and are saved in `ux0:data/ffvii-vita/cheats.txt`, including encounter
-  changes made by touching the visible button.
-- existing configurations default to encounters **on** and button **show**.
-
-## update / installation
-
-install **`ff7_vita_v1.1.0.vpk`** with vitashell over the previous version. keep
-existing game data and settings; back up `ux0:data/ffvii-vita/save/` before updating.
-no replacement apk or obb is needed for this update.
-
-for a new installation, the requirements remain the same: a homebrew-enabled
-ps vita, `kubridge.skprx`, `libshacccg.suprx`, and the user&#x27;s own android final
-fantasy vii **v1.0.29** game data. copy the original files intact to:
-
-```text
-ux0:data/ffvii-vita/base.apk
-ux0:data/ffvii-vita/main.30.com.square_enix.android_googleplay.ffvii.obb
-```
-
-see [the installation guide](https://github.com/ggdrn/meteor-vii-vita/blob/main/docs/data.md)
-for the complete setup instructions.
-
-## controls
-
-hold **l + r** and press **start** to open the port menu, then select **gameplay**
-with **l/r**. use **up/down** to select, **left/right** or **cross** to change a
-setting, and **circle** to close. no restart is needed for either encounter option.
-
-## known limitations
-
-- snowboard music remains silent.
-- some scenes may expose background or geometry limitations in widescreen;
-  switch back to 4:3 if a scene does not display correctly.
-- automated tests and the release build passed. on-device validation of the new
-  options remains pending; see [the validation record](release-v1.1.0-validation.md).
-
-for bug reports, include the port version, location, selected screen mode, steps
-to reproduce and `ux0:data/ffvii-vita/logs.txt` plus `logs_anterior.txt`.
-
-## credits
-
-port by **gustavo garcia (ggdrn)**, with ai-assisted development.
-thanks to the contributors behind soloader-boilerplate, so-util, falsojni,
-vitagl, vitasdk, kubridge and the vita homebrew community.
-
-the vpk contains the port only. game data must be supplied by the user.
-final fantasy vii © square enix. this project is not affiliated with or endorsed
-by square enix.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/meteor-vii-vita/icon0%20New.png" alt="Icono de FINAL FANTASY VII" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ggdrn/METEOR-VII-VITA</div>
-                      <h2><a href="https://github.com/ggdrn/METEOR-VII-VITA/releases/tag/v1.1.0" target="_blank" rel="noopener">FINAL FANTASY VII</a></h2>
-                      <div class="release-name">FINAL FANTASY VII for PS Vita — v1.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.1.0</span>
-                    <span>2026-11-02 22:58 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0</div>
-                  
-                  <div class="body markdown-body"><p>This update adds direct control over random encounters and an option to hide the
-Android encounter button for a cleaner screen.</p>
-<h2>What's new</h2>
-<ul>
-<li><strong>Gameplay &gt; RANDOM ENCOUNTERS: ON/OFF</strong> controls random encounters directly
-from the port menu, including while the on-screen button is hidden.</li>
-<li><strong>Gameplay &gt; ENCOUNTERS BUTTON: SHOW/HIDE</strong> shows or hides the touch button.
-Hiding it also removes its touch target and leaves the encounter setting unchanged.</li>
-<li>The menu and on-screen button share the same encounter state. Changes apply
-immediately and are saved in <code>ux0:data/ffvii-vita/cheats.txt</code>, including encounter
-changes made by touching the visible button.</li>
-<li>Existing configurations default to encounters <strong>ON</strong> and button <strong>SHOW</strong>.</li>
-</ul>
-<h2>Update / installation</h2>
-<p>Install <strong><code>ff7_vita_v1.1.0.vpk</code></strong> with VitaShell over the previous version. Keep
-existing game data and settings; back up <code>ux0:data/ffvii-vita/save/</code> before updating.
-No replacement APK or OBB is needed for this update.</p>
-<p>For a new installation, the requirements remain the same: a homebrew-enabled
-PS Vita, <code>kubridge.skprx</code>, <code>libshacccg.suprx</code>, and the user's own Android FINAL
-FANTASY VII <strong>v1.0.29</strong> game data. Copy the original files intact to:</p>
-<pre><code class="language-text">ux0:data/ffvii-vita/base.apk
-ux0:data/ffvii-vita/main.30.com.square_enix.android_googleplay.FFVII.obb
-</code></pre>
-<p>See <a target="_blank" rel="noopener noreferrer" href="https://github.com/ggdrn/METEOR-VII-VITA/blob/main/docs/DATA.md">the installation guide</a>
-for the complete setup instructions.</p>
-<h2>Controls</h2>
-<p>Hold <strong>L + R</strong> and press <strong>Start</strong> to open the port menu, then select <strong>Gameplay</strong>
-with <strong>L/R</strong>. Use <strong>Up/Down</strong> to select, <strong>Left/Right</strong> or <strong>Cross</strong> to change a
-setting, and <strong>Circle</strong> to close. No restart is needed for either encounter option.</p>
-<h2>Known limitations</h2>
-<ul>
-<li>Snowboard music remains silent.</li>
-<li>Some scenes may expose background or geometry limitations in widescreen;
-switch back to 4:3 if a scene does not display correctly.</li>
-<li>Automated tests and the release build passed. On-device validation of the new
-options remains pending; see <a target="_blank" rel="noopener noreferrer" href="RELEASE-v1.1.0-VALIDATION.md">the validation record</a>.</li>
-</ul>
-<p>For bug reports, include the port version, location, selected screen mode, steps
-to reproduce and <code>ux0:data/ffvii-vita/logs.txt</code> plus <code>logs_anterior.txt</code>.</p>
-<h2>Credits</h2>
-<p>Port by <strong>Gustavo Garcia (ggdrn)</strong>, with AI-assisted development.
-Thanks to the contributors behind soloader-boilerplate, so-util, FalsoJNI,
-vitaGL, VitaSDK, kubridge and the Vita homebrew community.</p>
-<p>The VPK contains the port only. Game data must be supplied by the user.
-FINAL FANTASY VII © SQUARE ENIX. This project is not affiliated with or endorsed
-by Square Enix.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/METEOR-VII-VITA/releases/download/v1.1.0/ff7_vita_v1.1.0.vpk" target="_blank" rel="noopener">⬇ ff7_vita_v1.1.0.vpk · 3.0 MB</a></div>
                 </div>
               </div>
             </article>
@@ -10062,424 +10540,6 @@ when settings appear. <strong>Done applies changes and exits; relaunch to play.<
                   <div class="body markdown-body"><p>Built APK (still requires data files)</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/jwfeniello/scribblenauts-remix-vita/releases/download/vpk/Scribblenauts.Remix.vpk" target="_blank" rel="noopener">⬇ Scribblenauts.Remix.vpk · 2.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="carnivores ice age carnivores ice age metalsyntax/carnivores-ice-age-vita carnivores: ice age for ps vita — v1.1 v1.1.0 ports # carnivores: ice age for ps vita — v1.1
-
-ps vita port of *carnivores: ice age* (android 1.5.4). this version adds full menu navigation with the
-buttons and the content packs from the game&#x27;s google play expansion file.
-
-**the game files are not included.** you need your own android apk (1.5.4, `armeabi`) and, for zones 2–5, its
-google play expansion file. installation, controls and options are in the [readme](readme.md).
-
-## download
-
-- `carnivoresiceage.vpk` — install with vitashell (over v1.0 is fine, save data is kept).
-
-requires `kubridge.skprx` and `libshacccg.suprx` (sharkbr33d).
-
-## what&#x27;s new in v1.1
-
-- **menus with physical buttons.** d-pad / left stick move a thin white marker that outlines each button, hunt
-  cell or slider without covering it; the focused button also shows its red &quot;pressed&quot; look. cross selects, circle goes back, left / right
-  change sliders. works in the main menus, the hunt setup pages and the in-game pause / statistics screens.
-- **content packs from the google play obb.** copy `main.33.com.tatemgames.iceage.obb` (or `main.obb`) to
-  `ux0:data/carnivoresiceage/`, without extracting it:
-  - pack 1: zones 2–3, shotgun, sniper rifle;
-  - pack 2: zones 4–5, double-barreled shotgun, crossbow.
-- **fixed: purple sky and broken textures in zone 2 and later.** v1.0 unlocked every zone even when its files
-  were missing, and the game loaded an empty terrain. packs are now unlocked only when the obb contains them;
-  without it only the first zone can be selected.
-- **facebook buttons hidden** (options menu, statistics and trophy screens): they did nothing on vita.
-- **faster right-stick camera** with a finer response near the center.
-- the `carnivoresbundleone/two.apk` files mentioned in v1.0 belong to *carnivores: dinosaur hunter* and do not
-  work with this game; they can be deleted.
-
-## what works
-
-- boot, menus, hunting in all five zones (with the obb), weapons, calls, map, binoculars, save data.
-- physical controls for everything, menus included, plus the original touch controls.
-- audio (fmod) through the vita&#x27;s audio output.
-
-## highlights
-
-- **right-stick camera** that feeds the game&#x27;s own camera input: fast and independent of the frame rate
-  (`look_sensitivity` in `config.txt`, 10–400 %).
-- **fpu instead of software floating point** for both the game and fmod (the apk is old `armeabi` code).
-  initial load: ~31 s → ~17 s.
-- **no freeze on missing weapons**: without the obb the shotgun has no model; such a weapon keeps its stats
-  and uses another weapon&#x27;s model instead of locking up the game.
-- in-game touch buttons drawn at 1 % opacity (`hud_opacity`, 0–100) since every one has a physical button;
-  the compass stays fully visible. circle is the animal call.
-- settings in `ux0:data/carnivoresiceage/config.txt`: language, content packs, camera speed / inversion,
-  anti-aliasing (`msaa`), fps / timing log (`show_fps`).
-
-## known issues
-
-- 3d scenes run well below 60 fps (menus run at 60). try `msaa 0`.
-- without the obb only the first zone is available and the shotgun uses another weapon&#x27;s model.
-- online features (facebook, google play games, ads, purchases) are disabled.
-- no in-game exit dialog: quit with the ps button.
-
-## reporting bugs
-
-open an issue with `ux0:data/carnivoresiceage/logs/carnivoresiceage_nnn.log` (the newest one) and, for a crash,
-the `.psp2dmp` file from `ux0:data/`. `engine_log 1` in `config.txt` adds the game&#x27;s own messages.
-
-## credits
-
-soloader-boilerplate and falsojni (volodymyr atamanenko, after theflow and rinnegatamante), vitagl and vitashark
-(rinnegatamante), kubridge (theflow). *carnivores: ice age* © tatem games; this project is not affiliated with
-tatem games.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/carnivores-ice-age-ps-vita-port/icon0.png" alt="Icono de Carnivores Ice Age" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Carnivores-Ice-Age-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Carnivores-Ice-Age-vita/releases/tag/v1.1.0" target="_blank" rel="noopener">Carnivores Ice Age</a></h2>
-                      <div class="release-name">Carnivores: Ice Age for PS Vita — v1.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.1.0</span>
-                    <span>2026-10-01 17:24 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1</div>
-                  
-                  <div class="body markdown-body"><h1>Carnivores: Ice Age for PS Vita — v1.1</h1>
-<p>PS Vita port of <em>Carnivores: Ice Age</em> (Android 1.5.4). This version adds full menu navigation with the
-buttons and the content packs from the game's Google Play expansion file.</p>
-<p><strong>The game files are not included.</strong> You need your own Android APK (1.5.4, <code>armeabi</code>) and, for zones 2–5, its
-Google Play expansion file. Installation, controls and options are in the <a target="_blank" rel="noopener noreferrer" href="README.md">README</a>.</p>
-<h2>Download</h2>
-<ul>
-<li><code>carnivoresiceage.vpk</code> — install with VitaShell (over v1.0 is fine, save data is kept).</li>
-</ul>
-<p>Requires <code>kubridge.skprx</code> and <code>libshacccg.suprx</code> (ShaRKBR33D).</p>
-<h2>What's new in v1.1</h2>
-<ul>
-<li><strong>Menus with physical buttons.</strong> D-Pad / left stick move a thin white marker that outlines each button, hunt
-cell or slider without covering it; the focused button also shows its red &quot;pressed&quot; look. Cross selects, Circle goes back, Left / Right
-change sliders. Works in the main menus, the hunt setup pages and the in-game pause / statistics screens.</li>
-<li><strong>Content packs from the Google Play OBB.</strong> Copy <code>main.33.com.tatemgames.iceage.obb</code> (or <code>main.obb</code>) to
-<code>ux0:data/carnivoresiceage/</code>, without extracting it:<ul>
-<li>pack 1: zones 2–3, shotgun, sniper rifle;</li>
-<li>pack 2: zones 4–5, double-barreled shotgun, crossbow.</li>
-</ul>
-</li>
-<li><strong>Fixed: purple sky and broken textures in zone 2 and later.</strong> v1.0 unlocked every zone even when its files
-were missing, and the game loaded an empty terrain. Packs are now unlocked only when the OBB contains them;
-without it only the first zone can be selected.</li>
-<li><strong>Facebook buttons hidden</strong> (options menu, statistics and trophy screens): they did nothing on Vita.</li>
-<li><strong>Faster right-stick camera</strong> with a finer response near the center.</li>
-<li>The <code>CarnivoresBundleOne/Two.apk</code> files mentioned in v1.0 belong to <em>Carnivores: Dinosaur Hunter</em> and do not
-work with this game; they can be deleted.</li>
-</ul>
-<h2>What works</h2>
-<ul>
-<li>Boot, menus, hunting in all five zones (with the OBB), weapons, calls, map, binoculars, save data.</li>
-<li>Physical controls for everything, menus included, plus the original touch controls.</li>
-<li>Audio (FMOD) through the Vita's audio output.</li>
-</ul>
-<h2>Highlights</h2>
-<ul>
-<li><strong>Right-stick camera</strong> that feeds the game's own camera input: fast and independent of the frame rate
-(<code>look_sensitivity</code> in <code>config.txt</code>, 10–400 %).</li>
-<li><strong>FPU instead of software floating point</strong> for both the game and FMOD (the APK is old <code>armeabi</code> code).
-Initial load: ~31 s → ~17 s.</li>
-<li><strong>No freeze on missing weapons</strong>: without the OBB the shotgun has no model; such a weapon keeps its stats
-and uses another weapon's model instead of locking up the game.</li>
-<li>In-game touch buttons drawn at 1 % opacity (<code>hud_opacity</code>, 0–100) since every one has a physical button;
-the compass stays fully visible. Circle is the animal call.</li>
-<li>Settings in <code>ux0:data/carnivoresiceage/config.txt</code>: language, content packs, camera speed / inversion,
-anti-aliasing (<code>msaa</code>), FPS / timing log (<code>show_fps</code>).</li>
-</ul>
-<h2>Known issues</h2>
-<ul>
-<li>3D scenes run well below 60 FPS (menus run at 60). Try <code>msaa 0</code>.</li>
-<li>Without the OBB only the first zone is available and the shotgun uses another weapon's model.</li>
-<li>Online features (Facebook, Google Play Games, ads, purchases) are disabled.</li>
-<li>No in-game exit dialog: quit with the PS button.</li>
-</ul>
-<h2>Reporting bugs</h2>
-<p>Open an issue with <code>ux0:data/carnivoresiceage/logs/carnivoresiceage_NNN.log</code> (the newest one) and, for a crash,
-the <code>.psp2dmp</code> file from <code>ux0:data/</code>. <code>engine_log 1</code> in <code>config.txt</code> adds the game's own messages.</p>
-<h2>Credits</h2>
-<p>soloader-boilerplate and FalsoJNI (Volodymyr Atamanenko, after TheFloW and Rinnegatamante), vitaGL and vitaShaRK
-(Rinnegatamante), kubridge (TheFloW). <em>Carnivores: Ice Age</em> © Tatem Games; this project is not affiliated with
-Tatem Games.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Carnivores-Ice-Age-vita/releases/download/v1.1.0/carnivoresiceage.vpk" target="_blank" rel="noopener">⬇ carnivoresiceage.vpk · 1.0 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="carnivores dinosaur hunter carnivores dinosaur hunter metalsyntax/carnivores-dinosaur-hunter-vita carnivores: dinosaur hunter — ps vita · v1.1.0 v1.1.0 ports # carnivores: dinosaur hunter — ps vita · v1.1.0
-
-&gt; paste the section below into the github release description. the title above goes in the
-&gt; release-title field; suggested tag: `v1.1.0`.
-
----
-
-**firing that works out of the box, an in-game menu to remap every button and tune the camera,
-and the whole game playable with buttons only, menus included.**
-
-## what&#x27;s new since v1.0.0
-
-### firing and weapons
-- **fire works with every firing method.** the game&#x27;s default firing method hides the fire button
-  that r/cross were mapped to in v1.0.0, so only l fired. **r** now fires whichever fire button the
-  game shows, fires directly in &quot;tap the screen&quot; mode, and draws a holstered weapon first.
-- new actions: **jump** (cross), **draw / holster** (square), **next weapon** (triangle),
-  **weapon list** (left), **photo zoom in / out** (right / unbound).
-- circle calls dinosaurs (like d-pad up); start alone is pause / back.
-
-### in-game &quot;ps vita controls &amp; camera&quot; menu
-open it with **start + select** while hunting (the hunt pauses), or **select** in the menus.
-- remap every action, including the rear touch corners. cross sets a button, square adds a
-  second one, triangle unbinds. a button belongs to one action at a time.
-- camera: right stick speed, invert up/down, invert left/right, swap sticks.
-- touch hud opacity. restore defaults.
-- saved to `controls.txt` and `config.txt` on close (both still editable by hand).
-
-### menus with buttons
-d-pad or left stick moves a highlight, cross presses, left/right move sliders, circle goes back.
-the highlight is fitted to what each item looks like on screen, and it works in the hunt menu
-(areas, dinosaurs, weapons). touching the screen hides it; the next d-pad press brings it back.
-
-### other
-- facebook share / login buttons are hidden and their functions disabled (no network on vita).
-- small performance fix: showing or hiding gui items no longer patches code on every call (the
-  game does it dozens of times per frame).
-
-## requirements
-
-- ps vita / ps tv with henkaku/enso (3.60–3.74 with a kernel plugin loader).
-- `kubridge.skprx` in `*kernel` of your taihen config.
-- `libshacccg.suprx` in `ur0:data/` (use sharkbr33d).
-- your own copy of the game apk (android **1.3.1**, `com.tatem.dinhunter`, `armeabi`).
-
-not compatible: **carnivores: dinosaur hunter hd** (`com.tatem.dinhunterhd`, 1.6.5) and its obb
-(`main.423.com.tatem.dinhunterhd.obb`). that is a newer opengl es 2 engine with a different
-asset layout and formats; this port can&#x27;t use any of it.
-
-## install / upgrade
-
-1. install `carnivoresdinosaurhunter.vpk` with vitashell (over v1.0.0 is fine: saves and packs are
-   kept).
-2. create `ux0:data/carnivoresdinosaurhunter/` and copy into it:
-   - the apk, named `carnivoresdinosaurhunter.apk`
-   - `libdinhunter.so` and `libfmodex.so` from the apk&#x27;s `lib/armeabi/`
-   - optional, the two content packs (separate apps on android):
-     `carnivoresbundleone.apk` renamed to `bundle1.apk` and `carnivoresbundletwo.apk` renamed to
-     `bundle2.apk`
-3. launch. the first load takes about 30 seconds on a static screen; that is normal.
-
-a `controls.txt` from v1.0.0 is replaced by the new defaults on first boot.
-
-## controls
-
-| vita | action |
-|---|---|
-| touch screen | original touch controls |
-| left stick | move |
-| right stick | look (frame-rate independent) |
-| r | fire (draws a holstered weapon first) / take photo |
-| cross | jump |
-| square | draw / holster weapon |
-| triangle | next weapon |
-| l | binoculars |
-| circle / d-pad up | call dinosaurs |
-| select / d-pad down | map |
-| d-pad left / right | weapon list / photo zoom in |
-| start | pause / back |
-| start + select | ps vita controls &amp; camera menu (select alone in menus) |
-
-## options
-
-most are in the in-game menu (start + select). by hand, in
-`ux0:data/carnivoresdinosaurhunter/config.txt`: `look_sensitivity` (10–400), `invert_look_y`,
-`invert_look_x`, `swap_sticks`, `msaa` (0 off / 1 2x / 2 4x), `hud_opacity` (0–100, default 1),
-`engine_log`, `vfp_float`. see the readme for details.
-
-## what works (confirmed on hardware)
-
-- boot, full asset loading straight from the apk, menus at 60 fps.
-- map loading and hunting in the 3d maps; a tester reports 30–60 fps while hunting.
-- fmod music and sound effects.
-- content packs (**pack 1**: areas 3–4 + sniper rifle; **pack 2**: area 6 + double-barrel shotgun
-  + crossbow), unlocked only when their apk is present.
-- saved games load on the next boot.
-- touch screen with the original controls, left/right stick movement and camera.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/carnivores-dinosaur-hunter-ps-vita-port/icon0.png" alt="Icono de Carnivores Dinosaur Hunter" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Carnivores-Dinosaur-Hunter-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita/releases/tag/v1.1.0" target="_blank" rel="noopener">Carnivores Dinosaur Hunter</a></h2>
-                      <div class="release-name">Carnivores: Dinosaur Hunter — PS Vita · v1.1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.1.0</span>
-                    <span>2026-10-01 16:51 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1.0</div>
-                  
-                  <div class="body markdown-body"><h1>Carnivores: Dinosaur Hunter — PS Vita · v1.1.0</h1>
-<blockquote>
-<p>Paste the section below into the GitHub release description. The title above goes in the
-release-title field; suggested tag: <code>v1.1.0</code>.</p>
-</blockquote>
-<hr>
-<p><strong>Firing that works out of the box, an in-game menu to remap every button and tune the camera,
-and the whole game playable with buttons only, menus included.</strong></p>
-<h2>What's new since v1.0.0</h2>
-<h3>Firing and weapons</h3>
-<ul>
-<li><strong>Fire works with every firing method.</strong> The game's default firing method hides the fire button
-that R/Cross were mapped to in v1.0.0, so only L fired. <strong>R</strong> now fires whichever fire button the
-game shows, fires directly in &quot;tap the screen&quot; mode, and draws a holstered weapon first.</li>
-<li>New actions: <strong>jump</strong> (Cross), <strong>draw / holster</strong> (Square), <strong>next weapon</strong> (Triangle),
-<strong>weapon list</strong> (Left), <strong>photo zoom in / out</strong> (Right / unbound).</li>
-<li>Circle calls dinosaurs (like D-pad up); Start alone is pause / back.</li>
-</ul>
-<h3>In-game &quot;PS Vita controls &amp; camera&quot; menu</h3>
-<p>Open it with <strong>Start + Select</strong> while hunting (the hunt pauses), or <strong>Select</strong> in the menus.</p>
-<ul>
-<li>Remap every action, including the rear touch corners. Cross sets a button, Square adds a
-second one, Triangle unbinds. A button belongs to one action at a time.</li>
-<li>Camera: right stick speed, invert up/down, invert left/right, swap sticks.</li>
-<li>Touch HUD opacity. Restore defaults.</li>
-<li>Saved to <code>controls.txt</code> and <code>config.txt</code> on close (both still editable by hand).</li>
-</ul>
-<h3>Menus with buttons</h3>
-<p>D-pad or left stick moves a highlight, Cross presses, Left/Right move sliders, Circle goes back.
-The highlight is fitted to what each item looks like on screen, and it works in the hunt menu
-(areas, dinosaurs, weapons). Touching the screen hides it; the next D-pad press brings it back.</p>
-<h3>Other</h3>
-<ul>
-<li>Facebook share / login buttons are hidden and their functions disabled (no network on Vita).</li>
-<li>Small performance fix: showing or hiding GUI items no longer patches code on every call (the
-game does it dozens of times per frame).</li>
-</ul>
-<h2>Requirements</h2>
-<ul>
-<li>PS Vita / PS TV with HENkaku/Enso (3.60–3.74 with a kernel plugin loader).</li>
-<li><code>kubridge.skprx</code> in <code>*KERNEL</code> of your taiHEN config.</li>
-<li><code>libshacccg.suprx</code> in <code>ur0:data/</code> (use ShaRKBR33D).</li>
-<li>Your own copy of the game APK (Android <strong>1.3.1</strong>, <code>com.tatem.dinhunter</code>, <code>armeabi</code>).</li>
-</ul>
-<p>Not compatible: <strong>Carnivores: Dinosaur Hunter HD</strong> (<code>com.tatem.dinhunterhd</code>, 1.6.5) and its OBB
-(<code>main.423.com.tatem.dinhunterhd.obb</code>). That is a newer OpenGL ES 2 engine with a different
-asset layout and formats; this port can't use any of it.</p>
-<h2>Install / upgrade</h2>
-<ol>
-<li>Install <code>carnivoresdinosaurhunter.vpk</code> with VitaShell (over v1.0.0 is fine: saves and packs are
-kept).</li>
-<li>Create <code>ux0:data/carnivoresdinosaurhunter/</code> and copy into it:<ul>
-<li>the APK, named <code>CarnivoresDinosaurHunter.apk</code></li>
-<li><code>libdinHunter.so</code> and <code>libfmodex.so</code> from the APK's <code>lib/armeabi/</code></li>
-<li>optional, the two content packs (separate apps on Android):
-<code>CarnivoresBundleOne.apk</code> renamed to <code>bundle1.apk</code> and <code>CarnivoresBundleTwo.apk</code> renamed to
-<code>bundle2.apk</code></li>
-</ul>
-</li>
-<li>Launch. The first load takes about 30 seconds on a static screen; that is normal.</li>
-</ol>
-<p>A <code>controls.txt</code> from v1.0.0 is replaced by the new defaults on first boot.</p>
-<h2>Controls</h2>
-<table>
-<thead>
-<tr>
-  <th>Vita</th>
-  <th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Touch screen</td>
-  <td>Original touch controls</td>
-</tr>
-<tr>
-  <td>Left stick</td>
-  <td>Move</td>
-</tr>
-<tr>
-  <td>Right stick</td>
-  <td>Look (frame-rate independent)</td>
-</tr>
-<tr>
-  <td>R</td>
-  <td>Fire (draws a holstered weapon first) / take photo</td>
-</tr>
-<tr>
-  <td>Cross</td>
-  <td>Jump</td>
-</tr>
-<tr>
-  <td>Square</td>
-  <td>Draw / holster weapon</td>
-</tr>
-<tr>
-  <td>Triangle</td>
-  <td>Next weapon</td>
-</tr>
-<tr>
-  <td>L</td>
-  <td>Binoculars</td>
-</tr>
-<tr>
-  <td>Circle / D-pad up</td>
-  <td>Call dinosaurs</td>
-</tr>
-<tr>
-  <td>Select / D-pad down</td>
-  <td>Map</td>
-</tr>
-<tr>
-  <td>D-pad left / right</td>
-  <td>Weapon list / photo zoom in</td>
-</tr>
-<tr>
-  <td>Start</td>
-  <td>Pause / back</td>
-</tr>
-<tr>
-  <td>Start + Select</td>
-  <td>PS Vita controls &amp; camera menu (Select alone in menus)</td>
-</tr>
-</tbody>
-</table>
-<h2>Options</h2>
-<p>Most are in the in-game menu (Start + Select). By hand, in
-<code>ux0:data/carnivoresdinosaurhunter/config.txt</code>: <code>look_sensitivity</code> (10–400), <code>invert_look_y</code>,
-<code>invert_look_x</code>, <code>swap_sticks</code>, <code>msaa</code> (0 off / 1 2x / 2 4x), <code>hud_opacity</code> (0–100, default 1),
-<code>engine_log</code>, <code>vfp_float</code>. See the README for details.</p>
-<h2>What works (confirmed on hardware)</h2>
-<ul>
-<li>Boot, full asset loading straight from the APK, menus at 60 FPS.</li>
-<li>Map loading and hunting in the 3D maps; a tester reports 30–60 FPS while hunting.</li>
-<li>FMOD music and sound effects.</li>
-<li>Content packs (<strong>Pack 1</strong>: areas 3–4 + sniper rifle; <strong>Pack 2</strong>: area 6 + double-barrel shotgun<ul>
-<li>crossbow), unlocked only when their APK is present.</li>
-</ul>
-</li>
-<li>Saved games load on the next boot.</li>
-<li>Touch screen with the original controls, left/right stick movement and camera.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita/releases/download/v1.1.0/carnivoresdinosaurhunter.vpk" target="_blank" rel="noopener">⬇ carnivoresdinosaurhunter.vpk · 1001.7 KB</a></div>
                 </div>
               </div>
             </article>
@@ -30339,447 +30399,10 @@ Initial Release</p>
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="osu!octave osu!octave v-atamanenko/osu-octave osu!octave v1.20 1.20 ports ### changelog
-- fixed #14 and #15: crashes on unconventional beatmaps.
-- added translation support and ukrainian, russian languages.
-- enhanced font loading performance.
-- changed default font to m plus (supports cyrillic, japanese, and other character subsets).
-- minor visual enhancements. 
-
-### updating — vita
-if you already have the previous (v1.12) version installed, you don&#x27;t need to go through the whole installation process again. to update:
-1. download and install `osu-octave.vpk`. *note: you **can** install it **without** uninstalling the game first. it will just update.*
-2. download `data-clean.zip`. in `ux0:/data/osu/` delete the `skins` folder. backup your custom skins if you had any. from `data-clean.zip`, unpack `skins` and `languages` folders and place them into in `ux0:/data/osu/`.
-
-to update from older versions, follow the installation process.
-
-### installation — vita
-0. you would need to have cfw-enabled ps vita. &lt;br&gt; (*[guide: setting up custom firmware on ps vita](https://vita.hacks.guide/)*)
-1. download and install the latest `osu-octave.vpk` from [the releases page](https://github.com/v-atamanenko/osu-octave/releases/latest). &lt;br&gt; (*[guide: how to install homebrew apps](https://www.cfwaifu.com/vitashell/)*)
-2. **a) if you want to have some maps to play from the start**: &lt;br&gt; 
-download the latest `data-maps.zip` from [the releases page](https://github.com/v-atamanenko/osu-octave/releases/latest).
-copy over this archive to `ux0:/data/` folder on your vita and unpack. the resulting directory structure must be like this: `ux0:/data/osu/skins/`. &lt;br&gt;&lt;br&gt;
-**b) if you want to have a clean installation without default maps**: &lt;br&gt;
-download the latest `data-clean.zip` from [the releases page](https://github.com/v-atamanenko/osu-octave/releases/latest).
-copy over this archive to `ux0:/data/` folder on your vita and unpack. the resulting directory structure must be like this: `ux0:/data/osu/skins/`.
-3. enjoy!">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-osu-octave/icon0.png" alt="Icono de osu!octave" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · v-atamanenko/osu-octave</div>
-                      <h2><a href="https://github.com/v-atamanenko/osu-octave/releases/tag/1.20" target="_blank" rel="noopener">osu!octave</a></h2>
-                      <div class="release-name">osu!octave v1.20</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.20</span>
-                    <span>2022-04-28 22:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.20</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.20</div>
-                  
-                  <div class="body markdown-body"><h3>Changelog</h3>
-<ul>
-<li>Fixed #14 and #15: Crashes on unconventional beatmaps.</li>
-<li>Added translation support and Ukrainian, Russian languages.</li>
-<li>Enhanced font loading performance.</li>
-<li>Changed default font to M PLUS (supports Cyrillic, Japanese, and other character subsets).</li>
-<li>Minor visual enhancements.</li>
-</ul>
-<h3>Updating — Vita</h3>
-<p>If you already have the previous (v1.12) version installed, you don't need to go through the whole installation process again. To update:</p>
-<ol>
-<li>Download and install <code>osu-octave.vpk</code>. <em>Note: You <strong>can</strong> install it <strong>without</strong> uninstalling the game first. It will just update.</em></li>
-<li>Download <code>data-clean.zip</code>. In <code>ux0:/data/osu/</code> delete the <code>skins</code> folder. Backup your custom skins if you had any. From <code>data-clean.zip</code>, unpack <code>skins</code> and <code>languages</code> folders and place them into In <code>ux0:/data/osu/</code>.</li>
-</ol>
-<p>To update from older versions, follow the installation process.</p>
-<h3>Installation — Vita</h3>
-<ol>
-<li>You would need to have CFW-enabled PS Vita. <br> (<em><a target="_blank" rel="noopener noreferrer" href="https://vita.hacks.guide/">Guide: Setting up custom firmware on PS Vita</a></em>)</li>
-<li>Download and install the latest <code>osu-octave.vpk</code> from <a target="_blank" rel="noopener noreferrer" href="https://github.com/v-atamanenko/osu-octave/releases/latest">the Releases page</a>. <br> (<em><a target="_blank" rel="noopener noreferrer" href="https://www.cfwaifu.com/vitashell/">Guide: How to install homebrew apps</a></em>)</li>
-<li><strong>A) If you want to have some maps to play from the start</strong>: <br>
-Download the latest <code>data-maps.zip</code> from <a target="_blank" rel="noopener noreferrer" href="https://github.com/v-atamanenko/osu-octave/releases/latest">the Releases page</a>.
-Copy over this archive to <code>ux0:/data/</code> folder on your Vita and unpack. The resulting directory structure must be like this: <code>ux0:/data/osu/skins/</code>. <br><br>
-<strong>B) If you want to have a clean installation without default maps</strong>: <br>
-Download the latest <code>data-clean.zip</code> from <a target="_blank" rel="noopener noreferrer" href="https://github.com/v-atamanenko/osu-octave/releases/latest">the Releases page</a>.
-Copy over this archive to <code>ux0:/data/</code> folder on your Vita and unpack. The resulting directory structure must be like this: <code>ux0:/data/osu/skins/</code>.</li>
-<li>Enjoy!</li>
-</ol>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/v-atamanenko/osu-octave/releases/download/1.20/osu-octave.vpk" target="_blank" rel="noopener">⬇ osu-octave.vpk · 2.4 MB</a><a class="btn" href="https://github.com/v-atamanenko/osu-octave/releases/download/1.20/data-clean.zip" target="_blank" rel="noopener">data-clean.zip · 15.7 MB</a><a class="btn" href="https://github.com/v-atamanenko/osu-octave/releases/download/1.20/data-maps.zip" target="_blank" rel="noopener">data-maps.zip · 134.3 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="vita launcher vita launcher cy33hc/vita-launcher v3.9.6 latest utilities **v3.9.6**
-- improved download speed of roms from ftp server. from my pstv lan cable, speed increase from 3.7mb/s to 6.2mb/s.
-
-**v3.9.5**
-- launch dreamcast games via new flycast app
-
-**v3.9.4**
-- fixed issue #48 where duplicate entries of games with dlc.
-
-**v3.9.3**
-- add ability to config a default global psp boot settings
-- expanded the per game psp boot settings to include the following
-  -  &quot;graphics filtering&quot;, &quot;smooth graphics&quot;, &quot;flux filter color&quot;, &quot;psp/ps1 scale&quot; etc...
-![newbootsettings](https://github.com/cy33hc/vita-launcher/blob/master/screenshots/new_boot_settings.jpg)
-
-**v3.9.2**
-- add new yoyo loader boot options &quot;use uncached memory&quot; and &quot;use double buffering&quot;
-
-**v3.9.1**
-- added support for easyrpg games put in sub directories or in zip files. only zip files with compression method **store** or **deflate** (not deflate64) are supported.
-
-**v3.9**
-- added support for booting easyrpg games. games have to be put into the **ux0:data/easyrpg-player** folder. you also need to download and install the latest nightly build of easyrpg from the official website that supports booting games externally. https://ci.easyrpg.org/job/player-vita/
-
-**v3.8.5**
-- fix updater dialog showing when nothing to update
-
-**v3.8.4**
-- add &quot;disable audio&quot; boot settings for yoyo loader
-- updated yoyo thumbnails db
-- fixed an issue downloading gms game icons
-
-**v3.8.3**
-- fix psp games can&#x27;t boot after plugin settings changed.
-
-**v3.8.2**
-- fix adernaline boot settings not saved due to missing tables. only some people affected based on the upgrade path.
-- improve psp plugins navigation. default selects the checkbox instead of the &quot;delete&quot; button.
-
-**v3.81**
-- fix gpu crash which was caused by texture being deleted while still in use. fixed by increasing the delay for cleanup of unused textures.
-
-**v3.8**
-- adds ability to manage psp plugins from within vita-launcher. also allow per game plugin configuration.
-![plugin1](https://github.com/cy33hc/vita-launcher/blob/master/screenshots/global_plugins.jpg)
-
-**v3.7**
-- updated fonts to handle more languages and special characters for copyright, tm etc which shows as &quot;?&quot;
-- better detection of itls-enso and abb(adernaline bubble booter plugin)
-- warn only once for missing itls-enso/abb install
-- overclocked cpu/gpu which seem to fix the random gpu crash.
-- **add ability to config a custom location** to look for bubbles/psp/ps1/pspmini icons.
-  - for bubbles, create a png file with the name of the title_id (eg. god of war file is pcsa00126.png)
-  - for psp iso, create a png file with the same name as the iso. (eg.&quot;ape escape.iso&quot;, create the png file called &quot;ape escape.png&quot;)
-  - for eboot.pbp, create png file with the same name as the folder that contains the eboot.pbp file.  (eg. &quot;ux0:pspemu/psp/game/final fantasy vii/eboot.pbp&quot;, create the png file called &quot;final fantasy vii.png&quot;
-
-**v3.6.6**
-- fix issues where duplicate retro alternate cores created in settings
-
-**v3.6.5**
-- auto installs/updates the flycast core in retroarch by extracting the smc.bin and smc2.bin from the flycast app
-
-**v3.6.4**
-- fix issue where yoyo settings isn&#x27;t saved if yy.cfg does not exists
-
-**v3.6.3**
-- check if itls-enso is installed before attempt to download updates. itls-enso is needed for this feature
-
-**v3.6.2**
-- add &quot;run with mem squeezing&quot; option to yoyo boot settings
-
-**v3.6.1**
-- add support for &quot;enable network features&quot; option to yoyo launcher boot settings
-
-**v3.6**
-- add option to apply bilinear filters to icons. this is enabled by default and can be change in the global settings.
-- add support to launch game maker studio games via yoyo launcher (new). thx to @rinnegatamante for this awesome app.
-- add support for scanning game maker studio games from ftp server. like support for roms, update the &quot;roms_path&quot; of gms category with &quot;ftp0:&quot; prefix.
-   - for both ux0 and ftp0, put an icon0.png in the same folder as the game.apk. vita-launcher will use that for the display icon.
-- add feature to auto-install &quot;adrenaline launcher&quot;, &quot;yoyo launcher&quot; (new). these are custom bubbles required by vita-launcher to launch games without bubbles.
-- add option to check and install updates for &quot;yoyo launcher&quot;, &quot;adrenaline launcher&quot;, &quot;vita launcher&quot;. there&#x27;s a new action &quot;check for updates&quot; can be found under the &quot;actions&quot; tab of settings.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-vita-launcher/icon0.png" alt="Icono de Vita Launcher" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · cy33hc/vita-launcher</div>
-                      <h2><a href="https://github.com/cy33hc/vita-launcher/releases/tag/latest" target="_blank" rel="noopener">Vita Launcher</a></h2>
-                      <div class="release-name">v3.9.6</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">latest</span>
-                    <span>2022-04-18 05:14 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.3.9.6</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.3.9.6 → release latest</div>
-                  
-                  <div class="body markdown-body"><p><strong>v3.9.6</strong></p>
-<ul>
-<li>Improved download speed of ROMS from FTP server. From my pstv lan cable, speed increase from 3.7MB/s to 6.2MB/s.</li>
-</ul>
-<p><strong>v3.9.5</strong></p>
-<ul>
-<li>Launch Dreamcast games via new Flycast app</li>
-</ul>
-<p><strong>v3.9.4</strong></p>
-<ul>
-<li>Fixed issue #48 where duplicate entries of games with DLC.</li>
-</ul>
-<p><strong>v3.9.3</strong></p>
-<ul>
-<li>Add ability to config a default global PSP boot settings</li>
-<li>Expanded the per game PSP boot settings to include the following<ul>
-<li>&quot;Graphics Filtering&quot;, &quot;Smooth Graphics&quot;, &quot;Flux Filter Color&quot;, &quot;PSP/PS1 Scale&quot; etc...
-<img src="https://github.com/cy33hc/vita-launcher/blob/master/screenshots/new_boot_settings.jpg" alt="newbootsettings"></li>
-</ul>
-</li>
-</ul>
-<p><strong>v3.9.2</strong></p>
-<ul>
-<li>Add new YoYo Loader boot options &quot;Use Uncached Memory&quot; and &quot;Use Double Buffering&quot;</li>
-</ul>
-<p><strong>v3.9.1</strong></p>
-<ul>
-<li>Added support for EasyRPG games put in sub directories or in zip files. Only zip files with compression method <strong>Store</strong> or <strong>Deflate</strong> (not Deflate64) are supported.</li>
-</ul>
-<p><strong>v3.9</strong></p>
-<ul>
-<li>Added support for Booting EasyRPG games. Games have to be put into the <strong>ux0:data/easyrpg-player</strong> folder. You also need to download and install the latest nightly build of EasyRPG from the official website that supports booting games externally. <a target="_blank" rel="noopener noreferrer" href="https://ci.easyrpg.org/job/player-vita/">https://ci.easyrpg.org/job/player-vita/</a></li>
-</ul>
-<p><strong>v3.8.5</strong></p>
-<ul>
-<li>Fix updater dialog showing when nothing to update</li>
-</ul>
-<p><strong>v3.8.4</strong></p>
-<ul>
-<li>Add &quot;disable audio&quot; boot settings for yoyo loader</li>
-<li>Updated yoyo thumbnails db</li>
-<li>Fixed an issue downloading gms game icons</li>
-</ul>
-<p><strong>v3.8.3</strong></p>
-<ul>
-<li>Fix psp games can't boot after plugin settings changed.</li>
-</ul>
-<p><strong>v3.8.2</strong></p>
-<ul>
-<li>Fix adernaline boot settings not saved due to missing tables. Only some people affected based on the upgrade path.</li>
-<li>Improve psp plugins navigation. Default selects the checkbox instead of the &quot;Delete&quot; button.</li>
-</ul>
-<p><strong>v3.81</strong></p>
-<ul>
-<li>Fix GPU crash which was caused by texture being deleted while still in use. Fixed by increasing the delay for cleanup of unused textures.</li>
-</ul>
-<p><strong>v3.8</strong></p>
-<ul>
-<li>Adds ability to manage PSP plugins from within Vita-Launcher. Also allow per game plugin configuration.
-<img src="https://github.com/cy33hc/vita-launcher/blob/master/screenshots/global_plugins.jpg" alt="plugin1"></li>
-</ul>
-<p><strong>v3.7</strong></p>
-<ul>
-<li>Updated fonts to handle more languages and special characters for copyright, TM etc which shows as &quot;?&quot;</li>
-<li>Better detection of iTLS-Enso and ABB(Adernaline Bubble Booter plugin)</li>
-<li>Warn ONLY ONCE for missing iTLS-Enso/ABB install</li>
-<li>Overclocked CPU/GPU which seem to fix the random GPU crash.</li>
-<li><strong>Add ability to config a custom location</strong> to look for Bubbles/PSP/PS1/PSPMini icons.<ul>
-<li>For Bubbles, create a png file with the name of the TITLE_ID (eg. God of War file is PCSA00126.png)</li>
-<li>For PSP ISO, create a png file with the same name as the ISO. (eg.&quot;Ape Escape.iso&quot;, create the png file called &quot;Ape Escape.png&quot;)</li>
-<li>For EBOOT.PBP, create png file with the same name as the folder that contains the EBOOT.PBP file.  (Eg. &quot;ux0:pspemu/PSP/GAME/Final Fantasy VII/EBOOT.PBP&quot;, create the png file called &quot;Final Fantasy VII.png&quot;</li>
-</ul>
-</li>
-</ul>
-<p><strong>v3.6.6</strong></p>
-<ul>
-<li>Fix issues where duplicate Retro alternate cores created in settings</li>
-</ul>
-<p><strong>v3.6.5</strong></p>
-<ul>
-<li>Auto installs/updates the flycast core in RetroArch by extracting the smc.bin and smc2.bin from the Flycast app</li>
-</ul>
-<p><strong>v3.6.4</strong></p>
-<ul>
-<li>Fix issue where YoYo settings isn't saved if yy.cfg does not exists</li>
-</ul>
-<p><strong>v3.6.3</strong></p>
-<ul>
-<li>Check if iTLS-Enso is installed before attempt to download updates. iTLS-Enso is needed for this feature</li>
-</ul>
-<p><strong>v3.6.2</strong></p>
-<ul>
-<li>Add &quot;Run with Mem Squeezing&quot; option to YoYo boot settings</li>
-</ul>
-<p><strong>v3.6.1</strong></p>
-<ul>
-<li>Add support for &quot;Enable network features&quot; option to YoYo Launcher boot settings</li>
-</ul>
-<p><strong>v3.6</strong></p>
-<ul>
-<li>Add option to apply Bilinear Filters to icons. This is enabled by default and can be change in the Global Settings.</li>
-<li>Add support to launch Game Maker Studio games via YoYo Launcher (NEW). Thx to @Rinnegatamante for this awesome app.</li>
-<li>Add support for scanning Game Maker Studio games from FTP Server. Like support for ROMS, update the &quot;roms_path&quot; of GMS category with &quot;ftp0:&quot; prefix.<ul>
-<li>For both ux0 and ftp0, put an icon0.png in the same folder as the game.apk. Vita-Launcher will use that for the display icon.</li>
-</ul>
-</li>
-<li>Add feature to auto-install &quot;Adrenaline Launcher&quot;, &quot;YoYo Launcher&quot; (NEW). These are custom bubbles required by Vita-Launcher to launch games without bubbles.</li>
-<li>Add option to check and install updates for &quot;YoYo Launcher&quot;, &quot;Adrenaline Launcher&quot;, &quot;Vita Launcher&quot;. There's a new action &quot;Check for updates&quot; can be found under the &quot;Actions&quot; tab of Settings.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/AdrenalineLauncher.vpk" target="_blank" rel="noopener">⬇ AdrenalineLauncher.vpk · 245.1 KB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/adr_launcher_version.txt" target="_blank" rel="noopener">adr_launcher_version.txt · 4.0 B</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/extract_eboot_iso_linux" target="_blank" rel="noopener">extract_eboot_iso_linux · 2.4 MB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/extract_eboot_iso_windows.exe" target="_blank" rel="noopener">extract_eboot_iso_windows.exe · 2.7 MB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/global_plugins.jpg" target="_blank" rel="noopener">global_plugins.jpg · 93.7 KB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/launcher.vpk" target="_blank" rel="noopener">launcher.vpk · 5.0 MB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/new_boot_settings.jpg" target="_blank" rel="noopener">new_boot_settings.jpg · 161.9 KB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/per_game_plugins.jpg" target="_blank" rel="noopener">per_game_plugins.jpg · 91.1 KB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/version.txt" target="_blank" rel="noopener">version.txt · 3.0 B</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/yoyo_launcher.vpk" target="_blank" rel="noopener">yoyo_launcher.vpk · 3.7 MB</a><a class="btn" href="https://github.com/cy33hc/vita-launcher/releases/download/latest/yoyo_launcher_version.txt" target="_blank" rel="noopener">yoyo_launcher_version.txt · 4.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="mvplayer mvplayer anthj/mvplayer mvplayer.vpk v1.4 utilities -- mvplayer v1.4 by anthj
--- ======================
--- fixed image loading issues to handle more movies
--- added (+5 movie) page skip on l and r triggers
--- added movie count in top left corner">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-mvplayer/icon0.png" alt="Icono de MVPlayer" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · AntHJ/MVPlayer</div>
-                      <h2><a href="https://github.com/AntHJ/MVPlayer/releases/tag/v1.4" target="_blank" rel="noopener">MVPlayer</a></h2>
-                      <div class="release-name">MVPlayer.vpk</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.4</span>
-                    <span>2022-04-17 00:23 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.4</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.4</div>
-                  
-                  <div class="body markdown-body"><p>-- MVPlayer v1.4 by AntHJ
--- ======================
--- Fixed image loading issues to handle more movies
--- added (+5 movie) page skip on L and R Triggers
--- added movie count in top left corner</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/AntHJ/MVPlayer/releases/download/v1.4/MVPLAYER0.vpk" target="_blank" rel="noopener">⬇ MVPLAYER0.vpk · 4.3 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="yoyo loader vita yoyo loader vita rinnegatamante/yoyoloader_vita nightly 2026-10-22 nightly emulators * 0d57846 fix videoplayer build compilation.
-* 09550b0 add kubridge compilation in ci.
-* 862598c properly implement __gnu_unwind_find_exidx.
-* b9261ac update to latest so loader variant.
-* e32f68f integrate vitadb ci webhook.
-* 1875da6 make it compatible with latest vitagl commit.
-* f95e9f7 add minit banner (#159)
-* 051de66 fix blackscreen issue on latest nightly.
-* 4d944be update to latest vitagl and vitasdk.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-yoyo-loader-vita/icon0.png" alt="Icono de YoYo Loader Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">EMULATORS · GITHUB · Rinnegatamante/yoyoloader_vita</div>
-                      <h2><a href="https://github.com/Rinnegatamante/yoyoloader_vita/releases/tag/Nightly" target="_blank" rel="noopener">YoYo Loader Vita</a></h2>
-                      <div class="release-name">Nightly 2026-10-22</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">Nightly</span>
-                    <span>2022-04-08 09:29 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.Nightly</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.Nightly</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>0d57846 Fix videoplayer build compilation.</li>
-<li>09550b0 Add kubridge compilation in CI.</li>
-<li>862598c Properly implement __gnu_Unwind_Find_exidx.</li>
-<li>b9261ac Update to latest so loader variant.</li>
-<li>e32f68f Integrate VitaDB CI webhook.</li>
-<li>1875da6 Make it compatible with latest vitaGL commit.</li>
-<li>f95e9f7 Add Minit Banner (#159)</li>
-<li>051de66 Fix blackscreen issue on latest Nightly.</li>
-<li>4d944be Update to latest vitaGL and vitasdk.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Rinnegatamante/yoyoloader_vita/releases/download/Nightly/YoYoLoader.vpk" target="_blank" rel="noopener">⬇ YoYoLoader.vpk · 7.9 MB</a><a class="btn" href="https://github.com/Rinnegatamante/yoyoloader_vita/releases/download/Nightly/banners.zip" target="_blank" rel="noopener">banners.zip · 9.4 MB</a><a class="btn" href="https://github.com/Rinnegatamante/yoyoloader_vita/releases/download/Nightly/builder.zip" target="_blank" rel="noopener">builder.zip · 5.7 MB</a><a class="btn" href="https://github.com/Rinnegatamante/yoyoloader_vita/releases/download/Nightly/libopenal.a" target="_blank" rel="noopener">libopenal.a · 972.4 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="hike back vita hike back vita silvercrow2323/hike-back-vita hike back / psvita port v.1.1 v.1.1 ports ## changelog v.1.1
-
-- removed unnecessary files
-- minor fixes">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-hike-back-vita/icon0.png" alt="Icono de HIKE BACK Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · SilverCrow2323/HIKE-BACK-Vita</div>
-                      <h2><a href="https://github.com/SilverCrow2323/HIKE-BACK-Vita/releases/tag/v.1.1" target="_blank" rel="noopener">HIKE BACK Vita</a></h2>
-                      <div class="release-name">HIKE BACK / PSVita Port v.1.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v.1.1</span>
-                    <span>2022-04-07 00:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.1</div>
-                  
-                  <div class="body markdown-body"><h2>Changelog v.1.1</h2>
-<ul>
-<li>Removed unnecessary files</li>
-<li>Minor fixes</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/SilverCrow2323/HIKE-BACK-Vita/releases/download/v.1.1/HIKE.BACK-v1.1.vpk" target="_blank" rel="noopener">⬇ HIKE.BACK-v1.1.vpk · 13.8 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="sakura succubus iv vita sakura succubus iv vita silvercrow2323/sakura-succubus-4-vita sakura succubus 4 / psvita port v.1.1 v.1.1 ports ## changelog v.1.1
-
-- removed unnecessary files">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-sakura-succubus-iv-vita/icon0.png" alt="Icono de Sakura Succubus IV Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · SilverCrow2323/Sakura-Succubus-4-Vita</div>
-                      <h2><a href="https://github.com/SilverCrow2323/Sakura-Succubus-4-Vita/releases/tag/v.1.1" target="_blank" rel="noopener">Sakura Succubus IV Vita</a></h2>
-                      <div class="release-name">Sakura Succubus 4 / PSVita Port v.1.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v.1.1</span>
-                    <span>2022-04-07 00:52 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.1</div>
-                  
-                  <div class="body markdown-body"><h2>Changelog v.1.1</h2>
-<ul>
-<li>Removed unnecessary files</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/SilverCrow2323/Sakura-Succubus-4-Vita/releases/download/v.1.1/Sakura.Succubus.IV-01.10.vpk" target="_blank" rel="noopener">⬇ Sakura.Succubus.IV-01.10.vpk · 13.9 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-05 10:07 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-05 19:17 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
