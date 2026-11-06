@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>479</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">387</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>92</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">386</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>93</strong><span>pendientes</span></div>
         <div class="stat"><strong>471</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
@@ -219,7 +219,505 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="nazi zombies portable nazi zombies portable nzp-team/nzportable 2.0.0-indev+20261106054138 nightly ports this is a nightly generated automagically. nightlies are generated at 3am est if changes are made to any component of the project in the past 24 hours. be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita the impossible game — ps vita port v1.3.1 v1.3.1 ports # the impossible game — ps vita port v1.3.1
+
+hotfix for v1.3.0: some saves unlocked trophies the player never earned on the first launch.
+
+## 🐛 fixed in v1.3.1
+
+- **phantom trophies on first launch**: saves written by older builds could hold garbage values (e.g. `38`, `20`, `15`) in medal slots. the retroactive unlock treated any non-zero value as earned, so it unlocked e.g. *sin banderas 3*, *practica 4* and *sin banderas 4* right after boot. the game only ever stores `1` in a medal slot, so any other value is now reset to `0` when the save loads (and logged as `save medal[i]=n corrupt`).
+- trophies that v1.3.0 already unlocked by mistake stay unlocked. the vita can&#x27;t re-lock a trophy; you can only delete the game&#x27;s trophy data.
+
+---
+
+# v1.3.0
+
+adds **native ps vita trophies**: every in-game medal now also unlocks a system trophy, with a platinum for collecting them all.
+
+---
+
+## 🏆 new in v1.3.0: trophies
+
+- **13 trophies** (1 platinum, 5 gold, 1 silver, 6 bronze), one per native medal:
+
+| trophy | type | how to get it |
+|---|---|---|
+| lo imposible | platinum | unlock every other trophy |
+| perseverancia | silver | 500 attempts without quitting |
+| saltarin | bronze | 999 jumps in total |
+| practica 1-5 | bronze | finish level 1 / xbox level / level 2 / level 3 / level 4 in practice mode |
+| sin banderas 1-5 | gold | finish that level with no flags |
+
+- **retroactive unlocks**: medals already in your save unlock their trophies on the next launch.
+- trophy icons are the game&#x27;s own medal art.
+- ⚠️ the **base game** only has 6 medals (level 1 + xbox level), so the platinum needs the **level pack**.
+- requires [**notrpdrm**](https://github.com/rinnegatamante/notrpdrm/releases) under `*main` in `ur0:tai/config.txt` (**reboot** after adding it). install the **full vpk** — trophies live in `sce_sys/` and are not installed by copying only `eboot.bin`.
+
+---
+
+## 🚨 critical fixes (from v1.2.1)
+
+### 1. fix for white worlds / missing textures
+- **stack alignment fix in `impossiblegame_initgame`**: in previous builds, passing `fps` as a `jfloat` under modern hardfp toolchains caused the compiler to place it in vfp register `s0`, skipping a stack slot. `libimpossible.so` (compiled under softfp aapcs) expected `fps` at `[sp, 4]`, which shifted the texture id arguments: the main texture atlas (`gametextures.png`) received the second texture id and the second received garbage, leaving game textures unbound and rendering obstacles and background as blank white quads. passing `fps` as a 32-bit bitcasted word preserves exact stack layout.
+- **fixed-function gles1 float bridge**: calls to `glcolor4f`, `glclearcolor`, `gltexenvf`, `glpointsize`, `gltranslatef`, and `glrotatef` from `libimpossible.so` now pass through softfp-to-hardfp integer bridge wrappers, ensuring color and transform values are correctly delivered to vitagl.
+
+### 2. fix for total audio silence
+- **abi mismatch in math functions**: `stb_vorbis` was passing float arguments in integer registers (`r0-r3`), while vitasdk gcc 15 `libm.a` (`sin`, `cos`, `pow`, `floor`) expected them in vfp registers (`s0-s15`). this resulted in math functions reading uninitialized registers and returning nans/0, causing audio decoding to output total silence.
+- rebuilding the project natively with `-mfloat-abi=hard` and linking against hardfp runtime libraries completely restores bgm and sfx audio playback.
+
+### 3. abi bridge wrappers (`source/dynlib.c`)
+- implemented dedicated softfp-to-hardfp bridge wrappers for all 10 external float functions imported by `libimpossible.so`:
+  - math: `sinf`, `cosf`, `truncf`, `round`
+  - gles1: `glclearcolor`, `glcolor4f`, `gltexenvf`, `glpointsize`, `gltranslatef`, `glrotatef`
+- removed `-wl,--no-warn-mismatch` entirely from cmake; all project components now compile and link cleanly with `-mfloat-abi=hard`.
+
+---
+
+## ✨ features &amp; universal compatibility (from v1.2.0)
+
+- **universal apk auto-detection**:
+  - dynamically resolves jni exports with automatic fallback between the level pack prefix (`java_com_flukedude_impossiblegamelevelpack_*`) and the base game prefix (`java_com_flukedude_impossiblegame_*`).
+  - drop in either `05133-the-impossible-1.5.2.apk` (2 levels) or `05133-impossible-level-pack.apk` (5 levels) — no code changes or separate builds needed.
+- **adaptive menus &amp; ui**:
+  - **base game mode (2 levels)**: automatically displays the original 2-button level selector (fire aura &amp; original xbox level) and restricts stats &amp; medals to 3 subpages, eliminating missing texture errors.
+  - **level pack mode (5 levels)**: automatically enables the full 5-level grid and 6 subpages for medals and stats.
+- **bounded save synchronization**:
+  - syncs up to 6 medals / 2 levels when running the base game, and 12 medals / 5 levels with the level pack.
+- **toolchain modernization**:
+  - full compatibility with modern vitasdk (gcc 15.2.0 / c23 standards).
+  - resolved `atomic_var_init` deprecation in `logger.c`.
+  - corrected return types in falsojni (`getprimitivearraycritical`, `jda_sizeof`).
+- **persistent diagnostics logging**:
+  - file logger (`ux0:data/theimpossiblegame/logs/log_xxx.log`) enabled unconditionally for runtime diagnostics.
+
+---
+
+## 📋 requirements
+
+- ps vita / ps tv running custom firmware (**henkaku** or **enso**), firmware 3.60/3.65+.
+- [**kubridge**](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin (`ur0:tai/config.txt`).
+- [**notrpdrm**](https://github.com/rinnegatamante/notrpdrm/releases) under `*main` in `ur0:tai/config.txt` (only needed for trophies).
+- [**libshacccg.suprx**](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
+- a legally obtained copy of:
+  - **the impossible game** for android (`05133-the-impossible-1.5.2.apk`), **or**
+  - **the impossible game: level pack** (`05133-impossible-level-pack.apk`).
+
+---
+
+## 📦 installation instructions
+
+1. install `theimpossiblegame.vpk` on your ps vita using vitashell.
+2. open your legally obtained `.apk` using any zip tool (7-zip, winrar, etc.):
+   - copy `lib/armeabi-v7a/libimpossible.so` to `ux0:data/theimpossiblegame/libimpossible.so`.
+   - copy the `assets/` folder to `ux0:data/theimpossiblegame/assets/`.
+   - copy the `res/` folder to `ux0:data/theimpossiblegame/res/`.
+3. *(optional)* if you own the **level pack** (`05133-impossible-level-pack.apk`), simply copy and overwrite `libimpossible.so` and merge the `assets/` and `res/` folders into `ux0:data/theimpossiblegame/`. the game will automatically detect all 5 levels.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.3.1" target="_blank" rel="noopener">The Impossible Game</a></h2>
+                      <div class="release-name">The Impossible Game — PS Vita Port v1.3.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.3.1</span>
+                    <span>2026-11-06 17:37 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.2.0 → release v1.3.1</div>
+                  
+                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.3.1</h1>
+<p>Hotfix for v1.3.0: some saves unlocked trophies the player never earned on the first launch.</p>
+<h2>🐛 Fixed in v1.3.1</h2>
+<ul>
+<li><strong>Phantom trophies on first launch</strong>: saves written by older builds could hold garbage values (e.g. <code>38</code>, <code>20</code>, <code>15</code>) in medal slots. The retroactive unlock treated any non-zero value as earned, so it unlocked e.g. <em>SIN BANDERAS 3</em>, <em>PRACTICA 4</em> and <em>SIN BANDERAS 4</em> right after boot. The game only ever stores <code>1</code> in a medal slot, so any other value is now reset to <code>0</code> when the save loads (and logged as <code>Save medal[i]=N corrupt</code>).</li>
+<li>Trophies that v1.3.0 already unlocked by mistake stay unlocked. The Vita can't re-lock a trophy; you can only delete the game's trophy data.</li>
+</ul>
+<hr>
+<h1>v1.3.0</h1>
+<p>Adds <strong>native PS Vita trophies</strong>: every in-game medal now also unlocks a system trophy, with a Platinum for collecting them all.</p>
+<hr>
+<h2>🏆 New in v1.3.0: Trophies</h2>
+<ul>
+<li><strong>13 trophies</strong> (1 Platinum, 5 Gold, 1 Silver, 6 Bronze), one per native medal:</li>
+</ul>
+<table>
+<thead>
+<tr>
+  <th>Trophy</th>
+  <th>Type</th>
+  <th>How to get it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>LO IMPOSIBLE</td>
+  <td>Platinum</td>
+  <td>Unlock every other trophy</td>
+</tr>
+<tr>
+  <td>PERSEVERANCIA</td>
+  <td>Silver</td>
+  <td>500 attempts without quitting</td>
+</tr>
+<tr>
+  <td>SALTARIN</td>
+  <td>Bronze</td>
+  <td>999 jumps in total</td>
+</tr>
+<tr>
+  <td>PRACTICA 1-5</td>
+  <td>Bronze</td>
+  <td>Finish Level 1 / Xbox Level / Level 2 / Level 3 / Level 4 in Practice Mode</td>
+</tr>
+<tr>
+  <td>SIN BANDERAS 1-5</td>
+  <td>Gold</td>
+  <td>Finish that level with no flags</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Retroactive unlocks</strong>: medals already in your save unlock their trophies on the next launch.</li>
+<li>Trophy icons are the game's own medal art.</li>
+<li>⚠️ The <strong>base game</strong> only has 6 medals (Level 1 + Xbox Level), so the Platinum needs the <strong>Level Pack</strong>.</li>
+<li>Requires <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/NoTrpDrm/releases"><strong>NoTrpDrm</strong></a> under <code>*main</code> in <code>ur0:tai/config.txt</code> (<strong>reboot</strong> after adding it). Install the <strong>full VPK</strong> — trophies live in <code>sce_sys/</code> and are not installed by copying only <code>eboot.bin</code>.</li>
+</ul>
+<hr>
+<h2>🚨 Critical Fixes (from v1.2.1)</h2>
+<h3>1. Fix for White Worlds / Missing Textures</h3>
+<ul>
+<li><strong>Stack Alignment Fix in <code>ImpossibleGame_initGame</code></strong>: In previous builds, passing <code>fps</code> as a <code>jfloat</code> under modern hardfp toolchains caused the compiler to place it in VFP register <code>s0</code>, skipping a stack slot. <code>libimpossible.so</code> (compiled under softfp AAPCS) expected <code>fps</code> at <code>[sp, 4]</code>, which shifted the texture ID arguments: the main texture atlas (<code>gametextures.png</code>) received the second texture ID and the second received garbage, leaving game textures unbound and rendering obstacles and background as blank white quads. Passing <code>fps</code> as a 32-bit bitcasted word preserves exact stack layout.</li>
+<li><strong>Fixed-Function GLES1 Float Bridge</strong>: Calls to <code>glColor4f</code>, <code>glClearColor</code>, <code>glTexEnvf</code>, <code>glPointSize</code>, <code>glTranslatef</code>, and <code>glRotatef</code> from <code>libimpossible.so</code> now pass through softfp-to-hardfp integer bridge wrappers, ensuring color and transform values are correctly delivered to VitaGL.</li>
+</ul>
+<h3>2. Fix for Total Audio Silence</h3>
+<ul>
+<li><strong>ABI Mismatch in Math Functions</strong>: <code>stb_vorbis</code> was passing float arguments in integer registers (<code>r0-r3</code>), while VitaSDK GCC 15 <code>libm.a</code> (<code>sin</code>, <code>cos</code>, <code>pow</code>, <code>floor</code>) expected them in VFP registers (<code>s0-s15</code>). This resulted in math functions reading uninitialized registers and returning NaNs/0, causing audio decoding to output total silence.</li>
+<li>Rebuilding the project natively with <code>-mfloat-abi=hard</code> and linking against hardfp runtime libraries completely restores BGM and SFX audio playback.</li>
+</ul>
+<h3>3. ABI Bridge Wrappers (<code>source/dynlib.c</code>)</h3>
+<ul>
+<li>Implemented dedicated softfp-to-hardfp bridge wrappers for all 10 external float functions imported by <code>libimpossible.so</code>:<ul>
+<li>Math: <code>sinf</code>, <code>cosf</code>, <code>truncf</code>, <code>round</code></li>
+<li>GLES1: <code>glClearColor</code>, <code>glColor4f</code>, <code>glTexEnvf</code>, <code>glPointSize</code>, <code>glTranslatef</code>, <code>glRotatef</code></li>
+</ul>
+</li>
+<li>Removed <code>-Wl,--no-warn-mismatch</code> entirely from CMake; all project components now compile and link cleanly with <code>-mfloat-abi=hard</code>.</li>
+</ul>
+<hr>
+<h2>✨ Features &amp; Universal Compatibility (from v1.2.0)</h2>
+<ul>
+<li><strong>Universal APK Auto-Detection</strong>:<ul>
+<li>Dynamically resolves JNI exports with automatic fallback between the Level Pack prefix (<code>Java_com_flukedude_impossiblegamelevelpack_*</code>) and the Base Game prefix (<code>Java_com_flukedude_impossiblegame_*</code>).</li>
+<li>Drop in either <code>05133-the-impossible-1.5.2.apk</code> (2 levels) or <code>05133-Impossible-Level-Pack.apk</code> (5 levels) — no code changes or separate builds needed.</li>
+</ul>
+</li>
+<li><strong>Adaptive Menus &amp; UI</strong>:<ul>
+<li><strong>Base Game Mode (2 levels)</strong>: Automatically displays the original 2-button level selector (Fire Aura &amp; Original Xbox Level) and restricts Stats &amp; Medals to 3 subpages, eliminating missing texture errors.</li>
+<li><strong>Level Pack Mode (5 levels)</strong>: Automatically enables the full 5-level grid and 6 subpages for Medals and Stats.</li>
+</ul>
+</li>
+<li><strong>Bounded Save Synchronization</strong>:<ul>
+<li>Syncs up to 6 medals / 2 levels when running the base game, and 12 medals / 5 levels with the Level Pack.</li>
+</ul>
+</li>
+<li><strong>Toolchain Modernization</strong>:<ul>
+<li>Full compatibility with modern VitaSDK (GCC 15.2.0 / C23 standards).</li>
+<li>Resolved <code>ATOMIC_VAR_INIT</code> deprecation in <code>logger.c</code>.</li>
+<li>Corrected return types in FalsoJNI (<code>GetPrimitiveArrayCritical</code>, <code>jda_sizeof</code>).</li>
+</ul>
+</li>
+<li><strong>Persistent Diagnostics Logging</strong>:<ul>
+<li>File logger (<code>ux0:data/theimpossiblegame/logs/log_XXX.log</code>) enabled unconditionally for runtime diagnostics.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>📋 Requirements</h2>
+<ul>
+<li>PS Vita / PS TV running Custom Firmware (<strong>HENkaku</strong> or <strong>Enso</strong>), firmware 3.60/3.65+.</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><strong>kubridge</strong></a> installed as a kernel plugin (<code>ur0:tai/config.txt</code>).</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/NoTrpDrm/releases"><strong>NoTrpDrm</strong></a> under <code>*main</code> in <code>ur0:tai/config.txt</code> (only needed for trophies).</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><strong>libshacccg.suprx</strong></a> installed in <code>ur0:data/</code>.</li>
+<li>A legally obtained copy of:<ul>
+<li><strong>The Impossible Game</strong> for Android (<code>05133-the-impossible-1.5.2.apk</code>), <strong>OR</strong></li>
+<li><strong>The Impossible Game: Level Pack</strong> (<code>05133-Impossible-Level-Pack.apk</code>).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>📦 Installation Instructions</h2>
+<ol>
+<li>Install <code>theimpossiblegame.vpk</code> on your PS Vita using VitaShell.</li>
+<li>Open your legally obtained <code>.apk</code> using any zip tool (7-Zip, WinRAR, etc.):<ul>
+<li>Copy <code>lib/armeabi-v7a/libimpossible.so</code> to <code>ux0:data/theimpossiblegame/libimpossible.so</code>.</li>
+<li>Copy the <code>assets/</code> folder to <code>ux0:data/theimpossiblegame/assets/</code>.</li>
+<li>Copy the <code>res/</code> folder to <code>ux0:data/theimpossiblegame/res/</code>.</li>
+</ul>
+</li>
+<li><em>(Optional)</em> If you own the <strong>Level Pack</strong> (<code>05133-Impossible-Level-Pack.apk</code>), simply copy and overwrite <code>libimpossible.so</code> and merge the <code>assets/</code> and <code>res/</code> folders into <code>ux0:data/theimpossiblegame/</code>. The game will automatically detect all 5 levels.</li>
+</ol>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.3.1/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 931.9 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.5.1-beta1 1.5.1-beta1 ports this is a test build for the sound problems in 1.5.0. if you reported one of these issues, please try it and tell me in the issue whether it&#x27;s fixed.
+
+## fixes
+
+- **silent engine.** the player&#x27;s engine was silent from the start (#114), or seemed to stop during a race while the nitro still played (#115). since 1.5.0 the engine sound of some cars didn&#x27;t fit in the sound memory.
+- **cutscene crash.** the game crashed when you skipped the crane cutscene, and at the end of mia&#x27;s jail cutscene (#114).
+- **speech volume.** the speech volume in options &gt; audio did nothing: any value above zero played the voices at full volume (#106).
+- **loading crash.** the game could crash while loading, for example when entering free roam from the main menu.
+
+## updating from 1.5.0
+
+- install the new `nfsmw.vpk`. you don&#x27;t need new game files.
+
+## online multiplayer?
+
+i&#x27;m thinking about adding multiplayer, both local and online, but only if enough people would play it. if you would, please react with 👍 to [this discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113), answer its questions and share it with other vita players. it would help me a lot.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.5.1-beta1" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.5.1-beta1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.5.1-beta1</span>
+                    <span>2026-11-06 16:46 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.4.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.4.2 → release 1.5.1-beta1</div>
+                  
+                  <div class="body markdown-body"><p>This is a test build for the sound problems in 1.5.0. If you reported one of these issues, please try it and tell me in the issue whether it's fixed.</p>
+<h2>Fixes</h2>
+<ul>
+<li><strong>Silent engine.</strong> The player's engine was silent from the start (#114), or seemed to stop during a race while the nitro still played (#115). Since 1.5.0 the engine sound of some cars didn't fit in the sound memory.</li>
+<li><strong>Cutscene crash.</strong> The game crashed when you skipped the crane cutscene, and at the end of Mia's jail cutscene (#114).</li>
+<li><strong>Speech volume.</strong> The speech volume in Options &gt; Audio did nothing: any value above zero played the voices at full volume (#106).</li>
+<li><strong>Loading crash.</strong> The game could crash while loading, for example when entering free roam from the main menu.</li>
+</ul>
+<h2>Updating from 1.5.0</h2>
+<ul>
+<li>Install the new <code>nfsmw.vpk</code>. You don't need new game files.</li>
+</ul>
+<h2>Online multiplayer?</h2>
+<p>I'm thinking about adding multiplayer, both local and online, but only if enough people would play it. If you would, please react with 👍 to <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">this discussion</a>, answer its questions and share it with other Vita players. It would help me a lot.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.5.1-beta1/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="inotia 3: children of carnia inotia 3: children of carnia metalsyntax/inotia3-vita inotia 3: children of carnia v1.0.3 — ps vita port 1.0.3 ports # inotia 3: children of carnia v1.0.3 — ps vita port
+
+bug-fix and quality-of-life update for the native android-to-ps vita wrapper port of **inotia 3: children of carnia** (originally by com2us). powered by so-loader, falsojni, and vitagl.
+
+this release builds on **v1.0.2**. it fixes input issues reported while playing on physical ps vita hardware and adds a game speed option.
+
+## 🛠️ fixes &amp; improvements
+
+1. **dialogues advance again**: cutscene dialogues could stop responding to both touch and buttons, forcing a restart. a button press could leave a virtual finger &quot;stuck&quot; on the screen; every press is now always released.
+2. **dragging works again**: quest descriptions scroll again, and items can be moved in the bag again, so equipping weapons and armour works.
+3. **buttons no longer press hidden menu items**: while a pop-up, npc window or dialogue choice is open, the d-pad and cross no longer trigger the menu behind it.
+4. **left stick works as a d-pad** everywhere, including in menus.
+5. **game speed option (start + select)**: cycles between 15 fps (original), 23, 25 and 30 fps. a short notice at the top of the screen shows the new value without pausing the game. the game&#x27;s logic runs per frame, so a higher fps also makes the game run faster. the choice is saved.
+6. **skill quick-slots stay visible**: with the touch controls hidden, quick-slots that have a skill assigned (including its cooldown) are now shown, not only item slots.
+7. **l + r shows or hides the touch controls**, with an on-screen notice. start + select no longer does this; it now changes the game speed.
+
+## 📋 prerequisites &amp; requirements
+
+before installing, ensure your ps vita has:
+
+- custom firmware (3.60 / 3.65 enso recommended).
+- plugins installed in `ur0:tai/config.txt` under `*kernel`:
+  - `kubridge.skprx` (v0.3 or newer)
+  - `fd_fix.skprx` (or repatch)
+- `libshacccg.suprx` installed in `ur0:data/` (can be extracted using sharkbr33d).
+
+## 📦 installation guide
+
+**updating from v1.0.0 / v1.0.1 / v1.0.2:** just install the new `inotia3.vpk`. your game files and saves in `ux0:data/inotia3/` are kept.
+
+**fresh install:**
+
+1. install `inotia3.vpk` on your ps vita using vitashell.
+2. legally obtain a copy of the inotia 3: children of carnia android apk (v1.3.2).
+3. open the `.apk` using any zip extractor (like 7-zip).
+4. copy `lib/armeabi/libgame.so` to:
+   `ux0:data/inotia3/libgame.so`
+5. extract the `assets/` folder from the `.apk` and copy its contents to:
+   `ux0:data/inotia3/assets/`
+   *(or copy extracted game resources into `ux0:data/inotia3/assets/common/game_res/`)*
+6. launch the game from livearea!
+
+## 🎮 controls
+
+| button | action |
+| :--- | :--- |
+| d-pad / left analog | move character / navigate menus |
+| cross (✕) | attack / confirm / action |
+| circle (◯) | back / close menu / cancel pop-up |
+| square (▢) | skill / quick slot |
+| triangle (δ) | special skill / quick slot |
+| l / r triggers | quick slots / target toggle |
+| start | pause menu |
+| select | map / character info |
+| l + r | show / hide on-screen touch controls |
+| **start + select** | **game speed: 15 / 23 / 25 / 30 fps** *(new)* |
+| l + r + select | button remap menu |
+| touchscreen | full touch ui navigation |
+
+## 📜 credits
+
+- original game by **com2us**.
+- **theofficialflow** for so_loader.
+- **rinnegatamante** for vitagl &amp; falsojni.
+- **bythos** for kubridge.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-inotia-3-children-of-carnia/icon0.png" alt="Icono de Inotia 3: Children of Carnia" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Inotia3-vita</div>
+                      <h2><a href="https://github.com/MetalSyntax/Inotia3-vita/releases/tag/1.0.3" target="_blank" rel="noopener">Inotia 3: Children of Carnia</a></h2>
+                      <div class="release-name">Inotia 3: Children of Carnia v1.0.3 — PS Vita Port</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.0.3</span>
+                    <span>2026-11-06 15:01 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.0.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.0.2 → release 1.0.3</div>
+                  
+                  <div class="body markdown-body"><h1>Inotia 3: Children of Carnia v1.0.3 — PS Vita Port</h1>
+<p>Bug-fix and quality-of-life update for the native Android-to-PS Vita wrapper port of <strong>Inotia 3: Children of Carnia</strong> (originally by Com2uS). Powered by so-loader, FalsoJNI, and vitaGL.</p>
+<p>This release builds on <strong>v1.0.2</strong>. It fixes input issues reported while playing on physical PS Vita hardware and adds a game speed option.</p>
+<h2>🛠️ Fixes &amp; Improvements</h2>
+<ol>
+<li><strong>Dialogues advance again</strong>: Cutscene dialogues could stop responding to both touch and buttons, forcing a restart. A button press could leave a virtual finger &quot;stuck&quot; on the screen; every press is now always released.</li>
+<li><strong>Dragging works again</strong>: Quest descriptions scroll again, and items can be moved in the bag again, so equipping weapons and armour works.</li>
+<li><strong>Buttons no longer press hidden menu items</strong>: While a pop-up, NPC window or dialogue choice is open, the D-pad and Cross no longer trigger the menu behind it.</li>
+<li><strong>Left stick works as a D-pad</strong> everywhere, including in menus.</li>
+<li><strong>Game speed option (Start + Select)</strong>: Cycles between 15 FPS (original), 23, 25 and 30 FPS. A short notice at the top of the screen shows the new value without pausing the game. The game's logic runs per frame, so a higher FPS also makes the game run faster. The choice is saved.</li>
+<li><strong>Skill quick-slots stay visible</strong>: With the touch controls hidden, quick-slots that have a skill assigned (including its cooldown) are now shown, not only item slots.</li>
+<li><strong>L + R shows or hides the touch controls</strong>, with an on-screen notice. Start + Select no longer does this; it now changes the game speed.</li>
+</ol>
+<h2>📋 Prerequisites &amp; Requirements</h2>
+<p>Before installing, ensure your PS Vita has:</p>
+<ul>
+<li>Custom Firmware (3.60 / 3.65 Enso recommended).</li>
+<li>Plugins installed in <code>ur0:tai/config.txt</code> under <code>*KERNEL</code>:<ul>
+<li><code>kubridge.skprx</code> (v0.3 or newer)</li>
+<li><code>fd_fix.skprx</code> (or rePatch)</li>
+</ul>
+</li>
+<li><code>libshacccg.suprx</code> installed in <code>ur0:data/</code> (can be extracted using ShaRKBR33D).</li>
+</ul>
+<h2>📦 Installation Guide</h2>
+<p><strong>Updating from v1.0.0 / v1.0.1 / v1.0.2:</strong> just install the new <code>inotia3.vpk</code>. Your game files and saves in <code>ux0:data/inotia3/</code> are kept.</p>
+<p><strong>Fresh install:</strong></p>
+<ol>
+<li>Install <code>inotia3.vpk</code> on your PS Vita using VitaShell.</li>
+<li>Legally obtain a copy of the Inotia 3: Children of Carnia Android APK (v1.3.2).</li>
+<li>Open the <code>.apk</code> using any zip extractor (like 7-Zip).</li>
+<li>Copy <code>lib/armeabi/libgame.so</code> to:
+<code>ux0:data/inotia3/libgame.so</code></li>
+<li>Extract the <code>assets/</code> folder from the <code>.apk</code> and copy its contents to:
+<code>ux0:data/inotia3/assets/</code>
+<em>(Or copy extracted game resources into <code>ux0:data/inotia3/assets/common/game_res/</code>)</em></li>
+<li>Launch the game from LiveArea!</li>
+</ol>
+<h2>🎮 Controls</h2>
+<table>
+<thead>
+<tr>
+  <th>Button</th>
+  <th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>D-Pad / Left Analog</td>
+  <td>Move Character / Navigate menus</td>
+</tr>
+<tr>
+  <td>Cross (✕)</td>
+  <td>Attack / Confirm / Action</td>
+</tr>
+<tr>
+  <td>Circle (◯)</td>
+  <td>Back / Close menu / Cancel pop-up</td>
+</tr>
+<tr>
+  <td>Square (▢)</td>
+  <td>Skill / Quick Slot</td>
+</tr>
+<tr>
+  <td>Triangle (Δ)</td>
+  <td>Special Skill / Quick Slot</td>
+</tr>
+<tr>
+  <td>L / R Triggers</td>
+  <td>Quick Slots / Target Toggle</td>
+</tr>
+<tr>
+  <td>Start</td>
+  <td>Pause Menu</td>
+</tr>
+<tr>
+  <td>Select</td>
+  <td>Map / Character Info</td>
+</tr>
+<tr>
+  <td>L + R</td>
+  <td>Show / hide on-screen touch controls</td>
+</tr>
+<tr>
+  <td><strong>Start + Select</strong></td>
+  <td><strong>Game speed: 15 / 23 / 25 / 30 FPS</strong> <em>(new)</em></td>
+</tr>
+<tr>
+  <td>L + R + Select</td>
+  <td>Button remap menu</td>
+</tr>
+<tr>
+  <td>Touchscreen</td>
+  <td>Full Touch UI Navigation</td>
+</tr>
+</tbody>
+</table>
+<h2>📜 Credits</h2>
+<ul>
+<li>Original Game by <strong>Com2uS</strong>.</li>
+<li><strong>TheOfficialFloW</strong> for so_loader.</li>
+<li><strong>Rinnegatamante</strong> for vitaGL &amp; FalsoJNI.</li>
+<li><strong>Bythos</strong> for kubridge.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Inotia3-vita/releases/download/1.0.3/inotia3.vpk" target="_blank" rel="noopener">⬇ inotia3.vpk · 1.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="nazi zombies portable nazi zombies portable nzp-team/nzportable 2.0.0-indev+20261106145537 nightly ports this is a nightly generated automagically. nightlies are generated at 3am est if changes are made to any component of the project in the past 24 hours. be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.
 changes in the following areas have been made since the last nightly:
 * vril (engine)
 
@@ -243,13 +741,13 @@ you can also play the webgl version at https://nzp.gay/">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · nzp-team/nzportable</div>
                       <h2><a href="https://github.com/nzp-team/nzportable/releases/tag/nightly" target="_blank" rel="noopener">Nazi Zombies Portable</a></h2>
-                      <div class="release-name">2.0.0-indev+20261106054138</div>
+                      <div class="release-name">2.0.0-indev+20261106145537</div>
                     </div>
                     <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
                     <span class="tag">nightly</span>
-                    <span>2026-11-06 05:43 UTC</span>
+                    <span>2026-11-06 14:57 UTC</span>
                     <span class="catalog-version">PSVitaAlive: Nightly</span>
                   </div>
                   <div class="catalog-detail">PSVitaAlive Nightly</div>
@@ -426,72 +924,6 @@ on-screen messages only appear when you change a setting. settings are saved in 
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Zenonia4-psvita-port/releases/download/1.2.0/zenonia_4_pace.vpk" target="_blank" rel="noopener">⬇ zenonia_4_pace.vpk · 1.6 MB</a><a class="btn" href="https://github.com/MetalSyntax/Zenonia4-psvita-port/releases/download/1.2.0/zenonia_4_pace_nologs.vpk" target="_blank" rel="noopener">zenonia_4_pace_nologs.vpk · 1.6 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.5.0 1.5.0 ports ## new
-
-- **language option** (#8). **options &gt; gameplay &gt; language**, from the main menu, switches the game between the ten languages on the black edition disc: english, french, german, italian, spanish, dutch, swedish, danish, finnish and polish. the menus change at once. the language is saved with your profile, so loading a profile brings its language back. a few screens added by the port, such as options &gt; video, are still in english.
-- **dubbed voices** (optional). the black edition disc has english voices only. if you also have a european ps2 disc, the data script can now take its dubbed police radio, phone calls and story movies, and the game plays them in your language:
-
-  | european disc | voices |
-  | --- | --- |
-  | sles-53559 | italian, spanish |
-  | sles-53558, sles-53857 (black edition) | french, german |
-
-  without these files the game plays the english voices with the texts of your language. story movies show subtitles in every language but english, as on the european ps2 game. dutch, swedish, danish, finnish and polish were never dubbed.
-
-## updating from 1.4.2
-
-- install the new `nfsmw.vpk`. the language option needs no new game files.
-- saves from 1.4.2 and earlier, and imported ps2 saves, load in english. pick your language and the next save keeps it. the ps2 copy of your profile (`save/ps2-export`) does not change, so it still loads on a ps2.
-- for the dubbed voices, download the latest `scripts/extract-game-data.py`. run it with the european disc and the same output folder as before, then copy the new files to `ux0:data/nfsmw/`. that is about 250 mb per language, with the movies. the readme&#x27;s &quot;voices in other languages&quot; section has the details.
-
-## online multiplayer?
-
-i&#x27;m thinking about adding multiplayer, both local and online, but only if enough people would play it. if you would, please react with 👍 to [this discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113), answer its questions and share it with other vita players. it would help me a lot.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.5.0" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.5.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.5.0</span>
-                    <span>2026-11-06 01:47 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.4.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.4.2 → release 1.5.0</div>
-                  
-                  <div class="body markdown-body"><h2>New</h2>
-<ul>
-<li><p><strong>Language option</strong> (#8). <strong>Options &gt; Gameplay &gt; Language</strong>, from the main menu, switches the game between the ten languages on the Black Edition disc: English, French, German, Italian, Spanish, Dutch, Swedish, Danish, Finnish and Polish. The menus change at once. The language is saved with your profile, so loading a profile brings its language back. A few screens added by the port, such as Options &gt; Video, are still in English.</p>
-</li>
-<li><p><strong>Dubbed voices</strong> (optional). The Black Edition disc has English voices only. If you also have a European PS2 disc, the data script can now take its dubbed police radio, phone calls and story movies, and the game plays them in your language:</p>
-<p>| European disc | Voices |
-| --- | --- |
-| SLES-53559 | Italian, Spanish |
-| SLES-53558, SLES-53857 (Black Edition) | French, German |</p>
-<p>Without these files the game plays the English voices with the texts of your language. Story movies show subtitles in every language but English, as on the European PS2 game. Dutch, Swedish, Danish, Finnish and Polish were never dubbed.</p>
-</li>
-</ul>
-<h2>Updating from 1.4.2</h2>
-<ul>
-<li>Install the new <code>nfsmw.vpk</code>. The language option needs no new game files.</li>
-<li>Saves from 1.4.2 and earlier, and imported PS2 saves, load in English. Pick your language and the next save keeps it. The PS2 copy of your profile (<code>save/ps2-export</code>) does not change, so it still loads on a PS2.</li>
-<li>For the dubbed voices, download the latest <code>scripts/extract-game-data.py</code>. Run it with the European disc and the same output folder as before, then copy the new files to <code>ux0:data/nfsmw/</code>. That is about 250 MB per language, with the movies. The README's &quot;Voices in other languages&quot; section has the details.</li>
-</ul>
-<h2>Online multiplayer?</h2>
-<p>I'm thinking about adding multiplayer, both local and online, but only if enough people would play it. If you would, please react with 👍 to <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">this discussion</a>, answer its questions and share it with other Vita players. It would help me a lot.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.5.0/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -5673,171 +6105,6 @@ closed them (glitches, slowdowns and crashes after resuming).</li>
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="the impossible game the impossible game metalsyntax/the-impossible-game-vita the impossible game — ps vita port v1.2.1 v1.2.0 ports # the impossible game — ps vita port v1.2.1
-
-a critical bugfix and universal compatibility release for **the impossible game** on playstation vita and playstation tv.
-
-this update resolves the regression in v1.2.0 where worlds rendered as blank white rectangles and audio was completely silent, while preserving full dynamic support for both the **base game** and the **level pack**.
-
----
-
-## 🚨 critical fixes in v1.2.1
-
-### 1. fix for white worlds / missing textures
-- **stack alignment fix in `impossiblegame_initgame`**: in previous builds, passing `fps` as a `jfloat` under modern hardfp toolchains caused the compiler to place it in vfp register `s0`, skipping a stack slot. `libimpossible.so` (compiled under softfp aapcs) expected `fps` at `[sp, 4]`, which shifted the texture id arguments: the main texture atlas (`gametextures.png`) received the second texture id and the second received garbage, leaving game textures unbound and rendering obstacles and background as blank white quads. passing `fps` as a 32-bit bitcasted word preserves exact stack layout.
-- **fixed-function gles1 float bridge**: calls to `glcolor4f`, `glclearcolor`, `gltexenvf`, `glpointsize`, `gltranslatef`, and `glrotatef` from `libimpossible.so` now pass through softfp-to-hardfp integer bridge wrappers, ensuring color and transform values are correctly delivered to vitagl.
-
-### 2. fix for total audio silence
-- **abi mismatch in math functions**: `stb_vorbis` was passing float arguments in integer registers (`r0-r3`), while vitasdk gcc 15 `libm.a` (`sin`, `cos`, `pow`, `floor`) expected them in vfp registers (`s0-s15`). this resulted in math functions reading uninitialized registers and returning nans/0, causing audio decoding to output total silence.
-- rebuilding the project natively with `-mfloat-abi=hard` and linking against hardfp runtime libraries completely restores bgm and sfx audio playback.
-
-### 3. abi bridge wrappers (`source/dynlib.c`)
-- implemented dedicated softfp-to-hardfp bridge wrappers for all 10 external float functions imported by `libimpossible.so`:
-  - math: `sinf`, `cosf`, `truncf`, `round`
-  - gles1: `glclearcolor`, `glcolor4f`, `gltexenvf`, `glpointsize`, `gltranslatef`, `glrotatef`
-- removed `-wl,--no-warn-mismatch` entirely from cmake; all project components now compile and link cleanly with `-mfloat-abi=hard`.
-
----
-
-## ✨ features &amp; universal compatibility (from v1.2.0)
-
-- **universal apk auto-detection**:
-  - dynamically resolves jni exports with automatic fallback between the level pack prefix (`java_com_flukedude_impossiblegamelevelpack_*`) and the base game prefix (`java_com_flukedude_impossiblegame_*`).
-  - drop in either `05133-the-impossible-1.5.2.apk` (2 levels) or `05133-impossible-level-pack.apk` (5 levels) — no code changes or separate builds needed.
-- **adaptive menus &amp; ui**:
-  - **base game mode (2 levels)**: automatically displays the original 2-button level selector (fire aura &amp; original xbox level) and restricts stats &amp; medals to 3 subpages, eliminating missing texture errors.
-  - **level pack mode (5 levels)**: automatically enables the full 5-level grid and 6 subpages for medals and stats.
-- **bounded save synchronization**:
-  - syncs up to 6 medals / 2 levels when running the base game, and 12 medals / 5 levels with the level pack.
-- **toolchain modernization**:
-  - full compatibility with modern vitasdk (gcc 15.2.0 / c23 standards).
-  - resolved `atomic_var_init` deprecation in `logger.c`.
-  - corrected return types in falsojni (`getprimitivearraycritical`, `jda_sizeof`).
-- **persistent diagnostics logging**:
-  - file logger (`ux0:data/theimpossiblegame/logs/log_xxx.log`) enabled unconditionally for runtime diagnostics.
-
----
-
-## 📋 requirements
-
-- ps vita / ps tv running custom firmware (**henkaku** or **enso**), firmware 3.60/3.65+.
-- [**kubridge**](https://github.com/theofficialflow/kubridge/releases) installed as a kernel plugin (`ur0:tai/config.txt`).
-- [**libshacccg.suprx**](https://github.com/rinnegatamante/sharkbr33d/releases/latest) installed in `ur0:data/`.
-- a legally obtained copy of:
-  - **the impossible game** for android (`05133-the-impossible-1.5.2.apk`), **or**
-  - **the impossible game: level pack** (`05133-impossible-level-pack.apk`).
-
----
-
-## 📦 installation instructions
-
-1. install `theimpossiblegame.vpk` on your ps vita using vitashell.
-2. open your legally obtained `.apk` using any zip tool (7-zip, winrar, etc.):
-   - copy `lib/armeabi-v7a/libimpossible.so` to `ux0:data/theimpossiblegame/libimpossible.so`.
-   - copy the `assets/` folder to `ux0:data/theimpossiblegame/assets/`.
-   - copy the `res/` folder to `ux0:data/theimpossiblegame/res/`.
-3. *(optional)* if you own the **level pack** (`05133-impossible-level-pack.apk`), simply copy and overwrite `libimpossible.so` and merge the `assets/` and `res/` folders into `ux0:data/theimpossiblegame/`. the game will automatically detect all 5 levels.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/the-impossible-game-ps-vita-port/icon0.png" alt="Icono de The Impossible Game" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/The-Impossible-Game-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/tag/v1.2.0" target="_blank" rel="noopener">The Impossible Game</a></h2>
-                      <div class="release-name">The Impossible Game — PS Vita Port v1.2.1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.2.0</span>
-                    <span>2026-10-27 23:56 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.2.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.2.0</div>
-                  
-                  <div class="body markdown-body"><h1>The Impossible Game — PS Vita Port v1.2.1</h1>
-<p>A critical bugfix and universal compatibility release for <strong>The Impossible Game</strong> on PlayStation Vita and PlayStation TV.</p>
-<p>This update resolves the regression in v1.2.0 where worlds rendered as blank white rectangles and audio was completely silent, while preserving full dynamic support for both the <strong>Base Game</strong> and the <strong>Level Pack</strong>.</p>
-<hr>
-<h2>🚨 Critical Fixes in v1.2.1</h2>
-<h3>1. Fix for White Worlds / Missing Textures</h3>
-<ul>
-<li><strong>Stack Alignment Fix in <code>ImpossibleGame_initGame</code></strong>: In previous builds, passing <code>fps</code> as a <code>jfloat</code> under modern hardfp toolchains caused the compiler to place it in VFP register <code>s0</code>, skipping a stack slot. <code>libimpossible.so</code> (compiled under softfp AAPCS) expected <code>fps</code> at <code>[sp, 4]</code>, which shifted the texture ID arguments: the main texture atlas (<code>gametextures.png</code>) received the second texture ID and the second received garbage, leaving game textures unbound and rendering obstacles and background as blank white quads. Passing <code>fps</code> as a 32-bit bitcasted word preserves exact stack layout.</li>
-<li><strong>Fixed-Function GLES1 Float Bridge</strong>: Calls to <code>glColor4f</code>, <code>glClearColor</code>, <code>glTexEnvf</code>, <code>glPointSize</code>, <code>glTranslatef</code>, and <code>glRotatef</code> from <code>libimpossible.so</code> now pass through softfp-to-hardfp integer bridge wrappers, ensuring color and transform values are correctly delivered to VitaGL.</li>
-</ul>
-<h3>2. Fix for Total Audio Silence</h3>
-<ul>
-<li><strong>ABI Mismatch in Math Functions</strong>: <code>stb_vorbis</code> was passing float arguments in integer registers (<code>r0-r3</code>), while VitaSDK GCC 15 <code>libm.a</code> (<code>sin</code>, <code>cos</code>, <code>pow</code>, <code>floor</code>) expected them in VFP registers (<code>s0-s15</code>). This resulted in math functions reading uninitialized registers and returning NaNs/0, causing audio decoding to output total silence.</li>
-<li>Rebuilding the project natively with <code>-mfloat-abi=hard</code> and linking against hardfp runtime libraries completely restores BGM and SFX audio playback.</li>
-</ul>
-<h3>3. ABI Bridge Wrappers (<code>source/dynlib.c</code>)</h3>
-<ul>
-<li>Implemented dedicated softfp-to-hardfp bridge wrappers for all 10 external float functions imported by <code>libimpossible.so</code>:<ul>
-<li>Math: <code>sinf</code>, <code>cosf</code>, <code>truncf</code>, <code>round</code></li>
-<li>GLES1: <code>glClearColor</code>, <code>glColor4f</code>, <code>glTexEnvf</code>, <code>glPointSize</code>, <code>glTranslatef</code>, <code>glRotatef</code></li>
-</ul>
-</li>
-<li>Removed <code>-Wl,--no-warn-mismatch</code> entirely from CMake; all project components now compile and link cleanly with <code>-mfloat-abi=hard</code>.</li>
-</ul>
-<hr>
-<h2>✨ Features &amp; Universal Compatibility (from v1.2.0)</h2>
-<ul>
-<li><strong>Universal APK Auto-Detection</strong>:<ul>
-<li>Dynamically resolves JNI exports with automatic fallback between the Level Pack prefix (<code>Java_com_flukedude_impossiblegamelevelpack_*</code>) and the Base Game prefix (<code>Java_com_flukedude_impossiblegame_*</code>).</li>
-<li>Drop in either <code>05133-the-impossible-1.5.2.apk</code> (2 levels) or <code>05133-Impossible-Level-Pack.apk</code> (5 levels) — no code changes or separate builds needed.</li>
-</ul>
-</li>
-<li><strong>Adaptive Menus &amp; UI</strong>:<ul>
-<li><strong>Base Game Mode (2 levels)</strong>: Automatically displays the original 2-button level selector (Fire Aura &amp; Original Xbox Level) and restricts Stats &amp; Medals to 3 subpages, eliminating missing texture errors.</li>
-<li><strong>Level Pack Mode (5 levels)</strong>: Automatically enables the full 5-level grid and 6 subpages for Medals and Stats.</li>
-</ul>
-</li>
-<li><strong>Bounded Save Synchronization</strong>:<ul>
-<li>Syncs up to 6 medals / 2 levels when running the base game, and 12 medals / 5 levels with the Level Pack.</li>
-</ul>
-</li>
-<li><strong>Toolchain Modernization</strong>:<ul>
-<li>Full compatibility with modern VitaSDK (GCC 15.2.0 / C23 standards).</li>
-<li>Resolved <code>ATOMIC_VAR_INIT</code> deprecation in <code>logger.c</code>.</li>
-<li>Corrected return types in FalsoJNI (<code>GetPrimitiveArrayCritical</code>, <code>jda_sizeof</code>).</li>
-</ul>
-</li>
-<li><strong>Persistent Diagnostics Logging</strong>:<ul>
-<li>File logger (<code>ux0:data/theimpossiblegame/logs/log_XXX.log</code>) enabled unconditionally for runtime diagnostics.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2>📋 Requirements</h2>
-<ul>
-<li>PS Vita / PS TV running Custom Firmware (<strong>HENkaku</strong> or <strong>Enso</strong>), firmware 3.60/3.65+.</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/TheOfficialFloW/kubridge/releases"><strong>kubridge</strong></a> installed as a kernel plugin (<code>ur0:tai/config.txt</code>).</li>
-<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/ShaRKBR33D/releases/latest"><strong>libshacccg.suprx</strong></a> installed in <code>ur0:data/</code>.</li>
-<li>A legally obtained copy of:<ul>
-<li><strong>The Impossible Game</strong> for Android (<code>05133-the-impossible-1.5.2.apk</code>), <strong>OR</strong></li>
-<li><strong>The Impossible Game: Level Pack</strong> (<code>05133-Impossible-Level-Pack.apk</code>).</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2>📦 Installation Instructions</h2>
-<ol>
-<li>Install <code>theimpossiblegame.vpk</code> on your PS Vita using VitaShell.</li>
-<li>Open your legally obtained <code>.apk</code> using any zip tool (7-Zip, WinRAR, etc.):<ul>
-<li>Copy <code>lib/armeabi-v7a/libimpossible.so</code> to <code>ux0:data/theimpossiblegame/libimpossible.so</code>.</li>
-<li>Copy the <code>assets/</code> folder to <code>ux0:data/theimpossiblegame/assets/</code>.</li>
-<li>Copy the <code>res/</code> folder to <code>ux0:data/theimpossiblegame/res/</code>.</li>
-</ul>
-</li>
-<li><em>(Optional)</em> If you own the <strong>Level Pack</strong> (<code>05133-Impossible-Level-Pack.apk</code>), simply copy and overwrite <code>libimpossible.so</code> and merge the <code>assets/</code> and <code>res/</code> folders into <code>ux0:data/theimpossiblegame/</code>. The game will automatically detect all 5 levels.</li>
-</ol>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.2.0/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 844.1 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="uptodate" data-search="skate 3 vita skate 3 vita irolup/skate-3-vita skate 3 vita 0.2.0 beta v0.2.0-beta ports skate 3 on the ps vita.
 
 **you need your own copy of the game.** this vpk contains none of the game&#x27;s files. follow [making your own game data](https://github.com/irolup/skate-3-vita#making-your-own-game-data) in the readme to make them from your own xbox 360 disc on a linux pc, then copy them to `ux0:data/skatevita/`.
@@ -7832,207 +8099,6 @@ no vpk includes ea files. real racing 3 is property of electronic arts.
 <p>☕ <a target="_blank" rel="noopener noreferrer" href="https://buymeacoffee.com/chuta7x">https://buymeacoffee.com/chuta7x</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/RR3_v3.6.3_junto_a_la_1.4.0.vpk" target="_blank" rel="noopener">⬇ RR3_v3.6.3_junto_a_la_1.4.0.vpk · 8.2 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/configurador.bin" target="_blank" rel="noopener">configurador.bin · 3.1 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/eboot.bin" target="_blank" rel="noopener">eboot.bin · 1.5 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/RR3_v3.6.3_LGPL.zip" target="_blank" rel="noopener">RR3_v3.6.3_LGPL.zip · 251.9 KB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/RR3_v3.6.3_reemplaza_la_1.4.0.vpk" target="_blank" rel="noopener">RR3_v3.6.3_reemplaza_la_1.4.0.vpk · 8.2 MB</a><a class="btn" href="https://github.com/CHUTA7X/Real-Racing-3-Port-Release/releases/download/Update3.6.3/rr3_version_9.txt" target="_blank" rel="noopener">rr3_version_9.txt · 1.0 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="inotia 3: children of carnia inotia 3: children of carnia metalsyntax/inotia3-vita  inotia 3: children of carnia v1.0.2 — ps vita port 1.02 ports # inotia 3: children of carnia v1.0.2 — ps vita port
-
-quality-of-life and bug-fix update for the native android-to-ps vita wrapper port of **inotia 3: children of carnia** (originally by com2us). powered by so-loader, falsojni, and vitagl.
-
-this release builds on **v1.0.1** (which fixed the missing top-left hud character portrait). it fixes 6 issues reported while playing on physical ps vita hardware.
-
-## 🛠️ fixes &amp; improvements
-
-1. **skill description panels keep their background**: long skill descriptions (e.g. fireball, missile) used to appear with no background, with the text drawn straight over the skill list. the dark background now renders at any panel height.
-2. **text no longer cut off**: letters with descenders (g, j, p, q, y) now show their bottom row, and lines no longer wrap one word too early.
-3. **circle (◯) = back**: closes in-game menus and cancels pop-up messages. it does nothing on the field and title screens, so it never opens the quit dialog by accident.
-4. **cleaner screen with physical buttons**: the on-screen d-pad and action circles are almost invisible by default, though they still respond to touch. skill quick-slots that have a skill assigned stay visible. press **l + r** or **start + select** to show or hide them.
-5. **offline main menu**: the online-only buttons (tapjoy, hub gem, terms of use) no longer appear on the title menu.
-6. **save protection**: every save keeps the previous file as `save&lt;n&gt;.dat.bak`. starting a new game over an occupied slot moves the old save to `save&lt;n&gt;.dat.del` instead of deleting it. to recover a save, rename the file back to `save&lt;n&gt;.dat`.
-
-### other changes
-
-- bundled vitagl build (fixes a black screen caused by an incompatible sdk library).
-- attempted fix for an occasional flicker on the character portrait (triple buffering re-enabled).
-- new menu cursor for d-pad navigation: cyan corner brackets that are easy to see on parchment buttons.
-- startup no longer aborts if the firmware rejects the requested cpu/gpu clock speeds.
-
-## 📋 prerequisites &amp; requirements
-
-before installing, ensure your ps vita has:
-
-- custom firmware (3.60 / 3.65 enso recommended).
-- plugins installed in `ur0:tai/config.txt` under `*kernel`:
-  - `kubridge.skprx` (v0.3 or newer)
-  - `fd_fix.skprx` (or repatch)
-- `libshacccg.suprx` installed in `ur0:data/` (can be extracted using sharkbr33d).
-
-## 📦 installation guide
-
-**updating from v1.0.0 / v1.0.1:** just install the new `inotia3.vpk`. your game files and saves in `ux0:data/inotia3/` are kept.
-
-**fresh install:**
-
-1. install `inotia3.vpk` on your ps vita using vitashell.
-2. legally obtain a copy of the inotia 3: children of carnia android apk (v1.3.2).
-3. open the `.apk` using any zip extractor (like 7-zip).
-4. copy `lib/armeabi/libgame.so` to:
-   `ux0:data/inotia3/libgame.so`
-5. extract the `assets/` folder from the `.apk` and copy its contents to:
-   `ux0:data/inotia3/assets/`
-   *(or copy extracted game resources into `ux0:data/inotia3/assets/common/game_res/`)*
-6. launch the game from livearea!
-
-## 🎮 controls
-
-| button | action |
-| :--- | :--- |
-| d-pad / left analog | move character |
-| cross (✕) | attack / confirm / action |
-| circle (◯) | **back / close menu / cancel pop-up** *(new)* |
-| square (▢) | skill / quick slot |
-| triangle (δ) | special skill / quick slot |
-| l / r triggers | quick slots / target toggle |
-| start | pause menu |
-| select | map / character info |
-| **l + r** or **start + select** | **show / hide on-screen touch controls** *(new)* |
-| l + r + select | button remap menu |
-| touchscreen | full touch ui navigation |
-
-## 📜 credits
-
-- original game by **com2us**.
-- **theofficialflow** for so_loader.
-- **rinnegatamante** for vitagl &amp; falsojni.
-- **bythos** for kubridge.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-inotia-3-children-of-carnia/icon0.png" alt="Icono de Inotia 3: Children of Carnia" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Inotia3-vita</div>
-                      <h2><a href="https://github.com/MetalSyntax/Inotia3-vita/releases/tag/1.02" target="_blank" rel="noopener">Inotia 3: Children of Carnia</a></h2>
-                      <div class="release-name"> Inotia 3: Children of Carnia v1.0.2 — PS Vita Port</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.02</span>
-                    <span>2026-10-18 04:23 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0.2 → release 1.02</div>
-                  
-                  <div class="body markdown-body"><h1>Inotia 3: Children of Carnia v1.0.2 — PS Vita Port</h1>
-<p>Quality-of-life and bug-fix update for the native Android-to-PS Vita wrapper port of <strong>Inotia 3: Children of Carnia</strong> (originally by Com2uS). Powered by so-loader, FalsoJNI, and vitaGL.</p>
-<p>This release builds on <strong>v1.0.1</strong> (which fixed the missing top-left HUD character portrait). It fixes 6 issues reported while playing on physical PS Vita hardware.</p>
-<h2>🛠️ Fixes &amp; Improvements</h2>
-<ol>
-<li><strong>Skill description panels keep their background</strong>: Long skill descriptions (e.g. Fireball, Missile) used to appear with no background, with the text drawn straight over the skill list. The dark background now renders at any panel height.</li>
-<li><strong>Text no longer cut off</strong>: Letters with descenders (g, j, p, q, y) now show their bottom row, and lines no longer wrap one word too early.</li>
-<li><strong>Circle (◯) = Back</strong>: Closes in-game menus and cancels pop-up messages. It does nothing on the field and title screens, so it never opens the quit dialog by accident.</li>
-<li><strong>Cleaner screen with physical buttons</strong>: The on-screen D-pad and action circles are almost invisible by default, though they still respond to touch. Skill quick-slots that have a skill assigned stay visible. Press <strong>L + R</strong> or <strong>Start + Select</strong> to show or hide them.</li>
-<li><strong>Offline main menu</strong>: The online-only buttons (Tapjoy, Hub Gem, Terms of Use) no longer appear on the title menu.</li>
-<li><strong>Save protection</strong>: Every save keeps the previous file as <code>save&lt;N&gt;.dat.bak</code>. Starting a New Game over an occupied slot moves the old save to <code>save&lt;N&gt;.dat.del</code> instead of deleting it. To recover a save, rename the file back to <code>save&lt;N&gt;.dat</code>.</li>
-</ol>
-<h3>Other changes</h3>
-<ul>
-<li>Bundled vitaGL build (fixes a black screen caused by an incompatible SDK library).</li>
-<li>Attempted fix for an occasional flicker on the character portrait (triple buffering re-enabled).</li>
-<li>New menu cursor for D-pad navigation: cyan corner brackets that are easy to see on parchment buttons.</li>
-<li>Startup no longer aborts if the firmware rejects the requested CPU/GPU clock speeds.</li>
-</ul>
-<h2>📋 Prerequisites &amp; Requirements</h2>
-<p>Before installing, ensure your PS Vita has:</p>
-<ul>
-<li>Custom Firmware (3.60 / 3.65 Enso recommended).</li>
-<li>Plugins installed in <code>ur0:tai/config.txt</code> under <code>*KERNEL</code>:<ul>
-<li><code>kubridge.skprx</code> (v0.3 or newer)</li>
-<li><code>fd_fix.skprx</code> (or rePatch)</li>
-</ul>
-</li>
-<li><code>libshacccg.suprx</code> installed in <code>ur0:data/</code> (can be extracted using ShaRKBR33D).</li>
-</ul>
-<h2>📦 Installation Guide</h2>
-<p><strong>Updating from v1.0.0 / v1.0.1:</strong> just install the new <code>inotia3.vpk</code>. Your game files and saves in <code>ux0:data/inotia3/</code> are kept.</p>
-<p><strong>Fresh install:</strong></p>
-<ol>
-<li>Install <code>inotia3.vpk</code> on your PS Vita using VitaShell.</li>
-<li>Legally obtain a copy of the Inotia 3: Children of Carnia Android APK (v1.3.2).</li>
-<li>Open the <code>.apk</code> using any zip extractor (like 7-Zip).</li>
-<li>Copy <code>lib/armeabi/libgame.so</code> to:
-<code>ux0:data/inotia3/libgame.so</code></li>
-<li>Extract the <code>assets/</code> folder from the <code>.apk</code> and copy its contents to:
-<code>ux0:data/inotia3/assets/</code>
-<em>(Or copy extracted game resources into <code>ux0:data/inotia3/assets/common/game_res/</code>)</em></li>
-<li>Launch the game from LiveArea!</li>
-</ol>
-<h2>🎮 Controls</h2>
-<table>
-<thead>
-<tr>
-  <th>Button</th>
-  <th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>D-Pad / Left Analog</td>
-  <td>Move Character</td>
-</tr>
-<tr>
-  <td>Cross (✕)</td>
-  <td>Attack / Confirm / Action</td>
-</tr>
-<tr>
-  <td>Circle (◯)</td>
-  <td><strong>Back / Close menu / Cancel pop-up</strong> <em>(new)</em></td>
-</tr>
-<tr>
-  <td>Square (▢)</td>
-  <td>Skill / Quick Slot</td>
-</tr>
-<tr>
-  <td>Triangle (Δ)</td>
-  <td>Special Skill / Quick Slot</td>
-</tr>
-<tr>
-  <td>L / R Triggers</td>
-  <td>Quick Slots / Target Toggle</td>
-</tr>
-<tr>
-  <td>Start</td>
-  <td>Pause Menu</td>
-</tr>
-<tr>
-  <td>Select</td>
-  <td>Map / Character Info</td>
-</tr>
-<tr>
-  <td><strong>L + R</strong> or <strong>Start + Select</strong></td>
-  <td><strong>Show / hide on-screen touch controls</strong> <em>(new)</em></td>
-</tr>
-<tr>
-  <td>L + R + Select</td>
-  <td>Button remap menu</td>
-</tr>
-<tr>
-  <td>Touchscreen</td>
-  <td>Full Touch UI Navigation</td>
-</tr>
-</tbody>
-</table>
-<h2>📜 Credits</h2>
-<ul>
-<li>Original Game by <strong>Com2uS</strong>.</li>
-<li><strong>TheOfficialFloW</strong> for so_loader.</li>
-<li><strong>Rinnegatamante</strong> for vitaGL &amp; FalsoJNI.</li>
-<li><strong>Bythos</strong> for kubridge.</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Inotia3-vita/releases/download/1.02/inotia3.vpk" target="_blank" rel="noopener">⬇ inotia3.vpk · 1.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -30633,7 +30699,7 @@ Copy over this archive to <code>ux0:/data/</code> folder on your Vita and unpack
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-06 10:12 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-06 18:43 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
