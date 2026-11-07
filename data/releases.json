@@ -1,6 +1,128 @@
 [
   {
     "platform": "github",
+    "repo": "CBOC-Vita-Lab/galaxy-vita",
+    "release_id": "437789169",
+    "tag": "v2.1",
+    "name": "Super Mario Galaxy 2.1",
+    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v2.1",
+    "published": "2026-11-07T19:21:51Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\nThe smooth-play update. Far fewer pauses while the game prepares new graphics.\n\n### Smoother play\n- **Many more graphics ready out of the box.** The download now carries ready-made shaders gathered from every mission of every galaxy, not just the first, so the game almost never has to build a shader mid-play anymore. In our test of eight galaxies on a fresh install, only 4 shaders had to be built on the Vita, and those are in the download too. A short hitch can still appear in the first moments of a galaxy while its graphics are linked.\n- **Galaxies warm up while they load.** Each galaxy prepares the graphics it's known to need during its loading screen, adding at most a second or so, so your first steps in a galaxy are as smooth as the rest.\n- **The list of what each galaxy needs now ships with the game,** so even a fresh install gets that warm-up on its very first visit.\n\n### Under the hood\n- An optional background shader compiler is included for testing (`GXV_ASYNC_SHADERS=1` in `env.txt`). It's off by default while it's being tuned.\n- The package no longer carries a stray macOS file.\n\n**Updating?** Install the new VPK over the old one. Your saves and settings stay.\n\n",
+    "assets": [
+      {
+        "name": "cboc-release.json",
+        "size": 1498,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/cboc-release.json",
+        "content_type": "application/json"
+      },
+      {
+        "name": "Galaxy-Vita-install.zip",
+        "size": 20493124,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/Galaxy-Vita-install.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Galaxy-Vita.vpk",
+        "size": 8862751,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/Galaxy-Vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 609721,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Super Mario Galaxy",
+    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+    "homebrew_id": "super-mario-galaxy",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "1.1",
+    "catalog_apps": [
+      {
+        "id": "super-mario-galaxy",
+        "name": "Super Mario Galaxy",
+        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+        "category": "ports",
+        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+        "version": "1.1",
+        "version_date": "2026-10-26",
+        "author_ids": [
+          "cboc-vita-lab"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.1 → release v2.1",
+    "catalog_version": "1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "xesf/manhunt-releases",
+    "release_id": "437785198",
+    "tag": "v0.4.0",
+    "name": "v0.4.0",
+    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.4.0",
+    "published": "2026-11-07T19:14:56Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "### Added\n\n- Radar blips are 1.5 times larger; `radar_blip_scale=` in Options.ini sets the factor (1.0 = the original's size).\n- The scrap2 crane works: the pad turns the crane (`SetPadControlEntityRotation`, `LockPlayerMovement`), the magnet hangs from it on a 2 m rope (`LinkHangingEntToEnt`), the fire action picks up iron props (fridge, cookers) and lets them fall onto hunters, the crane camera (`SetCameraModeCrane`, `SetCameraPosCrane`, `SetCameraLookAtEntityCrane`) follows the magnet, `InflictDamage` hurts entities and `TurnOffPhysics` is kept.\n- `AttachToEntity` makes entity lights, useables (the scrap2 fuel tank on the crane) and slide doors follow their parent, not only triggers.\n- `SetCounter`, `IncrementCounter` and `ShowCounter` show the script counter on the HUD (bonus1, bonus3); `SwitchLitterOn` is recorded and `LockPed` keeps a hunter standing and places the zoo2 prisoners.\n- The player picks up a dead hunter (Use with one within 1.3 m), carries it over the shoulder with the DeadBody walk and puts it down with Use or `PlayerDropBody`; the stance figure shows the pickup, drop, buddy follow / stop and kick icons, Use tells a buddy to follow or stop and kicks a downed hunter, `IsPlayerCarryingBody`, `PlayerDropBody` and the events OnPickUpDeadBody, OnDropDeadBody, OnBuddyBeingToldToFollow / Stop work (gas-can pickup, action 4, is not done).\n- Script particle effects (`NewParticleEffect`, `CreateEffect`, `KillEffect`, `SetEffectPosition/Direction/Radius/RGBAStart/RGBAEnd/PauseCycle/PauseLength`, `GetEntityMatrix`, `AttachEffectToMatrix`) run from `ParticleEffects.INI`: the red alarm lights of asylum and mansion_int, smoke, fire and rain in 10 levels.\n- Hunters speak through the original's AI comms messages: sighting, investigate, stop and listen, lost him, combat taunts and chatter, cover-fight role calls, group chat between idle hunters, body finds, with the health-low variants and `AISetSpeechTypes` muting.\n- The movie log has per-movie stats (frames skipped, late loops, longest decode step, audio underruns) and the level end logs and flushes each stage (level end, outro start and end, level-end screen, front end resumed); on the Vita `LogFlush` writes the log on the calling thread.\n\n### Fixed\n\n- The player walks again after the scrap intro (and the subway and pharm_wks ones): `CutSceneEnd` gives the control back after the script's `SetPlayerControllable(FALSE)`; the sample bank reads in 32 KB steps and the log shows each first sample read in ms.\n- The Vita no longer stalls every second while hunters chase you: the hunters' route smoothing (up to 17 ms on a Mac, about 300 ms on the Vita, each replan) is spread over the walk and its collision sweeps are cut into short pieces; a slow-frame log line now breaks the AI phase down.\n- The outro movie has sound on the Vita: it takes the audio port over from the level (one BGM port) and gives it back afterwards, and the level results appear after the movie, not before it.\n\n### Added (developer tools)\n\n- CI: a tagged release also sends the Vita package to VitaDB (secret `VITA_SECRET`); the `vitadb` workflow re-sends it by hand.\n",
+    "assets": [
+      {
+        "name": "manhunt-v0.4.0-macos-arm64.tar.gz",
+        "size": 1895991,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.4.0/manhunt-v0.4.0-macos-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.4.0-vita.vpk",
+        "size": 1341236,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.4.0/manhunt-v0.4.0-vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "xesf",
+    "homebrew_name": "Manhunt",
+    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_id": "manhunt",
+    "homebrew_authors": [
+      "xesf"
+    ],
+    "homebrew_version": "0.2.0",
+    "catalog_apps": [
+      {
+        "id": "manhunt",
+        "name": "Manhunt",
+        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "version": "0.2.0",
+        "version_date": "2026-11-02",
+        "author_ids": [
+          "xesf"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.2.0 → release v0.4.0",
+    "catalog_version": "0.2.0"
+  },
+  {
+    "platform": "github",
     "repo": "josephinoo/vitaForge",
     "release_id": "437676637",
     "tag": "v0.1.11",
@@ -50,73 +172,6 @@
   },
   {
     "platform": "github",
-    "repo": "CBOC-Vita-Lab/galaxy-vita",
-    "release_id": "437629880",
-    "tag": "v2.0",
-    "name": "Super Mario Galaxy 2.0",
-    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v2.0",
-    "published": "2026-11-07T14:35:14Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "The full-resolution update. Super Mario Galaxy now runs at the Vita's native 960×544 at a steady 30 FPS, with a new Performance mode that reaches for 60.\n\n### Pick your picture\n- **Quality (the default):** the sharpest picture at a steady 30 FPS, at up to the full 960×544. In the busiest moments it softens edges first, then sharpness a step at a time, and brings everything back as soon as there's room.\n- **Performance:** as close to 60 FPS as each scene allows. When 60 isn't possible it settles on a smooth 30 rather than a choppy 40.\n- **Locked 30:** always 960×544, always 30 FPS when the Vita can manage it.\n\n### Measured on a PS Vita (widest camera zoom, the toughest view)\n\n| Galaxy | Quality | Performance | Locked 30 |\n|---|---|---|---|\n| Good Egg | 30 FPS, up to 960 wide | 54 FPS | 30, at 960×544 |\n| Beach Bowl | 30 FPS, up to 784 wide | 30 FPS | 25, at 960×544 |\n| Honeyhive | 30 FPS, up to 848 wide | 42 FPS | 30, at 960×544 |\n| Bowser's Star Reactor | 29 FPS, up to 848 wide | 45 FPS | 30, at 960×544 |\n\nAt the default camera zoom, Performance mode hits 60 FPS in Good Egg and 54 in Honeyhive.\n\n### Smoother play\n- **Honeyhive, Beach Bowl and the Bowser fights hold 30 FPS** in Quality mode. They used to drop into the teens and 20s.\n- **All four CPU cores.** With the CapUnlocker plug-in, sound, animation and part of the graphics work move to the Vita's fourth core.\n- **The game and the graphics work side by side,** so the game never waits on the renderer between frames.\n- **Leaner graphics:** lighter shaders, cheaper water and glow effects, and nothing drawn that ends up off screen.\n- **Even frame pacing,** with each frame shown right on time.\n\n### Better picture\n- **Widescreen picture sizes** and texture sharpness that follows the resolution.\n- **Edge smoothing** across the whole picture, with the HUD kept crisp.\n- **No more stray lines:** a 1-pixel line in Beach Bowl and under menu buttons, and a line under the star counter, are gone.\n- **The unpowered Comet Observatory,** early in a new game, now has dim but visible floors.\n\n### Controls and gameplay\n- **New pause-menu options:** use the right stick as the Star Bit pointer (Square), and set Star Bit reach (Select) to collect from farther away.\n- **Enemies that grab and release Mario hurt him again,** just like on the Wii.\n- **Hidden-star missions** work properly.\n- **Rear touch works right after the Settings menu.**\n- **Spins come out every time,** even when you press Square right after a jump.\n\n### Under the hood\n- Shaders are prepared again after an update, graphics memory stays tidy in long sessions, and a 500 MHz PSVshell profile is left alone.\n- The HD texture pack builder matches the game's colours exactly.\n- Full details are in [Technical notes](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/docs/TECHNICAL.md) and [Source record](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/docs/SOURCE.md).\n\n### Thanks\nSeveral fixes and ideas come from Producdevity's fork of version 1.1: Star Bit reach, the right-stick pointer, the enemy-damage, hidden-star and rear-touch fixes, and some speed-ups. See [Credits](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/CREDITS.md).\n\n**Updating?** Install the new VPK over the old one. Your saves and settings stay. Measured frame rates are in [Performance](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/docs/PERFORMANCE.md).",
-    "assets": [
-      {
-        "name": "cboc-release.json",
-        "size": 1426,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/cboc-release.json",
-        "content_type": "application/json"
-      },
-      {
-        "name": "Galaxy-Vita-install.zip",
-        "size": 20225859,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/Galaxy-Vita-install.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Galaxy-Vita.vpk",
-        "size": 8564840,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/Galaxy-Vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS",
-        "size": 609205,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/SHA256SUMS",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Super Mario Galaxy",
-    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-    "homebrew_id": "super-mario-galaxy",
-    "homebrew_authors": [
-      "cboc-vita-lab"
-    ],
-    "homebrew_version": "1.1",
-    "catalog_apps": [
-      {
-        "id": "super-mario-galaxy",
-        "name": "Super Mario Galaxy",
-        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-        "category": "ports",
-        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-        "version": "1.1",
-        "version_date": "2026-10-26",
-        "author_ids": [
-          "cboc-vita-lab"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1 → release v2.0",
-    "catalog_version": "1.1"
-  },
-  {
-    "platform": "github",
     "repo": "boomannotjeff/usm_vita",
     "release_id": "437380857",
     "tag": "1.1",
@@ -144,7 +199,7 @@
     "homebrew_authors": [
       "boomannotjeff"
     ],
-    "homebrew_version": "1.0",
+    "homebrew_version": "1.1",
     "catalog_apps": [
       {
         "id": "ultimate-spider-man",
@@ -153,16 +208,16 @@
         "category": "ports",
         "description": "A PS Vita port of Ultimate Spider-Man (PC, 2005).",
         "long_description": "A PS Vita port of Ultimate Spider-Man (PC, 2005), made by statically recompiling the PC game's USM.exe to C (every x86 instruction becomes equivalent C, like N64Recomp / XenonRecomp), then running that on the Vita with its own Windows, Direct3D 9, DirectSound and input layer on top of vitaGL.",
-        "version": "1.0",
-        "version_date": "2026-11-02",
+        "version": "1.1",
+        "version_date": "2026-11-07",
         "author_ids": [
           "boomannotjeff"
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0 → release 1.1",
-    "catalog_version": "1.0"
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 1.1",
+    "catalog_version": "1.1"
   },
   {
     "platform": "github",
@@ -2004,67 +2059,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.1.2",
     "catalog_version": "1.1.2"
-  },
-  {
-    "platform": "github",
-    "repo": "xesf/manhunt-releases",
-    "release_id": "431888734",
-    "tag": "v0.2.0",
-    "name": "v0.2.0",
-    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.2.0",
-    "published": "2026-11-02T19:38:21Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "### Fixed\n\n- jury_turf ring tutorial: the trainer no longer attacks during the tutorial. A hunter attacks only once a hunt goal is on its sub-pack (the script releases him into `sKiller` at the end), and every hunter stands still from `CutSceneStart` until 0.5 s after `CutSceneEnd` unless the script enables it, as in the original. A fall or blast no longer gives a hunter a sighting of an attacker at the world origin.\n\n### Added\n\n- Saves keep the checkpoint (`docs/reference/frontend.md` 5.5): a slot saved from the pause menu after a save point stores the entity states, the player's items, the script DATA, the score and the play clock in the original's blocks (our own layout); loading the slot, or Continue after leaving a level, restarts from that checkpoint. `make check-save`; `--autoplay` now also works with `--boot` (test aid), `--autoplay put:x;y;z;yaw` places the player.\n- Smashable props: the player's melee blows break `SMASHABLE` props (derelict's window glass, the way on from the start room): glass pieces and the pane-break sound play, `ondestroy` runs and the collision goes, so the player can pass.\n\n- Vita: new LiveArea icon, background and start button art by Either-Version-9577 (credited in `LICENSE`).\n- Movers, switches and pad queries (`docs/reference/entities.md` \"Movers\", \"Switches and useables\"): subway trains and the pharm_wks platforms move (`SetMoverIdlePosition`, `MoveMoverToIdlePosition`, `SetMoverSpeed`, `SetMoverAccel`, `SetMoverIdlePosMargin`; the mover heads for its idle position at its speed and stops within the margin), the player and live hunters standing on a mover are carried by it, and a mover's collision follows it. Action near a switch, button or lever holds the player for its use delay, then toggles it and runs `OnUseByPlayer`; `GetSwitchState` / `SetSwitchState` read and write the state. `IsPadButtonPressed` / `HasPadButtonBeenPressed` read the shared action layer (Triangle = Action, Circle = SwitchWeapon, Cross = LightAttack, Square = StrongAttack), so keyboard, gamepad and Vita feed them. `--autoplay` gains `use:S`. `mhtool level run` prints the movers' and switches' final state.\n- Throwing (`docs/reference/pickups.md` section 8): with a bottle, half brick, can or severed head in hand, holding LightAttack or StrongAttack winds up the throw (`Throw_Charge_T`) and the release throws it (`Throw_Fire_T`) with the velocity of `Player_ComputeThrowVelocity`: `MIN_THROW_VELOCITY` to `MAX_THROW_VELOCITY` over `THROW_CHARGE_TIME`, plus the player's own speed. The item flies as a point mass (gravity 25, `GRENADE_PHYS` bounce and friction) against the level, plays its impact sound, and an impact above the original's impulse threshold posts the AI lure sound (24 bottle, brick and can; 26 head) at the landing point, so hunters within reach investigate it. Autoplay token `throw:S`. Not yet: the item hurting a ped, the bottle shattering\n- Blood pools (`docs/reference/entities.md`): a dead ped leaves a `blood_dead` decal under the body (under the head after an execution) that grows 0.01 per update to a random 1.8 to 2.2 m, drawn as a floor quad in both renderers\n- Level failed flow as the original (`docs/reference/frontend.md` 4.5): the failed screen comes 4 s after the player dies (or at once on `SetLevelFailed`) with the world still running, shows `LEVEL_F` and, after 30 frames, the Continue and Quit hints. Continue reloads from the last checkpoint (or the level start); Quit asks `UQUIT?` and returns to the main menu. It works with keyboard, pad and Vita buttons through the shared action layer (Escape / Start also ask to quit). It replaces the 3 s auto-restart and the placeholder text. Test aids: `--debug-die SECS`, `--failed-action continue|quit`.\n- Retries: `GetPlayerLevelRestarts` counts them, so intro speech and tutorial text are not replayed; kills, executions and points return to their checkpoint values; the level time includes the failed attempts; hunters dead at the checkpoint come back without a corpse; guns have at least 2 rounds (nail gun 3).\n- Corpses last 240 s (60 s when carried after expiry, 240 s after a drop, 5 s with `SetPedDecayInstantly`), fade out below -60 s, and at most five stay (a sixth shortens the oldest to 5 s).\n- Pickups need movement: a first aid kit or ammo box is taken only while the player walks, runs, sneaks or sprints over it (1.05 m, -1..+3 m, below full health). The log shows the closest approach of each kit passed.\n- Door open sides: `MAX_OPEN_ANGLE_IN` is now the negative-swing side as in the original (matters for lockers and dumpster lids; swing doors unchanged).\n- Effects on bones and surfaces (`docs/reference/effects.md`): FX instances take a matrix, local particles and a system velocity. Execution animations start their `FXP*` / `FXB*` / `FXSMOK2` events at the bone (blood in five slots per ped, `src/viewer/fx_attach.*`), landed melee blows play `FXP002` toward the attacker, the muzzle flash rides on the shooter's hand (local particles with the shooter's velocity, not for the shotgun), `CHARACTER_HIT_FX` faces the shot, and bullets that hit the world start the impact system of the surface material (`mat.bin` read, `src/engine/gamemat.*`; `FXBSTON`, `FXBWOOD`, `FXBTMET`, ...).\n- Blood on the lens (`src/viewer/screen_blood.*`): 8 drops per splat when the player is shot or a blood spray reaches the camera, running down after 15 frames and gone after 300. Debug aids: `MH_CAM_AT=x,y,z,yaw,pitch`, `MH_FX_STATS`, `MH_IMPACT_LOG`; `mhtool ifp list` shows effect events.\n- Sound range and volume as the original (`docs/reference/audio.md`): the per-sound volume / range table (`Audio_InitSoundTable`) and the raised-cosine distance curve (full inside a tenth of the range, 0 at the range) replace the flat 127 / 100 m; a positional one-shot beyond its range is dropped, footsteps carry 20 m, gun shots 50 m, hunter speech 40 m. Animation sound events add their volume offset to the table volume.\n- Hunter speech by type (`docs/reference/audio.md`): the 49 x 59 speech table of the exe (voice row x AISPEECH type) replaces the random scripted line. Hunters say a line for what they do (spotted, investigating, lost him, search over, taunts while chasing or fighting, pain, death, idle chatter for those with a SPEECH idle action), with the original's four-entry priority queue, taunt exclusions, no-repeat cycling of variants, the 60 s repeat guard and the range check; `PlayHunterSpeech` from scripts goes through the same table. Which AI state asks for which type is inferred (the requesting code was not traced). The log shows each line with its type, class and cause.\n- Player sounds: pain on damage and a long pain line on a heavy hit, a death line, the heartbeat (period from the stamina value, boost at low health) and the breathing when tired, with the exe's timing tables.\n- Level loops on stream voices 8..11 of the level track: the generator (Journo_Streets), crane (Scrap2), lift (Pharm_Wks) and electro hum (Asylum) follow the script cue sounds, the subway rumble plays in Subway, and Piggsy's chainsaw engine follows the hunter in Attic and Weasel; positional, with the distance curve.\n- The main menu plays `FE_M` (the front-end track) instead of `FE_S`; the direction layers are not done.\n- Music levels and hunt state as the original (`docs/reference/music.md`): layers at 50 of 127, linear fades of 0.33 s up and 5 s down (333 ms into combat), combat music only with an alerted hunter within 4 m, and silence after 3 s in shadow with nothing alerted. State changes are logged with level and fade length.\n- Help text as the original (`docs/reference/hud.md`): every `DisplayGameText` stays 6 s in the fixed box (font 1 at 0.83, panel alpha 160); `IsGameTextDisplaying` and `KillGameText` work, so tutorial chains wait on each other; the display-time, teletype, size and position natives do nothing, and an empty text, `~!~` or a dead player is refused.\n- Stamina lock: sprint stops at 0 and is locked until the bar is back to 0.4, with a recovery pause (rates are still placeholders).\n\n- Character controller as the original (`docs/reference/collision.md`): ground from a 0.7 m vertical segment with a 0.1 s eased step-up, no snap down (gravity 25 m/s2, so stairs down are short falls), 55..85 degree slopes cannot be climbed, a blocked move of the player is undone and the next slides along the wall, and a fall costs half the health from 1 m and all of it from 8 m (AI sound 5 / 6). `--player-at` takes a fifth value, the start height above the floor, for fall tests; `MH_CTL_TRACE=1` logs steps and slope slides.\n\n- Follow camera rebuilt from the original's rules (`docs/reference/camera.md`): pivot 2.0 m up and 0.3 m to the right, 3.9 m arm at an 18 degree look pitch (limits -50 / +60), sphere-sweep pull-in against the world, and look-behind (G, R3, d-pad up). Classic controls now follow the player's heading at the gait's rate and the right stick gives a spring-back look offset of up to 45 / 15 degrees; Modern controls keep the free orbit.\n\n- Animation runtime (`docs/reference/animation.md`): an upper-body `_T` animation (attacks, blocks, flinches, aim, fire, reload) is a\n  partial layer over the running locomotion, so a one-off upper-body move no longer freezes the legs or the movement; the layer fades in\n  and out over 0.2 s. A stop fades to the stand pose over 0.2 s with the quad frozen. Root motion is applied as a velocity (horizontal\n  speed clamped to 10 m/s). The `.ifp` animation events (4,455: sounds and effects) are parsed (`IfpEvent`); the sound events play at\n  the body (`MH_ANIM_EVENTS=1` logs them) and the crowbar animations post AI noise 25. The first quick melee attack starts 0.10 / 0.15 /\n  0.07 / 0.14 s into its animation (Fist, Beater, Beater2, Blade), hunters at 0.3 times that. `--autoplay` gained `runattack:S`.\n  `mhtool ifp check` counts the events.\n- `make check-playthrough` plays jury_turf (\"Born Again\") from the start to the exit with scripted input\n  (`tools/playthrough/jury_turf.route`, 428 s of game time, about 2 minutes of run time in Release) and fails unless the level\n  completes. `--autoplay` gained `kill:Entity[;S]` and `free:S`, and `to:x;y` sidesteps when it is stuck on a corner.\n- `MH_AI_TRACE=2` also prints every hunter's position every two seconds.\n\n### Fixed\n\n- `SetPlayerHeading` was a stub, so the player stayed facing away from the trainer after the yard cutscene and could not hit him.\n  It now turns the player (heading 0 faces the original +Z).\n- The player could not walk up a 0.42 m ledge: the viewer's step-up was 0.30 m and a foot sphere sat below the original's lowest\n  collision sphere (0.65 m). The mall entrance of jury_turf was impassable. The step-up is now 0.65 m and the foot sphere is gone.\n- `SetDoorOverrideAngle` used the script's sign with this engine's swing direction, so the jury_turf trainer-room gate (-85)\n  opened onto the only way out. The override now swings the other way.\n\n- Hunters now find the AI graph nodes that scripts name. The lookup used the node's numeric first string and\n  never the label, so every `AIDefineGoalGotoNode*` / `Guard*` goal, home node and patrol stop that names a node\n  failed. In jury_turf the training guy never left his spawn after the painkillers; now he walks to `arenamid`,\n  taunts, and fights the player in the yard.\n\n### Changed\n\n- Scripts run as the original runs them. Each handler is one VM: `RunScript` on a handler that is running or\n  sleeping does nothing and answers 0, an event wakes a sleeping handler and leaves a running one alone, and\n  `onentertrigger` / `onleavetrigger` start only an idle handler. Scripts run twice a frame (after the AI, entity\n  and trigger updates, and at the end of the world update) in the original's order: the level script, then the\n  entities newest first, the last handler of a script first. A handler gets a fixed number of VM steps per pass\n  (the original used a CPU time slice), `ScriptHogProcessorStart` / `End` lift the limit, and the level `oncreate`\n  runs at load without one and ends at its first `sleep`. `SetEntityScriptsFromEntity` no longer runs `oncreate`\n  on the copy, refuses a target that already has scripts, and returns the handler count. `SetDoorState` moves\n  only sliding doors (a swing door opens when something pushes it), `GetDoorState` of a swing door reads its angle.\n  Spawns and `Create*Trigger` refuse a name in use (result 0) and `ScriptCreateName` gets a numbered name.\n- Triggers: a `Trigger_Inst` of shape kind 0 is inert (182 of 302), `InsideTrigger` is false on the entry frame, and\n  the player is tested with one collision sphere with no slack on lines.\n- Save points (`Gen_Save_Point`): 0.1 s after the player enters, `onlevelsave` runs, the text `CHEKPNT` shows and a\n  checkpoint is saved (entity states, inventory, script data). After a death the level restarts from it.\n- Script timers (`SetTimer`, `StartTimer`, `HasTimerEnded`, ...) count down and fire `ontimerended`;\n  `GetPlayerPosition`, `GetPlayerAreaName` and `GetHunterAreaName` answer; `AIRemoveSubPackFromLeader`,\n  `AIAddLeaderEnemy` / `AIRemoveLeaderEnemy` and `AIIsEnemy` use the leader's lists; the AI queries answer -1 for a dead hunter\n  and 0 from a dead leader's sub-packs as the original does.\n\n- Combat follows `Ped_TakeDamage`: shots hit the original's 11 bone spheres at the live skeleton (after a 1.5 m\n  test sphere at the pelvis, first sphere wins), damage needs a `DAMAGE_CLASS` above the victim's `ARMOUR_CLASS`,\n  the first quick punch does 0.3 of its damage, a block works from any side and not against the chainsaw, and the\n  first fatal blow on an ordinary NPC leaves him with 6 to 14 hit points. Entity types without `HIT_POINTS` have\n  1,000,000, doors open to the angles of their physics record, footsteps post noise per footfall (sneaking is\n  silent), dead hunters leave after a timer once out of view, and at most two hunters attack in melee while the\n  rest hold range.\n- Hunter AI follows Manhunt 1's own rules: the hard-coded transition table over senses with\n  confirm and 1 s persistence replaces the alert levels of `aiTypeData.ini`; the player's real\n  light (under 0.06 he cannot be seen), the hunter's own gait for the frustum, footstep sound\n  events with `AISounds.ini` volumes, reach-based hearing, the `visplayer` sight formula,\n  peripheral vision, a vision check every 4 frames, last-known memory and the 67 % lose-track\n  roll beyond 12 m. `MH_AI_TRACE=1` prints one line per change of sight, hearing or state.\n\n- The ammo text reads \"clip / reserve\" at y 0.708, each part green when full, alpha 255.\n\n### Removed\n\n- The damage-direction arrows: the retail game never shows them.\n\n",
-    "assets": [
-      {
-        "name": "manhunt-0.2.0-source.tar.gz",
-        "size": 891863,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.2.0/manhunt-0.2.0-source.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-macos-arm64.tar.gz",
-        "size": 1405503,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.2.0/manhunt-macos-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt.vpk",
-        "size": 1069282,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.2.0/manhunt.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "xesf",
-    "homebrew_name": "Manhunt",
-    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_id": "manhunt",
-    "homebrew_authors": [
-      "xesf"
-    ],
-    "homebrew_version": "0.2.0",
-    "catalog_apps": [
-      {
-        "id": "manhunt",
-        "name": "Manhunt",
-        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "version": "0.2.0",
-        "version_date": "2026-11-02",
-        "author_ids": [
-          "xesf"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.2.0",
-    "catalog_version": "0.2.0"
   },
   {
     "platform": "github",
