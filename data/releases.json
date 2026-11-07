@@ -1,6 +1,122 @@
 [
   {
     "platform": "github",
+    "repo": "josephinoo/vitaForge",
+    "release_id": "437676637",
+    "tag": "v0.1.11",
+    "name": "VitaForge v0.1.11 (plugin manager beta)",
+    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.11",
+    "published": "2026-11-07T15:59:43Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Highlights\n\nPlugin manager (BETA): manage taiHEN plugins from Settings › Plugins. This feature is in beta and may contain bugs. Back up config.txt before using it.\nSafe updates: downloaded plugin modules are verified (size and ELF header) and the old module is restored if anything fails.\nProfiles: save, apply, rename, delete, export and import plugin setups.\nDependency warnings: disabling a plugin warns which enabled plugins still need it.\nConfig backups and safe mode: every config.txt change is backed up first; the registry is reconciled with config.txt on open.\nGame data fix: ports that extract data inside ux0:app/<TITLEID> now extract after the app is promoted, without wiping the app on update.\nSettings UI: scrolling follows focus in both directions, the footer is no longer covered, long names are elided, and hints use the PS Vita button icons.\n\nTechnical\n\nTarget version: 0.1.11.\n202 unit tests passing.\nBuilt with VitaSDK and cargo-vita for PS Vita hardware.\n",
+    "assets": [
+      {
+        "name": "vitaforge.vpk",
+        "size": 5604166,
+        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.11/vitaforge.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "josephinoo",
+    "homebrew_name": "VitaForge",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store client.",
+    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "vitaforge",
+    "homebrew_authors": [
+      "josephinoo"
+    ],
+    "homebrew_version": "v.0.1.1",
+    "catalog_apps": [
+      {
+        "id": "vitaforge",
+        "name": "VitaForge",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+        "category": "utilities",
+        "description": "Homebrew store client.",
+        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.0.1.1",
+        "version_date": "2026-08-11",
+        "author_ids": [
+          "josephinoo"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.11",
+    "catalog_version": "v.0.1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "CBOC-Vita-Lab/galaxy-vita",
+    "release_id": "437629880",
+    "tag": "v2.0",
+    "name": "Super Mario Galaxy 2.0",
+    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v2.0",
+    "published": "2026-11-07T14:35:14Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "The full-resolution update. Super Mario Galaxy now runs at the Vita's native 960×544 at a steady 30 FPS, with a new Performance mode that reaches for 60.\n\n### Pick your picture\n- **Quality (the default):** the sharpest picture at a steady 30 FPS, at up to the full 960×544. In the busiest moments it softens edges first, then sharpness a step at a time, and brings everything back as soon as there's room.\n- **Performance:** as close to 60 FPS as each scene allows. When 60 isn't possible it settles on a smooth 30 rather than a choppy 40.\n- **Locked 30:** always 960×544, always 30 FPS when the Vita can manage it.\n\n### Measured on a PS Vita (widest camera zoom, the toughest view)\n\n| Galaxy | Quality | Performance | Locked 30 |\n|---|---|---|---|\n| Good Egg | 30 FPS, up to 960 wide | 54 FPS | 30, at 960×544 |\n| Beach Bowl | 30 FPS, up to 784 wide | 30 FPS | 25, at 960×544 |\n| Honeyhive | 30 FPS, up to 848 wide | 42 FPS | 30, at 960×544 |\n| Bowser's Star Reactor | 29 FPS, up to 848 wide | 45 FPS | 30, at 960×544 |\n\nAt the default camera zoom, Performance mode hits 60 FPS in Good Egg and 54 in Honeyhive.\n\n### Smoother play\n- **Honeyhive, Beach Bowl and the Bowser fights hold 30 FPS** in Quality mode. They used to drop into the teens and 20s.\n- **All four CPU cores.** With the CapUnlocker plug-in, sound, animation and part of the graphics work move to the Vita's fourth core.\n- **The game and the graphics work side by side,** so the game never waits on the renderer between frames.\n- **Leaner graphics:** lighter shaders, cheaper water and glow effects, and nothing drawn that ends up off screen.\n- **Even frame pacing,** with each frame shown right on time.\n\n### Better picture\n- **Widescreen picture sizes** and texture sharpness that follows the resolution.\n- **Edge smoothing** across the whole picture, with the HUD kept crisp.\n- **No more stray lines:** a 1-pixel line in Beach Bowl and under menu buttons, and a line under the star counter, are gone.\n- **The unpowered Comet Observatory,** early in a new game, now has dim but visible floors.\n\n### Controls and gameplay\n- **New pause-menu options:** use the right stick as the Star Bit pointer (Square), and set Star Bit reach (Select) to collect from farther away.\n- **Enemies that grab and release Mario hurt him again,** just like on the Wii.\n- **Hidden-star missions** work properly.\n- **Rear touch works right after the Settings menu.**\n- **Spins come out every time,** even when you press Square right after a jump.\n\n### Under the hood\n- Shaders are prepared again after an update, graphics memory stays tidy in long sessions, and a 500 MHz PSVshell profile is left alone.\n- The HD texture pack builder matches the game's colours exactly.\n- Full details are in [Technical notes](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/docs/TECHNICAL.md) and [Source record](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/docs/SOURCE.md).\n\n### Thanks\nSeveral fixes and ideas come from Producdevity's fork of version 1.1: Star Bit reach, the right-stick pointer, the enemy-damage, hidden-star and rear-touch fixes, and some speed-ups. See [Credits](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/CREDITS.md).\n\n**Updating?** Install the new VPK over the old one. Your saves and settings stay. Measured frame rates are in [Performance](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/main/docs/PERFORMANCE.md).",
+    "assets": [
+      {
+        "name": "cboc-release.json",
+        "size": 1426,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/cboc-release.json",
+        "content_type": "application/json"
+      },
+      {
+        "name": "Galaxy-Vita-install.zip",
+        "size": 20225859,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/Galaxy-Vita-install.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Galaxy-Vita.vpk",
+        "size": 8564840,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/Galaxy-Vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 609205,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.0/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Super Mario Galaxy",
+    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+    "homebrew_id": "super-mario-galaxy",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "1.1",
+    "catalog_apps": [
+      {
+        "id": "super-mario-galaxy",
+        "name": "Super Mario Galaxy",
+        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+        "category": "ports",
+        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+        "version": "1.1",
+        "version_date": "2026-10-26",
+        "author_ids": [
+          "cboc-vita-lab"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.1 → release v2.0",
+    "catalog_version": "1.1"
+  },
+  {
+    "platform": "github",
     "repo": "boomannotjeff/usm_vita",
     "release_id": "437380857",
     "tag": "1.1",
@@ -3756,122 +3872,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 0.2.0",
     "catalog_version": "0.2.0"
-  },
-  {
-    "platform": "github",
-    "repo": "josephinoo/vitaForge",
-    "release_id": "424822207",
-    "tag": "v0.1.10",
-    "name": "VitaForge v0.1.10",
-    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.10",
-    "published": "2026-10-26T22:09:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Highlights\r\n\r\n• **Non-intrusive Self-Update Modal**: Redesigned the VitaForge updater. When a newer version is available, a clean dialog prompts on startup with clear action chips (`✕` to Update, `○` to Cancel).\r\n• **Native PlayStation Button Icons**: The update prompt buttons use official PS Vita button assets (`✕` and `○`) rather than plain unicode glyphs.\r\n• **Input Isolation in Dialogs**: Background button commands (D-Pad, Square, Triangle, Shoulders) are strictly blocked while the update dialog is open to prevent accidental catalog interactions.\r\n• **Header Overflow Resolved**: Removed the fixed update pill from the top navigation bar, giving full breathing room to category tabs (`Home`, `Games`, `Apps`, `Emus`, `Plugins`, `Lib`, `Updates`) and the search bar across all supported languages.\r\n• **Smooth Detail View Scrolling**: Fixed vertical analog and D-pad scrolling within long app/game descriptions.\r\n\r\n## Technical\r\n\r\n• Target version: **0.1.10** (`APP_VER=01.10` in `param.sfo`).\r\n• All 147 unit tests passing.\r\n• Built with VitaSDK and cargo-vita for PS Vita hardware.\r\n",
-    "assets": [
-      {
-        "name": "vitaforge.vpk",
-        "size": 5455187,
-        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.10/vitaforge.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "josephinoo",
-    "homebrew_name": "VitaForge",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store client.",
-    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "vitaforge",
-    "homebrew_authors": [
-      "josephinoo"
-    ],
-    "homebrew_version": "v.0.1.1",
-    "catalog_apps": [
-      {
-        "id": "vitaforge",
-        "name": "VitaForge",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-        "category": "utilities",
-        "description": "Homebrew store client.",
-        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.0.1.1",
-        "version_date": "2026-08-11",
-        "author_ids": [
-          "josephinoo"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.10",
-    "catalog_version": "v.0.1.1"
-  },
-  {
-    "platform": "github",
-    "repo": "CBOC-Vita-Lab/galaxy-vita",
-    "release_id": "424451280",
-    "tag": "v1.1",
-    "name": "Super Mario Galaxy 1.1",
-    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v1.1",
-    "published": "2026-10-26T15:52:34Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Super Mario Galaxy 1.1 brings better-looking eyes, a new Settings menu, game-language selection and a clearer start-up to PS Vita. Still native: no emulator and no streaming.\n\n## Mario's eyes are back\n\nMario's eyes now show and blink normally with the optional HD textures. The colour fix also restores his blue eyes without the HD pack, while the rest of your HD textures stay in place.\n\n## Make it yours\n\nOpen **Settings** from the game's LiveArea screen, before launching or while playing. The menu uses the game's own fonts and gives you:\n\n- **Button remapping** for the Vita and for a PlayStation controller on PS TV, with controller pictures to make each binding easy to find.\n- **Picture-rate options:** Up to 60 FPS, 30 FPS and the new **Steady 30** profile.\n- **Dynamic quality** and **reduced motion** settings.\n\nYour choices are saved. When a change needs a restart, the menu offers one.\n\n**Steady 30** is an opt-in profile that adjusts resolution and effects quality to favour steadier frame pacing over the highest picture rate.\n\n## Play in your language\n\nChoose the game language in **Settings**, using the languages included in your own game files. Language selection now sits alongside your controls and picture settings, so you can set it up in the same place.\n\n## A friendlier start\n\nA title-screen loading picture and progress bar show what is happening instead of leaving you guessing. A rare start-up file-handle crash is guarded, slow loading gets a clearer message, and the loading log is more useful when tracking down a problem.\n\n## Better controls and sound\n\nCustom button layouts no longer trap you in the pause menu. Unsupported saved controller profiles fall back to usable defaults, and the Settings menu no longer keeps reopening after Return or Restart.\n\nAudio mixing now uses the Vita's vector unit more efficiently while keeping the sound bit-for-bit the same.\n\n## Updating from 1.0\n\nInstall the new VPK over your existing copy. **Your saves are kept.** The first launch after updating can take a little longer while the game prepares its updated shaders.\n\n[Download the VPK](https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/latest/download/Galaxy-Vita.vpk) | [Download the install ZIP](https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/latest/download/Galaxy-Vita-install.zip)\n\nFor a fresh install, [CBOC Vita Installer](https://github.com/CBOC-Vita-Lab/vita-installer/releases/latest) handles preparation and transfer from your own Wii disc image. No game files are supplied.\n\n",
-    "assets": [
-      {
-        "name": "cboc-release.json",
-        "size": 1354,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/cboc-release.json",
-        "content_type": "application/json"
-      },
-      {
-        "name": "Galaxy-Vita-install.zip",
-        "size": 17056222,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/Galaxy-Vita-install.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Galaxy-Vita.vpk",
-        "size": 6973544,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/Galaxy-Vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS",
-        "size": 575165,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v1.1/SHA256SUMS",
-        "content_type": "text/plain"
-      }
-    ],
-    "author": "CBOC-Vita",
-    "homebrew_name": "Super Mario Galaxy",
-    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-    "homebrew_id": "super-mario-galaxy",
-    "homebrew_authors": [
-      "cboc-vita-lab"
-    ],
-    "homebrew_version": "1.1",
-    "catalog_apps": [
-      {
-        "id": "super-mario-galaxy",
-        "name": "Super Mario Galaxy",
-        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-        "category": "ports",
-        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-        "version": "1.1",
-        "version_date": "2026-10-26",
-        "author_ids": [
-          "cboc-vita-lab"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.1",
-    "catalog_version": "1.1"
   },
   {
     "platform": "github",
@@ -32969,5 +32969,114 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v.1.20",
     "catalog_version": "v.1.20"
+  },
+  {
+    "platform": "github",
+    "repo": "cy33hc/vita-launcher",
+    "release_id": "64622781",
+    "tag": "latest",
+    "name": "v3.9.6",
+    "url": "https://github.com/cy33hc/vita-launcher/releases/tag/latest",
+    "published": "2022-04-18T05:14:40Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "**v3.9.6**\r\n- Improved download speed of ROMS from FTP server. From my pstv lan cable, speed increase from 3.7MB/s to 6.2MB/s.\r\n\r\n**v3.9.5**\r\n- Launch Dreamcast games via new Flycast app\r\n\r\n**v3.9.4**\r\n- Fixed issue #48 where duplicate entries of games with DLC.\r\n\r\n**v3.9.3**\r\n- Add ability to config a default global PSP boot settings\r\n- Expanded the per game PSP boot settings to include the following\r\n  -  \"Graphics Filtering\", \"Smooth Graphics\", \"Flux Filter Color\", \"PSP/PS1 Scale\" etc...\r\n![newbootsettings](https://github.com/cy33hc/vita-launcher/blob/master/screenshots/new_boot_settings.jpg)\r\n\r\n**v3.9.2**\r\n- Add new YoYo Loader boot options \"Use Uncached Memory\" and \"Use Double Buffering\"\r\n\r\n**v3.9.1**\r\n- Added support for EasyRPG games put in sub directories or in zip files. Only zip files with compression method **Store** or **Deflate** (not Deflate64) are supported.\r\n\r\n**v3.9**\r\n- Added support for Booting EasyRPG games. Games have to be put into the **ux0:data/easyrpg-player** folder. You also need to download and install the latest nightly build of EasyRPG from the official website that supports booting games externally. https://ci.easyrpg.org/job/player-vita/\r\n\r\n**v3.8.5**\r\n- Fix updater dialog showing when nothing to update\r\n\r\n**v3.8.4**\r\n- Add \"disable audio\" boot settings for yoyo loader\r\n- Updated yoyo thumbnails db\r\n- Fixed an issue downloading gms game icons\r\n\r\n**v3.8.3**\r\n- Fix psp games can't boot after plugin settings changed.\r\n\r\n**v3.8.2**\r\n- Fix adernaline boot settings not saved due to missing tables. Only some people affected based on the upgrade path.\r\n- Improve psp plugins navigation. Default selects the checkbox instead of the \"Delete\" button.\r\n\r\n**v3.81**\r\n- Fix GPU crash which was caused by texture being deleted while still in use. Fixed by increasing the delay for cleanup of unused textures.\r\n\r\n**v3.8**\r\n- Adds ability to manage PSP plugins from within Vita-Launcher. Also allow per game plugin configuration.\r\n![plugin1](https://github.com/cy33hc/vita-launcher/blob/master/screenshots/global_plugins.jpg)\r\n\r\n**v3.7**\r\n- Updated fonts to handle more languages and special characters for copyright, TM etc which shows as \"?\"\r\n- Better detection of iTLS-Enso and ABB(Adernaline Bubble Booter plugin)\r\n- Warn ONLY ONCE for missing iTLS-Enso/ABB install\r\n- Overclocked CPU/GPU which seem to fix the random GPU crash.\r\n- **Add ability to config a custom location** to look for Bubbles/PSP/PS1/PSPMini icons.\r\n  - For Bubbles, create a png file with the name of the TITLE_ID (eg. God of War file is PCSA00126.png)\r\n  - For PSP ISO, create a png file with the same name as the ISO. (eg.\"Ape Escape.iso\", create the png file called \"Ape Escape.png\")\r\n  - For EBOOT.PBP, create png file with the same name as the folder that contains the EBOOT.PBP file.  (Eg. \"ux0:pspemu/PSP/GAME/Final Fantasy VII/EBOOT.PBP\", create the png file called \"Final Fantasy VII.png\"\r\n\r\n**v3.6.6**\r\n- Fix issues where duplicate Retro alternate cores created in settings\r\n\r\n**v3.6.5**\r\n- Auto installs/updates the flycast core in RetroArch by extracting the smc.bin and smc2.bin from the Flycast app\r\n\r\n**v3.6.4**\r\n- Fix issue where YoYo settings isn't saved if yy.cfg does not exists\r\n\r\n**v3.6.3**\r\n- Check if iTLS-Enso is installed before attempt to download updates. iTLS-Enso is needed for this feature\r\n\r\n**v3.6.2**\r\n- Add \"Run with Mem Squeezing\" option to YoYo boot settings\r\n\r\n**v3.6.1**\r\n- Add support for \"Enable network features\" option to YoYo Launcher boot settings\r\n\r\n**v3.6**\r\n- Add option to apply Bilinear Filters to icons. This is enabled by default and can be change in the Global Settings.\r\n- Add support to launch Game Maker Studio games via YoYo Launcher (NEW). Thx to @Rinnegatamante for this awesome app.\r\n- Add support for scanning Game Maker Studio games from FTP Server. Like support for ROMS, update the \"roms_path\" of GMS category with \"ftp0:\" prefix.\r\n   - For both ux0 and ftp0, put an icon0.png in the same folder as the game.apk. Vita-Launcher will use that for the display icon.\r\n- Add feature to auto-install \"Adrenaline Launcher\", \"YoYo Launcher\" (NEW). These are custom bubbles required by Vita-Launcher to launch games without bubbles.\r\n- Add option to check and install updates for \"YoYo Launcher\", \"Adrenaline Launcher\", \"Vita Launcher\". There's a new action \"Check for updates\" can be found under the \"Actions\" tab of Settings.",
+    "assets": [
+      {
+        "name": "AdrenalineLauncher.vpk",
+        "size": 250965,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/AdrenalineLauncher.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "adr_launcher_version.txt",
+        "size": 4,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/adr_launcher_version.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "extract_eboot_iso_linux",
+        "size": 2483228,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/extract_eboot_iso_linux",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "extract_eboot_iso_windows.exe",
+        "size": 2846968,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/extract_eboot_iso_windows.exe",
+        "content_type": "application/x-ms-dos-executable"
+      },
+      {
+        "name": "global_plugins.jpg",
+        "size": 95918,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/global_plugins.jpg",
+        "content_type": "image/jpeg"
+      },
+      {
+        "name": "launcher.vpk",
+        "size": 5286589,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/launcher.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "new_boot_settings.jpg",
+        "size": 165795,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/new_boot_settings.jpg",
+        "content_type": "image/jpeg"
+      },
+      {
+        "name": "per_game_plugins.jpg",
+        "size": 93335,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/per_game_plugins.jpg",
+        "content_type": "image/jpeg"
+      },
+      {
+        "name": "version.txt",
+        "size": 3,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/version.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "yoyo_launcher.vpk",
+        "size": 3925631,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/yoyo_launcher.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "yoyo_launcher_version.txt",
+        "size": 4,
+        "download_url": "https://github.com/cy33hc/vita-launcher/releases/download/latest/yoyo_launcher_version.txt",
+        "content_type": "text/plain"
+      }
+    ],
+    "author": "cy33hc",
+    "homebrew_name": "Vita Launcher",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-vita-launcher/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Applications launcher for PSVita/PSTV.",
+    "homebrew_long_description": "An application that allows to launch other installed apps, roms from emulators and PSP games and homebrews thbrough Adrenaline. This removes the bubbles limit of Livearea and allows to categorize applications.",
+    "homebrew_id": "vita-launcher",
+    "homebrew_authors": [
+      "cy33hc"
+    ],
+    "homebrew_version": "v.3.9.6",
+    "catalog_apps": [
+      {
+        "id": "vita-launcher",
+        "name": "Vita Launcher",
+        "icon": "https://archive.org/download/psvitaalive-vita-launcher/icon0.png",
+        "category": "utilities",
+        "description": "Applications launcher for PSVita/PSTV.",
+        "long_description": "An application that allows to launch other installed apps, roms from emulators and PSP games and homebrews thbrough Adrenaline. This removes the bubbles limit of Livearea and allows to categorize applications.",
+        "version": "v.3.9.6",
+        "version_date": "2022-11-23",
+        "author_ids": [
+          "cy33hc"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.3.9.6 → release latest",
+    "catalog_version": "v.3.9.6"
   }
 ]
