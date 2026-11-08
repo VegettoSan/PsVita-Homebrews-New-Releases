@@ -25,6 +25,7 @@ from urllib.parse import urlparse
 import bleach
 import mistune
 import requests
+from catalog_schema_v2_compat import to_v1
 
 CATALOG_URL = os.getenv(
     "PSVITAALIVE_CATALOG_URL",
@@ -1071,7 +1072,7 @@ def main() -> int:
         headers={"User-Agent": USER_AGENT},
     )
     response.raise_for_status()
-    catalog = response.json()
+    catalog = to_v1(response.json())
     index = catalog_repo_index(catalog)
 
     # PSVitaAlive itself is the catalog/store project, so it may not appear as a
