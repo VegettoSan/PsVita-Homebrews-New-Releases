@@ -219,16 +219,21 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="super mario galaxy super mario galaxy cboc-vita-lab/galaxy-vita super mario galaxy 2.1 v2.1 ports the smooth-play update. far fewer pauses while the game prepares new graphics.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="super mario galaxy super mario galaxy cboc-vita-lab/galaxy-vita super mario galaxy 2.2 v2.2 ports the smooth-play update, part two. fewer hitches everywhere, quicker menus and a new look.
 
 ### smoother play
-- **many more graphics ready out of the box.** the download now carries ready-made shaders gathered from every mission of every galaxy, not just the first, so the game almost never has to build a shader mid-play anymore. in our test of eight galaxies on a fresh install, only 4 shaders had to be built on the vita, and those are in the download too. a short hitch can still appear in the first moments of a galaxy while its graphics are linked.
-- **galaxies warm up while they load.** each galaxy prepares the graphics it&#x27;s known to need during its loading screen, adding at most a second or so, so your first steps in a galaxy are as smooth as the rest.
-- **the list of what each galaxy needs now ships with the game,** so even a fresh install gets that warm-up on its very first visit.
+- **galaxies start ready.** each galaxy finishes preparing its graphics during the loading screen (a few seconds longer the first time at most), so the first steps in a galaxy no longer stutter. on a 3-galaxy test, graphics prepared mid-play went from 25 to 0.
+- **no more hitch when the picture size changes.** the next size is prepared ahead of time, so a change takes about a millisecond instead of a visible skip.
+- **menus prepare their graphics at start-up**, so the pause menu and star select open smoothly.
+- **performance mode reacts faster.** when a scene gets heavy it steps down within a fraction of a second instead of several seconds. good egg at the widest camera now holds 60 fps.
+- **every packaged shader is compiled on a real vita.**
 
-### under the hood
-- an optional background shader compiler is included for testing (`gxv_async_shaders=1` in `env.txt`). it&#x27;s off by default while it&#x27;s being tuned.
-- the package no longer carries a stray macos file.
+### new look
+- **new original artwork** for the bubble and livearea: a starry night sky over a glowing ocean.
+- **the settings button on the livearea** has the size the vita expects. if you still don&#x27;t see it after updating, use vitashell&#x27;s refresh livearea (triangle on its home page) or delete the game and install fresh (your saves stay).
+
+### fixed
+- a guard against a crash if bee mario&#x27;s model isn&#x27;t loaded yet when you grab the bee mushroom.
 
 **updating?** install the new vpk over the old one. your saves and settings stay.">
               <div class="card-layout">
@@ -237,33 +242,124 @@
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · CBOC-Vita-Lab/galaxy-vita</div>
-                      <h2><a href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v2.1" target="_blank" rel="noopener">Super Mario Galaxy</a></h2>
-                      <div class="release-name">Super Mario Galaxy 2.1</div>
+                      <h2><a href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v2.2" target="_blank" rel="noopener">Super Mario Galaxy</a></h2>
+                      <div class="release-name">Super Mario Galaxy 2.2</div>
                     </div>
                     <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v2.1</span>
-                    <span>2026-11-07 19:21 UTC</span>
+                    <span class="tag">v2.2</span>
+                    <span>2026-11-08 02:23 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 1.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1 → release v2.1</div>
+                  <div class="catalog-detail">PSVitaAlive 1.1 → release v2.2</div>
                   
-                  <div class="body markdown-body"><p>The smooth-play update. Far fewer pauses while the game prepares new graphics.</p>
+                  <div class="body markdown-body"><p>The smooth-play update, part two. Fewer hitches everywhere, quicker menus and a new look.</p>
 <h3>Smoother play</h3>
 <ul>
-<li><strong>Many more graphics ready out of the box.</strong> The download now carries ready-made shaders gathered from every mission of every galaxy, not just the first, so the game almost never has to build a shader mid-play anymore. In our test of eight galaxies on a fresh install, only 4 shaders had to be built on the Vita, and those are in the download too. A short hitch can still appear in the first moments of a galaxy while its graphics are linked.</li>
-<li><strong>Galaxies warm up while they load.</strong> Each galaxy prepares the graphics it's known to need during its loading screen, adding at most a second or so, so your first steps in a galaxy are as smooth as the rest.</li>
-<li><strong>The list of what each galaxy needs now ships with the game,</strong> so even a fresh install gets that warm-up on its very first visit.</li>
+<li><strong>Galaxies start ready.</strong> Each galaxy finishes preparing its graphics during the loading screen (a few seconds longer the first time at most), so the first steps in a galaxy no longer stutter. On a 3-galaxy test, graphics prepared mid-play went from 25 to 0.</li>
+<li><strong>No more hitch when the picture size changes.</strong> The next size is prepared ahead of time, so a change takes about a millisecond instead of a visible skip.</li>
+<li><strong>Menus prepare their graphics at start-up</strong>, so the pause menu and star select open smoothly.</li>
+<li><strong>Performance mode reacts faster.</strong> When a scene gets heavy it steps down within a fraction of a second instead of several seconds. Good Egg at the widest camera now holds 60 FPS.</li>
+<li><strong>Every packaged shader is compiled on a real Vita.</strong></li>
 </ul>
-<h3>Under the hood</h3>
+<h3>New look</h3>
 <ul>
-<li>An optional background shader compiler is included for testing (<code>GXV_ASYNC_SHADERS=1</code> in <code>env.txt</code>). It's off by default while it's being tuned.</li>
-<li>The package no longer carries a stray macOS file.</li>
+<li><strong>New original artwork</strong> for the bubble and LiveArea: a starry night sky over a glowing ocean.</li>
+<li><strong>The Settings button on the LiveArea</strong> has the size the Vita expects. If you still don't see it after updating, use VitaShell's Refresh LiveArea (Triangle on its home page) or delete the game and install fresh (your saves stay).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>A guard against a crash if Bee Mario's model isn't loaded yet when you grab the Bee Mushroom.</li>
 </ul>
 <p><strong>Updating?</strong> Install the new VPK over the old one. Your saves and settings stay.</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/Galaxy-Vita.vpk" target="_blank" rel="noopener">⬇ Galaxy-Vita.vpk · 8.5 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/cboc-release.json" target="_blank" rel="noopener">cboc-release.json · 1.5 KB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/Galaxy-Vita-install.zip" target="_blank" rel="noopener">Galaxy-Vita-install.zip · 19.5 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.1/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 595.4 KB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2/Galaxy-Vita.vpk" target="_blank" rel="noopener">⬇ Galaxy-Vita.vpk · 8.6 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2/cboc-release.json" target="_blank" rel="noopener">cboc-release.json · 1.5 KB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2/Galaxy-Vita-install.zip" target="_blank" rel="noopener">Galaxy-Vita-install.zip · 19.9 MB</a><a class="btn" href="https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2/SHA256SUMS" target="_blank" rel="noopener">SHA256SUMS · 595.8 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.5.1 1.5.1 ports ## 1.5.1
+
+### fixes
+- **sounds disappearing and random crashes in long races (#78).** on slow frames, game events wrote past the end of their memory and damaged other data. tire, crash and impact sounds went silent, the music stopped, and sometimes the game crashed. the event memory is now 4 times bigger and can never overflow.
+- **crashes reported on 1.5.1-beta1 (#123).** one crash dump shows the same memory damage as #78, so it should be fixed too.
+- **silent engine (#114, #115).** the engine and other sounds could go silent because the audio memory ran out. it now has the space it needs.
+- **crash in a cutscene (#114).**
+- **speech volume (#106).** voices now follow their volume setting.
+- **crash while loading in free roam.** two threads opening files at the same time could crash the game.
+- **pursuit summary showing 0 (#121).** cops damaged and destroyed, roadblocks, spike strips and cost to state now show their real values. before, only the time was correct.
+- **semi trucks with trailers (#117)** are back in highway traffic.
+- **tail lights:** the dark square around the glow is gone.
+- **startup error (#116):** if the shader compiler can&#x27;t be read, the error screen now shows the exact error code.
+- **performance:** fps is back up in races, free roam and pursuits. 1.4.2 and 1.5.0 lost speed over long sessions and when cops showed up.
+
+### new
+- **rear-view mirror (#62).** it shows the lights of the racers and cops behind you, in every camera view. turn it on or off in options &gt; gameplay &gt; rearview mirror.
+- **ui no longer stretched (#119).** the hud and menus have the correct proportions on the vita&#x27;s 16:9 screen, and the 3d view is wider instead of stretched.
+  - **options &gt; video &gt; widescreen** is on by default and uses the game&#x27;s widescreen hud layout.
+  - turn it off for a centered 4:3 hud.
+  - videos (fmvs) are still stretched.
+
+### online multiplayer?
+i&#x27;m thinking about adding multiplayer, both local and online, but only if enough people would play it. if you would, please react with 👍 to [this discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113), answer its questions and share it with other vita players. it would help me a lot.
+
+### updating from 1.5.0 / 1.5.1-beta1
+install the vpk over the old one. your save and game data stay as they are.
+- **old saves start with the rear-view mirror off.** turn it on in options &gt; gameplay.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.5.1" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.5.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.5.1</span>
+                    <span>2026-11-07 23:19 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.4.2</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.4.2 → release 1.5.1</div>
+                  
+                  <div class="body markdown-body"><h2>1.5.1</h2>
+<h3>Fixes</h3>
+<ul>
+<li><strong>Sounds disappearing and random crashes in long races (#78).</strong> On slow frames, game events wrote past the end of their memory and damaged other data. Tire, crash and impact sounds went silent, the music stopped, and sometimes the game crashed. The event memory is now 4 times bigger and can never overflow.</li>
+<li><strong>Crashes reported on 1.5.1-beta1 (#123).</strong> One crash dump shows the same memory damage as #78, so it should be fixed too.</li>
+<li><strong>Silent engine (#114, #115).</strong> The engine and other sounds could go silent because the audio memory ran out. It now has the space it needs.</li>
+<li><strong>Crash in a cutscene (#114).</strong></li>
+<li><strong>Speech volume (#106).</strong> Voices now follow their volume setting.</li>
+<li><strong>Crash while loading in free roam.</strong> Two threads opening files at the same time could crash the game.</li>
+<li><strong>Pursuit summary showing 0 (#121).</strong> Cops damaged and destroyed, roadblocks, spike strips and cost to state now show their real values. Before, only the time was correct.</li>
+<li><strong>Semi trucks with trailers (#117)</strong> are back in highway traffic.</li>
+<li><strong>Tail lights:</strong> the dark square around the glow is gone.</li>
+<li><strong>Startup error (#116):</strong> if the shader compiler can't be read, the error screen now shows the exact error code.</li>
+<li><strong>Performance:</strong> FPS is back up in races, free roam and pursuits. 1.4.2 and 1.5.0 lost speed over long sessions and when cops showed up.</li>
+</ul>
+<h3>New</h3>
+<ul>
+<li><strong>Rear-view mirror (#62).</strong> It shows the lights of the racers and cops behind you, in every camera view. Turn it on or off in Options &gt; Gameplay &gt; Rearview Mirror.</li>
+<li><strong>UI no longer stretched (#119).</strong> The HUD and menus have the correct proportions on the Vita's 16:9 screen, and the 3D view is wider instead of stretched.<ul>
+<li><strong>Options &gt; Video &gt; Widescreen</strong> is on by default and uses the game's widescreen HUD layout.</li>
+<li>Turn it off for a centered 4:3 HUD.</li>
+<li>Videos (FMVs) are still stretched.</li>
+</ul>
+</li>
+</ul>
+<h3>Online multiplayer?</h3>
+<p>I'm thinking about adding multiplayer, both local and online, but only if enough people would play it. If you would, please react with 👍 to <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">this discussion</a>, answer its questions and share it with other Vita players. It would help me a lot.</p>
+<h3>Updating from 1.5.0 / 1.5.1-beta1</h3>
+<p>Install the VPK over the old one. Your save and game data stay as they are.</p>
+<ul>
+<li><strong>Old saves start with the rear-view mirror off.</strong> Turn it on in Options &gt; Gameplay.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.5.1/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -893,61 +989,6 @@ adds **native ps vita trophies**: every in-game medal now also unlocks a system 
 </ol>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/The-Impossible-Game-vita/releases/download/v1.3.1/theimpossiblegame.vpk" target="_blank" rel="noopener">⬇ theimpossiblegame.vpk · 931.9 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.5.1-beta1 1.5.1-beta1 ports this is a test build for the sound problems in 1.5.0. if you reported one of these issues, please try it and tell me in the issue whether it&#x27;s fixed.
-
-## fixes
-
-- **silent engine.** the player&#x27;s engine was silent from the start (#114), or seemed to stop during a race while the nitro still played (#115). since 1.5.0 the engine sound of some cars didn&#x27;t fit in the sound memory.
-- **cutscene crash.** the game crashed when you skipped the crane cutscene, and at the end of mia&#x27;s jail cutscene (#114).
-- **speech volume.** the speech volume in options &gt; audio did nothing: any value above zero played the voices at full volume (#106).
-- **loading crash.** the game could crash while loading, for example when entering free roam from the main menu.
-
-## updating from 1.5.0
-
-- install the new `nfsmw.vpk`. you don&#x27;t need new game files.
-
-## online multiplayer?
-
-i&#x27;m thinking about adding multiplayer, both local and online, but only if enough people would play it. if you would, please react with 👍 to [this discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113), answer its questions and share it with other vita players. it would help me a lot.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.5.1-beta1" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.5.1-beta1</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.5.1-beta1</span>
-                    <span>2026-11-06 16:46 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.4.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.4.2 → release 1.5.1-beta1</div>
-                  
-                  <div class="body markdown-body"><p>This is a test build for the sound problems in 1.5.0. If you reported one of these issues, please try it and tell me in the issue whether it's fixed.</p>
-<h2>Fixes</h2>
-<ul>
-<li><strong>Silent engine.</strong> The player's engine was silent from the start (#114), or seemed to stop during a race while the nitro still played (#115). Since 1.5.0 the engine sound of some cars didn't fit in the sound memory.</li>
-<li><strong>Cutscene crash.</strong> The game crashed when you skipped the crane cutscene, and at the end of Mia's jail cutscene (#114).</li>
-<li><strong>Speech volume.</strong> The speech volume in Options &gt; Audio did nothing: any value above zero played the voices at full volume (#106).</li>
-<li><strong>Loading crash.</strong> The game could crash while loading, for example when entering free roam from the main menu.</li>
-</ul>
-<h2>Updating from 1.5.0</h2>
-<ul>
-<li>Install the new <code>nfsmw.vpk</code>. You don't need new game files.</li>
-</ul>
-<h2>Online multiplayer?</h2>
-<p>I'm thinking about adding multiplayer, both local and online, but only if enough people would play it. If you would, please react with 👍 to <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">this discussion</a>, answer its questions and share it with other Vita players. It would help me a lot.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.5.1-beta1/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -30606,7 +30647,7 @@ Copy over this archive to <code>ux0:/data/</code> folder on your Vita and unpack
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-07 21:16 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-08 03:40 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
