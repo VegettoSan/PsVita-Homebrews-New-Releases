@@ -23,6 +23,7 @@ from typing import Any
 from urllib.parse import quote, urlparse
 
 import requests
+from catalog_schema_v2_compat import to_v1
 
 # ==================== CONFIG ====================
 
@@ -224,7 +225,7 @@ def discover_repositories(catalog: Any) -> list[dict[str, str]]:
 
 def sync_catalog_repositories() -> tuple[list[dict[str, str]], dict[str, Any]]:
     print(f"📚 Descargando catálogo PSVitaAlive: {CATALOG_URL}")
-    catalog = request_json(CATALOG_URL)
+    catalog = to_v1(request_json(CATALOG_URL))
     if catalog is None:
         raise RuntimeError("No se pudo descargar catalog.json de PSVitaAlive")
 
