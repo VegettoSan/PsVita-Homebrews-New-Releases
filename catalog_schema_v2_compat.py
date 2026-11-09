@@ -103,5 +103,7 @@ def to_v1(data, dynamic=False):
         long_key = key if dynamic else REVERSE.get(key, key)
         if long_key in out:
             raise ValueError(f"V2 duplicate key: {long_key}")
-        out[long_key] = to_v1(value, not dynamic and long_key in DYNAMIC)
+        # Dynamic namespaces contain external/arbitrary keys; keep them intact
+        # at every nested level rather than decoding a nested "t" or "u".
+        out[long_key] = to_v1(value, dynamic or long_key in DYNAMIC)
     return out
