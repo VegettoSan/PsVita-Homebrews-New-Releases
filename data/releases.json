@@ -1,6 +1,154 @@
 [
   {
     "platform": "github",
+    "repo": "unveroleone/save-sync",
+    "release_id": "439496321",
+    "tag": "v0.1.11",
+    "name": "v0.1.11",
+    "url": "https://github.com/unveroleone/save-sync/releases/tag/v0.1.11",
+    "published": "2026-11-09T18:39:54Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## What's new in v0.1.11\n\nPSP saves show their game title again on the Vita, you can exclude games from sync, and Save Sync Hub got a round of sync fixes. Thanks to @uncreepynuts for the Vita changes (#7, #8).\n\n**Features**\n- Sync exclusions: pick \"Exclude from Sync\" in a game's menu to hide it from the Games tab, the Cloud tab and Sync All\n- New Sync Exclusions screen in Settings: every known game grouped by platform, with a checkbox per game or per whole category. Use Left/Right to page through long categories\n\n**Bug fixes (Vita)**\n- PSP (Adrenaline) saves showed only the game code instead of the title. The PARAM.SFO reader looked for its entry table in the wrong place, so every title lookup failed (fixes #11)\n- PSP titles with line breaks in them are now shown on one line\n- PS1 thumbnails in the emulator grid are centered correctly (they were drawn as if they had the wider PSP icon size)\n\n**Bug fixes (Save Sync Hub)**\n- Single-slot PSP saves are uploaded with their slot folder again. Before, a restore put the save files loose into `SAVEDATA/`, and the Vita could not restore them from its Cloud tab. Saves uploaded in the old layout restore into the right folder, and uploading them again from the Hub also fixes them for the Vita\n- \"Upload needed\" now shows up after you play and change a save locally\n- Saving server settings no longer wipes your configured save sources\n- Cloud tab restore puts each save into the matching PSP or RetroArch folder instead of always the first source\n- A restored cloud-only save shows as synced instead of as a conflict\n- The window no longer freezes during scans, uploads and downloads\n- Downloads are checked against the server's hash before they are extracted, and errors now show the server's message\n- The app no longer has file and network permissions in its web view that it never used (#12)\n\n**Server**\n- Two uploads of the same game within one second no longer overwrite an older version\n",
+    "assets": [
+      {
+        "name": "Save.Sync.Hub-0.1.11-1.x86_64.rpm",
+        "size": 6427904,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub-0.1.11-1.x86_64.rpm",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Save.Sync.Hub_0.1.11_amd64.AppImage",
+        "size": 6638072,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_0.1.11_amd64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "Save.Sync.Hub_0.1.11_amd64.deb",
+        "size": 6427716,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_0.1.11_amd64.deb",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Save.Sync.Hub_0.1.11_android.apk",
+        "size": 76392068,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_0.1.11_android.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "Save.Sync.Hub_0.1.11_universal.dmg",
+        "size": 13535586,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_0.1.11_universal.dmg",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Save.Sync.Hub_0.1.11_x64-setup.exe",
+        "size": 4037511,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_0.1.11_x64-setup.exe",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Save.Sync.Hub_0.1.11_x64_en-US.msi",
+        "size": 5943296,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_0.1.11_x64_en-US.msi",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Save.Sync.Hub_universal.app.tar.gz",
+        "size": 12662189,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/Save.Sync.Hub_universal.app.tar.gz",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "vita-save-cloud.vpk",
+        "size": 8132562,
+        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.11/vita-save-cloud.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Save Sync",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-save-sync/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Self-hosted manual cloud save sync for PSVita.",
+    "homebrew_long_description": "Save Sync backs up PS Vita save data to a zip and uploads it to your own server. Download and restore on another device to keep saves in sync. Works with any number of Vitas and PSTVs sharing one server.\nThe server can be created with the prebuilt docker image.",
+    "homebrew_id": "save-sync",
+    "homebrew_authors": [
+      "iamcco",
+      "claude-ai"
+    ],
+    "homebrew_version": "v.0.1.5",
+    "catalog_apps": [
+      {
+        "id": "save-sync",
+        "name": "Save Sync",
+        "icon": "https://archive.org/download/psvitaalive-save-sync/icon0.png",
+        "category": "utilities",
+        "description": "Self-hosted manual cloud save sync for PSVita.",
+        "long_description": "Save Sync backs up PS Vita save data to a zip and uploads it to your own server. Download and restore on another device to keep saves in sync. Works with any number of Vitas and PSTVs sharing one server.\nThe server can be created with the prebuilt docker image.",
+        "version": "v.0.1.5",
+        "version_date": "2026-08-14",
+        "author_ids": [
+          "iamcco",
+          "claude-ai"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1.5 → release v0.1.11",
+    "catalog_version": "v.0.1.5"
+  },
+  {
+    "platform": "github",
+    "repo": "josephinoo/vitaForge",
+    "release_id": "439131039",
+    "tag": "v0.1.12",
+    "name": "VitaForge v0.1.12",
+    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.12",
+    "published": "2026-11-09T13:26:22Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Highlights\r\n\r\n- Plugin install fix: SELF-packed .skprx/.suprx modules are now accepted (\"the downloaded file isn't a valid plugin module\" is gone).\r\n- Stalled downloads: a download that receives no data for 10 s is retried instead of hanging.\r\n- Catalog snapshot fetch retries once on a transient failure.\r\n\r\nTechnical\r\n\r\n- Target version: 0.1.12.\r\n- 211 unit tests passing.\r\n- Built with VitaSDK and cargo-vita for PS Vita hardware.\r\n",
+    "assets": [
+      {
+        "name": "vitaforge.vpk",
+        "size": 5735732,
+        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.12/vitaforge.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "josephinoo",
+    "homebrew_name": "VitaForge",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store client.",
+    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "vitaforge",
+    "homebrew_authors": [
+      "josephinoo"
+    ],
+    "homebrew_version": "v.0.1.1",
+    "catalog_apps": [
+      {
+        "id": "vitaforge",
+        "name": "VitaForge",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+        "category": "utilities",
+        "description": "Homebrew store client.",
+        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.0.1.1",
+        "version_date": "2026-08-11",
+        "author_ids": [
+          "josephinoo"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.12",
+    "catalog_version": "v.0.1.1"
+  },
+  {
+    "platform": "github",
     "repo": "germanalvarez15/nfsmw-vita",
     "release_id": "438679562",
     "tag": "1.5.2",
@@ -901,55 +1049,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.1",
     "catalog_version": "1.1"
-  },
-  {
-    "platform": "github",
-    "repo": "josephinoo/vitaForge",
-    "release_id": "437676637",
-    "tag": "v0.1.11",
-    "name": "VitaForge v0.1.11 (plugin manager beta)",
-    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.11",
-    "published": "2026-11-07T15:59:43Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Highlights\n\nPlugin manager (BETA): manage taiHEN plugins from Settings › Plugins. This feature is in beta and may contain bugs. Back up config.txt before using it.\nSafe updates: downloaded plugin modules are verified (size and ELF header) and the old module is restored if anything fails.\nProfiles: save, apply, rename, delete, export and import plugin setups.\nDependency warnings: disabling a plugin warns which enabled plugins still need it.\nConfig backups and safe mode: every config.txt change is backed up first; the registry is reconciled with config.txt on open.\nGame data fix: ports that extract data inside ux0:app/<TITLEID> now extract after the app is promoted, without wiping the app on update.\nSettings UI: scrolling follows focus in both directions, the footer is no longer covered, long names are elided, and hints use the PS Vita button icons.\n\nTechnical\n\nTarget version: 0.1.11.\n202 unit tests passing.\nBuilt with VitaSDK and cargo-vita for PS Vita hardware.\n",
-    "assets": [
-      {
-        "name": "vitaforge.vpk",
-        "size": 5604166,
-        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.11/vitaforge.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "josephinoo",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.11",
-    "catalog_version": "v.0.1.1",
-    "homebrew_name": "VitaForge",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store client.",
-    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "vitaforge",
-    "homebrew_authors": [
-      "josephinoo"
-    ],
-    "homebrew_version": "v.0.1.1",
-    "catalog_apps": [
-      {
-        "id": "vitaforge",
-        "name": "VitaForge",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-        "category": "utilities",
-        "description": "Homebrew store client.",
-        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.0.1.1",
-        "version_date": "2026-08-11",
-        "author_ids": [
-          "josephinoo"
-        ]
-      }
-    ]
   },
   {
     "platform": "github",
@@ -6961,105 +7060,6 @@
         "version_date": "2026-09-29",
         "author_ids": [
           "metalsyntax"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "unveroleone/save-sync",
-    "release_id": "399093753",
-    "tag": "v0.1.10",
-    "name": "Save Sync v0.1.10",
-    "url": "https://github.com/unveroleone/save-sync/releases/tag/v0.1.10",
-    "published": "2026-09-29T11:46:45Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## What's new in v0.1.10\n\nFixes the Linux AppImage so it passes the AppImage catalog checks.\n\n**Bug fixes**\n- Linux AppImage: directories were packed as 0700 and AppRun.wrapped as 0770, so other users (and sandboxes such as firejail) got \"Permission denied\" on AppRun. Permissions are now normalized to 755/644.\n- Linux AppImage: `.DirIcon` is now a relative symlink to the bundled icon (fixed in v0.1.9)\n\n**CI**\n- AppImage repack step now normalizes file permissions before packaging",
-    "assets": [
-      {
-        "name": "Save.Sync.Hub-0.1.10-1.x86_64.rpm",
-        "size": 6398904,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub-0.1.10-1.x86_64.rpm",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Save.Sync.Hub_0.1.10_amd64.AppImage",
-        "size": 6625784,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_amd64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "Save.Sync.Hub_0.1.10_amd64.deb",
-        "size": 6398036,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_amd64.deb",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Save.Sync.Hub_0.1.10_android.apk",
-        "size": 75409028,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_android.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "Save.Sync.Hub_0.1.10_universal.dmg",
-        "size": 13428907,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_universal.dmg",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Save.Sync.Hub_0.1.10_x64-setup.exe",
-        "size": 4024956,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_x64-setup.exe",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Save.Sync.Hub_0.1.10_x64_en-US.msi",
-        "size": 5914624,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_0.1.10_x64_en-US.msi",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Save.Sync.Hub_universal.app.tar.gz",
-        "size": 12549026,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/Save.Sync.Hub_universal.app.tar.gz",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "vita-save-cloud.vpk",
-        "size": 8120780,
-        "download_url": "https://github.com/unveroleone/save-sync/releases/download/v0.1.10/vita-save-cloud.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1.5 → release v0.1.10",
-    "catalog_version": "v.0.1.5",
-    "homebrew_name": "Save Sync",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-save-sync/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Self-hosted manual cloud save sync for PSVita.",
-    "homebrew_long_description": "Save Sync backs up PS Vita save data to a zip and uploads it to your own server. Download and restore on another device to keep saves in sync. Works with any number of Vitas and PSTVs sharing one server.\nThe server can be created with the prebuilt docker image.",
-    "homebrew_id": "save-sync",
-    "homebrew_authors": [
-      "iamcco",
-      "claude-ai"
-    ],
-    "homebrew_version": "v.0.1.5",
-    "catalog_apps": [
-      {
-        "id": "save-sync",
-        "name": "Save Sync",
-        "icon": "https://archive.org/download/psvitaalive-save-sync/icon0.png",
-        "category": "utilities",
-        "description": "Self-hosted manual cloud save sync for PSVita.",
-        "long_description": "Save Sync backs up PS Vita save data to a zip and uploads it to your own server. Download and restore on another device to keep saves in sync. Works with any number of Vitas and PSTVs sharing one server.\nThe server can be created with the prebuilt docker image.",
-        "version": "v.0.1.5",
-        "version_date": "2026-08-14",
-        "author_ids": [
-          "iamcco",
-          "claude-ai"
         ]
       }
     ]
@@ -33072,60 +33072,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.2",
     "catalog_version": "1.2"
-  },
-  {
-    "platform": "github",
-    "repo": "cy33hc/vita-ftp-client",
-    "release_id": "65704392",
-    "tag": "latest",
-    "name": "v1.54",
-    "url": "https://github.com/cy33hc/vita-ftp-client/releases/tag/latest",
-    "published": "2022-04-29T18:06:30Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "**v1.54**\r\n- Add Arabic,Greek,Thai,Turkish language support\r\n\r\n**v1.53**\r\n- Add Hungarian language\r\n\r\n**v1.52**\r\n- Fixed bug when if you try rename a file without changing the name, the file got deleted instead\r\n\r\n**v1.51**\r\n- Improved the upload/download speed. At least from my testing on pstv lan cable it increase from 3.7MB/s to 6.2MB/s.\r\n\r\n**v1.50**\r\n- Fixed bug where latin fonts weren't loaded. Caused by previous code change from 1.49.\r\n\r\n**v1.49**\r\n- Add Ryukyuan language. This is also a non-standard PSVITA system language, so edit the **\"ux0:data/FTPCLI001/config.ini\"** file and update the \"language\" setting to \"Ryukyuan\"\r\n\r\n**v1.48**\r\n- Add Indonesian language. This is also a non-standard PSVITA system language, so edit the **\"ux0:data/FTPCLI001/config.ini\"** file and update the \"language\" setting to \"Indonesian\"\r\n\r\n**v1.47**\r\n- Fix bug where selecting a file will cause a folder change in the next folder selected\r\n- Only warn once if iTLS-Enso is not installed.\r\n\r\n**v1.46**\r\n- Disable suspend when a file transfer is in progress. This prevents the VITA going to sleep while transferring large files.\r\n\r\n**v1.45**\r\n- Some fixes for Portuguese_BR translation\r\n\r\n**v1.44**\r\n- Fix the flicker when open the IME input editor. NOTE: Still can't figure out what's causing the crash after opening the IME multiple times.\r\n\r\n**v1.43**\r\n- Added Croatian language translation. This is also a non-standard PSVITA system language, so edit the **\"ux0:data/FTPCLI001/config.ini\"** file and update the \"language\" setting to \"Croatian\"\r\n\r\n**v1.42**\r\n- Added Catalan, Euskera and Galego translations. These are non standard PSVITA system languages that cannot be auto detected by the application, so users need to edit the **\"ux0:data/FTPCLI001/config.ini\"** file and update the \"language\" setting to either Catalan, Euskera or Galego.\r\n\r\n**v1.41**\r\n- Added Chinese Simplified/Traditional and Japanese language\r\n\r\n**v1.40**\r\n- Added support for languages Dutch, French, German, Italian, Korean, Polish, Portuguese_BR, Russian and Spanish\r\n- Some UI adjustments to catered for the various languages\r\n- Add a tooltip to display full filename, while hovering over a file that can't fit in the displayed column\r\n\r\n**v1.31**\r\n- iTLS-Enso only needed on Firmware below 3.68\r\n\r\n**v1.30**\r\n- Add support for multiple languages. Currently only have lang/English.ini. Please submit translations by using the lang/English.ini as a template. https://github.com/cy33hc/vita-ftp-client/blob/main/lang/English.ini\r\n- App won't crash if libshacccg.suprx is missing. Instead it will print a message.\r\n\r\n**v1.21**\r\n- Rebuilt app with imgui-vita library which seem to completely fix the random crash when changing folders. Note: This doesn't fix the random crash in the IME input still.\r\n\r\n Note: The imgui-vita needs **libshacccg.suprx** extracted. If you experience crash after upgrade please follow the following guide to extract it.\r\nhttps://samilops2.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx\r\n\r\n**v1.20**\r\n- Add support for multiple sites\r\n- Fix more random crashes when changing between folders and disconnect from FTP.\r\n- Fixed an issue after suspend and a download happens, it will create a 0 byte file. App will always check if connection exists before upload or download a file.\r\n\r\n**v1.14**\r\n- added compatibility with VitaShell FTP server\r\n- display the app version in the Title\r\n\r\n**v1.13**\r\n- Fix a potential crash when changing folder\r\n\r\n**v1.12**\r\n- Fix an infinite search loop\r\n\r\n**v1.11**\r\n- Add ability to use the L1/R1 buttons to move  between the Local and Remote file browser\r\n\r\n**v1.1**\r\n- Add progressbar indicator when uploading/downloading files\r\n- Add tooltip to local/remote directory field to display full path\r\n- Show date/time in the local user timezone in the Properties dialog\r\n- Remove the \".\" and \"..\" folder returned from some implements of the LIST cmd\r\n\r\n**v1.0**\r\nInitial Release",
-    "assets": [
-      {
-        "name": "ftpclient.vpk",
-        "size": 16543732,
-        "download_url": "https://github.com/cy33hc/vita-ftp-client/releases/download/latest/ftpclient.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "version.txt",
-        "size": 3,
-        "download_url": "https://github.com/cy33hc/vita-ftp-client/releases/download/latest/version.txt",
-        "content_type": "text/plain"
-      }
-    ],
-    "author": "cy33hc",
-    "homebrew_name": "vita-ftp-client",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-vita-ftp-client/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "FTP client for PSVITA.",
-    "homebrew_long_description": "A simple FTP client for PSVITA.",
-    "homebrew_id": "vita-ftp-client",
-    "homebrew_authors": [
-      "cy33hc"
-    ],
-    "homebrew_version": "v.1.52",
-    "catalog_apps": [
-      {
-        "id": "vita-ftp-client",
-        "name": "vita-ftp-client",
-        "icon": "https://archive.org/download/psvitaalive-vita-ftp-client/icon0.png",
-        "category": "utilities",
-        "description": "FTP client for PSVITA.",
-        "long_description": "A simple FTP client for PSVITA.",
-        "version": "v.1.52",
-        "version_date": "2022-12-15",
-        "author_ids": [
-          "cy33hc"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.52 → release latest",
-    "catalog_version": "v.1.52"
   }
 ]
