@@ -1073,7 +1073,14 @@ def main() -> int:
     )
     response.raise_for_status()
     catalog = to_v1(response.json())
+    if not isinstance(catalog, (list, dict)):
+        raise RuntimeError("Formato inesperado de catalog.json; dashboard no actualizado")
     index = catalog_repo_index(catalog)
+    if not index:
+        raise RuntimeError(
+            "No se detectaron repositorios en catalog.json; se conserva "
+            "el dashboard anterior para evitar perder metadatos."
+        )
 
     # PSVitaAlive itself is the catalog/store project, so it may not appear as a
     # normal catalog entry. Pull its latest release explicitly so a new Store

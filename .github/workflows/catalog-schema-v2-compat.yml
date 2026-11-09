@@ -1,12 +1,14 @@
-name: Catalog V2 reader compatibility
+name: Catalog V1/V2 compatibility and safety
 
 on:
   push:
     branches:
+      - main
       - feature/catalog-schema-v2
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,25 +16,33 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Compile modules
-        run: python -m compileall -q monitor.py enrich_dashboard.py catalog_schema_v2_compat.py
-      - name: Compare V1 and V2 repository discovery
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile modules and tests
+        run: python -m compileall -q monitor.py enrich_dashboard.py catalog_schema_v2_compat.py tests
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate against current PSVitaAlive public catalog
         run: |
-          python -m pip install requests mistune bleach
           python - <<'PY'
+          import requests
           from catalog_schema_v2_compat import to_v1
-          from monitor import discover_repositories
-          url = 'https://github.com/example/vita-homebrew'
-          v1 = [{'id': 'test', 'title_id': 'TEST00001', 'name': 'Test Homebrew',
-                 'links': [{'type': 'Repository', 'name': 'Code', 'url': url}]}]
-          v2 = [{'id': 'test', 'tid': 'TEST00001', 'n': 'Test Homebrew',
-                 'l': [{'t': 'Repository', 'n': 'Code', 'u': url}]}]
-          assert to_v1(v2) == v1
-          assert discover_repositories(to_v1(v2)) == discover_repositories(v1)
-          print('Monitor V1/V2 repository discovery matches.')
+          from monitor import CATALOG_URL, discover_repositories
+          from enrich_dashboard import catalog_repo_index
+
+          response = requests.get(CATALOG_URL, timeout=60)
+          response.raise_for_status()
+          catalog = to_v1(response.json())
+          repos = discover_repositories(catalog)
+          index = catalog_repo_index(catalog)
+          print(f"Current PSVitaAlive catalog: {len(repos)} repositories, {len(index)} indexed projects")
+          assert len(repos) > 100, "Unexpectedly few repositories: schema may have changed"
+          assert len(index) > 100, "Catalog enrichment cannot discover repository metadata"
           PY
