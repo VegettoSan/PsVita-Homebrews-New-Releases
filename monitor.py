@@ -229,7 +229,36 @@ def sync_catalog_repositories() -> tuple[list[dict[str, str]], dict[str, Any]]:
     if catalog is None:
         raise RuntimeError("No se pudo descargar catalog.json de PSVitaAlive")
 
+    if not isinstance(catalog, (list, dict)):
+        raise RuntimeError("Formato inesperado de catalog.json; se conserva el estado anterior")
+
     repos = discover_repositories(catalog)
+    if not repos:
+        raise RuntimeError(
+            "catalog.json no contiene repositorios GitHub/GitLab reconocibles. "
+            "Posible cambio de esquema: sincronización cancelada sin sobrescribir el estado."
+        )
+
+    # Si el catálogo se leyó parcialmente, no reemplazar cientos de repositorios
+    # por unos pocos. Consultamos el estado previo antes de generar archivos.
+    previous_sync = load_json(SYNC_INFO_FILE, {})
+    previous_count = (
+        previous_sync.get("repositories", 0)
+        if isinstance(previous_sync, dict)
+        else 0
+    )
+    if not isinstance(previous_count, int) or isinstance(previous_count, bool):
+        previous_count = 0
+    previous_state = load_json(STATE_FILE, {})
+    tracked_count = len(previous_state) if isinstance(previous_state, dict) else 0
+    reference_count = max(previous_count, tracked_count)
+    if reference_count >= 50 and len(repos) * 2 < reference_count:
+        raise RuntimeError(
+            f"Caída anómala de repositorios: {reference_count} anteriores → "
+            f"{len(repos)} actuales. Se conserva el seguimiento hasta revisar "
+            "el catálogo o el lector de esquema."
+        )
+
     github_count = sum(1 for r in repos if r["platform"] == "github")
     gitlab_count = sum(1 for r in repos if r["platform"] == "gitlab")
 
@@ -869,7 +898,9 @@ def main() -> int:
             if initial_baseline:
                 continue
 
-            if first_catalog_sync and key not in old_state:
+            # Cada repositorio nuevo se inicializa silenciosamente; un release
+            # anterior a su incorporación no es una novedad para Discord.
+            if key not in old_state:
                 continue
 
             if previous != (release.get("tag") or identity):

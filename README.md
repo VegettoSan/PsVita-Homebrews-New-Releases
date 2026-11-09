@@ -6,7 +6,7 @@ La lista de proyectos ya no se mantiene manualmente: cada ejecución descarga el
 
 ## Qué hace
 
-- 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`.
+- 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`, tanto en formato de claves largas (V1) como compactas (V2).
 - ⏱️ Se ejecuta automáticamente **cada 3 horas** con GitHub Actions.
 - 🐙 Soporta repositorios de **GitHub**.
 - 🦊 Soporta proyectos de **GitLab**, incluidos grupos/subgrupos.
@@ -128,7 +128,19 @@ Para evitar spam:
 1. Los repos recién descubiertos se incorporan al estado.
 2. Sus releases actuales se añaden al dashboard.
 3. **No se envían cientos de notificaciones históricas.**
-4. Desde la siguiente ejecución, cualquier release nuevo sí genera notificación.
+4. Los repositorios añadidos más adelante también se inicializan sin avisos históricos.
+5. Las actualizaciones de repositorios previamente monitorizados sí pueden generar notificaciones.
+
+## Protección de datos ante cambios de esquema
+
+El monitor decodifica las claves compactas del catálogo oficial mediante `catalog_schema_v2_compat.py`.
+Si un cambio de esquema provoca que no se descubran repositorios, o desaparece repentinamente
+más de la mitad de los repositorios conocidos, el workflow **falla sin sobrescribir**
+`repos.txt`, `data/state.json` ni el historial. Esto evita que una ejecución incorrecta
+reinicie los avisos. El dashboard realiza una validación similar antes de guardar datos.
+
+`.github/workflows/catalog-schema-v2-compat.yml` incluye pruebas de regresión y una
+comprobación de integración contra el catálogo público actual.
 
 ## Fuente del catálogo
 
