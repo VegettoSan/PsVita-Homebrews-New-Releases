@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">396</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>481</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">393</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>88</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>473</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,269 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.6.0-beta2 1.6.0-beta2 ports ## nfs most wanted vita 1.6.0-beta2
+
+&gt; **this is a beta.** it brings multiplayer for the first time, and so far it has only been tested on my own consoles. expect bugs. if you&#x27;d rather play the stable version, stay on 1.5.2. both players need this same version.
+
+### changes since beta1
+- the other player now shows on the minimap.
+- less lag: the other player&#x27;s car is drawn where it really is. before, the game assumed a lan delay, so online and in ad hoc the car showed up behind.
+- the multiplayer menu no longer gets stuck when you cancel the keyboard or the ad hoc network dialog.
+- beta1 and beta2 can&#x27;t play together: both players need beta2.
+
+### fixes
+- fixed a crash when loading a save ([#142](https://github.com/germanalvarez15/nfsmw-vita/issues/142)).
+- fixed a crash during the ming race intro ([#144](https://github.com/germanalvarez15/nfsmw-vita/issues/144)).
+- no more dark squares around crash sparks ([#136](https://github.com/germanalvarez15/nfsmw-vita/issues/136)).
+- updated names in the credits.
+
+### why online works this way
+the [survey](https://github.com/germanalvarez15/nfsmw-vita/discussions/113) showed interest in online, lan and ad hoc modes. for online, though, nobody showed interest in hosting a server. what i took from that is that people want online, but nobody is going to keep a server running. so i built an online mode where each ps vita is the server: a player opens a game and shares it with other players, and when the game ends, the server closes. the same as in lan and ad hoc.
+
+### new: multiplayer
+main menu &gt; **multiplayer** (after quick race) has four modes: online, lan, ad hoc and split screen (moved here from quick race).
+- two players, circuit and sprint races, with no traffic, cops or ai racers for now.
+- **create game:** wait for the other player, then choose the race, the options and your car.
+- **join game:** choose your car, and the host&#x27;s race loads by itself.
+- after each race the host chooses **continue** (another race) or **leave room** (ends the session, and the other player goes back to the menu).
+
+**online** (over the internet, no servers)
+- create game asks your router to open udp port 7777 (upnp) and shows a 16-letter room code. send it to the other player, who types it in join game.
+- the code is new every game and contains your internet address, so only share it with people you trust. players without the code can&#x27;t join.
+- if your router has no upnp, the game tells you to forward udp port 7777 to your vita by hand.
+- it can&#x27;t work if your internet provider puts you behind a shared address (cgnat). the game warns you when that happens.
+- so far i&#x27;ve only tested it with two consoles on the same home network. reports from two different homes are very welcome.
+
+**lan:** two consoles on the same wi-fi network. join game finds the host by itself.
+
+**ad hoc:** sony&#x27;s ad hoc mode, console to console with no router. create game and join game open the system&#x27;s network dialog first.
+
+**known limits:** if the other player&#x27;s connection drops during a race, you finish it alone.
+
+### reporting problems
+please tell me what works and what doesn&#x27;t, in an issue or in [the discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113). if you can, attach `ux0:data/nfsmw/nfsmw.log` from both consoles. the log hides your internet address and the room code.
+
+### updating from 1.5.2
+install the vpk over the old one. your save and game data stay as they are.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.0-beta2" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.6.0-beta2</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.6.0-beta2</span>
+                    <span>2026-11-10 20:39 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.5.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.5.1 → release 1.6.0-beta2</div>
+                  
+                  <div class="body markdown-body"><h2>NFS Most Wanted Vita 1.6.0-beta2</h2>
+<blockquote>
+<p><strong>This is a beta.</strong> It brings multiplayer for the first time, and so far it has only been tested on my own consoles. Expect bugs. If you'd rather play the stable version, stay on 1.5.2. Both players need this same version.</p>
+</blockquote>
+<h3>Changes since beta1</h3>
+<ul>
+<li>The other player now shows on the minimap.</li>
+<li>Less lag: the other player's car is drawn where it really is. Before, the game assumed a LAN delay, so online and in ad hoc the car showed up behind.</li>
+<li>The Multiplayer menu no longer gets stuck when you cancel the keyboard or the ad hoc network dialog.</li>
+<li>Beta1 and beta2 can't play together: both players need beta2.</li>
+</ul>
+<h3>Fixes</h3>
+<ul>
+<li>Fixed a crash when loading a save (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/142">#142</a>).</li>
+<li>Fixed a crash during the Ming race intro (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/144">#144</a>).</li>
+<li>No more dark squares around crash sparks (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/136">#136</a>).</li>
+<li>Updated names in the credits.</li>
+</ul>
+<h3>Why online works this way</h3>
+<p>The <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">survey</a> showed interest in online, LAN and ad hoc modes. For online, though, nobody showed interest in hosting a server. What I took from that is that people want online, but nobody is going to keep a server running. So I built an online mode where each PS Vita is the server: a player opens a game and shares it with other players, and when the game ends, the server closes. The same as in LAN and ad hoc.</p>
+<h3>New: Multiplayer</h3>
+<p>Main menu &gt; <strong>Multiplayer</strong> (after Quick Race) has four modes: Online, LAN, Ad Hoc and Split Screen (moved here from Quick Race).</p>
+<ul>
+<li>Two players, circuit and sprint races, with no traffic, cops or AI racers for now.</li>
+<li><strong>Create Game:</strong> wait for the other player, then choose the race, the options and your car.</li>
+<li><strong>Join Game:</strong> choose your car, and the host's race loads by itself.</li>
+<li>After each race the host chooses <strong>Continue</strong> (another race) or <strong>Leave Room</strong> (ends the session, and the other player goes back to the menu).</li>
+</ul>
+<p><strong>Online</strong> (over the Internet, no servers)</p>
+<ul>
+<li>Create Game asks your router to open UDP port 7777 (UPnP) and shows a 16-letter room code. Send it to the other player, who types it in Join Game.</li>
+<li>The code is new every game and contains your Internet address, so only share it with people you trust. Players without the code can't join.</li>
+<li>If your router has no UPnP, the game tells you to forward UDP port 7777 to your Vita by hand.</li>
+<li>It can't work if your Internet provider puts you behind a shared address (CGNAT). The game warns you when that happens.</li>
+<li>So far I've only tested it with two consoles on the same home network. Reports from two different homes are very welcome.</li>
+</ul>
+<p><strong>LAN:</strong> two consoles on the same Wi-Fi network. Join Game finds the host by itself.</p>
+<p><strong>Ad Hoc:</strong> Sony's ad hoc mode, console to console with no router. Create Game and Join Game open the system's network dialog first.</p>
+<p><strong>Known limits:</strong> if the other player's connection drops during a race, you finish it alone.</p>
+<h3>Reporting problems</h3>
+<p>Please tell me what works and what doesn't, in an issue or in <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">the discussion</a>. If you can, attach <code>ux0:data/nfsmw/nfsmw.log</code> from both consoles. The log hides your Internet address and the room code.</p>
+<h3>Updating from 1.5.2</h3>
+<p>Install the VPK over the old one. Your save and game data stay as they are.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.0-beta2/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="zenonia 2 zenonia 2 metalsyntax/zenonia2-psvita-port zenonia 2: the lost memories - ps vita port v1.4.0: spanish &amp; portuguese text, switchable live v1.40 ports ### description
+
+this release adds support for text languages the original game never shipped: spanish and portuguese, alongside english. you can switch languages at any time from the in-game menu, with no restart.
+
+what&#x27;s new:
+
+• text language option: press start+select and use the &quot;text language&quot; row to switch between english, espanol and portugues. the change applies instantly to menus, inventory, items, skills, stats, quests and popups. your choice is saved to `ux0:data/zenonia-2/controls.txt` (`lang = en|es|pt`).
+• translated built-in menus: text that is built into the game program (main menu, pause, inventory, options) is translated in memory too. every string is checked before it is replaced, so a different game build or an outdated file can&#x27;t corrupt anything.
+• safe by design: the original english data in `data/eng/` is never modified. any file missing from a translation falls back to english.
+• fixes the crash from earlier community translations that were copied over `data/eng/`. those files had wrong headers and shifted string tables.
+
+notes:
+• the translation files are not included in this release. they are distributed separately. install them to `ux0:data/zenonia-2/assets/data/spa/` and `.../por/`. without them, the game stays in english.
+• if you previously copied a translation over `data/eng/`, restore the original `data/eng/` files from your apk.
+• game data in `ux0:data/zenonia-2/` is otherwise unchanged from v1.3.0. just install the new vpk.
+
+known issues:
+• story dialogue (`script/`) stays in english.
+• no accented characters: the game font only supports ascii and korean, so accents are dropped.
+• a text window that is already open when you switch languages keeps the previous language until it is reopened.
+• the experimental post-process shader build may show a black screen after the menu. use the standard vpk.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-zenonia-2/icon0.png" alt="Icono de Zenonia 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Zenonia2-psvita-port</div>
+                      <h2><a href="https://github.com/MetalSyntax/Zenonia2-psvita-port/releases/tag/v1.40" target="_blank" rel="noopener">Zenonia 2</a></h2>
+                      <div class="release-name">Zenonia 2: The Lost Memories - PS Vita Port v1.4.0: Spanish &amp; Portuguese Text, Switchable Live</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.40</span>
+                    <span>2026-11-10 16:28 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.20</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.20 → release v1.40</div>
+                  
+                  <div class="body markdown-body"><h3>Description</h3>
+<p>This release adds support for text languages the original game never shipped: Spanish and Portuguese, alongside English. You can switch languages at any time from the in-game menu, with no restart.</p>
+<p>What's New:</p>
+<p>• Text Language Option: Press Start+Select and use the &quot;Text language&quot; row to switch between ENGLISH, ESPANOL and PORTUGUES. The change applies instantly to menus, inventory, items, skills, stats, quests and popups. Your choice is saved to <code>ux0:data/zenonia-2/controls.txt</code> (<code>LANG = EN|ES|PT</code>).
+• Translated Built-in Menus: Text that is built into the game program (main menu, pause, inventory, options) is translated in memory too. Every string is checked before it is replaced, so a different game build or an outdated file can't corrupt anything.
+• Safe by Design: The original English data in <code>data/eng/</code> is never modified. Any file missing from a translation falls back to English.
+• Fixes the crash from earlier community translations that were copied over <code>data/eng/</code>. Those files had wrong headers and shifted string tables.</p>
+<p>Notes:
+• The translation files are not included in this release. They are distributed separately. Install them to <code>ux0:data/zenonia-2/assets/data/spa/</code> and <code>.../por/</code>. Without them, the game stays in English.
+• If you previously copied a translation over <code>data/eng/</code>, restore the original <code>data/eng/</code> files from your APK.
+• Game data in <code>ux0:data/zenonia-2/</code> is otherwise unchanged from v1.3.0. Just install the new VPK.</p>
+<p>Known Issues:
+• Story dialogue (<code>script/</code>) stays in English.
+• No accented characters: the game font only supports ASCII and Korean, so accents are dropped.
+• A text window that is already open when you switch languages keeps the previous language until it is reopened.
+• The experimental post-process shader build may show a black screen after the menu. Use the standard VPK.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Zenonia2-psvita-port/releases/download/v1.40/zenonia_2.vpk" target="_blank" rel="noopener">⬇ zenonia_2.vpk · 950.9 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="switchfin switchfin dragonflylee/switchfin switchfin 0.9.5 0.9.5 utilities ### added
+
+* add resume download with http range/etag support and progress bar for cancelled items
+* auto-download subtitles and fallback subtitle url when `deliveryurl` is missing
+* add configurable download path setting
+
+### fixed
+
+* support the new quick connect api (#272)
+* ps4: fix bitmap subtitle bluescreen (#271)
+* image: keep texture owned by cache and trim near-white border bars causing smears (#243)
+* websocket: harden receive loop, reconnect on normal close and fix teardownt
+* compare versions numerically in update check
+* keep nvtegra decode frames alive across hwaccel reinit
+* svg: fix crash when toggling fullscreen on macos (#165)
+* danmaku: reset on-screen danmaku after seeking to prevent overlap (#163)
+
+
+![download](https://img.shields.io/github/downloads/dragonflylee/switchfin/0.9.5/total?label=downloads)">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-switchfin/icon0.png" alt="Icono de Switchfin" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · dragonflylee/switchfin</div>
+                      <h2><a href="https://github.com/dragonflylee/switchfin/releases/tag/0.9.5" target="_blank" rel="noopener">Switchfin</a></h2>
+                      <div class="release-name">Switchfin 0.9.5</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">0.9.5</span>
+                    <span>2026-11-10 16:25 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.9.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.9.3 → release 0.9.5</div>
+                  
+                  <div class="body markdown-body"><h3>Added</h3>
+<ul>
+<li>add resume download with HTTP range/ETag support and progress bar for cancelled items</li>
+<li>auto-download subtitles and fallback subtitle URL when <code>DeliveryUrl</code> is missing</li>
+<li>add configurable download path setting</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>support the new Quick Connect API (#272)</li>
+<li>PS4: fix bitmap subtitle bluescreen (#271)</li>
+<li>image: keep texture owned by cache and trim near-white border bars causing smears (#243)</li>
+<li>websocket: harden receive loop, reconnect on normal close and fix teardownt</li>
+<li>compare versions numerically in update check</li>
+<li>keep nvtegra decode frames alive across hwaccel reinit</li>
+<li>svg: fix crash when toggling fullscreen on macOS (#165)</li>
+<li>danmaku: reset on-screen danmaku after seeking to prevent overlap (#163)</li>
+</ul>
+<p><img src="https://img.shields.io/github/downloads/dragonflylee/switchfin/0.9.5/total?label=Downloads" alt="download"></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin.vpk" target="_blank" rel="noopener">⬇ Switchfin.vpk · 41.1 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/IV0001-SFIN00000_00-SFIN000000009500.pkg" target="_blank" rel="noopener">IV0001-SFIN00000_00-SFIN000000009500.pkg · 55.8 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/switchfin-0.9.5-1-x86_64.pkg.tar.zst" target="_blank" rel="noopener">switchfin-0.9.5-1-x86_64.pkg.tar.zst · 6.4 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-arm64-v8a.apk" target="_blank" rel="noopener">Switchfin-arm64-v8a.apk · 18.6 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-armeabi-v7a.apk" target="_blank" rel="noopener">Switchfin-armeabi-v7a.apk · 17.8 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-Linux-aarch64-gl.flatpak" target="_blank" rel="noopener">Switchfin-Linux-aarch64-gl.flatpak · 38.4 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-Linux-aarch64-gles2.flatpak" target="_blank" rel="noopener">Switchfin-Linux-aarch64-gles2.flatpak · 38.4 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-Linux-x86_64-gl.flatpak" target="_blank" rel="noopener">Switchfin-Linux-x86_64-gl.flatpak · 40.0 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-macOS-Intel.dmg" target="_blank" rel="noopener">Switchfin-macOS-Intel.dmg · 58.8 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-macOS-Silicon.dmg" target="_blank" rel="noopener">Switchfin-macOS-Silicon.dmg · 56.7 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-windows-arm64.zip" target="_blank" rel="noopener">Switchfin-windows-arm64.zip · 56.2 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-windows-x64.zip" target="_blank" rel="noopener">Switchfin-windows-x64.zip · 65.1 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin-windows-x86.zip" target="_blank" rel="noopener">Switchfin-windows-x86.zip · 66.0 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.5/Switchfin.nro" target="_blank" rel="noopener">Switchfin.nro · 64.6 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4241">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
+                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
+                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">continuous</span>
+                    <span>2026-11-10 14:15 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
+                  
+                  <div class="body markdown-body"><p>buildnum 4241</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 27.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 23.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 27.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 15.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ps4.pkg" target="_blank" rel="noopener">xash3d-fwgs-ps4.pkg · 17.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 16.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 18.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/harbour-xash3d-fwgs.aarch64.rpm" target="_blank" rel="noopener">harbour-xash3d-fwgs.aarch64.rpm · 17.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/harbour-xash3d-fwgs.armv7hl.rpm" target="_blank" rel="noopener">harbour-xash3d-fwgs.armv7hl.rpm · 17.2 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="skate 3 vita skate 3 vita irolup/skate-3-vita skate 3 vita 0.3.0 beta v0.3.0-beta ports skate 3 on the ps vita.
 
 **you need your own copy of the game.** this vpk contains none of the game&#x27;s files. follow [making your own game data](https://github.com/irolup/skate-3-vita#making-your-own-game-data) in the readme to make them from your own xbox 360 disc on a linux pc, then copy them to `ux0:data/skatevita/`.
@@ -418,83 +681,6 @@ technical
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/josephinoo/vitaForge/releases/download/v0.1.12/vitaforge.vpk" target="_blank" rel="noopener">⬇ vitaforge.vpk · 5.5 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.5.2 1.5.2 ports ## nfs most wanted vita 1.5.2
-
-### new: split screen
-quick race &gt; split screen now works: two players, one view each (top and bottom), racing side by side from the start line.
-
-**controllers**
-- **ps tv:** pair two controllers.
-- **ps vita:** player 1 uses the vita&#x27;s own controls, player 2 a dualshock through [ds34vita](https://github.com/merlev/ds34vita).
-  - with a single dualshock, also install [revita](https://github.com/merlev/revita) (before ds34vita in `config.txt`), turn on *profile &gt; controller &gt; &quot;vita as virtual ds4&quot;* (menu: start + square), then reconnect the dualshock.
-  - two dualshocks work with ds34vita alone.
-  - ds4vita/ds3vita can&#x27;t be used for player 2: they feed the controller into the vita&#x27;s own buttons.
-
-### fixes and changes
-- **tollbooth races:** should fix a crash or freeze after crossing a tollbooth, likely caused by a hud message too long for its buffer in spanish and finnish. if it still happens to you, please tell me (#127, #133, #134).
-- **widescreen option:** *off* brings back the 1.5.0 look (menus, hud and world stretched to 16:9, bigger car). *on* (default) keeps the 1.5.1 look: 4:3 menus, the widescreen hud and a wider view of the world (#130).
-- **race win screen:** the texts sit on the photo again, and the photo is no longer stretched (#124).
-- **semi trailers:** their cargo (logs, crates, containers) now breaks loose when you hit them, so they work as pursuit breakers again (#125).
-
-### thank you
-the credits screen now thanks everyone who helped build this port by opening issues and commenting on github. thank you all!
-
-### online multiplayer?
-i&#x27;m thinking about adding online multiplayer, but only if enough people would play it. if you would, please react with 👍 to [this discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113), answer its questions and share it with other vita players. it would help me a lot.
-
-### updating from 1.5.1
-install the vpk over the old one. your save and game data stay as they are.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.5.2" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.5.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.5.2</span>
-                    <span>2026-11-09 02:22 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.5.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.5.1 → release 1.5.2</div>
-                  
-                  <div class="body markdown-body"><h2>NFS Most Wanted Vita 1.5.2</h2>
-<h3>New: split screen</h3>
-<p>Quick Race &gt; Split Screen now works: two players, one view each (top and bottom), racing side by side from the start line.</p>
-<p><strong>Controllers</strong></p>
-<ul>
-<li><strong>PS TV:</strong> pair two controllers.</li>
-<li><strong>PS Vita:</strong> player 1 uses the Vita's own controls, player 2 a DualShock through <a target="_blank" rel="noopener noreferrer" href="https://github.com/MERLev/ds34vita">ds34vita</a>.<ul>
-<li>With a single DualShock, also install <a target="_blank" rel="noopener noreferrer" href="https://github.com/MERLev/reVita">reVita</a> (before ds34vita in <code>config.txt</code>), turn on <em>Profile &gt; Controller &gt; &quot;Vita as virtual DS4&quot;</em> (menu: START + SQUARE), then reconnect the DualShock.</li>
-<li>Two DualShocks work with ds34vita alone.</li>
-<li>DS4Vita/DS3Vita can't be used for player 2: they feed the controller into the Vita's own buttons.</li>
-</ul>
-</li>
-</ul>
-<h3>Fixes and changes</h3>
-<ul>
-<li><strong>Tollbooth races:</strong> should fix a crash or freeze after crossing a tollbooth, likely caused by a HUD message too long for its buffer in Spanish and Finnish. If it still happens to you, please tell me (#127, #133, #134).</li>
-<li><strong>Widescreen option:</strong> <em>Off</em> brings back the 1.5.0 look (menus, HUD and world stretched to 16:9, bigger car). <em>On</em> (default) keeps the 1.5.1 look: 4:3 menus, the widescreen HUD and a wider view of the world (#130).</li>
-<li><strong>Race win screen:</strong> the texts sit on the photo again, and the photo is no longer stretched (#124).</li>
-<li><strong>Semi trailers:</strong> their cargo (logs, crates, containers) now breaks loose when you hit them, so they work as pursuit breakers again (#125).</li>
-</ul>
-<h3>Thank you</h3>
-<p>The Credits screen now thanks everyone who helped build this port by opening issues and commenting on GitHub. Thank you all!</p>
-<h3>Online multiplayer?</h3>
-<p>I'm thinking about adding online multiplayer, but only if enough people would play it. If you would, please react with 👍 to <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">this discussion</a>, answer its questions and share it with other Vita players. It would help me a lot.</p>
-<h3>Updating from 1.5.1</h3>
-<p>Install the VPK over the old one. Your save and game data stay as they are.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.5.2/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -3058,93 +3244,6 @@ performance, controls and quality-of-life update. installation is unchanged from
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/zenonia3-psvita-port/releases/download/v01.40/zenonia_3.vpk" target="_blank" rel="noopener">⬇ zenonia_3.vpk · 1.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="xash3d-fwgs xash3d-fwgs fwgs/xash3d-fwgs xash3d fwgs continuous master build continuous ports buildnum 4237">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png" alt="Icono de Xash3D-FWGS" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · FWGS/xash3d-fwgs</div>
-                      <h2><a href="https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous" target="_blank" rel="noopener">Xash3D-FWGS</a></h2>
-                      <div class="release-name">Xash3D FWGS Continuous master Build</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">continuous</span>
-                    <span>2026-11-06 01:05 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.continuous</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.continuous</div>
-                  
-                  <div class="body markdown-body"><p>buildnum 4237</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak" target="_blank" rel="noopener">⬇ su.xash.Engine.Compat.i386.flatpak · 11.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-amd64.AppImage · 25.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst" target="_blank" rel="noopener">xash3d-fwgs-android-mappings.tar.zst · 2.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk" target="_blank" rel="noopener">xash3d-fwgs-android.apk · 45.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-amd64.tar.xz · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz" target="_blank" rel="noopener">xash3d-fwgs-apple-arm64.tar.xz · 5.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage" target="_blank" rel="noopener">xash3d-fwgs-arm64.AppImage · 21.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage" target="_blank" rel="noopener">xash3d-fwgs-armhf.AppImage · 20.9 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage" target="_blank" rel="noopener">xash3d-fwgs-i386.AppImage · 25.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa" target="_blank" rel="noopener">xash3d-fwgs-ios-arm64.ipa · 5.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-amd64.tar.gz · 27.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-arm64.tar.gz · 23.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-armhf.tar.gz · 22.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-i386.tar.gz · 27.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-ppc64el.tar.gz · 21.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz" target="_blank" rel="noopener">xash3d-fwgs-linux-riscv64.tar.gz · 19.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z" target="_blank" rel="noopener">xash3d-fwgs-nswitch.7z · 16.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ps4.pkg" target="_blank" rel="noopener">xash3d-fwgs-ps4.pkg · 17.6 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-amd64.7z · 16.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z" target="_blank" rel="noopener">xash3d-fwgs-win32-i386.7z · 18.0 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz" target="_blank" rel="noopener">xashds-linux-amd64.tar.gz · 3.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz" target="_blank" rel="noopener">xashds-linux-arm64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz" target="_blank" rel="noopener">xashds-linux-armhf.tar.gz · 3.2 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz" target="_blank" rel="noopener">xashds-linux-i386.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz" target="_blank" rel="noopener">xashds-linux-ppc64el.tar.gz · 3.5 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz" target="_blank" rel="noopener">xashds-linux-riscv64.tar.gz · 3.1 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/harbour-xash3d-fwgs.aarch64.rpm" target="_blank" rel="noopener">harbour-xash3d-fwgs.aarch64.rpm · 17.4 MB</a><a class="btn" href="https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/harbour-xash3d-fwgs.armv7hl.rpm" target="_blank" rel="noopener">harbour-xash3d-fwgs.armv7hl.rpm · 17.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="zenonia 2 zenonia 2 metalsyntax/zenonia2-psvita-port zenonia 2: the lost memories - ps vita port v1.3.0: smooth combat, sharper image &amp; control remapping v1.30 ports ### description
-
-this release answers community feedback about lag in combat, slow movement, and a blurry image. the game now holds a steady 30 fps in combat, the picture is noticeably sharper, and every control can be remapped from an in-game menu.
-
-what&#x27;s new:
-
-• steady 30 fps in combat: the engine advances one logic tick per frame, so any frame drop made the whole game run slower. the graphics library is now built specifically for this port with faster texture uploads, the game and audio run on separate cpu cores, and memory routines use the vita&#x27;s native implementations. confirmed at a sustained 30 fps on hardware.
-• sharper image: the 400x240 game frame is upscaled 2x with nearest-neighbor before the final smooth stretch to the screen, so text and sprites look much less blurry.
-• better input: all button presses in a frame are now delivered (previously multi-button input could lag behind), and the left analog stick moves your character.
-• control remapping: press start+select to open the controls menu (the game pauses). assign any action to one or more buttons, including the rear touch panel (four quadrants), toggle touch controls, choose the frame rate, or restore defaults. settings are saved to `ux0:data/zenonia-2/controls.txt`.
-• toggle touch controls: press l+r to show or hide the on-screen d-pad and buttons.
-• frame rate mode: press select+r to switch between 30 fps (default) and original, which follows the game&#x27;s own speed setting (10–22 fps) like the android version.
-• logs are now saved as numbered files in `ux0:data/zenonia-2/logs/` (001.log, 002.log, ...).
-
-notes:
-• start+select no longer exits the game. use the ps button instead.
-• game data in `ux0:data/zenonia-2/` is unchanged from v1.2.0. just install the new vpk.
-
-known issues:
-• the experimental post-process shader build may show a black screen after the menu. use the standard vpk.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-zenonia-2/icon0.png" alt="Icono de Zenonia 2" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · MetalSyntax/Zenonia2-psvita-port</div>
-                      <h2><a href="https://github.com/MetalSyntax/Zenonia2-psvita-port/releases/tag/v1.30" target="_blank" rel="noopener">Zenonia 2</a></h2>
-                      <div class="release-name">Zenonia 2: The Lost Memories - PS Vita Port v1.3.0: Smooth Combat, Sharper Image &amp; Control Remapping</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.30</span>
-                    <span>2026-11-06 00:47 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.20</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.20 → release v1.30</div>
-                  
-                  <div class="body markdown-body"><h3>Description</h3>
-<p>This release answers community feedback about lag in combat, slow movement, and a blurry image. The game now holds a steady 30 FPS in combat, the picture is noticeably sharper, and every control can be remapped from an in-game menu.</p>
-<p>What's New:</p>
-<p>• Steady 30 FPS in Combat: The engine advances one logic tick per frame, so any frame drop made the whole game run slower. The graphics library is now built specifically for this port with faster texture uploads, the game and audio run on separate CPU cores, and memory routines use the Vita's native implementations. Confirmed at a sustained 30 FPS on hardware.
-• Sharper Image: The 400x240 game frame is upscaled 2x with nearest-neighbor before the final smooth stretch to the screen, so text and sprites look much less blurry.
-• Better Input: All button presses in a frame are now delivered (previously multi-button input could lag behind), and the left analog stick moves your character.
-• Control Remapping: Press Start+Select to open the controls menu (the game pauses). Assign any action to one or more buttons, including the rear touch panel (four quadrants), toggle touch controls, choose the frame rate, or restore defaults. Settings are saved to <code>ux0:data/zenonia-2/controls.txt</code>.
-• Toggle Touch Controls: Press L+R to show or hide the on-screen D-pad and buttons.
-• Frame Rate Mode: Press Select+R to switch between 30 FPS (default) and ORIGINAL, which follows the game's own speed setting (10–22 FPS) like the Android version.
-• Logs are now saved as numbered files in <code>ux0:data/zenonia-2/logs/</code> (001.log, 002.log, ...).</p>
-<p>Notes:
-• Start+Select no longer exits the game. Use the PS button instead.
-• Game data in <code>ux0:data/zenonia-2/</code> is unchanged from v1.2.0. Just install the new VPK.</p>
-<p>Known Issues:
-• The experimental post-process shader build may show a black screen after the menu. Use the standard VPK.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/Zenonia2-psvita-port/releases/download/v1.30/zenonia_2.vpk" target="_blank" rel="noopener">⬇ zenonia_2.vpk · 948.8 KB</a></div>
                 </div>
               </div>
             </article>
@@ -15838,56 +15937,6 @@ copy `filemanager_v0.6.2.vpk` to your ps vita and install it with vitashell or a
 
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/FMVita/releases/download/v0.6.2/FileManager_v0.6.2.vpk" target="_blank" rel="noopener">⬇ FileManager_v0.6.2.vpk · 2.0 MB</a><a class="btn" href="https://github.com/WolffsRoom/FMVita/releases/download/v0.6.2/Dark.png" target="_blank" rel="noopener">Dark.png · 103.5 KB</a><a class="btn" href="https://github.com/WolffsRoom/FMVita/releases/download/v0.6.2/Grid-1.png" target="_blank" rel="noopener">Grid-1.png · 65.1 KB</a><a class="btn" href="https://github.com/WolffsRoom/FMVita/releases/download/v0.6.2/Grid-2.png" target="_blank" rel="noopener">Grid-2.png · 76.5 KB</a><a class="btn" href="https://github.com/WolffsRoom/FMVita/releases/download/v0.6.2/Pink.png" target="_blank" rel="noopener">Pink.png · 92.7 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="switchfin switchfin dragonflylee/switchfin switchfin 0.9.4 0.9.4 utilities ### added
-
-* add ebook viewer with mupdf support
-* add local file gallery viewing
-* add unplayed item count badge to media cards
-
-### fixed
-
-* improve websocket receive loop to handle stop condition correctly
-* ps4: improve shader handling of libmpv
-
-
-![download](https://img.shields.io/github/downloads/dragonflylee/switchfin/0.9.4/total?label=downloads)">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-switchfin/icon0.png" alt="Icono de Switchfin" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · dragonflylee/switchfin</div>
-                      <h2><a href="https://github.com/dragonflylee/switchfin/releases/tag/0.9.4" target="_blank" rel="noopener">Switchfin</a></h2>
-                      <div class="release-name">Switchfin 0.9.4</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">0.9.4</span>
-                    <span>2026-08-25 16:39 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.9.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.9.3 → release 0.9.4</div>
-                  
-                  <div class="body markdown-body"><h3>Added</h3>
-<ul>
-<li>add eBook viewer with MuPDF support</li>
-<li>add local file gallery viewing</li>
-<li>add unplayed item count badge to media cards</li>
-</ul>
-<h3>Fixed</h3>
-<ul>
-<li>improve websocket receive loop to handle stop condition correctly</li>
-<li>PS4: improve shader handling of libmpv</li>
-</ul>
-<p><img src="https://img.shields.io/github/downloads/dragonflylee/switchfin/0.9.4/total?label=Downloads" alt="download"></p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin.vpk" target="_blank" rel="noopener">⬇ Switchfin.vpk · 39.3 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/IV0001-SFIN00000_00-SFIN000000009400.pkg" target="_blank" rel="noopener">IV0001-SFIN00000_00-SFIN000000009400.pkg · 55.8 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/switchfin-0.9.4-1-x86_64.pkg.tar.zst" target="_blank" rel="noopener">switchfin-0.9.4-1-x86_64.pkg.tar.zst · 6.4 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-arm64-v8a.apk" target="_blank" rel="noopener">Switchfin-arm64-v8a.apk · 18.3 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-armeabi-v7a.apk" target="_blank" rel="noopener">Switchfin-armeabi-v7a.apk · 17.5 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-Linux-aarch64-gl.flatpak" target="_blank" rel="noopener">Switchfin-Linux-aarch64-gl.flatpak · 36.3 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-Linux-aarch64-gles2.flatpak" target="_blank" rel="noopener">Switchfin-Linux-aarch64-gles2.flatpak · 36.3 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-Linux-x86_64-gl.flatpak" target="_blank" rel="noopener">Switchfin-Linux-x86_64-gl.flatpak · 37.6 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-macOS-Intel.dmg" target="_blank" rel="noopener">Switchfin-macOS-Intel.dmg · 54.9 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-macOS-Silicon.dmg" target="_blank" rel="noopener">Switchfin-macOS-Silicon.dmg · 52.9 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-windows-arm64.zip" target="_blank" rel="noopener">Switchfin-windows-arm64.zip · 51.3 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-windows-x64.zip" target="_blank" rel="noopener">Switchfin-windows-x64.zip · 59.6 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin-windows-x86.zip" target="_blank" rel="noopener">Switchfin-windows-x86.zip · 60.3 MB</a><a class="btn" href="https://github.com/dragonflylee/switchfin/releases/download/0.9.4/Switchfin.nro" target="_blank" rel="noopener">Switchfin.nro · 62.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -31288,102 +31337,10 @@ this was just a quick project for something to do.. its not great and i wouldnt 
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="modoru modoru theofficialflow/modoru modoru v2.3 v2.3 utilities - added compatibility for fw 3.74">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-modoru/icon0.png" alt="Icono de modoru" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · TheOfficialFloW/modoru</div>
-                      <h2><a href="https://github.com/TheOfficialFloW/modoru/releases/tag/v2.3" target="_blank" rel="noopener">modoru</a></h2>
-                      <div class="release-name">modoru v2.3</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v2.3</span>
-                    <span>2022-05-11 05:28 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v2.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v2.3</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Added compatibility for FW 3.74</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/TheOfficialFloW/modoru/releases/download/v2.3/modoru.vpk" target="_blank" rel="noopener">⬇ modoru.vpk · 122.5 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="log reset for yoyo loader log reset for yoyo loader drok17/log-reset-for-yyl log reset for yoyo loader v1.0 v1.0 utilities small app that deletes the yyl.log file and then launches yoyo loader vita.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-log-reset-for-yoyo-loader/icon0.png" alt="Icono de Log Reset for YoYo Loader" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · DRok17/Log-Reset-for-YYL</div>
-                      <h2><a href="https://github.com/DRok17/Log-Reset-for-YYL/releases/tag/v1.0" target="_blank" rel="noopener">Log Reset for YoYo Loader</a></h2>
-                      <div class="release-name">Log Reset For YoYo Loader v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2022-05-11 02:04 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>Small app that deletes the yyl.log file and then launches YoYo Loader Vita.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/DRok17/Log-Reset-for-YYL/releases/download/v1.0/YYLLOGDEL.vpk" target="_blank" rel="noopener">⬇ YYLLOGDEL.vpk · 3.3 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="imscared imscared hatoving/imscared-old-vita v1.2 1.2 ports minor update.
-
-- fixed &quot;lock.txt&quot; resetting itself
-- fixed &quot;realone.html&quot; not appearing
-- disabled debug mode for the vpk">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-imscared/icon0.png" alt="Icono de IMSCARED" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · hatoving/imscared-old-vita</div>
-                      <h2><a href="https://github.com/hatoving/imscared-old-vita/releases/tag/1.2" target="_blank" rel="noopener">IMSCARED</a></h2>
-                      <div class="release-name">v1.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.2</span>
-                    <span>2022-05-08 15:59 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.2</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.2</div>
-                  
-                  <div class="body markdown-body"><p>Minor update.</p>
-<ul>
-<li>Fixed &quot;lock.txt&quot; resetting itself</li>
-<li>Fixed &quot;realone.html&quot; not appearing</li>
-<li>Disabled Debug Mode for the VPK</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/hatoving/imscared-old-vita/releases/download/1.2/IMSCARED0.vpk" target="_blank" rel="noopener">⬇ IMSCARED0.vpk · 5.6 MB</a><a class="btn" href="https://github.com/hatoving/imscared-old-vita/releases/download/1.2/game.apk" target="_blank" rel="noopener">game.apk · 4.0 MB</a><a class="btn" href="https://github.com/hatoving/imscared-old-vita/releases/download/1.2/IMSCARED.xdelta" target="_blank" rel="noopener">IMSCARED.xdelta · 405.6 KB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-10 14:02 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-10 21:08 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
