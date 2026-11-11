@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">393</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>484</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">394</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>90</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,188 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="deltarune vita deltarune vita wolffsroom/deltarunevita deltarune vita v0.84 (internal development build) v0.84 ports &lt;img src=&quot;https://deltarune.wiki/images/friend_overworld_vision.gif?cb=exya2v&amp;h=thumb.php&amp;f=friend_overworld_vision.gif&quot; alt=&quot;friend overworld&quot; width=&quot;120&quot;&gt;
+
+&gt; [!warning]
+&gt; this is an internal development pre-release, not a release candidate. bugs, visual differences, performance drops, freezes, and gpu crashes may still occur on real hardware.
+
+---
+
+## highlights
+
+### performance
+
+* adjustments to the fps limiter (smoother gameplay).
+* faster chapter loading and smoother room transitions in chapters 2 to 5.
+* lighter chapter 5 final battle (battle textures in bc3 in optimized mode, long music streamed).
+* chapter 2 fireworks are less intense (only half the particles are rendered).
+
+### graphics
+
+* **new crt agressivo filter:** a real curved tube with scanlines, also applied to the console borders (including animated borders).
+* the sun on the cliff returns to the horizon.
+* the platforms&#x27; surfaces are rendered exactly like in the original game.
+* flowey tower and chapter 2 intro fixes.
+
+&lt;img src=&quot;https://raw.githubusercontent.com/wolffsroom/deltarunevita/32c3cdb74c9c71c854183da7c08d350c7c62dc27/docs/release/v0.84/crt-agressivo.gif&quot; alt=&quot;crt agressivo&quot; width=&quot;640&quot;&gt;
+
+### prologue and boot
+
+* reworked prologue and language selection: fixed text placement, centered hints, highlighted language name.
+* `boot_stages.txt`: the opening sequence plays even without devmode.
+* `config.ini` is recreated when missing, and `libshacccg.suprx` is also found in `ur0:data/external/`.
+
+### saves
+
+* **save anywhere:** l + r + select.
+* **pc ↔ vita save sync (deltarune sync), optional and with no ftp plugin.** when the pc and the vita are on the same network (wi-fi or ethernet), the app is running on the pc and the game is open with **settings → system → sync saves with pc** turned on, both find each other and sync automatically.
+* only `dr.ini`, `filech&lt;chapter&gt;_&lt;slot&gt;` and `vacationmemories.png` are synced. every overwritten save is backed up first, on both sides.
+* the pc app lives in the tray (beating heart icon), uses a deltarune-style dialog window and is available in the port&#x27;s 9 languages.
+
+&lt;img src=&quot;https://raw.githubusercontent.com/wolffsroom/deltarunevita/v0.84/docs/release/v0.84/deltarune-sync-window.png&quot; alt=&quot;deltarune sync window&quot; width=&quot;600&quot;&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/wolffsroom/deltarunevita/v0.84/docs/release/v0.84/deltarune-sync-tray.png&quot; alt=&quot;deltarune sync tray icon&quot; width=&quot;300&quot;&gt;
+
+**credits:** 
+the first version of **deltarune sync** was created by [federicoilgrandebardo](https://github.com/federicoilgrandebardo/). it worked over ftp ([ftp everywhere](https://github.com/teakhanirons/ftpeverywhere)), which is practical but heavier on the device. the version adopted here uses the network discovery method from [godot 4 vita](https://github.com/wolffsroom/godot4-vita), adapted to deltarune vita.
+
+&gt; [!note]
+&gt; builds v0.82 and v0.83 were internal builds focused on fps and crt filter improvements. their changes are included here.
+
+---
+
+## installation
+
+1. install `deltarune-v0.81-11.vpk` using your preferred file manager (vitashell, fmvita, or file manager).
+2. if you use the animated borders mod, make sure the `.bani` packages are up to date in `ux0:data/deltarune/deltarunevita/mods/bordersanim/`.
+3. launch the game as usual. your saves and settings will be preserved.
+
+---
+
+## bug reports and diagnostics
+
+if you encounter a problem, please open a ticket on the issues page:
+
+https://github.com/wolffsroom/deltarunevita/issues
+
+please include:
+
+```text
+ux0:data/deltarune/deltarunevita/butterscotch-probe.log
+```
+
+and, when relevant:
+
+- chapter and room.
+- selected language.
+- renderer.
+- texture-compression mode.
+- fps limit.
+- screenshot/video of visual problems.
+- generated `psp2dmp` crash dump when available.
+
+_if dev mode is enabled, also include the corresponding diagnostic information from the affected room._
+
+---
+
+_official commercial deltarune game data, music and chapter video files are not distributed with this release._">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-deltarune-vita/icon0.png" alt="Icono de Deltarune Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · WolffsRoom/DeltaruneVita</div>
+                      <h2><a href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.84" target="_blank" rel="noopener">Deltarune Vita</a></h2>
+                      <div class="release-name">Deltarune Vita v0.84 (Internal Development Build)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.84</span>
+                    <span>2026-11-11 11:14 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.0.69</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.0.69 → release v0.84</div>
+                  
+                  <div class="body markdown-body"><img src="https://deltarune.wiki/images/FRIEND_overworld_vision.gif?cb=exya2v&amp;h=thumb.php&amp;f=FRIEND_overworld_vision.gif" alt="Friend Overworld" width="120">
+
+<blockquote>
+<p>[!WARNING]
+This is an internal development pre-release, not a release candidate. Bugs, visual differences, performance drops, freezes, and GPU crashes may still occur on real hardware.</p>
+</blockquote>
+<hr>
+<h2>Highlights</h2>
+<h3>Performance</h3>
+<ul>
+<li>Adjustments to the FPS limiter (smoother gameplay).</li>
+<li>Faster chapter loading and smoother room transitions in Chapters 2 to 5.</li>
+<li>Lighter Chapter 5 final battle (battle textures in BC3 in Optimized mode, long music streamed).</li>
+<li>Chapter 2 fireworks are less intense (only half the particles are rendered).</li>
+</ul>
+<h3>Graphics</h3>
+<ul>
+<li><strong>New CRT Agressivo filter:</strong> a real curved tube with scanlines, also applied to the console borders (including animated borders).</li>
+<li>The sun on the cliff returns to the horizon.</li>
+<li>The platforms' surfaces are rendered exactly like in the original game.</li>
+<li>Flowey tower and Chapter 2 intro fixes.</li>
+</ul>
+<img src="https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/32c3cdb74c9c71c854183da7c08d350c7c62dc27/docs/release/v0.84/crt-agressivo.gif" alt="CRT Agressivo" width="640">
+
+<h3>Prologue and boot</h3>
+<ul>
+<li>Reworked prologue and language selection: fixed text placement, centered hints, highlighted language name.</li>
+<li><code>boot_stages.txt</code>: the opening sequence plays even without devmode.</li>
+<li><code>config.ini</code> is recreated when missing, and <code>libshacccg.suprx</code> is also found in <code>ur0:data/external/</code>.</li>
+</ul>
+<h3>Saves</h3>
+<ul>
+<li><strong>Save Anywhere:</strong> L + R + SELECT.</li>
+<li><strong>PC ↔ Vita save sync (DELTARUNE Sync), optional and with no FTP plugin.</strong> When the PC and the Vita are on the same network (Wi-Fi or Ethernet), the app is running on the PC and the game is open with <strong>Settings → System → Sync saves with PC</strong> turned on, both find each other and sync automatically.</li>
+<li>Only <code>dr.ini</code>, <code>filech&lt;chapter&gt;_&lt;slot&gt;</code> and <code>vacationmemories.png</code> are synced. Every overwritten save is backed up first, on both sides.</li>
+<li>The PC app lives in the tray (beating heart icon), uses a DELTARUNE-style dialog window and is available in the port's 9 languages.</li>
+</ul>
+<img src="https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/v0.84/docs/release/v0.84/deltarune-sync-window.png" alt="DELTARUNE Sync window" width="600">
+<img src="https://raw.githubusercontent.com/WolffsRoom/DeltaruneVita/v0.84/docs/release/v0.84/deltarune-sync-tray.png" alt="DELTARUNE Sync tray icon" width="300">
+
+<p><strong>Credits:</strong>
+The first version of <strong>DELTARUNE Sync</strong> was created by <a target="_blank" rel="noopener noreferrer" href="https://github.com/Federicoilgrandebardo/">Federicoilgrandebardo</a>. It worked over FTP (<a target="_blank" rel="noopener noreferrer" href="https://github.com/teakhanirons/ftpeverywhere">FTP Everywhere</a>), which is practical but heavier on the device. The version adopted here uses the network discovery method from <a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/godot4-vita">Godot 4 Vita</a>, adapted to Deltarune Vita.</p>
+<blockquote>
+<p>[!NOTE]
+Builds v0.82 and v0.83 were internal builds focused on FPS and CRT filter improvements. Their changes are included here.</p>
+</blockquote>
+<hr>
+<h2>Installation</h2>
+<ol>
+<li>Install <code>Deltarune-v0.81-11.vpk</code> using your preferred file manager (VitaShell, FMVita, or File Manager).</li>
+<li>If you use the Animated Borders mod, make sure the <code>.bani</code> packages are up to date in <code>ux0:data/deltarune/deltarunevita/mods/bordersanim/</code>.</li>
+<li>Launch the game as usual. Your saves and settings will be preserved.</li>
+</ol>
+<hr>
+<h2>Bug reports and diagnostics</h2>
+<p>If you encounter a problem, please open a ticket on the Issues page:</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita/issues">https://github.com/WolffsRoom/DeltaruneVita/issues</a></p>
+<p>Please include:</p>
+<pre><code class="language-text">ux0:data/deltarune/deltarunevita/butterscotch-probe.log
+</code></pre>
+<p>and, when relevant:</p>
+<ul>
+<li>Chapter and Room.</li>
+<li>Selected language.</li>
+<li>Renderer.</li>
+<li>Texture-compression mode.</li>
+<li>FPS limit.</li>
+<li>Screenshot/video of visual problems.</li>
+<li>Generated <code>psp2dmp</code> crash dump when available.</li>
+</ul>
+<p><em>If Dev Mode is enabled, also include the corresponding diagnostic information from the affected Room.</em></p>
+<hr>
+<p><em>Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release.</em></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.84/Deltarune-v0.84.Internal-Build-Test.vpk" target="_blank" rel="noopener">⬇ Deltarune-v0.84.Internal-Build-Test.vpk · 9.8 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.84/DeltaruneSync-v0.84.zip" target="_blank" rel="noopener">DeltaruneSync-v0.84.zip · 31.3 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.84/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 196.0 B</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="resident evil code: veronica x resident evil code: veronica x rinnegatamante/recvx_vita v.1.4 v.1.4 ports - added support for computer screens in localizations. now when interacting with computers, they&#x27;ll have properly translated textrs.
 - added a new option under graphics options to change game brightness.
 - added a new option under graphics ooptions to change color saturation.
@@ -653,6 +835,94 @@ skate and skate 3 belong to electronic arts. this is an unofficial fan project, 
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="thug2 vita thug2 vita iwannagooutside/thug2-vita v1.0.0: tony hawk&#x27;s underground 2 on ps vita v1.0.0 ports tony hawk&#x27;s underground 2, running natively on the ps vita. not emulated,
+rebuilt: the game engine is recompiled for the vita, with a renderer written
+on top of vitagl.
+
+**what&#x27;s in**
+- story mode, classic mode and free skate, with cutscenes, music, voices and
+  the game&#x27;s videos.
+- create-a-skater, create-a-park, create-a-goal, create-a-trick, create-a-graphic.
+- 960x544, 60 fps in most views; 30 fps cap in vita options.
+- controls reworked for the vita, plus a vita options menu
+  (options &gt; control setup &gt; vita options) and a dualshock layout for ps tv.
+- hd hud by the thug pro team.
+
+**installing**
+1. you need the **xbox** version of thug2, from your own disc, and
+   `libshacccg.suprx` in `ur0:data/` (run sharkf00d once if you&#x27;ve never done it).
+2. copy the game&#x27;s `data` folder to `ux0:data/thug2/data/` (you should have
+   `ux0:data/thug2/data/scripts/qdir.txt`). `tools/prepare_thug2_data.py`
+   checks the files and copies only what&#x27;s needed (2.6 gb, or 1.6 gb without
+   the videos).
+3. install `thug2_vita.vpk` with vitashell.
+
+full guide, controls and troubleshooting in the readme.
+
+**known issues**
+- very far views (new orleans) can drop to around 40 fps.
+- buttslaps can trigger on their own after a late ollie (same as on xbox).
+- if one of the game&#x27;s videos misbehaves, skip it with start or ✕ and open an issue.
+
+found a bug? open an issue with the level, what you were doing, a photo if you
+can, and `ux0:data/thug2-vita/thug.log`.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/thug2-vita/icon0.png" alt="Icono de THUG2 Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · iwannagooutside/thug2-vita</div>
+                      <h2><a href="https://github.com/iwannagooutside/thug2-vita/releases/tag/v1.0.0" target="_blank" rel="noopener">THUG2 Vita</a></h2>
+                      <div class="release-name">v1.0.0: Tony Hawk's Underground 2 on PS Vita</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.0.0</span>
+                    <span>2026-11-09 23:07 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v1.0.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v1.0.0</div>
+                  
+                  <div class="body markdown-body"><p>Tony Hawk's Underground 2, running natively on the PS Vita. Not emulated,
+rebuilt: the game engine is recompiled for the Vita, with a renderer written
+on top of vitaGL.</p>
+<p><strong>What's in</strong></p>
+<ul>
+<li>Story mode, Classic mode and Free Skate, with cutscenes, music, voices and
+the game's videos.</li>
+<li>Create-a-Skater, Create-a-Park, Create-a-Goal, Create-a-Trick, Create-a-Graphic.</li>
+<li>960x544, 60 fps in most views; 30 fps cap in Vita Options.</li>
+<li>Controls reworked for the Vita, plus a Vita Options menu
+(Options &gt; Control Setup &gt; Vita Options) and a DualShock layout for PS TV.</li>
+<li>HD HUD by the THUG Pro team.</li>
+</ul>
+<p><strong>Installing</strong></p>
+<ol>
+<li>You need the <strong>Xbox</strong> version of THUG2, from your own disc, and
+<code>libshacccg.suprx</code> in <code>ur0:data/</code> (run ShaRKF00D once if you've never done it).</li>
+<li>Copy the game's <code>data</code> folder to <code>ux0:data/thug2/Data/</code> (you should have
+<code>ux0:data/thug2/Data/scripts/qdir.txt</code>). <code>tools/prepare_thug2_data.py</code>
+checks the files and copies only what's needed (2.6 GB, or 1.6 GB without
+the videos).</li>
+<li>Install <code>thug2_vita.vpk</code> with VitaShell.</li>
+</ol>
+<p>Full guide, controls and troubleshooting in the README.</p>
+<p><strong>Known issues</strong></p>
+<ul>
+<li>Very far views (New Orleans) can drop to around 40 fps.</li>
+<li>Buttslaps can trigger on their own after a late ollie (same as on Xbox).</li>
+<li>If one of the game's videos misbehaves, skip it with START or ✕ and open an issue.</li>
+</ul>
+<p>Found a bug? Open an issue with the level, what you were doing, a photo if you
+can, and <code>ux0:data/thug2-vita/thug.log</code>.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/iwannagooutside/thug2-vita/releases/download/v1.0.0/thug2_vita.vpk" target="_blank" rel="noopener">⬇ thug2_vita.vpk · 7.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="save sync save sync unveroleone/save-sync v0.1.11 v0.1.11 utilities ## what&#x27;s new in v0.1.11
 
 psp saves show their game title again on the vita, you can exclude games from sync, and save sync hub got a round of sync fixes. thanks to @uncreepynuts for the vita changes (#7, #8).
@@ -853,965 +1123,6 @@ please follow the [**installation guide**](https://ihhub.github.io/fheroes2/inst
 <p>Please follow the <a target="_blank" rel="noopener noreferrer" href="https://ihhub.github.io/fheroes2/INSTALL.html"><strong>installation guide</strong></a> to download and install fheroes2.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_android.zip" target="_blank" rel="noopener">⬇ fheroes2_android.zip · 26.4 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_macos_x86-64_SDL2.zip" target="_blank" rel="noopener">fheroes2_macos_x86-64_SDL2.zip · 5.1 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_psv.zip" target="_blank" rel="noopener">fheroes2_psv.zip · 14.3 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_switch.zip" target="_blank" rel="noopener">fheroes2_switch.zip · 8.5 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_ubuntu_arm64_SDL2.zip" target="_blank" rel="noopener">fheroes2_ubuntu_arm64_SDL2.zip · 5.4 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_ubuntu_x86-64_SDL2.zip" target="_blank" rel="noopener">fheroes2_ubuntu_x86-64_SDL2.zip · 5.6 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_windows_x64_SDL2.zip" target="_blank" rel="noopener">fheroes2_windows_x64_SDL2.zip · 12.3 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_windows_x64_SDL2_installer.exe" target="_blank" rel="noopener">fheroes2_windows_x64_SDL2_installer.exe · 34.8 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_windows_x86_SDL2.zip" target="_blank" rel="noopener">fheroes2_windows_x86_SDL2.zip · 11.7 MB</a><a class="btn" href="https://github.com/ihhub/fheroes2/releases/download/1.1.18/fheroes2_windows_x86_SDL2_installer.exe" target="_blank" rel="noopener">fheroes2_windows_x86_SDL2_installer.exe · 23.2 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="deltarune vita deltarune vita wolffsroom/deltarunevita deltarune vita v0.81 v0.81 ports &lt;p align=&quot;center&quot;&gt;
-  &lt;img
-    src=&quot;https://email-files.fangamer.com/list_48/campaign_18/coloroutline_3x-cyohkzsgkqutjpvn.gif&quot;
-    alt=&quot;deltarune party&quot;
-    width=&quot;200&quot;
-  /&gt;&lt;br&gt;
-  &lt;picture&gt;
-    &lt;source
-      media=&quot;(prefers-color-scheme: dark)&quot;
-      srcset=&quot;https://github.com/user-attachments/assets/e828e610-42b5-4c9a-afad-d8228be8256c&quot;
-    /&gt;
-    &lt;source
-      media=&quot;(prefers-color-scheme: light)&quot;
-      srcset=&quot;https://github.com/user-attachments/assets/9bd2ad85-1660-4443-8677-d107365e1cb9&quot;
-    /&gt;
-    &lt;img
-      src=&quot;https://github.com/user-attachments/assets/9bd2ad85-1660-4443-8677-d107365e1cb9&quot;
-      alt=&quot;deltarune ps vita edition&quot;
-      width=&quot;500&quot;
-    /&gt;
-  &lt;/picture&gt;&lt;br&gt;
-  &lt;picture&gt;
-    &lt;source
-      media=&quot;(prefers-color-scheme: dark)&quot;
-      srcset=&quot;https://github.com/user-attachments/assets/bdce3f84-c36d-41c7-b421-09c06412a4c2&quot;
-    /&gt;
-    &lt;source
-      media=&quot;(prefers-color-scheme: light)&quot;
-      srcset=&quot;https://github.com/user-attachments/assets/ee8a4380-5f5f-4143-8d06-acded31d411c&quot;
-    /&gt;
-    &lt;img
-      src=&quot;https://github.com/user-attachments/assets/ee8a4380-5f5f-4143-8d06-acded31d411c&quot;
-      alt=&quot;release subtitle&quot;
-      width=&quot;300&quot;
-    /&gt;
-  &lt;/picture&gt;
-&lt;/p&gt;
-
-hey everyone! **wolff here again!**
-
-after months of development, countless experiments, internal builds, performance testing, gpu crashes, shader tweaks, and more debug logs than i&#x27;d like to admit, **deltarune for ps vita v0.81** is finally here!
-
-this release brings together everything i&#x27;ve been working on since the public **v0.73** release, marking another major step forward for the project.
-
-while **v0.80** laid the technical groundwork with the introduction of **native gxm rendering, a redesigned texture pipeline, and significant memory management improvements**, **v0.81** shifts the focus toward refining the actual gameplay experience.
-
-the goal? **smoother performance, more consistent frame pacing, native c optimizations tailored to real ps vita hardware, animated borders, enhanced shaders, and fixes for some of the most troublesome bottlenecks across all five chapters.**
-
-there&#x27;s still work to be done, but this update represents a huge step toward making deltarune feel right at home on the ps vita.
-
-&gt; [!important]
-&gt; the ps vita vpk does **not** include the full official deltarune game. you must provide your own legally obtained game data.
-&gt;
-&gt; always back up your save files (`ux0:data/deltarune_saves/`) before updating.
-
-
-### deltarune for ps vita (unofficial fan port) - announcement trailer
-
-&lt;p align=&quot;center&quot;&gt;
-
-&lt;a href=&quot;https://youtu.be/ut4apeyrvqm&quot;&gt;
-  &lt;img src=&quot;https://github.com/user-attachments/assets/d56c1863-434e-49b4-8ca3-d1d6dc55e0f8&quot; width=&quot;85%&quot; style=&quot;border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);&quot; alt=&quot;deltarune vita v0.73 update trailer&quot;&gt;
-&lt;/a&gt;
-&lt;br&gt;
-
-&lt;a href=&quot;https://youtu.be/-rye5zshyhu&quot;&gt;
-  &lt;img src=&quot;https://img.shields.io/badge/youtube-watch%20update%20trailer-ff0000?style=for-the-badge&amp;logo=youtube&amp;logocolor=white&quot; alt=&quot;watch the v0.73 update trailer on youtube&quot;&gt;
-&lt;/a&gt;
-
-&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img src=&quot;https://deltarune.wiki/images/crowd_overworld.gif?cb=o680kx&amp;h=thumb.php&amp;f=crowd_overworld.gif&quot; alt=&quot;crow&quot; width=&quot;300&quot;&gt;
-&lt;/p&gt;
-
----
-
-## release highlights
-
-the main changes since v0.73 include improvements, bug fixes, and general optimizations.
-
-### vitagl and vitagxm: two graphics apis
-
-previously, i had been working on gradually replacing vitagl with a native gxm (`libgxm`) implementation. however, after extensive experimentation with vitagxm, i decided to give vitagl another chance.
-
-improvements made to butterscotch (my local fork), together with what i learned from the native gxm implementation, allowed me to fix many of the original reasons for switching apis, including gpu crashes, vita freezes, and some ram leaks. occasional crashes may still happen, and i&#x27;m continuing to work on them.
-
-**vitagxm has not been discontinued.** deltarune for ps vita still supports both graphics apis, and you can choose which one to use:
-
-- **vitagxm**
-  - renderer: one native rendering mode, with no additional variants.
-- **vitagl**
-  - **legacy:** no shader support. more stable, but potentially less optimized due to higher cpu usage.
-  - **modern-gl:** lower cpu usage and proper shader support, but may experience gpu crashes.
-  - **experimental-gl:** a hybrid of legacy and modern-gl, designed to preserve legacy&#x27;s stability while providing the shader support required by certain chapters and areas.
-
-the work on `libgxm` also helped resolve other issues, such as enemy dialogue text being cut off at the bottom of the screen. for now, i&#x27;ve paused further gxm development to focus on polishing and finalizing vitagl, especially because shaders remain essential to parts of the game.
-
-### recommended graphics settings
-
-**these are my recommended settings for the current release.**
-
-| setting | recommended value |
-| --- | --- |
-| texture compression | optimized |
-| fps limit | 30 fps |
-| screen filter | none (although i recommend trying the new crt filter :d) |
-| shaders | on |
-| graphics api | vitagl |
-
-**p.s.** you can select **aggressive** texture compression for some extra fps at the cost of occasional slightly incorrect pixel colors (nothing too serious).
-
----
-
-### animated borders!
-
-this update introduces **animated borders**, a ps vita-exclusive mod that brings dynamic, animated backgrounds to the game&#x27;s borders!
-
-here are three examples of the new animated borders:
-
-| castle town | sunset town | castle café |
-|:---:|:---:|:---:|
-| &lt;img src=&quot;https://github.com/user-attachments/assets/150f90da-d95b-4817-b7f2-a8e8f9930d6b&quot; alt=&quot;border_dw_castletown&quot; width=&quot;300&quot;&gt; | &lt;img src=&quot;https://github.com/user-attachments/assets/30a101b0-cb3a-4a48-8e9c-56087b7ec02c&quot; alt=&quot;border_lw_town_sunset&quot; width=&quot;300&quot;&gt; | &lt;img src=&quot;https://github.com/user-attachments/assets/6fb9c0e4-c410-4b73-b020-8d738bfc3e43&quot; alt=&quot;border_dw_castle_cafe&quot; width=&quot;300&quot;&gt; |
-
-animated borders have minimal processing and vram overhead (**less than 768 kib**). in more demanding rooms, an animation or frame may be temporarily paused rather than competing with the game&#x27;s rendering resources.
-
----
-
-### enhanced crt effect!
-
-inspired by [this gamebanana mod](https://gamebanana.com/mods/733383), a new shader-based crt filter now works across all chapters.
-
-the previous basic screen filters have been replaced with a new collection of enhanced visual effects, ranging from subtle improvements to authentic retro crt aesthetics.
-
-### original (reference)
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;no filter&lt;/strong&gt;&lt;br&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/7e734388-0273-4e21-a319-5fd6ec3b7011&quot;
-    alt=&quot;no filter&quot;
-    width=&quot;300&quot;
-  /&gt;&lt;br&gt;
-  &lt;sub&gt;original deltarune visuals without additional processing.&lt;/sub&gt;
-&lt;/p&gt;
-
-### crt filters
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;soft crt&lt;/strong&gt;
-  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-  &lt;strong&gt;ㅤㅤㅤㅤㅤㅤㅤㅤmedium crt&lt;/strong&gt;
-  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-  &lt;strong&gt;ㅤㅤㅤㅤㅤㅤㅤㅤaggressive crt&lt;/strong&gt;
-  &lt;br&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/6a20698f-cbc4-4916-953e-94ff31008c55&quot;
-    alt=&quot;soft crt&quot;
-    width=&quot;250&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/6add48af-fd3e-4099-879c-3ef15f6aa7c3&quot;
-    alt=&quot;medium crt&quot;
-    width=&quot;250&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/b7b8ae62-bcb2-4b76-ae87-24023c9e6b67&quot;
-    alt=&quot;aggressive crt&quot;
-    width=&quot;250&quot;
-  /&gt;
-  &lt;br&gt;
-  &lt;sub&gt;subtle scanlines and gentle crt effects.&lt;/sub&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;sub&gt;enhanced contrast and stronger scanlines.&lt;/sub&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;sub&gt;full retro crt look with stronger analog-style effects.&lt;/sub&gt;
-&lt;/p&gt;
-
-### additional display filters
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;sharp bilinear&lt;/strong&gt;
-  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-  &lt;strong&gt;ㅤㅤㅤㅤㅤㅤㅤㅤdithering blending&lt;/strong&gt;
-  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-  &lt;strong&gt;ㅤㅤㅤㅤㅤㅤㅤㅤvhs (scanlines)&lt;/strong&gt;
-  &lt;br&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/0b5bc3c2-3537-41cb-aed0-3a083480aab8&quot;
-    alt=&quot;sharp bilinear&quot;
-    width=&quot;250&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/9f5940b5-1a75-4d59-bf45-0a35e3c460f5&quot;
-    alt=&quot;dithering blending&quot;
-    width=&quot;250&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/03f70b7b-9b6a-48bd-bef9-815bf835d204&quot;
-    alt=&quot;vhs scanlines&quot;
-    width=&quot;250&quot;
-  /&gt;
-  &lt;br&gt;
-  &lt;sub&gt;smoother scaling while preserving pixel-art sharpness.&lt;/sub&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;sub&gt;softer color transitions and blended dithering patterns.&lt;/sub&gt;
-  &amp;nbsp;&amp;nbsp;
-  &lt;sub&gt;classic analog video aesthetics with vhs-inspired scanlines.&lt;/sub&gt;
-&lt;/p&gt;
-
-&gt; [!tip]
-&gt; for the most authentic retro experience, try **medium crt** or **aggressive crt**. 
-
----
-
-
-### new features!
-
-- added mouse simulation for **mike&#x27;s room in chapter 4**, using the right analog stick or the front touchscreen. it turned out pretty cool!
-- added microphone support for mike&#x27;s room. if your microphone doesn&#x27;t work (or you simply don&#x27;t want to use it) tapping the screen will simulate sound input.
-- added a chapter 4-specific **mouse sensitivity** setting in game settings.
-
-### a mysterious prologue...
-
-for first-time players, the opening video now leads to a place that may seem... familiar.
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/e161a036-830b-49a2-93bd-d0f09111cb8d&quot;
-    alt=&quot;mysterious prologue&quot;
-    width=&quot;400&quot;
-  /&gt;
-&lt;/p&gt;
-
-the goal is to create a more immersive introduction while displaying notices about optional plugins ([notrpdrm](https://github.com/rinnegatamante/notrpdrm) and [capunlocker](https://github.com/graphenect/capunlocker)). this screen also displays the available language options based on the installed languages.
-
----
-
-### and more...
-
-- improved loading times with vitagl.
-- faster chapter loading.
-- general optimizations.
-
----
-
-## 1. improvements by category
-
-### performance, vsync, and frame pacing
-
-- **30 fps frame pacer fix:** fixed a critical *double-advance* bug that doubled frame deadlines and caused kernel waits of up to 55 ms. this restores smooth, consistent 30 fps gameplay in town and throughout the game.
-- **hardware vsync at 30 fps:** the 30 fps mode is now synchronized directly to the hardware display&#x27;s vblank signal (presenting one frame every two refreshes of the 60 hz screen), reducing frame-time fluctuations and microstutter.
-- **native c implementations:**
-  - `obj_plat_floortex_floor` and `alignbottom1tile`: prebaked ground and grass surfaces rendered directly in c, saving approximately 33 ms per frame of gml processing in climbing and castle areas.
-  - `obj_plat_vertical_floor_grass_strip`: native surface caching for vertical grass strips.
-  - `obj_parallax_cliffs_moving_layers` and `obj_parallax_cliffs_sunlayer`: c-based drawing and sunlight caching, saving 15–20 ms in the cliffs.
-  - `obj_blue_platform`: drawing logic moved to c while preserving the original physics and collision behavior.
-- **reduced room-transition freezes:** vitagl texture cleanup and garbage collection (`glfinish()` and `vglforcegarbagecollection()`) are now handled together in a single batch, reducing garden room transitions from 2.4 seconds to just a few milliseconds.
-- **camera-based culling:**
-  - temporarily hides sliding doors outside the camera view (`obj_plat_fusuma_mask`).
-  - applies frustum culling to background trees in the garden (`obj_blocktree_bg`).
-*similar optimizations may be implemented in other areas in future updates.*
-
-### graphics, shaders, and visuals
-
-- **diagonal petal transition (`shd_petalcut`):** implemented the proper diagonal wipe that reveals the pink garden from a dark scene in chapter 5, accompanied by a dense diagonal curtain of 96 petal particles (`pt_petal_whirl`).
-- **batch flush before blend mode changes:** the draw queue is now flushed before changing blend modes (`vitaquadbatchflush`), preventing visual artifacts and unwanted outlines in composited elements.
-
-### dynamic and animated borders
-
-- **seamless feathering:** the full static background border now blends into the animated side strips (`frames_side.bani`) using a smooth 24-pixel linear transparency gradient, removing harsh seams between static and moving artwork.
-- **low-memory mode:** visible side-border streaming uses less than **768 kib of vram** in total, helping keep animations active even when chapter 5 places heavy demands on memory.
-
-### audio and video
-
-- **music recovery:** music volume is preserved after loading save files and exiting battles.
-- **stream and pitch management:** generational audio ids prevent channels from being reused incorrectly, and pitch adjustments (`snd_pitch`) are now handled properly.
-
-### controls and debug tools
-
-- **mike&#x27;s controls (chapter 4):** added customizable mouse sensitivity (20%–200%) and pointer controls using the right analog stick or front touchscreen, while preserving kris&#x27;s normal movement with the d-pad.
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/0b6e7ba4-325b-4574-b81a-9dee4fedaa80&quot;
-    alt=&quot;mike&#x27;s controls&quot;
-    width=&quot;400&quot;
-  /&gt;
-&lt;/p&gt;
-
-- **debug / devmode improvements:** several developer tools have been redesigned and refined to make debugging, testing, and navigating the game easier:
-  - **game settings:** redesigned the interface, with improved layouts and accessibility for dev-exclusive options.
-  - **room navigator:** improved the interface and navigation controls, allowing faster room switching and more efficient testing.
-  - **collision and object mapping:** enhanced the debugging overlay to better visualize collision boundaries, identify in-game objects, and investigate missing textures.
-  - **screen adjustment:** refined the interface for easier display positioning and alignment.
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;room navigator     ㅤ&lt;/strong&gt;
-  &amp;emsp;&amp;emsp;&amp;emsp;
-  &lt;strong&gt;collision e object mapping     ㅤ&lt;/strong&gt;
-  &amp;emsp;&amp;emsp;
-  &lt;strong&gt;screen adjustment&lt;/strong&gt;
-  &lt;br&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/e3f0c074-f5a9-4230-ab75-fdbcff2aea9d&quot;
-    alt=&quot;room navigator&quot;
-    width=&quot;260&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/31490024-ce2d-44d5-9e94-aecc2035a8d2&quot;
-    alt=&quot;collision and object mapping&quot;
-    width=&quot;260&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/3496eb99-8d74-4eab-98e5-8c85cea27f7b&quot;
-    alt=&quot;screen adjustment&quot;
-    width=&quot;260&quot;
-  /&gt;
-&lt;/p&gt;
-
-
----
-
-## 2. fixes by chapter
-
-### chapter 2
-
-- improved protection against disappearing mice in noelle&#x27;s puzzle and the tower puzzle ([butterscotch pr #556](https://github.com/butterscotchrunner/butterscotch/pull/556)). the previous workaround remains available if needed, helping prevent softlocks.
-- fixed alpha testing and added fog support for compatible renderers.
-
-### chapter 3
-
-- prevented freezes during tenna&#x27;s cutscene through native execution of `scr_chromakey` and a five-second freeze watchdog.
-- added native c rendering for the wavy background of the post-chapter menu (`device_menu`), eliminating hundreds of repeated draw calls per frame.
-
-### chapter 4
-
-- fixed the climbing lockup in the church towers (`global.flag[23]`).
-- fixed direct rendering of enemies in battle without creating unnecessary individual surfaces (`obj_darkshape`).
-- implemented native c processing for foreground tiles in the titan&#x27;s tower (`room_dw_churchc_titanclimb1_tiled`).
-- improved the school-to-castle town transition with optimized border cleanup.
-
-### chapter 5
-
-
-- **fixed duplicate tp bar:** resolved a visual glitch in chapter 5 where two tp bars could appear simultaneously during the floradinn encounter (`room_dw_garden_floradinnencounter`). improved battle-state detection and surface cleanup to prevent leftover garden ui elements from overlapping the battle interface.
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;before                  &lt;/strong&gt;
-  &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-  &lt;strong&gt;after&lt;/strong&gt;
-  &lt;br&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/f82cb32f-f287-4938-9ff8-42bf1e9d6d14&quot;
-    alt=&quot;before - duplicate tp bar&quot;
-    width=&quot;400&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/5dc56f38-5810-4837-9171-51c9d20df142&quot;
-    alt=&quot;after - fixed tp bar&quot;
-    width=&quot;400&quot;
-  /&gt;
-&lt;/p&gt;
-
-- **complete petal transition:** restored the proper diagonal scene wipe (`shd_petalcut`) with a curtain of 96 pink petal particles.
-- **reduced stuttering:** faster transitions between garden areas (`room_dw_garden_*`) without synchronous gpu stalls.
-- **native c processing in the cliffs and castle:** ground and grass (`floortex`), moving cliff layers (`moving_layers`), sunlight (`sunlayer`), and blue platforms now run through compiled native code.
-- **textures kept in vram:** protected krákrá&#x27;s attacks (tongues and multiple projectiles), kris, and floor textures against premature video-memory deallocation, preventing invisible elements.
-- **ps4 button glyphs:** krákrá battle prompts now display the correct playstation-style button icons.
-- **border fixes:** corrected the nighttime border in `room_town_mid` and removed the unwanted border in the flower shop.
-- **restored the tower visuals during the final battle**, fixing the broken or incomplete background rendering and bringing the scene back to its intended appearance.
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;before&lt;/strong&gt;
-  &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-  &lt;strong&gt;after&lt;/strong&gt;
-  &lt;br&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/653e7adb-f4ba-4220-8291-dc922acf35b8&quot;
-    alt=&quot;before - final battle tower&quot;
-    width=&quot;400&quot;
-  /&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/f915a01f-d509-42ea-8553-99854aabdd78&quot;
-    alt=&quot;after - final battle tower restored&quot;
-    width=&quot;400&quot;
-  /&gt;
-&lt;/p&gt;
-
----
-
-### other fixes and improvements
-
-- fixed a missing pixel row at the bottom of enemy dialogue boxes during battles.
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img
-    src=&quot;https://github.com/user-attachments/assets/078d2b5d-9d09-4ad5-92cf-18f5e8729870&quot;
-    alt=&quot;fixed enemy dialogue rendering&quot;
-    width=&quot;400&quot;
-  /&gt;
-&lt;/p&gt;
-
-- added smooth fade-to-black transitions for school doors and menus.
-- **font rendering:** improved subpixel alignment and rendering of accented characters in portuguese and other languages, resulting in sharper text.
-- **background music:** improved soundtrack recovery after loading save files.
-- **stable 30 fps and hardware vsync:** fixed the critical frame-pacer delay that could drop gameplay to 15 fps. frame presentation now targets a consistent **33.333 ms** cadence synchronized with the ps vita&#x27;s 60 hz screen.
-- **native c fast paths (chapters 4 and 5):** replaced expensive gml interpreter operations with native c routines for drawing floors, grass, platforms, cliff layers, and tower elements, saving up to 35 ms per frame.
-
----
-
-## build information and installation
-
-  &lt;img src=&quot;https://img.wattpad.com/4524e6cf2f39817f918f16b1a8d0867bec19b60a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f623973523677674b6f3241374e513d3d2d3935302e313536363463366537356135303139633235353836393635373938362e676966&quot; alt=&quot;kris&quot; width=&quot;200&quot; align=&quot;left&quot; hspace=&quot;0&quot;&gt;
-
-- **vpk file:** `deltarune-v0.81-11.vpk`
-- **title id:** `delt00001`
-- **vpk sha-256:**
-  ```text
-  7ff182a70b266abb5ea745171c5faaba440a25cad05847d693cb800956ca1a1e
-  ```
-
-### how to update
-
-1. install `deltarune-v0.81-11.vpk` using your preferred file manager (vitashell, fmvita, or file manager).
-2. if you use the animated borders mod, make sure the `.bani` packages are up to date in `ux0:data/deltarune/deltarunevita/mods/bordersanim/`.
-3. launch the game as usual. your saves and settings will be preserved.
-
-&gt; [!note]
-&gt; **v0.81 does not require updated game data files.** however, the patcher has been updated to include the animated border assets and the updated brazilian portuguese translation of chapter 5 by [teiarruma](https://github.com/teiarruma/deltarune-ptbr).
-
-if you&#x27;d like to get just the animated border files, you can download them separately here:
-
-[download animated borders](https://drive.google.com/file/d/11w7fcjn8wxkmlahuehhd65bnqsp0nhin/view?usp=sharing)
-
----
-
-## installation guide
-
-for full setup steps, please refer to the [installation guide](https://github.com/wolffsroom/deltarunevita#installation-guide).
-
-
-&lt;div align=&quot;left&quot;&gt;
-
-&lt;table border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
-&lt;tr&gt;
-&lt;td bgcolor=&quot;#000000&quot; style=&quot;background-color: #000000; padding: 16px; border: 4px solid #ffffff; border-radius: 6px;&quot;&gt;
-
-  &lt;img src=&quot;https://static.wikia.nocookie.net/delta-rune/images/a/ac/seam_face.png/revision/latest/thumbnail/width/360/height/360?cb=20190722005950&amp;path-prefix=es&quot; alt=&quot;seam&quot; width=&quot;90&quot; align=&quot;left&quot; style=&quot;margin-right: 15px;&quot;&gt;
-
-  &lt;p align=&quot;left&quot; style=&quot;color: #ffffff; font-family: monospace; margin: 0;&quot;&gt;
-    &lt;i&gt;“hey, traveler. why don&#x27;t you come by my store?”&lt;/i&gt;
-    &lt;br&gt;&lt;br&gt;
-    access the &lt;b&gt;&lt;a href=&quot;https://wolffsroom.github.io/deltarunevita/&quot; style=&quot;color: #ffff00;&quot;&gt;seam&#x27;s patcher&lt;/a&gt;&lt;/b&gt;.
-  &lt;/p&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;/div&gt;
-
----
-
-## bug reports and diagnostics
-
-if you encounter a problem, please open a ticket on the issues page:
-
-https://github.com/wolffsroom/deltarunevita/issues
-
-please include:
-
-```text
-ux0:data/deltarune/deltarunevita/butterscotch-probe.log
-```
-
-and, when relevant:
-
-- chapter and room.
-- selected language.
-- renderer.
-- texture-compression mode.
-- fps limit.
-- screenshot/video of visual problems.
-- generated `psp2dmp` crash dump when available.
-
-_if dev mode is enabled, also include the corresponding diagnostic information from the affected room._
-
-&lt;br&gt;
-&lt;br&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img
-    src=&quot;https://64.media.tumblr.com/11f239f44bcc3b8af69ffedcbecb6de7/82ced20cf431ed05-a6/s400x600/09ab87617467a58934d94d01618c319eed289fea.gif&quot;
-    alt=&quot;spam spam cook sticker&quot;
-    width=&quot;200&quot;
-  /&gt;
-&lt;/p&gt;
-
-&lt;h2 align=&quot;center&quot;&gt;acknowledgments and credits&lt;/h2&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;strong&gt;deltarune vita&lt;/strong&gt; is an unofficial port developed by
-  &lt;strong&gt;wolff&lt;/strong&gt;, using the
-  &lt;a href=&quot;https://github.com/butterscotchrunner/butterscotch&quot;&gt;butterscotch&lt;/a&gt;
-  engine, vitagl, vitasdk, and other native ps vita graphics libraries.
-&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-  special thanks to all butterscotch developers, the ps vita homebrew
-  community, the translation teams, and everyone who submitted detailed
-  bug reports, logs, and gameplay videos during testing.
-&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-  and, of course, a huge thank-you to
-  &lt;strong&gt;toby fox and the deltarune team&lt;/strong&gt;
-  for creating this incredible game.
-&lt;/p&gt;">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-deltarune-vita/icon0.png" alt="Icono de Deltarune Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · WolffsRoom/DeltaruneVita</div>
-                      <h2><a href="https://github.com/WolffsRoom/DeltaruneVita/releases/tag/v0.81" target="_blank" rel="noopener">Deltarune Vita</a></h2>
-                      <div class="release-name">Deltarune Vita v0.81</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.81</span>
-                    <span>2026-11-08 19:54 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.0.69</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.0.69 → release v0.81</div>
-                  
-                  <div class="body markdown-body"><p>
-  <img src="https://email-files.fangamer.com/list_48/campaign_18/colorOutline_3x-cyOHKzSGkQUTJpvN.gif" alt="Deltarune Party" width="200"><br>
-  
-    
-    
-    <img src="https://github.com/user-attachments/assets/9bd2ad85-1660-4443-8677-d107365e1cb9" alt="Deltarune PS Vita Edition" width="500">
-  <br>
-  
-    
-    
-    <img src="https://github.com/user-attachments/assets/ee8a4380-5f5f-4143-8d06-acded31d411c" alt="Release Subtitle" width="300">
-  
-</p>
-
-<p>Hey everyone! <strong>Wolff here again!</strong></p>
-<p>After months of development, countless experiments, internal builds, performance testing, GPU crashes, shader tweaks, and more debug logs than I'd like to admit, <strong>DELTARUNE for PS Vita v0.81</strong> is finally here!</p>
-<p>This release brings together everything I've been working on since the public <strong>v0.73</strong> release, marking another major step forward for the project.</p>
-<p>While <strong>v0.80</strong> laid the technical groundwork with the introduction of <strong>native GXM rendering, a redesigned texture pipeline, and significant memory management improvements</strong>, <strong>v0.81</strong> shifts the focus toward refining the actual gameplay experience.</p>
-<p>The goal? <strong>Smoother performance, more consistent frame pacing, native C optimizations tailored to real PS Vita hardware, animated borders, enhanced shaders, and fixes for some of the most troublesome bottlenecks across all five chapters.</strong></p>
-<p>There's still work to be done, but this update represents a huge step toward making DELTARUNE feel right at home on the PS Vita.</p>
-<blockquote>
-<p>[!IMPORTANT]
-The PS Vita VPK does <strong>not</strong> include the full official DELTARUNE game. You must provide your own legally obtained game data.</p>
-<p>Always back up your save files (<code>ux0:data/deltarune_saves/</code>) before updating.</p>
-</blockquote>
-<h3>Deltarune for PS Vita (Unofficial Fan Port) - Announcement Trailer</h3>
-<p>
-
-<a target="_blank" rel="noopener noreferrer" href="https://youtu.be/uT4ApEyrvQM">
-  <img src="https://github.com/user-attachments/assets/d56c1863-434e-49b4-8ca3-d1d6dc55e0f8" width="85%" alt="DELTARUNE Vita v0.73 Update Trailer">
-</a>
-<br>
-
-<a target="_blank" rel="noopener noreferrer" href="https://youtu.be/-ryE5zShYhU">
-  <img src="https://img.shields.io/badge/YouTube-Watch%20Update%20Trailer-FF0000?style=for-the-badge&amp;logo=youtube&amp;logoColor=white" alt="Watch the v0.73 update trailer on YouTube">
-</a>
-
-
-</p>
-
-<p>
-  <img src="https://deltarune.wiki/images/Crowd_overworld.gif?cb=o680kx&amp;h=thumb.php&amp;f=Crowd_overworld.gif" alt="Crow" width="300">
-</p>
-
-<hr>
-<h2>Release Highlights</h2>
-<p>The main changes since v0.73 include improvements, bug fixes, and general optimizations.</p>
-<h3>VitaGL and VitaGXM: Two Graphics APIs</h3>
-<p>Previously, I had been working on gradually replacing VitaGL with a native GXM (<code>libgxm</code>) implementation. However, after extensive experimentation with VitaGXM, I decided to give VitaGL another chance.</p>
-<p>Improvements made to Butterscotch (my local fork), together with what I learned from the native GXM implementation, allowed me to fix many of the original reasons for switching APIs, including GPU crashes, Vita freezes, and some RAM leaks. Occasional crashes may still happen, and I'm continuing to work on them.</p>
-<p><strong>VitaGXM has not been discontinued.</strong> DELTARUNE for PS Vita still supports both graphics APIs, and you can choose which one to use:</p>
-<ul>
-<li><strong>VitaGXM</strong><ul>
-<li>Renderer: One native rendering mode, with no additional variants.</li>
-</ul>
-</li>
-<li><strong>VitaGL</strong><ul>
-<li><strong>Legacy:</strong> No shader support. More stable, but potentially less optimized due to higher CPU usage.</li>
-<li><strong>Modern-GL:</strong> Lower CPU usage and proper shader support, but may experience GPU crashes.</li>
-<li><strong>Experimental-GL:</strong> A hybrid of Legacy and Modern-GL, designed to preserve Legacy's stability while providing the shader support required by certain chapters and areas.</li>
-</ul>
-</li>
-</ul>
-<p>The work on <code>libgxm</code> also helped resolve other issues, such as enemy dialogue text being cut off at the bottom of the screen. For now, I've paused further GXM development to focus on polishing and finalizing VitaGL, especially because shaders remain essential to parts of the game.</p>
-<h3>Recommended Graphics Settings</h3>
-<p><strong>These are my recommended settings for the current release.</strong></p>
-<table>
-<thead>
-<tr>
-  <th>Setting</th>
-  <th>Recommended value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Texture Compression</td>
-  <td>Optimized</td>
-</tr>
-<tr>
-  <td>FPS Limit</td>
-  <td>30 FPS</td>
-</tr>
-<tr>
-  <td>Screen Filter</td>
-  <td>None (although I recommend trying the new CRT filter :D)</td>
-</tr>
-<tr>
-  <td>Shaders</td>
-  <td>On</td>
-</tr>
-<tr>
-  <td>Graphics API</td>
-  <td>VitaGL</td>
-</tr>
-</tbody>
-</table>
-<p><strong>P.S.</strong> You can select <strong>Aggressive</strong> texture compression for some extra FPS at the cost of occasional slightly incorrect pixel colors (nothing too serious).</p>
-<hr>
-<h3>Animated Borders!</h3>
-<p>This update introduces <strong>Animated Borders</strong>, a PS Vita-exclusive mod that brings dynamic, animated backgrounds to the game's borders!</p>
-<p>Here are three examples of the new animated borders:</p>
-<table>
-<thead>
-<tr>
-  <th>Castle Town</th>
-  <th>Sunset Town</th>
-  <th>Castle Café</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><img src="https://github.com/user-attachments/assets/150f90da-d95b-4817-b7f2-a8e8f9930d6b" alt="border_dw_castletown" width="300"></td>
-  <td><img src="https://github.com/user-attachments/assets/30a101b0-cb3a-4a48-8e9c-56087b7ec02c" alt="border_lw_town_sunset" width="300"></td>
-  <td><img src="https://github.com/user-attachments/assets/6fb9c0e4-c410-4b73-b020-8d738bfc3e43" alt="border_dw_castle_cafe" width="300"></td>
-</tr>
-</tbody>
-</table>
-<p>Animated borders have minimal processing and VRAM overhead (<strong>less than 768 KiB</strong>). In more demanding rooms, an animation or frame may be temporarily paused rather than competing with the game's rendering resources.</p>
-<hr>
-<h3>Enhanced CRT Effect!</h3>
-<p>Inspired by <a target="_blank" rel="noopener noreferrer" href="https://gamebanana.com/mods/733383">this GameBanana mod</a>, a new shader-based CRT filter now works across all chapters.</p>
-<p>The previous basic screen filters have been replaced with a new collection of enhanced visual effects, ranging from subtle improvements to authentic retro CRT aesthetics.</p>
-<h3>Original (Reference)</h3>
-<p>
-  <strong>No Filter</strong><br>
-  <img src="https://github.com/user-attachments/assets/7e734388-0273-4e21-a319-5fd6ec3b7011" alt="No Filter" width="300"><br>
-  Original DELTARUNE visuals without additional processing.
-</p>
-
-<h3>CRT Filters</h3>
-<p>
-  <strong>Soft CRT</strong>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <strong>ㅤㅤㅤㅤㅤㅤㅤㅤMedium CRT</strong>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <strong>ㅤㅤㅤㅤㅤㅤㅤㅤAggressive CRT</strong>
-  <br>
-  <img src="https://github.com/user-attachments/assets/6a20698f-cbc4-4916-953e-94ff31008c55" alt="Soft CRT" width="250">
-  <img src="https://github.com/user-attachments/assets/6add48af-fd3e-4099-879c-3ef15f6aa7c3" alt="Medium CRT" width="250">
-  <img src="https://github.com/user-attachments/assets/b7b8ae62-bcb2-4b76-ae87-24023c9e6b67" alt="Aggressive CRT" width="250">
-  <br>
-  Subtle scanlines and gentle CRT effects.
-  &nbsp;&nbsp;
-  Enhanced contrast and stronger scanlines.
-  &nbsp;&nbsp;
-  Full retro CRT look with stronger analog-style effects.
-</p>
-
-<h3>Additional Display Filters</h3>
-<p>
-  <strong>Sharp Bilinear</strong>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <strong>ㅤㅤㅤㅤㅤㅤㅤㅤDithering Blending</strong>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <strong>ㅤㅤㅤㅤㅤㅤㅤㅤVHS (Scanlines)</strong>
-  <br>
-  <img src="https://github.com/user-attachments/assets/0b5bc3c2-3537-41cb-aed0-3a083480aab8" alt="Sharp Bilinear" width="250">
-  <img src="https://github.com/user-attachments/assets/9f5940b5-1a75-4d59-bf45-0a35e3c460f5" alt="Dithering Blending" width="250">
-  <img src="https://github.com/user-attachments/assets/03f70b7b-9b6a-48bd-bef9-815bf835d204" alt="VHS Scanlines" width="250">
-  <br>
-  Smoother scaling while preserving pixel-art sharpness.
-  &nbsp;&nbsp;
-  Softer color transitions and blended dithering patterns.
-  &nbsp;&nbsp;
-  Classic analog video aesthetics with VHS-inspired scanlines.
-</p>
-
-<blockquote>
-<p>[!TIP]
-For the most authentic retro experience, try <strong>Medium CRT</strong> or <strong>Aggressive CRT</strong>.</p>
-</blockquote>
-<hr>
-<h3>New Features!</h3>
-<ul>
-<li>Added mouse simulation for <strong>Mike's Room in Chapter 4</strong>, using the right analog stick or the front touchscreen. It turned out pretty cool!</li>
-<li>Added microphone support for Mike's Room. If your microphone doesn't work (or you simply don't want to use it) tapping the screen will simulate sound input.</li>
-<li>Added a Chapter 4-specific <strong>mouse sensitivity</strong> setting in Game Settings.</li>
-</ul>
-<h3>A Mysterious Prologue...</h3>
-<p>For first-time players, the opening video now leads to a place that may seem... familiar.</p>
-<p>
-  <img src="https://github.com/user-attachments/assets/e161a036-830b-49a2-93bd-d0f09111cb8d" alt="Mysterious Prologue" width="400">
-</p>
-
-<p>The goal is to create a more immersive introduction while displaying notices about optional plugins (<a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/NoTrpDrm">NoTrpDrm</a> and <a target="_blank" rel="noopener noreferrer" href="https://github.com/GrapheneCt/CapUnlocker">CapUnlocker</a>). This screen also displays the available language options based on the installed languages.</p>
-<hr>
-<h3>And More...</h3>
-<ul>
-<li>Improved loading times with VitaGL.</li>
-<li>Faster chapter loading.</li>
-<li>General optimizations.</li>
-</ul>
-<hr>
-<h2>1. Improvements by Category</h2>
-<h3>Performance, VSync, and Frame Pacing</h3>
-<ul>
-<li><strong>30 FPS Frame Pacer Fix:</strong> Fixed a critical <em>double-advance</em> bug that doubled frame deadlines and caused kernel waits of up to 55 ms. This restores smooth, consistent 30 FPS gameplay in town and throughout the game.</li>
-<li><strong>Hardware VSync at 30 FPS:</strong> The 30 FPS mode is now synchronized directly to the hardware display's VBlank signal (presenting one frame every two refreshes of the 60 Hz screen), reducing frame-time fluctuations and microstutter.</li>
-<li><strong>Native C Implementations:</strong><ul>
-<li><code>obj_plat_floortex_FLOOR</code> and <code>AlignBottom1TILE</code>: Prebaked ground and grass surfaces rendered directly in C, saving approximately 33 ms per frame of GML processing in climbing and castle areas.</li>
-<li><code>obj_plat_vertical_floor_grass_strip</code>: Native surface caching for vertical grass strips.</li>
-<li><code>obj_parallax_cliffs_moving_layers</code> and <code>obj_parallax_cliffs_sunlayer</code>: C-based drawing and sunlight caching, saving 15–20 ms in the cliffs.</li>
-<li><code>obj_blue_platform</code>: Drawing logic moved to C while preserving the original physics and collision behavior.</li>
-</ul>
-</li>
-<li><strong>Reduced Room-Transition Freezes:</strong> VitaGL texture cleanup and garbage collection (<code>glFinish()</code> and <code>vglForceGarbageCollection()</code>) are now handled together in a single batch, reducing Garden room transitions from 2.4 seconds to just a few milliseconds.</li>
-<li><strong>Camera-Based Culling:</strong><ul>
-<li>Temporarily hides sliding doors outside the camera view (<code>obj_plat_fusuma_mask</code>).</li>
-<li>Applies frustum culling to background trees in the Garden (<code>obj_blocktree_bg</code>).
-<em>Similar optimizations may be implemented in other areas in future updates.</em></li>
-</ul>
-</li>
-</ul>
-<h3>Graphics, Shaders, and Visuals</h3>
-<ul>
-<li><strong>Diagonal Petal Transition (<code>shd_petalcut</code>):</strong> Implemented the proper diagonal wipe that reveals the pink Garden from a dark scene in Chapter 5, accompanied by a dense diagonal curtain of 96 petal particles (<code>pt_petal_whirl</code>).</li>
-<li><strong>Batch Flush Before Blend Mode Changes:</strong> The draw queue is now flushed before changing blend modes (<code>vitaQuadBatchFlush</code>), preventing visual artifacts and unwanted outlines in composited elements.</li>
-</ul>
-<h3>Dynamic and Animated Borders</h3>
-<ul>
-<li><strong>Seamless Feathering:</strong> The full static background border now blends into the animated side strips (<code>frames_side.bani</code>) using a smooth 24-pixel linear transparency gradient, removing harsh seams between static and moving artwork.</li>
-<li><strong>Low-Memory Mode:</strong> Visible side-border streaming uses less than <strong>768 KiB of VRAM</strong> in total, helping keep animations active even when Chapter 5 places heavy demands on memory.</li>
-</ul>
-<h3>Audio and Video</h3>
-<ul>
-<li><strong>Music Recovery:</strong> Music volume is preserved after loading save files and exiting battles.</li>
-<li><strong>Stream and Pitch Management:</strong> Generational audio IDs prevent channels from being reused incorrectly, and pitch adjustments (<code>snd_pitch</code>) are now handled properly.</li>
-</ul>
-<h3>Controls and Debug Tools</h3>
-<ul>
-<li><strong>Mike's Controls (Chapter 4):</strong> Added customizable mouse sensitivity (20%–200%) and pointer controls using the right analog stick or front touchscreen, while preserving Kris's normal movement with the D-pad.</li>
-</ul>
-<p>
-  <img src="https://github.com/user-attachments/assets/0b6e7ba4-325b-4574-b81a-9dee4fedaa80" alt="Mike's Controls" width="400">
-</p>
-
-<ul>
-<li><strong>DEBUG / DEVMODE Improvements:</strong> Several developer tools have been redesigned and refined to make debugging, testing, and navigating the game easier:<ul>
-<li><strong>Game Settings:</strong> Redesigned the interface, with improved layouts and accessibility for DEV-exclusive options.</li>
-<li><strong>Room Navigator:</strong> Improved the interface and navigation controls, allowing faster room switching and more efficient testing.</li>
-<li><strong>Collision and Object Mapping:</strong> Enhanced the debugging overlay to better visualize collision boundaries, identify in-game objects, and investigate missing textures.</li>
-<li><strong>Screen Adjustment:</strong> Refined the interface for easier display positioning and alignment.</li>
-</ul>
-</li>
-</ul>
-<p>
-  <strong>Room Navigator     ㅤ</strong>
-  &emsp;&emsp;&emsp;
-  <strong>Collision e Object Mapping     ㅤ</strong>
-  &emsp;&emsp;
-  <strong>Screen Adjustment</strong>
-  <br>
-  <img src="https://github.com/user-attachments/assets/e3f0c074-f5a9-4230-ab75-fdbcff2aea9d" alt="Room Navigator" width="260">
-  <img src="https://github.com/user-attachments/assets/31490024-ce2d-44d5-9e94-aecc2035a8d2" alt="Collision and Object Mapping" width="260">
-  <img src="https://github.com/user-attachments/assets/3496eb99-8d74-4eab-98e5-8c85cea27f7b" alt="Screen Adjustment" width="260">
-</p>
-
-<hr>
-<h2>2. Fixes by Chapter</h2>
-<h3>Chapter 2</h3>
-<ul>
-<li>Improved protection against disappearing mice in Noelle's puzzle and the tower puzzle (<a target="_blank" rel="noopener noreferrer" href="https://github.com/ButterscotchRunner/Butterscotch/pull/556">Butterscotch PR #556</a>). The previous workaround remains available if needed, helping prevent softlocks.</li>
-<li>Fixed alpha testing and added fog support for compatible renderers.</li>
-</ul>
-<h3>Chapter 3</h3>
-<ul>
-<li>Prevented freezes during Tenna's cutscene through native execution of <code>scr_chromakey</code> and a five-second freeze watchdog.</li>
-<li>Added native C rendering for the wavy background of the post-chapter menu (<code>DEVICE_MENU</code>), eliminating hundreds of repeated draw calls per frame.</li>
-</ul>
-<h3>Chapter 4</h3>
-<ul>
-<li>Fixed the climbing lockup in the church towers (<code>global.flag[23]</code>).</li>
-<li>Fixed direct rendering of enemies in battle without creating unnecessary individual surfaces (<code>obj_darkshape</code>).</li>
-<li>Implemented native C processing for foreground tiles in the Titan's tower (<code>room_dw_churchc_titanclimb1_tiled</code>).</li>
-<li>Improved the School-to-Castle Town transition with optimized border cleanup.</li>
-</ul>
-<h3>Chapter 5</h3>
-<ul>
-<li><strong>Fixed Duplicate TP Bar:</strong> Resolved a visual glitch in Chapter 5 where two TP bars could appear simultaneously during the Floradinn encounter (<code>room_dw_garden_floradinnencounter</code>). Improved battle-state detection and surface cleanup to prevent leftover Garden UI elements from overlapping the battle interface.</li>
-</ul>
-<p>
-  <strong>Before                  </strong>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  <strong>After</strong>
-  <br>
-  <img src="https://github.com/user-attachments/assets/f82cb32f-f287-4938-9ff8-42bf1e9d6d14" alt="Before - Duplicate TP Bar" width="400">
-  <img src="https://github.com/user-attachments/assets/5dc56f38-5810-4837-9171-51c9d20df142" alt="After - Fixed TP Bar" width="400">
-</p>
-
-<ul>
-<li><strong>Complete Petal Transition:</strong> Restored the proper diagonal scene wipe (<code>shd_petalcut</code>) with a curtain of 96 pink petal particles.</li>
-<li><strong>Reduced Stuttering:</strong> Faster transitions between Garden areas (<code>room_dw_garden_*</code>) without synchronous GPU stalls.</li>
-<li><strong>Native C Processing in the Cliffs and Castle:</strong> Ground and grass (<code>floortex</code>), moving cliff layers (<code>moving_layers</code>), sunlight (<code>sunlayer</code>), and blue platforms now run through compiled native code.</li>
-<li><strong>Textures Kept in VRAM:</strong> Protected Krákrá's attacks (tongues and multiple projectiles), Kris, and floor textures against premature video-memory deallocation, preventing invisible elements.</li>
-<li><strong>PS4 Button Glyphs:</strong> Krákrá battle prompts now display the correct PlayStation-style button icons.</li>
-<li><strong>Border Fixes:</strong> Corrected the nighttime border in <code>room_town_mid</code> and removed the unwanted border in the flower shop.</li>
-<li><strong>Restored the tower visuals during the final battle</strong>, fixing the broken or incomplete background rendering and bringing the scene back to its intended appearance.</li>
-</ul>
-<p>
-  <strong>Before</strong>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  <strong>After</strong>
-  <br>
-  <img src="https://github.com/user-attachments/assets/653e7adb-f4ba-4220-8291-dc922acf35b8" alt="Before - Final Battle Tower" width="400">
-  <img src="https://github.com/user-attachments/assets/f915a01f-d509-42ea-8553-99854aabdd78" alt="After - Final Battle Tower Restored" width="400">
-</p>
-
-<hr>
-<h3>Other Fixes and Improvements</h3>
-<ul>
-<li>Fixed a missing pixel row at the bottom of enemy dialogue boxes during battles.</li>
-</ul>
-<p>
-  <img src="https://github.com/user-attachments/assets/078d2b5d-9d09-4ad5-92cf-18f5e8729870" alt="Fixed Enemy Dialogue Rendering" width="400">
-</p>
-
-<ul>
-<li>Added smooth fade-to-black transitions for school doors and menus.</li>
-<li><strong>Font Rendering:</strong> Improved subpixel alignment and rendering of accented characters in Portuguese and other languages, resulting in sharper text.</li>
-<li><strong>Background Music:</strong> Improved soundtrack recovery after loading save files.</li>
-<li><strong>Stable 30 FPS and Hardware VSync:</strong> Fixed the critical frame-pacer delay that could drop gameplay to 15 FPS. Frame presentation now targets a consistent <strong>33.333 ms</strong> cadence synchronized with the PS Vita's 60 Hz screen.</li>
-<li><strong>Native C Fast Paths (Chapters 4 and 5):</strong> Replaced expensive GML interpreter operations with native C routines for drawing floors, grass, platforms, cliff layers, and tower elements, saving up to 35 ms per frame.</li>
-</ul>
-<hr>
-<h2>Build Information and Installation</h2>
-  <img src="https://img.wattpad.com/4524e6cf2f39817f918f16b1a8d0867bec19b60a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f623973523677674b6f3241374e513d3d2d3935302e313536363463366537356135303139633235353836393635373938362e676966" alt="Kris" width="200" align="left">
-
-<ul>
-<li><strong>VPK File:</strong> <code>Deltarune-v0.81-11.vpk</code></li>
-<li><strong>Title ID:</strong> <code>DELT00001</code></li>
-<li><strong>VPK SHA-256:</strong><pre><code class="language-text">7ff182a70b266abb5ea745171c5faaba440a25cad05847d693cb800956ca1a1e
-</code></pre>
-</li>
-</ul>
-<h3>How to Update</h3>
-<ol>
-<li>Install <code>Deltarune-v0.81-11.vpk</code> using your preferred file manager (VitaShell, FMVita, or File Manager).</li>
-<li>If you use the Animated Borders mod, make sure the <code>.bani</code> packages are up to date in <code>ux0:data/deltarune/deltarunevita/mods/bordersanim/</code>.</li>
-<li>Launch the game as usual. Your saves and settings will be preserved.</li>
-</ol>
-<blockquote>
-<p>[!NOTE]
-<strong>v0.81 does not require updated game data files.</strong> However, the patcher has been updated to include the animated border assets and the updated Brazilian Portuguese translation of Chapter 5 by <a target="_blank" rel="noopener noreferrer" href="https://github.com/teiarruma/deltarune-ptbr">Teiarruma</a>.</p>
-</blockquote>
-<p>If you'd like to get just the animated border files, you can download them separately here:</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/11W7fCJN8WxkmlahuEhHD65BnQsp0NhIn/view?usp=sharing">Download Animated Borders</a></p>
-<hr>
-<h2>Installation Guide</h2>
-<p>For full setup steps, please refer to the <a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita#installation-guide">Installation Guide</a>.</p>
-<div align="left">
-
-<table>
-<tbody><tr>
-<td>
-
-  <img src="https://static.wikia.nocookie.net/delta-rune/images/a/ac/Seam_Face.png/revision/latest/thumbnail/width/360/height/360?cb=20190722005950&amp;path-prefix=es" alt="Seam" width="90" align="left">
-
-  <p>
-    <i>“Hey, traveler. Why don't you come by my store?”</i>
-    <br><br>
-    Access the <b><a target="_blank" rel="noopener noreferrer" href="https://wolffsroom.github.io/DeltaruneVita/">Seam's Patcher</a></b>.
-  </p>
-
-</td>
-</tr>
-</tbody></table>
-
-</div>
-
-<hr>
-<h2>Bug reports and diagnostics</h2>
-<p>If you encounter a problem, please open a ticket on the Issues page:</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/WolffsRoom/DeltaruneVita/issues">https://github.com/WolffsRoom/DeltaruneVita/issues</a></p>
-<p>Please include:</p>
-<pre><code class="language-text">ux0:data/deltarune/deltarunevita/butterscotch-probe.log
-</code></pre>
-<p>and, when relevant:</p>
-<ul>
-<li>Chapter and Room.</li>
-<li>Selected language.</li>
-<li>Renderer.</li>
-<li>Texture-compression mode.</li>
-<li>FPS limit.</li>
-<li>Screenshot/video of visual problems.</li>
-<li>Generated <code>psp2dmp</code> crash dump when available.</li>
-</ul>
-<p><em>If Dev Mode is enabled, also include the corresponding diagnostic information from the affected Room.</em></p>
-<br>
-<br>
-
-<p>
-  <img src="https://64.media.tumblr.com/11f239f44bcc3b8af69ffedcbecb6de7/82ced20cf431ed05-a6/s400x600/09ab87617467a58934d94d01618c319eed289fea.gif" alt="Spam Spam Cook Sticker" width="200">
-</p>
-
-<h2>Acknowledgments and Credits</h2>
-
-<p>
-  <strong>DELTARUNE VITA</strong> is an unofficial port developed by
-  <strong>Wolff</strong>, using the
-  <a target="_blank" rel="noopener noreferrer" href="https://github.com/ButterscotchRunner/Butterscotch">Butterscotch</a>
-  engine, VitaGL, VitaSDK, and other native PS Vita graphics libraries.
-</p>
-
-<p>
-  Special thanks to all Butterscotch developers, the PS Vita homebrew
-  community, the translation teams, and everyone who submitted detailed
-  bug reports, logs, and gameplay videos during testing.
-</p>
-
-<p>
-  And, of course, a huge thank-you to
-  <strong>Toby Fox and the DELTARUNE team</strong>
-  for creating this incredible game.
-</p>
-
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.81/Deltarune-v0.81.vpk" target="_blank" rel="noopener">⬇ Deltarune-v0.81.vpk · 9.7 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.81/Deltarune.Vita.Patcher.v0.81.32bits.zip" target="_blank" rel="noopener">Deltarune.Vita.Patcher.v0.81.32bits.zip · 214.7 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.81/Deltarune.Vita.Patcher.v0.81.64bits.zip" target="_blank" rel="noopener">Deltarune.Vita.Patcher.v0.81.64bits.zip · 229.3 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.81/Seam.s.Patcher.v0.81.32bits.zip" target="_blank" rel="noopener">Seam.s.Patcher.v0.81.32bits.zip · 209.8 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.81/Seam.s.Patcher.v0.81.64bits.zip" target="_blank" rel="noopener">Seam.s.Patcher.v0.81.64bits.zip · 210.8 MB</a></div>
                 </div>
               </div>
             </article>
@@ -31386,7 +30697,7 @@ this was just a quick project for something to do.. its not great and i wouldnt 
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-11 03:57 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-11 13:19 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
