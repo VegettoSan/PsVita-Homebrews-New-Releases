@@ -1,6 +1,110 @@
 [
   {
     "platform": "github",
+    "repo": "Rinnegatamante/colosseum-vita",
+    "release_id": "443457894",
+    "tag": "v.1.1",
+    "name": "v.1.1",
+    "url": "https://github.com/Rinnegatamante/colosseum-vita/releases/tag/v.1.1",
+    "published": "2026-11-12T20:26:01Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Added experimental PAL languages (Italian, French, German, Spanish) support.\r\n- Fixed a bug causing black screens after entering certain rooms in the game.\r\n- Added several more new shaders in the built-in cache: this will make pop-in issues more rare.\r\n- Fixed a memleak that caused, after a certain amount of time, performance losses first and crashes further in.\r\n- Fixed a few rooms causing crashes when attempting to enter them.\r\n- Added a check on boot for CapUnlocker installation to prevent game booting without it.",
+    "assets": [
+      {
+        "name": "PokemonColosseum.vpk",
+        "size": 5100366,
+        "download_url": "https://github.com/Rinnegatamante/colosseum-vita/releases/download/v.1.1/PokemonColosseum.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "setup.zip",
+        "size": 24244577,
+        "download_url": "https://github.com/Rinnegatamante/colosseum-vita/releases/download/v.1.1/setup.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "Rinnegatamante",
+    "homebrew_name": "Pokemon Colosseum",
+    "homebrew_icon": "https://archive.org/download/pokemon-colosseum-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
+    "homebrew_long_description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
+    "homebrew_id": "pokemon-colosseum",
+    "homebrew_authors": [
+      "rinnegatamante"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "pokemon-colosseum",
+        "name": "Pokemon Colosseum",
+        "icon": "https://archive.org/download/pokemon-colosseum-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
+        "long_description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
+        "version": "1.0",
+        "version_date": "2026-11-06",
+        "author_ids": [
+          "rinnegatamante"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0 → release v.1.1",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "germanalvarez15/nfsmw-vita",
+    "release_id": "443236241",
+    "tag": "1.6.0",
+    "name": "1.6.0",
+    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.0",
+    "published": "2026-11-12T16:45:42Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## NFS Most Wanted Vita 1.6.0\r\n\r\nThis release brings **Multiplayer** (Online, LAN, Ad Hoc, and Split Screen) together with major optional **Graphics upgrades**, localized video menus, and bug fixes since 1.5.2.\r\n\r\n---\r\n\r\n### New: Graphics Options (`Options > Video`)\r\nThe video menu is now split across two pages (**More Options**) and translated into all 10 supported European languages. Most effects can be toggled on the fly so you can choose between higher visual quality or keeping FPS up:\r\n\r\n- **Car Shadows** (*On* / *Off*, default *On*): adds projected shadows underneath cars.\r\n- **Skid Marks** (*On* / *Off*, default *On*): tire skid marks on the road.\r\n- **Car Paint** (*Shader* / *Classic*, default *Shader*): metallic dual-lobe + clearcoat car paint shading.\r\n- **Anti-Aliasing** (*Off* / *2x* / *4x*, default *Off*, requires restart): MSAA via vitaGL. *(Note: when **MW Color Filter** or **Speed Blur** is enabled, the scene draws to an intermediate framebuffer where MSAA may not apply.)*\r\n- **Texture Filter** (*Bilinear* / *Mipmaps*, default *Bilinear*): trilinear mipmap filtering to reduce distance shimmer/aliasing on roads, fences, and buildings.\r\n- **Level of Detail** (*Normal* / *High*, default *Normal*): keeps higher-detail car and world models visible from further away.\r\n- **Car Reflections** now includes **Dynamic HQ** (renders dynamic reflection maps at twice the resolution).\r\n- **Sun Flare & Particle Fixes:** the sun now renders as a lens flare properly occluded by geometry, water spray/smoke particles no longer appear overly bright, and skybox texture seams/white flickering bars have been fixed ([#131](https://github.com/germanalvarez15/nfsmw-vita/issues/131)).\r\n\r\n---\r\n\r\n### New: Multiplayer\r\nMain menu > **Multiplayer** (after Quick Race) now includes **Online**, **LAN**, **Ad Hoc**, and **Split Screen** (moved here from Quick Race).\r\n- Two players, circuit and sprint races (no traffic, cops, or AI racers for now).\r\n- **Create Game:** wait for the other player, then choose the race, options, and your car.\r\n- **Join Game:** choose your car, and the host's race loads automatically.\r\n- After each race, the host chooses **Continue** (another race) or **Leave Room** (ends the session and returns the guest to the menu).\r\n- Both players must be on the same version.\r\n\r\n**Why Online works this way**\r\nThe [survey](https://github.com/germanalvarez15/nfsmw-vita/discussions/113) showed strong interest in online, LAN, and ad hoc modes, with no interest in hosting dedicated servers. Each PS Vita acts as the host: one player opens a room and shares a code, and when the session ends, the server closes.\r\n\r\n**Online** *(over the Internet, no dedicated servers)*\r\n- **Create Game** asks your router to open UDP port `7777` (UPnP) and generates a 16-letter room code. Share it only with people you trust, as the code contains your public IP address.\r\n- If your router does not support UPnP, forward UDP port `7777` to your PS Vita manually.\r\n- Online hosting cannot work if your ISP places you behind CGNAT (a shared public address); the game will warn you if detected.\r\n\r\n**LAN:** two consoles on the same Wi-Fi network; **Join Game** finds the host automatically.\r\n\r\n**Ad Hoc:** Sony's console-to-console ad hoc mode (no router needed).\r\n\r\n**Improvements since 1.6.0-beta1 / beta2:**\r\n- The other player now appears on the minimap.\r\n- Reduced perceived lag via measured ping and improved position sync.\r\n- Restored alpha masks for frontend radar and track maps.\r\n- Fixed a soft lock when cancelling the system keyboard or ad hoc network dialog in the Multiplayer menu.\r\n- Known limit: if the other player disconnects mid-race, you finish the race alone.\r\n\r\n---\r\n\r\n### Fixes\r\n- Fixed a crash when loading a save ([#142](https://github.com/germanalvarez15/nfsmw-vita/issues/142)).\r\n- Fixed a crash during the Ming race intro ([#144](https://github.com/germanalvarez15/nfsmw-vita/issues/144)).\r\n- Fixed dark squares around crash sparks ([#136](https://github.com/germanalvarez15/nfsmw-vita/issues/136)).\r\n- Updated names in the credits.\r\n\r\n### Diagnostics (Audio Silence — [#126](https://github.com/germanalvarez15/nfsmw-vita/issues/126))\r\n- Added extra diagnostic logging (`[snd] channels`, `[aems] instances`, and `[colsnd] states`) to `ux0:data/nfsmw/nfsmw.log` to help track down why skid and collision sounds can stop playing after a few minutes. If this happens to you on 1.6.0, please attach your `nfsmw.log` to issue [#126](https://github.com/germanalvarez15/nfsmw-vita/issues/126).\r\n\r\n---\r\n\r\n### Reporting problems & Updating from 1.5.2 (or 1.6.0-beta2)\r\nInstall the new `nfsmw.vpk` over the existing one. Your saves and game data stay intact.\r\n\r\nIf you run into any issues, please attach `ux0:data/nfsmw/nfsmw.log` — the log hides your full public IP address and the room code.\r\n",
+    "assets": [
+      {
+        "name": "nfsmw.vpk",
+        "size": 3294389,
+        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.0/nfsmw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "germanalvarez15",
+    "homebrew_name": "NFS Most Wanted",
+    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+    "homebrew_id": "nfs-most-wanted",
+    "homebrew_authors": [
+      "germanalvarez15"
+    ],
+    "homebrew_version": "1.5.1",
+    "catalog_apps": [
+      {
+        "id": "nfs-most-wanted",
+        "name": "NFS Most Wanted",
+        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+        "category": "ports",
+        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+        "version": "1.5.1",
+        "version_date": "2026-11-07",
+        "author_ids": [
+          "germanalvarez15"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.5.1 → release 1.6.0",
+    "catalog_version": "1.5.1"
+  },
+  {
+    "platform": "github",
     "repo": "ZekLab/TMNT-2003-PSVita-Port",
     "release_id": "442826668",
     "tag": "v0.5",
@@ -383,55 +487,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 0.81 → release v0.84",
     "catalog_version": "0.81"
-  },
-  {
-    "platform": "github",
-    "repo": "germanalvarez15/nfsmw-vita",
-    "release_id": "440884279",
-    "tag": "1.6.0-beta2",
-    "name": "1.6.0-beta2",
-    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.0-beta2",
-    "published": "2026-11-10T20:39:05Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "## NFS Most Wanted Vita 1.6.0-beta2\n\n> **This is a beta.** It brings multiplayer for the first time, and so far it has only been tested on my own consoles. Expect bugs. If you'd rather play the stable version, stay on 1.5.2. Both players need this same version.\n\n### Changes since beta1\n- The other player now shows on the minimap.\n- Less lag: the other player's car is drawn where it really is. Before, the game assumed a LAN delay, so online and in ad hoc the car showed up behind.\n- The Multiplayer menu no longer gets stuck when you cancel the keyboard or the ad hoc network dialog.\n- Beta1 and beta2 can't play together: both players need beta2.\n\n### Fixes\n- Fixed a crash when loading a save ([#142](https://github.com/germanalvarez15/nfsmw-vita/issues/142)).\n- Fixed a crash during the Ming race intro ([#144](https://github.com/germanalvarez15/nfsmw-vita/issues/144)).\n- No more dark squares around crash sparks ([#136](https://github.com/germanalvarez15/nfsmw-vita/issues/136)).\n- Updated names in the credits.\n\n### Why online works this way\nThe [survey](https://github.com/germanalvarez15/nfsmw-vita/discussions/113) showed interest in online, LAN and ad hoc modes. For online, though, nobody showed interest in hosting a server. What I took from that is that people want online, but nobody is going to keep a server running. So I built an online mode where each PS Vita is the server: a player opens a game and shares it with other players, and when the game ends, the server closes. The same as in LAN and ad hoc.\n\n### New: Multiplayer\nMain menu > **Multiplayer** (after Quick Race) has four modes: Online, LAN, Ad Hoc and Split Screen (moved here from Quick Race).\n- Two players, circuit and sprint races, with no traffic, cops or AI racers for now.\n- **Create Game:** wait for the other player, then choose the race, the options and your car.\n- **Join Game:** choose your car, and the host's race loads by itself.\n- After each race the host chooses **Continue** (another race) or **Leave Room** (ends the session, and the other player goes back to the menu).\n\n**Online** (over the Internet, no servers)\n- Create Game asks your router to open UDP port 7777 (UPnP) and shows a 16-letter room code. Send it to the other player, who types it in Join Game.\n- The code is new every game and contains your Internet address, so only share it with people you trust. Players without the code can't join.\n- If your router has no UPnP, the game tells you to forward UDP port 7777 to your Vita by hand.\n- It can't work if your Internet provider puts you behind a shared address (CGNAT). The game warns you when that happens.\n- So far I've only tested it with two consoles on the same home network. Reports from two different homes are very welcome.\n\n**LAN:** two consoles on the same Wi-Fi network. Join Game finds the host by itself.\n\n**Ad Hoc:** Sony's ad hoc mode, console to console with no router. Create Game and Join Game open the system's network dialog first.\n\n**Known limits:** if the other player's connection drops during a race, you finish it alone.\n\n### Reporting problems\nPlease tell me what works and what doesn't, in an issue or in [the discussion](https://github.com/germanalvarez15/nfsmw-vita/discussions/113). If you can, attach `ux0:data/nfsmw/nfsmw.log` from both consoles. The log hides your Internet address and the room code.\n\n### Updating from 1.5.2\nInstall the VPK over the old one. Your save and game data stay as they are.\n\n",
-    "assets": [
-      {
-        "name": "nfsmw.vpk",
-        "size": 3280422,
-        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.0-beta2/nfsmw.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "germanalvarez15",
-    "homebrew_name": "NFS Most Wanted",
-    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-    "homebrew_id": "nfs-most-wanted",
-    "homebrew_authors": [
-      "germanalvarez15"
-    ],
-    "homebrew_version": "1.5.1",
-    "catalog_apps": [
-      {
-        "id": "nfs-most-wanted",
-        "name": "NFS Most Wanted",
-        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-        "category": "ports",
-        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-        "version": "1.5.1",
-        "version_date": "2026-11-07",
-        "author_ids": [
-          "germanalvarez15"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.5.1 → release 1.6.0-beta2",
-    "catalog_version": "1.5.1"
   },
   {
     "platform": "github",
@@ -2040,61 +2095,6 @@
         "version_date": "2026-11-06",
         "author_ids": [
           "ndrw"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/colosseum-vita",
-    "release_id": "436941315",
-    "tag": "v.1.0",
-    "name": "v.1.0",
-    "url": "https://github.com/Rinnegatamante/colosseum-vita/releases/tag/v.1.0",
-    "published": "2026-11-06T19:58:19Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Initial release.",
-    "assets": [
-      {
-        "name": "PokemonColosseum.vpk",
-        "size": 4903113,
-        "download_url": "https://github.com/Rinnegatamante/colosseum-vita/releases/download/v.1.0/PokemonColosseum.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "setup.zip",
-        "size": 24225454,
-        "download_url": "https://github.com/Rinnegatamante/colosseum-vita/releases/download/v.1.0/setup.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0",
-    "catalog_version": "1.0",
-    "homebrew_name": "Pokemon Colosseum",
-    "homebrew_icon": "https://archive.org/download/pokemon-colosseum-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
-    "homebrew_long_description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
-    "homebrew_id": "pokemon-colosseum",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "1.0",
-    "catalog_apps": [
-      {
-        "id": "pokemon-colosseum",
-        "name": "Pokemon Colosseum",
-        "icon": "https://archive.org/download/pokemon-colosseum-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
-        "long_description": "Port of Pokemon Colosseum for PSVita based off the decompilation of the Gamecube version.",
-        "version": "1.0",
-        "version_date": "2026-11-06",
-        "author_ids": [
-          "rinnegatamante"
         ]
       }
     ]
@@ -33142,55 +33142,6 @@
         "version_date": "2022-05-23",
         "author_ids": [
           "hatoving"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "Eyeman420/rePatch-Manager",
-    "release_id": "66870953",
-    "tag": "v1.10",
-    "name": "rePatch Manager v1.10",
-    "url": "https://github.com/Eyeman420/rePatch-Manager/releases/tag/v1.10",
-    "published": "2022-05-14T06:55:12Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Fix the random crash after enable or disable rePatch mods.",
-    "assets": [
-      {
-        "name": "rePatch.Manager.vpk",
-        "size": 3969733,
-        "download_url": "https://github.com/Eyeman420/rePatch-Manager/releases/download/v1.10/rePatch.Manager.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Eyeman420",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.10",
-    "catalog_version": "v.1.10",
-    "homebrew_name": "rePatch Manager",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-repatch-manager/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Tools to manage rePatch games",
-    "homebrew_long_description": "Tool to enable and disable specific rePatch game. Useful to enable and disable mods that using rePatch.\nTested with FW 3.60 and 3.65.",
-    "homebrew_id": "repatch-manager",
-    "homebrew_authors": [
-      "eyeman"
-    ],
-    "homebrew_version": "v.1.10",
-    "catalog_apps": [
-      {
-        "id": "repatch-manager",
-        "name": "rePatch Manager",
-        "icon": "https://archive.org/download/psvitaalive-repatch-manager/icon0.png",
-        "category": "utilities",
-        "description": "Tools to manage rePatch games",
-        "long_description": "Tool to enable and disable specific rePatch game. Useful to enable and disable mods that using rePatch.\nTested with FW 3.60 and 3.65.",
-        "version": "v.1.10",
-        "version_date": "2022-05-14",
-        "author_ids": [
-          "eyeman"
         ]
       }
     ]
