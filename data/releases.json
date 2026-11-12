@@ -1,6 +1,110 @@
 [
   {
     "platform": "github",
+    "repo": "Botarguirix/Touhou123Vita",
+    "release_id": "442330158",
+    "tag": "v0.2.0-beta",
+    "name": "Touhou123Vita beta 0.2.0 — versión final estable (proyecto en pausa)",
+    "url": "https://github.com/Botarguirix/Touhou123Vita/releases/tag/v0.2.0-beta",
+    "published": "2026-11-12T00:08:28Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "**Versión final estable (beta) de la recompilación estática. Es el último release de esta línea: el proyecto de recompilación queda en pausa (hold) y no se publicarán más versiones de ella.** El trabajo continúa como una reimplementación nativa para PS Vita escrita desde cero, que se publicará aparte cuando esté lista.\n\nFuentes: `main`, commit c523d99 (versión interna de pruebas v29). El VPK adjunto se compiló exactamente desde ese commit.\n\n## Estado\n- Probado en una PS Vita real (FW 3.65) con la configuración de esta versión: arranque, menús, selección y combates completos reproduciendo un replay. Las capturas de esta línea se tomaron sin vsync (`vsync-off.txt`).\n- Menús a 60 FPS (600 de 600 fotogramas cada 10 s).\n- En combate, la lógica del juego corre a 586–600 pasos por cada 10 s (60 FPS = 600), y se dibujan en promedio ~572 fotogramas cada 10 s (~57 FPS), con algunos tirones al empezar las peleas mientras se cargan texturas. No llega a 60 FPS estables en combate.\n- El juego en red (adhoc/Wi-Fi) está implementado pero no se ha probado entre dos Vitas.\n\n## Mejoras de todo el proyecto\n**Base (alphas 0.1.0–0.1.1)**\n- Recompilación estática del ejecutable original 1.10a (x86 → C → ARM): 6 406 funciones traducidas, sin instrucciones sin soporte en el código del juego.\n- Capas de Windows, Direct3D 9, DirectSound y DirectInput sobre vitaGL, el audio y los controles de la Vita (162 de 171 importaciones implementadas).\n- Texturas guardadas comprimidas en memoria y presupuesto de GPU con expulsión de las menos usadas; fondos grandes a media resolución.\n- Audio: mezclador propio hacia `sceAudioOut`, decodificador vorbis nativo.\n- Traducción al inglés (`th123e.dat`), soporte del plantel 10.5 (`th105a/b.dat`), texto con FreeType y Noto CJK, teclado en pantalla.\n- Correcciones de efectos, selección de personajes, memoria de GPU y pilas de hilos.\n\n**Alpha 0.1.2**\n- Mezclador de audio sin bloqueo (antes retenía al juego ~10 ms por sonido en pelea).\n- Llamadas indirectas más baratas; perfilador por muestreo en la Vita (`prof.txt`).\n\n**Esta versión (pruebas v13–v29)**\n- **El registro (trace) se escribe desde un hilo aparte.** Antes, cada línea forzaba una escritura en la tarjeta de 6–10 ms dentro del hilo del juego, y cada efecto de sonido costaba un fotograma. Fue la mejora más grande en combate.\n- **Reloj del juego con prioridad alta:** antes llegaba hasta 13 ms tarde por competir con los hilos de música.\n- **Texturas DXT5:** codificador propio. Las texturas de 32 bits de 256×256 a 1024×1024 se comprimen y se suben a la GPU desde hilos de fondo en cuanto el juego las carga, y ocupan una cuarta parte de la memoria. Los desalojos de texturas en combate bajaron de ~1 800 a unos cientos.\n- **16 bits para el resto de texturas de 32 bits.**\n- **Más memoria para la GPU** (80 MiB de CDRAM para vitaGL).\n- **Herramientas de diagnóstico** con `prof.txt`: pasos largos del juego, desglose del dibujo, esperas del juego y del reloj.\n\n## Archivos opcionales en `ux0:data/touhou123vita/`\n- `vsync-off.txt`: sin sincronía vertical.\n- `nodxt.txt`: desactiva DXT5.\n- `tex32.txt`: texturas a 32 bits.\n- `oldclock.txt`: prioridad original del reloj.\n- `gpu64.txt`: 64 MiB para vitaGL.\n- `prof.txt`: diagnóstico.\n- Experimentales, **no recomendados**:\n  - `dxtall.txt` y `texcache.txt`: con ellos la carga del escenario no termina.\n  - `preload.txt`: empeora el rendimiento.\n\n## Requisitos\nEl paquete contiene código traducido del juego; no incluye los DAT originales ni módulos de Sony. Requiere los datos de tu propia copia de Touhou 12.3 (1.10a) en `ux0:data/touhou123vita/` y los requisitos de instalación de README.md.\n\nSHA-256 de Touhou123Vita-beta-0.2.0.vpk:\n5e3cec1c6d931ce16e508c4fce80db2fe51c8d8e0eb9c922927b74c0820fb060\n",
+    "assets": [
+      {
+        "name": "Touhou123Vita-beta-0.2.0.vpk",
+        "size": 24876199,
+        "download_url": "https://github.com/Botarguirix/Touhou123Vita/releases/download/v0.2.0-beta/Touhou123Vita-beta-0.2.0.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Botarguirix",
+    "homebrew_name": "Touhou12.3Vita Hisoutensoku",
+    "homebrew_icon": "https://archive.org/download/touhou-12-3-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
+    "homebrew_long_description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
+    "homebrew_id": "touhou12-3vita-hisoutensoku",
+    "homebrew_authors": [
+      "botarguirix"
+    ],
+    "homebrew_version": "0.1.1",
+    "catalog_apps": [
+      {
+        "id": "touhou12-3vita-hisoutensoku",
+        "name": "Touhou12.3Vita Hisoutensoku",
+        "icon": "https://archive.org/download/touhou-12-3-vita/icon0.png",
+        "category": "ports",
+        "description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
+        "long_description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
+        "version": "0.1.1",
+        "version_date": "2026-11-01",
+        "author_ids": [
+          "botarguirix"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.1 → release v0.2.0-beta",
+    "catalog_version": "0.1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "Grarak/mh3-wii",
+    "release_id": "442262431",
+    "tag": "0.3.1",
+    "name": "0.3.1",
+    "url": "https://github.com/Grarak/mh3-wii/releases/tag/0.3.1",
+    "published": "2026-11-11T22:37:13Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Fix crash when bringing Cha Cha to a quest\r\n- Fix missing item name in banner when collecting resources",
+    "assets": [
+      {
+        "name": "mh3-vita.vpk",
+        "size": 19936277,
+        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.3.1/mh3-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "MH3_do_not_download.elf",
+        "size": 150946812,
+        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.3.1/MH3_do_not_download.elf",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Grarak",
+    "homebrew_name": "Monster Hunter Tri",
+    "homebrew_icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Monster Hunter Tri for the PS Vita.",
+    "homebrew_long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.\n\n- PsVitaAlive -",
+    "homebrew_id": "monster-hunter-tri",
+    "homebrew_authors": [
+      "grarak"
+    ],
+    "homebrew_version": "0.3",
+    "catalog_apps": [
+      {
+        "id": "monster-hunter-tri",
+        "name": "Monster Hunter Tri",
+        "icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Monster Hunter Tri for the PS Vita.",
+        "long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.\n\n- PsVitaAlive -",
+        "version": "0.3",
+        "version_date": "2026-11-08",
+        "author_ids": [
+          "grarak"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.3 → release 0.3.1",
+    "catalog_version": "0.3"
+  },
+  {
+    "platform": "github",
     "repo": "Rinnegatamante/recvx_vita",
     "release_id": "442136437",
     "tag": "v.1.4.1",
@@ -114,55 +218,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive v.0.69 → release v0.84",
     "catalog_version": "v.0.69"
-  },
-  {
-    "platform": "github",
-    "repo": "Botarguirix/Touhou123Vita",
-    "release_id": "440919839",
-    "tag": "v0.1.2-alpha",
-    "name": "Touhou123Vita alpha 0.1.2",
-    "url": "https://github.com/Botarguirix/Touhou123Vita/releases/tag/v0.1.2-alpha",
-    "published": "2026-11-10T21:14:26Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Alpha del port de Touhou 12.3 Hisoutensoku para PS Vita, centrada en rendimiento y diagnóstico.\n\nFuentes: main, commit 582451b.\n\nCambios:\n- Mezclador de audio sin bloqueo: antes retenía su mutex 5-7 ms de cada 21 ms y las llamadas de sonido del juego (Play) esperaban ~10 ms en pelea, una causa probable de los tirones. Mezcla en float.\n- Despacho de llamadas indirectas más barato (sin pthread_getspecific por llamada).\n- Perfilador por muestreo en la Vita: crear prof.txt en ux0:data/touhou123vita/.\n- Mediciones por llamada solo con stats.txt.\n- Vorbis nativo por defecto (guest-vorbis.txt para el decodificador traducido).\n- Red adhoc/infraestructura y teclado en pantalla (sin probar entre dos Vitas).\n\nEstado: el VPK se compiló desde este commit, pero esta versión NO se ha probado todavía en PS Vita. No se garantizan 60 FPS estables en peleas.\n\nEl paquete contiene código traducido del juego; no incluye los DAT originales ni módulos de Sony. Requiere los datos de la copia propia en ux0:data/touhou123vita/ y los requisitos de README.md.\n\nSHA-256 de Touhou123Vita-alpha-0.1.2.vpk:\n389eb3a9b0df11a76e43c96b083f7899f88848529d1714d1bd1329d8fde3e8b3",
-    "assets": [
-      {
-        "name": "Touhou123Vita-alpha-0.1.2.vpk",
-        "size": 24868022,
-        "download_url": "https://github.com/Botarguirix/Touhou123Vita/releases/download/v0.1.2-alpha/Touhou123Vita-alpha-0.1.2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Botarguirix",
-    "homebrew_name": "Touhou12.3Vita Hisoutensoku",
-    "homebrew_icon": "https://archive.org/download/touhou-12-3-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
-    "homebrew_long_description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
-    "homebrew_id": "touhou12-3vita-hisoutensoku",
-    "homebrew_authors": [
-      "botarguirix"
-    ],
-    "homebrew_version": "0.1.1",
-    "catalog_apps": [
-      {
-        "id": "touhou12-3vita-hisoutensoku",
-        "name": "Touhou12.3Vita Hisoutensoku",
-        "icon": "https://archive.org/download/touhou-12-3-vita/icon0.png",
-        "category": "ports",
-        "description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
-        "long_description": "Experimental native PS Vita port research and practice prototype for Touhou 12.3",
-        "version": "0.1.1",
-        "version_date": "2026-11-01",
-        "author_ids": [
-          "botarguirix"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.1 → release v0.1.2-alpha",
-    "catalog_version": "0.1.1"
   },
   {
     "platform": "github",
@@ -1196,61 +1251,6 @@
         ]
       }
     ]
-  },
-  {
-    "platform": "github",
-    "repo": "Grarak/mh3-wii",
-    "release_id": "438396676",
-    "tag": "0.3",
-    "name": "0.3",
-    "url": "https://github.com/Grarak/mh3-wii/releases/tag/0.3",
-    "published": "2026-11-08T17:22:42Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Added language packs: Japanese is imported from your own Japanese disc, and other languages from JSON translation files\r\n- Added ad hoc multiplayer\r\n- Added the option to use the system keyboard\r\n- Fixed a rare crash in the village when an NPC sat exactly level with the camera\r\n- Fixed monster size records showing impossible sizes\r\n- Fixed the missing arch at the Tavern's dock, plus missing ships and torch baskets\r\n- Fixed broken monster parts briefly flickering back to their whole shape\r\n- Faster City rendering: 52 → 59 fps\r\n- Faster lit scenery shaders, which cuts GPU time in the Flooded Forest and other maps\r\n- The game's helper threads now run ahead of disc reads, and the disc reader can also use core 0, which should reduce short stutters in fights",
-    "assets": [
-      {
-        "name": "mh3-vita.vpk",
-        "size": 19935529,
-        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.3/mh3-vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "MH3_do_not_download.elf",
-        "size": 150939488,
-        "download_url": "https://github.com/Grarak/mh3-wii/releases/download/0.3/MH3_do_not_download.elf",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Grarak",
-    "homebrew_name": "Monster Hunter Tri",
-    "homebrew_icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Monster Hunter Tri for the PS Vita.",
-    "homebrew_long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.\n\n- PsVitaAlive -",
-    "homebrew_id": "monster-hunter-tri",
-    "homebrew_authors": [
-      "grarak"
-    ],
-    "homebrew_version": "0.3",
-    "catalog_apps": [
-      {
-        "id": "monster-hunter-tri",
-        "name": "Monster Hunter Tri",
-        "icon": "https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "Monster Hunter Tri for the PS Vita.",
-        "long_description": "A static recompilation of Monster Hunter Tri (Wii) to native ARM code. The game's PowerPC code is translated to C++ and linked with a native runtime that replaces the Wii's hardware and system software: there is no emulator, interpreter or JIT. Rendering goes through native GXM on the PS Vita and OpenGL ES 3.0 on Linux; a WebAssembly build draws through WebGPU.\n\nThe repository contains no game code or data. You need your own copy of the European disc (RMHP08, \"Monster Hunter Tri (Europe) (En,Fr,De,Es,It)\") as an ISO or RVZ image. WIA images are recognized too, but untested and possibly unstable. Other regions are not supported.\n\nHow the port reaches full speed on a 444 MHz Cortex-A9, written so that the techniques carry over to other Wii games: docs/optimizations.\n\n- PsVitaAlive -",
-        "version": "0.3",
-        "version_date": "2026-11-08",
-        "author_ids": [
-          "grarak"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.3",
-    "catalog_version": "0.3"
   },
   {
     "platform": "github",
@@ -33127,54 +33127,5 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive v2.3",
     "catalog_version": "v2.3"
-  },
-  {
-    "platform": "github",
-    "repo": "DRok17/Log-Reset-for-YYL",
-    "release_id": "66531980",
-    "tag": "v1.0",
-    "name": "Log Reset For YoYo Loader v1.0",
-    "url": "https://github.com/DRok17/Log-Reset-for-YYL/releases/tag/v1.0",
-    "published": "2022-05-11T02:04:23Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Small app that deletes the yyl.log file and then launches YoYo Loader Vita.",
-    "assets": [
-      {
-        "name": "YYLLOGDEL.vpk",
-        "size": 3484788,
-        "download_url": "https://github.com/DRok17/Log-Reset-for-YYL/releases/download/v1.0/YYLLOGDEL.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "DRok17",
-    "homebrew_name": "Log Reset for YoYo Loader",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-log-reset-for-yoyo-loader/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Logs purger and launcher for YoYo Loader.",
-    "homebrew_long_description": "Small app that deletes the yyl.log file and then launches YoYo Loader Vita.",
-    "homebrew_id": "log-reset-for-yoyo-loader",
-    "homebrew_authors": [
-      "drok17"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "log-reset-for-yoyo-loader",
-        "name": "Log Reset for YoYo Loader",
-        "icon": "https://archive.org/download/psvitaalive-log-reset-for-yoyo-loader/icon0.png",
-        "category": "utilities",
-        "description": "Logs purger and launcher for YoYo Loader.",
-        "long_description": "Small app that deletes the yyl.log file and then launches YoYo Loader Vita.",
-        "version": "v.1.0",
-        "version_date": "2022-05-11",
-        "author_ids": [
-          "drok17"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
   }
 ]

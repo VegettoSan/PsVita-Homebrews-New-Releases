@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">394</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>90</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">392</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>91</strong><span>pendientes</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,160 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="touhou12.3vita hisoutensoku touhou12.3vita hisoutensoku botarguirix/touhou123vita touhou123vita beta 0.2.0 — versión final estable (proyecto en pausa) v0.2.0-beta ports **versión final estable (beta) de la recompilación estática. es el último release de esta línea: el proyecto de recompilación queda en pausa (hold) y no se publicarán más versiones de ella.** el trabajo continúa como una reimplementación nativa para ps vita escrita desde cero, que se publicará aparte cuando esté lista.
+
+fuentes: `main`, commit c523d99 (versión interna de pruebas v29). el vpk adjunto se compiló exactamente desde ese commit.
+
+## estado
+- probado en una ps vita real (fw 3.65) con la configuración de esta versión: arranque, menús, selección y combates completos reproduciendo un replay. las capturas de esta línea se tomaron sin vsync (`vsync-off.txt`).
+- menús a 60 fps (600 de 600 fotogramas cada 10 s).
+- en combate, la lógica del juego corre a 586–600 pasos por cada 10 s (60 fps = 600), y se dibujan en promedio ~572 fotogramas cada 10 s (~57 fps), con algunos tirones al empezar las peleas mientras se cargan texturas. no llega a 60 fps estables en combate.
+- el juego en red (adhoc/wi-fi) está implementado pero no se ha probado entre dos vitas.
+
+## mejoras de todo el proyecto
+**base (alphas 0.1.0–0.1.1)**
+- recompilación estática del ejecutable original 1.10a (x86 → c → arm): 6 406 funciones traducidas, sin instrucciones sin soporte en el código del juego.
+- capas de windows, direct3d 9, directsound y directinput sobre vitagl, el audio y los controles de la vita (162 de 171 importaciones implementadas).
+- texturas guardadas comprimidas en memoria y presupuesto de gpu con expulsión de las menos usadas; fondos grandes a media resolución.
+- audio: mezclador propio hacia `sceaudioout`, decodificador vorbis nativo.
+- traducción al inglés (`th123e.dat`), soporte del plantel 10.5 (`th105a/b.dat`), texto con freetype y noto cjk, teclado en pantalla.
+- correcciones de efectos, selección de personajes, memoria de gpu y pilas de hilos.
+
+**alpha 0.1.2**
+- mezclador de audio sin bloqueo (antes retenía al juego ~10 ms por sonido en pelea).
+- llamadas indirectas más baratas; perfilador por muestreo en la vita (`prof.txt`).
+
+**esta versión (pruebas v13–v29)**
+- **el registro (trace) se escribe desde un hilo aparte.** antes, cada línea forzaba una escritura en la tarjeta de 6–10 ms dentro del hilo del juego, y cada efecto de sonido costaba un fotograma. fue la mejora más grande en combate.
+- **reloj del juego con prioridad alta:** antes llegaba hasta 13 ms tarde por competir con los hilos de música.
+- **texturas dxt5:** codificador propio. las texturas de 32 bits de 256×256 a 1024×1024 se comprimen y se suben a la gpu desde hilos de fondo en cuanto el juego las carga, y ocupan una cuarta parte de la memoria. los desalojos de texturas en combate bajaron de ~1 800 a unos cientos.
+- **16 bits para el resto de texturas de 32 bits.**
+- **más memoria para la gpu** (80 mib de cdram para vitagl).
+- **herramientas de diagnóstico** con `prof.txt`: pasos largos del juego, desglose del dibujo, esperas del juego y del reloj.
+
+## archivos opcionales en `ux0:data/touhou123vita/`
+- `vsync-off.txt`: sin sincronía vertical.
+- `nodxt.txt`: desactiva dxt5.
+- `tex32.txt`: texturas a 32 bits.
+- `oldclock.txt`: prioridad original del reloj.
+- `gpu64.txt`: 64 mib para vitagl.
+- `prof.txt`: diagnóstico.
+- experimentales, **no recomendados**:
+  - `dxtall.txt` y `texcache.txt`: con ellos la carga del escenario no termina.
+  - `preload.txt`: empeora el rendimiento.
+
+## requisitos
+el paquete contiene código traducido del juego; no incluye los dat originales ni módulos de sony. requiere los datos de tu propia copia de touhou 12.3 (1.10a) en `ux0:data/touhou123vita/` y los requisitos de instalación de readme.md.
+
+sha-256 de touhou123vita-beta-0.2.0.vpk:
+5e3cec1c6d931ce16e508c4fce80db2fe51c8d8e0eb9c922927b74c0820fb060">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/touhou-12-3-vita/icon0.png" alt="Icono de Touhou12.3Vita Hisoutensoku" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Botarguirix/Touhou123Vita</div>
+                      <h2><a href="https://github.com/Botarguirix/Touhou123Vita/releases/tag/v0.2.0-beta" target="_blank" rel="noopener">Touhou12.3Vita Hisoutensoku</a></h2>
+                      <div class="release-name">Touhou123Vita beta 0.2.0 — versión final estable (proyecto en pausa)</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.2.0-beta</span>
+                    <span>2026-11-12 00:08 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.1 → release v0.2.0-beta</div>
+                  
+                  <div class="body markdown-body"><p><strong>Versión final estable (beta) de la recompilación estática. Es el último release de esta línea: el proyecto de recompilación queda en pausa (hold) y no se publicarán más versiones de ella.</strong> El trabajo continúa como una reimplementación nativa para PS Vita escrita desde cero, que se publicará aparte cuando esté lista.</p>
+<p>Fuentes: <code>main</code>, commit c523d99 (versión interna de pruebas v29). El VPK adjunto se compiló exactamente desde ese commit.</p>
+<h2>Estado</h2>
+<ul>
+<li>Probado en una PS Vita real (FW 3.65) con la configuración de esta versión: arranque, menús, selección y combates completos reproduciendo un replay. Las capturas de esta línea se tomaron sin vsync (<code>vsync-off.txt</code>).</li>
+<li>Menús a 60 FPS (600 de 600 fotogramas cada 10 s).</li>
+<li>En combate, la lógica del juego corre a 586–600 pasos por cada 10 s (60 FPS = 600), y se dibujan en promedio ~572 fotogramas cada 10 s (~57 FPS), con algunos tirones al empezar las peleas mientras se cargan texturas. No llega a 60 FPS estables en combate.</li>
+<li>El juego en red (adhoc/Wi-Fi) está implementado pero no se ha probado entre dos Vitas.</li>
+</ul>
+<h2>Mejoras de todo el proyecto</h2>
+<p><strong>Base (alphas 0.1.0–0.1.1)</strong></p>
+<ul>
+<li>Recompilación estática del ejecutable original 1.10a (x86 → C → ARM): 6 406 funciones traducidas, sin instrucciones sin soporte en el código del juego.</li>
+<li>Capas de Windows, Direct3D 9, DirectSound y DirectInput sobre vitaGL, el audio y los controles de la Vita (162 de 171 importaciones implementadas).</li>
+<li>Texturas guardadas comprimidas en memoria y presupuesto de GPU con expulsión de las menos usadas; fondos grandes a media resolución.</li>
+<li>Audio: mezclador propio hacia <code>sceAudioOut</code>, decodificador vorbis nativo.</li>
+<li>Traducción al inglés (<code>th123e.dat</code>), soporte del plantel 10.5 (<code>th105a/b.dat</code>), texto con FreeType y Noto CJK, teclado en pantalla.</li>
+<li>Correcciones de efectos, selección de personajes, memoria de GPU y pilas de hilos.</li>
+</ul>
+<p><strong>Alpha 0.1.2</strong></p>
+<ul>
+<li>Mezclador de audio sin bloqueo (antes retenía al juego ~10 ms por sonido en pelea).</li>
+<li>Llamadas indirectas más baratas; perfilador por muestreo en la Vita (<code>prof.txt</code>).</li>
+</ul>
+<p><strong>Esta versión (pruebas v13–v29)</strong></p>
+<ul>
+<li><strong>El registro (trace) se escribe desde un hilo aparte.</strong> Antes, cada línea forzaba una escritura en la tarjeta de 6–10 ms dentro del hilo del juego, y cada efecto de sonido costaba un fotograma. Fue la mejora más grande en combate.</li>
+<li><strong>Reloj del juego con prioridad alta:</strong> antes llegaba hasta 13 ms tarde por competir con los hilos de música.</li>
+<li><strong>Texturas DXT5:</strong> codificador propio. Las texturas de 32 bits de 256×256 a 1024×1024 se comprimen y se suben a la GPU desde hilos de fondo en cuanto el juego las carga, y ocupan una cuarta parte de la memoria. Los desalojos de texturas en combate bajaron de ~1 800 a unos cientos.</li>
+<li><strong>16 bits para el resto de texturas de 32 bits.</strong></li>
+<li><strong>Más memoria para la GPU</strong> (80 MiB de CDRAM para vitaGL).</li>
+<li><strong>Herramientas de diagnóstico</strong> con <code>prof.txt</code>: pasos largos del juego, desglose del dibujo, esperas del juego y del reloj.</li>
+</ul>
+<h2>Archivos opcionales en <code>ux0:data/touhou123vita/</code></h2>
+<ul>
+<li><code>vsync-off.txt</code>: sin sincronía vertical.</li>
+<li><code>nodxt.txt</code>: desactiva DXT5.</li>
+<li><code>tex32.txt</code>: texturas a 32 bits.</li>
+<li><code>oldclock.txt</code>: prioridad original del reloj.</li>
+<li><code>gpu64.txt</code>: 64 MiB para vitaGL.</li>
+<li><code>prof.txt</code>: diagnóstico.</li>
+<li>Experimentales, <strong>no recomendados</strong>:<ul>
+<li><code>dxtall.txt</code> y <code>texcache.txt</code>: con ellos la carga del escenario no termina.</li>
+<li><code>preload.txt</code>: empeora el rendimiento.</li>
+</ul>
+</li>
+</ul>
+<h2>Requisitos</h2>
+<p>El paquete contiene código traducido del juego; no incluye los DAT originales ni módulos de Sony. Requiere los datos de tu propia copia de Touhou 12.3 (1.10a) en <code>ux0:data/touhou123vita/</code> y los requisitos de instalación de README.md.</p>
+<p>SHA-256 de Touhou123Vita-beta-0.2.0.vpk:
+5e3cec1c6d931ce16e508c4fce80db2fe51c8d8e0eb9c922927b74c0820fb060</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Botarguirix/Touhou123Vita/releases/download/v0.2.0-beta/Touhou123Vita-beta-0.2.0.vpk" target="_blank" rel="noopener">⬇ Touhou123Vita-beta-0.2.0.vpk · 23.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="monster hunter tri monster hunter tri grarak/mh3-wii 0.3.1 0.3.1 ports - fix crash when bringing cha cha to a quest
+- fix missing item name in banner when collecting resources">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png" alt="Icono de Monster Hunter Tri" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · Grarak/mh3-wii</div>
+                      <h2><a href="https://github.com/Grarak/mh3-wii/releases/tag/0.3.1" target="_blank" rel="noopener">Monster Hunter Tri</a></h2>
+                      <div class="release-name">0.3.1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">0.3.1</span>
+                    <span>2026-11-11 22:37 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.3 → release 0.3.1</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>Fix crash when bringing Cha Cha to a quest</li>
+<li>Fix missing item name in banner when collecting resources</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.3.1/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 19.0 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.3.1/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 144.0 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="resident evil code: veronica x resident evil code: veronica x rinnegatamante/recvx_vita v.1.4.1 v.1.4.1 ports - fixed a regression that causes translucent meshes to fully cover up anything behind them.">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/resident-evil-code-veronica-x-vita/icon0.png" alt="Icono de Resident Evil Code: Veronica X" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
@@ -425,64 +579,6 @@ Builds v0.82 and v0.83 were internal builds focused on FPS and CRT filter improv
 <p><em>Official commercial DELTARUNE game data, music and Chapter video files are not distributed with this release.</em></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.84/Deltarune-v0.84.Internal-Build-Test.vpk" target="_blank" rel="noopener">⬇ Deltarune-v0.84.Internal-Build-Test.vpk · 9.8 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.84/DeltaruneSync-v0.84.zip" target="_blank" rel="noopener">DeltaruneSync-v0.84.zip · 31.3 MB</a><a class="btn" href="https://github.com/WolffsRoom/DeltaruneVita/releases/download/v0.84/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 196.0 B</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="touhou12.3vita hisoutensoku touhou12.3vita hisoutensoku botarguirix/touhou123vita touhou123vita alpha 0.1.2 v0.1.2-alpha ports alpha del port de touhou 12.3 hisoutensoku para ps vita, centrada en rendimiento y diagnóstico.
-
-fuentes: main, commit 582451b.
-
-cambios:
-- mezclador de audio sin bloqueo: antes retenía su mutex 5-7 ms de cada 21 ms y las llamadas de sonido del juego (play) esperaban ~10 ms en pelea, una causa probable de los tirones. mezcla en float.
-- despacho de llamadas indirectas más barato (sin pthread_getspecific por llamada).
-- perfilador por muestreo en la vita: crear prof.txt en ux0:data/touhou123vita/.
-- mediciones por llamada solo con stats.txt.
-- vorbis nativo por defecto (guest-vorbis.txt para el decodificador traducido).
-- red adhoc/infraestructura y teclado en pantalla (sin probar entre dos vitas).
-
-estado: el vpk se compiló desde este commit, pero esta versión no se ha probado todavía en ps vita. no se garantizan 60 fps estables en peleas.
-
-el paquete contiene código traducido del juego; no incluye los dat originales ni módulos de sony. requiere los datos de la copia propia en ux0:data/touhou123vita/ y los requisitos de readme.md.
-
-sha-256 de touhou123vita-alpha-0.1.2.vpk:
-389eb3a9b0df11a76e43c96b083f7899f88848529d1714d1bd1329d8fde3e8b3">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/touhou-12-3-vita/icon0.png" alt="Icono de Touhou12.3Vita Hisoutensoku" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Botarguirix/Touhou123Vita</div>
-                      <h2><a href="https://github.com/Botarguirix/Touhou123Vita/releases/tag/v0.1.2-alpha" target="_blank" rel="noopener">Touhou12.3Vita Hisoutensoku</a></h2>
-                      <div class="release-name">Touhou123Vita alpha 0.1.2</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.2-alpha</span>
-                    <span>2026-11-10 21:14 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.1 → release v0.1.2-alpha</div>
-                  
-                  <div class="body markdown-body"><p>Alpha del port de Touhou 12.3 Hisoutensoku para PS Vita, centrada en rendimiento y diagnóstico.</p>
-<p>Fuentes: main, commit 582451b.</p>
-<p>Cambios:</p>
-<ul>
-<li>Mezclador de audio sin bloqueo: antes retenía su mutex 5-7 ms de cada 21 ms y las llamadas de sonido del juego (Play) esperaban ~10 ms en pelea, una causa probable de los tirones. Mezcla en float.</li>
-<li>Despacho de llamadas indirectas más barato (sin pthread_getspecific por llamada).</li>
-<li>Perfilador por muestreo en la Vita: crear prof.txt en ux0:data/touhou123vita/.</li>
-<li>Mediciones por llamada solo con stats.txt.</li>
-<li>Vorbis nativo por defecto (guest-vorbis.txt para el decodificador traducido).</li>
-<li>Red adhoc/infraestructura y teclado en pantalla (sin probar entre dos Vitas).</li>
-</ul>
-<p>Estado: el VPK se compiló desde este commit, pero esta versión NO se ha probado todavía en PS Vita. No se garantizan 60 FPS estables en peleas.</p>
-<p>El paquete contiene código traducido del juego; no incluye los DAT originales ni módulos de Sony. Requiere los datos de la copia propia en ux0:data/touhou123vita/ y los requisitos de README.md.</p>
-<p>SHA-256 de Touhou123Vita-alpha-0.1.2.vpk:
-389eb3a9b0df11a76e43c96b083f7899f88848529d1714d1bd1329d8fde3e8b3</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Botarguirix/Touhou123Vita/releases/download/v0.1.2-alpha/Touhou123Vita-alpha-0.1.2.vpk" target="_blank" rel="noopener">⬇ Touhou123Vita-alpha-0.1.2.vpk · 23.7 MB</a></div>
                 </div>
               </div>
             </article>
@@ -1144,53 +1240,6 @@ please follow the [**installation guide**](https://ihhub.github.io/fheroes2/inst
                   <div class="body markdown-body"><p>GitHub Actions build log: <a target="_blank" rel="noopener noreferrer" href="https://github.com/isledecomp/isle-portable/actions/runs/42501968631">https://github.com/isledecomp/isle-portable/actions/runs/42501968631</a></p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk" target="_blank" rel="noopener">⬇ isle.vpk · 6.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk" target="_blank" rel="noopener">app-debug.apk · 13.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk" target="_blank" rel="noopener">app-release.apk · 12.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg" target="_blank" rel="noopener">isle-0.1-Darwin-arm64.dmg · 22.5 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg" target="_blank" rel="noopener">isle-0.1-Darwin-x64.dmg · 23.0 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz" target="_blank" rel="noopener">isle-0.1-DOS-x86.tar.gz · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz" target="_blank" rel="noopener">isle-0.1-Emscripten-emscripten.tar.gz · 1003.3 KB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-FreeBSD-x64.tar.gz · 3.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa" target="_blank" rel="noopener">isle-0.1-iOS-arm64.ipa · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-Linux-x64.tar.gz · 4.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip" target="_blank" rel="noopener">isle-0.1-Windows-arm64.zip · 2.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz" target="_blank" rel="noopener">isle-0.1-Windows-x64.tar.gz · 17.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip" target="_blank" rel="noopener">isle-0.1-Windows-x64.zip · 20.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip" target="_blank" rel="noopener">isle-0.1-Windows-x86.zip · 1.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip" target="_blank" rel="noopener">isle-0.1-Xbox_One_Series_XS-x64.zip · 2.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip" target="_blank" rel="noopener">isle-assets.zip · 436.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip" target="_blank" rel="noopener">isle-hdaudio.zip · 284.2 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx" target="_blank" rel="noopener">isle.3dsx · 2.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia" target="_blank" rel="noopener">isle.cia · 2.1 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro" target="_blank" rel="noopener">isle.nro · 8.4 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage" target="_blank" rel="noopener">Isle_Portable-x86_64.AppImage · 31.9 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak" target="_blank" rel="noopener">org.legoisland.Isle.aarch64.flatpak · 2.3 MB</a><a class="btn" href="https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak" target="_blank" rel="noopener">org.legoisland.Isle.x86_64.flatpak · 2.5 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="monster hunter tri monster hunter tri grarak/mh3-wii 0.3 0.3 ports - added language packs: japanese is imported from your own japanese disc, and other languages from json translation files
-- added ad hoc multiplayer
-- added the option to use the system keyboard
-- fixed a rare crash in the village when an npc sat exactly level with the camera
-- fixed monster size records showing impossible sizes
-- fixed the missing arch at the tavern&#x27;s dock, plus missing ships and torch baskets
-- fixed broken monster parts briefly flickering back to their whole shape
-- faster city rendering: 52 → 59 fps
-- faster lit scenery shaders, which cuts gpu time in the flooded forest and other maps
-- the game&#x27;s helper threads now run ahead of disc reads, and the disc reader can also use core 0, which should reduce short stutters in fights">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/monster-hunter-tri-ps-vita/icon0.png" alt="Icono de Monster Hunter Tri" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · Grarak/mh3-wii</div>
-                      <h2><a href="https://github.com/Grarak/mh3-wii/releases/tag/0.3" target="_blank" rel="noopener">Monster Hunter Tri</a></h2>
-                      <div class="release-name">0.3</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">0.3</span>
-                    <span>2026-11-08 17:22 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.3</div>
-                  
-                  <div class="body markdown-body"><ul>
-<li>Added language packs: Japanese is imported from your own Japanese disc, and other languages from JSON translation files</li>
-<li>Added ad hoc multiplayer</li>
-<li>Added the option to use the system keyboard</li>
-<li>Fixed a rare crash in the village when an NPC sat exactly level with the camera</li>
-<li>Fixed monster size records showing impossible sizes</li>
-<li>Fixed the missing arch at the Tavern's dock, plus missing ships and torch baskets</li>
-<li>Fixed broken monster parts briefly flickering back to their whole shape</li>
-<li>Faster City rendering: 52 → 59 fps</li>
-<li>Faster lit scenery shaders, which cuts GPU time in the Flooded Forest and other maps</li>
-<li>The game's helper threads now run ahead of disc reads, and the disc reader can also use core 0, which should reduce short stutters in fights</li>
-</ul>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/mh3-wii/releases/download/0.3/mh3-vita.vpk" target="_blank" rel="noopener">⬇ mh3-vita.vpk · 19.0 MB</a><a class="btn" href="https://github.com/Grarak/mh3-wii/releases/download/0.3/MH3_do_not_download.elf" target="_blank" rel="noopener">MH3_do_not_download.elf · 143.9 MB</a></div>
                 </div>
               </div>
             </article>
@@ -30661,37 +30710,10 @@ this was just a quick project for something to do.. its not great and i wouldnt 
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="log reset for yoyo loader log reset for yoyo loader drok17/log-reset-for-yyl log reset for yoyo loader v1.0 v1.0 utilities small app that deletes the yyl.log file and then launches yoyo loader vita.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-log-reset-for-yoyo-loader/icon0.png" alt="Icono de Log Reset for YoYo Loader" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">UTILITIES · GITHUB · DRok17/Log-Reset-for-YYL</div>
-                      <h2><a href="https://github.com/DRok17/Log-Reset-for-YYL/releases/tag/v1.0" target="_blank" rel="noopener">Log Reset for YoYo Loader</a></h2>
-                      <div class="release-name">Log Reset For YoYo Loader v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.0</span>
-                    <span>2022-05-11 02:04 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>Small app that deletes the yyl.log file and then launches YoYo Loader Vita.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/DRok17/Log-Reset-for-YYL/releases/download/v1.0/YYLLOGDEL.vpk" target="_blank" rel="noopener">⬇ YYLLOGDEL.vpk · 3.3 MB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-11 21:41 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-12 05:06 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
