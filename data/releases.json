@@ -1,6 +1,159 @@
 [
   {
     "platform": "github",
+    "repo": "iwannagooutside/thug2-vita",
+    "release_id": "444694147",
+    "tag": "v1.0.2",
+    "name": "v1.0.2: Barcelona and Boston fixes",
+    "url": "https://github.com/iwannagooutside/thug2-vita/releases/tag/v1.0.2",
+    "published": "2026-11-13T20:18:11Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Second update of THUG2 on PS Vita, with fixes for the bugs players reported\nafter v1.0.1. Thanks to everyone who opened an issue.\n\n**Fixes**\n- Barcelona: after freeing the bull, the bull fighter and every other skater\n  no longer double jump on their own to extreme heights. The bull's dung only\n  bounces you when you actually ride over it, as on Xbox (#14).\n- Barcelona: the castle catapults launch you into the air again instead of\n  dropping you on the roof, so \"Catapult launch\" and the Catapult 720 goal work (#16).\n  The same fix wakes up hidden Steve-O in Barcelona and the ambient music boxes\n  in Berlin, Boston and New Orleans.\n- Boston: the pro goal \"Skitch a Seaworthy Vehicle\" now starts when you skitch\n  the amphibious duck. The 20-second timer shows and the goal counts toward\n  100% (#15).\n- 30 fps mode: the display queue is now limited to one frame, as at 60 fps.\n  This is a possible fix for the crash reported a few seconds after switching\n  to 30 fps (#13). We couldn't reproduce that crash on our Vita, even on\n  v1.0.0, so if it still happens to you, please attach your log to #13.\n\n**Updating**\nInstall the new `thug2_vita.vpk` over v1.0.1 or v1.0.0 with VitaShell. Your\nsaves, settings and game files stay where they are.\n\n**Known issues**\n- Some very busy views (New Orleans, Barcelona) still run in the 50s (#1).\n- Buttslaps can trigger on their own after a late ollie (#2).\n\nFound a bug? Open an issue with the level, what you were doing, a photo if you\ncan, and `ux0:data/thug2-vita/thug.log`.\n",
+    "assets": [
+      {
+        "name": "thug2_vita.vpk",
+        "size": 8218504,
+        "download_url": "https://github.com/iwannagooutside/thug2-vita/releases/download/v1.0.2/thug2_vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "iwannagooutside",
+    "homebrew_name": "THUG2 Vita",
+    "homebrew_icon": "https://archive.org/download/thug2-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native port of Tony Hawk's Underground 2 for PSVita.",
+    "homebrew_long_description": "A native PS Vita port of Tony Hawk's Underground 2 (2004). Not an emulator: the game engine is rebuilt for the Vita's ARM processor with a vitaGL graphics backend, the same engine as THUG Vita (based on kisak-thug), extended to run the Xbox version of THUG2. Story mode (World Destruction Tour) and Classic mode can be played to the end, along with Free Skate and every create mode (Create-a-Skater, Create-a-Park, Create-a-Goal, Create-a-Trick, Create-a-Graphic). Most views run at or near 60 fps, FMV videos play, and the HUD uses the THUG Pro HD assets. No game data is included: the port reads the data files of the Xbox release.",
+    "homebrew_id": "thug2-vita",
+    "homebrew_authors": [
+      "iwannagooutside"
+    ],
+    "homebrew_version": "v1.0.0",
+    "catalog_apps": [
+      {
+        "id": "thug2-vita",
+        "name": "THUG2 Vita",
+        "icon": "https://archive.org/download/thug2-vita/icon0.png",
+        "category": "ports",
+        "description": "Native port of Tony Hawk's Underground 2 for PSVita.",
+        "long_description": "A native PS Vita port of Tony Hawk's Underground 2 (2004). Not an emulator: the game engine is rebuilt for the Vita's ARM processor with a vitaGL graphics backend, the same engine as THUG Vita (based on kisak-thug), extended to run the Xbox version of THUG2. Story mode (World Destruction Tour) and Classic mode can be played to the end, along with Free Skate and every create mode (Create-a-Skater, Create-a-Park, Create-a-Goal, Create-a-Trick, Create-a-Graphic). Most views run at or near 60 fps, FMV videos play, and the HUD uses the THUG Pro HD assets. No game data is included: the port reads the data files of the Xbox release.",
+        "version": "v1.0.0",
+        "version_date": "2026-11-09",
+        "author_ids": [
+          "iwannagooutside"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v1.0.0 → release v1.0.2",
+    "catalog_version": "v1.0.0"
+  },
+  {
+    "platform": "github",
+    "repo": "AngeloGalav/sh2-vita",
+    "release_id": "444621961",
+    "tag": "v0.1.0-alpha.3",
+    "name": "sh2-vita v0.1.0-alpha.3",
+    "url": "https://github.com/AngeloGalav/sh2-vita/releases/tag/v0.1.0-alpha.3",
+    "published": "2026-11-13T18:59:18Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "> [!WARNING]\n> Early alpha: expect graphical, animation and sound bugs, and plenty of rough edges.\n>\n> So far the game has been tested from saves only: a full playthrough from the very start to the end has not been done yet. There may be bugs that only show when playing straight through, such as the one in the Woodside Apartments. **Issue reports are very welcome**, whatever you find.\n\nThe third alpha of sh2-vita. Mostly light and shadows, the random freezes players reported, and Born From a Wish.\n\n### Changes\n\n- **Shadows:** the dark patches that moved with the flashlight in the bowling alley are gone: the map's shadow volumes are closed now, as the original builds them. Shadow edges are soft as the Enhanced Edition's, with a new **Shadow Quality** option (Hard, Soft Lite, Soft). Shadows no longer run past the lit part of the flashlight's beam. James and Maria keep the right shadow hulls through model swaps, and companion Maria casts a shadow too.\n- **Freezes:** the game now watches its own main loop: when it stops for three seconds, its last steps are written to `stall.txt` in the game's data folder. One freeze found this way is fixed — the frame pacing could wait forever for a screen refresh that had already passed. The audio mixer no longer lets one buffer into two lists at once.\n- **Born From a Wish:** the scene's Maria is the player now: one Maria at the start, and she has her reflection in the mirror. She kicks and stomps with Action alone, without holding Aim.\n- **Characters:** a landed blow pushes James back (the port's own, asked for from play). James no longer passes through Maria: her push takes her own move into account. The Lying Figure restarts its walk loop when it starts chasing, as on the PC.\n- **Mandarin:** it pauses after a strike that lands, its strikes no longer drag it along with James, and it is no longer stopped at him. Closer to the PC now, not all the way.\n- **Map:** the map opens in Born From a Wish, where the PC's own readable test opens it, and \"no map of this area\" now shows the message alone, as on the PC.\n- **Rooms:** West Apartments 2F's floor was all white: a texture whose id clashed with another map's now gets an id of its own. Repack to fix it (or copy the two files named in STATUS).\n- **Stages:** the per-frame room sounds of stages 25, 26, 28, 32, 41 and 42 are in.\n- **Scenes:** every character of a scene is drawn for the whole scene, as on the PC: Maria shows outside the bowling alley, Eddie and Laura in the apartment scene.\n- **Options:** the SELECT test combinations are rows in a new Debug tab now (Shadow Volumes, Map Test, Freeze Watchdog, Sound Buffer Guard and the rest). The version shows in the bottom-left corner of the title screen.\n- **Docs:** step-by-step Windows install steps in the README, and issue templates for bug reports and suggestions.\n\n### For testers\n\n- If the game freezes, attach `stall.txt` from `ux0:data/sh2-vita/` to the report, with the version shown on the title screen: its last lines name the step the game stopped in.\n- New and not yet checked on a console: the stage room sounds, per-room footsteps, Maria's voices in Born From a Wish, and the hotel elevator doors.\n- Still open from reports: the audio crackle in music (the mixer's new fade and limiter did not change it), the companion Maria's shadow (it shows but is a little corrupted), and the Mandarin's turn between attacks.\n\nThe known problems and what is still open are listed in [STATUS.md](https://github.com/AngeloGalav/sh2-vita/blob/main/port/STATUS.md).\n\nA native PS Vita port of Silent Hill 2 (PC Director's Cut). This file contains no game data: you convert that from your own copy of the PC game, with the Enhanced Edition installed.\n\n**Install**\n\n1. Install `sh2vita.vpk` with VitaShell.\n2. Make sure `ur0:data/libshacccg.suprx` exists (the shader compiler, extracted with ShaRKBR33D).\n3. Convert your game with the packer image as the [README](https://github.com/AngeloGalav/sh2-vita#install) says (Docker, from your own copy of the game with the Enhanced Edition), and copy the contents of `out/sh2-vita/` to `ux0:data/sh2-vita/` (about 2.6 GB). On Windows, follow [Windows, step by step](https://github.com/AngeloGalav/sh2-vita#windows-step-by-step): every command to type, in order.\n\nThe first time each shader is needed it is compiled and kept on the card, so the first run has some short pauses. The checksum is in `sh2vita.sha256`.\n\n```\n84322e2767fa38d7c72506c5dfe16a93e15388818e3505a2e489a31f5c3aed1f  sh2vita.vpk\n```\n",
+    "assets": [
+      {
+        "name": "sh2vita.sha256",
+        "size": 78,
+        "download_url": "https://github.com/AngeloGalav/sh2-vita/releases/download/v0.1.0-alpha.3/sh2vita.sha256",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "sh2vita.vpk",
+        "size": 1297848,
+        "download_url": "https://github.com/AngeloGalav/sh2-vita/releases/download/v0.1.0-alpha.3/sh2vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Silent Hill 2",
+    "homebrew_icon": "https://archive.org/download/sh2-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
+    "homebrew_long_description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
+    "homebrew_id": "silent-hill-2",
+    "homebrew_authors": [
+      "angelogalav"
+    ],
+    "homebrew_version": "0.1.0a2",
+    "catalog_apps": [
+      {
+        "id": "silent-hill-2",
+        "name": "Silent Hill 2",
+        "icon": "https://archive.org/download/sh2-vita/icon0.png",
+        "category": "ports",
+        "description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
+        "long_description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
+        "version": "0.1.0a2",
+        "version_date": "2026-11-11",
+        "author_ids": [
+          "angelogalav"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.0a2 → release v0.1.0-alpha.3",
+    "catalog_version": "0.1.0a2"
+  },
+  {
+    "platform": "github",
+    "repo": "MetalSyntax/Raging-Thunder-vita",
+    "release_id": "444353426",
+    "tag": "v1.0.2",
+    "name": "Raging Thunder Vita — v1.0.2",
+    "url": "https://github.com/MetalSyntax/Raging-Thunder-vita/releases/tag/v1.0.2",
+    "published": "2026-11-13T14:50:37Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# Raging Thunder Vita — v1.0.2\n\nBug-fix release based on tester reports.\n\n## Fixes\n\n- **Background flicker**: during races and in the garage the engine only clears\n  the depth buffer, so areas not covered by the sky showed old frames and\n  flickered. The port now clears the color buffer every frame.\n\n## Install / update\n\nInstall `ragingthunder.vpk` over v1.0.1 with VitaShell. Game files\n(`ux0:data/ragingthunder/main.so`, `assets/data.vfs`) and saves are kept.\nFirst install: see `LEEME.txt` or the README.\n",
+    "assets": [
+      {
+        "name": "ragingthunder.vpk",
+        "size": 922121,
+        "download_url": "https://github.com/MetalSyntax/Raging-Thunder-vita/releases/download/v1.0.2/ragingthunder.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "MetalSyntax",
+    "homebrew_name": "Raging Thunder",
+    "homebrew_icon": "https://archive.org/download/raging-thunder-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Android to PS Vita port of Raging Thunder",
+    "homebrew_long_description": "Unofficial port of Raging Thunder (Polarbit, Android) to the PS Vita, running the original ARM game library through a native loader (TheFloW's so-loader + FalsoJNI) with rendering via vitaGL.",
+    "homebrew_id": "raging-thunder",
+    "homebrew_authors": [
+      "metalsyntax"
+    ],
+    "homebrew_version": "1.0.1",
+    "catalog_apps": [
+      {
+        "id": "raging-thunder",
+        "name": "Raging Thunder",
+        "icon": "https://archive.org/download/raging-thunder-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Android to PS Vita port of Raging Thunder",
+        "long_description": "Unofficial port of Raging Thunder (Polarbit, Android) to the PS Vita, running the original ARM game library through a native loader (TheFloW's so-loader + FalsoJNI) with rendering via vitaGL.",
+        "version": "1.0.1",
+        "version_date": "2026-10-17",
+        "author_ids": [
+          "metalsyntax"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.1 → release v1.0.2",
+    "catalog_version": "1.0.1"
+  },
+  {
+    "platform": "github",
     "repo": "ggdrn/KH-DAYS-VITA",
     "release_id": "443735874",
     "tag": "1.1",
@@ -215,55 +368,6 @@
   },
   {
     "platform": "github",
-    "repo": "iwannagooutside/thug2-vita",
-    "release_id": "442697311",
-    "tag": "v1.0.1",
-    "name": "v1.0.1: player fixes and a faster game",
-    "url": "https://github.com/iwannagooutside/thug2-vita/releases/tag/v1.0.1",
-    "published": "2026-11-12T08:57:14Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "First update of THUG2 on PS Vita. It fixes the bugs players reported after\nv1.0.0 and makes the busiest views noticeably smoother, with exactly the same\npicture.\n\n**Fixes**\n- Create-A-Skater: hands now match the skater's skin tone (calves and bare\n  torso too), on custom and pre-made skaters (#7).\n- Goal givers and pros speak again: goal intros and description boxes are\n  voiced, as on Xbox (#8).\n- Tomatoes (and other thrown objects): every press of □ throws, no need to\n  restart the goal any more (#9).\n- Story mode: your current chapter is now saved. Loading a save continues\n  where you were, pro teammate and goals included (Boston, #10).\n- Level select: story points are kept in the save. Points from a v1.0.0 save\n  come back level by level as you visit them again (#11).\n- Memory card loading screen: the purple overlay now covers the whole screen\n  (#12).\n- Classic mode: the run now ends properly when the timer hits 0:00 (the skater\n  no longer rolls on forever), the ten classic goals use their own rules again,\n  and picking up the voodoo dolls in New Orleans no longer crashes the game.\n\n**Performance**\nBusy and far-away views render faster, with the same picture (screenshots\ncompared with v1.0.0 on the console, menus included). Measured on a PS Vita in Free\nSkate:\n\n| Place | v1.0.0 | v1.0.1 |\n|---|---|---|\n| New Orleans, Mardi Gras street | ~44 fps | ~55 fps |\n| New Orleans, rooftops | ~52 fps | ~59 fps |\n| Barcelona, far view | ~44 fps | ~52 fps |\n\nStory mode puts more people in the streets of New Orleans, so expect a few fps\nless there. Work on reaching a steady 60 fps continues (#1).\n\n**Updating**\nInstall the new `thug2_vita.vpk` over v1.0.0 with VitaShell. Your saves,\nsettings and game files stay where they are.\n\n**Known issues**\n- Some very busy views (New Orleans, Barcelona) still run in the 50s (#1).\n- Buttslaps can trigger on their own after a late ollie (#2).\n\nFound a bug? Open an issue with the level, what you were doing, a photo if you\ncan, and `ux0:data/thug2-vita/thug.log`.\n",
-    "assets": [
-      {
-        "name": "thug2_vita.vpk",
-        "size": 8216751,
-        "download_url": "https://github.com/iwannagooutside/thug2-vita/releases/download/v1.0.1/thug2_vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "iwannagooutside",
-    "homebrew_name": "THUG2 Vita",
-    "homebrew_icon": "https://archive.org/download/thug2-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native port of Tony Hawk's Underground 2 for PSVita.",
-    "homebrew_long_description": "A native PS Vita port of Tony Hawk's Underground 2 (2004). Not an emulator: the game engine is rebuilt for the Vita's ARM processor with a vitaGL graphics backend, the same engine as THUG Vita (based on kisak-thug), extended to run the Xbox version of THUG2. Story mode (World Destruction Tour) and Classic mode can be played to the end, along with Free Skate and every create mode (Create-a-Skater, Create-a-Park, Create-a-Goal, Create-a-Trick, Create-a-Graphic). Most views run at or near 60 fps, FMV videos play, and the HUD uses the THUG Pro HD assets. No game data is included: the port reads the data files of the Xbox release.",
-    "homebrew_id": "thug2-vita",
-    "homebrew_authors": [
-      "iwannagooutside"
-    ],
-    "homebrew_version": "v1.0.0",
-    "catalog_apps": [
-      {
-        "id": "thug2-vita",
-        "name": "THUG2 Vita",
-        "icon": "https://archive.org/download/thug2-vita/icon0.png",
-        "category": "ports",
-        "description": "Native port of Tony Hawk's Underground 2 for PSVita.",
-        "long_description": "A native PS Vita port of Tony Hawk's Underground 2 (2004). Not an emulator: the game engine is rebuilt for the Vita's ARM processor with a vitaGL graphics backend, the same engine as THUG Vita (based on kisak-thug), extended to run the Xbox version of THUG2. Story mode (World Destruction Tour) and Classic mode can be played to the end, along with Free Skate and every create mode (Create-a-Skater, Create-a-Park, Create-a-Goal, Create-a-Trick, Create-a-Graphic). Most views run at or near 60 fps, FMV videos play, and the HUD uses the THUG Pro HD assets. No game data is included: the port reads the data files of the Xbox release.",
-        "version": "v1.0.0",
-        "version_date": "2026-11-09",
-        "author_ids": [
-          "iwannagooutside"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v1.0.0 → release v1.0.1",
-    "catalog_version": "v1.0.0"
-  },
-  {
-    "platform": "github",
     "repo": "Botarguirix/Touhou123Vita",
     "release_id": "442330158",
     "tag": "v0.2.0-beta",
@@ -420,61 +524,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.4.1",
     "catalog_version": "1.4.1"
-  },
-  {
-    "platform": "github",
-    "repo": "AngeloGalav/sh2-vita",
-    "release_id": "441760647",
-    "tag": "v0.1.0-alpha.2",
-    "name": "sh2-vita v0.1.0-alpha.2",
-    "url": "https://github.com/AngeloGalav/sh2-vita/releases/tag/v0.1.0-alpha.2",
-    "published": "2026-11-11T13:52:03Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "> [!WARNING]\n> Early alpha: expect graphical, animation and sound bugs, and plenty of rough edges.\n>\n> So far the game has been tested from saves only: a full playthrough from the very start to the end has not been done yet. There may be bugs that only show when playing straight through, such as the one in the Woodside Apartments. **Issue reports are very welcome**, whatever you find.\n\nThe second alpha of sh2-vita. Mostly fixes to what you see and hear while playing, and a few tools for testing on the console.\n\n### Changes\n\n- **Camera:** the view is now built from the camera's own axes, as the original does, instead of a look-at through eye + direction.\n- **Doors:** the open areas' tile now has floor under the arrival, so Wood Side's gate leads into its courtyard.\n- **Rooms:** textures are sampled down to 64, against the walls' shimmer when the camera turns.\n- **Characters:** James turns through the frame between walking and turning on the spot. Eddie keeps hold of his pizza, and the pizza waits for him.\n- **Stages:** the characters the room code places now appear, along with the stages' own sounds.\n- **Combat:** a gunshot lights the room, with an option to turn it off. View Control Normal is available on the Vita.\n- **Packer:** a Docker image that makes the Vita's data, with install steps that work. No pack is made without the Enhanced Edition.\n\n### For testers\n\n- SELECT + D-pad up records a trace of the camera's last minute.\n- SELECT + D-pad down shows a burst of 16 frames.\n- An experimental attempt to time the frame beat from when frames reach the screen.\n\nThe known problems and what is still open are listed in [STATUS.md](https://github.com/AngeloGalav/sh2-vita/blob/main/port/STATUS.md).\n\nA native PS Vita port of Silent Hill 2 (PC Director's Cut). This file contains no game data: you convert that from your own copy of the PC game, with the Enhanced Edition installed.\n\n**Install**\n\n1. Install `sh2vita.vpk` with VitaShell.\n2. Make sure `ur0:data/libshacccg.suprx` exists (the shader compiler, extracted with ShaRKBR33D).\n3. Convert your game with the packer image as the [README](https://github.com/AngeloGalav/sh2-vita#install) says (Docker, from your own copy of the game with the Enhanced Edition), and copy the contents of `out/sh2-vita/` to `ux0:data/sh2-vita/` (about 2.6 GB).\n\nThe first time each shader is needed it is compiled and kept on the card, so the first run has some short pauses. The checksum is in `sh2vita.sha256`.\n\n```\n94de25f164ddd31d891a34109f2948cc17304f88f3b53c2bcb1f9b0b1f1bedc9  sh2vita.vpk\n```\n\n",
-    "assets": [
-      {
-        "name": "sh2vita.sha256",
-        "size": 78,
-        "download_url": "https://github.com/AngeloGalav/sh2-vita/releases/download/v0.1.0-alpha.2/sh2vita.sha256",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "sh2vita.vpk",
-        "size": 1287531,
-        "download_url": "https://github.com/AngeloGalav/sh2-vita/releases/download/v0.1.0-alpha.2/sh2vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Silent Hill 2",
-    "homebrew_icon": "https://archive.org/download/sh2-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
-    "homebrew_long_description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
-    "homebrew_id": "silent-hill-2",
-    "homebrew_authors": [
-      "angelogalav"
-    ],
-    "homebrew_version": "0.1.0a2",
-    "catalog_apps": [
-      {
-        "id": "silent-hill-2",
-        "name": "Silent Hill 2",
-        "icon": "https://archive.org/download/sh2-vita/icon0.png",
-        "category": "ports",
-        "description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
-        "long_description": "A native PS Vita port of the PC Director's Cut, with menus that follow the original.",
-        "version": "0.1.0a2",
-        "version_date": "2026-11-11",
-        "author_ids": [
-          "angelogalav"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.0a2 → release v0.1.0-alpha.2",
-    "catalog_version": "0.1.0a2"
   },
   {
     "platform": "github",
@@ -5953,55 +6002,6 @@
         "version_date": "2026-10-19",
         "author_ids": [
           "chuta7x"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "MetalSyntax/Raging-Thunder-vita",
-    "release_id": "416218764",
-    "tag": "v1.0.1",
-    "name": "Raging Thunder Vita — v1.0.1",
-    "url": "https://github.com/MetalSyntax/Raging-Thunder-vita/releases/tag/v1.0.1",
-    "published": "2026-10-18T03:52:28Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# Raging Thunder Vita — v1.0.1\r\n\r\nBug-fix release based on tester reports.\r\n\r\n## Fixes\r\n\r\n- **Race controls**: Cross accelerates, Square brakes, Triangle fires the nitro,\r\n  R/L accelerate/brake. (Before, Cross was nitro and Square/Triangle did nothing:\r\n  Raging Thunder 1 never remaps the engine's generic key masks, so the port now\r\n  does it at boot.)\r\n- **Start pauses reliably**: the back key is now held for 6 frames instead of 1,\r\n  which the game sometimes missed.\r\n- **Lighting / shadows**: lit objects (track, cars) no longer flash to another\r\n  mesh's lighting. Fixed in vendored vitaGL: an unlit draw consumed the\r\n  matrix-changed flag without recomputing the normal matrix.\r\n- **Start + Select menu**: no input lag; the overlay is redrawn only when something changes.\r\n\r\n## Controls (default)\r\n\r\n| Vita | Race | Menus |\r\n|---|---|---|\r\n| ✕ Cross / R | Accelerate | — (does nothing) |\r\n| ■ Square / L | Brake / reverse | L/R switch page |\r\n| ▲ Triangle | Nitro | **OK / confirm** |\r\n| ● Circle / Start | Pause | Back |\r\n| D-Pad / left stick | Steer | Navigate |\r\n| Start + Select | PS Vita controls menu | |\r\n\r\n> If you already have a `controls.txt` from v1.0.0, it keeps your bindings;\r\n> the new race actions apply to whatever buttons are bound to ACCELERATE / BRAKE / NITRO.\r\n\r\n## Install / update\r\n\r\nInstall `ragingthunder.vpk` over v1.0.0 with VitaShell. Game files\r\n(`ux0:data/ragingthunder/main.so`, `assets/data.vfs`) and saves are kept.\r\nFirst install: see `LEEME.txt` or the README.\r\n",
-    "assets": [
-      {
-        "name": "ragingthunder.vpk",
-        "size": 922277,
-        "download_url": "https://github.com/MetalSyntax/Raging-Thunder-vita/releases/download/v1.0.1/ragingthunder.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MetalSyntax",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0.1",
-    "catalog_version": "1.0.1",
-    "homebrew_name": "Raging Thunder",
-    "homebrew_icon": "https://archive.org/download/raging-thunder-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Android to PS Vita port of Raging Thunder",
-    "homebrew_long_description": "Unofficial port of Raging Thunder (Polarbit, Android) to the PS Vita, running the original ARM game library through a native loader (TheFloW's so-loader + FalsoJNI) with rendering via vitaGL.",
-    "homebrew_id": "raging-thunder",
-    "homebrew_authors": [
-      "metalsyntax"
-    ],
-    "homebrew_version": "1.0.1",
-    "catalog_apps": [
-      {
-        "id": "raging-thunder",
-        "name": "Raging Thunder",
-        "icon": "https://archive.org/download/raging-thunder-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Android to PS Vita port of Raging Thunder",
-        "long_description": "Unofficial port of Raging Thunder (Polarbit, Android) to the PS Vita, running the original ARM game library through a native loader (TheFloW's so-loader + FalsoJNI) with rendering via vitaGL.",
-        "version": "1.0.1",
-        "version_date": "2026-10-17",
-        "author_ids": [
-          "metalsyntax"
         ]
       }
     ]
@@ -33145,103 +33145,5 @@
         ]
       }
     ]
-  },
-  {
-    "platform": "github",
-    "repo": "Eyeman420/rePatch-Manager",
-    "release_id": "66870953",
-    "tag": "v1.10",
-    "name": "rePatch Manager v1.10",
-    "url": "https://github.com/Eyeman420/rePatch-Manager/releases/tag/v1.10",
-    "published": "2022-05-14T06:55:12Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Fix the random crash after enable or disable rePatch mods.",
-    "assets": [
-      {
-        "name": "rePatch.Manager.vpk",
-        "size": 3969733,
-        "download_url": "https://github.com/Eyeman420/rePatch-Manager/releases/download/v1.10/rePatch.Manager.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Eyeman420",
-    "homebrew_name": "rePatch Manager",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-repatch-manager/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Tools to manage rePatch games",
-    "homebrew_long_description": "Tool to enable and disable specific rePatch game. Useful to enable and disable mods that using rePatch.\nTested with FW 3.60 and 3.65.",
-    "homebrew_id": "repatch-manager",
-    "homebrew_authors": [
-      "eyeman"
-    ],
-    "homebrew_version": "v.1.10",
-    "catalog_apps": [
-      {
-        "id": "repatch-manager",
-        "name": "rePatch Manager",
-        "icon": "https://archive.org/download/psvitaalive-repatch-manager/icon0.png",
-        "category": "utilities",
-        "description": "Tools to manage rePatch games",
-        "long_description": "Tool to enable and disable specific rePatch game. Useful to enable and disable mods that using rePatch.\nTested with FW 3.60 and 3.65.",
-        "version": "v.1.10",
-        "version_date": "2022-05-14",
-        "author_ids": [
-          "eyeman"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.10",
-    "catalog_version": "v.1.10"
-  },
-  {
-    "platform": "github",
-    "repo": "TheOfficialFloW/modoru",
-    "release_id": "66542327",
-    "tag": "v2.3",
-    "name": "modoru v2.3",
-    "url": "https://github.com/TheOfficialFloW/modoru/releases/tag/v2.3",
-    "published": "2022-05-11T05:28:24Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Added compatibility for FW 3.74",
-    "assets": [
-      {
-        "name": "modoru.vpk",
-        "size": 125403,
-        "download_url": "https://github.com/TheOfficialFloW/modoru/releases/download/v2.3/modoru.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SKGleba",
-    "homebrew_name": "modoru",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-modoru/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Downgrader for PSVITA/PSTV.",
-    "homebrew_long_description": "modoru means \"to go back\" in Japanese and is a downgrader for the PS Vita,",
-    "homebrew_id": "modoru",
-    "homebrew_authors": [
-      "theflow"
-    ],
-    "homebrew_version": "v2.3",
-    "catalog_apps": [
-      {
-        "id": "modoru",
-        "name": "modoru",
-        "icon": "https://archive.org/download/psvitaalive-modoru/icon0.png",
-        "category": "utilities",
-        "description": "Downgrader for PSVITA/PSTV.",
-        "long_description": "modoru means \"to go back\" in Japanese and is a downgrader for the PS Vita,",
-        "version": "v2.3",
-        "version_date": "2022-05-11",
-        "author_ids": [
-          "theflow"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v2.3",
-    "catalog_version": "v2.3"
   }
 ]
