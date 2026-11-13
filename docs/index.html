@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong>484</strong><span>apps con release</span></div>
         <div class="stat"><strong class="green">390</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>93</strong><span>pendientes</span></div>
-        <div class="stat"><strong>475</strong><span>GitHub</span></div>
+        <div class="stat"><strong>94</strong><span>pendientes</span></div>
+        <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,6 +219,102 @@
   </div>
 
   <main class="wrap" id="releases">
+            <article class="card" data-platform="github" data-catalog="pending" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita khdays-vita v1.1.0 1.1 ports version 1.1 focuses on widescreen hud correctness, stable scripted-camera rendering and an expanded dual-wield option for roxas.
+
+## highlights
+
+- enabled roxas&#x27;s oathkeeper and oblivion dual-wield form in story mode mission replays and challenges when zero gear and three ability units are equipped. the option is applied automatically and uses the existing mission mode player implementation.
+- fixed `locked on` and portal countdown text being clipped in the detail single-screen layout.
+- fixed shortcut-command graphics becoming corrupted when holding l with the widescreen 4:3 hud below 100% size.
+- fixed black flashes during cutscenes when the script changed cameras.
+- fixed the oversized duplicate genie seen during mission 24 dialogue camera changes.
+- fixed moving seams between repeating skybox polygons, including the twilight town sky.
+- improved stability for affected scripted scenes by presenting their authored 30 hz frames directly instead of interpolating unrelated camera states.
+
+## technical notes
+
+- scripted field scenes and one-screen dialogue scenes bypass 60 hz geometry interpolation while gameplay continues to use it.
+- the detail compositor now extracts the complete lock-on/countdown strip before masking the original ds hud region.
+- widescreen shortcut composition remains synchronous while l is held and for four settling frames after release when hud scaling is active.
+- opaque repeating textures use ds-compatible wrap detection at exact texture-period boundaries; translucent and cut-out effects keep the existing clamp behavior.
+- the story/challenge player selector reuses the game&#x27;s panel recipe evaluation and promotes roxas to player group `0x13` only when the zero gear dual-wield combination is active.
+
+## validation
+
+- native vita build completed successfully.
+- the linked-elf post-credits scene validation passed.
+- video composition and ending-link host tests passed.
+- the final vpk archive passed integrity validation.
+- the fixes were exercised on real vita hardware during development. additional mission-by-mission coverage is still welcome, especially for story/challenge dual wield and uncommon scripted scenes.
+
+## requirements
+
+- a ps vita running henkaku/enso with vitashell.
+- `libshacccg.suprx` installed in `ur0:data/`.
+- the user&#x27;s own european kingdom hearts 358/2 days cartridge dump (`ykgp`) at `ux0:data/khdays/days.nds`.
+- `kubridge.skprx` is optional and only used for enhanced crash reports.
+
+no copyrighted game data is included in this release.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
+                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/1.1" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
+                      <div class="release-name">khdays-vita v1.1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.1</span>
+                    <span>2026-11-13 02:16 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0.0 → release 1.1</div>
+                  
+                  <div class="body markdown-body"><p>Version 1.1 focuses on widescreen HUD correctness, stable scripted-camera rendering and an expanded dual-wield option for Roxas.</p>
+<h2>Highlights</h2>
+<ul>
+<li>Enabled Roxas's Oathkeeper and Oblivion dual-wield form in Story Mode mission replays and Challenges when Zero Gear and three Ability Units are equipped. The option is applied automatically and uses the existing Mission Mode player implementation.</li>
+<li>Fixed <code>LOCKED ON</code> and portal countdown text being clipped in the DETAIL single-screen layout.</li>
+<li>Fixed shortcut-command graphics becoming corrupted when holding L with the widescreen 4:3 HUD below 100% size.</li>
+<li>Fixed black flashes during cutscenes when the script changed cameras.</li>
+<li>Fixed the oversized duplicate Genie seen during Mission 24 dialogue camera changes.</li>
+<li>Fixed moving seams between repeating skybox polygons, including the Twilight Town sky.</li>
+<li>Improved stability for affected scripted scenes by presenting their authored 30 Hz frames directly instead of interpolating unrelated camera states.</li>
+</ul>
+<h2>Technical notes</h2>
+<ul>
+<li>Scripted field scenes and one-screen dialogue scenes bypass 60 Hz geometry interpolation while gameplay continues to use it.</li>
+<li>The DETAIL compositor now extracts the complete lock-on/countdown strip before masking the original DS HUD region.</li>
+<li>Widescreen shortcut composition remains synchronous while L is held and for four settling frames after release when HUD scaling is active.</li>
+<li>Opaque repeating textures use DS-compatible wrap detection at exact texture-period boundaries; translucent and cut-out effects keep the existing clamp behavior.</li>
+<li>The Story/Challenge player selector reuses the game's panel recipe evaluation and promotes Roxas to player group <code>0x13</code> only when the Zero Gear dual-wield combination is active.</li>
+</ul>
+<h2>Validation</h2>
+<ul>
+<li>Native Vita build completed successfully.</li>
+<li>The linked-ELF post-credits scene validation passed.</li>
+<li>Video composition and ending-link host tests passed.</li>
+<li>The final VPK archive passed integrity validation.</li>
+<li>The fixes were exercised on real Vita hardware during development. Additional mission-by-mission coverage is still welcome, especially for Story/Challenge dual wield and uncommon scripted scenes.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>A PS Vita running HENkaku/Enso with VitaShell.</li>
+<li><code>libshacccg.suprx</code> installed in <code>ur0:data/</code>.</li>
+<li>The user's own European Kingdom Hearts 358/2 Days cartridge dump (<code>YKGP</code>) at <code>ux0:data/khdays/days.nds</code>.</li>
+<li><code>kubridge.skprx</code> is optional and only used for enhanced crash reports.</li>
+</ul>
+<p>No copyrighted game data is included in this release.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/1.1/khdays-vita-1.1.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-1.1.0.vpk · 3.8 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-search="pokemon colosseum pokemon colosseum rinnegatamante/colosseum-vita v.1.1 v.1.1 ports - added experimental pal languages (italian, french, german, spanish) support.
 - fixed a bug causing black screens after entering certain rooms in the game.
 - added several more new shaders in the built-in cache: this will make pop-in issues more rare.
@@ -8804,90 +8900,6 @@ extract the selected package and follow the [mod installation guide](https://git
 <p>Extract the selected package and follow the <a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/blob/main/docs/MODDING.md#starter-mods">mod installation guide</a>. Only one mod folder is selected at a time; use the combined package for both replacements. Starter mods are optional and contain no roster changes.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/NBA2K16Vita_v0%2E2%2Evpk" target="_blank" rel="noopener">⬇ NBA2K16Vita_v0.2.vpk</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/SHA256SUMS%2Etxt" target="_blank" rel="noopener">SHA256SUMS.txt</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/starter_aba_la_fitness%2Ezip" target="_blank" rel="noopener">starter_aba_la_fitness.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/starter_la_fitness%2Ezip" target="_blank" rel="noopener">starter_la_fitness.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/starter_aba%2Ezip" target="_blank" rel="noopener">starter_aba.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/nba2k16-vita-v0%2E2-source%2Ezip" target="_blank" rel="noopener">nba2k16-vita-v0.2-source.zip</a><a class="btn" href="https://gitlab.com/api/v4/projects/sexcurrybeats%2Fnba2k16-vita/packages/generic/nba2k16-vita/v0%2E2/NBA2K16Vita_v0%2E2-setup%2Ezip" target="_blank" rel="noopener">NBA2K16Vita_v0.2-setup.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/nba2k16-vita/-/archive/v0.2/nba2k16-vita-v0.2.tar" target="_blank" rel="noopener">source.tar</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="kingdom hearts 358/2 days kingdom hearts 358/2 days ggdrn/kh-days-vita 1.0.0 — release 1.0 ports release 1.0 with off, simple and detail single-screen modes.
-
-## changes
-
-- fixed the post-credits save-scene descriptor and restored the cleared-game save flow, theater mode and zero gear unlock path.
-- added linked-elf validation and diagnostic logging for the ending save scene.
-- fixed the mostly black display that could occur after pausing and resuming the final riku battle.
-- fixed the brief widescreen 4:3 hud corruption when opening the l shortcut.
-- fixed the temporary stretched darkside tentacle geometry in holo-mission: two keys.
-- extended the pause dim overlay across the widescreen side borders, including cutscene menus with continue / skip.
-- added three single-screen choices: off, simple and detail.
-- simple uses static panels with fewer 2d texture effects and filters for better performance.
-- detail keeps richer hud composition, detailed 2d filtering and effects for a more immersive experience at a higher rendering cost.
-- added mode-change logging and optimized detail by skipping smoothing for pixels discarded by hud masks.
-
-## performance findings
-
-the supplied performance log contains menu transitions, scene changes and different layouts, so it does not provide a controlled off/simple/detail comparison. cpu percentages are thread-group measurements, not total hardware utilization, and gpu completion time is not a direct utilization percentage.
-
-the existing port already requests the configured maximum clocks. increasing thread activity to 100% would not guarantee more frames and could harm audio and synchronization. the log now records the effective clocks for verification.
-
-## validation
-
-- native vita build completed successfully.
-- post-link ending-scene check passed.
-- composition, ending-link and gx3d host tests passed.
-- the vpk archive passed integrity validation.
-- real vita testing is still required for performance and the cutscene continue / skip overlay.
-
-## test procedure
-
-use the same mission, resolution, hud and filter settings. warm the detail shader cache once, then test off, simple and detail for at least 20 seconds each with the menu closed. repeat with debug logging disabled. during a cutscene, test continue and skip in all three modes and confirm that the side borders dim and return to normal after closing the pause menu.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/kh-days-vita/icon0.png" alt="Icono de Kingdom Hearts 358/2 Days" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · ggdrn/KH-DAYS-VITA</div>
-                      <h2><a href="https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/1.0" target="_blank" rel="noopener">Kingdom Hearts 358/2 Days</a></h2>
-                      <div class="release-name">1.0.0 — Release</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.0</span>
-                    <span>2026-10-21 20:08 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0.0</div>
-                  
-                  <div class="body markdown-body"><p>Release 1.0 with OFF, SIMPLE and DETAIL single-screen modes.</p>
-<h2>Changes</h2>
-<ul>
-<li>Fixed the post-credits save-scene descriptor and restored the cleared-game save flow, Theater Mode and Zero Gear unlock path.</li>
-<li>Added linked-ELF validation and diagnostic logging for the ending save scene.</li>
-<li>Fixed the mostly black display that could occur after pausing and resuming the final Riku battle.</li>
-<li>Fixed the brief widescreen 4:3 HUD corruption when opening the L shortcut.</li>
-<li>Fixed the temporary stretched Darkside tentacle geometry in Holo-Mission: Two Keys.</li>
-<li>Extended the pause dim overlay across the widescreen side borders, including cutscene menus with Continue / Skip.</li>
-<li>Added three single-screen choices: OFF, SIMPLE and DETAIL.</li>
-<li>SIMPLE uses static panels with fewer 2D texture effects and filters for better performance.</li>
-<li>DETAIL keeps richer HUD composition, detailed 2D filtering and effects for a more immersive experience at a higher rendering cost.</li>
-<li>Added mode-change logging and optimized DETAIL by skipping smoothing for pixels discarded by HUD masks.</li>
-</ul>
-<h2>Performance findings</h2>
-<p>The supplied performance log contains menu transitions, scene changes and different layouts, so it does not provide a controlled OFF/SIMPLE/DETAIL comparison. CPU percentages are thread-group measurements, not total hardware utilization, and GPU completion time is not a direct utilization percentage.</p>
-<p>The existing port already requests the configured maximum clocks. Increasing thread activity to 100% would not guarantee more frames and could harm audio and synchronization. The log now records the effective clocks for verification.</p>
-<h2>Validation</h2>
-<ul>
-<li>Native Vita build completed successfully.</li>
-<li>Post-link ending-scene check passed.</li>
-<li>Composition, ending-link and GX3D host tests passed.</li>
-<li>The VPK archive passed integrity validation.</li>
-<li>Real Vita testing is still required for performance and the cutscene Continue / Skip overlay.</li>
-</ul>
-<h2>Test procedure</h2>
-<p>Use the same mission, resolution, HUD and filter settings. Warm the DETAIL shader cache once, then test OFF, SIMPLE and DETAIL for at least 20 seconds each with the menu closed. Repeat with debug logging disabled. During a cutscene, test Continue and Skip in all three modes and confirm that the side borders dim and return to normal after closing the pause menu.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/ggdrn/KH-DAYS-VITA/releases/download/1.0/khdays-vita-1.0.0.vpk" target="_blank" rel="noopener">⬇ khdays-vita-1.0.0.vpk · 3.8 MB</a></div>
                 </div>
               </div>
             </article>
@@ -30884,10 +30896,37 @@ this was just a quick project for something to do.. its not great and i wouldnt 
                 </div>
               </div>
             </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-search="repatch manager repatch manager eyeman420/repatch-manager repatch manager v1.10 v1.10 utilities fix the random crash after enable or disable repatch mods.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-repatch-manager/icon0.png" alt="Icono de rePatch Manager" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · Eyeman420/rePatch-Manager</div>
+                      <h2><a href="https://github.com/Eyeman420/rePatch-Manager/releases/tag/v1.10" target="_blank" rel="noopener">rePatch Manager</a></h2>
+                      <div class="release-name">rePatch Manager v1.10</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.10</span>
+                    <span>2022-05-14 06:55 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: v.1.10</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive v.1.10</div>
+                  
+                  <div class="body markdown-body"><p>Fix the random crash after enable or disable rePatch mods.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Eyeman420/rePatch-Manager/releases/download/v1.10/rePatch.Manager.vpk" target="_blank" rel="noopener">⬇ rePatch.Manager.vpk · 3.8 MB</a></div>
+                </div>
+              </div>
+            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-12 21:40 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-13 04:22 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

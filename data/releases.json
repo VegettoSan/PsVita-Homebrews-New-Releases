@@ -1,6 +1,55 @@
 [
   {
     "platform": "github",
+    "repo": "ggdrn/KH-DAYS-VITA",
+    "release_id": "443735874",
+    "tag": "1.1",
+    "name": "khdays-vita v1.1.0",
+    "url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/1.1",
+    "published": "2026-11-13T02:16:22Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Version 1.1 focuses on widescreen HUD correctness, stable scripted-camera rendering and an expanded dual-wield option for Roxas.\r\n\r\n## Highlights\r\n\r\n- Enabled Roxas's Oathkeeper and Oblivion dual-wield form in Story Mode mission replays and Challenges when Zero Gear and three Ability Units are equipped. The option is applied automatically and uses the existing Mission Mode player implementation.\r\n- Fixed `LOCKED ON` and portal countdown text being clipped in the DETAIL single-screen layout.\r\n- Fixed shortcut-command graphics becoming corrupted when holding L with the widescreen 4:3 HUD below 100% size.\r\n- Fixed black flashes during cutscenes when the script changed cameras.\r\n- Fixed the oversized duplicate Genie seen during Mission 24 dialogue camera changes.\r\n- Fixed moving seams between repeating skybox polygons, including the Twilight Town sky.\r\n- Improved stability for affected scripted scenes by presenting their authored 30 Hz frames directly instead of interpolating unrelated camera states.\r\n\r\n## Technical notes\r\n\r\n- Scripted field scenes and one-screen dialogue scenes bypass 60 Hz geometry interpolation while gameplay continues to use it.\r\n- The DETAIL compositor now extracts the complete lock-on/countdown strip before masking the original DS HUD region.\r\n- Widescreen shortcut composition remains synchronous while L is held and for four settling frames after release when HUD scaling is active.\r\n- Opaque repeating textures use DS-compatible wrap detection at exact texture-period boundaries; translucent and cut-out effects keep the existing clamp behavior.\r\n- The Story/Challenge player selector reuses the game's panel recipe evaluation and promotes Roxas to player group `0x13` only when the Zero Gear dual-wield combination is active.\r\n\r\n## Validation\r\n\r\n- Native Vita build completed successfully.\r\n- The linked-ELF post-credits scene validation passed.\r\n- Video composition and ending-link host tests passed.\r\n- The final VPK archive passed integrity validation.\r\n- The fixes were exercised on real Vita hardware during development. Additional mission-by-mission coverage is still welcome, especially for Story/Challenge dual wield and uncommon scripted scenes.\r\n\r\n## Requirements\r\n\r\n- A PS Vita running HENkaku/Enso with VitaShell.\r\n- `libshacccg.suprx` installed in `ur0:data/`.\r\n- The user's own European Kingdom Hearts 358/2 Days cartridge dump (`YKGP`) at `ux0:data/khdays/days.nds`.\r\n- `kubridge.skprx` is optional and only used for enhanced crash reports.\r\n\r\nNo copyrighted game data is included in this release.\r\n",
+    "assets": [
+      {
+        "name": "khdays-vita-1.1.0.vpk",
+        "size": 3978210,
+        "download_url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/download/1.1/khdays-vita-1.1.0.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "ggdrn",
+    "homebrew_name": "Kingdom Hearts 358/2 Days",
+    "homebrew_icon": "https://archive.org/download/kh-days-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
+    "homebrew_long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.\n\n- PsVitaAlive -",
+    "homebrew_id": "kingdom-hearts-358-2-days",
+    "homebrew_authors": [
+      "ggdrn"
+    ],
+    "homebrew_version": "1.0.0",
+    "catalog_apps": [
+      {
+        "id": "kingdom-hearts-358-2-days",
+        "name": "Kingdom Hearts 358/2 Days",
+        "icon": "https://archive.org/download/kh-days-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
+        "long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.\n\n- PsVitaAlive -",
+        "version": "1.0.0",
+        "version_date": "2026-10-21",
+        "author_ids": [
+          "ggdrn"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0.0 → release 1.1",
+    "catalog_version": "1.0.0"
+  },
+  {
+    "platform": "github",
     "repo": "Rinnegatamante/colosseum-vita",
     "release_id": "443457894",
     "tag": "v.1.1",
@@ -5758,55 +5807,6 @@
         "version_date": "2026-10-22",
         "author_ids": [
           "spliffcurrybeats"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "ggdrn/KH-DAYS-VITA",
-    "release_id": "420005252",
-    "tag": "1.0",
-    "name": "1.0.0 — Release",
-    "url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/tag/1.0",
-    "published": "2026-10-21T20:08:00Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Release 1.0 with OFF, SIMPLE and DETAIL single-screen modes.\r\n\r\n## Changes\r\n\r\n- Fixed the post-credits save-scene descriptor and restored the cleared-game save flow, Theater Mode and Zero Gear unlock path.\r\n- Added linked-ELF validation and diagnostic logging for the ending save scene.\r\n- Fixed the mostly black display that could occur after pausing and resuming the final Riku battle.\r\n- Fixed the brief widescreen 4:3 HUD corruption when opening the L shortcut.\r\n- Fixed the temporary stretched Darkside tentacle geometry in Holo-Mission: Two Keys.\r\n- Extended the pause dim overlay across the widescreen side borders, including cutscene menus with Continue / Skip.\r\n- Added three single-screen choices: OFF, SIMPLE and DETAIL.\r\n- SIMPLE uses static panels with fewer 2D texture effects and filters for better performance.\r\n- DETAIL keeps richer HUD composition, detailed 2D filtering and effects for a more immersive experience at a higher rendering cost.\r\n- Added mode-change logging and optimized DETAIL by skipping smoothing for pixels discarded by HUD masks.\r\n\r\n## Performance findings\r\n\r\nThe supplied performance log contains menu transitions, scene changes and different layouts, so it does not provide a controlled OFF/SIMPLE/DETAIL comparison. CPU percentages are thread-group measurements, not total hardware utilization, and GPU completion time is not a direct utilization percentage.\r\n\r\nThe existing port already requests the configured maximum clocks. Increasing thread activity to 100% would not guarantee more frames and could harm audio and synchronization. The log now records the effective clocks for verification.\r\n\r\n## Validation\r\n\r\n- Native Vita build completed successfully.\r\n- Post-link ending-scene check passed.\r\n- Composition, ending-link and GX3D host tests passed.\r\n- The VPK archive passed integrity validation.\r\n- Real Vita testing is still required for performance and the cutscene Continue / Skip overlay.\r\n\r\n## Test procedure\r\n\r\nUse the same mission, resolution, HUD and filter settings. Warm the DETAIL shader cache once, then test OFF, SIMPLE and DETAIL for at least 20 seconds each with the menu closed. Repeat with debug logging disabled. During a cutscene, test Continue and Skip in all three modes and confirm that the side borders dim and return to normal after closing the pause menu.",
-    "assets": [
-      {
-        "name": "khdays-vita-1.0.0.vpk",
-        "size": 3978235,
-        "download_url": "https://github.com/ggdrn/KH-DAYS-VITA/releases/download/1.0/khdays-vita-1.0.0.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ggdrn",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0.0",
-    "catalog_version": "1.0.0",
-    "homebrew_name": "Kingdom Hearts 358/2 Days",
-    "homebrew_icon": "https://archive.org/download/kh-days-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
-    "homebrew_long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.\n\n- PsVitaAlive -",
-    "homebrew_id": "kingdom-hearts-358-2-days",
-    "homebrew_authors": [
-      "ggdrn"
-    ],
-    "homebrew_version": "1.0.0",
-    "catalog_apps": [
-      {
-        "id": "kingdom-hearts-358-2-days",
-        "name": "Kingdom Hearts 358/2 Days",
-        "icon": "https://archive.org/download/kh-days-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Decompilation of Kingdom Hearts: 358/2 Days to PS VITA",
-        "long_description": "A native PS Vita port of Kingdom Hearts 358/2 Days (Nintendo DS), built from the khdays-decomp decompilation.\n\nThe game code is recompiled for the Vita, not emulated. The DS hardware it expects (2D and 3D engines, sound, card, touch screen) is reimplemented on top of VitaSDK and vitaGL.\n\n- PsVitaAlive -",
-        "version": "1.0.0",
-        "version_date": "2026-10-21",
-        "author_ids": [
-          "ggdrn"
         ]
       }
     ]
@@ -33145,5 +33145,54 @@
         ]
       }
     ]
+  },
+  {
+    "platform": "github",
+    "repo": "Eyeman420/rePatch-Manager",
+    "release_id": "66870953",
+    "tag": "v1.10",
+    "name": "rePatch Manager v1.10",
+    "url": "https://github.com/Eyeman420/rePatch-Manager/releases/tag/v1.10",
+    "published": "2022-05-14T06:55:12Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Fix the random crash after enable or disable rePatch mods.",
+    "assets": [
+      {
+        "name": "rePatch.Manager.vpk",
+        "size": 3969733,
+        "download_url": "https://github.com/Eyeman420/rePatch-Manager/releases/download/v1.10/rePatch.Manager.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Eyeman420",
+    "homebrew_name": "rePatch Manager",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-repatch-manager/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Tools to manage rePatch games",
+    "homebrew_long_description": "Tool to enable and disable specific rePatch game. Useful to enable and disable mods that using rePatch.\nTested with FW 3.60 and 3.65.",
+    "homebrew_id": "repatch-manager",
+    "homebrew_authors": [
+      "eyeman"
+    ],
+    "homebrew_version": "v.1.10",
+    "catalog_apps": [
+      {
+        "id": "repatch-manager",
+        "name": "rePatch Manager",
+        "icon": "https://archive.org/download/psvitaalive-repatch-manager/icon0.png",
+        "category": "utilities",
+        "description": "Tools to manage rePatch games",
+        "long_description": "Tool to enable and disable specific rePatch game. Useful to enable and disable mods that using rePatch.\nTested with FW 3.60 and 3.65.",
+        "version": "v.1.10",
+        "version_date": "2022-05-14",
+        "author_ids": [
+          "eyeman"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.10",
+    "catalog_version": "v.1.10"
   }
 ]
