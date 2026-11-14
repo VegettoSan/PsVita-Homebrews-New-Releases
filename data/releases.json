@@ -1,6 +1,195 @@
 [
   {
     "platform": "github",
+    "repo": "pyjabox/VitaKotor2",
+    "release_id": "445484897",
+    "tag": "v0.6.0",
+    "name": "VitaKotor2 v0.6.0",
+    "url": "https://github.com/pyjabox/VitaKotor2/releases/tag/v0.6.0",
+    "published": "2026-11-14T17:58:45Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# VitaKotor2 v0.6.0 — Enemies that fight back, and a lighter engine\n\nThis release is about the AI and big fights. In large battles most enemies\nused to stand idle, waiting seconds for their turn; they now take their turns,\nand the AI's work costs less: scripts run in the port's own interpreter,\nreactions that change nothing are skipped, and the AI waits less for the\ndrawing. The engine's calls, menus, animations and effects cost less too.\nIt also fixes saving during big fights, and mods' English-only lines that came\nout blank in other languages. The release build was played on a physical Vita\nover several sessions, through to Korriban.\n\n## The AI\n\nHardware, the battle of Khoonda on Dantooine (TSLRCM, 20+ fighters); each\nchange measured on and off in alternating 10 s windows.\n- **Enemies take their turns.** The engine ends an AI priority level as soon\n  as an event is due, and every enemy turn queues shouts, so the enemies in\n  combat stopped after one or two creatures whatever the budget: each enemy\n  decided every 2–3 s. Beside the drawing, the AI now carries on past due\n  events, their time no longer counts against its budget, and the budget\n  follows the time the drawing leaves (from the engine's 10 ms up to six\n  times that). Enemy decisions went from 1.5–2.6 to 5–15 a frame, attacks\n  from 45–85 to 85–245 per 10 s, and one enemy decision from 4–5 ms to\n  1–2 ms.\n- **Scripts run in the port's own NWScript interpreter:** the engine's,\n  transcribed, with its common stack operations done in place. Each script's\n  set-up of its constants (720 instructions for the AI's main script, about\n  70% of everything the AI interpreted) is worked out once, checked against a\n  real run, then copied in.\n- **Shout reactions that do nothing are skipped.** Every listener of every\n  battle shout ran the AI's main script. The runs its bytecode shows change\n  nothing, 35–57% of them in heavy fighting, are skipped, only for those two\n  scripts byte for byte: about a third less script time for the AI.\n- **The AI waits less for the drawing.** The calls that made it wait most\n  often (combat state, facing, camera, the combat message line, damage\n  numbers) are queued until the drawing ends, and attack animations are\n  looked up by the game thread at safe points of the drawing. The game thread\n  waited 14.1 instead of 42.5 ms a frame for the AI; the queued messages save\n  about 5 ms more.\n\n## Faster\n\n- **Engine calls:** libkotor2 is a shared library, so its calls to its own\n  functions went through a call table. About 97,000 of them now go straight\n  to the function (those to functions the port hooks keep the table): Telos\n  frames of 62.2 instead of 67.8 ms, battle frames 7–11% shorter.\n- **Action menus** are rebuilt when something changes rather than every frame:\n  1.6 instead of 4.2 ms a frame in the battle.\n- **Quaternion interpolation and name comparisons** are 2–3 times faster, with\n  the same answers.\n- **Effects:** procedural texture animation (energy fields, hyperspace) without\n  a library call per random number: 2.9–3.2 instead of 6.2–7.0 ms a frame.\n  Blaster sparks no longer test collisions with the scene (300–660 tests a\n  frame, 6–13 ms). Particle drawing in the battle went from 15–31 to 8–16 ms a\n  frame.\n- **Animation:** key searches, animation and table-column lookups are\n  remembered (the engine's own answers, checked against it), and bone and\n  light constants already sent to the GPU are not sent again (62–74% of them\n  in the battle).\n- **Trade-offs, each with a switch:** creatures and objects out of view are\n  animated one frame in three, those drawn beyond 20 m every other frame, and\n  the engine's animation-detail distances are 6 and 15 m instead of 12 and\n  30 m. Their animation events can fire a frame or two late. Blaster sparks\n  fly on through the floor, hidden by it, instead of bouncing.\n- **Overall:** the battle's first wave runs at 111–140 ms a frame (v0.5.8:\n  about 158 ms, with most enemies idle), with 3–6 times as many enemy\n  decisions.\n\n## Fixed\n\n**Saving during big fights** sat on the SAVING screen: the save ran out of\nmemory. Every pending scripted event saved its own copy of its script (one\narea's record reached 37 MB), the record grew by small fixed steps, and empty\nstrings were saved without a length, so loading could read a stray 18.9 MB\nstring. Events are now saved in the engine's own form without the copy, the\nrecord grows by an eighth, and new room starts zeroed. A save that already\nholds a 40 MB area still needs that memory to be saved again: load an older\none.\n\n**Mods' English-only text in another language.** Player replies, item names\nand other text that a mod has only in English came out blank instead of in\nEnglish, and a conversation whose replies mixed blank and translated lines\ndid not open. In French, the Sith Academy's detention terminal on Korriban\n(M4-78EP) stopped opening after \"ERROR: UNSPECIFIED\". The English fallback\nnow applies whenever a text comes out empty, in every language and for every\nmod. Checked on hardware at that terminal.\n\n**Resuming after the PS button:** the README now describes TheFloW's optional\n[FdFix](https://github.com/TheOfficialFloW/FdFix/releases) plugin, which\nkeeps the game's open files valid across a suspend.\n\n## Installation\n\n1. Install `KOTOR2.vpk` with VitaShell. The title ID is `KOTR00002`.\n2. Create `ux0:data/kotor2/`.\n3. Copy from your own copy of the Android version **2.0.4**, using the 32-bit\n   libraries from the APK's `lib/armeabi-v7a/` folder (the README lists each\n   file's exact size and SHA-256):\n   - `libkotor2.so`\n   - `libObbVfs.so`\n   - `libc++_shared.so`\n   - `libminiz.so`\n   - `libLzmaLib.so`\n   - `main.213.com.aspyr.swkotorii.obb`\n   - `patch.14.com.aspyr.swkotorii.obb`\n   - the APK `assets/` directory\n4. Install and enable `kubridge.skprx`.\n5. Place `libshacccg.suprx` in `ur0:data/`.\n6. Optionally, mods in `ux0:data/kotor2/mods/`, voice packs in\n   `ux0:data/kotor2/localized/`, and the FdFix plugin (see the README).\n\n**Upgrading from v0.5.2 or later:** install the VPK over the old one.\nGame data, saves, mods, voice packs, the chosen language and the shader cache\nstay as they are.\nFrom v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a\nlanguage.\n\n## Known issues and limitations\n\n- **Very large fights are still slow:** the battle of Khoonda with TSLRCM runs\n  at about 7–9 FPS, now mostly drawing the blaster fire and effects.\n- **A black screen after the militia's retreat at Khoonda** was seen once in\n  about five test runs of the battle: the retreat's conversation never\n  started, and the screen stayed black while the game kept running. Not seen\n  since, and the cause is not known yet. If it happens, load a save from\n  before the retreat.\n- **The menu before the game is in English.**\n- **Mods in another language:** what a mod has only in English shows in\n  English, voice lines added by mods are English (they were never dubbed), and\n  a mod's own voice-line and lip-sync files are used instead of a voice pack's\n  (TSLRCM: 4 lines and the lip sync of 9 areas). Text a mod adds only to the\n  English talk table, rather than to its own files, can still be blank.\n  Details in the README.\n- **With mods, launches take about 1 s longer** while they are indexed, and the\n  first launch in a new language about 2 s more to build its talk table.\n- **Noise behind the sound in busy scenes,** such as Telos. The decoders and\n  the mix were checked and are clean; the cause is not known yet\n  ([issue #5](https://github.com/pyjabox/VitaKotor2/issues/5)).\n- **About one launch in three takes about 11 s longer,** in the engine's scan of\n  `dlc/`. The cause is not known yet.\n- **Shorter hitches remain** (usually 0.12–0.23 s, occasionally more) when new\n  content is first read from the memory card, at about 10 MB/s: the minimap's\n  first draw, dialogue entries and their voices, creatures spawned by scripts.\n- **Loading-screen images** still take about 0.1–0.35 s each.\n- **Heavy scenes remain CPU-bound,** mostly in the engine's per-object rendering\n  work.\n- **Visual changes:** no dynamic shadows, no bloom passes, and blaster sparks\n  don't bounce. Rooms keep their baked lighting.\n- **Less frequent updates:** idle creatures, placeables, doors and items get\n  their AI update every third frame; animation trade-offs as above. Nothing\n  was noticed in testing.\n- **One frame of extra latency:** the GL worker lets the game run up to one\n  frame ahead, and the AI's decisions reach the screen one frame later. An\n  object stepping out from cover can appear up to three frames late\n  (occlusion culling).\n- **Touch:** only the front touchscreen is used. The game keeps its controller\n  layout, so its touch-only on-screen controls are not shown.\n- **First launch:** it can take about two minutes while archives are scanned\n  and shaders compile, and the loading screen can sit still for much of it.\n- **Shader cache:** if a warm launch black-screens, remove\n  `ux0:data/shader_cache/KOTR00002/` and relaunch.\n- **No complete playthrough certified yet.** Trophies, cloud saves and online\n  features are unavailable.\n\n## Switches\n\nCreate the file in `ux0:data/kotor2/` and relaunch; delete it to go back.\n- **New:** each of these files turns one v0.6.0 change off, going back to how\n  v0.5.8 did it:\n  - `nwvm_mode.txt` containing `0`: the engine's own script interpreter.\n  - `dialogue_mode.txt` containing `0`: every shout reaction runs.\n  - `spark_collision.txt` containing `1`: blaster sparks bounce again (up to\n    13 ms a frame in big fights).\n  - `part_collide_mode.txt` containing `0`: the engine's own particle box test.\n  - `anim_mode.txt` containing `0`: no remembered animation lookups.\n  - `anim_offscreen.txt` containing `0`: everything out of view animated every\n    frame; `anim_far.txt` containing `0` (or a distance in metres instead of\n    20): distant creatures animated every frame; `anim_depth.txt` containing\n    `0`: the engine's animation-detail distances.\n  - `plt_mode.txt` containing `0`: the engine's calls through its call table.\n  - `menu_mode.txt` containing `0`: action menus rebuilt every frame.\n  - `leaf_mode.txt` containing `0`: the engine's own interpolation and name\n    comparison.\n  - `proc_mode.txt` containing `0`: the engine's own procedural texture\n    animation.\n  - `slim_mode.txt` containing `0`: pending events saved with their script's\n    copy (saves in big fights grow by tens of MB and can run out of memory).\n  - `gff_mode.txt` containing `0`: the engine's own save writer and string\n    reader (also turns off the slim saves).\n- **From v0.5.8:** `ai_thread.txt`, `aslw_mode.txt`, `offload_mode.txt`,\n  `scene_mode.txt`, `path_mode.txt` and `script_mode.txt` containing `0` go\n  back to how v0.5.7 did each.\n- `ai_mode.txt` containing `0`: the game's own AI loop, with no throttle and no\n  AI caches (slower in busy areas). Containing a number from 1 to 65: the AI's\n  base time budget in milliseconds (the engine's is 10).\n- `touch_mode.txt` containing `0`: buttons only, as in v0.4.2.\n- `loadscreen_mode.txt` containing `0`: black screen until the legal screen, as\n  in v0.4.2.\n- `patcher_mode.txt` containing `0`: vitaGL's vertex-program requests go\n  straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool\n  stays at 4 MB).\n- `fps_cap.txt` containing `0`: no 30 FPS cap. `LockFramerate=1` under\n  `[Graphics Options]` in `swkotor2.ini` then caps again, and `V-Sync=0` turns\n  vsync off.\n- `room_distance.txt` containing a distance in metres: rooms beyond it are not\n  drawn (up to about 25% faster where long views open, with distant geometry\n  missing).\n- `glw_mode.txt` containing `0`: vitaGL on the game thread, as in v0.2.0.\n- `dxt_mode.txt` containing `0`: DXT textures decoded on the CPU, as in v0.3.0.\n- `mipgen_mode.txt` containing `0`: every mip chain built by the engine, as in\n  v0.3.0.\n\nThis release contains no copyrighted game code or data.\n\n`KOTOR2.vpk` SHA-256: `62c5b55b48abd07048237a3fa2e8131bdc4dfd7d834c829e2f6d82552ff827c9`\n",
+    "assets": [
+      {
+        "name": "KOTOR2.vpk",
+        "size": 2194649,
+        "download_url": "https://github.com/pyjabox/VitaKotor2/releases/download/v0.6.0/KOTOR2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "pyjabox",
+    "homebrew_name": "KOTOR II",
+    "homebrew_icon": "https://archive.org/download/VitaKotor2/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
+    "homebrew_long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
+    "homebrew_id": "kotor-ii",
+    "homebrew_authors": [
+      "pyjabox"
+    ],
+    "homebrew_version": "0.5.8",
+    "catalog_apps": [
+      {
+        "id": "kotor-ii",
+        "name": "KOTOR II",
+        "icon": "https://archive.org/download/VitaKotor2/icon0.png",
+        "category": "ports",
+        "description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
+        "long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
+        "version": "0.5.8",
+        "version_date": "2026-11-03",
+        "author_ids": [
+          "pyjabox"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.5.8 → release v0.6.0",
+    "catalog_version": "0.5.8"
+  },
+  {
+    "platform": "github",
+    "repo": "Federicoilgrandebardo/vampire-survivors-vita",
+    "release_id": "445461828",
+    "tag": "v1.2.1",
+    "name": "v1.2.1",
+    "url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/tag/v1.2.1",
+    "published": "2026-11-14T17:21:55Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "A fix release: the DLC stages no longer run out of memory, Arcana chests give Arcanas again, and the game now starts with an animated boot screen.\n\n### What's new\n- **Animated boot screen**, frames by Wolff ([WolffsRoom](https://github.com/WolffsRoom)): the LiveArea picture stays on screen while the game loads, then comes to life and fades to black before the photosensitivity warning. No more black screen between the two. Any button skips it.\n\n### Fixed\n- **Crash on the DLC stages** (#14): every run reloaded its stage map without freeing the previous one. The base game maps are small enough that nobody noticed, but the Moonspell, Foscari and Astral Stair maps take about 70 MB each, so the second or third run on a DLC stage ran out of memory. The game now keeps only the current map. The bug dates back to v1.0.\n- **Arcana chests gave only gold** (#15): the purple chests at 11:00 and 21:00 never recognized their Arcana prize and paid out a gold bag instead. They now open the Arcana draft, as in the original.\n\n### Updating from v1.2\nInstall the VPK. Your save carries over. For co-op, both Vitas need v1.2.1.\n\n### Downloads\n- `VampireSurvivors-Vita-v1.2.1.vpk`: the game\n- `VampireSurvivorsSetup-Windows.zip`, `-macOS.zip`, `-Linux.zip`: the setup tool, unchanged from v1.2\n- `libraylib.a`: only for building from source\n\n### Known issues\n- Very heavy waves, around 300 enemies with the busiest weapons, can still dip below 60 fps.\n- The 3D view is still an experiment: see the v1.1 notes.\n\nThanks to limonetas ([limonetas](https://github.com/limonetas)) for the crash dump behind the DLC fix, to Athos ([AthosSoster](https://github.com/AthosSoster)) for the Arcana chest report, and to Wolff ([WolffsRoom](https://github.com/WolffsRoom)) for the boot animation.\n",
+    "assets": [
+      {
+        "name": "libraylib.a",
+        "size": 1599854,
+        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.2.1/libraylib.a",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "VampireSurvivors-Vita-v1.2.1.vpk",
+        "size": 13368510,
+        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.2.1/VampireSurvivors-Vita-v1.2.1.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "VampireSurvivorsSetup-Linux.zip",
+        "size": 97711134,
+        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.2.1/VampireSurvivorsSetup-Linux.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "VampireSurvivorsSetup-macOS.zip",
+        "size": 66919907,
+        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.2.1/VampireSurvivorsSetup-macOS.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "VampireSurvivorsSetup-Windows.zip",
+        "size": 51343777,
+        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.2.1/VampireSurvivorsSetup-Windows.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "Federicoilgrandebardo",
+    "homebrew_name": "Vampire Survivors",
+    "homebrew_icon": "https://archive.org/download/vampire-survivors-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native PS Vita port of Vampire Survivors (Phaser build rewritten in C).",
+    "homebrew_long_description": "A native PS Vita port of Vampire Survivors (poncle, 2022). Not an emulator and not a wrapper: the Phaser build of the game, the one Steam still ships as the old-engine beta branch, rewritten in C on top of raylib, SDL2 and vitaGL, logic class by class, so it plays like the original.",
+    "homebrew_id": "vampire-survivors",
+    "homebrew_authors": [
+      "federicoilgrandebardo"
+    ],
+    "homebrew_version": "1.1",
+    "catalog_apps": [
+      {
+        "id": "vampire-survivors",
+        "name": "Vampire Survivors",
+        "icon": "https://archive.org/download/vampire-survivors-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Native PS Vita port of Vampire Survivors (Phaser build rewritten in C).",
+        "long_description": "A native PS Vita port of Vampire Survivors (poncle, 2022). Not an emulator and not a wrapper: the Phaser build of the game, the one Steam still ships as the old-engine beta branch, rewritten in C on top of raylib, SDL2 and vitaGL, logic class by class, so it plays like the original.",
+        "version": "1.1",
+        "version_date": "2026-11-07",
+        "author_ids": [
+          "federicoilgrandebardo"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.1 → release v1.2.1",
+    "catalog_version": "1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "T64NCollection/TNTV",
+    "release_id": "445416827",
+    "tag": "v1.01",
+    "name": "TNTV v1.01 — 60 FPS Single Player Opponent",
+    "url": "https://github.com/T64NCollection/TNTV/releases/tag/v1.01",
+    "published": "2026-11-14T16:07:44Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# TNTV v1.01 — 60 FPS Single Player Opponent update\n\n*The New Tetris* native on **PS Vita and PlayStation TV (PSTV / Vita TV)**, now with a faster **Single Player OPPONENT (vs. CPU)** mode.\n\n## What's new in v1.01\n\n- **All seven cultural backdrops in Single Player → OPPONENT now run at approximately 60 FPS, raised from the original 30 FPS in TNTV v1.0.** Every backdrop was verified on actual Vita TV hardware, with additional quick Opponent gameplay checks on handheld Vita.\n- Corrected playfield-to-backdrop alignment, including the bottom row of locked blocks, and eliminated ghost-piece rendering artifacts.\n- Preserved metallic blocks, holds, garbage, line clears, pause/PROGRESS and match results—all verified across the seven cultural stages.\n- Improved individual block rendering and framebuffer restoration without changing CPU difficulty or gameplay speed.\n- Kept the **L + R + Select** FPS counter; removed development-only timing overlays.\n\nThe existing **eight optimized solo stages, complete Wonders progression/Hall, original gameplay/audio, and hardware-tested local 2–4 player PSTV support** remain intact. The 60 FPS CPU Opponent upgrade does **not** imply local multiplayer or every cinematic runs at 60 FPS.\n\n## Download and installation\n\nDownload **TNTV-v1.01.zip**, extract it and install **TNTV_v1.01.vpk** using VitaShell. The same VPK is also available directly below.\n\n**Already have TNTV v1.0?** Install v1.01 over the existing app (Title ID `NTET00001`). **Do not delete `ux0:/data/TNTV/`**, which holds your ROM, locally generated assets, profiles, scores and Wonder progression. No ROM renaming, cache reset or save migration is needed.\n\n**New installation:** Supply your own compatible **The New Tetris (USA 1.0)** Nintendo 64 ROM (**12,582,912 bytes / 12 MiB**) in `ux0:/data/TNTV/`. Common `.z64`, `.v64` and `.n64` names work without renaming. TNTV prepares game assets locally. **No original ROM, extracted media, personal saves or caches are included.**\n\nRead [INSTALLATION.md](https://github.com/T64NCollection/TNTV/blob/main/INSTALLATION.md) and [TROUBLESHOOTING.md](https://github.com/T64NCollection/TNTV/blob/main/TROUBLESHOOTING.md). Source builders can download **TNTV-v1.01-source.zip** or clone the repository.\n\n## Notes & credits\n\nTNTV adapts work from [chris-gilmore/tnt-splat](https://github.com/chris-gilmore/tnt-splat), with substantial AI-assisted porting/optimization and extensive physical Vita/PSTV testing. Thanks to the original developers and VitaSDK/homebrew communities. This is an unofficial fan project unaffiliated with the original rights holders.\n",
+    "assets": [
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 250,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "TNTV-v1.01-source.zip",
+        "size": 828433,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV-v1.01-source.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "TNTV-v1.01.zip",
+        "size": 751585,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV-v1.01.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "TNTV_v1.01.vpk",
+        "size": 741555,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV_v1.01.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "T64NCollection",
+    "homebrew_name": "TNTV - The New Tetris",
+    "homebrew_icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
+    "homebrew_long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
+    "homebrew_id": "tntv",
+    "homebrew_authors": [
+      "t64ncollection"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "tntv",
+        "name": "TNTV - The New Tetris",
+        "icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
+        "category": "ports",
+        "description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
+        "long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
+        "version": "1.0",
+        "version_date": "2026-11-11",
+        "author_ids": [
+          "t64ncollection"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.01",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
     "repo": "arielxflores/Tenkaichi3Decomp-Vita",
     "release_id": "445285291",
     "tag": "v1.2.1",
@@ -622,73 +811,6 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.4.1",
     "catalog_version": "1.4.1"
-  },
-  {
-    "platform": "github",
-    "repo": "T64NCollection/TNTV",
-    "release_id": "441764172",
-    "tag": "v1.0",
-    "name": "TNTV v1.0 — The New Tetris for PS Vita & PlayStation TV",
-    "url": "https://github.com/T64NCollection/TNTV/releases/tag/v1.0",
-    "published": "2026-11-11T13:55:27Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# TNTV v1.0 — The New Tetris for PS Vita & PlayStation TV\n\n[![Platform: PS Vita / PSTV](https://img.shields.io/badge/Platform-PS%20Vita%20%7C%20PSTV-1863AE)](https://github.com/T64NCollection/TNTV)\n[![Players: 1–4](https://img.shields.io/badge/Players-1%E2%80%934-blueviolet)](https://github.com/T64NCollection/TNTV)\n\n*The New Tetris* on the go—or with four controllers on the couch. **TNTV** is an unofficial native port for **PS Vita and PlayStation TV (PSTV / Vita TV)**.\n\n## ✨ Highlights\n\n- **🎮 Eight optimized solo stages:** All seven cultural boards plus Industrial/Finale, extensively tuned for **approximately 60 FPS** in normal single-player gameplay. Detailed work on skies, animated effects and visual fidelity.\n- **👥 Up to four players on PSTV:** Real-hardware-tested 2P/3P/4P gameplay using four DualShock 3/4 controllers, with targeting, garbage attacks, Hot Potato and complete results screens.\n- **🏛️ Restored Wonders:** Construction milestones, progression, 3D WONDERS Hall (including completed/in-progress/locked states), animations and the finale, with persistent unlocks.\n- **🎵 Original audio and faithful gameplay:** Music and assets reconstructed locally from your ROM, original sound effects, familiar rules, original name-entry cheats and perhaps a hidden surprise.\n- **🕹️ Native Vita polish:** GXM rendering, custom cybergrid pillarboxes and a toggleable FPS counter.\n\n## 🎮 Controls\n\n| Action | PS Vita / DS3 / DS4 |\n|---|---|\n| Move | D-pad Left / Right |\n| Soft drop / Hard drop | D-pad Down / Up |\n| Rotate clockwise / counterclockwise | Cross (×) / Circle (○) |\n| Hold piece | L / L1 |\n| Start / Pause | Start |\n| Menu confirm / back | Cross (×) / Circle (○) |\n| Change multiplayer target | Square / Triangle (3–4P Directed mode) |\n| N64 R input | R / R1 (context-dependent) |\n| FPS display on/off | **L + R + Select** |\n\n## 📦 Download & installation\n\n1. Download **`TNTV-v1.0.zip`** below, extract it and install **`TNTV_v1.0.vpk`** using VitaShell.\n2. Place **your own original USA 1.0 ROM** of *The New Tetris*, exactly **12,582,912 bytes (12 MiB)**, in `ux0:/data/TNTV/`.\n3. Keep its existing filename. TNTV supports `.z64`, `.v64` and `.n64` files without renaming. Keep one compatible ROM in the folder.\n4. Launch the game. It prepares graphics, scenes and music locally on first run; future launches reuse caches.\n\n**No copyrighted ROM, extracted soundtrack, game-art cache or save is bundled.** When updating, preserve `ux0:/data/TNTV/tntv_sram.bin` to keep profiles, scores and Wonders progress.\n\nThe package includes [installation instructions](https://github.com/T64NCollection/TNTV/blob/main/INSTALLATION.md) and [troubleshooting](https://github.com/T64NCollection/TNTV/blob/main/TROUBLESHOOTING.md). Source builders can download **`TNTV-v1.0-source.zip`**; VitaSDK is required, but the game ROM is not needed to compile.\n\n## 📝 Notes & credits\n\nPerformance varies by mode and scene; the ~60 FPS figure refers to normal **solo-stage gameplay**, while multiplayer and cinematic sequences have their own frame rates.\n\nTNTV adapts the work of [chris-gilmore/tnt-splat](https://github.com/chris-gilmore/tnt-splat). The port involved **substantial AI assistance** and extensive Vita/PSTV hardware testing. Thanks to the original developers and the VitaSDK/homebrew community. TNTV is an unofficial fan project; original rights remain with their respective owners.\n",
-    "assets": [
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 167,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.0/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "TNTV-v1.0-source.zip",
-        "size": 823445,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.0/TNTV-v1.0-source.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "TNTV-v1.0.zip",
-        "size": 721066,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.0/TNTV-v1.0.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "TNTV_v1.0.vpk",
-        "size": 711691,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.0/TNTV_v1.0.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "T64NCollection",
-    "homebrew_name": "TNTV - The New Tetris",
-    "homebrew_icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
-    "homebrew_long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
-    "homebrew_id": "tntv",
-    "homebrew_authors": [
-      "t64ncollection"
-    ],
-    "homebrew_version": "1.0",
-    "catalog_apps": [
-      {
-        "id": "tntv",
-        "name": "TNTV - The New Tetris",
-        "icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
-        "category": "ports",
-        "description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
-        "long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
-        "version": "1.0",
-        "version_date": "2026-11-11",
-        "author_ids": [
-          "t64ncollection"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0",
-    "catalog_version": "1.0"
   },
   {
     "platform": "github",
@@ -2067,79 +2189,6 @@
   },
   {
     "platform": "github",
-    "repo": "Federicoilgrandebardo/vampire-survivors-vita",
-    "release_id": "437800559",
-    "tag": "v1.1",
-    "name": "v1.1",
-    "url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/tag/v1.1",
-    "published": "2026-11-07T19:46:26Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Local co-op, a startup intro, smoother heavy waves, custom characters, and a pair of glasses you should not trust.\n\n### What's new\n- **Local co-op**: two Vitas on the same Wi-Fi, from Co-op in the main menu. One hosts and picks the stage, the other joins with any character they have bought. A fallen player comes back at the other's next level-up.\n- **Intro** at startup, animation from the Ode to Castlevania announcement trailer set to original music. Any button skips it.\n- **Performance, thanks to Marcin ([DrakonPL](https://github.com/DrakonPL))**: heavy waves run around 56 fps where v1.0 dropped to 39. His pull request measured where the frame time was going and brought every idea behind the speed-up: no more waiting on the GPU every frame, music and sound effects off the main thread, incremental sorting and off-screen culling for the draw list, enemy templates for spawning, and a grid for projectile hits. They are rewritten for this port, but the speed-up is his.\n- **Wolff ([WolffsRoom](https://github.com/WolffsRoom))'s interface ideas**: photosensitivity warning, pixel button glyphs, animated main menu, centered prompts, zoom and touch movement in the Options, achievements fixed at the edges.\n- **Custom characters** in the format of the Unity custom character beta, in `ux0:data/VampireSurvivors/CustomCharacters/`.\n- **Jukebox**: every stage hides a vinyl record; the first unlocks the Jukebox in the main menu.\n- **The Funny Glasses**: somewhere in the Mad Forest. See below.\n\n### Experimental: 3D view\nThe glasses give 30 seconds of 3D and then unlock a View option for good. **It is a beta and an easter egg, made for fun rather than to be played seriously**: the game was never designed for 3D, so props can float, walls can look odd, ground effects stay flat and the frame rate drops. Rough edges are expected and part of the joke.\n\n### Fixed\n- Pause: the weapon evolutions panel fits the screen; the Grimoire box grows with its text.\n\n### Updating from v1.0\nInstall the VPK. Your save carries over. For co-op, both Vitas need v1.1.\n\n### Downloads\n- `VampireSurvivors-Vita-v1.1.vpk`: the game\n- `VampireSurvivorsSetup-Windows.exe`, `-macOS.zip`, `-Linux.zip`: the setup tool, unchanged from v1.0\n- `libraylib.a`: only for building from source\n\n### Known issues\n- Very heavy waves can still dip below 60 fps.\n- The 3D view: see above.\n\nThanks to Wolff ([WolffsRoom](https://github.com/WolffsRoom)) for the interface ideas and the animated menu, and to Marcin ([DrakonPL](https://github.com/DrakonPL)), whose performance work is the reason this release runs as smoothly as it does.\n",
-    "assets": [
-      {
-        "name": "libraylib.a",
-        "size": 1599854,
-        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.1/libraylib.a",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "VampireSurvivors-Vita-v1.1.vpk",
-        "size": 13150344,
-        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.1/VampireSurvivors-Vita-v1.1.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "VampireSurvivorsSetup-Linux.zip",
-        "size": 97711134,
-        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.1/VampireSurvivorsSetup-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "VampireSurvivorsSetup-macOS.zip",
-        "size": 66919907,
-        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.1/VampireSurvivorsSetup-macOS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "VampireSurvivorsSetup-Windows.exe",
-        "size": 51710405,
-        "download_url": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita/releases/download/v1.1/VampireSurvivorsSetup-Windows.exe",
-        "content_type": "application/x-msdownload"
-      }
-    ],
-    "author": "Federicoilgrandebardo",
-    "homebrew_name": "Vampire Survivors",
-    "homebrew_icon": "https://archive.org/download/vampire-survivors-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native PS Vita port of Vampire Survivors (Phaser build rewritten in C).",
-    "homebrew_long_description": "A native PS Vita port of Vampire Survivors (poncle, 2022). Not an emulator and not a wrapper: the Phaser build of the game, the one Steam still ships as the old-engine beta branch, rewritten in C on top of raylib, SDL2 and vitaGL, logic class by class, so it plays like the original.",
-    "homebrew_id": "vampire-survivors",
-    "homebrew_authors": [
-      "federicoilgrandebardo"
-    ],
-    "homebrew_version": "1.1",
-    "catalog_apps": [
-      {
-        "id": "vampire-survivors",
-        "name": "Vampire Survivors",
-        "icon": "https://archive.org/download/vampire-survivors-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Native PS Vita port of Vampire Survivors (Phaser build rewritten in C).",
-        "long_description": "A native PS Vita port of Vampire Survivors (poncle, 2022). Not an emulator and not a wrapper: the Phaser build of the game, the one Steam still ships as the old-engine beta branch, rewritten in C on top of raylib, SDL2 and vitaGL, logic class by class, so it plays like the original.",
-        "version": "1.1",
-        "version_date": "2026-11-07",
-        "author_ids": [
-          "federicoilgrandebardo"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.1",
-    "catalog_version": "1.1"
-  },
-  {
-    "platform": "github",
     "repo": "boomannotjeff/usm_vita",
     "release_id": "437380857",
     "tag": "1.1",
@@ -3096,55 +3145,6 @@
         "version_date": "2026-02-13",
         "author_ids": [
           "nekomimi"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "pyjabox/VitaKotor2",
-    "release_id": "433030987",
-    "tag": "v0.5.8",
-    "name": "VitaKotor2 v0.5.8",
-    "url": "https://github.com/pyjabox/VitaKotor2/releases/tag/v0.5.8",
-    "published": "2026-11-03T17:47:07Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# VitaKotor2 v0.5.8 — More cores, and long sessions fixed\n\nThis release puts the Vita's other two cores to work: the AI now runs beside\nthe drawing, and the game's GL translation runs on the GL worker. It also\nfixes saving and the save list failing after a long session with a voice\npack, and a crash in Telos's cantina. The new threading was played for\nseveral hours on a physical Vita; the two last fixes were checked in Vita3K.\n\n## Faster\n\nHardware, Telos; each change was measured on and off in alternating 10 s\nwindows.\n- **The AI runs on core 1 while the scene is drawn:** 22.3 against 19.5 FPS.\n  Wherever the AI reaches into the client side, it waits for the drawing to\n  end, so the two never touch the same data.\n- **The game's GL translation (ASLgl) runs on the GL worker:** 18.4 against\n  14.6 FPS.\n- **Text widths are cached, and animated textures (water, ripples) are rebuilt\n  on core 1:** 21.5 against 17.5 FPS.\n- **Smaller savings:** light lists without repeated scans (about 1.5 ms a\n  frame), and creatures not drawn in a frame animated one frame in three\n  (about 0.7 ms).\n- **A periodic hitch in Telos:** a creature with no clear path re-planned it\n  every few seconds, about 110 ms a try. Searches that fail on the walkmesh\n  alone are now remembered until the next load: worst frames of 60–92 ms\n  instead of 165–194 ms.\n- **Large fights:** compiled scripts stay in memory instead of being read\n  again on every run. In the battle of Khoonda on Dantooine (TSLRCM, 20+\n  fighters; [issue #4](https://github.com/pyjabox/VitaKotor2/issues/4)) this\n  halves the AI's work: 55% more creatures are updated each frame, and frames\n  take 158 instead of 192 ms. The battle is still slow (see below).\n\n## Fixed\n\n**Saving, the save list and the voices failing after a long session with a\nvoice pack.** After one to two hours, saving failed, Load Game listed no\nsaves, and the voices switched to English. The game forgets to close the file\nof every dialogue line it plays. v0.5.6 kept loose voice lines in RAM, which\nonly delayed the problem: after about 512 lines, all 64 files a Vita app may\nhold were taken. The loader now closes what the game forgets. Voices from\nthe game's archive (English) leaked too, more slowly.\n\n**A crash in Telos's cantina,** which looked like a black screen at 30 FPS\nwith no sound, and made saves in that module look as if they would not load.\nThe game asked the loader for a C library function by name (`wcslen`), which\nthe loader did not provide. Saves made there were never damaged.\n\n## Installation\n\n1. Install `KOTOR2.vpk` with VitaShell. The title ID is `KOTR00002`.\n2. Create `ux0:data/kotor2/`.\n3. Copy from your own copy of the Android version **2.0.4**, using the 32-bit\n   libraries from the APK's `lib/armeabi-v7a/` folder (the README lists each\n   file's exact size and SHA-256):\n   - `libkotor2.so`\n   - `libObbVfs.so`\n   - `libc++_shared.so`\n   - `libminiz.so`\n   - `libLzmaLib.so`\n   - `main.213.com.aspyr.swkotorii.obb`\n   - `patch.14.com.aspyr.swkotorii.obb`\n   - the APK `assets/` directory\n4. Install and enable `kubridge.skprx`.\n5. Place `libshacccg.suprx` in `ur0:data/`.\n6. Optionally, mods in `ux0:data/kotor2/mods/` and voice packs in\n   `ux0:data/kotor2/localized/` (see the README).\n\n**Upgrading from v0.5.2 or later:** install the VPK over the old one.\nGame data, saves, mods, voice packs, the chosen language and the shader cache\nstay as they are.\nFrom v0.5.1 or older, see also the v0.5.2 notes: the first launch asks for a\nlanguage.\n\n## Known issues and limitations\n\n- **Very large fights are slow:** the battle of Khoonda with TSLRCM runs at\n  about 6 FPS. The engine gives its AI 10 ms a frame; in such fights that runs\n  out, and creatures of lower priority act only every few frames, so some\n  seem idle. `ai_mode.txt` containing a number of milliseconds (1 to 65)\n  raises the budget, at a cost in frame rate.\n- **The menu before the game is in English.**\n- **Mods in another language:** what a mod has only in English shows in\n  English, voice lines added by mods are English (they were never dubbed), and\n  a mod's own voice-line and lip-sync files are used instead of a voice pack's\n  (TSLRCM: 4 lines and the lip sync of 9 areas). Details in the README.\n- **With mods, launches take about 1 s longer** while they are indexed, and the\n  first launch in a new language about 2 s more to build its talk table.\n- **Noise behind the sound in busy scenes,** such as Telos. The decoders and\n  the mix were checked and are clean; the cause is not known yet\n  ([issue #5](https://github.com/pyjabox/VitaKotor2/issues/5)).\n- **About one launch in three takes about 11 s longer,** in the engine's scan of\n  `dlc/`. The cause is not known yet.\n- **Shorter hitches remain** (usually 0.12–0.23 s, occasionally more) when new\n  content is first read from the memory card, at about 10 MB/s: the minimap's\n  first draw, dialogue entries and their voices, creatures spawned by scripts.\n- **Loading-screen images** still take about 0.1–0.35 s each.\n- **Heavy scenes remain CPU-bound,** mostly in the engine's per-object rendering\n  work.\n- **Visual changes:** no dynamic shadows and no bloom passes. Rooms keep their\n  baked lighting.\n- **Idle objects update less often:** idle creatures, placeables, doors and\n  items get their AI update every third frame, and creatures not drawn in a\n  frame are animated one frame in three. Nothing was noticed in testing.\n- **One frame of extra latency:** the GL worker lets the game run up to one\n  frame ahead, and the AI's decisions reach the screen one frame later. An\n  object stepping out from cover can appear up to three frames late\n  (occlusion culling).\n- **Touch:** only the front touchscreen is used. The game keeps its controller\n  layout, so its touch-only on-screen controls are not shown.\n- **First launch:** it can take about two minutes while archives are scanned\n  and shaders compile, and the loading screen can sit still for much of it.\n- **Shader cache:** if a warm launch black-screens, remove\n  `ux0:data/shader_cache/KOTR00002/` and relaunch.\n- **No complete playthrough certified yet.** Trophies, cloud saves and online\n  features are unavailable.\n\n## Switches\n\nCreate the file in `ux0:data/kotor2/` and relaunch; delete it to go back.\n- **New:** each of these files containing `0` turns one v0.5.8 change off,\n  going back to how v0.5.7 did it:\n  - `ai_thread.txt`: the AI on the game thread.\n  - `aslw_mode.txt`: ASLgl on the game thread.\n  - `offload_mode.txt`: text widths and animated textures on the game thread.\n  - `scene_mode.txt`: the engine's own light lists, and every creature\n    animated every frame.\n  - `path_mode.txt`: no failed path search remembered.\n  - `script_mode.txt`: scripts read from the archive on every run.\n- `ai_mode.txt` containing `0`: the game's own AI loop, with no throttle and no\n  AI caches (slower in busy areas). Containing a number from 1 to 65: the AI's\n  time budget in milliseconds (the engine's is 10).\n- `touch_mode.txt` containing `0`: buttons only, as in v0.4.2.\n- `loadscreen_mode.txt` containing `0`: black screen until the legal screen, as\n  in v0.4.2.\n- `patcher_mode.txt` containing `0`: vitaGL's vertex-program requests go\n  straight to the shader patcher and nothing is freed, as in v0.4.2 (the pool\n  stays at 4 MB).\n- `fps_cap.txt` containing `0`: no 30 FPS cap. `LockFramerate=1` under\n  `[Graphics Options]` in `swkotor2.ini` then caps again, and `V-Sync=0` turns\n  vsync off.\n- `room_distance.txt` containing a distance in metres: rooms beyond it are not\n  drawn (up to about 25% faster where long views open, with distant geometry\n  missing).\n- `glw_mode.txt` containing `0`: vitaGL on the game thread, as in v0.2.0.\n- `dxt_mode.txt` containing `0`: DXT textures decoded on the CPU, as in v0.3.0.\n- `mipgen_mode.txt` containing `0`: every mip chain built by the engine, as in\n  v0.3.0.\n\nThis release contains no copyrighted game code or data.\n\n`KOTOR2.vpk` SHA-256: `a8dddf4ac000e38afd25dd07afcf5421443cd0be99ee6520ecc6643204f66950`\n",
-    "assets": [
-      {
-        "name": "KOTOR2.vpk",
-        "size": 2138556,
-        "download_url": "https://github.com/pyjabox/VitaKotor2/releases/download/v0.5.8/KOTOR2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "pyjabox",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.5.8",
-    "catalog_version": "0.5.8",
-    "homebrew_name": "KOTOR II",
-    "homebrew_icon": "https://archive.org/download/VitaKotor2/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
-    "homebrew_long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
-    "homebrew_id": "kotor-ii",
-    "homebrew_authors": [
-      "pyjabox"
-    ],
-    "homebrew_version": "0.5.8",
-    "catalog_apps": [
-      {
-        "id": "kotor-ii",
-        "name": "KOTOR II",
-        "icon": "https://archive.org/download/VitaKotor2/icon0.png",
-        "category": "ports",
-        "description": "Star Wars: Knights of the Old Republic II loader for PlayStation Vita",
-        "long_description": "This is an experimental native loader for the Android release of KOTOR II. It loads the original ARM shared libraries from a user-supplied copy of the game, maps their platform APIs to Vita implementations, renders through vitaGL, and provides a custom FMOD audio backend over sceAudiodec and sceAudioOut.\n\n- PsVitaAlive -",
-        "version": "0.5.8",
-        "version_date": "2026-11-03",
-        "author_ids": [
-          "pyjabox"
         ]
       }
     ]
@@ -33148,67 +33148,6 @@
         "version_date": "2022-05-26",
         "author_ids": [
           "elpapadelospollitos"
-        ]
-      }
-    ]
-  },
-  {
-    "platform": "github",
-    "repo": "hatoving/csd2-old-vita",
-    "release_id": "67494677",
-    "tag": "1.0",
-    "name": "v1.0",
-    "url": "https://github.com/hatoving/csd2-old-vita/releases/tag/1.0",
-    "published": "2022-05-22T19:38:13Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Initial release.",
-    "assets": [
-      {
-        "name": "CSD2VITA0.vpk",
-        "size": 5131431,
-        "download_url": "https://github.com/hatoving/csd2-old-vita/releases/download/1.0/CSD2VITA0.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "game.apk",
-        "size": 2811234,
-        "download_url": "https://github.com/hatoving/csd2-old-vita/releases/download/1.0/game.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "patch.xdelta",
-        "size": 147894,
-        "download_url": "https://github.com/hatoving/csd2-old-vita/releases/download/1.0/patch.xdelta",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "hatoving",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "homebrew_name": "CSD2Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-csd2vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Cook, Serve, Delicious! 2 for PSVITA.",
-    "homebrew_long_description": "Cook, Serve, Delicious! 2 is the massive sequel to the surprise best selling original, one of the few games that gives players complete control on how they want to build their restaurant.\n\n- PsVitaAlive -",
-    "homebrew_id": "csd2vita",
-    "homebrew_authors": [
-      "hatoving"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "csd2vita",
-        "name": "CSD2Vita",
-        "icon": "https://archive.org/download/psvitaalive-csd2vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Cook, Serve, Delicious! 2 for PSVITA.",
-        "long_description": "Cook, Serve, Delicious! 2 is the massive sequel to the surprise best selling original, one of the few games that gives players complete control on how they want to build their restaurant.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-05-23",
-        "author_ids": [
-          "hatoving"
         ]
       }
     ]
