@@ -195,8 +195,8 @@
       </div>
       <div class="stats">
         <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">388</strong><span>al día en PSVitaAlive</span></div>
-        <div class="stat"><strong>96</strong><span>pendientes</span></div>
+        <div class="stat"><strong class="green">387</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>97</strong><span>pendientes</span></div>
         <div class="stat"><strong>476</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
@@ -219,94 +219,153 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="dragon ball z: bt3 dragon ball z: bt3 arielxflores/tenkaichi3decomp-vita v1.2 v1.2 ports install `tenkaichi3decomp-vita.vpk` with vitashell. it installs over 1.0 or 1.1: your saves and settings in `ux0:data/bt3/` are kept, and the game files stay where they are. two things got simpler: your disc image (`.iso`) can be copied to `ux0:data/bt3/` as it is (no need to unpack it with 7-zip; unpacked files still work), and `libshacccg.suprx` is no longer needed. full details in the readme and changelog.
-
-### new
-
-- **languages**: options → language/sound → language (now the page&#x27;s first row) sets the text and the voices together: english, or japanese voices; with your own european disc (sles-54945: its image, or its `data/pzs3eu1.afs`, in `ux0:data/bt3/eu/`) spanish, german, french and italian menus, hud and battle subtitles, with english or japanese voices. in spanish the options screen, vita settings and the port&#x27;s own menus are in spanish too. based on matteo santoro&#x27;s work.
-- **budokai tenkaichi 4** (experimental): team bt4&#x27;s b14 rev2, built from nautaro&#x27;s bt4decomp, from your own bt4 disc image in `ux0:data/bt3/bt4/`. choose it in the start menu (hold select while the game starts) or options → vita settings → game. with team bt4&#x27;s spanish release in `ux0:data/bt3/bt4/es/`, bt4&#x27;s vita settings → language switches to it.
-- **multiplayer between two vitas** (experimental: not yet tested on two real vitas): versus matches ad hoc (no router) or over the same wi-fi network, versus → multiplayer → ad hoc: host / join. the two games are kept in step by the buttons pressed, as in the pc version&#x27;s online play. a match uses its own save with everything unlocked; yours is not touched.
-- **sharper fights**: fights are drawn at 720 x 408 whenever the graphics chip has the time, and drop to 640 x 368 the moment a heavy scene needs it (`fightres=640` in `bt3.txt` keeps them at 640 x 368).
-- **faster**: the game&#x27;s shaders come already compiled (nothing is compiled at start), the outline, glow and colour passes run in half precision, the file unpacker is 2 to 5 times faster, and music changes no longer stop the game for a moment.
-- **clearer sound**: music and voices are brought up to the vita&#x27;s 48 khz through a proper filter (no more dulled treble or rough edge), and sound follows the picture more closely.
-- **vita settings, a second page** (from the pc version): **unlock all** (every character, stage, song and item and 9,999,999 zenni; your save is copied aside first and turning it off gives it back), **quick start** (no logos or opening film), **quick save** (no memory card window) and **tech fixes** (the community&#x27;s z counter and bombardment fixes). vita settings shows its page number at the top right.
-- **options reorganized**: the rows are vita settings, controls, language/sound, save/load. **controller settings → custom** now reaches l1, l2, r1 and r2, so every button can take any action.
-- **dragon history: fight again** in the pause menu (from the pc version).
-- **stages and songs from outside the disc** (from the pc version): `.unk` stages in `ux0:data/bt3/stages/` and mp3 or adx songs in `ux0:data/bt3/songs/` join the versus menus. see the readme.
-- **disc fusion**: the modes of the two earlier games&#x27; discs are open (the vita has no disc to swap).
-- a crash writes `ux0:data/bt3/crash.txt` and closes the game instead of leaving it frozen (with the kubridge plugin).
+            <article class="card" data-platform="github" data-catalog="pending" data-search="dragon ball z: bt3 dragon ball z: bt3 arielxflores/tenkaichi3decomp-vita v1.2.1 v1.2.1 ports a small update that fixes what was reported on 1.2. install `tenkaichi3decomp-vita.vpk` with vitashell over 1.2 (or 1.0 / 1.1): your saves, settings and game files in `ux0:data/bt3/` are kept.
 
 ### fixed
 
-- slowdown and missing effects after many fights in one session (graphics memory leaked when it ran short).
-- l3 / r3 on the touch panels: transformations work (a touch is now a quick press).
-- a second controller paired with the vitacontrol plugin moved player 1 as well as player 2.
-- the dragon&#x27;s screen (shenron): the dragon balls&#x27; outlines no longer lag behind, and the screen keeps its pace.
-- the large lettering (title screen, menu headings) no longer looks cut through.
-- no freeze of about a second when the opening film ends or is skipped.
-- a two-player battle without a second controller says so in the vita&#x27;s words, not the ps2&#x27;s.
+- **music mods&#x27; songs loop again.** songs from music mods (the anime songs isos, among others) played once and then the fight went silent: they keep their loop point in an older version of the adx format, which the port didn&#x27;t read. they now loop through the whole fight, like the disc&#x27;s own songs.
+- **bt4&#x27;s disc image is found in more places.** the game looked only in `ux0:data/bt3/bt4/`; it now also finds the bt4 `.iso` (or its unpacked files) in `ux0:bt3/bt4/`, `ux0:data/bt4/`, `ux0:bt4/` and next to your bt3 image in `ux0:data/bt3/`.
+- **bt4: the outfit select window was empty.** it now shows the costume&#x27;s number between the arrows (1/6) and its name under them, centred and fitted inside the window, in english and spanish.
 
-### known issues
+### good to know
 
-- multiplayer between two vitas has not been tested on two real vitas yet: reports are welcome, with `ux0:data/bt3/log.txt` from both vitas. online play over the internet is not there yet.
-- budokai tenkaichi 4 is experimental.
-
-### thanks
-
-z3xox and the tenkaichi3decomp contributors (the pc port and the features ported from it), matteo santoro (european languages), team bt4 and nautaro (budokai tenkaichi 4 and bt4decomp), valenvivaldi (mp3 songs), limeking614-dev (ps tv controller support) and rinnegatamante (vitagl). the full list is in the readme.">
+- bt4&#x27;s image is about 5.5 gb. a memory card formatted as fat32 (common with sd2vita) can&#x27;t hold a file over 4 gb, so the copy gets cut off and bt4 can&#x27;t load. on fat32, open the `.iso` on your pc with 7-zip and copy `slus_219.78` and the `bin` and `data` folders into `ux0:data/bt3/bt4/` instead, or format the card as exfat.
+- **if the game closes right at the start**: i can&#x27;t reproduce this one yet. 1.2.1&#x27;s log now records each step of the start and your plugin list, so please send `ux0:data/bt3/log.txt` (and `ux0:data/bt3/crash.txt` if there is one) from a start that crashed, plus your vita model and firmware.">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png" alt="Icono de Dragon Ball Z: BT3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · arielxflores/Tenkaichi3Decomp-Vita</div>
-                      <h2><a href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2" target="_blank" rel="noopener">Dragon Ball Z: BT3</a></h2>
-                      <div class="release-name">v1.2</div>
+                      <h2><a href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.1" target="_blank" rel="noopener">Dragon Ball Z: BT3</a></h2>
+                      <div class="release-name">v1.2.1</div>
                     </div>
                     <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v1.2</span>
-                    <span>2026-11-13 22:05 UTC</span>
+                    <span class="tag">v1.2.1</span>
+                    <span>2026-11-14 12:36 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 1.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1 → release v1.2</div>
+                  <div class="catalog-detail">PSVitaAlive 1.1 → release v1.2.1</div>
                   
-                  <div class="body markdown-body"><p>Install <code>Tenkaichi3Decomp-Vita.vpk</code> with VitaShell. It installs over 1.0 or 1.1: your saves and settings in <code>ux0:data/bt3/</code> are kept, and the game files stay where they are. Two things got simpler: your disc image (<code>.iso</code>) can be copied to <code>ux0:data/bt3/</code> as it is (no need to unpack it with 7-Zip; unpacked files still work), and <code>libshacccg.suprx</code> is no longer needed. Full details in the README and CHANGELOG.</p>
+                  <div class="body markdown-body"><p>A small update that fixes what was reported on 1.2. Install <code>Tenkaichi3Decomp-Vita.vpk</code> with VitaShell over 1.2 (or 1.0 / 1.1): your saves, settings and game files in <code>ux0:data/bt3/</code> are kept.</p>
+<h3>Fixed</h3>
+<ul>
+<li><strong>Music mods' songs loop again.</strong> Songs from music mods (the anime songs isos, among others) played once and then the fight went silent: they keep their loop point in an older version of the ADX format, which the port didn't read. They now loop through the whole fight, like the disc's own songs.</li>
+<li><strong>BT4's disc image is found in more places.</strong> The game looked only in <code>ux0:data/bt3/bt4/</code>; it now also finds the BT4 <code>.iso</code> (or its unpacked files) in <code>ux0:bt3/bt4/</code>, <code>ux0:data/bt4/</code>, <code>ux0:bt4/</code> and next to your BT3 image in <code>ux0:data/bt3/</code>.</li>
+<li><strong>BT4: the Outfit Select window was empty.</strong> It now shows the costume's number between the arrows (1/6) and its name under them, centred and fitted inside the window, in English and Spanish.</li>
+</ul>
+<h3>Good to know</h3>
+<ul>
+<li>BT4's image is about 5.5 GB. A memory card formatted as FAT32 (common with SD2Vita) can't hold a file over 4 GB, so the copy gets cut off and BT4 can't load. On FAT32, open the <code>.iso</code> on your PC with 7-Zip and copy <code>SLUS_219.78</code> and the <code>BIN</code> and <code>DATA</code> folders into <code>ux0:data/bt3/bt4/</code> instead, or format the card as exFAT.</li>
+<li><strong>If the game closes right at the start</strong>: I can't reproduce this one yet. 1.2.1's log now records each step of the start and your plugin list, so please send <code>ux0:data/bt3/log.txt</code> (and <code>ux0:data/bt3/crash.txt</code> if there is one) from a start that crashed, plus your Vita model and firmware.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.1/Tenkaichi3Decomp-Vita.vpk" target="_blank" rel="noopener">⬇ Tenkaichi3Decomp-Vita.vpk · 5.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita v0.2.0 v0.2.0 ports a feature update for the native ps vita port of star fox adventures.
+
+**work in progress.** it&#x27;s playable, but expect bugs.
+
+**no game data is included.** you need a disc image of your own copy of star fox adventures (gamecube, usa, rev 1, `gsae01`) as a full, uncompressed `.iso`. see the [readme](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.
+
+### new
+- **character shadows are back.** fox&#x27;s and tricky&#x27;s shadows are drawn again, in the right place, and are on by default.
+- **widescreen by default.** the game now renders in 16:9 for the vita&#x27;s screen instead of stretching a 4:3 picture. title screen &gt; options turns it off.
+- **languages.** english, french, german, italian and spanish text, chosen in title screen &gt; options (applies the next time the game is started). voices are english, as in the original game.
+- **shaders appear sooner.** the shipped shader file is held in memory, so objects no longer wait on the memory card for shaders that are in the package. 3751 pre-compiled shaders are included.
+
+### fixed
+- the title-screen options panels were missing rows (for example in the audio panel).
+- audio cut-outs and choppy music in busy areas.
+- shader compiling that repeated in some areas (cape claw).
+- draws that are entirely off screen are skipped, which gives back about 1 ms a frame.
+
+### install / update
+1. install `starfoxadventures.vpk` with vitashell (over the old version is fine; your save and settings are kept).
+2. new install only: copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).
+3. launch.
+
+needs custom firmware (henkaku / enso) and `ur0:data/libshacccg.suprx`.
+
+### known issues
+- some areas run below 30 fps, thorntail hollow the most; widescreen makes the heaviest areas a little slower.
+- the first visit to an area whose shaders are not included can show missing or dark objects while they compile.
+- short pauses when loading a new area or starting some cutscenes; the opening cutscene still stutters in places.
+
+### checksums (sha-256)
+- `starfoxadventures-vita-2026-11-13.zip`: `962eaa5b898f2bb207808f3114c0eebc1971692e3d9b8f54a9ad40c335d462d1`
+- `starfoxadventures.vpk`: `41d390fd7d207762751d057f81f953408018668d4fe74ecd41851f5bb3ff375a`
+- `eboot.bin` (inside the vpk): `2e950ba394b96dabd942a2aabf95ac1ecd228defebc88e45e3966beb20f8190a`
+
+problems: open an issue with `ux0:data/stairfax_game.txt` attached (and `ux0:data/stairfax/frames.bin` for a slowdown).
+
+### credits
+built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-decomp) (zachary canann, jack price-burns and contributors) and cassieandstuff&#x27;s [pc port branch](https://github.com/cassieandstuff/sfa-decomp/tree/pc-port-continued). uses vitagl, vitashark and math-neon (rinnegatamante, lgpl-3.0) and sceshacccgext (bythos14, lgpl-2.1). livearea artwork and layout by [u/either-version-9577](https://www.reddit.com/user/either-version-9577/). the full source and the library details are in this repository: see [credits.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/credits.md).">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png" alt="Icono de Star Fox Adventures" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · tchisholm20/starfox-adventures-vita</div>
+                      <h2><a href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.2.0" target="_blank" rel="noopener">Star Fox Adventures</a></h2>
+                      <div class="release-name">v0.2.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.2.0</span>
+                    <span>2026-11-14 07:13 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.3 → release v0.2.0</div>
+                  
+                  <div class="body markdown-body"><p>A feature update for the native PS Vita port of Star Fox Adventures.</p>
+<p><strong>Work in progress.</strong> It's playable, but expect bugs.</p>
+<p><strong>No game data is included.</strong> You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, <code>GSAE01</code>) as a full, uncompressed <code>.iso</code>. See the <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita#readme">README</a> for details.</p>
 <h3>New</h3>
 <ul>
-<li><strong>Languages</strong>: Options → Language/Sound → Language (now the page's first row) sets the text and the voices together: English, or Japanese voices; with your own European disc (SLES-54945: its image, or its <code>DATA/PZS3EU1.AFS</code>, in <code>ux0:data/bt3/eu/</code>) Spanish, German, French and Italian menus, HUD and battle subtitles, with English or Japanese voices. In Spanish the Options screen, Vita Settings and the port's own menus are in Spanish too. Based on Matteo Santoro's work.</li>
-<li><strong>Budokai Tenkaichi 4</strong> (experimental): Team BT4's B14 Rev2, built from NauTaro's BT4decomp, from your own BT4 disc image in <code>ux0:data/bt3/bt4/</code>. Choose it in the start menu (hold SELECT while the game starts) or Options → Vita Settings → Game. With Team BT4's Spanish release in <code>ux0:data/bt3/bt4/es/</code>, BT4's Vita Settings → Language switches to it.</li>
-<li><strong>Multiplayer between two Vitas</strong> (experimental: not yet tested on two real Vitas): versus matches ad hoc (no router) or over the same Wi-Fi network, Versus → Multiplayer → Ad Hoc: Host / Join. The two games are kept in step by the buttons pressed, as in the PC version's online play. A match uses its own save with everything unlocked; yours is not touched.</li>
-<li><strong>Sharper fights</strong>: fights are drawn at 720 x 408 whenever the graphics chip has the time, and drop to 640 x 368 the moment a heavy scene needs it (<code>fightres=640</code> in <code>bt3.txt</code> keeps them at 640 x 368).</li>
-<li><strong>Faster</strong>: the game's shaders come already compiled (nothing is compiled at start), the outline, glow and colour passes run in half precision, the file unpacker is 2 to 5 times faster, and music changes no longer stop the game for a moment.</li>
-<li><strong>Clearer sound</strong>: music and voices are brought up to the Vita's 48 kHz through a proper filter (no more dulled treble or rough edge), and sound follows the picture more closely.</li>
-<li><strong>Vita Settings, a second page</strong> (from the PC version): <strong>Unlock All</strong> (every character, stage, song and item and 9,999,999 Zenni; your save is copied aside first and turning it off gives it back), <strong>Quick Start</strong> (no logos or opening film), <strong>Quick Save</strong> (no memory card window) and <strong>Tech Fixes</strong> (the community's Z Counter and Bombardment fixes). Vita Settings shows its page number at the top right.</li>
-<li><strong>Options reorganized</strong>: the rows are Vita Settings, Controls, Language/Sound, Save/Load. <strong>Controller Settings → Custom</strong> now reaches L1, L2, R1 and R2, so every button can take any action.</li>
-<li><strong>Dragon History: Fight Again</strong> in the pause menu (from the PC version).</li>
-<li><strong>Stages and songs from outside the disc</strong> (from the PC version): <code>.unk</code> stages in <code>ux0:data/bt3/stages/</code> and MP3 or ADX songs in <code>ux0:data/bt3/songs/</code> join the versus menus. See the README.</li>
-<li><strong>Disc Fusion</strong>: the modes of the two earlier games' discs are open (the Vita has no disc to swap).</li>
-<li>A crash writes <code>ux0:data/bt3/crash.txt</code> and closes the game instead of leaving it frozen (with the kubridge plugin).</li>
+<li><strong>Character shadows are back.</strong> Fox's and Tricky's shadows are drawn again, in the right place, and are on by default.</li>
+<li><strong>Widescreen by default.</strong> The game now renders in 16:9 for the Vita's screen instead of stretching a 4:3 picture. Title screen &gt; Options turns it off.</li>
+<li><strong>Languages.</strong> English, French, German, Italian and Spanish text, chosen in title screen &gt; Options (applies the next time the game is started). Voices are English, as in the original game.</li>
+<li><strong>Shaders appear sooner.</strong> The shipped shader file is held in memory, so objects no longer wait on the memory card for shaders that are in the package. 3751 pre-compiled shaders are included.</li>
 </ul>
 <h3>Fixed</h3>
 <ul>
-<li>Slowdown and missing effects after many fights in one session (graphics memory leaked when it ran short).</li>
-<li>L3 / R3 on the touch panels: transformations work (a touch is now a quick press).</li>
-<li>A second controller paired with the VitaControl plugin moved player 1 as well as player 2.</li>
-<li>The dragon's screen (Shenron): the dragon balls' outlines no longer lag behind, and the screen keeps its pace.</li>
-<li>The large lettering (title screen, menu headings) no longer looks cut through.</li>
-<li>No freeze of about a second when the opening film ends or is skipped.</li>
-<li>A two-player battle without a second controller says so in the Vita's words, not the PS2's.</li>
+<li>The title-screen Options panels were missing rows (for example in the audio panel).</li>
+<li>Audio cut-outs and choppy music in busy areas.</li>
+<li>Shader compiling that repeated in some areas (Cape Claw).</li>
+<li>Draws that are entirely off screen are skipped, which gives back about 1 ms a frame.</li>
 </ul>
+<h3>Install / update</h3>
+<ol>
+<li>Install <code>StarFoxAdventures.vpk</code> with VitaShell (over the old version is fine; your save and settings are kept).</li>
+<li>New install only: copy your disc image to <code>ux0:data/stairfax/sfa_rev1.iso</code> (create the folder if needed).</li>
+<li>Launch.</li>
+</ol>
+<p>Needs custom firmware (HENkaku / Enso) and <code>ur0:data/libshacccg.suprx</code>.</p>
 <h3>Known issues</h3>
 <ul>
-<li>Multiplayer between two Vitas has not been tested on two real Vitas yet: reports are welcome, with <code>ux0:data/bt3/log.txt</code> from both Vitas. Online play over the internet is not there yet.</li>
-<li>Budokai Tenkaichi 4 is experimental.</li>
+<li>Some areas run below 30 fps, ThornTail Hollow the most; widescreen makes the heaviest areas a little slower.</li>
+<li>The first visit to an area whose shaders are not included can show missing or dark objects while they compile.</li>
+<li>Short pauses when loading a new area or starting some cutscenes; the opening cutscene still stutters in places.</li>
 </ul>
-<h3>Thanks</h3>
-<p>z3xox and the Tenkaichi3Decomp contributors (the PC port and the features ported from it), Matteo Santoro (European languages), Team BT4 and NauTaro (Budokai Tenkaichi 4 and BT4decomp), valenvivaldi (MP3 songs), limeking614-dev (PS TV controller support) and Rinnegatamante (vitaGL). The full list is in the README.</p>
+<h3>Checksums (SHA-256)</h3>
+<ul>
+<li><code>StarFoxAdventures-Vita-2026-11-13.zip</code>: <code>962eaa5b898f2bb207808f3114c0eebc1971692e3d9b8f54a9ad40c335d462d1</code></li>
+<li><code>StarFoxAdventures.vpk</code>: <code>41d390fd7d207762751d057f81f953408018668d4fe74ecd41851f5bb3ff375a</code></li>
+<li><code>eboot.bin</code> (inside the vpk): <code>2e950ba394b96dabd942a2aabf95ac1ecd228defebc88e45e3966beb20f8190a</code></li>
+</ul>
+<p>Problems: open an issue with <code>ux0:data/stairfax_game.txt</code> attached (and <code>ux0:data/stairfax/frames.bin</code> for a slowdown).</p>
+<h3>Credits</h3>
+<p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). LiveArea artwork and layout by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Either-Version-9577/">u/Either-Version-9577</a>. The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2/Tenkaichi3Decomp-Vita.vpk" target="_blank" rel="noopener">⬇ Tenkaichi3Decomp-Vita.vpk · 5.7 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.2.0/StarFoxAdventures-Vita-2026-11-13.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-11-13.zip · 8.3 MB</a></div>
                 </div>
               </div>
             </article>
@@ -3261,82 +3320,6 @@ performance, controls and quality-of-life update. installation is unchanged from
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/MetalSyntax/zenonia3-psvita-port/releases/download/v01.40/zenonia_3.vpk" target="_blank" rel="noopener">⬇ zenonia_3.vpk · 1.7 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita star fox adventures for ps vita - v0.1.3 (2026-11-05) v0.1.3 ports new livearea layout for the native ps vita port of star fox adventures. the game itself is the same as [v0.1.2](https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.2).
-
-**work in progress.** it&#x27;s playable, but expect bugs.
-
-**no game data is included.** you need a disc image of your own copy of star fox adventures (gamecube, usa, rev 1, `gsae01`) as a full, uncompressed `.iso`. see the [readme](https://github.com/tchisholm20/starfox-adventures-vita#readme) for details.
-
-### changed
-- new livearea layout by u/either-version-9577: the full artwork fills the bubble&#x27;s page and the star fox adventures logo is the launch button (tap it to start the game). thanks again for the artwork and the layout!
-
-### install / update
-1. install `starfoxadventures.vpk` with vitashell (over the old version is fine; your save and settings are kept). the install can take several minutes because of the pre-compiled shaders.
-2. new install only: copy your disc image to `ux0:data/stairfax/sfa_rev1.iso` (create the folder if needed).
-3. launch.
-
-needs custom firmware (henkaku / enso) and `ur0:data/libshacccg.suprx`.
-
-known issues are unchanged from v0.1.2 (see its release notes and the readme).
-
-### checksums (sha-256)
-- `starfoxadventures-vita-2026-11-05.zip`: `70bd36a30ee66b04a65834e47cd333aa3b0af7b867b371eb40d3271490bd2ddc`
-- `starfoxadventures.vpk`: `cf84ad751fcfb4838b20c1415a4bb85f3c3b608a675fd2c7f7fd8a55242bfa16`
-- `eboot.bin` (inside the vpk, same as v0.1.2): `4743a5d29d54fb00bd73d35ec92b8854ae876ab07c2e8eeed015e9514694405f`
-
-problems: open an issue with `ux0:data/stairfax_game.txt` attached (and `ux0:data/stairfax/frames.bin` for a slowdown).
-
-### credits
-built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-decomp) (zachary canann, jack price-burns and contributors) and cassieandstuff&#x27;s [pc port branch](https://github.com/cassieandstuff/sfa-decomp/tree/pc-port-continued). uses vitagl, vitashark and math-neon (rinnegatamante, lgpl-3.0) and sceshacccgext (bythos14, lgpl-2.1). livearea artwork and layout by [u/either-version-9577](https://www.reddit.com/user/either-version-9577/). the full source and the library details are in this repository: see [credits.md](https://github.com/tchisholm20/starfox-adventures-vita/blob/main/credits.md).">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/star-fox-adventures-for-ps-vita/icon0.png" alt="Icono de Star Fox Adventures" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · tchisholm20/starfox-adventures-vita</div>
-                      <h2><a href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.3" target="_blank" rel="noopener">Star Fox Adventures</a></h2>
-                      <div class="release-name">Star Fox Adventures for PS Vita - v0.1.3 (2026-11-05)</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v0.1.3</span>
-                    <span>2026-11-05 17:42 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 0.1.3</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 0.1.3</div>
-                  
-                  <div class="body markdown-body"><p>New LiveArea layout for the native PS Vita port of Star Fox Adventures. The game itself is the same as <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/tag/v0.1.2">v0.1.2</a>.</p>
-<p><strong>Work in progress.</strong> It's playable, but expect bugs.</p>
-<p><strong>No game data is included.</strong> You need a disc image of your own copy of Star Fox Adventures (GameCube, USA, Rev 1, <code>GSAE01</code>) as a full, uncompressed <code>.iso</code>. See the <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita#readme">README</a> for details.</p>
-<h3>Changed</h3>
-<ul>
-<li>New LiveArea layout by u/Either-Version-9577: the full artwork fills the bubble's page and the Star Fox Adventures logo is the launch button (tap it to start the game). Thanks again for the artwork and the layout!</li>
-</ul>
-<h3>Install / update</h3>
-<ol>
-<li>Install <code>StarFoxAdventures.vpk</code> with VitaShell (over the old version is fine; your save and settings are kept). The install can take several minutes because of the pre-compiled shaders.</li>
-<li>New install only: copy your disc image to <code>ux0:data/stairfax/sfa_rev1.iso</code> (create the folder if needed).</li>
-<li>Launch.</li>
-</ol>
-<p>Needs custom firmware (HENkaku / Enso) and <code>ur0:data/libshacccg.suprx</code>.</p>
-<p>Known issues are unchanged from v0.1.2 (see its release notes and the README).</p>
-<h3>Checksums (SHA-256)</h3>
-<ul>
-<li><code>StarFoxAdventures-Vita-2026-11-05.zip</code>: <code>70bd36a30ee66b04a65834e47cd333aa3b0af7b867b371eb40d3271490bd2ddc</code></li>
-<li><code>StarFoxAdventures.vpk</code>: <code>cf84ad751fcfb4838b20c1415a4bb85f3c3b608a675fd2c7f7fd8a55242bfa16</code></li>
-<li><code>eboot.bin</code> (inside the vpk, same as v0.1.2): <code>4743a5d29d54fb00bd73d35ec92b8854ae876ab07c2e8eeed015e9514694405f</code></li>
-</ul>
-<p>Problems: open an issue with <code>ux0:data/stairfax_game.txt</code> attached (and <code>ux0:data/stairfax/frames.bin</code> for a slowdown).</p>
-<h3>Credits</h3>
-<p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). LiveArea artwork and layout by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Either-Version-9577/">u/Either-Version-9577</a>. The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.1.3/StarFoxAdventures-Vita-2026-11-05.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-11-05.zip · 8.4 MB</a></div>
                 </div>
               </div>
             </article>
@@ -30918,7 +30901,7 @@ this was just a quick project for something to do.. its not great and i wouldnt 
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-14 04:18 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-14 12:46 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
