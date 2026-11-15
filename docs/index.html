@@ -194,10 +194,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>484</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">384</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>483</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">383</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>100</strong><span>pendientes</span></div>
-        <div class="stat"><strong>476</strong><span>GitHub</span></div>
+        <div class="stat"><strong>475</strong><span>GitHub</span></div>
         <div class="stat"><strong>8</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -219,45 +219,197 @@
   </div>
 
   <main class="wrap" id="releases">
-            <article class="card" data-platform="github" data-catalog="pending" data-search="dragon ball z: bt3 dragon ball z: bt3 arielxflores/tenkaichi3decomp-vita v1.2.2 v1.2.2 ports a hotfix for the game closing right at its start on some vitas. install `tenkaichi3decomp-vita.vpk` with vitashell over 1.2.1 (or any earlier version): your saves, settings and game files in `ux0:data/bt3/` are kept.
+            <article class="card" data-platform="github" data-catalog="pending" data-search="dragon ball z: bt3 dragon ball z: bt3 arielxflores/tenkaichi3decomp-vita v1.2.3 v1.2.3 ports a faster update, most of it manumastro&#x27;s work (his pull request #6, thank you!). install `tenkaichi3decomp-vita.vpk` with vitashell over 1.2.2 (or any earlier version): your saves, settings and game files in `ux0:data/bt3/` are kept.
+
+### faster
+
+- **detailed stages stay at full speed.** the game slowed down on detailed stages, especially after playing a few others or as more of the stage came into view. in a duel, stage 4 now runs at 29.5 frames per second (before: 26.2), stage 27 at 29.5 (24.8), kame house at 29.8 (28.8), against the game&#x27;s 30. the first fight on a stage is as fast as the next ones.
+- **screen-filling effects** (big auras, beams, flashes) are drawn at a lower resolution and added to the picture, so they no longer slow the fight down.
+- with the capunlocker plugin, the vita&#x27;s fourth cpu core takes on more of the work.
+- `log.txt` is kept under 1 mb (a longer one becomes `log-prev.txt` at the next start).
 
 ### fixed
 
-- **the game closing at its start** (&quot;an error has occurred&quot;, c2-12828-1), on some vitas with 1.2 and 1.2.1. the game set up its own crash report through the kubridge plugin, and some versions of kubridge closed the game at that call. the released game no longer sets it up. (`crashreport=1` in `ux0:data/bt3/bt3.txt` turns it back on, if you want `crash.txt`.)
+- **bt4: the map select shows the two fighters&#x27; portraits** behind the stage picture, faded toward the middle, as on the ps2.
+- **a broken disc image is reported at the start.** an `.iso` whose copy did not finish (its size can look right while part of it reads back empty), or one cut at 4 gb by a memory card formatted as fat32, was used anyway: sounds went silent and starting a fight could close the game. the game now checks the image and says how much of it can be read and what to do. if you see that message, copy the `.iso` again (or copy the files inside it with 7-zip instead).
+- **a disc image one folder down is found.** if unpacking a download put the `.iso` in a folder of its own (bt4&#x27;s comes in `ps2_ntsc/`), it no longer has to be moved: `ux0:data/bt3/` and `ux0:data/bt3/bt4/` are searched one folder deeper.
 
-### if the game still closes by itself
+### if the game closes by itself
 
-please send `ux0:data/bt3/log.txt` and the newest crash dump the error message names (`ux0:data/psp2core-...-eboot.bin.psp2dmp`), with your vita model and firmware.
-
-1.2.1&#x27;s notes still apply: music mods loop, bt4&#x27;s image is found in more folders, and bt4&#x27;s outfit select shows the costumes&#x27; names.">
+please send `ux0:data/bt3/log.txt` (`ux0:data/bt3/bt4/log.txt` for bt4) and the newest crash dump the error message names (`ux0:data/psp2core-...-eboot.bin.psp2dmp`), with your vita model and firmware.">
               <div class="card-layout">
                 <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png" alt="Icono de Dragon Ball Z: BT3" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
                 <div class="card-content">
                   <div class="card-top">
                     <div class="title-block">
                       <div class="eyebrow">PORTS · GITHUB · arielxflores/Tenkaichi3Decomp-Vita</div>
-                      <h2><a href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.2" target="_blank" rel="noopener">Dragon Ball Z: BT3</a></h2>
-                      <div class="release-name">v1.2.2</div>
+                      <h2><a href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.3" target="_blank" rel="noopener">Dragon Ball Z: BT3</a></h2>
+                      <div class="release-name">v1.2.3</div>
                     </div>
                     <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
                   </div>
                   <div class="meta">
-                    <span class="tag">v1.2.2</span>
-                    <span>2026-11-14 20:08 UTC</span>
+                    <span class="tag">v1.2.3</span>
+                    <span>2026-11-15 07:14 UTC</span>
                     <span class="catalog-version">PSVitaAlive: 1.1</span>
                   </div>
-                  <div class="catalog-detail">PSVitaAlive 1.1 → release v1.2.2</div>
+                  <div class="catalog-detail">PSVitaAlive 1.1 → release v1.2.3</div>
                   
-                  <div class="body markdown-body"><p>A hotfix for the game closing right at its start on some Vitas. Install <code>Tenkaichi3Decomp-Vita.vpk</code> with VitaShell over 1.2.1 (or any earlier version): your saves, settings and game files in <code>ux0:data/bt3/</code> are kept.</p>
+                  <div class="body markdown-body"><p>A faster update, most of it manumastro's work (his pull request #6, thank you!). Install <code>Tenkaichi3Decomp-Vita.vpk</code> with VitaShell over 1.2.2 (or any earlier version): your saves, settings and game files in <code>ux0:data/bt3/</code> are kept.</p>
+<h3>Faster</h3>
+<ul>
+<li><strong>Detailed stages stay at full speed.</strong> The game slowed down on detailed stages, especially after playing a few others or as more of the stage came into view. In a duel, stage 4 now runs at 29.5 frames per second (before: 26.2), stage 27 at 29.5 (24.8), Kame House at 29.8 (28.8), against the game's 30. The first fight on a stage is as fast as the next ones.</li>
+<li><strong>Screen-filling effects</strong> (big auras, beams, flashes) are drawn at a lower resolution and added to the picture, so they no longer slow the fight down.</li>
+<li>With the CapUnlocker plugin, the Vita's fourth CPU core takes on more of the work.</li>
+<li><code>log.txt</code> is kept under 1 MB (a longer one becomes <code>log-prev.txt</code> at the next start).</li>
+</ul>
 <h3>Fixed</h3>
 <ul>
-<li><strong>The game closing at its start</strong> (&quot;An error has occurred&quot;, C2-12828-1), on some Vitas with 1.2 and 1.2.1. The game set up its own crash report through the kubridge plugin, and some versions of kubridge closed the game at that call. The released game no longer sets it up. (<code>crashreport=1</code> in <code>ux0:data/bt3/bt3.txt</code> turns it back on, if you want <code>crash.txt</code>.)</li>
+<li><strong>BT4: the map select shows the two fighters' portraits</strong> behind the stage picture, faded toward the middle, as on the PS2.</li>
+<li><strong>A broken disc image is reported at the start.</strong> An <code>.iso</code> whose copy did not finish (its size can look right while part of it reads back empty), or one cut at 4 GB by a memory card formatted as FAT32, was used anyway: sounds went silent and starting a fight could close the game. The game now checks the image and says how much of it can be read and what to do. If you see that message, copy the <code>.iso</code> again (or copy the files inside it with 7-Zip instead).</li>
+<li><strong>A disc image one folder down is found.</strong> If unpacking a download put the <code>.iso</code> in a folder of its own (BT4's comes in <code>PS2_NTSC/</code>), it no longer has to be moved: <code>ux0:data/bt3/</code> and <code>ux0:data/bt3/bt4/</code> are searched one folder deeper.</li>
 </ul>
-<h3>If the game still closes by itself</h3>
-<p>Please send <code>ux0:data/bt3/log.txt</code> and the newest crash dump the error message names (<code>ux0:data/psp2core-...-eboot.bin.psp2dmp</code>), with your Vita model and firmware.</p>
-<p>1.2.1's notes still apply: music mods loop, BT4's image is found in more folders, and BT4's Outfit Select shows the costumes' names.</p>
+<h3>If the game closes by itself</h3>
+<p>Please send <code>ux0:data/bt3/log.txt</code> (<code>ux0:data/bt3/bt4/log.txt</code> for BT4) and the newest crash dump the error message names (<code>ux0:data/psp2core-...-eboot.bin.psp2dmp</code>), with your Vita model and firmware.</p>
 </div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.2/Tenkaichi3Decomp-Vita.vpk" target="_blank" rel="noopener">⬇ Tenkaichi3Decomp-Vita.vpk · 5.7 MB</a></div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.3/Tenkaichi3Decomp-Vita.vpk" target="_blank" rel="noopener">⬇ Tenkaichi3Decomp-Vita.vpk · 5.7 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="tntv - the new tetris tntv - the new tetris t64ncollection/tntv tntv v1.05 — 60 fps intro, menus &amp; credits v1.05 ports # tntv v1.05 — 60 fps intro, menus and credits
+
+*the new tetris* native on **ps vita and playstation tv (pstv / vita tv)**.
+
+## what&#x27;s new
+
+- **~60 fps opening:** developer splash, the full *tetris in the sand* cinematic and press start title, with original fades, sound and animation timing retained.
+- **~60 fps frontend:** main menu, single player setup, new name selection and typing keyboard, options, data, audio and scores. includes smoother highlights and navigation.
+- **60 fps scrolling credits:** names continue scrolling smoothly in text-heavy scenes, with original art and spotlight effects.
+- **same gameplay and progress:** solo stages, cpu opponent, wonders/hall, local 2–4 player support, saved profiles and audio remain intact. the optional **l + r + select** fps counter is retained; development timing overlays removed.
+
+these optimizations were hardware-tested on a handheld vita. brief fps fluctuations can still occur. **wonder construction/finale cinematics and local 2–4 player gameplay remain separate performance targets**; this release does not claim either is running at 60 fps.
+
+## download and update
+
+download **tntv-v1.05.zip**, extract it, and install **tntv_v1.05.vpk** with vitashell. you can also download the vpk directly.
+
+**updating an earlier tntv release?** install v1.05 over your existing app (title id `ntet00001`). **do not delete `ux0:/data/tntv/`**: your rom, generated caches, names, scores and wonder progress remain in place. no rom rename or cache reset is needed.
+
+**first installation?** supply your own compatible *the new tetris* **usa 1.0 n64 rom (12,582,912 bytes / 12 mib)** in `ux0:/data/tntv/`. common `.z64`, `.v64` and `.n64` filenames work without renaming. tntv prepares assets locally. **no original rom, extracted game media, user saves or cache files are bundled.**
+
+see [installation.md](https://github.com/t64ncollection/tntv/blob/main/installation.md) and [troubleshooting.md](https://github.com/t64ncollection/tntv/blob/main/troubleshooting.md). a complete source snapshot is included as **tntv-v1.05-source.zip**.
+
+## credits
+
+based on reconstruction work by [chris-gilmore/tnt-splat](https://github.com/chris-gilmore/tnt-splat), with substantial ai-assisted porting and optimization and extensive hands-on ps vita/pstv testing. thanks to the original developers and vitasdk/homebrew community. unofficial fan project, unaffiliated with the game&#x27;s rights holders.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png" alt="Icono de TNTV - The New Tetris" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · T64NCollection/TNTV</div>
+                      <h2><a href="https://github.com/T64NCollection/TNTV/releases/tag/v1.05" target="_blank" rel="noopener">TNTV - The New Tetris</a></h2>
+                      <div class="release-name">TNTV v1.05 — 60 FPS Intro, Menus &amp; Credits</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.05</span>
+                    <span>2026-11-15 06:12 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.0 → release v1.05</div>
+                  
+                  <div class="body markdown-body"><h1>TNTV v1.05 — 60 FPS intro, menus and Credits</h1>
+<p><em>The New Tetris</em> native on <strong>PS Vita and PlayStation TV (PSTV / Vita TV)</strong>.</p>
+<h2>What's new</h2>
+<ul>
+<li><strong>~60 FPS opening:</strong> Developer splash, the full <em>Tetris in the Sand</em> cinematic and Press Start title, with original fades, sound and animation timing retained.</li>
+<li><strong>~60 FPS frontend:</strong> Main menu, Single Player setup, New Name selection and typing keyboard, Options, Data, Audio and Scores. Includes smoother highlights and navigation.</li>
+<li><strong>60 FPS scrolling Credits:</strong> Names continue scrolling smoothly in text-heavy scenes, with original art and spotlight effects.</li>
+<li><strong>Same gameplay and progress:</strong> Solo stages, CPU Opponent, Wonders/Hall, local 2–4 player support, saved profiles and audio remain intact. The optional <strong>L + R + Select</strong> FPS counter is retained; development timing overlays removed.</li>
+</ul>
+<p>These optimizations were hardware-tested on a handheld Vita. Brief FPS fluctuations can still occur. <strong>Wonder construction/finale cinematics and local 2–4 player gameplay remain separate performance targets</strong>; this release does not claim either is running at 60 FPS.</p>
+<h2>Download and update</h2>
+<p>Download <strong>TNTV-v1.05.zip</strong>, extract it, and install <strong>TNTV_v1.05.vpk</strong> with VitaShell. You can also download the VPK directly.</p>
+<p><strong>Updating an earlier TNTV release?</strong> Install v1.05 over your existing app (Title ID <code>NTET00001</code>). <strong>Do not delete <code>ux0:/data/TNTV/</code></strong>: your ROM, generated caches, names, scores and Wonder progress remain in place. No ROM rename or cache reset is needed.</p>
+<p><strong>First installation?</strong> Supply your own compatible <em>The New Tetris</em> <strong>USA 1.0 N64 ROM (12,582,912 bytes / 12 MiB)</strong> in <code>ux0:/data/TNTV/</code>. Common <code>.z64</code>, <code>.v64</code> and <code>.n64</code> filenames work without renaming. TNTV prepares assets locally. <strong>No original ROM, extracted game media, user saves or cache files are bundled.</strong></p>
+<p>See <a target="_blank" rel="noopener noreferrer" href="https://github.com/T64NCollection/TNTV/blob/main/INSTALLATION.md">INSTALLATION.md</a> and <a target="_blank" rel="noopener noreferrer" href="https://github.com/T64NCollection/TNTV/blob/main/TROUBLESHOOTING.md">TROUBLESHOOTING.md</a>. A complete source snapshot is included as <strong>TNTV-v1.05-source.zip</strong>.</p>
+<h2>Credits</h2>
+<p>Based on reconstruction work by <a target="_blank" rel="noopener noreferrer" href="https://github.com/chris-gilmore/tnt-splat">chris-gilmore/tnt-splat</a>, with substantial AI-assisted porting and optimization and extensive hands-on PS Vita/PSTV testing. Thanks to the original developers and VitaSDK/homebrew community. Unofficial fan project, unaffiliated with the game's rights holders.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/T64NCollection/TNTV/releases/download/v1.05/TNTV_v1.05.vpk" target="_blank" rel="noopener">⬇ TNTV_v1.05.vpk · 728.6 KB</a><a class="btn" href="https://github.com/T64NCollection/TNTV/releases/download/v1.05/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 250.0 B</a><a class="btn" href="https://github.com/T64NCollection/TNTV/releases/download/v1.05/TNTV-v1.05-source.zip" target="_blank" rel="noopener">TNTV-v1.05-source.zip · 818.7 KB</a><a class="btn" href="https://github.com/T64NCollection/TNTV/releases/download/v1.05/TNTV-v1.05.zip" target="_blank" rel="noopener">TNTV-v1.05.zip · 738.9 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.6.1-beta1 1.6.1-beta1 ports ## nfs most wanted vita 1.6.1-beta1
+
+this beta collects the fixes for the issues reported since 1.6.0. if you reported one of them, please try it and tell me on your issue whether it works for you. once they are confirmed, i&#x27;ll release 1.6.1.
+
+### fixes
+- **falling through the road at the start of a race:** on a bridge or an overpass, the car could be placed on the road below when a race started or restarted, or when you reset the car with select. reported on the tollbooth races (beacon &amp; riverfront, wharf &amp; north bay, ronnie, bull), jv&#x27;s race 10 and challenge series 65 (#161, #112, #129, #141, #97, #155).
+- **skid and crash sounds going silent:** after a few minutes or in the second race, skid and collision sounds stopped and the game could later close. i believe the cause was that these sounds were never freed when they ended, so they piled up until there was no room for new ones (#126).
+- **audio mode:** mono or stereo now stays selected after restarting the game instead of going back to dolby pro logic ii (#126).
+- **music after a pursuit:** if a race started before the music came back after a pursuit, it didn&#x27;t return until the next pursuit or a visit to the safehouse. it now comes back as on the ps2 (#150).
+- **white lines on cars:** the thick white lines along the panel gaps (doors, fuel cap, spoiler, window frames) are gone (#164, #70).
+- **big lou&#x27;s first sprint:** your car was missing from the race intro. the race starts on a bridge and the game put your car on the river bank under it (#156).
+- **milestone and bounty maps:** the map now moves to each event&#x27;s location as you browse them (#154).
+- **showcase:** parts and vinyls no longer show the mitsubishi logo on every car (#152).
+- **performance tuning (pause menu):** circle now opens and closes each slider&#x27;s help, as the on-screen prompt says (#159).
+- **options &gt; video:** the empty row on the second page is gone (#153).
+- **options &gt; controls:** the title is now translated and no longer in capitals ([#113](https://github.com/germanalvarez15/nfsmw-vita/discussions/113#discussioncomment-19529029)).
+- **game stats (main menu):** the back button closes the screen again.
+
+### pursuit freeze with a helicopter (#160)
+i couldn&#x27;t reproduce it yet. i fixed one possible cause and added pursuit and helicopter details to the log. if the game freezes or crashes during a pursuit, please attach `ux0:data/nfsmw/nfsmw.log` and the crash dump (`ux0:data/psp2core-*.psp2dmp`) to #160.
+
+### updating from 1.6.0
+install the new `nfsmw.vpk` over the existing one. your saves and game data stay intact.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
+                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.1-beta1" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
+                      <div class="release-name">1.6.1-beta1</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span><span class="badge pre">PRE-RELEASE</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.6.1-beta1</span>
+                    <span>2026-11-15 01:13 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.5.1</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.5.1 → release 1.6.1-beta1</div>
+                  
+                  <div class="body markdown-body"><h2>NFS Most Wanted Vita 1.6.1-beta1</h2>
+<p>This beta collects the fixes for the issues reported since 1.6.0. If you reported one of them, please try it and tell me on your issue whether it works for you. Once they are confirmed, I'll release 1.6.1.</p>
+<h3>Fixes</h3>
+<ul>
+<li><strong>Falling through the road at the start of a race:</strong> on a bridge or an overpass, the car could be placed on the road below when a race started or restarted, or when you reset the car with Select. Reported on the tollbooth races (Beacon &amp; Riverfront, Wharf &amp; North Bay, Ronnie, Bull), JV's race 10 and Challenge Series 65 (#161, #112, #129, #141, #97, #155).</li>
+<li><strong>Skid and crash sounds going silent:</strong> after a few minutes or in the second race, skid and collision sounds stopped and the game could later close. I believe the cause was that these sounds were never freed when they ended, so they piled up until there was no room for new ones (#126).</li>
+<li><strong>Audio mode:</strong> Mono or Stereo now stays selected after restarting the game instead of going back to Dolby Pro Logic II (#126).</li>
+<li><strong>Music after a pursuit:</strong> if a race started before the music came back after a pursuit, it didn't return until the next pursuit or a visit to the safehouse. It now comes back as on the PS2 (#150).</li>
+<li><strong>White lines on cars:</strong> the thick white lines along the panel gaps (doors, fuel cap, spoiler, window frames) are gone (#164, #70).</li>
+<li><strong>Big Lou's first sprint:</strong> your car was missing from the race intro. The race starts on a bridge and the game put your car on the river bank under it (#156).</li>
+<li><strong>Milestone and Bounty maps:</strong> the map now moves to each event's location as you browse them (#154).</li>
+<li><strong>Showcase:</strong> parts and vinyls no longer show the Mitsubishi logo on every car (#152).</li>
+<li><strong>Performance Tuning (pause menu):</strong> Circle now opens and closes each slider's help, as the on-screen prompt says (#159).</li>
+<li><strong>Options &gt; Video:</strong> the empty row on the second page is gone (#153).</li>
+<li><strong>Options &gt; Controls:</strong> the title is now translated and no longer in capitals (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113#discussioncomment-19529029">#113</a>).</li>
+<li><strong>Game Stats (main menu):</strong> the back button closes the screen again.</li>
+</ul>
+<h3>Pursuit freeze with a helicopter (#160)</h3>
+<p>I couldn't reproduce it yet. I fixed one possible cause and added pursuit and helicopter details to the log. If the game freezes or crashes during a pursuit, please attach <code>ux0:data/nfsmw/nfsmw.log</code> and the crash dump (<code>ux0:data/psp2core-*.psp2dmp</code>) to #160.</p>
+<h3>Updating from 1.6.0</h3>
+<p>Install the new <code>nfsmw.vpk</code> over the existing one. Your saves and game data stay intact.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.1-beta1/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -850,76 +1002,6 @@ thanks to limonetas ([limonetas](https://github.com/limonetas)) for the crash du
             </article>
             
 
-            <article class="card" data-platform="github" data-catalog="pending" data-search="tntv - the new tetris tntv - the new tetris t64ncollection/tntv tntv v1.01 — 60 fps single player opponent v1.01 ports # tntv v1.01 — 60 fps single player opponent update
-
-*the new tetris* native on **ps vita and playstation tv (pstv / vita tv)**, now with a faster **single player opponent (vs. cpu)** mode.
-
-## what&#x27;s new in v1.01
-
-- **all seven cultural backdrops in single player → opponent now run at approximately 60 fps, raised from the original 30 fps in tntv v1.0.** every backdrop was verified on actual vita tv hardware, with additional quick opponent gameplay checks on handheld vita.
-- corrected playfield-to-backdrop alignment, including the bottom row of locked blocks, and eliminated ghost-piece rendering artifacts.
-- preserved metallic blocks, holds, garbage, line clears, pause/progress and match results—all verified across the seven cultural stages.
-- improved individual block rendering and framebuffer restoration without changing cpu difficulty or gameplay speed.
-- kept the **l + r + select** fps counter; removed development-only timing overlays.
-
-the existing **eight optimized solo stages, complete wonders progression/hall, original gameplay/audio, and hardware-tested local 2–4 player pstv support** remain intact. the 60 fps cpu opponent upgrade does **not** imply local multiplayer or every cinematic runs at 60 fps.
-
-## download and installation
-
-download **tntv-v1.01.zip**, extract it and install **tntv_v1.01.vpk** using vitashell. the same vpk is also available directly below.
-
-**already have tntv v1.0?** install v1.01 over the existing app (title id `ntet00001`). **do not delete `ux0:/data/tntv/`**, which holds your rom, locally generated assets, profiles, scores and wonder progression. no rom renaming, cache reset or save migration is needed.
-
-**new installation:** supply your own compatible **the new tetris (usa 1.0)** nintendo 64 rom (**12,582,912 bytes / 12 mib**) in `ux0:/data/tntv/`. common `.z64`, `.v64` and `.n64` names work without renaming. tntv prepares game assets locally. **no original rom, extracted media, personal saves or caches are included.**
-
-read [installation.md](https://github.com/t64ncollection/tntv/blob/main/installation.md) and [troubleshooting.md](https://github.com/t64ncollection/tntv/blob/main/troubleshooting.md). source builders can download **tntv-v1.01-source.zip** or clone the repository.
-
-## notes &amp; credits
-
-tntv adapts work from [chris-gilmore/tnt-splat](https://github.com/chris-gilmore/tnt-splat), with substantial ai-assisted porting/optimization and extensive physical vita/pstv testing. thanks to the original developers and vitasdk/homebrew communities. this is an unofficial fan project unaffiliated with the original rights holders.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png" alt="Icono de TNTV - The New Tetris" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · T64NCollection/TNTV</div>
-                      <h2><a href="https://github.com/T64NCollection/TNTV/releases/tag/v1.01" target="_blank" rel="noopener">TNTV - The New Tetris</a></h2>
-                      <div class="release-name">TNTV v1.01 — 60 FPS Single Player Opponent</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">v1.01</span>
-                    <span>2026-11-14 16:07 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.0 → release v1.01</div>
-                  
-                  <div class="body markdown-body"><h1>TNTV v1.01 — 60 FPS Single Player Opponent update</h1>
-<p><em>The New Tetris</em> native on <strong>PS Vita and PlayStation TV (PSTV / Vita TV)</strong>, now with a faster <strong>Single Player OPPONENT (vs. CPU)</strong> mode.</p>
-<h2>What's new in v1.01</h2>
-<ul>
-<li><strong>All seven cultural backdrops in Single Player → OPPONENT now run at approximately 60 FPS, raised from the original 30 FPS in TNTV v1.0.</strong> Every backdrop was verified on actual Vita TV hardware, with additional quick Opponent gameplay checks on handheld Vita.</li>
-<li>Corrected playfield-to-backdrop alignment, including the bottom row of locked blocks, and eliminated ghost-piece rendering artifacts.</li>
-<li>Preserved metallic blocks, holds, garbage, line clears, pause/PROGRESS and match results—all verified across the seven cultural stages.</li>
-<li>Improved individual block rendering and framebuffer restoration without changing CPU difficulty or gameplay speed.</li>
-<li>Kept the <strong>L + R + Select</strong> FPS counter; removed development-only timing overlays.</li>
-</ul>
-<p>The existing <strong>eight optimized solo stages, complete Wonders progression/Hall, original gameplay/audio, and hardware-tested local 2–4 player PSTV support</strong> remain intact. The 60 FPS CPU Opponent upgrade does <strong>not</strong> imply local multiplayer or every cinematic runs at 60 FPS.</p>
-<h2>Download and installation</h2>
-<p>Download <strong>TNTV-v1.01.zip</strong>, extract it and install <strong>TNTV_v1.01.vpk</strong> using VitaShell. The same VPK is also available directly below.</p>
-<p><strong>Already have TNTV v1.0?</strong> Install v1.01 over the existing app (Title ID <code>NTET00001</code>). <strong>Do not delete <code>ux0:/data/TNTV/</code></strong>, which holds your ROM, locally generated assets, profiles, scores and Wonder progression. No ROM renaming, cache reset or save migration is needed.</p>
-<p><strong>New installation:</strong> Supply your own compatible <strong>The New Tetris (USA 1.0)</strong> Nintendo 64 ROM (<strong>12,582,912 bytes / 12 MiB</strong>) in <code>ux0:/data/TNTV/</code>. Common <code>.z64</code>, <code>.v64</code> and <code>.n64</code> names work without renaming. TNTV prepares game assets locally. <strong>No original ROM, extracted media, personal saves or caches are included.</strong></p>
-<p>Read <a target="_blank" rel="noopener noreferrer" href="https://github.com/T64NCollection/TNTV/blob/main/INSTALLATION.md">INSTALLATION.md</a> and <a target="_blank" rel="noopener noreferrer" href="https://github.com/T64NCollection/TNTV/blob/main/TROUBLESHOOTING.md">TROUBLESHOOTING.md</a>. Source builders can download <strong>TNTV-v1.01-source.zip</strong> or clone the repository.</p>
-<h2>Notes &amp; credits</h2>
-<p>TNTV adapts work from <a target="_blank" rel="noopener noreferrer" href="https://github.com/chris-gilmore/tnt-splat">chris-gilmore/tnt-splat</a>, with substantial AI-assisted porting/optimization and extensive physical Vita/PSTV testing. Thanks to the original developers and VitaSDK/homebrew communities. This is an unofficial fan project unaffiliated with the original rights holders.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV_v1.01.vpk" target="_blank" rel="noopener">⬇ TNTV_v1.01.vpk · 724.2 KB</a><a class="btn" href="https://github.com/T64NCollection/TNTV/releases/download/v1.01/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 250.0 B</a><a class="btn" href="https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV-v1.01-source.zip" target="_blank" rel="noopener">TNTV-v1.01-source.zip · 809.0 KB</a><a class="btn" href="https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV-v1.01.zip" target="_blank" rel="noopener">TNTV-v1.01.zip · 734.0 KB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
             <article class="card" data-platform="github" data-catalog="pending" data-search="star fox adventures star fox adventures tchisholm20/starfox-adventures-vita v0.2.0 v0.2.0 ports a feature update for the native ps vita port of star fox adventures.
 
 **work in progress.** it&#x27;s playable, but expect bugs.
@@ -1392,154 +1474,6 @@ no copyrighted game data is included in this release.">
 </ul>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/Rinnegatamante/colosseum-vita/releases/download/v.1.1/PokemonColosseum.vpk" target="_blank" rel="noopener">⬇ PokemonColosseum.vpk · 4.9 MB</a><a class="btn" href="https://github.com/Rinnegatamante/colosseum-vita/releases/download/v.1.1/setup.zip" target="_blank" rel="noopener">setup.zip · 23.1 MB</a></div>
-                </div>
-              </div>
-            </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="pending" data-search="nfs most wanted nfs most wanted germanalvarez15/nfsmw-vita 1.6.0 1.6.0 ports ## nfs most wanted vita 1.6.0
-
-this release brings **multiplayer** (online, lan, ad hoc, and split screen) together with major optional **graphics upgrades**, localized video menus, and bug fixes since 1.5.2.
-
----
-
-### new: graphics options (`options &gt; video`)
-the video menu is now split across two pages (**more options**) and translated into all 10 supported european languages. most effects can be toggled on the fly so you can choose between higher visual quality or keeping fps up:
-
-- **car shadows** (*on* / *off*, default *on*): adds projected shadows underneath cars.
-- **skid marks** (*on* / *off*, default *on*): tire skid marks on the road.
-- **car paint** (*shader* / *classic*, default *shader*): metallic dual-lobe + clearcoat car paint shading.
-- **anti-aliasing** (*off* / *2x* / *4x*, default *off*, requires restart): msaa via vitagl. *(note: when **mw color filter** or **speed blur** is enabled, the scene draws to an intermediate framebuffer where msaa may not apply.)*
-- **texture filter** (*bilinear* / *mipmaps*, default *bilinear*): trilinear mipmap filtering to reduce distance shimmer/aliasing on roads, fences, and buildings.
-- **level of detail** (*normal* / *high*, default *normal*): keeps higher-detail car and world models visible from further away.
-- **car reflections** now includes **dynamic hq** (renders dynamic reflection maps at twice the resolution).
-- **sun flare &amp; particle fixes:** the sun now renders as a lens flare properly occluded by geometry, water spray/smoke particles no longer appear overly bright, and skybox texture seams/white flickering bars have been fixed ([#131](https://github.com/germanalvarez15/nfsmw-vita/issues/131)).
-
----
-
-### new: multiplayer
-main menu &gt; **multiplayer** (after quick race) now includes **online**, **lan**, **ad hoc**, and **split screen** (moved here from quick race).
-- two players, circuit and sprint races (no traffic, cops, or ai racers for now).
-- **create game:** wait for the other player, then choose the race, options, and your car.
-- **join game:** choose your car, and the host&#x27;s race loads automatically.
-- after each race, the host chooses **continue** (another race) or **leave room** (ends the session and returns the guest to the menu).
-- both players must be on the same version.
-
-**why online works this way**
-the [survey](https://github.com/germanalvarez15/nfsmw-vita/discussions/113) showed strong interest in online, lan, and ad hoc modes, with no interest in hosting dedicated servers. each ps vita acts as the host: one player opens a room and shares a code, and when the session ends, the server closes.
-
-**online** *(over the internet, no dedicated servers)*
-- **create game** asks your router to open udp port `7777` (upnp) and generates a 16-letter room code. share it only with people you trust, as the code contains your public ip address.
-- if your router does not support upnp, forward udp port `7777` to your ps vita manually.
-- online hosting cannot work if your isp places you behind cgnat (a shared public address); the game will warn you if detected.
-
-**lan:** two consoles on the same wi-fi network; **join game** finds the host automatically.
-
-**ad hoc:** sony&#x27;s console-to-console ad hoc mode (no router needed).
-
-**improvements since 1.6.0-beta1 / beta2:**
-- the other player now appears on the minimap.
-- reduced perceived lag via measured ping and improved position sync.
-- restored alpha masks for frontend radar and track maps.
-- fixed a soft lock when cancelling the system keyboard or ad hoc network dialog in the multiplayer menu.
-- known limit: if the other player disconnects mid-race, you finish the race alone.
-
----
-
-### fixes
-- fixed a crash when loading a save ([#142](https://github.com/germanalvarez15/nfsmw-vita/issues/142)).
-- fixed a crash during the ming race intro ([#144](https://github.com/germanalvarez15/nfsmw-vita/issues/144)).
-- fixed dark squares around crash sparks ([#136](https://github.com/germanalvarez15/nfsmw-vita/issues/136)).
-- updated names in the credits.
-
-### diagnostics (audio silence — [#126](https://github.com/germanalvarez15/nfsmw-vita/issues/126))
-- added extra diagnostic logging (`[snd] channels`, `[aems] instances`, and `[colsnd] states`) to `ux0:data/nfsmw/nfsmw.log` to help track down why skid and collision sounds can stop playing after a few minutes. if this happens to you on 1.6.0, please attach your `nfsmw.log` to issue [#126](https://github.com/germanalvarez15/nfsmw-vita/issues/126).
-
----
-
-### reporting problems &amp; updating from 1.5.2 (or 1.6.0-beta2)
-install the new `nfsmw.vpk` over the existing one. your saves and game data stay intact.
-
-if you run into any issues, please attach `ux0:data/nfsmw/nfsmw.log` — the log hides your full public ip address and the room code.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/nfsmw-vita/icon0.png" alt="Icono de NFS Most Wanted" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · germanalvarez15/nfsmw-vita</div>
-                      <h2><a href="https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.0" target="_blank" rel="noopener">NFS Most Wanted</a></h2>
-                      <div class="release-name">1.6.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.6.0</span>
-                    <span>2026-11-12 16:45 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: 1.5.1</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive 1.5.1 → release 1.6.0</div>
-                  
-                  <div class="body markdown-body"><h2>NFS Most Wanted Vita 1.6.0</h2>
-<p>This release brings <strong>Multiplayer</strong> (Online, LAN, Ad Hoc, and Split Screen) together with major optional <strong>Graphics upgrades</strong>, localized video menus, and bug fixes since 1.5.2.</p>
-<hr>
-<h3>New: Graphics Options (<code>Options &gt; Video</code>)</h3>
-<p>The video menu is now split across two pages (<strong>More Options</strong>) and translated into all 10 supported European languages. Most effects can be toggled on the fly so you can choose between higher visual quality or keeping FPS up:</p>
-<ul>
-<li><strong>Car Shadows</strong> (<em>On</em> / <em>Off</em>, default <em>On</em>): adds projected shadows underneath cars.</li>
-<li><strong>Skid Marks</strong> (<em>On</em> / <em>Off</em>, default <em>On</em>): tire skid marks on the road.</li>
-<li><strong>Car Paint</strong> (<em>Shader</em> / <em>Classic</em>, default <em>Shader</em>): metallic dual-lobe + clearcoat car paint shading.</li>
-<li><strong>Anti-Aliasing</strong> (<em>Off</em> / <em>2x</em> / <em>4x</em>, default <em>Off</em>, requires restart): MSAA via vitaGL. <em>(Note: when <strong>MW Color Filter</strong> or <strong>Speed Blur</strong> is enabled, the scene draws to an intermediate framebuffer where MSAA may not apply.)</em></li>
-<li><strong>Texture Filter</strong> (<em>Bilinear</em> / <em>Mipmaps</em>, default <em>Bilinear</em>): trilinear mipmap filtering to reduce distance shimmer/aliasing on roads, fences, and buildings.</li>
-<li><strong>Level of Detail</strong> (<em>Normal</em> / <em>High</em>, default <em>Normal</em>): keeps higher-detail car and world models visible from further away.</li>
-<li><strong>Car Reflections</strong> now includes <strong>Dynamic HQ</strong> (renders dynamic reflection maps at twice the resolution).</li>
-<li><strong>Sun Flare &amp; Particle Fixes:</strong> the sun now renders as a lens flare properly occluded by geometry, water spray/smoke particles no longer appear overly bright, and skybox texture seams/white flickering bars have been fixed (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/131">#131</a>).</li>
-</ul>
-<hr>
-<h3>New: Multiplayer</h3>
-<p>Main menu &gt; <strong>Multiplayer</strong> (after Quick Race) now includes <strong>Online</strong>, <strong>LAN</strong>, <strong>Ad Hoc</strong>, and <strong>Split Screen</strong> (moved here from Quick Race).</p>
-<ul>
-<li>Two players, circuit and sprint races (no traffic, cops, or AI racers for now).</li>
-<li><strong>Create Game:</strong> wait for the other player, then choose the race, options, and your car.</li>
-<li><strong>Join Game:</strong> choose your car, and the host's race loads automatically.</li>
-<li>After each race, the host chooses <strong>Continue</strong> (another race) or <strong>Leave Room</strong> (ends the session and returns the guest to the menu).</li>
-<li>Both players must be on the same version.</li>
-</ul>
-<p><strong>Why Online works this way</strong>
-The <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/discussions/113">survey</a> showed strong interest in online, LAN, and ad hoc modes, with no interest in hosting dedicated servers. Each PS Vita acts as the host: one player opens a room and shares a code, and when the session ends, the server closes.</p>
-<p><strong>Online</strong> <em>(over the Internet, no dedicated servers)</em></p>
-<ul>
-<li><strong>Create Game</strong> asks your router to open UDP port <code>7777</code> (UPnP) and generates a 16-letter room code. Share it only with people you trust, as the code contains your public IP address.</li>
-<li>If your router does not support UPnP, forward UDP port <code>7777</code> to your PS Vita manually.</li>
-<li>Online hosting cannot work if your ISP places you behind CGNAT (a shared public address); the game will warn you if detected.</li>
-</ul>
-<p><strong>LAN:</strong> two consoles on the same Wi-Fi network; <strong>Join Game</strong> finds the host automatically.</p>
-<p><strong>Ad Hoc:</strong> Sony's console-to-console ad hoc mode (no router needed).</p>
-<p><strong>Improvements since 1.6.0-beta1 / beta2:</strong></p>
-<ul>
-<li>The other player now appears on the minimap.</li>
-<li>Reduced perceived lag via measured ping and improved position sync.</li>
-<li>Restored alpha masks for frontend radar and track maps.</li>
-<li>Fixed a soft lock when cancelling the system keyboard or ad hoc network dialog in the Multiplayer menu.</li>
-<li>Known limit: if the other player disconnects mid-race, you finish the race alone.</li>
-</ul>
-<hr>
-<h3>Fixes</h3>
-<ul>
-<li>Fixed a crash when loading a save (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/142">#142</a>).</li>
-<li>Fixed a crash during the Ming race intro (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/144">#144</a>).</li>
-<li>Fixed dark squares around crash sparks (<a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/136">#136</a>).</li>
-<li>Updated names in the credits.</li>
-</ul>
-<h3>Diagnostics (Audio Silence — <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/126">#126</a>)</h3>
-<ul>
-<li>Added extra diagnostic logging (<code>[snd] channels</code>, <code>[aems] instances</code>, and <code>[colsnd] states</code>) to <code>ux0:data/nfsmw/nfsmw.log</code> to help track down why skid and collision sounds can stop playing after a few minutes. If this happens to you on 1.6.0, please attach your <code>nfsmw.log</code> to issue <a target="_blank" rel="noopener noreferrer" href="https://github.com/germanalvarez15/nfsmw-vita/issues/126">#126</a>.</li>
-</ul>
-<hr>
-<h3>Reporting problems &amp; Updating from 1.5.2 (or 1.6.0-beta2)</h3>
-<p>Install the new <code>nfsmw.vpk</code> over the existing one. Your saves and game data stay intact.</p>
-<p>If you run into any issues, please attach <code>ux0:data/nfsmw/nfsmw.log</code> — the log hides your full public IP address and the room code.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.0/nfsmw.vpk" target="_blank" rel="noopener">⬇ nfsmw.vpk · 3.1 MB</a></div>
                 </div>
               </div>
             </article>
@@ -30907,37 +30841,10 @@ this was just a quick project for something to do.. its not great and i wouldnt 
                 </div>
               </div>
             </article>
-            
-
-            <article class="card" data-platform="github" data-catalog="uptodate" data-search="csd2vita csd2vita hatoving/csd2-old-vita v1.0 1.0 ports initial release.">
-              <div class="card-layout">
-                <div class="icon-wrap"><img class="app-icon" src="https://archive.org/download/psvitaalive-csd2vita/icon0.png" alt="Icono de CSD2Vita" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
-                <div class="card-content">
-                  <div class="card-top">
-                    <div class="title-block">
-                      <div class="eyebrow">PORTS · GITHUB · hatoving/csd2-old-vita</div>
-                      <h2><a href="https://github.com/hatoving/csd2-old-vita/releases/tag/1.0" target="_blank" rel="noopener">CSD2Vita</a></h2>
-                      <div class="release-name">v1.0</div>
-                    </div>
-                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span></div>
-                  </div>
-                  <div class="meta">
-                    <span class="tag">1.0</span>
-                    <span>2022-05-22 19:38 UTC</span>
-                    <span class="catalog-version">PSVitaAlive: v.1.0</span>
-                  </div>
-                  <div class="catalog-detail">PSVitaAlive v.1.0</div>
-                  
-                  <div class="body markdown-body"><p>Initial release.</p>
-</div>
-                  <div class="assets"><a class="btn primary" href="https://github.com/hatoving/csd2-old-vita/releases/download/1.0/CSD2VITA0.vpk" target="_blank" rel="noopener">⬇ CSD2VITA0.vpk · 4.9 MB</a><a class="btn" href="https://github.com/hatoving/csd2-old-vita/releases/download/1.0/game.apk" target="_blank" rel="noopener">game.apk · 2.7 MB</a><a class="btn" href="https://github.com/hatoving/csd2-old-vita/releases/download/1.0/patch.xdelta" target="_blank" rel="noopener">patch.xdelta · 144.4 KB</a></div>
-                </div>
-              </div>
-            </article>
             </main>
 
   <footer class="wrap">
-    Actualizado: 2026-11-15 00:34 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-15 10:13 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>

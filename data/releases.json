@@ -2,19 +2,19 @@
   {
     "platform": "github",
     "repo": "arielxflores/Tenkaichi3Decomp-Vita",
-    "release_id": "445558767",
-    "tag": "v1.2.2",
-    "name": "v1.2.2",
-    "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.2",
-    "published": "2026-11-14T20:08:05Z",
+    "release_id": "445877521",
+    "tag": "v1.2.3",
+    "name": "v1.2.3",
+    "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.3",
+    "published": "2026-11-15T07:14:34Z",
     "prerelease": false,
     "draft": false,
-    "body": "A hotfix for the game closing right at its start on some Vitas. Install `Tenkaichi3Decomp-Vita.vpk` with VitaShell over 1.2.1 (or any earlier version): your saves, settings and game files in `ux0:data/bt3/` are kept.\n\n### Fixed\n\n- **The game closing at its start** (\"An error has occurred\", C2-12828-1), on some Vitas with 1.2 and 1.2.1. The game set up its own crash report through the kubridge plugin, and some versions of kubridge closed the game at that call. The released game no longer sets it up. (`crashreport=1` in `ux0:data/bt3/bt3.txt` turns it back on, if you want `crash.txt`.)\n\n### If the game still closes by itself\n\nPlease send `ux0:data/bt3/log.txt` and the newest crash dump the error message names (`ux0:data/psp2core-...-eboot.bin.psp2dmp`), with your Vita model and firmware.\n\n1.2.1's notes still apply: music mods loop, BT4's image is found in more folders, and BT4's Outfit Select shows the costumes' names.\n",
+    "body": "A faster update, most of it manumastro's work (his pull request #6, thank you!). Install `Tenkaichi3Decomp-Vita.vpk` with VitaShell over 1.2.2 (or any earlier version): your saves, settings and game files in `ux0:data/bt3/` are kept.\n\n### Faster\n\n- **Detailed stages stay at full speed.** The game slowed down on detailed stages, especially after playing a few others or as more of the stage came into view. In a duel, stage 4 now runs at 29.5 frames per second (before: 26.2), stage 27 at 29.5 (24.8), Kame House at 29.8 (28.8), against the game's 30. The first fight on a stage is as fast as the next ones.\n- **Screen-filling effects** (big auras, beams, flashes) are drawn at a lower resolution and added to the picture, so they no longer slow the fight down.\n- With the CapUnlocker plugin, the Vita's fourth CPU core takes on more of the work.\n- `log.txt` is kept under 1 MB (a longer one becomes `log-prev.txt` at the next start).\n\n### Fixed\n\n- **BT4: the map select shows the two fighters' portraits** behind the stage picture, faded toward the middle, as on the PS2.\n- **A broken disc image is reported at the start.** An `.iso` whose copy did not finish (its size can look right while part of it reads back empty), or one cut at 4 GB by a memory card formatted as FAT32, was used anyway: sounds went silent and starting a fight could close the game. The game now checks the image and says how much of it can be read and what to do. If you see that message, copy the `.iso` again (or copy the files inside it with 7-Zip instead).\n- **A disc image one folder down is found.** If unpacking a download put the `.iso` in a folder of its own (BT4's comes in `PS2_NTSC/`), it no longer has to be moved: `ux0:data/bt3/` and `ux0:data/bt3/bt4/` are searched one folder deeper.\n\n### If the game closes by itself\n\nPlease send `ux0:data/bt3/log.txt` (`ux0:data/bt3/bt4/log.txt` for BT4) and the newest crash dump the error message names (`ux0:data/psp2core-...-eboot.bin.psp2dmp`), with your Vita model and firmware.\n",
     "assets": [
       {
         "name": "Tenkaichi3Decomp-Vita.vpk",
-        "size": 5953509,
-        "download_url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.2/Tenkaichi3Decomp-Vita.vpk",
+        "size": 6028730,
+        "download_url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.3/Tenkaichi3Decomp-Vita.vpk",
         "content_type": "application/octet-stream"
       }
     ],
@@ -45,8 +45,124 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.1 → release v1.2.2",
+    "catalog_update_detail": "PSVitaAlive 1.1 → release v1.2.3",
     "catalog_version": "1.1"
+  },
+  {
+    "platform": "github",
+    "repo": "T64NCollection/TNTV",
+    "release_id": "445851014",
+    "tag": "v1.05",
+    "name": "TNTV v1.05 — 60 FPS Intro, Menus & Credits",
+    "url": "https://github.com/T64NCollection/TNTV/releases/tag/v1.05",
+    "published": "2026-11-15T06:12:36Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# TNTV v1.05 — 60 FPS intro, menus and Credits\n\n*The New Tetris* native on **PS Vita and PlayStation TV (PSTV / Vita TV)**.\n\n## What's new\n\n- **~60 FPS opening:** Developer splash, the full *Tetris in the Sand* cinematic and Press Start title, with original fades, sound and animation timing retained.\n- **~60 FPS frontend:** Main menu, Single Player setup, New Name selection and typing keyboard, Options, Data, Audio and Scores. Includes smoother highlights and navigation.\n- **60 FPS scrolling Credits:** Names continue scrolling smoothly in text-heavy scenes, with original art and spotlight effects.\n- **Same gameplay and progress:** Solo stages, CPU Opponent, Wonders/Hall, local 2–4 player support, saved profiles and audio remain intact. The optional **L + R + Select** FPS counter is retained; development timing overlays removed.\n\nThese optimizations were hardware-tested on a handheld Vita. Brief FPS fluctuations can still occur. **Wonder construction/finale cinematics and local 2–4 player gameplay remain separate performance targets**; this release does not claim either is running at 60 FPS.\n\n## Download and update\n\nDownload **TNTV-v1.05.zip**, extract it, and install **TNTV_v1.05.vpk** with VitaShell. You can also download the VPK directly.\n\n**Updating an earlier TNTV release?** Install v1.05 over your existing app (Title ID `NTET00001`). **Do not delete `ux0:/data/TNTV/`**: your ROM, generated caches, names, scores and Wonder progress remain in place. No ROM rename or cache reset is needed.\n\n**First installation?** Supply your own compatible *The New Tetris* **USA 1.0 N64 ROM (12,582,912 bytes / 12 MiB)** in `ux0:/data/TNTV/`. Common `.z64`, `.v64` and `.n64` filenames work without renaming. TNTV prepares assets locally. **No original ROM, extracted game media, user saves or cache files are bundled.**\n\nSee [INSTALLATION.md](https://github.com/T64NCollection/TNTV/blob/main/INSTALLATION.md) and [TROUBLESHOOTING.md](https://github.com/T64NCollection/TNTV/blob/main/TROUBLESHOOTING.md). A complete source snapshot is included as **TNTV-v1.05-source.zip**.\n\n## Credits\n\nBased on reconstruction work by [chris-gilmore/tnt-splat](https://github.com/chris-gilmore/tnt-splat), with substantial AI-assisted porting and optimization and extensive hands-on PS Vita/PSTV testing. Thanks to the original developers and VitaSDK/homebrew community. Unofficial fan project, unaffiliated with the game's rights holders.\n",
+    "assets": [
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 250,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.05/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "TNTV-v1.05-source.zip",
+        "size": 838389,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.05/TNTV-v1.05-source.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "TNTV-v1.05.zip",
+        "size": 756645,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.05/TNTV-v1.05.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "TNTV_v1.05.vpk",
+        "size": 746058,
+        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.05/TNTV_v1.05.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "T64NCollection",
+    "homebrew_name": "TNTV - The New Tetris",
+    "homebrew_icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
+    "homebrew_long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
+    "homebrew_id": "tntv",
+    "homebrew_authors": [
+      "t64ncollection"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "tntv",
+        "name": "TNTV - The New Tetris",
+        "icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
+        "category": "ports",
+        "description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
+        "long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
+        "version": "1.0",
+        "version_date": "2026-11-11",
+        "author_ids": [
+          "t64ncollection"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.05",
+    "catalog_version": "1.0"
+  },
+  {
+    "platform": "github",
+    "repo": "germanalvarez15/nfsmw-vita",
+    "release_id": "445726064",
+    "tag": "1.6.1-beta1",
+    "name": "1.6.1-beta1",
+    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.1-beta1",
+    "published": "2026-11-15T01:13:05Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "## NFS Most Wanted Vita 1.6.1-beta1\n\nThis beta collects the fixes for the issues reported since 1.6.0. If you reported one of them, please try it and tell me on your issue whether it works for you. Once they are confirmed, I'll release 1.6.1.\n\n### Fixes\n- **Falling through the road at the start of a race:** on a bridge or an overpass, the car could be placed on the road below when a race started or restarted, or when you reset the car with Select. Reported on the tollbooth races (Beacon & Riverfront, Wharf & North Bay, Ronnie, Bull), JV's race 10 and Challenge Series 65 (#161, #112, #129, #141, #97, #155).\n- **Skid and crash sounds going silent:** after a few minutes or in the second race, skid and collision sounds stopped and the game could later close. I believe the cause was that these sounds were never freed when they ended, so they piled up until there was no room for new ones (#126).\n- **Audio mode:** Mono or Stereo now stays selected after restarting the game instead of going back to Dolby Pro Logic II (#126).\n- **Music after a pursuit:** if a race started before the music came back after a pursuit, it didn't return until the next pursuit or a visit to the safehouse. It now comes back as on the PS2 (#150).\n- **White lines on cars:** the thick white lines along the panel gaps (doors, fuel cap, spoiler, window frames) are gone (#164, #70).\n- **Big Lou's first sprint:** your car was missing from the race intro. The race starts on a bridge and the game put your car on the river bank under it (#156).\n- **Milestone and Bounty maps:** the map now moves to each event's location as you browse them (#154).\n- **Showcase:** parts and vinyls no longer show the Mitsubishi logo on every car (#152).\n- **Performance Tuning (pause menu):** Circle now opens and closes each slider's help, as the on-screen prompt says (#159).\n- **Options > Video:** the empty row on the second page is gone (#153).\n- **Options > Controls:** the title is now translated and no longer in capitals ([#113](https://github.com/germanalvarez15/nfsmw-vita/discussions/113#discussioncomment-19529029)).\n- **Game Stats (main menu):** the back button closes the screen again.\n\n### Pursuit freeze with a helicopter (#160)\nI couldn't reproduce it yet. I fixed one possible cause and added pursuit and helicopter details to the log. If the game freezes or crashes during a pursuit, please attach `ux0:data/nfsmw/nfsmw.log` and the crash dump (`ux0:data/psp2core-*.psp2dmp`) to #160.\n\n### Updating from 1.6.0\nInstall the new `nfsmw.vpk` over the existing one. Your saves and game data stay intact.\n",
+    "assets": [
+      {
+        "name": "nfsmw.vpk",
+        "size": 3298299,
+        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.1-beta1/nfsmw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "germanalvarez15",
+    "homebrew_name": "NFS Most Wanted",
+    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+    "homebrew_id": "nfs-most-wanted",
+    "homebrew_authors": [
+      "germanalvarez15"
+    ],
+    "homebrew_version": "1.5.1",
+    "catalog_apps": [
+      {
+        "id": "nfs-most-wanted",
+        "name": "NFS Most Wanted",
+        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+        "category": "ports",
+        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+        "version": "1.5.1",
+        "version_date": "2026-11-07",
+        "author_ids": [
+          "germanalvarez15"
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.5.1 → release 1.6.1-beta1",
+    "catalog_version": "1.5.1"
   },
   {
     "platform": "github",
@@ -310,73 +426,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 1.1 → release v1.2.1",
     "catalog_version": "1.1"
-  },
-  {
-    "platform": "github",
-    "repo": "T64NCollection/TNTV",
-    "release_id": "445416827",
-    "tag": "v1.01",
-    "name": "TNTV v1.01 — 60 FPS Single Player Opponent",
-    "url": "https://github.com/T64NCollection/TNTV/releases/tag/v1.01",
-    "published": "2026-11-14T16:07:44Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# TNTV v1.01 — 60 FPS Single Player Opponent update\n\n*The New Tetris* native on **PS Vita and PlayStation TV (PSTV / Vita TV)**, now with a faster **Single Player OPPONENT (vs. CPU)** mode.\n\n## What's new in v1.01\n\n- **All seven cultural backdrops in Single Player → OPPONENT now run at approximately 60 FPS, raised from the original 30 FPS in TNTV v1.0.** Every backdrop was verified on actual Vita TV hardware, with additional quick Opponent gameplay checks on handheld Vita.\n- Corrected playfield-to-backdrop alignment, including the bottom row of locked blocks, and eliminated ghost-piece rendering artifacts.\n- Preserved metallic blocks, holds, garbage, line clears, pause/PROGRESS and match results—all verified across the seven cultural stages.\n- Improved individual block rendering and framebuffer restoration without changing CPU difficulty or gameplay speed.\n- Kept the **L + R + Select** FPS counter; removed development-only timing overlays.\n\nThe existing **eight optimized solo stages, complete Wonders progression/Hall, original gameplay/audio, and hardware-tested local 2–4 player PSTV support** remain intact. The 60 FPS CPU Opponent upgrade does **not** imply local multiplayer or every cinematic runs at 60 FPS.\n\n## Download and installation\n\nDownload **TNTV-v1.01.zip**, extract it and install **TNTV_v1.01.vpk** using VitaShell. The same VPK is also available directly below.\n\n**Already have TNTV v1.0?** Install v1.01 over the existing app (Title ID `NTET00001`). **Do not delete `ux0:/data/TNTV/`**, which holds your ROM, locally generated assets, profiles, scores and Wonder progression. No ROM renaming, cache reset or save migration is needed.\n\n**New installation:** Supply your own compatible **The New Tetris (USA 1.0)** Nintendo 64 ROM (**12,582,912 bytes / 12 MiB**) in `ux0:/data/TNTV/`. Common `.z64`, `.v64` and `.n64` names work without renaming. TNTV prepares game assets locally. **No original ROM, extracted media, personal saves or caches are included.**\n\nRead [INSTALLATION.md](https://github.com/T64NCollection/TNTV/blob/main/INSTALLATION.md) and [TROUBLESHOOTING.md](https://github.com/T64NCollection/TNTV/blob/main/TROUBLESHOOTING.md). Source builders can download **TNTV-v1.01-source.zip** or clone the repository.\n\n## Notes & credits\n\nTNTV adapts work from [chris-gilmore/tnt-splat](https://github.com/chris-gilmore/tnt-splat), with substantial AI-assisted porting/optimization and extensive physical Vita/PSTV testing. Thanks to the original developers and VitaSDK/homebrew communities. This is an unofficial fan project unaffiliated with the original rights holders.\n",
-    "assets": [
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 250,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "TNTV-v1.01-source.zip",
-        "size": 828433,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV-v1.01-source.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "TNTV-v1.01.zip",
-        "size": 751585,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV-v1.01.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "TNTV_v1.01.vpk",
-        "size": 741555,
-        "download_url": "https://github.com/T64NCollection/TNTV/releases/download/v1.01/TNTV_v1.01.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "T64NCollection",
-    "homebrew_name": "TNTV - The New Tetris",
-    "homebrew_icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
-    "homebrew_long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
-    "homebrew_id": "tntv",
-    "homebrew_authors": [
-      "t64ncollection"
-    ],
-    "homebrew_version": "1.0",
-    "catalog_apps": [
-      {
-        "id": "tntv",
-        "name": "TNTV - The New Tetris",
-        "icon": "https://raw.githubusercontent.com/T64NCollection/TNTV/v1.0/sce_sys/icon0.png",
-        "category": "ports",
-        "description": "Native PS Vita and PSTV port of the N64 game The New Tetris.",
-        "long_description": "A native port of The New Tetris for PS Vita and PlayStation TV. All eight solo stages are optimized for approximately 60 FPS during normal gameplay, with restored Wonders construction, WONDERS Hall and finale, original music and sound effects, saved progression and secrets. PlayStation TV supports local 2-4 player games, hardware-tested using four DS3/DS4 controllers. This unofficial fan port involved substantial AI assistance together with extensive human-directed debugging and testing. All original game resources are generated locally from a user-supplied compatible USA 1.0 N64 ROM; no commercial ROM or extracted game media is included.",
-        "version": "1.0",
-        "version_date": "2026-11-11",
-        "author_ids": [
-          "t64ncollection"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.01",
-    "catalog_version": "1.0"
   },
   {
     "platform": "github",
@@ -683,55 +732,6 @@
     "catalog_update_status": "pending",
     "catalog_update_detail": "PSVitaAlive 1.0 → release v.1.1",
     "catalog_version": "1.0"
-  },
-  {
-    "platform": "github",
-    "repo": "germanalvarez15/nfsmw-vita",
-    "release_id": "443236241",
-    "tag": "1.6.0",
-    "name": "1.6.0",
-    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.0",
-    "published": "2026-11-12T16:45:42Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## NFS Most Wanted Vita 1.6.0\r\n\r\nThis release brings **Multiplayer** (Online, LAN, Ad Hoc, and Split Screen) together with major optional **Graphics upgrades**, localized video menus, and bug fixes since 1.5.2.\r\n\r\n---\r\n\r\n### New: Graphics Options (`Options > Video`)\r\nThe video menu is now split across two pages (**More Options**) and translated into all 10 supported European languages. Most effects can be toggled on the fly so you can choose between higher visual quality or keeping FPS up:\r\n\r\n- **Car Shadows** (*On* / *Off*, default *On*): adds projected shadows underneath cars.\r\n- **Skid Marks** (*On* / *Off*, default *On*): tire skid marks on the road.\r\n- **Car Paint** (*Shader* / *Classic*, default *Shader*): metallic dual-lobe + clearcoat car paint shading.\r\n- **Anti-Aliasing** (*Off* / *2x* / *4x*, default *Off*, requires restart): MSAA via vitaGL. *(Note: when **MW Color Filter** or **Speed Blur** is enabled, the scene draws to an intermediate framebuffer where MSAA may not apply.)*\r\n- **Texture Filter** (*Bilinear* / *Mipmaps*, default *Bilinear*): trilinear mipmap filtering to reduce distance shimmer/aliasing on roads, fences, and buildings.\r\n- **Level of Detail** (*Normal* / *High*, default *Normal*): keeps higher-detail car and world models visible from further away.\r\n- **Car Reflections** now includes **Dynamic HQ** (renders dynamic reflection maps at twice the resolution).\r\n- **Sun Flare & Particle Fixes:** the sun now renders as a lens flare properly occluded by geometry, water spray/smoke particles no longer appear overly bright, and skybox texture seams/white flickering bars have been fixed ([#131](https://github.com/germanalvarez15/nfsmw-vita/issues/131)).\r\n\r\n---\r\n\r\n### New: Multiplayer\r\nMain menu > **Multiplayer** (after Quick Race) now includes **Online**, **LAN**, **Ad Hoc**, and **Split Screen** (moved here from Quick Race).\r\n- Two players, circuit and sprint races (no traffic, cops, or AI racers for now).\r\n- **Create Game:** wait for the other player, then choose the race, options, and your car.\r\n- **Join Game:** choose your car, and the host's race loads automatically.\r\n- After each race, the host chooses **Continue** (another race) or **Leave Room** (ends the session and returns the guest to the menu).\r\n- Both players must be on the same version.\r\n\r\n**Why Online works this way**\r\nThe [survey](https://github.com/germanalvarez15/nfsmw-vita/discussions/113) showed strong interest in online, LAN, and ad hoc modes, with no interest in hosting dedicated servers. Each PS Vita acts as the host: one player opens a room and shares a code, and when the session ends, the server closes.\r\n\r\n**Online** *(over the Internet, no dedicated servers)*\r\n- **Create Game** asks your router to open UDP port `7777` (UPnP) and generates a 16-letter room code. Share it only with people you trust, as the code contains your public IP address.\r\n- If your router does not support UPnP, forward UDP port `7777` to your PS Vita manually.\r\n- Online hosting cannot work if your ISP places you behind CGNAT (a shared public address); the game will warn you if detected.\r\n\r\n**LAN:** two consoles on the same Wi-Fi network; **Join Game** finds the host automatically.\r\n\r\n**Ad Hoc:** Sony's console-to-console ad hoc mode (no router needed).\r\n\r\n**Improvements since 1.6.0-beta1 / beta2:**\r\n- The other player now appears on the minimap.\r\n- Reduced perceived lag via measured ping and improved position sync.\r\n- Restored alpha masks for frontend radar and track maps.\r\n- Fixed a soft lock when cancelling the system keyboard or ad hoc network dialog in the Multiplayer menu.\r\n- Known limit: if the other player disconnects mid-race, you finish the race alone.\r\n\r\n---\r\n\r\n### Fixes\r\n- Fixed a crash when loading a save ([#142](https://github.com/germanalvarez15/nfsmw-vita/issues/142)).\r\n- Fixed a crash during the Ming race intro ([#144](https://github.com/germanalvarez15/nfsmw-vita/issues/144)).\r\n- Fixed dark squares around crash sparks ([#136](https://github.com/germanalvarez15/nfsmw-vita/issues/136)).\r\n- Updated names in the credits.\r\n\r\n### Diagnostics (Audio Silence — [#126](https://github.com/germanalvarez15/nfsmw-vita/issues/126))\r\n- Added extra diagnostic logging (`[snd] channels`, `[aems] instances`, and `[colsnd] states`) to `ux0:data/nfsmw/nfsmw.log` to help track down why skid and collision sounds can stop playing after a few minutes. If this happens to you on 1.6.0, please attach your `nfsmw.log` to issue [#126](https://github.com/germanalvarez15/nfsmw-vita/issues/126).\r\n\r\n---\r\n\r\n### Reporting problems & Updating from 1.5.2 (or 1.6.0-beta2)\r\nInstall the new `nfsmw.vpk` over the existing one. Your saves and game data stay intact.\r\n\r\nIf you run into any issues, please attach `ux0:data/nfsmw/nfsmw.log` — the log hides your full public IP address and the room code.\r\n",
-    "assets": [
-      {
-        "name": "nfsmw.vpk",
-        "size": 3294389,
-        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.0/nfsmw.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "germanalvarez15",
-    "homebrew_name": "NFS Most Wanted",
-    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-    "homebrew_id": "nfs-most-wanted",
-    "homebrew_authors": [
-      "germanalvarez15"
-    ],
-    "homebrew_version": "1.5.1",
-    "catalog_apps": [
-      {
-        "id": "nfs-most-wanted",
-        "name": "NFS Most Wanted",
-        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-        "category": "ports",
-        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-        "version": "1.5.1",
-        "version_date": "2026-11-07",
-        "author_ids": [
-          "germanalvarez15"
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.5.1 → release 1.6.0",
-    "catalog_version": "1.5.1"
   },
   {
     "platform": "github",
@@ -33157,66 +33157,5 @@
         ]
       }
     ]
-  },
-  {
-    "platform": "github",
-    "repo": "hatoving/csd2-old-vita",
-    "release_id": "67494677",
-    "tag": "1.0",
-    "name": "v1.0",
-    "url": "https://github.com/hatoving/csd2-old-vita/releases/tag/1.0",
-    "published": "2022-05-22T19:38:13Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Initial release.",
-    "assets": [
-      {
-        "name": "CSD2VITA0.vpk",
-        "size": 5131431,
-        "download_url": "https://github.com/hatoving/csd2-old-vita/releases/download/1.0/CSD2VITA0.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "game.apk",
-        "size": 2811234,
-        "download_url": "https://github.com/hatoving/csd2-old-vita/releases/download/1.0/game.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "patch.xdelta",
-        "size": 147894,
-        "download_url": "https://github.com/hatoving/csd2-old-vita/releases/download/1.0/patch.xdelta",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "hatoving",
-    "homebrew_name": "CSD2Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-csd2vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Cook, Serve, Delicious! 2 for PSVITA.",
-    "homebrew_long_description": "Cook, Serve, Delicious! 2 is the massive sequel to the surprise best selling original, one of the few games that gives players complete control on how they want to build their restaurant.\n\n- PsVitaAlive -",
-    "homebrew_id": "csd2vita",
-    "homebrew_authors": [
-      "hatoving"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "csd2vita",
-        "name": "CSD2Vita",
-        "icon": "https://archive.org/download/psvitaalive-csd2vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Cook, Serve, Delicious! 2 for PSVITA.",
-        "long_description": "Cook, Serve, Delicious! 2 is the massive sequel to the surprise best selling original, one of the few games that gives players complete control on how they want to build their restaurant.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-05-23",
-        "author_ids": [
-          "hatoving"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0"
   }
 ]
