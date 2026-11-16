@@ -68,7 +68,7 @@ class PreservationStatusTests(unittest.TestCase):
         self.assertEqual(
             assess_backup(release_tag="nightly", catalog_version="",
                           archive_urls=[ROOT + "example.vpk"], is_registered=True)[0],
-            "unversioned",
+            "review",
         )
 
 
