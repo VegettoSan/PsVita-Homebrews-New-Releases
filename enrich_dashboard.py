@@ -27,6 +27,7 @@ import mistune
 import requests
 from catalog_schema_v2_compat import to_v1
 from preservation_status import assess_backup, current_download, archive_vpk_url
+from game_data_dashboard import add_data_tab
 
 CATALOG_URL = os.getenv(
     "PSVITAALIVE_CATALOG_URL",
@@ -1163,7 +1164,7 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
 """
 
     HTML_FILE.parent.mkdir(parents=True, exist_ok=True)
-    HTML_FILE.write_text(document, encoding="utf-8")
+    HTML_FILE.write_text(add_data_tab(document), encoding="utf-8")
 
 
 def main() -> int:
