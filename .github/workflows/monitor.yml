@@ -2,8 +2,10 @@ name: PS Vita Release Tracker
 
 on:
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types: [psvitaalive_catalog_published]
   push:
     branches:
       - main
@@ -15,7 +17,7 @@ permissions:
 
 concurrency:
   group: psvita-release-tracker-v2
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   monitor-and-build:
@@ -39,16 +41,19 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Sync PSVitaAlive catalog and check releases
+        id: scan
         if: github.event_name != 'push' || contains(github.event.head_commit.message, '[scan]')
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          PSVITAALIVE_CATALOG_URL: ${{ github.event_name == 'repository_dispatch' && format('https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/{0}/catalog.json', github.event.client_payload.catalog_sha) || 'https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/catalog.json' }}
         run: python monitor.py
 
       - name: Build PSVitaAlive-enriched dashboard
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PSVITAALIVE_CATALOG_URL: ${{ github.event_name == 'repository_dispatch' && format('https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/{0}/catalog.json', github.event.client_payload.catalog_sha) || 'https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/catalog.json' }}
         run: python enrich_dashboard.py
 
       - name: Commit generated data
@@ -62,6 +67,23 @@ jobs:
             git commit -m "chore: sync PSVitaAlive releases [skip ci]"
             git push
           fi
+
+      - name: Notify PSVitaAlive about checked upstream releases
+        if: steps.scan.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.PSVA_AUTOUPDATE_DISPATCH_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::notice::PSVA_AUTOUPDATE_DISPATCH_TOKEN not configured. Monitor works; cross-repo updates remain disabled."
+            exit 0
+          fi
+          monitor_sha="$(git rev-parse HEAD)"
+          jq -n --arg sha "$monitor_sha" \
+            '{event_type:"release_monitor_synced",client_payload:{monitor_sha:$sha,monitor_repository:"VegettoSan/PsVita-Homebrews-New-Releases"}}' \
+            > /tmp/psva-dispatch.json
+          gh api --method POST repos/VegettoSan/PSVitaAlive/dispatches --input /tmp/psva-dispatch.json
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
