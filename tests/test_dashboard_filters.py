@@ -76,6 +76,29 @@ class TestDashboardFilters(unittest.TestCase):
         self.assertIn('Revisar respaldo (1)', html)
         self.assertIn('Sin ficha asociada (1)', html)
 
+    def test_pending_without_a_unique_vpk_explains_manual_review(self):
+        no_vpk = release("no-vpk", "pending", "missing")
+        no_vpk["assets"] = [{"name": "bundle.zip", "size": 1234, "download_url": "https://github.com/example/homebrew/releases/download/v1.3/bundle.zip"}]
+        many_vpks = release("multi-vpk", "pending", "missing")
+        many_vpks["assets"] = [
+            {"name": "a.vpk", "download_url": "https://github.com/example/homebrew/releases/download/v1.3/a.vpk"},
+            {"name": "b.vpk", "download_url": "https://github.com/example/homebrew/releases/download/v1.3/b.vpk"},
+        ]
+        # The dashboard preserves the existing Pending status, but gives a reason.
+        # The updater must then leave these catalog JSONs untouched.
+        for source, expected in (
+            (no_vpk, "Revisión manual: release sin VPK"),
+            (many_vpks, "Revisión manual: 2 VPK diferentes"),
+        ):
+            with self.subTest(expected=expected):
+                with patch.object(enrich_dashboard, "calculate_catalog_status",
+                                  return_value=("pending", "Version nueva")):
+                    with patch.object(enrich_dashboard, "choose_primary_app",
+                                      return_value={"id": "no-vpk", "name": "Test", "version": "1.2"}):
+                        enrich_dashboard.enrich_release(source, [{"id": "no-vpk", "name": "Test", "version": "1.2"}])
+                self.assertEqual(source["catalog_update_status"], "pending")
+                self.assertIn(expected, source["catalog_update_detail"])
+
     def test_preserves_downloads_and_version_labels_in_same_cards(self):
         html = self.render()
         self.assertIn('href="https://github.com/example/homebrew/releases/download/v1.3/Homebrew.vpk"', html)
