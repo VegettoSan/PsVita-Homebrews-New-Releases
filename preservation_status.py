@@ -80,7 +80,15 @@ def assess_backup(
 
     versions = [filename_version(url) for url in archive_urls]
     has_unversioned = any(version is None for version in versions)
-    target = parse_numeric_version(release_tag) or parse_numeric_version(catalog_version)
+    # The catalog may already be newer than the monitored release.
+    # Never treat a backup of an older upstream tag as the current version.
+    candidates = [
+        value for value in (
+            parse_numeric_version(release_tag),
+            parse_numeric_version(catalog_version),
+        ) if value is not None
+    ]
+    target = max(candidates) if candidates else None
 
     if target is None:
         return "unversioned", "Existe enlace Archive.org, pero no se puede comparar la versión"
