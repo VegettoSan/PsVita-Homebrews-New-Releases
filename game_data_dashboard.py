@@ -84,7 +84,7 @@ def safe_href(url):
         return ""
     if parsed.hostname not in {
         "github.com", "gitlab.com", "www.reddit.com", "raw.githubusercontent.com",
-        "archive.org", "www.archive.org", "i.imgur.com"
+        "archive.org", "www.archive.org", "i.imgur.com", "docs.google.com"
     }:
         return ""
     return esc(url)
@@ -153,9 +153,11 @@ def render_panel(report):
                                     str(app.get("title_id") or ""),
                                     str(app.get("id") or "")]).lower())
         parts.append(
-            '<article class="gd-item" data-found="' + ("official" if any(
-                c.get("kind") == "possible-archive" for c in app["candidates"])
-                else "community") +
+            '<article class="gd-item" data-found="' + " ".join(
+                label for label, kind in (("official", "possible-archive"),
+                                          ("community", "community-sheet"))
+                if any(c.get("kind") == kind for c in app["candidates"])
+            ) +
             '" data-search="' + search_text + '"><div class="gd-top">' + icon_html +
             '<div><div class="gd-title">' + name + '</div><div class="gd-id">' +
             title_id + ' · ' + app_id + '</div></div></div><p class="gd-note">' +
@@ -181,6 +183,12 @@ def render_panel(report):
         'hoja comunitaria enlazada desde Reddit. No equivale a validar '
         'el contenido ni los derechos de distribución.</p>'
         '<p>' + report_message + '</p>'
+        '<p><a class="btn" target="_blank" rel="noopener noreferrer" '
+        'href="https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294">'
+        'Consultar hoja comunitaria</a> '
+        '<a class="btn" target="_blank" rel="noopener noreferrer" '
+        'href="https://www.reddit.com/r/VitaPiracy/comments/1xd0dai/full_list_of_ps_vita_ports_google_sheets/">'
+        'Publicación de Reddit</a></p>'
         '<div class="gd-totals">'
         '<div class="gd-total"><strong>' + str(with_matches) +
         '</strong>ports con referencias</div>'
@@ -247,7 +255,7 @@ SCRIPT = """
       let visible = 0;
       for (const card of cards) {
         const show = (!q || card.dataset.search.includes(q)) &&
-                     (state === 'all' || card.dataset.found === state);
+                     (state === 'all' || card.dataset.found.split(' ').includes(state));
         card.hidden = !show;
         if (show) visible++;
       }
