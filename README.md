@@ -32,6 +32,26 @@ Los filtros de seguridad, las exclusiones de apps con Game Files y el orden de
 activación están documentados en
 [PSVitaAlive/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md](https://github.com/VegettoSan/PSVitaAlive/blob/main/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md).
 
+## Actualizaciones automáticas de GitHub y GitLab
+
+El monitor identifica releases en **GitHub y GitLab** y remite sus assets al
+actualizador de PSVitaAlive. Si la versión es más nueva y la release expone
+**exactamente un .vpk**, el actualizador puede reemplazar **solo la URL
+del botón `Download` llamado `VPK`**, sin cambiar su nombre, preferencia,
+posición ni otros botones de configuraciones alternativas. No añade Mirrors
+ni botones con enlaces antiguos; tampoco descarga el VPK.
+
+Cuando una release no tiene VPK o tiene varios, se mantiene **Pendiente** y
+la misma ficha explica que requiere revisión manual. En GitLab se priorizan
+los enlaces permanentes `direct_asset_url` de los adjuntos. Los enlaces de
+descarga externos, proyectos ambiguos y VPK sin botón `VPK` inequívoco en
+el JSON se omiten de la automatización para revisión.
+
+**El enlace manual de Archive.org nunca se sobrescribe mientras la versión
+del catálogo sea igual o superior a la release monitoreada.** Si llega otra
+versión nueva válida, el enlace `VPK` puede pasar temporalmente a la
+descarga del repositorio hasta que se haga su respaldo manual.
+
 ## Preservación en la misma ficha de releases
 
 **No hay sección ni página nueva** para los respaldos: cada tarjeta del monitor
@@ -44,8 +64,8 @@ una segunda etiqueta de Archive.org.
 - **Versión nueva sin respaldo**: el enlace principal aún apunta a Archive.org
   de la versión del catálogo, pero el upstream ya anunció otra versión.
 - **Falta respaldo en Archive.org**: tras actualizarse el catálogo a un release
-  nuevo, el Download actual apunta a GitHub; si hay un antiguo VPK archivado
-  en un Mirror, no se considera respaldo de la versión nueva.
+  nuevo, el botón `VPK` actual apunta a GitHub/GitLab en lugar de Archive.org.
+  Si ya había otros Mirrors manuales, se conservan sin crear otros nuevos.
 - **Revisar respaldo**: falta una descarga principal inequívoca o hay
   incongruencia comprobable con el nombre del VPK/versiones.
 - Los registros sin ficha asociada no presentan esta etiqueta.
