@@ -32,31 +32,35 @@ Los filtros de seguridad, las exclusiones de apps con Game Files y el orden de
 activación están documentados en
 [PSVitaAlive/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md](https://github.com/VegettoSan/PSVitaAlive/blob/main/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md).
 
-## Preservación sencilla con Archive.org
+## Preservación en la misma ficha de releases
 
-El dashboard muestra una **segunda etiqueta independiente de la versión
-del catálogo**, basada exclusivamente en los enlaces directos a VPK de
-Archive.org que ya están en el JSON de PSVitaAlive:
+**No hay sección ni página nueva** para los respaldos: cada tarjeta del monitor
+mantiene los botones de descarga, el estado de actualización de PSVitaAlive y
+una segunda etiqueta de Archive.org.
 
-- **Archivo con versión identificada**: el nombre del VPK en Archive.org
-  indica la última versión conocida (release o catálogo).
-- **Falta respaldo en Archive.org**: la ficha no contiene ningún enlace
-  directo a un VPK en Archive.org. No asegura que el archivo no exista allí.
-- **Respaldo de versión anterior**: los enlaces Archive VPK tienen versiones
-  identificables, pero todas son menores que la última versión conocida.
-- **Respaldo sin versión identificable**: caso normal para los antiguos
-  `homebrew.vpk`, `2048.vpk`, etc. Nunca se marcan falsamente como ausentes.
-- **Revisar respaldo** o **Respaldo sin comprobar**: versión ambigua o
-  Homebrew sin ficha vinculada.
+- **Respaldo en Archive.org**: el Download actual/recomendado del JSON apunta a
+  un VPK de Archive.org, y el release monitoreado no es más nuevo que la versión
+  del catálogo. La etiqueta es un enlace pulsable hacia ese VPK.
+- **Versión nueva sin respaldo**: el enlace principal aún apunta a Archive.org
+  de la versión del catálogo, pero el upstream ya anunció otra versión.
+- **Falta respaldo en Archive.org**: tras actualizarse el catálogo a un release
+  nuevo, el Download actual apunta a GitHub; si hay un antiguo VPK archivado
+  en un Mirror, no se considera respaldo de la versión nueva.
+- **Revisar respaldo**: falta una descarga principal inequívoca o hay
+  incongruencia comprobable con el nombre del VPK/versiones.
+- Los registros sin ficha asociada no presentan esta etiqueta.
 
-Un desplegable permite ver rápidamente los que necesitan respaldo.
+Los VPK **antiguos sin versión en su nombre** no se tratan como perdidos cuando
+son el Download de la versión catalogada. Los nuevos nombres con versión sirven
+como comprobación adicional, no como requisito para aceptar un respaldo.
 
-**Alcance de esta primera etapa:** no se consulta la API de Archive.org ni se
-comprueba que el archivo todavía esté accesible o íntegro. Coincidir por
-nombre **no equivale** a un respaldo verificado con hash. Si subiste un VPK
-nuevo al mismo item de Archive.org, pero aún no añadiste su enlace al JSON
-de PSVitaAlive, el monitor no podrá reconocerlo hasta que enlaces ese archivo.
-No se modifican `apps/`, `catalog.json` ni los archivos de Archive.org.
+**No es una verificación técnica del contenido:** la etiqueta refleja
+la URL registrada por quien mantiene PSVitaAlive, no disponibilidad real,
+checksum ni verificación del Title ID. No descarga ni sube archivos y no
+necesita credenciales de Archive.org.
+
+Los futuros descubrimientos de Homebrew ausentes del catálogo tendrán una
+pestaña separada cuando implementemos esa funcionalidad, no antes.
 
 ## Qué hace
 
