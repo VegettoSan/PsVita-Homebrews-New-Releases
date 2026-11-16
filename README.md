@@ -113,42 +113,54 @@ pestaña separada cuando implementemos esa funcionalidad, no antes.
 
 ## Segunda pestaña: búsqueda de Game Data
 
-La web tiene dos pestañas: **Actualizaciones Homebrew** (el monitor original,
-sin cambiar sus filtros) y **Búsqueda de Game Data**. Esta última muestra solo
-registros de categoría **ports** que no tienen un enlace **Game Files**, **Data
-Files** ni un campo **data_url**. Reconoce además Download/Mirror con nombre Game
-Files o Data Files.
+La web mantiene dos pestañas: **Actualizaciones Homebrew** (el monitor
+original, sin cambios en sus filtros) y **Búsqueda de Game Data**.
 
-El workflow independiente **Discover missing PS Vita Game Data** se ejecuta
-cada tres horas con cron **47 */3 * * *** (UTC), separado del monitor original
-(minuto 17). También admite **Run workflow**. Ambos workflows se serializan
-para evitar escrituras concurrentes y despliegues simultáneos a Pages.
+**Solo aparecen ports con alguna referencia documentada** y que no tengan ya
+un enlace Game Files, Data Files ni un data_url en el catálogo oficial. Los
+ports sin evidencia se siguen contabilizando internamente para su búsqueda
+rotativa, pero no aparecen como tarjetas vacías.
 
-1. Lee el catalog.json oficial (V1/V2) de PSVitaAlive, solo como lectura.
-2. Examina GitHub/GitLab Releases e Issues de repositorios enlazados desde los
-   ports. Si hay muchos, inspecciona primero los menos recientemente comprobados
-   (hasta 100 ports por ejecución).
-3. Genera data/game_data_candidates.json con evidencia revisable: título,
-   Title ID, tipo de hallazgo, fuente y enlace **a la página**, nunca al binario.
-4. La pestaña incluye búsqueda, filtro de coincidencias, acceso al proyecto y
-   un botón **Buscar en Reddit** por port.
-5. Los descubrimientos se muestran **solo en la pestaña web**. El buscador
-   de Game Data **nunca envía avisos a Discord**, tampoco durante
-   ejecuciones futuras. Las notificaciones del monitor original de releases
-   permanecen independientes.
+Fuentes reconocidas:
 
-**Importante:** una coincidencia no verifica legalidad, integridad ni
-compatibilidad. No descarga Game Data, no publica enlaces automáticamente,
-no edita apps/ ni modifica catalog.json. El mantenedor revisa las fuentes y
-sus derechos antes de incorporar contenido.
+- **GitHub/GitLab Releases:** un asset de archivo cuyo nombre indica Game
+  Files/Data Files. Se muestra el release del desarrollador; no se descarga
+  el archivo ni se verifica su contenido.
+- **PS Vita Ports Tracker [Official] (hoja pública de u/RamenRams):**
+  https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294
+  Publicada en Reddit:
+  https://www.reddit.com/r/VitaPiracy/comments/1xd0dai/full_list_of_ps_vita_ports_google_sheets/
+  Cada ejecución intenta leer su CSV público, detecta filas con referencia a
+  archivos de datos/ZIP y **solo relaciona registros cuando coincide
+  inequívocamente el repositorio del desarrollador** con la ficha canónica y
+  existe coincidencia razonable de nombre. Los valores Missing, WIP y VPK
+  únicamente no cuentan. El enlace abre la **fila original de la hoja** para
+  que el mantenedor examine la fuente y los enlaces allí, no descarga
+  directamente paquetes de origen desconocido.
 
-Reddit se ofrece como búsqueda manual: el uso programático de su API requiere
-autenticación OAuth y aprobación explícita bajo sus condiciones actuales.
-No se implementa scraping no autorizado; una integración aprobada puede
-añadirse más adelante respetando sus límites y eliminación de contenido.
+Los hallazgos de Issues, problemas de ejecución y textos genéricos que
+mencionen "data files" ya no se muestran como evidencia. Las fuentes de la
+hoja comunitaria **no son una verificación independiente de integridad,
+legalidad, licencia o compatibilidad**. Se identifican separadamente de los
+assets de releases oficiales. Los registros canónicos de PSVitaAlive siguen
+siendo la única autoridad para el catálogo.
 
-Solo se generan el informe y docs/index.html. enrich_dashboard.py conserva
-la interfaz y los filtros del monitor de releases y sus respaldos.
+El workflow **Discover missing PS Vita Game Data** se ejecuta cada tres horas
+a minuto 47 UTC, separado del monitor de releases (minuto 17). También puede
+ejecutarse manualmente. Inspecciona hasta 100 ports por ronda; la hoja se
+consulta una sola vez por ejecución. Si la hoja no responde, el escaneo de
+GitHub/GitLab continúa y preserva las referencias de hoja de la última
+consulta exitosa, señalando el error en el JSON.
+
+El JSON de resultados generado es data/game_data_candidates.json y el
+dashboard está en docs/index.html. El código no modifica los archivos
+canónicos de PSVitaAlive ni sus catálogos generados.
+
+**Discord:** la búsqueda Game Data nunca envía mensajes o notificaciones.
+Las notificaciones del monitor original de releases continúan funcionando.
+La consulta programática de Reddit requeriría una integración OAuth
+aprobada; por ahora solo se consulta la **hoja pública enlazada por Reddit**
+y se facilita la búsqueda manual desde cada tarjeta.
 
 ## Qué hace
 
