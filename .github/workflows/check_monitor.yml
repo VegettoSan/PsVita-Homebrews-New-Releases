@@ -24,6 +24,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_preservation_status.py -v
       - name: Verify combined dashboard status filters
         run: python -m unittest discover -s tests -p test_dashboard_filters.py -v
+      - name: Verify GitLab VPK release links and manual-review status
+        run: python -m unittest discover -s tests -p test_gitlab_vpk.py -v
       - name: Check workflow, snapshot and dispatch contracts
         run: |
           python - <<'PY'
