@@ -4,6 +4,105 @@ Monitor automático de releases de **homebrew, ports, plugins y utilidades de PS
 
 La lista de proyectos ya no se mantiene manualmente: cada ejecución descarga el catálogo público de **[PSVitaAlive](https://github.com/VegettoSan/PSVitaAlive)**, descubre los repositorios de **GitHub y GitLab** enlazados por el catálogo y comprueba sus releases.
 
+
+## Sincronización inmediata con PSVitaAlive y actualización de Homebrew
+
+Además del cron de tres horas, el monitor ahora acepta el evento
+`psvitaalive_catalog_published`. Cuando el workflow de publicación de PSVitaAlive
+termina correctamente, avisa al monitor enviando el SHA del catálogo publicado.
+El monitor lo consulta directamente, sincroniza los repos y reconstruye la web.
+
+Cada ejecución completa genera también `data/upstream_latest.json` (snapshot de
+releases actuales de los repositorios monitoreados). Puede emitir el evento
+`release_monitor_synced` a PSVitaAlive para que su workflow **valide y actualice
+solo JSON canónicos seguros**, nunca los catálogos generados a mano.
+
+Para conectar ambos repositorios, se requieren dos secrets de Actions con tokens
+de alcance limitado:
+
+- `PSVA_TRACKER_DISPATCH_TOKEN`, guardado en **PSVitaAlive** y con permiso
+  Contents: Read and write *solo* en este repositorio de releases.
+- `PSVA_AUTOUPDATE_DISPATCH_TOKEN`, guardado en **este monitor** y con permiso
+  Contents: Read and write *solo* en `VegettoSan/PSVitaAlive`.
+
+Sin estos secrets, las sincronizaciones programadas continúan, pero los eventos
+entre repositorios no se pueden enviar.
+
+Los filtros de seguridad, las exclusiones de apps con Game Files y el orden de
+activación están documentados en
+[PSVitaAlive/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md](https://github.com/VegettoSan/PSVitaAlive/blob/main/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md).
+
+## Actualizaciones automáticas de GitHub y GitLab
+
+El monitor identifica releases en **GitHub y GitLab** y remite sus assets al
+actualizador de PSVitaAlive. Si la versión es más nueva y la release expone
+**exactamente un .vpk**, el actualizador puede reemplazar **solo la URL
+del botón `Download` llamado `VPK`**, sin cambiar su nombre, preferencia,
+posición ni otros botones de configuraciones alternativas. No añade Mirrors
+ni botones con enlaces antiguos; tampoco descarga el VPK.
+
+Cuando una release no tiene VPK o tiene varios, se mantiene **Pendiente** y
+la misma ficha explica que requiere revisión manual. En GitLab se priorizan
+los enlaces permanentes `direct_asset_url` de los adjuntos. Los enlaces de
+descarga externos, proyectos ambiguos y VPK sin botón `VPK` inequívoco en
+el JSON se omiten de la automatización para revisión.
+
+**El enlace manual de Archive.org nunca se sobrescribe mientras la versión
+del catálogo sea igual o superior a la release monitoreada.** Si llega otra
+versión nueva válida, el enlace `VPK` puede pasar temporalmente a la
+descarga del repositorio hasta que se haga su respaldo manual.
+
+## Preservación en la misma ficha de releases
+
+**No hay sección ni página nueva** para los respaldos: cada tarjeta del monitor
+mantiene los botones de descarga, el estado de actualización de PSVitaAlive y
+una segunda etiqueta de Archive.org.
+
+- **Respaldo en Archive.org**: el Download actual/recomendado del JSON apunta a
+  un VPK de Archive.org, y el release monitoreado no es más nuevo que la versión
+  del catálogo. La etiqueta es un enlace pulsable hacia ese VPK.
+- **Versión nueva sin respaldo**: el enlace principal aún apunta a Archive.org
+  de la versión del catálogo, pero el upstream ya anunció otra versión.
+- **Falta respaldo en Archive.org**: tras actualizarse el catálogo a un release
+  nuevo, el botón `VPK` actual apunta a GitHub/GitLab en lugar de Archive.org.
+  Si ya había otros Mirrors manuales, se conservan sin crear otros nuevos.
+- **Revisar respaldo**: falta una descarga principal inequívoca o hay
+  incongruencia comprobable con el nombre del VPK/versiones.
+- Los registros sin ficha asociada no presentan esta etiqueta.
+
+Los VPK **antiguos sin versión en su nombre** no se tratan como perdidos cuando
+son el Download de la versión catalogada. Los nuevos nombres con versión sirven
+como comprobación adicional, no como requisito para aceptar un respaldo.
+
+**No es una verificación técnica del contenido:** la etiqueta refleja
+la URL registrada por quien mantiene PSVitaAlive, no disponibilidad real,
+checksum ni verificación del Title ID. No descarga ni sube archivos y no
+necesita credenciales de Archive.org.
+
+### Filtros en la misma página
+
+La barra de filtros existente incluye búsqueda por texto y plataforma,
+**versión en PSVitaAlive** (todas / al día / pendiente de actualizar)
+y **respaldo en Archive.org**:
+
+- Todos los respaldos.
+- Pendientes de respaldar: agrupa `missing` y `outdated`.
+- En Archive.org: el VPK de descarga actual está enlazado allí.
+- Sin respaldo actual: el Download vigente no es un VPK de Archive.org.
+- Nueva versión sin respaldo: el upstream ha lanzado una versión posterior a
+  la versión que está respaldada en el enlace actual.
+- Revisar respaldo: situaciones que no permiten clasificarlo con seguridad.
+- Sin ficha asociada: no hay un Homebrew de PSVitaAlive enlazado a ese release.
+
+**Los filtros se pueden combinar**: «Al día en PSVitaAlive» +
+«Pendientes de respaldar» enseña precisamente versiones ya actualizadas en
+el catálogo pero que aún necesitan su copia de Archive.org. Los desplegables
+incluyen conteos globales, el contador de resultados cambia al filtrar y el
+botón «Limpiar filtros» restablece búsqueda y selección.
+
+Los futuros descubrimientos de Homebrew ausentes del catálogo tendrán una
+pestaña separada cuando implementemos esa funcionalidad, no antes.
+
 ## Qué hace
 
 - 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`, tanto en formato de claves largas (V1) como compactas (V2).
