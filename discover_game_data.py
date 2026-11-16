@@ -294,7 +294,20 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None,
             except Exception as exc:
                 errors.append(app_id + ": " + type(exc).__name__)
                 results[app_id] = ([], [type(exc).__name__])
-    community = match_apps(missing, sheet_rows or []) if sheet_rows is not None else {}
+    # Descriptions are used only to correlate original game names; keep them
+    # out of the generated discovery report to avoid growing it unnecessarily.
+    descriptions = {
+        str(app.get("id")): {
+            "description": str(app.get("description") or ""),
+            "long_description": str(app.get("long_description") or ""),
+        }
+        for app in catalog_items(catalog)
+        if isinstance(app, dict) and app.get("id")
+    }
+    community = (
+        match_apps(missing, sheet_rows or [], descriptions)
+        if sheet_rows is not None else {}
+    )
     new_links = []
     items = []
     for app in missing:
