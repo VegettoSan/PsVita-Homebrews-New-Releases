@@ -1,0 +1,33 @@
+name: Verify release monitor changes
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Python syntax
+        run: python -m py_compile monitor.py enrich_dashboard.py catalog_schema_v2_compat.py
+      - name: Check workflow, snapshot and dispatch contracts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          monitor = Path("monitor.py").read_text()
+          workflow = Path(".github/workflows/monitor.yml").read_text()
+          assert "data/upstream_latest.json" in monitor
+          assert '"schema_version": 1' in monitor
+          assert "psvitaalive_catalog_published" in workflow
+          assert "release_monitor_synced" in workflow
+          assert "PSVITAALIVE_CATALOG_URL" in workflow
+          print("Release monitor integration contracts OK")
+          PY
