@@ -137,7 +137,16 @@ Fuentes reconocidas:
   ese contenido**. Para asociar las filas a PSVitaAlive compara el repositorio
   del desarrollador, reconoce títulos alternativos cuando el repositorio
   corresponde de forma inequívoca o aplica un nombre exacto si no hay
-  colisiones ni repositorios contradictorios. Descarta Missing y WIP.
+  colisiones ni repositorios contradictorios. También identifica el nombre
+  original del juego desde los campos `description` (descripción corta)
+  y `long_description` (descripción larga) del catálogo PSVitaAlive V1/V2,
+  cuando mencionan explícitamente que es un **port de ese título**.
+  Una comparación ("inspirado en...", "similar a...") o una mención
+  accidental no basta. Una coincidencia por descripción solo se acepta si
+  no hay otra aplicación compatible que la haga ambigua, y nunca invalida
+  un repositorio ya identificado con otra aplicación. Se muestra en la
+  tarjeta el nombre original que figura en la hoja y el método usado para
+  vincularlo; siempre requiere revisión humana. Descarta Missing y WIP.
   Los enlaces conducen a **la fila pública de la hoja**, nunca a una descarga
   externa sin revisar.
 
