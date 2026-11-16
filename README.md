@@ -59,6 +59,27 @@ la URL registrada por quien mantiene PSVitaAlive, no disponibilidad real,
 checksum ni verificación del Title ID. No descarga ni sube archivos y no
 necesita credenciales de Archive.org.
 
+### Filtros en la misma página
+
+La barra de filtros existente incluye búsqueda por texto y plataforma,
+**versión en PSVitaAlive** (todas / al día / pendiente de actualizar)
+y **respaldo en Archive.org**:
+
+- Todos los respaldos.
+- Pendientes de respaldar: agrupa `missing` y `outdated`.
+- En Archive.org: el VPK de descarga actual está enlazado allí.
+- Sin respaldo actual: el Download vigente no es un VPK de Archive.org.
+- Nueva versión sin respaldo: el upstream ha lanzado una versión posterior a
+  la versión que está respaldada en el enlace actual.
+- Revisar respaldo: situaciones que no permiten clasificarlo con seguridad.
+- Sin ficha asociada: no hay un Homebrew de PSVitaAlive enlazado a ese release.
+
+**Los filtros se pueden combinar**: «Al día en PSVitaAlive» +
+«Pendientes de respaldar» enseña precisamente versiones ya actualizadas en
+el catálogo pero que aún necesitan su copia de Archive.org. Los desplegables
+incluyen conteos globales, el contador de resultados cambia al filtrar y el
+botón «Limpiar filtros» restablece búsqueda y selección.
+
 Los futuros descubrimientos de Homebrew ausentes del catálogo tendrán una
 pestaña separada cuando implementemos esa funcionalidad, no antes.
 
