@@ -32,6 +32,32 @@ Los filtros de seguridad, las exclusiones de apps con Game Files y el orden de
 activación están documentados en
 [PSVitaAlive/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md](https://github.com/VegettoSan/PSVitaAlive/blob/main/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md).
 
+## Preservación sencilla con Archive.org
+
+El dashboard muestra una **segunda etiqueta independiente de la versión
+del catálogo**, basada exclusivamente en los enlaces directos a VPK de
+Archive.org que ya están en el JSON de PSVitaAlive:
+
+- **Archivo con versión identificada**: el nombre del VPK en Archive.org
+  indica la última versión conocida (release o catálogo).
+- **Falta respaldo en Archive.org**: la ficha no contiene ningún enlace
+  directo a un VPK en Archive.org. No asegura que el archivo no exista allí.
+- **Respaldo de versión anterior**: los enlaces Archive VPK tienen versiones
+  identificables, pero todas son menores que la última versión conocida.
+- **Respaldo sin versión identificable**: caso normal para los antiguos
+  `homebrew.vpk`, `2048.vpk`, etc. Nunca se marcan falsamente como ausentes.
+- **Revisar respaldo** o **Respaldo sin comprobar**: versión ambigua o
+  Homebrew sin ficha vinculada.
+
+Un desplegable permite ver rápidamente los que necesitan respaldo.
+
+**Alcance de esta primera etapa:** no se consulta la API de Archive.org ni se
+comprueba que el archivo todavía esté accesible o íntegro. Coincidir por
+nombre **no equivale** a un respaldo verificado con hash. Si subiste un VPK
+nuevo al mismo item de Archive.org, pero aún no añadiste su enlace al JSON
+de PSVitaAlive, el monitor no podrá reconocerlo hasta que enlaces ese archivo.
+No se modifican `apps/`, `catalog.json` ni los archivos de Archive.org.
+
 ## Qué hace
 
 - 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`, tanto en formato de claves largas (V1) como compactas (V2).
