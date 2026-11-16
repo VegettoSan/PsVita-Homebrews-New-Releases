@@ -118,8 +118,8 @@ original, sin cambios en sus filtros) y **Búsqueda de Game Data**.
 
 **Solo aparecen ports con alguna referencia documentada** y que no tengan ya
 un enlace Game Files, Data Files ni un data_url en el catálogo oficial. Los
-ports sin evidencia se siguen contabilizando internamente para su búsqueda
-rotativa, pero no aparecen como tarjetas vacías.
+ports sin evidencia se contabilizan internamente, pero no aparecen como
+tarjetas vacías.
 
 Fuentes reconocidas:
 
@@ -130,13 +130,16 @@ Fuentes reconocidas:
   https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294
   Publicada en Reddit:
   https://www.reddit.com/r/VitaPiracy/comments/1xd0dai/full_list_of_ps_vita_ports_google_sheets/
-  Cada ejecución intenta leer su CSV público, detecta filas con referencia a
-  archivos de datos/ZIP y **solo relaciona registros cuando coincide
-  inequívocamente el repositorio del desarrollador** con la ficha canónica y
-  existe coincidencia razonable de nombre. Los valores Missing, WIP y VPK
-  únicamente no cuentan. El enlace abre la **fila original de la hoja** para
-  que el mantenedor examine la fuente y los enlaces allí, no descarga
-  directamente paquetes de origen desconocido.
+  Cada ejecución lee su CSV público y selecciona filas con **enlaces concretos
+  de descarga**. Distingue referencias a archivos de datos/ZIP de paquetes
+  generales: según la publicación original de Reddit, muchos de estos
+  últimos incluyen VPK y datos conjuntamente, pero el escáner **no verifica
+  ese contenido**. Para asociar las filas a PSVitaAlive compara el repositorio
+  del desarrollador, reconoce títulos alternativos cuando el repositorio
+  corresponde de forma inequívoca o aplica un nombre exacto si no hay
+  colisiones ni repositorios contradictorios. Descarta Missing y WIP.
+  Los enlaces conducen a **la fila pública de la hoja**, nunca a una descarga
+  externa sin revisar.
 
 Los hallazgos de Issues, problemas de ejecución y textos genéricos que
 mencionen "data files" ya no se muestran como evidencia. Las fuentes de la
@@ -147,8 +150,9 @@ siendo la única autoridad para el catálogo.
 
 El workflow **Discover missing PS Vita Game Data** se ejecuta cada tres horas
 a minuto 47 UTC, separado del monitor de releases (minuto 17). También puede
-ejecutarse manualmente. Inspecciona hasta 100 ports por ronda; la hoja se
-consulta una sola vez por ejecución. Si la hoja no responde, el escaneo de
+ejecutarse manualmente. Inspecciona todos los ports con repositorios identificables
+(hasta 500 por ronda), incluidos algunos repositorios deducidos de enlaces
+oficiales de releases; la hoja se consulta una vez por ejecución. Si la hoja no responde, el escaneo de
 GitHub/GitLab continúa y preserva las referencias de hoja de la última
 consulta exitosa, señalando el error en el JSON.
 
