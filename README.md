@@ -4,6 +4,34 @@ Monitor automático de releases de **homebrew, ports, plugins y utilidades de PS
 
 La lista de proyectos ya no se mantiene manualmente: cada ejecución descarga el catálogo público de **[PSVitaAlive](https://github.com/VegettoSan/PSVitaAlive)**, descubre los repositorios de **GitHub y GitLab** enlazados por el catálogo y comprueba sus releases.
 
+
+## Sincronización inmediata con PSVitaAlive y actualización de Homebrew
+
+Además del cron de tres horas, el monitor ahora acepta el evento
+`psvitaalive_catalog_published`. Cuando el workflow de publicación de PSVitaAlive
+termina correctamente, avisa al monitor enviando el SHA del catálogo publicado.
+El monitor lo consulta directamente, sincroniza los repos y reconstruye la web.
+
+Cada ejecución completa genera también `data/upstream_latest.json` (snapshot de
+releases actuales de los repositorios monitoreados). Puede emitir el evento
+`release_monitor_synced` a PSVitaAlive para que su workflow **valide y actualice
+solo JSON canónicos seguros**, nunca los catálogos generados a mano.
+
+Para conectar ambos repositorios, se requieren dos secrets de Actions con tokens
+de alcance limitado:
+
+- `PSVA_TRACKER_DISPATCH_TOKEN`, guardado en **PSVitaAlive** y con permiso
+  Contents: Read and write *solo* en este repositorio de releases.
+- `PSVA_AUTOUPDATE_DISPATCH_TOKEN`, guardado en **este monitor** y con permiso
+  Contents: Read and write *solo* en `VegettoSan/PSVitaAlive`.
+
+Sin estos secrets, las sincronizaciones programadas continúan, pero los eventos
+entre repositorios no se pueden enviar.
+
+Los filtros de seguridad, las exclusiones de apps con Game Files y el orden de
+activación están documentados en
+[PSVitaAlive/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md](https://github.com/VegettoSan/PSVitaAlive/blob/main/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md).
+
 ## Qué hace
 
 - 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`, tanto en formato de claves largas (V1) como compactas (V2).
