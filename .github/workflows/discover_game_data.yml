@@ -5,6 +5,13 @@ on:
     # Offset from the existing release monitor at minute 17.
     - cron: "47 */3 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "discover_game_data.py"
+      - "game_data_dashboard.py"
+      - "enrich_dashboard.py"
+      - ".github/workflows/discover_game_data.yml"
 
 permissions:
   contents: write
