@@ -829,9 +829,11 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     gitlab_count = sum(1 for item in history if item.get("platform") == "gitlab")
     up_to_date = sum(1 for item in history if item.get("catalog_update_status") == "uptodate")
     pending = len(history) - up_to_date
-    backup_pending = sum(
-        1 for item in history if item.get("backup_status") in ("missing", "outdated")
-    )
+    backup_counts = {
+        status: sum(1 for item in history if item.get("backup_status") == status)
+        for status in ("matched", "missing", "outdated", "review", "unknown")
+    }
+    backup_pending = backup_counts["missing"] + backup_counts["outdated"]
     updated = esc(str(sync_info.get("metadata_enriched_at") or sync_info.get("synced_at") or "")[:16].replace("T", " "))
 
     document = f"""<!doctype html>
@@ -924,7 +926,7 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
       background:rgba(0,0,0,.88);
       backdrop-filter:blur(14px);
     }}
-    input,select {{
+    input,select,.clear-filters {{
       min-height:44px;
       border:1px solid var(--border);
       border-radius:var(--radius);
@@ -934,7 +936,12 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
       outline:none;
     }}
     input {{ flex:1 1 330px; }}
-    input:focus,select:focus {{ border-color:var(--accent); box-shadow:0 0 0 2px rgba(59,255,0,.18); }}
+    input:focus,select:focus,.clear-filters:focus-visible {{ border-color:var(--accent); box-shadow:0 0 0 2px rgba(59,255,0,.18); }}
+    .clear-filters {{ border:1px solid var(--border); border-radius:var(--radius); background:#171717; color:var(--white); padding:0 13px; cursor:pointer; }}
+    .clear-filters:hover {{ border-color:var(--accent); color:var(--accent); }}
+    .clear-filters:disabled {{ opacity:.45; cursor:default; }}
+    .no-results {{ display:none; color:var(--text-secondary); padding:26px; border:1px dashed var(--border); border-radius:var(--radius); text-align:center; }}
+    .no-results:not([hidden]) {{ display:block; }}
     #count {{ margin-left:auto; align-self:center; color:var(--text-secondary); font-size:.84rem; }}
     main {{ padding:2px 0 64px; }}
     .card {{
@@ -1051,15 +1058,28 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
       <option value="github">GitHub</option>
       <option value="gitlab">GitLab</option>
     </select>
-    <select id="catalog-status">
-      <option value="all">Todo PSVitaAlive</option>
-      <option value="uptodate">✓ Al día en PSVitaAlive</option>
-      <option value="pending">↻ Pendientes por actualizar</option>
+    <select id="catalog-status" aria-label="Filtrar por actualización del catálogo">
+      <option value="all">Todas las actualizaciones</option>
+      <option value="uptodate">✓ Al día en PSVitaAlive ({up_to_date})</option>
+      <option value="pending">↻ Pendientes por actualizar ({pending})</option>
     </select>
-    <span id="count"></span>
+    <select id="backup-status" aria-label="Filtrar por respaldo en Archive.org">
+      <option value="all">Todos los respaldos</option>
+      <option value="needs-backup">Pendientes de respaldar ({backup_pending})</option>
+      <option value="matched">✓ En Archive.org ({backup_counts["matched"]})</option>
+      <option value="missing">Sin respaldo actual ({backup_counts["missing"]})</option>
+      <option value="outdated">Nueva versión sin respaldo ({backup_counts["outdated"]})</option>
+      <option value="review">Revisar respaldo ({backup_counts["review"]})</option>
+      <option value="unknown">Sin ficha asociada ({backup_counts["unknown"]})</option>
+    </select>
+    <button type="button" class="clear-filters" id="clear-filters">Limpiar filtros</button>
+    <span id="count" role="status" aria-live="polite"></span>
   </div>
 
-  <main class="wrap" id="releases">{cards_html}</main>
+  <main class="wrap" id="releases">
+    {cards_html}
+    <div class="no-results" id="no-results" hidden>No hay aplicaciones que coincidan con estos filtros.</div>
+  </main>
 
   <footer class="wrap">
     Actualizado: {updated or 'N/A'} UTC · Metadatos y paleta visual: PSVitaAlive
@@ -1069,6 +1089,9 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     const search=document.getElementById('search');
     const platform=document.getElementById('platform');
     const catalogStatus=document.getElementById('catalog-status');
+    const backupStatus=document.getElementById('backup-status');
+    const clearFilters=document.getElementById('clear-filters');
+    const noResults=document.getElementById('no-results');
     const cards=[...document.querySelectorAll('.card')];
     const count=document.getElementById('count');
 
@@ -1076,23 +1099,38 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
       const q=search.value.trim().toLowerCase();
       const p=platform.value;
       const s=catalogStatus.value;
+      const b=backupStatus.value;
       let visible=0;
 
       for(const card of cards){{
         const textOk=!q||card.dataset.search.includes(q);
         const platformOk=p==='all'||card.dataset.platform===p;
         const statusOk=s==='all'||card.dataset.catalog===s;
-        const show=textOk&&platformOk&&statusOk;
+        const backupOk=b==='all'
+          ||(b==='needs-backup'
+            ? (card.dataset.backup==='missing'||card.dataset.backup==='outdated')
+            : card.dataset.backup===b);
+        const show=textOk&&platformOk&&statusOk&&backupOk;
         card.hidden=!show;
         if(show)visible++;
       }}
 
       count.textContent=`${{visible}} de ${{cards.length}} apps`;
+      noResults.hidden=visible!==0 || cards.length===0;
+      clearFilters.disabled=!q&&p==='all'&&s==='all'&&b==='all';
     }}
 
     search.addEventListener('input',filterCards);
     platform.addEventListener('change',filterCards);
     catalogStatus.addEventListener('change',filterCards);
+    backupStatus.addEventListener('change',filterCards);
+    clearFilters.addEventListener('click',()=>{{
+      search.value='';
+      platform.value='all';
+      catalogStatus.value='all';
+      backupStatus.value='all';
+      filterCards();
+    }});
     filterCards();
   </script>
 </body>
