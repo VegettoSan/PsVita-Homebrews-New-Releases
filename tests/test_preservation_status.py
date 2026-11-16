@@ -1,75 +1,78 @@
 #!/usr/bin/env python3
-"""Offline tests for Archive.org backup labels; no HTTP calls."""
+"""Current VPK Archive.org badge stays on the existing release card."""
 import unittest
 
 from preservation_status import (
-    archive_vpk_url, assess_backup, filename_version,
+    archive_vpk_url, assess_backup, current_download, filename_version,
     find_archive_vpk_urls, parse_numeric_version,
 )
 
-ROOT = "https://archive.org/download/psvitaalive-example/"
+ARCHIVE = "https://archive.org/download/psvitaalive-example/"
+GITHUB = "https://github.com/example/homebrew/releases/download/v1.3/example.vpk"
 
 
-class PreservationStatusTests(unittest.TestCase):
-    def test_identifies_versioned_archive_filename(self):
-        self.assertEqual(filename_version(ROOT + "example-v1.3.0.vpk"), (1, 3, 0, 0))
-        self.assertEqual(filename_version(ROOT + "example_01.02.vpk"), (1, 2, 0, 0))
-        self.assertEqual(filename_version(ROOT + "Example%20v.2.0.vpk"), (2, 0, 0, 0))
+def links(url, *, mirrors=()):
+    return ([{"type": "Download", "name": "VPK", "url": url, "recommended": True}]
+            + [{"type": "Mirror", "name": "Versión anterior", "url": mirror}
+               for mirror in mirrors])
+
+
+def assess(url, catalog="v1.3", upstream="v1.3", *, mirrors=()):
+    return assess_backup(
+        release_tag=upstream, catalog_version=catalog,
+        links=links(url, mirrors=mirrors), is_registered=True,
+    )
+
+
+class PreservationTests(unittest.TestCase):
+    def test_archive_url_and_name(self):
+        self.assertTrue(archive_vpk_url(ARCHIVE + "example-v1.3.vpk"))
+        self.assertFalse(archive_vpk_url(ARCHIVE + "icon.png"))
+        self.assertFalse(archive_vpk_url("https://archive.org/details/example"))
+        self.assertFalse(archive_vpk_url(GITHUB))
+        self.assertEqual(filename_version(ARCHIVE + "example_01.02.vpk"), (1, 2, 0, 0))
         self.assertEqual(parse_numeric_version("v.1.2.0"), (1, 2, 0, 0))
-        self.assertIsNone(filename_version(ROOT + "example-v1.3.0-beta.vpk"))
 
-    def test_legacy_without_version_is_unknown_not_missing(self):
-        self.assertIsNone(filename_version(ROOT + "example.vpk"))
-        self.assertIsNone(filename_version(ROOT + "2048.vpk"))
-        self.assertIsNone(filename_version(ROOT + "z2.vpk"))
-        state, _ = assess_backup(
-            release_tag="v1.3.0", catalog_version="1.2",
-            archive_urls=[ROOT + "example.vpk"], is_registered=True,
-        )
-        self.assertEqual(state, "unversioned")
+    def test_current_archive_is_marked_even_if_legacy_filename_without_version(self):
+        self.assertEqual(assess(ARCHIVE + "example.vpk")[0], "matched")
+        self.assertEqual(assess(ARCHIVE + "z2.vpk")[0], "matched")
+        self.assertIn("sin versión", assess(ARCHIVE + "example.vpk")[1])
+        self.assertEqual(assess(ARCHIVE + "example-v1.3.vpk")[0], "matched")
 
-    def test_archive_link_selection_ignores_images_and_item_pages(self):
-        self.assertTrue(archive_vpk_url(ROOT + "example-v1.0.vpk?download=1"))
-        self.assertFalse(archive_vpk_url(ROOT + "icon.png"))
-        self.assertFalse(archive_vpk_url("https://archive.org/details/psvitaalive-example"))
-        self.assertFalse(archive_vpk_url("https://github.com/example/repo/releases/download/v1/example.vpk"))
-        links = [
-            {"type": "Download", "url": ROOT + "example-v1.3.vpk"},
-            {"type": "Mirror", "url": ROOT + "example-v1.3.vpk"},
-            {"type": "Repository", "url": "https://github.com/example/repo"},
-            {"type": "Other", "url": ROOT + "icon.png"},
-        ]
-        self.assertEqual(find_archive_vpk_urls(links), [ROOT + "example-v1.3.vpk"])
+    def test_new_release_while_catalog_archive_is_old(self):
+        self.assertEqual(assess(ARCHIVE + "example.vpk", catalog="1.2",
+                                upstream="1.3")[0], "outdated")
+        self.assertEqual(assess(ARCHIVE + "example-v1.2.vpk", catalog="1.2",
+                                upstream="1.3")[0], "outdated")
 
-    def test_status_matched_outdated_and_missing(self):
-        common = {"release_tag": "1.3", "catalog_version": "1.2", "is_registered": True}
-        result = assess_backup(**common, archive_urls=[ROOT + "example-1.3.0.vpk"])
-        self.assertEqual(result[0], "matched")
-        self.assertIn("sin comprobar", result[1])
-        self.assertEqual(
-            assess_backup(**common, archive_urls=[ROOT + "example-1.2.0.vpk"])[0],
-            "outdated",
-        )
-        self.assertEqual(assess_backup(**common, archive_urls=[])[0], "missing")
+    def test_after_automatic_switch_to_github_old_archive_is_not_current_backup(self):
+        self.assertEqual(assess(GITHUB, mirrors=[ARCHIVE + "example.vpk"])[0], "missing")
+        self.assertIn("respaldo anterior", assess(GITHUB, mirrors=[ARCHIVE + "example.vpk"])[1])
 
-    def test_catalog_newer_than_release_is_target(self):
-        self.assertEqual(
-            assess_backup(release_tag="v1.2", catalog_version="v1.3",
-                          archive_urls=[ROOT + "example-v1.2.vpk"], is_registered=True)[0],
-            "outdated",
-        )
+    def test_backup_appears_after_user_updates_recommended_url_to_archive(self):
+        self.assertEqual(assess(ARCHIVE + "example-v1.3.vpk")[0], "matched")
 
-    def test_does_not_guess_when_unregistered_or_uncomparable(self):
-        self.assertEqual(
-            assess_backup(release_tag="v1.2", catalog_version="",
-                          archive_urls=[], is_registered=False)[0],
-            "unknown",
-        )
-        self.assertEqual(
-            assess_backup(release_tag="nightly", catalog_version="",
-                          archive_urls=[ROOT + "example.vpk"], is_registered=True)[0],
-            "review",
-        )
+    def test_ambiguities(self):
+        self.assertEqual(assess(ARCHIVE + "example-v1.2.vpk")[0], "review")
+        self.assertEqual(assess(ARCHIVE + "example.vpk", upstream="nightly")[0], "review")
+        self.assertEqual(assess_backup(
+            release_tag="v1.3", catalog_version="1.2", links=[], is_registered=True
+        )[0], "review")
+        self.assertEqual(assess_backup(
+            release_tag="v1.3", catalog_version="", links=[], is_registered=False
+        )[0], "unknown")
+
+    def test_current_selection_does_not_use_an_unrelated_mirror(self):
+        current = links(GITHUB, mirrors=[ARCHIVE + "example-1.3.vpk"])
+        self.assertEqual(current_download(current)["url"], GITHUB)
+        self.assertEqual(find_archive_vpk_urls(current), [ARCHIVE + "example-1.3.vpk"])
+        current[0]["recommended"] = False
+        current.append({"type": "Download", "url": ARCHIVE + "other.vpk"})
+        self.assertIsNone(current_download(current))
+        self.assertEqual(assess_backup(
+            release_tag="1.3", catalog_version="1.3", links=current,
+            is_registered=True,
+        )[0], "review")
 
 
 if __name__ == "__main__":
