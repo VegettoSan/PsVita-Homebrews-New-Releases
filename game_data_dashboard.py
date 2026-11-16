@@ -84,7 +84,7 @@ def safe_href(url):
         return ""
     if parsed.hostname not in {
         "github.com", "gitlab.com", "www.reddit.com", "raw.githubusercontent.com",
-        "archive.org", "www.archive.org", "i.imgur.com"
+        "archive.org", "www.archive.org", "i.imgur.com", "docs.google.com"
     }:
         return ""
     return esc(url)
@@ -94,12 +94,15 @@ def render_panel(report):
     apps = report.get("apps", [])
     if not isinstance(apps, list):
         apps = []
-    with_matches = sum(bool(a.get("candidates")) for a in apps if isinstance(a, dict))
+    matches = [a for a in apps if isinstance(a, dict) and a.get("candidates")]
+    with_matches = len(matches)
+    official_count = sum(any(c.get("kind") == "possible-archive" for c in a["candidates"])
+                         for a in matches)
+    community_count = sum(any(c.get("kind") == "community-sheet" for c in a["candidates"])
+                          for a in matches)
     timestamp = str(report.get("scanned_at") or "")[:16].replace("T", " ")
     parts = []
-    for app in apps:
-        if not isinstance(app, dict):
-            continue
+    for app in matches:
         name = esc(app.get("name"))
         app_id = esc(app.get("id"))
         title_id = esc(app.get("title_id"))
@@ -118,6 +121,11 @@ def render_panel(report):
             label = esc(candidate.get("title"))
             source = esc(candidate.get("source"))
             date = esc(candidate.get("date"))
+            kind = esc(candidate.get("kind"))
+            if kind == "community-sheet":
+                source += " · Referencia comunitaria, archivo sin verificar"
+            else:
+                source += " · Archivo identificado en release oficial"
             newly = '<span class="gd-new">Nuevo</span>' if candidate.get("url") in news else ""
             options.append(
                 '<div class="gd-result"><div class="gd-label">' + source +
@@ -145,7 +153,11 @@ def render_panel(report):
                                     str(app.get("title_id") or ""),
                                     str(app.get("id") or "")]).lower())
         parts.append(
-            '<article class="gd-item" data-found="' + ("yes" if options else "no") +
+            '<article class="gd-item" data-found="' + " ".join(
+                label for label, kind in (("official", "possible-archive"),
+                                          ("community", "community-sheet"))
+                if any(c.get("kind") == kind for c in app["candidates"])
+            ) +
             '" data-search="' + search_text + '"><div class="gd-top">' + icon_html +
             '<div><div class="gd-title">' + name + '</div><div class="gd-id">' +
             title_id + ' · ' + app_id + '</div></div></div><p class="gd-note">' +
@@ -158,30 +170,43 @@ def render_panel(report):
         if not timestamp else
         "Última exploración: " + esc(timestamp) + " UTC."
     )
-    empty_text = ('<p>No hay ports sin enlaces de Game/Data Files.</p>'
-                  if timestamp and not apps
-                  else '<p>' + report_message + '</p>' if not apps else "")
+    empty_text = (
+        '<p>Por ahora no hay referencias con evidencia suficiente. '
+        'Los ports sin resultados permanecen ocultos.</p>'
+        if timestamp else '<p>' + report_message + '</p>'
+    )
     return (
         '<section class="wrap" id="gd-panel" aria-labelledby="gd-heading" hidden>'
         '<div class="gd-summary"><h2 id="gd-heading">Búsqueda de Game Data</h2>'
-        '<p>Ports sin Game Files o Data Files registrados en PSVitaAlive. '
-        'Las coincidencias son pistas para revisión manual, nunca descargas verificadas.</p>'
+        '<p>Solo se muestran ports sin Game/Data Files que tienen evidencia: '
+        'un archivo identificado en releases oficiales o una referencia en la '
+        'hoja comunitaria enlazada desde Reddit. No equivale a validar '
+        'el contenido ni los derechos de distribución.</p>'
         '<p>' + report_message + '</p>'
+        '<p><a class="btn" target="_blank" rel="noopener noreferrer" '
+        'href="https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294">'
+        'Consultar hoja comunitaria</a> '
+        '<a class="btn" target="_blank" rel="noopener noreferrer" '
+        'href="https://www.reddit.com/r/VitaPiracy/comments/1xd0dai/full_list_of_ps_vita_ports_google_sheets/">'
+        'Publicación de Reddit</a></p>'
         '<div class="gd-totals">'
-        '<div class="gd-total"><strong>' + str(len(apps)) +
-        '</strong>ports sin enlace de datos</div>'
         '<div class="gd-total"><strong>' + str(with_matches) +
-        '</strong>con posibles fuentes</div>'
+        '</strong>ports con referencias</div>'
+        '<div class="gd-total"><strong>' + str(official_count) +
+        '</strong>con archivos en releases</div>'
+        '<div class="gd-total"><strong>' + str(community_count) +
+        '</strong>con datos de la hoja</div>'
         '<div class="gd-total"><strong>' + str(report.get("new_matches") or 0) +
         '</strong>nuevas referencias</div></div></div>'
         '<div class="gd-tools"><input class="gd-input" id="gd-search" type="search" '
         'placeholder="Buscar port o Title ID…" autocomplete="off" '
         'aria-label="Buscar port o Title ID">'
-        '<select id="gd-filter" aria-label="Filtrar descubrimientos">'
-        '<option value="all">Todos los ports sin datos</option>'
-        '<option value="yes">Solo con posibles enlaces (' + str(with_matches) + ')</option>'
-        '<option value="no">Sin pistas todavía (' + str(len(apps) - with_matches) +
-        ')</option></select></div>'
+        '<select id="gd-filter" aria-label="Filtrar por tipo de evidencia">'
+        '<option value="all">Todos con referencias (' + str(with_matches) + ')</option>'
+        '<option value="official">Archivo identificado en release (' +
+        str(official_count) + ')</option>'
+        '<option value="community">Referencia de hoja comunitaria (' +
+        str(community_count) + ')</option></select></div>'
         + (('<div class="gd-grid" id="gd-list">' + "".join(parts) + '</div>')
            if parts else empty_text) +
         '<div class="gd-empty-filter" id="gd-empty-filter" hidden>'
@@ -230,7 +255,7 @@ SCRIPT = """
       let visible = 0;
       for (const card of cards) {
         const show = (!q || card.dataset.search.includes(q)) &&
-                     (state === 'all' || card.dataset.found === state);
+                     (state === 'all' || card.dataset.found.split(' ').includes(state));
         card.hidden = !show;
         if (show) visible++;
       }

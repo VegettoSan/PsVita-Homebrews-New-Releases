@@ -1,5 +1,8 @@
 """Offline regression tests for the independent Game/Data Files discovery."""
 import unittest
+import csv
+import io
+import community_port_sheet as sheet
 from unittest.mock import patch
 from catalog_schema_v2_compat import to_v1
 import discover_game_data as gd
@@ -58,14 +61,16 @@ class DiscoveryTests(unittest.TestCase):
         previous = {"schema_version": 1, "apps": [
             {"id": "port-one", "checked_at": "2026-11-15",
              "candidates": [{"url": "https://github.com/dev/game/releases/tag/old",
-                             "source": "GitHub Releases", "title": "Old"}]}]}
+                             "kind": "possible-archive",
+                             "source": "GitHub Releases", "title": "Posible paquete: datafiles.zip"}]}]}
         changed = [{
             "id": "port-one", "name": "Port One", "category_id": "ports",
             "links": [{"type": "Repository", "url": "https://github.com/dev/game"}]
         }]
         def fake_scanner(_):
             return ([{"url": "https://github.com/dev/game/releases/tag/new",
-                      "source": "GitHub Releases", "title": "New"}], [])
+                      "kind": "possible-archive",
+                      "source": "GitHub Releases", "title": "Posible paquete: game-data.zip"}], [])
         report, new = gd.build_report(changed, previous, scanner=fake_scanner,
                                       timestamp="2026-11-16T12:00:00Z")
         self.assertEqual(report["missing_count"], 1)
@@ -75,6 +80,95 @@ class DiscoveryTests(unittest.TestCase):
         report, new = gd.build_report(changed, report, scanner=fake_scanner)
         self.assertEqual(report["missing_count"], 0)
         self.assertEqual(new, [])
+
+    def test_generic_issue_and_release_instructions_are_hidden(self):
+        release = {"tag_name": "v2",
+                   "html_url": "https://github.com/dev/game/releases/tag/v2",
+                   "assets": [{"name": "game.vpk"}],
+                   "body": "You need to copy original data files"}
+        with patch.object(gd, "get_json", return_value=[release]):
+            hits = gd.search_project("github", "dev/game")
+        self.assertEqual(hits, [])
+        self.assertFalse(gd.is_strong_candidate({
+            "kind": "community-reference", "source": "GitHub Issues",
+            "title": "Game crashes when loading data files",
+            "url": "https://github.com/dev/game/issues/4",
+        }))
+        old = {"apps": [{
+            "id": "port-one", "candidates": [{
+                "kind": "instructions", "source": "GitHub Releases",
+                "url": "https://github.com/dev/game/releases/tag/v1",
+            }]
+        }]}
+        report, _ = gd.build_report([
+            port("port-one", links=[
+                {"type": "Repository", "url": "https://github.com/dev/game"}
+            ])
+        ], old, scanner=lambda _: ([], []), sheet_rows=[])
+        self.assertEqual(report["possible_matches"], 0)
+        self.assertEqual(report["apps"][0]["candidates"], [])
+
+    def test_sheet_csv_filters_missing_and_vpk_only(self):
+        buffer = io.StringIO()
+        writer = csv.writer(buffer)
+        writer.writerow(["Cover", "Game Name", "Download Link",
+                         "GitHub / Developer Page", "Development Stage",
+                         "Last Verified By", "Last Verified Date"])
+        writer.writerow(["", "Test Game Vita",
+                         "https://www.mediafire.com/file/ab/datafiles.zip/file",
+                         "https://github.com/dev/test-game", "Release",
+                         "u/Tester", "2026-11-15"])
+        writer.writerow(["", "Missing Game", "Missing",
+                         "https://github.com/dev/missing", "Release", "", ""])
+        writer.writerow(["", "Vpk Only", "https://github.com/dev/vpk/releases/foo.vpk",
+                         "https://github.com/dev/vpk", "Release", "", ""])
+        writer.writerow(["", "Spoofed", "https://www.mediafire.com/file/a/data.zip",
+                         "https://github.com@evil.example/dev/test-game", "Release", "", ""])
+        rows = sheet.parse_sheet_csv(buffer.getvalue())
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["projects"], [("github", "dev/test-game")])
+        self.assertEqual(rows[0]["archive_hosts"], ["www.mediafire.com"])
+        self.assertIn("range=A2", rows[0]["url"])
+        apps = [port("test-game", extra={
+            "name": "Test Game Vita",
+            "links": [{"type": "Repository", "url": "https://github.com/dev/test-game"}]
+        })]
+        found = sheet.match_apps(gd.missing_ports(apps), rows)
+        self.assertEqual(len(found["test-game"]), 1)
+        self.assertEqual(found["test-game"][0]["kind"], "community-sheet")
+        self.assertTrue(gd.is_strong_candidate(found["test-game"][0]))
+
+    def test_sheet_ignores_ambiguous_shared_repositories(self):
+        row = {"name": "Example One", "row": 2,
+               "projects": [("github", "dev/shared")],
+               "archive_hosts": ["www.mediafire.com"],
+               "url": sheet.SHEET_URL + "&range=A2",
+               "verified_by": "", "verified_date": ""}
+        apps = [
+            {"id": "example-one", "name": "Example One",
+             "repositories": [["github", "dev/shared"]]},
+            {"id": "example-two", "name": "Example Two",
+             "repositories": [["github", "dev/shared"]]},
+        ]
+        self.assertEqual(sheet.match_apps(apps, [row]), {})
+
+    def test_sheet_failure_preserves_old_community_evidence(self):
+        record = {
+            "id": "port-one", "candidates": [{
+                "source": "PS Vita Ports Tracker (Reddit / Google Sheets)",
+                "kind": "community-sheet",
+                "title": "Hoja comunitaria: paquete referenciado",
+                "url": sheet.SHEET_URL + "&range=A22",
+            }]
+        }
+        app = port("port-one", links=[
+            {"type": "Repository", "url": "https://github.com/dev/game"}
+        ])
+        report, _ = gd.build_report(
+            [app], {"apps": [record]}, scanner=lambda _: ([], []),
+            sheet_rows=None, sheet_error="HTTPError")
+        self.assertEqual(report["sheet_status"], "error")
+        self.assertEqual(report["possible_matches"], 1)
 
     def test_game_data_never_sends_discord_notifications(self):
         from pathlib import Path
@@ -90,7 +184,10 @@ class DiscoveryTests(unittest.TestCase):
             {"type": "Repository", "url": "https://github.com/dev/game"}
         ])
         prior = {"apps": [{"id": "port-one", "checked_at": "2026-11-15",
-                           "candidates": [{"url": "https://github.com/dev/game/releases/tag/a"}]}]}
+                           "candidates": [{"url": "https://github.com/dev/game/releases/tag/a",
+                                          "kind": "possible-archive",
+                                          "source": "GitHub Releases",
+                                          "title": "Posible paquete: game-data.zip"}]}]}
         report, new = gd.build_report([app], prior,
                     scanner=lambda a: ([], ["API throttled"]))
         self.assertEqual(len(report["apps"][0]["candidates"]), 1)
@@ -114,8 +211,27 @@ class DashboardTests(unittest.TestCase):
         self.assertIn('id="gd-data-tab"', html)
         self.assertIn('id="gd-panel"', html)
         self.assertIn('id="gd-search"', html)
+        self.assertNotIn('<article class="gd-item"', html)
+        self.assertIn('no hay referencias con evidencia suficiente', html)
         self.assertIn('id="releases">Release content', html)
         self.assertIn("location.hash === '#game-data'", html)
+
+    def test_only_evidence_cards_are_shown_and_filter_has_no_missing(self):
+        report = {"scanned_at": "2026-11-16T12:00:00Z", "apps": [
+            {"id": "none", "name": "No evidence", "candidates": []},
+            {"id": "real", "name": "Real evidence",
+             "repositories": [],
+             "candidates": [{
+                 "source": "GitHub Releases", "kind": "possible-archive",
+                 "title": "Posible paquete: datafiles.zip",
+                 "url": "https://github.com/dev/game/releases/tag/v2",
+             }]}
+        ]}
+        markup = ui.add_data_tab(self.DOC, report)
+        self.assertIn("Real evidence", markup)
+        self.assertNotIn("No evidence", markup)
+        self.assertNotIn("Sin pistas todavía", markup)
+        self.assertIn("Archivo identificado en release", markup)
 
     def test_untrusted_title_is_escaped(self):
         html = ui.add_data_tab(self.DOC, {

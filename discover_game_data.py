@@ -3,7 +3,8 @@
 
 This is a review-only index. Never download assets or change PSVitaAlive apps.
 GitHub/GitLab project links come exclusively from the canonical catalog.
-Reddit searches are manual links: its API needs approved OAuth access.
+The linked public Reddit community spreadsheet is read read-only; Reddit's API
+itself is not scraped and requires an approved OAuth connection.
 """
 from __future__ import annotations
 
@@ -17,6 +18,7 @@ from urllib.parse import quote, urlparse
 
 import requests
 from catalog_schema_v2_compat import to_v1
+from community_port_sheet import fetch_public_sheet, match_apps, SHEET_URL
 
 CATALOG_URL = os.getenv(
     "PSVITAALIVE_CATALOG_URL",
@@ -218,38 +220,6 @@ def search_project(platform, project):
                 "url": page,
                 "date": date[:10],
             })
-        elif GUIDE_PATTERN.search(body):
-            candidates.append({
-                "source": "GitHub Releases" if platform == "github" else "GitLab Releases",
-                "kind": "instructions",
-                "title": "Release con instrucciones de Game/Data Files (" + tag[:40] + ")",
-                "url": page,
-                "date": date[:10],
-            })
-    # Recent issues may point to official setup directions or community references.
-    # Only request them when no release already provides evidence.
-    if not candidates and platform == "github":
-        issues_url = "https://api.github.com/repos/" + quote(project, safe="/") + "/issues?state=all&per_page=30&sort=updated"
-        issues = get_json(issues_url, platform)
-        if isinstance(issues, list):
-            for issue in issues:
-                if not isinstance(issue, dict) or "pull_request" in issue:
-                    continue
-                title = str(issue.get("title") or "")
-                body = str(issue.get("body") or "")[:2400]
-                if not GUIDE_PATTERN.search(title + " " + body):
-                    continue
-                page = issue.get("html_url")
-                if valid_page(page, platform, project):
-                    candidates.append({
-                        "source": "GitHub Issues",
-                        "kind": "community-reference",
-                        "title": title[:160],
-                        "url": page,
-                        "date": str(issue.get("updated_at") or "")[:10],
-                    })
-                if len(candidates) >= 3:
-                    break
     unique = {}
     for candidate in candidates:
         unique[candidate["url"]] = candidate
@@ -267,7 +237,36 @@ def check_app(app):
     return result[:8], errors
 
 
-def build_report(catalog, previous, scanner=check_app, timestamp=None):
+def is_strong_candidate(candidate):
+    """Show evidence-backed leads; hide generic instructions and unrelated Issues."""
+    if not isinstance(candidate, dict):
+        return False
+    kind = candidate.get("kind")
+    url = candidate.get("url")
+    if not isinstance(url, str) or not url.startswith("https://"):
+        return False
+    if kind == "possible-archive":
+        source = str(candidate.get("source") or "")
+        title = str(candidate.get("title") or "")
+        return (
+            source in {"GitHub Releases", "GitLab Releases"}
+            and "Posible paquete:" in title
+            and bool(DATA_ARCHIVE_NAME.search(title))
+            and urlparse(url).hostname in {"github.com", "gitlab.com"}
+        )
+    if kind == "community-sheet":
+        return (
+            str(candidate.get("source") or "").startswith("PS Vita Ports Tracker")
+            and url.startswith(SHEET_URL + "&range=")
+        )
+    return False
+
+
+DATA_ARCHIVE_NAME = ARCHIVE_PATTERN
+
+
+def build_report(catalog, previous, scanner=check_app, timestamp=None,
+                 sheet_rows=None, sheet_error=""):
     timestamp = timestamp or now_iso()
     missing = missing_ports(catalog)
     prior = {a["id"]: a for a in previous.get("apps", [])
@@ -286,24 +285,42 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None):
             except Exception as exc:
                 errors.append(app_id + ": " + type(exc).__name__)
                 results[app_id] = ([], [type(exc).__name__])
+    community = match_apps(missing, sheet_rows or []) if sheet_rows is not None else {}
     new_links = []
     items = []
     for app in missing:
         old = prior.get(app["id"], {})
-        previous_sources = old.get("candidates") if isinstance(old.get("candidates"), list) else []
+        previous_sources = [
+            c for c in (old.get("candidates") or [])
+            if is_strong_candidate(c)
+        ]
+        old_upstream = [
+            c for c in previous_sources if c.get("kind") == "possible-archive"
+        ]
+        old_community = [
+            c for c in previous_sources if c.get("kind") == "community-sheet"
+        ]
         if app["id"] in results:
             latest, failures = results[app["id"]]
             errors += [app["id"] + ": " + e for e in failures]
-            # Preserve prior valid evidence on temporary upstream errors.
-            candidates = latest if not failures else (latest or previous_sources)
+            official = [c for c in latest if is_strong_candidate(c)]
+            if failures:
+                # Keep old official proof if an upstream provider is unavailable.
+                official = official or old_upstream
             checked_at = timestamp if not failures else old.get("checked_at", "")
         else:
-            candidates = previous_sources
+            official = old_upstream
             checked_at = old.get("checked_at", "")
+        if sheet_rows is not None:
+            sheet = community.get(app["id"], [])
+        else:
+            # Retain previous sheet reference only on temporary CSV failures.
+            sheet = old_community
+        candidates = official + sheet
         seen = set()
         safe = []
         for candidate in candidates:
-            if not isinstance(candidate, dict):
+            if not is_strong_candidate(candidate):
                 continue
             url = candidate.get("url")
             if not isinstance(url, str) or not url.startswith("https://") or url in seen:
@@ -324,6 +341,9 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None):
         "checked_this_run": len(selected),
         "new_matches": len(new_links),
         "apps": items,
+        "sheet_status": "error" if sheet_error else "ok",
+        "sheet_error": str(sheet_error)[:160],
+        "sheet_source": SHEET_URL,
         "errors": errors[:30],
     }, new_links
 
@@ -338,7 +358,19 @@ def main():
     previous = load_json(OUTPUT, {})
     if not isinstance(previous, dict):
         previous = {}
-    report, _new_links = build_report(catalog, previous)
+    try:
+        sheet_rows = fetch_public_sheet()
+        print("Hoja comunitaria: " + str(len(sheet_rows)) +
+              " filas con referencias a paquetes examinadas")
+        sheet_error = ""
+    except (requests.RequestException, ValueError, UnicodeError) as exc:
+        sheet_rows = None
+        sheet_error = type(exc).__name__
+        print("Aviso: hoja comunitaria no disponible (" + sheet_error +
+              "); se conserva la evidencia anterior")
+    report, _new_links = build_report(catalog, previous,
+                                      sheet_rows=sheet_rows,
+                                      sheet_error=sheet_error)
     save_json(OUTPUT, report)
     # Game Data discoveries are shown only on the web dashboard.
     print("Game Data: " + str(report["missing_count"]) + " ports sin enlaces; "
