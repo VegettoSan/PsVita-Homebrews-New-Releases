@@ -111,6 +111,44 @@ botón «Limpiar filtros» restablece búsqueda y selección.
 Los futuros descubrimientos de Homebrew ausentes del catálogo tendrán una
 pestaña separada cuando implementemos esa funcionalidad, no antes.
 
+## Segunda pestaña: búsqueda de Game Data
+
+La web tiene dos pestañas: **Actualizaciones Homebrew** (el monitor original,
+sin cambiar sus filtros) y **Búsqueda de Game Data**. Esta última muestra solo
+registros de categoría **ports** que no tienen un enlace **Game Files**, **Data
+Files** ni un campo **data_url**. Reconoce además Download/Mirror con nombre Game
+Files o Data Files.
+
+El workflow independiente **Discover missing PS Vita Game Data** se ejecuta
+cada tres horas con cron **47 */3 * * *** (UTC), separado del monitor original
+(minuto 17). También admite **Run workflow**. Ambos workflows se serializan
+para evitar escrituras concurrentes y despliegues simultáneos a Pages.
+
+1. Lee el catalog.json oficial (V1/V2) de PSVitaAlive, solo como lectura.
+2. Examina GitHub/GitLab Releases e Issues de repositorios enlazados desde los
+   ports. Si hay muchos, inspecciona primero los menos recientemente comprobados
+   (hasta 100 ports por ejecución).
+3. Genera data/game_data_candidates.json con evidencia revisable: título,
+   Title ID, tipo de hallazgo, fuente y enlace **a la página**, nunca al binario.
+4. La pestaña incluye búsqueda, filtro de coincidencias, acceso al proyecto y
+   un botón **Buscar en Reddit** por port.
+5. Con el secret DISCORD_WEBHOOK_URL ya configurado, envía un resumen de
+   nuevas referencias. El primer escaneo es silencioso para evitar spam.
+   Sin webhook, el dashboard sigue funcionando.
+
+**Importante:** una coincidencia no verifica legalidad, integridad ni
+compatibilidad. No descarga Game Data, no publica enlaces automáticamente,
+no edita apps/ ni modifica catalog.json. El mantenedor revisa las fuentes y
+sus derechos antes de incorporar contenido.
+
+Reddit se ofrece como búsqueda manual: el uso programático de su API requiere
+autenticación OAuth y aprobación explícita bajo sus condiciones actuales.
+No se implementa scraping no autorizado; una integración aprobada puede
+añadirse más adelante respetando sus límites y eliminación de contenido.
+
+Solo se generan el informe y docs/index.html. enrich_dashboard.py conserva
+la interfaz y los filtros del monitor de releases y sus respaldos.
+
 ## Qué hace
 
 - 🔄 Sincroniza los repositorios desde `PSVitaAlive/catalog.json`, tanto en formato de claves largas (V1) como compactas (V2).
