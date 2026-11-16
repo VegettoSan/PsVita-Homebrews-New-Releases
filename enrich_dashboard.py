@@ -418,12 +418,19 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
     release["catalog_apps"] = ordered[:12]
 
     status, detail = calculate_catalog_status(release, primary)
-    if status == "pending" and str(release.get("platform") or "").lower() == "github":
+    if status == "pending" and str(release.get("platform") or "").lower() in {"github", "gitlab"}:
         assets = release.get("assets") or []
         candidates = [
             asset for asset in assets
             if isinstance(asset, dict)
-            and str(asset.get("name") or "").lower().endswith(".vpk")
+            and (
+                str(asset.get("name") or "").lower().endswith(".vpk")
+                or any(
+                    isinstance(asset.get(field), str)
+                    and urlparse(asset[field]).path.lower().endswith(".vpk")
+                    for field in ("download_url", "original_url")
+                )
+            )
         ]
         if not candidates:
             detail += " · Revisión manual: release sin VPK"
