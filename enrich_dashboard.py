@@ -695,6 +695,11 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
         catalog_version = esc(item.get("catalog_version") or "")
         catalog_detail = esc(item.get("catalog_update_detail") or "")
         catalog_status = str(item.get("catalog_update_status") or "pending")
+        if catalog_status == "uptodate":
+            catalog_badge = '<span class="badge catalog-ok">✓ Al día en PSVitaAlive</span>'
+        else:
+            catalog_badge = '<span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span>'
+
         backup_status = str(item.get("backup_status") or "unknown")
         backup_detail = esc(item.get("backup_detail") or "")
         backup_labels = {
