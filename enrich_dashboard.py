@@ -26,7 +26,7 @@ import bleach
 import mistune
 import requests
 from catalog_schema_v2_compat import to_v1
-from preservation_status import assess_backup, find_archive_vpk_urls
+from preservation_status import assess_backup, current_download, archive_vpk_url
 
 CATALOG_URL = os.getenv(
     "PSVITAALIVE_CATALOG_URL",
@@ -187,7 +187,7 @@ def compact_app(record: dict[str, Any]) -> dict[str, Any]:
         "version": str(record.get("version") or "").strip(),
         "version_date": str(record.get("version_date") or "").strip(),
         "author_ids": [str(item) for item in author_ids if item],
-        "archive_vpk_urls": find_archive_vpk_urls(record.get("links")),
+        "links": record.get("links") if isinstance(record.get("links"), list) else [],
     }
 
 
@@ -399,7 +399,7 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
         release["backup_status"], release["backup_detail"] = assess_backup(
             release_tag=str(release.get("tag") or ""),
             catalog_version="",
-            archive_urls=[],
+            links=[],
             is_registered=False,
         )
         return
@@ -421,10 +421,15 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
     release["catalog_update_status"] = status
     release["catalog_update_detail"] = detail
     release["catalog_version"] = primary.get("version") or ""
+    main_download = current_download(primary.get("links") or [])
+    selected_url = (main_download or {}).get("url")
+    release["archive_current_link"] = (
+        selected_url if archive_vpk_url(selected_url) else ""
+    )
     release["backup_status"], release["backup_detail"] = assess_backup(
         release_tag=str(release.get("tag") or ""),
         catalog_version=str(primary.get("version") or ""),
-        archive_urls=primary.get("archive_vpk_urls") or [],
+        links=primary.get("links") or [],
         is_registered=current_repo_key != PSVITAALIVE_REPO_KEY,
     )
 
@@ -693,23 +698,26 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
         backup_status = str(item.get("backup_status") or "unknown")
         backup_detail = esc(item.get("backup_detail") or "")
         backup_labels = {
-            "matched": "Archivo con versión identificada",
+            "matched": "Respaldo en Archive.org",
             "missing": "Falta respaldo en Archive.org",
-            "outdated": "Respaldo de versión anterior",
-            "unversioned": "Respaldo sin versión identificable",
+            "outdated": "Versión nueva sin respaldo",
             "review": "Revisar respaldo",
-            "unknown": "Respaldo sin comprobar",
         }
-        backup_label = esc(backup_labels.get(backup_status, "Respaldo sin comprobar"))
-        backup_badge = (
-            f'<span class="badge backup-{esc(backup_status, quote=True)}" '
-            f'title="{backup_detail}">{backup_label}</span>'
-        )
-
-        if catalog_status == "uptodate":
-            catalog_badge = '<span class="badge catalog-ok">✓ Al día en PSVitaAlive</span>'
+        backup_label = esc(backup_labels.get(backup_status, ""))
+        archive_href = str(item.get("archive_current_link") or "")
+        if backup_status == "matched" and archive_vpk_url(archive_href):
+            backup_badge = (
+                f'<a class="badge backup-matched" href="{esc(archive_href, quote=True)}" '
+                f'target="_blank" rel="noopener noreferrer" title="{backup_detail}">'
+                f'{backup_label}</a>'
+            )
+        elif backup_label:
+            backup_badge = (
+                f'<span class="badge backup-{esc(backup_status, quote=True)}" '
+                f'title="{backup_detail}">{backup_label}</span>'
+            )
         else:
-            catalog_badge = '<span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span>'
+            backup_badge = ""
 
         prerelease = '<span class="badge pre">PRE-RELEASE</span>' if item.get("prerelease") else ""
 
@@ -967,6 +975,7 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     .catalog-pending {{ color:var(--white); background:#1b1b1b; border-color:var(--warning); }}
     .pre {{ color:#000; background:var(--warning); border-color:var(--warning); }}
     .backup-matched {{ color:#000; background:var(--accent); border-color:var(--accent); }}
+    a.backup-matched:hover {{ color:#000; filter:brightness(1.13); }}
     .backup-missing,.backup-outdated {{ color:#fff; background:#202020; border-color:#ddd; }}
     .backup-unversioned,.backup-review,.backup-unknown {{ color:var(--text-secondary); background:#1b1b1b; }}
 
@@ -1047,14 +1056,6 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
       <option value="uptodate">✓ Al día en PSVitaAlive</option>
       <option value="pending">↻ Pendientes por actualizar</option>
     </select>
-    <select id="backup-status" aria-label="Filtrar respaldo en Archive.org">
-      <option value="all">Todos los respaldos</option>
-      <option value="needs-backup">Falta respaldo actual ({backup_pending})</option>
-      <option value="matched">Versión en nombre de VPK</option>
-      <option value="unversioned">Respaldo sin versión</option>
-      <option value="review">Revisar respaldo</option>
-      <option value="unknown">Sin comprobar</option>
-    </select>
     <span id="count"></span>
   </div>
 
@@ -1068,7 +1069,6 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     const search=document.getElementById('search');
     const platform=document.getElementById('platform');
     const catalogStatus=document.getElementById('catalog-status');
-    const backupStatus=document.getElementById('backup-status');
     const cards=[...document.querySelectorAll('.card')];
     const count=document.getElementById('count');
 
@@ -1076,17 +1076,13 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
       const q=search.value.trim().toLowerCase();
       const p=platform.value;
       const s=catalogStatus.value;
-      const b=backupStatus.value;
       let visible=0;
 
       for(const card of cards){{
         const textOk=!q||card.dataset.search.includes(q);
         const platformOk=p==='all'||card.dataset.platform===p;
         const statusOk=s==='all'||card.dataset.catalog===s;
-        const backupOk=b==='all'||(b==='needs-backup'
-          ? ['missing','outdated'].includes(card.dataset.backup)
-          : card.dataset.backup===b);
-        const show=textOk&&platformOk&&statusOk&&backupOk;
+        const show=textOk&&platformOk&&statusOk;
         card.hidden=!show;
         if(show)visible++;
       }}
@@ -1097,7 +1093,6 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     search.addEventListener('input',filterCards);
     platform.addEventListener('change',filterCards);
     catalogStatus.addEventListener('change',filterCards);
-    backupStatus.addEventListener('change',filterCards);
     filterCards();
   </script>
 </body>
