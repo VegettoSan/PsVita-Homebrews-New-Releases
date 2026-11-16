@@ -190,6 +190,61 @@
       .badges { justify-content:flex-start; }
       h2 { font-size:1.16rem; }
     }
+  
+  /* Independent Game Data panel: same PSVitaAlive colors and spacing. */
+  .gd-tabs{display:flex;gap:8px;padding:0 0 9px;flex-wrap:wrap}
+  .gd-tab{border:1px solid var(--border);border-radius:var(--radius);
+    padding:12px 18px;background:#191919;color:var(--white);
+    cursor:pointer;font:inherit;font-weight:700}
+  .gd-tab[aria-selected="true"]{background:var(--accent);color:#000;
+    border-color:var(--accent)}
+  .gd-tab:focus-visible,.gd-input:focus-visible{outline:2px solid var(--accent);
+    outline-offset:2px}
+  .gd-pill{display:inline-block;margin-left:7px;border-radius:999px;
+    padding:1px 7px;background:#454545;color:#fff;font-size:.78rem}
+  .gd-tab[aria-selected="true"] .gd-pill{background:#153b0e;color:#fff}
+  #gd-panel[hidden],#releases[hidden],.toolbar[hidden],.gd-item[hidden],
+  .gd-empty-filter[hidden]{display:none!important}
+  #gd-panel{padding:14px 0 64px}
+  .gd-summary{background:rgba(55,55,55,.84);border:1px solid var(--border);
+    border-radius:var(--radius);padding:20px;margin:0 0 16px}
+  .gd-summary h2{margin:0 0 8px}
+  .gd-summary p{margin:5px 0;color:var(--text-secondary)}
+  .gd-totals{display:flex;flex-wrap:wrap;gap:12px;margin:15px 0 0}
+  .gd-total{background:#171717;border:1px solid var(--border);
+    border-radius:10px;padding:8px 13px}
+  .gd-total strong{display:block;color:var(--accent);font-size:1.3rem}
+  .gd-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+  .gd-input{flex:1 1 280px}
+  .gd-tools select{flex:0 1 250px}
+  .gd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .gd-item{border:1px solid var(--border);border-left:4px solid var(--accent);
+    background:rgba(55,55,55,.84);border-radius:var(--radius);
+    padding:16px;min-width:0}
+  .gd-top{display:flex;gap:13px;align-items:flex-start}
+  .gd-icon{width:60px;height:60px;object-fit:cover;border-radius:9px;
+    border:1px solid var(--border);background:#111;flex-shrink:0}
+  .gd-title{color:var(--white);font-size:1.05rem;font-weight:800;
+    overflow-wrap:anywhere}
+  .gd-id{color:var(--text-secondary);font-size:.76rem;overflow-wrap:anywhere}
+  .gd-note{font-size:.81rem;color:var(--text-secondary);margin:10px 0}
+  .gd-result{border-top:1px solid var(--border);padding:9px 0}
+  .gd-result a{color:var(--accent);text-decoration:underline;
+    text-underline-offset:3px;overflow-wrap:anywhere}
+  .gd-label{font-size:.73rem;color:var(--text-secondary)}
+  .gd-new{color:#000;background:var(--accent);border-radius:5px;
+    padding:1px 5px;font-size:.68rem;font-weight:800;margin-left:5px}
+  .gd-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .gd-links a{display:inline-block;background:#191919;border:1px solid var(--border);
+    padding:7px 10px;border-radius:9px;color:var(--white);font-size:.76rem}
+  .gd-links a:hover{border-color:var(--accent);color:var(--accent)}
+  .gd-no-match{font-size:.8rem;color:var(--text-secondary);margin:12px 0}
+  .gd-empty-filter{border:1px dashed var(--border);border-radius:10px;
+    padding:22px;text-align:center}
+  body.gd-active .stats{display:none}
+  @media(max-width:800px){.gd-grid{grid-template-columns:1fr}}
+  @media(max-width:620px){.gd-tab{flex:1;padding:10px 8px}}
+
   </style>
 </head>
 <body>
@@ -212,6 +267,14 @@
       </div>
     </section>
   </header>
+
+  
+  <nav class="wrap gd-tabs" aria-label="Herramientas de mantenimiento">
+    <button class="gd-tab" id="gd-release-tab" type="button"
+      aria-selected="true" aria-controls="releases">Actualizaciones Homebrew</button>
+    <button class="gd-tab" id="gd-data-tab" type="button"
+      aria-selected="false" aria-controls="gd-panel">Búsqueda de Game Data <span class="gd-pill">0</span></button>
+  </nav>
 
   <div class="wrap toolbar">
     <input id="search" type="search" placeholder="Buscar app, repositorio, versión o categoría…" autocomplete="off">
@@ -31381,8 +31444,9 @@ this was just a quick project for something to do.. its not great and i wouldnt 
     <div class="no-results" id="no-results" hidden>No hay aplicaciones que coincidan con estos filtros.</div>
   </main>
 
+  <section class="wrap" id="gd-panel" aria-labelledby="gd-heading" hidden><div class="gd-summary"><h2 id="gd-heading">Búsqueda de Game Data</h2><p>Ports sin Game Files o Data Files registrados en PSVitaAlive. Las coincidencias son pistas para revisión manual, nunca descargas verificadas.</p><p>Todavía no se ha ejecutado el nuevo workflow.</p><div class="gd-totals"><div class="gd-total"><strong>0</strong>ports sin enlace de datos</div><div class="gd-total"><strong>0</strong>con posibles fuentes</div><div class="gd-total"><strong>0</strong>nuevas referencias</div></div></div><div class="gd-tools"><input class="gd-input" id="gd-search" type="search" placeholder="Buscar port o Title ID…" autocomplete="off" aria-label="Buscar port o Title ID"><select id="gd-filter" aria-label="Filtrar descubrimientos"><option value="all">Todos los ports sin datos</option><option value="yes">Solo con posibles enlaces (0)</option><option value="no">Sin pistas todavía (0)</option></select></div><p>Todavía no se ha ejecutado el nuevo workflow.</p><div class="gd-empty-filter" id="gd-empty-filter" hidden>No hay ports que coincidan con estos filtros.</div></section>
   <footer class="wrap">
-    Actualizado: 2026-11-16 17:27 UTC · Metadatos y paleta visual: PSVitaAlive
+    Actualizado: 2026-11-16 18:03 UTC · Metadatos y paleta visual: PSVitaAlive
   </footer>
 
   <script>
@@ -31433,5 +31497,48 @@ this was just a quick project for something to do.. its not great and i wouldnt 
     });
     filterCards();
   </script>
+
+  <script>
+  (function () {
+    const releaseTab = document.getElementById('gd-release-tab');
+    const dataTab = document.getElementById('gd-data-tab');
+    const releases = document.getElementById('releases');
+    const toolbar = document.querySelector('.toolbar');
+    const panel = document.getElementById('gd-panel');
+    function switchTab(data, changeHash) {
+      releaseTab.setAttribute('aria-selected', String(!data));
+      dataTab.setAttribute('aria-selected', String(data));
+      releases.hidden = data;
+      toolbar.hidden = data;
+      panel.hidden = !data;
+      document.body.classList.toggle('gd-active', data);
+      if (changeHash) {
+        history.replaceState(null, '', data ? '#game-data' : '#releases');
+      }
+    }
+    releaseTab.addEventListener('click', function () { switchTab(false, true); });
+    dataTab.addEventListener('click', function () { switchTab(true, true); });
+    const search = document.getElementById('gd-search');
+    const filter = document.getElementById('gd-filter');
+    const cards = Array.from(document.querySelectorAll('.gd-item'));
+    const empty = document.getElementById('gd-empty-filter');
+    function applyFilter() {
+      const q = search.value.trim().toLowerCase();
+      const state = filter.value;
+      let visible = 0;
+      for (const card of cards) {
+        const show = (!q || card.dataset.search.includes(q)) &&
+                     (state === 'all' || card.dataset.found === state);
+        card.hidden = !show;
+        if (show) visible++;
+      }
+      empty.hidden = visible !== 0 || cards.length === 0;
+    }
+    search.addEventListener('input', applyFilter);
+    filter.addEventListener('change', applyFilter);
+    switchTab(location.hash === '#game-data', false);
+  }());
+  </script>
+
 </body>
 </html>
