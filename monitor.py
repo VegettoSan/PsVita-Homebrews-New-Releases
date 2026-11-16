@@ -40,6 +40,7 @@ REPOS_FILE = Path("repos.txt")
 STATE_FILE = Path("data/state.json")
 HISTORY_FILE = Path("data/releases.json")
 SYNC_INFO_FILE = Path("data/sync.json")
+UPSTREAM_LATEST_FILE = Path("data/upstream_latest.json")
 HTML_FILE = Path("docs/index.html")
 
 MAX_HISTORY = 500
@@ -854,6 +855,7 @@ def main() -> int:
     }
 
     new_state: dict[str, Any] = {}
+    upstream_latest: dict[str, dict[str, Any]] = {}
     changed_releases: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
     successful_checks = 0
@@ -879,6 +881,18 @@ def main() -> int:
                 if key in old_state:
                     new_state[key] = old_state[key]
                 continue
+
+            # Snapshot inmutable de releases para la sincronización segura de PSVitaAlive.
+            # No contiene timestamps de chequeo, para evitar cambios innecesarios.
+            upstream_latest[key.lower()] = {
+                "platform": release.get("platform") or "",
+                "repo": release.get("repo") or "",
+                "tag": release.get("tag") or "",
+                "release_id": release_identity(release),
+                "published": release.get("published") or "",
+                "prerelease": bool(release.get("prerelease")),
+                "assets": release.get("assets") or [],
+            }
 
             identity = release_identity(release)
             previous = state_tag(old_state.get(key))
@@ -930,6 +944,10 @@ def main() -> int:
     )
 
     save_json(STATE_FILE, new_state)
+    save_json(UPSTREAM_LATEST_FILE, {
+        "schema_version": 1,
+        "releases": [upstream_latest[key] for key in sorted(upstream_latest)],
+    })
     save_json(HISTORY_FILE, history)
     save_json(SYNC_INFO_FILE, sync_info)
     generate_html(
