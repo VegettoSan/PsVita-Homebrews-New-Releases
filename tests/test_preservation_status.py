@@ -67,7 +67,14 @@ class PreservationTests(unittest.TestCase):
         self.assertEqual(current_download(current)["url"], GITHUB)
         self.assertEqual(find_archive_vpk_urls(current), [ARCHIVE + "example-1.3.vpk"])
         current[0]["recommended"] = False
-        current.append({"type": "Download", "url": ARCHIVE + "other.vpk"})
+        current.append({"type": "Download", "name": "VPK debug", "url": ARCHIVE + "other.vpk",
+                        "recommended": True})
+        self.assertEqual(current_download(current)["url"], GITHUB)
+        self.assertEqual(assess_backup(
+            release_tag="1.3", catalog_version="1.3", links=current,
+            is_registered=True,
+        )[0], "missing")
+        current.append({"type": "Download", "name": "vPk", "url": ARCHIVE + "other.vpk"})
         self.assertIsNone(current_download(current))
         self.assertEqual(assess_backup(
             release_tag="1.3", catalog_version="1.3", links=current,
