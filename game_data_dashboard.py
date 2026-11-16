@@ -123,7 +123,12 @@ def render_panel(report):
             date = esc(candidate.get("date"))
             kind = esc(candidate.get("kind"))
             if kind == "community-sheet":
-                source += " · Referencia comunitaria, archivo sin verificar"
+                if candidate.get("evidence_type") == "bundle":
+                    source += " · Descarga comunitaria con datos anunciados, contenido sin inspeccionar"
+                else:
+                    source += " · Archivo citado en hoja comunitaria, contenido sin inspeccionar"
+                if candidate.get("match_method") == "exact-title":
+                    source += " · Asociado solo por nombre exacto"
             else:
                 source += " · Archivo identificado en release oficial"
             newly = '<span class="gd-new">Nuevo</span>' if candidate.get("url") in news else ""
@@ -178,10 +183,10 @@ def render_panel(report):
     return (
         '<section class="wrap" id="gd-panel" aria-labelledby="gd-heading" hidden>'
         '<div class="gd-summary"><h2 id="gd-heading">Búsqueda de Game Data</h2>'
-        '<p>Solo se muestran ports sin Game/Data Files que tienen evidencia: '
-        'un archivo identificado en releases oficiales o una referencia en la '
-        'hoja comunitaria enlazada desde Reddit. No equivale a validar '
-        'el contenido ni los derechos de distribución.</p>'
+        '<p>Solo ports con enlaces documentados: archivos identificados en '
+        'releases oficiales o descargas publicadas en la hoja enlazada desde '
+        'Reddit. Algunas descargas comunitarias anuncian VPK y datos juntos; '
+        'su contenido, compatibilidad y derechos siguen sin comprobarse.</p>'
         '<p>' + report_message + '</p>'
         '<p><a class="btn" target="_blank" rel="noopener noreferrer" '
         'href="https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294">'
