@@ -211,6 +211,105 @@ class DiscoveryTests(unittest.TestCase):
     def test_scan_limit_covers_current_catalog(self):
         self.assertGreaterEqual(gd.SCAN_LIMIT, 480)
 
+    def test_description_alias_matches_different_catalog_name(self):
+        app = port("goldenidol", extra={"name": "GoldenIdol-Vita"})
+        row = {"name": "The Case of The Golden Idol", "row": 2,
+               "projects": [], "archive_hosts": ["www.mediafire.com"],
+               "evidence_type": "bundle",
+               "url": sheet.SHEET_URL + "&range=A2",
+               "verified_by": "", "verified_date": ""}
+        found = sheet.match_apps(gd.missing_ports([app]), [row], {
+            "goldenidol": {
+                "description": "A PS Vita port of The Case of the Golden Idol.",
+                "long_description": "",
+            }
+        })
+        self.assertEqual(found["goldenidol"][0]["match_method"], "short-description")
+        self.assertEqual(found["goldenidol"][0]["sheet_title"],
+                         "The Case of The Golden Idol")
+
+    def test_long_description_alias_and_platform_suffix(self):
+        app = port("bc2", extra={"name": "BC2 Vita"})
+        row = {"name": "Battlefield: Bad Company 2 (Android)", "row": 7,
+               "projects": [], "archive_hosts": ["archive.org"],
+               "evidence_type": "archive",
+               "url": sheet.SHEET_URL + "&range=A7",
+               "verified_by": "", "verified_date": ""}
+        descriptions = {"bc2": {
+            "description": "New PS Vita homebrew game.",
+            "long_description": "This is a wrapper/port of Battlefield: Bad Company 2 Mobile for PS Vita."
+        }}
+        found = sheet.match_apps(gd.missing_ports([app]), [row], descriptions)
+        self.assertEqual(found["bc2"][0]["match_method"], "long-description")
+
+    def test_mentions_and_comparisons_do_not_match(self):
+        row = {"name": "Half-Life", "row": 4, "projects": [],
+               "archive_hosts": ["archive.org"], "evidence_type": "bundle",
+               "url": sheet.SHEET_URL + "&range=A4",
+               "verified_by": "", "verified_date": ""}
+        apps = [port("some-engine", extra={"name": "Source Engine Demo"})]
+        for words in ("Inspired by Half-Life and Quake",
+                      "Similar to Half-Life.",
+                      "Requires Half-Life data to run.",
+                      "Works with Half-Life files.",
+                      "This application supports Half-Life and Counter-Strike."):
+            found = sheet.match_apps(gd.missing_ports(apps), [row],
+                                     {"some-engine": {"description": words}})
+            self.assertEqual(found, {}, msg=words)
+
+    def test_ambiguous_description_matches_are_rejected(self):
+        row = {"name": "Quake II", "row": 8,
+               "projects": [], "archive_hosts": ["www.mediafire.com"],
+               "evidence_type": "bundle",
+               "url": sheet.SHEET_URL + "&range=A8",
+               "verified_by": "", "verified_date": ""}
+        apps = [
+            port("one", extra={"name": "Source Port One"}),
+            port("two", extra={"name": "Source Port Two"})
+        ]
+        details = {a["id"]: {"description": "Port of Quake II for PS Vita."}
+                   for a in apps}
+        self.assertEqual(sheet.match_apps(gd.missing_ports(apps), [row], details), {})
+
+    def test_description_cannot_override_other_repositories_identity(self):
+        row = {"name": "Some Classic Game", "row": 9,
+               "projects": [("github", "dev/another-app")],
+               "archive_hosts": ["www.mediafire.com"], "evidence_type": "bundle",
+               "url": sheet.SHEET_URL + "&range=A9",
+               "verified_by": "", "verified_date": ""}
+        apps = [
+            port("one", extra={"name": "First",
+                               "links": [{"type": "Repository",
+                                          "url": "https://github.com/dev/first"}]}),
+            port("two", extra={"name": "Second",
+                               "links": [{"type": "Repository",
+                                          "url": "https://github.com/dev/another-app"}]})
+        ]
+        details = {"one": {"description": "Port of Some Classic Game"}}
+        self.assertEqual(sheet.match_apps(gd.missing_ports(apps), [row], details),
+                         {"two": sheet.match_apps(gd.missing_ports(apps), [row], details)["two"]})
+        # The sheet's explicit repository must never select the other port.
+        self.assertNotIn("one", sheet.match_apps(gd.missing_ports(apps), [row], details))
+
+    def test_report_uses_descriptions_without_serializing_them(self):
+        app = port("alias", extra={
+            "name": "Short Internal Name",
+            "description": "Port of Totally Different Game",
+            "long_description": "Historical metadata and lots of text.",
+        })
+        row = {"name": "Totally Different Game", "row": 11,
+               "projects": [], "archive_hosts": ["archive.org"],
+               "evidence_type": "bundle",
+               "url": sheet.SHEET_URL + "&range=A11",
+               "verified_by": "", "verified_date": ""}
+        report, _ = gd.build_report([app], {}, scanner=lambda _: ([], []),
+                                    sheet_rows=[row])
+        self.assertEqual(report["possible_matches"], 1)
+        candidate = report["apps"][0]["candidates"][0]
+        self.assertEqual(candidate["match_method"], "short-description")
+        self.assertNotIn("description", report["apps"][0])
+        self.assertNotIn("long_description", report["apps"][0])
+
     def test_sheet_failure_preserves_old_community_evidence(self):
         record = {
             "id": "port-one", "candidates": [{
@@ -291,6 +390,25 @@ class DashboardTests(unittest.TestCase):
         self.assertNotIn("No evidence", markup)
         self.assertNotIn("Sin pistas todavía", markup)
         self.assertIn("Archivo identificado en release", markup)
+
+    def test_sheet_original_title_is_searchable_and_escaped(self):
+        item = {
+            "id": "alias", "title_id": "ALIAS0001", "name": "Internal Name",
+            "repositories": [],
+            "candidates": [{
+                "kind": "community-sheet",
+                "source": "PS Vita Ports Tracker (Reddit / Google Sheets)",
+                "title": "Hoja comunitaria",
+                "url": sheet.SHEET_URL + "&range=A12",
+                "match_method": "long-description",
+                "sheet_title": "The Original Game <script>alert(1)</script>",
+            }],
+        }
+        markup = ui.add_data_tab(self.DOC, {"apps": [item]})
+        self.assertIn("Nombre original en descripción larga", markup)
+        self.assertIn("The Original Game", markup)
+        self.assertNotIn("<script>alert(1)</script>", markup)
+        self.assertIn("&lt;script&gt;", markup)
 
     def test_untrusted_title_is_escaped(self):
         html = ui.add_data_tab(self.DOC, {
