@@ -18,7 +18,7 @@ _FILENAME_VERSION = re.compile(
     re.IGNORECASE,
 )
 _BAD_SUFFIX = re.compile(
-    r"(?:^|[-_. ])(?:alpha|beta|rc\d*|preview|nightly|dev|test)(?:$|[-_. ])",
+    r"(?:^|[-_. ])(?:alpha|beta|rc\d*|preview|nightly|dev|test|hotfix)(?:$|[-_. ])",
     re.IGNORECASE,
 )
 
@@ -80,6 +80,11 @@ def assess_backup(
 
     versions = [filename_version(url) for url in archive_urls]
     has_unversioned = any(version is None for version in versions)
+
+    # A non-numeric upstream tag may be a prerelease/nightly that is newer than
+    # the catalog. Do not assert that a catalog-version VPK backs that release.
+    if str(release_tag or "").strip() and parse_numeric_version(release_tag) is None:
+        return "review", "La etiqueta del release no permite comparar la versión del respaldo"
     # The catalog may already be newer than the monitored release.
     # Never treat a backup of an older upstream tag as the current version.
     candidates = [
