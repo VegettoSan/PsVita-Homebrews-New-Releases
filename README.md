@@ -32,6 +32,14 @@ Los filtros de seguridad, las exclusiones de apps con Game Files y el orden de
 activación están documentados en
 [PSVitaAlive/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md](https://github.com/VegettoSan/PSVitaAlive/blob/main/docs/AUTOMATIC_RELEASE_CATALOG_SYNC.md).
 
+### Comprobación manual del monitor
+
+Además de la ejecución programada cada tres horas, el workflow `PS Vita Release Tracker`
+se puede iniciar desde GitHub Actions con **Run workflow**. Una confirmación
+administrativa mediante un commit a `main` con `[scan]` en el mensaje también
+fuerza el escaneo completo y la regeneración del dashboard; los commits normales
+no realizan esa consulta costosa.
+
 ## Actualizaciones automáticas de GitHub y GitLab
 
 El monitor identifica releases en **GitHub y GitLab** y remite sus assets al
