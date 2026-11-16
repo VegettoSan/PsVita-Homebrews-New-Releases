@@ -132,9 +132,10 @@ para evitar escrituras concurrentes y despliegues simultáneos a Pages.
    Title ID, tipo de hallazgo, fuente y enlace **a la página**, nunca al binario.
 4. La pestaña incluye búsqueda, filtro de coincidencias, acceso al proyecto y
    un botón **Buscar en Reddit** por port.
-5. Con el secret DISCORD_WEBHOOK_URL ya configurado, envía un resumen de
-   nuevas referencias. El primer escaneo es silencioso para evitar spam.
-   Sin webhook, el dashboard sigue funcionando.
+5. Los descubrimientos se muestran **solo en la pestaña web**. El buscador
+   de Game Data **nunca envía avisos a Discord**, tampoco durante
+   ejecuciones futuras. Las notificaciones del monitor original de releases
+   permanecen independientes.
 
 **Importante:** una coincidencia no verifica legalidad, integridad ni
 compatibilidad. No descarga Game Data, no publica enlaces automáticamente,
