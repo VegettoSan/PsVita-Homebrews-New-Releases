@@ -108,7 +108,7 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(report["possible_matches"], 0)
         self.assertEqual(report["apps"][0]["candidates"], [])
 
-    def test_sheet_csv_filters_missing_and_vpk_only(self):
+    def test_sheet_csv_filters_missing_and_retains_linked_packages(self):
         buffer = io.StringIO()
         writer = csv.writer(buffer)
         writer.writerow(["Cover", "Game Name", "Download Link",
@@ -125,10 +125,13 @@ class DiscoveryTests(unittest.TestCase):
         writer.writerow(["", "Spoofed", "https://www.mediafire.com/file/a/data.zip",
                          "https://github.com@evil.example/dev/test-game", "Release", "", ""])
         rows = sheet.parse_sheet_csv(buffer.getvalue())
-        self.assertEqual(len(rows), 1)
+        self.assertEqual(len(rows), 3)
         self.assertEqual(rows[0]["projects"], [("github", "dev/test-game")])
         self.assertEqual(rows[0]["archive_hosts"], ["www.mediafire.com"])
         self.assertIn("range=A2", rows[0]["url"])
+        self.assertEqual(rows[1]["evidence_type"], "bundle")
+        self.assertEqual(rows[1]["name"], "Vpk Only")
+        self.assertEqual(rows[2]["projects"], [])
         apps = [port("test-game", extra={
             "name": "Test Game Vita",
             "links": [{"type": "Repository", "url": "https://github.com/dev/test-game"}]
@@ -150,7 +153,63 @@ class DiscoveryTests(unittest.TestCase):
             {"id": "example-two", "name": "Example Two",
              "repositories": [["github", "dev/shared"]]},
         ]
+        matched = sheet.match_apps(apps, [row])
+        self.assertEqual(set(matched), {"example-one"})
+        self.assertEqual(matched["example-one"][0]["match_method"], "repository-title")
+
+    def test_sheet_matches_unique_repo_with_alternate_game_title(self):
+        apps = [{"id": "bc2-vita", "name": "BC2 Vita",
+                 "repositories": [["github", "dev/battlefield-bc2"]]}]
+        row = {"name": "Battlefield: Bad Company 2 (Android)", "row": 15,
+               "projects": [("github", "dev/battlefield-bc2")],
+               "archive_hosts": ["www.mediafire.com"],
+               "evidence_type": "bundle",
+               "url": sheet.SHEET_URL + "&range=A15",
+               "verified_by": "", "verified_date": ""}
+        found = sheet.match_apps(apps, [row])
+        self.assertEqual(found["bc2-vita"][0]["match_method"], "repository")
+        self.assertEqual(found["bc2-vita"][0]["evidence_type"], "bundle")
+        self.assertIn("datos anunciados", found["bc2-vita"][0]["title"])
+
+    def test_sheet_shared_repository_does_not_mix_unrelated_titles(self):
+        apps = [{"id": "engine", "name": "vitaXash3D",
+                 "repositories": [["github", "dev/shared"]]}]
+        rows = []
+        for i, game in enumerate(["Half-Life", "Half-Life: Blue Shift"], 2):
+            rows.append({"name": game, "row": i,
+                         "projects": [("github", "dev/shared")],
+                         "archive_hosts": ["www.mediafire.com"],
+                         "evidence_type": "bundle",
+                         "url": sheet.SHEET_URL + "&range=A" + str(i),
+                         "verified_by": "", "verified_date": ""})
+        self.assertEqual(sheet.match_apps(apps, rows), {})
+
+    def test_sheet_title_fallback_is_exact_and_rejects_different_repos(self):
+        row = {"name": "Unique Game Vita", "row": 6,
+               "projects": [], "archive_hosts": ["archive.org"],
+               "evidence_type": "archive",
+               "url": sheet.SHEET_URL + "&range=A6",
+               "verified_by": "", "verified_date": ""}
+        apps = [{"id": "unique", "name": "Unique Game",
+                 "repositories": []}]
+        found = sheet.match_apps(apps, [row])
+        self.assertEqual(found["unique"][0]["match_method"], "exact-title")
+        self.assertEqual(sheet.match_apps(apps + [
+            {"id": "duplicate", "name": "Unique Game Vita", "repositories": []}
+        ], [row]), {})
+        row["projects"] = [("github", "different/developer")]
+        apps[0]["repositories"] = [["github", "right/developer"]]
         self.assertEqual(sheet.match_apps(apps, [row]), {})
+
+    def test_download_release_links_are_considered_repo_sources(self):
+        app = port("download-only", links=[{
+            "type": "Download",
+            "url": "https://github.com/example/project/releases/download/v1/main.vpk",
+        }])
+        self.assertEqual(gd.app_repos(app), [("github", "example/project")])
+
+    def test_scan_limit_covers_current_catalog(self):
+        self.assertGreaterEqual(gd.SCAN_LIMIT, 480)
 
     def test_sheet_failure_preserves_old_community_evidence(self):
         record = {
