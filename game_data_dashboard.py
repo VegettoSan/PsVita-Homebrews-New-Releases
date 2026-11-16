@@ -83,7 +83,8 @@ def safe_href(url):
     if parsed.scheme != "https" or parsed.username or parsed.password:
         return ""
     if parsed.hostname not in {
-        "github.com", "gitlab.com", "www.reddit.com", "raw.githubusercontent.com"
+        "github.com", "gitlab.com", "www.reddit.com", "raw.githubusercontent.com",
+        "archive.org", "www.archive.org", "i.imgur.com"
     }:
         return ""
     return esc(url)
@@ -255,7 +256,12 @@ def add_data_tab(document, report=None):
                   '</body>', '<main class="wrap" id="releases">'):
         if token not in document:
             raise ValueError("Cambió el HTML del dashboard: falta " + token)
+    count = sum(bool(a.get("candidates")) for a in report.get("apps", [])
+                if isinstance(a, dict))
+    navigation = NAV.replace("Búsqueda de Game Data</button>",
+                             "Búsqueda de Game Data <span class=\"gd-pill\">" +
+                             str(count) + "</span></button>")
     return (document.replace("</style>", STYLE + "\n  </style>", 1)
-            .replace('<div class="wrap toolbar">', NAV + '\n  <div class="wrap toolbar">', 1)
+            .replace('<div class="wrap toolbar">', navigation + '\n  <div class="wrap toolbar">', 1)
             .replace('<footer class="wrap">', render_panel(report) + '\n  <footer class="wrap">', 1)
             .replace('</body>', SCRIPT + '\n</body>', 1))
