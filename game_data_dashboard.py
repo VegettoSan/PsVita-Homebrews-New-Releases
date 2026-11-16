@@ -127,8 +127,16 @@ def render_panel(report):
                     source += " · Descarga comunitaria con datos anunciados, contenido sin inspeccionar"
                 else:
                     source += " · Archivo citado en hoja comunitaria, contenido sin inspeccionar"
-                if candidate.get("match_method") == "exact-title":
-                    source += " · Asociado solo por nombre exacto"
+                method = str(candidate.get("match_method") or "")
+                if method == "exact-title":
+                    source += " · Asociado por nombre exacto"
+                elif "short-description" in method:
+                    source += " · Nombre original en descripción corta; revisar identidad"
+                elif "long-description" in method:
+                    source += " · Nombre original en descripción larga; revisar identidad"
+                sheet_title = str(candidate.get("sheet_title") or "").strip()
+                if sheet_title and sheet_title.casefold() != str(app.get("name") or "").casefold():
+                    source += " · Título en hoja: " + esc(sheet_title)
             else:
                 source += " · Archivo identificado en release oficial"
             newly = '<span class="gd-new">Nuevo</span>' if candidate.get("url") in news else ""
@@ -154,9 +162,12 @@ def render_panel(report):
                                 '" target="_blank" rel="noopener noreferrer">Repositorio</a>')
         projects.append('<a href="' + esc(reddit) +
                         '" target="_blank" rel="noopener noreferrer">Buscar en Reddit</a>')
-        search_text = esc(" ".join([str(app.get("name") or ""),
-                                    str(app.get("title_id") or ""),
-                                    str(app.get("id") or "")]).lower())
+        search_text = esc(" ".join(
+            [str(app.get("name") or ""), str(app.get("title_id") or ""),
+             str(app.get("id") or "")] +
+            [str(c.get("sheet_title") or "") for c in (app.get("candidates") or [])
+             if isinstance(c, dict)]
+        ).lower())
         parts.append(
             '<article class="gd-item" data-found="' + " ".join(
                 label for label, kind in (("official", "possible-archive"),
