@@ -69,16 +69,28 @@ def filename_version(url: str) -> tuple[int, ...] | None:
 
 
 def current_download(links: object) -> dict | None:
-    """Return a unique, current Download link from the canonical app record."""
+    """Prefer the unique Download named VPK over other configuration buttons."""
     if not isinstance(links, list):
         return None
+    named = [
+        link for link in links if isinstance(link, dict)
+        and str(link.get("type") or "").strip().lower() == "download"
+        and str(link.get("name") or "").strip().casefold() == "vpk"
+    ]
+    if len(named) > 1:
+        return None
+    if len(named) == 1:
+        return named[0]
+    # Compatibility for older records that have only one unnamed Download.
     recommended = [link for link in links if isinstance(link, dict) and link.get("recommended") is True]
     if len(recommended) > 1:
         return None
     if recommended:
         return recommended[0] if str(recommended[0].get("type") or "").lower() == "download" else None
-    downloads = [link for link in links if isinstance(link, dict)
-                 and str(link.get("type") or "").lower() == "download"]
+    downloads = [
+        link for link in links if isinstance(link, dict)
+        and str(link.get("type") or "").lower() == "download"
+    ]
     return downloads[0] if len(downloads) == 1 else None
 
 
