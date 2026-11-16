@@ -76,6 +76,15 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(report["missing_count"], 0)
         self.assertEqual(new, [])
 
+    def test_game_data_never_sends_discord_notifications(self):
+        from pathlib import Path
+        source = Path(gd.__file__).read_text(encoding="utf-8")
+        workflow = Path(".github/workflows/discover_game_data.yml").read_text(encoding="utf-8")
+        self.assertNotIn("DISCORD_WEBHOOK_URL", source)
+        self.assertNotIn("DISCORD_WEBHOOK_URL", workflow)
+        self.assertNotIn("requests.post(", source)
+        self.assertNotIn("def notify(", source)
+
     def test_scan_failure_preserves_previous_evidence(self):
         app = port("port-one", links=[
             {"type": "Repository", "url": "https://github.com/dev/game"}
