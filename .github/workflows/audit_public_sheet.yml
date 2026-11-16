@@ -44,4 +44,49 @@ jobs:
           print("CLASSIFICATIONS:",dict(statuses))
           print("SAMPLES:",samples)
           print("PARSER ACCEPTS:",len(parse_sheet_csv(data)))
+          from collections import Counter
+          import discover_game_data as gd
+          from catalog_schema_v2_compat import to_v1
+          url=gd.CATALOG_URL
+          canon=to_v1(requests.get(url,timeout=45).json())
+          apps=gd.missing_ports(canon)
+          known={}
+          for a in apps:
+            for p,n in a["repositories"]:
+              known.setdefault((p,n.lower()),[]).append(a)
+          counts=Counter()
+          examples=[]
+          hosts=Counter()
+          for index,row in enumerate(rows[1:],2):
+            if len(row)<=max(name,download,project):continue
+            a_name=row[name].strip()
+            links=urls(row[download])
+            if not links:continue
+            proids=set(filter(None,(repo_identity(u) for u in urls(row[project]))))
+            if not proids:continue
+            counts["has_url_and_repo"]+=1
+            poss={a["id"]:a for p in proids for a in known.get(p,[])}
+            if not poss:
+              counts["repo_not_in_missing_catalog"]+=1
+              if len(examples)<14:examples.append(("repo_not_found",index,a_name,repr(sorted(proids))[:70]))
+              continue
+            counts["repo_matches"]+=1
+            if len(poss)>1:
+              counts["ambiguous_repository"]+=1
+              if len(examples)<25:examples.append(("ambig",index,a_name,repr([a["name"] for a in poss.values()])[:110]))
+              continue
+            found=next(iter(poss.values()))
+            an=normalize(found["name"]);rn=normalize(a_name)
+            ta={z for z in an.split() if len(z)>3 and z not in {"vita","port"}}
+            tr={z for z in rn.split() if len(z)>3 and z not in {"vita","port"}}
+            if an!=rn and not ta.intersection(tr):
+              counts["same_repo_name_mismatch"]+=1
+              if len(examples)<28:examples.append(("name_diff",index,a_name,found["name"]))
+              continue
+            counts["can_map"]+=1
+            hosts[urlparse(links[0]).hostname]+=1
+          print("CATALOG COUNT",len(apps))
+          print("EXTRA COVERAGE:",dict(counts))
+          print("HOSTS MATCHED:",dict(hosts.most_common(12)))
+          print("UNMATCHED SAMPLES:",examples)
           PY
