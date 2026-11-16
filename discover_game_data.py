@@ -28,7 +28,7 @@ OUTPUT = Path("data/game_data_candidates.json")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "").strip()
 GITLAB_TOKEN = os.getenv("GITLAB_TOKEN", "").strip()
 TIMEOUT = 18
-SCAN_LIMIT = 100
+SCAN_LIMIT = 500  # Full ~480-port catalog per run; GitHub token permits this budget
 USER_AGENT = "PSVitaAlive-GameDataDiscovery/1.0 (VegettoSan/PSVitaAlive)"
 ASSET_PATTERN = re.compile(
     r"(?:game[\s_.-]*files?|data[\s_.-]*files?|game[\s_.-]*data|"
@@ -113,10 +113,19 @@ def app_repos(record):
     for item in record.get("links") or []:
         if not isinstance(item, dict):
             continue
-        if str(item.get("type") or "").lower() in {
-            "repository", "official website", "documentation"
-        }:
-            urls.append(item.get("url"))
+        kind = str(item.get("type") or "").strip().lower()
+        link = item.get("url")
+        if kind in {"repository", "official website", "documentation"}:
+            urls.append(link)
+        elif kind in {"download", "mirror"} and isinstance(link, str):
+            # A catalog entry may link only to its GitHub/GitLab Release
+            # rather than keeping a separate "Repository" link.
+            parsed = urlparse(link)
+            if parsed.hostname in {"github.com", "gitlab.com"} and (
+                    "/releases/" in parsed.path or
+                    parsed.path.endswith("/releases") or
+                    "/-/releases/" in parsed.path):
+                urls.append(link)
     found = []
     for url in urls:
         repo = repo_from_url(url)
@@ -184,11 +193,11 @@ def valid_page(url, platform, project):
 def search_project(platform, project):
     candidates = []
     if platform == "github":
-        endpoint = "https://api.github.com/repos/" + quote(project, safe="/") + "/releases?per_page=4"
+        endpoint = "https://api.github.com/repos/" + quote(project, safe="/") + "/releases?per_page=8"
         releases = get_json(endpoint, platform)
     else:
         endpoint = ("https://gitlab.com/api/v4/projects/" +
-                    quote(project, safe="") + "/releases?per_page=4")
+                    quote(project, safe="") + "/releases?per_page=8")
         releases = get_json(endpoint, platform)
     if not isinstance(releases, list):
         raise ValueError("Respuesta de releases inesperada")
@@ -276,7 +285,7 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None,
     selected = [a for a in ordered if a["repositories"]][:SCAN_LIMIT]
     results = {}
     errors = []
-    with ThreadPoolExecutor(max_workers=6) as pool:
+    with ThreadPoolExecutor(max_workers=8) as pool:
         tasks = {pool.submit(scanner, app): app["id"] for app in selected}
         for future in as_completed(tasks):
             app_id = tasks[future]
@@ -361,7 +370,8 @@ def main():
     try:
         sheet_rows = fetch_public_sheet()
         print("Hoja comunitaria: " + str(len(sheet_rows)) +
-              " filas con referencias a paquetes examinadas")
+              " filas con enlaces de descarga concretos examinadas; " +
+              "los paquetes no se descargan ni inspeccionan")
         sheet_error = ""
     except (requests.RequestException, ValueError, UnicodeError) as exc:
         sheet_rows = None
