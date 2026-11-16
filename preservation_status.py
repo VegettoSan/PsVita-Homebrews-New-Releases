@@ -68,43 +68,56 @@ def filename_version(url: str) -> tuple[int, ...] | None:
     return next(iter(versions)) if len(versions) == 1 else None
 
 
+def current_download(links: object) -> dict | None:
+    """Return a unique, current Download link from the canonical app record."""
+    if not isinstance(links, list):
+        return None
+    recommended = [link for link in links if isinstance(link, dict) and link.get("recommended") is True]
+    if len(recommended) > 1:
+        return None
+    if recommended:
+        return recommended[0] if str(recommended[0].get("type") or "").lower() == "download" else None
+    downloads = [link for link in links if isinstance(link, dict)
+                 and str(link.get("type") or "").lower() == "download"]
+    return downloads[0] if len(downloads) == 1 else None
+
+
 def assess_backup(
-    *, release_tag: str, catalog_version: str, archive_urls: list[str], is_registered: bool,
+    *, release_tag: str, catalog_version: str, links: object, is_registered: bool,
 ) -> tuple[str, str]:
-    """Return status and Spanish explanation; never claims hash/file verification."""
+    """Assess *current recommended VPK*, not historical mirrors.
+
+    This is a URL-based catalog indicator. It does not query Archive.org or
+    imply that files are available or have cryptographically verified contents.
+    """
     if not is_registered:
-        return "unknown", "No hay ficha asociada en PSVitaAlive para comprobar respaldos"
+        return "unknown", "Sin ficha asociada en PSVitaAlive"
 
-    if not archive_urls:
-        return "missing", "No hay un enlace directo a un VPK de Archive.org en la ficha"
+    selected = current_download(links)
+    if selected is None:
+        return "review", "No se puede identificar una única descarga principal"
 
-    versions = [filename_version(url) for url in archive_urls]
-    has_unversioned = any(version is None for version in versions)
+    url = selected.get("url")
+    if not archive_vpk_url(url):
+        if find_archive_vpk_urls(links):
+            return "missing", "La descarga actual no usa Archive.org; hay un respaldo anterior en otros enlaces"
+        return "missing", "La descarga actual no apunta a un VPK de Archive.org"
 
-    # A non-numeric upstream tag may be a prerelease/nightly that is newer than
-    # the catalog. Do not assert that a catalog-version VPK backs that release.
-    if str(release_tag or "").strip() and parse_numeric_version(release_tag) is None:
-        return "review", "La etiqueta del release no permite comparar la versión del respaldo"
-    # The catalog may already be newer than the monitored release.
-    # Never treat a backup of an older upstream tag as the current version.
-    candidates = [
-        value for value in (
-            parse_numeric_version(release_tag),
-            parse_numeric_version(catalog_version),
-        ) if value is not None
-    ]
-    target = max(candidates) if candidates else None
+    # In PSVitaAlive, maintainers switch the main Download to Archive.org
+    # when they have uploaded the currently catalogued version.
+    # If the upstream release is newer, that Archive link remains an older
+    # catalog version, even if its VPK has no version in the filename.
+    upstream_version = parse_numeric_version(release_tag)
+    current_version = parse_numeric_version(catalog_version)
+    if release_tag and upstream_version is None:
+        return "review", "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+    if upstream_version is not None and current_version is not None and upstream_version > current_version:
+        return "outdated", "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
 
-    if target is None:
-        return "unversioned", "Existe enlace Archive.org, pero no se puede comparar la versión"
+    file_ver = filename_version(url)
+    if file_ver is not None and current_version is not None and file_ver != current_version:
+        return "review", "El nombre del VPK en Archive.org no coincide con la versión del catálogo"
 
-    if target in versions:
-        return "matched", "VPK de Archive.org con la versión indicada en el nombre (archivo sin comprobar)"
-
-    if has_unversioned:
-        return "unversioned", "Hay VPK en Archive.org sin versión identificable; revisar si es la versión actual"
-
-    if all(version < target for version in versions if version is not None):
-        return "outdated", "Los VPK enlazados en Archive.org indican versiones anteriores"
-
-    return "review", "Las versiones de los VPK enlazados no coinciden; revisar manualmente"
+    if file_ver is None:
+        return "matched", "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
+    return "matched", "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
