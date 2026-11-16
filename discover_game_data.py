@@ -25,7 +25,6 @@ CATALOG_URL = os.getenv(
 OUTPUT = Path("data/game_data_candidates.json")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "").strip()
 GITLAB_TOKEN = os.getenv("GITLAB_TOKEN", "").strip()
-DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "").strip()
 TIMEOUT = 18
 SCAN_LIMIT = 100
 USER_AGENT = "PSVitaAlive-GameDataDiscovery/1.0 (VegettoSan/PSVitaAlive)"
@@ -268,21 +267,6 @@ def check_app(app):
     return result[:8], errors
 
 
-def notify(new_links):
-    if not DISCORD_WEBHOOK_URL or not new_links:
-        return
-    lines = ["🔎 **PSVitaAlive — posibles Game/Data Files para revisar**"]
-    for record in new_links[:8]:
-        lines.append("• " + record["name"][:90] + ": " + record["url"])
-    if len(new_links) > 8:
-        lines.append("Y " + str(len(new_links) - 8) + " referencias más en el dashboard.")
-    response = requests.post(DISCORD_WEBHOOK_URL, timeout=TIMEOUT, json={
-        "content": "\n".join(lines)[:1900],
-        "allowed_mentions": {"parse": []},
-    }, headers={"User-Agent": USER_AGENT})
-    response.raise_for_status()
-
-
 def build_report(catalog, previous, scanner=check_app, timestamp=None):
     timestamp = timestamp or now_iso()
     missing = missing_ports(catalog)
@@ -354,14 +338,9 @@ def main():
     previous = load_json(OUTPUT, {})
     if not isinstance(previous, dict):
         previous = {}
-    report, new_links = build_report(catalog, previous)
+    report, _new_links = build_report(catalog, previous)
     save_json(OUTPUT, report)
-    # Initial baseline is silent to avoid flooding the existing Discord webhook.
-    if previous.get("schema_version") == 1 and new_links:
-        try:
-            notify(new_links)
-        except requests.RequestException as exc:
-            print("Aviso: no se pudo notificar a Discord: " + str(exc))
+    # Game Data discoveries are shown only on the web dashboard.
     print("Game Data: " + str(report["missing_count"]) + " ports sin enlaces; "
           + str(report["possible_matches"]) + " con pistas; "
           + str(report["checked_this_run"]) + " comprobados en esta ejecución; "
