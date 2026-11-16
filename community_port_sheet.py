@@ -180,6 +180,44 @@ def name_related(a, b):
     return len(a_parts & b_parts) >= 2
 
 
+PLATFORM_SUFFIX = re.compile(r"\s*\((?:android|ios|mobile|pc|windows|gamecube|ps2|psp)\)\s*$", re.I)
+TITLE_IDENTITY_PREFIX = (
+    r"(?:port|porting|ported|wrapper|remake|reimplementation|"
+    r"adaptation|adaptacion|conversion|recreation|version)"
+    r"\s+(?:of|for|de|del)\s+(?:the\s+|el\s+|la\s+)?"
+)
+
+
+def title_variants(name):
+    """Keep the whole title, also allowing an explicitly labelled platform."""
+    main = str(name or "").strip()
+    variants = {comparable_name(main)}
+    without_platform = PLATFORM_SUFFIX.sub("", main)
+    if without_platform != main:
+        variants.add(comparable_name(without_platform))
+    return {v for v in variants if len(v) >= 5}
+
+
+def description_name_match(name, details):
+    """Find an original game named as the port's SUBJECT, not a comparison.
+
+    Requiring "port of X" etc. avoids conflating references like
+    "inspired by X", "similar to X", or a list of supported games.
+    """
+    if not isinstance(details, dict):
+        return None
+    for key, label in (("description", "short-description"),
+                       ("long_description", "long-description")):
+        content = normalize(details.get(key, ""))
+        if not content:
+            continue
+        for variant in sorted(title_variants(name), key=len, reverse=True):
+            title = re.escape(variant)
+            if re.search(r"\b" + TITLE_IDENTITY_PREFIX + title + r"(?:\b|$)", content):
+                return label
+    return None
+
+
 def fetch_public_sheet():
     response = requests.get(SHEET_CSV_URL, timeout=25, headers={
         "User-Agent": "PSVitaAlive-GameData-References/1.0 (public read-only sheet)",
@@ -191,12 +229,14 @@ def fetch_public_sheet():
     return parse_sheet_csv(response.content.decode("utf-8-sig"))
 
 
-def match_apps(apps, rows):
-    """Match by developer repository, or uniquely by exact normalized title.
+def match_apps(apps, rows, descriptions=None):
+    """Correlate sheet rows with canonical ports using independent evidence.
 
-    A shared repository only maps when the game title is distinct. A
-    repository attached to multiple sheet rows is NOT enough on its own.
+    Use matching repos first, then a unique exact name, then descriptions
+    explicitly identifying the ORIGINAL ported game. Mere mentions of a
+    game (comparisons, dependencies) never establish an identity.
     """
+    descriptions = descriptions or {}
     by_project = {}
     by_name = {}
     by_id = {app["id"]: app for app in apps}
@@ -207,49 +247,79 @@ def match_apps(apps, rows):
         if len(key) >= 6:
             by_name.setdefault(key, set()).add(app["id"])
 
-    projects_in_rows = Counter(project for row in rows for project in
-                               set(tuple(p) for p in row.get("projects", [])))
+    projects_in_rows = Counter(
+        project for row in rows for project in
+        {tuple(p) for p in row.get("projects", [])}
+    )
     result = {}
     for row in rows:
-        repo_matches = set()
         projects = {tuple(p) for p in row.get("projects", [])}
+        repo_matches = set()
         for identity in projects:
             repo_matches.update(by_project.get(identity, set()))
 
+        # Evaluate the short/long description of EVERY missing port. Only
+        # a unique explicit "port of X" match can introduce an alias.
+        desc_matches = {
+            app_id: method for app_id in by_id
+            if (method := description_name_match(
+                row["name"], descriptions.get(app_id, {})))
+        }
         match_method = None
+        app_id = None
         if len(repo_matches) == 1:
-            app_id = next(iter(repo_matches))
-            # If a single repo is shared by multiple sheet games, require
-            # unambiguous similarity to avoid attaching data to wrong ports.
-            unique_sheet_project = any(projects_in_rows[p] == 1 for p in projects
-                                       if app_id in by_project.get(p, set()))
-            if unique_sheet_project or name_related(by_id[app_id]["name"], row["name"]):
+            candidate_id = next(iter(repo_matches))
+            # A repo reused for multiple sheet entries needs additional
+            # evidence. A unique repo gets its usual strong correspondence.
+            unique_sheet_project = any(
+                projects_in_rows[p] == 1 for p in projects
+                if candidate_id in by_project.get(p, set())
+            )
+            if unique_sheet_project or name_related(by_id[candidate_id]["name"], row["name"]):
+                app_id = candidate_id
                 match_method = "repository"
+            elif candidate_id in desc_matches:
+                app_id = candidate_id
+                match_method = "repository-" + desc_matches[candidate_id]
         elif len(repo_matches) > 1:
-            alike = [app_id for app_id in repo_matches
-                     if name_related(by_id[app_id]["name"], row["name"])]
+            alike = [candidate_id for candidate_id in repo_matches
+                     if name_related(by_id[candidate_id]["name"], row["name"])]
             if len(alike) == 1:
                 app_id = alike[0]
                 match_method = "repository-title"
+            else:
+                descriptive = [candidate_id for candidate_id in repo_matches
+                               if candidate_id in desc_matches]
+                if len(descriptive) == 1 and len(desc_matches) == 1:
+                    app_id = descriptive[0]
+                    match_method = "repository-" + desc_matches[app_id]
 
-        if not match_method:
-            # Name-only fallback is safe only if exactly one missing-data port
-            # has precisely the same normalized full title.
-            matches = by_name.get(comparable_name(row["name"]), set())
-            if len(matches) == 1 and len(comparable_name(row["name"])) >= 8:
-                app_id = next(iter(matches))
-                # If developer repos disagree, do not silently conflate games.
+        if match_method is None:
+            exact = by_name.get(comparable_name(row["name"]), set())
+            if len(exact) == 1 and len(comparable_name(row["name"])) >= 8:
+                candidate_id = next(iter(exact))
                 catalog_repos = {(p, n.lower()) for p, n in
-                                 by_id[app_id].get("repositories", [])}
-                if projects and catalog_repos and not projects.intersection(catalog_repos):
-                    continue
-                match_method = "exact-title"
+                                 by_id[candidate_id].get("repositories", [])}
+                if not (projects and catalog_repos and
+                        not projects.intersection(catalog_repos)):
+                    app_id = candidate_id
+                    match_method = "exact-title"
 
-        if not match_method:
+        if match_method is None and len(desc_matches) == 1:
+            candidate_id, method = next(iter(desc_matches.items()))
+            # If a known repo points to a DIFFERENT catalog port, the
+            # description alone must not override that stronger identity.
+            if not repo_matches or candidate_id in repo_matches:
+                app_id = candidate_id
+                match_method = method
+
+        if match_method is None:
             continue
 
         source_domains = ", ".join(row["archive_hosts"][:2])
         is_archive = row.get("evidence_type") == "archive"
+        evidence_needs_review = (match_method.endswith("description") or
+                                 "description" in match_method)
         candidate = {
             "source": "PS Vita Ports Tracker (Reddit / Google Sheets)",
             "kind": "community-sheet",
@@ -264,6 +334,8 @@ def match_apps(apps, rows):
             "evidence": "referencia-comunitaria",
             "evidence_type": "archive" if is_archive else "bundle",
             "match_method": match_method,
+            "sheet_title": row["name"][:140],
+            "identity_review": evidence_needs_review,
         }
         result.setdefault(app_id, []).append(candidate)
     return {k: v[:3] for k, v in result.items()}
