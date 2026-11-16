@@ -352,13 +352,17 @@ def get_gitlab_release(project: str) -> dict[str, Any] | None:
     assets: list[dict[str, Any]] = []
 
     for link in (latest.get("assets") or {}).get("links", []):
-        if not link.get("url"):
+        if not isinstance(link, dict) or not link.get("url"):
             continue
+        # GitLab's direct_asset_url keeps the VPK link under the release's
+        # stable downloads path. The original URL is metadata only.
+        target = link.get("direct_asset_url") or link["url"]
         assets.append(
             {
                 "name": link.get("name") or link["url"].split("/")[-1] or "archivo",
                 "size": 0,
-                "download_url": link["url"],
+                "download_url": target,
+                "original_url": link["url"],
                 "content_type": "",
             }
         )
