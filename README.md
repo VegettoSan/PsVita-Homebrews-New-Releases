@@ -60,6 +60,22 @@ del catálogo sea igual o superior a la release monitoreada.** Si llega otra
 versión nueva válida, el enlace `VPK` puede pasar temporalmente a la
 descarga del repositorio hasta que se haga su respaldo manual.
 
+### Canal opcional de pre-releases
+
+El monitor detecta tanto releases estables como pre-releases publicados de
+GitHub. Si el más reciente es un pre-release, guarda también un release
+estable anterior (si aparece en los últimos 20 releases) en
+`data/upstream_latest.json`, sin cambiar el formato principal del snapshot.
+
+PSVitaAlive solo aplica pre-releases a aplicaciones con
+`allow_prereleases: true` en su archivo individual de `apps/`
+(en el esquema compacto V2: `"apr": true`). Por defecto permanece
+en el canal estable. Los tags beta/RC reconocibles se comparan por
+versión base y prioridad de fase; tags ambiguos quedan en revisión.
+
+`Archive`, versiones anteriores, proyectos compartidos, VPK ambiguos y
+fuentes no verificadas siguen excluidos de cambios automáticos.
+
 ## Preservación en la misma ficha de releases
 
 **No hay sección ni página nueva** para los respaldos: cada tarjeta del monitor

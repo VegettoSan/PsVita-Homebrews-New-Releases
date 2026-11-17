@@ -296,20 +296,8 @@ def github_headers() -> dict[str, str]:
     return headers
 
 
-def get_github_release(project: str) -> dict[str, Any] | None:
-    url = f"https://api.github.com/repos/{quote(project, safe='/')}/releases"
-    data = request_json(
-        url,
-        headers=github_headers(),
-        params={"per_page": 5},
-    )
-    if not data or not isinstance(data, list):
-        return None
-
-    latest = next((item for item in data if not item.get("draft")), None)
-    if not latest:
-        return None
-
+def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, Any]:
+    """Build a trusted provider snapshot without downloading VPKs."""
     assets = [
         {
             "name": asset.get("name") or "archivo",
@@ -317,24 +305,57 @@ def get_github_release(project: str) -> dict[str, Any] | None:
             "download_url": asset.get("browser_download_url") or "",
             "content_type": asset.get("content_type") or "",
         }
-        for asset in latest.get("assets", [])
+        for asset in release.get("assets", [])
         if asset.get("browser_download_url")
     ]
-
     return {
         "platform": "github",
         "repo": project,
-        "release_id": str(latest.get("id") or latest.get("tag_name") or ""),
-        "tag": latest.get("tag_name") or "",
-        "name": latest.get("name") or latest.get("tag_name") or "Release",
-        "url": latest.get("html_url") or f"https://github.com/{project}/releases",
-        "published": latest.get("published_at") or latest.get("created_at") or "",
-        "prerelease": bool(latest.get("prerelease")),
+        "release_id": str(release.get("id") or release.get("tag_name") or ""),
+        "tag": release.get("tag_name") or "",
+        "name": release.get("name") or release.get("tag_name") or "Release",
+        "url": release.get("html_url") or f"https://github.com/{project}/releases",
+        "published": release.get("published_at") or release.get("created_at") or "",
+        "prerelease": bool(release.get("prerelease")),
         "draft": False,
-        "body": latest.get("body") or "",
+        "body": release.get("body") or "",
         "assets": assets,
-        "author": (latest.get("author") or {}).get("login") or "",
+        "author": (release.get("author") or {}).get("login") or "",
     }
+
+
+def get_github_release(project: str) -> dict[str, Any] | None:
+    url = f"https://api.github.com/repos/{quote(project, safe='/')}/releases"
+    data = request_json(
+        url,
+        headers=github_headers(),
+        # Include an older stable release when a project currently publishes
+        # prereleases. Existing stable-only apps must never be forced to beta.
+        params={"per_page": 20},
+    )
+    if not data or not isinstance(data, list):
+        return None
+
+    published = [item for item in data if isinstance(item, dict) and not item.get("draft")]
+    if not published:
+        return None
+
+    latest = published[0]
+    record = _github_release_record(project, latest)
+    if record["prerelease"]:
+        previous_stable = next(
+            (item for item in published[1:] if not item.get("prerelease")), None
+        )
+        if previous_stable:
+            # Optional extension of snapshot schema v1. The top-level latest
+            # release still powers the dashboard; sync chooses by app policy.
+            stable = _github_release_record(project, previous_stable)
+            record["stable_release"] = {
+                key: stable[key] for key in
+                ("platform", "repo", "tag", "release_id", "published",
+                 "prerelease", "assets")
+            }
+    return record
 
 
 def get_gitlab_release(project: str) -> dict[str, Any] | None:
@@ -897,6 +918,8 @@ def main() -> int:
                 "prerelease": bool(release.get("prerelease")),
                 "assets": release.get("assets") or [],
             }
+            if isinstance(release.get("stable_release"), dict):
+                upstream_latest[key.lower()]["stable_release"] = release["stable_release"]
 
             identity = release_identity(release)
             previous = state_tag(old_state.get(key))

@@ -24,6 +24,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_preservation_status.py -v
       - name: Verify combined dashboard status filters
         run: python -m unittest discover -s tests -p test_dashboard_filters.py -v
+      - name: Verify prerelease snapshots and semantic version ordering
+        run: python -m unittest discover -s tests -p test_prerelease_updates.py -v
       - name: Verify GitLab VPK release links and manual-review status
         run: python -m unittest discover -s tests -p test_gitlab_vpk.py -v
       - name: Verify Game Data discovery and dashboard tab

@@ -283,48 +283,45 @@ def choose_primary_app(
     return scored[0][2]
 
 
+_RELEASE_VERSION = re.compile(
+    r"^[vV]?\\.?(\\d+(?:\\.\\d+){0,3})"
+    r"(?:[-._]?(dev|test|alpha|a|beta|b|pre|preview|rc)(?:[-._]?(\\d+))?)?$",
+    re.IGNORECASE,
+)
+_RELEASE_STAGES = {
+    "dev": 0, "test": 0, "alpha": 1, "a": 1,
+    "beta": 2, "b": 2, "pre": 3, "preview": 3, "rc": 4,
+}
+
+
 def version_signature(value: Any) -> tuple[tuple[int, ...] | None, str]:
+    """Conservative numeric + known prerelease tags, compatible with sync."""
     text = html.unescape(str(value or "")).strip().lower()
-    if not text:
-        return None, ""
-
-    text = re.sub(r"^\s*(?:version|release)\s*", "", text)
-    text = re.sub(r"^\s*v[\s._-]*", "", text)
-
-    numbers = [int(piece) for piece in re.findall(r"\d+", text)]
-    if numbers:
-        while len(numbers) > 1 and numbers[-1] == 0:
-            numbers.pop()
-        suffix = re.sub(r"\d+", "", text)
-        suffix = re.sub(r"[^a-z]+", "", suffix)
-        return tuple(numbers), suffix
-
-    return None, re.sub(r"[^a-z0-9]+", "", text)
+    match = _RELEASE_VERSION.fullmatch(text)
+    if not match:
+        return None, re.sub(r"[^a-z0-9]+", "", text)
+    numbers = tuple(int(part) for part in match.group(1).split("."))
+    numbers += (0,) * (4 - len(numbers))
+    stage = match.group(2)
+    return numbers, (f"{_RELEASE_STAGES[stage]}:{int(match.group(3) or 0)}"
+                     if stage else "5:0")
 
 
 def compare_versions(catalog_version: Any, release_version: Any) -> int | None:
-    c_numbers, c_suffix = version_signature(catalog_version)
-    r_numbers, r_suffix = version_signature(release_version)
+    c_numbers, c_stage = version_signature(catalog_version)
+    r_numbers, r_stage = version_signature(release_version)
 
     if c_numbers is not None and r_numbers is not None:
-        max_len = max(len(c_numbers), len(r_numbers))
-        c_pad = c_numbers + (0,) * (max_len - len(c_numbers))
-        r_pad = r_numbers + (0,) * (max_len - len(r_numbers))
-
-        if c_pad < r_pad:
+        if c_numbers < r_numbers:
             return -1
-        if c_pad > r_pad:
+        if c_numbers > r_numbers:
             return 1
+        c_rank = tuple(int(part) for part in c_stage.split(":"))
+        r_rank = tuple(int(part) for part in r_stage.split(":"))
+        return -1 if c_rank < r_rank else (1 if c_rank > r_rank else 0)
 
-        if c_suffix and r_suffix and c_suffix != r_suffix:
-            return None
+    if c_numbers is None and r_numbers is None and c_stage and c_stage == r_stage:
         return 0
-
-    _, c_text = version_signature(catalog_version)
-    _, r_text = version_signature(release_version)
-    if c_text and r_text:
-        return 0 if c_text == r_text else None
-
     return None
 
 
