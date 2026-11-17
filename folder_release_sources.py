@@ -43,7 +43,7 @@ def pick_folder_vpk(entries: list[dict], folder: str, version: str) -> dict | No
     if not vpks:
         return None
     token = re.compile(r"(?<![a-z0-9])v?" + re.escape(version.lstrip("vV")) +
-                       r"(?![a-z0-9.])", re.I)
+                       r"(?=\.vpk$)", re.I)
     matched = [item for item in vpks if token.search(PurePosixPath(item["path"]).name)]
     return matched[0] if len(matched) == 1 else None
 
