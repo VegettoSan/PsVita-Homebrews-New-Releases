@@ -9,6 +9,7 @@ import html
 import json
 from pathlib import Path
 from urllib.parse import quote_plus, urlparse
+from external_game_data import archive_url, KIND as EXTERNAL_KIND
 
 REPORT_FILE = Path("data/game_data_candidates.json")
 
@@ -73,9 +74,11 @@ def esc(value):
     return html.escape(str(value or ""), quote=True)
 
 
-def safe_href(url):
+def safe_href(url, *, external_archive=False):
     if not isinstance(url, str):
         return ""
+    if external_archive:
+        return esc(url) if archive_url(url) else ""
     try:
         parsed = urlparse(url)
     except ValueError:
@@ -100,6 +103,8 @@ def render_panel(report):
                          for a in matches)
     community_count = sum(any(c.get("kind") == "community-sheet" for c in a["candidates"])
                           for a in matches)
+    catalog_count = sum(any(c.get("kind") == EXTERNAL_KIND for c in a["candidates"])
+                        for a in matches)
     timestamp = str(report.get("scanned_at") or "")[:16].replace("T", " ")
     parts = []
     for app in matches:
@@ -115,7 +120,8 @@ def render_panel(report):
         for candidate in (app.get("candidates") or [])[:8]:
             if not isinstance(candidate, dict):
                 continue
-            url = safe_href(candidate.get("url"))
+            url = safe_href(candidate.get("url"),
+                            external_archive=candidate.get("kind") == EXTERNAL_KIND)
             if not url:
                 continue
             label = esc(candidate.get("title"))
@@ -137,6 +143,14 @@ def render_panel(report):
                 sheet_title = str(candidate.get("sheet_title") or "").strip()
                 if sheet_title and sheet_title.casefold() != str(app.get("name") or "").casefold():
                     source += " · Título en hoja: " + esc(sheet_title)
+            elif kind == EXTERNAL_KIND:
+                source += " · Enlace de archivo sin verificar"
+                size = candidate.get("size")
+                if isinstance(size, int) and size > 0:
+                    source += " · Tamaño declarado: " + format(size / (1024**2), ".1f") + " MiB"
+                language = str(candidate.get("language") or "").strip()
+                if language:
+                    source += " · Idioma: " + esc(language)
             else:
                 source += " · Archivo identificado en release oficial"
             newly = '<span class="gd-new">Nuevo</span>' if candidate.get("url") in news else ""
@@ -171,7 +185,8 @@ def render_panel(report):
         parts.append(
             '<article class="gd-item" data-found="' + " ".join(
                 label for label, kind in (("official", "possible-archive"),
-                                          ("community", "community-sheet"))
+                                          ("community", "community-sheet"),
+                                          ("catalog", EXTERNAL_KIND))
                 if any(c.get("kind") == kind for c in app["candidates"])
             ) +
             '" data-search="' + search_text + '"><div class="gd-top">' + icon_html +
@@ -195,9 +210,10 @@ def render_panel(report):
         '<section class="wrap" id="gd-panel" aria-labelledby="gd-heading" hidden>'
         '<div class="gd-summary"><h2 id="gd-heading">Búsqueda de Game Data</h2>'
         '<p>Solo ports con enlaces documentados: archivos identificados en '
-        'releases oficiales o descargas publicadas en la hoja enlazada desde '
-        'Reddit. Algunas descargas comunitarias anuncian VPK y datos juntos; '
-        'su contenido, compatibilidad y derechos siguen sin comprobarse.</p>'
+        'releases oficiales, descargas de una hoja comunitaria y enlaces de '
+        'archivos señalados por un catálogo público. Los archivos no se '
+        'descargan ni se verifican: contenido, compatibilidad, derechos y '
+        'disponibilidad quedan pendientes de revisión.</p>'
         '<p>' + report_message + '</p>'
         '<p><a class="btn" target="_blank" rel="noopener noreferrer" '
         'href="https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294">'
@@ -212,6 +228,8 @@ def render_panel(report):
         '</strong>con archivos en releases</div>'
         '<div class="gd-total"><strong>' + str(community_count) +
         '</strong>con datos de la hoja</div>'
+        '<div class="gd-total"><strong>' + str(catalog_count) +
+        '</strong>con referencias de catálogo público</div>'
         '<div class="gd-total"><strong>' + str(report.get("new_matches") or 0) +
         '</strong>nuevas referencias</div></div></div>'
         '<div class="gd-tools"><input class="gd-input" id="gd-search" type="search" '
@@ -222,7 +240,9 @@ def render_panel(report):
         '<option value="official">Archivo identificado en release (' +
         str(official_count) + ')</option>'
         '<option value="community">Referencia de hoja comunitaria (' +
-        str(community_count) + ')</option></select></div>'
+        str(community_count) + ')</option>'
+        '<option value="catalog">Archivo en catálogo público (' +
+        str(catalog_count) + ')</option></select></div>'
         + (('<div class="gd-grid" id="gd-list">' + "".join(parts) + '</div>')
            if parts else empty_text) +
         '<div class="gd-empty-filter" id="gd-empty-filter" hidden>'

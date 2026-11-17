@@ -19,6 +19,9 @@ from urllib.parse import quote, urlparse
 import requests
 from catalog_schema_v2_compat import to_v1
 from community_port_sheet import fetch_public_sheet, match_apps, SHEET_URL
+from external_game_data import (fetch_snapshot, match_apps as match_external_apps,
+                                archive_url, KIND as EXTERNAL_KIND,
+                                SOURCE_LABEL as EXTERNAL_SOURCE)
 
 CATALOG_URL = os.getenv(
     "PSVITAALIVE_CATALOG_URL",
@@ -268,6 +271,10 @@ def is_strong_candidate(candidate):
             str(candidate.get("source") or "").startswith("PS Vita Ports Tracker")
             and url.startswith(SHEET_URL + "&range=")
         )
+    if kind == EXTERNAL_KIND:
+        return (candidate.get("source") == EXTERNAL_SOURCE
+                and candidate.get("match_method") == "title-id"
+                and archive_url(url))
     return False
 
 
@@ -275,7 +282,8 @@ DATA_ARCHIVE_NAME = ARCHIVE_PATTERN
 
 
 def build_report(catalog, previous, scanner=check_app, timestamp=None,
-                 sheet_rows=None, sheet_error=""):
+                 sheet_rows=None, sheet_error="",
+                 external_rows=None, external_error=""):
     timestamp = timestamp or now_iso()
     missing = missing_ports(catalog)
     prior = {a["id"]: a for a in previous.get("apps", [])
@@ -308,6 +316,10 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None,
         match_apps(missing, sheet_rows or [], descriptions)
         if sheet_rows is not None else {}
     )
+    external = (
+        match_external_apps(missing, external_rows)
+        if external_rows is not None else {}
+    )
     new_links = []
     items = []
     for app in missing:
@@ -321,6 +333,9 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None,
         ]
         old_community = [
             c for c in previous_sources if c.get("kind") == "community-sheet"
+        ]
+        old_external = [
+            c for c in previous_sources if c.get("kind") == EXTERNAL_KIND
         ]
         if app["id"] in results:
             latest, failures = results[app["id"]]
@@ -338,7 +353,13 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None,
         else:
             # Retain previous sheet reference only on temporary CSV failures.
             sheet = old_community
-        candidates = official + sheet
+        # Previous leads survive temporary upstream outages, but disappear
+        # when a successful snapshot no longer contains them.
+        fresh_external = (external.get(app["id"], []) if external_rows is not None
+                          else old_external)
+        # Reserve space for each evidence class before filling remaining slots.
+        candidates = (official[:3] + fresh_external[:3] + sheet[:2] +
+                      official[3:] + fresh_external[3:] + sheet[2:])
         seen = set()
         safe = []
         for candidate in candidates:
@@ -366,6 +387,8 @@ def build_report(catalog, previous, scanner=check_app, timestamp=None,
         "sheet_status": "error" if sheet_error else "ok",
         "sheet_error": str(sheet_error)[:160],
         "sheet_source": SHEET_URL,
+        "external_status": "error" if external_error else "ok",
+        "external_error": str(external_error)[:160],
         "errors": errors[:30],
     }, new_links
 
@@ -391,9 +414,21 @@ def main():
         sheet_error = type(exc).__name__
         print("Aviso: hoja comunitaria no disponible (" + sheet_error +
               "); se conserva la evidencia anterior")
+    try:
+        external_rows = fetch_snapshot()
+        external_error = ""
+        print("Catálogo público: " + str(len(external_rows)) +
+              " registros examinados, solo pistas de Game Data")
+    except (requests.RequestException, ValueError, UnicodeError) as exc:
+        external_rows = None
+        external_error = type(exc).__name__
+        print("Aviso: catálogo público no disponible (" + external_error +
+              "); se conservan los hallazgos anteriores")
     report, _new_links = build_report(catalog, previous,
                                       sheet_rows=sheet_rows,
-                                      sheet_error=sheet_error)
+                                      sheet_error=sheet_error,
+                                      external_rows=external_rows,
+                                      external_error=external_error)
     save_json(OUTPUT, report)
     # Game Data discoveries are shown only on the web dashboard.
     print("Game Data: " + str(report["missing_count"]) + " ports sin enlaces; "

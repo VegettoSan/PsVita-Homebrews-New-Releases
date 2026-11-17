@@ -126,6 +126,14 @@ Fuentes reconocidas:
 - **GitHub/GitLab Releases:** un asset de archivo cuyo nombre indica Game
   Files/Data Files. Se muestra el release del desarrollador; no se descarga
   el archivo ni se verifica su contenido.
+- **Catálogo público complementario (consulta en vivo):** el monitor lee un
+  snapshot JSON adicional y solo considera registros de ports con Title ID único.
+  Detecta enlaces a archivos de datos en `packages` (`game_files` /
+  `data_files`), `data_url` y variantes de `game_data_languages`.
+  Rechaza enlaces inválidos, VPK y juegos comerciales; evita duplicados.
+  Los hallazgos se muestran como **Catálogo público**, con enlaces directos
+  para revisión manual, sin descargar ni analizar el contenido del archivo.
+  Una caída del servicio conserva las referencias de la última consulta correcta.
 - **PS Vita Ports Tracker [Official] (hoja pública de u/RamenRams):**
   https://docs.google.com/spreadsheets/d/1_nuD1Sr5sNCtZPjWMliR-fFZDvQToUtnMwhh_dJkNeE/edit?gid=1739999294
   Publicada en Reddit:
@@ -164,6 +172,11 @@ ejecutarse manualmente. Inspecciona todos los ports con repositorios identificab
 oficiales de releases; la hoja se consulta una vez por ejecución. Si la hoja no responde, el escaneo de
 GitHub/GitLab continúa y preserva las referencias de hoja de la última
 consulta exitosa, señalando el error en el JSON.
+
+El snapshot externo se consulta en cada ejecución del workflow y no se almacena
+ni se republica. Su URL es configurable mediante
+`EXTERNAL_GAME_DATA_SNAPSHOT_URL`; si el servicio no responde, el rastreo de
+GitHub/GitLab y de la hoja comunitaria sigue funcionando.
 
 El JSON de resultados generado es data/game_data_candidates.json y el
 dashboard está en docs/index.html. El código no modifica los archivos
@@ -289,6 +302,7 @@ python monitor.py
 | `GITHUB_TOKEN` | Token para la API de GitHub |
 | `GITLAB_TOKEN` | Token opcional para GitLab |
 | `PSVITAALIVE_CATALOG_URL` | Permite cambiar temporalmente la fuente del catálogo |
+| `EXTERNAL_GAME_DATA_SNAPSHOT_URL` | Permite configurar el catálogo público complementario usado solo para descubrimiento de Game Data |
 
 ## Comportamiento de la primera sincronización
 
