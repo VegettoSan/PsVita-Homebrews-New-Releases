@@ -284,8 +284,8 @@ def choose_primary_app(
 
 
 _RELEASE_VERSION = re.compile(
-    r"^[vV]?\\.?(\\d+(?:\\.\\d+){0,3})"
-    r"(?:[-._]?(dev|test|alpha|a|beta|b|pre|preview|rc)(?:[-._]?(\\d+))?)?$",
+    r"^[vV]?\.?(\d+(?:\.\d+){0,3})"
+    r"(?:[-._]?(dev|test|alpha|a|beta|b|pre|preview|rc)(?:[-._]?(\d+))?)?$",
     re.IGNORECASE,
 )
 _RELEASE_STAGES = {
