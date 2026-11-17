@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Verify folder VPK detection (offline)
+        run: python -m unittest discover -s tests -p test_folder_release_sources.py -v
+
       - name: Verify pre-release snapshot and safe version order (offline)
         run: python -m unittest discover -s tests -p test_prerelease_updates.py -v
 

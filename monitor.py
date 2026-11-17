@@ -11,6 +11,8 @@ PS Vita Homebrew Release Tracker.
 
 from __future__ import annotations
 
+from folder_release_sources import scan_supported_folders
+
 import concurrent.futures
 import html
 import json
@@ -947,6 +949,15 @@ def main() -> int:
             if previous != (release.get("tag") or identity):
                 changed_releases.append(release)
 
+    # Read immutable per-port VPKs from reviewed GitHub folder repositories.
+    folder_releases, folder_errors = scan_supported_folders(
+        repos, request_json, github_headers
+    )
+    errors.extend({"repo": "github_folder", "error": error}
+                  for error in folder_errors)
+    print(f"GitHub folder ports: {len(folder_releases)} valid, "
+          f"{len(folder_errors)} require manual review")
+
     history = sort_history(history)
 
     notifications_sent = 0
@@ -974,6 +985,7 @@ def main() -> int:
     save_json(UPSTREAM_LATEST_FILE, {
         "schema_version": 1,
         "releases": [upstream_latest[key] for key in sorted(upstream_latest)],
+        "folder_releases": folder_releases,
     })
     save_json(HISTORY_FILE, history)
     save_json(SYNC_INFO_FILE, sync_info)

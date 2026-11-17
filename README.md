@@ -350,3 +350,10 @@ Los metadatos del catálogo de homebrew provienen de PSVitaAlive. El catálogo m
 Proyecto:
 
 https://github.com/VegettoSan/PSVitaAlive
+
+
+## GitHub VPKs distributed by folder
+
+The monitor now supports reviewed repositories which publish VPK files and README metadata in one folder per Homebrew instead of GitHub Releases. The first supported source is https://github.com/papilenote/vita-ports. Each folder must have a README table with Title ID and a comparable version, plus a uniquely identifiable .vpk file. When multiple VPKs are stored (such as Marvel vs. Capcom 2), the filename must uniquely match the README version. The monitor uses the last VPK-changing commit as an immutable download URL and publication date. It never downloads or installs binaries.
+
+Generated data/upstream_latest.json retains schema_version 1 and releases unchanged, adding a separate folder_releases array. PSVitaAlive must separately validate its canonical app's registered folder URL and Title ID before updating the existing Download/VPK link. Unknown apps and ambiguous folders remain manual-review only. The normal GitHub Releases monitor is unaffected.
