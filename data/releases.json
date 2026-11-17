@@ -1,55 +1,363 @@
 [
   {
     "platform": "github",
+    "repo": "theheroGAC/PSV-Cleaner",
+    "release_id": "449051817",
+    "tag": "1.18",
+    "name": "1.18",
+    "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/tag/1.18",
+    "published": "2026-11-17T18:45:09Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Version 1.18 - November 17, 2026\r\n\r\n### Added\r\n- **Multi-Language Support**: Real system language detection via `sceAppUtilSystemParamGetInt` plus manual selector in Options (`Auto`, `EN`, `IT`, `ES`, `FR`, `DE`, `PT`, `JP`).\r\n- **Dynamic UI Themes**: Live switching between `Dark Slate`, `Light`, `OLED Black`, and `Vita Blue`, persisted in `settings.bin` (with v1 migration).\r\n- **Large File & Leftover Archive Finder**: Finds big files (`>= 10/50/100/250 MB`) and leftover `.vpk`/`.pkg`/`.zip`/`.7z`/`.rar`/`.cso` packages across `ux0:`, `uma0:`, `imc0:`, and `ur0:data/`.\r\n- **TaiHEN / Plugin Auditor**: Detects `ux0:tai/` vs `ur0:tai/` conflicts, broken `config.txt` plugin entries, duplicates, and unused/backup `.skprx`/`.suprx` files with one-button `config.txt.bak` backup.\r\n- **Orphan Save ZIP Backup**: Standard PKZIP archive backup of orphaned savedata (`zlib` deflate) to `uma0:PSV_Cleaner_Backups/` or `ux0:data/PSV_Cleaner/saves_backup/` with optional post-backup deletion.\r\n- **Storage Analyzer Drill-Down**: Interactive directory explorer (`X` to open subfolders, `O` to go up, `△` to delete safe items).\r\n- **Real Game & Homebrew Names**: Parses `param.sfo` (`TITLE` / `STITLE`) to display readable app names in Per-App Cleaning and Orphan Scanner.\r\n- **Persistent Whitelist & Cleanup History**: Exclude specific paths or Title IDs (`whitelist.txt`), view historical sessions (`history.log`), and track lifetime recovered space (`stats.bin`).\r\n- **On-Screen Toast Notifications & Vita Controls**: Non-blocking toast overlay, `L`/`R` fast page scrolling, left analog stick navigation, front touchscreen tap/swipe, `SceImeDialog` text search, About/Controls screen, and instant result dismissal.\r\n- **Expanded Multi-Volume Coverage**: Added `uma0:`, `imc0:`, `ur0:` crash dumps, `rePatch/`, `reAddcont/`, `bgdl/w/`, `ptmp/`, and full Options menu toggles for all core categories.\r\n\r\n### Fixed\r\n- **Preview Filtering & Multi-Select**: Extension filter (`tmp`, `log`, `cache`, `dmp`, `vpk`, `pkg`) and text search now filter displayed rows, with checkboxes for cleaning selected or filtered files.\r\n- **Exclude VitaDB Cache**: Fixed off-by-one `strncmp` length (`17` vs `16`) and covered `ux0:vdb_data/` and `ux0:data/vdb_vpk/`.\r\n- **Wildcard Pattern Support**: Expanded `*` globs in `TEMP_PATHS[]` and `safetyPathIsCurated()` across scan, preview, smart clean, and deletion.\r\n- **ScanCache Subdirectory Detection**: Checks recursive directory mtime (depth 2) so changes in subfolders invalidate stale cache entries.\r\n- **README Controls Alignment**: Fixed Orphan Scanner confirm button documentation (`△ / START`).",
+    "assets": [
+      {
+        "name": "PSV_Cleaner.vpk",
+        "size": 223678,
+        "download_url": "https://github.com/theheroGAC/PSV-Cleaner/releases/download/1.18/PSV_Cleaner.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "theheroGAC",
+    "homebrew_name": "Psv Cleaner",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-psv-cleaner/icon0.png",
+    "homebrew_category": "games",
+    "homebrew_description": "",
+    "homebrew_long_description": "PSV Cleaner is a powerful and user-friendly temporary files cleaner. This tool helps you free up valuable storage space by safely removing temporary files, cache data, and system dumps that accumulate over time.",
+    "homebrew_id": "psv-cleaner",
+    "homebrew_authors": [
+      "theherogac"
+    ],
+    "homebrew_version": "1.17",
+    "catalog_apps": [
+      {
+        "id": "psv-cleaner",
+        "name": "Psv Cleaner",
+        "icon": "https://archive.org/download/psvitaalive-psv-cleaner/icon0.png",
+        "category": "games",
+        "description": "",
+        "long_description": "PSV Cleaner is a powerful and user-friendly temporary files cleaner. This tool helps you free up valuable storage space by safely removing temporary files, cache data, and system dumps that accumulate over time.",
+        "version": "1.17",
+        "version_date": "2026-09-26",
+        "author_ids": [
+          "theherogac"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/download/1.17/PSV_Cleaner.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/tag/1.15"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/theheroGAC/PSV-Cleaner"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/tag/1.16"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.17 → release 1.18",
+    "catalog_version": "1.17",
+    "archive_current_link": "",
+    "backup_status": "missing",
+    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "xyzz/vita-moonlight",
+    "release_id": "449022838",
+    "tag": "1.0.0",
+    "name": "1.0.0",
+    "url": "https://github.com/xyzz/vita-moonlight/releases/tag/1.0.0",
+    "published": "2026-11-17T18:17:24Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## What's Changed\n\n### ✨ Major Features\n\n- **UI**\n  - Migrate the Vita client to Borealis while preserving legacy sources\n  - Add in-stream display controls\n  - Add keyboard and stream controls\n- **Video**\n  - Enable Vita hardware decoding for 1080p\n  - Add texture and pixel format pipeline\n  - Enable FFmpeg by default\n  - Add buffer mode selection\n  - Add 480p resolution\n  - Add decoder presentation modes\n- **Input**\n  - Add keyboard overlay and safer cleanup\n  - Add keyboard layout settings\n  - Add legacy and modern keyboards\n  - Add configurable shortcuts\n  - Configure modern keyboard input and display\n  - Add gyroscope configuration\n  - Capture PS button during streams\n  - Add touch zones and shoulder swapping\n  - Add keyboard layout resources\n- **Moonmic**\n  - Add microphone streaming\n  - Add microphone diagnostics\n  - Add gain and connection status\n  - Show microphone latency\n- **Add host actions and connection tests**\n- **Add locales and restart on language change**\n- **Support custom connection ports**\n- **Support selectable Legacy and Borealis frontends**\n- **Add first-run frontend welcome**\n- **Version Legacy independently in combined VPK**\n\n### 🔧 Core Improvements\n\n- **Video**\n  - Align Vita stream resolutions\n  - Guard frame slots and rename GameStream includes\n  - Align FFmpeg texture formats\n  - Prevent renderer starvation\n  - Add telemetry and lock-free frame buffers\n  - Reduce GXM presentation latency\n  - Apply Borealis latency patch\n  - Avoid redundant frame presentation\n  - Validate SPS buffer assembly\n  - Enable Vita low-delay decoding\n  - Keep playback on the latest frame\n  - Resync FFmpeg startup latency\n  - Correct frame limits and resolution handling\n  - Fence decoded frames before reusing their buffers\n  - Prefer next-frame presentation\n- **Load hosts asynchronously**\n- **Vita**\n  - Disable CapUnlocker checks\n  - Use correct size formats\n  - Consolidate release and build fixes\n- **Input**\n  - Reduce controller polling overhead\n  - Repair touchscreen modes\n  - Isolate Limelight macros from Borealis button declarations\n  - Correct keyboard overlays and focus\n  - Preserve uppercase keyboard input\n- **Network**\n  - Validate TLS files and certificates\n  - Shorten handshake retries\n  - Tune automatic bitrate selection\n  - Serialize device.ini access during discovery\n  - Update mDNS discovery in Legacy and Borealis\n- **UI**\n  - Close host options correctly\n  - Prevent callbacks after view destruction\n  - Cache remote game artwork\n- **Logging**\n  - Buffer formatted log writes\n  - Queue Vita log output\n  - Reduce dropped log messages\n  - Correct Vita diagnostics and protect HTTP data\n- **Handle variable Opus frame sizes**\n- **Stream**\n  - Restore stream playback lifecycle\n  - Reconnect after app resume\n  - Guard session startup and automatic bitrate limits\n- **Improve first-run welcome dialog layout**\n- **Build**\n  - Deploy noninteractive VPKs and validate dual-frontend packages\n  - Pin FFmpeg-vita to current decoder revision\n  - Fix Vita CI on Windows and Linux\n- **Pairing**\n  - Harden authentication and server data handling\n  - Reject invalid AES blocks and failed signatures\n- **Handle invalid data slices without exiting**\n- **Fetch submodules before release tests**\n- **Preserve prepared changelog baseline**\n\n### ⚙️ Under the Hood\n\n- **Vita**\n  - Add VitaSDK dependencies and diagnostic tools\n  - Repair build scripts\n  - Fix build configuration\n  - Support VitaSDK builds from MSYS2\n  - Unify VitaSDK host workflows\n  - Standardize package workflow\n  - Ignore dirty nested Borealis submodules\n- **Moonmic**\n  - Route setup through MoonmicBridge\n  - Rename integration\n  - Use public protocol headers\n- **UI**\n  - Wrap editor in an AppletFrame\n  - Organize stream and Moonmic options\n  - Replace proprietary font assets\n- **Code**\n  - Clarify comments and update Vita declarations\n  - Remove redundant comments and standardize diagnostic messages\n- **Deps**\n  - Update streaming dependencies\n  - Repair dependency preparation scripts\n  - Add Moonbeam and update Borealis\n  - Pin Vita low-delay revision\n  - Link low-delay decoder revision\n- **Video**\n  - Update FFmpeg integration\n  - Rework FFmpeg decoding pipeline\n  - Migrate renderer to native Borealis GXM\n- **Rename GameStream source directory**\n- **Input**\n  - Use standard gamepad button names\n  - Migrate absolute touch mode\n  - Use one action path for front and rear touch zones\n- **Repo**\n  - Remove obsolete project files\n  - Ignore local stream logs\n  - Replace issue and pull request templates\n- **Remove unused audio and overlay code**\n- **Build**\n  - Document VitaSDK workflows and credits\n  - Validate PSVita on Windows and Linux\n- **Release**\n  - Automate Vita release preparation and packaging\n  - Pin checkout and artifact actions\n  - Combine release workflow\n  - Update 1.0.0 changelog and app metadata\n  - Simplify GitHub release metadata\n  - Normalize release note style\n  - Harden pull requests and verified releases\n- **Move Vita diagnostics and legacy MinGW scripts**\n- **Check C++ formatting with clang-format**\n- **Replace global stream state with owned session state**\n- **Compact stream frame statistics**\n- **Format sources and improve connection handling**\n- **Clarify upstream setup and frontend documentation**\n- **Readme**\n  - Document credits and controller shortcuts\n  - Clarify network requirements and bitrate guidance\n- **Clarify libuuid license**\n\n## Contributors\n\n- @AorsiniYT\n\n**Full Changelog**: https://github.com/xyzz/vita-moonlight/compare/0.13.2...1.0.0\n",
+    "assets": [
+      {
+        "name": "moonlight.vpk",
+        "size": 12886977,
+        "download_url": "https://github.com/xyzz/vita-moonlight/releases/download/1.0.0/moonlight.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AorsiniYT",
+    "homebrew_name": "Vita Moonlight",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-vita-moonlight/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "NVIDIA Moonlight Streamer port.",
+    "homebrew_long_description": "Vita Moonlight allows you to stream your full collection of Steam games from your powerful Windows desktop to your PSVITA.",
+    "homebrew_id": "vita-moonlight",
+    "homebrew_authors": [
+      "aorsiniyt",
+      "xyzz",
+      "d3m3vilurr",
+      "shadowprince"
+    ],
+    "homebrew_version": "v.0.13.2",
+    "catalog_apps": [
+      {
+        "id": "vita-moonlight",
+        "name": "Vita Moonlight",
+        "icon": "https://archive.org/download/psvitaalive-vita-moonlight/icon0.png",
+        "category": "utilities",
+        "description": "NVIDIA Moonlight Streamer port.",
+        "long_description": "Vita Moonlight allows you to stream your full collection of Steam games from your powerful Windows desktop to your PSVITA.",
+        "version": "v.0.13.2",
+        "version_date": "2025-11-16",
+        "author_ids": [
+          "aorsiniyt",
+          "xyzz",
+          "d3m3vilurr",
+          "shadowprince"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-vita-moonlight/vita-moonlight.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/xyzz/vita-moonlight/releases"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/xyzz/vita-moonlight/releases/tag/0.13.2"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/xyzz/vita-moonlight"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.13.2 → release 1.0.0",
+    "catalog_version": "v.0.13.2",
+    "archive_current_link": "https://archive.org/download/psvitaalive-vita-moonlight/vita-moonlight.vpk",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "fr3dsp/sonic-r-vita",
+    "release_id": "448956819",
+    "tag": "v2.1",
+    "name": "v2.1",
+    "url": "https://github.com/PupueStudios/sonic-r-vita/releases/tag/v2.1",
+    "published": "2026-11-17T17:15:58Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Now servers actually work.\r\n\r\nAlso updated to upstream and fixed some bugs.\r\n\r\nNow, the same stuff as always:\r\n\r\nThe VPK comes with a DATA folder inside (same as repo) that adds/replaces the custom widescreen image and the glyphs for online and stuff the decomp already had at boot\r\n\r\nYou need to place the original Sonic R (1998 PC ver) files in ux0:data/sonicr\r\n\r\nAlso get libshacccg.suprx\r\n\r\nAnd that's all I think!",
+    "assets": [
+      {
+        "name": "sonicr_vita.vpk",
+        "size": 4363896,
+        "download_url": "https://github.com/PupueStudios/sonic-r-vita/releases/download/v2.1/sonicr_vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "fr3dsp",
+    "homebrew_name": "Sonic R",
+    "homebrew_icon": "https://archive.org/download/sonic-r-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A reimplementation of Sonic R for the PlayStation Vita.",
+    "homebrew_long_description": "A reimplementation of Sonic R for the PlayStation Vita.\n\n- PsVitaAlive -",
+    "homebrew_id": "sonic-r",
+    "homebrew_authors": [
+      "fr3dsp"
+    ],
+    "homebrew_version": "2.0",
+    "catalog_apps": [
+      {
+        "id": "sonic-r",
+        "name": "Sonic R",
+        "icon": "https://archive.org/download/sonic-r-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "A reimplementation of Sonic R for the PlayStation Vita.",
+        "long_description": "A reimplementation of Sonic R for the PlayStation Vita.\n\n- PsVitaAlive -",
+        "version": "2.0",
+        "version_date": "2026-10-12",
+        "author_ids": [
+          "fr3dsp"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/sonic-r-ps-vita/sonicr_vita%20v2.0.vpk",
+            "size": 4299162,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/sonic-r-ps-vita/Game%20Files.zip",
+            "size": 647705395,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "sonicr"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "GitHub",
+            "url": "https://github.com/fr3dsp/sonic-r-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 2.0 → release v2.1",
+    "catalog_version": "2.0",
+    "archive_current_link": "https://archive.org/download/sonic-r-ps-vita/sonicr_vita%20v2.0.vpk",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "AngeloGalav/sh3-vita",
+    "release_id": "448859424",
+    "tag": "v0.0.2",
+    "name": "sh3-vita 0.0.2",
+    "url": "https://github.com/AngeloGalav/sh3-vita/releases/tag/v0.0.2",
+    "published": "2026-11-17T15:54:59Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Second development snapshot of the Silent Hill 3 port for PS Vita.\n\n**What's new since 0.0.1**\n\n- The black square over Heather's flashlight is gone.\n- The map shows Heather's arrow and the page arrows again.\n\nBoth confirmed on a real PS Vita.\n\nThis is an experimental static-recompilation port of the 2003 PC game: `sh3.exe` is recompiled to C and runs over vitaGL through a Win32 / Direct3D 8 / DirectInput / DirectSound compatibility layer. The port contains no game data: bring your own copy of the 2003 PC release of Silent Hill 3 (`sh3.exe` SHA-256 `8ff8f74806f55843b9bc277508b17c8926999f292c65dbe7949325087d460918`).\n\n**Install**\n\n1. You need a PS Vita with custom firmware and the shader compiler `libshacccg.suprx` installed at `ur0:data/libshacccg.suprx`.\n2. Download `sh3.vpk` below, copy it to the Vita (for example to `ux0:data/` with VitaShell or its FTP) and install it from VitaShell.\n3. Copy `sh3.exe` and the `data` folder from your game to `ux0:data/sh3-vita/` on the Vita. If either is missing, the port shows a \"GAME FILES NOT FOUND\" screen.\n4. Launch the game. The first minutes stutter more than later runs: the shaders are compiled on the console the first time each one is needed.\n\n**Movies (recommended)**\n\nThe original `.000` movies play at about 20 fps. Convert them to MP4 and the Vita's hardware decoder plays them at a steady 30 fps: run `python3 tools/convert_movies.py \"<your game>/data/movie\"` on your PC (needs ffmpeg/ffprobe on the PATH), then copy the `.mp4` files to `ux0:data/sh3-vita/data/movie/`, next to the `.000` files. Once a movie has its `.mp4`, its `.000` can be deleted to save space.\n\n**Known issues**\n\n- Lens flares (for example the glow of Heather's flashlight) are not drawn on the console yet.\n- Performance can still be improved: depending on the area the game runs between 20 and 30 fps. Only the opening and the first areas have been played on a real Vita so far.\n\n",
+    "assets": [
+      {
+        "name": "sh3.vpk",
+        "size": 6798515,
+        "download_url": "https://github.com/AngeloGalav/sh3-vita/releases/download/v0.0.2/sh3.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "AngeloGalav",
+    "homebrew_name": "Silent Hill 3",
+    "homebrew_icon": "https://archive.org/download/sh3-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Experimental recompilation of the PC version of Silent Hill 3 for the PS Vita",
+    "homebrew_long_description": "sh3-vita runs Silent Hill 3 from the PC version's own data. Unlike sh2-vita, which is a native port that rebuilds Silent Hill 2 as native code on the Vita's CPU and GPU, this is a static recompilation: a recompiler translates the game's sh3.exe (x86) to C, and a Win32 / Direct3D 8 / DirectInput / DirectSound compatibility layer runs it over vitaGL on the Vita. It is built on sh4vita by vallfrr, the Silent Hill 4 port that came first, and uses sh3-nx by cutarev as its rendering reference.",
+    "homebrew_id": "silent-hill-3",
+    "homebrew_authors": [
+      "angelogalav"
+    ],
+    "homebrew_version": "0.0.1",
+    "catalog_apps": [
+      {
+        "id": "silent-hill-3",
+        "name": "Silent Hill 3",
+        "icon": "https://archive.org/download/sh3-vita/icon0.png",
+        "category": "ports",
+        "description": "Experimental recompilation of the PC version of Silent Hill 3 for the PS Vita",
+        "long_description": "sh3-vita runs Silent Hill 3 from the PC version's own data. Unlike sh2-vita, which is a native port that rebuilds Silent Hill 2 as native code on the Vita's CPU and GPU, this is a static recompilation: a recompiler translates the game's sh3.exe (x86) to C, and a Win32 / Direct3D 8 / DirectInput / DirectSound compatibility layer runs it over vitaGL on the Vita. It is built on sh4vita by vallfrr, the Silent Hill 4 port that came first, and uses sh3-nx by cutarev as its rendering reference.",
+        "version": "0.0.1",
+        "version_date": "2026-11-14",
+        "author_ids": [
+          "angelogalav"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/sh3-vita/sh3%20v0.0.1.vpk",
+            "size": 6815744,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/sh3-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 4831838208,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "sh3-vita"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Gihub",
+            "url": "https://github.com/AngeloGalav/sh3-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.0.1 → release v0.0.2",
+    "catalog_version": "0.0.1",
+    "archive_current_link": "https://archive.org/download/sh3-vita/sh3%20v0.0.1.vpk",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
-    "release_id": "448557652",
+    "release_id": "448564342",
     "tag": "continuous",
     "name": "Xash3D FWGS Continuous master Build",
     "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
-    "published": "2026-11-17T11:49:06Z",
+    "published": "2026-11-17T11:55:29Z",
     "prerelease": true,
     "draft": false,
     "body": "buildnum 4248\n",
     "assets": [
       {
         "name": "su.xash.Engine.Compat.i386.flatpak",
-        "size": 11335848,
+        "size": 11336360,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
         "content_type": "application/vnd.flatpak"
       },
       {
         "name": "xash3d-fwgs-amd64.AppImage",
-        "size": 26573304,
+        "size": 26577400,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
         "content_type": "application/vnd.appimage"
       },
       {
         "name": "xash3d-fwgs-android-mappings.tar.zst",
-        "size": 2647816,
+        "size": 2647744,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
         "content_type": "application/zstd"
       },
       {
         "name": "xash3d-fwgs-android.apk",
-        "size": 47350550,
+        "size": 47351897,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
         "content_type": "application/vnd.android.package-archive"
       },
       {
         "name": "xash3d-fwgs-apple-amd64.tar.xz",
-        "size": 5513404,
+        "size": 5513868,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
         "content_type": "application/x-xz"
       },
       {
         "name": "xash3d-fwgs-apple-arm64.tar.xz",
-        "size": 5279312,
+        "size": 5281412,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
         "content_type": "application/x-xz"
       },
       {
         "name": "xash3d-fwgs-arm64.AppImage",
-        "size": 22616584,
+        "size": 22608392,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
         "content_type": "application/vnd.appimage"
       },
@@ -61,55 +369,55 @@
       },
       {
         "name": "xash3d-fwgs-i386.AppImage",
-        "size": 26545528,
+        "size": 26541432,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
         "content_type": "application/vnd.appimage"
       },
       {
         "name": "xash3d-fwgs-ios-arm64.ipa",
-        "size": 5582145,
+        "size": 5582373,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
         "content_type": "application/octet-stream"
       },
       {
         "name": "xash3d-fwgs-linux-amd64.tar.gz",
-        "size": 28459098,
+        "size": 28460554,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xash3d-fwgs-linux-arm64.tar.gz",
-        "size": 24268725,
+        "size": 24273367,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xash3d-fwgs-linux-armhf.tar.gz",
-        "size": 23520433,
+        "size": 23521197,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xash3d-fwgs-linux-i386.tar.gz",
-        "size": 28458183,
+        "size": 28460105,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
-        "size": 21971122,
+        "size": 21974021,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xash3d-fwgs-linux-riscv64.tar.gz",
-        "size": 20480910,
+        "size": 20481192,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xash3d-fwgs-nswitch.7z",
-        "size": 16716603,
+        "size": 16720656,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
         "content_type": "application/x-7z-compressed"
       },
@@ -121,49 +429,49 @@
       },
       {
         "name": "xash3d-fwgs-win32-amd64.7z",
-        "size": 16749275,
+        "size": 16750322,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
         "content_type": "application/x-7z-compressed"
       },
       {
         "name": "xash3d-fwgs-win32-i386.7z",
-        "size": 18880935,
+        "size": 18866939,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
         "content_type": "application/x-7z-compressed"
       },
       {
         "name": "xashds-linux-amd64.tar.gz",
-        "size": 3526915,
+        "size": 3526554,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xashds-linux-arm64.tar.gz",
-        "size": 3470223,
+        "size": 3470568,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xashds-linux-armhf.tar.gz",
-        "size": 3372825,
+        "size": 3374650,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xashds-linux-i386.tar.gz",
-        "size": 3461735,
+        "size": 3462811,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xashds-linux-ppc64el.tar.gz",
-        "size": 3640592,
+        "size": 3641195,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
         "content_type": "application/x-gtar"
       },
       {
         "name": "xashds-linux-riscv64.tar.gz",
-        "size": 3216797,
+        "size": 3214654,
         "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
         "content_type": "application/x-gtar"
       },
@@ -1384,82 +1692,6 @@
     "archive_current_link": "",
     "backup_status": "missing",
     "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "AngeloGalav/sh3-vita",
-    "release_id": "445679062",
-    "tag": "v0.0.1",
-    "name": "sh3-vita: First pre-release!",
-    "url": "https://github.com/AngeloGalav/sh3-vita/releases/tag/v0.0.1",
-    "published": "2026-11-14T23:44:09Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "First release of the Silent Hill 3 port for PS Vita!\r\n\r\nThis is an experimental static-recompilation port of the 2003 PC game: `sh3.exe` is recompiled to C and runs over vitaGL through a Win32 / Direct3D 8 / DirectInput / DirectSound compatibility layer. The port contains no game data: bring your own copy of the 2003 PC release of Silent Hill 3 (`sh3.exe` SHA-256 `8ff8f74806f55843b9bc277508b17c8926999f292c65dbe7949325087d460918`).\r\n\r\n**Install**\r\n\r\n1. You need a PS Vita with custom firmware and the shader compiler `libshacccg.suprx` installed at `ur0:data/libshacccg.suprx`.\r\n2. Download `sh3.vpk` below, copy it to the Vita (for example to `ux0:data/` with VitaShell or its FTP) and install it from VitaShell.\r\n3. Copy `sh3.exe` and the `data` folder from your game to `ux0:data/sh3-vita/` on the Vita. If either is missing, the port shows a \"GAME FILES NOT FOUND\" screen.\r\n4. Launch the game. The first minutes stutter more than later runs: the shaders are compiled on the console the first time each one is needed.\r\n\r\n**Movies (recommended)**\r\n\r\nThe original `.000` movies play at about 20 fps. Convert them to MP4 and the Vita's hardware decoder plays them at a steady 30 fps: run `python3 tools/convert_movies.py \"<your game>/data/movie\"` on your PC (needs ffmpeg/ffprobe on the PATH), then copy the `.mp4` files to `ux0:data/sh3-vita/data/movie/`, next to the `.000` files. Once a movie has its `.mp4`, its `.000` can be deleted to save space.\r\n\r\n**Known issues**\r\n\r\n- Lens flares, especially the one from Heather's flashlight, are not rendered properly yet (a dark rectangle where the glow should be).\r\n- Performance can still be improved: depending on the area the game runs between 20 and 30 fps. Only the opening and the first areas have been played on a real Vita so far.\r\n",
-    "assets": [
-      {
-        "name": "sh3.vpk",
-        "size": 6797935,
-        "download_url": "https://github.com/AngeloGalav/sh3-vita/releases/download/v0.0.1/sh3.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "AngeloGalav",
-    "homebrew_name": "Silent Hill 3",
-    "homebrew_icon": "https://archive.org/download/sh3-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Experimental recompilation of the PC version of Silent Hill 3 for the PS Vita",
-    "homebrew_long_description": "sh3-vita runs Silent Hill 3 from the PC version's own data. Unlike sh2-vita, which is a native port that rebuilds Silent Hill 2 as native code on the Vita's CPU and GPU, this is a static recompilation: a recompiler translates the game's sh3.exe (x86) to C, and a Win32 / Direct3D 8 / DirectInput / DirectSound compatibility layer runs it over vitaGL on the Vita. It is built on sh4vita by vallfrr, the Silent Hill 4 port that came first, and uses sh3-nx by cutarev as its rendering reference.",
-    "homebrew_id": "silent-hill-3",
-    "homebrew_authors": [
-      "angelogalav"
-    ],
-    "homebrew_version": "0.0.1",
-    "catalog_apps": [
-      {
-        "id": "silent-hill-3",
-        "name": "Silent Hill 3",
-        "icon": "https://archive.org/download/sh3-vita/icon0.png",
-        "category": "ports",
-        "description": "Experimental recompilation of the PC version of Silent Hill 3 for the PS Vita",
-        "long_description": "sh3-vita runs Silent Hill 3 from the PC version's own data. Unlike sh2-vita, which is a native port that rebuilds Silent Hill 2 as native code on the Vita's CPU and GPU, this is a static recompilation: a recompiler translates the game's sh3.exe (x86) to C, and a Win32 / Direct3D 8 / DirectInput / DirectSound compatibility layer runs it over vitaGL on the Vita. It is built on sh4vita by vallfrr, the Silent Hill 4 port that came first, and uses sh3-nx by cutarev as its rendering reference.",
-        "version": "0.0.1",
-        "version_date": "2026-11-14",
-        "author_ids": [
-          "angelogalav"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/sh3-vita/sh3%20v0.0.1.vpk",
-            "size": 6815744,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/sh3-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 4831838208,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "sh3-vita"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Gihub",
-            "url": "https://github.com/AngeloGalav/sh3-vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.0.1",
-    "catalog_version": "0.0.1",
-    "archive_current_link": "https://archive.org/download/sh3-vita/sh3%20v0.0.1.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
   },
   {
     "platform": "github",
@@ -10096,82 +10328,6 @@
   },
   {
     "platform": "github",
-    "repo": "fr3dsp/sonic-r-vita",
-    "release_id": "410504434",
-    "tag": "v2.0",
-    "name": "Release v2.0 ",
-    "url": "https://github.com/fr3dsp/sonic-r-vita/releases/tag/v2.0",
-    "published": "2026-10-12T10:59:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Second big release of the port\r\n\r\nFinally we have working online, it was easy to fix, but didn't bother checking further before.\r\n(Expect bugs from it, anything weird report in the Issues section.)\r\n\r\nAlso now the UI fits nicely in Widescreen mode thanks to Hiro, and for Online I added custom PS Glyphs made by Juanen100.\r\n\r\nAlso now we have better good loking LiveArea Assets thanks to Standard-Republic.\r\n\r\nNow, the same stuff as always:\r\n\r\nThe VPK comes with a DATA folder inside (same as repo) that adds/replaces the custom widescreen image and the glyphs for online and stuff the decomp already had at boot\r\n\r\nYou need to place the original Sonic R (1998 PC ver) files in ux0:data/sonicr\r\n\r\nAlso get libshacccg.suprx\r\n\r\nAnd that's all I think!\r\n",
-    "assets": [
-      {
-        "name": "sonicr_vita.vpk",
-        "size": 4324166,
-        "download_url": "https://github.com/fr3dsp/sonic-r-vita/releases/download/v2.0/sonicr_vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "fr3dsp",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 2.0",
-    "catalog_version": "2.0",
-    "homebrew_name": "Sonic R",
-    "homebrew_icon": "https://archive.org/download/sonic-r-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A reimplementation of Sonic R for the PlayStation Vita.",
-    "homebrew_long_description": "A reimplementation of Sonic R for the PlayStation Vita.\n\n- PsVitaAlive -",
-    "homebrew_id": "sonic-r",
-    "homebrew_authors": [
-      "fr3dsp"
-    ],
-    "homebrew_version": "2.0",
-    "catalog_apps": [
-      {
-        "id": "sonic-r",
-        "name": "Sonic R",
-        "icon": "https://archive.org/download/sonic-r-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "A reimplementation of Sonic R for the PlayStation Vita.",
-        "long_description": "A reimplementation of Sonic R for the PlayStation Vita.\n\n- PsVitaAlive -",
-        "version": "2.0",
-        "version_date": "2026-10-12",
-        "author_ids": [
-          "fr3dsp"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/sonic-r-ps-vita/sonicr_vita%20v2.0.vpk",
-            "size": 4299162,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/sonic-r-ps-vita/Game%20Files.zip",
-            "size": 647705395,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "sonicr"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "GitHub",
-            "url": "https://github.com/fr3dsp/sonic-r-vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/sonic-r-ps-vita/sonicr_vita%20v2.0.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
     "repo": "KartingSackboy06/insaniquarium-vita",
     "release_id": "409990420",
     "tag": "v1.00a",
@@ -12171,81 +12327,6 @@
     "archive_current_link": "https://archive.org/download/asphalt-6-ps-vita/asphalt6%20v0.2.1.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "theheroGAC/PSV-Cleaner",
-    "release_id": "397334387",
-    "tag": "1.17",
-    "name": "1.17",
-    "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/tag/1.17",
-    "published": "2026-09-26T17:41:57Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Version 1.17 - September 26, 2026\r\n\r\n### Added\r\n- **Storage Analyzer**: Detailed volume analysis for `ux0:`, `ur0:`, `uma0:`, and `imc0:`. Displays total/used/free space, category breakdown (app, patch, addcont, data, license, tai, temp), and top largest directories.\r\n- **Smart Clean**: Comprehensive intelligent cleanup system that scans system caches, crash dumps, and unneeded temp files across partitions with an interactive pre-clean preview and post-clean metrics report.\r\n- **Orphan Scanner**: Identifies leftover directories and files from previously uninstalled games, patches, DLCs, and homebrews across `ux0:data/`, `ux0:patch/`, `ux0:addcont/`, `ux0:appmeta/`, and `ux0:license/`. Includes support for homebrew data directories with manual confirmation.\r\n- **Safety Engine**: Robust multi-tier verification (`SAFE`, `REGENERABLE`, `ORPHANED`, `REVIEW`, `PROTECTED`). Absolutely protects system volumes (`os0:`, `vs0:`), plugins (`tai/`), active game assets, and user save data (`ux0:user/00/savedata/`).\r\n- **Tools Menu**: Dedicated launcher accessible via `L-trigger` from the main dashboard for quick navigation to Storage Analyzer, Smart Clean, and Orphan Scanner.\r\n\r\n### Improved & Fixed\r\n- **UI & Layout Enhancements**: Widened information cards and optimized typography across Storage Analyzer, Smart Clean Preview, and Orphan Scanner to prevent any text clipping or overflow on the 960x544 display.\r\n- **High-Performance Non-Blocking Scans**: Directory traversal uses iterative bounded slot arrays and cooperative CPU yields, preventing memory bloat and keeping Emergency Stop immediately responsive even on massive storages.\r\n- **Deletion Efficiency**: Minimized delay cycles during bulk file deletions while preserving UI interactivity and safe abort capability.\r\n\r\n---",
-    "assets": [
-      {
-        "name": "PSV_Cleaner.vpk",
-        "size": 136582,
-        "download_url": "https://github.com/theheroGAC/PSV-Cleaner/releases/download/1.17/PSV_Cleaner.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "theheroGAC",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.17",
-    "catalog_version": "1.17",
-    "homebrew_name": "Psv Cleaner",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-psv-cleaner/icon0.png",
-    "homebrew_category": "games",
-    "homebrew_description": "",
-    "homebrew_long_description": "PSV Cleaner is a powerful and user-friendly temporary files cleaner. This tool helps you free up valuable storage space by safely removing temporary files, cache data, and system dumps that accumulate over time.",
-    "homebrew_id": "psv-cleaner",
-    "homebrew_authors": [
-      "theherogac"
-    ],
-    "homebrew_version": "1.17",
-    "catalog_apps": [
-      {
-        "id": "psv-cleaner",
-        "name": "Psv Cleaner",
-        "icon": "https://archive.org/download/psvitaalive-psv-cleaner/icon0.png",
-        "category": "games",
-        "description": "",
-        "long_description": "PSV Cleaner is a powerful and user-friendly temporary files cleaner. This tool helps you free up valuable storage space by safely removing temporary files, cache data, and system dumps that accumulate over time.",
-        "version": "1.17",
-        "version_date": "2026-09-26",
-        "author_ids": [
-          "theherogac"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/download/1.17/PSV_Cleaner.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/tag/1.15"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/theheroGAC/PSV-Cleaner"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/theheroGAC/PSV-Cleaner/releases/tag/1.16"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "",
-    "backup_status": "missing",
-    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
   },
   {
     "platform": "github",
@@ -29568,87 +29649,6 @@
   },
   {
     "platform": "github",
-    "repo": "xyzz/vita-moonlight",
-    "tag": "0.13.2",
-    "name": "0.13.2",
-    "url": "https://github.com/xyzz/vita-moonlight/releases/tag/0.13.2",
-    "published": "2025-11-16T03:17:44Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## What's Changed\r\n\r\n### ✨ Major Features\r\n- **PS Button Capture**\r\n  - Optional PS button capture implemented — double press opens the menu, single press forwarded to Sunshine as PS/Xbox button mapping.\r\n  - To support PS button capture we disabled `-s` (safe) flag for `vita-make-fself` and added the `SceShell` permission (0x2800000000000001) to the Vita package.\r\n\r\n- **Touch Zones While Touch Enabled**\r\n  - Allow using front-screen touch zones independently of the selected touch input mode. When a zone is active, touch input in that area is ignored; unused touch zones behave as normal touch areas.\r\n\r\n### 🔧 Core Improvements\r\n- **feat:** Implement MAC address handling for devices and remove deprecated MAC retrieval functions — host MACs are saved to `device.ini` and the legacy ARP/fetch logic is removed.\r\n- **fix:** Update subproject commits for `enet`, `inih`, and `moonlight-common-c`.\r\n\r\n### ⚙️ Under the Hood\r\n- Split `vitainput_process` into multiple smaller functions for readability and maintainability.\r\n- Refactor: input and shortcut handling cleanup, improved overlay/input state handling.\r\n\r\n## New Contributors\r\n- @navewindre made their first contribution in https://github.com/xyzz/vita-moonlight/pull/278\r\n\r\n## Contributors\r\n- @AorsiniYT\r\n\r\n**Full Changelog**: https://github.com/xyzz/vita-moonlight/compare/0.13.1...0.13.2",
-    "assets": [
-      {
-        "name": "moonlight.vpk",
-        "size": 2788529,
-        "download_url": "https://github.com/xyzz/vita-moonlight/releases/download/0.13.2/moonlight.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "AorsiniYT",
-    "release_id": "262724140",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.13.2",
-    "catalog_version": "v.0.13.2",
-    "homebrew_name": "Vita Moonlight",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-vita-moonlight/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "NVIDIA Moonlight Streamer port.",
-    "homebrew_long_description": "Vita Moonlight allows you to stream your full collection of Steam games from your powerful Windows desktop to your PSVITA.",
-    "homebrew_id": "vita-moonlight",
-    "homebrew_authors": [
-      "aorsiniyt",
-      "xyzz",
-      "d3m3vilurr",
-      "shadowprince"
-    ],
-    "homebrew_version": "v.0.13.2",
-    "catalog_apps": [
-      {
-        "id": "vita-moonlight",
-        "name": "Vita Moonlight",
-        "icon": "https://archive.org/download/psvitaalive-vita-moonlight/icon0.png",
-        "category": "utilities",
-        "description": "NVIDIA Moonlight Streamer port.",
-        "long_description": "Vita Moonlight allows you to stream your full collection of Steam games from your powerful Windows desktop to your PSVITA.",
-        "version": "v.0.13.2",
-        "version_date": "2025-11-16",
-        "author_ids": [
-          "aorsiniyt",
-          "xyzz",
-          "d3m3vilurr",
-          "shadowprince"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-vita-moonlight/vita-moonlight.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/xyzz/vita-moonlight/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/xyzz/vita-moonlight/releases/tag/0.13.2"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/xyzz/vita-moonlight"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-vita-moonlight/vita-moonlight.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
     "repo": "HarommelRabbid/VitaSokoban",
     "release_id": "259070183",
     "tag": "02-11-25",
@@ -45591,329 +45591,6 @@
       }
     ],
     "archive_current_link": "https://archive.org/download/psvitaalive-rvgl-loader/rvgl-loader.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/Death-Road-to-Canada-Lite",
-    "release_id": "73151020",
-    "tag": "v.1.0",
-    "name": "v.1.0",
-    "url": "https://github.com/Rinnegatamante/Death-Road-to-Canada-Lite/releases/tag/v.1.0",
-    "published": "2022-07-29T10:49:06Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "**NOTE: If you had this homebrew already installed, you'll need to re-apply the mod on vanilla files!**\r\n\r\nChangelog:\r\n- Fixed a bug causing crashes when attempting to click on online related buttons in game (eg: Twitter Profiles links).\r\n- Fixed a bug causing a crash when attempting to edit custom characters names.\r\n- All game maps have now been optimised for vita\r\n- All game modes are now playable, with reduced zombies. \r\n- OPP game mode performs poorly for initial character selection but the gameplay is fine. \r\n- \"VITA MOD 1.0\"  will be present on title screen to indicate mod is active.",
-    "assets": [
-      {
-        "name": "Canada.vpk",
-        "size": 2399930,
-        "download_url": "https://github.com/Rinnegatamante/Death-Road-to-Canada-Lite/releases/download/v.1.0/Canada.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "canada.zip",
-        "size": 264047,
-        "download_url": "https://github.com/Rinnegatamante/Death-Road-to-Canada-Lite/releases/download/v.1.0/canada.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "homebrew_name": "Death Road to Canada Lite",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-death-road-to-canada-lite/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Death Road to Canada for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Death Road to Canada for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nBy doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as it is.\nThis release is bundled with a mod made by CatoTheYounger to reduce workload of game maps in order to make the game playable on Vita hardware (Thus why the release is named Lite).\n\n- PsVitaAlive -",
-    "homebrew_id": "death-road-to-canada-lite",
-    "homebrew_authors": [
-      "bythos",
-      "rinnegatamante",
-      "catotheyounger"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "death-road-to-canada-lite",
-        "name": "Death Road to Canada Lite",
-        "icon": "https://archive.org/download/psvitaalive-death-road-to-canada-lite/icon0.png",
-        "category": "ports",
-        "description": "Port of Death Road to Canada for PSVITA.",
-        "long_description": "This is a wrapper/port of Death Road to Canada for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nBy doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as it is.\nThis release is bundled with a mod made by CatoTheYounger to reduce workload of game maps in order to make the game playable on Vita hardware (Thus why the release is named Lite).\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-07-29",
-        "author_ids": [
-          "bythos",
-          "rinnegatamante",
-          "catotheyounger"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-death-road-to-canada-lite/death-road-to-canada-lite.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/Death-Road-to-Canada-Lite/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/Death-Road-to-Canada-Lite/releases/tag/v.1.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/Death-Road-to-Canada-Lite"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-death-road-to-canada-lite/death-road-to-canada-lite.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "gitlab",
-    "repo": "rlyx/vita-milk",
-    "release_id": "v1.04",
-    "tag": "v1.04",
-    "name": "Version 1.04",
-    "url": "https://gitlab.com/rlyx/vita-milk/-/releases/v1.04",
-    "published": "2022-07-29T00:00:00.000Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Updated patches to match translation updates in the desktop copy of the game",
-    "assets": [
-      {
-        "name": "Vita Milk 1.04.vpk",
-        "size": 0,
-        "download_url": "https://cdn.discordapp.com/attachments/943565235309117521/1002668318227955762/Vita_Milk_1.04.vpk",
-        "content_type": ""
-      },
-      {
-        "name": "source.zip",
-        "size": 0,
-        "download_url": "https://gitlab.com/rlyx/vita-milk/-/archive/v1.04/vita-milk-v1.04.zip",
-        "content_type": ""
-      },
-      {
-        "name": "source.tar.gz",
-        "size": 0,
-        "download_url": "https://gitlab.com/rlyx/vita-milk/-/archive/v1.04/vita-milk-v1.04.tar.gz",
-        "content_type": ""
-      },
-      {
-        "name": "source.tar.bz2",
-        "size": 0,
-        "download_url": "https://gitlab.com/rlyx/vita-milk/-/archive/v1.04/vita-milk-v1.04.tar.bz2",
-        "content_type": ""
-      },
-      {
-        "name": "source.tar",
-        "size": 0,
-        "download_url": "https://gitlab.com/rlyx/vita-milk/-/archive/v1.04/vita-milk-v1.04.tar",
-        "content_type": ""
-      }
-    ],
-    "author": "rlyx",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.03 → release v1.04",
-    "catalog_version": "v.1.03",
-    "homebrew_name": "Vita Milk",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-vita-milk/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Milk inside a bag of milk inside a bag of milk for PSVITA.",
-    "homebrew_long_description": "A short story about what sort of challenges everyday little things can be. Help the girl buy milk, be the first not to disappoint her.\nThe game is a small visual novel, showing either funny abstraction and wordplay or painful psychological episodes. The claim that history is based on real events will be too specific, so it is easier to pretend that it is just a set of abstractions and wordplay.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-    "homebrew_id": "vita-milk",
-    "homebrew_authors": [
-      "rlyx"
-    ],
-    "homebrew_version": "v.1.03",
-    "catalog_apps": [
-      {
-        "id": "vita-milk",
-        "name": "Vita Milk",
-        "icon": "https://archive.org/download/psvitaalive-vita-milk/icon0.png",
-        "category": "ports",
-        "description": "Port of Milk inside a bag of milk inside a bag of milk for PSVITA.",
-        "long_description": "A short story about what sort of challenges everyday little things can be. Help the girl buy milk, be the first not to disappoint her.\nThe game is a small visual novel, showing either funny abstraction and wordplay or painful psychological episodes. The claim that history is based on real events will be too specific, so it is easier to pretend that it is just a set of abstractions and wordplay.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-        "version": "v.1.03",
-        "version_date": "2022-03-04",
-        "author_ids": [
-          "rlyx"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-vita-milk/vita-milk.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Repository",
-            "url": "https://gitlab.com/rlyx/vita-milk/-/releases"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://gitlab.com/rlyx/vita-milk"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-vita-milk/vita-milk.vpk",
-    "backup_status": "outdated",
-    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/Pekka-Kana-2-Vita",
-    "release_id": "73073941",
-    "tag": "v.1.0",
-    "name": "v.1.0",
-    "url": "https://github.com/Rinnegatamante/Pekka-Kana-2-Vita/releases/tag/v.1.0",
-    "published": "2022-07-28T15:06:34Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "Pekka2.vpk",
-        "size": 1761732,
-        "download_url": "https://github.com/Rinnegatamante/Pekka-Kana-2-Vita/releases/download/v.1.0/Pekka2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "homebrew_name": "Pekka Kana 2 Vita",
-    "homebrew_icon": "https://raw.githubusercontent.com/DrDecki/VitaDBtoo-db/main/icons/b1653a96dab6ffe0b676c7335752145805a3ef64b50746b254c9efc8662a19bb.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Pekka Kana 2 for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Pekka Kana 2 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nBy doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as is.\n\n- PsVitaAlive -",
-    "homebrew_id": "pekka-kana-2-vita",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "pekka-kana-2-vita",
-        "name": "Pekka Kana 2 Vita",
-        "icon": "https://raw.githubusercontent.com/DrDecki/VitaDBtoo-db/main/icons/b1653a96dab6ffe0b676c7335752145805a3ef64b50746b254c9efc8662a19bb.png",
-        "category": "ports",
-        "description": "Port of Pekka Kana 2 for PSVITA.",
-        "long_description": "This is a wrapper/port of Pekka Kana 2 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run.\nBy doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as is.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-07-28",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/Pekka-Kana-2-Vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/Pekka-Kana-2-Vita/releases/tag/v.1.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/Pekka-Kana-2-Vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/partia-vita",
-    "release_id": "72653617",
-    "tag": "v.1.0",
-    "name": "v.1.0",
-    "url": "https://github.com/Rinnegatamante/partia-vita/releases/tag/v.1.0",
-    "published": "2022-07-22T21:08:08Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "Partia.vpk",
-        "size": 5690682,
-        "download_url": "https://github.com/Rinnegatamante/partia-vita/releases/download/v.1.0/Partia.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "homebrew_name": "Partia: The Granian Trilogy",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-partia-the-granian-trilogy/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Partia 1, Partia 2 and Partia 3 for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Portia 1, Portia 2 and Porta 3 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executables in memory, resolving their imports with native functions and patching them in order to properly run.\nBy doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as they are.\n\n- PsVitaAlive -",
-    "homebrew_id": "partia-the-granian-trilogy",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "partia-the-granian-trilogy",
-        "name": "Partia: The Granian Trilogy",
-        "icon": "https://archive.org/download/psvitaalive-partia-the-granian-trilogy/icon0.png",
-        "category": "ports",
-        "description": "Port of Partia 1, Partia 2 and Partia 3 for PSVITA.",
-        "long_description": "This is a wrapper/port of Portia 1, Portia 2 and Porta 3 Android for the PS Vita.\nThe port works by loading the official Android ARMv7 executables in memory, resolving their imports with native functions and patching them in order to properly run.\nBy doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as they are.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-07-22",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-partia-the-granian-trilogy/partia-the-granian-trilogy.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/partia-vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/partia-vita/releases/tag/v.1.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/partia-vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-partia-the-granian-trilogy/partia-the-granian-trilogy.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
   }
