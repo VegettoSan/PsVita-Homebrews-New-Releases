@@ -329,7 +329,7 @@ def calculate_catalog_status(
     release: dict[str, Any],
     primary: dict[str, Any] | None,
 ) -> tuple[str, str]:
-    latest_version = str(release.get("tag") or release.get("name") or "").strip()
+    latest_version = str(release.get("version") or release.get("tag") or release.get("name") or "").strip()
 
     if repo_key(
         str(release.get("platform") or "github"),
@@ -347,6 +347,11 @@ def calculate_catalog_status(
 
     if not latest_version:
         return "pending", f"PSVitaAlive {catalog_version} · release sin versión comparable"
+
+    if release.get("review_required") is True:
+        return ("pending", f"Compilación experimental {latest_version}: "
+                "el desarrollador solicita validación en hardware; "
+                "no se actualizará automáticamente")
 
     comparison = compare_versions(catalog_version, latest_version)
 
@@ -395,7 +400,7 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
         release["catalog_update_detail"] = detail
         release["catalog_version"] = ""
         release["backup_status"], release["backup_detail"] = assess_backup(
-            release_tag=str(release.get("tag") or ""),
+            release_tag=str(release.get("version") or release.get("tag") or ""),
             catalog_version="",
             links=[],
             is_registered=False,
@@ -444,12 +449,19 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
     release["archive_current_link"] = (
         selected_url if archive_vpk_url(selected_url) else ""
     )
-    release["backup_status"], release["backup_detail"] = assess_backup(
-        release_tag=str(release.get("tag") or ""),
-        catalog_version=str(primary.get("version") or ""),
-        links=primary.get("links") or [],
-        is_registered=current_repo_key != PSVITAALIVE_REPO_KEY,
-    )
+    if release.get("review_required") is True:
+        release["backup_status"] = "review"
+        release["backup_detail"] = (
+            "Build experimental pendiente de validación: "
+            "conservar el VPK estable existente en Archive.org"
+        )
+    else:
+        release["backup_status"], release["backup_detail"] = assess_backup(
+            release_tag=str(release.get("version") or release.get("tag") or ""),
+            catalog_version=str(primary.get("version") or ""),
+            links=primary.get("links") or [],
+            is_registered=current_repo_key != PSVITAALIVE_REPO_KEY,
+        )
 
 
 def github_headers() -> dict[str, str]:
@@ -594,7 +606,7 @@ def display_identity(item: dict[str, Any]) -> str:
 
 def release_rank(item: dict[str, Any]) -> tuple[datetime, tuple[int, ...]]:
     published = parse_published(item.get("published"))
-    numbers, _ = version_signature(item.get("tag") or item.get("name"))
+    numbers, _ = version_signature(item.get("version") or item.get("tag") or item.get("name"))
     return published, numbers or tuple()
 
 
@@ -716,7 +728,10 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
         if catalog_status == "uptodate":
             catalog_badge = '<span class="badge catalog-ok">✓ Al día en PSVitaAlive</span>'
         else:
-            catalog_badge = '<span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span>'
+            if item.get("review_required") is True:
+                catalog_badge = '<span class="badge catalog-pending">Revisión manual: build sin validar</span>'
+            else:
+                catalog_badge = '<span class="badge catalog-pending">↻ Pendiente PSVitaAlive</span>'
 
         backup_status = str(item.get("backup_status") or "unknown")
         backup_detail = esc(item.get("backup_detail") or "")
