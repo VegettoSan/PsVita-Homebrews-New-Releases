@@ -316,7 +316,7 @@ def github_headers() -> dict[str, str]:
 # Require independent agreement from a release title and exactly one VPK
 # filename before translating a rolling build to a catalog version.
 _ROLLING_CHANNEL_TAGS = {"vita-next", "next", "nightly", "continuous", "rolling"}
-_NUMBERED_BUILD_VERSION = r"(\\d+\\.\\d+(?:\\.\\d+){0,2})"
+_NUMBERED_BUILD_VERSION = r"(\d+\.\d+(?:\.\d+){0,2})"
 
 
 def rolling_release_metadata(release: dict[str, Any]) -> dict[str, Any]:
@@ -329,8 +329,8 @@ def rolling_release_metadata(release: dict[str, Any]) -> dict[str, Any]:
     # The publisher's explicit warning must win over GitHub's draft:false
     # when a public release still carries an unpublished validation note.
     metadata["review_required"] = bool(
-        re.search(r"<!--\\s*vita-next-build-draft\\s*-->", body, re.I)
-        or re.search(r"Draft build:\\s*review.*?validate on hardware before publishing",
+        re.search(r"<!--\s*vita-next-build-draft\s*-->", body, re.I)
+        or re.search(r"Draft build:\s*review.*?validate on hardware before publishing",
                      body, re.I | re.S)
     )
     vpks = [
@@ -342,14 +342,14 @@ def rolling_release_metadata(release: dict[str, Any]) -> dict[str, Any]:
     if len(vpks) != 1:
         return metadata
     title_match = re.search(
-        r"\\(v" + _NUMBERED_BUILD_VERSION + r"\\)\\s*$", name, re.I
+        r"\(v" + _NUMBERED_BUILD_VERSION + r"\)\s*$", name, re.I
     )
     vpk_tokens = re.findall(
         r"(?<![a-z0-9])v" + _NUMBERED_BUILD_VERSION + r"(?=[^0-9]|$)",
         str(vpks[0].get("name") or ""), re.I,
     )
     declared = re.search(
-        r"App version\\s*`" + _NUMBERED_BUILD_VERSION + r"`",
+        r"App version\s*`" + _NUMBERED_BUILD_VERSION + r"`",
         body, re.I,
     )
     if (title_match and len(vpk_tokens) == 1
