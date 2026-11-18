@@ -570,6 +570,18 @@ def release_history_key(release: dict[str, Any]) -> str:
     return f"{release.get('platform')}:{release.get('repo')}:{release_identity(release)}"
 
 
+def rolling_revision(release: dict[str, Any]) -> tuple[str, str, bool] | None:
+    """Recognize a changed numbered VPK even when a moving tag is unchanged."""
+    if release.get("release_channel") != "rolling":
+        return None
+    vpks = [asset for asset in release.get("assets", [])
+            if isinstance(asset, dict)
+            and str(asset.get("name") or "").lower().endswith(".vpk")]
+    url = str(vpks[0].get("download_url") or "") if len(vpks) == 1 else ""
+    return (str(release.get("version") or ""), url,
+            release.get("review_required") is True)
+
+
 def send_discord(release: dict[str, Any]) -> bool:
     if not DISCORD_WEBHOOK_URL:
         return False
@@ -1040,6 +1052,10 @@ def main() -> int:
         for item in history
         if isinstance(item, dict)
     }
+    history_index = {
+        release_history_key(item): i
+        for i, item in enumerate(history) if isinstance(item, dict)
+    }
 
     new_state: dict[str, Any] = {}
     upstream_latest: dict[str, dict[str, Any]] = {}
@@ -1133,11 +1149,23 @@ def main() -> int:
                 "published": release.get("published") or "",
                 "checked_at": iso_now(),
             }
+            revision = rolling_revision(release)
+            if revision is not None:
+                version, asset_url, needs_review = revision
+                new_state[key].update({
+                    "version": version, "vpk_url": asset_url,
+                    "review_required": needs_review,
+                })
 
             history_key = release_history_key(release)
             if history_key not in existing_history_keys:
+                history_index[history_key] = len(history)
                 history.append(release)
                 existing_history_keys.add(history_key)
+            elif revision is not None:
+                # Rolling channels reuse the same release ID/tag while their
+                # VPK and version change. Refresh the existing card in-place.
+                history[history_index[history_key]] = release
 
             if initial_baseline:
                 continue
@@ -1147,7 +1175,21 @@ def main() -> int:
             if key not in old_state:
                 continue
 
-            if previous != (release.get("tag") or identity):
+            changed = previous != (release.get("tag") or identity)
+            if revision is not None:
+                previous_record = old_state.get(key)
+                if isinstance(previous_record, dict):
+                    old_revision = (
+                        str(previous_record.get("version") or ""),
+                        str(previous_record.get("vpk_url") or ""),
+                        previous_record.get("review_required") is True,
+                    )
+                    changed = changed or old_revision != revision
+                # Author explicitly requests validation: do not announce
+                # a test build as an officially published update.
+                if revision[2]:
+                    changed = False
+            if changed:
                 changed_releases.append(release)
 
     # Read immutable per-port VPKs from reviewed GitHub folder repositories.
