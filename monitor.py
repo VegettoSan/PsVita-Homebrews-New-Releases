@@ -326,37 +326,81 @@ def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, A
     }
 
 
+def canonical_github_repo(project: str, release_url: str) -> tuple[str, int] | None:
+    """Verify a GitHub repository rename using the original repository API."""
+    parsed = urlparse(release_url)
+    if parsed.scheme != "https" or parsed.hostname not in {"github.com", "www.github.com"}:
+        return None
+    parts = [part for part in parsed.path.split("/") if part]
+    if len(parts) < 4 or parts[2] != "releases" or parts[3] not in {"tag", "latest"}:
+        return None
+    canonical = "/".join(parts[:2])
+    if canonical.casefold() == project.casefold():
+        return None
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", canonical):
+        return None
+    try:
+        metadata = request_json(
+            f"https://api.github.com/repos/{quote(project, safe='/')}",
+            headers=github_headers(),
+        )
+    except RuntimeError as exc:
+        print(f"Cannot verify GitHub repo move for {project}: {exc}")
+        return None
+    if (not isinstance(metadata, dict)
+            or str(metadata.get("full_name") or "").casefold() != canonical.casefold()
+            or type(metadata.get("id")) is not int or metadata["id"] <= 0):
+        return None
+    return str(metadata["full_name"]), metadata["id"]
+
+
+def github_stable_snapshot(project: str, release: dict[str, Any],
+                           canonical: tuple[str, int] | None) -> dict[str, Any]:
+    details = _github_release_record(project, release)
+    stable = {
+        key: details[key] for key in
+        ("platform", "repo", "tag", "release_id", "published", "prerelease", "assets")
+    }
+    if canonical:
+        stable["canonical_repo"], stable["repo_id"] = canonical
+    return stable
+
+
 def get_github_release(project: str) -> dict[str, Any] | None:
-    url = f"https://api.github.com/repos/{quote(project, safe='/')}/releases"
-    data = request_json(
-        url,
-        headers=github_headers(),
-        # Include an older stable release when a project currently publishes
-        # prereleases. Existing stable-only apps must never be forced to beta.
-        params={"per_page": 20},
-    )
+    base = f"https://api.github.com/repos/{quote(project, safe='/')}/releases"
+    data = request_json(base, headers=github_headers(), params={"per_page": 20})
     if not data or not isinstance(data, list):
         return None
-
     published = [item for item in data if isinstance(item, dict) and not item.get("draft")]
     if not published:
         return None
-
     latest = published[0]
     record = _github_release_record(project, latest)
+    canonical = canonical_github_repo(project, str(record.get("url") or ""))
+    if canonical:
+        record["canonical_repo"], record["repo_id"] = canonical
     if record["prerelease"]:
         previous_stable = next(
             (item for item in published[1:] if not item.get("prerelease")), None
         )
-        if previous_stable:
-            # Optional extension of snapshot schema v1. The top-level latest
-            # release still powers the dashboard; sync chooses by app policy.
-            stable = _github_release_record(project, previous_stable)
-            record["stable_release"] = {
-                key: stable[key] for key in
-                ("platform", "repo", "tag", "release_id", "published",
-                 "prerelease", "assets")
-            }
+        if previous_stable is None:
+            # /releases/latest omits prereleases. A 404 confirms no stable;
+            # errors are never interpreted as confirmed absence.
+            try:
+                previous_stable = request_json(
+                    base + "/latest", headers=github_headers()
+                )
+            except RuntimeError as exc:
+                print(f"Cannot verify stable release for {project}: {exc}")
+                previous_stable = {}
+            if previous_stable is None:
+                record["no_stable_release"] = True
+        if (isinstance(previous_stable, dict) and previous_stable
+                and not previous_stable.get("prerelease")
+                and not previous_stable.get("draft")):
+            record["stable_release"] = github_stable_snapshot(
+                project, previous_stable, canonical
+            )
     return record
 
 
@@ -922,6 +966,11 @@ def main() -> int:
             }
             if isinstance(release.get("stable_release"), dict):
                 upstream_latest[key.lower()]["stable_release"] = release["stable_release"]
+            if isinstance(release.get("canonical_repo"), str) and type(release.get("repo_id")) is int:
+                upstream_latest[key.lower()]["canonical_repo"] = release["canonical_repo"]
+                upstream_latest[key.lower()]["repo_id"] = release["repo_id"]
+            if release.get("no_stable_release") is True:
+                upstream_latest[key.lower()]["no_stable_release"] = True
 
             identity = release_identity(release)
             previous = state_tag(old_state.get(key))
