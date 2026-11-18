@@ -903,7 +903,55 @@ def generate_html(
     HTML_FILE.write_text(document, encoding="utf-8")
 
 
+def read_previous_repo_keys() -> set[str]:
+    """Read the previous generated repository list before rewriting it."""
+    if not REPOS_FILE.is_file():
+        return set()
+    keys: set[str] = set()
+    for line in REPOS_FILE.read_text(encoding="utf-8").splitlines():
+        if not line or line.lstrip().startswith("#"):
+            continue
+        normalized = normalize_repo_url(line)
+        if normalized:
+            platform, project = normalized
+            keys.add(f"{platform}:{project.lower()}")
+    return keys
+
+
+def prepare_catalog_refresh(
+    repos: list[dict[str, str]], previous: set[str], snapshot: object
+) -> tuple[list[dict[str, str]], dict[str, dict]] | None:
+    """Reuse existing upstream releases; check only newly catalogued repos.
+
+    The scheduled three-hour scan continues to check all repositories. A
+    missing, incomplete or malformed local cache forces a normal full scan.
+    """
+    if not previous or not isinstance(snapshot, dict):
+        return None
+    rows = snapshot.get("releases")
+    if snapshot.get("schema_version") != 1 or not isinstance(rows, list):
+        return None
+    if len(repos) >= 50 and (len(previous) * 2 < len(repos) or not rows):
+        return None
+    active = {item["key"].lower() for item in repos}
+    new_repos = [item for item in repos if item["key"].lower() not in previous]
+    cached: dict[str, dict] = {}
+    for item in rows:
+        if not isinstance(item, dict):
+            return None
+        platform, project = item.get("platform"), item.get("repo")
+        if platform not in {"github", "gitlab"} or not isinstance(project, str):
+            return None
+        key = f"{platform}:{project.lower()}"
+        if key in active and key in previous and key not in cached:
+            cached[key] = item
+    return new_repos, cached
+
+
 def main() -> int:
+    catalog_refresh = os.getenv("PSVA_MONITOR_CATALOG_REFRESH") == "1"
+    previous = read_previous_repo_keys() if catalog_refresh else set()
+    previous_snapshot = load_json(UPSTREAM_LATEST_FILE, {}) if catalog_refresh else {}
     repos, sync_info = sync_catalog_repositories()
 
     old_state = load_json(STATE_FILE, {})
@@ -930,13 +978,36 @@ def main() -> int:
     changed_releases: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
     successful_checks = 0
+    scan_repos = repos
+    refreshed = (prepare_catalog_refresh(repos, previous, previous_snapshot)
+                 if catalog_refresh else None)
+    if refreshed is not None:
+        scan_repos, upstream_latest = refreshed
+        active = {r["key"].lower() for r in repos}
+        new_state = {
+            key: value for key, value in old_state.items()
+            if key.lower() in active and key.lower() in previous
+        }
+        print(f"📚 Refresco del catálogo: {len(upstream_latest)} releases en caché, "
+              f"{len(scan_repos)} repositorios nuevos para consultar. "
+              "Escaneo completo cada 3 horas.", flush=True)
+    elif catalog_refresh:
+        print("⚠️ Faltan datos de caché confiables: escaneo completo seguro.",
+              flush=True)
 
-    print(f"🔎 Consultando {len(repos)} repositorios con {MAX_WORKERS} workers…")
-
+    print(f"🔎 Consultando {len(scan_repos)} repositorios con {MAX_WORKERS} workers…",
+          flush=True)
+    started_at = time.monotonic()
+    scanned = 0
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = [executor.submit(fetch_latest_release, repo) for repo in repos]
+        futures = [executor.submit(fetch_latest_release, repo) for repo in scan_repos]
 
         for future in concurrent.futures.as_completed(futures):
+            scanned += 1
+            if scanned % 50 == 0 or scanned == len(scan_repos):
+                print(f"📊 Progreso: {scanned}/{len(scan_repos)} repositorios; "
+                      f"{len(errors)} fallos; {time.monotonic() - started_at:.0f}s",
+                      flush=True)
             repo, release, error = future.result()
             key = repo["key"]
 
@@ -944,6 +1015,16 @@ def main() -> int:
                 errors.append({"repo": key, "error": error})
                 if key in old_state:
                     new_state[key] = old_state[key]
+                # Preserve the previous trusted release record on transient
+                # network failure, rather than silently deleting catalog data.
+                previous_rows = previous_snapshot.get("releases") if isinstance(previous_snapshot, dict) else None
+                if isinstance(previous_rows, list):
+                    for prior in previous_rows:
+                        if (isinstance(prior, dict)
+                                and prior.get("platform") == repo["platform"]
+                                and str(prior.get("repo") or "").lower() == repo["project"].lower()):
+                            upstream_latest[key.lower()] = prior
+                            break
                 continue
 
             successful_checks += 1
@@ -1020,6 +1101,9 @@ def main() -> int:
     sync_info.update(
         {
             "checked_at": iso_now(),
+            "scan_mode": "catalog_refresh" if refreshed is not None else "full",
+            "cached_releases": (len(upstream_latest) - successful_checks
+                                if refreshed is not None else 0),
             "successful_checks": successful_checks,
             "failed_checks": len(errors),
             "new_releases": len(changed_releases),
