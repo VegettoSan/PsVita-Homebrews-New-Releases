@@ -1340,6 +1340,8 @@ def main() -> int:
     )
     pending = len(history) - up_to_date
 
+    # Helps diagnose old owner/name values still present in monitor history.
+    sync_info["renamed_repo_releases_reconciled"] = corrected_repos
     sync_info["catalog_metadata_matches"] = matched
     sync_info["catalog_icons"] = with_icon
     sync_info["metadata_enriched_at"] = datetime.now(timezone.utc).isoformat()
