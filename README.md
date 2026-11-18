@@ -365,3 +365,32 @@ https://github.com/VegettoSan/PSVitaAlive
 The monitor now supports reviewed repositories which publish VPK files and README metadata in one folder per Homebrew instead of GitHub Releases. The first supported source is https://github.com/papilenote/vita-ports. Each folder must have a README table with Title ID and a comparable version, plus a uniquely identifiable .vpk file. When multiple VPKs are stored (such as Marvel vs. Capcom 2), the filename must uniquely match the README version. The monitor uses the last VPK-changing commit as an immutable download URL and publication date. It never downloads or installs binaries.
 
 Generated data/upstream_latest.json retains schema_version 1 and releases unchanged, adding a separate folder_releases array. PSVitaAlive must separately validate its canonical app's registered folder URL and Title ID before updating the existing Download/VPK link. Unknown apps and ambiguous folders remain manual-review only. The normal GitHub Releases monitor is unaffected.
+
+
+### Releases con etiquetas móviles (vita-next, nightly, continuous)
+
+Algunos desarrolladores publican VPKs en una etiqueta GitHub reutilizable
+como `vita-next`, mientras que la versión real figura en el título
+`Next Build (v1.7.3)` y en el nombre del VPK. El monitor solo interpreta
+una versión numérica si **un único VPK** y el título de la release coinciden;
+cuando el cuerpo declara `App version`, también debe coincidir.
+Se mantienen por separado el `tag` original (para validar el enlace
+`/releases/download/vita-next/`) y `version` (para comparar versiones),
+sin alterar el esquema oficial del catálogo.
+
+Se considera canal experimental aunque GitHub muestre `prerelease: false`.
+Se aplica la política existente de siete días respecto a la última estable,
+siempre con versión estrictamente superior, un VPK único y fuente verificada.
+**Si el desarrollador avisa explícitamente que el build aún necesita
+validación en hardware**, por ejemplo con el marcador
+`vita-next-build-draft` o el texto `Draft build: review ... validate on
+hardware before publishing`, se marca `review_required` y NO se actualiza
+automáticamente el catálogo, ni siquiera con `apr: true`.
+El dashboard mostrará revisión manual y conservará el VPK estable de
+Archive.org. Se evita anunciar un draft como nueva release verificada.
+
+Cuando el desarrollador sustituye un VPK en la misma etiqueta móvil, el
+monitor compara también la versión y la URL del VPK, actualiza el registro
+existente del historial sin duplicarlo y conserva las reglas de seguridad.
+Los escaneos completos programados detectan esos cambios; los refrescos
+rápidos provocados por publicación del catálogo siguen usando el snapshot.
