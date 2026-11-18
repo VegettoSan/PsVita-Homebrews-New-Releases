@@ -118,6 +118,62 @@ class PrereleaseMonitorTests(unittest.TestCase):
         self.assertNotIn("no_stable_release", record)
         self.assertNotIn("stable_release", record)
 
+    def test_golden_balloon_rolling_build_is_numbered_but_requires_review(self):
+        draft = entry("vita-next", False, 449376784)
+        draft["name"] = "Golden Balloon Vita - Next Build (v1.7.3)"
+        draft["published_at"] = "2026-11-18T03:49:45Z"
+        draft["body"] = (
+            "<!-- vita-next-build-draft -->\n"
+            "**Draft build: review these notes and validate on hardware before publishing.**\n"
+            "App version " + chr(96) + "1.7.3" + chr(96) + " built from main."
+        )
+        vpk = "GoldenBalloon-Vita-v1.7.3-44079be4-44209555230-1.vpk"
+        draft["assets"] = [
+            {"name": vpk, "size": 4799043,
+             "browser_download_url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/download/vita-next/" + vpk},
+            {"name": vpk + ".sha256", "size": 119,
+             "browser_download_url": "https://github.com/zm2283145/goldenballoon-vita-port/releases/download/vita-next/" + vpk + ".sha256"},
+        ]
+        stable = entry("v1.7.2", False, 391110485)
+        stable["published_at"] = "2026-09-17T23:04:32Z"
+        with patch.object(monitor, "request_json", return_value=[draft, stable]):
+            result = monitor.get_github_release("zm2283145/goldenballoon-vita-port")
+        self.assertEqual(result["tag"], "vita-next")
+        self.assertEqual(result["version"], "1.7.3")
+        self.assertEqual(result["release_channel"], "rolling")
+        self.assertTrue(result["review_required"])
+        self.assertTrue(result["prerelease"])
+        self.assertEqual(result["stable_release"]["tag"], "v1.7.2")
+        from enrich_dashboard import calculate_catalog_status
+        status, detail = calculate_catalog_status(result, {"version": "1.7.2"})
+        self.assertEqual(status, "pending")
+        self.assertIn("validación", detail)
+        self.assertIn("1.7.3", detail)
+
+    def test_rolling_requires_matching_title_vpk_and_body_version(self):
+        build = entry("vita-next", False, 1)
+        build["name"] = "Golden Balloon Vita - Next Build (v1.7.3)"
+        build["body"] = "App version " + chr(96) + "1.7.3" + chr(96) + " built from main"
+        build["assets"] = [{
+            "name": "GoldenBalloon-Vita-v1.7.3-deadbeef.vpk", "size": 100,
+            "browser_download_url": "https://github.com/dev/port/releases/download/vita-next/GoldenBalloon-Vita-v1.7.3-deadbeef.vpk",
+        }]
+        result = monitor.rolling_release_metadata(build)
+        self.assertEqual(result["version"], "1.7.3")
+        self.assertFalse(result["review_required"])
+        for invalid in [
+            {**build, "name": "Build v1.7.3 without proper title"},
+            {**build, "body": "App version " + chr(96) + "1.7.4" + chr(96) + " built from main"},
+            {**build, "assets": [{**build["assets"][0],
+                                 "name": "GoldenBalloon-Vita-v1.7.2-deadbeef.vpk"}]},
+            {**build, "assets": build["assets"] * 2},
+        ]:
+            result = monitor.rolling_release_metadata(invalid)
+            self.assertNotIn("version", result, invalid)
+        unrecognized = dict(build)
+        unrecognized["tag_name"] = "unversioned-random"
+        self.assertEqual(monitor.rolling_release_metadata(unrecognized), {})
+
     def test_dashboard_semantic_order_and_incomparables(self):
         self.assertEqual(compare_versions("1.2.0-beta2", "1.2.0-beta3"), -1)
         self.assertEqual(compare_versions("1.2.0-rc1", "1.2.0"), -1)
