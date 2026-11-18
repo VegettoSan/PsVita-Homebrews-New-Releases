@@ -312,6 +312,53 @@ def github_headers() -> dict[str, str]:
     return headers
 
 
+# Tags such as vita-next are moving channels, not usable version numbers.
+# Require independent agreement from a release title and exactly one VPK
+# filename before translating a rolling build to a catalog version.
+_ROLLING_CHANNEL_TAGS = {"vita-next", "next", "nightly", "continuous", "rolling"}
+_NUMBERED_BUILD_VERSION = r"(\\d+\\.\\d+(?:\\.\\d+){0,2})"
+
+
+def rolling_release_metadata(release: dict[str, Any]) -> dict[str, Any]:
+    tag = str(release.get("tag_name") or "").strip().casefold()
+    if tag not in _ROLLING_CHANNEL_TAGS:
+        return {}
+    metadata: dict[str, Any] = {"release_channel": "rolling"}
+    name = str(release.get("name") or "")
+    body = str(release.get("body") or "")
+    # The publisher's explicit warning must win over GitHub's draft:false
+    # when a public release still carries an unpublished validation note.
+    metadata["review_required"] = bool(
+        re.search(r"<!--\\s*vita-next-build-draft\\s*-->", body, re.I)
+        or re.search(r"Draft build:\\s*review.*?validate on hardware before publishing",
+                     body, re.I | re.S)
+    )
+    vpks = [
+        asset for asset in (release.get("assets") or [])
+        if isinstance(asset, dict)
+        and str(asset.get("name") or "").lower().endswith(".vpk")
+        and asset.get("browser_download_url")
+    ]
+    if len(vpks) != 1:
+        return metadata
+    title_match = re.search(
+        r"\\(v" + _NUMBERED_BUILD_VERSION + r"\\)\\s*$", name, re.I
+    )
+    vpk_tokens = re.findall(
+        r"(?<![a-z0-9])v" + _NUMBERED_BUILD_VERSION + r"(?=[^0-9]|$)",
+        str(vpks[0].get("name") or ""), re.I,
+    )
+    declared = re.search(
+        r"App version\\s*`" + _NUMBERED_BUILD_VERSION + r"`",
+        body, re.I,
+    )
+    if (title_match and len(vpk_tokens) == 1
+            and title_match.group(1) == vpk_tokens[0]
+            and (not declared or declared.group(1) == vpk_tokens[0])):
+        metadata["version"] = vpk_tokens[0]
+    return metadata
+
+
 def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, Any]:
     """Build a trusted provider snapshot without downloading VPKs."""
     assets = [
@@ -324,7 +371,8 @@ def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, A
         for asset in release.get("assets", [])
         if asset.get("browser_download_url")
     ]
-    return {
+    rolling = rolling_release_metadata(release)
+    record = {
         "platform": "github",
         "repo": project,
         "release_id": str(release.get("id") or release.get("tag_name") or ""),
@@ -332,12 +380,14 @@ def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, A
         "name": release.get("name") or release.get("tag_name") or "Release",
         "url": release.get("html_url") or f"https://github.com/{project}/releases",
         "published": release.get("published_at") or release.get("created_at") or "",
-        "prerelease": bool(release.get("prerelease")),
+        "prerelease": bool(release.get("prerelease")) or bool(rolling),
         "draft": False,
         "body": release.get("body") or "",
         "assets": assets,
         "author": (release.get("author") or {}).get("login") or "",
     }
+    record.update(rolling)
+    return record
 
 
 def canonical_github_repo(project: str, release_url: str) -> tuple[str, int] | None:
@@ -1070,6 +1120,9 @@ def main() -> int:
                 upstream_latest[key.lower()]["repo_id"] = release["repo_id"]
             if release.get("no_stable_release") is True:
                 upstream_latest[key.lower()]["no_stable_release"] = True
+            for field in ("version", "release_channel", "review_required"):
+                if field in release:
+                    upstream_latest[key.lower()][field] = release[field]
 
             identity = release_identity(release)
             previous = state_tag(old_state.get(key))
