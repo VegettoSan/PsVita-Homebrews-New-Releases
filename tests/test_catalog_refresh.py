@@ -62,6 +62,34 @@ class CatalogRefreshTests(unittest.TestCase):
                 monitor.prepare_catalog_refresh(repos, old_keys, snapshot),
             )
 
+    def test_read_previous_repo_keys_ignores_comments_and_preserves_gitlab(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "repos.txt"
+            path.write_text(
+                "# auto-generated\n\nhttps://github.com/Example/Game\n"
+                "https://gitlab.com/example/subgroup/game\n",
+                encoding="utf-8",
+            )
+            with patch.object(monitor, "REPOS_FILE", path):
+                found = monitor.read_previous_repo_keys()
+            self.assertEqual(found, {
+                "github:example/game", "gitlab:example/subgroup/game",
+            })
+
+    def test_github_api_throttle_stops_further_requests(self):
+        class LimitedResponse:
+            status_code = 429
+            headers = {"X-RateLimit-Remaining": "0", "Retry-After": "600"}
+            text = "secondary rate limit"
+        with patch.object(monitor.requests, "get", return_value=LimitedResponse()) as get:
+            with self.assertRaisesRegex(RuntimeError, "rate limit"):
+                monitor.request_json("https://api.github.com/repos/dev/app/releases")
+            self.assertTrue(monitor.GITHUB_API_THROTTLED.is_set())
+            _source, _release, error = monitor.fetch_latest_release(github("dev/app"))
+            self.assertIn("limit", error)
+            self.assertEqual(get.call_count, 1, "Do not retry 429 hundreds of times")
+        monitor.GITHUB_API_THROTTLED.clear()
+
     def test_catalog_dispatch_reuses_snapshot_without_upstream_requests(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
