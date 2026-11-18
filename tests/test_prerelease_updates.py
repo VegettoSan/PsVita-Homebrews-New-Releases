@@ -174,6 +174,66 @@ class PrereleaseMonitorTests(unittest.TestCase):
         unrecognized["tag_name"] = "unversioned-random"
         self.assertEqual(monitor.rolling_release_metadata(unrecognized), {})
 
+    def test_moving_channel_updates_its_existing_history_card_without_announcing_drafts(self):
+        import json
+        import tempfile
+        from pathlib import Path
+
+        old = {
+            "platform": "github", "repo": "dev/port", "tag": "vita-next",
+            "name": "Next Build (v1.7.2)", "release_id": "1234",
+            "published": "2026-11-10T10:00:00Z", "prerelease": True,
+            "release_channel": "rolling", "version": "1.7.2",
+            "review_required": True,
+            "assets": [{"name": "port-v1.7.2.vpk", "download_url":
+                        "https://github.com/dev/port/releases/download/vita-next/port-v1.7.2.vpk"}],
+        }
+        newer = {
+            **old, "name": "Next Build (v1.7.3)", "version": "1.7.3",
+            "assets": [{"name": "port-v1.7.3.vpk", "download_url":
+                        "https://github.com/dev/port/releases/download/vita-next/port-v1.7.3.vpk"}],
+        }
+        project = {
+            "platform": "github", "project": "dev/port",
+            "key": "github:dev/port", "url": "https://github.com/dev/port",
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            state_file = base / "state.json"
+            history_file = base / "releases.json"
+            snap_file = base / "upstream_latest.json"
+            sync_file = base / "sync.json"
+            state_file.write_text(json.dumps({"github:dev/port": {
+                "tag": "vita-next", "release_id": "1234",
+                "version": "1.7.2", "review_required": True,
+                "vpk_url": old["assets"][0]["download_url"],
+            }}), encoding="utf-8")
+            history_file.write_text(json.dumps([old]), encoding="utf-8")
+            with (
+                patch.dict(monitor.os.environ, {"PSVA_MONITOR_CATALOG_REFRESH": "0"}),
+                patch.object(monitor, "STATE_FILE", state_file),
+                patch.object(monitor, "HISTORY_FILE", history_file),
+                patch.object(monitor, "UPSTREAM_LATEST_FILE", snap_file),
+                patch.object(monitor, "SYNC_INFO_FILE", sync_file),
+                patch.object(monitor, "sync_catalog_repositories",
+                             return_value=([project], {"repositories": 1})),
+                patch.object(monitor, "scan_supported_folders",
+                             return_value=([], [])),
+                patch.object(monitor, "fetch_latest_release",
+                             return_value=(project, newer, None)),
+                patch.object(monitor, "generate_html"),
+                patch.object(monitor, "send_discord") as notify,
+            ):
+                self.assertEqual(monitor.main(), 0)
+            saved = json.loads(history_file.read_text(encoding="utf-8"))
+            self.assertEqual(len(saved), 1)
+            self.assertEqual(saved[0]["version"], "1.7.3")
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["github:dev/port"]["version"], "1.7.3")
+            notify.assert_not_called()
+            self.assertEqual(json.loads(snap_file.read_text(
+                encoding="utf-8"))["releases"][0]["version"], "1.7.3")
+
     def test_dashboard_semantic_order_and_incomparables(self):
         self.assertEqual(compare_versions("1.2.0-beta2", "1.2.0-beta3"), -1)
         self.assertEqual(compare_versions("1.2.0-rc1", "1.2.0"), -1)
