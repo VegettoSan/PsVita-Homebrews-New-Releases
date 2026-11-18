@@ -18,6 +18,7 @@ import html
 import json
 import os
 import re
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -47,8 +48,10 @@ HTML_FILE = Path("docs/index.html")
 
 MAX_HISTORY = 500
 MAX_WORKERS = 8
-HTTP_TIMEOUT = 30
+HTTP_TIMEOUT = 20
 USER_AGENT = "PsVita-Homebrews-New-Releases/2.0"
+# Avoid retrying hundreds of GitHub API queries after quota exhaustion.
+GITHUB_API_THROTTLED = threading.Event()
 
 # =================================================
 
@@ -84,7 +87,7 @@ def request_json(
     *,
     headers: dict[str, str] | None = None,
     params: dict[str, Any] | None = None,
-    attempts: int = 3,
+    attempts: int = 2,
 ) -> Any:
     merged_headers = {"User-Agent": USER_AGENT}
     if headers:
@@ -102,10 +105,21 @@ def request_json(
             )
 
             if response.status_code in (403, 429):
+                remaining = response.headers.get("X-RateLimit-Remaining")
+                # For official GitHub API, stop fanning out requests when
+                # secondary/primary rate limits have been reached.
+                if (urlparse(url).hostname == "api.github.com"
+                        and (remaining == "0" or response.status_code == 429
+                             or "secondary rate limit" in response.text.lower())):
+                    GITHUB_API_THROTTLED.set()
+                    raise RuntimeError(
+                        "GitHub API rate limit: pending checks deferred to next scan"
+                    )
                 retry_after = response.headers.get("Retry-After")
-                wait = int(retry_after) if retry_after and retry_after.isdigit() else min(5 * attempt, 20)
+                wait = min(10, int(retry_after)) if retry_after and retry_after.isdigit() else min(5 * attempt, 10)
                 if attempt < attempts:
-                    print(f"⏳ Límite temporal en {url}; reintento en {wait}s")
+                    print(f"⏳ Límite temporal en {url}; reintento en {wait}s",
+                          flush=True)
                     time.sleep(wait)
                     continue
 
@@ -467,6 +481,8 @@ def get_gitlab_release(project: str) -> dict[str, Any] | None:
 
 
 def fetch_latest_release(repo: dict[str, str]) -> tuple[dict[str, str], dict[str, Any] | None, str | None]:
+    if repo["platform"] == "github" and GITHUB_API_THROTTLED.is_set():
+        return repo, None, "GitHub API limit reached; retaining previous release"
     try:
         if repo["platform"] == "github":
             release = get_github_release(repo["project"])
@@ -949,9 +965,11 @@ def prepare_catalog_refresh(
 
 
 def main() -> int:
+    GITHUB_API_THROTTLED.clear()
     catalog_refresh = os.getenv("PSVA_MONITOR_CATALOG_REFRESH") == "1"
     previous = read_previous_repo_keys() if catalog_refresh else set()
-    previous_snapshot = load_json(UPSTREAM_LATEST_FILE, {}) if catalog_refresh else {}
+    # Keep last known releases on network failure in both scan modes.
+    previous_snapshot = load_json(UPSTREAM_LATEST_FILE, {})
     repos, sync_info = sync_catalog_repositories()
 
     old_state = load_json(STATE_FILE, {})
@@ -1080,13 +1098,24 @@ def main() -> int:
                 changed_releases.append(release)
 
     # Read immutable per-port VPKs from reviewed GitHub folder repositories.
-    folder_releases, folder_errors = scan_supported_folders(
-        repos, request_json, github_headers
-    )
+    if GITHUB_API_THROTTLED.is_set():
+        # Never replace valid folder data with empty results during rate limit.
+        saved_folders = (previous_snapshot.get("folder_releases")
+                         if isinstance(previous_snapshot, dict) else None)
+        folder_releases = saved_folders if isinstance(saved_folders, list) else []
+        folder_errors = ["GitHub rate-limited; folder VPKs kept from cache"]
+    else:
+        folder_releases, folder_errors = scan_supported_folders(
+            repos, request_json, github_headers
+        )
     errors.extend({"repo": "github_folder", "error": error}
                   for error in folder_errors)
     print(f"GitHub folder ports: {len(folder_releases)} valid, "
           f"{len(folder_errors)} require manual review")
+
+    if GITHUB_API_THROTTLED.is_set():
+        print("⚠️ GitHub API limit: preserved known releases; no more GitHub "
+              "requests this scan.", flush=True)
 
     history = sort_history(history)
 
