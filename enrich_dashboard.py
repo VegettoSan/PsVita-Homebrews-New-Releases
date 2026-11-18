@@ -239,6 +239,92 @@ def catalog_repo_index(catalog: Any) -> dict[str, list[dict[str, Any]]]:
     return index
 
 
+def vpk_download_urls(release: dict[str, Any]) -> tuple[str, ...]:
+    """Exact VPK asset URLs: never infer a transfer from a similar project name."""
+    assets = release.get("assets")
+    if not isinstance(assets, list):
+        return ()
+    urls = []
+    for asset in assets:
+        if not isinstance(asset, dict):
+            continue
+        url = asset.get("download_url")
+        if not isinstance(url, str):
+            continue
+        parsed = urlparse(url)
+        if (parsed.scheme == "https" and parsed.hostname == "github.com"
+                and parsed.path.lower().endswith(".vpk")
+                and not parsed.query and not parsed.fragment):
+            urls.append(url)
+    return tuple(sorted(set(urls)))
+
+
+def reconcile_renamed_github_releases(
+    history: list[dict[str, Any]],
+    snapshot: object,
+    catalog_index: dict[str, list[dict[str, Any]]],
+) -> int:
+    """Match an old GitHub owner/name to the same release under its new owner.
+
+    Use only the monitor's *already checked* snapshot. A GitHub release ID
+    must be unique, with exactly matching tag, timestamp, and VPK asset URL.
+    We never match by similar title, app name, author, or unverified redirect.
+    """
+    if not isinstance(snapshot, dict) or snapshot.get("schema_version") != 1:
+        return 0
+    rows = snapshot.get("releases")
+    if not isinstance(rows, list):
+        return 0
+    by_release_id: dict[str, list[dict[str, Any]]] = {}
+    for item in rows:
+        if not isinstance(item, dict) or item.get("platform") != "github":
+            continue
+        release_id = str(item.get("release_id") or "")
+        if not release_id.isascii() or not release_id.isdecimal() or release_id == "0":
+            continue
+        by_release_id.setdefault(release_id, []).append(item)
+
+    repaired = 0
+    for release in history:
+        if not isinstance(release, dict) or release.get("platform") != "github":
+            continue
+        old_repo = release.get("repo")
+        if not isinstance(old_repo, str) or repo_key("github", old_repo) in catalog_index:
+            continue
+        release_id = str(release.get("release_id") or "")
+        own_vpks = vpk_download_urls(release)
+        if not release_id.isdecimal() or len(own_vpks) != 1:
+            continue
+        matched: list[str] = []
+        for candidate in by_release_id.get(release_id, []):
+            new_repo = candidate.get("repo")
+            if not isinstance(new_repo, str) or new_repo.casefold() == old_repo.casefold():
+                continue
+            new_key = repo_key("github", new_repo)
+            if len(catalog_index.get(new_key, [])) != 1:
+                continue
+            if (str(candidate.get("tag") or "") != str(release.get("tag") or "")
+                    or str(candidate.get("published") or "") != str(release.get("published") or "")
+                    or vpk_download_urls(candidate) != own_vpks):
+                continue
+            # The original GitHub release page must also point to the same
+            # canonical owner/name, not just an asset at a coincidental URL.
+            page = urlparse(str(release.get("url") or ""))
+            if page.scheme != "https" or page.hostname != "github.com":
+                continue
+            parts = [p for p in page.path.split("/") if p]
+            if (len(parts) != 5 or "/".join(parts[:2]).casefold() != new_repo.casefold()
+                    or parts[2:4] != ["releases", "tag"]
+                    or parts[4] != str(release.get("tag") or "")):
+                continue
+            matched.append(new_repo)
+        if len(matched) == 1:
+            release["previous_repo"] = old_repo
+            release["repo"] = matched[0]
+            repaired += 1
+    return repaired
+
+
 def normalized_text(value: Any) -> str:
     text = html.unescape(str(value or "")).lower()
     text = re.sub(r"[^a-z0-9]+", " ", text)
@@ -1203,6 +1289,14 @@ def main() -> int:
             "No se detectaron repositorios en catalog.json; se conserva "
             "el dashboard anterior para evitar perder metadatos."
         )
+
+    upstream_snapshot = load_json(Path("data/upstream_latest.json"), {})
+    corrected_repos = reconcile_renamed_github_releases(
+        history, upstream_snapshot, index
+    )
+    if corrected_repos:
+        print(f"🔗 Repositorios GitHub renombrados reconciliados: {corrected_repos}",
+              flush=True)
 
     # PSVitaAlive itself is the catalog/store project, so it may not appear as a
     # normal catalog entry. Pull its latest release explicitly so a new Store
