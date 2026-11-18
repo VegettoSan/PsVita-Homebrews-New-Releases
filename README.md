@@ -60,18 +60,26 @@ del catálogo sea igual o superior a la release monitoreada.** Si llega otra
 versión nueva válida, el enlace `VPK` puede pasar temporalmente a la
 descarga del repositorio hasta que se haga su respaldo manual.
 
-### Canal opcional de pre-releases
+### Pre-releases después de siete días y repositorios renombrados
 
-El monitor detecta tanto releases estables como pre-releases publicados de
-GitHub. Si el más reciente es un pre-release, guarda también un release
-estable anterior (si aparece en los últimos 20 releases) en
-`data/upstream_latest.json`, sin cambiar el formato principal del snapshot.
+El monitor registra los pre-releases de GitHub y la última versión estable.
+Si los primeros 20 releases solo contienen betas, consulta
+`/releases/latest` para hallar la estable anterior o confirmar mediante
+HTTP 404 que no existe ninguna. Solo en ese último caso emite
+`no_stable_release: true`; los errores de API nunca se tratan como ausencia.
 
-PSVitaAlive solo aplica pre-releases a aplicaciones con
-`allow_prereleases: true` en su archivo individual de `apps/`
-(en el esquema compacto V2: `"apr": true`). Por defecto permanece
-en el canal estable. Los tags beta/RC reconocibles se comparan por
-versión base y prioridad de fase; tags ambiguos quedan en revisión.
+PSVitaAlive puede promover un pre-release si es **estrictamente más nuevo**
+que la estable y fue publicado **más de siete días completos después** de
+ella, o si se ha confirmado la ausencia de releases estables. La opción
+`allow_prereleases: true` (`apr: true` en V2) elimina la espera para
+Homebrew que siguen betas voluntariamente. Se conservan todas las
+protecciones de versionado, VPK único, origen y respaldos Archive.org.
+
+Cuando GitHub ha movido un repositorio a otro propietario, el monitor
+comprueba el `full_name` y el ID numérico del repositorio antiguo mediante
+la API oficial, antes de añadir `canonical_repo` y `repo_id` al snapshot.
+El sincronizador puede así aceptar los VPK del nuevo repositorio sin confiar
+en enlaces ajenos no verificados.
 
 `Archive`, versiones anteriores, proyectos compartidos, VPK ambiguos y
 fuentes no verificadas siguen excluidos de cambios automáticos.
