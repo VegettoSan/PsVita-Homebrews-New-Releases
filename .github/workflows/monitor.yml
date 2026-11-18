@@ -54,7 +54,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           PSVITAALIVE_CATALOG_URL: ${{ github.event_name == 'repository_dispatch' && format('https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/{0}/catalog.json', github.event.client_payload.catalog_sha) || 'https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/catalog.json' }}
-        run: python monitor.py
+          # A catalog publish only refreshes catalog data and checks new repos.
+          # Scheduled/manual scans still query every upstream repository.
+          PSVA_MONITOR_CATALOG_REFRESH: ${{ github.event_name == 'repository_dispatch' && '1' || '0' }}
+        run: python -u monitor.py
 
       - name: Build PSVitaAlive-enriched dashboard
         env:
@@ -63,7 +66,9 @@ jobs:
         run: python enrich_dashboard.py
 
       - name: Commit generated data
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add repos.txt data/ docs/
@@ -71,7 +76,24 @@ jobs:
             echo "No generated changes"
           else
             git commit -m "chore: sync PSVitaAlive releases [skip ci]"
-            git push
+            # Preserve unrelated commits made while the scan was running.
+            # Never force-push generated files over a newer main.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Generated data conflicts with newer main; no forced overwrite."
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                echo "Generated data published safely"
+                exit 0
+              fi
+              echo "::warning::Main advanced during push; retry $attempt/3"
+              sleep "$((attempt * 2))"
+            done
+            echo "::error::Unable to publish generated data after 3 attempts"
+            exit 1
           fi
 
       - name: Notify PSVitaAlive about checked upstream releases
