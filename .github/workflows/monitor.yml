@@ -14,6 +14,9 @@ on:
       - "data/**"
       - "docs/**"
       - "repos.txt"
+      # Rebuild the public dashboard when its rendering/association logic changes,
+      # without running a full upstream release scan on every source-code push.
+      - "enrich_dashboard.py"
 
 permissions:
   contents: write
