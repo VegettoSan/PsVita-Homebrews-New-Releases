@@ -1,6 +1,200 @@
 [
   {
     "platform": "github",
+    "repo": "arielxflores/Tenkaichi3Decomp-Vita",
+    "release_id": "450744497",
+    "tag": "v1.2.4",
+    "name": "v1.2.4",
+    "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.4",
+    "published": "2026-11-19T00:58:02Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Fixes for what players reported on 1.2.3, and a few requests. Install `Tenkaichi3Decomp-Vita.vpk` with VitaShell over 1.2.3 (or any earlier version): your saves, settings and game files in `ux0:data/bt3/` are kept.\n\n### Fixed\n\n- **Fusion works again from the touch panels.** Since 1.2 a touch of R3 was always a short press (so a hand resting on the rear pad could not hold R3 and stop your fighter), but fusion is R3 held with left, up or right. Now: hold left, up or right, then touch R3 and keep both; R3 stays held while the direction does. A touch without a direction is still a short press (transformations).\n- **\"out of memory (4294947232 bytes)\" at the start.** BT3 took files in `ux0:data/bt3/bt4/` with BT3's program name (BT3's own files put there, or an older BT4 release made on BT3's files) for its disc, and stopped at once. It no longer looks there, and the \"files were not found\" message says where BT3's files go and which BT4 release works (Team BT4's B14 Rev2, whose program is `SLUS_219.78`).\n- **A data file that was not copied whole is named at the start**, with its size and the size it needs, instead of the game crashing when it reaches the missing part. If you see that message, copy that file again (or the `.iso` itself).\n\n### New\n\n- **BT4 found**: the first time the game finds your BT4 files, it tells you how to switch to it: Options → Vita Settings → Game → BT4 (press CROSS twice), or hold SELECT while the game starts.\n- **uma0**: the game's files (its `.iso`, or `SLUS_216.78`, `BIN` and `DATA`) and BT4's are also found in `uma0:data/bt3/` (`disc/`, `bt4/`), for an SD2Vita mounted as uma0 beside a memory card. Saves, settings and mods stay in `ux0:data/bt3/`.\n- **Multiplayer team battles** (experimental): hold SELECT while the game starts → Multiplayer → **Battle when hosting: teams**, then host. Up to five fighters each, switching and fusion. Not yet played on two Vitas: please report how it goes, with `ux0:data/bt3/log.txt` from both.\n\n### If the game closes by itself\n\nPlease send `ux0:data/bt3/log.txt` (`ux0:data/bt3/bt4/log.txt` for BT4) and the newest crash dump the error message names (`ux0:data/psp2core-...-eboot.bin.psp2dmp`), with your Vita model and firmware.\n",
+    "assets": [
+      {
+        "name": "Tenkaichi3Decomp-Vita.vpk",
+        "size": 6032211,
+        "download_url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.4/Tenkaichi3Decomp-Vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "arielxflores",
+    "homebrew_name": "Dragon Ball Z: BT3",
+    "homebrew_icon": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3, based on Tenkaichi3Decomp",
+    "homebrew_long_description": "A native PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3 (PlayStation 2, USA release, SLUS-21678), based on z3xox's Tenkaichi3Decomp, the PC port built on the BT3-Decompiled decompilation. The game's own code is compiled for the Vita, with a renderer for the Vita's GPU (vitaGL), sound, touch and controls written for the handheld. It is not an emulator.\n\n- PsVitaAlive -",
+    "homebrew_id": "dragon-ball-z-bt3",
+    "homebrew_authors": [
+      "arielxflores"
+    ],
+    "homebrew_version": "1.2.3",
+    "catalog_apps": [
+      {
+        "id": "dragon-ball-z-bt3",
+        "name": "Dragon Ball Z: BT3",
+        "icon": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3, based on Tenkaichi3Decomp",
+        "long_description": "A native PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3 (PlayStation 2, USA release, SLUS-21678), based on z3xox's Tenkaichi3Decomp, the PC port built on the BT3-Decompiled decompilation. The game's own code is compiled for the Vita, with a renderer for the Vita's GPU (vitaGL), sound, touch and controls written for the handheld. It is not an emulator.\n\n- PsVitaAlive -",
+        "version": "1.2.3",
+        "version_date": "2026-11-15",
+        "author_ids": [
+          "arielxflores"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.3/Tenkaichi3Decomp-Vita.vpk",
+            "size": 6028730,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files English",
+            "url": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/Game%20Files%20English%20for%20PSVA.zip",
+            "size": 3006477107,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "bt3"
+            ]
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files Latino MOD",
+            "url": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/Game%20Files%20Latino%20for%20PSVA.zip",
+            "size": 4294967296,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "bt3"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5222,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": false
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.2.3 → release v1.2.4",
+    "catalog_version": "1.2.3",
+    "archive_current_link": "",
+    "backup_status": "missing",
+    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "danos-x5/NFSUG2_VITA",
+    "release_id": "450634456",
+    "tag": "v0.8.3",
+    "name": "v0.8.3",
+    "url": "https://github.com/danos-x5/NFSUG2_VITA/releases/tag/v0.8.3",
+    "published": "2026-11-18T22:27:07Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Significant performance increase, ~15% fps improvement across all game modes compared to v0.8.2\n\n- **Faster game code.** The translated game code keeps more values in CPU registers and loads floating-point numbers directly, and it is compiled with a fresh profile recorded on the Vita.\n- **Less waiting on audio.** The game's sound scripts run about twice as fast, and the sound mixer now holds the game's sound lock for a shorter time (`audio_mixer_split`, on by default).\n- **Hardware music decoding on by default.** Music now plays through the Vita's hardware MP3 decoder (`music_hw_decode`), which frees CPU time. Set it to `off` in the cfg to go back.\n- **Faster drawing.** The Direct3D layer sends shader constants to the GPU more cheaply.\n- **Better performing car physics code.** The wheel and drivetrain physics run as native code, rather than translated x86 / x87. Function handling results are identical to before. \n",
+    "assets": [
+      {
+        "name": "LICENSE",
+        "size": 1092,
+        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.3/LICENSE",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "NFSU2VITA.vpk",
+        "size": 9759628,
+        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.3/NFSU2VITA.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "THIRD_PARTY.md",
+        "size": 1504,
+        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.3/THIRD_PARTY.md",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "danos-x5",
+    "homebrew_name": "NFS Underground 2",
+    "homebrew_icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Need for Speed Underground 2 port for the PS VITA",
+    "homebrew_long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
+    "homebrew_id": "nfs-underground-2",
+    "homebrew_authors": [
+      "danos-x5"
+    ],
+    "homebrew_version": "0.8.2",
+    "catalog_apps": [
+      {
+        "id": "nfs-underground-2",
+        "name": "NFS Underground 2",
+        "icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
+        "category": "ports",
+        "description": "Need for Speed Underground 2 port for the PS VITA",
+        "long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
+        "version": "0.8.2",
+        "version_date": "2026-11-18",
+        "author_ids": [
+          "danos-x5"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.2/NFSU2VITA.vpk",
+            "size": 9778411,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/NFSUG2_VITA/Game%20Files%20for%20PSVA.zip",
+            "size": 2899102925,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "NeedForSpeedUnderground2"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5837,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": false
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/danos-x5/NFSUG2_VITA"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.8.2 → release v0.8.3",
+    "catalog_version": "0.8.2",
+    "archive_current_link": "",
+    "backup_status": "missing",
+    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
+  },
+  {
+    "platform": "github",
     "repo": "edgarlugo/stk-code",
     "release_id": "450384361",
     "tag": "vita-1.01",
@@ -502,104 +696,6 @@
     "archive_current_link": "https://archive.org/download/golden-balloon-psvita/GoldenBalloon-Vita-v1.7.2.vpk",
     "backup_status": "review",
     "backup_detail": "Build experimental pendiente de validación: conservar el VPK estable existente en Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "danos-x5/NFSUG2_VITA",
-    "release_id": "449434827",
-    "tag": "v0.8.2",
-    "name": "v0.8.2",
-    "url": "https://github.com/danos-x5/NFSUG2_VITA/releases/tag/v0.8.2",
-    "published": "2026-11-18T02:09:25Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Faster tyre smoke: heavy smoke from burnouts and donuts now costs far less. In tests the frame rate went from about 33 to about 46 fps. The smoke looks close to the original. Set optimised_particles=off to get the original back.\r\n- Fixed world textures swapping to the wrong ones after moving between areas, for example going from a quick race into career free roam (#4). Texture memory is now freed straight away instead of piling up.\r\n- Fixed magazine and DVD cover photos showing black or garbled (#5).\r\n- Right stick turns the car in the garage and customisation menus, with a 20% dead zone. Adjust it with garage_stick_deadzone and garage_stick_speed, or turn it off with garage_stick=off.\r\n- Lighter audio: sounds too quiet to hear are no longer mixed, which saves processor time. Adjust it with audio_silence_db (default -60), or set it to off.\r\n- Optional hardware music decoding: add music_hw_decode=on to your cfg to have the Vita's own MP3 hardware play the in-game music. It sounds the same and frees up the processor. If the decoder can't start, the game falls back to its own decoding automatically.",
-    "assets": [
-      {
-        "name": "LICENSE",
-        "size": 1092,
-        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.2/LICENSE",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "NFSU2VITA.vpk",
-        "size": 9778411,
-        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.2/NFSU2VITA.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "THIRD_PARTY.md",
-        "size": 1504,
-        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.2/THIRD_PARTY.md",
-        "content_type": "text/markdown"
-      }
-    ],
-    "author": "danos-x5",
-    "homebrew_name": "NFS Underground 2",
-    "homebrew_icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Need for Speed Underground 2 port for the PS VITA",
-    "homebrew_long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
-    "homebrew_id": "nfs-underground-2",
-    "homebrew_authors": [
-      "danos-x5"
-    ],
-    "homebrew_version": "0.8.2",
-    "catalog_apps": [
-      {
-        "id": "nfs-underground-2",
-        "name": "NFS Underground 2",
-        "icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
-        "category": "ports",
-        "description": "Need for Speed Underground 2 port for the PS VITA",
-        "long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
-        "version": "0.8.2",
-        "version_date": "2026-11-18",
-        "author_ids": [
-          "danos-x5"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.8.2/NFSU2VITA.vpk",
-            "size": 9778411,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/NFSUG2_VITA/Game%20Files%20for%20PSVA.zip",
-            "size": 2899102925,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "NeedForSpeedUnderground2"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5837,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": false
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/danos-x5/NFSUG2_VITA"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.8.2",
-    "catalog_version": "0.8.2",
-    "archive_current_link": "",
-    "backup_status": "missing",
-    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
   },
   {
     "platform": "github",
@@ -2387,102 +2483,6 @@
     "archive_current_link": "https://archive.org/download/guitar-hero-ps2-ps-vita/ghvita-v0.1.1.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "arielxflores/Tenkaichi3Decomp-Vita",
-    "release_id": "445877521",
-    "tag": "v1.2.3",
-    "name": "v1.2.3",
-    "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/tag/v1.2.3",
-    "published": "2026-11-15T07:14:34Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "A faster update, most of it manumastro's work (his pull request #6, thank you!). Install `Tenkaichi3Decomp-Vita.vpk` with VitaShell over 1.2.2 (or any earlier version): your saves, settings and game files in `ux0:data/bt3/` are kept.\n\n### Faster\n\n- **Detailed stages stay at full speed.** The game slowed down on detailed stages, especially after playing a few others or as more of the stage came into view. In a duel, stage 4 now runs at 29.5 frames per second (before: 26.2), stage 27 at 29.5 (24.8), Kame House at 29.8 (28.8), against the game's 30. The first fight on a stage is as fast as the next ones.\n- **Screen-filling effects** (big auras, beams, flashes) are drawn at a lower resolution and added to the picture, so they no longer slow the fight down.\n- With the CapUnlocker plugin, the Vita's fourth CPU core takes on more of the work.\n- `log.txt` is kept under 1 MB (a longer one becomes `log-prev.txt` at the next start).\n\n### Fixed\n\n- **BT4: the map select shows the two fighters' portraits** behind the stage picture, faded toward the middle, as on the PS2.\n- **A broken disc image is reported at the start.** An `.iso` whose copy did not finish (its size can look right while part of it reads back empty), or one cut at 4 GB by a memory card formatted as FAT32, was used anyway: sounds went silent and starting a fight could close the game. The game now checks the image and says how much of it can be read and what to do. If you see that message, copy the `.iso` again (or copy the files inside it with 7-Zip instead).\n- **A disc image one folder down is found.** If unpacking a download put the `.iso` in a folder of its own (BT4's comes in `PS2_NTSC/`), it no longer has to be moved: `ux0:data/bt3/` and `ux0:data/bt3/bt4/` are searched one folder deeper.\n\n### If the game closes by itself\n\nPlease send `ux0:data/bt3/log.txt` (`ux0:data/bt3/bt4/log.txt` for BT4) and the newest crash dump the error message names (`ux0:data/psp2core-...-eboot.bin.psp2dmp`), with your Vita model and firmware.\n",
-    "assets": [
-      {
-        "name": "Tenkaichi3Decomp-Vita.vpk",
-        "size": 6028730,
-        "download_url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.3/Tenkaichi3Decomp-Vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "arielxflores",
-    "homebrew_name": "Dragon Ball Z: BT3",
-    "homebrew_icon": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3, based on Tenkaichi3Decomp",
-    "homebrew_long_description": "A native PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3 (PlayStation 2, USA release, SLUS-21678), based on z3xox's Tenkaichi3Decomp, the PC port built on the BT3-Decompiled decompilation. The game's own code is compiled for the Vita, with a renderer for the Vita's GPU (vitaGL), sound, touch and controls written for the handheld. It is not an emulator.\n\n- PsVitaAlive -",
-    "homebrew_id": "dragon-ball-z-bt3",
-    "homebrew_authors": [
-      "arielxflores"
-    ],
-    "homebrew_version": "1.2.3",
-    "catalog_apps": [
-      {
-        "id": "dragon-ball-z-bt3",
-        "name": "Dragon Ball Z: BT3",
-        "icon": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3, based on Tenkaichi3Decomp",
-        "long_description": "A native PS Vita port of Dragon Ball Z: Budokai Tenkaichi 3 (PlayStation 2, USA release, SLUS-21678), based on z3xox's Tenkaichi3Decomp, the PC port built on the BT3-Decompiled decompilation. The game's own code is compiled for the Vita, with a renderer for the Vita's GPU (vitaGL), sound, touch and controls written for the handheld. It is not an emulator.\n\n- PsVitaAlive -",
-        "version": "1.2.3",
-        "version_date": "2026-11-15",
-        "author_ids": [
-          "arielxflores"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita/releases/download/v1.2.3/Tenkaichi3Decomp-Vita.vpk",
-            "size": 6028730,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files English",
-            "url": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/Game%20Files%20English%20for%20PSVA.zip",
-            "size": 3006477107,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "bt3"
-            ]
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files Latino MOD",
-            "url": "https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-ps-vita/Game%20Files%20Latino%20for%20PSVA.zip",
-            "size": 4294967296,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "bt3"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5222,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": false
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/arielxflores/Tenkaichi3Decomp-Vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.2.3",
-    "catalog_version": "1.2.3",
-    "archive_current_link": "",
-    "backup_status": "missing",
-    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
   },
   {
     "platform": "github",
@@ -45978,5 +45978,100 @@
     "archive_current_link": "https://archive.org/download/psvitaalive-zelda-picross-vita/zelda-picross-vita.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
+  },
+  {
+    "platform": "gitlab",
+    "repo": "alexramallo/lugaruvita",
+    "release_id": "77acff61",
+    "tag": "77acff61",
+    "name": "Release 'release-beta-1'",
+    "url": "https://gitlab.com/alexramallo/lugaruvita/-/releases/77acff61",
+    "published": "2022-08-20T12:14:28.231Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Created using release-cli",
+    "assets": [
+      {
+        "name": "Lugaru VPK (77acff61)",
+        "size": 0,
+        "download_url": "https://gitlab.com/api/v4/projects/38700345/packages/generic/builds/release-beta-1/Lugaru-release-beta-1.vpk",
+        "original_url": "https://gitlab.com/api/v4/projects/38700345/packages/generic/builds/release-beta-1/Lugaru-release-beta-1.vpk",
+        "content_type": ""
+      },
+      {
+        "name": "source.zip",
+        "size": 0,
+        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.zip",
+        "content_type": ""
+      },
+      {
+        "name": "source.tar.gz",
+        "size": 0,
+        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.tar.gz",
+        "content_type": ""
+      },
+      {
+        "name": "source.tar.bz2",
+        "size": 0,
+        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.tar.bz2",
+        "content_type": ""
+      },
+      {
+        "name": "source.tar",
+        "size": 0,
+        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.tar",
+        "content_type": ""
+      }
+    ],
+    "author": "Alejandro Ramallo",
+    "homebrew_name": "Lugaru HD",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-lugaru-hd/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Lugaru for PSVITA.",
+    "homebrew_long_description": "Ninja rabbits on your Vita!\nThis is a beta release, meaning there are some bugs and crashes, but it's still entirely playable.\nThis is a port of the LugaruOSS to the PS Vita. It runs at 60 FPS at stock speeds, and some scenes even run at 60 with an underclock!\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
+    "homebrew_id": "lugaru-hd",
+    "homebrew_authors": [
+      "diggeloid"
+    ],
+    "homebrew_version": "beta 1",
+    "catalog_apps": [
+      {
+        "id": "lugaru-hd",
+        "name": "Lugaru HD",
+        "icon": "https://archive.org/download/psvitaalive-lugaru-hd/icon0.png",
+        "category": "ports",
+        "description": "Port of Lugaru for PSVITA.",
+        "long_description": "Ninja rabbits on your Vita!\nThis is a beta release, meaning there are some bugs and crashes, but it's still entirely playable.\nThis is a port of the LugaruOSS to the PS Vita. It runs at 60 FPS at stock speeds, and some scenes even run at 60 with an underclock!\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
+        "version": "beta 1",
+        "version_date": "2022-08-20",
+        "author_ids": [
+          "diggeloid"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-lugaru-hd/lugaru-hd.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Official Website",
+            "url": "https://aramallo.itch.io/lugaru-vita-port"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://gitlab.com/alexramallo/lugaruvita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive beta 1 → release 77acff61",
+    "catalog_version": "beta 1",
+    "archive_current_link": "https://archive.org/download/psvitaalive-lugaru-hd/lugaru-hd.vpk",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   }
 ]
