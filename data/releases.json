@@ -1,6 +1,457 @@
 [
   {
     "platform": "github",
+    "repo": "xesf/manhunt-releases",
+    "release_id": "451661229",
+    "tag": "v0.7.0",
+    "name": "v0.7.0",
+    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.7.0",
+    "published": "2026-11-19T17:09:17Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "- Manhunt 1: journo_streets plays to LEVEL COMPLETED (third segment `journo_streets_club.route` from `Gen_Save_Point01`: club front and subway, `make check-playthrough-journo_streets_club`). AI: hunters can follow a noise to its end without our 20 s investigate cap, as in the original (`AIInvestigate_StartGoto` 0x52F4D0 has no walk limit); opt-in `MH_AI_INVESTIGATE_NOLIMIT=1`.\n- Manhunt 1, Scrap Yard 2: the gas can is carried in Cash's left hand (bone 1021, turned and offset as the original places it) instead of floating in front of him.\n- Manhunt 1, Scrap Yard 2: the crane turns at the original's rate with the left stick, and with the turn keys (A / D, arrows) and the mouse (Modern controls) with the original's build-up and slow-down; Action toggles the magnet as before.\n- Manhunt 1, Scrap Yard 2: the crane magnet hangs from the boom tip and follows it as the crane turns (it used to drop 2 m and sway behind it); a lifted prop hangs under the magnet's face and lands on its base when dropped.\n- Settings, Controls page: new EXECUTION FX option (ON/OFF, default ON) turns off the camcorder filters, white noise, night tint and hand-held shake over Manhunt 1 executions; stored as `execution_fx` in `Options.ini` and applied live.\n- Manhunt 1: a prop's collision mesh only stops a character sphere that overlaps the prop's bounding sphere (`Col_SpheresVsEntity` 0x4E3D80), so journo_streets `FLAT4` is no longer wedged under the hi-fi shelf; journo_streets now plays from the lobby checkpoint through all seven flat cops and the dossier (`GOAL2`) to `Gen_Save_Point01`, exported for a third segment. Playthrough harness: the stalk walk test reads a full 3D point (it read past a 2-element array); the straight walk it allows inside 4 m is opt-in (`MH_STALK_DIRECT=1`, the journo_streets routes), so the other routes keep the graph path they were tuned on.\n- Manhunt 1 scripts: `RunScript` on an entity a script has killed does nothing, as in the original (journo_streets: after a reload the player is no longer locked by `Unlock_Entrance.EndCutScene`); `journo_streets_resume.route` executes four of the seven flat cops from the lobby slot.\n- Playthrough: mansion_int now plays start to `LEVEL COMPLETED` in two segments (`mansion_int_save.route` to the cellar checkpoint with 71 hit points, `mansion_int_resume.route` from the slot: lever, guards ambushed and sniped, elevator).\n- Playthrough harness: opt-in `safe:N[;T[;L]]` token holds the bot while an awake hunter would see its next position (the engine's sight test); `journo_streets_save.route` (lobby checkpoint) and `mansion_int_save.route` (cellar checkpoint) export slots for resume routes.\n- Manhunt 1: a checkpoint reload applies the saved world state before the level's `oncreate` runs (`Level_Reload` 0x4739E0, `Level_ApplyWorldState` 0x437650), so a used save point is gone and scripts take their reload branch (the journo_streets Journalist resumes at her saved spot; `check-save` tests it).\n- Manhunt 1 AI: the exact active-area gate keeps `AIEntityAlwaysEnabled` agents awake (0x40E390, 0x40E290) and puts a hunter with no walkable home node to sleep (journo_streets FLAT4).\n- Playthrough harness: route headers `export:`, `resume:`, `allow-death:` and `after-continue:` (`--after-continue`) run a route from a checkpoint slot; `make check-playthrough-resume`.\n- Manhunt 1 AI: the original re-issues each idle patrol every min..max seconds from the nearer end of its path (0x52A370, 0x529460, 0x52C150); ported opt-in as `MH_AI_PATROLRESTART=1` (only mansion_int, jury_turf hArena and estate_ext Guardian02 have patrols short enough to matter).\n- Manhunt 1: asylum (1096 s) and trainyard (970 s) play start to LEVEL COMPLETED. Placed guns carry their `DROPPED_AMMO` rounds (`WeaponCollectable_SetMatrix` 0x4CAEA0); a sneaking player no longer auto-jumps on the trainyard gantry; asylum switches to the exact AI area gate from GOAL4 (`MH_AI_EXACT_FROM`, opt-in); the bot no longer re-fetches a spent gas can. The prison route is retuned for the new ammo (873 s).\n- Manhunt 1 (trainyard): the player jumps the three gaps of the box-car gantry as in the original (auto-jump over AI graph links flagged 2, trainyard and weasel only: `Ped_UpdateJumpLinkAssist` 0x4E8960, `Physics_CharJump` 0x48F9A0).\n- Manhunt 1: `KillEntity` on a prop fires `ondeath`/`ondestroy` and removes it (`Entity_Kill` 0x4313E0).\n- Manhunt 1 (mansion_int): exact active-area gate (`MH_AI_AREAGATE=exact`, opt-in; `AIEntityMgr_RefreshPlayerArea` 0x51E310, `AIAgent_TryDeactivate` 0x411580); GOAL1 and GOAL2 clear in one run.\n- Manhunt 1 (journo_streets): a goto goal with the TRUE flag ends on arrival for a buddy (`AIScript_DefineGoalGoto` 0x53A540), and only buddies look at bodies (`AIHunt_CheckDeadBodies` 0x50CB80).\n- Manhunt 1 (asylum): the bot no longer fetches a gas can the blast killed; Hunter2_Tower is killed with the cleaver and the control room kit taken (93 hit points at the gate instead of 26); the route enters the building's ground hall; `waitaway:` takes several patrols (`A|B|C`).\n- Manhunt 1 (mansion_int): a second route, `mansion_int_key.route`, clears GOAL1 (CHIEF's elevator key) by wall taps and pocket executions.\n- Manhunt 1: cellblock plays start to LEVEL COMPLETED (797 s): GUN4 and GUN6 are ambushed at a dark cell door, GUN9 and GUN12 sniped from the halls, GUN11 passed at a run before the exit.\n- Manhunt 1 (journo_streets): the player gets control back when `PlayerFullBodyAnimDone` ends the animation (Ped_EndCutsceneAnim 0x4EDCE0). Route aids: `waitaway:`, `waitnear:`, an anchored ambush (`stalk:Prefix*;H;S;-R;-L`).\n- Manhunt 1: estate_ext and attic play from the start to LEVEL COMPLETED (784 s and 581 s) with scripted input: Hunter_End2 is lured off his loop and executed from behind; the attic Cerberus guards are executed one by one from the dark attic with the player chainsaw.\n- Manhunt 1 AI: the area gate of `AIEntityMgr_RefreshPlayerArea` (0x51E310) reads the area of the hunter's own graph node (opt-in, `MH_AI_AREAGATE`); the asylum route plays on to the opened garage gate (831 s, `MH_DOOR_AWAY=1` swings a script-angle door away from the player), cellblock to GUN10 (563 s), journo_streets to the entrance door (785 s).\n",
+    "assets": [
+      {
+        "name": "manhunt-v0.7.0-macos-x86_64.tar.gz",
+        "size": 2352794,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.7.0/manhunt-v0.7.0-macos-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.7.0-vita.vpk",
+        "size": 1536135,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.7.0/manhunt-v0.7.0-vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "xesf",
+    "homebrew_name": "Manhunt",
+    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_id": "manhunt",
+    "homebrew_authors": [
+      "xesf"
+    ],
+    "homebrew_version": "0.5.1",
+    "catalog_apps": [
+      {
+        "id": "manhunt",
+        "name": "Manhunt",
+        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "version": "0.5.1",
+        "version_date": "2026-11-08",
+        "author_ids": [
+          "xesf"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.5.1.vpk",
+            "size": 1363149,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/Game%20Files%20for%20PSVA.zip",
+            "size": 2040109466,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "manhunt"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/xesf/manhunt-releases"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.5.1 → release v0.7.0",
+    "catalog_version": "0.5.1",
+    "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.5.1.vpk",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "nzp-team/nzportable",
+    "release_id": "451615111",
+    "tag": "nightly",
+    "name": "2.0.0-indev+20261119162905",
+    "url": "https://github.com/nzp-team/nzportable/releases/tag/nightly",
+    "published": "2026-11-19T16:30:40Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "This is a nightly generated automagically. Nightlies are generated at 3AM EST if changes are made to any component of the project in the past 24 hours. Be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.\nChanges in the following areas have been made since the last nightly:\n* Game Assets\n\n \n **If you are looking for Co-Op enabled FTEQW builds, see: https://github.com/nzp-team/fteqw/releases/tag/legacy\nInstallation Instructions:\n* PC: Extract .ZIP archive into a folder of your choice. Linux users may need to mark as executable with `chmod`. Linux users may also choose to use the Flatpak.\n* PSP: Extract the  folder inside the .ZIP archive into `PSP/GAME/`.\n* PS VITA: Extract `nzp.zip` into ux0:data/ and install `nzportable.vpk`.\n* PS2: Place `nzportable.elf` on a USB, Memory Card, HDD. Copy game data to `/APPS/NZPORTABLE/` in the same media.\n* PS3: Install `nzportable.pkg` and copy game data to `/dev_hdd0/game/NZPT00001/USRDIR/`.\n* PS4: Install `nzportable.pkg` and copy game data to `/data/nzportable/`.\n* Xbox: Extract the `nzportable` folder into `<drive>/Games/` and launch `default.xbe`.\n* Xbox 360: Extract to root of USB drive and run with XeLL (Reloaded).* Nintendo 3DS: Extract the .ZIP archive into `/3ds/`.\n* Nintendo Switch: Extract the  folder inside the .ZIP archive into `/switch/` and launch with Homebrew Launcher. Requires extra memory, so make sure to open HBLauncher by holding 'R' over an installed title!\n* TI NSPIRE: Extract the .ZIP archive and sync contents to `My Documents`. \n\n \nYou can also play the WebGL version at https://nzp.gay/",
+    "assets": [
+      {
+        "name": "build-version.txt",
+        "size": 27,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt",
+        "content_type": "text/plain"
+      },
+      {
+        "name": "nzportable-3ds.zip",
+        "size": 64901978,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-3ds.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-linux32.zip",
+        "size": 74181725,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux32.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-linux64.zip",
+        "size": 74294747,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-linuxarm64.zip",
+        "size": 74267314,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-linuxarmhf.zip",
+        "size": 74219429,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarmhf.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-nspire.zip",
+        "size": 25235579,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-nspire.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-ps2.zip",
+        "size": 77108751,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps2.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-ps3.zip",
+        "size": 74532665,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps3.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-ps4.zip",
+        "size": 79853505,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps4.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-psp.zip",
+        "size": 64756766,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-psp.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-switch.zip",
+        "size": 77336750,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-switch.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-vita.zip",
+        "size": 76334883,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-vita.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-win32.zip",
+        "size": 78020622,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win32.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-win64.zip",
+        "size": 78020622,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win64.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-xbox.zip",
+        "size": 74145336,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nzportable-xbox360.zip",
+        "size": 74202247,
+        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox360.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "release_channel": "rolling",
+    "review_required": false,
+    "stable_release": {
+      "platform": "github",
+      "repo": "nzp-team/nzportable",
+      "tag": "nightly",
+      "release_id": "451615111",
+      "published": "2026-11-19T16:30:40Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "name": "build-version.txt",
+          "size": 27,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt",
+          "content_type": "text/plain"
+        },
+        {
+          "name": "nzportable-3ds.zip",
+          "size": 64901978,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-3ds.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-linux32.zip",
+          "size": 74181725,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux32.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-linux64.zip",
+          "size": 74294747,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-linuxarm64.zip",
+          "size": 74267314,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-linuxarmhf.zip",
+          "size": 74219429,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarmhf.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-nspire.zip",
+          "size": 25235579,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-nspire.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-ps2.zip",
+          "size": 77108751,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps2.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-ps3.zip",
+          "size": 74532665,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps3.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-ps4.zip",
+          "size": 79853505,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps4.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-psp.zip",
+          "size": 64756766,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-psp.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-switch.zip",
+          "size": 77336750,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-switch.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-vita.zip",
+          "size": 76334883,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-vita.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-win32.zip",
+          "size": 78020622,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win32.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-win64.zip",
+          "size": 78020622,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win64.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-xbox.zip",
+          "size": 74145336,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox.zip",
+          "content_type": "application/zip"
+        },
+        {
+          "name": "nzportable-xbox360.zip",
+          "size": 74202247,
+          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox360.zip",
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    "homebrew_name": "Nazi Zombies Portable",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-nazi-zombies-portable/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Nazi Zombies Portable for PSVITA.",
+    "homebrew_long_description": "Call of Duty: Zombies \"de-make\" for PlayStation Portable & VITA, Nintendo Switch & 3DS, Windows, & Linux (ARM & x86). Powered by various Quake sourceports. Includes \"Nacht der Untoten\" and several community-made maps.\n\n- PsVitaAlive -",
+    "homebrew_id": "nazi-zombies-portable",
+    "homebrew_authors": [
+      "nzp-reboot-team",
+      "rinnegatamante"
+    ],
+    "homebrew_version": "Nightly",
+    "catalog_apps": [
+      {
+        "id": "nazi-zombies-portable",
+        "name": "Nazi Zombies Portable",
+        "icon": "https://archive.org/download/psvitaalive-nazi-zombies-portable/icon0.png",
+        "category": "ports",
+        "description": "Port of Nazi Zombies Portable for PSVITA.",
+        "long_description": "Call of Duty: Zombies \"de-make\" for PlayStation Portable & VITA, Nintendo Switch & 3DS, Windows, & Linux (ARM & x86). Powered by various Quake sourceports. Includes \"Nacht der Untoten\" and several community-made maps.\n\n- PsVitaAlive -",
+        "version": "Nightly",
+        "version_date": "2024-02-05",
+        "author_ids": [
+          "nzp-reboot-team",
+          "rinnegatamante"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-nazi-zombies-portable/nazi-zombies-portable.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/nzp-team/nzportable/releases"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/nzp-team/nzportable/releases/tag/nightly"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/nzp-team/nzportable"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive Nightly",
+    "catalog_version": "Nightly",
+    "archive_current_link": "https://archive.org/download/psvitaalive-nazi-zombies-portable/nazi-zombies-portable.vpk",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "germanalvarez15/nfsmw-vita",
+    "release_id": "451498405",
+    "tag": "1.6.2",
+    "name": "1.6.2",
+    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.2",
+    "published": "2026-11-19T14:58:10Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## NFS Most Wanted Vita 1.6.2\n\nThis release brings the rain and the fixes tested in 1.6.2-beta1 to everyone, plus three fixes from your feedback on the beta. Thanks to everyone who tried it!\n\n> **Heads-up about performance:** the rain is among the most demanding features for the Vita and can lower the frame rate. If you want the smoothest frame rate, use the most basic settings in Options > Video, with Rain set to Off.\n\n### New: rain (Options > Video > Rain)\n- Redone from scratch: thin drops that splash on the road, a darker sky and a grey haze in the distance. Dynamic follows the game's weather; Always keeps it raining. Off by default.\n\n### Fixes since 1.6.2-beta1\n- **Rain at speed:** the drops no longer fly at the camera when driving fast, and they get fainter the faster you go, as on the PS2 (#153).\n- **Tunnels:** the rain look no longer switches off inside a tunnel, and entering or leaving one fades over a second and a half instead of changing at once (#153).\n- **Matte roofs and trunks:** in races and free roam, the roof and trunk of every car lost their reflections. They shine again (#173).\n- **Crash in pursuits:** the game could freeze and close during a pursuit when the police set up a roadblock with the heavy SUVs: one of the SUVs picked for it had already been removed from the game (#177).\n\n### Also in this release (from 1.6.2-beta1)\n- **Car reflections:** calculated per pixel, no longer faceted (#169).\n- **Props sinking into the ground:** the marina yacht and Ming's water tower stay on the road (#167).\n\n### Updating from 1.6.1 or 1.6.2-beta1\nInstall the new `nfsmw.vpk` over the existing one. Your saves and game data stay intact. The other LiveArea designs are in `assets.zip`.\n",
+    "assets": [
+      {
+        "name": "assets.zip",
+        "size": 971074,
+        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.2/assets.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "nfsmw.vpk",
+        "size": 3274720,
+        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.2/nfsmw.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "germanalvarez15",
+    "homebrew_name": "NFS Most Wanted",
+    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+    "homebrew_id": "nfs-most-wanted",
+    "homebrew_authors": [
+      "germanalvarez15"
+    ],
+    "homebrew_version": "1.6.1",
+    "catalog_apps": [
+      {
+        "id": "nfs-most-wanted",
+        "name": "NFS Most Wanted",
+        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
+        "category": "ports",
+        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
+        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
+        "version": "1.6.1",
+        "version_date": "2026-11-17",
+        "author_ids": [
+          "germanalvarez15"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.1/nfsmw.vpk",
+            "size": 3260233,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files Fix",
+            "url": "https://archive.org/download/nfsmw-vita/Game%20Files%20Fix%20for%20PSVA.zip",
+            "size": 1610612736,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "nfsmw"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Gihub",
+            "url": "https://github.com/germanalvarez15/nfsmw-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.6.1 → release 1.6.2",
+    "catalog_version": "1.6.1",
+    "archive_current_link": "",
+    "backup_status": "missing",
+    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
+  },
+  {
+    "platform": "github",
     "repo": "thcolin/gamepad-media-center-aggregator",
     "release_id": "451224731",
     "tag": "v1.5.0",
@@ -1746,110 +2197,6 @@
   },
   {
     "platform": "github",
-    "repo": "germanalvarez15/nfsmw-vita",
-    "release_id": "447922044",
-    "tag": "1.6.2-beta1",
-    "name": "1.6.2-beta1",
-    "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/tag/1.6.2-beta1",
-    "published": "2026-11-17T01:43:08Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "## NFS Most Wanted Vita 1.6.2-beta1\n\nThis beta brings back the rain, redone from scratch, and fixes two issues reported since 1.6.1-beta1. If you reported one of them, please try it and tell me on your issue whether it works for you.\n\n> **Heads-up about performance:** the new features, especially the rain, are among the most demanding for the Vita and can lower the frame rate. You can use them, but if you want the smoothest frame rate, use the most basic settings in Options > Video, with Rain set to Off.\n\n### New: rain (Options > Video > Rain)\n- **Rain:** I redid it from scratch. The drops are thin and stay in the world, so you see them while driving too, and they splash on the road. While it rains the sky clouds over, the scene gets darker and a grey haze covers the distance, blending into the sky at the horizon.\n- **Dynamic or Always:** Dynamic follows the game's own weather maps, so it rains in some areas for a few minutes at a time. Always keeps it raining everywhere.\n- **It costs frame rate:** rain is off by default and Off is the recommended setting. Turning it on lowers the FPS, more so at 60 FPS.\n\n### Fixes\n- **Car reflections:** reflections on glass and paint are now calculated for each pixel instead of each triangle, so they no longer look faceted. The normals of the car's panels are also smoothed across the seams, as on the PS2 (#169).\n- **Props sinking into the ground:** the marina yacht (a pursuit breaker) and the water tower tank in Ming's race intros fell through the road. When many props were moving at once, the game turned the oldest ones into simple objects without ground collision. That limit now works as on the PS2 (#167).\n\n### New LiveArea\nLike 1.6.1, this beta has the new default LiveArea, the Black Edition design by @once13one (#162), chosen in the [community vote](https://github.com/germanalvarez15/nfsmw-vita/discussions/166). The other designs are in `assets.zip`; the 1.6.1 notes explain how to use them.\n\n### Updating from 1.6.1 or 1.6.1-beta1\nInstall the new `nfsmw.vpk` over the existing one. Your saves and game data stay intact.\n",
-    "assets": [
-      {
-        "name": "assets.zip",
-        "size": 971074,
-        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.2-beta1/assets.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nfsmw.vpk",
-        "size": 3273518,
-        "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.2-beta1/nfsmw.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "germanalvarez15",
-    "stable_release": {
-      "platform": "github",
-      "repo": "germanalvarez15/nfsmw-vita",
-      "tag": "1.6.1",
-      "release_id": "447921790",
-      "published": "2026-11-17T01:42:53Z",
-      "prerelease": false,
-      "assets": [
-        {
-          "name": "assets.zip",
-          "size": 971074,
-          "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.1/assets.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nfsmw.vpk",
-          "size": 3260233,
-          "download_url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.1/nfsmw.vpk",
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    "homebrew_name": "NFS Most Wanted",
-    "homebrew_icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-    "homebrew_long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-    "homebrew_id": "nfs-most-wanted",
-    "homebrew_authors": [
-      "germanalvarez15"
-    ],
-    "homebrew_version": "1.6.1",
-    "catalog_apps": [
-      {
-        "id": "nfs-most-wanted",
-        "name": "NFS Most Wanted",
-        "icon": "https://archive.org/download/nfsmw-vita/icon0.png",
-        "category": "ports",
-        "description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.",
-        "long_description": "An unofficial port of Need for Speed: Most Wanted (PS2, Black Edition, SLUS-21351) to the PS Vita.\n\n- PsVitaAlive -",
-        "version": "1.6.1",
-        "version_date": "2026-11-17",
-        "author_ids": [
-          "germanalvarez15"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/germanalvarez15/nfsmw-vita/releases/download/1.6.1/nfsmw.vpk",
-            "size": 3260233,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files Fix",
-            "url": "https://archive.org/download/nfsmw-vita/Game%20Files%20Fix%20for%20PSVA.zip",
-            "size": 1610612736,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "nfsmw"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Gihub",
-            "url": "https://github.com/germanalvarez15/nfsmw-vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.6.1 → release 1.6.2-beta1",
-    "catalog_version": "1.6.1",
-    "archive_current_link": "",
-    "backup_status": "missing",
-    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
-  },
-  {
-    "platform": "github",
     "repo": "isledecomp/isle-portable",
     "release_id": "447808684",
     "tag": "continuous",
@@ -2356,293 +2703,6 @@
     "archive_current_link": "",
     "backup_status": "missing",
     "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "nzp-team/nzportable",
-    "release_id": "447329595",
-    "tag": "nightly",
-    "name": "2.0.0-indev+20261116165525",
-    "url": "https://github.com/nzp-team/nzportable/releases/tag/nightly",
-    "published": "2026-11-16T16:57:12Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "This is a nightly generated automagically. Nightlies are generated at 3AM EST if changes are made to any component of the project in the past 24 hours. Be sure to check the build date above and compare it to the version displayed on the main menu to verify whether or not you are out of date.\nChanges in the following areas have been made since the last nightly:\n* Game Assets\n* QuakeC (Game Code)\n* Vril (Engine)\n\n \n **If you are looking for Co-Op enabled FTEQW builds, see: https://github.com/nzp-team/fteqw/releases/tag/legacy\nInstallation Instructions:\n* PC: Extract .ZIP archive into a folder of your choice. Linux users may need to mark as executable with `chmod`. Linux users may also choose to use the Flatpak.\n* PSP: Extract the  folder inside the .ZIP archive into `PSP/GAME/`.\n* PS VITA: Extract `nzp.zip` into ux0:data/ and install `nzportable.vpk`.\n* PS2: Place `nzportable.elf` on a USB, Memory Card, HDD. Copy game data to `/APPS/NZPORTABLE/` in the same media.\n* PS3: Install `nzportable.pkg` and copy game data to `/dev_hdd0/game/NZPT00001/USRDIR/`.\n* PS4: Install `nzportable.pkg` and copy game data to `/data/nzportable/`.\n* Xbox: Extract the `nzportable` folder into `<drive>/Games/` and launch `default.xbe`.\n* Xbox 360: Extract to root of USB drive and run with XeLL (Reloaded).* Nintendo 3DS: Extract the .ZIP archive into `/3ds/`.\n* Nintendo Switch: Extract the  folder inside the .ZIP archive into `/switch/` and launch with Homebrew Launcher. Requires extra memory, so make sure to open HBLauncher by holding 'R' over an installed title!\n* TI NSPIRE: Extract the .ZIP archive and sync contents to `My Documents`. \n\n \nYou can also play the WebGL version at https://nzp.gay/",
-    "assets": [
-      {
-        "name": "build-version.txt",
-        "size": 27,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt",
-        "content_type": "text/plain"
-      },
-      {
-        "name": "nzportable-3ds.zip",
-        "size": 64901600,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-3ds.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-linux32.zip",
-        "size": 74181347,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux32.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-linux64.zip",
-        "size": 74294369,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-linuxarm64.zip",
-        "size": 74266936,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-linuxarmhf.zip",
-        "size": 74219051,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarmhf.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-nspire.zip",
-        "size": 25237375,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-nspire.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-ps2.zip",
-        "size": 77108373,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps2.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-ps3.zip",
-        "size": 74532287,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps3.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-ps4.zip",
-        "size": 79853127,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps4.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-psp.zip",
-        "size": 64756388,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-psp.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-switch.zip",
-        "size": 77336372,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-switch.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-vita.zip",
-        "size": 76334505,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-win32.zip",
-        "size": 78020244,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win32.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-win64.zip",
-        "size": 78020244,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win64.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-xbox.zip",
-        "size": 74144958,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "nzportable-xbox360.zip",
-        "size": 74201869,
-        "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox360.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "release_channel": "rolling",
-    "review_required": false,
-    "stable_release": {
-      "platform": "github",
-      "repo": "nzp-team/nzportable",
-      "tag": "nightly",
-      "release_id": "447329595",
-      "published": "2026-11-16T16:57:12Z",
-      "prerelease": true,
-      "assets": [
-        {
-          "name": "build-version.txt",
-          "size": 27,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt",
-          "content_type": "text/plain"
-        },
-        {
-          "name": "nzportable-3ds.zip",
-          "size": 64901600,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-3ds.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-linux32.zip",
-          "size": 74181347,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux32.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-linux64.zip",
-          "size": 74294369,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-linuxarm64.zip",
-          "size": 74266936,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-linuxarmhf.zip",
-          "size": 74219051,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarmhf.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-nspire.zip",
-          "size": 25237375,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-nspire.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-ps2.zip",
-          "size": 77108373,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps2.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-ps3.zip",
-          "size": 74532287,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps3.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-ps4.zip",
-          "size": 79853127,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-ps4.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-psp.zip",
-          "size": 64756388,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-psp.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-switch.zip",
-          "size": 77336372,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-switch.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-vita.zip",
-          "size": 76334505,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-vita.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-win32.zip",
-          "size": 78020244,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win32.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-win64.zip",
-          "size": 78020244,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-win64.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-xbox.zip",
-          "size": 74144958,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox.zip",
-          "content_type": "application/zip"
-        },
-        {
-          "name": "nzportable-xbox360.zip",
-          "size": 74201869,
-          "download_url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-xbox360.zip",
-          "content_type": "application/zip"
-        }
-      ]
-    },
-    "homebrew_name": "Nazi Zombies Portable",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-nazi-zombies-portable/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Nazi Zombies Portable for PSVITA.",
-    "homebrew_long_description": "Call of Duty: Zombies \"de-make\" for PlayStation Portable & VITA, Nintendo Switch & 3DS, Windows, & Linux (ARM & x86). Powered by various Quake sourceports. Includes \"Nacht der Untoten\" and several community-made maps.\n\n- PsVitaAlive -",
-    "homebrew_id": "nazi-zombies-portable",
-    "homebrew_authors": [
-      "nzp-reboot-team",
-      "rinnegatamante"
-    ],
-    "homebrew_version": "Nightly",
-    "catalog_apps": [
-      {
-        "id": "nazi-zombies-portable",
-        "name": "Nazi Zombies Portable",
-        "icon": "https://archive.org/download/psvitaalive-nazi-zombies-portable/icon0.png",
-        "category": "ports",
-        "description": "Port of Nazi Zombies Portable for PSVITA.",
-        "long_description": "Call of Duty: Zombies \"de-make\" for PlayStation Portable & VITA, Nintendo Switch & 3DS, Windows, & Linux (ARM & x86). Powered by various Quake sourceports. Includes \"Nacht der Untoten\" and several community-made maps.\n\n- PsVitaAlive -",
-        "version": "Nightly",
-        "version_date": "2024-02-05",
-        "author_ids": [
-          "nzp-reboot-team",
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-nazi-zombies-portable/nazi-zombies-portable.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/nzp-team/nzportable/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/nzp-team/nzportable/releases/tag/nightly"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/nzp-team/nzportable"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive Nightly",
-    "catalog_version": "Nightly",
-    "archive_current_link": "https://archive.org/download/psvitaalive-nazi-zombies-portable/nazi-zombies-portable.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   },
   {
     "platform": "github",
@@ -4747,94 +4807,6 @@
     "archive_current_link": "",
     "backup_status": "review",
     "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "xesf/manhunt-releases",
-    "release_id": "438534362",
-    "tag": "v0.5.1",
-    "name": "v0.5.1",
-    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.5.1",
-    "published": "2026-11-08T21:29:05Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "### Changed\n\n- Starting `manhunt` with no arguments boots the game (title movie, front end) on every platform, and finds the data in `data/Manhunt`, the per-user data folder or a default Steam library; the rotating-quad check is now `--demo`.\n",
-    "assets": [
-      {
-        "name": "manhunt-v0.5.1-linux-x86_64.tar.gz",
-        "size": 2664585,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.5.1/manhunt-v0.5.1-linux-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-v0.5.1-macos-arm64.tar.gz",
-        "size": 1959886,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.5.1/manhunt-v0.5.1-macos-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-v0.5.1-vita.vpk",
-        "size": 1382436,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.5.1/manhunt-v0.5.1-vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "xesf",
-    "homebrew_name": "Manhunt",
-    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_id": "manhunt",
-    "homebrew_authors": [
-      "xesf"
-    ],
-    "homebrew_version": "0.5.1",
-    "catalog_apps": [
-      {
-        "id": "manhunt",
-        "name": "Manhunt",
-        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "version": "0.5.1",
-        "version_date": "2026-11-08",
-        "author_ids": [
-          "xesf"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.5.1.vpk",
-            "size": 1363149,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/Game%20Files%20for%20PSVA.zip",
-            "size": 2040109466,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "manhunt"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/xesf/manhunt-releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.5.1",
-    "catalog_version": "0.5.1",
-    "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.5.1.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
   },
   {
     "platform": "github",
@@ -45985,100 +45957,5 @@
     "archive_current_link": "https://archive.org/download/psvitaalive-zelda-picross-vita/zelda-picross-vita.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "gitlab",
-    "repo": "alexramallo/lugaruvita",
-    "release_id": "77acff61",
-    "tag": "77acff61",
-    "name": "Release 'release-beta-1'",
-    "url": "https://gitlab.com/alexramallo/lugaruvita/-/releases/77acff61",
-    "published": "2022-08-20T12:14:28.231Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Created using release-cli",
-    "assets": [
-      {
-        "name": "Lugaru VPK (77acff61)",
-        "size": 0,
-        "download_url": "https://gitlab.com/api/v4/projects/38700345/packages/generic/builds/release-beta-1/Lugaru-release-beta-1.vpk",
-        "original_url": "https://gitlab.com/api/v4/projects/38700345/packages/generic/builds/release-beta-1/Lugaru-release-beta-1.vpk",
-        "content_type": ""
-      },
-      {
-        "name": "source.zip",
-        "size": 0,
-        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.zip",
-        "content_type": ""
-      },
-      {
-        "name": "source.tar.gz",
-        "size": 0,
-        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.tar.gz",
-        "content_type": ""
-      },
-      {
-        "name": "source.tar.bz2",
-        "size": 0,
-        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.tar.bz2",
-        "content_type": ""
-      },
-      {
-        "name": "source.tar",
-        "size": 0,
-        "download_url": "https://gitlab.com/alexramallo/lugaruvita/-/archive/77acff61/lugaruvita-77acff61.tar",
-        "content_type": ""
-      }
-    ],
-    "author": "Alejandro Ramallo",
-    "homebrew_name": "Lugaru HD",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-lugaru-hd/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Lugaru for PSVITA.",
-    "homebrew_long_description": "Ninja rabbits on your Vita!\nThis is a beta release, meaning there are some bugs and crashes, but it's still entirely playable.\nThis is a port of the LugaruOSS to the PS Vita. It runs at 60 FPS at stock speeds, and some scenes even run at 60 with an underclock!\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-    "homebrew_id": "lugaru-hd",
-    "homebrew_authors": [
-      "diggeloid"
-    ],
-    "homebrew_version": "beta 1",
-    "catalog_apps": [
-      {
-        "id": "lugaru-hd",
-        "name": "Lugaru HD",
-        "icon": "https://archive.org/download/psvitaalive-lugaru-hd/icon0.png",
-        "category": "ports",
-        "description": "Port of Lugaru for PSVITA.",
-        "long_description": "Ninja rabbits on your Vita!\nThis is a beta release, meaning there are some bugs and crashes, but it's still entirely playable.\nThis is a port of the LugaruOSS to the PS Vita. It runs at 60 FPS at stock speeds, and some scenes even run at 60 with an underclock!\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-        "version": "beta 1",
-        "version_date": "2022-08-20",
-        "author_ids": [
-          "diggeloid"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-lugaru-hd/lugaru-hd.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Official Website",
-            "url": "https://aramallo.itch.io/lugaru-vita-port"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://gitlab.com/alexramallo/lugaruvita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive beta 1 → release 77acff61",
-    "catalog_version": "beta 1",
-    "archive_current_link": "https://archive.org/download/psvitaalive-lugaru-hd/lugaru-hd.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   }
 ]
