@@ -308,6 +308,113 @@ def find_vpk(repo, platform):
     return {}
 
 
+
+# Versioned, conservative destination classification. "Mentions Vita" is not enough.
+TARGET_FILTER_VERSION = 2
+VITA_PATTERN = r"(?:ps[\s_-]*vita|playstation\s+vita|ps[\s_-]*tv|pstv)"
+TARGET_PATTERN = re.compile(
+    r"(?:\b(?:for|to|on|runs?\s+on|installed?\s+on|built\s+for|made\s+for|"
+    r"port(?:ed)?\s+to|compatible\s+with|para|sur|für)\s+(?:the\s+|a\s+)?"
+    + VITA_PATTERN
+    + r"|\b" + VITA_PATTERN + r"\s+(?:homebrew|app(?:lication)?|client|game|plugin|port|patch|mod|version|release|tool|reader|player)\b)",
+    re.I,
+)
+SWITCH_DESTINATION = re.compile(
+    r"(?:\b(?:recompil\w*|port(?:ed)?|compil\w*|build\w*|target\w*)"
+    r".{0,90}\b(?:for|to|para|on)\s+(?:the\s+)?(?:nintendo\s+)?switch\b"
+    r"|\b(?:nintendo\s+switch|switch)\s+homebrew\b"
+    r"|\b(?:libnx|devkitpro\s+switch|switch\s+arm64)\b)",
+    re.I,
+)
+VITA_EMULATOR = re.compile(
+    r"(?:\b(?:ps[\s_-]*vita|playstation\s+vita)\s+emulator\b"
+    r"|\bemulat(?:or|ion)\s+of\s+(?:the\s+)?(?:ps[\s_-]*vita|playstation\s+vita)\b)", re.I,
+)
+BUILD_VITA = re.compile(r"\bvita_create_(?:vpk|self)\s*\(", re.I)
+PATCH = re.compile(r"\b(?:patch(?:es|ing)?|translation|localization|mod|traducci[oó]n|tradu[cç][aã]o|parche)\b", re.I)
+
+
+def classify_target(name, description, readme_text, paths=(), vpk=None):
+    """Returns (status, kind, reason). Never treat a mere PS Vita mention as eligibility."""
+    meta = (str(name or "") + " " + str(description or "")).strip()
+    body = str(readme_text or "")[:16000]
+    combined = meta + "\n" + body
+    lower_name = str(name or "").lower()
+    has_vpk = bool(vpk)
+    build = bool(BUILD_VITA.search(body))
+    vita_icon = any(str(p).lower().endswith("sce_sys/icon0.png") for p in paths)
+    vita_plugin = any(str(p).lower().endswith((".skprx", ".suprx")) for p in paths)
+    patch = bool(PATCH.search(meta)) and bool(re.search(VITA_PATTERN, meta, re.I))
+    kind = "patch" if patch else "homebrew"
+
+    # Explicit outputs for another platform override incidental Vita references.
+    if lower_name == "vita3k" or (VITA_EMULATOR.search(meta) and not has_vpk):
+        return "excluded", kind, "Emulador de PS Vita para otras plataformas"
+    if (SWITCH_DESTINATION.search(meta) or
+            (SWITCH_DESTINATION.search(body[:1800]) and not has_vpk)):
+        if not has_vpk and not build:
+            return "excluded", kind, "El destino es Nintendo Switch, no PS Vita"
+    if re.search(r"(?:ps[\s_-]*vita|playstation\s+vita).{0,100}\b(?:to|for|para)\s+(?:the\s+)?(?:nintendo\s+)?switch\b",
+                 combined[:2500], re.I) and not has_vpk:
+        return "excluded", kind, "Proyecto que parte de Vita pero se dirige a Switch"
+
+    # Related PC management tools should not be misidentified as console apps.
+    desktop = bool(re.search(
+        r"\b(?:windows\s+(?:desktop|app|program)|desktop\s+(?:app|utility|tool)|"
+        r"pc[-\s]+only|for\s+(?:windows|macos|linux)\b|native\s+(?:rust|python)\s+(?:builder|tool))\b",
+        meta, re.I))
+    if desktop and not has_vpk and not build and not vita_icon:
+        return "review", kind, "Herramienta de PC relacionada con PS Vita"
+
+    # Keep PSP-only patches for separate review, not as PS Vita game patches.
+    if patch and re.search(r"\b(?:PSP|PPSSPP|playstation\s+portable)\b", meta, re.I) and not re.search(
+            r"(?:ps[\s_-]*vita|playstation\s+vita)\s+(?:game|patch|title)", meta, re.I):
+        return "review", kind, "Parche PSP compatible con Vita; requiere revisión"
+
+    targeted = bool(TARGET_PATTERN.search(meta) or TARGET_PATTERN.search(body[:4000]))
+    targeted = targeted or bool(re.search(
+        r"(?:ps[\s_-]*vita|playstation\s+vita)\s+(?:port|build)\s+of\b", combined, re.I))
+    if has_vpk:
+        return "candidate", kind, "VPK en release público"
+    if build and (targeted or vita_icon or vita_plugin):
+        return "candidate", kind, "Compilación VitaSDK con destino PS Vita"
+    if targeted and (vita_icon or vita_plugin):
+        return "candidate", kind, "Destino Vita confirmado por recursos nativos"
+    if patch and targeted and not re.search(r"\b(?:nintendo\s+switch|libnx)\b", combined[:1800], re.I):
+        return "candidate", kind, "Posible parche para PS Vita (revisión necesaria)"
+    return "review", kind, "No está confirmado que se ejecute o aplique en PS Vita"
+
+
+def reclassify_existing(state, candidates):
+    """Clean old candidates once without re-fetching the same repositories."""
+    if int(state.get("target_filter_version", 0)) >= TARGET_FILTER_VERSION:
+        return 0
+    audit = state.setdefault("target_filter_audit", {})
+    count = 0
+    for key, entry in list(candidates.items()):
+        app = entry.get("app_draft") or {}
+        links = app.get("links") or []
+        vpk = next((link for link in links if isinstance(link, dict) and
+                    link.get("type") == "Download" and
+                    str(link.get("url") or "").lower().endswith(".vpk")), None)
+        paths = [str(app.get("icon") or "")]
+        result, kind, reason = classify_target(
+            app.get("name"), app.get("description"), app.get("long_description"), paths, vpk)
+        if result != "candidate":
+            audit[key] = {"result": result, "reason": reason,
+                          "project": entry.get("project"), "filtered_at": utc()}
+            if key in state.get("seen", {}):
+                state["seen"][key]["result"] = result
+                state["seen"][key]["reason"] = reason
+            del candidates[key]
+            count += 1
+        else:
+            entry["project_type"] = kind
+            entry["target_reason"] = reason
+    state["target_filter_version"] = TARGET_FILTER_VERSION
+    return count
+
+
 def analyze(repo, platform, known, authors):
     full = project(repo, platform)
     if platform + ":" + full.lower() in known:
@@ -316,8 +423,16 @@ def analyze(repo, platform, known, authors):
     metadata = str(repo.get("name") or "") + " " + str(repo.get("description") or "")
     if not re.search(r"ps[\s-]?vita|vitasdk|vita2d|vita[-_]?homebrew|vita", metadata + " " + text[:12000], re.I):
         return "unrelated", None
+    # Avoid expensive API calls if the description already declares a wrong target.
+    early, _, early_reason = classify_target(repo.get("name"), repo.get("description"), text)
+    if early == "excluded":
+        return "excluded", None
     files = files_for(repo, platform)
     vpk = find_vpk(repo, platform)
+    decision, kind, target_reason = classify_target(
+        repo.get("name"), repo.get("description"), text, files, vpk)
+    if decision != "candidate":
+        return decision, None
     score, reasons = 0, []
     if re.search(r"ps[\s-]?vita|vitasdk|vita[-_]?homebrew", metadata, re.I):
         score += 4
@@ -364,6 +479,7 @@ def analyze(repo, platform, known, authors):
         "name": handle, "avatar": owner.get("avatar_url") or "", "bio": "",
         "links": [{"type": platform.title(), "name": platform.title(), "url": profile_url}]}
     entry = {"key": repo_id(repo, platform), "platform": platform, "project": full,
+             "project_type": kind, "target_reason": target_reason,
              "source_url": app_url, "author_profile": profile_url,
              "author_draft": author_draft, "discovered_at": utc(), "review_state": "new",
              "score": score, "evidence": reasons, "app_draft": app,
@@ -384,6 +500,7 @@ def run():
     candidates = read_json(CANDIDATES, {})
     if not isinstance(candidates, dict) or not isinstance(state.get("queue"), list):
         raise RuntimeError("Corrupt discovery data; refusing overwrite")
+    reclassified = reclassify_existing(state, candidates)
     failures = []
     globally_found = scanned_profiles = checked = found = 0
     try:
@@ -420,7 +537,8 @@ def run():
     state["last_run"] = utc()
     state["errors"] = failures[:10]
     state["last_round"] = {"global_results": globally_found, "profiles_checked": scanned_profiles,
-                           "repositories_checked": checked, "new_candidates": found, "pending": len(state["queue"])}
+                           "repositories_checked": checked, "new_candidates": found, "filtered_existing": reclassified,
+                           "pending": len(state["queue"])}
     # Migrate prior queue snapshots to compact state, including initial runs.
     for task in state["queue"]:
         task["repo"] = compact_repo(task["repo"], task["platform"])
