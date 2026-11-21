@@ -423,7 +423,7 @@ def files_for(repo, platform):
 
 
 def raw_url(repo, platform, file):
-    branch = quote(repo.get("default_branch") or "main", safe="")
+    branch = quote(repo.get("default_branch") or "main", safe="/")
     path = "/".join(quote(part, safe="") for part in file.split("/"))
     full = "/".join(quote(part, safe="") for part in project(repo, platform).split("/"))
     if platform == "github":
