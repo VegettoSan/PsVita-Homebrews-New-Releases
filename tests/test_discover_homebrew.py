@@ -158,6 +158,73 @@ class TextLimitsTests(unittest.TestCase):
         self.assertEqual(len(state["queue"]), 3)
         self.assertEqual(state["seen"]["gl:1"]["result"], "irrelevant_metadata")
 
+    def test_catalog_sync_hides_registered_repo_and_keeps_other_discoveries(self):
+        catalog = {"apps": [
+            {"id": "vitacell", "name": "VitaCell", "title_id": "VITA00001",
+             "author_ids": ["shadowmedicis"],
+             "links": [{"type": "Repository",
+                        "url": "https://github.com/shadowmedicis/VitaCell/releases/latest"}]},
+        ]}
+        official = dh.official_app_index(catalog)
+        candidates = {
+            "gh:42": {"project": "shadowmedicis/VitaCell",
+                      "source_url": "https://github.com/shadowmedicis/VitaCell",
+                      "app_draft": {"title_id": "", "name": "VitaCell", "links": []}},
+            "gh:43": {"project": "notregistered/example",
+                      "source_url": "https://github.com/notregistered/example",
+                      "app_draft": {"name": "Example", "links": []}},
+        }
+        state = {"seen": {"gh:42": {"result": "candidate"}},
+                 "queue": [{"key": "gh:44", "platform": "github",
+                            "repo": {"id": 44, "full_name": "shadowmedicis/VitaCell"}},
+                           {"key": "gh:45", "platform": "github",
+                            "repo": {"id": 45, "full_name": "new/repo"}}]}
+        removed = dh.reconcile_catalog(state, candidates, official)
+        self.assertEqual(removed, 1)
+        self.assertNotIn("gh:42", candidates)
+        self.assertIn("gh:43", candidates)
+        self.assertEqual(len(state["queue"]), 1)
+        self.assertEqual(state["queue"][0]["key"], "gh:45")
+        self.assertEqual(state["seen"]["gh:42"]["result"], "catalogued")
+        self.assertIn("gh:42", state["catalogued_discoveries"])
+
+    def test_catalog_id_or_exact_author_title_match_but_not_name_alone(self):
+        official = dh.official_app_index([{
+            "id": "vita-game", "name": "Great Vita Game", "title_id": "GREAT0001",
+            "author_ids": ["dev1"], "links": []}])
+        by_id = {"source_url": "https://github.com/other/a",
+                 "app_draft": {"name": "Unrelated", "title_id": "GREAT0001"}}
+        by_author = {"source_url": "https://github.com/other/b",
+                     "app_draft": {"name": "Great-Vita-Game", "author_ids": ["dev1"]}}
+        just_name = {"source_url": "https://github.com/other/c",
+                     "app_draft": {"name": "Great Vita Game", "author_ids": ["dev2"]}}
+        self.assertEqual(dh.match_official_candidate(by_id, official), "title_id:GREAT0001")
+        self.assertEqual(dh.match_official_candidate(by_author, official), "same_author_and_title")
+        self.assertIsNone(dh.match_official_candidate(just_name, official))
+
+    def test_queued_known_vita_projects_take_priority_without_starving_rest(self):
+        queue = [
+            {"key": "gh:1", "platform": "github",
+             "repo": {"id": 1, "full_name": "someone/unrelated-code",
+                      "description": "A desktop CSS project"}},
+            {"key": "gh:2", "platform": "github",
+             "repo": {"id": 2, "full_name": "known-author/tool",
+                      "owner": {"login": "known-author"}, "description": "Small tool"}},
+            {"key": "gh:3", "platform": "github",
+             "repo": {"id": 3, "full_name": "dev/ps-vita-player",
+                      "description": "Homebrew for PS Vita"}},
+        ]
+        chosen = dh.pop_prioritized_task(queue, ["github:known-author"], 0)
+        self.assertEqual(chosen["key"], "gh:3")
+        low = dh.pop_prioritized_task(queue, ["github:known-author"], 4)
+        self.assertEqual(low["key"], "gh:1")
+        self.assertEqual(queue[0]["key"], "gh:2")
+
+    def test_budget_enforced_without_network_call(self):
+        with patch.object(dh, "REQUEST_COUNT", dh.MAX_REQUESTS):
+            with self.assertRaises(dh.DiscoveryBudgetReached):
+                dh.request("https://api.github.com/repos/example/project")
+
     def test_dashboard_escapes_untrusted_metadata(self):
         html = dash.render({"gh:1": {"key": "gh:1", "project": "a/b", "platform": "github",
                                     "source_url": "https://github.com/a/b", "score": 5,
