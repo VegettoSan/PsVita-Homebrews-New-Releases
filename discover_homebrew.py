@@ -878,7 +878,7 @@ def enrich_existing_media(candidates):
             "still_to_refresh": pending}
 
 
-def analyze(repo, platform, known, authors):
+def analyze(repo, platform, known, authors, official=None):
     if repo.get("needs_refresh"):
         if platform == "github":
             repo = request("https://api.github.com/repos/" + project(repo, platform)) or repo
@@ -920,6 +920,14 @@ def analyze(repo, platform, known, authors):
         reasons.append("VPK publicado")
     if score < 4:
         return "uncertain", None
+    # Check real source/parent on new candidates, including old compact queue
+    # entries that did not persist GitHub's 'fork' flag.
+    lineage = (fetch_repository_lineage(full, platform, compact=repo)
+               if official is not None else None)
+    if lineage and lineage.get("lineage_is_fork"):
+        for relation in ("lineage_source", "lineage_parent"):
+            if lineage.get(relation) in official["repos"]:
+                return "catalogued", None
     icon, screenshots = media(repo, platform, files, text)
     desc = short_text(repo.get("description"), 180)
     paragraph = readme_paragraph(text)
@@ -956,6 +964,9 @@ def analyze(repo, platform, known, authors):
              "missing_fields": [k for k in ("title_id", "author_ids", "category_id", "version",
                                              "version_date", "size", "status", "icon")
                                 if not app[k]]}
+    if lineage:
+        entry.update(lineage)
+        entry["lineage_checked_at"] = utc()
     return "candidate", entry
 
 
@@ -1082,7 +1093,7 @@ def run():
         if key in state["seen"]:
             continue
         try:
-            status, entry = analyze(task["repo"], task["platform"], known, existing)
+            status, entry = analyze(task["repo"], task["platform"], known, existing, official)
         except DiscoveryBudgetReached as exc:
             # Budget limits are normal: return this item to the FRONT of the queue.
             state["queue"].insert(0, task)
