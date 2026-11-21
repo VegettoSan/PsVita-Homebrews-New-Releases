@@ -220,6 +220,27 @@ class TextLimitsTests(unittest.TestCase):
         self.assertEqual(low["key"], "gh:1")
         self.assertEqual(queue[0]["key"], "gh:2")
 
+    def test_priority_skips_attempted_repositories_this_round(self):
+        queue = [
+            {"key": "gh:1", "platform": "github", "repo": {
+                "id": 1, "full_name": "dev/psvita-first", "description": "PS Vita port"}},
+            {"key": "gh:2", "platform": "github", "repo": {
+                "id": 2, "full_name": "dev/psvita-next", "description": "PS Vita port"}},
+        ]
+        chosen = dh.pop_prioritized_task(queue, [], 0, {"gh:1"})
+        self.assertEqual(chosen["key"], "gh:2")
+        self.assertEqual(len(queue), 1)
+        self.assertIsNone(dh.pop_prioritized_task(queue, [], 0, {"gh:1"}))
+
+    def test_empty_github_git_tree_is_treated_as_no_files(self):
+        response = type("Reply", (), {
+            "status_code": 409, "headers": {},
+        })()
+        with patch.object(dh.HTTP, "get", return_value=response):
+            with patch.object(dh, "REQUEST_COUNT", 0), patch.object(dh, "LOW_RATE_LIMIT", False):
+                self.assertEqual(dh.request(
+                    "https://api.github.com/repos/example/empty/git/trees/main"), {"tree": []})
+
     def test_budget_enforced_without_network_call(self):
         with patch.object(dh, "REQUEST_COUNT", dh.MAX_REQUESTS):
             with self.assertRaises(dh.DiscoveryBudgetReached):
