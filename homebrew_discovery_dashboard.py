@@ -99,11 +99,11 @@ def card(entry):
               if icon_link else '<div class="app-icon placeholder" aria-hidden="true">PSV</div>')
     previews = "".join('<a href="' + x + '" target="_blank" rel="noopener noreferrer">'
                        '<img loading="lazy" alt="Captura del proyecto" src="' + x + '"></a>' for x in images)
+    author_key, author_name = author_identity(entry)
     searchable = esc((str(app.get("name") or "") + " " + str(entry.get("project") or "") +
                       " " + str(app.get("description") or "") +
                       " " + author_name).lower())
     platform = esc(entry.get("platform"))
-    author_key, author_name = author_identity(entry)
     missing_note = ('<p class="muted"><strong>Faltan:</strong> ' + esc(missing) + '</p>') if missing else ""
     return ('<article class="entry" data-search="' + searchable + '" data-platform="' + platform + '" '
             'data-media="' + ("yes" if icon_link or images else "no") +
@@ -111,7 +111,7 @@ def card(entry):
             '<div class="top">' + poster + '<div><h2>' + title + '</h2>'
             '<p class="muted">' + esc(entry.get("project")) + '</p>' +
             (('<p class="muted">Autor / cuenta: <strong>' + esc(author_name) + '</strong></p>')
-             if author_name else '')
+             if author_name else '') +
             '<p class="desc">' + desc + '</p></div></div>'
             '<div class="tags"><span>' + platform.upper() + '</span><span>' + esc(project_type) +
             '</span><span>Pendiente de revisión</span></div>'
