@@ -74,6 +74,9 @@ jobs:
             exit 0
           fi
           git commit -m "chore(discovery): checkpoint incremental search [skip ci]"
+          # enrich_dashboard.py may refresh unrelated tracked release data; never publish it.
+          # Clear only unstaged tracked changes after committing the selected discovery paths.
+          git restore --worktree -- .
           for attempt in 1 2 3; do
             git fetch origin main
             if ! git rebase origin/main; then
