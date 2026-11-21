@@ -21,6 +21,9 @@ CATALOG_URL = os.getenv("PSVITAALIVE_CATALOG_URL", "https://raw.githubuserconten
 AUTHORS_URL = os.getenv("PSVITAALIVE_AUTHORS_URL", "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/authors.json")
 PROFILE_LIMIT = max(1, min(8, int(os.getenv("DISCOVERY_PROFILE_LIMIT", "3"))))
 MEDIA_SCAN_VERSION = 2
+LINEAGE_SCAN_VERSION = 1
+LINEAGE_REFRESH_LIMIT = max(0, min(150, int(os.getenv("DISCOVERY_LINEAGE_REFRESH_LIMIT", "90"))))
+LINEAGE_REQUEST_CAP = max(60, min(320, int(os.getenv("DISCOVERY_LINEAGE_REQUEST_CAP", "200"))))
 # Recheck older discoveries gradually without exhausting the discovery quota.
 MEDIA_REFRESH_LIMIT = max(0, min(100, int(os.getenv("DISCOVERY_MEDIA_REFRESH_LIMIT", "60"))))
 MEDIA_REFRESH_REQUEST_CAP = max(40, min(260, int(os.getenv("DISCOVERY_MEDIA_REQUEST_CAP", "185"))))
@@ -150,12 +153,13 @@ def norm_title(value):
 
 def official_app_index(catalog):
     apps = official_apps(catalog)
-    titles, names_and_authors = set(), set()
+    titles, names_and_authors, normalized_titles = set(), set(), set()
     for app in apps:
         tid = str(app.get("title_id") or "").strip().upper()
         if tid:
             titles.add(tid)
         names = {norm_title(app.get("name")), norm_title(app.get("id"))}
+        normalized_titles.update(names - {""})
         author_ids = app.get("author_ids") or ([app.get("author_id")] if app.get("author_id") else [])
         if isinstance(author_ids, str):
             author_ids = [author_ids]
@@ -164,7 +168,95 @@ def official_app_index(catalog):
                 if aid:
                     names_and_authors.add((name, str(aid).casefold()))
     return {"repos": official_repo_keys(catalog), "title_ids": titles,
-            "name_authors": names_and_authors, "app_count": len(apps)}
+            "name_authors": names_and_authors, "normalized_titles": normalized_titles,
+            "app_count": len(apps)}
+
+
+def repository_lineage_from_api(repo, platform):
+    """Only GitHub/GitLab API ancestry proves that a repo is a fork.
+
+    A similarly named but independently developed homebrew is NOT a duplicate.
+    """
+    if not isinstance(repo, dict):
+        return {"lineage_parent": "", "lineage_source": "", "lineage_is_fork": False}
+    if platform == "github":
+        source = repo.get("source") if isinstance(repo.get("source"), dict) else {}
+        parent = repo.get("parent") if isinstance(repo.get("parent"), dict) else {}
+        # GitHub's repository detail returns both source (root) and parent.
+        root = str(source.get("full_name") or "").strip()
+        previous = str(parent.get("full_name") or "").strip()
+        fork = repo.get("fork") is True
+        return {"lineage_source": "github:" + root.casefold() if fork and root else "",
+                "lineage_parent": "github:" + previous.casefold() if fork and previous else "",
+                "lineage_is_fork": fork}
+    if platform == "gitlab":
+        parent = repo.get("forked_from_project") if isinstance(
+            repo.get("forked_from_project"), dict) else {}
+        full = str(parent.get("path_with_namespace") or "").strip()
+        return {"lineage_source": "", "lineage_parent": "gitlab:" + full.casefold() if full else "",
+                "lineage_is_fork": bool(full)}
+    return {"lineage_parent": "", "lineage_source": "", "lineage_is_fork": False}
+
+
+def fetch_repository_lineage(project_name, platform, compact=None):
+    """Retrieve reliable fork ancestry using one repository metadata request."""
+    if platform not in ("github", "gitlab") or "/" not in str(project_name or ""):
+        return None
+    if isinstance(compact, dict) and compact.get("fork") is False:
+        # Explicit non-fork status from GitHub's own search/user API is enough.
+        return {"lineage_parent": "", "lineage_source": "",
+                "lineage_is_fork": False, "lineage_check_version": LINEAGE_SCAN_VERSION}
+    if platform == "github":
+        url = "https://api.github.com/repos/" + "/".join(
+            quote(part, safe="") for part in project_name.split("/"))
+    else:
+        # GitLab project path must be URL-encoded as a single path parameter.
+        url = "https://gitlab.com/api/v4/projects/" + quote(project_name, safe="")
+    detail = request(url, gitlab=platform == "gitlab")
+    if not isinstance(detail, dict):
+        return None
+    return {**repository_lineage_from_api(detail, platform),
+            "lineage_check_version": LINEAGE_SCAN_VERSION}
+
+
+def enrich_existing_lineage(candidates, official):
+    """Check existing discoveries a bounded amount each run.
+
+    Prioritize same-name repos to remove proven duplicates early. Remaining
+    candidates are still checked incrementally to detect renamed forks.
+    """
+    github_basenames = {norm_title(x.rsplit("/", 1)[-1]) for x in official["repos"]
+                        if x.startswith("github:")}
+    catalog_titles = official["normalized_titles"]
+    needs_check = [x for x in candidates.values()
+                   if isinstance(x, dict) and x.get("lineage_check_version") != LINEAGE_SCAN_VERSION]
+    def priority(entry):
+        app = entry.get("app_draft") or {}
+        repo_name = str(entry.get("project") or "").rsplit("/", 1)[-1]
+        aliases = {norm_title(repo_name), norm_title(app.get("name")), norm_title(app.get("id"))}
+        return (0 if (aliases & github_basenames or aliases & catalog_titles) else 1,
+                str(entry.get("discovered_at") or ""))
+    needs_check.sort(key=priority)
+    checked = 0
+    requests_before = REQUEST_COUNT
+    for entry in needs_check:
+        if checked >= LINEAGE_REFRESH_LIMIT or REQUEST_COUNT - requests_before >= LINEAGE_REQUEST_CAP:
+            break
+        if LOW_RATE_LIMIT or REQUEST_COUNT >= MAX_REQUESTS - 160 or time.monotonic() - START_TIME >= MAX_SECONDS - 120:
+            break
+        try:
+            info = fetch_repository_lineage(entry.get("project"), entry.get("platform"))
+            if info is None:
+                continue
+            entry.update(info)
+            entry["lineage_checked_at"] = utc()
+            checked += 1
+        except DiscoveryBudgetReached:
+            break
+        except (requests.RequestException, RuntimeError, ValueError, KeyError, TypeError):
+            continue
+    return {"checked": checked, "remaining": max(0, len(needs_check) - checked),
+            "http_requests": REQUEST_COUNT - requests_before}
 
 
 def match_official_candidate(entry, official):
@@ -179,6 +271,13 @@ def match_official_candidate(entry, official):
         key = project_url_key(link)
         if key and key in official["repos"]:
             return "repo:" + key
+    # Fork ancestry verified by the hosting provider is stronger than names.
+    # A different author or empty title_id must not make a fork look new.
+    if entry.get("lineage_is_fork"):
+        for field in ("lineage_source", "lineage_parent"):
+            origin = str(entry.get(field) or "").casefold()
+            if origin and origin in official["repos"]:
+                return "fork_of:" + origin
     tid = str(app.get("title_id") or "").strip().upper()
     if tid and tid in official["title_ids"]:
         return "title_id:" + tid
@@ -301,7 +400,7 @@ def project(repo, platform):
 def compact_repo(repo, platform):
     """Store only fields required for analysis; do not persist full API responses."""
     fields = ("id", "name", "description", "full_name", "path_with_namespace",
-              "default_branch", "topics", "archived", "disabled", "needs_refresh")
+              "default_branch", "topics", "archived", "disabled", "fork", "needs_refresh")
     obj = {k: repo[k] for k in fields if k in repo}
     if platform == "github":
         owner = repo.get("owner") or {}
@@ -946,6 +1045,9 @@ def run():
         raise RuntimeError("Corrupt discovery data; refusing overwrite")
     official = official_app_index(catalog)
     catalogued_before = reconcile_catalog(state, candidates, official)
+    # Inspect fork parents/root origins from the provider, not fuzzy names.
+    lineage_refresh = enrich_existing_lineage(candidates, official)
+    catalogued_before += reconcile_catalog(state, candidates, official)
     reclassified = reclassify_existing(state, candidates)
     removed_gitlab_noise = prune_unrelated_gitlab_queue(state, profiles)
     failures = []
@@ -1008,7 +1110,8 @@ def run():
                            "filtered_existing": reclassified, "http_requests": REQUEST_COUNT,
                            "request_budget": MAX_REQUESTS, "scan_limit": REPO_LIMIT,
                            "pruned_gitlab": removed_gitlab_noise, "pending": len(state["queue"]),
-                           "media_refresh": media_refresh}
+                           "media_refresh": media_refresh,
+                           "lineage_refresh": lineage_refresh}
     # Migrate prior queue snapshots to compact state, including initial runs.
     for task in state["queue"]:
         task["repo"] = compact_repo(task["repo"], task["platform"])
