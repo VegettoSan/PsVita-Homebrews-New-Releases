@@ -74,6 +74,10 @@ def request(url, params=None, gitlab=False, plain=False):
     REQUEST_COUNT += 1
     if response.status_code == 404:
         return None
+    # GitHub tree API returns 409 for empty/unborn branches. No files to inspect,
+    # but a release or README may still confirm a Vita project.
+    if response.status_code == 409 and "/git/trees/" in url:
+        return {"tree": []}
     if response.status_code in (403, 429):
         raise DiscoveryBudgetReached("API rate limit: " + (urlparse(url).hostname or ""))
     response.raise_for_status()
@@ -685,18 +689,22 @@ def task_priority(task, known_profiles):
     return 1
 
 
-def pop_prioritized_task(queue, profiles, examined):
-    """Reserve one in five checks for less obvious projects to avoid starvation."""
+def pop_prioritized_task(queue, profiles, examined, attempted=()):
+    """Prefer Vita evidence, but never retry a failed repository in the same run."""
     if not queue:
         return None
+    attempted = set(attempted)
     known = set(profiles)
     wants_low = examined % 5 == 4
     preferred = (1, 2) if wants_low else (3, 2)
     for score in preferred:
         for index, task in enumerate(queue):
-            if task_priority(task, known) == score:
+            if task["key"] not in attempted and task_priority(task, known) == score:
                 return queue.pop(index)
-    return queue.pop(0)
+    for index, task in enumerate(queue):
+        if task["key"] not in attempted:
+            return queue.pop(index)
+    return None
 
 
 def prune_unrelated_gitlab_queue(state, profiles):
@@ -762,14 +770,16 @@ def run():
     except (RuntimeError, ValueError, requests.RequestException) as exc:
         failures.append("Author profiles: " + str(exc)[:150])
     scanned = 0
+    attempted_keys = set()
     for _ in range(min(REPO_LIMIT, len(state["queue"]))):
         if REQUEST_COUNT >= MAX_REQUESTS or LOW_RATE_LIMIT or time.monotonic() - START_TIME >= MAX_SECONDS:
             failures.append("Presupuesto de búsqueda alcanzado; la cola se conserva")
             break
-        task = pop_prioritized_task(state["queue"], profiles, scanned)
+        task = pop_prioritized_task(state["queue"], profiles, scanned, attempted_keys)
         if task is None:
             break
         key = task["key"]
+        attempted_keys.add(key)
         if key in state["seen"]:
             continue
         try:
