@@ -246,6 +246,65 @@ class TextLimitsTests(unittest.TestCase):
             with self.assertRaises(dh.DiscoveryBudgetReached):
                 dh.request("https://api.github.com/repos/example/project")
 
+    def test_author_filter_groups_case_insensitively_and_counts_projects(self):
+        entries = [
+            {"project": "DevAlpha/one", "platform": "github",
+             "author_profile": "https://github.com/DevAlpha"},
+            {"project": "devalpha/two", "platform": "github",
+             "author_profile": "https://github.com/devalpha"},
+            {"project": "DevAlpha/three", "platform": "gitlab",
+             "author_profile": "https://gitlab.com/DevAlpha"},
+            {"project": "Other/four", "platform": "github",
+             "author_profile": "https://github.com/Other"},
+        ]
+        self.assertEqual(dash.author_identity(entries[0]), ("github:devalpha", "DevAlpha"))
+        self.assertEqual(dash.author_identity(entries[1]), ("github:devalpha", "devalpha"))
+        self.assertEqual(dash.author_identity(entries[2]), ("gitlab:devalpha", "DevAlpha"))
+        options = dash.author_options(entries)
+        self.assertIn('<option value="github:devalpha">DevAlpha · GitHub (2)</option>', options)
+        self.assertIn('<option value="gitlab:devalpha">DevAlpha · GitLab (1)</option>', options)
+        self.assertEqual(options.count('value="github:devalpha"'), 1)
+        self.assertLess(options.index('value="github:devalpha"'),
+                        options.index('value="gitlab:devalpha"'))
+
+    def test_author_filter_uses_existing_project_name_as_fallback(self):
+        entry = {"project": "Known-Dev/project", "platform": "github",
+                 "author_profile": ""}
+        self.assertEqual(dash.author_identity(entry), ("github:known-dev", "Known-Dev"))
+        self.assertEqual(dash.author_identity({"platform": "github", "project": "invalid"}), ("", ""))
+
+    def test_author_filter_rejects_unsafe_author_identity(self):
+        malicious = {"project": "user<script>/project", "platform": "github",
+                     "author_profile": "https://github.com/user<script>"}
+        self.assertEqual(dash.author_identity(malicious), ("", ""))
+        wrong_host = {"project": "safe/repo", "platform": "github",
+                      "author_profile": "https://gitlab.com/someone"}
+        self.assertEqual(dash.author_identity(wrong_host), ("github:safe", "safe"))
+
+    def test_dashboard_author_filter_is_combined_with_other_filters(self):
+        entries = {
+            "gh:11": {"key": "gh:11", "platform": "github", "project": "Dev/one",
+                      "author_profile": "https://github.com/Dev",
+                      "app_draft": {"name": "Homebrew One", "screenshots": []}},
+            "gh:12": {"key": "gh:12", "platform": "github", "project": "Dev/two",
+                      "author_profile": "https://github.com/Dev",
+                      "app_draft": {"name": "Homebrew Two", "screenshots": []}},
+        }
+        output = dash.render(entries, {})
+        self.assertIn('id="author"', output)
+        self.assertIn('id="visible-count"', output)
+        self.assertIn('<option value="github:dev">Dev · GitHub (2)</option>', output)
+        self.assertEqual(output.count('data-author="github:dev"'), 2)
+        self.assertEqual(output.count('data-select-author="github:dev"'), 2)
+        self.assertIn("card.dataset.author===author.value", output)
+        self.assertIn("card.dataset.platform===platform.value", output)
+        self.assertIn("card.dataset.media===media.value", output)
+        self.assertIn("search.value.trim().toLowerCase()", output)
+        self.assertIn("window.location.search", output)
+        self.assertIn("Ver proyectos del autor", output)
+        self.assertNotIn("__AUTHORS__", output)
+        self.assertIn("la autoría definitiva se verifica", output)
+
     def test_dashboard_escapes_untrusted_metadata(self):
         html = dash.render({"gh:1": {"key": "gh:1", "project": "a/b", "platform": "github",
                                     "source_url": "https://github.com/a/b", "score": 5,
