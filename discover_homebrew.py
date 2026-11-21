@@ -405,9 +405,12 @@ def classify_target(name, description, readme_text, paths=(), vpk=None):
 
 def reclassify_existing(state, candidates):
     """Clean old candidates once without re-fetching the same repositories."""
+    audit = state.setdefault("target_filter_audit", {})
+    # Restored candidates are no longer held for review; never keep stale notes.
+    for key in candidates:
+        audit.pop(key, None)
     if int(state.get("target_filter_version", 0)) >= TARGET_FILTER_VERSION:
         return 0
-    audit = state.setdefault("target_filter_audit", {})
     state.setdefault("queue", [])
     count = 0
     for key, entry in list(candidates.items()):
