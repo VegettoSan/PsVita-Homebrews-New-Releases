@@ -60,6 +60,109 @@ class TextLimitsTests(unittest.TestCase):
         self.assertTrue(icon.endswith("/sce_sys/icon0.png"))
         self.assertEqual(len(shots), 1)
 
+    def test_nested_vita_icon_and_screenshot_folders(self):
+        repo = {"full_name": "artist/vita-title", "default_branch": "main"}
+        files = [
+            "third_party/example/icon.png",
+            "src/app/game/sce_sys/icon0.png",
+            "docs/guide/screens/01-menu.png",
+            "docs/guide/screens/02-gameplay.webp",
+            "game/assets/sprites/player.png",
+        ]
+        icon, shots = dh.media(repo, "github", files)
+        self.assertTrue(icon.endswith("/src/app/game/sce_sys/icon0.png"))
+        self.assertEqual(len(shots), 2)
+        self.assertTrue(shots[0].endswith("/docs/guide/screens/01-menu.png"))
+        self.assertTrue(shots[1].endswith("/docs/guide/screens/02-gameplay.webp"))
+
+    def test_pic0_used_as_screenshot_only_when_no_real_capture(self):
+        repo = {"full_name": "developer/sample", "default_branch": "main"}
+        files = ["some/deep/source/sce_sys/icon0.png",
+                 "some/deep/source/sce_sys/pic0.png",
+                 "some/deep/source/sce_sys/livearea/contents/bg.png"]
+        _, shots = dh.media(repo, "github", files)
+        self.assertEqual(len(shots), 1)
+        self.assertTrue(shots[0].endswith("/some/deep/source/sce_sys/pic0.png"))
+        files.append("docs/screenshots/real-screen.png")
+        _, shots = dh.media(repo, "github", files)
+        self.assertEqual(len(shots), 1)
+        self.assertTrue(shots[0].endswith("/docs/screenshots/real-screen.png"))
+
+    def test_livearea_background_fallback_without_pic0(self):
+        repo = {"full_name": "developer/sample", "default_branch": "main"}
+        _, shots = dh.media(repo, "github", [
+            "assets/vita/sce_sys/livearea/contents/bg.png"])
+        self.assertEqual(len(shots), 1)
+        self.assertTrue(shots[0].endswith("/assets/vita/sce_sys/livearea/contents/bg.png"))
+
+    def test_only_confirmed_readme_embedded_images_become_screens(self):
+        repo = {"full_name": "developer/sample", "default_branch": "master"}
+        files = ["docs/images/01-diagnostic.png", "docs/images/02-analyse.png",
+                 "docs/images/logo.png", "assets/fonts/font.png"]
+        readme = ("![Gameplay](docs/images/01-diagnostic.png)\n"
+                  "<img src=\"docs/images/02-analyse.png\">\n"
+                  "![Made-up screenshot](docs/images/not-there.png)\n"
+                  "![Escape](../../secrets.png)\n")
+        _, shots = dh.media(repo, "github", files, readme)
+        self.assertEqual(len(shots), 2)
+        self.assertTrue(all("/docs/images/" in shot for shot in shots))
+        self.assertFalse(any("not-there" in shot or "secrets" in shot for shot in shots))
+
+    def test_badges_sprites_and_buttons_not_screenshots(self):
+        repo = {"full_name": "developer/sample", "default_branch": "main"}
+        icon, shots = dh.media(repo, "github", [
+            "docs/screenshots/logo.png", "docs/screenshots/badge-build.png",
+            "assets/sprites/enemy.png", "assets/ui/button-play.png",
+            "docs/images/tutorial.png"])
+        self.assertEqual((icon, shots), ("", []))
+
+    def test_gitlab_tree_reads_all_pages_not_only_first_hundred(self):
+        calls = []
+        def fake_request(url, params=None, gitlab=False, plain=False):
+            calls.append(params["page"])
+            if params["page"] == 1:
+                return [{"type": "blob", "path": "src/a/file"+str(i)+".txt"}
+                        for i in range(100)]
+            return [{"type": "blob", "path": "nested/game/sce_sys/icon0.png"}]
+        with patch.object(dh, "request", side_effect=fake_request):
+            paths = dh.files_for({"id": 9, "default_branch": "main"}, "gitlab")
+        self.assertEqual(calls, [1, 2])
+        self.assertIn("nested/game/sce_sys/icon0.png", paths)
+        self.assertEqual(len(paths), 101)
+
+    def test_github_truncated_tree_keeps_known_paths(self):
+        with patch.object(dh, "request", return_value={
+            "truncated": True, "tree": [
+                {"type": "blob", "path": "deep/path/sce_sys/icon0.png"}]}):
+            paths = dh.files_for({"full_name": "dev/app"}, "github")
+        self.assertEqual(paths, ["deep/path/sce_sys/icon0.png"])
+
+    def test_existing_draft_media_enrichment_preserves_original_facts(self):
+        old = {"gh:14": {"platform": "github", "project": "dev/great-vita",
+                        "key": "gh:14", "discovered_at": "2026-11-20T00:00:00+00:00",
+                        "app_draft": {"name": "Great Vita", "description": "Original",
+                                      "icon": "", "screenshots": [], "status": "",
+                                      "title_id": ""},
+                        "missing_fields": ["title_id", "icon", "status"]}}
+        metadata = {"id": 14, "full_name": "dev/great-vita", "default_branch": "master"}
+        filenames = ["deep/game/sce_sys/icon0.png",
+                     "docs/preview/screenshots/01.png"]
+        with patch.object(dh, "request", return_value=metadata), \
+             patch.object(dh, "files_for", return_value=filenames):
+            stats = dh.enrich_existing_media(old)
+        item = old["gh:14"]
+        self.assertEqual(stats["refreshed"], 1)
+        self.assertEqual(stats["icons_added"], 1)
+        self.assertEqual(stats["screenshots_added"], 1)
+        self.assertTrue(item["app_draft"]["icon"].endswith("/deep/game/sce_sys/icon0.png"))
+        self.assertEqual(len(item["app_draft"]["screenshots"]), 1)
+        self.assertEqual(item["app_draft"]["description"], "Original")
+        self.assertEqual(item["app_draft"]["status"], "")
+        self.assertEqual(item["app_draft"]["title_id"], "")
+        self.assertNotIn("icon", item["missing_fields"])
+        self.assertEqual(item["media_scan_version"], dh.MEDIA_SCAN_VERSION)
+        self.assertEqual(dh.enrich_existing_media(old)["refreshed"], 0)
+
     def test_vita3k_is_excluded_even_if_icon_exists(self):
         result, _, reason = dh.classify_target(
             "Vita3K", "Experimental PlayStation Vita emulator",
