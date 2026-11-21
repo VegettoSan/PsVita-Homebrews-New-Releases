@@ -124,6 +124,102 @@ def official_repo_keys(catalog):
     return keys
 
 
+def official_apps(catalog):
+    """The public PSVitaAlive catalog can be a list or a list in a wrapper."""
+    if isinstance(catalog, list):
+        return [x for x in catalog if isinstance(x, dict)]
+    if isinstance(catalog, dict):
+        for key in ("apps", "items", "catalog"):
+            if isinstance(catalog.get(key), list):
+                return [x for x in catalog[key] if isinstance(x, dict)]
+    raise ValueError("Catálogo oficial sin una lista válida de aplicaciones")
+
+
+def norm_title(value):
+    """Match only precise normalized titles; never infer identity from vague text."""
+    return re.sub(r"[^a-z0-9]", "", str(value or "").casefold())
+
+
+def official_app_index(catalog):
+    apps = official_apps(catalog)
+    titles, names_and_authors = set(), set()
+    for app in apps:
+        tid = str(app.get("title_id") or "").strip().upper()
+        if tid:
+            titles.add(tid)
+        names = {norm_title(app.get("name")), norm_title(app.get("id"))}
+        author_ids = app.get("author_ids") or ([app.get("author_id")] if app.get("author_id") else [])
+        if isinstance(author_ids, str):
+            author_ids = [author_ids]
+        for name in names - {""}:
+            for aid in author_ids:
+                if aid:
+                    names_and_authors.add((name, str(aid).casefold()))
+    return {"repos": official_repo_keys(catalog), "title_ids": titles,
+            "name_authors": names_and_authors, "app_count": len(apps)}
+
+
+def match_official_candidate(entry, official):
+    """Return the reliable matching evidence or None (no name-only guesses)."""
+    if not isinstance(entry, dict):
+        return None
+    app = entry.get("app_draft") or {}
+    links = app.get("links") or []
+    # Prefer verified canonical repositories, including GitHub release links.
+    for link in [entry.get("source_url"), *(
+            x.get("url") for x in links if isinstance(x, dict))]:
+        key = project_url_key(link)
+        if key and key in official["repos"]:
+            return "repo:" + key
+    tid = str(app.get("title_id") or "").strip().upper()
+    if tid and tid in official["title_ids"]:
+        return "title_id:" + tid
+    author_ids = app.get("author_ids") or []
+    if isinstance(author_ids, str):
+        author_ids = [author_ids]
+    names = {norm_title(app.get("name")), norm_title(app.get("id"))} - {""}
+    if names and any((name, str(aid).casefold()) in official["name_authors"]
+                     for name in names for aid in author_ids if aid):
+        return "same_author_and_title"
+    return None
+
+
+def reconcile_catalog(state, candidates, official):
+    """Hide newly catalogued discoveries on EVERY run, not only when first found.
+
+    Candidate data and public drafts disappear; state retains evidence of the match.
+    This never edits catalog.json or any PSVitaAlive canonical source JSON.
+    """
+    count = 0
+    history = state.setdefault("catalogued_discoveries", {})
+    for key, entry in list(candidates.items()):
+        reason = match_official_candidate(entry, official)
+        if not reason:
+            continue
+        history[key] = {"project": entry.get("project"), "matched_on": reason,
+                        "catalogued_at": utc()}
+        state.setdefault("seen", {}).setdefault(key, {})["result"] = "catalogued"
+        state["seen"][key]["catalogue_match"] = reason
+        state.get("target_filter_audit", {}).pop(key, None)
+        del candidates[key]
+        count += 1
+    # Previously queued registered repositories do not consume the scan budget.
+    registered = official["repos"]
+    remaining = []
+    for task in state.get("queue", []):
+        repo = task.get("repo") or {}
+        key = task.get("platform", "") + ":" + project(repo, task.get("platform"))
+        if key.casefold() not in registered:
+            remaining.append(task)
+            continue
+        state.setdefault("seen", {})[task["key"]] = {
+            "result": "catalogued", "checked_at": utc(),
+            "project": project(repo, task.get("platform")),
+        }
+    state["queue"] = remaining
+    return count
+
+
 def profiles_from_authors(authors):
     found, existing = set(), {}
     for author in authors:
@@ -565,6 +661,44 @@ def analyze(repo, platform, known, authors):
     return "candidate", entry
 
 
+VITA_METADATA = re.compile(
+    r"ps[\s_-]*vita|playstation[\s_-]*vita|vitasdk|vita2d|"
+    r"taihen|henkaku|[.]vpk\b|vita[-_]homebrew|"
+    r"(?:^|[-_/])vita(?:$|[-_/])|(?:^|[-_/])psvita(?:$|[-_/])",
+    re.I,
+)
+
+
+def task_priority(task, known_profiles):
+    """3: strong Vita metadata, 2: known author, 1: global candidate."""
+    repo = task.get("repo") or {}
+    platform = task.get("platform") or ""
+    full = project(repo, platform)
+    metadata = " ".join(str(repo.get(k) or "")
+                        for k in ("name", "description", "topics")) + " " + full
+    if VITA_METADATA.search(metadata):
+        return 3
+    owner = (repo.get("owner") or {}) if platform == "github" else (repo.get("namespace") or {})
+    username = str(owner.get("login") or owner.get("path") or full.split("/")[0]).casefold()
+    if platform + ":" + username in known_profiles:
+        return 2
+    return 1
+
+
+def pop_prioritized_task(queue, profiles, examined):
+    """Reserve one in five checks for less obvious projects to avoid starvation."""
+    if not queue:
+        return None
+    known = set(profiles)
+    wants_low = examined % 5 == 4
+    preferred = (1, 2) if wants_low else (3, 2)
+    for score in preferred:
+        for index, task in enumerate(queue):
+            if task_priority(task, known) == score:
+                return queue.pop(index)
+    return queue.pop(0)
+
+
 def prune_unrelated_gitlab_queue(state, profiles):
     """Discard broad GitLab hits without platform hints; preserve known authors."""
     known_authors = {name.split(":", 1)[1] for name in profiles if name.startswith("gitlab:")}
@@ -607,6 +741,8 @@ def run():
     candidates = read_json(CANDIDATES, {})
     if not isinstance(candidates, dict) or not isinstance(state.get("queue"), list):
         raise RuntimeError("Corrupt discovery data; refusing overwrite")
+    official = official_app_index(catalog)
+    catalogued_before = reconcile_catalog(state, candidates, official)
     reclassified = reclassify_existing(state, candidates)
     removed_gitlab_noise = prune_unrelated_gitlab_queue(state, profiles)
     failures = []
@@ -625,31 +761,45 @@ def run():
         scanned_profiles = scan_profiles(state, profiles)
     except (RuntimeError, ValueError, requests.RequestException) as exc:
         failures.append("Author profiles: " + str(exc)[:150])
+    scanned = 0
     for _ in range(min(REPO_LIMIT, len(state["queue"]))):
-        task = state["queue"].pop(0)
+        if REQUEST_COUNT >= MAX_REQUESTS or LOW_RATE_LIMIT or time.monotonic() - START_TIME >= MAX_SECONDS:
+            failures.append("Presupuesto de búsqueda alcanzado; la cola se conserva")
+            break
+        task = pop_prioritized_task(state["queue"], profiles, scanned)
+        if task is None:
+            break
         key = task["key"]
         if key in state["seen"]:
             continue
         try:
             status, entry = analyze(task["repo"], task["platform"], known, existing)
+        except DiscoveryBudgetReached as exc:
+            # Budget limits are normal: return this item to the FRONT of the queue.
+            state["queue"].insert(0, task)
+            failures.append(str(exc)[:150])
+            break
         except (RuntimeError, ValueError, KeyError, requests.RequestException) as exc:
             state["queue"].append(task)
             failures.append(key + ": " + str(exc)[:150])
-            if "limit" in str(exc).lower():
-                break
             continue
         state["seen"][key] = {"result": status, "checked_at": utc(), "project": project(task["repo"], task["platform"])}
         checked += 1
+        scanned += 1
         if entry:
             candidates[key] = entry
-            # An old review note is no longer true if the project is accepted.
             state.get("target_filter_audit", {}).pop(key, None)
             found += 1
+    catalogued_after = reconcile_catalog(state, candidates, official)
     state["run_count"] += 1
     state["last_run"] = utc()
     state["errors"] = failures[:10]
     state["last_round"] = {"global_results": globally_found, "profiles_checked": scanned_profiles,
-                           "repositories_checked": checked, "new_candidates": found, "filtered_existing": reclassified,
+                           "repositories_checked": checked,
+                           "new_candidates": found - catalogued_after,
+                           "catalogued_removed": catalogued_before + catalogued_after,
+                           "filtered_existing": reclassified, "http_requests": REQUEST_COUNT,
+                           "request_budget": MAX_REQUESTS, "scan_limit": REPO_LIMIT,
                            "pruned_gitlab": removed_gitlab_noise, "pending": len(state["queue"])}
     # Migrate prior queue snapshots to compact state, including initial runs.
     for task in state["queue"]:
