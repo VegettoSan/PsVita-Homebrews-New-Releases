@@ -161,6 +161,21 @@ públicos. Se conserva una anotación en el historial local de descubrimiento.
 Los casos con identidad ambigua permanecen pendientes de revisión:
 no se eliminan basándose únicamente en un nombre parecido.
 
+**Imágenes del Homebrew:** la búsqueda recorre los archivos de los repositorios
+GitHub y GitLab, incluyendo carpetas anidadas. Detecta `sce_sys/icon0.png`,
+variantes del icono, carpetas `screens/`, `screenshots/`, `captures/` y
+capturas locales que aparezcan insertadas en el README. No confunde sprites,
+botones ni badges con capturas. Si no encuentra capturas reales, puede usar
+`sce_sys/pic0.png` o, como último recurso, el fondo de LiveArea; siempre
+verifica primero que el archivo exista en el repositorio y nunca inventa
+URLs. Si tampoco existe, deja las capturas vacías. Conserva de una a cinco
+capturas y nunca elimina imágenes válidas que ya se hubieran guardado.
+Los árboles de GitLab se recorren por páginas, no solamente los 100 primeros
+archivos. En cada ejecución, un lote limitado de descubrimientos antiguos
+se vuelve a examinar para recuperar imágenes que las reglas anteriores no
+detectaban; el proceso respeta el presupuesto de API y se completa
+gradualmente. El escáner no abre archivos VPK para obtener imágenes.
+
 Los hallazgos se guardan en `data/discovery/candidates.json`; la web expone
 un JSON de consulta y borradores individuales en `docs/discovery-drafts/`.
 Si se detecta un autor sin registro inequívoco, se genera un borrador en
