@@ -142,6 +142,22 @@ class TextLimitsTests(unittest.TestCase):
         self.assertEqual(state["seen"]["gh:3"]["result"], "excluded")
         self.assertIn("gh:3", state["target_filter_audit"])
 
+    def test_gitlab_queue_skips_unrelated_names_but_keeps_known_authors(self):
+        state = {"seen": {}, "queue": [
+            {"key": "gl:1", "platform": "gitlab",
+             "repo": {"id": 1, "name": "civitas-core", "path_with_namespace": "civitas/civitas-core"}},
+            {"key": "gl:2", "platform": "gitlab",
+             "repo": {"id": 2, "name": "vita-port", "path_with_namespace": "newdev/vita-port"}},
+            {"key": "gl:3", "platform": "gitlab",
+             "repo": {"id": 3, "name": "unknown", "path_with_namespace": "trusteddev/unknown"}},
+            {"key": "gh:4", "platform": "github",
+             "repo": {"id": 4, "name": "example", "full_name": "any/example"}},
+        ]}
+        deleted = dh.prune_unrelated_gitlab_queue(state, ["gitlab:trusteddev"])
+        self.assertEqual(deleted, 1)
+        self.assertEqual(len(state["queue"]), 3)
+        self.assertEqual(state["seen"]["gl:1"]["result"], "irrelevant_metadata")
+
     def test_dashboard_escapes_untrusted_metadata(self):
         html = dash.render({"gh:1": {"key": "gh:1", "project": "a/b", "platform": "github",
                                     "source_url": "https://github.com/a/b", "score": 5,
