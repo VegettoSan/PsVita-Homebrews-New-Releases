@@ -155,11 +155,23 @@ Toda la cola, los resultados y los descartes se guardan en
 **Sincronización con el catálogo:** al inicio y final de cada ronda, se
 compara cada candidato con el `catalog.json` oficial (URL del repositorio
 o de sus releases, Title ID fiable, o nombre exacto junto con autor
-confirmado). Cuando una aplicación está publicada, se retira de
+confirmado). Además se consulta el origen real de los **forks** en la API de
+GitHub/GitLab: si el repositorio `parent` o `source` coincide con un
+repositorio registrado, el fork también se considera ya catalogado aunque
+tenga otro propietario, título alternativo o un Title ID todavía vacío.
+Por ejemplo, `Digital33Studios/D2Vita` desciende de `Franckrst/D2Vita`,
+y `DrakonPL/vampire-survivors-vita` de
+`Federicoilgrandebardo/vampire-survivors-vita`.
+Los descubrimientos antiguos también se revisan de manera incremental
+hasta comprobar su procedencia, manteniendo el presupuesto gratuito
+de peticiones. Los nuevos forks se revisan antes de publicar el borrador.
+
+Cuando una aplicación está publicada, se retira de
 `data/discovery/candidates.json`, de la página web y de sus borradores
 públicos. Se conserva una anotación en el historial local de descubrimiento.
 Los casos con identidad ambigua permanecen pendientes de revisión:
-no se eliminan basándose únicamente en un nombre parecido.
+no se eliminan basándose únicamente en un nombre parecido; dos ports
+independientes pueden tener títulos similares.
 
 **Imágenes del Homebrew:** la búsqueda recorre los archivos de los repositorios
 GitHub y GitLab, incluyendo carpetas anidadas. Detecta `sce_sys/icon0.png`,
