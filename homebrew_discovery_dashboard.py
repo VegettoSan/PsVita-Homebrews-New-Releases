@@ -46,6 +46,8 @@ def card(entry):
     missing = ", ".join(str(x).replace("_", " ") for x in entry.get("missing_fields", []))
     score = int(entry.get("score") or 0)
     evidence = ", ".join(str(x) for x in entry.get("evidence", [])[:6])
+    project_type = "Parche" if entry.get("project_type") == "patch" else "Homebrew / port"
+    destination = str(entry.get("target_reason") or "Posible proyecto para PS Vita")
     author_draft = entry.get("author_draft")
     author_download = ('<a href="discovery-authors/' + key + '.json" download>JSON de autor</a>'
                        if isinstance(author_draft, dict) else "")
@@ -62,9 +64,10 @@ def card(entry):
             '<div class="top">' + poster + '<div><h2>' + title + '</h2>'
             '<p class="muted">' + esc(entry.get("project")) + '</p>'
             '<p class="desc">' + desc + '</p></div></div>'
-            '<div class="tags"><span>' + platform.upper() + '</span><span>Confianza: ' + str(score) +
+            '<div class="tags"><span>' + platform.upper() + '</span><span>' + esc(project_type) +
             '</span><span>Pendiente de revisión</span></div>'
             '<details><summary>Ver ficha y datos encontrados</summary>'
+            '<p class="muted"><strong>Destino:</strong> ' + esc(destination) + '</p>'
             '<p class="muted"><strong>Indicios:</strong> ' + esc(evidence) + '</p>' +
             (('<p class="long-desc">' + esc(app.get("long_description")) + '</p>') if app.get("long_description") else "") +
             missing_note + (('<div class="shots">' + previews + '</div>') if images else '') +
@@ -142,6 +145,13 @@ def main():
     if not isinstance(candidates, dict) or not isinstance(state, dict):
         raise ValueError("Discovery files invalid")
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    # Old drafts for rejected/review-only projects must disappear from public Pages.
+    # These two directories contain generated files, never manual work.
+    for folder in (Path("docs/discovery-drafts"), AUTHORS):
+        if folder.exists():
+            for file in folder.glob("*.json"):
+                if re.fullmatch(r"(gh|gl)_[0-9]+", file.stem) and file.stem.replace("_", ":", 1) not in candidates:
+                    file.unlink()
     OUTPUT.write_text(render(candidates, state), encoding="utf-8")
     DATA.write_text(json.dumps(list(candidates.values()), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     AUTHORS.mkdir(parents=True, exist_ok=True)
