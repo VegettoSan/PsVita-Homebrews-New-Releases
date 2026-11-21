@@ -46,7 +46,8 @@ def card(entry):
     missing = ", ".join(str(x).replace("_", " ") for x in entry.get("missing_fields", []))
     score = int(entry.get("score") or 0)
     evidence = ", ".join(str(x) for x in entry.get("evidence", [])[:6])
-    project_type = "Parche" if entry.get("project_type") == "patch" else "Homebrew / port"
+    project_type = {"patch": "Parche", "plugin": "Plugin", "homebrew": "Homebrew / port"}.get(
+        entry.get("project_type"), "Homebrew / port")
     destination = str(entry.get("target_reason") or "Posible proyecto para PS Vita")
     author_draft = entry.get("author_draft")
     author_download = ('<a href="discovery-authors/' + key + '.json" download>JSON de autor</a>'
