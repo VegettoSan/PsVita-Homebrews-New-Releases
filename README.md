@@ -143,9 +143,23 @@ El workflow independiente `Discover New PS Vita Homebrew`
 (`.github/workflows/discover_homebrew.yml`) se ejecuta cada tres horas,
 desplazado del monitor de releases y del escáner Game Data. Explora repositorios de
 autores enlazados en `authors.json`, además de búsquedas globales rotativas en
-GitHub y GitLab. Cada ronda revisa una cantidad limitada de repositorios y
-conserva su cola y las decisiones de análisis en `data/discovery/state.json`.
-Los fallos de consulta se reintentan sin marcar los repositorios como comprobados.
+GitHub y GitLab. Cada ronda intenta revisar hasta **150 repositorios** en vez de
+18, dando prioridad a proyectos con evidencias en sus metadatos y reservando
+parte del trabajo para repositorios de autores conocidos o de señales débiles.
+La capacidad está protegida por un presupuesto de 520 peticiones HTTP
+y 12 minutos: si una cuota o límite se alcanza antes, los pendientes
+**no se pierden** y continúan en la siguiente ejecución.
+Toda la cola, los resultados y los descartes se guardan en
+`data/discovery/state.json`, evitando volver a empezar cada tres horas.
+
+**Sincronización con el catálogo:** al inicio y final de cada ronda, se
+compara cada candidato con el `catalog.json` oficial (URL del repositorio
+o de sus releases, Title ID fiable, o nombre exacto junto con autor
+confirmado). Cuando una aplicación está publicada, se retira de
+`data/discovery/candidates.json`, de la página web y de sus borradores
+públicos. Se conserva una anotación en el historial local de descubrimiento.
+Los casos con identidad ambigua permanecen pendientes de revisión:
+no se eliminan basándose únicamente en un nombre parecido.
 
 Los hallazgos se guardan en `data/discovery/candidates.json`; la web expone
 un JSON de consulta y borradores individuales en `docs/discovery-drafts/`.
