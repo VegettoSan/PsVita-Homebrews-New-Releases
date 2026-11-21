@@ -346,8 +346,12 @@ def classify_target(name, description, readme_text, paths=(), vpk=None):
     vita_plugin = any(str(p).lower().endswith((".skprx", ".suprx")) for p in paths)
     # A mention of a patch database is not itself a patch project.
     patch = bool(PATCH.search(str(name or "")) or re.search(
-        r"(?:ps[\s_-]*vita|playstation\s+vita).{0,35}\b(?:patch|translation|mod)\b"
-        r"|\b(?:patch|translation|mod)\b.{0,35}(?:ps[\s_-]*vita|playstation\s+vita)",
+        r"\b(?:patch|translation|mod)\b(?:\s+\w+){0,6}\s+"
+        r"(?:for|to|on|para)\s+(?:a\s+|the\s+)?"
+        r"(?:ps[\s_-]*vita|playstation\s+vita)"
+        r"|(?:ps[\s_-]*vita|playstation\s+vita)\s+"
+        r"(?:game\s+|title\s+|english\s+|translation\s+|texture\s+)?"
+        r"(?:patch|translation|mod)\b",
         meta, re.I))
     kind = "patch" if patch else "homebrew"
 
@@ -402,6 +406,7 @@ def reclassify_existing(state, candidates):
     if int(state.get("target_filter_version", 0)) >= TARGET_FILTER_VERSION:
         return 0
     audit = state.setdefault("target_filter_audit", {})
+    state.setdefault("queue", [])
     count = 0
     for key, entry in list(candidates.items()):
         app = entry.get("app_draft") or {}
@@ -442,8 +447,8 @@ def reclassify_existing(state, candidates):
                 del state["seen"][key]
             tasks.append({"key": key, "platform": platform,
                           "repo": compact_repo(repo, platform)})
-        queued = {x["key"] for x in state.get("queue", [])}
-        state["queue"] = tasks + [x for x in state["queue"] if x["key"] not in {t["key"] for t in tasks}]
+        task_keys = {task["key"] for task in tasks}
+        state["queue"] = tasks + [task for task in state["queue"] if task["key"] not in task_keys]
         state["target_review_requeued_v3"] = True
     state["target_filter_version"] = TARGET_FILTER_VERSION
     return count
