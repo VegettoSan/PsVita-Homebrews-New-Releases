@@ -103,6 +103,12 @@ class TextLimitsTests(unittest.TestCase):
         self.assertEqual(kind, "plugin")
         self.assertIn("taiHEN", reason)
 
+    def test_kernel_plugin_readme_sufficient_without_repo_description(self):
+        status, kind, _ = dh.classify_target(
+            "vita-coldboot", "",
+            "A lightweight PS Vita kernel plugin for HENkaku Ensō. Install under *KERNEL in ur0:tai.", [])
+        self.assertEqual((status, kind), ("candidate", "plugin"))
+
     def test_patch_database_is_not_misclassified_as_vita_patch(self):
         result, kind, _ = dh.classify_target(
             "PSX2PSP Reborn", "Native Rust POPS EBOOT.PBP builder for PSP & PS Vita, patch database",
