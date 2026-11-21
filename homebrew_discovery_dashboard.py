@@ -86,8 +86,12 @@ def render(entries, state):
                      key=lambda x: x.get("discovered_at") or "", reverse=True)
     cards = "".join(card(item) for item in entries)
     count = len(entries)
-    scanned = int(state.get("last_round", {}).get("repositories_checked") or 0)
-    queued = int(state.get("last_round", {}).get("pending") or 0)
+    last = state.get("last_round") or {}
+    scanned = int(last.get("repositories_checked") or 0)
+    queued = int(last.get("pending") or 0)
+    processed = len(state.get("seen") or {})
+    new_found = int(last.get("new_candidates") or 0)
+    catalogued = int(last.get("catalogued_removed") or 0)
     page = """<!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>Nuevos descubrimientos — PSVitaAlive</title>
@@ -116,7 +120,7 @@ details{margin:12px 0;border-top:1px solid var(--border);padding-top:11px}summar
 <header><h1>Nuevos descubrimientos</h1><p class="muted">Proyectos encontrados automáticamente; ninguno está verificado ni publicado en el catálogo por este sistema.</p></header>
 <nav aria-label="Herramientas"><a href="index.html#releases">Actualizaciones Homebrew</a><a href="index.html#game-data">Búsqueda de Game Data</a><a href="discoveries.html" class="active" aria-current="page">Nuevos descubrimientos</a></nav>
 <section class="summary"><strong>Exploración incremental</strong><p class="muted">Cada ejecución conserva el progreso y analiza otro lote. Los JSON son borradores incompletos para revisar en el generador de PSVitaAlive.</p>
-<div class="counts"><span>Descubrimientos: <strong>__COUNT__</strong></span><span>Revisados en última ronda: <strong>__SCANNED__</strong></span><span>Pendientes: <strong>__QUEUED__</strong></span></div></section>
+<div class="counts"><span>Descubrimientos pendientes de publicar: <strong>__COUNT__</strong></span><span>Procesados históricamente: <strong>__PROCESSED__</strong></span><span>Revisados en última ronda: <strong>__SCANNED__</strong></span><span>Nuevos en última ronda: <strong>__NEW_FOUND__</strong></span><span>Retirados por estar en catálogo: <strong>__CATALOGUED__</strong></span><span>En cola: <strong>__QUEUED__</strong></span></div><p class="muted">Solo aparecen los proyectos con indicios de ejecutarse o aplicarse en PS Vita. Los demás se conservan en el historial de búsqueda, sin saturar esta página.</p></section>
 <div class="filters"><input id="search" type="search" aria-label="Buscar proyectos" placeholder="Buscar por nombre, autor o descripción">
 <select id="platform" aria-label="Filtrar plataforma"><option value="all">GitHub y GitLab</option><option value="github">GitHub</option><option value="gitlab">GitLab</option></select>
 <select id="media" aria-label="Filtrar recursos"><option value="all">Con y sin imágenes</option><option value="yes">Con imágenes</option><option value="no">Sin imágenes</option></select></div>
@@ -137,6 +141,8 @@ search.addEventListener('input',apply);platform.addEventListener('change',apply)
 }());
 </script></body></html>"""
     return (page.replace("__COUNT__", str(count)).replace("__SCANNED__", str(scanned))
+            .replace("__PROCESSED__", str(processed)).replace("__NEW_FOUND__", str(new_found))
+            .replace("__CATALOGUED__", str(catalogued))
             .replace("__QUEUED__", str(queued)).replace("__CARDS__", cards))
 
 
