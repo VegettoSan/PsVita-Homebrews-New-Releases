@@ -132,8 +132,34 @@ el catálogo pero que aún necesitan su copia de Archive.org. Los desplegables
 incluyen conteos globales, el contador de resultados cambia al filtrar y el
 botón «Limpiar filtros» restablece búsqueda y selección.
 
-Los futuros descubrimientos de Homebrew ausentes del catálogo tendrán una
-pestaña separada cuando implementemos esa funcionalidad, no antes.
+## Tercera pestaña: Nuevos descubrimientos de Homebrew
+
+La página **Nuevos descubrimientos** (`docs/discoveries.html`) muestra proyectos públicos
+que el escáner considera posibles Homebrew de PS Vita **no registrados**.
+Son pistas para revisión humana: el descubrimiento no verifica funcionamiento en consola
+ni autoría oficial, no instala/descarga VPKs y nunca cambia `PSVitaAlive/apps/`.
+
+El workflow independiente `Discover New PS Vita Homebrew`
+(`.github/workflows/discover_homebrew.yml`) se ejecuta cada tres horas,
+desplazado del monitor de releases y del escáner Game Data. Explora repositorios de
+autores enlazados en `authors.json`, además de búsquedas globales rotativas en
+GitHub y GitLab. Cada ronda revisa una cantidad limitada de repositorios y
+conserva su cola y las decisiones de análisis en `data/discovery/state.json`.
+Los fallos de consulta se reintentan sin marcar los repositorios como comprobados.
+
+Los hallazgos se guardan en `data/discovery/candidates.json`; la web expone
+un JSON de consulta y borradores individuales en `docs/discovery-drafts/`.
+Si se detecta un autor sin registro inequívoco, se genera un borrador en
+`docs/discovery-authors/`. El administrador puede descargar esos JSON,
+importar el borrador de aplicación en el generador oficial y completar los
+campos obligatorios. Los borradores **no están listos para publicación**.
+
+Para evitar enormes descripciones, la descripción corta tiene un máximo de
+180 caracteres y la larga de 420. Solo se usan descripciones públicas o
+párrafos breves del README; cuando no se consigue un texto adecuado se deja
+el campo vacío. La autoría, Title ID, categoría y estado nunca se inventan.
+Se conserva el nombre original, las pruebas encontradas y el repositorio
+de procedencia para facilitar la revisión.
 
 ## Segunda pestaña: búsqueda de Game Data
 
