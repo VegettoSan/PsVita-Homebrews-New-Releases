@@ -168,6 +168,20 @@ def project(repo, platform):
     return str(repo.get("full_name") if platform == "github" else repo.get("path_with_namespace") or "")
 
 
+def compact_repo(repo, platform):
+    """Store only fields required for analysis; do not persist full API responses."""
+    fields = ("id", "name", "description", "full_name", "path_with_namespace",
+              "default_branch", "topics", "archived", "disabled")
+    obj = {k: repo[k] for k in fields if k in repo}
+    if platform == "github":
+        owner = repo.get("owner") or {}
+        obj["owner"] = {"login": owner.get("login"), "avatar_url": owner.get("avatar_url")}
+    else:
+        namespace = repo.get("namespace") or {}
+        obj["namespace"] = {"path": namespace.get("path"), "avatar_url": namespace.get("avatar_url")}
+    return obj
+
+
 def enqueue(state, repo, platform):
     if not repo.get("id") or not project(repo, platform) or repo.get("archived") or repo.get("disabled"):
         return
@@ -175,7 +189,7 @@ def enqueue(state, repo, platform):
     if key in state["seen"] or any(x["key"] == key for x in state["queue"]):
         return
     if len(state["queue"]) < 2500:
-        state["queue"].append({"key": key, "platform": platform, "repo": repo})
+        state["queue"].append({"key": key, "platform": platform, "repo": compact_repo(repo, platform)})
 
 
 def global_search(state):
@@ -190,6 +204,24 @@ def global_search(state):
         state["query_index"], state["query_page"] = (idx + 1) % len(QUERIES), 1
     else:
         state["query_page"] += 1
+    return len(rows)
+
+
+def global_gitlab_search(state):
+    """Rotate through public GitLab projects independently of GitHub searches."""
+    terms = ("ps vita", "psvita", "vitasdk", "vita homebrew")
+    idx = int(state.get("gl_query_index", 0)) % len(terms)
+    page = int(state.get("gl_query_page", 1))
+    rows = request("https://gitlab.com/api/v4/projects",
+                   {"search": terms[idx], "per_page": 20, "page": page,
+                    "simple": "true", "order_by": "last_activity_at", "sort": "desc"},
+                   gitlab=True) or []
+    for item in rows:
+        enqueue(state, item, "gitlab")
+    if len(rows) < 20 or page >= 3:
+        state["gl_query_index"], state["gl_query_page"] = (idx + 1) % len(terms), 1
+    else:
+        state["gl_query_page"] = page + 1
     return len(rows)
 
 
@@ -359,6 +391,10 @@ def run():
     except (RuntimeError, ValueError, requests.RequestException) as exc:
         failures.append("Global search: " + str(exc)[:150])
     try:
+        globally_found += global_gitlab_search(state)
+    except (RuntimeError, ValueError, requests.RequestException) as exc:
+        failures.append("GitLab search: " + str(exc)[:150])
+    try:
         scanned_profiles = scan_profiles(state, profiles)
     except (RuntimeError, ValueError, requests.RequestException) as exc:
         failures.append("Author profiles: " + str(exc)[:150])
@@ -385,6 +421,9 @@ def run():
     state["errors"] = failures[:10]
     state["last_round"] = {"global_results": globally_found, "profiles_checked": scanned_profiles,
                            "repositories_checked": checked, "new_candidates": found, "pending": len(state["queue"])}
+    # Migrate prior queue snapshots to compact state, including initial runs.
+    for task in state["queue"]:
+        task["repo"] = compact_repo(task["repo"], task["platform"])
     write_json(STATE, state)
     write_json(CANDIDATES, candidates)
     for key, item in candidates.items():
