@@ -209,7 +209,9 @@ def global_search(state):
 
 def global_gitlab_search(state):
     """Rotate through public GitLab projects independently of GitHub searches."""
-    terms = ("ps vita", "psvita", "vitasdk", "vita homebrew")
+    # GitLab project search on "ps vita" matches unrelated occurrences of "vita".
+    # Use platform-specific words; existing author scanning catches less obvious names.
+    terms = ("psvita", "vitasdk", "vita-homebrew", "playstation-vita")
     idx = int(state.get("gl_query_index", 0)) % len(terms)
     page = int(state.get("gl_query_page", 1))
     rows = request("https://gitlab.com/api/v4/projects",
@@ -534,6 +536,37 @@ def analyze(repo, platform, known, authors):
     return "candidate", entry
 
 
+def prune_unrelated_gitlab_queue(state, profiles):
+    """Discard broad GitLab hits without platform hints; preserve known authors."""
+    known_authors = {name.split(":", 1)[1] for name in profiles if name.startswith("gitlab:")}
+    keep = []
+    removed = 0
+    for task in state["queue"]:
+        repo = task.get("repo") or {}
+        if task.get("platform") != "gitlab":
+            keep.append(task)
+            continue
+        project_name = project(repo, "gitlab")
+        owner = project_name.split("/", 1)[0].lower()
+        meta = " ".join(str(repo.get(field) or "") for field in ("name", "description", "topics"))
+        meta += " " + project_name
+        if owner in known_authors or re.search(
+            r"ps[\s_-]*vita|playstation[\s_-]*vita|vitasdk|vita2d|"
+            r"henkaku|taihen|vita[-_]homebrew|(?:^|[-_/])vita(?:$|[-_/])",
+            meta, re.I):
+            keep.append(task)
+            continue
+        state["seen"][task["key"]] = {
+            "result": "irrelevant_metadata",
+            "checked_at": utc(),
+            "project": project_name,
+            "reason": "Sin indicios de PS Vita en los metadatos del proyecto GitLab",
+        }
+        removed += 1
+    state["queue"] = keep
+    return removed
+
+
 def run():
     catalog, authors = to_v1(request(CATALOG_URL)), to_v1(request(AUTHORS_URL))
     if not isinstance(catalog, (dict, list)) or not isinstance(authors, list):
@@ -546,6 +579,7 @@ def run():
     if not isinstance(candidates, dict) or not isinstance(state.get("queue"), list):
         raise RuntimeError("Corrupt discovery data; refusing overwrite")
     reclassified = reclassify_existing(state, candidates)
+    removed_gitlab_noise = prune_unrelated_gitlab_queue(state, profiles)
     failures = []
     globally_found = scanned_profiles = checked = found = 0
     try:
@@ -556,6 +590,8 @@ def run():
         globally_found += global_gitlab_search(state)
     except (RuntimeError, ValueError, requests.RequestException) as exc:
         failures.append("GitLab search: " + str(exc)[:150])
+    # Prune noisy new GitLab global results as well, before deeper requests.
+    removed_gitlab_noise += prune_unrelated_gitlab_queue(state, profiles)
     try:
         scanned_profiles = scan_profiles(state, profiles)
     except (RuntimeError, ValueError, requests.RequestException) as exc:
@@ -577,13 +613,15 @@ def run():
         checked += 1
         if entry:
             candidates[key] = entry
+            # An old review note is no longer true if the project is accepted.
+            state.get("target_filter_audit", {}).pop(key, None)
             found += 1
     state["run_count"] += 1
     state["last_run"] = utc()
     state["errors"] = failures[:10]
     state["last_round"] = {"global_results": globally_found, "profiles_checked": scanned_profiles,
                            "repositories_checked": checked, "new_candidates": found, "filtered_existing": reclassified,
-                           "pending": len(state["queue"])}
+                           "pruned_gitlab": removed_gitlab_noise, "pending": len(state["queue"])}
     # Migrate prior queue snapshots to compact state, including initial runs.
     for task in state["queue"]:
         task["repo"] = compact_repo(task["repo"], task["platform"])
