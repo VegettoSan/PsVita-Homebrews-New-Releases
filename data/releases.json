@@ -1,6 +1,318 @@
 [
   {
     "platform": "github",
+    "repo": "ScoobyDouche/VitaKotor",
+    "release_id": "453263458",
+    "tag": "v0.5.2",
+    "name": "VitaKotor v0.5.2 — two more cores at work",
+    "url": "https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.5.2",
+    "published": "2026-11-20T22:59:52Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# VitaKotor v0.5.2 — two more cores at work\n\nEverything from the v0.5.0 and v0.5.1-multicore pre-releases, played further and released properly, plus the Google Play 1.0.43 APK and fixes for the d-pad, the boot screen and short stalls in play. If you are coming from v0.4.3, this is everything since.\n\n## What changed\n\n- **The graphics calls run on a second core.** The core running the game no longer does the graphics library's work for every object it draws. Busy frames take about a tenth less time.\n\n- **The AI runs on a third core while the scene draws.** It used to run after the drawing, on the same core. In busy areas that takes about 3.5 ms more off each frame. Add `ServerOverlap=0` under `[Vita Options]` in `ux0:data/kotor/swkotor.ini` to turn it off.\n\n- **The Google Play 1.0.43 APK works** (issue #14), with its 32-bit libraries. A 64-bit phone downloads only the 64-bit ones; the README says how to get the right files. The 1.0.10, 1.0.9 build 54 and 1.0.7 / 1.0.71 APKs still work.\n\n- **A d-pad tap no longer moves a menu selection twice** (issue #15).\n\n- **The boot screen no longer looks frozen.** The loading bar used to stop about 4 seconds in and sit still for 20 more. It now keeps moving until the game is about to show the menu.\n\n- **Fewer short stalls in play**: a hitch about once a second caused by the log writer, sound dropouts during area-change saves, pauses when an area's ambient sounds start on a return visit, and pauses as dialogue lines appear.\n\n- **Shiny materials** (issue #11): two fixes for armour and weapons showing neon colours or another surface's reflection.\n\n- **Sound fixes**: a replayed track could carry on from where it last stopped, a stream could be closed while it was still being decoded, and short sound loops are now kept decoded instead of being decoded again every time they restart.\n\n- **Graphics fixes**: 16-bit textures could come out corrupted, a deleted buffer stayed bound, and one texture update every frame made the game wait for the graphics core.\n\n- **Setup mistakes show a message instead of a black screen.** A missing `kubridge`, `libshacccg`, `.so` file or `.obb` now says what is missing and where it goes.\n\n- **New options** under `[Vita Options]`: `ShadowDistance` (how far creatures cast shadows, default `35`), `ServerOverlap` (above), and `FrameLock=60` now also lifts the game's own 40 fps cap. The README has the full table.\n\n- **KOTOR-nolog.vpk**: an optional build with diagnostic logging disabled. Install it in place of `KOTOR.vpk` if you prefer not to have a log file written.\n\n### The pre-releases\n\nv0.5.0, v0.5.1-multicore.1 and v0.5.1-multicore.2 have been taken down from the releases page: everything in them is in this release.\n\n## Updating\n\nInstall `KOTOR.vpk` over your current one. Your files in `ux0:data/kotor/`, your saves and your mods stay as they are. If anything goes wrong, set `ServerOverlap=0`, or reinstall v0.4.3 from the releases page.\n\n## Honest limits\n\n- **Loading a save can occasionally take about 15 seconds longer.** It was seen in 3 of about 10 loads of one large save: one long pause just after the loading screen appears, then the load finishes normally. The cause is being traced.\n\n- **Busy areas still sit near 20 fps.** The Upper City and the Undercity crowds are the game's own code on one core.\n\n- **1.0.43 has had several sessions, not a full playthrough.**\n\n- **Mod sets have not been tried with this build.**\n\n- **The equipment menu issue** (issue #10) is still open.\n\n## Everything else from v0.4.3 still applies\n\nGriff spawns in the Sand People Enclave, texture quality is picked from the MODS button, busy areas have 96 sound channels, and frames are locked to 30 fps.\n\n## You need your own copy of the game\n\nThis is a loader, not a game. It needs the Android release's `main` and `patch` `.obb` files, which you must own.\n\n## Something broken?\n\nOpen an issue with `ux0:data/kotor/log.txt` attached, say where in the game it happened, and whether it still happens with `ServerOverlap=0`.\n",
+    "assets": [
+      {
+        "name": "KOTOR-nolog.vpk",
+        "size": 2748569,
+        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.2/KOTOR-nolog.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "KOTOR.vpk",
+        "size": 2759766,
+        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.2/KOTOR.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "ScoobyDouche",
+    "homebrew_name": "KOTOR",
+    "homebrew_icon": "https://archive.org/download/VitaKotor/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
+    "homebrew_long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.\n\n- PsVitaAlive -",
+    "homebrew_id": "kotor",
+    "homebrew_authors": [
+      "scoobydouche"
+    ],
+    "homebrew_version": "0.5.0",
+    "catalog_apps": [
+      {
+        "id": "kotor",
+        "name": "KOTOR",
+        "icon": "https://archive.org/download/VitaKotor/icon0.png",
+        "category": "ports",
+        "description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
+        "long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.\n\n- PsVitaAlive -",
+        "version": "0.5.0",
+        "version_date": "2026-10-24",
+        "author_ids": [
+          "scoobydouche"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/VitaKotor/KOTOR%20v0.5.0.vpk",
+            "size": 2726298,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/VitaKotor/Game%20Files.zip",
+            "size": 2576980378,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "kotor"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/ScoobyDouche/VitaKotor"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.5.0 → release v0.5.2 · Revisión manual: 2 VPK diferentes",
+    "catalog_version": "0.5.0",
+    "archive_current_link": "https://archive.org/download/VitaKotor/KOTOR%20v0.5.0.vpk",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "FWGS/xash3d-fwgs",
+    "release_id": "453172204",
+    "tag": "continuous",
+    "name": "Xash3D FWGS Continuous master Build",
+    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
+    "published": "2026-11-20T20:58:09Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "buildnum 4251\n",
+    "assets": [
+      {
+        "name": "su.xash.Engine.Compat.i386.flatpak",
+        "size": 11347336,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
+        "content_type": "application/vnd.flatpak"
+      },
+      {
+        "name": "xash3d-fwgs-amd64.AppImage",
+        "size": 26585592,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-android-mappings.tar.zst",
+        "size": 2647348,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
+        "content_type": "application/zstd"
+      },
+      {
+        "name": "xash3d-fwgs-android.apk",
+        "size": 47361655,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "xash3d-fwgs-apple-amd64.tar.xz",
+        "size": 5515016,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-apple-arm64.tar.xz",
+        "size": 5284228,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
+        "content_type": "application/x-xz"
+      },
+      {
+        "name": "xash3d-fwgs-arm64.AppImage",
+        "size": 22616584,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-armhf.AppImage",
+        "size": 21966212,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-i386.AppImage",
+        "size": 26549624,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
+        "content_type": "application/vnd.appimage"
+      },
+      {
+        "name": "xash3d-fwgs-ios-arm64.ipa",
+        "size": 5585085,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "xash3d-fwgs-linux-amd64.tar.gz",
+        "size": 28458886,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-arm64.tar.gz",
+        "size": 24278886,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-armhf.tar.gz",
+        "size": 23520277,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-i386.tar.gz",
+        "size": 28459230,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
+        "size": 21966644,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
+        "size": 20466527,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xash3d-fwgs-nswitch.7z",
+        "size": 16718938,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-ps4.pkg",
+        "size": 18481152,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ps4.pkg",
+        "content_type": "application/x-xar"
+      },
+      {
+        "name": "xash3d-fwgs-win32-amd64.7z",
+        "size": 16542935,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xash3d-fwgs-win32-i386.7z",
+        "size": 18949636,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
+        "content_type": "application/x-7z-compressed"
+      },
+      {
+        "name": "xashds-linux-amd64.tar.gz",
+        "size": 3540309,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-arm64.tar.gz",
+        "size": 3484995,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-armhf.tar.gz",
+        "size": 3384762,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-i386.tar.gz",
+        "size": 3474014,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-ppc64el.tar.gz",
+        "size": 3653996,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "xashds-linux-riscv64.tar.gz",
+        "size": 3220759,
+        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
+        "content_type": "application/x-gtar"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "release_channel": "rolling",
+    "review_required": false,
+    "no_stable_release": true,
+    "homebrew_name": "Xash3D-FWGS",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
+    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
+    "homebrew_id": "xash3d-fwgs",
+    "homebrew_authors": [
+      "fgsfds",
+      "xash3d-fwgs-team"
+    ],
+    "homebrew_version": "v.continuous",
+    "catalog_apps": [
+      {
+        "id": "xash3d-fwgs",
+        "name": "Xash3D-FWGS",
+        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
+        "category": "ports",
+        "description": "Port of Xash3D-FWGS for PSVITA.",
+        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
+        "version": "v.continuous",
+        "version_date": "2023-10-07",
+        "author_ids": [
+          "fgsfds",
+          "xash3d-fwgs-team"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-xash3d-fwgs/xash3d-fwgs.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/psvitaalive-xash3d-fwgs/Game%20Files.zip",
+            "size": 1610612736,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "xash3d"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/FWGS/xash3d-fwgs"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.continuous → release continuous · Revisión manual: release sin VPK",
+    "catalog_version": "v.continuous",
+    "archive_current_link": "https://archive.org/download/psvitaalive-xash3d-fwgs/xash3d-fwgs.vpk",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
     "repo": "marcocatena/TheSimsVita-release",
     "release_id": "452878201",
     "tag": "v1.2",
@@ -1974,236 +2286,6 @@
     "catalog_update_detail": "PSVitaAlive 1.0 → release PC_RecompMX",
     "catalog_version": "1.0",
     "archive_current_link": "https://archive.org/download/mx-vs-atv-unleashed-ps-vita/MXVSATV%20v1.0.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "FWGS/xash3d-fwgs",
-    "release_id": "448564342",
-    "tag": "continuous",
-    "name": "Xash3D FWGS Continuous master Build",
-    "url": "https://github.com/FWGS/xash3d-fwgs/releases/tag/continuous",
-    "published": "2026-11-17T11:55:29Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "buildnum 4248\n",
-    "assets": [
-      {
-        "name": "su.xash.Engine.Compat.i386.flatpak",
-        "size": 11336360,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/su.xash.Engine.Compat.i386.flatpak",
-        "content_type": "application/vnd.flatpak"
-      },
-      {
-        "name": "xash3d-fwgs-amd64.AppImage",
-        "size": 26577400,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-amd64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-android-mappings.tar.zst",
-        "size": 2647744,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android-mappings.tar.zst",
-        "content_type": "application/zstd"
-      },
-      {
-        "name": "xash3d-fwgs-android.apk",
-        "size": 47351897,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-android.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "xash3d-fwgs-apple-amd64.tar.xz",
-        "size": 5513868,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-amd64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-apple-arm64.tar.xz",
-        "size": 5281412,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-apple-arm64.tar.xz",
-        "content_type": "application/x-xz"
-      },
-      {
-        "name": "xash3d-fwgs-arm64.AppImage",
-        "size": 22608392,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-arm64.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-armhf.AppImage",
-        "size": 21962116,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-armhf.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-i386.AppImage",
-        "size": 26541432,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-i386.AppImage",
-        "content_type": "application/vnd.appimage"
-      },
-      {
-        "name": "xash3d-fwgs-ios-arm64.ipa",
-        "size": 5582373,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ios-arm64.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "xash3d-fwgs-linux-amd64.tar.gz",
-        "size": 28460554,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-arm64.tar.gz",
-        "size": 24273367,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-armhf.tar.gz",
-        "size": 23521197,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-i386.tar.gz",
-        "size": 28460105,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-ppc64el.tar.gz",
-        "size": 21974021,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-linux-riscv64.tar.gz",
-        "size": 20481192,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xash3d-fwgs-nswitch.7z",
-        "size": 16720656,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-nswitch.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-ps4.pkg",
-        "size": 18481152,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-ps4.pkg",
-        "content_type": "application/x-xar"
-      },
-      {
-        "name": "xash3d-fwgs-win32-amd64.7z",
-        "size": 16750322,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-amd64.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xash3d-fwgs-win32-i386.7z",
-        "size": 18866939,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xash3d-fwgs-win32-i386.7z",
-        "content_type": "application/x-7z-compressed"
-      },
-      {
-        "name": "xashds-linux-amd64.tar.gz",
-        "size": 3526554,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-amd64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-arm64.tar.gz",
-        "size": 3470568,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-arm64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-armhf.tar.gz",
-        "size": 3374650,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-armhf.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-i386.tar.gz",
-        "size": 3462811,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-i386.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-ppc64el.tar.gz",
-        "size": 3641195,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-ppc64el.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "xashds-linux-riscv64.tar.gz",
-        "size": 3214654,
-        "download_url": "https://github.com/FWGS/xash3d-fwgs/releases/download/continuous/xashds-linux-riscv64.tar.gz",
-        "content_type": "application/x-gtar"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "release_channel": "rolling",
-    "review_required": false,
-    "no_stable_release": true,
-    "homebrew_name": "Xash3D-FWGS",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Xash3D-FWGS for PSVITA.",
-    "homebrew_long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-    "homebrew_id": "xash3d-fwgs",
-    "homebrew_authors": [
-      "fgsfds",
-      "xash3d-fwgs-team"
-    ],
-    "homebrew_version": "v.continuous",
-    "catalog_apps": [
-      {
-        "id": "xash3d-fwgs",
-        "name": "Xash3D-FWGS",
-        "icon": "https://archive.org/download/psvitaalive-xash3d-fwgs/icon0.png",
-        "category": "ports",
-        "description": "Port of Xash3D-FWGS for PSVITA.",
-        "long_description": "Port of Xash3D-FWGS for PSVITA.\nXash3D-FWGS is an open source re-creation of the GoldSrc engine, a modified Quake Engine running Half-Life, Counter Strike and Team Fortress.\n\nNOTE: Data files are slightly different from vitaXash3D. This means both versions can't be installed at the same time.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.\n\n- PsVitaAlive -",
-        "version": "v.continuous",
-        "version_date": "2023-10-07",
-        "author_ids": [
-          "fgsfds",
-          "xash3d-fwgs-team"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-xash3d-fwgs/xash3d-fwgs.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/psvitaalive-xash3d-fwgs/Game%20Files.zip",
-            "size": 1610612736,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "xash3d"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/FWGS/xash3d-fwgs"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.continuous → release continuous · Revisión manual: release sin VPK",
-    "catalog_version": "v.continuous",
-    "archive_current_link": "https://archive.org/download/psvitaalive-xash3d-fwgs/xash3d-fwgs.vpk",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   },
@@ -7980,88 +8062,6 @@
     "archive_current_link": "https://archive.org/download/psvitaalive-scratch-everywhere/scratch-everywhere.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "ScoobyDouche/VitaKotor",
-    "release_id": "430278838",
-    "tag": "v0.5.1-multicore.2",
-    "name": "VitaKotor v0.5.1-multicore.2 — tuned for every graphics option on",
-    "url": "https://github.com/ScoobyDouche/VitaKotor/releases/tag/v0.5.1-multicore.2",
-    "published": "2026-11-01T00:44:58Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "A test pre-release from the `multicore` branch, aimed at playing with Shadows, Grass, Frame Buffer and 32-bit textures all on. It builds on multicore.1: the AI now runs alongside the 3D scene far more of the time, and one graphics stall the port caused itself is gone.\n\n## What changed\n\n- **The AI waits far less for the scene.** In multicore.1 the AI often had to stop partway and wait for the drawing to finish, mostly when it started a character animation or loaded a script. Animations are now queued and played the moment the drawing is done, and script loading shares the game's resource manager through a lock instead of stopping. In the Upper City the wait after each frame's drawing dropped from 3.8 ms to 2.0 ms; in the Lower City to 0.2 ms.\n\n- **A texture update no longer stalls the frame.** The game updates one texture every frame, and each update made the game core wait for the graphics core to finish everything before it: up to 3 ms a frame. It is now queued like every other draw call.\n\n- **New option: `ShadowDistance`.** How far away, in metres, creatures still cast shadows when Shadows is on. The default is the original `35`; `20` saves about 1 ms in the Upper City crowds.\n\n- **KOTOR-nolog.vpk**: an optional build with diagnostic logging disabled. Install it in place of `KOTOR.vpk` if you prefer not to have a log file written.\n\n### What to expect\n\nWith every graphics option on and 32-bit textures, the Taris Lower City now averages about 34 ms a frame, right at the edge of the 30 fps lock: most frames make it, some show for an extra refresh. The Upper City South crowds still run at about 17 fps and the Undercity at about 19: those areas draw 500 to 800 objects a frame, and that work is the game's own code on one core, whatever the settings. With FrameLock at 30, frames that miss the lock are shown for an extra refresh; `FrameLock=20` gives an even 20 in those areas if you prefer steady to fast.\n\n## Updating\n\nInstall `KOTOR.vpk` over your current one. Your files in `ux0:data/kotor/`, your saves and your mods stay as they are. If anything goes wrong, set `ServerOverlap=0` under `[Vita Options]` in `swkotor.ini`, or reinstall multicore.1 or v0.5.0 from the releases page.\n\n## Honest limits\n\n- **Tested for one evening in Taris.** Several sessions in the Upper City, Lower City and Undercity with every graphics option on, with no crashes. The last small widening of the animation and lock changes has not been played yet.\n\n- **32-bit textures fill the Vita's video memory** in the busy Taris areas, and the rest spills into regular memory. It has not caused trouble so far, but the bigger outdoor areas have not been tried at 32-bit.\n\n- **Mod sets have not been tried with this build.**\n\n- **The loading screen runs twice when you load a save** (issue #13), and **the rare crash after an area-change auto-save** (issue #12) is still open.\n\n## Everything else from multicore.1 still applies\n\nThe AI runs on its own core while the scene draws, the graphics calls run on another, and `ServerOverlap=0` turns the AI overlap off.\n\n## You need your own copy of the game\n\nThis is a loader, not a game. It needs the Android release's `main` and `patch` `.obb` files, which you must own.\n\n## Something broken?\n\nOpen an issue with `ux0:data/kotor/log.txt` attached, say where in the game it happened, and whether it still happens with `ServerOverlap=0`.\n",
-    "assets": [
-      {
-        "name": "KOTOR-nolog.vpk",
-        "size": 2726631,
-        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.1-multicore.2/KOTOR-nolog.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "KOTOR.vpk",
-        "size": 2738128,
-        "download_url": "https://github.com/ScoobyDouche/VitaKotor/releases/download/v0.5.1-multicore.2/KOTOR.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ScoobyDouche",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.5.0 → release v0.5.1-multicore.2 · Revisión manual: 2 VPK diferentes",
-    "catalog_version": "0.5.0",
-    "homebrew_name": "KOTOR",
-    "homebrew_icon": "https://archive.org/download/VitaKotor/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
-    "homebrew_long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.\n\n- PsVitaAlive -",
-    "homebrew_id": "kotor",
-    "homebrew_authors": [
-      "scoobydouche"
-    ],
-    "homebrew_version": "0.5.0",
-    "catalog_apps": [
-      {
-        "id": "kotor",
-        "name": "KOTOR",
-        "icon": "https://archive.org/download/VitaKotor/icon0.png",
-        "category": "ports",
-        "description": "Star Wars: Knights of the Old Republic on the PlayStation Vita.",
-        "long_description": "A native Vita port of the Android release of KOTOR, built with the so-loader technique: rather than reimplementing the game, the loader loads Aspyr's own ARM libraries straight from your copy of the Android build, resolves everything they import against Vita equivalents, and hands control to the game's real entry point. Graphics run through vitaGL, with a from-scratch FMOD audio implementation over sceAudiodec and sceAudioOut underneath.\n\n- PsVitaAlive -",
-        "version": "0.5.0",
-        "version_date": "2026-10-24",
-        "author_ids": [
-          "scoobydouche"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/VitaKotor/KOTOR%20v0.5.0.vpk",
-            "size": 2726298,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/VitaKotor/Game%20Files.zip",
-            "size": 2576980378,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "kotor"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/ScoobyDouche/VitaKotor"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/VitaKotor/KOTOR%20v0.5.0.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   },
   {
     "platform": "github",
