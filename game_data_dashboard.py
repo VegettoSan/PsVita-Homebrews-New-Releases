@@ -21,6 +21,7 @@ STYLE = """
     cursor:pointer;font:inherit;font-weight:700}
   .gd-tab[aria-selected="true"]{background:var(--accent);color:#000;
     border-color:var(--accent)}
+  a.gd-tab{display:inline-block;text-decoration:none}
   .gd-tab:focus-visible,.gd-input:focus-visible{outline:2px solid var(--accent);
     outline-offset:2px}
   .gd-pill{display:inline-block;margin-left:7px;border-radius:999px;
@@ -257,6 +258,7 @@ NAV = """
       aria-selected="true" aria-controls="releases">Actualizaciones Homebrew</button>
     <button class="gd-tab" id="gd-data-tab" type="button"
       aria-selected="false" aria-controls="gd-panel">Búsqueda de Game Data</button>
+    <a class="gd-tab" href="discoveries.html">Nuevos descubrimientos</a>
   </nav>
 """
 
