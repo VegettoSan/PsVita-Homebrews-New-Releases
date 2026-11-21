@@ -5,6 +5,7 @@ import html
 import json
 import os
 import re
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote, urlparse
@@ -19,7 +20,19 @@ DRAFTS = Path("docs/discovery-drafts")
 CATALOG_URL = os.getenv("PSVITAALIVE_CATALOG_URL", "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/catalog.json")
 AUTHORS_URL = os.getenv("PSVITAALIVE_AUTHORS_URL", "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/authors.json")
 PROFILE_LIMIT = max(1, min(8, int(os.getenv("DISCOVERY_PROFILE_LIMIT", "3"))))
-REPO_LIMIT = max(1, min(30, int(os.getenv("DISCOVERY_REPO_LIMIT", "18"))))
+# Up to 150 repository checks per round (previously only 18).
+REPO_LIMIT = max(1, min(200, int(os.getenv("DISCOVERY_REPO_LIMIT", "150"))))
+# API and wall-clock safeguards: GitHub Actions GITHUB_TOKEN allows ~1000 API calls/hour.
+MAX_REQUESTS = max(80, min(750, int(os.getenv("DISCOVERY_REQUEST_BUDGET", "520"))))
+MAX_SECONDS = max(120, min(1080, int(os.getenv("DISCOVERY_TIME_BUDGET", "720"))))
+REQUEST_COUNT = 0
+LOW_RATE_LIMIT = False
+START_TIME = time.monotonic()
+HTTP = requests.Session()
+class DiscoveryBudgetReached(RuntimeError):
+    """The next batch can resume from the durable checkpoint."""
+    pass
+
 QUERIES = ("topic:ps-vita", '"ps vita" in:name,description,readme',
            "vitasdk in:name,description,readme", "psvita in:name,description,readme",
            "vita2d in:readme", '"vita homebrew" in:readme')
@@ -52,13 +65,26 @@ def write_json(path, obj):
 
 
 def request(url, params=None, gitlab=False, plain=False):
+    global REQUEST_COUNT, LOW_RATE_LIMIT
+    if (REQUEST_COUNT >= MAX_REQUESTS or LOW_RATE_LIMIT or
+            time.monotonic() - START_TIME >= MAX_SECONDS):
+        raise DiscoveryBudgetReached("Límite prudente de tiempo o peticiones; continuamos en la próxima ronda")
     headers = GL_HEADERS if gitlab else HEADERS
-    response = requests.get(url, params=params, headers=headers, timeout=20)
+    response = HTTP.get(url, params=params, headers=headers, timeout=(5, 18))
+    REQUEST_COUNT += 1
     if response.status_code == 404:
         return None
     if response.status_code in (403, 429):
-        raise RuntimeError("API rate limit: " + (urlparse(url).hostname or ""))
+        raise DiscoveryBudgetReached("API rate limit: " + (urlparse(url).hostname or ""))
     response.raise_for_status()
+    # Search uses a separate quota; protect the main authenticated GitHub REST quota.
+    if url.startswith("https://api.github.com/") and "/search/" not in url:
+        remaining = response.headers.get("X-RateLimit-Remaining")
+        try:
+            if remaining is not None and int(remaining) < 70:
+                LOW_RATE_LIMIT = True
+        except ValueError:
+            pass
     return response.text[:40000] if plain else response.json()
 
 
