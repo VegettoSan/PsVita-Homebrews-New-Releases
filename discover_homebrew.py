@@ -171,7 +171,7 @@ def project(repo, platform):
 def compact_repo(repo, platform):
     """Store only fields required for analysis; do not persist full API responses."""
     fields = ("id", "name", "description", "full_name", "path_with_namespace",
-              "default_branch", "topics", "archived", "disabled")
+              "default_branch", "topics", "archived", "disabled", "needs_refresh")
     obj = {k: repo[k] for k in fields if k in repo}
     if platform == "github":
         owner = repo.get("owner") or {}
@@ -310,7 +310,7 @@ def find_vpk(repo, platform):
 
 
 # Versioned, conservative destination classification. "Mentions Vita" is not enough.
-TARGET_FILTER_VERSION = 3
+TARGET_FILTER_VERSION = 4
 VITA_PATTERN = r"(?:ps[\s_-]*vita|playstation\s+vita|ps[\s_-]*tv|pstv)"
 TARGET_PATTERN = re.compile(
     r"(?:\b(?:for|to|on|runs?\s+on|installed?\s+on|built\s+for|made\s+for|"
@@ -386,7 +386,7 @@ def classify_target(name, description, readme_text, paths=(), vpk=None):
     vita_kernel_plugin = bool(re.search(
         r"(?:ps[\s_-]*vita|playstation\s+vita).{0,24}\b(?:kernel\s+)?plugin\b"
         r"|\b(?:kernel\s+)?plugin\b.{0,32}(?:ps[\s_-]*vita|playstation\s+vita)",
-        meta, re.I)) and bool(re.search(
+        meta + "\n" + body[:1400], re.I)) and bool(re.search(
             r"taihen|henkaku|ens[oō]|\*KERNEL|ur0:tai|ksce[A-Z]|\.skprx", combined, re.I))
     if has_vpk:
         return "candidate", kind, "VPK en release público"
@@ -430,7 +430,7 @@ def reclassify_existing(state, candidates):
             entry["target_reason"] = reason
     # Previously held cases deserve one rescan with the improved Vita-specific
     # rules; do not rescan rejected Switch/Vita emulator projects.
-    if not state.get("target_review_requeued_v3"):
+    if int(state.get("target_review_requeued_version", 0)) < TARGET_FILTER_VERSION:
         tasks = []
         for key, data in audit.items():
             if data.get("result") != "review" or not re.fullmatch(r"(gh|gl):[0-9]+", key):
@@ -440,7 +440,7 @@ def reclassify_existing(state, candidates):
             if not full:
                 continue
             name = full.rsplit("/", 1)[-1]
-            repo = {"id": int(key.split(":")[1]), "name": name,
+            repo = {"id": int(key.split(":")[1]), "name": name, "needs_refresh": True,
                     "default_branch": "main",
                     ("full_name" if platform == "github" else "path_with_namespace"): full}
             if key in state.get("seen", {}):
@@ -449,12 +449,18 @@ def reclassify_existing(state, candidates):
                           "repo": compact_repo(repo, platform)})
         task_keys = {task["key"] for task in tasks}
         state["queue"] = tasks + [task for task in state["queue"] if task["key"] not in task_keys]
-        state["target_review_requeued_v3"] = True
+        state["target_review_requeued_version"] = TARGET_FILTER_VERSION
     state["target_filter_version"] = TARGET_FILTER_VERSION
     return count
 
 
 def analyze(repo, platform, known, authors):
+    if repo.get("needs_refresh"):
+        if platform == "github":
+            repo = request("https://api.github.com/repos/" + project(repo, platform)) or repo
+        else:
+            repo = request("https://gitlab.com/api/v4/projects/" + str(repo["id"]),
+                           gitlab=True) or repo
     full = project(repo, platform)
     if platform + ":" + full.lower() in known:
         return "catalogued", None
