@@ -310,7 +310,7 @@ def find_vpk(repo, platform):
 
 
 # Versioned, conservative destination classification. "Mentions Vita" is not enough.
-TARGET_FILTER_VERSION = 2
+TARGET_FILTER_VERSION = 3
 VITA_PATTERN = r"(?:ps[\s_-]*vita|playstation\s+vita|ps[\s_-]*tv|pstv)"
 TARGET_PATTERN = re.compile(
     r"(?:\b(?:for|to|on|runs?\s+on|installed?\s+on|built\s+for|made\s+for|"
@@ -344,7 +344,11 @@ def classify_target(name, description, readme_text, paths=(), vpk=None):
     build = bool(BUILD_VITA.search(body))
     vita_icon = any(str(p).lower().endswith("sce_sys/icon0.png") for p in paths)
     vita_plugin = any(str(p).lower().endswith((".skprx", ".suprx")) for p in paths)
-    patch = bool(PATCH.search(meta)) and bool(re.search(VITA_PATTERN, meta, re.I))
+    # A mention of a patch database is not itself a patch project.
+    patch = bool(PATCH.search(str(name or "")) or re.search(
+        r"(?:ps[\\s_-]*vita|playstation\\s+vita).{0,35}\\b(?:patch|translation|mod)\\b"
+        r"|\\b(?:patch|translation|mod)\\b.{0,35}(?:ps[\\s_-]*vita|playstation\\s+vita)",
+        meta, re.I))
     kind = "patch" if patch else "homebrew"
 
     # Explicit outputs for another platform override incidental Vita references.
@@ -374,12 +378,20 @@ def classify_target(name, description, readme_text, paths=(), vpk=None):
     targeted = bool(TARGET_PATTERN.search(meta) or TARGET_PATTERN.search(body[:4000]))
     targeted = targeted or bool(re.search(
         r"(?:ps[\s_-]*vita|playstation\s+vita)\s+(?:port|build)\s+of\b", combined, re.I))
+    # Kernel plugins often ship only .skprx sources or a taiHEN config (no VPK).
+    vita_kernel_plugin = bool(re.search(
+        r"(?:ps[\s_-]*vita|playstation\s+vita).{0,24}\b(?:kernel\s+)?plugin\b"
+        r"|\b(?:kernel\s+)?plugin\b.{0,32}(?:ps[\s_-]*vita|playstation\s+vita)",
+        meta, re.I)) and bool(re.search(
+            r"taihen|henkaku|ens[oō]|\*KERNEL|ur0:tai|ksce[A-Z]|\.skprx", combined, re.I))
     if has_vpk:
         return "candidate", kind, "VPK en release público"
     if build and (targeted or vita_icon or vita_plugin):
         return "candidate", kind, "Compilación VitaSDK con destino PS Vita"
     if targeted and (vita_icon or vita_plugin):
         return "candidate", kind, "Destino Vita confirmado por recursos nativos"
+    if vita_kernel_plugin:
+        return "candidate", "plugin", "Plugin para el kernel de PS Vita y taiHEN"
     if patch and targeted and not re.search(r"\b(?:nintendo\s+switch|libnx)\b", combined[:1800], re.I):
         return "candidate", kind, "Posible parche para PS Vita (revisión necesaria)"
     return "review", kind, "No está confirmado que se ejecute o aplique en PS Vita"
@@ -411,6 +423,28 @@ def reclassify_existing(state, candidates):
         else:
             entry["project_type"] = kind
             entry["target_reason"] = reason
+    # Previously held cases deserve one rescan with the improved Vita-specific
+    # rules; do not rescan rejected Switch/Vita emulator projects.
+    if not state.get("target_review_requeued_v3"):
+        tasks = []
+        for key, data in audit.items():
+            if data.get("result") != "review" or not re.fullmatch(r"(gh|gl):[0-9]+", key):
+                continue
+            platform = "github" if key.startswith("gh:") else "gitlab"
+            full = data.get("project") or ""
+            if not full:
+                continue
+            name = full.rsplit("/", 1)[-1]
+            repo = {"id": int(key.split(":")[1]), "name": name,
+                    "default_branch": "main",
+                    ("full_name" if platform == "github" else "path_with_namespace"): full}
+            if key in state.get("seen", {}):
+                del state["seen"][key]
+            tasks.append({"key": key, "platform": platform,
+                          "repo": compact_repo(repo, platform)})
+        queued = {x["key"] for x in state.get("queue", [])}
+        state["queue"] = tasks + [x for x in state["queue"] if x["key"] not in {t["key"] for t in tasks}]
+        state["target_review_requeued_v3"] = True
     state["target_filter_version"] = TARGET_FILTER_VERSION
     return count
 
