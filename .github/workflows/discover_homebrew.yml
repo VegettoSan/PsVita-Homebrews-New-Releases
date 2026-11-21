@@ -51,7 +51,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           DISCOVERY_PROFILE_LIMIT: "3"
-          DISCOVERY_REPO_LIMIT: "18"
+          DISCOVERY_REPO_LIMIT: "150"
+          DISCOVERY_REQUEST_BUDGET: "520"
+          DISCOVERY_TIME_BUDGET: "720"
         run: python -u discover_homebrew.py
 
       - name: Render discoveries
