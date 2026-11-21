@@ -60,6 +60,65 @@ class TextLimitsTests(unittest.TestCase):
         self.assertTrue(icon.endswith("/sce_sys/icon0.png"))
         self.assertEqual(len(shots), 1)
 
+    def test_vita3k_is_excluded_even_if_icon_exists(self):
+        result, _, reason = dh.classify_target(
+            "Vita3K", "Experimental PlayStation Vita emulator",
+            "Vita3K emulator for Windows Linux macOS and Android", ["sce_sys/icon0.png"])
+        self.assertEqual(result, "excluded")
+        self.assertIn("Emulador", reason)
+
+    def test_switch_recompilation_from_vita_is_excluded(self):
+        result, _, _ = dh.classify_target(
+            "gow-collection-nx",
+            "God of War PS Vita recompiled for Nintendo Switch homebrew - libnx",
+            "Compiles for the ARM64 Switch", [])
+        self.assertEqual(result, "excluded")
+
+    def test_vita_target_with_vpk_is_candidate(self):
+        result, _, _ = dh.classify_target(
+            "VitaCell", "Battery health homebrew for the PS Vita",
+            "Installed on the PS Vita", [], {"url": "https://github.com/a/b.vpk"})
+        self.assertEqual(result, "candidate")
+
+    def test_homebrew_emulator_for_vita_is_not_vita_emulator(self):
+        result, _, _ = dh.classify_target(
+            "retro-emulator", "An emulator for PS Vita",
+            "Install on PS Vita", ["sce_sys/icon0.png"])
+        self.assertEqual(result, "candidate")
+
+    def test_ps_vita_patch_is_kept_as_candidate(self):
+        result, kind, _ = dh.classify_target(
+            "English patch", "Translation patch for a PS Vita game",
+            "Apply patch for PS Vita", [])
+        self.assertEqual(result, "candidate")
+        self.assertEqual(kind, "patch")
+
+    def test_psp_only_patch_remains_manual_review(self):
+        result, _, _ = dh.classify_target(
+            "PSP translation patch",
+            "English patch for a PSP game. Play on PPSSPP, PSP or PS Vita.",
+            "Apply the patch to a PSP ISO.", [])
+        self.assertEqual(result, "review")
+
+    def test_readme_vita_reference_alone_is_insufficient(self):
+        result, _, _ = dh.classify_target(
+            "OpenStrike", "A path-traced desktop FPS",
+            "We used to discuss PS Vita rendering constraints.", [])
+        self.assertEqual(result, "review")
+
+    def test_existing_candidate_cleanup_preserves_audit(self):
+        state = {"seen": {"gh:3": {"result": "candidate"}}}
+        samples = {
+            "gh:3": {"project": "Vita3K/Vita3K", "app_draft": {
+                "name": "Vita3K", "description": "PlayStation Vita emulator",
+                "long_description": "Emulator for Windows", "links": []}}
+        }
+        removed = dh.reclassify_existing(state, samples)
+        self.assertEqual(removed, 1)
+        self.assertEqual(samples, {})
+        self.assertEqual(state["seen"]["gh:3"]["result"], "excluded")
+        self.assertIn("gh:3", state["target_filter_audit"])
+
     def test_dashboard_escapes_untrusted_metadata(self):
         html = dash.render({"gh:1": {"key": "gh:1", "project": "a/b", "platform": "github",
                                     "source_url": "https://github.com/a/b", "score": 5,
