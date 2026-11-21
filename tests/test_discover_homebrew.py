@@ -305,6 +305,103 @@ class TextLimitsTests(unittest.TestCase):
         self.assertEqual(dh.match_official_candidate(by_author, official), "same_author_and_title")
         self.assertIsNone(dh.match_official_candidate(just_name, official))
 
+    def test_forks_of_catalogued_d2vita_and_vampire_survivors_are_identified(self):
+        catalog = dh.to_v1([
+            {"id": "d2vita", "tid": "DTWO00001", "n": "D2Vita",
+             "aids": ["franckrst"], "l": [{"t": "Repository",
+             "u": "https://github.com/Franckrst/D2Vita"}]},
+            {"id": "vampire-survivors", "tid": "VSPH00001", "n": "Vampire Survivors",
+             "aids": ["federicoilgrandebardo"], "l": [{"t": "Repository",
+             "u": "https://github.com/Federicoilgrandebardo/vampire-survivors-vita"}]},
+        ])
+        official = dh.official_app_index(catalog)
+        forks = [
+            ("Digital33Studios/D2Vita", "Franckrst/D2Vita", "D2Vita"),
+            ("DrakonPL/vampire-survivors-vita",
+             "Federicoilgrandebardo/vampire-survivors-vita", "vampire-survivors-vita"),
+        ]
+        candidates = {}
+        for number, (candidate, origin, name) in enumerate(forks):
+            api = {"fork": True, "full_name": candidate,
+                   "parent": {"full_name": origin}, "source": {"full_name": origin}}
+            evidence = dh.repository_lineage_from_api(api, "github")
+            key = f"gh:{number+1}"
+            candidates[key] = {"key": key, "platform": "github", "project": candidate,
+                               "source_url": "https://github.com/" + candidate,
+                               "app_draft": {"name": name, "title_id": "",
+                                             "author_ids": [], "links": []},
+                               **evidence}
+            self.assertEqual(dh.match_official_candidate(candidates[key], official),
+                             "fork_of:github:" + origin.casefold())
+        state = {"seen": {}, "queue": []}
+        self.assertEqual(dh.reconcile_catalog(state, candidates, official), 2)
+        self.assertEqual(candidates, {})
+        self.assertEqual(len(state["catalogued_discoveries"]), 2)
+
+    def test_same_name_different_independent_project_is_not_removed(self):
+        official = dh.official_app_index([{
+            "id": "example", "name": "Example Vita",
+            "author_ids": ["original"],
+            "links": [{"type": "Repository", "url": "https://github.com/original/vita-game"}]}])
+        entry = {"project": "other/vita-game",
+                 "source_url": "https://github.com/other/vita-game",
+                 "app_draft": {"name": "Example Vita", "author_ids": ["other"], "links": []},
+                 "lineage_is_fork": False, "lineage_parent": "", "lineage_source": ""}
+        self.assertIsNone(dh.match_official_candidate(entry, official))
+
+    def test_fork_source_is_checked_even_when_parent_differs(self):
+        official = dh.official_app_index([{
+            "id": "vita-game", "name": "Vita Game",
+            "links": [{"url": "https://github.com/author/vita-game"}]}])
+        grandchild = {"source_url": "https://github.com/third/fork",
+                      "app_draft": {"name": "Renamed Game", "links": []},
+                      "lineage_is_fork": True,
+                      "lineage_parent": "github:second/fork",
+                      "lineage_source": "github:author/vita-game"}
+        self.assertEqual(dh.match_official_candidate(grandchild, official),
+                         "fork_of:github:author/vita-game")
+
+    def test_existing_fork_ancestry_check_is_bounded_and_persistent(self):
+        official = dh.official_app_index([{
+            "id": "vita-game", "name": "Vita Game",
+            "links": [{"url": "https://github.com/author/vita-game"}]}])
+        candidates = {"gh:42": {
+            "key": "gh:42", "platform": "github", "project": "third/fork",
+            "app_draft": {"name": "Vita Game", "links": []}}}
+        info = {"lineage_is_fork": True, "lineage_source": "github:author/vita-game",
+                "lineage_parent": "github:second/fork",
+                "lineage_check_version": dh.LINEAGE_SCAN_VERSION}
+        with patch.object(dh, "fetch_repository_lineage", return_value=info) as fetch:
+            stats = dh.enrich_existing_lineage(candidates, official)
+            self.assertEqual(stats["checked"], 1)
+            self.assertEqual(dh.match_official_candidate(candidates["gh:42"], official),
+                             "fork_of:github:author/vita-game")
+            self.assertEqual(dh.enrich_existing_lineage(candidates, official)["checked"], 0)
+            self.assertEqual(fetch.call_count, 1)
+
+    def test_new_candidate_fork_is_filtered_before_entering_discovery(self):
+        official = dh.official_app_index([{
+            "id": "vita-game", "name": "Example Vita",
+            "links": [{"url": "https://github.com/original/vita-game"}]}])
+        repo = {"id": 77, "name": "vita-game", "full_name": "other/vita-game",
+                "fork": True, "description": "A PS Vita homebrew",
+                "default_branch": "main"}
+        evidence = {"lineage_is_fork": True, "lineage_source": "github:original/vita-game",
+                    "lineage_parent": "github:original/vita-game",
+                    "lineage_check_version": dh.LINEAGE_SCAN_VERSION}
+        with patch.object(dh, "readme", return_value="For PS Vita"), \
+             patch.object(dh, "files_for", return_value=["sce_sys/icon0.png"]), \
+             patch.object(dh, "find_vpk", return_value={}), \
+             patch.object(dh, "fetch_repository_lineage", return_value=evidence):
+            self.assertEqual(dh.analyze(repo, "github", official["repos"], {},
+                                       official), ("catalogued", None))
+
+    def test_original_repo_can_match_when_fork_flag_is_false(self):
+        evidence = dh.repository_lineage_from_api(
+            {"fork": False, "source": {"full_name": "author/other"}}, "github")
+        self.assertFalse(evidence["lineage_is_fork"])
+        self.assertEqual(evidence["lineage_source"], "")
+
     def test_queued_known_vita_projects_take_priority_without_starving_rest(self):
         queue = [
             {"key": "gh:1", "platform": "github",
