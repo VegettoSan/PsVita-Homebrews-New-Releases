@@ -8,7 +8,7 @@ import re
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import quote, urlparse
+from urllib.parse import quote, unquote, urlparse
 
 import requests
 from catalog_schema_v2_compat import to_v1
@@ -20,6 +20,10 @@ DRAFTS = Path("docs/discovery-drafts")
 CATALOG_URL = os.getenv("PSVITAALIVE_CATALOG_URL", "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/catalog.json")
 AUTHORS_URL = os.getenv("PSVITAALIVE_AUTHORS_URL", "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/authors.json")
 PROFILE_LIMIT = max(1, min(8, int(os.getenv("DISCOVERY_PROFILE_LIMIT", "3"))))
+MEDIA_SCAN_VERSION = 2
+# Recheck older discoveries gradually without exhausting the discovery quota.
+MEDIA_REFRESH_LIMIT = max(0, min(100, int(os.getenv("DISCOVERY_MEDIA_REFRESH_LIMIT", "60"))))
+MEDIA_REFRESH_REQUEST_CAP = max(40, min(260, int(os.getenv("DISCOVERY_MEDIA_REQUEST_CAP", "185"))))
 # Up to 150 repository checks per round (previously only 18).
 REPO_LIMIT = max(1, min(200, int(os.getenv("DISCOVERY_REPO_LIMIT", "150"))))
 # API and wall-clock safeguards: GitHub Actions GITHUB_TOKEN allows ~1000 API calls/hour.
@@ -393,19 +397,33 @@ def readme(repo, platform):
 
 
 def files_for(repo, platform):
+    """Fetch nested repository files. GitLab trees require explicit pagination."""
     if platform == "github":
         tree = request("https://api.github.com/repos/" + project(repo, platform) + "/git/trees/" +
                        quote(repo.get("default_branch") or "main", safe=""), {"recursive": "1"})
-        if not isinstance(tree, dict) or tree.get("truncated"):
+        if not isinstance(tree, dict):
             return []
-        return [x["path"] for x in tree.get("tree", [])[:6000] if x.get("type") == "blob" and isinstance(x.get("path"), str)]
-    tree = request("https://gitlab.com/api/v4/projects/" + str(repo["id"]) + "/repository/tree",
-                   {"per_page": 100, "recursive": "true"}, gitlab=True) or []
-    return [x["path"] for x in tree if x.get("type") == "blob" and isinstance(x.get("path"), str)]
+        # Even truncated GitHub trees contain useful file paths: do not discard
+        # their entire partial result. Stop at a bounded 16000 entries.
+        return [x["path"] for x in tree.get("tree", [])[:16000]
+                if x.get("type") == "blob" and isinstance(x.get("path"), str)]
+    paths = []
+    pid = quote(str(repo["id"]), safe="")
+    for page in range(1, 16):  # Up to 1,500 entries, with API budget guard.
+        tree = request("https://gitlab.com/api/v4/projects/" + pid + "/repository/tree",
+                       {"per_page": 100, "page": page, "recursive": "true",
+                        "ref": repo.get("default_branch") or "main"}, gitlab=True) or []
+        if not isinstance(tree, list):
+            break
+        paths.extend(x["path"] for x in tree
+                     if x.get("type") == "blob" and isinstance(x.get("path"), str))
+        if len(tree) < 100:
+            break
+    return paths
 
 
 def raw_url(repo, platform, file):
-    branch = quote(repo.get("default_branch") or "main", safe="/")
+    branch = quote(repo.get("default_branch") or "main", safe="")
     path = "/".join(quote(part, safe="") for part in file.split("/"))
     full = "/".join(quote(part, safe="") for part in project(repo, platform).split("/"))
     if platform == "github":
@@ -413,14 +431,93 @@ def raw_url(repo, platform, file):
     return "https://gitlab.com/" + full + "/-/raw/" + branch + "/" + path
 
 
-def media(repo, platform, files):
-    icons = [p for p in files if p.lower().endswith("sce_sys/icon0.png")]
-    if not icons:
-        icons = [p for p in files if p.lower() in ("icon0.png", "assets/icon0.png", "images/icon0.png", "icon.png")]
-    images = [p for p in files if p.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
-              and re.search(r"(^|/)(screenshots?|captures?)/|screenshot[_0-9-]", p, re.I)]
-    return (raw_url(repo, platform, min(icons, key=len)) if icons else "",
-            [raw_url(repo, platform, p) for p in sorted(images)[:5]])
+IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp")
+IMAGE_DIRS = frozenset(("screenshots", "screenshot", "screens", "screen", "captures",
+                       "capture", "shots", "shot", "gallery", "previews", "preview"))
+IMAGE_NAME = re.compile(
+    r"(?:screenshot|screen[_ -]?\d|capture[_ -]?\d|preview[_ -]?\d?|"
+    r"gameplay|in[_ -]?game|title[_ -]?screen)", re.I)
+UNSUITABLE_IMAGE = re.compile(
+    r"(?:^|[/_.-])(?:badge|button|sprite|tileset|texture|font|flag|avatar|logo|"
+    r"icon|thumbnail|banner|button|cursor|loading|spinner|startup)(?:[/_.-]|$)", re.I)
+
+
+def readme_image_paths(text, files):
+    """Collect only README-embedded images that actually exist in the file tree."""
+    if not text or not files:
+        return set()
+    available = {p.casefold(): p for p in files}
+    references = re.findall(r"!\[[^\]]*\]\(\s*<?([^)\s>]+)", text)
+    references += re.findall(r"<img\b[^>]*\bsrc\s*=\s*['\"]([^'\"]+)['\"]", text, re.I)
+    found = set()
+    for src in references[:150]:
+        if src.startswith(("http:", "https:", "//", "data:")):
+            continue
+        path = unquote(src.split("#", 1)[0].split("?", 1)[0]).replace("\\", "/")
+        if path.startswith("/") or ".." in path.split("/"):
+            continue
+        while path.startswith("./"):
+            path = path[2:]
+        resolved = available.get(path.casefold())
+        if resolved and resolved.lower().endswith(IMAGE_EXTENSIONS):
+            found.add(resolved)
+    return found
+
+
+def media(repo, platform, files, readme_text=""):
+    """Conservatively rank actual images, including deeply nested sce_sys paths.
+
+    The fallback pic0 / LiveArea background becomes a screenshot only when no
+    real screenshots were found. No URL is guessed without a matching blob path.
+    """
+    files = sorted({p for p in files if isinstance(p, str) and
+                    p.lower().endswith(IMAGE_EXTENSIONS)}, key=lambda p: (p.casefold(), p))
+    embedded = readme_image_paths(readme_text, files)
+    icons = []
+    screenshots = []
+    fallback = []
+    for path in files:
+        parts = path.lower().split("/")
+        filename = parts[-1]
+        folders = parts[:-1]
+        nested = "/".join(parts)
+        livearea = "sce_sys" in folders and "livearea" in folders and "contents" in folders
+        pic0 = filename == "pic0.png" and ("sce_sys" in folders or len(parts) == 1)
+        if pic0:
+            fallback.append((0, len(parts), path))
+            continue
+        if livearea and filename in ("bg.png", "bg0.png", "background.png"):
+            fallback.append((1, len(parts), path))
+            continue
+
+        if filename == "icon0.png":
+            # Native VPK icon (even at project/src/sce_sys/icon0.png) wins.
+            rank = 0 if "sce_sys" in folders else 2
+            icons.append((rank, len(parts), path))
+            continue
+        if filename in ("icon.png", "appicon.png", "app_icon.png", "vita_icon.png",
+                        "bubble.png", "bubble_icon.png"):
+            icons.append((3, len(parts), path))
+            continue
+        if re.fullmatch(r"(?:app[_-]?)?icon[_-]?\d{2,4}\.png", filename):
+            icons.append((4, len(parts), path))
+            continue
+
+        # Ignore art/assets often confused with screenshots.
+        if UNSUITABLE_IMAGE.search(nested):
+            continue
+        by_folder = any(folder in IMAGE_DIRS for folder in folders)
+        by_name = bool(IMAGE_NAME.search(filename))
+        if by_folder or by_name or path in embedded:
+            rank = 0 if by_folder else 1 if by_name else 2
+            screenshots.append((rank, len(parts), path))
+
+    icon = min(icons, default=None)
+    best_shots = [p for _, _, p in sorted(screenshots, key=lambda t: (t[0], t[1], t[2].casefold()))[:5]]
+    if not best_shots and fallback:
+        best_shots = [min(fallback, key=lambda t: (t[0], t[1], t[2].casefold()))[2]]
+    return (raw_url(repo, platform, icon[2]) if icon else "",
+            [raw_url(repo, platform, p) for p in best_shots])
 
 
 def find_vpk(repo, platform):
