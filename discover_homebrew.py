@@ -682,6 +682,103 @@ def reclassify_existing(state, candidates):
     return count
 
 
+def media_image_fallback(url):
+    path = urlparse(url or "").path.casefold()
+    return path.endswith(("/pic0.png", "/livearea/contents/bg.png",
+                          "/livearea/contents/bg0.png", "/livearea/contents/background.png"))
+
+
+def enrich_existing_media(candidates):
+    """Revisit historic discoveries in bounded batches; retain all previous data.
+
+    Rechecks each candidate once after this algorithm changes, and missing-media
+    projects can be retried after 30 days. No changes to canonical PSVitaAlive.
+    """
+    refreshed = new_icons = added_screens = changed = 0
+    request_cap = min(MAX_REQUESTS - 120, MEDIA_REFRESH_REQUEST_CAP)
+    def eligible(entry):
+        last_ver = int(entry.get("media_scan_version") or 0)
+        if last_ver < MEDIA_SCAN_VERSION:
+            return True
+        app = entry.get("app_draft") or {}
+        return (not app.get("icon") or not app.get("screenshots")) and due(
+            entry.get("media_checked_at"), days=30)
+    # Empty-media discoveries first, followed by those with only one media type.
+    items = sorted(
+        (entry for entry in candidates.values() if isinstance(entry, dict) and eligible(entry)),
+        key=lambda e: (bool((e.get("app_draft") or {}).get("icon")) +
+                       bool((e.get("app_draft") or {}).get("screenshots")),
+                       e.get("discovered_at") or ""),
+    )
+    for entry in items:
+        if refreshed >= MEDIA_REFRESH_LIMIT or REQUEST_COUNT >= request_cap or LOW_RATE_LIMIT:
+            break
+        if time.monotonic() - START_TIME >= MAX_SECONDS - 120:
+            break
+        platform = entry.get("platform")
+        project_name = str(entry.get("project") or "")
+        if platform not in ("github", "gitlab") or "/" not in project_name:
+            # Preserve uncertain historical records; never fabricate a URL.
+            entry["media_scan_version"] = MEDIA_SCAN_VERSION
+            entry["media_checked_at"] = utc()
+            refreshed += 1
+            continue
+        try:
+            if platform == "github":
+                url = "https://api.github.com/repos/" + "/".join(
+                    quote(part, safe="") for part in project_name.split("/"))
+            else:
+                url = "https://gitlab.com/api/v4/projects/" + quote(
+                    entry["key"].split(":", 1)[1], safe="")
+            repo = request(url, gitlab=platform == "gitlab")
+            if repo:
+                paths = files_for(repo, platform)
+                icon, screenshots = media(repo, platform, paths)
+                # A README often describes images under docs/images/01.png.
+                # Check it only when no real screenshots exist.
+                if paths and (not screenshots or all(
+                        media_image_fallback(p) for p in screenshots)):
+                    text = readme(repo, platform)
+                    if text:
+                        icon, screenshots = media(repo, platform, paths, text)
+                app = entry.get("app_draft") or {}
+                previous_icon = str(app.get("icon") or "")
+                previous_screens = [x for x in (app.get("screenshots") or [])
+                                    if isinstance(x, str) and x]
+                if icon and icon != previous_icon:
+                    app["icon"] = icon
+                    changed += 1
+                    if not previous_icon:
+                        new_icons += 1
+                if screenshots:
+                    # Never let a background/pic0 replace real existing captures.
+                    if (len(screenshots) == 1 and media_image_fallback(screenshots[0])
+                            and previous_screens):
+                        screenshots = []
+                    merged = list(dict.fromkeys(screenshots + previous_screens))[:5]
+                    if merged != previous_screens:
+                        added_screens += len([x for x in merged if x not in previous_screens])
+                        app["screenshots"] = merged
+                        changed += 1
+                if app.get("icon"):
+                    entry["missing_fields"] = [k for k in entry.get("missing_fields", [])
+                                               if k != "icon"]
+            entry["media_scan_version"] = MEDIA_SCAN_VERSION
+            entry["media_checked_at"] = utc()
+            refreshed += 1
+        except DiscoveryBudgetReached:
+            break
+        except (requests.RequestException, RuntimeError, ValueError, KeyError, TypeError) as exc:
+            # Transient errors are eligible to retry on the next scheduled run.
+            print("Media deferred:", project_name, str(exc)[:120])
+            continue
+    pending = sum(1 for entry in candidates.values()
+                  if isinstance(entry, dict) and eligible(entry))
+    return {"refreshed": refreshed, "icons_added": new_icons,
+            "screenshots_added": added_screens, "fields_updated": changed,
+            "still_to_refresh": pending}
+
+
 def analyze(repo, platform, known, authors):
     if repo.get("needs_refresh"):
         if platform == "github":
@@ -724,7 +821,7 @@ def analyze(repo, platform, known, authors):
         reasons.append("VPK publicado")
     if score < 4:
         return "uncertain", None
-    icon, screenshots = media(repo, platform, files)
+    icon, screenshots = media(repo, platform, files, text)
     desc = short_text(repo.get("description"), 180)
     paragraph = readme_paragraph(text)
     if not desc:
@@ -756,6 +853,7 @@ def analyze(repo, platform, known, authors):
              "source_url": app_url, "author_profile": profile_url,
              "author_draft": author_draft, "discovered_at": utc(), "review_state": "new",
              "score": score, "evidence": reasons, "app_draft": app,
+             "media_scan_version": MEDIA_SCAN_VERSION, "media_checked_at": utc(),
              "missing_fields": [k for k in ("title_id", "author_ids", "category_id", "version",
                                              "version_date", "size", "status", "icon")
                                 if not app[k]]}
@@ -866,6 +964,8 @@ def run():
         scanned_profiles = scan_profiles(state, profiles)
     except (RuntimeError, ValueError, requests.RequestException) as exc:
         failures.append("Author profiles: " + str(exc)[:150])
+    # Repair historical discoveries incrementally, with a separate request cap.
+    media_refresh = enrich_existing_media(candidates)
     scanned = 0
     attempted_keys = set()
     for _ in range(min(REPO_LIMIT, len(state["queue"]))):
@@ -907,7 +1007,8 @@ def run():
                            "catalogued_removed": catalogued_before + catalogued_after,
                            "filtered_existing": reclassified, "http_requests": REQUEST_COUNT,
                            "request_budget": MAX_REQUESTS, "scan_limit": REPO_LIMIT,
-                           "pruned_gitlab": removed_gitlab_noise, "pending": len(state["queue"])}
+                           "pruned_gitlab": removed_gitlab_noise, "pending": len(state["queue"]),
+                           "media_refresh": media_refresh}
     # Migrate prior queue snapshots to compact state, including initial runs.
     for task in state["queue"]:
         task["repo"] = compact_repo(task["repo"], task["platform"])
