@@ -75,6 +75,26 @@ def author_options(entries):
     )
 
 
+def fork_origin(entry):
+    """Use provider-verified lineage only; never guess the parent from the name."""
+    if entry.get("lineage_is_fork") is not True:
+        return "", ""
+    for prop in ("lineage_source", "lineage_parent"):
+        value = str(entry.get(prop) or "")
+        platform, _, name = value.partition(":")
+        segments = name.split("/")
+        if platform not in ("github", "gitlab") or len(segments) < 2:
+            continue
+        if platform == "github" and len(segments) != 2:
+            continue
+        if not all(re.fullmatch(r"[A-Za-z0-9_.-]{1,100}", part)
+                   and part not in (".", "..") for part in segments):
+            continue
+        url = "https://" + platform + ".com/" + "/".join(segments)
+        return name, url
+    return "", ""
+
+
 def card(entry):
     app = entry.get("app_draft") or {}
     key = str(entry.get("key") or "").replace(":", "_")
@@ -100,24 +120,35 @@ def card(entry):
     previews = "".join('<a href="' + x + '" target="_blank" rel="noopener noreferrer">'
                        '<img loading="lazy" alt="Captura del proyecto" src="' + x + '"></a>' for x in images)
     author_key, author_name = author_identity(entry)
+    is_fork = entry.get("lineage_is_fork") is True
+    origin_name, origin_url = fork_origin(entry)
+    original_repo = href(origin_url)
     searchable = esc((str(app.get("name") or "") + " " + str(entry.get("project") or "") +
                       " " + str(app.get("description") or "") +
-                      " " + author_name).lower())
+                      " " + author_name + " " + origin_name).lower())
     platform = esc(entry.get("platform"))
     missing_note = ('<p class="muted"><strong>Faltan:</strong> ' + esc(missing) + '</p>') if missing else ""
     return ('<article class="entry" data-search="' + searchable + '" data-platform="' + platform + '" '
             'data-media="' + ("yes" if icon_link or images else "no") +
-            '" data-author="' + esc(author_key) + '">'
+            '" data-author="' + esc(author_key) +
+            '" data-fork="' + ("yes" if is_fork else "no") + '">'
             '<div class="top">' + poster + '<div><h2>' + title + '</h2>'
             '<p class="muted">' + esc(entry.get("project")) + '</p>' +
             (('<p class="muted">Autor / cuenta: <strong>' + esc(author_name) + '</strong></p>')
              if author_name else '') +
             '<p class="desc">' + desc + '</p></div></div>'
             '<div class="tags"><span>' + platform.upper() + '</span><span>' + esc(project_type) +
-            '</span><span>Pendiente de revisión</span></div>'
+            '</span>' +
+            ('<span class="tag-fork" title="Repositorio derivado de otro proyecto">Fork</span>'
+             if is_fork else '') +
+            '<span>Pendiente de revisión</span></div>'
             '<details><summary>Ver ficha y datos encontrados</summary>'
             '<p class="muted"><strong>Destino:</strong> ' + esc(destination) + '</p>'
             '<p class="muted"><strong>Indicios:</strong> ' + esc(evidence) + '</p>' +
+            (('<p class="muted"><strong>Fork de:</strong> ' +
+              (('<a href="' + original_repo + '" target="_blank" rel="noopener noreferrer">' +
+                esc(origin_name) + '</a>') if original_repo else 'origen no disponible') +
+              '</p>') if is_fork else '') +
             (('<p class="long-desc">' + esc(app.get("long_description")) + '</p>') if app.get("long_description") else "") +
             missing_note + (('<div class="shots">' + previews + '</div>') if images else '') +
             '<p class="muted">Descubierto: ' + esc(str(entry.get("discovered_at") or "")[:10]) + '</p></details>'
@@ -126,6 +157,8 @@ def card(entry):
              if author_link else '') +
             (('<button type="button" class="filter-author" data-select-author="' +
               esc(author_key) + '">Ver proyectos del autor</button>') if author_key else '') +
+            (('<a href="' + original_repo + '" target="_blank" rel="noopener noreferrer">Repositorio original del fork</a>')
+             if is_fork and original_repo else '') +
             '<a href="discovery-drafts/' + key + '.json" download>JSON de aplicación</a>' +
             author_download +
             '<a href="' + GENERATE_URL + '" target="_blank" rel="noopener noreferrer">Abrir generador</a></div></article>')
@@ -137,6 +170,7 @@ def render(entries, state):
     cards = "".join(card(item) for item in entries)
     choices = author_options(entries)
     count = len(entries)
+    fork_count = sum(entry.get("lineage_is_fork") is True for entry in entries)
     last = state.get("last_round") or {}
     scanned = int(last.get("repositories_checked") or 0)
     queued = int(last.get("pending") or 0)
@@ -161,6 +195,9 @@ p{margin:8px 0}.muted{color:var(--muted)}.summary{padding:18px;border:1px solid 
 .placeholder{display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--accent)}
 h2{font-size:1.08rem;margin:0;overflow-wrap:anywhere}.desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .tags,.links{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tags span{font-size:.72rem;color:#fff;background:#555;padding:3px 8px;border-radius:6px}
+.tags .tag-fork{background:#27221a;border:1px solid #c9a066;color:#ffdb9e;font-weight:800}
+.entry[data-fork="yes"]{border-left-color:#c9a066}
+details a{color:var(--accent);overflow-wrap:anywhere}
 .links a,.links button{font:inherit;color:#fff;border:1px solid var(--border);padding:7px 10px;background:#1e1e1e;border-radius:8px;text-decoration:none;font-size:.82rem;cursor:pointer}
 .links a:hover,.links button:hover{color:var(--accent);border-color:var(--accent)}
 .filter-author{font-weight:700!important}
@@ -177,24 +214,25 @@ details{margin:12px 0;border-top:1px solid var(--border);padding-top:11px}summar
 <header><h1>Nuevos descubrimientos</h1><p class="muted">Proyectos encontrados automáticamente; ninguno está verificado ni publicado en el catálogo por este sistema.</p></header>
 <nav aria-label="Herramientas"><a href="index.html#releases">Actualizaciones Homebrew</a><a href="index.html#game-data">Búsqueda de Game Data</a><a href="discoveries.html" class="active" aria-current="page">Nuevos descubrimientos</a></nav>
 <section class="summary"><strong>Exploración incremental</strong><p class="muted">Cada ejecución conserva el progreso y analiza otro lote. Los JSON son borradores incompletos para revisar en el generador de PSVitaAlive.</p>
-<div class="counts"><span>Descubrimientos pendientes de publicar: <strong>__COUNT__</strong></span><span>Procesados históricamente: <strong>__PROCESSED__</strong></span><span>Revisados en última ronda: <strong>__SCANNED__</strong></span><span>Nuevos en última ronda: <strong>__NEW_FOUND__</strong></span><span>Retirados por estar en catálogo: <strong>__CATALOGUED__</strong></span><span>En cola: <strong>__QUEUED__</strong></span></div><p class="muted">Solo aparecen los proyectos con indicios de ejecutarse o aplicarse en PS Vita. Los demás se conservan en el historial de búsqueda, sin saturar esta página.</p></section>
+<div class="counts"><span>Descubrimientos pendientes de publicar: <strong>__COUNT__</strong></span><span>Procesados históricamente: <strong>__PROCESSED__</strong></span><span>Revisados en última ronda: <strong>__SCANNED__</strong></span><span>Nuevos en última ronda: <strong>__NEW_FOUND__</strong></span><span>Retirados por estar en catálogo: <strong>__CATALOGUED__</strong></span><span>En cola: <strong>__QUEUED__</strong></span><span>Forks identificados: <strong>__FORKS__</strong></span></div><p class="muted">Solo aparecen los proyectos con indicios de ejecutarse o aplicarse en PS Vita. Los demás se conservan en el historial de búsqueda, sin saturar esta página.</p></section>
 <div class="filters" id="filters"><input id="search" type="search" aria-label="Buscar proyectos" placeholder="Buscar por nombre, autor o descripción">
 <label for="author">Autor <select id="author" aria-label="Filtrar por autor"><option value="all">Todos los autores</option>__AUTHORS__</select></label>
 <select id="platform" aria-label="Filtrar plataforma"><option value="all">GitHub y GitLab</option><option value="github">GitHub</option><option value="gitlab">GitLab</option></select>
-<select id="media" aria-label="Filtrar recursos"><option value="all">Con y sin imágenes</option><option value="yes">Con imágenes</option><option value="no">Sin imágenes</option></select></div>
-<p class="muted">La agrupación por autor utiliza la cuenta que publica el repositorio en GitHub o GitLab; la autoría definitiva se verifica al registrar el Homebrew.</p>
+<select id="media" aria-label="Filtrar recursos"><option value="all">Con y sin imágenes</option><option value="yes">Con imágenes</option><option value="no">Sin imágenes</option></select>
+<select id="fork" aria-label="Filtrar forks"><option value="all">Todos los proyectos</option><option value="no">No marcados como fork</option><option value="yes">Solo forks</option></select></div>
+<p class="muted">La agrupación por autor utiliza la cuenta que publica el repositorio en GitHub o GitLab; la autoría definitiva se verifica al registrar el Homebrew. La etiqueta Fork se basa en la procedencia confirmada por el proveedor y no significa que el proyecto sea una versión nueva o independiente.</p>
 <p id="visible-count" class="results-meta" aria-live="polite"></p>
 <main class="grid" id="cards">__CARDS__</main><p id="empty" hidden>No hay resultados para estos filtros.</p>
 </div><script>
 (function(){
-const search=document.getElementById('search'),author=document.getElementById('author'),platform=document.getElementById('platform'),media=document.getElementById('media');
+const search=document.getElementById('search'),author=document.getElementById('author'),platform=document.getElementById('platform'),media=document.getElementById('media'),fork=document.getElementById('fork');
 const cards=Array.from(document.querySelectorAll('.entry')),empty=document.getElementById('empty'),visible=document.getElementById('visible-count');
 const start=new URLSearchParams(window.location.search).get('autor');
 if(start && Array.from(author.options).some(function(option){return option.value===start;})){author.value=start;}
 function apply(){
 const q=search.value.trim().toLowerCase();let shown=0;
 cards.forEach(function(card){
-const match=(!q||card.dataset.search.includes(q))&&(author.value==='all'||card.dataset.author===author.value)&&(platform.value==='all'||card.dataset.platform===platform.value)&&(media.value==='all'||card.dataset.media===media.value);
+const match=(!q||card.dataset.search.includes(q))&&(author.value==='all'||card.dataset.author===author.value)&&(platform.value==='all'||card.dataset.platform===platform.value)&&(media.value==='all'||card.dataset.media===media.value)&&(fork.value==='all'||card.dataset.fork===fork.value);
 card.hidden=!match;if(match)shown++;
 });
 visible.textContent='Mostrando '+shown+' de '+cards.length+' descubrimientos';
@@ -216,13 +254,14 @@ document.getElementById('filters').scrollIntoView({behavior:'smooth',block:'star
 });
 search.addEventListener('input',apply);
 author.addEventListener('change',function(){selectAuthor(author.value);});
-platform.addEventListener('change',apply);media.addEventListener('change',apply);apply();
+platform.addEventListener('change',apply);media.addEventListener('change',apply);fork.addEventListener('change',apply);apply();
 }());
 </script></body></html>"""
     return (page.replace("__COUNT__", str(count)).replace("__SCANNED__", str(scanned))
             .replace("__PROCESSED__", str(processed)).replace("__NEW_FOUND__", str(new_found))
             .replace("__CATALOGUED__", str(catalogued))
-            .replace("__QUEUED__", str(queued)).replace("__AUTHORS__", choices)
+            .replace("__QUEUED__", str(queued)).replace("__FORKS__", str(fork_count))
+            .replace("__AUTHORS__", choices)
             .replace("__CARDS__", cards))
 
 
