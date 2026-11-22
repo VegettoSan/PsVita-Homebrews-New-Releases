@@ -505,6 +505,60 @@ class TextLimitsTests(unittest.TestCase):
         self.assertNotIn("__AUTHORS__", output)
         self.assertIn("la autoría definitiva se verifica", output)
 
+    def test_dashboard_labels_confirmed_forks_and_links_original(self):
+        example = {
+            "key": "gh:1461905208", "project": "edgarlugo/PSVitaAlive",
+            "platform": "github", "source_url": "https://github.com/edgarlugo/PSVitaAlive",
+            "lineage_check_version": dh.LINEAGE_SCAN_VERSION,
+            "lineage_is_fork": True,
+            "lineage_source": "github:vegettosan/psvitaalive",
+            "lineage_parent": "github:vegettosan/psvitaalive",
+            "app_draft": {"name": "PSVitaAlive", "screenshots": []}
+        }
+        out = dash.render({"gh:1461905208": example}, {})
+        self.assertIn('data-fork="yes"', out)
+        self.assertIn('<span class="tag-fork"', out)
+        self.assertIn('Fork de:', out)
+        self.assertIn('href="https://github.com/vegettosan/psvitaalive"', out)
+        self.assertIn('Repositorio original del fork', out)
+        self.assertIn('Forks identificados: <strong>1</strong>', out)
+        self.assertIn('id="fork"', out)
+        self.assertIn('card.dataset.fork===fork.value', out)
+
+    def test_dashboard_does_not_mark_independent_repo_as_fork(self):
+        normal = {"key": "gh:1", "platform": "github",
+                  "project": "dev/native-homebrew",
+                  "lineage_is_fork": False,
+                  "app_draft": {"name": "Native Vita", "screenshots": []}}
+        html = dash.render({"gh:1": normal}, {})
+        self.assertIn('data-fork="no"', html)
+        self.assertNotIn('<span class="tag-fork"', html)
+        self.assertNotIn('Fork de:', html)
+        self.assertIn('Forks identificados: <strong>0</strong>', html)
+
+    def test_fork_without_origin_still_has_label(self):
+        unknown = {"key": "gh:2", "platform": "github",
+                   "project": "dev/fork", "lineage_is_fork": True,
+                   "lineage_source": "", "lineage_parent": "",
+                   "app_draft": {"name": "Test", "screenshots": []}}
+        html = dash.render({"gh:2": unknown}, {})
+        self.assertIn('data-fork="yes"', html)
+        self.assertIn('<span class="tag-fork"', html)
+        self.assertIn('origen no disponible', html)
+        self.assertNotIn('Repositorio original del fork</a>', html)
+
+    def test_fork_origin_rejects_untrusted_link_and_html(self):
+        entry = {"lineage_is_fork": True,
+                 "lineage_source": "github:evil<script>/bad",
+                 "lineage_parent": "github:other/../../danger"}
+        self.assertEqual(dash.fork_origin(entry), ("", ""))
+        entry["lineage_parent"] = "gitlab:valid-team/psvita/app"
+        self.assertEqual(dash.fork_origin(entry),
+                         ("valid-team/psvita/app",
+                          "https://gitlab.com/valid-team/psvita/app"))
+        entry["lineage_is_fork"] = False
+        self.assertEqual(dash.fork_origin(entry), ("", ""))
+
     def test_dashboard_escapes_untrusted_metadata(self):
         html = dash.render({"gh:1": {"key": "gh:1", "project": "a/b", "platform": "github",
                                     "source_url": "https://github.com/a/b", "score": 5,
