@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Conservative Archive.org preservation hints for PSVitaAlive release monitor.
 
-Only catalog Download/Mirror URLs to .vpk are inspected. Filenames are evidence
-of *declared* versions, NOT proof of a healthy Archive.org copy. Legacy VPKs
-without versions are "unversioned", not silently reported as missing.
+The main catalog Download/VPK URL establishes whether the current VPK is
+hosted on Archive.org. The icon and ALL screenshots can independently identify
+a media item even while the newly updated VPK still points to GitHub.
+Media URLs are merely hints, NOT proof of item ownership or a verified VPK.
 """
 from __future__ import annotations
 
@@ -40,6 +41,34 @@ def archive_vpk_url(value: object) -> bool:
     path = unquote(parsed.path)
     pieces = path.split("/")
     return len(pieces) >= 4 and pieces[1].lower() == "download" and bool(pieces[2]) and path.lower().endswith(".vpk")
+
+
+def _archive_image_item(url: object) -> str | None:
+    """Direct Archive.org image URL only; never infer an item from Game Files."""
+    if not isinstance(url, str):
+        return None
+    parsed = urlparse(url.strip())
+    if (parsed.scheme != "https" or (parsed.hostname or "").lower()
+            not in {"archive.org", "www.archive.org"}
+            or parsed.username or parsed.password or parsed.port):
+        return None
+    parts = [unquote(p) for p in parsed.path.split("/") if p]
+    if (len(parts) < 3 or parts[0] != "download"
+            or not parts[-1].lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
+            or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", parts[1])):
+        return None
+    return parts[1]
+
+
+def catalog_media_item(icon: object, screenshots: object) -> str | None:
+    """Only icon + every screenshot pointing to one item identify staged media.
+
+    This does NOT establish who owns the item or that any VPK is backed up.
+    """
+    item = _archive_image_item(icon)
+    if not item or not isinstance(screenshots, list) or not screenshots:
+        return None
+    return item if all(_archive_image_item(shot) == item for shot in screenshots) else None
 
 
 def find_archive_vpk_urls(links: object) -> list[str]:
@@ -96,6 +125,7 @@ def current_download(links: object) -> dict | None:
 
 def assess_backup(
     *, release_tag: str, catalog_version: str, links: object, is_registered: bool,
+    media_item: str | None = None,
 ) -> tuple[str, str]:
     """Assess *current recommended VPK*, not historical mirrors.
 
@@ -111,9 +141,16 @@ def assess_backup(
 
     url = selected.get("url")
     if not archive_vpk_url(url):
+        if media_item:
+            detail = (f"Ícono y capturas asociados al ítem {media_item} de Archive.org; "
+                      "VPK actual del catálogo pendiente de respaldo. "
+                      "La propiedad del ítem y el VPK deben verificarse por separado")
+            if find_archive_vpk_urls(links):
+                detail += "; otros enlaces contienen un VPK anterior"
+            return "vpk_pending", detail
         if find_archive_vpk_urls(links):
-            return "missing", "La descarga actual no usa Archive.org; hay un respaldo anterior en otros enlaces"
-        return "missing", "La descarga actual no apunta a un VPK de Archive.org"
+            return "missing", "El VPK actual no está en Archive.org; hay un respaldo anterior en otros enlaces"
+        return "missing", "El VPK actual todavía no está enlazado desde Archive.org"
 
     # In PSVitaAlive, maintainers switch the main Download to Archive.org
     # when they have uploaded the currently catalogued version.
