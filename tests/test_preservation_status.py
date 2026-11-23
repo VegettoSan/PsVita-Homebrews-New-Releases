@@ -3,7 +3,7 @@
 import unittest
 
 from preservation_status import (
-    archive_vpk_url, assess_backup, current_download, filename_version,
+    archive_vpk_url, assess_backup, catalog_media_item, current_download, filename_version,
     find_archive_vpk_urls, parse_numeric_version,
 )
 
@@ -61,6 +61,60 @@ class PreservationTests(unittest.TestCase):
         self.assertEqual(assess_backup(
             release_tag="v1.3", catalog_version="", links=[], is_registered=False
         )[0], "unknown")
+
+    def test_bt3_bt4_spongebob_media_ready_but_current_vpk_still_pending(self):
+        for identifier in (
+            "dragon-ball-z-budokai-tenkaichi-3-ps-vita",
+            "dbz-bt4-ps-vita",
+            "battle-for-bikini-bottom-vita",
+        ):
+            with self.subTest(identifier=identifier):
+                media = catalog_media_item(
+                    f"https://archive.org/download/{identifier}/icon0.png",
+                    [f"https://archive.org/download/{identifier}/shot0.jpg",
+                     f"https://archive.org/download/{identifier}/shot1.png"],
+                )
+                self.assertEqual(media, identifier)
+                status, detail = assess_backup(
+                    release_tag="1.3", catalog_version="1.3",
+                    links=links(GITHUB), is_registered=True, media_item=media,
+                )
+                self.assertEqual(status, "vpk_pending")
+                self.assertIn("VPK actual del catálogo pendiente", detail)
+                self.assertIn("propiedad", detail)
+                # Once the principal VPK points to Archive.org it becomes a
+                # hosted VPK, never cryptographically "verified" by Orbit.
+                self.assertEqual(assess_backup(
+                    release_tag="1.3", catalog_version="1.3",
+                    links=links(f"https://archive.org/download/{identifier}/app-v1.3.vpk"),
+                    is_registered=True, media_item=media,
+                )[0], "matched")
+
+    def test_media_hints_cannot_grant_ownership_or_hide_vpk_pending(self):
+        self.assertIsNone(catalog_media_item(
+            "https://archive.org/download/my-item/icon.png",
+            ["https://archive.org/download/foreign-item/shot.jpg"]))
+        self.assertIsNone(catalog_media_item(
+            "https://archive.org/download/my-item/icon.png", []))
+        self.assertIsNone(catalog_media_item(
+            "https://archive.org.evil.test/download/my-item/icon.png",
+            ["https://archive.org/download/my-item/shot.jpg"]))
+        self.assertIsNone(catalog_media_item(
+            "https://archive.org/download/my-item/icon.png",
+            ["https://archive.org/download/my-item/GameFiles.zip"]))
+        self.assertEqual(assess_backup(
+            release_tag="1.3", catalog_version="1.3",
+            links=links(GITHUB), is_registered=True, media_item=None,
+        )[0], "missing")
+        # A prior VPK mirror doesn't claim the current GitHub version exists
+        # in Archive.org, even when icons/screenshots have been preserved.
+        status, detail = assess_backup(
+            release_tag="1.3", catalog_version="1.3",
+            links=links(GITHUB, mirrors=[ARCHIVE + "old.vpk"]),
+            is_registered=True, media_item="my-item",
+        )
+        self.assertEqual(status, "vpk_pending")
+        self.assertIn("anterior", detail)
 
     def test_current_selection_does_not_use_an_unrelated_mirror(self):
         current = links(GITHUB, mirrors=[ARCHIVE + "example-1.3.vpk"])
