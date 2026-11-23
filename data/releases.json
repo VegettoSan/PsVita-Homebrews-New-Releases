@@ -1,6 +1,444 @@
 [
   {
     "platform": "github",
+    "repo": "manumastro/DBZ-BT4-Tag-Team-Decomp-Vita",
+    "release_id": "455190788",
+    "tag": "v1.5.1",
+    "name": "BT4 Vita v1.5.1",
+    "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/tag/v1.5.1",
+    "published": "2026-11-23T09:09:26Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Install `BT4-Vita.vpk` over your existing version with VitaShell. Your saves and game files stay untouched.\n\n### Fixed in v1.5.1\n\n- **Fixed: 1 vs 1 & General Microstutters / Texture Upload Stalls (regression from v1.5)**\n  - Reverted `vglcached` (`vglUseCachedMem(GL_TRUE)`), `splitms`, and `fxbox` defaults to `0`. On hardware, `vglcached=1` stalled `glTexImage2D` from 1–2 ms to 500–1,999 ms/2s during fights, while `splitms=1` and `fxbox=1` introduced residual GPU frame-pacing and per-texture microstutters.\n  - Keeps the 6 verified pure CPU/NEON optimizations from v1.5 (`upneon`, `postskip`, `snapneon`, `fxcull`, `vifneon`, `pffast2`, plus `pffast` single-gate `ps2float`).\n  - Verified on PS Vita hardware across heavy 1 vs 1 stages (4, 12, 15, 19), 1 vs 1 heavy specials (`hx0`), and 2 vs 2 Tag Team (`hx2`):\n    - Heavy 1 vs 1 stages: **29.68 fps** avg, **24.7 fps** min (up from 10.1 fps in v1.5), heavy hitches (`4+ blanks`) **-83%** (`0.88 → 0.15/2s`), microstutters (`>33 ms`) **-66%** (`2.15 → 0.73/2s`), `vitaGL` texture upload max **7 ms** (down from 1,999 ms).\n    - Heavy 1 vs 1 specials (`hx0`): **29.78 fps** avg, **24.5 fps** min, `4+ blanks` **-87%** (`0.55 → 0.07/2s`), `vitaGL` texture upload max **2 ms**.\n    - Heavy 2 vs 2 Tag Team (`hx2`): **28.98 fps** avg, `4+ blanks` **-21%** (`0.33 → 0.26/2s`), 0 crashes.\n\n### Everything from v1.5 included\n- **Online Play — 1 vs 1** (crossplay with PC & Vita: Quick Match + Train While Waiting, Ranked, Create Match, Public Rooms, Tournament, in-process lobby return, Vita Normal controls).\n- **In-Game Vita Guide & Controls Reminder** (EN/ES) and **Remappable Vita Controls (Vita Buttons)**.\n- **Tag Team HUD & Menus** remade for the Vita.\n- **Stage 4 (World Tournament) GPU crash fix** (`vglcirc=1`).\n\n### Updating / Installing\n\n- **Updating**: install `BT4-Vita.vpk` over your current version in VitaShell. Your saves and `.iso` stay intact.\n- **First time**: install `BT4-Vita.vpk`, copy your **Team BT4 B14 Rev2** `.iso` (English or Spanish) to `ux0:data/bt4/`, and launch. **CapUnlocker** is strongly recommended for best performance.\n- **Reporting issues**: attach `ux0:data/bt4/log.txt` (and any `.psp2dmp` crash dump if created).\n\n**SHA-256 (`BT4-Vita.vpk`)**: `fde2136771e975037880631fd71d3f221376e020b9b13bf177710c820739e659`\n",
+    "assets": [
+      {
+        "name": "BT4-Vita.vpk",
+        "size": 12589859,
+        "download_url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/download/v1.5.1/BT4-Vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "manumastro",
+    "homebrew_name": "Dragon Ball Z: BT4",
+    "homebrew_icon": "https://archive.org/download/dbz-bt4-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 4 (BT4decomp), based on DBZ-BT4-Tag-Team-Decomp and Tenkaichi3Decomp-Vita",
+    "homebrew_long_description": "A native PS Vita port of Budokai Tenkaichi 4 (Team BT4's B14 Rev2 of Dragon Ball Z: Budokai Tenkaichi 3), based on NauTaro's DBZ-BT4-Tag-Team-Decomp (BT4decomp, built on z3xox's Tenkaichi3Decomp) and on arielxflores's Tenkaichi3Decomp-Vita, the BT3 port for the Vita, through my fork of it (its optimized branch: the same speed-ups in both). The game's own code is compiled for the Vita, with the renderer for the Vita's GPU (vitaGL), the sound, touch and controls of the BT3 Vita port and all of its speed-ups. It is not an emulator.",
+    "homebrew_id": "dragon-ball-z-bt4",
+    "homebrew_authors": [
+      "manumastro"
+    ],
+    "homebrew_version": "1.5",
+    "catalog_apps": [
+      {
+        "id": "dragon-ball-z-bt4",
+        "name": "Dragon Ball Z: BT4",
+        "icon": "https://archive.org/download/dbz-bt4-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 4 (BT4decomp), based on DBZ-BT4-Tag-Team-Decomp and Tenkaichi3Decomp-Vita",
+        "long_description": "A native PS Vita port of Budokai Tenkaichi 4 (Team BT4's B14 Rev2 of Dragon Ball Z: Budokai Tenkaichi 3), based on NauTaro's DBZ-BT4-Tag-Team-Decomp (BT4decomp, built on z3xox's Tenkaichi3Decomp) and on arielxflores's Tenkaichi3Decomp-Vita, the BT3 port for the Vita, through my fork of it (its optimized branch: the same speed-ups in both). The game's own code is compiled for the Vita, with the renderer for the Vita's GPU (vitaGL), the sound, touch and controls of the BT3 Vita port and all of its speed-ups. It is not an emulator.",
+        "version": "1.5",
+        "version_date": "2026-11-22",
+        "author_ids": [
+          "manumastro"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/download/v1.5/BT4-Vita.vpk",
+            "size": 12591093,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/dbz-bt4-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 5905580032,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "bt4"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5222,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": false
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.5 → release v1.5.1",
+    "catalog_version": "1.5",
+    "archive_current_link": "",
+    "backup_status": "missing",
+    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "isledecomp/isle-portable",
+    "release_id": "455027594",
+    "tag": "continuous",
+    "name": "Continuous build",
+    "url": "https://github.com/isledecomp/isle-portable/releases/tag/continuous",
+    "published": "2026-11-23T05:38:19Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "GitHub Actions build log: https://github.com/isledecomp/isle-portable/actions/runs/45117471533",
+    "assets": [
+      {
+        "name": "app-debug.apk",
+        "size": 13650748,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "app-release.apk",
+        "size": 12581138,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "isle-0.1-Darwin-arm64.dmg",
+        "size": 23592629,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Darwin-x64.dmg",
+        "size": 24116560,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-DOS-x86.tar.gz",
+        "size": 2386716,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Emscripten-emscripten.tar.gz",
+        "size": 1030673,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-FreeBSD-x64.tar.gz",
+        "size": 3469192,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-iOS-arm64.ipa",
+        "size": 2407857,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Linux-x64.tar.gz",
+        "size": 4195458,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-arm64.zip",
+        "size": 2229468,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-x64.tar.gz",
+        "size": 20041244,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-x64.zip",
+        "size": 21393854,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-x86.zip",
+        "size": 1454545,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
+        "size": 2314501,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-assets.zip",
+        "size": 457393245,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-hdaudio.zip",
+        "size": 298041650,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.3dsx",
+        "size": 3057340,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.cia",
+        "size": 2198464,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.nro",
+        "size": 8837851,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.vpk",
+        "size": 7200335,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "Isle_Portable-x86_64.AppImage",
+        "size": 31152632,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "org.legoisland.Isle.aarch64.flatpak",
+        "size": 2452456,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "org.legoisland.Isle.x86_64.flatpak",
+        "size": 2677104,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "release_channel": "rolling",
+    "review_required": false,
+    "stable_release": {
+      "platform": "github",
+      "repo": "isledecomp/isle-portable",
+      "tag": "continuous",
+      "release_id": "455027594",
+      "published": "2026-11-23T05:38:19Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "size": 13650748,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
+          "content_type": "application/vnd.android.package-archive"
+        },
+        {
+          "name": "app-release.apk",
+          "size": 12581138,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
+          "content_type": "application/vnd.android.package-archive"
+        },
+        {
+          "name": "isle-0.1-Darwin-arm64.dmg",
+          "size": 23592629,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Darwin-x64.dmg",
+          "size": 24116560,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-DOS-x86.tar.gz",
+          "size": 2386716,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Emscripten-emscripten.tar.gz",
+          "size": 1030673,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-FreeBSD-x64.tar.gz",
+          "size": 3469192,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-iOS-arm64.ipa",
+          "size": 2407857,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Linux-x64.tar.gz",
+          "size": 4195458,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-arm64.zip",
+          "size": 2229468,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-x64.tar.gz",
+          "size": 20041244,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-x64.zip",
+          "size": 21393854,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-x86.zip",
+          "size": 1454545,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
+          "size": 2314501,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-assets.zip",
+          "size": 457393245,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-hdaudio.zip",
+          "size": 298041650,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.3dsx",
+          "size": 3057340,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.cia",
+          "size": 2198464,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.nro",
+          "size": 8837851,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.vpk",
+          "size": 7200335,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "Isle_Portable-x86_64.AppImage",
+          "size": 31152632,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "org.legoisland.Isle.aarch64.flatpak",
+          "size": 2452456,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "org.legoisland.Isle.x86_64.flatpak",
+          "size": 2677104,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    "homebrew_name": "Lego Island",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of LEGO Island for PSVITA.",
+    "homebrew_long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
+    "homebrew_id": "lego-island",
+    "homebrew_authors": [
+      "isledecomp"
+    ],
+    "homebrew_version": "v.0.1",
+    "catalog_apps": [
+      {
+        "id": "lego-island",
+        "name": "Lego Island",
+        "icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
+        "category": "ports",
+        "description": "Port of LEGO Island for PSVITA.",
+        "long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
+        "version": "v.0.1",
+        "version_date": "2026-08-05",
+        "author_ids": [
+          "isledecomp"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/isledecomp/isle-portable/releases"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/isledecomp/isle-portable"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
+    "catalog_version": "v.0.1",
+    "archive_current_link": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
     "repo": "memory-hunter/all-is-lost-vita",
     "release_id": "454801073",
     "tag": "v1.0",
@@ -395,92 +833,6 @@
     "archive_current_link": "https://archive.org/download/the-drifter-ps-vita/drifter-vita-small.vpk",
     "backup_status": "outdated",
     "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
-  },
-  {
-    "platform": "github",
-    "repo": "manumastro/DBZ-BT4-Tag-Team-Decomp-Vita",
-    "release_id": "454612644",
-    "tag": "v1.5",
-    "name": "BT4 Vita v1.5",
-    "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/tag/v1.5",
-    "published": "2026-11-22T17:17:01Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Install `BT4-Vita.vpk` over your existing version with VitaShell. Your saves and game files stay untouched.\n\n### What's New\n\n- **Online Play — 1 vs 1 (First Version, Crossplay with PC & Vita)**\n  Open **Tenkaichi Budokai Online** from the main menu to play 1 vs 1 online on the PC version's online service (thanks to its developer!):\n  - **Quick Match** (with **Train While Waiting**), **Ranked**, **Create Match** (Room Code, Public Rooms, or By IP Address), **Public Rooms / Join**, and **Tournament** (up to 32 players).\n  - Runs in-process: when a match ends, you return straight to the lobby without restarting the app.\n  - Keeps your Vita Normal offline controls in online fights without desyncing.\n  - Both players need the same **BT4 B14 Rev2** game files (English or Spanish).\n  - *Not yet on the Vita*: Tag Team online, Ad Hoc, voice chat.\n\n- **In-Game Vita Guide & Controls Reminder**\n  - Open **Vita Guide** from the main menu (just above the first entry, press UP) in English or Spanish: controls, touch corners, full Tag Team guide, Unlock All, Vita Settings, anime soundtrack, game files, mods, and troubleshooting.\n  - **Pause > Vita Controls** shows the controls for the fight you are in (1 vs 1 or Tag Team), plus a short controls reminder during your first 5 fights (toggle with SQUARE).\n\n- **Remappable Vita Controls (Vita Buttons)**\n  - Go to **Vita Guide > Vita Buttons** (or **Options > Controller > Vita Settings > START**) to customize SELECT + button combos for L2, R2, L3, R3, Senzu Bean, fusion, undo fusion, quit, Unlock All, and Tag Team target selection. Press SQUARE twice to reset defaults.\n\n- **Tag Team HUD & Menus Remade for the Vita**\n  - Sharp Vita-sized graphics and fonts, your health/ki gauge in the same corner and proportions as 1 vs 1, readable names and timer, and 4–6 MB less memory used.\n\n- **Fixed: Stage 4 (World Tournament) GPU Crash**\n  - Fixes the \"render gpu crash\" at fight start introduced in v1.4.1 (`vglcirc=1`).\n\n- **Smoother Heavy Stages & Battles**\n  - 9 new renderer and CPU optimizations enabled by default: render thread busy time reduced by ~25%, smoother heavy stages (World Tournament, heavy blast/aura scenes) and 2 vs 2 fights.\n\n### Updating / Installing\n\n- **Updating**: install `BT4-Vita.vpk` over your current version in VitaShell. Your saves and `.iso` stay intact.\n- **First time**: install `BT4-Vita.vpk`, copy your **Team BT4 B14 Rev2** `.iso` (English or Spanish) to `ux0:data/bt4/`, and launch. **CapUnlocker** is strongly recommended for best performance.\n- **Reporting issues**: attach `ux0:data/bt4/log.txt` (and any `.psp2dmp` crash dump if created).\n\n**SHA-256 (`BT4-Vita.vpk`)**: `e8ea11e0f48945c48a3ddde0f256cddb0064ca20fe88e87d5db0f658d58e0120`\n",
-    "assets": [
-      {
-        "name": "BT4-Vita.vpk",
-        "size": 12591093,
-        "download_url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/download/v1.5/BT4-Vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "manumastro",
-    "homebrew_name": "Dragon Ball Z: BT4",
-    "homebrew_icon": "https://archive.org/download/dbz-bt4-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 4 (BT4decomp), based on DBZ-BT4-Tag-Team-Decomp and Tenkaichi3Decomp-Vita",
-    "homebrew_long_description": "A native PS Vita port of Budokai Tenkaichi 4 (Team BT4's B14 Rev2 of Dragon Ball Z: Budokai Tenkaichi 3), based on NauTaro's DBZ-BT4-Tag-Team-Decomp (BT4decomp, built on z3xox's Tenkaichi3Decomp) and on arielxflores's Tenkaichi3Decomp-Vita, the BT3 port for the Vita, through my fork of it (its optimized branch: the same speed-ups in both). The game's own code is compiled for the Vita, with the renderer for the Vita's GPU (vitaGL), the sound, touch and controls of the BT3 Vita port and all of its speed-ups. It is not an emulator.",
-    "homebrew_id": "dragon-ball-z-bt4",
-    "homebrew_authors": [
-      "manumastro"
-    ],
-    "homebrew_version": "1.5",
-    "catalog_apps": [
-      {
-        "id": "dragon-ball-z-bt4",
-        "name": "Dragon Ball Z: BT4",
-        "icon": "https://archive.org/download/dbz-bt4-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "PS Vita port of Dragon Ball Z: Budokai Tenkaichi 4 (BT4decomp), based on DBZ-BT4-Tag-Team-Decomp and Tenkaichi3Decomp-Vita",
-        "long_description": "A native PS Vita port of Budokai Tenkaichi 4 (Team BT4's B14 Rev2 of Dragon Ball Z: Budokai Tenkaichi 3), based on NauTaro's DBZ-BT4-Tag-Team-Decomp (BT4decomp, built on z3xox's Tenkaichi3Decomp) and on arielxflores's Tenkaichi3Decomp-Vita, the BT3 port for the Vita, through my fork of it (its optimized branch: the same speed-ups in both). The game's own code is compiled for the Vita, with the renderer for the Vita's GPU (vitaGL), the sound, touch and controls of the BT3 Vita port and all of its speed-ups. It is not an emulator.",
-        "version": "1.5",
-        "version_date": "2026-11-22",
-        "author_ids": [
-          "manumastro"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/download/v1.5/BT4-Vita.vpk",
-            "size": 12591093,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/dbz-bt4-ps-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 5905580032,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "bt4"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5222,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": false
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.5",
-    "catalog_version": "1.5",
-    "archive_current_link": "",
-    "backup_status": "missing",
-    "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
   },
   {
     "platform": "github",
@@ -6469,358 +6821,6 @@
     "archive_current_link": "",
     "backup_status": "missing",
     "backup_detail": "La descarga actual no apunta a un VPK de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "isledecomp/isle-portable",
-    "release_id": "447808684",
-    "tag": "continuous",
-    "name": "Continuous build",
-    "url": "https://github.com/isledecomp/isle-portable/releases/tag/continuous",
-    "published": "2026-11-17T00:16:33Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "GitHub Actions build log: https://github.com/isledecomp/isle-portable/actions/runs/43983638996",
-    "assets": [
-      {
-        "name": "app-debug.apk",
-        "size": 13636858,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "app-release.apk",
-        "size": 12568628,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "isle-0.1-Darwin-arm64.dmg",
-        "size": 23596747,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Darwin-x64.dmg",
-        "size": 24098789,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-DOS-x86.tar.gz",
-        "size": 2385377,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Emscripten-emscripten.tar.gz",
-        "size": 1030130,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-FreeBSD-x64.tar.gz",
-        "size": 3463823,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-iOS-arm64.ipa",
-        "size": 2406835,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Linux-x64.tar.gz",
-        "size": 4187804,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-arm64.zip",
-        "size": 2233813,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-x64.tar.gz",
-        "size": 17936714,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-x64.zip",
-        "size": 21400979,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-x86.zip",
-        "size": 1446859,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
-        "size": 2316301,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-assets.zip",
-        "size": 457393244,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-hdaudio.zip",
-        "size": 298041650,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.3dsx",
-        "size": 3056596,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.cia",
-        "size": 2197952,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.nro",
-        "size": 8837851,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.vpk",
-        "size": 7199047,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Isle_Portable-x86_64.AppImage",
-        "size": 31148536,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "org.legoisland.Isle.aarch64.flatpak",
-        "size": 2456328,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "org.legoisland.Isle.x86_64.flatpak",
-        "size": 2674464,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "release_channel": "rolling",
-    "review_required": false,
-    "stable_release": {
-      "platform": "github",
-      "repo": "isledecomp/isle-portable",
-      "tag": "continuous",
-      "release_id": "447808684",
-      "published": "2026-11-17T00:16:33Z",
-      "prerelease": true,
-      "assets": [
-        {
-          "name": "app-debug.apk",
-          "size": 13636858,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
-          "content_type": "application/vnd.android.package-archive"
-        },
-        {
-          "name": "app-release.apk",
-          "size": 12568628,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
-          "content_type": "application/vnd.android.package-archive"
-        },
-        {
-          "name": "isle-0.1-Darwin-arm64.dmg",
-          "size": 23596747,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Darwin-x64.dmg",
-          "size": 24098789,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-DOS-x86.tar.gz",
-          "size": 2385377,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Emscripten-emscripten.tar.gz",
-          "size": 1030130,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-FreeBSD-x64.tar.gz",
-          "size": 3463823,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-iOS-arm64.ipa",
-          "size": 2406835,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Linux-x64.tar.gz",
-          "size": 4187804,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-arm64.zip",
-          "size": 2233813,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-x64.tar.gz",
-          "size": 17936714,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-x64.zip",
-          "size": 21400979,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-x86.zip",
-          "size": 1446859,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
-          "size": 2316301,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-assets.zip",
-          "size": 457393244,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-hdaudio.zip",
-          "size": 298041650,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.3dsx",
-          "size": 3056596,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.cia",
-          "size": 2197952,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.nro",
-          "size": 8837851,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.vpk",
-          "size": 7199047,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "Isle_Portable-x86_64.AppImage",
-          "size": 31148536,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "org.legoisland.Isle.aarch64.flatpak",
-          "size": 2456328,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "org.legoisland.Isle.x86_64.flatpak",
-          "size": 2674464,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    "homebrew_name": "Lego Island",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of LEGO Island for PSVITA.",
-    "homebrew_long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
-    "homebrew_id": "lego-island",
-    "homebrew_authors": [
-      "isledecomp"
-    ],
-    "homebrew_version": "v.0.1",
-    "catalog_apps": [
-      {
-        "id": "lego-island",
-        "name": "Lego Island",
-        "icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
-        "category": "ports",
-        "description": "Port of LEGO Island for PSVITA.",
-        "long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
-        "version": "v.0.1",
-        "version_date": "2026-08-05",
-        "author_ids": [
-          "isledecomp"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/isledecomp/isle-portable/releases"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/isledecomp/isle-portable"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
-    "catalog_version": "v.0.1",
-    "archive_current_link": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   },
   {
     "platform": "github",
