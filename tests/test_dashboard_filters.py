@@ -33,6 +33,7 @@ class TestDashboardFilters(unittest.TestCase):
     def render(self):
         records = [
             release("catalog-current-no-backup", "uptodate", "missing"),
+            release("catalog-media-ready-vpk-pending", "uptodate", "vpk_pending"),
             release("catalog-old-backup-old", "pending", "outdated"),
             release("catalog-current-archived", "uptodate", "matched"),
             release("catalog-current-review", "uptodate", "review"),
@@ -172,23 +173,52 @@ class TestDashboardFilters(unittest.TestCase):
         html = self.render()
         self.assertIn('data-catalog="uptodate" data-backup="missing"', html)
         self.assertIn('data-catalog="pending" data-backup="outdated"', html)
+        self.assertIn('data-catalog="uptodate" data-backup="vpk_pending"', html)
         self.assertIn('data-catalog="uptodate" data-backup="matched"', html)
         self.assertIn("const show=textOk&&platformOk&&statusOk&&backupOk;", html)
-        self.assertIn("card.dataset.backup==='missing'||card.dataset.backup==='outdated'", html)
+        self.assertIn("card.dataset.backup==='missing'||card.dataset.backup==='outdated'||card.dataset.backup==='vpk_pending'", html)
         self.assertIn("backupStatus.addEventListener('change',filterCards);", html)
         self.assertIn("backupStatus.value='all';", html)
         self.assertIn('noResults.hidden=visible!==0 || cards.length===0;', html)
 
     def test_exact_counts_in_dropdowns(self):
         html = self.render()
-        self.assertIn('Al día en PSVitaAlive (3)', html)
+        self.assertIn('Al día en PSVitaAlive (4)', html)
         self.assertIn('Pendientes por actualizar (2)', html)
-        self.assertIn('Pendientes de respaldar (2)', html)
-        self.assertIn('En Archive.org (1)', html)
-        self.assertIn('Sin respaldo actual (1)', html)
+        self.assertIn('Pendientes de respaldar (3)', html)
+        self.assertIn('VPK en Archive.org (1)', html)
+        self.assertIn('Multimedia lista, VPK pendiente (1)', html)
+        self.assertIn('VPK sin respaldo detectado (1)', html)
         self.assertIn('Nueva versión sin respaldo (1)', html)
         self.assertIn('Revisar respaldo (1)', html)
         self.assertIn('Sin ficha asociada (1)', html)
+
+    def test_enrichment_uses_catalog_media_to_explain_vpk_pending(self):
+        card = release("dragon-ball-z-bt4", "uptodate", "missing",
+                       repo="manumastro/DBZ-BT4-Tag-Team-Decomp-Vita")
+        card.update({"tag": "v1.5.1"})
+        identifier = "dbz-bt4-ps-vita"
+        app = {
+            "id": "dragon-ball-z-bt4", "name": "Dragon Ball Z: BT4",
+            "version": "1.5.1",
+            "icon": f"https://archive.org/download/{identifier}/icon0.png",
+            "screenshots": [f"https://archive.org/download/{identifier}/shot0.png",
+                            f"https://archive.org/download/{identifier}/shot1.jpg"],
+            "links": [{"type": "Download", "name": "VPK",
+                       "url": "https://github.com/manumastro/DBZ-BT4-Tag-Team-Decomp-Vita/releases/download/v1.5.1/BT4-Vita.vpk"}],
+        }
+        enrich_dashboard.enrich_release(card, [app])
+        self.assertEqual(card["catalog_update_status"], "uptodate")
+        self.assertEqual(card["backup_status"], "vpk_pending")
+        self.assertEqual(card["archive_media_item"], identifier)
+        self.assertIn("VPK actual del catálogo pendiente", card["backup_detail"])
+        # If the updater selected an Archive.org VPK, no additional pending
+        # badge is introduced just because the media item differs.
+        app["links"][0]["url"] = (
+            f"https://archive.org/download/{identifier}/dragon-ball-z-bt4%20v1.5.1.vpk"
+        )
+        enrich_dashboard.enrich_release(card, [app])
+        self.assertEqual(card["backup_status"], "matched")
 
     def test_pending_without_a_unique_vpk_explains_manual_review(self):
         no_vpk = release("no-vpk", "pending", "missing")
@@ -217,8 +247,9 @@ class TestDashboardFilters(unittest.TestCase):
         html = self.render()
         self.assertIn('href="https://github.com/example/homebrew/releases/download/v1.3/Homebrew.vpk"', html)
         self.assertIn('Al día en PSVitaAlive', html)
-        self.assertIn('Respaldo en Archive.org', html)
-        self.assertIn('Falta respaldo en Archive.org', html)
+        self.assertIn('VPK en Archive.org', html)
+        self.assertIn('Multimedia en Archive.org · VPK pendiente', html)
+        self.assertIn('VPK pendiente de respaldo', html)
         self.assertIn('Versión nueva sin respaldo', html)
 
 
