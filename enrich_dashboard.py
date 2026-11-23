@@ -26,7 +26,7 @@ import bleach
 import mistune
 import requests
 from catalog_schema_v2_compat import to_v1
-from preservation_status import assess_backup, current_download, archive_vpk_url
+from preservation_status import assess_backup, current_download, archive_vpk_url, catalog_media_item
 from game_data_dashboard import add_data_tab
 
 CATALOG_URL = os.getenv(
@@ -535,6 +535,9 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
     release["archive_current_link"] = (
         selected_url if archive_vpk_url(selected_url) else ""
     )
+    media_item = catalog_media_item(primary.get("icon"), primary.get("screenshots"))
+    # These are already-catalogued media references, not an upload/ownership proof.
+    release["archive_media_item"] = media_item or ""
     if release.get("review_required") is True:
         release["backup_status"] = "review"
         release["backup_detail"] = (
@@ -547,6 +550,7 @@ def enrich_release(release: dict[str, Any], apps: list[dict[str, Any]]) -> None:
             catalog_version=str(primary.get("version") or ""),
             links=primary.get("links") or [],
             is_registered=current_repo_key != PSVITAALIVE_REPO_KEY,
+            media_item=media_item,
         )
 
 
@@ -822,10 +826,11 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
         backup_status = str(item.get("backup_status") or "unknown")
         backup_detail = esc(item.get("backup_detail") or "")
         backup_labels = {
-            "matched": "Respaldo en Archive.org",
-            "missing": "Falta respaldo en Archive.org",
+            "matched": "VPK en Archive.org",
+            "vpk_pending": "Multimedia en Archive.org · VPK pendiente",
+            "missing": "VPK pendiente de respaldo",
             "outdated": "Versión nueva sin respaldo",
-            "review": "Revisar respaldo",
+            "review": "Revisar VPK",
         }
         backup_label = esc(backup_labels.get(backup_status, ""))
         archive_href = str(item.get("archive_current_link") or "")
@@ -955,9 +960,10 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     pending = len(history) - up_to_date
     backup_counts = {
         status: sum(1 for item in history if item.get("backup_status") == status)
-        for status in ("matched", "missing", "outdated", "review", "unknown")
+        for status in ("matched", "vpk_pending", "missing", "outdated", "review", "unknown")
     }
-    backup_pending = backup_counts["missing"] + backup_counts["outdated"]
+    backup_pending = (backup_counts["vpk_pending"] + backup_counts["missing"]
+                      + backup_counts["outdated"])
     updated = esc(str(sync_info.get("metadata_enriched_at") or sync_info.get("synced_at") or "")[:16].replace("T", " "))
 
     document = f"""<!doctype html>
@@ -1107,7 +1113,7 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     .pre {{ color:#000; background:var(--warning); border-color:var(--warning); }}
     .backup-matched {{ color:#000; background:var(--accent); border-color:var(--accent); }}
     a.backup-matched:hover {{ color:#000; filter:brightness(1.13); }}
-    .backup-missing,.backup-outdated {{ color:#fff; background:#202020; border-color:#ddd; }}
+    .backup-missing,.backup-outdated,.backup-vpk_pending {{ color:#fff; background:#202020; border-color:#ddd; }}
     .backup-unversioned,.backup-review,.backup-unknown {{ color:var(--text-secondary); background:#1b1b1b; }}
 
     .meta {{ display:flex; gap:9px; flex-wrap:wrap; align-items:center; margin:10px 0 4px; color:var(--text-secondary); font-size:.79rem; }}
@@ -1190,8 +1196,9 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
     <select id="backup-status" aria-label="Filtrar por respaldo en Archive.org">
       <option value="all">Todos los respaldos</option>
       <option value="needs-backup">Pendientes de respaldar ({backup_pending})</option>
-      <option value="matched">✓ En Archive.org ({backup_counts["matched"]})</option>
-      <option value="missing">Sin respaldo actual ({backup_counts["missing"]})</option>
+      <option value="matched">✓ VPK en Archive.org ({backup_counts["matched"]})</option>
+      <option value="vpk_pending">Multimedia lista, VPK pendiente ({backup_counts["vpk_pending"]})</option>
+      <option value="missing">VPK sin respaldo detectado ({backup_counts["missing"]})</option>
       <option value="outdated">Nueva versión sin respaldo ({backup_counts["outdated"]})</option>
       <option value="review">Revisar respaldo ({backup_counts["review"]})</option>
       <option value="unknown">Sin ficha asociada ({backup_counts["unknown"]})</option>
@@ -1232,7 +1239,7 @@ def generate_dashboard(history: list[dict[str, Any]], sync_info: dict[str, Any])
         const statusOk=s==='all'||card.dataset.catalog===s;
         const backupOk=b==='all'
           ||(b==='needs-backup'
-            ? (card.dataset.backup==='missing'||card.dataset.backup==='outdated')
+            ? (card.dataset.backup==='missing'||card.dataset.backup==='outdated'||card.dataset.backup==='vpk_pending')
             : card.dataset.backup===b);
         const show=textOk&&platformOk&&statusOk&&backupOk;
         card.hidden=!show;
