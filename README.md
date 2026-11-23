@@ -90,15 +90,21 @@ fuentes no verificadas siguen excluidos de cambios automáticos.
 mantiene los botones de descarga, el estado de actualización de PSVitaAlive y
 una segunda etiqueta de Archive.org.
 
-- **Respaldo en Archive.org**: el Download actual/recomendado del JSON apunta a
+- **VPK en Archive.org**: el Download actual/recomendado del JSON apunta a
   un VPK de Archive.org, y el release monitoreado no es más nuevo que la versión
   del catálogo. La etiqueta es un enlace pulsable hacia ese VPK.
 - **Versión nueva sin respaldo**: el enlace principal aún apunta a Archive.org
   de la versión del catálogo, pero el upstream ya anunció otra versión.
-- **Falta respaldo en Archive.org**: tras actualizarse el catálogo a un release
-  nuevo, el botón `VPK` actual apunta a GitHub/GitLab en lugar de Archive.org.
-  Si ya había otros Mirrors manuales, se conservan sin crear otros nuevos.
-- **Revisar respaldo**: falta una descarga principal inequívoca o hay
+- **Multimedia en Archive.org · VPK pendiente**: la ficha del catálogo ya contiene
+  un ícono y **todas** las capturas apuntando a un único ítem de Archive.org,
+  pero el `Download/VPK` de la versión vigente todavía apunta a GitHub/GitLab.
+  El ítem de las imágenes **no confirma que el VPK esté almacenado ni que
+  pertenezca a nuestra cuenta**; esas comprobaciones corresponden al workflow
+  independiente de preservación en PSVitaAlive.
+- **VPK pendiente de respaldo**: la descarga principal todavía es externa
+  y no hay una única referencia multimedia de Archive.org en el catálogo.
+  Los Mirrors anteriores, si existen, siguen siendo enlaces separados.
+- **Revisar VPK**: falta una descarga principal inequívoca o hay
   incongruencia comprobable con el nombre del VPK/versiones.
 - Los registros sin ficha asociada no presentan esta etiqueta.
 
@@ -118,12 +124,15 @@ La barra de filtros existente incluye búsqueda por texto y plataforma,
 y **respaldo en Archive.org**:
 
 - Todos los respaldos.
-- Pendientes de respaldar: agrupa `missing` y `outdated`.
-- En Archive.org: el VPK de descarga actual está enlazado allí.
-- Sin respaldo actual: el Download vigente no es un VPK de Archive.org.
+- Pendientes de respaldar: agrupa `vpk_pending`, `missing` y `outdated`.
+- VPK en Archive.org: la descarga principal actual está enlazada allí.
+- Multimedia lista, VPK pendiente: icono/capturas apuntan al mismo ítem,
+  pero el VPK vigente aún necesita preservación.
+- VPK sin respaldo detectado: el Download vigente no es de Archive.org
+  y no hay prueba multimedia uniforme.
 - Nueva versión sin respaldo: el upstream ha lanzado una versión posterior a
   la versión que está respaldada en el enlace actual.
-- Revisar respaldo: situaciones que no permiten clasificarlo con seguridad.
+- Revisar VPK: situaciones que no permiten clasificarlo con seguridad.
 - Sin ficha asociada: no hay un Homebrew de PSVitaAlive enlazado a ese release.
 
 **Los filtros se pueden combinar**: «Al día en PSVitaAlive» +
