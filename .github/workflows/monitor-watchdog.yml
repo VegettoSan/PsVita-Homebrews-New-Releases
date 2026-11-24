@@ -1,0 +1,38 @@
+name: Recover missed PS Vita release scans
+
+on:
+  # Normal 3-hour scans stay in monitor.yml. This independent hourly
+  # watchdog catches missing/dropped schedule events without extra full scans.
+  schedule:
+    - cron: "43 * * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/monitor-watchdog.yml"
+      - "monitor_watchdog.py"
+      - "tests/test_monitor_watchdog.py"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: psvita-orbit-monitor-watchdog
+  cancel-in-progress: false
+
+jobs:
+  recover-missed-scans:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout Orbit
+        uses: actions/checkout@v4
+
+      - name: Test recovery safeguards offline
+        run: python3 -m unittest discover -s tests -p test_monitor_watchdog.py -v
+
+      - name: Dispatch a missing full scan (if needed)
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 monitor_watchdog.py
