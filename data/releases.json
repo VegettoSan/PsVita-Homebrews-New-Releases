@@ -1,6 +1,558 @@
 [
   {
     "platform": "github",
+    "repo": "arielxflores/NitronicRush-Vita",
+    "release_id": "457450828",
+    "tag": "v1.1",
+    "name": "1.1",
+    "url": "https://github.com/arielxflores/NitronicRush-Vita/releases/tag/v1.1",
+    "published": "2026-11-24T23:18:48Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Smoother and faster on the Vita, cleaner sound, and a free-look camera.\n\n**Performance**\n- Dynamic Resolution (Options, on by default): the 3D scene is drawn smaller, down to 60%, only where the GPU would\n  not finish a frame in time, and at full size everywhere else. The HUD and menus are always full size.\n- The car is drawn between its physics steps, so the world no longer judders unevenly at speed.\n- Fixed the GPU hitches of 100-500 ms that came with a lot of particles from about the fourth level of a session on\n  (warp_speed, KillItWithFire, Old_RedLevel).\n- Fixed a hitch at the finish line (the high scores were read from the memory card there).\n- Faster collision, tyre tracks, particles, ghost cars (the five fastest are shown) and screen effects; simpler\n  models for distant objects; repeated objects drawn together.\n- Levels and the menus load faster: the game data is unpacked with libdeflate instead of the old decoder, and\n  textures and collision are prepared with less work.\n- The start no longer waits for the memory card: the log is written over the last one in place instead of as a new\n  file (on some memory cards the first new file of a run held everything up for up to 25 seconds).\n- The CPU, bus and GPU clocks are set again if the system lowers them (after the Vita has slept), and the Vita no\n  longer goes to sleep by itself in the middle of a race.\n\n**Graphics**\n- Fixed textures that reached the GPU damaged on the Vita (about one texture in sixteen, all of them DXT5: some\n  buildings, road cracks, streetlights and others): vitaGL sometimes copied them from a misaligned address. Each\n  texture is now checked after it is copied and copied again if it came out wrong.\n- The smallest levels of each texture, which were never copied (whatever was in video memory showed on far-off\n  surfaces), are now filled in.\n\n**Sound**\n- No more crackle when many copies of a sound play at once (warp_speed's rings, Gray's falling buildings): the\n  output now has a smooth limiter instead of clipping.\n- The engine sound comes back after a wreck and a restart in Challenge levels.\n\n**Controls**\n- The right stick looks around the car, on the ground and in the air, and the view eases back behind the car when\n  you let go. Either direction can be inverted in Controls.\n\n**Other**\n- A read from the game data that fails is tried again instead of leaving a texture or level part missing.\n\nThe game data from 1.0 still works: there is no need to run the converter again.\n\n- Install `NitronicRush-Vita.vpk` with VitaShell (over 1.0: your saves and settings are kept).\n- New install: get Nitronic Rush for PC (free from [DigiPen](https://games.digipen.edu/games/nitronic-rush)), make the\n  Vita's data from it with `NitronicRush-Vita-Converter.zip` (Windows: drag the game's folder onto\n  `CONVERT (Windows).bat`; Linux/macOS: `bash convert.sh \"/path/to/Nitronic Rush\"`) and copy the `nitronic` folder it\n  makes to `ux0:data/`. Details: [Game data](https://github.com/arielxflores/NitronicRush-Vita#game-data).\n- `libshacccg.suprx` must be extracted to `ur0:data/`. CapUnlocker is recommended.\n",
+    "assets": [
+      {
+        "name": "NitronicRush-Vita-Converter.zip",
+        "size": 31111690,
+        "download_url": "https://github.com/arielxflores/NitronicRush-Vita/releases/download/v1.1/NitronicRush-Vita-Converter.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "NitronicRush-Vita.vpk",
+        "size": 1404774,
+        "download_url": "https://github.com/arielxflores/NitronicRush-Vita/releases/download/v1.1/NitronicRush-Vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "arielxflores",
+    "homebrew_name": "Nitronic Rush",
+    "homebrew_icon": "https://archive.org/download/nitronic-rush-for-the-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "PS Vita port of Nitronic Rush, DigiPen's free futuristic racing game",
+    "homebrew_long_description": "A native PS Vita port of Nitronic Rush (2011), the free futuristic racing game made by Team Nitronic, a student team at DigiPen Institute of Technology. The game is rebuilt in C on VitaSDK and vitaGL: it loads the PC version's own levels, models, textures, sounds and menus, and its handling, level objects, camera and race rules follow the PC game's code. It is not an emulator.",
+    "homebrew_id": "nitronic-rush",
+    "homebrew_authors": [
+      "arielxflores"
+    ],
+    "homebrew_version": "1.0",
+    "catalog_apps": [
+      {
+        "id": "nitronic-rush",
+        "name": "Nitronic Rush",
+        "icon": "https://archive.org/download/nitronic-rush-for-the-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "PS Vita port of Nitronic Rush, DigiPen's free futuristic racing game",
+        "long_description": "A native PS Vita port of Nitronic Rush (2011), the free futuristic racing game made by Team Nitronic, a student team at DigiPen Institute of Technology. The game is rebuilt in C on VitaSDK and vitaGL: it loads the PC version's own levels, models, textures, sounds and menus, and its handling, level objects, camera and race rules follow the PC game's code. It is not an emulator.",
+        "version": "1.0",
+        "version_date": "2026-10-28",
+        "author_ids": [
+          "arielxflores"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/nitronic-rush-for-the-ps-vita/NitronicRush-Vita%20v1.0.vpk",
+            "size": 1258291,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/nitronic-rush-for-the-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 407791206,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "nitronic"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5222,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": false
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/arielxflores/NitronicRush-Vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.0 → release v1.1",
+    "catalog_version": "1.0",
+    "archive_current_link": "https://archive.org/download/nitronic-rush-for-the-ps-vita/NitronicRush-Vita%20v1.0.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "isledecomp/isle-portable",
+    "release_id": "457444539",
+    "tag": "continuous",
+    "name": "Continuous build",
+    "url": "https://github.com/isledecomp/isle-portable/releases/tag/continuous",
+    "published": "2026-11-24T23:11:01Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "GitHub Actions build log: https://github.com/isledecomp/isle-portable/actions/runs/45505411965",
+    "assets": [
+      {
+        "name": "app-debug.apk",
+        "size": 13658880,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "app-release.apk",
+        "size": 12589056,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
+        "content_type": "application/vnd.android.package-archive"
+      },
+      {
+        "name": "isle-0.1-Darwin-arm64.dmg",
+        "size": 23597395,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Darwin-x64.dmg",
+        "size": 24117090,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-DOS-x86.tar.gz",
+        "size": 2387517,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Emscripten-emscripten.tar.gz",
+        "size": 1031194,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-FreeBSD-x64.tar.gz",
+        "size": 3470301,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-iOS-arm64.ipa",
+        "size": 2409160,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Linux-x64.tar.gz",
+        "size": 4196672,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-arm64.zip",
+        "size": 2230662,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-x64.tar.gz",
+        "size": 20041217,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-x64.zip",
+        "size": 21395019,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Windows-x86.zip",
+        "size": 1455674,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
+        "size": 2314996,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-assets.zip",
+        "size": 457393244,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle-hdaudio.zip",
+        "size": 298041650,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.3dsx",
+        "size": 3059192,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.cia",
+        "size": 2200000,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.nro",
+        "size": 8837851,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "isle.vpk",
+        "size": 7200797,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "Isle_Portable-x86_64.AppImage",
+        "size": 31156728,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "org.legoisland.Isle.aarch64.flatpak",
+        "size": 2449696,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "org.legoisland.Isle.x86_64.flatpak",
+        "size": 2679552,
+        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "release_channel": "rolling",
+    "review_required": false,
+    "stable_release": {
+      "platform": "github",
+      "repo": "isledecomp/isle-portable",
+      "tag": "continuous",
+      "release_id": "457444539",
+      "published": "2026-11-24T23:11:01Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "size": 13658880,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
+          "content_type": "application/vnd.android.package-archive"
+        },
+        {
+          "name": "app-release.apk",
+          "size": 12589056,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
+          "content_type": "application/vnd.android.package-archive"
+        },
+        {
+          "name": "isle-0.1-Darwin-arm64.dmg",
+          "size": 23597395,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Darwin-x64.dmg",
+          "size": 24117090,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-DOS-x86.tar.gz",
+          "size": 2387517,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Emscripten-emscripten.tar.gz",
+          "size": 1031194,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-FreeBSD-x64.tar.gz",
+          "size": 3470301,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-iOS-arm64.ipa",
+          "size": 2409160,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Linux-x64.tar.gz",
+          "size": 4196672,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-arm64.zip",
+          "size": 2230662,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-x64.tar.gz",
+          "size": 20041217,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-x64.zip",
+          "size": 21395019,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Windows-x86.zip",
+          "size": 1455674,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
+          "size": 2314996,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-assets.zip",
+          "size": 457393244,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle-hdaudio.zip",
+          "size": 298041650,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.3dsx",
+          "size": 3059192,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.cia",
+          "size": 2200000,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.nro",
+          "size": 8837851,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "isle.vpk",
+          "size": 7200797,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "Isle_Portable-x86_64.AppImage",
+          "size": 31156728,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "org.legoisland.Isle.aarch64.flatpak",
+          "size": 2449696,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "org.legoisland.Isle.x86_64.flatpak",
+          "size": 2679552,
+          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    "homebrew_name": "Lego Island",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of LEGO Island for PSVITA.",
+    "homebrew_long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
+    "homebrew_id": "lego-island",
+    "homebrew_authors": [
+      "isledecomp"
+    ],
+    "homebrew_version": "v.0.1",
+    "catalog_apps": [
+      {
+        "id": "lego-island",
+        "name": "Lego Island",
+        "icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
+        "category": "ports",
+        "description": "Port of LEGO Island for PSVITA.",
+        "long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
+        "version": "v.0.1",
+        "version_date": "2026-08-05",
+        "author_ids": [
+          "isledecomp"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/isledecomp/isle-portable/releases"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/isledecomp/isle-portable"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
+    "catalog_version": "v.0.1",
+    "archive_current_link": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "Swisha33/NFSCVita",
+    "release_id": "457397962",
+    "tag": "v0.1.8",
+    "name": "v0.1.8 — crash fixes, faster",
+    "url": "https://github.com/Swisha33/NFSCVita/releases/tag/v0.1.8",
+    "published": "2026-11-24T22:13:07Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Crash fixes from your reports, and faster again. Install the new `NFSCVita.vpk` over the old one; your game files\r\nand saves stay.\r\n\r\n### Fixed\r\n- **Crash on the loading screen after a career event** (issue #8: the first speed-camera event in career\r\n  territory). The cutscene after the event needs a large texture, and the port's graphics memory could only grow\r\n  in whole 16 MB blocks, so a smaller amount of free memory went unused and the texture could not be created. The\r\n  graphics memory now also grows in smaller steps, and first frees textures the game has already let go. The same\r\n  cause most likely explains the crashes in the Quick Race car selector (#4), before a canyon race (#6) and in a\r\n  speed trap after the textures vanished (#7); any such failure is now written to the log.\r\n- **Crash after 30-40 minutes of play** (#5): a debugging aid kept a history for every texture the game ever\r\n  made, and the port's own memory slowly filled up. It is off now; memory use stays flat in long sessions.\r\n- **Black screen after beating Kenji** (#9): while closing a file, the game waited for a read that needed one of\r\n  its helper threads, and that thread could not run until the wait ended. The waiting loop now lets the helper\r\n  thread run.\r\n\r\n### Faster\r\n- **About 18 % faster than v0.1.7** (free roam at 500 MHz: about 27.8 fps instead of about 23.4).\r\n  - Log lines are written by a thread of their own: writing them to the memory card used to wait behind the\r\n    game's own reads and caused many of the short in-race freezes.\r\n  - New profile-guided optimization profile, native audio resampling, smaller sound-routine code, faster vector\r\n    math (NEON), and cheaper effect state changes.\r\n\r\n### Known issues\r\n- Issues #4-#9 could not all be reproduced here; if one of them still happens, please attach `nfscvita.log` (it\r\n  now says which memory ran out).\r\n- Spoken audio follows your game files: a copy installed in another language speaks that language.\r\n\r\nIcon and LiveArea artwork by u/Either-Version-9577.\r\n\r\nUnofficial, non-commercial fan port, not affiliated with or endorsed by Electronic Arts.\r\n",
+    "assets": [
+      {
+        "name": "LICENSE",
+        "size": 1240,
+        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.8/LICENSE",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "NFSCVita.vpk",
+        "size": 15297426,
+        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.8/NFSCVita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 234,
+        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.8/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "THIRD_PARTY.md",
+        "size": 2710,
+        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.8/THIRD_PARTY.md",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Swisha33",
+    "no_stable_release": true,
+    "homebrew_name": "NFS Carbon",
+    "homebrew_icon": "https://archive.org/download/NFSCVita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Need for Speed Carbon, on the PS Vita",
+    "homebrew_long_description": "Need for Speed Carbon (PC v1.4) on the PS Vita: static recompilation of your own NFSC.exe with a sceGxm renderer. Unofficial fan port.",
+    "homebrew_id": "nfs-carbon",
+    "homebrew_authors": [
+      "swisha33"
+    ],
+    "homebrew_version": "0.1.7",
+    "catalog_apps": [
+      {
+        "id": "nfs-carbon",
+        "name": "NFS Carbon",
+        "icon": "https://archive.org/download/NFSCVita/icon0.png",
+        "category": "ports",
+        "description": "Need for Speed Carbon, on the PS Vita",
+        "long_description": "Need for Speed Carbon (PC v1.4) on the PS Vita: static recompilation of your own NFSC.exe with a sceGxm renderer. Unofficial fan port.",
+        "version": "0.1.7",
+        "version_date": "2026-11-24",
+        "author_ids": [
+          "swisha33"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.7/NFSCVita.vpk",
+            "size": 15130705,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/NFSCVita/Game%20Files%20for%20PSVA.zip",
+            "size": 4187593114,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "NFSCVITA"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5222,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": false
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/Swisha33/NFSCVita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.1.7 → release v0.1.8",
+    "catalog_version": "0.1.7",
+    "archive_current_link": "",
+    "archive_media_item": "",
+    "backup_status": "missing",
+    "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org"
+  },
+  {
+    "platform": "github",
     "repo": "SaNch0sE/azahar-vita-mh4u",
     "release_id": "457342368",
     "tag": "0.4.4-beta",
@@ -931,465 +1483,6 @@
     "catalog_update_detail": "PSVitaAlive v.continuous → release continuous · Revisión manual: release sin VPK",
     "catalog_version": "v.continuous",
     "archive_current_link": "https://archive.org/download/psvitaalive-xash3d-fwgs/xash3d-fwgs.vpk",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "Swisha33/NFSCVita",
-    "release_id": "456147410",
-    "tag": "v0.1.7",
-    "name": "v0.1.7 — faster (PGO)",
-    "url": "https://github.com/Swisha33/NFSCVita/releases/tag/v0.1.7",
-    "published": "2026-11-24T00:07:30Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Faster again, especially where the frame rate used to drop. Install the new `NFSCVita.vpk` over the old one; your\r\ngame files and saves stay.\r\n\r\n### New\r\n- **About 14 % faster.** Free roam at 500 MHz: about 23.4 fps instead of about 20.5; the slowest stretches about\r\n  17.5 instead of 15.5 fps.\r\n  - **Profile-guided optimization (PGO):** the build is optimized with profiles recorded on a real Vita (free roam,\r\n    a race with full traffic, the menus), as [NFSUG2_VITA](https://github.com/danos-x5/NFSUG2_VITA) does. About\r\n    +10 %.\r\n  - **Smaller vertex uploads:** the game's per-frame buffers for particles, light glows and similar quads were copied\r\n    to the GPU whole (180 KB) on every frame; now only the part the game wrote (usually ~25 KB). About +3 %.\r\n  - **Cheaper clock reads:** the game reads the clock about 1000 times a frame, most of them while new city\r\n    sections load.\r\n\r\n### Known issues\r\n- Rare short freezes (up to about a second) when the game's sound thread holds its lock for a long time; being\r\n  investigated.\r\n- Spoken audio follows your game files: a copy installed in another language speaks that language.\r\n\r\nIcon and LiveArea artwork by u/Either-Version-9577.\r\n\r\nUnofficial, non-commercial fan port, not affiliated with or endorsed by Electronic Arts.\r\n",
-    "assets": [
-      {
-        "name": "LICENSE",
-        "size": 1240,
-        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.7/LICENSE",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "NFSCVita.vpk",
-        "size": 15130705,
-        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.7/NFSCVita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 234,
-        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.7/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "THIRD_PARTY.md",
-        "size": 2710,
-        "download_url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.7/THIRD_PARTY.md",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Swisha33",
-    "no_stable_release": true,
-    "homebrew_name": "NFS Carbon",
-    "homebrew_icon": "https://archive.org/download/NFSCVita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Need for Speed Carbon, on the PS Vita",
-    "homebrew_long_description": "Need for Speed Carbon (PC v1.4) on the PS Vita: static recompilation of your own NFSC.exe with a sceGxm renderer. Unofficial fan port.",
-    "homebrew_id": "nfs-carbon",
-    "homebrew_authors": [
-      "swisha33"
-    ],
-    "homebrew_version": "0.1.7",
-    "catalog_apps": [
-      {
-        "id": "nfs-carbon",
-        "name": "NFS Carbon",
-        "icon": "https://archive.org/download/NFSCVita/icon0.png",
-        "category": "ports",
-        "description": "Need for Speed Carbon, on the PS Vita",
-        "long_description": "Need for Speed Carbon (PC v1.4) on the PS Vita: static recompilation of your own NFSC.exe with a sceGxm renderer. Unofficial fan port.",
-        "version": "0.1.7",
-        "version_date": "2026-11-24",
-        "author_ids": [
-          "swisha33"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/Swisha33/NFSCVita/releases/download/v0.1.7/NFSCVita.vpk",
-            "size": 15130705,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/NFSCVita/Game%20Files%20for%20PSVA.zip",
-            "size": 4187593114,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "NFSCVITA"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5222,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": false
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/Swisha33/NFSCVita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.1.7",
-    "catalog_version": "0.1.7",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "missing",
-    "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "isledecomp/isle-portable",
-    "release_id": "456131459",
-    "tag": "continuous",
-    "name": "Continuous build",
-    "url": "https://github.com/isledecomp/isle-portable/releases/tag/continuous",
-    "published": "2026-11-23T23:43:16Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "GitHub Actions build log: https://github.com/isledecomp/isle-portable/actions/runs/45288737409",
-    "assets": [
-      {
-        "name": "app-debug.apk",
-        "size": 13651321,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "app-release.apk",
-        "size": 12581713,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
-        "content_type": "application/vnd.android.package-archive"
-      },
-      {
-        "name": "isle-0.1-Darwin-arm64.dmg",
-        "size": 23593803,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Darwin-x64.dmg",
-        "size": 24117274,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-DOS-x86.tar.gz",
-        "size": 2386642,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Emscripten-emscripten.tar.gz",
-        "size": 1030689,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-FreeBSD-x64.tar.gz",
-        "size": 3469260,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-iOS-arm64.ipa",
-        "size": 2407895,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Linux-x64.tar.gz",
-        "size": 4191906,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-arm64.zip",
-        "size": 2229461,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-x64.tar.gz",
-        "size": 20041211,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-x64.zip",
-        "size": 21393830,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Windows-x86.zip",
-        "size": 1454530,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
-        "size": 2314456,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-assets.zip",
-        "size": 457393237,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle-hdaudio.zip",
-        "size": 298041650,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.3dsx",
-        "size": 3057356,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.cia",
-        "size": 2198464,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.nro",
-        "size": 8837851,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "isle.vpk",
-        "size": 7199931,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Isle_Portable-x86_64.AppImage",
-        "size": 31152632,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "org.legoisland.Isle.aarch64.flatpak",
-        "size": 2456544,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "org.legoisland.Isle.x86_64.flatpak",
-        "size": 2680080,
-        "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "release_channel": "rolling",
-    "review_required": false,
-    "stable_release": {
-      "platform": "github",
-      "repo": "isledecomp/isle-portable",
-      "tag": "continuous",
-      "release_id": "456131459",
-      "published": "2026-11-23T23:43:16Z",
-      "prerelease": true,
-      "assets": [
-        {
-          "name": "app-debug.apk",
-          "size": 13651321,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-debug.apk",
-          "content_type": "application/vnd.android.package-archive"
-        },
-        {
-          "name": "app-release.apk",
-          "size": 12581713,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/app-release.apk",
-          "content_type": "application/vnd.android.package-archive"
-        },
-        {
-          "name": "isle-0.1-Darwin-arm64.dmg",
-          "size": 23593803,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-arm64.dmg",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Darwin-x64.dmg",
-          "size": 24117274,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Darwin-x64.dmg",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-DOS-x86.tar.gz",
-          "size": 2386642,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-DOS-x86.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Emscripten-emscripten.tar.gz",
-          "size": 1030689,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Emscripten-emscripten.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-FreeBSD-x64.tar.gz",
-          "size": 3469260,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-FreeBSD-x64.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-iOS-arm64.ipa",
-          "size": 2407895,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-iOS-arm64.ipa",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Linux-x64.tar.gz",
-          "size": 4191906,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Linux-x64.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-arm64.zip",
-          "size": 2229461,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-arm64.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-x64.tar.gz",
-          "size": 20041211,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.tar.gz",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-x64.zip",
-          "size": 21393830,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x64.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Windows-x86.zip",
-          "size": 1454530,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Windows-x86.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-0.1-Xbox_One_Series_XS-x64.zip",
-          "size": 2314456,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-0.1-Xbox_One_Series_XS-x64.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-assets.zip",
-          "size": 457393237,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-assets.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle-hdaudio.zip",
-          "size": 298041650,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle-hdaudio.zip",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.3dsx",
-          "size": 3057356,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.3dsx",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.cia",
-          "size": 2198464,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.cia",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.nro",
-          "size": 8837851,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.nro",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "isle.vpk",
-          "size": 7199931,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/isle.vpk",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "Isle_Portable-x86_64.AppImage",
-          "size": 31152632,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/Isle_Portable-x86_64.AppImage",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "org.legoisland.Isle.aarch64.flatpak",
-          "size": 2456544,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.aarch64.flatpak",
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "org.legoisland.Isle.x86_64.flatpak",
-          "size": 2680080,
-          "download_url": "https://github.com/isledecomp/isle-portable/releases/download/continuous/org.legoisland.Isle.x86_64.flatpak",
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    "homebrew_name": "Lego Island",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of LEGO Island for PSVITA.",
-    "homebrew_long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
-    "homebrew_id": "lego-island",
-    "homebrew_authors": [
-      "isledecomp"
-    ],
-    "homebrew_version": "v.0.1",
-    "catalog_apps": [
-      {
-        "id": "lego-island",
-        "name": "Lego Island",
-        "icon": "https://archive.org/download/psvitaalive-lego-island/icon0.png",
-        "category": "ports",
-        "description": "Port of LEGO Island for PSVITA.",
-        "long_description": "A portable version of LEGO Island (1997), built from the decompiled source. The original game files are required and are not included.\n\n- PsVitaAlive -",
-        "version": "v.0.1",
-        "version_date": "2026-08-05",
-        "author_ids": [
-          "isledecomp"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/isledecomp/isle-portable/releases"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/isledecomp/isle-portable"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1 → release continuous",
-    "catalog_version": "v.0.1",
-    "archive_current_link": "https://archive.org/download/psvitaalive-lego-island/isle.vpk",
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
@@ -13007,99 +13100,6 @@
       }
     ],
     "archive_current_link": "https://archive.org/download/gun-bros-ps-vita/Gun_Bros%20v1.03.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "arielxflores/NitronicRush-Vita",
-    "release_id": "427119449",
-    "tag": "v1.0",
-    "name": "1.0",
-    "url": "https://github.com/arielxflores/NitronicRush-Vita/releases/tag/v1.0",
-    "published": "2026-10-28T19:48:53Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "First release.\n\n- Install `NitronicRush-Vita.vpk` with VitaShell.\n- Get Nitronic Rush for PC (free from [DigiPen](https://games.digipen.edu/games/nitronic-rush)), make the Vita's data\n  from it with `NitronicRush-Vita-Converter.zip` (Windows: drag the game's folder onto `CONVERT (Windows).bat`;\n  Linux/macOS: `bash convert.sh \"/path/to/Nitronic Rush\"`) and copy the `nitronic` folder it makes to `ux0:data/`.\n  Details: [Game data](https://github.com/arielxflores/NitronicRush-Vita#game-data).\n- `libshacccg.suprx` must be extracted to `ur0:data/`. CapUnlocker is recommended.\n",
-    "assets": [
-      {
-        "name": "NitronicRush-Vita-Converter.zip",
-        "size": 31111690,
-        "download_url": "https://github.com/arielxflores/NitronicRush-Vita/releases/download/v1.0/NitronicRush-Vita-Converter.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "NitronicRush-Vita.vpk",
-        "size": 1253988,
-        "download_url": "https://github.com/arielxflores/NitronicRush-Vita/releases/download/v1.0/NitronicRush-Vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "arielxflores",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.0",
-    "catalog_version": "1.0",
-    "homebrew_name": "Nitronic Rush",
-    "homebrew_icon": "https://archive.org/download/nitronic-rush-for-the-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "PS Vita port of Nitronic Rush, DigiPen's free futuristic racing game",
-    "homebrew_long_description": "A native PS Vita port of Nitronic Rush (2011), the free futuristic racing game made by Team Nitronic, a student team at DigiPen Institute of Technology. The game is rebuilt in C on VitaSDK and vitaGL: it loads the PC version's own levels, models, textures, sounds and menus, and its handling, level objects, camera and race rules follow the PC game's code. It is not an emulator.",
-    "homebrew_id": "nitronic-rush",
-    "homebrew_authors": [
-      "arielxflores"
-    ],
-    "homebrew_version": "1.0",
-    "catalog_apps": [
-      {
-        "id": "nitronic-rush",
-        "name": "Nitronic Rush",
-        "icon": "https://archive.org/download/nitronic-rush-for-the-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "PS Vita port of Nitronic Rush, DigiPen's free futuristic racing game",
-        "long_description": "A native PS Vita port of Nitronic Rush (2011), the free futuristic racing game made by Team Nitronic, a student team at DigiPen Institute of Technology. The game is rebuilt in C on VitaSDK and vitaGL: it loads the PC version's own levels, models, textures, sounds and menus, and its handling, level objects, camera and race rules follow the PC game's code. It is not an emulator.",
-        "version": "1.0",
-        "version_date": "2026-10-28",
-        "author_ids": [
-          "arielxflores"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/nitronic-rush-for-the-ps-vita/NitronicRush-Vita%20v1.0.vpk",
-            "size": 1258291,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/nitronic-rush-for-the-ps-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 407791206,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "nitronic"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5222,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": false
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/arielxflores/NitronicRush-Vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/nitronic-rush-for-the-ps-vita/NitronicRush-Vita%20v1.0.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
     "archive_media_item": ""
@@ -48329,5 +48329,197 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "CrossCraft/CrossCraft-SurvivalTest",
+    "release_id": "84634138",
+    "tag": "ST4",
+    "name": "Survival Test 4: The Final Experiment",
+    "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4",
+    "published": "2022-12-02T02:40:53Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "This release will be the last major release of CrossCraft Survival Test for a reasonably long time. The Mac Release has been removed until further testing can be done. \r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding Support\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Major Refactor of Survival Test\r\n- Acceleration based player and mobs\r\n- Particles are now one particle-system\r\n- Heart & Air Bubble Animations\r\n- Toggleable Weather (F5 on PC)\r\n\r\n### Bug Fixes\r\n- PS Vita Crash Fix\r\n- Mobs clipping into terrain from being hit\r\n- Mobs falling animation around their heads instead of their feet\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- Transition from Menu Still does not have a loading screen",
+    "assets": [
+      {
+        "name": "CrossCraft-3DS.zip",
+        "size": 8336815,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-3DS.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-Linux.zip",
+        "size": 12896495,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Linux.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-PSP.zip",
+        "size": 9746437,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-PSP.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-Vita.zip",
+        "size": 17518102,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Vita.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-Windows.zip",
+        "size": 8860608,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Windows.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "IridescentRose",
+    "homebrew_name": "CrossCraft SurvivalTest",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
+    "homebrew_category": "games",
+    "homebrew_description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
+    "homebrew_long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
+    "homebrew_id": "crosscraft-survivaltest",
+    "homebrew_authors": [
+      "iridescence",
+      "motolegacy"
+    ],
+    "homebrew_version": "ST4",
+    "catalog_apps": [
+      {
+        "id": "crosscraft-survivaltest",
+        "name": "CrossCraft SurvivalTest",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
+        "category": "games",
+        "description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
+        "long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
+        "version": "ST4",
+        "version_date": "2022-12-02",
+        "author_ids": [
+          "iridescence",
+          "motolegacy"
+        ],
+        "links": [
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive ST4",
+    "catalog_version": "ST4",
+    "archive_current_link": "",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "No se puede identificar una única descarga principal"
+  },
+  {
+    "platform": "github",
+    "repo": "CrossCraft/CrossCraft-Classic",
+    "release_id": "84633227",
+    "tag": "v1.3",
+    "name": "[v1.3] End of the Line",
+    "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3",
+    "published": "2022-12-01T18:22:19Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "This release will be the last major release of CrossCraft Classic for a reasonably long time. As such, it has implemented plenty of bug fixes alongside backporting features from Survival Test 4. Note on the Mac Release -- this has been removed for the time being until better testing can be done.\r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding API\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Steve Models in Multiplayer\r\n- Music from Survival Test backported.\r\n\r\n### Bug Fixes\r\n- Particles now face the player\r\n- You can no longer break while paused\r\n- PS Vita Crash Fix\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- MP / Transition from Menu Still does not have a loading screen",
+    "assets": [
+      {
+        "name": "CrossCraft-3DS.zip",
+        "size": 8230254,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-3DS.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-Linux.zip",
+        "size": 14946577,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Linux.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-PSP.zip",
+        "size": 11863120,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-PSP.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-Vita.zip",
+        "size": 10028371,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Vita.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "CrossCraft-Windows.zip",
+        "size": 8831316,
+        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Windows.zip",
+        "content_type": "application/x-zip-compressed"
+      }
+    ],
+    "author": "IridescentRose",
+    "homebrew_name": "CrossCraft Classic",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
+    "homebrew_category": "games",
+    "homebrew_description": "Multiplatform clone of Minecraft Classic.",
+    "homebrew_long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
+    "homebrew_id": "crosscraft-classic",
+    "homebrew_authors": [
+      "iridescence",
+      "motolegacy"
+    ],
+    "homebrew_version": "v1.3",
+    "catalog_apps": [
+      {
+        "id": "crosscraft-classic",
+        "name": "CrossCraft Classic",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
+        "category": "games",
+        "description": "Multiplatform clone of Minecraft Classic.",
+        "long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
+        "version": "v1.3",
+        "version_date": "2022-12-01",
+        "author_ids": [
+          "iridescence",
+          "motolegacy"
+        ],
+        "links": [
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/CrossCraft/CrossCraft-Classic"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v1.3",
+    "catalog_version": "v1.3",
+    "archive_current_link": "",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "No se puede identificar una única descarga principal"
   }
 ]
