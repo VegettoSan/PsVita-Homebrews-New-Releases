@@ -2,25 +2,25 @@
   {
     "platform": "github",
     "repo": "SaNch0sE/azahar-vita-mh4u",
-    "release_id": "456615062",
-    "tag": "0.4.2-beta",
-    "name": "Azahar MH4U 0.4.2-beta",
-    "url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/tag/0.4.2-beta",
-    "published": "2026-11-24T10:37:38Z",
+    "release_id": "457342368",
+    "tag": "0.4.4-beta",
+    "name": "Azahar MH4U 0.4.4-beta",
+    "url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/tag/0.4.4-beta",
+    "published": "2026-11-24T21:13:33Z",
     "prerelease": true,
     "draft": false,
-    "body": "Azahar for the PS Vita, built on [Grarak's beta-1](https://github.com/Grarak/azahar/releases/tag/beta-1), with optimisations for **Monster Hunter 4 Ultimate** and, since 0.4.1, **Monster Hunter XX**. Other games run as in beta-1. Beta: back up your saves.\n\nBeta-1's new CPU and GPU emulation fixes the lighting and dark ground of our 0.3 builds, and our changes bring MH4U to 30 fps in the places we test (beta-1 alone ran them at 67–84% speed).\n\n> [!IMPORTANT]\n> The MH4U optimisations are tested **only** with the **USA** game (`0004000000126300`), its **1.3 (v1.1) update**, and the **Heavenfall mod**. Other regions, other versions or no mod may run slower or show problems.\n\nNo game files are included: you need your own decrypted copy of the game and its update.\n\n## New in 0.4.2-beta\n\n- **Fewer stutters in MH4U and MHXX.** Every so often the game froze for 10–160 ms while the emulator handed memory it had moved for the GPU back to the game; in a fight that was a visible hitch every half-minute or so. For MH4U and MHXX that memory now stays where it is unless it's actually needed.\n  - Measured in MH4U (a fight and a busy field, 1x with HUD 1.5x, vsync and Even frame pacing on): no freezes over 10 ms (nine in four minutes before), the slowest second at 97% speed instead of 88%, and visible hitches from 7 in 186 seconds to 1 in 52.\n- For smooth play keep **Even frame pacing** on (Patches): with it off, frames are shown unevenly in fights.\n\n## In 0.4.1-beta\n\n- **Monster Hunter XX (Japan)** gets the same optimisations entry as MH4U, which offers the **HUD resolution** and **Even frame pacing** options for it. See \"Monster Hunter XX\" below.\n- Nothing changes for MH4U.\n\n## Which download?\n\n| File | Installs as | Settings |\n|---|---|---|\n| **`Azahar-MH4U-0.4.2-beta.vpk`** (recommended) | **Azahar MH4U**, a separate app next to Azahar | its own (`settings-AZAHMH4UB.txt`) |\n| `Azahar-0.4.2-beta-replaces-Azahar.vpk` | **Azahar**, over upstream Azahar | Azahar's (`settings.txt`) |\n\nWe recommend **Azahar MH4U**: you keep upstream Azahar installed and can update it whenever a new version comes out, while Azahar MH4U stays your MH4U app. Both apps use `ux0:data/azahar`, so games, installed updates, saves, savestates, mods and cheats are shared: install the game update once and play it in either app. Only settings are separate (Azahar MH4U copies Azahar's on its first start), so changing a setting in one doesn't reset the other's. Run one app at a time.\n\n## Install\n\n1. **A PS Vita** on firmware 3.60, 3.65, 3.68 or 3.73.\n2. **The app.** Copy the vpk to the Vita and install it with VitaShell. The kernel plugin ships inside the vpk: nothing to add to taiHEN's `config.txt` (if you added `azaharnative.skprx` there for Azahar 0.1, remove that line and reboot).\n3. **The game.** Put your decrypted Monster Hunter 4 Ultimate (USA) `.3ds` / `.cci` / `.cxi` in `ux0:data/azahar/roms/`.\n4. **The update (1.3, v1.1).** Put your decrypted update `.cia` in `ux0:data/azahar/roms/` too. Start the app, select the update in the game list and press **Install**. You can delete the `.cia` afterwards.\n5. **The Heavenfall mod** (menus on one screen; the port is tuned for it):\n   1. Open the web installer, https://popzol.github.io/4u-heavenfall-mod-beta/, on a PC or phone. Your game is never uploaded.\n   2. Choose your **base game** file (the same decrypted `.3ds`), not the update `.cia`.\n   3. Options: **Single Screen mode** on; **HUD size** **80%** (with the HUD drawn at 1.5x it's sharp and readable; the default 70% is small on the Vita); **Aspect ratio**: tick *Allow other aspect ratios (EXPERIMENTAL)* and choose **16:9**; keep the quality-of-life (\"other\") module on. Layered Gear and the mod's cheats are your choice.\n   4. Press **Make the mod**, download the zip and extract it. You get a folder named `0004000000126300`.\n   5. Copy that folder to `ux0:data/azahar/load/mods/`, so that you have `ux0:data/azahar/load/mods/0004000000126300/romfs`. To change the mod later, delete that folder first and copy the new one in.\n6. **CPU at 500 MHz.** Set it with a clock plugin before starting a game. Higher clocks make the console warmer.\n7. **Start the game.** In the game's START menu, third page, **Mod Settings → Display**: aspect ratio **16:9** if you made the mod with it, **FPS: 30**, 3D mode off.\n\n## What's in it for MH4U\n\nAlways on for MH4U (USA), listed under **Patches → SaNch0sE optimizations**:\n\n- **Geometry batches:** grass, sprites and particles go to the GPU in fewer, larger batches.\n- **Hidden screen not drawn:** with the single-screen layout, the bottom screen's draws are skipped.\n- **Full speed from a cold start:** the intro and Val Habar no longer run slowly until a savestate is taken or loaded.\n- **Performance profile:** the app is compiled with upstream's profile merged with one recorded from MH4U on this code: about 2–3% more headroom in our tests.\n\nMH4U starts with these settings (pause menu → **Game settings**, all yours to change):\n\n- Layout **single** screen, Widescreen **stretch**\n- Internal resolution **1.25x**, HUD resolution **1.5x**\n- Even frame pacing **on**, Vsync **on**\n- Touch a hidden bottom screen **off**\n\nIf MH4U already has settings of its own (for example copied from Azahar's file), those are kept: set the values above by hand.\n\nThe options behind them:\n\n- **Patches → HUD resolution:** draws the HUD and text at a higher resolution than the 3D scene, e.g. the scene at 1.25x with the HUD at 1.5x. It applies only above the internal resolution. (Whole-screen 1.5x is too heavy: about 17 fps.)\n- **Patches → Even frame pacing (experimental):** with vsync on, holds an early frame so frames are shown two refreshes apart. If it looks worse to you, turn it off.\n- **Controls → Touch a hidden bottom screen:** off so stray touches don't open bottom-screen menus.\n\n## Monster Hunter XX\n\nTested with the **Japanese** game (`0004000000197100`) and the fan English patch (*MHXX Final Patch v3.1, no crossplay*) installed as its update, in four savestates (village, fields, a fight), without a single-screen mod. Other versions may differ.\n\n- MH4U's speed-ups don't make MHXX faster: at internal resolution 1.25x it is limited by the GPU drawing the extra pixels. They don't make it slower either.\n- What it does gain is the **HUD resolution** option: the HUD and dialogue text drawn at 1.5x, much easier to read.\n- Recommended (pause menu → **Game settings**):\n  - Internal resolution **1x** with HUD resolution **1.5x**: sharp text, 30 fps with room to spare; the 3D picture is smoothed.\n  - Or internal resolution **1.25x** with HUD resolution **1x**: a sharper 3D picture, 30 fps but with little room in busy places.\n  - 1.25x *with* HUD 1.5x dips below 30 fps in busy places.\n  - In **Patches → engine settings**, keep the game's own *Top screen 2x anti-aliasing* **off**: it is very heavy, and Azahar's resolution does the smoothing.\n  - For more room at 1.25x, switching off the game's *Outlines*, *Radial blur*, *Motion blur* and *Screen noise* filters (same place) gains about 5% with little visible change; *Colour correction* off gains another ~5% but makes the picture cooler.\n\n## Known issues\n\n- Exiting the app sometimes leaves a black screen with sound still playing, or restarts the console. Hold the power button to restart if it hangs.\n- After many hours or a Wi-Fi drop, the console's kernel memory can run out: the app closes with an error (C1-2569-2) or the console restarts when the app starts. A console restart clears it.\n- Tested in the intro, the character select, Val Habar, the quest counter, fields and hunt savestates. Not yet tested: long sessions, every menu, other regions or versions.\n\n## Reporting a problem\n\nOpen an issue with the app (Azahar MH4U or Azahar), where in the game it happens and, after a crash, the zip from `ux0:data/azahar/crashes/`.\n\n## Checksums (SHA-256)\n\n- `Azahar-MH4U-0.4.2-beta.vpk`: `78472a5f1a8c56380261e32720298ced629b948c569a93a56567beb6120a4429`\n- `Azahar-0.4.2-beta-replaces-Azahar.vpk`: `0a72ee4e5749fcd749a513ba0a35226481b8a7a6ca6adf48179e77b56c7f784a`\n",
+    "body": "Azahar for the PS Vita, built on [Grarak's beta-1](https://github.com/Grarak/azahar/releases/tag/beta-1), with optimisations for **Monster Hunter 4 Ultimate**, and Fast shadows for **Monster Hunter XX**. Other games run as in beta-1. Beta: back up your saves.\n\nBeta-1's new CPU and GPU emulation fixes the lighting and dark ground of our 0.3 builds, and our changes bring MH4U to 30 fps in the places we test (beta-1 alone ran them at 67–84% speed).\n\n> [!IMPORTANT]\n> The MH4U optimisations are tested **only** with the **USA** game (`0004000000126300`), its **1.3 (v1.1) update**, and the **Heavenfall mod**. Other regions, other versions or no mod may run slower or show problems.\n\nNo game files are included: you need your own decrypted copy of the game and its update.\n\n## New in 0.4.4-beta\n\n- **Fast shadows, on by default in MH4U and Monster Hunter XX.** The 3DS compares shadows in hardware; the Vita can't read the 3DS shadow map that way, so the emulator read it four times per lit pixel and compared and blended each read itself. That was about a quarter of the GPU's time in a busy MH4U field. Fast shadows reads it once, filtered, and compares once. Shadows stay where they are, with harder, slightly stepped edges.\n  - Measured in MH4U (a busy field at 1.5x, uncapped): speed from 90% to 102%, the slowest second from 83–89% to 98–99%. In MHXX near a flying monster, the slowest second from 74–78% to 84–95%.\n  - To get the soft shadows back, turn **Patches → Fast shadows** off (in MHXX it is under **Fast shadows option**).\n- **Monster Hunter XX:** this option is the only change; everything else still runs as in beta-1.\n\n## In 0.4.3-beta\n\n- **MH4U's intro video at full speed again** (30 fps from a cold start instead of 15), keeping 0.4.2's smoother fights.\n\n## Which download?\n\n| File | Installs as | Settings |\n|---|---|---|\n| **`Azahar-MH4U-0.4.4-beta.vpk`** (recommended) | **Azahar MH4U**, a separate app next to Azahar | its own (`settings-AZAHMH4UB.txt`) |\n| `Azahar-0.4.4-beta-replaces-Azahar.vpk` | **Azahar**, over upstream Azahar | Azahar's (`settings.txt`) |\n\nWe recommend **Azahar MH4U**: you keep upstream Azahar installed and can update it whenever a new version comes out, while Azahar MH4U stays your MH4U app. Both apps use `ux0:data/azahar`, so games, installed updates, saves, savestates, mods and cheats are shared: install the game update once and play it in either app. Only settings are separate (Azahar MH4U copies Azahar's on its first start), so changing a setting in one doesn't reset the other's. Run one app at a time.\n\n## Install\n\n1. **A PS Vita** on firmware 3.60, 3.65, 3.68 or 3.73.\n2. **The app.** Copy the vpk to the Vita and install it with VitaShell. The kernel plugin ships inside the vpk: nothing to add to taiHEN's `config.txt` (if you added `azaharnative.skprx` there for Azahar 0.1, remove that line and reboot).\n3. **The game.** Put your decrypted Monster Hunter 4 Ultimate (USA) `.3ds` / `.cci` / `.cxi` in `ux0:data/azahar/roms/`.\n4. **The update (1.3, v1.1).** Put your decrypted update `.cia` in `ux0:data/azahar/roms/` too. Start the app, select the update in the game list and press **Install**. You can delete the `.cia` afterwards.\n5. **The Heavenfall mod** (menus on one screen; the port is tuned for it):\n   1. Open the web installer, https://popzol.github.io/4u-heavenfall-mod-beta/, on a PC or phone. Your game is never uploaded.\n   2. Choose your **base game** file (the same decrypted `.3ds`), not the update `.cia`.\n   3. Options: **Single Screen mode** on; **HUD size** **80%** (with the HUD drawn at 1.5x it's sharp and readable; the default 70% is small on the Vita); **Aspect ratio**: tick *Allow other aspect ratios (EXPERIMENTAL)* and choose **16:9**; keep the quality-of-life (\"other\") module on. Layered Gear and the mod's cheats are your choice.\n   4. Press **Make the mod**, download the zip and extract it. You get a folder named `0004000000126300`.\n   5. Copy that folder to `ux0:data/azahar/load/mods/`, so that you have `ux0:data/azahar/load/mods/0004000000126300/romfs`. To change the mod later, delete that folder first and copy the new one in.\n6. **CPU at 500 MHz.** Set it with a clock plugin before starting a game. Higher clocks make the console warmer.\n7. **Start the game.** In the game's START menu, third page, **Mod Settings → Display**: aspect ratio **16:9** if you made the mod with it, **FPS: 30**, 3D mode off.\n\n## What's in it for MH4U\n\nAlways on for MH4U (USA), listed under **Patches → SaNch0sE optimizations**:\n\n- **Geometry batches:** grass, sprites and particles go to the GPU in fewer, larger batches.\n- **Hidden screen not drawn:** with the single-screen layout, the bottom screen's draws are skipped.\n- **Full speed from a cold start:** the intro and Val Habar no longer run slowly until a savestate is taken or loaded.\n- **Performance profile:** the app is compiled with upstream's profile merged with one recorded from MH4U on this code: about 2–3% more headroom in our tests.\n\nMH4U starts with these settings (pause menu → **Game settings**, all yours to change):\n\n- Layout **single** screen, Widescreen **stretch**\n- Internal resolution **1.25x**, HUD resolution **1.5x**\n- Even frame pacing **on**, Vsync **on**\n- Touch a hidden bottom screen **off**\n\nIf MH4U already has settings of its own (for example copied from Azahar's file), those are kept: set the values above by hand.\n\nThe options behind them:\n\n- **Patches → HUD resolution:** draws the HUD and text at a higher resolution than the 3D scene, e.g. the scene at 1.25x with the HUD at 1.5x. It applies only above the internal resolution. (Whole-screen 1.5x is too heavy: about 17 fps.)\n- **Patches → Fast shadows:** one shadow-map read per lit pixel instead of four (on by default; off gives soft shadow edges).\n- **Patches → Even frame pacing (experimental):** with vsync on, holds an early frame so frames are shown two refreshes apart. If it looks worse to you, turn it off.\n- **Controls → Touch a hidden bottom screen:** off so stray touches don't open bottom-screen menus.\n\n## Known issues\n\n- Exiting the app sometimes leaves a black screen with sound still playing, or restarts the console. Hold the power button to restart if it hangs.\n- After many hours or a Wi-Fi drop, the console's kernel memory can run out: the app closes with an error (C1-2569-2) or the console restarts when the app starts. A console restart clears it.\n- Tested in the intro, the character select, Val Habar, the quest counter, fields and hunt savestates. Not yet tested: long sessions, every menu, other regions or versions.\n\n## Reporting a problem\n\nOpen an issue with the app (Azahar MH4U or Azahar), where in the game it happens and, after a crash, the zip from `ux0:data/azahar/crashes/`.\n\n## Checksums (SHA-256)\n\n- `Azahar-MH4U-0.4.4-beta.vpk`: `1716ad8db669a5641904af4038498f600c2bc27e23a1042b39fb700cc42c8b85`\n- `Azahar-0.4.4-beta-replaces-Azahar.vpk`: `78f0857da46073288566eed196002bf8542f3e68a8c76edec9e2720c37b1cd91`\n",
     "assets": [
       {
-        "name": "Azahar-0.4.2-beta-replaces-Azahar.vpk",
-        "size": 8446312,
-        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.2-beta/Azahar-0.4.2-beta-replaces-Azahar.vpk",
+        "name": "Azahar-0.4.4-beta-replaces-Azahar.vpk",
+        "size": 8449550,
+        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.4-beta/Azahar-0.4.4-beta-replaces-Azahar.vpk",
         "content_type": "application/octet-stream"
       },
       {
-        "name": "Azahar-MH4U-0.4.2-beta.vpk",
-        "size": 8446411,
-        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.2-beta/Azahar-MH4U-0.4.2-beta.vpk",
+        "name": "Azahar-MH4U-0.4.4-beta.vpk",
+        "size": 8450771,
+        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.4-beta/Azahar-MH4U-0.4.4-beta.vpk",
         "content_type": "application/octet-stream"
       }
     ],
@@ -96,9 +96,341 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.3.2 → release 0.4.2-beta · Revisión manual: 2 VPK diferentes",
+    "catalog_update_detail": "PSVitaAlive 0.3.2 → release 0.4.4-beta · Revisión manual: 2 VPK diferentes",
     "catalog_version": "0.3.2",
     "archive_current_link": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "josephinoo/vitaForge",
+    "release_id": "457251612",
+    "tag": "v0.1.14",
+    "name": "VitaForge v0.1.14",
+    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.14",
+    "published": "2026-11-24T19:46:17Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## What's new in v0.1.14\r\n- **New ROMs tab (Nintendo 3DS)**: 5-column native grid with Libretro boxart, D-pad/joystick navigation, top-bar search, and genre filter (`All genres`).\r\n- **Direct  downloads for Azahar**: Downloads straight to `ux0:data/azahar/roms/` using 4-part parallel resume + MD5 verification (no extraction needed).\r\n- **Configurable 3DS ROMs folder**: Change the destination path in **Settings → Storage → 3DS ROMs folder** using the native PS Vita keyboard.\r\n- **Cleaner header bar**: Removed duplicate `Lib` and `Updates` buttons from the top nav (still accessible via bottom footer pills and `L`/`R`).",
+    "assets": [
+      {
+        "name": "vitaforge.vpk",
+        "size": 6274545,
+        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.14/vitaforge.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "josephinoo",
+    "homebrew_name": "VitaForge",
+    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store client.",
+    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+    "homebrew_id": "vitaforge",
+    "homebrew_authors": [
+      "josephinoo"
+    ],
+    "homebrew_version": "v.0.1.1",
+    "catalog_apps": [
+      {
+        "id": "vitaforge",
+        "name": "VitaForge",
+        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
+        "category": "utilities",
+        "description": "Homebrew store client.",
+        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
+        "version": "v.0.1.1",
+        "version_date": "2026-08-11",
+        "author_ids": [
+          "josephinoo"
+        ],
+        "links": [
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/josephinoo/vitaForge/releases"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/josephinoo/vitaForge"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.14",
+    "catalog_version": "v.0.1.1",
+    "archive_current_link": "",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "No se puede identificar una única descarga principal"
+  },
+  {
+    "platform": "github",
+    "repo": "xesf/manhunt-releases",
+    "release_id": "457166537",
+    "tag": "v0.10.2",
+    "name": "v0.10.2",
+    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.10.2",
+    "published": "2026-11-24T18:23:33Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n- Manhunt 1: the attack button kicks a hunter lying on the floor, also in the middle of a punch combo (before, fast presses kept punching him), when he lies within the original's kick reach; the player stomps him while he lands and uses the ground attack otherwise, a kick does five times damage only on a hunter not spared before, hunters kick a downed player (who gets up when his fall ends: blows on him do not keep him down), and the Action button no longer offers a kick on a downed hunter.\n- Manhunt 1, Scrap Yard 2: a prop on the crane magnet keeps the orientation it was caught in and leans with the magnet; let go, it falls as a rigid body and can tip over and come to rest on its side (it used to hang upright and land on its base). Leaving the crane drops a prop the magnet still holds, as in the original.\n- Manhunt 1, Scrap Yard 2: pouring the gas can into the crane tank plays as in the original: Cash steps onto the tank's use spot facing it, the can tilts in both hands with its own pour animation, and it is gone only when the 7.5 s pour ends (it used to hang at his side and vanish after 2 s).\n- Gyro aiming: tilting the top of the pad away from you now aims down (point the pad like a gun), and it no longer follows the camera Invert Y. It also works with Classic controls. New Controls rows: Gyro Aim, Gyro Sensitivity (0.25x to 3x), Gyro Invert Y, Gyro Invert X (Options.ini `gyro`, `gyro_sens`, `gyro_invert_y`, `gyro_invert_x`).\n\n\nThe Windows and Linux x86_64 builds are untested on real hardware.\n",
+    "assets": [
+      {
+        "name": "manhunt-v0.10.2-linux-x86_64.tar.gz",
+        "size": 3749345,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.2/manhunt-v0.10.2-linux-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.10.2-macos-x86_64.tar.gz",
+        "size": 3024618,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.2/manhunt-v0.10.2-macos-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.10.2-vita.vpk",
+        "size": 1835963,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.2/manhunt-v0.10.2-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "manhunt-v0.10.2-windows-x86_64.zip",
+        "size": 3490653,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.2/manhunt-v0.10.2-windows-x86_64.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "xesf",
+    "homebrew_name": "Manhunt",
+    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_id": "manhunt",
+    "homebrew_authors": [
+      "xesf"
+    ],
+    "homebrew_version": "0.10.1",
+    "catalog_apps": [
+      {
+        "id": "manhunt",
+        "name": "Manhunt",
+        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "version": "0.10.1",
+        "version_date": "2026-11-23",
+        "author_ids": [
+          "xesf"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.1.vpk",
+            "size": 1819197,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/Game%20Files%20for%20PSVA.zip",
+            "size": 2040109466,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "manhunt"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/xesf/manhunt-releases"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.10.1 → release v0.10.2",
+    "catalog_version": "0.10.1",
+    "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.1.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "marcocatena/TheSimsVita-release",
+    "release_id": "456957920",
+    "tag": "v1.2.1",
+    "name": "The Sims for PS Vita v1.2.1",
+    "url": "https://github.com/marcocatena/TheSimsVita-release/releases/tag/v1.2.1",
+    "published": "2026-11-24T15:29:10Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "The Sims (2000) on PS Vita, with all seven expansion packs, played from your own copy of\n**The Sims Legacy Collection**. No game files are included.\n\n> If something doesn't work, please report it under [Issues](https://github.com/marcocatena/TheSimsVita-release/issues/new/choose).\n\n## What's new in v1.2.1\n\nA fixes release for v1.2, from your reports. Thank you to everyone who reported them.\n\n- **Studio Town by car works again.** In v1.2 a Sim called the Studio Town car, walked out to it and\n  then refused to get in. Fixed for every family. ([#5](https://github.com/marcocatena/TheSimsVita-release/issues/5))\n- **Makin' Magic's hole no longer swallows your Sim.** If the game was closed while Magic Town's\n  \"Where am I taking you?\" map was up after jumping into the hole, the Sim came back invisible for\n  good. That no longer happens, and **a Sim already left invisible by it shows up again** the next\n  time their house is opened. ([#4](https://github.com/marcocatena/TheSimsVita-release/issues/4))\n- **No flash of the lot when travelling.** Picking a lot on the Downtown, Vacation, Studio Town,\n  Magic Town or Old Town map now goes straight to the loading picture, instead of showing the lot\n  you're leaving for a moment first.\n- **A cover in RetroFlow Launcher.** If you use RetroFlow, the game puts its own cover in RetroFlow's\n  covers folder when it starts. Rescan your games in RetroFlow once (Settings › Scan Settings ›\n  Rescan) to see it. A cover you've added yourself is left as it is.\n\n## Downloads\n\n**You only need `TheSimsVita-v1.2.1.vpk`.**\n\n| File | What it is |\n|---|---|\n| `TheSimsVita-v1.2.1.vpk` | The app. Install it with VitaShell |\n| `SHA256SUMS.txt` | Optional: checksums, to check a download arrived intact |\n| `TheSimsVita-v1.2.1-lgpl-sources.zip` | For developers (licence requirement): the source of the LGPL libraries in the app (vitaGL, vitaShaRK, pthread-embedded) |\n| `TheSimsVita-v1.2.1-relink-kit.zip` | For developers (licence requirement): the app's object files, to rebuild it with modified versions of those libraries |\n\n## Installing\n\nFull steps in the [README](https://github.com/marcocatena/TheSimsVita-release#installing). In short:\n\n1. Have HENkaku/Ensō, VitaShell and the shader compiler (`ur0:data/libshacccg.suprx`, from ShaRKF00D).\n2. Copy every folder of your Legacy Collection install (about 3 GB) to `ux0:data/TheSims/`\n   on the Vita's memory card.\n3. Install the VPK and start it. The first start indexes the game's files and takes a few minutes.\n\nUpdating from an earlier version: install the new VPK over the old one; saves and options are kept.\n",
+    "assets": [
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 294,
+        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "TheSimsVita-v1.2.1-lgpl-sources.zip",
+        "size": 9986977,
+        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/TheSimsVita-v1.2.1-lgpl-sources.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "TheSimsVita-v1.2.1-relink-kit.zip",
+        "size": 32867674,
+        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/TheSimsVita-v1.2.1-relink-kit.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "TheSimsVita-v1.2.1.vpk",
+        "size": 5041417,
+        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/TheSimsVita-v1.2.1.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "marcocatena",
+    "homebrew_name": "The Sims",
+    "homebrew_icon": "https://archive.org/download/the-sims-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "The Sims (2000) on PS Vita: an unofficial native port that plays from your own Legacy Collection files",
+    "homebrew_long_description": "A native PS Vita engine that plays The Sims (2000), with all seven expansion packs, from your own copy of the game's files. It isn't an emulator and not a PC port: a new engine, written for the Vita, that reads the original game's data and runs the game's own code for the Sims and their objects.",
+    "homebrew_id": "the-sims",
+    "homebrew_authors": [
+      "marcocatena"
+    ],
+    "homebrew_version": "1.2",
+    "catalog_apps": [
+      {
+        "id": "the-sims",
+        "name": "The Sims",
+        "icon": "https://archive.org/download/the-sims-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "The Sims (2000) on PS Vita: an unofficial native port that plays from your own Legacy Collection files",
+        "long_description": "A native PS Vita engine that plays The Sims (2000), with all seven expansion packs, from your own copy of the game's files. It isn't an emulator and not a PC port: a new engine, written for the Vita, that reads the original game's data and runs the game's own code for the Sims and their objects.",
+        "version": "1.2",
+        "version_date": "2026-11-20",
+        "author_ids": [
+          "marcocatena"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/the-sims-ps-vita/the-sims%20v1.2.vpk",
+            "size": 5006776,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/the-sims-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 3650722202,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "TheSims"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/marcocatena/TheSimsVita-release"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.2 → release v1.2.1",
+    "catalog_version": "1.2",
+    "archive_current_link": "https://archive.org/download/the-sims-ps-vita/the-sims%20v1.2.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "Botarguirix/ValdisStoryVita",
+    "release_id": "456861731",
+    "tag": "v0.8.0-alpha",
+    "name": "Valdis Story PSVITA v0.8.0-alpha",
+    "url": "https://github.com/Botarguirix/ValdisStoryVita/releases/tag/v0.8.0-alpha",
+    "published": "2026-11-24T14:25:41Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Valdis Story PSVITA v0.8.0-alpha\r\n\r\nPort nativo de **Valdis Story: Abyssal City** para PS Vita: un runner propio de GameMaker Studio 1.x en C++17 (no es emulador ni YoYo Loader). El juego se convierte desde **tu copia de Steam** en la propia consola.\r\n\r\n**ULTRA IA VIBECODED!** Todo el código, las herramientas y la documentación los escribió una IA (Claude Opus 5.5 como modelo principal y Claude Sonnet 5.5 en subagentes, con Claude Code); el usuario dirigió y probó cada build en una PS Vita real.\r\n\r\n> ⚠️ **No incluye el juego.** Necesitas una copia legal de Steam (build 722041, App ID 252030; ver README). Este VPK solo trae el motor y la traducción al español (sin el texto original). Valdis Story es propiedad de Endless Fluff Games; proyecto de fans sin ánimo de lucro.\r\n\r\nEsta versión sale del reporte de una partida larga jugada a mano en la Vita.\r\n\r\n### Correcciones\r\n- **Cuelgue al abrir un cofre tras una sesión larga:** la memoria de los efectos de sonido no se liberaba nunca y acababa agotándose. Ahora tiene un tope y, si alguna vez falta memoria, se salta ese sonido en vez de cerrar el juego.\r\n- **El Manawar y Abbigail ya no bajan a 10–30 fps:** las colisiones de los rayos giratorios se calculaban píxel a píxel sobre un área enorme. Ahora solo se revisa donde puede estar el rayo, con el mismo resultado que antes.\r\n- **Al bajar del tren** el personaje ya no se queda detrás de los edificios.\r\n- **Recompensas de los jefes:** ya no quedan tapadas por el panel de puntuación.\r\n\r\n### Novedades (menú MODS, SELECT)\r\n- **HUD más pequeño:** 100 / 85 / 70 / 60 / 50 %. La vida, el maná, los combos y los avisos se encogen hacia su esquina; los diálogos y los menús quedan igual.\r\n- **Tres fuentes nuevas:** además de la original y la del sistema en negrita, ahora están la del sistema normal, la estrecha y la de remates.\r\n- **Tamaño del texto:** 100 / 90 / 80 / 70 %. Las letras se achican sin cambiar el ancho de las cajas, así las descripciones caben.\r\n- **Logros locales:** los 68 logros del juego se guardan en la consola, con aviso e icono al conseguirlos y la lista en MODS → Logros.\r\n\r\n### Traducción\r\n- Nombres de zona en español (Pasarela occidental, Restos de Tagrum, Prisión hundida…).\r\n- Diálogos que faltaban (Gilda, Reina, Vladyn), avisos de tutorial y nombres del bestiario (Templario ángel, Zelote ángel…).\r\n\r\n### Rendimiento de este VPK\r\nEs la versión de **intérprete**: no lleva código del juego, por eso se puede compartir. En las salas más cargadas baja a unos 34 fps. La versión rápida (AOT, 60 fps) se genera desde tu propia copia con `tools/build_aot_vpk.sh` (guía en `docs/AOT_USUARIOS.md`).\r\n\r\n### Problemas conocidos\r\n- En las ranuras de partida, \"Lv/Time/Crew/Location\" siguen en inglés: forman parte del dibujo del juego.\r\n- A veces el icono del objeto que sale de un cofre no coincide con lo que es (en investigación).\r\n- \"GFX : Low\" hace el juego más lento en vez de más fluido (pendiente).\r\n- Boss Rush: Ruckjahl y Dhistahn poseído solo aparecen si ya los grabaste jugando la historia.\r\n\r\n### Instalación\r\n1. Instala `vsvita.vpk` con VitaShell. Necesitas `ur0:data/libshacccg.suprx` (extráelo con ShaRKBR33D).\r\n2. Copia `data.win`, `data_1/`, `data_2/`, `data_5/` y los `music_*.ogg` de tu carpeta de Steam a `ux0:data/valdis/game/`.\r\n3. Abre el juego: el primer arranque convierte los datos (unos minutos). Pulsa SELECT para elegir español y el resto de opciones.\r\n",
+    "assets": [
+      {
+        "name": "vsvita.vpk",
+        "size": 1653039,
+        "download_url": "https://github.com/Botarguirix/ValdisStoryVita/releases/download/v0.8.0-alpha/vsvita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Botarguirix",
+    "homebrew_name": "Valdis Story PSVITA",
+    "homebrew_icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
+    "homebrew_long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
+    "homebrew_id": "valdis-story-psvita",
+    "homebrew_authors": [
+      "botarguirix"
+    ],
+    "homebrew_version": "0.7.0",
+    "catalog_apps": [
+      {
+        "id": "valdis-story-psvita",
+        "name": "Valdis Story PSVITA",
+        "icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
+        "category": "ports",
+        "description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
+        "long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
+        "version": "0.7.0",
+        "version_date": "2026-11-21",
+        "author_ids": [
+          "botarguirix"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
+            "size": 1572864,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/valdis-story-psvita/Game%20Files%20for%20PSVA.zip",
+            "size": 796183757,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "valdis"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/Botarguirix/ValdisStoryVita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.7.0 → release v0.8.0-alpha",
+    "catalog_version": "0.7.0",
+    "archive_current_link": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
@@ -1061,101 +1393,6 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "xesf/manhunt-releases",
-    "release_id": "455925881",
-    "tag": "v0.10.1",
-    "name": "v0.10.1",
-    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.10.1",
-    "published": "2026-11-23T19:59:09Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Manhunt 1 level viewer (`--level` without `--play`): hunters stand in the game's `Stand_Idle` loop instead of looping a one-shot idle fidget (the Innocentz one doubles them over with the head hidden at the chest); `--debug head-probe` tints head models red and logs the head bone and head mesh positions.\n- Manhunt 1: hunter heads sit on the neck again in zoo, zoo2, ramirez, mall, church2 and pharm_wks (the head's root frame matrix is replaced by the head bone, as in the original); before, some of those hunters were headless with the head floating beside them.\n- Manhunt 1: the player can walk and strafe while aiming a gun (the gun stance's walk animations, the aim stays where it is).\n- Manhunt 1: aiming from cover works: at a wall edge or behind a low wall, Aim leans out and the camera aims away from the wall, and firing no longer drops the player out of cover.\n- Manhunt 1: sliding to the end of a wall no longer jitters between sliding and standing at the edge.\n- Manhunt 1: with a pad lock held on a hunter, pushing the look stick up aims at his head and down at his body, instead of letting go of the lock.\n\n\nThe Windows and Linux x86_64 builds are untested on real hardware.\n",
-    "assets": [
-      {
-        "name": "manhunt-v0.10.1-linux-x86_64.tar.gz",
-        "size": 3724685,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.1/manhunt-v0.10.1-linux-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-v0.10.1-macos-x86_64.tar.gz",
-        "size": 2997200,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.1/manhunt-v0.10.1-macos-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-v0.10.1-vita.vpk",
-        "size": 1819197,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.1/manhunt-v0.10.1-vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "manhunt-v0.10.1-windows-x86_64.zip",
-        "size": 3462767,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.1/manhunt-v0.10.1-windows-x86_64.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "xesf",
-    "homebrew_name": "Manhunt",
-    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_id": "manhunt",
-    "homebrew_authors": [
-      "xesf"
-    ],
-    "homebrew_version": "0.10.1",
-    "catalog_apps": [
-      {
-        "id": "manhunt",
-        "name": "Manhunt",
-        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "version": "0.10.1",
-        "version_date": "2026-11-23",
-        "author_ids": [
-          "xesf"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.1.vpk",
-            "size": 1819197,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/Game%20Files%20for%20PSVA.zip",
-            "size": 2040109466,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "manhunt"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/xesf/manhunt-releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.10.1",
-    "catalog_version": "0.10.1",
-    "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.1.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
   },
   {
     "platform": "github",
@@ -4806,71 +5043,6 @@
   },
   {
     "platform": "github",
-    "repo": "josephinoo/vitaForge",
-    "release_id": "453739014",
-    "tag": "v0.1.13",
-    "name": "VitaForge v0.1.13",
-    "url": "https://github.com/josephinoo/vitaForge/releases/tag/v0.1.13",
-    "published": "2026-11-21T14:17:43Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Highlights\r\n\r\n- **Accounts**: login, registration, session persistence, logout, authenticated API requests and an account settings screen.\r\n- **Game verifier workflows** added to the catalog.\r\n- **New themes & audio**: OLED Black theme and a persistent sound-effects toggle.\r\n- **Install screen**: dims after 2 minutes of inactivity and shows battery percentage.\r\n- **Redesigned LiveArea**: centered logo, no start gate covering it.\r\n\r\nHow installs work\r\n\r\n- **PS Vita games, DLC, demos, themes** are queued through the system background downloader (BGDL / LiveArea), the same way pkgj does it. If BGDL fails, the real error is shown; there is no silent in-app fallback.\r\n- **PSP, PS1 and homebrew (VPK, plugins)** are installed inside the app.\r\n- **Real licenses (zRIF)**: the zRIF decoder was rewritten as a faithful port of pkgj's (correct 1024-byte dictionary, Adler-32 check). Real zRIFs now decode and are used instead of silently falling back to a fake license, which fixes the \"this app belongs to another player\" errors (C1-2758-2 / C2-13270-3).\r\n- **Outdated badge** compares the installed file's MD5 against the catalog digest.\r\n- **Free space check** in the detail screen warns when ux0 doesn't have enough room.\r\n- **In-app on-screen keyboard** replaces the system IME, which blanked the screen on Vita.\r\n- The app runs with an unsafe eboot so it can reach `ux0:bgdl` and `ux0:pspemu`.\r\n\r\nPerformance & downloads\r\n\r\n- Faster rendering and catalog filtering; higher-optimization egui release builds with periodic frame-phase profiling.\r\n- Much faster icon loading: more precaching/decoding, separated disk and network budgets, better Vita image decoding, JPEG fallback (stb_image). Art that 404s is no longer re-requested forever, and the app backs off cleanly when rate-limited (\"art resumes in Xm YYs\").\r\n- Parallel range downloads: probe failures are retried up to 3 times; HTTP 429 honors `Retry-After` (1-10 s); fastest archive.org node probing with MD5 verification.\r\n- Glass-style UI polish for modals, footer, badges and account screens.\r\n\r\nTechnical\r\n\r\n- Target version: 0.1.13.\r\n- Built with VitaSDK and cargo-vita for PS Vita hardware.\r\n",
-    "assets": [
-      {
-        "name": "vitaforge.vpk",
-        "size": 6201848,
-        "download_url": "https://github.com/josephinoo/vitaForge/releases/download/v0.1.13/vitaforge.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "josephinoo",
-    "homebrew_name": "VitaForge",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store client.",
-    "homebrew_long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-    "homebrew_id": "vitaforge",
-    "homebrew_authors": [
-      "josephinoo"
-    ],
-    "homebrew_version": "v.0.1.1",
-    "catalog_apps": [
-      {
-        "id": "vitaforge",
-        "name": "VitaForge",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/1979-vitaforge.png",
-        "category": "utilities",
-        "description": "Homebrew store client.",
-        "long_description": "Client for browsing and installing PSVITA homebrew, written in Rust with SDL2. Reads its catalogue from VitaHomebrewDB-db.\n\nNote: this download is hosted on an external server, not GitHub, and may stop working if that server goes down or changes without the catalog knowing.",
-        "version": "v.0.1.1",
-        "version_date": "2026-08-11",
-        "author_ids": [
-          "josephinoo"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/josephinoo/vitaForge/releases"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/josephinoo/vitaForge"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1.1 → release v0.1.13",
-    "catalog_version": "v.0.1.1",
-    "archive_current_link": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
     "repo": "vallfrr/sh3vita",
     "release_id": "453718738",
     "tag": "v1.0.3",
@@ -4974,83 +5146,6 @@
     "archive_current_link": "https://archive.org/download/silent-hill-3-2003-ps-vita/sh3vita%20v1.0.3.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "Botarguirix/ValdisStoryVita",
-    "release_id": "453461237",
-    "tag": "v0.7.0-alpha",
-    "name": "Valdis Story PSVITA v0.7.0-alpha",
-    "url": "https://github.com/Botarguirix/ValdisStoryVita/releases/tag/v0.7.0-alpha",
-    "published": "2026-11-21T05:25:49Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Valdis Story PSVITA v0.7.0-alpha\r\n\r\nPort nativo de **Valdis Story: Abyssal City** para PS Vita: un runner propio de GameMaker Studio 1.x en C++17 (no es emulador ni YoYo Loader). El juego se convierte desde **tu copia de Steam** en la propia consola.\r\n\r\n**ULTRA IA VIBECODED!** Todo el código, las herramientas y la documentación los escribió una IA (Claude Opus 5.5 como modelo principal y Claude Sonnet 5.5 en subagentes, con Claude Code); el usuario dirigió y probó cada build en una PS Vita real.\r\n\r\n> ⚠️ **No incluye el juego.** Necesitas una copia legal de Steam (build 722041, App ID 252030; ver README). Este VPK solo trae el motor y la traducción al español (sin el texto original). Valdis Story es propiedad de Endless Fluff Games; proyecto de fans sin ánimo de lucro.\r\n\r\n### Novedades\r\n- **Modo Boss Rush** en el menú principal (aparece al terminar el juego con cualquier personaje, como los modos extra del original): los 20 jefes de la historia seguidos, cada uno en su propia sala con su presentación.\r\n  - **Fiel a cada encuentro:** el port graba tu estado justo antes de cada jefe mientras juegas la historia (nivel, armas, hechizos, objetos) y el Boss Rush lo usa. Los jefes que aún no grabaste usan tu partida más avanzada con todo el equipo.\r\n  - **Aleatorio:** equipo al azar en cada jefe.\r\n  - Tus partidas no se tocan durante el modo. Al final, tabla con el tiempo de cada jefe.\r\n- **Versión rápida (AOT) con un solo comando:** `tools/build_aot_vpk.sh` genera tu VPK de 60 fps desde tu copia de Steam (guía en `docs/AOT_USUARIOS.md`).\r\n- **Menú de MODS (SELECT):**\r\n  - **Idioma:** inglés original o **español**. La traducción de fans, en **español latino**, cubre el 99,5 % del texto: diálogos de los 4 personajes, historia, libro del saber, menús, objetos y habilidades.\r\n  - **Fuente:** la del juego, que ahora también dibuja tildes, ñ y ¿ ¡, o la **fuente del sistema de la Vita**, más legible.\r\n  - **Botones:** iconos de PS Vita (✕ ○ □ △ L R) en tutoriales y avisos, en lugar de los nombres de mando de Xbox (A, B, LB…).\r\n  - **Panel trasero:** por defecto solo responde la parte de arriba, para no pulsar L1/R1 sin querer al sujetar la consola; también \"entero\" o \"apagado\".\r\n- **Menú de TRUCOS (SELECT + L + R):** modo dios, maná infinito, subir nivel, +5 puntos, personajes desbloqueados, ir a cualquier sala y contador de rendimiento.\r\n- **Salir → Menú principal** ya vuelve al título.\r\n- **\"GFX : Low\"** ya no causa parpadeos.\r\n- **Arranque más rápido:** de 21,6 a 7,6 s hasta el primer frame.\r\n- **Menos pausas al volver a salas ya visitadas:** se mantienen más texturas en memoria (en una sesión de 75 min, las entradas de más de 0,3 s bajaron de 9 a 4).\r\n- Corregido el número de fps del contador de rendimiento de TRUCOS.\r\n- Con teclado en PC: flechas, Enter y Escape en el menú del Boss Rush.\r\n\r\n### Pruebas en la Vita (versión AOT, la de 60 fps)\r\n- Partida de 42 minutos jugada a mano (Wyatt, hasta el jefe de hielo): sin cuelgues.\r\n- Partida nueva automática y recorrido de unas 220 salas con cada personaje: Wyatt, Reina y Gilda sin cuelgues; con Vladyn hubo un cuelgue suelto que no se ha vuelto a repetir.\r\n- **28 jefes, cada uno en su propia sala:** sin cuelgues, a 60 pasos por segundo.\r\n- **Sesión larga de 74 minutos** (las 245 salas tres veces, con botones al azar): sin cuelgues, 0,42 % de frames perdidos y **sin fugas de memoria**. La memoria del juego se estabiliza en unos 78 MB a partir del minuto 40.\r\n\r\n### Rendimiento de este VPK\r\nEs la versión de **intérprete**: no lleva código del juego, por eso se puede compartir. Va bien en la mayoría de salas, pero en las más cargadas baja a unos 34 fps. La versión rápida (AOT) se compila desde tu propia copia del juego (ver README).\r\n\r\n### Problemas conocidos\r\n- En las ranuras de partida, \"Lv/Time/Crew/Location\" siguen en inglés: forman parte del dibujo del juego.\r\n- Con la fuente original, algún texto en español puede quedar justo en su cuadro; la fuente del sistema es más estrecha.\r\n- Primera entrada a una sala lejana (al cargar partida o saltar con TRUCOS): pausa de 0,3–0,6 s leyendo texturas de la tarjeta.\r\n- Boss Rush: Ruckjahl y Dhistahn poseído solo aparecen si ya los grabaste jugando la historia; el modo aleatorio es una primera versión.\r\n\r\n### Instalación\r\n1. Instala `vsvita.vpk` con VitaShell. Necesitas `ur0:data/libshacccg.suprx` (extráelo con ShaRKBR33D).\r\n2. Copia `data.win`, `data_1/`, `data_2/`, `data_5/` y los `music_*.ogg` de tu carpeta de Steam a `ux0:data/valdis/game/`.\r\n3. Abre el juego: el primer arranque convierte los datos (unos minutos). Pulsa SELECT para elegir español.\r\n",
-    "assets": [
-      {
-        "name": "vsvita.vpk",
-        "size": 1622138,
-        "download_url": "https://github.com/Botarguirix/ValdisStoryVita/releases/download/v0.7.0-alpha/vsvita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Botarguirix",
-    "homebrew_name": "Valdis Story PSVITA",
-    "homebrew_icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
-    "homebrew_long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
-    "homebrew_id": "valdis-story-psvita",
-    "homebrew_authors": [
-      "botarguirix"
-    ],
-    "homebrew_version": "0.7.0",
-    "catalog_apps": [
-      {
-        "id": "valdis-story-psvita",
-        "name": "Valdis Story PSVITA",
-        "icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
-        "category": "ports",
-        "description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
-        "long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
-        "version": "0.7.0",
-        "version_date": "2026-11-21",
-        "author_ids": [
-          "botarguirix"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
-            "size": 1572864,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/valdis-story-psvita/Game%20Files%20for%20PSVA.zip",
-            "size": 796183757,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "valdis"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/Botarguirix/ValdisStoryVita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.7.0",
-    "catalog_version": "0.7.0",
-    "archive_current_link": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org",
     "archive_media_item": ""
   },
   {
@@ -5283,101 +5378,6 @@
     "archive_current_link": "",
     "backup_status": "missing",
     "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "marcocatena/TheSimsVita-release",
-    "release_id": "452878201",
-    "tag": "v1.2",
-    "name": "The Sims for PS Vita v1.2",
-    "url": "https://github.com/marcocatena/TheSimsVita-release/releases/tag/v1.2",
-    "published": "2026-11-20T15:45:11Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "The Sims (2000) on PS Vita, with all seven expansion packs, played from your own copy of\n**The Sims Legacy Collection**. No game files are included.\n\n> If something doesn't work, please report it under [Issues](https://github.com/marcocatena/TheSimsVita-release/issues/new/choose).\n\n## What's new in v1.2\n\n- **Up to 60 fps** (v1.1 was held at 30). The drawing runs on a thread of its own and does much less\n  work a frame; quieter lots run at 60, busy ones somewhere between 30 and 60. A new **Frame rate**\n  option (Options › Display): **Target 60 fps** (the default) or **30 fps capped**, steadier and easier\n  on the battery.\n- **Eighteen languages**, picked at the first start or in Options › Game › Language: English (US and\n  UK), French, German, Italian, Spanish, Dutch, Danish, Swedish, Norwegian, Finnish, Portuguese, Polish,\n  Japanese, Chinese (Simplified and Traditional), Korean and Thai, with the game's own fonts.\n- **Pets** can be selected and have their own panel (needs, traits and Pet Skills), as in the original.\n- **Vacations are kept.** Leaving Vacation Island for the neighbourhood, or closing the game there, no\n  longer ends the vacation: the family's house opens onto their vacation lot, with them on it.\n- **Makin' Magic:** the spellbook and cookbook windows; Creepy Hollow's homes bought with Simoleons\n  and MagiCoins; the MagiCoins column in Magic Town's family picker.\n- **Superstar:** the fame panel's details, and the gold star over famous Sims.\n- **Hot Date:** the date's blue plumbob, deeper blue the better the date goes.\n- **Townies** made from the game's own templates (Magic Town's have their wands, so they duel).\n- **Sound** as the original mixes it: how loud a sound is by where it is on screen and the zoom, the\n  night's sounds, the beach lots' waves, and one sound for several objects playing the same thing.\n- **Build mode** follows the original's rules: money back for what you take away, the terrain tools'\n  limits, stairs cutting their own opening and laying their landing, the edge round a pool, no roof\n  over a stairwell.\n- **Cheats:** `interests`, `route_balloons`, `rotation`; the original's error boxes.\n- **Options:** **Edge scrolling** on or off (Options › Controls); a **Kids make quick meals** gameplay\n  modifier (off unless you choose it).\n- **Fixes**, among many: a family moving into a lot that had a save no longer gets a clone of each Sim;\n  a family back from a trip no longer stays \"on vacation\"; the relationship panel shows full names;\n  the neighbourhood's top bar keeps the D-pad on the bar; Call Neighbor with nobody to call; family\n  files from a PC game in another language; the diner's jukebox; a lot with cockroaches running slowly.\n\n## Downloads\n\n**You only need `TheSimsVita-v1.2.vpk`.**\n\n| File | What it is |\n|---|---|\n| `TheSimsVita-v1.2.vpk` | The app. Install it with VitaShell |\n| `SHA256SUMS.txt` | Optional: checksums, to check a download arrived intact |\n| `TheSimsVita-v1.2-lgpl-sources.zip` | For developers (licence requirement): the source of the LGPL libraries in the app (vitaGL, vitaShaRK, pthread-embedded) |\n| `TheSimsVita-v1.2-relink-kit.zip` | For developers (licence requirement): the app's object files, to rebuild it with modified versions of those libraries |\n\n## Installing\n\nFull steps in the [README](https://github.com/marcocatena/TheSimsVita-release#installing). In short:\n\n1. Have HENkaku/Ensō, VitaShell and the shader compiler (`ur0:data/libshacccg.suprx`, from ShaRKF00D).\n2. Copy every folder of your Legacy Collection install (about 3 GB) to `ux0:data/TheSims/`\n   on the Vita's memory card.\n3. Install the VPK and start it. The first start indexes the game's files and takes a few minutes.\n\nUpdating from v1.0 or v1.1: install the new VPK over the old one; saves and options are kept.\n",
-    "assets": [
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 288,
-        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "TheSimsVita-v1.2-lgpl-sources.zip",
-        "size": 9986976,
-        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2/TheSimsVita-v1.2-lgpl-sources.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "TheSimsVita-v1.2-relink-kit.zip",
-        "size": 32847387,
-        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2/TheSimsVita-v1.2-relink-kit.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "TheSimsVita-v1.2.vpk",
-        "size": 5006776,
-        "download_url": "https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2/TheSimsVita-v1.2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "marcocatena",
-    "homebrew_name": "The Sims",
-    "homebrew_icon": "https://archive.org/download/the-sims-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "The Sims (2000) on PS Vita: an unofficial native port that plays from your own Legacy Collection files",
-    "homebrew_long_description": "A native PS Vita engine that plays The Sims (2000), with all seven expansion packs, from your own copy of the game's files. It isn't an emulator and not a PC port: a new engine, written for the Vita, that reads the original game's data and runs the game's own code for the Sims and their objects.",
-    "homebrew_id": "the-sims",
-    "homebrew_authors": [
-      "marcocatena"
-    ],
-    "homebrew_version": "1.2",
-    "catalog_apps": [
-      {
-        "id": "the-sims",
-        "name": "The Sims",
-        "icon": "https://archive.org/download/the-sims-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "The Sims (2000) on PS Vita: an unofficial native port that plays from your own Legacy Collection files",
-        "long_description": "A native PS Vita engine that plays The Sims (2000), with all seven expansion packs, from your own copy of the game's files. It isn't an emulator and not a PC port: a new engine, written for the Vita, that reads the original game's data and runs the game's own code for the Sims and their objects.",
-        "version": "1.2",
-        "version_date": "2026-11-20",
-        "author_ids": [
-          "marcocatena"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/the-sims-ps-vita/the-sims%20v1.2.vpk",
-            "size": 5006776,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/the-sims-ps-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 3650722202,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "TheSims"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/marcocatena/TheSimsVita-release"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.2",
-    "catalog_version": "1.2",
-    "archive_current_link": "https://archive.org/download/the-sims-ps-vita/the-sims%20v1.2.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
     "archive_media_item": ""
   },
   {
@@ -48329,425 +48329,5 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "CrossCraft/CrossCraft-SurvivalTest",
-    "release_id": "84634138",
-    "tag": "ST4",
-    "name": "Survival Test 4: The Final Experiment",
-    "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4",
-    "published": "2022-12-02T02:40:53Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This release will be the last major release of CrossCraft Survival Test for a reasonably long time. The Mac Release has been removed until further testing can be done. \r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding Support\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Major Refactor of Survival Test\r\n- Acceleration based player and mobs\r\n- Particles are now one particle-system\r\n- Heart & Air Bubble Animations\r\n- Toggleable Weather (F5 on PC)\r\n\r\n### Bug Fixes\r\n- PS Vita Crash Fix\r\n- Mobs clipping into terrain from being hit\r\n- Mobs falling animation around their heads instead of their feet\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- Transition from Menu Still does not have a loading screen",
-    "assets": [
-      {
-        "name": "CrossCraft-3DS.zip",
-        "size": 8336815,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-3DS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Linux.zip",
-        "size": 12896495,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-PSP.zip",
-        "size": 9746437,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Vita.zip",
-        "size": 17518102,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Windows.zip",
-        "size": 8860608,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Windows.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "IridescentRose",
-    "homebrew_name": "CrossCraft SurvivalTest",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
-    "homebrew_category": "games",
-    "homebrew_description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
-    "homebrew_long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
-    "homebrew_id": "crosscraft-survivaltest",
-    "homebrew_authors": [
-      "iridescence",
-      "motolegacy"
-    ],
-    "homebrew_version": "ST4",
-    "catalog_apps": [
-      {
-        "id": "crosscraft-survivaltest",
-        "name": "CrossCraft SurvivalTest",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
-        "category": "games",
-        "description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
-        "long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
-        "version": "ST4",
-        "version_date": "2022-12-02",
-        "author_ids": [
-          "iridescence",
-          "motolegacy"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive ST4",
-    "catalog_version": "ST4",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "CrossCraft/CrossCraft-Classic",
-    "release_id": "84633227",
-    "tag": "v1.3",
-    "name": "[v1.3] End of the Line",
-    "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3",
-    "published": "2022-12-01T18:22:19Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This release will be the last major release of CrossCraft Classic for a reasonably long time. As such, it has implemented plenty of bug fixes alongside backporting features from Survival Test 4. Note on the Mac Release -- this has been removed for the time being until better testing can be done.\r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding API\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Steve Models in Multiplayer\r\n- Music from Survival Test backported.\r\n\r\n### Bug Fixes\r\n- Particles now face the player\r\n- You can no longer break while paused\r\n- PS Vita Crash Fix\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- MP / Transition from Menu Still does not have a loading screen",
-    "assets": [
-      {
-        "name": "CrossCraft-3DS.zip",
-        "size": 8230254,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-3DS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Linux.zip",
-        "size": 14946577,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-PSP.zip",
-        "size": 11863120,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Vita.zip",
-        "size": 10028371,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Windows.zip",
-        "size": 8831316,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Windows.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "IridescentRose",
-    "homebrew_name": "CrossCraft Classic",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
-    "homebrew_category": "games",
-    "homebrew_description": "Multiplatform clone of Minecraft Classic.",
-    "homebrew_long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
-    "homebrew_id": "crosscraft-classic",
-    "homebrew_authors": [
-      "iridescence",
-      "motolegacy"
-    ],
-    "homebrew_version": "v1.3",
-    "catalog_apps": [
-      {
-        "id": "crosscraft-classic",
-        "name": "CrossCraft Classic",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
-        "category": "games",
-        "description": "Multiplatform clone of Minecraft Classic.",
-        "long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
-        "version": "v1.3",
-        "version_date": "2022-12-01",
-        "author_ids": [
-          "iridescence",
-          "motolegacy"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.3",
-    "catalog_version": "v1.3",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "majonessyltetoy/airpressure",
-    "release_id": "84328310",
-    "tag": "v1.0.0",
-    "name": "v1.0.0",
-    "url": "https://github.com/majonessyltetoy/airpressure/releases/tag/v1.0.0",
-    "published": "2022-11-28T13:08:50Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "airpressure.vpk",
-        "size": 26852528,
-        "download_url": "https://github.com/majonessyltetoy/airpressure/releases/download/v1.0.0/airpressure.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "majonessyltetoy",
-    "homebrew_name": "Air Pressure",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-air-pressure/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Air Pressure for PSVITA.",
-    "homebrew_long_description": "Port of Air Pressure for PSVITA.\nAir Pressure is an unromantic visual novel.\n\n- PsVitaAlive -",
-    "homebrew_id": "air-pressure",
-    "homebrew_authors": [
-      "majonessyltetoy"
-    ],
-    "homebrew_version": "v.1.0.0",
-    "catalog_apps": [
-      {
-        "id": "air-pressure",
-        "name": "Air Pressure",
-        "icon": "https://archive.org/download/psvitaalive-air-pressure/icon0.png",
-        "category": "ports",
-        "description": "Port of Air Pressure for PSVITA.",
-        "long_description": "Port of Air Pressure for PSVITA.\nAir Pressure is an unromantic visual novel.\n\n- PsVitaAlive -",
-        "version": "v.1.0.0",
-        "version_date": "2022-11-28",
-        "author_ids": [
-          "majonessyltetoy"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-air-pressure/air-pressure.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/majonessyltetoy/airpressure/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/majonessyltetoy/airpressure/releases/tag/v1.0.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/majonessyltetoy/airpressure"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0",
-    "catalog_version": "v.1.0.0",
-    "archive_current_link": "https://archive.org/download/psvitaalive-air-pressure/air-pressure.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "v-atamanenko/masseffect-vita",
-    "release_id": "83803154",
-    "tag": "v1.0",
-    "name": "Mass Effect Infiltrator — PSVita Port v1.0",
-    "url": "https://github.com/v-atamanenko/masseffect-vita/releases/tag/v1.0",
-    "published": "2022-11-21T21:17:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Please read the repository readme for installation instructions.",
-    "assets": [
-      {
-        "name": "MassEffectInfiltrator.vpk",
-        "size": 2085575,
-        "download_url": "https://github.com/v-atamanenko/masseffect-vita/releases/download/v1.0/MassEffectInfiltrator.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "v-atamanenko",
-    "homebrew_name": "Mass Effect Infiltrator Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Mass Effect Infiltrator for PSVITA.",
-    "homebrew_long_description": "A loader for an iOS/Android-exclusive Third-Person Shooter with RPG Elements released as a tie-in game to Mass Effect 3. Please read the installation instructions on GitHub.\n\n- PsVitaAlive -",
-    "homebrew_id": "mass-effect-infiltrator-vita",
-    "homebrew_authors": [
-      "gl33ntwine"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "mass-effect-infiltrator-vita",
-        "name": "Mass Effect Infiltrator Vita",
-        "icon": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Mass Effect Infiltrator for PSVITA.",
-        "long_description": "A loader for an iOS/Android-exclusive Third-Person Shooter with RPG Elements released as a tie-in game to Mass Effect 3. Please read the installation instructions on GitHub.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-11-21",
-        "author_ids": [
-          "gl33ntwine"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/mass-effect-infiltrator-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 778462822,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "masseffect"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/v-atamanenko/masseffect-vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "archive_current_link": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/mass-effect-infiltrator-vita.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/hassey-collection",
-    "release_id": "82198011",
-    "tag": "v.0.9",
-    "name": "v.0.9",
-    "url": "https://github.com/Rinnegatamante/hassey-collection/releases/tag/v.0.9",
-    "published": "2022-11-06T15:40:55Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "hassey.vpk",
-        "size": 4914316,
-        "download_url": "https://github.com/Rinnegatamante/hassey-collection/releases/download/v.0.9/hassey.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "homebrew_name": "Hassey Collection",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-hassey-collection/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Galcon 2/BREAKFINITY for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Galcon 2: Galactic Conquest and BREAKFINITY for the PS Vita.\nThe port works by loading the official Android ARMv7 executables in memory, resolving their imports with native functions and patching them in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as they are.\n\n- PsVitaAlive -",
-    "homebrew_id": "hassey-collection",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.0.9",
-    "catalog_apps": [
-      {
-        "id": "hassey-collection",
-        "name": "Hassey Collection",
-        "icon": "https://archive.org/download/psvitaalive-hassey-collection/icon0.png",
-        "category": "ports",
-        "description": "Port of Galcon 2/BREAKFINITY for PSVITA.",
-        "long_description": "This is a wrapper/port of Galcon 2: Galactic Conquest and BREAKFINITY for the PS Vita.\nThe port works by loading the official Android ARMv7 executables in memory, resolving their imports with native functions and patching them in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as they are.\n\n- PsVitaAlive -",
-        "version": "v.0.9",
-        "version_date": "2022-11-06",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-hassey-collection/hassey-collection.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/hassey-collection/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/hassey-collection/releases/tag/v.0.9"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/hassey-collection"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.9",
-    "catalog_version": "v.0.9",
-    "archive_current_link": "https://archive.org/download/psvitaalive-hassey-collection/hassey-collection.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
   }
 ]
