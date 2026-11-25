@@ -60,6 +60,83 @@
   },
   {
     "platform": "github",
+    "repo": "Botarguirix/ValdisStoryVita",
+    "release_id": "457293113",
+    "tag": "v0.9.0-alpha",
+    "name": "Valdis Story PSVITA v0.9.0-alpha",
+    "url": "https://github.com/Botarguirix/ValdisStoryVita/releases/tag/v0.9.0-alpha",
+    "published": "2026-11-25T00:49:32Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "## Valdis Story PSVITA v0.9.0-alpha\r\n\r\nPort nativo de **Valdis Story: Abyssal City** para PS Vita: un runner propio de GameMaker Studio 1.x en C++17 (no es emulador ni YoYo Loader). El juego se convierte desde **tu copia de Steam** en la propia consola.\r\n\r\n**ULTRA IA VIBECODED!** Todo el código, las herramientas y la documentación los escribió una IA (Claude Opus 5.5 como modelo principal y Claude Sonnet 5.5 en subagentes, con Claude Code); el usuario dirigió y probó cada build en una PS Vita real.\r\n\r\n> ⚠️ **No incluye el juego.** Necesitas una copia legal de Steam (build 722041, App ID 252030; ver README). Este VPK solo trae el motor y la traducción al español (sin el texto original). Valdis Story es propiedad de Endless Fluff Games; proyecto de fans sin ánimo de lucro.\r\n\r\n### Novedad principal: AOT en la consola\r\nHasta ahora, la versión rápida (AOT) había que compilarla en un PC desde tu copia del juego. **Ahora la propia Vita traduce el código del juego** la primera vez que ejecuta cada parte, sin PC ni compilador y sin nada del juego dentro del VPK. Es automático y viene activado.\r\n- **En la Vita** (El Manawar, la pelea de los rayos): de 49 fps de media con 14,1 ms de lógica por frame a **56,5 fps con 8,1 ms** (−43 %). El AOT compilado en PC da 59–63 fps en esa pelea.\r\n- El resultado es idéntico al del juego interpretado (comprobado cuadro a cuadro en un recorrido de 170 salas).\r\n- Si quieres comparar, crea el archivo vacío `ux0:data/valdis/save/novaot` para volver al intérprete.\r\n- Experimental: con `ux0:data/valdis/save/vaot_arm` la Vita además genera código ARM nativo. Funciona, pero en las pruebas no mejora a la traducción normal, así que viene apagado.\r\n\r\n### Icono y LiveArea nuevos\r\n- Arte original nuevo (ciudad abisal y emblema), con la versión y el tipo de build en la burbuja y la LiveArea: **v0.9.0 PÚBLICA** en esta, **v0.9.0 AOT** en la que compiles tú.\r\n\r\n### Logros\r\n- **Pantalla de logros dentro del juego:** pausa → **Mapa/Opc. → Logros** (sustituye a \"Full Screen\", que en la Vita no hacía nada). Cuadrícula con todos los logros, nombre, descripción y estado.\r\n- **80 logros** (faltaban los 12 de rango [S] al terminar), con nombre y descripción en español.\r\n- **Imágenes de cada logro (opcional):** en un PC, `python tools/logros_iconos.py` baja los iconos de la página pública de logros de Steam; copia la carpeta `build/vsdata/logros/` a `ux0:data/valdis/vsdata/logros/`. Sin ellas se usan los sprites del juego.\r\n- TRUCOS (SELECT + L + R) → **Reiniciar logros**, con confirmación.\r\n\r\n### Correcciones y mejoras\r\n- **HUD reducido:** cada elemento se encoge hacia su sitio según su centro (cartel y texto juntos); el panel de puntuación del jefe siempre al 70 % o menos, para no tapar las recompensas.\r\n- **Fuentes del sistema** que no son negrita, uno o dos tamaños más grandes.\r\n- **El Manawar** medido en la Vita: 59–63 fps toda la pelea con la versión AOT.\r\n- Si el juego se cerró por un fallo (también de la GPU), al volver a abrirlo lo anota en `vsrunner.log`; los errores de audio también quedan ahí.\r\n\r\n### Problemas conocidos\r\n- En las ranuras de partida, \"Lv/Time/Crew/Location\" siguen en inglés: forman parte del dibujo del juego.\r\n- A veces el icono del objeto que sale de un cofre no coincide con lo que es (en investigación).\r\n- \"GFX : Low\" hace el juego más lento en vez de más fluido (pendiente).\r\n- Se han visto cierres por error de la GPU en sesiones largas (en investigación).\r\n- Boss Rush: Ruckjahl y Dhistahn poseído solo aparecen si ya los grabaste jugando la historia.\r\n\r\n### Instalación\r\n1. Instala `vsvita.vpk` con VitaShell. Necesitas `ur0:data/libshacccg.suprx` (extráelo con ShaRKBR33D).\r\n2. Copia `data.win`, `data_1/`, `data_2/`, `data_5/` y los `music_*.ogg` de tu carpeta de Steam a `ux0:data/valdis/game/`.\r\n3. Abre el juego: el primer arranque convierte los datos (unos minutos). Pulsa SELECT para elegir español y el resto de opciones.\r\n",
+    "assets": [
+      {
+        "name": "vsvita.vpk",
+        "size": 1750225,
+        "download_url": "https://github.com/Botarguirix/ValdisStoryVita/releases/download/v0.9.0-alpha/vsvita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "Botarguirix",
+    "homebrew_name": "Valdis Story PSVITA",
+    "homebrew_icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
+    "homebrew_long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
+    "homebrew_id": "valdis-story-psvita",
+    "homebrew_authors": [
+      "botarguirix"
+    ],
+    "homebrew_version": "0.7.0",
+    "catalog_apps": [
+      {
+        "id": "valdis-story-psvita",
+        "name": "Valdis Story PSVITA",
+        "icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
+        "category": "ports",
+        "description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
+        "long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
+        "version": "0.7.0",
+        "version_date": "2026-11-21",
+        "author_ids": [
+          "botarguirix"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
+            "size": 1572864,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/valdis-story-psvita/Game%20Files%20for%20PSVA.zip",
+            "size": 796183757,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "valdis"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/Botarguirix/ValdisStoryVita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.7.0 → release v0.9.0-alpha",
+    "catalog_version": "0.7.0",
+    "archive_current_link": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
     "repo": "arielxflores/NitronicRush-Vita",
     "release_id": "457450828",
     "tag": "v1.1",
@@ -984,83 +1061,6 @@
     "archive_media_item": "",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "Botarguirix/ValdisStoryVita",
-    "release_id": "456861731",
-    "tag": "v0.8.0-alpha",
-    "name": "Valdis Story PSVITA v0.8.0-alpha",
-    "url": "https://github.com/Botarguirix/ValdisStoryVita/releases/tag/v0.8.0-alpha",
-    "published": "2026-11-24T14:25:41Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "## Valdis Story PSVITA v0.8.0-alpha\r\n\r\nPort nativo de **Valdis Story: Abyssal City** para PS Vita: un runner propio de GameMaker Studio 1.x en C++17 (no es emulador ni YoYo Loader). El juego se convierte desde **tu copia de Steam** en la propia consola.\r\n\r\n**ULTRA IA VIBECODED!** Todo el código, las herramientas y la documentación los escribió una IA (Claude Opus 5.5 como modelo principal y Claude Sonnet 5.5 en subagentes, con Claude Code); el usuario dirigió y probó cada build en una PS Vita real.\r\n\r\n> ⚠️ **No incluye el juego.** Necesitas una copia legal de Steam (build 722041, App ID 252030; ver README). Este VPK solo trae el motor y la traducción al español (sin el texto original). Valdis Story es propiedad de Endless Fluff Games; proyecto de fans sin ánimo de lucro.\r\n\r\nEsta versión sale del reporte de una partida larga jugada a mano en la Vita.\r\n\r\n### Correcciones\r\n- **Cuelgue al abrir un cofre tras una sesión larga:** la memoria de los efectos de sonido no se liberaba nunca y acababa agotándose. Ahora tiene un tope y, si alguna vez falta memoria, se salta ese sonido en vez de cerrar el juego.\r\n- **El Manawar y Abbigail ya no bajan a 10–30 fps:** las colisiones de los rayos giratorios se calculaban píxel a píxel sobre un área enorme. Ahora solo se revisa donde puede estar el rayo, con el mismo resultado que antes.\r\n- **Al bajar del tren** el personaje ya no se queda detrás de los edificios.\r\n- **Recompensas de los jefes:** ya no quedan tapadas por el panel de puntuación.\r\n\r\n### Novedades (menú MODS, SELECT)\r\n- **HUD más pequeño:** 100 / 85 / 70 / 60 / 50 %. La vida, el maná, los combos y los avisos se encogen hacia su esquina; los diálogos y los menús quedan igual.\r\n- **Tres fuentes nuevas:** además de la original y la del sistema en negrita, ahora están la del sistema normal, la estrecha y la de remates.\r\n- **Tamaño del texto:** 100 / 90 / 80 / 70 %. Las letras se achican sin cambiar el ancho de las cajas, así las descripciones caben.\r\n- **Logros locales:** los 68 logros del juego se guardan en la consola, con aviso e icono al conseguirlos y la lista en MODS → Logros.\r\n\r\n### Traducción\r\n- Nombres de zona en español (Pasarela occidental, Restos de Tagrum, Prisión hundida…).\r\n- Diálogos que faltaban (Gilda, Reina, Vladyn), avisos de tutorial y nombres del bestiario (Templario ángel, Zelote ángel…).\r\n\r\n### Rendimiento de este VPK\r\nEs la versión de **intérprete**: no lleva código del juego, por eso se puede compartir. En las salas más cargadas baja a unos 34 fps. La versión rápida (AOT, 60 fps) se genera desde tu propia copia con `tools/build_aot_vpk.sh` (guía en `docs/AOT_USUARIOS.md`).\r\n\r\n### Problemas conocidos\r\n- En las ranuras de partida, \"Lv/Time/Crew/Location\" siguen en inglés: forman parte del dibujo del juego.\r\n- A veces el icono del objeto que sale de un cofre no coincide con lo que es (en investigación).\r\n- \"GFX : Low\" hace el juego más lento en vez de más fluido (pendiente).\r\n- Boss Rush: Ruckjahl y Dhistahn poseído solo aparecen si ya los grabaste jugando la historia.\r\n\r\n### Instalación\r\n1. Instala `vsvita.vpk` con VitaShell. Necesitas `ur0:data/libshacccg.suprx` (extráelo con ShaRKBR33D).\r\n2. Copia `data.win`, `data_1/`, `data_2/`, `data_5/` y los `music_*.ogg` de tu carpeta de Steam a `ux0:data/valdis/game/`.\r\n3. Abre el juego: el primer arranque convierte los datos (unos minutos). Pulsa SELECT para elegir español y el resto de opciones.\r\n",
-    "assets": [
-      {
-        "name": "vsvita.vpk",
-        "size": 1653039,
-        "download_url": "https://github.com/Botarguirix/ValdisStoryVita/releases/download/v0.8.0-alpha/vsvita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Botarguirix",
-    "homebrew_name": "Valdis Story PSVITA",
-    "homebrew_icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
-    "homebrew_long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
-    "homebrew_id": "valdis-story-psvita",
-    "homebrew_authors": [
-      "botarguirix"
-    ],
-    "homebrew_version": "0.7.0",
-    "catalog_apps": [
-      {
-        "id": "valdis-story-psvita",
-        "name": "Valdis Story PSVITA",
-        "icon": "https://archive.org/download/valdis-story-psvita/icon0.png",
-        "category": "ports",
-        "description": "Native port of Valdis Story: Abyssal City to PlayStation Vita",
-        "long_description": "ULTRA AI VIBECODED! Native port of Valdis Story: Abyssal City to PlayStation Vita: a custom GameMaker Studio 1.x runner written from scratch in C++17 (VM, events, rooms, rendering, particles, audio). It is not an emulator and does not use YoYo Loader.",
-        "version": "0.7.0",
-        "version_date": "2026-11-21",
-        "author_ids": [
-          "botarguirix"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
-            "size": 1572864,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/valdis-story-psvita/Game%20Files%20for%20PSVA.zip",
-            "size": 796183757,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "valdis"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/Botarguirix/ValdisStoryVita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.7.0 → release v0.8.0-alpha",
-    "catalog_version": "0.7.0",
-    "archive_current_link": "https://archive.org/download/valdis-story-psvita/vsvita%20v0.7.0.vpk",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   },
   {
     "platform": "github",
@@ -48537,5 +48537,157 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "No se puede identificar una única descarga principal"
+  },
+  {
+    "platform": "github",
+    "repo": "majonessyltetoy/airpressure",
+    "release_id": "84328310",
+    "tag": "v1.0.0",
+    "name": "v1.0.0",
+    "url": "https://github.com/majonessyltetoy/airpressure/releases/tag/v1.0.0",
+    "published": "2022-11-28T13:08:50Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "",
+    "assets": [
+      {
+        "name": "airpressure.vpk",
+        "size": 26852528,
+        "download_url": "https://github.com/majonessyltetoy/airpressure/releases/download/v1.0.0/airpressure.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "majonessyltetoy",
+    "homebrew_name": "Air Pressure",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-air-pressure/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Air Pressure for PSVITA.",
+    "homebrew_long_description": "Port of Air Pressure for PSVITA.\nAir Pressure is an unromantic visual novel.\n\n- PsVitaAlive -",
+    "homebrew_id": "air-pressure",
+    "homebrew_authors": [
+      "majonessyltetoy"
+    ],
+    "homebrew_version": "v.1.0.0",
+    "catalog_apps": [
+      {
+        "id": "air-pressure",
+        "name": "Air Pressure",
+        "icon": "https://archive.org/download/psvitaalive-air-pressure/icon0.png",
+        "category": "ports",
+        "description": "Port of Air Pressure for PSVITA.",
+        "long_description": "Port of Air Pressure for PSVITA.\nAir Pressure is an unromantic visual novel.\n\n- PsVitaAlive -",
+        "version": "v.1.0.0",
+        "version_date": "2022-11-28",
+        "author_ids": [
+          "majonessyltetoy"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-air-pressure/air-pressure.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/majonessyltetoy/airpressure/releases"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/majonessyltetoy/airpressure/releases/tag/v1.0.0"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/majonessyltetoy/airpressure"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0.0",
+    "catalog_version": "v.1.0.0",
+    "archive_current_link": "https://archive.org/download/psvitaalive-air-pressure/air-pressure.vpk",
+    "archive_media_item": "",
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
+  },
+  {
+    "platform": "github",
+    "repo": "v-atamanenko/masseffect-vita",
+    "release_id": "83803154",
+    "tag": "v1.0",
+    "name": "Mass Effect Infiltrator — PSVita Port v1.0",
+    "url": "https://github.com/v-atamanenko/masseffect-vita/releases/tag/v1.0",
+    "published": "2022-11-21T21:17:40Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Please read the repository readme for installation instructions.",
+    "assets": [
+      {
+        "name": "MassEffectInfiltrator.vpk",
+        "size": 2085575,
+        "download_url": "https://github.com/v-atamanenko/masseffect-vita/releases/download/v1.0/MassEffectInfiltrator.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "v-atamanenko",
+    "homebrew_name": "Mass Effect Infiltrator Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Mass Effect Infiltrator for PSVITA.",
+    "homebrew_long_description": "A loader for an iOS/Android-exclusive Third-Person Shooter with RPG Elements released as a tie-in game to Mass Effect 3. Please read the installation instructions on GitHub.\n\n- PsVitaAlive -",
+    "homebrew_id": "mass-effect-infiltrator-vita",
+    "homebrew_authors": [
+      "gl33ntwine"
+    ],
+    "homebrew_version": "v.1.0",
+    "catalog_apps": [
+      {
+        "id": "mass-effect-infiltrator-vita",
+        "name": "Mass Effect Infiltrator Vita",
+        "icon": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Mass Effect Infiltrator for PSVITA.",
+        "long_description": "A loader for an iOS/Android-exclusive Third-Person Shooter with RPG Elements released as a tie-in game to Mass Effect 3. Please read the installation instructions on GitHub.\n\n- PsVitaAlive -",
+        "version": "v.1.0",
+        "version_date": "2022-11-21",
+        "author_ids": [
+          "gl33ntwine"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/mass-effect-infiltrator-vita.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 778462822,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "masseffect"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/v-atamanenko/masseffect-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive v.1.0",
+    "catalog_version": "v.1.0",
+    "archive_current_link": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/mass-effect-infiltrator-vita.vpk",
+    "archive_media_item": "",
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
   }
 ]
