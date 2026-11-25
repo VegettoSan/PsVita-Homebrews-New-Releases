@@ -1,6 +1,65 @@
 [
   {
     "platform": "github",
+    "repo": "VegettoSan/PSVitaAlive",
+    "release_id": "457575847",
+    "tag": "02.19",
+    "name": "PsVita Alive Store 02.19",
+    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.19",
+    "published": "2026-11-25T02:26:34Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# PSVitaAlive 02.19 — UI Redesign & Stability Update\n\nA major update for the native PS Vita / PSTV client, with a refreshed interface, better controller navigation, improved download recovery, safer installation and storage management, and catalog reliability improvements.\n\n## New interface and navigation\n- Sprite-based visual skin with consistent rounded panels, dialogs, buttons, focus indicators, progress bars and physical controller hints.\n- Refreshed catalog, app details, keyboard, settings, theme picker, installation, storage, reports and QR dialogs.\n- Navigate header, catalog and footer with physical controls; improved touch-aware focus, incomplete grid rows and loading-screen input protection.\n- Theme selection now distinguishes browsing from applying a color. The last explicitly applied theme is saved on confirmation or exit.\n- Fixed clipping, scrolling and unexpected position changes in feedback panels.\n\n## Performance and stability\n- Batched nine-slice rendering and safe GPU vertex reuse.\n- Bounded text layout cache, off-screen draw culling, asynchronous image filesystem checks and budgeted texture decoding.\n- Reduced redundant storage lookups and hidden modal rendering. No specific FPS or memory improvement is claimed.\n\n## Downloads and installation\n- Automatic recovery from transient network interruptions with bounded retries and backoff.\n- Retains validated partial progress, respects manual pauses, protects HTTP ranges and prefers alternate Archive.org nodes when appropriate.\n- Improved handling of transient MediaFire resolution failures and unsafe resume responses.\n- Stronger pre-download free-space checks, combined Install All budgeting, ZIP extraction progress and safe existing-file extraction optimization.\n- Partial downloads are preserved during the current client session only; recovery across app restarts is not supported.\n\n## Storage and catalog\n- More readable storage manager with catalog icons for retained ZIPs, scan progress, synchronized touch targets and clearer deletion confirmations.\n- Informed warnings for shared Game Files, with affected app names, Title IDs and installed status; preserves unrelated ur0 dependencies.\n- Automatic recovery from unexpectedly empty catalogs, safe cache replacement and fallback to validated in-memory catalogs.\n- Optimized JSON parsing without changing the catalog schema; fewer redundant HTTP requests.\n- Corrected Homebrew version comparison for alpha, beta, preview, release candidate and stable releases.\n- Updated all eight existing UI languages: English, Spanish, French, German, Italian, Brazilian Portuguese, European Portuguese and Russian.\n\n## Install or update\nExisting users can open PSVitaAlive with its built-in automatic update enabled. It checks GitHub Releases and downloads the official update when available. Alternatively, download **PSVitaAlive.vpk** below and install it over the existing app with VitaShell.\n\n**Version:** `02.19`  \n**Title ID:** `PSVAS1178`\n\nThe official release workflow validates the VPK ZIP integrity, internal APP_VER, Title ID and SHA-256. The UI redesign was approved on physical PS Vita hardware; the final release binary is rebuilt from main.\n\nWebsite: https://vegettosan.github.io/PSVitaAlive/  \nSource: https://github.com/VegettoSan/PSVitaAlive  \nDiscord: https://discord.gg/byn8FDuDrw\n\nThank you to everyone who tested, reported issues and supported PSVitaAlive!\n",
+    "assets": [
+      {
+        "name": "PSVitaAlive.vpk",
+        "size": 10259075,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.19/PSVitaAlive.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "PSVitaAlive.vpk.sha256",
+        "size": 82,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.19/PSVitaAlive.vpk.sha256",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "PSVitaAlive Store",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
+    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+    "homebrew_id": "psvitaalive-store",
+    "homebrew_authors": [
+      "vegettosan"
+    ],
+    "homebrew_version": "02.19",
+    "catalog_apps": [
+      {
+        "id": "psvitaalive-store",
+        "name": "PSVitaAlive Store",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+        "category": "utilities",
+        "description": "Homebrew store and catalog for PlayStation Vita.",
+        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+        "version": "02.19",
+        "version_date": "2026-11-25",
+        "author_ids": [
+          "vegettosan"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive oficial · 02.19",
+    "catalog_version": "02.19",
+    "archive_current_link": "",
+    "archive_media_item": "",
+    "backup_status": "unknown",
+    "backup_detail": "Sin ficha asociada en PSVitaAlive"
+  },
+  {
+    "platform": "github",
     "repo": "arielxflores/NitronicRush-Vita",
     "release_id": "457450828",
     "tag": "v1.1",
@@ -1017,7 +1076,7 @@
       "edgarlugo",
       "rinnegatamante"
     ],
-    "homebrew_version": "1.01",
+    "homebrew_version": "1.02",
     "catalog_apps": [
       {
         "id": "supertuxkart-vita",
@@ -1026,8 +1085,8 @@
         "category": "ports",
         "description": "Port of SuperTuxKart 1.5 for PSVita.",
         "long_description": "SuperTuxKart is a free kart racing game. This port runs SuperTuxKart 1.5 with all the offline modes: races, time trials, follow the leader, battles (3 strikes and free-for-all), soccer and egg hunts, with up to 6 karts and about 60 FPS on most tracks. Based on the port by Rinnegatamante, rendered with vitaGL.\n\nThe game data is installed with the Game Files (extracted to ux0:data/supertuxkart/stk-data/).",
-        "version": "1.01",
-        "version_date": "2026-11-18",
+        "version": "1.02",
+        "version_date": "2026-11-24",
         "author_ids": [
           "edgarlugo",
           "rinnegatamante"
@@ -1036,7 +1095,7 @@
           {
             "type": "Download",
             "name": "VPK",
-            "url": "https://github.com/edgarlugo/stk-code/releases/download/vita-1.01/supertuxkart.vpk",
+            "url": "https://github.com/edgarlugo/stk-code/releases/download/vita-1.02/supertuxkart.vpk",
             "recommended": true
           },
           {
@@ -1058,8 +1117,8 @@
       }
     ],
     "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 1.01 → release vita-1.02",
-    "catalog_version": "1.01",
+    "catalog_update_detail": "PSVitaAlive 1.02 → release vita-1.02",
+    "catalog_version": "1.02",
     "archive_current_link": "",
     "archive_media_item": "",
     "backup_status": "missing",
@@ -9307,65 +9366,6 @@
     "archive_current_link": "https://archive.org/download/psvitaalive-soulcalibur-vita/soulcalibur%20v1.2.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "VegettoSan/PSVitaAlive",
-    "release_id": "438074490",
-    "tag": "02.18",
-    "name": "PsVita Alive Store 02.18",
-    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.18",
-    "published": "2026-11-08T06:27:21Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# PSVitaAlive 02.18\n\n**02.18** updates the native PS Vita / PSTV client with a V1/V2 catalog reader and usability and memory-management improvements. This client is released **before** the public JSON catalog format switches to V2.\n\n## Highlights\n\n- **Catalog compatibility:** reads V1 and compact V2 Homebrew, author, category, PS Vita, PSP and PS1 metadata, and preserves support for previously cached V1 catalogs.\n- **Game Files status:** shows a localized alert if a port is installed but all known required Game Files folders are missing.\n- **Screenshot memory:** retains screenshots as long as their actual rendered rectangles intersect the viewport; continues freeing off-screen GPU textures through the safe deferred-release mechanism.\n- **Readable details:** wraps long requirements, descriptions and metadata to the actual text width.\n- **Installed-data management:** clearer APP-only, Game Files-only and combined removal options, appropriate warning text, and consistent confirmation dialogs.\n- **Visual fixes:** improvements to marquee clipping, modal overlap and eight-language interface labels.\n- **Web and tools:** supports both schema formats without changing published catalog content ahead of the client.\n\n## Safe catalog rollout\n\nThis is the **compatibility update**. Public catalogs remain V1 at the time 02.18 is published. Only after this release and its VPK are confirmed available will a separate change introduce compact V2 JSON. Updating to 02.18 first is important: old clients with disabled, failed or cancelled updates may not be able to read V2.\n\n## Install or update\n\n1. Download **PSVitaAlive.vpk** from the release assets below.\n2. Install over the existing PSVitaAlive using VitaShell, or use its built-in release updater.\n3. Reopen PSVitaAlive after installing the update.\n\n**Title ID:** `PSVAS1178`  \n**Version:** `02.18`\n\nThe official VitaSDK release workflow checks the VPK's internal `APP_VER`, Title ID, ZIP integrity, and attached SHA-256 checksum.\n\nWebsite: https://vegettosan.github.io/PSVitaAlive/  \nSource: https://github.com/VegettoSan/PSVitaAlive\n",
-    "assets": [
-      {
-        "name": "PSVitaAlive.vpk",
-        "size": 10141092,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.18/PSVitaAlive.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "PSVitaAlive.vpk.sha256",
-        "size": 82,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.18/PSVitaAlive.vpk.sha256",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "PSVitaAlive Store",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
-    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-    "homebrew_id": "psvitaalive-store",
-    "homebrew_authors": [
-      "vegettosan"
-    ],
-    "homebrew_version": "02.18",
-    "catalog_apps": [
-      {
-        "id": "psvitaalive-store",
-        "name": "PSVitaAlive Store",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-        "category": "utilities",
-        "description": "Homebrew store and catalog for PlayStation Vita.",
-        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-        "version": "02.18",
-        "version_date": "2026-11-08",
-        "author_ids": [
-          "vegettosan"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive oficial · 02.18",
-    "catalog_version": "02.18",
-    "archive_current_link": "",
-    "backup_status": "unknown",
-    "backup_detail": "Sin ficha asociada en PSVitaAlive",
     "archive_media_item": ""
   },
   {
