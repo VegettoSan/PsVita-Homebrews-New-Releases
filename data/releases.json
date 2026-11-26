@@ -1,6 +1,169 @@
 [
   {
     "platform": "github",
+    "repo": "SaNch0sE/azahar-vita-mh4u",
+    "release_id": "459101541",
+    "tag": "0.4.6-beta",
+    "name": "Azahar MH4U 0.4.6-beta",
+    "url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/tag/0.4.6-beta",
+    "published": "2026-11-26T07:53:43Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Azahar for the PS Vita, built on [Grarak's beta-1](https://github.com/Grarak/azahar/releases/tag/beta-1), with optimisations for **Monster Hunter 4 Ultimate**, and speed options for **Monster Hunter XX**. Other games run as in beta-1. Beta: back up your saves.\n\nBeta-1's new CPU and GPU emulation fixes the lighting and dark ground of our 0.3 builds, and our changes bring MH4U to 30 fps in the places we test (beta-1 alone ran them at 67–84% speed).\n\n> [!IMPORTANT]\n> The MH4U optimisations are tested **only** with the **USA** game (`0004000000126300`), its **1.3 (v1.1) update**, and the **Heavenfall mod**. Other regions, other versions or no mod may run slower or show problems.\n\nNo game files are included: you need your own decrypted copy of the game and its update.\n\n## New in 0.4.6-beta\n\n- **Parallel geometry, MH4U, Monster Hunter XX and any game you turn it on for.** Effects such as a wyvern's takeoff wind and dust used to build their particles one after another on the GPU. They are now built side by side: in MHXX at 1x, the Rathian's takeoff went from dipping to 26 fps to 29–30 fps. Particle **trails** (wind, dust ribbons) are built trail by trail, so they come out exactly as before (checked draw by draw against the old way); this fixes the stray triangles some testers saw with the first version of the option.\n  - **Patches → Parallel geometry**: on by default in MHXX, off in MH4U and other games.\n- **Fast shadows and Parallel geometry for every game.** Both now appear under **Patches** for any game, off by default except where tested (Fast shadows on in MH4U and MHXX, Parallel geometry on in MHXX). They only help games that use real-time shadow maps or geometry-shader particles. If an effect looks wrong with one on, turn it off for that game and tell us which game.\n- **Monster Hunter XX: HUD resolution and Even frame pacing.**\n  - **Patches → HUD resolution**: draw the HUD sharper than the 3D scene. Internal resolution **1x** with HUD **1.25x** held 29–30 fps near the Rathian in our tests, where the whole picture at 1.25x still dips when it takes off.\n  - **Patches → Even frame pacing**: with Vsync on, pictures shown an even two refreshes apart 99% of the time (71–79% without it), at the same frame rate. Costs about one refresh (17 ms) of delay.\n- **Display → Smooth picture at Native** (off by default): at internal resolution 1x, the screens are scaled to the Vita's display smoothly instead of pixel for pixel. No speed cost.\n- **Fixes**\n  - Changing the internal resolution (or other settings) in the pause menu could freeze the game on **Resume**. Fixed.\n  - MHXX: a freeze of about 17 seconds shortly after loading. Fixed.\n  - MHXX at 1x: short hitches in the first seconds after loading. Fixed.\n\nRecommended for MHXX: internal resolution **1x**, HUD resolution **1.25x**, Even frame pacing **on**, Vsync **on**.\n\n## In 0.4.5-beta\n\n- **Per-vertex effect lighting** (optional, off by default), MH4U and MHXX: see-through lit effects such as a wyvern's takeoff mist are lit once per corner instead of per pixel.\n- **Monster Hunter XX: particle effects get the room they need**, as MH4U's.\n\n## Which download?\n\n| File | Installs as | Settings |\n|---|---|---|\n| **`Azahar-MH4U-0.4.6-beta.vpk`** (recommended) | **Azahar MH4U**, a separate app next to Azahar | its own (`settings-AZAHMH4UB.txt`) |\n| `Azahar-0.4.6-beta-replaces-Azahar.vpk` | **Azahar**, over upstream Azahar | Azahar's (`settings.txt`) |\n\nWe recommend **Azahar MH4U**: you keep upstream Azahar installed and can update it whenever a new version comes out, while Azahar MH4U stays your MH4U app. Both apps use `ux0:data/azahar`, so games, installed updates, saves, savestates, mods and cheats are shared: install the game update once and play it in either app. Only settings are separate (Azahar MH4U copies Azahar's on its first start), so changing a setting in one doesn't reset the other's. Run one app at a time.\n\n## Install\n\n1. **A PS Vita** on firmware 3.60, 3.65, 3.68 or 3.73.\n2. **The app.** Copy the vpk to the Vita and install it with VitaShell. The kernel plugin ships inside the vpk: nothing to add to taiHEN's `config.txt` (if you added `azaharnative.skprx` there for Azahar 0.1, remove that line and reboot).\n3. **The game.** Put your decrypted Monster Hunter 4 Ultimate (USA) `.3ds` / `.cci` / `.cxi` in `ux0:data/azahar/roms/`.\n4. **The update (1.3, v1.1).** Put your decrypted update `.cia` in `ux0:data/azahar/roms/` too. Start the app, select the update in the game list and press **Install**. You can delete the `.cia` afterwards.\n5. **The Heavenfall mod** (menus on one screen; the port is tuned for it):\n   1. Open the web installer, https://popzol.github.io/4u-heavenfall-mod-beta/, on a PC or phone. Your game is never uploaded.\n   2. Choose your **base game** file (the same decrypted `.3ds`), not the update `.cia`.\n   3. Options: **Single Screen mode** on; **HUD size** **80%** (with the HUD drawn at 1.5x it's sharp and readable; the default 70% is small on the Vita); **Aspect ratio**: tick *Allow other aspect ratios (EXPERIMENTAL)* and choose **16:9**; keep the quality-of-life (\"other\") module on. Layered Gear and the mod's cheats are your choice.\n   4. Press **Make the mod**, download the zip and extract it. You get a folder named `0004000000126300`.\n   5. Copy that folder to `ux0:data/azahar/load/mods/`, so that you have `ux0:data/azahar/load/mods/0004000000126300/romfs`. To change the mod later, delete that folder first and copy the new one in.\n6. **CPU at 500 MHz.** Set it with a clock plugin before starting a game. Higher clocks make the console warmer.\n7. **Start the game.** In the game's START menu, third page, **Mod Settings → Display**: aspect ratio **16:9** if you made the mod with it, **FPS: 30**, 3D mode off.\n\n## What's in it for MH4U\n\nAlways on for MH4U (USA), listed under **Patches → SaNch0sE optimizations**:\n\n- **Geometry batches:** grass, sprites and particles go to the GPU in fewer, larger batches.\n- **Hidden screen not drawn:** with the single-screen layout, the bottom screen's draws are skipped.\n- **Full speed from a cold start:** the intro and Val Habar no longer run slowly until a savestate is taken or loaded.\n- **Performance profile:** the app is compiled with upstream's profile merged with one recorded from MH4U on this code: about 2–3% more headroom in our tests.\n\nMH4U starts with these settings (pause menu → **Game settings**, all yours to change):\n\n- Layout **single** screen, Widescreen **stretch**\n- Internal resolution **1.25x**, HUD resolution **1.5x**\n- Even frame pacing **on**, Vsync **on**\n- Touch a hidden bottom screen **off**\n\nIf MH4U already has settings of its own (for example copied from Azahar's file), those are kept: set the values above by hand.\n\nThe options behind them:\n\n- **Patches → HUD resolution:** draws the HUD and text at a higher resolution than the 3D scene, e.g. the scene at 1.25x with the HUD at 1.5x. It applies only above the internal resolution. (Whole-screen 1.5x is too heavy: about 17 fps.)\n- **Patches → Per-vertex effect lighting:** see-through lit effects lit per corner instead of per pixel (off by default).\n- **Patches → Fast shadows:** one shadow-map read per lit pixel instead of four (on by default; off gives soft shadow edges).\n- **Patches → Parallel geometry:** effect particles built side by side on the GPU (off by default in MH4U; on in MHXX).\n- **Patches → Even frame pacing (experimental):** with vsync on, holds an early frame so frames are shown two refreshes apart. Costs about one refresh (17 ms) of delay. If it looks worse to you, turn it off.\n- **Display → Smooth picture at Native:** at 1x, smooth scaling instead of pixel for pixel (off by default).\n- **Controls → Touch a hidden bottom screen:** off so stray touches don't open bottom-screen menus.\n\n## Known issues\n\n- Exiting the app sometimes leaves a black screen with sound still playing, or restarts the console. Hold the power button to restart if it hangs.\n- After many hours or a Wi-Fi drop, the console's kernel memory can run out: the app closes with an error (C1-2569-2) or the console restarts when the app starts. A console restart clears it.\n- Tested in the intro, the character select, Val Habar, the quest counter, fields and hunt savestates. Not yet tested: long sessions, every menu, other regions or versions.\n\n- **USB video** can leave a game on its loading screen forever when another USB plugin (such as `udcd_uvc`) is installed: keep **System → USB video** off. If it happened, hold the power button to restart, then turn the option off before starting a game.\n- MHXX at internal resolution 1.25x for the whole picture still dips (to 23–25 fps) for a moment when a wyvern takes off: use 1x with HUD 1.25x.\n\n## Reporting a problem\n\nOpen an issue with the app (Azahar MH4U or Azahar), where in the game it happens and, after a crash, the zip from `ux0:data/azahar/crashes/`.\n\n## Checksums (SHA-256)\n\n- `Azahar-MH4U-0.4.6-beta.vpk`: `d3f096cd372acc83d4097f820744c3a4a96da7c2b49df3b53f6f4a139d443a56`\n- `Azahar-0.4.6-beta-replaces-Azahar.vpk`: `8a075c494c5fcee43e28e61d3354b05c7b7137b8f0cf4119c60c126f42072b50`\n",
+    "assets": [
+      {
+        "name": "Azahar-0.4.6-beta-replaces-Azahar.vpk",
+        "size": 8453218,
+        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.6-beta/Azahar-0.4.6-beta-replaces-Azahar.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "Azahar-MH4U-0.4.6-beta.vpk",
+        "size": 8453171,
+        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.6-beta/Azahar-MH4U-0.4.6-beta.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "SaNch0sE",
+    "no_stable_release": true,
+    "homebrew_name": "Monster Hunter 4 Ultimate",
+    "homebrew_icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+    "homebrew_long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+    "homebrew_id": "monster-hunter-4-ultimate",
+    "homebrew_authors": [
+      "sanch0se"
+    ],
+    "homebrew_version": "0.3.2",
+    "catalog_apps": [
+      {
+        "id": "monster-hunter-4-ultimate",
+        "name": "Monster Hunter 4 Ultimate",
+        "icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+        "long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+        "version": "0.3.2",
+        "version_date": "2026-11-18",
+        "author_ids": [
+          "sanch0se"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
+            "size": 8703181,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 2791728742,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "mh4u"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "mh4unative.skprx",
+            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/mh4unative.skprx",
+            "size": 24678,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/mh4unative.skprx",
+            "required": true
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5222,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": true
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/SaNch0sE/azahar-vita-mh4u"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.3.2 → release 0.4.6-beta · Revisión manual: 2 VPK diferentes",
+    "catalog_version": "0.3.2",
+    "archive_current_link": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "VegettoSan/PSVitaAlive",
+    "release_id": "459070818",
+    "tag": "02.20",
+    "name": "PsVita Alive Store 02.20",
+    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.20",
+    "published": "2026-11-26T07:14:52Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "# PSVitaAlive 02.20 — Download Manager & Multitasking Update\n\nA major update for the native PS Vita / PSTV client focused on managing multiple downloads, browsing while installations run, and reducing interruptions in the interface.\n\n## Download manager\n- Add multiple applications or Install All groups to a single queue without leaving the catalog.\n- A dedicated footer button opens the manager, with application icons, current task, pending tasks, progress and component details.\n- Internal installation steps execute one at a time in FIFO order. The active group appears first, waiting groups follow, and finished groups move to the end with an animated transition.\n- Pause, resume and cancel when supported by the current operation. Confirmations and installer ownership checks remain in place.\n- Transfer size, speed, ETA and extraction progress are shown when available. Unknown totals are not fabricated.\n- Persistent download history with icons, result details and explicit recovery of eligible pending jobs after restarting the client.\n- Interrupted or ambiguous jobs require review; this is not automatic byte-level resume across app restarts. A BGDL handoff is not treated as a completed system installation.\n\n## Safer installation and storage\n- Combined capacity checks across selected components and destination mounts, with conservative handling of unknown sizes.\n- Recalculate active size estimates when the actual HTTP payload exceeds catalog metadata.\n- Credit only stable staged bytes; preserve existing ZIP/path validation, native installer routes and shell/power protection.\n- If space is insufficient, open restricted storage maintenance and explicitly retry the queue.\n\n## Interface and controls\n- Animated icon feedback when adding a job; animated reordering in the manager.\n- Navigate queue, history, recovery and step details with the left analog stick or D-pad, including held-direction scrolling.\n- START follows the current focus: catalog cards → footer → header → catalog cards. Tabs count as the header section.\n- OLED protection activates after one minute of inactivity during a protected session and shows current operation, component, progress, pending count and battery.\n- Localized download manager in all eight existing client languages.\n\n## Performance\n- Icon file reads and PNG decoding move to the existing image worker during queue sessions; the UI uploads bounded pixel buffers to GPU textures.\n- Reduce passive installed-state and saved-ZIP storage probes during protected sessions.\n- Cooperative ZIP extraction scheduling also covers preflight and small files.\n- Bounded performance diagnostics help identify remaining slow frames without per-frame log spam.\n\nPhysical Vita tests of the queue baseline completed multiple large ZIP installations and showed a substantial reduction in observed slow frames. Results vary with storage, package contents and user interaction; no fixed FPS or speed improvement is guaranteed. Mascot startup, some explicit storage checks and job transitions remain areas for further optimization.\n\n## Install or update\n\nOpen PSVitaAlive with automatic updates enabled, or download the official **PSVitaAlive.vpk** and install it over your existing app using VitaShell.\n\n**Version:** `02.20`  \n**Title ID:** `PSVAS1178`\n\nThe release workflow validates ZIP integrity, internal version, Title ID and SHA-256 before publishing. The download manager and prior history remain compatible with the existing catalog architecture.\n\nWebsite: https://vegettosan.github.io/PSVitaAlive/  \nSource: https://github.com/VegettoSan/PSVitaAlive  \nDiscord: https://discord.gg/byn8FDuDrw\n\nThank you to everyone who tested, reported issues and supported PSVitaAlive!\n",
+    "assets": [
+      {
+        "name": "PSVitaAlive.vpk",
+        "size": 10345318,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.20/PSVitaAlive.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "PSVitaAlive.vpk.sha256",
+        "size": 82,
+        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.20/PSVitaAlive.vpk.sha256",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "PSVitaAlive Store",
+    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
+    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+    "homebrew_id": "psvitaalive-store",
+    "homebrew_authors": [
+      "vegettosan"
+    ],
+    "homebrew_version": "02.20",
+    "catalog_apps": [
+      {
+        "id": "psvitaalive-store",
+        "name": "PSVitaAlive Store",
+        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
+        "category": "utilities",
+        "description": "Homebrew store and catalog for PlayStation Vita.",
+        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
+        "version": "02.20",
+        "version_date": "2026-11-26",
+        "author_ids": [
+          "vegettosan"
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive oficial · 02.20",
+    "catalog_version": "02.20",
+    "archive_current_link": "",
+    "archive_media_item": "",
+    "backup_status": "unknown",
+    "backup_detail": "Sin ficha asociada en PSVitaAlive"
+  },
+  {
+    "platform": "github",
     "repo": "OpenCloudGaming/OpenNOW-vita",
     "release_id": "458875715",
     "tag": "v0.3.5",
@@ -866,110 +1029,6 @@
   },
   {
     "platform": "github",
-    "repo": "SaNch0sE/azahar-vita-mh4u",
-    "release_id": "458196514",
-    "tag": "0.4.5-beta",
-    "name": "Azahar MH4U 0.4.5-beta",
-    "url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/tag/0.4.5-beta",
-    "published": "2026-11-25T14:03:46Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Azahar for the PS Vita, built on [Grarak's beta-1](https://github.com/Grarak/azahar/releases/tag/beta-1), with optimisations for **Monster Hunter 4 Ultimate**, and speed options for **Monster Hunter XX**. Other games run as in beta-1. Beta: back up your saves.\n\nBeta-1's new CPU and GPU emulation fixes the lighting and dark ground of our 0.3 builds, and our changes bring MH4U to 30 fps in the places we test (beta-1 alone ran them at 67–84% speed).\n\n> [!IMPORTANT]\n> The MH4U optimisations are tested **only** with the **USA** game (`0004000000126300`), its **1.3 (v1.1) update**, and the **Heavenfall mod**. Other regions, other versions or no mod may run slower or show problems.\n\nNo game files are included: you need your own decrypted copy of the game and its update.\n\n## New in 0.4.5-beta\n\n- **Per-vertex effect lighting (optional, off by default), MH4U and Monster Hunter XX.** Some see-through effects are lit, and in MHXX a flying wyvern's takeoff mist is drawn in many stacked layers. Every pixel of every layer used to run the full lighting maths. With this option on, such effects are lit once per corner instead, and the shader does far less per pixel (the mist's from 58 instructions to 32). Effects may look very slightly different; in testing they looked right.\n  - Turn it on in **Patches → Per-vertex effect lighting** (in MHXX it is under **Speed options**). It helps most at internal resolution 1.5x: in MHXX near a taking-off wyvern, the worst second went from 51% to 55–57% speed.\n- **Monster Hunter XX: particle effects get the room they need.** MHXX's effect geometry now uses the same batching rules as MH4U's. In a test build it fixed an overflow in the stage that builds particles; speed is unchanged.\n- Known: in MHXX at 1x, a wyvern's takeoff and landing can still dip to 25–27 fps for a moment. Work on it continues.\n\n## In 0.4.4-beta\n\n- **Fast shadows**, on by default in MH4U and MHXX: one shadow-map read per lit pixel instead of four (MH4U busy field at 1.5x: 90% to 102% speed). Turn it off in Patches for soft shadow edges.\n\n## Which download?\n\n| File | Installs as | Settings |\n|---|---|---|\n| **`Azahar-MH4U-0.4.5-beta.vpk`** (recommended) | **Azahar MH4U**, a separate app next to Azahar | its own (`settings-AZAHMH4UB.txt`) |\n| `Azahar-0.4.5-beta-replaces-Azahar.vpk` | **Azahar**, over upstream Azahar | Azahar's (`settings.txt`) |\n\nWe recommend **Azahar MH4U**: you keep upstream Azahar installed and can update it whenever a new version comes out, while Azahar MH4U stays your MH4U app. Both apps use `ux0:data/azahar`, so games, installed updates, saves, savestates, mods and cheats are shared: install the game update once and play it in either app. Only settings are separate (Azahar MH4U copies Azahar's on its first start), so changing a setting in one doesn't reset the other's. Run one app at a time.\n\n## Install\n\n1. **A PS Vita** on firmware 3.60, 3.65, 3.68 or 3.73.\n2. **The app.** Copy the vpk to the Vita and install it with VitaShell. The kernel plugin ships inside the vpk: nothing to add to taiHEN's `config.txt` (if you added `azaharnative.skprx` there for Azahar 0.1, remove that line and reboot).\n3. **The game.** Put your decrypted Monster Hunter 4 Ultimate (USA) `.3ds` / `.cci` / `.cxi` in `ux0:data/azahar/roms/`.\n4. **The update (1.3, v1.1).** Put your decrypted update `.cia` in `ux0:data/azahar/roms/` too. Start the app, select the update in the game list and press **Install**. You can delete the `.cia` afterwards.\n5. **The Heavenfall mod** (menus on one screen; the port is tuned for it):\n   1. Open the web installer, https://popzol.github.io/4u-heavenfall-mod-beta/, on a PC or phone. Your game is never uploaded.\n   2. Choose your **base game** file (the same decrypted `.3ds`), not the update `.cia`.\n   3. Options: **Single Screen mode** on; **HUD size** **80%** (with the HUD drawn at 1.5x it's sharp and readable; the default 70% is small on the Vita); **Aspect ratio**: tick *Allow other aspect ratios (EXPERIMENTAL)* and choose **16:9**; keep the quality-of-life (\"other\") module on. Layered Gear and the mod's cheats are your choice.\n   4. Press **Make the mod**, download the zip and extract it. You get a folder named `0004000000126300`.\n   5. Copy that folder to `ux0:data/azahar/load/mods/`, so that you have `ux0:data/azahar/load/mods/0004000000126300/romfs`. To change the mod later, delete that folder first and copy the new one in.\n6. **CPU at 500 MHz.** Set it with a clock plugin before starting a game. Higher clocks make the console warmer.\n7. **Start the game.** In the game's START menu, third page, **Mod Settings → Display**: aspect ratio **16:9** if you made the mod with it, **FPS: 30**, 3D mode off.\n\n## What's in it for MH4U\n\nAlways on for MH4U (USA), listed under **Patches → SaNch0sE optimizations**:\n\n- **Geometry batches:** grass, sprites and particles go to the GPU in fewer, larger batches.\n- **Hidden screen not drawn:** with the single-screen layout, the bottom screen's draws are skipped.\n- **Full speed from a cold start:** the intro and Val Habar no longer run slowly until a savestate is taken or loaded.\n- **Performance profile:** the app is compiled with upstream's profile merged with one recorded from MH4U on this code: about 2–3% more headroom in our tests.\n\nMH4U starts with these settings (pause menu → **Game settings**, all yours to change):\n\n- Layout **single** screen, Widescreen **stretch**\n- Internal resolution **1.25x**, HUD resolution **1.5x**\n- Even frame pacing **on**, Vsync **on**\n- Touch a hidden bottom screen **off**\n\nIf MH4U already has settings of its own (for example copied from Azahar's file), those are kept: set the values above by hand.\n\nThe options behind them:\n\n- **Patches → HUD resolution:** draws the HUD and text at a higher resolution than the 3D scene, e.g. the scene at 1.25x with the HUD at 1.5x. It applies only above the internal resolution. (Whole-screen 1.5x is too heavy: about 17 fps.)\n- **Patches → Per-vertex effect lighting:** see-through lit effects lit per corner instead of per pixel (off by default).\n- **Patches → Fast shadows:** one shadow-map read per lit pixel instead of four (on by default; off gives soft shadow edges).\n- **Patches → Even frame pacing (experimental):** with vsync on, holds an early frame so frames are shown two refreshes apart. If it looks worse to you, turn it off.\n- **Controls → Touch a hidden bottom screen:** off so stray touches don't open bottom-screen menus.\n\n## Known issues\n\n- Exiting the app sometimes leaves a black screen with sound still playing, or restarts the console. Hold the power button to restart if it hangs.\n- After many hours or a Wi-Fi drop, the console's kernel memory can run out: the app closes with an error (C1-2569-2) or the console restarts when the app starts. A console restart clears it.\n- Tested in the intro, the character select, Val Habar, the quest counter, fields and hunt savestates. Not yet tested: long sessions, every menu, other regions or versions.\n\n## Reporting a problem\n\nOpen an issue with the app (Azahar MH4U or Azahar), where in the game it happens and, after a crash, the zip from `ux0:data/azahar/crashes/`.\n\n## Checksums (SHA-256)\n\n- `Azahar-MH4U-0.4.5-beta.vpk`: `ddb778ff3c7b47edfc11950839a11766eecc8c845bb8e5439ca38e90290d1754`\n- `Azahar-0.4.5-beta-replaces-Azahar.vpk`: `ed7d0028399ea43b0f871e1604d0093b67ae9945208e9cb79d71cb62919cdad0`\n",
-    "assets": [
-      {
-        "name": "Azahar-0.4.5-beta-replaces-Azahar.vpk",
-        "size": 8462397,
-        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.5-beta/Azahar-0.4.5-beta-replaces-Azahar.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Azahar-MH4U-0.4.5-beta.vpk",
-        "size": 8462391,
-        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.5-beta/Azahar-MH4U-0.4.5-beta.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SaNch0sE",
-    "no_stable_release": true,
-    "homebrew_name": "Monster Hunter 4 Ultimate",
-    "homebrew_icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-    "homebrew_long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-    "homebrew_id": "monster-hunter-4-ultimate",
-    "homebrew_authors": [
-      "sanch0se"
-    ],
-    "homebrew_version": "0.3.2",
-    "catalog_apps": [
-      {
-        "id": "monster-hunter-4-ultimate",
-        "name": "Monster Hunter 4 Ultimate",
-        "icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-        "long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-        "version": "0.3.2",
-        "version_date": "2026-11-18",
-        "author_ids": [
-          "sanch0se"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
-            "size": 8703181,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 2791728742,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "mh4u"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "mh4unative.skprx",
-            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/mh4unative.skprx",
-            "size": 24678,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/mh4unative.skprx",
-            "required": true
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5222,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": true
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/SaNch0sE/azahar-vita-mh4u"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.3.2 → release 0.4.5-beta · Revisión manual: 2 VPK diferentes",
-    "catalog_version": "0.3.2",
-    "archive_current_link": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
     "repo": "AngeloGalav/sh2-vita",
     "release_id": "458177891",
     "tag": "v0.3.0",
@@ -1523,65 +1582,6 @@
     "archive_media_item": "",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "VegettoSan/PSVitaAlive",
-    "release_id": "457575847",
-    "tag": "02.19",
-    "name": "PsVita Alive Store 02.19",
-    "url": "https://github.com/VegettoSan/PSVitaAlive/releases/tag/02.19",
-    "published": "2026-11-25T02:26:34Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# PSVitaAlive 02.19 — UI Redesign & Stability Update\n\nA major update for the native PS Vita / PSTV client, with a refreshed interface, better controller navigation, improved download recovery, safer installation and storage management, and catalog reliability improvements.\n\n## New interface and navigation\n- Sprite-based visual skin with consistent rounded panels, dialogs, buttons, focus indicators, progress bars and physical controller hints.\n- Refreshed catalog, app details, keyboard, settings, theme picker, installation, storage, reports and QR dialogs.\n- Navigate header, catalog and footer with physical controls; improved touch-aware focus, incomplete grid rows and loading-screen input protection.\n- Theme selection now distinguishes browsing from applying a color. The last explicitly applied theme is saved on confirmation or exit.\n- Fixed clipping, scrolling and unexpected position changes in feedback panels.\n\n## Performance and stability\n- Batched nine-slice rendering and safe GPU vertex reuse.\n- Bounded text layout cache, off-screen draw culling, asynchronous image filesystem checks and budgeted texture decoding.\n- Reduced redundant storage lookups and hidden modal rendering. No specific FPS or memory improvement is claimed.\n\n## Downloads and installation\n- Automatic recovery from transient network interruptions with bounded retries and backoff.\n- Retains validated partial progress, respects manual pauses, protects HTTP ranges and prefers alternate Archive.org nodes when appropriate.\n- Improved handling of transient MediaFire resolution failures and unsafe resume responses.\n- Stronger pre-download free-space checks, combined Install All budgeting, ZIP extraction progress and safe existing-file extraction optimization.\n- Partial downloads are preserved during the current client session only; recovery across app restarts is not supported.\n\n## Storage and catalog\n- More readable storage manager with catalog icons for retained ZIPs, scan progress, synchronized touch targets and clearer deletion confirmations.\n- Informed warnings for shared Game Files, with affected app names, Title IDs and installed status; preserves unrelated ur0 dependencies.\n- Automatic recovery from unexpectedly empty catalogs, safe cache replacement and fallback to validated in-memory catalogs.\n- Optimized JSON parsing without changing the catalog schema; fewer redundant HTTP requests.\n- Corrected Homebrew version comparison for alpha, beta, preview, release candidate and stable releases.\n- Updated all eight existing UI languages: English, Spanish, French, German, Italian, Brazilian Portuguese, European Portuguese and Russian.\n\n## Install or update\nExisting users can open PSVitaAlive with its built-in automatic update enabled. It checks GitHub Releases and downloads the official update when available. Alternatively, download **PSVitaAlive.vpk** below and install it over the existing app with VitaShell.\n\n**Version:** `02.19`  \n**Title ID:** `PSVAS1178`\n\nThe official release workflow validates the VPK ZIP integrity, internal APP_VER, Title ID and SHA-256. The UI redesign was approved on physical PS Vita hardware; the final release binary is rebuilt from main.\n\nWebsite: https://vegettosan.github.io/PSVitaAlive/  \nSource: https://github.com/VegettoSan/PSVitaAlive  \nDiscord: https://discord.gg/byn8FDuDrw\n\nThank you to everyone who tested, reported issues and supported PSVitaAlive!\n",
-    "assets": [
-      {
-        "name": "PSVitaAlive.vpk",
-        "size": 10259075,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.19/PSVitaAlive.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "PSVitaAlive.vpk.sha256",
-        "size": 82,
-        "download_url": "https://github.com/VegettoSan/PSVitaAlive/releases/download/02.19/PSVitaAlive.vpk.sha256",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "PSVitaAlive Store",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Homebrew store and catalog for PlayStation Vita.",
-    "homebrew_long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-    "homebrew_id": "psvitaalive-store",
-    "homebrew_authors": [
-      "vegettosan"
-    ],
-    "homebrew_version": "02.19",
-    "catalog_apps": [
-      {
-        "id": "psvitaalive-store",
-        "name": "PSVitaAlive Store",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/web/assets/background/PSVitaAlive_Store_logo_psvita.png",
-        "category": "utilities",
-        "description": "Homebrew store and catalog for PlayStation Vita.",
-        "long_description": "PSVitaAlive Store — catálogo y cliente homebrew para PlayStation Vita.",
-        "version": "02.19",
-        "version_date": "2026-11-25",
-        "author_ids": [
-          "vegettosan"
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive oficial · 02.19",
-    "catalog_version": "02.19",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "unknown",
-    "backup_detail": "Sin ficha asociada en PSVitaAlive"
   },
   {
     "platform": "github",
@@ -48701,253 +48701,5 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "CrossCraft/CrossCraft-Classic",
-    "release_id": "84633227",
-    "tag": "v1.3",
-    "name": "[v1.3] End of the Line",
-    "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3",
-    "published": "2022-12-01T18:22:19Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This release will be the last major release of CrossCraft Classic for a reasonably long time. As such, it has implemented plenty of bug fixes alongside backporting features from Survival Test 4. Note on the Mac Release -- this has been removed for the time being until better testing can be done.\r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding API\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Steve Models in Multiplayer\r\n- Music from Survival Test backported.\r\n\r\n### Bug Fixes\r\n- Particles now face the player\r\n- You can no longer break while paused\r\n- PS Vita Crash Fix\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- MP / Transition from Menu Still does not have a loading screen",
-    "assets": [
-      {
-        "name": "CrossCraft-3DS.zip",
-        "size": 8230254,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-3DS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Linux.zip",
-        "size": 14946577,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-PSP.zip",
-        "size": 11863120,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Vita.zip",
-        "size": 10028371,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Windows.zip",
-        "size": 8831316,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Windows.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "IridescentRose",
-    "homebrew_name": "CrossCraft Classic",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
-    "homebrew_category": "games",
-    "homebrew_description": "Multiplatform clone of Minecraft Classic.",
-    "homebrew_long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
-    "homebrew_id": "crosscraft-classic",
-    "homebrew_authors": [
-      "iridescence",
-      "motolegacy"
-    ],
-    "homebrew_version": "v1.3",
-    "catalog_apps": [
-      {
-        "id": "crosscraft-classic",
-        "name": "CrossCraft Classic",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
-        "category": "games",
-        "description": "Multiplatform clone of Minecraft Classic.",
-        "long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
-        "version": "v1.3",
-        "version_date": "2022-12-01",
-        "author_ids": [
-          "iridescence",
-          "motolegacy"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.3",
-    "catalog_version": "v1.3",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "majonessyltetoy/airpressure",
-    "release_id": "84328310",
-    "tag": "v1.0.0",
-    "name": "v1.0.0",
-    "url": "https://github.com/majonessyltetoy/airpressure/releases/tag/v1.0.0",
-    "published": "2022-11-28T13:08:50Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "airpressure.vpk",
-        "size": 26852528,
-        "download_url": "https://github.com/majonessyltetoy/airpressure/releases/download/v1.0.0/airpressure.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "majonessyltetoy",
-    "homebrew_name": "Air Pressure",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-air-pressure/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Air Pressure for PSVITA.",
-    "homebrew_long_description": "Port of Air Pressure for PSVITA.\nAir Pressure is an unromantic visual novel.\n\n- PsVitaAlive -",
-    "homebrew_id": "air-pressure",
-    "homebrew_authors": [
-      "majonessyltetoy"
-    ],
-    "homebrew_version": "v.1.0.0",
-    "catalog_apps": [
-      {
-        "id": "air-pressure",
-        "name": "Air Pressure",
-        "icon": "https://archive.org/download/psvitaalive-air-pressure/icon0.png",
-        "category": "ports",
-        "description": "Port of Air Pressure for PSVITA.",
-        "long_description": "Port of Air Pressure for PSVITA.\nAir Pressure is an unromantic visual novel.\n\n- PsVitaAlive -",
-        "version": "v.1.0.0",
-        "version_date": "2022-11-28",
-        "author_ids": [
-          "majonessyltetoy"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-air-pressure/air-pressure.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/majonessyltetoy/airpressure/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/majonessyltetoy/airpressure/releases/tag/v1.0.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/majonessyltetoy/airpressure"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0.0",
-    "catalog_version": "v.1.0.0",
-    "archive_current_link": "https://archive.org/download/psvitaalive-air-pressure/air-pressure.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "v-atamanenko/masseffect-vita",
-    "release_id": "83803154",
-    "tag": "v1.0",
-    "name": "Mass Effect Infiltrator — PSVita Port v1.0",
-    "url": "https://github.com/v-atamanenko/masseffect-vita/releases/tag/v1.0",
-    "published": "2022-11-21T21:17:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Please read the repository readme for installation instructions.",
-    "assets": [
-      {
-        "name": "MassEffectInfiltrator.vpk",
-        "size": 2085575,
-        "download_url": "https://github.com/v-atamanenko/masseffect-vita/releases/download/v1.0/MassEffectInfiltrator.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "v-atamanenko",
-    "homebrew_name": "Mass Effect Infiltrator Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Mass Effect Infiltrator for PSVITA.",
-    "homebrew_long_description": "A loader for an iOS/Android-exclusive Third-Person Shooter with RPG Elements released as a tie-in game to Mass Effect 3. Please read the installation instructions on GitHub.\n\n- PsVitaAlive -",
-    "homebrew_id": "mass-effect-infiltrator-vita",
-    "homebrew_authors": [
-      "gl33ntwine"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "mass-effect-infiltrator-vita",
-        "name": "Mass Effect Infiltrator Vita",
-        "icon": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Mass Effect Infiltrator for PSVITA.",
-        "long_description": "A loader for an iOS/Android-exclusive Third-Person Shooter with RPG Elements released as a tie-in game to Mass Effect 3. Please read the installation instructions on GitHub.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2022-11-21",
-        "author_ids": [
-          "gl33ntwine"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/mass-effect-infiltrator-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 778462822,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "masseffect"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/v-atamanenko/masseffect-vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "archive_current_link": "https://archive.org/download/psvitaalive-mass-effect-infiltrator-vita/mass-effect-infiltrator-vita.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
   }
 ]
