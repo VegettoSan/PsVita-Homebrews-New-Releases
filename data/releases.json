@@ -1,6 +1,177 @@
 [
   {
     "platform": "github",
+    "repo": "xesf/manhunt-releases",
+    "release_id": "459672980",
+    "tag": "v0.10.4",
+    "name": "v0.10.4",
+    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.10.4",
+    "published": "2026-11-26T16:41:45Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n- Manhunt 1: the aim reticle follows the original: a firearm that is out but not aimed shows nothing, or the small dot while mouse look is active; the four-tick cross appears only while aiming (before, the cross was always on).\n- Manhunt 1: Continue after a death (or a loaded slot) puts the player at the save point before the level's script reads his AI area, as the original's level reload does; before, cellblock and mall started the first half again from the checkpoint (opening goal, gun hunters never armed, no one attacked), and the checkpoint now keeps the level goals.\n- Hunters that passed the last smoothed waypoint of their path no longer turn straight for a target on another floor or behind a wall (the prison rabbit running into the tower stair walls).\n- Manhunt 1 AI: a pack now shares what it senses, as in the original (one senses record per sub-pack): when one hunter sees or hears the player, his pack mates on a hunt order go to investigate or hunt with him. Before, each hunter reacted alone, so most hunters ignored noises and sightings a pack mate had already made.\n- Manhunt 1 AI: hunters run where the original runs. The original's move speed 0.75 is the run gait (0.5 is the walk); the gun fight's advance, relocate, approach and retreat moves walked instead, so gun hunters crept toward the player. A hunter who investigates also breaks into a run as soon as he sees the player at medium or hears him loud, or has had him in sight for a second, instead of walking the whole way.\n- Manhunt 1 AI: a gun hunter pulls the trigger while he advances, backs off or relocates with the player in plain view and in front of him, not only while he stands in the shoot state; before, some walked toward the player with the gun down.\n- Manhunt 1 AI: a hunter holding a loaded gun keeps shooting at any distance. Before, he dropped to his fists inside 1.7 m, so a player who ran up to a gun hunter was punched instead of shot.\n- Manhunt 1 AI: melee hunters start their first swing as soon as they are in reach and face the player (a made-up 0.4 s wind-up is gone), and turn on the spot at 300 degrees per second instead of 220.\n- `--debug ai-measure` prints, per alert hunter, state, controller, gait and speed, weapon and rounds, distance, sight and hearing levels, the time from first sight to first attack and the gap between attacks.\n- Manhunt 1: hunters smooth their routes only over the next 30 m instead of testing every node of a long path (asylum, after the tower door explodes: the once-a-second stalls of 100 to 190 ms in the AI are gone, AI time 4 to 6 ms down to 2 to 4 ms).\n- Manhunt 1: a shotgun or sawn-off head hit within 5.5 m now blows the head off (Ped_ChooseDamageAnim 0x49D560, PedHead_Explode 0x49CCB0): the head becomes the DedHed stump on the neck, 13 DedBit gibs fly with blood, 4 kill points; pistols and other guns do not.\n- Manhunt 1: the gas can pickup test looks up a record only for entities within reach (about 0.26 ms less per frame in asylum); `--debug frame-log=N` prints the wall-clock ms per frame.\n- Manhunt 1: the run meter uses the player record's `STAMINA_*` values (20 s of sprint, refill 80 / 54 / 22 s by body state, sprint input only above 15 %), refills in every state, and drains only in the upright stance; before, placeholder rates let the player sprint almost without end.\n- Manhunt 1: hunters no longer walk into each other's bodies (prison: Cerberus piled up inside one another on the last tower's stairs, so one stood unseen in another and kept shooting); a hunter held up for 0.75 s by another passes through him so stairs cannot jam.\n\n\nThe Windows and Linux x86_64 builds are untested on real hardware.\n",
+    "assets": [
+      {
+        "name": "manhunt-v0.10.4-linux-x86_64.tar.gz",
+        "size": 3804922,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.4/manhunt-v0.10.4-linux-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.10.4-macos-x86_64.tar.gz",
+        "size": 3070791,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.4/manhunt-v0.10.4-macos-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.10.4-vita.vpk",
+        "size": 1860387,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.4/manhunt-v0.10.4-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "manhunt-v0.10.4-windows-x86_64.zip",
+        "size": 3535359,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.4/manhunt-v0.10.4-windows-x86_64.zip",
+        "content_type": "application/zip"
+      }
+    ],
+    "author": "xesf",
+    "homebrew_name": "Manhunt",
+    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+    "homebrew_id": "manhunt",
+    "homebrew_authors": [
+      "xesf"
+    ],
+    "homebrew_version": "0.10.3",
+    "catalog_apps": [
+      {
+        "id": "manhunt",
+        "name": "Manhunt",
+        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
+        "category": "ports",
+        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
+        "version": "0.10.3",
+        "version_date": "2026-11-25",
+        "author_ids": [
+          "xesf"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.3.vpk",
+            "size": 1850755,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/Game%20Files%20for%20PSVA.zip",
+            "size": 2040109466,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "manhunt"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/xesf/manhunt-releases"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.10.3 → release v0.10.4",
+    "catalog_version": "0.10.3",
+    "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.3.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "memory-hunter/hill-climb-racing-vita",
+    "release_id": "459329999",
+    "tag": "v1.0",
+    "name": "v1.0 release",
+    "url": "https://github.com/memory-hunter/hill-climb-racing-vita/releases/tag/v1.0",
+    "published": "2026-11-26T11:37:07Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Bringing you guys a new update for HCR. Thanks to @devnoname120, and with recent updates to all libs, I decided to move to v1.41.0 of the game, and most things are just like on Android now. Sound works, no death screen lag and crash, and I implemented free item purchase for those who want to have shortcut to upgrades.\r\n\r\nI am taking the game out of beta and this should be a stable release.\r\nInstallation steps is the same. Just read the readme.",
+    "assets": [
+      {
+        "name": "hcr.vpk",
+        "size": 2762855,
+        "download_url": "https://github.com/memory-hunter/hill-climb-racing-vita/releases/download/v1.0/hcr.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "memory-hunter",
+    "homebrew_name": "Hill Climb Racing Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Port of Hill Clamb Racing for PSVita.",
+    "homebrew_long_description": "Hill Climb Racing is a game made by Fingersoft, a Finnish game engine where you can control a vehicle and try to survive as far as possible to get more coins for more upgrades, vehicles and stages! Each stage has a different layout, and different obstacles to overcome. Each vehicle has their own strengths and weaknesses, making certain vehicles excel in certain stages, and their vehicles have overalls.\n\n- PsVitaAlive -",
+    "homebrew_id": "hill-climb-racing-vita",
+    "homebrew_authors": [
+      "memoryhunter"
+    ],
+    "homebrew_version": "beta2",
+    "catalog_apps": [
+      {
+        "id": "hill-climb-racing-vita",
+        "name": "Hill Climb Racing Vita",
+        "icon": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/icon0.png",
+        "category": "ports",
+        "description": "Port of Hill Clamb Racing for PSVita.",
+        "long_description": "Hill Climb Racing is a game made by Fingersoft, a Finnish game engine where you can control a vehicle and try to survive as far as possible to get more coins for more upgrades, vehicles and stages! Each stage has a different layout, and different obstacles to overcome. Each vehicle has their own strengths and weaknesses, making certain vehicles excel in certain stages, and their vehicles have overalls.\n\n- PsVitaAlive -",
+        "version": "beta2",
+        "version_date": "2025-10-31",
+        "author_ids": [
+          "memoryhunter"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/hill-climb-racing-vita.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 44669338,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "hcr"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/memory-hunter/hill-climb-racing-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive beta2 → release v1.0",
+    "catalog_version": "beta2",
+    "archive_current_link": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/hill-climb-racing-vita.vpk",
+    "archive_media_item": "",
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
+  },
+  {
+    "platform": "github",
     "repo": "SaNch0sE/azahar-vita-mh4u",
     "release_id": "459101541",
     "tag": "0.4.6-beta",
@@ -1106,101 +1277,6 @@
     "catalog_update_detail": "PSVitaAlive 0.3.0",
     "catalog_version": "0.3.0",
     "archive_current_link": "https://archive.org/download/sh2-vita/silent-hill-2%20v0.3.0.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "xesf/manhunt-releases",
-    "release_id": "458177022",
-    "tag": "v0.10.3",
-    "name": "v0.10.3",
-    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.10.3",
-    "published": "2026-11-25T13:48:09Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\n- Manhunt 1: pressing attack with the player chainsaw behind an unaware hunter now only charges the execution, as in the original; before, the same press also fired a cut that could hit someone in front and alert the guards.\n- Manhunt 1 strafing: StrafeLeft / StrafeRight (L2 / R2, Comma / Period, Vita L + stick, PS TV L2 / R2) sidestep with the heading held in the walk, sneak and gun aim, on the remap page as SIDESTEP rows saved in Settings.dat; pad buttons bound to the movement rows now move the player.\n- Tutorial and help texts show pad buttons as icons (PlayStation, Vita and Xbox styles, drawn in code) instead of names like \"Triangle button\", in both games; Options.ini `button_icons=off` and a Controls page row switch back to names.\n- Manhunt 1: with a gun locked onto a hunter, the look stick puts the lock on his head only within the gun's lock range (8 m for the pistols), as in the original; before, a locked 6shooter killed with a head shot from up to 18 m.\n- Manhunt 1: a hunter who guards a post (a guard goal with no hunt order, such as the church2 graveyard shotgun guard) now reacts as in the original: he attacks when he sees or hears you inside his guard radius, shoots from his post when he has a gun, and walks to a noise; before, he stood still even with you in front of him.\n- Manhunt 1: trigger volumes detect a hunter by the original's body sphere (1 m), so an escort such as the church2 tramp opens a gate when he stands near it; before, he had to stand almost exactly on the trigger, and the last church2 gate opened only by luck.\n- Manhunt 1: doors the level data marks as locked now start locked, as in the original (mall: the gun shop's glass door no longer opens; punch or shoot the glass to reach the 6shooter), and a smashable door breaks under blows, shots and thrown items like a smashable pane.\n- Manhunt 1: the player and the hunters no longer walk into each other's bodies; a hunter stops at arm's length (Pharmaceutical Works: after the main door button cutscene a hunter could stand inside the player and catch every shot).\n- Manhunt 1, cover: at a wall edge, aiming a gun now leans the player out and holds the pose (the lean restarted every frame, so the body stayed turned to the wall while the camera aimed out). In the middle of a wall, Aim does nothing and the fire button knocks on the wall, as in the original (it fired the gun into the wall).\n- Manhunt 1, wall knock: the knock works with any weapon in hand (a gun or a throwable knocks instead of firing or winding up a throw), with the strong attack too (fists or a melee weapon), plays the weapon's hit sound on the wall and shows the noise on the radar. Hunters within hearing range investigate it. A gun or a throwable makes no blow, so hunters do not hear that knock (as in the original).\n\n\nThe Windows and Linux x86_64 builds are untested on real hardware.\n",
-    "assets": [
-      {
-        "name": "manhunt-v0.10.3-linux-x86_64.tar.gz",
-        "size": 3784452,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.3/manhunt-v0.10.3-linux-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-v0.10.3-macos-x86_64.tar.gz",
-        "size": 3057611,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.3/manhunt-v0.10.3-macos-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
-      },
-      {
-        "name": "manhunt-v0.10.3-vita.vpk",
-        "size": 1850755,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.3/manhunt-v0.10.3-vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "manhunt-v0.10.3-windows-x86_64.zip",
-        "size": 3521060,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.3/manhunt-v0.10.3-windows-x86_64.zip",
-        "content_type": "application/zip"
-      }
-    ],
-    "author": "xesf",
-    "homebrew_name": "Manhunt",
-    "homebrew_icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-    "homebrew_id": "manhunt",
-    "homebrew_authors": [
-      "xesf"
-    ],
-    "homebrew_version": "0.10.3",
-    "catalog_apps": [
-      {
-        "id": "manhunt",
-        "name": "Manhunt",
-        "icon": "https://archive.org/download/manhunt-1-2-ps-vita-port/icon0.png",
-        "category": "ports",
-        "description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "long_description": "Builds of an unofficial, from-scratch reimplementation of the engine of Manhunt (2003) for macOS and the PS Vita.",
-        "version": "0.10.3",
-        "version_date": "2026-11-25",
-        "author_ids": [
-          "xesf"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.3.vpk",
-            "size": 1850755,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/manhunt-1-2-ps-vita-port/Game%20Files%20for%20PSVA.zip",
-            "size": 2040109466,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "manhunt"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/xesf/manhunt-releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.10.3",
-    "catalog_version": "0.10.3",
-    "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.3.vpk",
     "archive_media_item": "",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
@@ -28633,82 +28709,6 @@
   },
   {
     "platform": "github",
-    "repo": "memory-hunter/hill-climb-racing-vita",
-    "release_id": "352364352",
-    "tag": "beta3",
-    "name": "beta3",
-    "url": "https://github.com/memory-hunter/hill-climb-racing-vita/releases/tag/beta3",
-    "published": "2026-07-10T22:52:48Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "- #1 is still a problem, and it is a VRAM issue, something leaks, memory fills up and then stuttering begins. This version the game feel more smoother, and it takes longer to reach the point where the lagging/crashing starts, so you can have longer gameplay sessions. In my testing, 5 minutes of gameplay is possible with changing multiple stages and vehicles.\r\n- #2 is sort of reintroduced if you use 1.24.0, the engine sound doesn't work if the level isn't restarted.",
-    "assets": [
-      {
-        "name": "hcr.vpk",
-        "size": 2701454,
-        "download_url": "https://github.com/memory-hunter/hill-climb-racing-vita/releases/download/beta3/hcr.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "memory-hunter",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive beta2 → release beta3",
-    "catalog_version": "beta2",
-    "homebrew_name": "Hill Climb Racing Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Hill Clamb Racing for PSVita.",
-    "homebrew_long_description": "Hill Climb Racing is a game made by Fingersoft, a Finnish game engine where you can control a vehicle and try to survive as far as possible to get more coins for more upgrades, vehicles and stages! Each stage has a different layout, and different obstacles to overcome. Each vehicle has their own strengths and weaknesses, making certain vehicles excel in certain stages, and their vehicles have overalls.\n\n- PsVitaAlive -",
-    "homebrew_id": "hill-climb-racing-vita",
-    "homebrew_authors": [
-      "memoryhunter"
-    ],
-    "homebrew_version": "beta2",
-    "catalog_apps": [
-      {
-        "id": "hill-climb-racing-vita",
-        "name": "Hill Climb Racing Vita",
-        "icon": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Hill Clamb Racing for PSVita.",
-        "long_description": "Hill Climb Racing is a game made by Fingersoft, a Finnish game engine where you can control a vehicle and try to survive as far as possible to get more coins for more upgrades, vehicles and stages! Each stage has a different layout, and different obstacles to overcome. Each vehicle has their own strengths and weaknesses, making certain vehicles excel in certain stages, and their vehicles have overalls.\n\n- PsVitaAlive -",
-        "version": "beta2",
-        "version_date": "2025-10-31",
-        "author_ids": [
-          "memoryhunter"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/hill-climb-racing-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 44669338,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "hcr"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/memory-hunter/hill-climb-racing-vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-hill-climb-racing-vita/hill-climb-racing-vita.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
     "repo": "WolffsRoom/MotherEncore-PSVita",
     "tag": "v0.2b",
     "name": "v0.2b",
@@ -48605,101 +48605,5 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "CrossCraft/CrossCraft-SurvivalTest",
-    "release_id": "84634138",
-    "tag": "ST4",
-    "name": "Survival Test 4: The Final Experiment",
-    "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4",
-    "published": "2022-12-02T02:40:53Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This release will be the last major release of CrossCraft Survival Test for a reasonably long time. The Mac Release has been removed until further testing can be done. \r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding Support\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Major Refactor of Survival Test\r\n- Acceleration based player and mobs\r\n- Particles are now one particle-system\r\n- Heart & Air Bubble Animations\r\n- Toggleable Weather (F5 on PC)\r\n\r\n### Bug Fixes\r\n- PS Vita Crash Fix\r\n- Mobs clipping into terrain from being hit\r\n- Mobs falling animation around their heads instead of their feet\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- Transition from Menu Still does not have a loading screen",
-    "assets": [
-      {
-        "name": "CrossCraft-3DS.zip",
-        "size": 8336815,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-3DS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Linux.zip",
-        "size": 12896495,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-PSP.zip",
-        "size": 9746437,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Vita.zip",
-        "size": 17518102,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Windows.zip",
-        "size": 8860608,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Windows.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "IridescentRose",
-    "homebrew_name": "CrossCraft SurvivalTest",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
-    "homebrew_category": "games",
-    "homebrew_description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
-    "homebrew_long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
-    "homebrew_id": "crosscraft-survivaltest",
-    "homebrew_authors": [
-      "iridescence",
-      "motolegacy"
-    ],
-    "homebrew_version": "ST4",
-    "catalog_apps": [
-      {
-        "id": "crosscraft-survivaltest",
-        "name": "CrossCraft SurvivalTest",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
-        "category": "games",
-        "description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
-        "long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
-        "version": "ST4",
-        "version_date": "2022-12-02",
-        "author_ids": [
-          "iridescence",
-          "motolegacy"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive ST4",
-    "catalog_version": "ST4",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
   }
 ]
