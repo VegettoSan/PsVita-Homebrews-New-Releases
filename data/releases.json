@@ -1,6 +1,82 @@
 [
   {
     "platform": "github",
+    "repo": "OpenCloudGaming/OpenNOW-vita",
+    "release_id": "458875715",
+    "tag": "v0.3.5",
+    "name": "OpenNOW Vita v0.3.5",
+    "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/tag/v0.3.5",
+    "published": "2026-11-26T02:35:22Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "[0.3.5] - 2026-11-26\r\n\r\n### Added\r\n- **Login provider dropdown**: pick NVIDIA or a partner (au, Taiwan Mobile, Zain, GAME+, StarHub...) from a list. Works with D-pad and touch (tap to open/select, drag to scroll).\r\n\r\n### Fixed\r\n- Connection failures caused by DNS lookups: hostnames now resolve through the Vita's own resolver, with retries and a cache.\r\n- After a video decode error, the stream now waits for a fresh keyframe instead of showing corrupted frames.\r\n\r\n### Changed\r\n- Lower-latency video: AVC low-delay decode mode, NV12 GPU textures, decoding at the stream's native size (up to 720p).\r\n- **Vita `APP_VER=00.35`**.\r\n",
+    "assets": [
+      {
+        "name": "opennow-vita.vpk",
+        "size": 9459807,
+        "download_url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/download/v0.3.5/opennow-vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "josephinoo",
+    "homebrew_name": "OpenNow Vita",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-opennow-vita/icon0.png",
+    "homebrew_category": "utilities",
+    "homebrew_description": "Nvidia GeForce Now client for PSVita.",
+    "homebrew_long_description": "A native homebrew GeForce NOW client for the PlayStation Vita.",
+    "homebrew_id": "opennow-vita",
+    "homebrew_authors": [
+      "josephinoo"
+    ],
+    "homebrew_version": "0.3.3",
+    "catalog_apps": [
+      {
+        "id": "opennow-vita",
+        "name": "OpenNow Vita",
+        "icon": "https://archive.org/download/psvitaalive-opennow-vita/icon0.png",
+        "category": "utilities",
+        "description": "Nvidia GeForce Now client for PSVita.",
+        "long_description": "A native homebrew GeForce NOW client for the PlayStation Vita.",
+        "version": "0.3.3",
+        "version_date": "2026-10-27",
+        "author_ids": [
+          "josephinoo"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psvitaalive-opennow-vita/opennow-vita%20v0.3.3.vpk",
+            "recommended": true
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/tag/v0.3.1"
+          },
+          {
+            "type": "Repository",
+            "name": "Repositorio",
+            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita"
+          },
+          {
+            "type": "Official Website",
+            "name": "Release Page",
+            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.3.3 → release v0.3.5",
+    "catalog_version": "0.3.3",
+    "archive_current_link": "https://archive.org/download/psvitaalive-opennow-vita/opennow-vita%20v0.3.3.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
     "repo": "PupueStudios/mkds-vita",
     "release_id": "458583289",
     "tag": "v1.3",
@@ -46,7 +122,7 @@
           {
             "type": "Download",
             "name": "VPK",
-            "url": "https://github.com/PupueStudios/mkds-vita/releases/download/v1.3/mkds.vpk",
+            "url": "https://archive.org/download/mario-kart-ds-vita/mario-kart-ds%20v1.3.vpk",
             "size": 2290308,
             "recommended": true
           },
@@ -71,10 +147,10 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.3",
     "catalog_version": "1.3",
-    "archive_current_link": "",
+    "archive_current_link": "https://archive.org/download/mario-kart-ds-vita/mario-kart-ds%20v1.3.vpk",
     "archive_media_item": "",
-    "backup_status": "missing",
-    "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org"
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
   },
   {
     "platform": "github",
@@ -11498,82 +11574,6 @@
     "archive_current_link": "https://archive.org/download/batman-arkham-origins-ps-vita/batmanarkhamoriginsvita%20v1.1.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "OpenCloudGaming/OpenNOW-vita",
-    "release_id": "430860814",
-    "tag": "v0.3.4-beta",
-    "name": "OpenNOW Vita v0.3.4 (beta)",
-    "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/tag/v0.3.4-beta",
-    "published": "2026-11-01T21:12:39Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Beta for testing; not the latest release.\n\n- Default to the global NVIDIA endpoint (fixes long queues, #32)\n- Retry 408/425/429/5xx on session create and poll (#31)\n- Login provider selector (◄/►)\n- Keep account on temporary refresh failures (#26), retry device-login polling (#28)\n- Stream: drop goog-remb, bigger UDP buffer, fixed jitter and adaptive reorder grace, no mid-stream bitrate renegotiation (#30)",
-    "assets": [
-      {
-        "name": "opennow-vita.vpk",
-        "size": 9451434,
-        "download_url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/download/v0.3.4-beta/opennow-vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "josephinoo",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.3.3 → release v0.3.4-beta",
-    "catalog_version": "0.3.3",
-    "homebrew_name": "OpenNow Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-opennow-vita/icon0.png",
-    "homebrew_category": "utilities",
-    "homebrew_description": "Nvidia GeForce Now client for PSVita.",
-    "homebrew_long_description": "A native homebrew GeForce NOW client for the PlayStation Vita.",
-    "homebrew_id": "opennow-vita",
-    "homebrew_authors": [
-      "josephinoo"
-    ],
-    "homebrew_version": "0.3.3",
-    "catalog_apps": [
-      {
-        "id": "opennow-vita",
-        "name": "OpenNow Vita",
-        "icon": "https://archive.org/download/psvitaalive-opennow-vita/icon0.png",
-        "category": "utilities",
-        "description": "Nvidia GeForce Now client for PSVita.",
-        "long_description": "A native homebrew GeForce NOW client for the PlayStation Vita.",
-        "version": "0.3.3",
-        "version_date": "2026-10-27",
-        "author_ids": [
-          "josephinoo"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-opennow-vita/opennow-vita%20v0.3.3.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/tag/v0.3.1"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-opennow-vita/opennow-vita%20v0.3.3.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org",
     "archive_media_item": ""
   },
   {
