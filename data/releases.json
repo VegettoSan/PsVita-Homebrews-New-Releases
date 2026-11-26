@@ -46,7 +46,7 @@
           {
             "type": "Download",
             "name": "VPK",
-            "url": "https://github.com/OpenCloudGaming/OpenNOW-vita/releases/download/v0.3.5/opennow-vita.vpk",
+            "url": "https://archive.org/download/psvitaalive-opennow-vita/opennow-vita%20v0.3.5.vpk",
             "recommended": true
           },
           {
@@ -70,10 +70,88 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 0.3.5",
     "catalog_version": "0.3.5",
-    "archive_current_link": "",
+    "archive_current_link": "https://archive.org/download/psvitaalive-opennow-vita/opennow-vita%20v0.3.5.vpk",
     "archive_media_item": "",
-    "backup_status": "missing",
-    "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org"
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
+  },
+  {
+    "platform": "github",
+    "repo": "elmnt22/vita-nfshp2",
+    "release_id": "458873892",
+    "tag": "v0.1.2-alpha",
+    "name": "v0.1.2-alpha",
+    "url": "https://github.com/elmnt22/vita-nfshp2/releases/tag/v0.1.2-alpha",
+    "published": "2026-11-26T02:31:26Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "# NFS Hot Pursuit 2 for PS Vita — v0.1.2-alpha\n\nFixes for the reported bugs in racing and the track map, clearer audio, and a steadier 30 FPS in busy scenes.\n\n## Fixes\n\n- **Rivals no longer pull away at impossible speeds** ([#1](https://github.com/elmnt22/vita-nfshp2/issues/1)). Two port bugs caused this:\n  - **AI updated twice as often as on PS2.** The port runs the world at 60 Hz, but AI decisions were still counted per update, so cars made them twice as often as the original 30 Hz. Far-away rivals then sped up a little on every decision until they were far too fast, and a car could \"rocket\" up from behind. AI decisions now run at the PS2 rate.\n  - **Catch Up was forced off.** It was off in Quick Game, Free Run and Event Trees, where the PS2 game keeps it on.\n- **The 3D Rotation and 2D Rotation track maps now rotate** ([#4](https://github.com/elmnt22/vita-nfshp2/issues/4)). The map was reading the rear-view mirror's camera instead of the main one, so it stayed fixed like Standard mode. It now turns with your car, like on PS2.\n- **No more audio clipping in busy race moments.** With many sounds playing at once, such as engines, sirens, crashes and speech, the mix could go well over full volume and crackle. A peak limiter now turns the volume down smoothly during these peaks and leaves quieter moments untouched.\n\n## Performance\n\nBusy scenes hold 30 FPS more often:\n\n- **AI opponent cars use their simpler detail level** (no driver model or road shadow). The bodies look nearly the same. Your own car stays at full detail.\n- **Heaviest frames only:** distant scenery switches to its lower-detail models a little earlier.\n- **Lots of smaller speed-ups** in scenery drawing, collision, particles, audio streaming and memory use.\n\nLate frames in our heaviest test races fell from about 4.6% to 2.8%, and from about 2.7% to 0.9%. A typical full race measured 0.6%.\n\n## Updating\n\nInstall the new **`NFSHP2.vpk`** over the old one with VitaShell. Your game data and saves in `ux0:data/NFSHP2/` are kept.\n\n## What you need\n\n- **Need for Speed: Hot Pursuit 2 for PS2, PAL version 1.00 (SLES-50731).** Other regions and versions are not supported. No game data is included.\n- A PS Vita or PS TV with **HENkaku / Ensō**, and **VitaShell**.\n- **`libshacccg.suprx`** in `ur0:data/` (extract it with ShaRKBR33D if you don't have it).\n- About **3.2 GB** free on the memory card.\n\n## Installation\n\n1. Install **`NFSHP2.vpk`** (below) with VitaShell. It shows up as **NFS Hot Pursuit 2** (title ID `NFSHP2002`).\n2. Copy **`ZDIR.BIN`** and **`ZZDATA.BIN`** from the disc's `NFSHP2` folder to **`ux0:data/NFSHP2/`**.\n3. Start the game from the LiveArea.\n\n## Known issues\n\n- Very busy moments, such as big pileups and wide open views, can still dip briefly below 30 FPS.\n- Some parts have had less testing than single-player racing, such as two-player split screen and long career runs. Reports from these are very welcome.\n\n## Options\n\nFiles in `ux0:data/NFSHP2/` change settings at boot. All are empty except `audio_gain.txt`.\n\n| File | Effect |\n| --- | --- |\n| `fps_uncapped.txt` | Unlock the frame rate (experimental) |\n| `audio_dry.txt` | Turn the reverb off |\n| `audio_linear.txt` | Use plain linear voice interpolation |\n| `speedtrap_retail.txt` | Keep the original race-start behaviour for the parked speed-trap cop |\n| `reduced_opponents_off.txt` | **New:** draw AI opponent cars at full detail (costs frame rate) |\n| `scenery_cut_off.txt` | **New:** never lower scenery detail in heavy frames (costs frame rate) |\n| `audio_limiter_off.txt` | **New:** turn the peak limiter off |\n| `audio_gain.txt` | **New:** a number such as `0.6` sets the overall volume (default `1.0`) |\n\n## Reporting problems\n\nOpen an [issue](https://github.com/elmnt22/vita-nfshp2/issues) and attach `ux0:data/NFSHP2/NFSHP2_log.txt` from the run with the problem. With [kubridge](https://github.com/bythos14/kubridge) installed, a crash also writes `crash.txt` there; please attach it too.\n\n## Credits and license\n\nBuilt on **[NFSHP2_Switch_Port](https://github.com/HDErick/NFSHP2_Switch_Port)** by HDErick, with **vitaGL** by Rinnegatamante and the **VitaSDK** team. Full credits are in the README. Licensed under **GPL-3.0**.\n\nNeed for Speed and Hot Pursuit 2 are trademarks of Electronic Arts. This project is not affiliated with or endorsed by Electronic Arts.\n",
+    "assets": [
+      {
+        "name": "NFSHP2.vpk",
+        "size": 4258410,
+        "download_url": "https://github.com/elmnt22/vita-nfshp2/releases/download/v0.1.2-alpha/NFSHP2.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "elmnt22",
+    "no_stable_release": true,
+    "homebrew_name": "NFS Hot Pursuit 2",
+    "homebrew_icon": "https://archive.org/download/psva-need-for-speed-hot-pursuit-2-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A native port of Need for Speed: Hot Pursuit 2 (PS2) for the PlayStation Vita.",
+    "homebrew_long_description": "A native PlayStation Vita port of Need for Speed: Hot Pursuit 2, built on a C++ reimplementation of the PS2 game's engine and running the PS2 disc's own data on the console. That covers the front end, cars, tracks, cops, HUD, movies, speech, sound effects and music.\n\nThe goal is to play like the PS2 original. Gameplay, physics, AI and handling keep the retail behaviour; every Vita optimisation is checked against the reference code for identical results. There is no emulation and no recompiler: the game runs as native ARM code.",
+    "homebrew_id": "nfs-hot-pursuit-2",
+    "homebrew_authors": [
+      "elmnt22"
+    ],
+    "homebrew_version": "0.1.2",
+    "catalog_apps": [
+      {
+        "id": "nfs-hot-pursuit-2",
+        "name": "NFS Hot Pursuit 2",
+        "icon": "https://archive.org/download/psva-need-for-speed-hot-pursuit-2-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "A native port of Need for Speed: Hot Pursuit 2 (PS2) for the PlayStation Vita.",
+        "long_description": "A native PlayStation Vita port of Need for Speed: Hot Pursuit 2, built on a C++ reimplementation of the PS2 game's engine and running the PS2 disc's own data on the console. That covers the front end, cars, tracks, cops, HUD, movies, speech, sound effects and music.\n\nThe goal is to play like the PS2 original. Gameplay, physics, AI and handling keep the retail behaviour; every Vita optimisation is checked against the reference code for identical results. There is no emulation and no recompiler: the game runs as native ARM code.",
+        "version": "0.1.2",
+        "version_date": "2026-11-25",
+        "author_ids": [
+          "elmnt22"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/psva-need-for-speed-hot-pursuit-2-ps-vita/NFSHP2%20v0.1.2.vpk",
+            "size": 4299162,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/psva-need-for-speed-hot-pursuit-2-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 3113851290,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "NFSHP2"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/elmnt22/vita-nfshp2"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.1.2",
+    "catalog_version": "0.1.2",
+    "archive_current_link": "https://archive.org/download/psva-need-for-speed-hot-pursuit-2-ps-vita/NFSHP2%20v0.1.2.vpk",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
   },
   {
     "platform": "github",
