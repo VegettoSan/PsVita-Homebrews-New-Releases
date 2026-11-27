@@ -7,6 +7,8 @@ on:
     branches: [main]
     paths:
       - .github/workflows/discovery-enrichment-queue.yml
+      - discovery_enrichment_queue.py
+      - preview_discovery_enrichment.py
   pull_request:
     branches: [main]
     paths:
@@ -27,7 +29,7 @@ jobs:
     if: >-
       github.repository == 'VegettoSan/PsVita-Homebrews-New-Releases' &&
       (github.ref == 'refs/heads/main' ||
-      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/discovery-enrichment'))
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/prioritize-publishable-discoveries'))
     permissions:
       contents: write
       actions: read
@@ -52,6 +54,10 @@ jobs:
           BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
+          if [ -s data/discovery/enrichment_state.json ]; then
+            cp data/discovery/enrichment_state.json enrichment-state.json
+            exit 0
+          fi
           prior=$(gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/discovery-enrichment-queue.yml/runs" -f branch="$BRANCH" -f event=pull_request -f status=success --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID and .head_repository.full_name == \"$GITHUB_REPOSITORY\") | .id" | head -n 1)
           if [ -n "$prior" ]; then
             echo "Resuming checkpoint from run $prior"
@@ -135,6 +141,17 @@ jobs:
             git commit -m "Checkpoint automatic discovery enrichment"
             git push origin HEAD:main
           fi
+      - name: Notify PSVitaAlive after enrichment checkpoint
+        if: github.ref == 'refs/heads/main' && success()
+        env:
+          GH_TOKEN: ${{ secrets.PSVA_AUTOUPDATE_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::Cross-repository token unavailable; scheduled importer remains enabled."
+            exit 0
+          fi
+          gh api --method POST repos/VegettoSan/PSVitaAlive/dispatches -f event_type=orbit_enrichment_ready
       - name: Save queue checkpoint
         if: always()
         uses: actions/upload-artifact@v4
