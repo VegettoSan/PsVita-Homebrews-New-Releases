@@ -8,7 +8,7 @@ import json
 import os
 import tempfile
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 SCHEMA_VERSION = 1
@@ -88,7 +88,23 @@ def due(record, now):
     return datetime.fromisoformat(value) <= now
 
 
-def choose(state, candidates, limit, now=None):
+def publication_priority(entry, now):
+    """Historical native GitHub projects with an actual downloadable VPK.
+    This is only scheduling priority, not publication approval."""
+    if (entry.get("platform") != "github" or entry.get("project_type") != "homebrew"
+            or entry.get("lineage_is_fork") is True):
+        return False
+    draft = entry.get("app_draft") or {}
+    try:
+        return (date.fromisoformat(draft["version_date"]) <= now.date() - timedelta(days=365)
+                and type(draft.get("size")) is int and 0 < draft["size"] <= 64*1024*1024
+                and any(l.get("type") == "Download" and str(l.get("url","")).startswith("https://github.com/")
+                        for l in draft.get("links",[]) if isinstance(l,dict)))
+    except (ValueError, TypeError, KeyError):
+        return False
+
+
+def choose(state, candidates, limit, now=None, prioritize_publication=False):
     """Rotate by last attempt; prefer nearly complete candidates among equal age."""
     now = now or now_utc()
     rows = []
@@ -100,6 +116,12 @@ def choose(state, candidates, limit, now=None):
         # Never-attempted first, then oldest attempted: no candidate monopolizes retries.
         rows.append((record.get("last_at", ""), -present, key))
     rows.sort()
+    if prioritize_publication:
+        # Reserve half the batch for likely importable historical candidates,
+        # keeping the other half for ordinary discovery fairness.
+        priority = [row for row in rows if publication_priority(candidates[row[2]], now)][:max(1, limit//2)]
+        keys = {row[2] for row in priority}
+        rows = priority + [row for row in rows if row[2] not in keys]
     return [(key, candidates[key]) for _, _, key in rows[:limit]]
 
 
