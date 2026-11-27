@@ -33,6 +33,8 @@ def file_priority(path):
         return 0
     if n in {"cmakelists.txt", "makefile", "gnumakefile", "projectsettings.asset"}:
         return 1
+    if len(p.parts) == 1 and n.startswith("readme"):
+        return 1
     if re.search(r"title.?id|param|manifest|version|config|build|package|vita|psp2", n) and p.suffix.casefold() in TEXT_SUFFIXES:
         return 2
     if n.startswith(("readme", "changelog", "release", "install")):
@@ -44,7 +46,7 @@ def file_priority(path):
 
 def prioritized_paths(paths):
     ranked = [(file_priority(p), p) for p in set(paths) if isinstance(p, str)]
-    return [p for rank, p in sorted((r, p) for r, p in ranked if r is not None)]
+    return [p for rank, p in sorted(((r, p) for r, p in ranked if r is not None), key=lambda x: (x[0], x[1].count("/"), x[1].casefold(), x[1]))]
 
 
 def sfo_title_id(raw):
@@ -126,13 +128,13 @@ RULES = {
     "emulators": [(10, r"\b(?:emulator|emulation frontend|emulation core)\b")],
     "plugins": [(10, r"\b(?:taihen plugin|kernel plugin|user plugin|vita plugin|skprx|suprx)\b"), (5, r"\bplugin\b")],
     "utilities": [(8, r"\b(?:file manager|save manager|calculator|backup tool|installer|terminal emulator|text editor|launcher|updater|utility)\b")],
-    "system": [(8, r"\b(?:firmware tool|downgrade|system manager|mount tool|system diagnostics|system information|storage manager)\b")],
-    "media": [(8, r"\b(?:music player|video player|image viewer|image editor|audio player|multimedia player|media player)\b")],
+    "system": [(8, r"\b(?:custom firmware|firmware tool|downgrade|system manager|mount tool|system diagnostics|system information|storage manager)\b")],
+    "media": [(8, r"\b(?:music player|video player|image viewer|image editor|audio (?:[a-z]+ ){0,2}player|multimedia player|media player)\b")],
     "networking": [(8, r"\b(?:ftp server|ssh client|ssh server|web browser|remote desktop|game streaming|network tool|http server|messaging client)\b")],
     "customization": [(8, r"\b(?:theme manager|custom theme|wallpaper|boot animation|bubble manager|font manager)\b")],
     "modding": [(9, r"\b(?:translation patch|game patch|rom hack|texture pack|fan translation|localization patch|game mod)\b")],
-    "development": [(8, r"\b(?:development library|software development kit|development tool|programming framework|compiler|debugger|game engine library)\b")],
-    "demos": [(8, r"\b(?:tech demo|technical demo|proof of concept|benchmark|graphics demo|gameplay demo)\b")],
+    "development": [(8, r"\b(?:development library|software development kit|development tool|programming framework|compiler|debugger|game engine library|homebrew interpreter|lua interpreter)\b")],
+    "demos": [(8, r"\b(?:tech demo|technical demo|proof of concept|poc|qr demo|benchmark|graphics demo|gameplay demo)\b")],
     "education": [(8, r"\b(?:educational app|learning tool|language learning|encyclopedia|math learning)\b")],
     "accessibility": [(8, r"\b(?:accessibility tool|assistive tool|screen reader|assistive technology)\b")],
     "preservation": [(8, r"\b(?:preservation tool|software preservation|archival tool|historical archive)\b")],
@@ -144,18 +146,61 @@ SUB_RULES = {
     "plugins": {"overclock": r"\boverclock\w*\b", "performance": r"\b(?:performance|overclock\w*)\b", "audio": r"\baudio\b", "graphics": r"\bgraphics\b", "storage": r"\bstorage\b", "input": r"\b(?:input|controller)\b", "display": r"\bdisplay\b"},
     "utilities": {"file-manager": r"\bfile manager\b", "ftp": r"\bftp\b", "save-manager": r"\bsave manager\b", "calculator": r"\bcalculator\b", "installer": r"\binstaller\b", "launcher": r"\blauncher\b", "terminal": r"\bterminal\b", "text-editor": r"\btext editor\b", "backup": r"\bbackup\b", "updater": r"\bupdater\b"},
     "networking": {"ftp": r"\bftp\b", "web-browser": r"\bweb browser\b", "game-streaming": r"\bgame streaming\b", "remote-desktop": r"\bremote desktop\b", "client": r"\bclient\b", "server": r"\bserver\b"},
-    "media": {"music-player": r"\bmusic player\b", "video-player": r"\bvideo player\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
+    "media": {"audio": r"\baudio\b", "music-player": r"\b(?:music player|audio (?:[a-z]+ ){0,2}player)\b", "video-player": r"\bvideo player\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
     "modding": {"translation": r"\b(?:translation|fan translation)\b", "game-patches": r"\bgame patch\b", "rom-hacks": r"\brom hack\b", "textures": r"\btexture pack\b"},
-    "system": {"firmware-tools": r"\bfirmware tool\b", "downgrade": r"\bdowngrade\b", "storage": r"\bstorage manager\b"},
+    "system": {"firmware": r"\bcustom firmware\b", "firmware-tools": r"\bfirmware tool\b", "downgrade": r"\bdowngrade\b", "storage": r"\bstorage manager\b"},
+    "demos": {"proof-of-concept": r"\b(?:proof of concept|poc)\b", "tech-demo": r"\b(?:tech demo|qr demo)\b"},
+    "development": {"interpreter": r"\binterpreter\b", "lua": r"\blua\b"},
     "customization": {"themes": r"\btheme\b", "wallpapers": r"\bwallpaper\b", "boot-animation": r"\bboot animation\b"},
 }
+
+
+def readme_purpose(readme):
+    """Only opening project prose/headings, not feature lists or instructions."""
+    out = []
+    started = False
+    fenced = False
+    for line in str(readme)[:12000].splitlines():
+        line = line.strip()
+        if line.startswith(("\x60\x60\x60", "~~~")):
+            fenced = not fenced
+            continue
+        if fenced or not line or line.startswith(("![", "<", "[!", ">", "|")):
+            continue
+        if re.fullmatch(r"[-=_*]{3,}", line):
+            if started:
+                break
+            continue
+        if re.match(r"^#{1,6}\s*(?:features?|installation|install|building|build|usage|requirements|dependencies|credits|changelog|notes|supported platforms|screenshots|theme support|controls|download|license)\b", line, re.I):
+            break
+        if re.match(r"^(?:[-*+]|\d+\.)\s+", line):
+            continue
+        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", line)
+        line = re.sub(r"https?://\S+", "", line)
+        line = re.sub(r"[\x60*#]", "", line).strip()
+        if line:
+            out.append(line)
+            started = True
+        if len(out) >= 8 or sum(map(len, out)) >= 1800:
+            break
+    return "\n".join(out)[:1800]
+
+
+def target_review(name, description, readme):
+    """Explicit direction of a port can contradict a Vita discovery."""
+    text = "\n".join((str(name), str(description), readme_purpose(readme)))
+    if re.search(r"\b(?:port (?:of|from)\b[^.\n]{0,200}\bto desktop platforms|(?:lua player plus|ps vita homebrew|vita interpreter) for desktop)\b", text, re.I):
+        return {"state": "review", "reason": "Explicit desktop target; Vita is the source, not necessarily the destination"}
+    return {"state": "not_excluded", "reason": ""}
 
 
 def classify_category(name, description, readme, project_type, categories):
     taxonomy = {c["id"]: {s["id"] for s in c.get("subcategories", [])}
                 for c in categories if isinstance(c, dict) and "id" in c}
     primary = (str(name) + "\n" + str(description)).replace("_", " ").replace("-", " ")
-    body = str(readme)[:12000].replace("_", " ").replace("-", " ")
+    body = readme_purpose(readme).replace("_", " ").replace("-", " ")
+    if target_review(name, description, readme)["state"] == "review":
+        return {"state": "target_review", "category_id": "", "subcategory_ids": [], "scores": {}, "evidence": {}}
     scores, evidence = {}, {}
     for cid, rules in RULES.items():
         if cid not in taxonomy:
@@ -165,7 +210,7 @@ def classify_category(name, description, readme, project_type, categories):
             origin = "metadata"
             if not m:
                 m = re.search(pattern, body, re.I)
-                origin = "readme"
+                origin = "readme_purpose"
             if m:
                 scores[cid] = scores.get(cid, 0) + weight + (2 if origin == "metadata" else 0)
                 evidence.setdefault(cid, []).append({"match": m.group(0), "source": origin})
