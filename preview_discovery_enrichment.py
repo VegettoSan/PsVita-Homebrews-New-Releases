@@ -71,7 +71,8 @@ def provider_repo(entry):
 def read_file(endpoint, platform, path, ref):
     """Use only official provider endpoints; reject large/binary data before parsing."""
     if platform == "github":
-        data = discovery.request(endpoint + "/contents/" + quote(path, safe="/"), {"ref": ref})
+        project = endpoint.removeprefix("https://api.github.com/repos/")
+        return discovery.raw_bytes(project, ref, path, MAX_FILE_BYTES)
     else:
         data = discovery.request(endpoint + "/repository/files/" + quote(path, safe=""), {"ref": ref}, gitlab=True)
     if not isinstance(data, dict) or data.get("encoding") != "base64":
@@ -227,6 +228,16 @@ def inspect_batch(rows, taxonomy, official, retired, max_files):
 
 
 def run(limit, offset, max_files, state_path=None):
+    state = None
+    if state_path is not None:
+        state = queue.load_state(state_path)
+        if queue.paused(state):
+            return {"mode": "queue_preview", "offset": offset, "requested": limit,
+                    "max_files": max_files, "http_requests": 0,
+                    "quota": {**discovery.quota_status(), "rate_limited": True,
+                              "reset_at": state["resume_at"], "reason": "Persisted quota cooldown"},
+                    "results": [], "internal_errors": 0, "budget_stopped": True,
+                    "unattempted_keys": [], "queue": queue.summary(state, [])}
     taxonomy = to_v1(discovery.request(BASE + "categories.json"))
     catalog = to_v1(discovery.request(BASE + "catalog.json"))
     registry = discovery.request(BASE + "registry/retired_ids.json")
@@ -243,9 +254,8 @@ def run(limit, offset, max_files, state_path=None):
     candidates = json.loads(Path("data/discovery/candidates.json").read_text(encoding="utf-8"))
     if not isinstance(candidates, dict):
         raise ValueError("Invalid candidate inventory")
-    state = None
-    if state_path is not None:
-        state = queue.reconcile(queue.load_state(state_path), candidates)
+    if state is not None:
+        state = queue.reconcile(state, candidates)
         queue.save_state(state_path, state)
         rows = queue.choose(state, candidates, limit)
     else:
@@ -257,7 +267,7 @@ def run(limit, offset, max_files, state_path=None):
     for result in batch["results"]:
         if result.get("state") not in {"inspected", "partial"}:
             if state is not None:
-                queue.checkpoint(state, result["key"], result)
+                queue.checkpoint(state, result["key"], result, quota=discovery.quota_status())
                 queue.save_state(state_path, state)
             continue
         entry = candidates[result["key"]]
@@ -265,7 +275,8 @@ def run(limit, offset, max_files, state_path=None):
         cache_key = (entry.get("author_profile"), owner.get("id"), owner.get("fork"), owner.get("group"))
         try:
             if cache_key not in author_cache:
-                author_cache[cache_key] = author_proposal(entry, owner, authors, registry, discovery.request)
+                author_cache[cache_key] = author_proposal(entry, owner, authors, registry,
+                    queue.profile_request(state, owner, discovery.request) if state is not None else discovery.request)
             result["author"] = author_cache[cache_key]
         except discovery.DiscoveryBudgetReached:
             result["author"] = {"state": "deferred", "reason": "API budget exhausted"}
@@ -316,14 +327,9 @@ def run(limit, offset, max_files, state_path=None):
         if author.get("state") == "draft" and len(proposed[author["draft"]["id"]]) > 1:
             result["author"] = {**author, "state": "review", "reason": "Different accounts produce same author ID"}
     if state is not None:
+        queue.apply_quota_pause(state, discovery.quota_status())
         queue.save_state(state_path, state)
-        counts = {}
-        for record in state["records"].values():
-            stage = record.get("state", "new")
-            counts[stage] = counts.get(stage, 0) + 1
-        batch["queue"] = {"inventory": len(state["records"]), "states": counts,
-                          "selected_keys": [key for key, _ in rows],
-                          "processed_keys": [r["key"] for r in batch["results"] if r.get("state") != "deferred"]}
+        batch["queue"] = queue.summary(state, [key for key, _ in rows], batch["results"])
     return {"mode": "queue_preview" if state is not None else "read_only", "offset": offset,
             "requested": limit, "max_files": max_files,
             "http_requests": discovery.REQUEST_COUNT, "quota": discovery.quota_status(), **batch}
