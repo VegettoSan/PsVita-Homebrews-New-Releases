@@ -257,6 +257,15 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
         raise ValueError("Invalid candidate inventory")
     if state is not None:
         state = queue.reconcile(state, candidates)
+        feedback = {}
+        try:
+            cursor = discovery.request(BASE + "data/orbit_import_cursor.json")
+            if isinstance(cursor, dict) and isinstance(cursor.get("feedback"), dict) and len(cursor["feedback"]) <= queue.MAX_RECORDS:
+                feedback = cursor["feedback"]
+        except (requests.RequestException, ValueError, TypeError, KeyError, discovery.DiscoveryBudgetReached):
+            # The hint is optional. Missing feedback must not prevent discovery.
+            pass
+        queue.publication_snapshot(state, candidates, apps, registry, taxonomy, feedback)
         queue.save_state(state_path, state)
         rows = queue.choose(state, candidates, limit, prioritize_publication=True)
     else:
@@ -342,8 +351,11 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
         author = result.get("author", {})
         if author.get("state") == "draft" and len(proposed[author["draft"]["id"]]) > 1:
             result["author"] = {**author, "state": "review", "reason": "Different accounts produce same author ID"}
+            if state is not None:
+                state["records"][result["key"]]["result"] = result
     if state is not None:
         queue.apply_quota_pause(state, discovery.quota_status())
+        queue.publication_snapshot(state, candidates, apps, registry, taxonomy, feedback)
         queue.save_state(state_path, state)
         batch["queue"] = queue.summary(state, [key for key, _ in rows], batch["results"])
     return {"mode": "queue_preview" if state is not None else "read_only", "offset": offset,
