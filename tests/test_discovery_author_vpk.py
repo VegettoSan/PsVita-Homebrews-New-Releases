@@ -3,7 +3,7 @@ import struct
 import unittest
 import zipfile
 from discovery_author_profiles import author_proposal, DEFAULT_AVATAR
-from discovery_vpk import select_vpk, validate_package, verify_download
+from discovery_vpk import select_vpk, validate_package, verify_download, latest_publication_asset
 
 
 class AuthorTests(unittest.TestCase):
@@ -67,6 +67,21 @@ class VpkTests(unittest.TestCase):
         self.assertEqual(select_vpk(self.entry, [{"tag_name": "v2", "assets": [self.asset]}])["state"], "review")
         self.assertEqual(select_vpk({**self.entry, "project": "other/demo"},
                          [{"tag_name": "v1", "assets": [self.asset]}])["state"], "review")
+
+    def test_latest_stable_release_refresh_and_attribution(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 11, 27, tzinfo=timezone.utc)
+        entry = {**self.entry, "key": "gh:123", "author_profile": "https://github.com/dev"}
+        repo = {"id": 123, "full_name": "dev/demo", "fork": False, "owner": {"login": "dev", "type": "User"}}
+        asset = {**self.asset, "browser_download_url": self.url.replace("/v1/", "/v2/")}
+        latest = {"draft": False, "prerelease": False, "tag_name": "v2", "published_at": "2026-11-26T00:00:00Z", "assets": [asset]}
+        proof = latest_publication_asset(entry, repo, latest, now)
+        self.assertEqual(proof["state"], "verified")
+        self.assertEqual(proof["draft_update"]["version"], "2")
+        self.assertEqual(proof["asset"]["tag"], "v2")
+        self.assertEqual(latest_publication_asset(entry, repo, {**latest, "prerelease": True}, now)["state"], "WAITING_RELEASE")
+        self.assertEqual(latest_publication_asset(entry, {**repo, "owner": {"login": "dev", "type": "Organization"}}, latest, now)["state"], "NEEDS_REVIEW")
+        self.assertEqual(latest_publication_asset(entry, repo, {**latest, "assets": [asset, asset]}, now)["state"], "WAITING_RELEASE")
 
     def test_valid_package_identity(self):
         self.assertEqual(validate_package(package(), "DEMO00001"),

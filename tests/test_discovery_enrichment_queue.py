@@ -50,7 +50,12 @@ class QueueTests(unittest.TestCase):
                           "url": entry["app_draft"]["links"][0]["url"]},
                   "category": {"state": "suggested", "category_id": "demos", "subcategory_ids": ["other"]},
                   "author": {"state": "draft"}, "requirements": {"state": "no_data"}}
+        result["publication_preflight"] = {"state": "verified", "checked_at": self.now.isoformat(),
+            "asset": {"state": "selected", "size": 100, "url": result["vpk"]["url"]}}
         taxonomy = [{"id": "demos", "subcategories": [{"id": "other"}]}]
+        self.assertTrue(q.source_proof_matches(result, self.now))
+        self.assertFalse(q.source_proof_matches(result, self.now + timedelta(hours=25)))
+        self.assertFalse(q.source_proof_matches({**result, "publication_preflight": None}, self.now))
         q.checkpoint(state, "gh:123", result, self.now)
         snap = q.publication_snapshot(state, candidates, [], {}, taxonomy, now=self.now)
         self.assertEqual(snap["counts"], {"READY_TO_PUBLISH": 1})

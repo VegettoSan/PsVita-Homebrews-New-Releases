@@ -20,7 +20,7 @@ from discovery_enrichment import (
 
 from discovery_readiness import readiness
 from discovery_author_profiles import author_proposal
-from discovery_vpk import select_vpk, verify_download
+from discovery_vpk import select_vpk, verify_download, latest_publication_asset
 from discovery_vpk_artwork import media_proposal
 import discovery_enrichment_queue as queue
 from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
@@ -93,6 +93,25 @@ def read_file(endpoint, platform, path, ref):
 def inspect(entry, taxonomy, official, retired, max_files):
     repo, endpoint, ref = provider_repo(entry)
     platform = entry["platform"]
+    preflight = None
+    if platform == "github" and entry.get("project_type") == "homebrew":
+        # Do not spend tree, README or binary budget on a known bad publication source.
+        try:
+            latest = discovery.request(endpoint + "/releases/latest")
+            preflight = latest_publication_asset(entry, repo, latest)
+        except discovery.DiscoveryBudgetReached:
+            raise
+        except requests.HTTPError as exc:
+            code = exc.response.status_code if exc.response is not None else None
+            preflight = {"state": "WAITING_RELEASE" if code == 404 else "RETRY_LATER",
+                         "reason": "no_stable_release" if code == 404 else "upstream_http"}
+        except (requests.RequestException, ValueError, RuntimeError):
+            preflight = {"state": "RETRY_LATER", "reason": "upstream_unavailable"}
+        if preflight["state"] != "verified":
+            return {"key": entry["key"], "project": entry["project"], "state": "source_wait",
+                    "publication_preflight": preflight, "publication_allowed": False}
+        if preflight.get("draft_update"):
+            entry = {**entry, "app_draft": preflight["draft_update"]}
     files = discovery.files_for(repo, platform)
     paths = prioritized_paths(files)
     evidence = []
@@ -181,7 +200,8 @@ def inspect(entry, taxonomy, official, retired, max_files):
     return {"key": entry["key"], "project": entry["project"], "ref": ref,
             "title": identity, "category": category,
             "requirements": resolve_requirements(requirements),
-            "owner_profile": owner_info, "vpk_asset": select_vpk(entry, releases),
+            "owner_profile": owner_info, "vpk_asset": preflight["asset"] if preflight else select_vpk(entry, releases),
+            "publication_preflight": preflight,
             "coverage": {"listed_files": len(files), "eligible_files": len(paths),
                          "read_files": read_count, "skipped": skipped, "remaining": max(0, len(paths) - max_files),
                          "complete": False, "note": "Bounded pilot; tree/release coverage is not proof of exhaustive inspection"},
@@ -211,6 +231,9 @@ def inspect_batch(rows, taxonomy, official, retired, max_files):
             stopped = True
             break
         except (requests.RequestException, ValueError, KeyError, TypeError, RuntimeError) as exc:
+            if isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code == 404:
+                results.append({**identity, "state": "source_wait", "publication_preflight": {"state": "RETRY_LATER", "reason": "upstream_missing"}, "publication_allowed": False})
+                continue
             results.append({**identity, "state": "candidate_error",
                             "error_type": type(exc).__name__, "retry": True,
                             "publication_allowed": False})
@@ -271,6 +294,21 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
     else:
         rows = sorted(candidates.items())[offset:offset+limit]
     batch = inspect_batch(rows, taxonomy, official, retired, max_files)
+    # Persist authoritative stable-release refreshes only in the discovery inventory.
+    # A new fingerprint invalidates old binary/feedback evidence before checkpointing.
+    refreshed = 0
+    if state is not None:
+        for result in batch["results"]:
+            proof = result.get("publication_preflight") or {}
+            draft = proof.pop("draft_update", None)
+            if proof.get("state") == "verified" and isinstance(draft, dict):
+                candidates[result["key"]]["app_draft"] = draft
+                refreshed += 1
+        if refreshed:
+            queue.save_state(Path("data/discovery/candidates.json"), candidates)
+            queue.reconcile(state, candidates)
+            queue.save_state(state_path, state)
+        print("Stable release discovery drafts refreshed:", refreshed)
     binary_budget = 128 * 1024 * 1024
     deadline = min(time.monotonic() + 180, discovery.START_TIME + discovery.MAX_SECONDS)
     author_cache = {}
@@ -281,6 +319,8 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
                 queue.save_state(state_path, state)
             continue
         entry = candidates[result["key"]]
+        if state is None and (result.get("publication_preflight") or {}).get("draft_update"):
+            entry = {**entry, "app_draft": result["publication_preflight"]["draft_update"]}
         owner = result.get("owner_profile", {})
         cache_key = (entry.get("author_profile"), owner.get("id"), owner.get("fork"), owner.get("group"))
         try:

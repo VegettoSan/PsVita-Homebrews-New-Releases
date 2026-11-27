@@ -5,6 +5,7 @@ import stat
 import tempfile
 import time
 import zipfile
+from datetime import date, datetime, timezone
 from pathlib import PurePosixPath
 from urllib.parse import urlsplit, unquote, urljoin
 import requests
@@ -48,6 +49,51 @@ def select_vpk(entry, releases):
         matches.append({"state": "selected", "url": url, "size": size, "digest": a.get("digest"),
                         "tag": release.get("tag_name"), "asset_id": a.get("id")})
     return matches[0] if len(matches) == 1 else {"state": "review", "reason": "No unique matching published VPK asset"}
+
+
+def latest_publication_asset(entry, repo, latest, now=None):
+    """Check the same stable release and attribution policy as PSVitaAlive.
+
+    A changed release may refresh only the discovery draft, never canonical apps.
+    """
+    now = now or datetime.now(timezone.utc)
+    owner = repo.get("owner") or {}
+    if (entry.get("key") != "gh:" + str(repo.get("id"))
+            or str(repo.get("full_name", "")).casefold() != entry["project"].casefold()
+            or repo.get("fork") is not False or owner.get("type") != "User"
+            or not isinstance(owner.get("login"), str)
+            or str(entry.get("author_profile", "")).rstrip("/").casefold() != ("https://github.com/" + owner["login"]).casefold()):
+        return {"state": "NEEDS_REVIEW", "reason": "repository_or_author_identity"}
+    if not isinstance(latest, dict) or latest.get("draft") is not False or latest.get("prerelease") is not False:
+        return {"state": "WAITING_RELEASE", "reason": "no_stable_release"}
+    tag = latest.get("tag_name")
+    try:
+        published = date.fromisoformat(str(latest.get("published_at", ""))[:10])
+        if published > now.date() or not isinstance(tag, str) or not tag or len(tag) > 100 or any(c.isspace() for c in tag):
+            raise ValueError("Invalid release")
+    except (ValueError, TypeError):
+        return {"state": "NEEDS_REVIEW", "reason": "release_metadata"}
+    assets = [a for a in latest.get("assets") or [] if isinstance(a, dict)
+              and str(a.get("name", "")).lower().endswith(".vpk")]
+    if len(assets) != 1:
+        return {"state": "WAITING_RELEASE", "reason": "no_unique_vpk"}
+    a = assets[0]
+    if a.get("state") != "uploaded" or type(a.get("size")) is not int or not 0 < a["size"] <= MAX_BYTES or not isinstance(a.get("browser_download_url"), str):
+        return {"state": "WAITING_RELEASE", "reason": "asset_not_publishable"}
+    old = entry.get("app_draft") or {}
+    url = a["browser_download_url"]
+    links = [l for l in old.get("links", []) if isinstance(l, dict) and l.get("type") != "Download"]
+    links.append({"type": "Download", "name": "VPK (revisión pendiente)", "url": url})
+    # Preserve all other discovery metadata and verify URL provenance before proposing any change.
+    refreshed = {**old, "links": links, "version": tag.lstrip("vV"),
+                 "version_date": published.isoformat(), "size": a["size"]}
+    asset = select_vpk({**entry, "app_draft": refreshed}, [latest])
+    if asset.get("state") != "selected":
+        return {"state": "NEEDS_REVIEW", "reason": "asset_provenance"}
+    old_urls = {l.get("url") for l in old.get("links", []) if isinstance(l, dict) and l.get("type") == "Download"}
+    changed = old_urls != {url} or any(old.get(k) != refreshed[k] for k in ("version", "version_date", "size"))
+    return {"state": "verified", "checked_at": now.isoformat(), "asset": asset,
+            **({"draft_update": refreshed} if changed else {})}
 
 
 def validate_package(file, expected="", deadline=None):

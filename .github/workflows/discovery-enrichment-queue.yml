@@ -137,7 +137,7 @@ jobs:
           cp enrichment-state.json data/discovery/enrichment_state.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/discovery/enrichment_state.json
+          git add data/discovery/enrichment_state.json data/discovery/candidates.json
           if ! git diff --cached --quiet; then
             git commit -m "Checkpoint automatic discovery enrichment"
             git push origin HEAD:main

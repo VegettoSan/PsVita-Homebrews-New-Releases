@@ -118,6 +118,22 @@ def evidence_key(entry, result):
                                     separators=(",", ":")).encode()).hexdigest()
 
 
+def source_proof_matches(result, now):
+    proof = result.get("publication_preflight") or {}
+    asset = proof.get("asset") or {}
+    vpk = result.get("vpk") or {}
+    try:
+        age = now - datetime.fromisoformat(proof["checked_at"])
+    except (TypeError, ValueError, KeyError):
+        return False
+    return (proof.get("state") == "verified" and timedelta(0) <= age <= timedelta(hours=24)
+            and asset.get("state") == "selected"
+            and asset.get("tag") == vpk.get("tag") and asset.get("url") == vpk.get("url")
+            and asset.get("size") == vpk.get("bytes_read")
+            and asset.get("asset_id") == vpk.get("asset_id")
+            and (not asset.get("digest") or asset["digest"] == "sha256:" + str(vpk.get("sha256", ""))))
+
+
 def publication_snapshot(state, candidates, apps, registry, taxonomy, feedback=None, now=None):
     """Materialize readiness for every discovery without additional upstream calls.
 
@@ -150,9 +166,12 @@ def publication_snapshot(state, candidates, apps, registry, taxonomy, feedback=N
                 (project and ("https://github.com/" + project).casefold() in sources) or
                 (tid and tid in tids)):
             item["state"] = "DUPLICATE"
+        elif (result.get("publication_preflight") or {}).get("state") in ("WAITING_RELEASE", "NEEDS_REVIEW", "RETRY_LATER"):
+            proof = result["publication_preflight"]
+            item.update(state=proof["state"], reason=proof.get("reason", "source_review"))
         elif record.get("state") == "review":
             item["state"] = "NEEDS_REVIEW"
-        elif (result.get("state") == "inspected" and title.get("state") == "high"
+        elif (source_proof_matches(result, now) and result.get("state") == "inspected" and title.get("state") == "high"
                 and isinstance(tid, str) and re.fullmatch(r"[A-Z0-9]{9}", tid)
                 and title.get("suggestion") == tid
                 and vpk.get("state") == "verified" and vpk.get("crc_checked") is True
@@ -192,7 +211,7 @@ def publication_snapshot(state, candidates, apps, registry, taxonomy, feedback=N
         if counts_id[item["app_id"]] > 1 or counts_tid[item["title_id"]] > 1:
             item["state"] = "NEEDS_REVIEW"
     counts = Counter(item["state"] for item in records.values())
-    state["publication_queue"] = {"schema_version": 1, "records": records, "counts": dict(counts)}
+    state["publication_queue"] = {"schema_version": 2, "records": records, "counts": dict(counts)}
     return state["publication_queue"]
 
 
@@ -200,20 +219,31 @@ def choose(state, candidates, limit, now=None, prioritize_publication=False):
     """Rotate by last attempt; prefer nearly complete candidates among equal age."""
     now = now or now_utc()
     rows = []
+    index = (state.get("publication_queue") or {}).get("records", {})
     for key, record in state["records"].items():
-        if not due(record, now):
+        hint = index.get(key, {})
+        result = record.get("result") or {}
+        # Revalidate old cached packages once rather than waiting for their old checkpoint TTL.
+        migration = (prioritize_publication and hint.get("state") in ("PROMISING", "RETRY_LATER")
+                     and (hint.get("state") != "RETRY_LATER" or hint.get("reason") == "release_changed")
+                     and (result.get("vpk") or {}).get("state") == "verified"
+                     and not source_proof_matches(result, now))
+        if prioritize_publication and (hint.get("state") == "DUPLICATE" or
+                (hint.get("state") == "RETRY_LATER" and hint.get("retry_at") and not migration)):
+            continue
+        if not due(record, now) and not migration:
             continue
         readiness = record.get("result", {}).get("readiness", {})
         present = readiness.get("required_present", 0)
         # Never-attempted first, then oldest attempted: no candidate monopolizes retries.
-        rows.append((record.get("last_at", ""), -present, key))
+        rows.append(("" if migration else record.get("last_at", ""), -present - (100 if migration else 0), key))
     rows.sort()
     if prioritize_publication:
         # Reserve 80% for promising candidates; keep a fair exploration lane.
         # Ready candidates already have evidence and need not monopolize it.
         index = (state.get("publication_queue") or {}).get("records", {})
         priority = [row for row in rows if publication_priority(candidates[row[2]], now)
-                    and index.get(row[2], {}).get("state", "PROMISING") == "PROMISING"][:max(1, limit*4//5)]
+                    and (index.get(row[2], {}).get("state", "PROMISING") == "PROMISING" or row[1] < -100)][:max(1, limit*4//5)]
         keys = {row[2] for row in priority}
         rows = priority + [row for row in rows if row[2] not in keys]
     return [(key, candidates[key]) for _, _, key in rows[:limit]]
@@ -234,7 +264,11 @@ def checkpoint(state, key, result, now=None, quota=None):
     vpk = result.get("vpk", {})
     category = result.get("category", {})
     readiness = result.get("readiness", {})
-    if status in {"candidate_error", "internal_error", "partial"} or vpk.get("state") in {"retry", "deferred", "internal_error"}:
+    if status == "source_wait":
+        proof = result.get("publication_preflight") or {}
+        stage = "review" if proof.get("state") == "NEEDS_REVIEW" else "retry"
+        delay = timedelta(days=7) if proof.get("reason") == "upstream_missing" else timedelta(days=3) if stage == "review" else timedelta(hours=12)
+    elif status in {"candidate_error", "internal_error", "partial"} or vpk.get("state") in {"retry", "deferred", "internal_error"}:
         stage = "retry"
         delay = timedelta(hours=min(72, 2 ** min(attempts, 6)))
     elif title.get("state") in {"collision", "retired", "ambiguous"} or category.get("state") == "target_review":
