@@ -9,7 +9,7 @@ import struct
 from pathlib import PurePosixPath
 
 TITLE = r"[A-Z0-9]{9}"
-KEY = r"(?:VITA_TITLE_?ID|PSP2_TITLE_?ID|APP_TITLE_?ID|TITLE_?ID|UPDATER_TITLE_?ID|TITLE[ \t]+ID)"
+KEY = r"(?:VITA_?TITLE_?ID|PSP2_?TITLE_?ID|APP_?TITLE_?ID|TITLE_?ID|UPDATER_?TITLE_?ID|TITLE[ \t]+ID)"
 VALUE = r"[\x60\"']?(" + TITLE + r")[\x60\"']?(?![A-Za-z0-9_])"
 DECLARATIONS = (
     re.compile(r"^\s*set\s*\(\s*(" + KEY + r")\s+" + VALUE, re.I),
