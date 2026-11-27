@@ -1,0 +1,70 @@
+name: Discovery enrichment pilot (read only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - discover_homebrew.py
+      - discovery_enrichment_queue.py
+      - discovery_enrichment.py
+      - discovery_requirements.py
+      - discovery_readiness.py
+      - discovery_author_profiles.py
+      - discovery_vpk.py
+      - discovery_vpk_artwork.py
+      - tests/test_discovery_vpk_artwork.py
+      - requirements.txt
+      - tests/test_discovery_author_vpk.py
+      - tests/test_discovery_readiness.py
+      - preview_discovery_enrichment.py
+      - tests/test_discovery_enrichment.py
+      - .github/workflows/discovery-enrichment-preview.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        offset: [0, 5, 10]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Existing discovery regressions
+        run: python -m unittest discover -s tests -p test_discover_homebrew.py -v
+      - name: New enrichment regressions
+        run: python -m unittest discover -s tests -p test_discovery_enrichment.py -v
+      - name: Mandatory metadata preflight tests
+        run: python -m unittest discover -s tests -p test_discovery_readiness.py -v
+      - name: Author profile and VPK safety tests
+        run: python -m unittest discover -s tests -p test_discovery_author_vpk.py -v
+      - name: Native artwork regression tests
+        run: python -m unittest discover -s tests -p test_discovery_vpk_artwork.py -v
+      - name: Read-only sample of existing discoveries (manual only)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCOVERY_REQUEST_BUDGET: "180"
+          DISCOVERY_TIME_BUDGET: "420"
+        run: python preview_discovery_enrichment.py --limit 5 --offset ${{ matrix.offset }} --max-files 18 --media-dir enrichment-media --output enrichment-report-${{ matrix.offset }}.json
+      - name: Save pilot report
+        if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-preview-${{ matrix.offset }}
+          path: enrichment-report-${{ matrix.offset }}.json
+          if-no-files-found: ignore
+      - name: Save recovered native artwork
+        if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-vpk-artwork-${{ matrix.offset }}
+          path: enrichment-media/*.png
+          if-no-files-found: ignore
+          retention-days: 30

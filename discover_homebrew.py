@@ -32,8 +32,14 @@ REPO_LIMIT = max(1, min(200, int(os.getenv("DISCOVERY_REPO_LIMIT", "150"))))
 # API and wall-clock safeguards: GitHub Actions GITHUB_TOKEN allows ~1000 API calls/hour.
 MAX_REQUESTS = max(80, min(750, int(os.getenv("DISCOVERY_REQUEST_BUDGET", "520"))))
 MAX_SECONDS = max(120, min(1080, int(os.getenv("DISCOVERY_TIME_BUDGET", "720"))))
+RATE_RESERVE = max(10, min(100, int(os.getenv("DISCOVERY_RATE_RESERVE", "70"))))
 REQUEST_COUNT = 0
+RAW_REQUEST_COUNT = 0
+CORE_REQUEST_COUNT = 0
 LOW_RATE_LIMIT = False
+RATE_REMAINING = None
+RATE_RESET = None
+RATE_STOP_REASON = ""
 START_TIME = time.monotonic()
 HTTP = requests.Session()
 class DiscoveryBudgetReached(RuntimeError):
@@ -71,32 +77,113 @@ def write_json(path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def quota_status():
+    return {"request_budget": MAX_REQUESTS, "requests_used": REQUEST_COUNT,
+            "reserve": RATE_RESERVE, "remaining": RATE_REMAINING,
+            "raw_requests": RAW_REQUEST_COUNT, "core_requests": CORE_REQUEST_COUNT,
+            "reset_at": RATE_RESET, "rate_limited": LOW_RATE_LIMIT,
+            "reason": RATE_STOP_REASON}
+
+
 def request(url, params=None, gitlab=False, plain=False):
-    global REQUEST_COUNT, LOW_RATE_LIMIT
-    if (REQUEST_COUNT >= MAX_REQUESTS or LOW_RATE_LIMIT or
-            time.monotonic() - START_TIME >= MAX_SECONDS):
-        raise DiscoveryBudgetReached("Límite prudente de tiempo o peticiones; continuamos en la próxima ronda")
-    headers = GL_HEADERS if gitlab else HEADERS
+    global REQUEST_COUNT, CORE_REQUEST_COUNT, LOW_RATE_LIMIT, RATE_REMAINING, RATE_RESET, RATE_STOP_REASON
+    if LOW_RATE_LIMIT:
+        raise DiscoveryBudgetReached(RATE_STOP_REASON or "API reserve reached")
+    if REQUEST_COUNT >= MAX_REQUESTS:
+        raise DiscoveryBudgetReached("Local request budget reached")
+    if time.monotonic() - START_TIME >= MAX_SECONDS:
+        raise DiscoveryBudgetReached("Local time budget reached")
+    host = urlparse(url).hostname
+    # Provider credentials never accompany raw files or third-party URLs.
+    headers = GL_HEADERS if gitlab and host == "gitlab.com" else HEADERS if host == "api.github.com" else {
+        "User-Agent": "PSVitaAlive-Discovery/1.0", "Accept": "application/json"}
+    REQUEST_COUNT += 1  # Failed network attempts also consume local budget.
+    core = host == "api.github.com" and "/search/" not in url
+    if core:
+        CORE_REQUEST_COUNT += 1
     response = HTTP.get(url, params=params, headers=headers, timeout=(5, 18))
-    REQUEST_COUNT += 1
+    remaining = response.headers.get("X-RateLimit-Remaining")
+    try:
+        remaining = int(remaining) if remaining is not None else None
+    except (TypeError, ValueError):
+        remaining = None
+    if core:
+        RATE_REMAINING = remaining
+        try:
+            RATE_RESET = datetime.fromtimestamp(int(response.headers["X-RateLimit-Reset"]), timezone.utc).isoformat()
+        except (KeyError, TypeError, ValueError, OSError, OverflowError):
+            RATE_RESET = None
+        if remaining is not None and remaining <= RATE_RESERVE:
+            LOW_RATE_LIMIT = True
+            RATE_STOP_REASON = "GitHub core API reserve reached"
+    # A forbidden repository is not necessarily a global API limit.
+    if response.status_code in (403, 429):
+        detail = str(getattr(response, "text", ""))[:2000].casefold()
+        limited = (response.status_code == 429 or remaining == 0 or
+                   bool(response.headers.get("Retry-After")) or
+                   "rate limit" in detail or "abuse detection" in detail)
+        if limited:
+            LOW_RATE_LIMIT = True
+            RATE_STOP_REASON = "API rate limit: " + (host or "")
+            # Retry-After is more specific than the primary reset for secondary
+            # throttling. Retain the later known retry time if both apply.
+            try:
+                retry = int(response.headers.get("Retry-After", ""))
+                if retry >= 0:
+                    until = datetime.now(timezone.utc) + timedelta(seconds=min(retry, 7200))
+                    old_reset = datetime.fromisoformat(RATE_RESET) if RATE_RESET else until
+                    RATE_RESET = max(old_reset, until).isoformat()
+            except (ValueError, TypeError, OverflowError):
+                pass
+            raise DiscoveryBudgetReached(RATE_STOP_REASON)
     if response.status_code == 404:
         return None
-    # GitHub tree API returns 409 for empty/unborn branches. No files to inspect,
-    # but a release or README may still confirm a Vita project.
     if response.status_code == 409 and "/git/trees/" in url:
         return {"tree": []}
-    if response.status_code in (403, 429):
-        raise DiscoveryBudgetReached("API rate limit: " + (urlparse(url).hostname or ""))
     response.raise_for_status()
-    # Search uses a separate quota; protect the main authenticated GitHub REST quota.
-    if url.startswith("https://api.github.com/") and "/search/" not in url:
-        remaining = response.headers.get("X-RateLimit-Remaining")
-        try:
-            if remaining is not None and int(remaining) < 70:
-                LOW_RATE_LIMIT = True
-        except ValueError:
-            pass
     return response.text[:40000] if plain else response.json()
+
+
+
+def raw_bytes(project, ref, path, max_bytes=262144):
+    """Read public immutable GitHub files without using the core REST quota.
+
+    Count attempts in the local budget, stream bounded bytes, never forward
+    provider tokens, and never follow redirects from an untrusted source.
+    """
+    global REQUEST_COUNT, RAW_REQUEST_COUNT
+    if REQUEST_COUNT >= MAX_REQUESTS:
+        raise DiscoveryBudgetReached("Local request budget reached")
+    if time.monotonic() - START_TIME >= MAX_SECONDS:
+        raise DiscoveryBudgetReached("Local time budget reached")
+    if (not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", project)
+            or any(p in {".", ".."} for p in project.split("/"))
+            or not re.fullmatch(r"[0-9a-f]{40}", ref)
+            or not path or any(p in {"", ".", ".."} for p in path.split("/"))
+            or "\\" in path or any(ord(c) < 32 for c in path)):
+        raise ValueError("Invalid immutable raw file path")
+    url = "https://raw.githubusercontent.com/" + project + "/" + ref + "/" + quote(path, safe="/")
+    REQUEST_COUNT += 1
+    RAW_REQUEST_COUNT += 1
+    with HTTP.get(url, headers={"User-Agent": "PSVitaAlive-Discovery/1.0",
+                               "Accept-Encoding": "identity"},
+                  stream=True, allow_redirects=False, timeout=(5, 10)) as response:
+        if response.status_code == 404:
+            return None
+        if response.status_code != 200:
+            response.raise_for_status()
+            raise ValueError("Unexpected raw response")
+        size = response.headers.get("Content-Length")
+        if size and size.isdigit() and int(size) > max_bytes:
+            return None
+        data = bytearray()
+        for chunk in response.iter_content(32768):
+            if time.monotonic() - START_TIME >= MAX_SECONDS:
+                raise DiscoveryBudgetReached("Local time budget reached")
+            data.extend(chunk)
+            if len(data) > max_bytes:
+                return None
+        return bytes(data) if data else None
 
 
 def project_url_key(value):

@@ -1,0 +1,160 @@
+name: Discovery persistent queue pilot
+on:
+  schedule:
+    - cron: '37 2-23/3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/discovery-enrichment-queue.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - 'discovery_*.py'
+      - discover_homebrew.py
+      - requirements.txt
+      - preview_discovery_enrichment.py
+      - 'tests/test_discovery_*.py'
+      - .github/workflows/discovery-enrichment-queue.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('discovery-queue-pilot-{0}', github.event.pull_request.number) || 'psvita-release-tracker-v2' }}
+  cancel-in-progress: false
+jobs:
+  queue:
+    if: >-
+      github.repository == 'VegettoSan/PsVita-Homebrews-New-Releases' &&
+      (github.ref == 'refs/heads/main' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/discovery-enrichment'))
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Queue regression tests
+        run: python -m unittest discover -s tests -p test_discovery_enrichment_queue.py -v
+      - name: Native artwork regression tests
+        run: python -m unittest discover -s tests -p test_discovery_vpk_artwork.py -v
+      - name: Restore last successful queue checkpoint for this branch
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          prior=$(gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/discovery-enrichment-queue.yml/runs" -f branch="$BRANCH" -f event=pull_request -f status=success --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID and .head_repository.full_name == \"$GITHUB_REPOSITORY\") | .id" | head -n 1)
+          if [ -n "$prior" ]; then
+            echo "Resuming checkpoint from run $prior"
+            gh run download "$prior" --repo "$GITHUB_REPOSITORY" --name enrichment-queue-state --dir .
+            test -s enrichment-state.json
+          else
+            echo "First queue pilot run"
+          fi
+      - name: Restore durable main checkpoint (or migrate verified pilot)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          if [ -s data/discovery/enrichment_state.json ]; then
+            cp data/discovery/enrichment_state.json enrichment-state.json
+          else
+            gh run download 46061716359 --repo "$GITHUB_REPOSITORY" --name enrichment-queue-state --dir .
+          fi
+          test -s enrichment-state.json
+      - name: Queue round one
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DISCOVERY_REQUEST_BUDGET: "600"
+          DISCOVERY_RATE_RESERVE: "30"
+          DISCOVERY_TIME_BUDGET: "900"
+        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 10 --max-files 18 --media-dir enrichment-media --output enrichment-report-round1.json
+      - name: Determine remaining round budget
+        id: budget
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          a = json.loads(Path("enrichment-report-round1.json").read_text())
+          q = a["quota"]
+          left = max(0, 600 - a["http_requests"])
+          core_left = None if q["remaining"] is None else max(0, q["remaining"] - q["reserve"])
+          proceed = not q["rate_limited"] and left >= 80 and (core_left is None or core_left >= 5)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              print(f"proceed={'true' if proceed else 'false'}", file=out)
+              print(f"budget={left}", file=out)
+          print("Quota:", q, "remaining local budget:", left, "remaining core budget:", core_left)
+          if not proceed:
+              print("Round two deferred; queue retained.")
+          PY
+      - name: Queue round two (resume same checkpoint)
+        if: steps.budget.outputs.proceed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DISCOVERY_REQUEST_BUDGET: ${{ steps.budget.outputs.budget }}
+          DISCOVERY_RATE_RESERVE: "30"
+          DISCOVERY_TIME_BUDGET: "900"
+        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 10 --max-files 18 --media-dir enrichment-media --output enrichment-report-round2.json
+      - name: Assert independent processed candidates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a = json.loads(Path("enrichment-report-round1.json").read_text())
+          path = Path("enrichment-report-round2.json")
+          if path.exists():
+              b = json.loads(path.read_text())
+              assert not set(a["queue"]["processed_keys"]) & set(b["queue"]["selected_keys"]), "Previously processed candidate repeated"
+              assert a["http_requests"] + b["http_requests"] <= 600, "Shared local budget exceeded"
+              print("Checkpoint resumed; unprocessed candidates may be retried.")
+              print("Queue:", b["queue"], "Quota:", b["quota"])
+          else:
+              print("Second round deferred safely. Queue:", a["queue"], "Quota:", a["quota"])
+          PY
+      - name: Commit durable enrichment state on main
+        if: github.ref == 'refs/heads/main' && success()
+        run: |
+          set -euo pipefail
+          python -c 'import discovery_enrichment_queue as q; q.load_state("enrichment-state.json")'
+          cp enrichment-state.json data/discovery/enrichment_state.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/discovery/enrichment_state.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Checkpoint automatic discovery enrichment"
+            git push origin HEAD:main
+          fi
+      - name: Save queue checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-queue-state
+          path: enrichment-state.json
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Save diagnostic reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-queue-reports
+          path: enrichment-report-round*.json
+          if-no-files-found: ignore
+      - name: Save recovered native artwork
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-vpk-artwork
+          path: enrichment-media/*.png
+          if-no-files-found: ignore
+          retention-days: 30
