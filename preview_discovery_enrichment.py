@@ -7,6 +7,7 @@ import base64
 import json
 import re
 import traceback
+import time
 from pathlib import Path
 from urllib.parse import quote
 
@@ -18,6 +19,8 @@ from discovery_enrichment import (
 )
 
 from discovery_readiness import readiness
+from discovery_author_profiles import author_proposal
+from discovery_vpk import select_vpk, verify_download
 from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
 
 BASE = "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/"
@@ -158,6 +161,15 @@ def inspect(entry, taxonomy, official, retired, max_files):
         if relevant_document(path):
             requirements.extend(extract_requirements(body, path, ref))
     identity = resolve_title(evidence, official, retired)
+    if platform == "github":
+        owner = repo.get("owner") or {}
+        owner_info = {"url": owner.get("html_url"), "id": owner.get("id"),
+                      "fork": bool(repo.get("fork")), "group": owner.get("type") != "User"}
+    else:
+        owner = repo.get("owner") or {}
+        namespace = repo.get("namespace") or {}
+        owner_info = {"url": namespace.get("web_url"), "id": owner.get("id"),
+                      "fork": bool(repo.get("forked_from_project")), "group": namespace.get("kind") != "user"}
     # Root README describes the project; nested READMEs often describe dependencies.
     purpose_readme = min(readmes, key=lambda pair: (pair[0].count("/"), pair[0].casefold()))[1] if readmes else ""
     category = classify_category(repo.get("name") or app.get("name", ""),
@@ -166,6 +178,7 @@ def inspect(entry, taxonomy, official, retired, max_files):
     return {"key": entry["key"], "project": entry["project"], "ref": ref,
             "title": identity, "category": category,
             "requirements": resolve_requirements(requirements),
+            "owner_profile": owner_info, "vpk_asset": select_vpk(entry, releases),
             "coverage": {"listed_files": len(files), "eligible_files": len(paths),
                          "read_files": read_count, "skipped": skipped, "remaining": max(0, len(paths) - max_files),
                          "complete": False, "note": "Bounded pilot; tree/release coverage is not proof of exhaustive inspection"},
@@ -231,12 +244,45 @@ def run(limit, offset, max_files):
         raise ValueError("Invalid candidate inventory")
     rows = sorted(candidates.items())[offset:offset+limit]
     batch = inspect_batch(rows, taxonomy, official, retired, max_files)
+    binary_budget = 128 * 1024 * 1024
+    deadline = min(time.monotonic() + 180, discovery.START_TIME + discovery.MAX_SECONDS)
+    author_cache = {}
     for result in batch["results"]:
-        if result.get("state") in {"inspected", "partial"}:
-            try:
-                result["readiness"] = readiness(candidates[result["key"]], result, taxonomy, authors, apps, registry)
-            except (ValueError, TypeError, KeyError, AttributeError) as exc:
-                result["readiness"] = {"state": "review", "error_type": type(exc).__name__, "publication_allowed": False}
+        if result.get("state") not in {"inspected", "partial"}:
+            continue
+        entry = candidates[result["key"]]
+        owner = result.get("owner_profile", {})
+        cache_key = (entry.get("author_profile"), owner.get("id"), owner.get("fork"), owner.get("group"))
+        try:
+            if cache_key not in author_cache:
+                author_cache[cache_key] = author_proposal(entry, owner, authors, registry, discovery.request)
+            result["author"] = author_cache[cache_key]
+        except discovery.DiscoveryBudgetReached:
+            result["author"] = {"state": "deferred", "reason": "API budget exhausted"}
+        except (requests.RequestException, ValueError, TypeError, KeyError, RuntimeError, AttributeError) as exc:
+            result["author"] = {"state": "retry", "error_type": type(exc).__name__}
+        title = result["title"]
+        if title["state"] in {"collision", "retired", "ambiguous"} or result["category"]["state"] == "target_review":
+            result["vpk"] = {"state": "review", "reason": "Resolve identity or platform conflict first"}
+        else:
+            result["vpk"] = verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget)
+            binary_budget -= result["vpk"].get("bytes_read", 0)
+            if result["vpk"]["state"] == "verified":
+                tid = result["vpk"]["title_id"]
+                evidence = title["evidence"] + [{"title_id": tid, "source": result["vpk"]["url"],
+                    "ref": result["vpk"]["sha256"], "kind": "downloaded_vpk_sfo", "confidence": "high"}]
+                result["title"] = resolve_title(evidence, official, retired)
+        try:
+            # Use existing, exact-account author matches; new drafts remain pending
+            # until PSVitaAlive can validate both records atomically.
+            draft = dict(entry.get("app_draft") or {})
+            if result["author"]["state"] == "existing":
+                draft["author_ids"] = result["author"]["author_ids"]
+            result["readiness"] = readiness({**entry, "app_draft": draft}, result, taxonomy, authors, apps, registry)
+            result["readiness"]["vpk_verified"] = result["vpk"]["state"] == "verified"
+            result["readiness"]["publication_allowed"] = False
+        except (ValueError, TypeError, KeyError, AttributeError) as exc:
+            result["readiness"] = {"state": "review", "error_type": type(exc).__name__, "publication_allowed": False}
     return {"mode": "read_only", "offset": offset, "requested": limit, "max_files": max_files,
             "http_requests": discovery.REQUEST_COUNT, **batch}
 
