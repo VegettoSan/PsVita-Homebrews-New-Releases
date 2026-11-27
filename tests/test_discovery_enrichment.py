@@ -7,6 +7,7 @@ from discovery_enrichment import (
 )
 from catalog_schema_v2_compat import to_v1
 import preview_discovery_enrichment as pilot
+from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
 
 
 class IdentityTests(unittest.TestCase):
@@ -190,6 +191,41 @@ class PreviewTests(unittest.TestCase):
         self.assertTrue(row["retry"])
         self.assertEqual(len(row["errors"]), 2)
         self.assertFalse(row["publication_allowed"])
+
+
+
+class RequirementsTests(unittest.TestCase):
+    def result(self, text):
+        return resolve_requirements(extract_requirements(text, "README.md", "a"*40))
+
+    def test_missing_uses_exact_placeholder(self):
+        self.assertEqual(self.result("# Demo\nThis is a demo.")["value"], "- no data")
+        self.assertEqual(self.result("## Building\n- Install VitaSDK\n- Requires CMake and SDL2")["value"], "- no data")
+
+    def test_runtime_requirements_and_installation(self):
+        result = self.result("## Requirements\n- kuBridge plugin\n- Original game files\n## Installation\n1. Copy data files to ux0:data/demo/")
+        self.assertEqual(result["state"], "detected")
+        self.assertEqual(result["value"], "- kuBridge plugin\n- Original game files\n- Copy data files to ux0:data/demo/")
+        self.assertEqual(result["evidence"][0]["line"], 2)
+
+    def test_explicit_none_is_not_unknown(self):
+        result = self.result("## Requirements\nNone")
+        self.assertEqual(result["state"], "explicit_none")
+        self.assertEqual(result["value"], "- None")
+
+    def test_optional_and_build_dependencies_are_not_required(self):
+        result = self.result("## Requirements\n- Optional plugin\n## Building\n- Install SDL2\n- Copy game data for build testing")
+        self.assertEqual(result["value"], "- no data")
+
+    def test_duplicate_and_conflicting_requirements(self):
+        result = self.result("## Requirements\nNone\n- kuBridge plugin\n- kuBridge plugin")
+        self.assertEqual(result["state"], "review")
+        self.assertEqual(result["value"], "- kuBridge plugin")
+
+    def test_document_scope(self):
+        self.assertTrue(relevant_document("docs/INSTALL.md"))
+        self.assertFalse(relevant_document("requirements.txt"))
+        self.assertFalse(relevant_document("vendor/library/README.md"))
 
 
 if __name__ == "__main__":
