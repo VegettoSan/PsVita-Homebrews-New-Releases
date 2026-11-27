@@ -89,19 +89,111 @@ def due(record, now):
 
 
 def publication_priority(entry, now):
-    """Historical native GitHub projects with an actual downloadable VPK.
-    This is only scheduling priority, not publication approval."""
+    """Cheap whole-inventory filter; includes historical and recent releases."""
     if (entry.get("platform") != "github" or entry.get("project_type") != "homebrew"
             or entry.get("lineage_is_fork") is True):
         return False
     draft = entry.get("app_draft") or {}
     try:
-        return (date.fromisoformat(draft["version_date"]) <= now.date() - timedelta(days=365)
+        project = entry.get("project", "")
+        prefix = "https://github.com/" + project.casefold() + "/releases/download/"
+        return (bool(re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", project))
+                and date.fromisoformat(draft["version_date"]) <= now.date()
                 and type(draft.get("size")) is int and 0 < draft["size"] <= 64*1024*1024
-                and any(l.get("type") == "Download" and str(l.get("url","")).startswith("https://github.com/")
-                        for l in draft.get("links",[]) if isinstance(l,dict)))
+                and isinstance(draft.get("description"), str) and bool(draft["description"].strip())
+                and any(l.get("type") == "Download" and str(l.get("url", "")).casefold().startswith(prefix)
+                        and str(l.get("url", "")).casefold().endswith(".vpk")
+                        for l in draft.get("links", []) if isinstance(l, dict)))
     except (ValueError, TypeError, KeyError):
         return False
+
+
+def evidence_key(entry, result):
+    vpk = result.get("vpk") or {}
+    fields = {"fingerprint": fingerprint(entry),
+              "package": {k: vpk.get(k) for k in ("tag", "url", "sha256", "title_id", "bytes_read")},
+              "category": result.get("category"), "author": result.get("author"),
+              "requirements": result.get("requirements")}
+    return hashlib.sha256(json.dumps(fields, sort_keys=True, ensure_ascii=False,
+                                    separators=(",", ":")).encode()).hexdigest()
+
+
+def publication_snapshot(state, candidates, apps, registry, taxonomy, feedback=None, now=None):
+    """Materialize readiness for every discovery without additional upstream calls.
+
+    This is a scheduling index, not publication authorization. The canonical
+    importer independently checks all metadata, live release and package bytes.
+    """
+    now = now or now_utc()
+    feedback = feedback or {}
+    ids = {a.get("id") for a in apps} | set(registry.get("apps", {}).get("ids", []))
+    tids = {str(a.get("title_id", "")).upper() for a in apps} | {str(t).upper() for t in registry.get("apps", {}).get("title_ids", [])}
+    source_ids = {a.get("source_id") for a in apps if a.get("source_name") == "Orbit"}
+    sources = {str(a.get("source_url", "")).rstrip("/").casefold() for a in apps}
+    allowed = {c.get("id"): {s.get("id") for s in c.get("subcategories", [])} for c in taxonomy}
+    records = {}
+    for key, entry in candidates.items():
+        record = state["records"].get(key, {})
+        draft = entry.get("app_draft") or {}
+        mark = fingerprint(entry)
+        result = record.get("result", {}) if record.get("fingerprint") == mark else {}
+        vpk = result.get("vpk") or {}
+        title = result.get("title") or {}
+        cat = result.get("category") or {}
+        author = result.get("author") or {}
+        req = result.get("requirements") or {}
+        project = str(entry.get("project", ""))
+        tid = vpk.get("title_id")
+        app_id = draft.get("id")
+        item = {"fingerprint": mark, "sha256": vpk.get("sha256", ""), "state": "DISCOVERED"}
+        if (key in source_ids or app_id in ids or
+                (project and ("https://github.com/" + project).casefold() in sources) or
+                (tid and tid in tids)):
+            item["state"] = "DUPLICATE"
+        elif record.get("state") == "review":
+            item["state"] = "NEEDS_REVIEW"
+        elif (result.get("state") == "inspected" and title.get("state") == "high"
+                and isinstance(tid, str) and re.fullmatch(r"[A-Z0-9]{9}", tid)
+                and title.get("suggestion") == tid
+                and vpk.get("state") == "verified" and vpk.get("crc_checked") is True
+                and re.fullmatch(r"[a-f0-9]{64}", str(vpk.get("sha256", "")))
+                and type(vpk.get("bytes_read")) is int and 0 < vpk["bytes_read"] <= 64*1024*1024
+                and (vpk.get("artwork") or {}).get("icon")
+                and cat.get("state") == "suggested" and cat.get("category_id") in allowed
+                and bool(cat.get("subcategory_ids") or ("other" in allowed.get(cat.get("category_id"), set())))
+                and set(cat.get("subcategory_ids") or []) <= allowed.get(cat.get("category_id"), set())
+                and author.get("state") in ("existing", "draft") and req.get("state") != "review"
+                and publication_priority(entry, now)
+                and isinstance(app_id, str) and re.fullmatch(r"[a-z0-9][a-z0-9-]{0,70}", app_id)
+                and any(l.get("type") == "Download" and l.get("url") == vpk.get("url")
+                        for l in draft.get("links", []) if isinstance(l, dict))):
+            item["state"] = "READY_TO_PUBLISH"
+            item["title_id"] = tid
+            item["app_id"] = app_id
+        elif publication_priority(entry, now):
+            item["state"] = "PROMISING"
+        elif record.get("state") == "retry":
+            item["state"] = "RETRY_LATER"
+        elif result:
+            item["state"] = "PREPARING"
+        prior = feedback.get(key, {})
+        if item["state"] not in ("DUPLICATE", "NEEDS_REVIEW") and isinstance(prior, dict) and prior.get("evidence") == evidence_key(entry, result):
+            try:
+                if datetime.fromisoformat(prior["retry_at"]) > now:
+                    item.update(state="RETRY_LATER", reason=prior.get("reason", "retry"), retry_at=prior["retry_at"])
+            except (ValueError, TypeError, KeyError):
+                pass
+        records[key] = item
+    from collections import Counter
+    ready = [item for item in records.values() if item["state"] == "READY_TO_PUBLISH"]
+    counts_id = Counter(item["app_id"] for item in ready)
+    counts_tid = Counter(item["title_id"] for item in ready)
+    for item in ready:
+        if counts_id[item["app_id"]] > 1 or counts_tid[item["title_id"]] > 1:
+            item["state"] = "NEEDS_REVIEW"
+    counts = Counter(item["state"] for item in records.values())
+    state["publication_queue"] = {"schema_version": 1, "records": records, "counts": dict(counts)}
+    return state["publication_queue"]
 
 
 def choose(state, candidates, limit, now=None, prioritize_publication=False):
@@ -117,9 +209,11 @@ def choose(state, candidates, limit, now=None, prioritize_publication=False):
         rows.append((record.get("last_at", ""), -present, key))
     rows.sort()
     if prioritize_publication:
-        # Reserve half the batch for likely importable historical candidates,
-        # keeping the other half for ordinary discovery fairness.
-        priority = [row for row in rows if publication_priority(candidates[row[2]], now)][:max(1, limit//2)]
+        # Reserve 80% for promising candidates; keep a fair exploration lane.
+        # Ready candidates already have evidence and need not monopolize it.
+        index = (state.get("publication_queue") or {}).get("records", {})
+        priority = [row for row in rows if publication_priority(candidates[row[2]], now)
+                    and index.get(row[2], {}).get("state", "PROMISING") == "PROMISING"][:max(1, limit*4//5)]
         keys = {row[2] for row in priority}
         rows = priority + [row for row in rows if row[2] not in keys]
     return [(key, candidates[key]) for _, _, key in rows[:limit]]
@@ -211,7 +305,8 @@ def summary(state, selected, results=()):
     return {"inventory": len(state["records"]), "states": counts,
             "selected_keys": selected,
             "processed_keys": [r["key"] for r in results if r.get("state") != "deferred"],
-            "resume_at": state.get("resume_at"), "cached_profiles": len(state.get("profiles", {}))}
+            "resume_at": state.get("resume_at"), "cached_profiles": len(state.get("profiles", {})),
+            "publication_states": (state.get("publication_queue") or {}).get("counts", {})}
 
 
 def profile_request(state, owner, request, now=None):

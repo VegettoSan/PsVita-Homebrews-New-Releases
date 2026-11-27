@@ -28,13 +28,39 @@ class QueueTests(unittest.TestCase):
         self.assertEqual(loaded["records"]["a"]["result"]["readiness"]["required_present"], 14)
 
     def test_publication_lane_reserves_capacity_for_historical_candidates(self):
-        historical = {"platform":"github","project_type":"homebrew","app_draft":{
-            "version_date":"2020-01-01","size":100,"links":[{"type":"Download","url":"https://github.com/dev/demo/releases/download/v1/demo.vpk"}]}}
+        historical = {"platform":"github","project_type":"homebrew","project":"dev/demo","app_draft":{
+            "version_date":"2020-01-01","size":100,"description":"Demo","links":[{"type":"Download","url":"https://github.com/dev/demo/releases/download/v1/demo.vpk"}]}}
         self.candidates["c"].update(historical)
         q.reconcile(self.state,self.candidates)
         self.assertEqual([k for k,_ in q.choose(self.state,self.candidates,2,self.now,prioritize_publication=True)],["c","a"])
         q.checkpoint(self.state,"c",{"state":"inspected"},self.now)
         self.assertEqual([k for k,_ in q.choose(self.state,self.candidates,2,self.now,prioritize_publication=True)],["a","b"])
+
+    def test_recent_promising_and_ready_snapshot(self):
+        entry = {"key": "gh:123", "platform": "github", "project_type": "homebrew",
+                 "project": "dev/demo", "app_draft": {"id": "demo", "description": "Demo",
+                 "version_date": self.now.date().isoformat(), "size": 100,
+                 "links": [{"type": "Download", "url": "https://github.com/dev/demo/releases/download/v1/demo.vpk"}]}}
+        candidates = {"gh:123": entry}
+        state = q.reconcile(q.empty_state(), candidates)
+        self.assertTrue(q.publication_priority(entry, self.now))
+        result = {"state": "inspected", "title": {"state": "high", "suggestion": "DEMO00001"},
+                  "vpk": {"state": "verified", "title_id": "DEMO00001", "crc_checked": True,
+                          "bytes_read": 100, "sha256": "a"*64, "artwork": {"icon": True},
+                          "url": entry["app_draft"]["links"][0]["url"]},
+                  "category": {"state": "suggested", "category_id": "demos", "subcategory_ids": ["other"]},
+                  "author": {"state": "draft"}, "requirements": {"state": "no_data"}}
+        taxonomy = [{"id": "demos", "subcategories": [{"id": "other"}]}]
+        q.checkpoint(state, "gh:123", result, self.now)
+        snap = q.publication_snapshot(state, candidates, [], {}, taxonomy, now=self.now)
+        self.assertEqual(snap["counts"], {"READY_TO_PUBLISH": 1})
+        feedback = {"gh:123": {"evidence": q.evidence_key(entry, result), "reason": "upstream_missing",
+                              "retry_at": (self.now + timedelta(days=7)).isoformat()}}
+        self.assertEqual(q.publication_snapshot(state, candidates, [], {}, taxonomy, feedback, self.now)["counts"], {"RETRY_LATER": 1})
+        self.assertEqual(q.publication_snapshot(state, candidates, [{"id": "demo"}], {}, taxonomy, now=self.now)["counts"], {"DUPLICATE": 1})
+        entry["app_draft"]["version_date"] = "2026-11-26"
+        q.reconcile(state, candidates)
+        self.assertEqual(q.publication_snapshot(state, candidates, [], {}, taxonomy, feedback, self.now)["counts"], {"PROMISING": 1})
 
     def test_retry_backoff_and_fairness(self):
         q.checkpoint(self.state, "a", {"state": "candidate_error"}, self.now)
