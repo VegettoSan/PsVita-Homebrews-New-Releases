@@ -17,6 +17,8 @@ from discovery_enrichment import (
     classify_category, prioritized_paths, resolve_title, sfo_title_id, text_evidence,
 )
 
+from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
+
 BASE = "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/"
 MAX_FILE_BYTES = 262144
 
@@ -87,6 +89,8 @@ def inspect(entry, taxonomy, official, retired, max_files):
     files = discovery.files_for(repo, platform)
     paths = prioritized_paths(files)
     evidence = []
+    requirements = []
+    app = entry.get("app_draft") or {}
     readmes = []
     skipped = []
     errors = []
@@ -106,6 +110,16 @@ def inspect(entry, taxonomy, official, retired, max_files):
         tag = str(release.get("tag_name", ""))[:120]
         body = str(release.get("body") or release.get("description") or "")[:40000]
         evidence.extend(text_evidence(body, "release:" + tag, "release", tag))
+        # Only use release-specific requirements for the draft's actual VPK.
+        assets = release.get("assets") or []
+        if isinstance(assets, dict):
+            assets = assets.get("links") or []
+        download_urls = {link.get("url") for link in app.get("links", [])
+                         if isinstance(link, dict) and link.get("type") == "Download"}
+        if any(isinstance(asset, dict) and any(asset.get(k) in download_urls
+               for k in ("browser_download_url", "direct_asset_url", "url") if asset.get(k))
+               for asset in assets if isinstance(assets, list)):
+            requirements.extend(extract_requirements(body, "release:" + tag, tag))
     for path in paths[:max_files]:
         try:
             raw = read_file(endpoint, platform, path, ref)
@@ -140,7 +154,8 @@ def inspect(entry, taxonomy, official, retired, max_files):
         if name.startswith("readme"):
             readmes.append((path, body[:12000]))
         evidence.extend(text_evidence(body, path, kind, ref))
-    app = entry.get("app_draft") or {}
+        if relevant_document(path):
+            requirements.extend(extract_requirements(body, path, ref))
     identity = resolve_title(evidence, official, retired)
     # Root README describes the project; nested READMEs often describe dependencies.
     purpose_readme = min(readmes, key=lambda pair: (pair[0].count("/"), pair[0].casefold()))[1] if readmes else ""
@@ -149,6 +164,7 @@ def inspect(entry, taxonomy, official, retired, max_files):
                                  purpose_readme, entry.get("project_type"), taxonomy)
     return {"key": entry["key"], "project": entry["project"], "ref": ref,
             "title": identity, "category": category,
+            "requirements": resolve_requirements(requirements),
             "coverage": {"listed_files": len(files), "eligible_files": len(paths),
                          "read_files": read_count, "skipped": skipped, "remaining": max(0, len(paths) - max_files),
                          "complete": False, "note": "Bounded pilot; tree/release coverage is not proof of exhaustive inspection"},
