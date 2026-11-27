@@ -129,8 +129,8 @@ RULES = {
     "plugins": [(10, r"\b(?:taihen plugin|kernel plugin|user plugin|vita plugin|skprx|suprx)\b"), (5, r"\bplugin\b")],
     "utilities": [(8, r"\b(?:file manager|save manager|calculator|backup tool|installer|terminal emulator|text editor|launcher|updater|utility)\b")],
     "system": [(8, r"\b(?:custom firmware|firmware tool|downgrade|system manager|mount tool|system diagnostics|system information|storage manager)\b")],
-    "media": [(8, r"\b(?:music player|video player|image viewer|image editor|audio (?:[a-z]+ ){0,2}player|multimedia player|media player)\b")],
-    "networking": [(8, r"\b(?:ftp server|ssh client|ssh server|web browser|remote desktop|game streaming|network tool|http server|messaging client)\b")],
+    "media": [(8, r"\b(?:music player|video player|image viewer|image editor|audio (?:[a-z]+ ){0,2}player|multimedia player|media player|umd (?:video )?player|spotify connect (?:\(premium\) )?(?:audio )?client)\b")],
+    "networking": [(8, r"\b(?:ftp server|ssh client|ssh server|web browser|remote desktop|game streaming|network tool|http server|messaging client|irc client|chat client|instant messaging client|vpn client|vpn server)\b")],
     "customization": [(8, r"\b(?:theme manager|custom theme|wallpaper|boot animation|bubble manager|font manager)\b")],
     "modding": [(9, r"\b(?:translation patch|game patch|rom hack|texture pack|fan translation|localization patch|game mod)\b")],
     "development": [(8, r"\b(?:development library|software development kit|development tool|programming framework|compiler|debugger|game engine library|homebrew interpreter|lua interpreter)\b")],
@@ -145,8 +145,8 @@ SUB_RULES = {
     "emulators": {"game-boy-advance": r"\b(?:gba|game boy advance)\b", "game-boy-color": r"\b(?:gbc|game boy color)\b", "snes": r"\b(?:snes|super nintendo)\b", "nes": r"\b(?:nes|famicom)\b", "nintendo-64": r"\b(?:n64|nintendo 64)\b", "multi-system": r"\b(?:multi.system|multiple systems)\b", "playstation": r"\b(?:ps1|psx)\b", "genesis": r"\b(?:genesis|mega drive)\b"},
     "plugins": {"overclock": r"\boverclock\w*\b", "performance": r"\b(?:performance|overclock\w*)\b", "audio": r"\baudio\b", "graphics": r"\bgraphics\b", "storage": r"\bstorage\b", "input": r"\b(?:input|controller)\b", "display": r"\bdisplay\b"},
     "utilities": {"file-manager": r"\bfile manager\b", "ftp": r"\bftp\b", "save-manager": r"\bsave manager\b", "calculator": r"\bcalculator\b", "installer": r"\binstaller\b", "launcher": r"\blauncher\b", "terminal": r"\bterminal\b", "text-editor": r"\btext editor\b", "backup": r"\bbackup\b", "updater": r"\bupdater\b"},
-    "networking": {"ftp": r"\bftp\b", "web-browser": r"\bweb browser\b", "game-streaming": r"\bgame streaming\b", "remote-desktop": r"\bremote desktop\b", "client": r"\bclient\b", "server": r"\bserver\b"},
-    "media": {"audio": r"\baudio\b", "music-player": r"\b(?:music player|audio (?:[a-z]+ ){0,2}player)\b", "video-player": r"\bvideo player\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
+    "networking": {"messaging": r"\b(?:irc|chat|instant messaging|messaging) client\b", "network-tools": r"\b(?:vpn|network diagnostic)\b", "ftp": r"\bftp\b", "web-browser": r"\bweb browser\b", "game-streaming": r"\bgame streaming\b", "remote-desktop": r"\bremote desktop\b", "client": r"\bclient\b", "server": r"\bserver\b"},
+    "media": {"audio": r"\baudio\b", "music-player": r"\b(?:music player|audio (?:[a-z]+ ){0,2}player|spotify connect (?:\(premium\) )?(?:audio )?client)\b", "video-player": r"\b(?:video player|umd (?:video )?player)\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
     "modding": {"translation": r"\b(?:translation|fan translation)\b", "game-patches": r"\bgame patch\b", "rom-hacks": r"\brom hack\b", "textures": r"\btexture pack\b"},
     "system": {"firmware": r"\bcustom firmware\b", "firmware-tools": r"\bfirmware tool\b", "downgrade": r"\bdowngrade\b", "storage": r"\bstorage manager\b"},
     "demos": {"proof-of-concept": r"\b(?:proof of concept|poc)\b", "tech-demo": r"\b(?:tech demo|qr demo)\b"},
@@ -201,6 +201,18 @@ def classify_category(name, description, readme, project_type, categories):
     body = readme_purpose(readme).replace("_", " ").replace("-", " ")
     if target_review(name, description, readme)["state"] == "review":
         return {"state": "target_review", "category_id": "", "subcategory_ids": [], "scores": {}, "evidence": {}}
+    # Explicit product purpose outranks secondary features in a description.
+    # Keep ambiguous multi-purpose descriptions on the normal scoring path.
+    purpose = re.split(r"[:;]|\bwith\b|\bfeatures?\b", str(description), maxsplit=1, flags=re.I)[0]
+    purpose = purpose.replace("_", " ").replace("-", " ")
+    direct = {
+        "networking": r"\b(?:irc|chat|instant messaging|messaging|vpn) (?:client|server)\b",
+        "media": r"\b(?:umd (?:video )?player|spotify connect (?:\(premium\) )?(?:audio )?client)\b",
+        "ports": r"\b(?:port of|ported from)\b[^.\n]{0,100}\b(?:game remake|remake of (?:a |the )?game)\b",
+    }
+    purpose_matches = {cid: re.search(pattern, purpose, re.I)
+                       for cid, pattern in direct.items() if cid in taxonomy}
+    purpose_matches = {cid: hit for cid, hit in purpose_matches.items() if hit}
     scores, evidence = {}, {}
     for cid, rules in RULES.items():
         if cid not in taxonomy:
@@ -226,13 +238,25 @@ def classify_category(name, description, readme, project_type, categories):
     # A game port may contain genre terms used by the original-games rules.
     if "ports" in scores and "games" in scores:
         scores["ports"] += scores.pop("games")
+    # A branded game named "Dream Emulator" is not necessarily an emulator.
+    # Require explicit remake context in the opening documentation, not the name alone.
+    remake_port = re.search(r"\bport of\b[^.\n]{0,150}\bremake of\b", body, re.I)
+    if remake_port and "ports" in taxonomy and re.search(r"\bport of\b", primary, re.I):
+        purpose_matches["ports"] = remake_port
+    if len(purpose_matches) == 1 and project_type not in {"plugin", "patch"} and not re.search(r"\b(?:and|or)\b", purpose, re.I):
+        cid, hit = next(iter(purpose_matches.items()))
+        scores[cid] = max(10, scores.get(cid, 0), max(scores.values(), default=0) + 3)
+        evidence.setdefault(cid, []).append({"match": hit.group(0), "source": "primary_purpose"})
     ranked = sorted(scores, key=lambda k: (-scores[k], k))
     if not ranked or scores[ranked[0]] < 6:
         return {"state": "missing", "category_id": "", "subcategory_ids": [], "scores": scores, "evidence": evidence}
     cid = ranked[0]
     if len(ranked) > 1 and scores[cid] - scores[ranked[1]] < 3:
         return {"state": "ambiguous", "category_id": "", "subcategory_ids": [], "scores": scores, "evidence": evidence}
+    # For a clear purpose, use that evidence first; secondary features must
+    # not supply unrelated subcategories.
+    sub_text = purpose if cid in purpose_matches else primary + "\n" + body
     subs = [sid for sid, pattern in SUB_RULES.get(cid, {}).items()
-            if sid in taxonomy[cid] and re.search(pattern, primary + "\n" + body, re.I)]
+            if sid in taxonomy[cid] and re.search(pattern, sub_text, re.I)]
     return {"state": "suggested", "category_id": cid, "subcategory_ids": subs[:5],
             "scores": scores, "evidence": evidence}

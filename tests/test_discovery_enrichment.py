@@ -90,6 +90,25 @@ class TaxonomyTests(unittest.TestCase):
         self.assertEqual(self.classify("PS Vita project")["state"], "missing")
         self.assertEqual(self.classify("File manager and SSH client")["state"], "ambiguous")
 
+    def test_irc_primary_purpose_over_image_viewer(self):
+        taxonomy = self.taxonomy + [{"id": "networking", "subcategories": [{"id": "client"}, {"id": "messaging"}]},
+                                    {"id": "media", "subcategories": [{"id": "image-viewer"}]}]
+        result = classify_category("VitaIRC", "Native IRC client for the PS Vita: chat history and an image viewer",
+                                   "A native IRC client with an image viewer.", "homebrew", taxonomy)
+        self.assertEqual(result["category_id"], "networking")
+        self.assertEqual(set(result["subcategory_ids"]), {"client", "messaging"})
+
+    def test_remake_port_is_not_console_emulator(self):
+        result = classify_category("LSD Revamped", "PS Vita port of LSD Revamped (LSD: Dream Emulator)",
+                                   "A native PS Vita port of LSD Revamped, Figglewatts' remake of LSD: Dream Emulator.",
+                                   "homebrew", self.taxonomy)
+        self.assertEqual(result["category_id"], "ports")
+
+    def test_umd_player_and_spotify(self):
+        self.assertEqual(self.classify("A PS Vita UMD Player")["category_id"], "media")
+        result = self.classify("Native Spotify Connect (Premium) client for PS Vita homebrew")
+        self.assertEqual(result["category_id"], "media")
+
     def test_taxonomy_only(self):
         result = classify_category("", "Game port of a first-person shooter", "", "homebrew",
                                    [{"id": "ports", "subcategories": []}])
