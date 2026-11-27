@@ -58,6 +58,11 @@ class TaxonomyTests(unittest.TestCase):
         {"id": "utilities", "subs": [{"id": "file-manager"}]},
         {"id": "networking", "subs": [{"id": "client"}]},
         {"id": "modding", "subs": [{"id": "translation"}]},
+        {"id": "media", "subs": [{"id": "audio"}, {"id": "music-player"}]},
+        {"id": "customization", "subs": [{"id": "themes"}]},
+        {"id": "demos", "subs": [{"id": "proof-of-concept"}, {"id": "tech-demo"}]},
+        {"id": "system", "subs": [{"id": "firmware"}]},
+        {"id": "development", "subs": [{"id": "interpreter"}, {"id": "lua"}]},
     ])
 
     def classify(self, desc, kind="homebrew"):
@@ -88,6 +93,33 @@ class TaxonomyTests(unittest.TestCase):
         result = classify_category("", "Game port of a first-person shooter", "", "homebrew",
                                    [{"id": "ports", "subcategories": []}])
         self.assertEqual(result["subcategory_ids"], [])
+
+
+    def test_tracplayer_purpose_over_secondary_features(self):
+        readme = "# TRAC Player\n\n## The Retro Audio Collection Player\n\nBrowse a music archive.\n\n------\n- Custom theme support\n- Download tracks\n## Theme Support\nCreate custom themes."
+        result = classify_category("TRACPlayer", "", readme, "homebrew", self.taxonomy)
+        self.assertEqual(result["category_id"], "media")
+        self.assertIn("audio", result["subcategory_ids"])
+        self.assertNotIn("customization", result["scores"])
+
+    def test_desktop_port_is_review_not_vita_game(self):
+        readme = "# Lua Player Plus for Desktop\n\nA cross-platform port of the PS Vita homebrew interpreter to desktop platforms using SDL2.\n## Features\n- launcher"
+        result = classify_category("lpp-sdl", "", readme, "homebrew", self.taxonomy)
+        self.assertEqual(result["state"], "target_review")
+        self.assertEqual(result["category_id"], "")
+
+    def test_qr_demo_and_firmware(self):
+        result = classify_category("qrdemo", "", "# QR Demo for Vita\nDecode QR codes from the camera.\nThis is a PoC.", "homebrew", self.taxonomy)
+        self.assertEqual(result["category_id"], "demos")
+        self.assertEqual(self.classify("Custom Firmware for PSP and PS Vita ePSP")["category_id"], "system")
+
+    def test_feature_list_alone_does_not_classify(self):
+        result = classify_category("Unknown app", "", "# Unknown app\n## Features\n- custom theme support\n- file manager", "homebrew", self.taxonomy)
+        self.assertEqual(result["state"], "missing")
+
+    def test_root_readme_not_starved_by_nested_config_files(self):
+        paths = [f"lib/{i}/CMakeLists.txt" for i in range(30)] + ["README.md", "sce_sys/param.sfo"]
+        self.assertIn("README.md", prioritized_paths(paths)[:3])
 
 
 class PreviewTests(unittest.TestCase):
