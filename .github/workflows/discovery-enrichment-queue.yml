@@ -35,6 +35,8 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -68,7 +70,7 @@ jobs:
           if [ -s data/discovery/enrichment_state.json ]; then
             cp data/discovery/enrichment_state.json enrichment-state.json
           else
-            gh run download 46059093491 --repo "$GITHUB_REPOSITORY" --name enrichment-queue-state --dir .
+            gh run download 46061716359 --repo "$GITHUB_REPOSITORY" --name enrichment-queue-state --dir .
           fi
           test -s enrichment-state.json
       - name: Queue round one
