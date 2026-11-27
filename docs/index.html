@@ -260,10 +260,10 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><strong>495</strong><span>apps con release</span></div>
-        <div class="stat"><strong class="green">398</strong><span>al día en PSVitaAlive</span></div>
+        <div class="stat"><strong>500</strong><span>apps con release</span></div>
+        <div class="stat"><strong class="green">403</strong><span>al día en PSVitaAlive</span></div>
         <div class="stat"><strong>97</strong><span>pendientes</span></div>
-        <div class="stat"><strong>490</strong><span>GitHub</span></div>
+        <div class="stat"><strong>495</strong><span>GitHub</span></div>
         <div class="stat"><strong>5</strong><span>GitLab</span></div>
       </div>
     </section>
@@ -287,15 +287,15 @@
     </select>
     <select id="catalog-status" aria-label="Filtrar por actualización del catálogo">
       <option value="all">Todas las actualizaciones</option>
-      <option value="uptodate">✓ Al día en PSVitaAlive (398)</option>
+      <option value="uptodate">✓ Al día en PSVitaAlive (403)</option>
       <option value="pending">↻ Pendientes por actualizar (97)</option>
     </select>
     <select id="backup-status" aria-label="Filtrar por respaldo en Archive.org">
       <option value="all">Todos los respaldos</option>
-      <option value="needs-backup">Pendientes de respaldar (19)</option>
+      <option value="needs-backup">Pendientes de respaldar (24)</option>
       <option value="matched">✓ VPK en Archive.org (350)</option>
       <option value="vpk_pending">Multimedia lista, VPK pendiente (0)</option>
-      <option value="missing">VPK sin respaldo detectado (6)</option>
+      <option value="missing">VPK sin respaldo detectado (11)</option>
       <option value="outdated">Nueva versión sin respaldo (13)</option>
       <option value="review">Revisar respaldo (123)</option>
       <option value="unknown">Sin ficha asociada (3)</option>
@@ -2266,6 +2266,334 @@ the readme has the controls, how internet rooms work and the known limits.">
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-backup="missing" data-search="the two towers the two towers federicopellegrino994/lotr-two-towers-vita lotr - the two towers vita 0.3 v0.3 modding hi r/vitahacks!
+
+i&#x27;ve been working on a ps vita port of **the lord of the rings: the two towers**, the 2002 xbox hack-and-slash from stormfront/ea. it is **not emulation**. the port is based on **the two towers recompiled**, a *static recompilation* of the xbox game: the original xbox code was translated into c and runs natively on the vita&#x27;s arm cpu. the xbox gpu commands are translated on the fly to the vita&#x27;s gpu through vitagl.
+
+**project page:** https://github.com/federicopellegrino994/lotr-two-towers-vita
+**download (vpk):** https://github.com/federicopellegrino994/lotr-two-towers-vita/releases
+
+⚠️ **no game files are included. you need your own copy of the xbox game (usa version).** please don&#x27;t ask for isos.
+
+---
+
+## what works well
+
+- the whole game is playable, with every level tested up to helm&#x27;s deep: menus, saves, sound and music, cutscenes and the in-game cinematics.
+- sound is clean, with no crackling.
+- cutscene films can play on the vita&#x27;s hardware video decoder, smooth and full speed (after a one-time conversion, see below).
+- saves work and stay in `ux0:data/twotowers/`.
+- lighter levels play comfortably.
+
+## how it runs (honestly)
+
+this is a demanding game for the vita: big crowds, physics and a lot of draw calls. the cpu is the main limit.
+
+| level | frame rate (444 mhz) |
+|---|---|
+| lighter levels, menus | 20–30 fps |
+| most levels (balin&#x27;s tomb, amon hen, fangorn…) | ~16–19 fps |
+| big battles (second rohan level, helm&#x27;s deep) | ~13–17 fps |
+
+- it is playable, but **not smooth** in the biggest fights.
+- with **psvshell at 500 mhz** you get about **+12%** (see below). recommended.
+- to save performance, some effects are **off by default**: rain, weapon swing trails, very distant particles and the characters&#x27; round blob shadows. tiny far-away objects (a few pixels) are also skipped. everything else looks like the xbox version, at 544x408 internal resolution in 4:3.
+
+## what you need
+
+- a ps vita with henkaku/ensō and vitashell (ps tv untested).
+- your own **xbox, usa** copy of *the two towers*, as a disc image (iso).
+- a pc to extract the disc (windows, linux or mac).
+- free space on `ux0:` for the game files, plus about 0.7 gb more if you convert the films.
+- optional but recommended: **ffmpeg** on the pc (to convert the films) and **psvshell** on the vita (500 mhz).
+
+## installation, step by step
+
+**1. install the vpk**
+copy `twotowers.vpk` to your vita and install it with vitashell.
+
+**2. extract your xbox disc on the pc**
+use **extract-xiso** (windows/linux/mac) or **xdvdfs**:
+```
+extract-xiso -x &quot;the two towers (usa).iso&quot;
+```
+you get a folder with `default.xbe` and folders like `fmv`, etc. you need the **complete** extraction, not just the .xbe.
+
+**3. copy the game files to the vita**
+copy **everything inside** the extracted folder to:
+```
+ux0:data/twotowers/game_files/
+```
+when you&#x27;re done, this file must exist: `ux0:data/twotowers/game_files/default.xbe`.
+
+**4. convert the films (recommended)**
+the game&#x27;s films are bink (`.bik`). without conversion they play in software. with conversion they play on the vita&#x27;s hardware decoder, smooth and with sound.
+
+install ffmpeg on the pc, open a terminal **inside the extracted `fmv` folder** and run:
+
+windows (cmd):
+```
+for %f in (*.bik) do ffmpeg -i &quot;%f&quot; -c:v libx264 -profile:v baseline -level 3.1 -pix_fmt yuv420p -vf scale=640:480 -b:v 2500k -c:a aac -b:a 160k -ar 48000 -ac 2 &quot;%~nf.mp4&quot;
+```
+
+linux / mac:
+```
+for f in *.bik; do ffmpeg -i &quot;$f&quot; -c:v libx264 -profile:v baseline -level 3.1 -pix_fmt yuv420p -vf scale=640:480 -b:v 2500k -c:a aac -b:a 160k -ar 48000 -ac 2 &quot;${f%.bik}.mp4&quot;; done
+```
+copy all the `.mp4` files to:
+```
+ux0:data/twotowers/movies/
+```
+(for example `ux0:data/twotowers/movies/logos.mp4`). keep the original file names.
+
+**5. play**
+launch *the two towers* from the livearea. the first time you meet new effects there can be small hitches: the shaders are compiled once, then cached in `ux0:data/twotowers/shader_cache/`.
+
+## psvshell at 500 mhz (recommended)
+
+the game asks for the maximum clock a normal app can use (444 mhz). **psvshell** can push the cpu to 500 mhz.
+1. download psvshell (https://github.com/electry/psvshell) and install it as its readme explains (a plugin in `ur0:tai/` plus a line in `config.txt`).
+2. reboot, start the game, open the psvshell menu (its readme lists the button combo) and set the cpu to **500 mhz** for this game.
+
+overclocking is at your own risk, as always. many people use 500 mhz daily without issues.
+
+## options (optional)
+
+create a text file `ux0:data/twotowers/env.txt` with one option per line, for example:
+```
+tt_rain=1
+```
+
+| option | effect |
+|---|---|
+| `tt_rain=1` | rain back on (costs fps in helm&#x27;s deep) |
+| `tt_trails=1` | weapon swing trails back on |
+| `tt_farfx=1` | distant particles back on |
+| `tt_blobs=1` | round ground shadows under the characters back on |
+| `tt_wide=1` | 16:9 widescreen (works, but slower than 4:3) |
+| `tt_pace=1` | cap at 20 fps (drops to 15 when the game can&#x27;t keep up), for a steadier feel |
+
+## known issues
+
+- **low frame rate in the biggest battles** (second rohan level, helm&#x27;s deep), 13–17 fps. this is the main limitation.
+- some effects are off by default (see above). turning them on costs fps.
+- very distant enemies can animate a little less smoothly (animation level of detail).
+- small hitches the first time new shaders are compiled.
+- crashes are rare, but they can happen. if the game closes, please report it (see below).
+- only the **usa** xbox version is supported.
+- co-op and the pc version&#x27;s extras (texture packs, high frame rates) are not part of the vita port.
+
+## reporting bugs
+
+please open an issue at https://github.com/federicopellegrino994/lotr-two-towers-vita/issues and attach:
+- `ux0:data/twotowers/twotowers_log.txt`
+- the crash dump, if there is one: the `.psp2dmp` file in `ux0:data/` (the whole file, not `.tmp`)
+- the level and what you were doing.
+
+## credits and thanks
+
+this port stands on the work of many people. huge thanks to:
+
+- **gumpolas** and **the two towers recompiled** contributors, for the recompilation of the xbox game that this port is built on: https://github.com/gumpolas/tootawersrecomp
+- **the128rebits**, for their contributions to the two towers recompiled (playable characters, combat and progression changes, languages, runtime work): https://github.com/the128rebits
+- **sp00nz**, for **xboxrecomp**, the xbox static recompilation toolkit and runtime: https://github.com/sp00nznet/xboxrecomp
+- **the xemu project**, whose code some parts of the runtime derive from: https://github.com/xemu-project/xemu
+- **volverine-dude**, for the co-op work on the pc version: https://github.com/volverine-dude/tootawersrecomp-coop
+- **rinnegatamante**, for **vitagl**, which makes the graphics possible on the vita: https://github.com/rinnegatamante/vitagl
+- **electry**, for **psvshell**: https://github.com/electry/psvshell
+- the **vitasdk** team and the whole vita homebrew scene: https://vitasdk.org
+- vita port by me (federicopellegrino994), with technical assistance from claude (anthropic).
+
+**project page (source, readme, issues):** https://github.com/federicopellegrino994/lotr-two-towers-vita
+**downloads:** https://github.com/federicopellegrino994/lotr-two-towers-vita/releases
+
+*the lord of the rings: the two towers* belongs to its respective owners. this is a non-commercial fan project, not affiliated with or endorsed by them. support the original game.
+
+enjoy, and let me know how it runs on your console! 🗡️">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/lotr-two-towers-vita/0a0140b7566e71cb0bd5e3209176b26dafb42223eb0712aad2b7a6ebe2e51360.png" alt="Icono de The Two Towers" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">MODDING · GITHUB · federicopellegrino994/lotr-two-towers-vita</div>
+                      <h2><a href="https://github.com/federicopellegrino994/lotr-two-towers-vita/releases/tag/v0.3" target="_blank" rel="noopener">The Two Towers</a></h2>
+                      <div class="release-name">LOTR - The Two Towers vita 0.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge backup-missing" title="El VPK actual todavía no está enlazado desde Archive.org">VPK pendiente de respaldo</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.3</span>
+                    <span>2026-11-25 11:45 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.3</div>
+                  <div class="catalog-detail">El VPK actual todavía no está enlazado desde Archive.org</div>
+                  
+                  <div class="body markdown-body"><p>Hi r/vitahacks!</p>
+<p>I've been working on a PS Vita port of <strong>The Lord of the Rings: The Two Towers</strong>, the 2002 Xbox hack-and-slash from Stormfront/EA. It is <strong>not emulation</strong>. The port is based on <strong>The Two Towers Recompiled</strong>, a <em>static recompilation</em> of the Xbox game: the original Xbox code was translated into C and runs natively on the Vita's ARM CPU. The Xbox GPU commands are translated on the fly to the Vita's GPU through vitaGL.</p>
+<p><strong>Project page:</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/federicopellegrino994/lotr-two-towers-vita">https://github.com/federicopellegrino994/lotr-two-towers-vita</a>
+<strong>Download (VPK):</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/federicopellegrino994/lotr-two-towers-vita/releases">https://github.com/federicopellegrino994/lotr-two-towers-vita/releases</a></p>
+<p>⚠️ <strong>No game files are included. You need your own copy of the Xbox game (USA version).</strong> Please don't ask for ISOs.</p>
+<hr>
+<h2>What works well</h2>
+<ul>
+<li>The whole game is playable, with every level tested up to Helm's Deep: menus, saves, sound and music, cutscenes and the in-game cinematics.</li>
+<li>Sound is clean, with no crackling.</li>
+<li>Cutscene films can play on the Vita's hardware video decoder, smooth and full speed (after a one-time conversion, see below).</li>
+<li>Saves work and stay in <code>ux0:data/twotowers/</code>.</li>
+<li>Lighter levels play comfortably.</li>
+</ul>
+<h2>How it runs (honestly)</h2>
+<p>This is a demanding game for the Vita: big crowds, physics and a lot of draw calls. The CPU is the main limit.</p>
+<table>
+<thead>
+<tr>
+  <th>Level</th>
+  <th>Frame rate (444 MHz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Lighter levels, menus</td>
+  <td>20–30 fps</td>
+</tr>
+<tr>
+  <td>Most levels (Balin's Tomb, Amon Hen, Fangorn…)</td>
+  <td>~16–19 fps</td>
+</tr>
+<tr>
+  <td>Big battles (second Rohan level, Helm's Deep)</td>
+  <td>~13–17 fps</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>It is playable, but <strong>not smooth</strong> in the biggest fights.</li>
+<li>With <strong>PSVshell at 500 MHz</strong> you get about <strong>+12%</strong> (see below). Recommended.</li>
+<li>To save performance, some effects are <strong>off by default</strong>: rain, weapon swing trails, very distant particles and the characters' round blob shadows. Tiny far-away objects (a few pixels) are also skipped. Everything else looks like the Xbox version, at 544x408 internal resolution in 4:3.</li>
+</ul>
+<h2>What you need</h2>
+<ul>
+<li>A PS Vita with HENkaku/Ensō and VitaShell (PS TV untested).</li>
+<li>Your own <strong>Xbox, USA</strong> copy of <em>The Two Towers</em>, as a disc image (ISO).</li>
+<li>A PC to extract the disc (Windows, Linux or Mac).</li>
+<li>Free space on <code>ux0:</code> for the game files, plus about 0.7 GB more if you convert the films.</li>
+<li>Optional but recommended: <strong>ffmpeg</strong> on the PC (to convert the films) and <strong>PSVshell</strong> on the Vita (500 MHz).</li>
+</ul>
+<h2>Installation, step by step</h2>
+<p><strong>1. Install the VPK</strong>
+Copy <code>TwoTowers.vpk</code> to your Vita and install it with VitaShell.</p>
+<p><strong>2. Extract your Xbox disc on the PC</strong>
+Use <strong>extract-xiso</strong> (Windows/Linux/Mac) or <strong>xdvdfs</strong>:</p>
+<pre><code>extract-xiso -x &quot;The Two Towers (USA).iso&quot;
+</code></pre>
+<p>You get a folder with <code>default.xbe</code> and folders like <code>FMV</code>, etc. You need the <strong>complete</strong> extraction, not just the .xbe.</p>
+<p><strong>3. Copy the game files to the Vita</strong>
+Copy <strong>everything inside</strong> the extracted folder to:</p>
+<pre><code>ux0:data/twotowers/game_files/
+</code></pre>
+<p>When you're done, this file must exist: <code>ux0:data/twotowers/game_files/default.xbe</code>.</p>
+<p><strong>4. Convert the films (recommended)</strong>
+The game's films are Bink (<code>.bik</code>). Without conversion they play in software. With conversion they play on the Vita's hardware decoder, smooth and with sound.</p>
+<p>Install ffmpeg on the PC, open a terminal <strong>inside the extracted <code>FMV</code> folder</strong> and run:</p>
+<p>Windows (cmd):</p>
+<pre><code>for %f in (*.bik) do ffmpeg -i &quot;%f&quot; -c:v libx264 -profile:v baseline -level 3.1 -pix_fmt yuv420p -vf scale=640:480 -b:v 2500k -c:a aac -b:a 160k -ar 48000 -ac 2 &quot;%~nf.mp4&quot;
+</code></pre>
+<p>Linux / Mac:</p>
+<pre><code>for f in *.bik; do ffmpeg -i &quot;$f&quot; -c:v libx264 -profile:v baseline -level 3.1 -pix_fmt yuv420p -vf scale=640:480 -b:v 2500k -c:a aac -b:a 160k -ar 48000 -ac 2 &quot;${f%.bik}.mp4&quot;; done
+</code></pre>
+<p>Copy all the <code>.mp4</code> files to:</p>
+<pre><code>ux0:data/twotowers/movies/
+</code></pre>
+<p>(for example <code>ux0:data/twotowers/movies/logos.mp4</code>). Keep the original file names.</p>
+<p><strong>5. Play</strong>
+Launch <em>The Two Towers</em> from the LiveArea. The first time you meet new effects there can be small hitches: the shaders are compiled once, then cached in <code>ux0:data/twotowers/shader_cache/</code>.</p>
+<h2>PSVshell at 500 MHz (recommended)</h2>
+<p>The game asks for the maximum clock a normal app can use (444 MHz). <strong>PSVshell</strong> can push the CPU to 500 MHz.</p>
+<ol>
+<li>Download PSVshell (<a target="_blank" rel="noopener noreferrer" href="https://github.com/Electry/PSVshell">https://github.com/Electry/PSVshell</a>) and install it as its readme explains (a plugin in <code>ur0:tai/</code> plus a line in <code>config.txt</code>).</li>
+<li>Reboot, start the game, open the PSVshell menu (its readme lists the button combo) and set the CPU to <strong>500 MHz</strong> for this game.</li>
+</ol>
+<p>Overclocking is at your own risk, as always. Many people use 500 MHz daily without issues.</p>
+<h2>Options (optional)</h2>
+<p>Create a text file <code>ux0:data/twotowers/env.txt</code> with one option per line, for example:</p>
+<pre><code>TT_RAIN=1
+</code></pre>
+<table>
+<thead>
+<tr>
+  <th>Option</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>TT_RAIN=1</code></td>
+  <td>rain back on (costs fps in Helm's Deep)</td>
+</tr>
+<tr>
+  <td><code>TT_TRAILS=1</code></td>
+  <td>weapon swing trails back on</td>
+</tr>
+<tr>
+  <td><code>TT_FARFX=1</code></td>
+  <td>distant particles back on</td>
+</tr>
+<tr>
+  <td><code>TT_BLOBS=1</code></td>
+  <td>round ground shadows under the characters back on</td>
+</tr>
+<tr>
+  <td><code>TT_WIDE=1</code></td>
+  <td>16:9 widescreen (works, but slower than 4:3)</td>
+</tr>
+<tr>
+  <td><code>TT_PACE=1</code></td>
+  <td>cap at 20 fps (drops to 15 when the game can't keep up), for a steadier feel</td>
+</tr>
+</tbody>
+</table>
+<h2>Known issues</h2>
+<ul>
+<li><strong>Low frame rate in the biggest battles</strong> (second Rohan level, Helm's Deep), 13–17 fps. This is the main limitation.</li>
+<li>Some effects are off by default (see above). Turning them on costs fps.</li>
+<li>Very distant enemies can animate a little less smoothly (animation level of detail).</li>
+<li>Small hitches the first time new shaders are compiled.</li>
+<li>Crashes are rare, but they can happen. If the game closes, please report it (see below).</li>
+<li>Only the <strong>USA</strong> Xbox version is supported.</li>
+<li>Co-op and the PC version's extras (texture packs, high frame rates) are not part of the Vita port.</li>
+</ul>
+<h2>Reporting bugs</h2>
+<p>Please open an issue at <a target="_blank" rel="noopener noreferrer" href="https://github.com/federicopellegrino994/lotr-two-towers-vita/issues">https://github.com/federicopellegrino994/lotr-two-towers-vita/issues</a> and attach:</p>
+<ul>
+<li><code>ux0:data/twotowers/twotowers_log.txt</code></li>
+<li>the crash dump, if there is one: the <code>.psp2dmp</code> file in <code>ux0:data/</code> (the whole file, not <code>.tmp</code>)</li>
+<li>the level and what you were doing.</li>
+</ul>
+<h2>Credits and thanks</h2>
+<p>This port stands on the work of many people. Huge thanks to:</p>
+<ul>
+<li><strong>Gumpolas</strong> and <strong>The Two Towers Recompiled</strong> contributors, for the recompilation of the Xbox game that this port is built on: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Gumpolas/TooTawersRecomp">https://github.com/Gumpolas/TooTawersRecomp</a></li>
+<li><strong>The128ReBits</strong>, for their contributions to The Two Towers Recompiled (playable characters, combat and progression changes, languages, runtime work): <a target="_blank" rel="noopener noreferrer" href="https://github.com/The128ReBits">https://github.com/The128ReBits</a></li>
+<li><strong>sp00nz</strong>, for <strong>xboxrecomp</strong>, the Xbox static recompilation toolkit and runtime: <a target="_blank" rel="noopener noreferrer" href="https://github.com/sp00nznet/xboxrecomp">https://github.com/sp00nznet/xboxrecomp</a></li>
+<li><strong>The xemu project</strong>, whose code some parts of the runtime derive from: <a target="_blank" rel="noopener noreferrer" href="https://github.com/xemu-project/xemu">https://github.com/xemu-project/xemu</a></li>
+<li><strong>Volverine-Dude</strong>, for the co-op work on the PC version: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Volverine-Dude/TooTawersRecomp-coop">https://github.com/Volverine-Dude/TooTawersRecomp-coop</a></li>
+<li><strong>Rinnegatamante</strong>, for <strong>vitaGL</strong>, which makes the graphics possible on the Vita: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rinnegatamante/vitaGL">https://github.com/Rinnegatamante/vitaGL</a></li>
+<li><strong>Electry</strong>, for <strong>PSVshell</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/Electry/PSVshell">https://github.com/Electry/PSVshell</a></li>
+<li>The <strong>vitasdk</strong> team and the whole Vita homebrew scene: <a target="_blank" rel="noopener noreferrer" href="https://vitasdk.org">https://vitasdk.org</a></li>
+<li>Vita port by me (federicopellegrino994), with technical assistance from Claude (Anthropic).</li>
+</ul>
+<p><strong>Project page (source, README, issues):</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/federicopellegrino994/lotr-two-towers-vita">https://github.com/federicopellegrino994/lotr-two-towers-vita</a>
+<strong>Downloads:</strong> <a target="_blank" rel="noopener noreferrer" href="https://github.com/federicopellegrino994/lotr-two-towers-vita/releases">https://github.com/federicopellegrino994/lotr-two-towers-vita/releases</a></p>
+<p><em>The Lord of the Rings: The Two Towers</em> belongs to its respective owners. This is a non-commercial fan project, not affiliated with or endorsed by them. Support the original game.</p>
+<p>Enjoy, and let me know how it runs on your console! 🗡️</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/federicopellegrino994/lotr-two-towers-vita/releases/download/v0.3/TwoTowers.vpk" target="_blank" rel="noopener">⬇ TwoTowers.vpk · 9.4 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="pending" data-backup="outdated" data-search="pokemon emerald voxel pokemon emerald voxel arfatnaik0/cln-pokemon-emerald-voxel-psvita pokémon emerald voxel ps vita v1.03 v1.03 ports source-only release of the **pokémon emerald voxel ps vita** port. the 3d voxel renderer remains experimental.
 
 &gt; no vpk or game asset pack is distributed here. build your own locally using your legally obtained pokémon emerald (usa, europe) rev 0 (`bpee`) rom.
@@ -2711,6 +3039,76 @@ on the Vita's memory card.</li>
 <p>Updating from an earlier version: install the new VPK over the old one; saves and options are kept.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/TheSimsVita-v1.2.1.vpk" target="_blank" rel="noopener">⬇ TheSimsVita-v1.2.1.vpk · 4.8 MB</a><a class="btn" href="https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt · 294.0 B</a><a class="btn" href="https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/TheSimsVita-v1.2.1-lgpl-sources.zip" target="_blank" rel="noopener">TheSimsVita-v1.2.1-lgpl-sources.zip · 9.5 MB</a><a class="btn" href="https://github.com/marcocatena/TheSimsVita-release/releases/download/v1.2.1/TheSimsVita-v1.2.1-relink-kit.zip" target="_blank" rel="noopener">TheSimsVita-v1.2.1-relink-kit.zip · 31.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-backup="missing" data-search="syncthing syncthing geoffreymetais/syncthing-vita v0.2.0 v0.2.0 utilities ## what&#x27;s changed
+* docs(agents): skip tests/ during design and implementation by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/33
+* fix(deps): resolve cargo-audit vulnerabilities and update dependencies by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/34
+* chore(ci,tls): harden chacha20 tls 1.2 bounds, add cli/vita3k e2e checks, and update actions by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/35
+* restore ux0:user/00/savedata share preset by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/36
+* fix(vita): prefer lan addresses over public ips when peering on the same network by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/37
+* feat(vita): make ps vita reachable inbound (tcp, relay, global discovery) and add deviceoffer modal by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/38
+* feat(core): bep lz4 send compression and downloadprogress (p2.1) by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/39
+* feat: add .stignore filtering and sendonly folder mode (p2.2) by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/40
+* feat(core): inbound secondary 1+2 connections and adler-32 weak_hash block reuse (p2.3) by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/41
+* feat(core): extended fileinfo metadata, unix symlinks, and clusterconfig introducer support (p2.4) by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/42
+* feat(core): add upnp/nat-pmp port mapping, .stversions file versioning, and receiveencrypted support (p2.5) by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/43
+* docs: update agents.md and skills for inbound reachability, part 2 features, cargo audit &amp; e2e by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/44
+* fix(vita): advertise explicit lan ipv4 on udp discovery and relay-only on global discovery behind nat by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/45
+* fix(vita): run global discovery lookup while dialing unreachable lan peers by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/46
+* ci: cover all e2e suites and quality checks by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/47
+* fix(vita): speed up global discovery startup when no local peer is present by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/48
+* fix(bep): fix clusterconfig disconnects on syncthing servers and add connection lifecycle e2e by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/49
+* feat(vita): scroll the share list and the log viewer by touch drag by @geoffreymetais in https://github.com/geoffreymetais/syncthing-vita/pull/50
+
+
+**full changelog**: https://github.com/geoffreymetais/syncthing-vita/compare/v0.1.0...v0.2.0">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/syncthing-vita/8f259199658fcdf6ead409467dc47275284c03d2075f76341cac850c7bcc901e.png" alt="Icono de Syncthing" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">UTILITIES · GITHUB · GeoffreyMetais/syncthing-vita</div>
+                      <h2><a href="https://github.com/GeoffreyMetais/syncthing-vita/releases/tag/v0.2.0" target="_blank" rel="noopener">Syncthing</a></h2>
+                      <div class="release-name">v0.2.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge backup-missing" title="El VPK actual todavía no está enlazado desde Archive.org">VPK pendiente de respaldo</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v0.2.0</span>
+                    <span>2026-11-24 10:40 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.2.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.2.0</div>
+                  <div class="catalog-detail">El VPK actual todavía no está enlazado desde Archive.org</div>
+                  
+                  <div class="body markdown-body"><h2>What's Changed</h2>
+<ul>
+<li>docs(agents): skip tests/ during design and implementation by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/33">https://github.com/GeoffreyMetais/syncthing-vita/pull/33</a></li>
+<li>fix(deps): resolve cargo-audit vulnerabilities and update dependencies by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/34">https://github.com/GeoffreyMetais/syncthing-vita/pull/34</a></li>
+<li>chore(ci,tls): harden ChaCha20 TLS 1.2 bounds, add CLI/Vita3K E2E checks, and update Actions by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/35">https://github.com/GeoffreyMetais/syncthing-vita/pull/35</a></li>
+<li>Restore ux0:user/00/savedata share preset by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/36">https://github.com/GeoffreyMetais/syncthing-vita/pull/36</a></li>
+<li>fix(vita): prefer LAN addresses over public IPs when peering on the same network by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/37">https://github.com/GeoffreyMetais/syncthing-vita/pull/37</a></li>
+<li>feat(vita): make PS Vita reachable inbound (TCP, Relay, Global Discovery) and add DeviceOffer modal by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/38">https://github.com/GeoffreyMetais/syncthing-vita/pull/38</a></li>
+<li>feat(core): BEP LZ4 send compression and DownloadProgress (P2.1) by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/39">https://github.com/GeoffreyMetais/syncthing-vita/pull/39</a></li>
+<li>feat: add .stignore filtering and SendOnly folder mode (P2.2) by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/40">https://github.com/GeoffreyMetais/syncthing-vita/pull/40</a></li>
+<li>feat(core): inbound secondary 1+2 connections and Adler-32 weak_hash block reuse (P2.3) by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/41">https://github.com/GeoffreyMetais/syncthing-vita/pull/41</a></li>
+<li>feat(core): extended FileInfo metadata, Unix symlinks, and ClusterConfig introducer support (P2.4) by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/42">https://github.com/GeoffreyMetais/syncthing-vita/pull/42</a></li>
+<li>feat(core): add UPnP/NAT-PMP port mapping, .stversions file versioning, and ReceiveEncrypted support (P2.5) by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/43">https://github.com/GeoffreyMetais/syncthing-vita/pull/43</a></li>
+<li>docs: update AGENTS.md and skills for inbound reachability, Part 2 features, cargo audit &amp; E2E by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/44">https://github.com/GeoffreyMetais/syncthing-vita/pull/44</a></li>
+<li>fix(vita): advertise explicit LAN IPv4 on UDP discovery and relay-only on Global Discovery behind NAT by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/45">https://github.com/GeoffreyMetais/syncthing-vita/pull/45</a></li>
+<li>fix(vita): run Global Discovery lookup while dialing unreachable LAN peers by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/46">https://github.com/GeoffreyMetais/syncthing-vita/pull/46</a></li>
+<li>ci: cover all E2E suites and quality checks by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/47">https://github.com/GeoffreyMetais/syncthing-vita/pull/47</a></li>
+<li>fix(vita): speed up Global Discovery startup when no local peer is present by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/48">https://github.com/GeoffreyMetais/syncthing-vita/pull/48</a></li>
+<li>fix(bep): fix ClusterConfig disconnects on Syncthing servers and add connection lifecycle E2E by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/49">https://github.com/GeoffreyMetais/syncthing-vita/pull/49</a></li>
+<li>feat(vita): scroll the share list and the log viewer by touch drag by @GeoffreyMetais in <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/pull/50">https://github.com/GeoffreyMetais/syncthing-vita/pull/50</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a target="_blank" rel="noopener noreferrer" href="https://github.com/GeoffreyMetais/syncthing-vita/compare/v0.1.0...v0.2.0">https://github.com/GeoffreyMetais/syncthing-vita/compare/v0.1.0...v0.2.0</a></p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/GeoffreyMetais/syncthing-vita/releases/download/v0.2.0/SYNCTHING.vpk" target="_blank" rel="noopener">⬇ SYNCTHING.vpk · 1.4 MB</a></div>
                 </div>
               </div>
             </article>
@@ -6040,6 +6438,88 @@ by Square Enix.</p>
             </article>
             
 
+            <article class="card" data-platform="github" data-catalog="uptodate" data-backup="missing" data-search="ps vita recovery ps vita recovery drinkingsubset/ps-vita-recovery-menu-project ps vita recovery menu v1.2.3 v1.2.3 plugins [crash reports](https://raw.githubusercontent.com/drinkingsubset/ps-vita-recovery-menu-project/main/vitarecovery%20screenshots/v1.2.3/crash_reports.png)
+
+**crash reports, and a file manager that opens files.**
+
+- **boot diagnostics &gt; crash reports** (new section). lists the crash reports the vita saved in `ux0:data` (`psp2core-*.psp2dmp`), newest first, with date, time and what crashed, plus how much space they use.
+  - **home screen (sceshell) crashed 2+ times** is reported as a warning: that is almost always a plugin under `*main`. suggested fix: turn `*main` plugins off one by one, newest first (the plugins section shows the newest plugin files).
+  - crash reports using 100 mb or more of `ux0:` are reported as a warning. old reports can be deleted from `ux0:data` with the file manager.
+- **fix: file manager said &quot;file too large to view&quot; for almost every file.** the viewer only opened files under 8 kb. now:
+  - files up to 256 kb open in full; bigger files show their first 256 kb with a note on top;
+  - binary files (eboot.bin, .skprx, images) open as a **hex view** instead of garbage;
+  - **up/down** scroll and keep scrolling while held, **l/r** move a page at a time, **left/right** scroll long lines sideways;
+  - the title shows which lines you are on (&quot;19-35 of 863&quot;).
+- **battery in the title bar:** the battery level and an icon under &quot;by drinkingsubset&quot; on every screen, read live from the vita (checked every 2 seconds). yellow at 20% or less, red at 10% or less, a lightning bolt while charging. hidden on ps tv.
+- **file manager:** the folder path was drawn twice on top of itself; long paths now show &quot;...&quot; and the last part so they never run under the battery.
+- **menus:** the &quot;&lt; back&quot; rows are gone from advanced, plugins and registry hacks, like settings. **o** goes back in every menu.
+- no boot plugin changes: just install the vpk.
+
+## screenshots
+
+![boot diagnostics summary](https://raw.githubusercontent.com/drinkingsubset/ps-vita-recovery-menu-project/main/vitarecovery%20screenshots/v1.2.3/boot_diagnostics_summary.png)
+![battery states](https://raw.githubusercontent.com/drinkingsubset/ps-vita-recovery-menu-project/main/vitarecovery%20screenshots/v1.2.3/battery_states.png)
+![file viewer text](https://raw.githubusercontent.com/drinkingsubset/ps-vita-recovery-menu-project/main/vitarecovery%20screenshots/v1.2.3/file_viewer_text.png)
+![file viewer hex](https://raw.githubusercontent.com/drinkingsubset/ps-vita-recovery-menu-project/main/vitarecovery%20screenshots/v1.2.3/file_viewer_hex.png)
+
+## install
+install `vitarecovery_v1.2.3.vpk` with vitashell. no boot plugin changes, so you do **not** need to reinstall boot recovery. &quot;enable unsafe homebrew&quot; must stay ticked in henkaku settings.
+
+tested on ps vita 2000 (3.65 ensō) and pch-1101 3g (3.60 and 3.65 ensō), all with sd2vita.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/ps-vita-recovery-menu-project/a422f81e9113b42afc98e85df1a748d11bf5b31ba53675f69ee3f96fa8d7eb29.png" alt="Icono de PS Vita Recovery" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">PLUGINS · GITHUB · DrinkingSubset/PS-Vita-Recovery-Menu-Project</div>
+                      <h2><a href="https://github.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/releases/tag/v1.2.3" target="_blank" rel="noopener">PS Vita Recovery</a></h2>
+                      <div class="release-name">PS Vita Recovery Menu v1.2.3</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge backup-missing" title="El VPK actual todavía no está enlazado desde Archive.org">VPK pendiente de respaldo</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">v1.2.3</span>
+                    <span>2026-11-16 21:02 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.2.3</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.2.3</div>
+                  <div class="catalog-detail">El VPK actual todavía no está enlazado desde Archive.org</div>
+                  
+                  <div class="body markdown-body"><p><a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/main/VitaRecovery%20Screenshots/v1.2.3/crash_reports.png">Crash Reports</a></p>
+<p><strong>Crash Reports, and a File Manager that opens files.</strong></p>
+<ul>
+<li><strong>Boot Diagnostics &gt; Crash Reports</strong> (new section). Lists the crash reports the Vita saved in <code>ux0:data</code> (<code>psp2core-*.psp2dmp</code>), newest first, with date, time and what crashed, plus how much space they use.<ul>
+<li><strong>Home screen (SceShell) crashed 2+ times</strong> is reported as a warning: that is almost always a plugin under <code>*main</code>. Suggested fix: turn <code>*main</code> plugins off one by one, newest first (the Plugins section shows the newest plugin files).</li>
+<li>Crash reports using 100 MB or more of <code>ux0:</code> are reported as a warning. Old reports can be deleted from <code>ux0:data</code> with the File Manager.</li>
+</ul>
+</li>
+<li><strong>Fix: File Manager said &quot;File too large to view&quot; for almost every file.</strong> The viewer only opened files under 8 KB. Now:<ul>
+<li>files up to 256 KB open in full; bigger files show their first 256 KB with a note on top;</li>
+<li>binary files (eboot.bin, .skprx, images) open as a <strong>hex view</strong> instead of garbage;</li>
+<li><strong>Up/Down</strong> scroll and keep scrolling while held, <strong>L/R</strong> move a page at a time, <strong>Left/Right</strong> scroll long lines sideways;</li>
+<li>the title shows which lines you are on (&quot;19-35 of 863&quot;).</li>
+</ul>
+</li>
+<li><strong>Battery in the title bar:</strong> the battery level and an icon under &quot;By DrinkingSubset&quot; on every screen, read live from the Vita (checked every 2 seconds). Yellow at 20% or less, red at 10% or less, a lightning bolt while charging. Hidden on PS TV.</li>
+<li><strong>File Manager:</strong> the folder path was drawn twice on top of itself; long paths now show &quot;...&quot; and the last part so they never run under the battery.</li>
+<li><strong>Menus:</strong> the &quot;&lt; Back&quot; rows are gone from Advanced, Plugins and Registry Hacks, like Settings. <strong>O</strong> goes back in every menu.</li>
+<li>No boot plugin changes: just install the VPK.</li>
+</ul>
+<h2>Screenshots</h2>
+<p><img src="https://raw.githubusercontent.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/main/VitaRecovery%20Screenshots/v1.2.3/boot_diagnostics_summary.png" alt="Boot Diagnostics summary">
+<img src="https://raw.githubusercontent.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/main/VitaRecovery%20Screenshots/v1.2.3/battery_states.png" alt="Battery states">
+<img src="https://raw.githubusercontent.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/main/VitaRecovery%20Screenshots/v1.2.3/file_viewer_text.png" alt="File Viewer text">
+<img src="https://raw.githubusercontent.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/main/VitaRecovery%20Screenshots/v1.2.3/file_viewer_hex.png" alt="File Viewer hex"></p>
+<h2>Install</h2>
+<p>Install <code>VitaRecovery_v1.2.3.vpk</code> with VitaShell. No boot plugin changes, so you do <strong>not</strong> need to reinstall Boot Recovery. &quot;Enable Unsafe Homebrew&quot; must stay ticked in HENkaku Settings.</p>
+<p>Tested on PS Vita 2000 (3.65 Ensō) and PCH-1101 3G (3.60 and 3.65 Ensō), all with SD2Vita.</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/DrinkingSubset/PS-Vita-Recovery-Menu-Project/releases/download/v1.2.3/VitaRecovery_v1.2.3.vpk" target="_blank" rel="noopener">⬇ VitaRecovery_v1.2.3.vpk · 588.6 KB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
             <article class="card" data-platform="github" data-catalog="uptodate" data-backup="matched" data-search="combopeel combopeel retroaria/combo-peel-vita combopeel v1.1 v1.1 plugins ## combopeel v1.1
 plugin de kernel (taihen) de qualidade de vida para ps vita slim: desbloqueia a tela de bloqueio com analógico esquerdo para baixo + x, com a mesma animação de “descascar” do gesto com o dedo.
 deve funcionar nos modelos fat, mas ainda não foi testado num modelo pch-1000.
@@ -6934,6 +7414,44 @@ built on the [star fox adventures decompilation](https://github.com/zcanann/sfa-
 <p>Built on the <a target="_blank" rel="noopener noreferrer" href="https://github.com/zcanann/SFA-Decomp">Star Fox Adventures decompilation</a> (Zachary Canann, Jack Price-Burns and contributors) and Cassieandstuff's <a target="_blank" rel="noopener noreferrer" href="https://github.com/Cassieandstuff/SFA-Decomp/tree/pc-port-continued">PC port branch</a>. Uses vitaGL, vitaShaRK and math-neon (Rinnegatamante, LGPL-3.0) and SceShaccCgExt (bythos14, LGPL-2.1). LiveArea artwork and layout by <a target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/user/Either-Version-9577/">u/Either-Version-9577</a>. The full source and the library details are in this repository: see <a target="_blank" rel="noopener noreferrer" href="https://github.com/tchisholm20/starfox-adventures-vita/blob/main/CREDITS.md">CREDITS.md</a>.</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://github.com/tchisholm20/starfox-adventures-vita/releases/download/v0.2.0/StarFoxAdventures-Vita-2026-11-13.zip" target="_blank" rel="noopener">⬇ StarFoxAdventures-Vita-2026-11-13.zip · 8.3 MB</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-backup="missing" data-search="uae4all2 hd uae4all2 hd theherogac/uae4all2-hd-vita 1.14 1.14 emulators - new dedicated cd32 tab:
+- added cd32 pad remap:
+- per-game controller remap: save, load and delete a remap for the active game from the controls tab (`remap_&lt;game&gt;.cfg`, cd32 mapping included).
+- library scan respects `ux0:/data/uae4all/library_roots.txt`: only the listed folders are scanned. an empty file disables scanning; without the file the previous default folders are used.
+- library scan can be cancelled with triangle (keeps partial results) and auto-scan can be turned off in `system -&gt; library auto-scan on startup`.">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/uae4all2-hd-vita/b9140d9ef1b04e0781b4611ab4e26af4bc77c3afe02b79d67a2df0bb4d54a4a8.png" alt="Icono de UAE4All2 HD" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">EMULATORS · GITHUB · theheroGAC/UAE4ALL2-HD-VITA</div>
+                      <h2><a href="https://github.com/theheroGAC/UAE4ALL2-HD-VITA/releases/tag/1.14" target="_blank" rel="noopener">UAE4All2 HD</a></h2>
+                      <div class="release-name">1.14</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge backup-missing" title="El VPK actual todavía no está enlazado desde Archive.org">VPK pendiente de respaldo</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">1.14</span>
+                    <span>2026-11-13 22:30 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 1.14</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 1.14</div>
+                  <div class="catalog-detail">El VPK actual todavía no está enlazado desde Archive.org</div>
+                  
+                  <div class="body markdown-body"><ul>
+<li>New dedicated CD32 tab:</li>
+<li>Added CD32 pad remap:</li>
+<li>Per-game controller remap: save, load and delete a remap for the active game from the Controls tab (<code>remap_&lt;game&gt;.cfg</code>, CD32 mapping included).</li>
+<li>Library scan respects <code>ux0:/data/uae4all/library_roots.txt</code>: only the listed folders are scanned. An empty file disables scanning; without the file the previous default folders are used.</li>
+<li>Library scan can be cancelled with TRIANGLE (keeps partial results) and auto-scan can be turned off in <code>System -&gt; Library Auto-Scan on Startup</code>.</li>
+</ul>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/theheroGAC/UAE4ALL2-HD-VITA/releases/download/1.14/uae4all2hd.vpk" target="_blank" rel="noopener">⬇ uae4all2hd.vpk · 6.6 MB</a></div>
                 </div>
               </div>
             </article>
@@ -19954,6 +20472,34 @@ sha-256: 07413098f3b1b69435736f66c0622d05e902397516347a7f4847d748c18f13d3">
 <p>SHA-256: 07413098F3B1B69435736F66C0622D05E902397516347A7F4847D748C18F13D3</p>
 </div>
                   <div class="assets"><a class="btn primary" href="https://gitlab.com/-/project/86541142/uploads/b45bad669d5e2faf8b30ae5172c51091/PowerpuffVita_v0.1.1.vpk" target="_blank" rel="noopener">⬇ PowerpuffVita_v0.1.1.vpk</a><a class="btn" href="https://gitlab.com/-/project/86541142/uploads/02f1ee46b55f211cd7af91f0e0485333/Powerpuff_Girls_Mojo_Madness_Vita_v0.1.1_Windows_Installer_payload-flex.zip" target="_blank" rel="noopener">Powerpuff_Girls_Mojo_Madness_Vita_v0.1.1_Windows_Installer.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.zip" target="_blank" rel="noopener">source.zip</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar.gz" target="_blank" rel="noopener">source.tar.gz</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar.bz2" target="_blank" rel="noopener">source.tar.bz2</a><a class="btn" href="https://gitlab.com/sexcurrybeats/powerpuff-mojo-madness-vita/-/archive/v0.1.1/powerpuff-mojo-madness-vita-v0.1.1.tar" target="_blank" rel="noopener">source.tar</a></div>
+                </div>
+              </div>
+            </article>
+            
+
+            <article class="card" data-platform="github" data-catalog="uptodate" data-backup="missing" data-search="advancedslop advancedslop grarak/advancedslop 0.1.0 0.1.0 emulators initial release">
+              <div class="card-layout">
+                <div class="icon-wrap"><img class="app-icon" src="https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/advancedslop/b61a2ff397beb7f6ecfb361925450d3e93d452297de618337c1b7f0e70d4d45e.png" alt="Icono de AdvancedSlop" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('icon-failed');this.remove()"><span class="icon-fallback">PSV</span></div>
+                <div class="card-content">
+                  <div class="card-top">
+                    <div class="title-block">
+                      <div class="eyebrow">EMULATORS · GITHUB · Grarak/AdvancedSlop</div>
+                      <h2><a href="https://github.com/Grarak/AdvancedSlop/releases/tag/0.1.0" target="_blank" rel="noopener">AdvancedSlop</a></h2>
+                      <div class="release-name">0.1.0</div>
+                    </div>
+                    <div class="badges"><span class="badge catalog-ok">✓ Al día en PSVitaAlive</span><span class="badge backup-missing" title="El VPK actual todavía no está enlazado desde Archive.org">VPK pendiente de respaldo</span></div>
+                  </div>
+                  <div class="meta">
+                    <span class="tag">0.1.0</span>
+                    <span>2026-09-16 20:43 UTC</span>
+                    <span class="catalog-version">PSVitaAlive: 0.1.0</span>
+                  </div>
+                  <div class="catalog-detail">PSVitaAlive 0.1.0</div>
+                  <div class="catalog-detail">El VPK actual todavía no está enlazado desde Archive.org</div>
+                  
+                  <div class="body markdown-body"><p>Initial release</p>
+</div>
+                  <div class="assets"><a class="btn primary" href="https://github.com/Grarak/AdvancedSlop/releases/download/0.1.0/advancedslop.vpk" target="_blank" rel="noopener">⬇ advancedslop.vpk · 3.2 MB</a></div>
                 </div>
               </div>
             </article>
