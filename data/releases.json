@@ -1,38 +1,235 @@
 [
   {
     "platform": "github",
-    "repo": "xesf/manhunt-releases",
-    "release_id": "460406746",
-    "tag": "v0.10.5",
-    "name": "v0.10.5",
-    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.10.5",
-    "published": "2026-11-27T09:45:54Z",
+    "repo": "CBOC-Vita-Lab/galaxy-vita",
+    "release_id": "460959464",
+    "tag": "v3.0",
+    "name": "Super Mario Galaxy 3.0",
+    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v3.0",
+    "published": "2026-11-27T18:48:43Z",
     "prerelease": false,
     "draft": false,
-    "body": "\n- Manhunt 1: a buddy or hostage who follows the player and stands in his way (the Journalist in journo_streets' narrow street) no longer blocks him for good: the player passes through him after 15 undone moves (the original's AI steering, `PedSteer_ResolveContacts` 0x55A530, is not ported). The autoplay never fights a follower.\n- Manhunt 1: swing doors are hinge bodies as in the original: the player and the hunters push them open by walking into them, the spring (HINGE_SPRING_STRENGTH, HINGE_SPRING_DAMP) swings them back and they latch shut (the mall's exit door no longer stays open); SetDoorOverrideAngle drives a door to its angle, a locked door at rest takes no push.\n\n\nThe Windows and Linux x86_64 builds are untested on real hardware.\n",
+    "body": "# Super Mario Galaxy for PS Vita 3.0 — Full-Res 60 FPS & First-Ever Multiplayer\n\n![Galaxy Vita 3.0](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/hero.png)\n\n**Version 3.0 is the biggest leap since Super Mario Galaxy first landed on PlayStation Vita.** Compared to 2.0, almost the entire adventure now runs at **full native resolution (`960×544`) at up to 60 FPS**, **Quality mode gains hardware `2× MSAA`**, **5,401 precompiled shaders** eliminate first-visit stutters, and — for the very first time anywhere on Vita — **Super Mario Galaxy has full 2–4 player Multiplayer** built for both local and online play.\n\n> You still need your own Super Mario Galaxy Wii USA (`RMGE01`) disc files. **Upgrading from 2.x?** Install `Galaxy-Vita.vpk` right over your current install — your saves, settings, and game files stay safe.\n\n---\n\n## First-Ever Super Mario Galaxy Multiplayer (Local & Online-Ready)\n\n![Luigi and Mario together in the Comet Observatory garden](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/mp-garden.png)\n\n![The gathering screen: a 3D face for every player found on your Wi-Fi](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/mp-gathering.png)\n\n* **Play Together (2–4 Players):** Team up in one shared galaxy where switches, Star Bits, purple coins, enemies, and Power Stars count for everyone. Fall off a planet and a **rescue bubble** floats you smoothly right back to a teammate — with a live follow camera tracking you all the way until they pop you free.\n* **Star Race (2–4 Players):** Race head-to-head to the same Power Star from a synchronized countdown, complete with an on-screen timer, live standings, series leaderboard points, and automatic winner start delays so every rematch stays intense.\n* **Zero Setup Hassle:** Choose **Multiplayer** right after the title screen. Every player on your **same Wi-Fi** pops onto the gathering screen as a 3D face — no host/join menus, just press **START**. Also built with **Nearby** (direct console-to-console, no router), **Far-Away Friend Codes**, and live **Online Play** on **`https://galaxy.psvita.dev`** (**Play with Anyone**, **Friends**, **Star Race Leaderboards**, and Cloudflare TURN relay).\n\n![Fall off and a rescue bubble carries you smoothly back to a teammate](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/mp-bubble.png)\n\n* **Six Playable Characters:** Mario, Luigi, Toad, Yellow Toad, Cosmic Mario, and Cosmic Luigi — plus quick messages and typed chat (with per-player mute).\n* **Polished on Real Hardware:** Smooth remote player movement, zero pushing during galaxy fly-ins, full Luigi rendering on face-first launch rings, encrypted sessions, automatic reconnection (up to 75 s), and clean **even 60 / even 30** frame pacing (60.0 FPS on Flipswitch, locked 30 on busy open planets like Good Egg).\n* **Your Single-Player Save Stays Protected:** Multiplayer uses its own **Team Files** and creates an automatic checked Safe Copy on first launch.\n\n*(Hardware status: live 2-player Play Together over Wi-Fi verified on a real PS Vita at 5–16 ms ping, and the public online server `https://galaxy.psvita.dev` is live with TURN relay, WAF, and rate limiting active. Two physical Vitas, Nearby ad-hoc, far-away codes across real routers, and 4-player console stress tests have only been tested on computers so far — see [Known Issues](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/KNOWN-ISSUES.md).)*\n\n---\n\n## Full-Resolution 60 FPS & Hardware 2× MSAA Quality Mode\n\n![Beach Bowl Galaxy](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/beach-bowl.png)\n\nA massive GPU, shader, and CPU overhaul since Version 2.0 delivers both higher frame rates and sharper visuals on real PS Vita hardware (measured at **500 MHz CPU / 222 MHz GPU / 222 MHz BUS** via **PSVshell** with the 4th CPU core unlocked via **CapUnlocker**):\n\n| Mode / Galaxy | Version 3.0 (Real PS Vita) |\n|---|---|\n| **Good Egg, Gusty Garden, Freezeflame, Battlerock, Space Junk, Toy Time, Sea Slide, Bowser Jr.** | **58–60 FPS** at native `960×544` |\n| **Honeyhive Galaxy** | **59.9 FPS native** at `960×544` (`100%` frame cadence — up from 12 FPS in v1.2!) |\n| **Beach Bowl & Melty Molten Galaxy** | **55–60 FPS** at `960×544` (Melty Molten up to `59.6 FPS` steady!) |\n| **Dreadnought & Final Bowser Fight** | **55–60 FPS** in normal play; clean **locked even 30 FPS** on the heaviest overlooks |\n| **Quality Mode (Full Detail)** | **Locked 30.0 FPS** at native **`960×544` with hardware `2× MSAA`** & anisotropic filtering |\n\n* **No More Choppy 48–50 FPS Judder:** Performance mode locks cleanly to **even 60 FPS**, and only steps down to a **silky-even 30 FPS** during sustained heavy scenes — automatically stepping right back up to 60 as soon as the action clears.\n* **Under-the-Hood Horsepower:** Major shader optimizations (split branchless vertex shaders, half-precision fog, early alpha-test, projective UV cuts), exact 1-byte intensity textures, fast ARMv7 geometry welding, `4×` faster CPU texture swizzling, vitaGL fast-path upgrades, and a freshly recorded **CPU PGO profile** squeeze dramatically more speed out of the Vita without changing the look of the game.\n* **Instant Shader Loading (5,401 Precompiled Shaders):** Every galaxy, boss fight, power-up, multiplayer screen, and menu was harvested natively on a real PS Vita. All **5,401 shaders preload into RAM in ~0.4 seconds** — giving **zero cold shader compiles** across Title, Observatory, Good Egg, Honeyhive, Beach Bowl, Melty Molten, and Dreadnought even on a brand-new install!\n\n---\n\n## All Major Bug Fixes & Quality-of-Life Upgrades Since 2.0\n\n![The Comet Observatory](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/observatory.png)\n\nMore than **30 major crash, visual, audio, control, save, and multiplayer fixes** have landed between Version 2.0 and Version 3.0:\n\n### Crashes & Stability\n* **Bee Mushroom & power-up transformation crashes fixed:** Grabbing a Bee Mushroom, Ice Flower, Spring Mushroom, Rainbow Star, or getting shocked by an electric enemy no longer crashes Mario or Luigi mid-morph.\n* **Power-ups are never lost** if a form's models aren't loaded yet — the item stays put instead of vanishing.\n* **Comet Observatory & Kitchen Dome crashes fixed:** Resolved the GPU memory-free-while-drawing fault behind both crashes.\n* **Performance-mode loading black-screen hang fixed:** Galaxies no longer stall indefinitely on a black screen during 60 FPS loads.\n* **Post-load resolution-switch crash fixed** by resampling cleanly instead of reusing stale pre-load timings.\n* **Boot stall watch & crash reports improved:** Eliminated false \"Taking longer than usual\" messages during active shader prep, and improved `log.txt` + `psp2dmp` diagnostics if an unexpected exit ever happens.\n\n### Graphics & Visual Fixes\n* **Black-hole white flicker & crosshair artifact fixed** while Mario is falling into a black hole.\n* **Missing fog & corrupted object textures fixed** (locked shader fog slot alignment).\n* **Blinking ground shadows fixed** on small planets and Dreadnought's start disc.\n* **No vanishing objectives in Performance mode:** Distant Toads, Lumas, Rosalina, bunnies, switches, and bosses are always kept drawn.\n* **Misplaced-object shader bugs from 2.1 completely gone:** All **5,401** shaders ship compiled directly on real PS Vita hardware.\n* **Upgraded Home Screen bubble, LiveArea & launch splash (`content-rev 5`):** Refreshed 8-bit palette artwork tailored for the Vita Home Screen and Start gate.\n\n### Stutter, Audio & Engine Fixes\n* **20-second periodic micro-hitch (\"little stutter here and there\") eliminated** by spreading thread checks smoothly across frames.\n* **48 FPS lock & uneven 50 FPS judder eliminated** in both single player and multiplayer.\n* **Music cutouts during loading fixed:** Long memory-card archive reads are chunked into 512 KiB slices so audio streams never stall behind them.\n* **Resolution-switch & menu stutters eliminated:** Next picture sizes are pre-allocated (~1 ms swap) and menus warm up at start-up.\n* **Quieter memory-card logging & faster start-up:** Dropped constant 100 ms dev-stat card writes during play and trimmed boot overhead.\n\n### Controls, Camera, Saves & Console Experience\n* **Broken motion sensor auto-fallback:** On Manta Surfing and Star Ball levels, an unresponsive tilt sensor automatically hands control to the left stick.\n* **Zoomed-in (`1.5×`) off-screen Pull Stars, Launch Stars, Coins & Star Bits fixed:** Nearby items just outside the zoomed view stay active, and the camera automatically eases back to `1.0×` for Pull Stars and fixed dome shots.\n* **Bowser's planet on the Galaxy Map fixed:** Planets whose center sits off the screen edge can now be selected anywhere their disc is visible.\n* **\"Controller disconnected\" Settings freeze fixed** with a clean fallback to direct Vita pad reads.\n* **Settings moved inside the game:** Open from the Start screen or press **△** in pause — clean 2-mode Picture choice (**Smooth Motion 60 FPS** vs. **Full Detail 30 FPS 2× MSAA**), automatic Vita system language detection (**English, French, Spanish, German, Italian**), and one-tap **Save and Start Again**.\n* **Safe Saves always on & OLED-safe keep-awake:** Power-cut-safe atomic saves with `.mpbak` backups protect both single-player saves and Team Files, and the screen stays cleanly awake during play.\n\n### Multiplayer Fixes (Hardware Verified on PS Vita)\n* **Smooth remote player movement** (velocity-matched glide + 30 FPS puppet animation cadence eliminate jumpy motion).\n* **Zero fly-in pushing** so teammates never knock each other off the landing platform.\n* **Full Luigi body on face-first launch-ring fly-ins** (fixed missing body segments).\n* **Bubble rescue follow camera & anti-double-death fix** (camera tracks your bubble across the galaxy without overriding cutscenes, and clears leftover death hits when popped).\n* **Multiplayer pause camera zoom (`L`/`R`) restored**, faster gathering screen, group-restart sync guards, encrypted sessions, and up to 75-second silent-link reconnection.\n\n---\n\n## Quick Update Guide\n\n* **Installing or Updating:** Install `Galaxy-Vita.vpk` in VitaShell (or use **[CBOC Vita Installer](https://github.com/CBOC-Vita-Lab/vita-installer/releases/latest)**). Your saves, settings, and prepared game files stay intact. If LiveArea still shows the old icon or Settings tile, run **Refresh LiveArea** in VitaShell.\n* **Strongly Recommended Plug-ins for Best 60 FPS Performance:** While Galaxy runs without extra plug-ins, we strongly recommend **CapUnlocker** (unlocks the Vita's 4th CPU core) together with **PSVshell / PSVshellPlus** (or your preferred overclock plug-in set to **500 MHz CPU / 222 MHz GPU / 222 MHz BUS** — Galaxy automatically respects your 500 MHz overclock profile).\n* **Full Details:** See [What's New](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/CHANGELOG.md) for every technical change, [Multiplayer Guide](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/docs/MULTIPLAYER.md) to get started with friends, and [Known Issues](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/KNOWN-ISSUES.md) for open items.\n\n## Gallery (Straight from a PS Vita Running 3.0)\n\n| | |\n|---|---|\n| ![Honeyhive](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/honeyhive.png) | ![Gusty Garden](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/gusty-garden.png) |\n| ![Toy Time](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/toy-time.png) | ![Freezeflame](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/freezeflame.png) |\n| ![Melty Molten](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/melty-molten.png) | ![Dreadnought](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/dreadnought.png) |\n\nThank you to everyone in the PS Vita community who tested, reported issues, and cheered this port on. Grab your Vita, grab a friend, and blast off! — **CBOC Vita**\n",
     "assets": [
       {
-        "name": "manhunt-v0.10.5-linux-x86_64.tar.gz",
-        "size": 3809504,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.5/manhunt-v0.10.5-linux-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
+        "name": "cboc-release.json",
+        "size": 1426,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/cboc-release.json",
+        "content_type": "application/json"
       },
       {
-        "name": "manhunt-v0.10.5-macos-x86_64.tar.gz",
-        "size": 3073860,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.5/manhunt-v0.10.5-macos-x86_64.tar.gz",
-        "content_type": "application/x-gtar"
+        "name": "Galaxy-Vita-install.zip",
+        "size": 42133176,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/Galaxy-Vita-install.zip",
+        "content_type": "application/zip"
       },
       {
-        "name": "manhunt-v0.10.5-vita.vpk",
-        "size": 1862643,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.5/manhunt-v0.10.5-vita.vpk",
+        "name": "Galaxy-Vita.vpk",
+        "size": 13616965,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/Galaxy-Vita.vpk",
         "content_type": "application/octet-stream"
       },
       {
-        "name": "manhunt-v0.10.5-windows-x86_64.zip",
-        "size": 3539713,
-        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.5/manhunt-v0.10.5-windows-x86_64.zip",
+        "name": "SHA256SUMS",
+        "size": 864560,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Super Mario Galaxy",
+    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+    "homebrew_id": "super-mario-galaxy",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "2.2.1",
+    "catalog_apps": [
+      {
+        "id": "super-mario-galaxy",
+        "name": "Super Mario Galaxy",
+        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+        "category": "ports",
+        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+        "version": "2.2.1",
+        "version_date": "2026-11-08",
+        "author_ids": [
+          "cboc-vita-lab"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/smg-vita/Galaxy-Vita%20v2.2.1.vpk",
+            "size": 8912896,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files USA",
+            "url": "https://archive.org/download/smg-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 2469606195,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "smg"
+            ]
+          },
+          {
+            "type": "Mod",
+            "name": "HD Textures",
+            "url": "https://archive.org/download/smg-vita/hdtex.pack",
+            "size": 4718592,
+            "extract_path": "ux0:data/smg/"
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 2.2.1 → release v3.0",
+    "catalog_version": "2.2.1",
+    "archive_current_link": "https://archive.org/download/smg-vita/Galaxy-Vita%20v2.2.1.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "CBOC-Vita-Lab/strikers-charged-vita",
+    "release_id": "460951075",
+    "tag": "v2.0",
+    "name": "Mario Strikers Charged 2.0",
+    "url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/tag/v2.0",
+    "published": "2026-11-27T18:38:20Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n**Our biggest update yet — bringing smooth 60 fps gameplay with crisp dynamic resolution, the first-ever local and online multiplayer for Mario Strikers Charged on PS Vita, a complete stutter-free shader pack, automatic on-device artwork, Spanish & French support, and redesigned in-game settings.** *(Version 1.2 was shared briefly and withdrawn, so 2.0 includes every improvement from 1.2 along with months of new speed, visual, and stability work.)*\n\n### Smooth 60 FPS & Crisp Dynamic Resolution\n- **Smooth 60 fps with dynamic resolution up to native `960×544`.** **SMOOTH 60** is now the default: matches run cleanly at **60 fps** using a dynamic 3D resolution ladder that climbs up to full native **`960×544`** whenever GPU headroom allows while keeping the **HUD, menus, Title screen, and Mega Saves locked at full native `960×544`**. In the heaviest chaos it steps smoothly **60 → 45 → 30** and climbs straight back to 60 fps once the action clears. Prefer max sharpness everywhere? Pick **30 LOCKED** anytime in **VITA SETTINGS** for locked 30 fps at **full native `960×544` with `2× MSAA`**.\n- **Complete full-game shader pack (4,281 shaders).** Prebuilt on a real PS Vita across all 17 stadiums, all 12 captains, all 11 power-ups, menus, character select, tackles, goals, replays, Mega Strikes, and Mega Saves — virtually eliminating mid-match shader compile freezes while keeping startup warm-up quick (~1.2 s).\n- **Razor-sharp Mega Strikes, Mega Saves & Title screens.** Mega Strikes run smoothly without distracting mid-scene resolution jumps, while Mega Save gloves, balls, and the Title / Game Start screen stay crisp at full native **960×544**.\n- **Pipeline Central & The Dump overhauled.** Pipeline Central runs much smoother with a tuned reflective floor and mist profile, while The Dump's rain, shadow flicker, kickoff hitch, and 30-fps recovery edge cases are fixed.\n- **Faster from top to bottom.** Rebuilt with profile-guided Vita optimizations for extra 60 fps headroom, automatic high-performance Vita clock tuning, and keep-awake protection so the screen never dims mid-match or during loading.\n- **Recommended optional plug-ins for maximum 60 fps.** Works great with zero plug-ins, and **automatically supports [CapUnlocker](https://github.com/GrapheneCt/CapUnlocker)** (unlocks the Vita's 4th CPU core for extra headroom with zero configuration) and **[PSVshell](https://github.com/Electry/PSVshell) / [PSVshellPlus](https://github.com/GrapheneCt/PSVshellPlus)** (`500 MHz` CPU / `222 MHz` GPU & bus overclock — automatically detected and preserved). See [Optional Plug-ins](docs/PLUGINS.md) for details.\n\n### First-Ever Online & Local Multiplayer on PS Vita *(Beta)*\n- **Play online with friends or rivals.** Create a private room and share a short invite code, jump straight into unranked **PLAY WITH ANYONE**, or climb the season and daily leaderboards in **RANKED MATCH** (live web rankings at **[strikers.psvita.dev/leaderboard](https://strikers.psvita.dev/leaderboard)**).\n- **Local multiplayer anywhere.** Play another Vita head-to-head over **Same Wi-Fi** or **Nearby** local play.\n- **Smoother connections & clearer status.** Improved Vita network compatibility, clearer online name feedback, a live **\"Waiting for the other player...\"** timer during hiccups, instant cleanup when a partner disconnects, and built-in **REPORT A PROBLEM** and **ONLINE ACCOUNT** management.\n- *Note: Multiplayer is marked **Beta** while two-Vita field testing continues. Version 2.0 uses an updated link protocol — update both Vitas to connect.*\n\n### One App, Automatic Artwork & Redesigned In-Game Settings\n- **Clean in-game VITA SETTINGS.** Pause any match and choose **VITA SETTINGS**, or open **OPTIONS > VITA SETTINGS** from the main menu — five tidy pages with plain-English help, **RESET TO DEFAULTS**, and **ONLINE ACCOUNT**. No separate Settings download or extra LiveArea tile needed; hold **L + R** at launch for **SAFE START** if a setting ever prevents boot.\n- **Automatic first-boot loading screen, LiveArea & Home bubble.** On first launch, the game automatically builds its own *Mario Strikers Charged* loading screen, Mario vs. Bowser LiveArea background, fiery START gate, launch splash, and circular Home screen bubble straight from your own disc files on your Vita — with zero copyrighted art bundled in the download and without ever overwriting custom artwork. *(LiveArea and loading screen appear immediately; on manual VPK installs, reboot your Vita once to refresh the Home bubble, or use CBOC Vita Installer to brand before install. Offline `tools/brand-from-disc.py` is still included too.)*\n- **Natural game progression.** Unlock All now defaults to OFF so you can earn trophies and stadiums normally (or toggle it back on anytime in VITA SETTINGS), and all locked stadiums work cleanly.\n- **Clean `2.0` version reporting.** Displays `02.00` (`2.0`) properly on the Vita system and VitaDB.\n\n### Play in English, Español & Français\n- Switch to **Spanish** or **French** in **VITA SETTINGS** and everything switches together: the North American disc's own game text plus every Vita Settings page, control guide, loading screen, error screen, and online menu.\n\n### Stability, Saves & Under-the-Hood Polish\n- **Crash-safe saves & cleaner I/O.** Saves, settings, and online account files now write safely with automatic backup and damaged-save recovery (`Strikers2.bad`), alongside full multi-thread file protection.\n- **More resilient matches, movies & sleep/resume.** Prevents out-of-memory crashes (`C2-12828-1`) during heavy stadium intros, automatically falls back to software decoding if the Vita's hardware video decoder stalls during a cutscene, and recovers audio cleanly after long frames or suspend/resume.\n- **Drop-in update.** Install 2.0 right over 1.0 or 1.1 — your disc files, saves, and settings stay intact, and older shader caches migrate automatically on first boot.\n\nFor developer notes and build provenance, see [Technical Notes](docs/TECHNICAL.md) and [Source Record](docs/SOURCE.md).\n\n",
+    "assets": [
+      {
+        "name": "cboc-release.json",
+        "size": 1555,
+        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v2.0/cboc-release.json",
+        "content_type": "application/json"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 276,
+        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v2.0/SHA256SUMS.txt",
+        "content_type": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "Strikers-Charged-Vita-install.zip",
+        "size": 27925965,
+        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v2.0/Strikers-Charged-Vita-install.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Strikers-Charged-Vita.vpk",
+        "size": 11803115,
+        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v2.0/Strikers-Charged-Vita.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Mario Strikers Charged",
+    "homebrew_icon": "https://archive.org/download/mario-strikers-charged-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Mario Strikers Charged for PS Vita.",
+    "homebrew_long_description": "A native PS Vita port of Mario Strikers Charged, with Vita controls, audio and graphics support.\n\n- PsVitaAlive -",
+    "homebrew_id": "mario-strikers-charged",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "1.1",
+    "catalog_apps": [
+      {
+        "id": "mario-strikers-charged",
+        "name": "Mario Strikers Charged",
+        "icon": "https://archive.org/download/mario-strikers-charged-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "Mario Strikers Charged for PS Vita.",
+        "long_description": "A native PS Vita port of Mario Strikers Charged, with Vita controls, audio and graphics support.\n\n- PsVitaAlive -",
+        "version": "1.1",
+        "version_date": "2026-10-24",
+        "author_ids": [
+          "cboc-vita-lab"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/mario-strikers-charged-ps-vita/Strikers-Charged-Vita%20v1.1.vpk",
+            "size": 3984589,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/mario-strikers-charged-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 1932735283,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "mscharged"
+            ]
+          },
+          {
+            "type": "Repository",
+            "name": "GitHub",
+            "url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 1.1 → release v2.0",
+    "catalog_version": "1.1",
+    "archive_current_link": "https://archive.org/download/mario-strikers-charged-ps-vita/Strikers-Charged-Vita%20v1.1.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "xesf/manhunt-releases",
+    "release_id": "460693958",
+    "tag": "v0.10.6",
+    "name": "v0.10.6",
+    "url": "https://github.com/xesf/manhunt-releases/releases/tag/v0.10.6",
+    "published": "2026-11-27T14:21:37Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\n- Manhunt 1: with a gun out and not aiming, the reticle dot now stays after the mouse stops moving, as in the original; it goes only when a pad stick (left or right) is pushed, and it is not cleared by walking with the keys. Before, it showed only on frames with look input.\n- Manhunt 2 performance: characters are posed and skinned and the hunters' perception and moves run on the helper cores, the world and static props are drawn as joined meshes (about 2.5 times fewer draws), and the collision queries reject triangles early; on the Mac the main thread of A01 to A03 takes about half the time. `perf_log=1` in Options.ini (or `--debug perf-log=1`) logs per-phase times, frame times and draw counts every 5 s, also on the Vita; `batch_cell=`, `jobs=0` and `perf_off=nobatch` switch the parts for A/B tests, `make perf-mh2` runs the workload.\n- Manhunt 1 AI: the alert-others shout (ALERT_OTHERS) is no longer heard as a noise. As in the original, a hunter who hears it queues an alert, and a frame later his sub-pack gets a confirmed high sighting of the player at his real position, but only when the shouting hunter is in combat, the listener is not, and the two belong to different leaders; before, any hunter in reach just went to investigate.\n- Manhunt 1 AI: hunters no longer start a chase on a medium sighting. The original confirms the player only with a high vision sense (all points of him in view inside 13.5 m, a face inside 4 m, anything inside 6 m with most points visible); a medium sighting at 17 m only sends the hunter to investigate (before, a hunter in Investigate fired at 17 m in the frame he saw the player). A pack member at medium sight within 4 m still starts the chase.\n\n\nThe Windows and Linux x86_64 builds are untested on real hardware.\n",
+    "assets": [
+      {
+        "name": "manhunt-v0.10.6-linux-x86_64.tar.gz",
+        "size": 3842741,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.6/manhunt-v0.10.6-linux-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.10.6-macos-x86_64.tar.gz",
+        "size": 3109105,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.6/manhunt-v0.10.6-macos-x86_64.tar.gz",
+        "content_type": "application/x-gtar"
+      },
+      {
+        "name": "manhunt-v0.10.6-vita.vpk",
+        "size": 1884691,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.6/manhunt-v0.10.6-vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "manhunt-v0.10.6-windows-x86_64.zip",
+        "size": 3577765,
+        "download_url": "https://github.com/xesf/manhunt-releases/releases/download/v0.10.6/manhunt-v0.10.6-windows-x86_64.zip",
         "content_type": "application/zip"
       }
     ],
@@ -86,13 +283,13 @@
         ]
       }
     ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.10.5",
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.10.5 → release v0.10.6",
     "catalog_version": "0.10.5",
     "archive_current_link": "https://archive.org/download/manhunt-1-2-ps-vita-port/manhunt%20v0.10.5.vpk",
     "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
   },
   {
     "platform": "github",
@@ -9728,108 +9925,6 @@
   },
   {
     "platform": "github",
-    "repo": "CBOC-Vita-Lab/galaxy-vita",
-    "release_id": "438017105",
-    "tag": "v2.2.1",
-    "name": "Super Mario Galaxy 2.2.1",
-    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v2.2.1",
-    "published": "2026-11-08T03:50:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\nA quick fix for 2.2.\n\n### Fixed\n- **2.2 could crash on entering the Comet Observatory.** 2.2.1 goes back to the proven game code of 2.1.1 while the cause is found; the smoother loading and picture-size changes of 2.2 will return in a later update once they're fixed.\n- Keeps 2.2's new artwork and the larger Settings tile.\n\n**Updating?** Install the new VPK over the old one. Your saves and settings stay.\n\n",
-    "assets": [
-      {
-        "name": "cboc-release.json",
-        "size": 1502,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2.1/cboc-release.json",
-        "content_type": "application/json"
-      },
-      {
-        "name": "Galaxy-Vita-install.zip",
-        "size": 20693180,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2.1/Galaxy-Vita-install.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Galaxy-Vita.vpk",
-        "size": 8910994,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2.1/Galaxy-Vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS",
-        "size": 609721,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v2.2.1/SHA256SUMS",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 2.2.1",
-    "catalog_version": "2.2.1",
-    "homebrew_name": "Super Mario Galaxy",
-    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-    "homebrew_id": "super-mario-galaxy",
-    "homebrew_authors": [
-      "cboc-vita-lab"
-    ],
-    "homebrew_version": "2.2.1",
-    "catalog_apps": [
-      {
-        "id": "super-mario-galaxy",
-        "name": "Super Mario Galaxy",
-        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-        "category": "ports",
-        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-        "version": "2.2.1",
-        "version_date": "2026-11-08",
-        "author_ids": [
-          "cboc-vita-lab"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/smg-vita/Galaxy-Vita%20v2.2.1.vpk",
-            "size": 8912896,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files USA",
-            "url": "https://archive.org/download/smg-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 2469606195,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "smg"
-            ]
-          },
-          {
-            "type": "Mod",
-            "name": "HD Textures",
-            "url": "https://archive.org/download/smg-vita/hdtex.pack",
-            "size": 4718592,
-            "extract_path": "ux0:data/smg/"
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/smg-vita/Galaxy-Vita%20v2.2.1.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
     "repo": "boomannotjeff/usm_vita",
     "release_id": "437380857",
     "tag": "1.1",
@@ -13993,101 +14088,6 @@
       }
     ],
     "archive_current_link": "https://archive.org/download/psvitaalive-ff3-vita/FF3%20v1.2.5.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "CBOC-Vita-Lab/strikers-charged-vita",
-    "release_id": "422591166",
-    "tag": "v1.1",
-    "name": "Mario Strikers Charged 1.1",
-    "url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/tag/v1.1",
-    "published": "2026-10-24T07:45:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "\nThe performance update.\n\n**Smoother play**\n- Matches run at up to 60 fps. The Frame Rate setting is now **AUTO** by\n  default: 60 when the Vita can keep up, a smooth 30 when it can't. Prefer a\n  locked 30? Choose **30 FPS** in Settings.\n- Mega Strikes run at a steady 30 fps at full resolution (about 15 fps\n  before). Their glowing haze is drawn at a lower resolution and blended over\n  the sharp, full-size scene.\n- Snappier controls: a third less delay from button to screen, about a\n  tenth of a second in normal play. Stick and touch respond faster in Mega\n  Saves and other heavy scenes too.\n- The picture size adapts to the load: effects soften first and the scene\n  only slightly, so the frame rate holds without the game looking rough.\n- Fewer hitches from those size changes: they now happen at the cuts into\n  and out of a Mega Strike, not a few seconds into play, and a size used\n  recently is switched back to quickly.\n\n**Better picture**\n- A light sharpening filter is on by default (Settings > Sharpness: SMOOTH).\n  OFF, CRISP and CRISP+ are still there.\n- SMOOTH also softens jagged character outlines, at almost no cost.\n- Optional HD characters and ball: sharper faces, kits and ball in close-ups\n  (Mega Strikes, celebrations, menus), made on your computer from your own\n  game files with `tools/hdtex` and copied to `ux0:data/mscharged/hdtex.pack`.\n  In normal play the game draws the same detail as before, so it costs no\n  frame rate.\n- When there's time to spare, the game is drawn above native resolution for\n  cleaner edges.\n- New optional **Distant Textures** setting for sharper ground and walls at an\n  angle (experimental, off by default).\n\n**Controls and gameplay**\n- Tap anywhere on the title screen to start.\n- All seven camera zoom levels are on the Options > Visual slider.\n- The CPU plays just as well when your camera is zoomed in close.\n- Quick screen taps are never missed, and button presses are never lost or\n  repeated after a system pop-up.\n- The stick moves the glove three times faster in Mega Saves by default, so\n  you can reach the far side of the goal in time (Settings > Mega Save Speed:\n  3x, 4x, 2x or ORIGINAL). Optional rear-touch aiming is in Settings too.\n\n**Under the hood**\n- Fixed a crash when starting a match after the picture size had changed a\n  few times: unused graphics buffers are now freed, and the game only draws a\n  larger picture when there is graphics memory to spare.\n- Mega Strikes no longer drop to a low resolution when that would not make\n  them any faster.\n- More of the game's graphics come prebuilt, so a goal replay no longer stops\n  for a loading bar the first time.\n- Fixed new graphics effects never being built on the console (a fault in\n  the shader cache code), which kept the sharpening and the lighter Mega\n  Strike glow from switching on.\n- More reliable shader cache and graphics memory recovery.\n- Faster texture uploads and less background CPU use.\n- The game's 3D models are rebuilt less often after loading screens and\n  pauses (improvements shared with the Super Mario Galaxy port).\n- Players' faces in celebrations, replays and cut-scenes are skinned on the\n  graphics chip like the rest of the body, so those scenes give the CPU less\n  to do.\n\nTechnical details for developers are in\n[Technical Notes](docs/TECHNICAL.md#version-11-changes).\n\n",
-    "assets": [
-      {
-        "name": "cboc-release.json",
-        "size": 1483,
-        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/cboc-release.json",
-        "content_type": "application/json"
-      },
-      {
-        "name": "SHA256SUMS.txt",
-        "size": 276,
-        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/SHA256SUMS.txt",
-        "content_type": "text/plain; charset=utf-8"
-      },
-      {
-        "name": "Strikers-Charged-Vita-install.zip",
-        "size": 12925194,
-        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/Strikers-Charged-Vita-install.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Strikers-Charged-Vita.vpk",
-        "size": 3968954,
-        "download_url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita/releases/download/v1.1/Strikers-Charged-Vita.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 1.1",
-    "catalog_version": "1.1",
-    "homebrew_name": "Mario Strikers Charged",
-    "homebrew_icon": "https://archive.org/download/mario-strikers-charged-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Mario Strikers Charged for PS Vita.",
-    "homebrew_long_description": "A native PS Vita port of Mario Strikers Charged, with Vita controls, audio and graphics support.\n\n- PsVitaAlive -",
-    "homebrew_id": "mario-strikers-charged",
-    "homebrew_authors": [
-      "cboc-vita-lab"
-    ],
-    "homebrew_version": "1.1",
-    "catalog_apps": [
-      {
-        "id": "mario-strikers-charged",
-        "name": "Mario Strikers Charged",
-        "icon": "https://archive.org/download/mario-strikers-charged-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "Mario Strikers Charged for PS Vita.",
-        "long_description": "A native PS Vita port of Mario Strikers Charged, with Vita controls, audio and graphics support.\n\n- PsVitaAlive -",
-        "version": "1.1",
-        "version_date": "2026-10-24",
-        "author_ids": [
-          "cboc-vita-lab"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/mario-strikers-charged-ps-vita/Strikers-Charged-Vita%20v1.1.vpk",
-            "size": 3984589,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/mario-strikers-charged-ps-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 1932735283,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "mscharged"
-            ]
-          },
-          {
-            "type": "Repository",
-            "name": "GitHub",
-            "url": "https://github.com/CBOC-Vita-Lab/strikers-charged-vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/mario-strikers-charged-ps-vita/Strikers-Charged-Vita%20v1.1.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
     "archive_media_item": ""
@@ -48380,341 +48380,5 @@
     "archive_media_item": "",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "hatoving/ponyisland-old-vita",
-    "release_id": "85633129",
-    "tag": "1.2-vita",
-    "name": "1.2 PS Vita",
-    "url": "https://github.com/hatoving/ponyisland-old-vita/releases/tag/1.2-vita",
-    "published": "2022-12-10T17:37:10Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Initial release.",
-    "assets": [
-      {
-        "name": "PonyIsland.vpk",
-        "size": 32772175,
-        "download_url": "https://github.com/hatoving/ponyisland-old-vita/releases/download/1.2-vita/PonyIsland.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "hatoving",
-    "homebrew_name": "Pony Island",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-pony-island/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Pony Island for PSVITA.",
-    "homebrew_long_description": "A port of Pony Island to the PS Vita. Pony Island is a suspense puzzle game in disguise. You are in limbo, trapped in a malevolent and malfunctioning arcade machine devised by the devil himself. The devil detests having his puzzles solved and poor programming exposed; you will need to think outside the box to proceed and you will be insulted when you do. You need legally purchased files in order to play this. All the credit of making this game goes to Daniel Mullins Games.\n\n- PsVitaAlive -",
-    "homebrew_id": "pony-island",
-    "homebrew_authors": [
-      "hatoving"
-    ],
-    "homebrew_version": "v.1.2",
-    "catalog_apps": [
-      {
-        "id": "pony-island",
-        "name": "Pony Island",
-        "icon": "https://archive.org/download/psvitaalive-pony-island/icon0.png",
-        "category": "ports",
-        "description": "Port of Pony Island for PSVITA.",
-        "long_description": "A port of Pony Island to the PS Vita. Pony Island is a suspense puzzle game in disguise. You are in limbo, trapped in a malevolent and malfunctioning arcade machine devised by the devil himself. The devil detests having his puzzles solved and poor programming exposed; you will need to think outside the box to proceed and you will be insulted when you do. You need legally purchased files in order to play this. All the credit of making this game goes to Daniel Mullins Games.\n\n- PsVitaAlive -",
-        "version": "v.1.2",
-        "version_date": "2022-12-10",
-        "author_ids": [
-          "hatoving"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-pony-island/pony-island.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Repository",
-            "url": "https://github.com/hatoving/PonyIsland"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/hatoving/ponyisland-old-vita/releases/tag/1.2-vita"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/hatoving/ponyisland-old-vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.1.2 → release 1.2-vita",
-    "catalog_version": "v.1.2",
-    "archive_current_link": "https://archive.org/download/psvitaalive-pony-island/pony-island.vpk",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "CrossCraft/CrossCraft-SurvivalTest",
-    "release_id": "84634138",
-    "tag": "ST4",
-    "name": "Survival Test 4: The Final Experiment",
-    "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4",
-    "published": "2022-12-02T02:40:53Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This release will be the last major release of CrossCraft Survival Test for a reasonably long time. The Mac Release has been removed until further testing can be done. \r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding Support\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Major Refactor of Survival Test\r\n- Acceleration based player and mobs\r\n- Particles are now one particle-system\r\n- Heart & Air Bubble Animations\r\n- Toggleable Weather (F5 on PC)\r\n\r\n### Bug Fixes\r\n- PS Vita Crash Fix\r\n- Mobs clipping into terrain from being hit\r\n- Mobs falling animation around their heads instead of their feet\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- Transition from Menu Still does not have a loading screen",
-    "assets": [
-      {
-        "name": "CrossCraft-3DS.zip",
-        "size": 8336815,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-3DS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Linux.zip",
-        "size": 12896495,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-PSP.zip",
-        "size": 9746437,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Vita.zip",
-        "size": 17518102,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Windows.zip",
-        "size": 8860608,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/download/ST4/CrossCraft-Windows.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "IridescentRose",
-    "homebrew_name": "CrossCraft SurvivalTest",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
-    "homebrew_category": "games",
-    "homebrew_description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
-    "homebrew_long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
-    "homebrew_id": "crosscraft-survivaltest",
-    "homebrew_authors": [
-      "iridescence",
-      "motolegacy"
-    ],
-    "homebrew_version": "ST4",
-    "catalog_apps": [
-      {
-        "id": "crosscraft-survivaltest",
-        "name": "CrossCraft SurvivalTest",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0850-crosscraft-survivaltest.png",
-        "category": "games",
-        "description": "Recreation of Minecraft Java Edition: Classic Survival Test.",
-        "long_description": "CrossCraft-SurvivalTest is a project that aims to implement Minecraft Java Edition: Classic Survival Test. It is not a clone. CrossCraft does not use any of the source code of the original game, nor do the developers have any knowledge of the source code. CrossCraft does not use the original copyrighted assets. All knowledge is figured out with documentation and observation of in-game mechanics.",
-        "version": "ST4",
-        "version_date": "2022-12-02",
-        "author_ids": [
-          "iridescence",
-          "motolegacy"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases/tag/ST4"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-SurvivalTest/releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive ST4",
-    "catalog_version": "ST4",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "CrossCraft/CrossCraft-Classic",
-    "release_id": "84633227",
-    "tag": "v1.3",
-    "name": "[v1.3] End of the Line",
-    "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3",
-    "published": "2022-12-01T18:22:19Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "This release will be the last major release of CrossCraft Classic for a reasonably long time. As such, it has implemented plenty of bug fixes alongside backporting features from Survival Test 4. Note on the Mac Release -- this has been removed for the time being until better testing can be done.\r\n\r\nSpecial Thanks to @masterfeizz for helping with the 3DS Port and providing support with [picaGL](https://github.com/masterfeizz/picaGL)\r\n\r\n### New Features\r\n- 3DS Support\r\n   - PS2 Support is pushed to Indev \r\n- New Terrain Generator for \"Classic\" terrain\r\n- Modding API\r\n- Options Menu\r\n- Customizable Controls\r\n- Lava Implementation\r\n- Steve Models in Multiplayer\r\n- Music from Survival Test backported.\r\n\r\n### Bug Fixes\r\n- Particles now face the player\r\n- You can no longer break while paused\r\n- PS Vita Crash Fix\r\n\r\n### Known Issues\r\n- 3DS has degraded performance stemming from a known issue which will be fixed in the future.\r\n- 3DS audio is disabled.\r\n- MP / Transition from Menu Still does not have a loading screen",
-    "assets": [
-      {
-        "name": "CrossCraft-3DS.zip",
-        "size": 8230254,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-3DS.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Linux.zip",
-        "size": 14946577,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Linux.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-PSP.zip",
-        "size": 11863120,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-PSP.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Vita.zip",
-        "size": 10028371,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Vita.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "CrossCraft-Windows.zip",
-        "size": 8831316,
-        "download_url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/download/v1.3/CrossCraft-Windows.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "IridescentRose",
-    "homebrew_name": "CrossCraft Classic",
-    "homebrew_icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
-    "homebrew_category": "games",
-    "homebrew_description": "Multiplatform clone of Minecraft Classic.",
-    "homebrew_long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
-    "homebrew_id": "crosscraft-classic",
-    "homebrew_authors": [
-      "iridescence",
-      "motolegacy"
-    ],
-    "homebrew_version": "v1.3",
-    "catalog_apps": [
-      {
-        "id": "crosscraft-classic",
-        "name": "CrossCraft Classic",
-        "icon": "https://raw.githubusercontent.com/robin994/NeoVitaDB-Catalog/main/icons_vita/0848-crosscraft-classic.png",
-        "category": "games",
-        "description": "Multiplatform clone of Minecraft Classic.",
-        "long_description": "CrossCraft-Classic is a project that aims to recreate Minecraft Java Edition: Classic without looking at any of the source code of the original application and without using the original copyrighted assets. All knowledge is figured out with an understanding of in-game mechanics and is approximated to be as close as possible to the original.",
-        "version": "v1.3",
-        "version_date": "2022-12-01",
-        "author_ids": [
-          "iridescence",
-          "motolegacy"
-        ],
-        "links": [
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases/tag/v1.3"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/CrossCraft/CrossCraft-Classic/releases"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v1.3",
-    "catalog_version": "v1.3",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "No se puede identificar una única descarga principal"
-  },
-  {
-    "platform": "github",
-    "repo": "Electric1447/MinFWVer",
-    "release_id": "46023644",
-    "tag": "v2.1",
-    "name": "MinFWVer v2.1",
-    "url": "https://github.com/Electric1447/MinFWVer/releases/tag/v2.1",
-    "published": "2021-07-11T16:46:13Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Blocked PS button while in app in order to avoid system crash due to force close.",
-    "assets": [
-      {
-        "name": "minfwver.vpk",
-        "size": 119681,
-        "download_url": "https://github.com/Electric1447/MinFWVer/releases/download/v2.1/minfwver.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Electric1447",
-    "homebrew_name": "MinFWVer",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/minfwver/cad2a5a0f1b55cde853afdd54fb30ac6bb5549f5ec905d86216768de5905df20.png",
-    "homebrew_category": "system",
-    "homebrew_description": "Checks the minimum factory firmware version of your PS Vita.",
-    "homebrew_long_description": "Utility for checking the factory firmware version of a PS Vita. Published by Electric1447; the factory firmware code is credited to TheFloW in the original README.",
-    "homebrew_id": "minfwver",
-    "homebrew_authors": [
-      "electric",
-      "theflow"
-    ],
-    "homebrew_version": "2.1",
-    "catalog_apps": [
-      {
-        "id": "minfwver",
-        "name": "MinFWVer",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/minfwver/cad2a5a0f1b55cde853afdd54fb30ac6bb5549f5ec905d86216768de5905df20.png",
-        "category": "system",
-        "description": "Checks the minimum factory firmware version of your PS Vita.",
-        "long_description": "Utility for checking the factory firmware version of a PS Vita. Published by Electric1447; the factory firmware code is credited to TheFloW in the original README.",
-        "version": "2.1",
-        "version_date": "2021-07-11",
-        "author_ids": [
-          "electric",
-          "theflow"
-        ],
-        "links": [
-          {
-            "type": "Repository",
-            "name": "GitHub",
-            "url": "https://github.com/Electric1447/MinFWVer"
-          },
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://github.com/Electric1447/MinFWVer/releases/download/v2.1/minfwver.vpk",
-            "recommended": true
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 2.1",
-    "catalog_version": "2.1",
-    "archive_current_link": "",
-    "archive_media_item": "",
-    "backup_status": "missing",
-    "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org"
   }
 ]
