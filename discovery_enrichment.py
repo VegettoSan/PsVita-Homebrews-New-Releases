@@ -243,9 +243,9 @@ def classify_category(name, description, readme, project_type, categories):
     remake_port = re.search(r"\bport of\b[^.\n]{0,150}\bremake of\b", body, re.I)
     if remake_port and "ports" in taxonomy and re.search(r"\bport of\b", primary, re.I):
         purpose_matches["ports"] = remake_port
-    if len(purpose_matches) == 1 and project_type not in {"plugin", "patch"}:
+    if len(purpose_matches) == 1 and project_type not in {"plugin", "patch"} and not re.search(r"\b(?:and|or)\b", purpose, re.I):
         cid, hit = next(iter(purpose_matches.items()))
-        scores[cid] = max(scores.get(cid, 0), max(scores.values(), default=0) + 3)
+        scores[cid] = max(10, scores.get(cid, 0), max(scores.values(), default=0) + 3)
         evidence.setdefault(cid, []).append({"match": hit.group(0), "source": "primary_purpose"})
     ranked = sorted(scores, key=lambda k: (-scores[k], k))
     if not ranked or scores[ranked[0]] < 6:
