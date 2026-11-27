@@ -1,0 +1,79 @@
+name: Discovery persistent queue pilot
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'discovery_*.py'
+      - preview_discovery_enrichment.py
+      - 'tests/test_discovery_*.py'
+      - .github/workflows/discovery-enrichment-queue.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: discovery-queue-pilot-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+jobs:
+  queue:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/discovery-enrichment'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - name: Queue regression tests
+        run: python -m unittest discover -s tests -p test_discovery_enrichment_queue.py -v
+      - name: Restore last successful queue checkpoint for this branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          prior=$(gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/discovery-enrichment-queue.yml/runs" -f branch="$BRANCH" -f event=pull_request -f status=success --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID and .head_repository.full_name == \"$GITHUB_REPOSITORY\") | .id" | head -n 1)
+          if [ -n "$prior" ]; then
+            echo "Resuming checkpoint from run $prior"
+            gh run download "$prior" --repo "$GITHUB_REPOSITORY" --name enrichment-queue-state --dir .
+            test -s enrichment-state.json
+          else
+            echo "First queue pilot run"
+          fi
+      - name: Queue round one
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DISCOVERY_REQUEST_BUDGET: "180"
+          DISCOVERY_TIME_BUDGET: "420"
+        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 3 --max-files 18 --output enrichment-report-round1.json
+      - name: Queue round two (resume same checkpoint)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DISCOVERY_REQUEST_BUDGET: "180"
+          DISCOVERY_TIME_BUDGET: "420"
+        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 3 --max-files 18 --output enrichment-report-round2.json
+      - name: Assert independent rounds
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a, b = (json.loads(Path(f"enrichment-report-round{i}.json").read_text()) for i in (1, 2))
+          assert not set(a["queue"]["selected_keys"]) & set(b["queue"]["selected_keys"]), "Repeated candidates within same round window"
+          print("Checkpoint resumed; independent candidates selected.")
+          print("Queue:", b["queue"])
+          PY
+      - name: Save queue checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-queue-state
+          path: enrichment-state.json
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Save diagnostic reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrichment-queue-reports
+          path: enrichment-report-round*.json
+          if-no-files-found: ignore
