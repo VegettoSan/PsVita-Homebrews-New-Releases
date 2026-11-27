@@ -27,6 +27,15 @@ class QueueTests(unittest.TestCase):
         self.assertEqual([k for k, _ in q.choose(loaded, self.candidates, 2, self.now)], ["b", "c"])
         self.assertEqual(loaded["records"]["a"]["result"]["readiness"]["required_present"], 14)
 
+    def test_publication_lane_reserves_capacity_for_historical_candidates(self):
+        historical = {"platform":"github","project_type":"homebrew","app_draft":{
+            "version_date":"2020-01-01","size":100,"links":[{"type":"Download","url":"https://github.com/dev/demo/releases/download/v1/demo.vpk"}]}}
+        self.candidates["c"].update(historical)
+        q.reconcile(self.state,self.candidates)
+        self.assertEqual([k for k,_ in q.choose(self.state,self.candidates,2,self.now,prioritize_publication=True)],["c","a"])
+        q.checkpoint(self.state,"c",{"state":"inspected"},self.now)
+        self.assertEqual([k for k,_ in q.choose(self.state,self.candidates,2,self.now,prioritize_publication=True)],["a","b"])
+
     def test_retry_backoff_and_fairness(self):
         q.checkpoint(self.state, "a", {"state": "candidate_error"}, self.now)
         self.assertEqual(self.state["records"]["a"]["state"], "retry")
