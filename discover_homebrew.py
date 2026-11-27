@@ -125,6 +125,16 @@ def request(url, params=None, gitlab=False, plain=False):
         if limited:
             LOW_RATE_LIMIT = True
             RATE_STOP_REASON = "API rate limit: " + (host or "")
+            # Retry-After is more specific than the primary reset for secondary
+            # throttling. Retain the later known retry time if both apply.
+            try:
+                retry = int(response.headers.get("Retry-After", ""))
+                if retry >= 0:
+                    until = datetime.now(timezone.utc) + timedelta(seconds=min(retry, 7200))
+                    old_reset = datetime.fromisoformat(RATE_RESET) if RATE_RESET else until
+                    RATE_RESET = max(old_reset, until).isoformat()
+            except (ValueError, TypeError, OverflowError):
+                pass
             raise DiscoveryBudgetReached(RATE_STOP_REASON)
     if response.status_code == 404:
         return None
