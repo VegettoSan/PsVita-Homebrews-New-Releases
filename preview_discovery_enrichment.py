@@ -138,12 +138,15 @@ def inspect(entry, taxonomy, official, retired, max_files):
         build = name in {"cmakelists.txt", "makefile", "gnumakefile", "projectsettings.asset"} or name.endswith((".cmake", ".mk"))
         kind = "build" if build else "documentation" if doc else "code"
         if name.startswith("readme"):
-            readmes.append(body[:12000])
+            readmes.append((path, body[:12000]))
         evidence.extend(text_evidence(body, path, kind, ref))
     app = entry.get("app_draft") or {}
     identity = resolve_title(evidence, official, retired)
-    category = classify_category(app.get("name", ""), app.get("description", ""),
-                                 "\n".join(readmes), entry.get("project_type"), taxonomy)
+    # Root README describes the project; nested READMEs often describe dependencies.
+    purpose_readme = min(readmes, key=lambda pair: (pair[0].count("/"), pair[0].casefold()))[1] if readmes else ""
+    category = classify_category(repo.get("name") or app.get("name", ""),
+                                 repo.get("description") or app.get("description", ""),
+                                 purpose_readme, entry.get("project_type"), taxonomy)
     return {"key": entry["key"], "project": entry["project"], "ref": ref,
             "title": identity, "category": category,
             "coverage": {"listed_files": len(files), "eligible_files": len(paths),
