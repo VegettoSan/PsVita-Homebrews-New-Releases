@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import tempfile
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -102,7 +103,7 @@ def choose(state, candidates, limit, now=None):
     return [(key, candidates[key]) for _, _, key in rows[:limit]]
 
 
-def checkpoint(state, key, result, now=None):
+def checkpoint(state, key, result, now=None, quota=None):
     now = now or now_utc()
     record = state["records"][key]
     attempts = record.get("attempts", 0)
@@ -110,7 +111,7 @@ def checkpoint(state, key, result, now=None):
     if status == "deferred":
         # Global budget is not a failed candidate attempt; rotate this round.
         record["last_at"] = now.isoformat()
-        record["next_at"] = (now + timedelta(minutes=30)).isoformat()
+        record["next_at"] = (quota_resume(quota, now) or now + timedelta(minutes=30)).isoformat()
         return
     attempts += 1
     title = result.get("title", {})
@@ -153,3 +154,74 @@ def cached_vpk(record, asset, expected=""):
             or asset["digest"] != "sha256:" + str(previous.get("sha256", ""))):
         return None
     return {**previous, "cache_hit": True}
+
+def quota_resume(quota, now):
+    if not quota or not quota.get("rate_limited"):
+        return None
+    try:
+        reset = datetime.fromisoformat(quota.get("reset_at") or "")
+        if reset.tzinfo is not None and now < reset <= now + timedelta(hours=2):
+            return reset + timedelta(seconds=60)
+    except (TypeError, ValueError):
+        pass
+    return now + timedelta(minutes=30)
+
+
+def paused(state, now=None):
+    now = now or now_utc()
+    value = state.get("resume_at")
+    return bool(value and datetime.fromisoformat(value) > now)
+
+
+def apply_quota_pause(state, quota, now=None):
+    resume = quota_resume(quota, now or now_utc())
+    if resume is None:
+        state.pop("resume_at", None)
+    else:
+        state["resume_at"] = resume.isoformat()
+
+
+def summary(state, selected, results=()):
+    counts = {}
+    for record in state["records"].values():
+        stage = record.get("state", "new")
+        counts[stage] = counts.get(stage, 0) + 1
+    return {"inventory": len(state["records"]), "states": counts,
+            "selected_keys": selected,
+            "processed_keys": [r["key"] for r in results if r.get("state") != "deferred"],
+            "resume_at": state.get("resume_at"), "cached_profiles": len(state.get("profiles", {}))}
+
+
+def profile_request(state, owner, request, now=None):
+    """Cache only verified public GitHub user fields; revalidate official author
+    matches and retired IDs through author_proposal on every use.
+    """
+    now = now or now_utc()
+    profiles = state.setdefault("profiles", {})
+    if not isinstance(profiles, dict):
+        raise ValueError("Invalid profile cache")
+    for key, value in list(profiles.items()):
+        try:
+            if datetime.fromisoformat(value["expires_at"]) <= now:
+                del profiles[key]
+        except (KeyError, TypeError, ValueError, AttributeError):
+            del profiles[key]
+
+    def lookup(url, *args, **kwargs):
+        match = re.fullmatch(r"https://api.github.com/users/([a-zA-Z0-9-]{1,39})", url)
+        if not match or type(owner.get("id")) is not int:
+            return request(url, *args, **kwargs)
+        handle = match.group(1).casefold()
+        key = str(owner["id"]) + ":" + handle
+        cached = profiles.get(key)
+        if cached is not None:
+            return dict(cached["data"])
+        data = request(url, *args, **kwargs)
+        if (isinstance(data, dict) and data.get("type") == "User"
+                and data.get("id") == owner["id"]
+                and str(data.get("login", "")).casefold() == handle
+                and len(profiles) < MAX_RECORDS):
+            fields = {k: data.get(k) for k in ("id", "type", "login", "html_url", "name", "bio", "avatar_url")}
+            profiles[key] = {"expires_at": (now + timedelta(days=7)).isoformat(), "data": fields}
+        return data
+    return lookup
