@@ -265,7 +265,13 @@ def run(limit, offset, max_files):
         if title["state"] in {"collision", "retired", "ambiguous"} or result["category"]["state"] == "target_review":
             result["vpk"] = {"state": "review", "reason": "Resolve identity or platform conflict first"}
         else:
-            result["vpk"] = verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget)
+            try:
+                result["vpk"] = verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget)
+            except Exception as exc:
+                # Preserve the rest of the batch and mark CI failed for defects.
+                batch["internal_errors"] += 1
+                result["vpk"] = {"state": "internal_error", "error_type": type(exc).__name__}
+                binary_budget = 0  # Unknown consumption: do not exceed the byte cap.
             binary_budget -= result["vpk"].get("bytes_read", 0)
             if result["vpk"]["state"] == "verified":
                 tid = result["vpk"]["title_id"]
@@ -283,6 +289,17 @@ def run(limit, offset, max_files):
             result["readiness"]["publication_allowed"] = False
         except (ValueError, TypeError, KeyError, AttributeError) as exc:
             result["readiness"] = {"state": "review", "error_type": type(exc).__name__, "publication_allowed": False}
+    # Different accounts may normalize to the same slug. Detect collisions
+    # within this sample; final canonical publication must recheck globally.
+    proposed = {}
+    for result in batch["results"]:
+        author = result.get("author", {})
+        if author.get("state") == "draft":
+            proposed.setdefault(author["draft"]["id"], set()).add(author["profile"])
+    for result in batch["results"]:
+        author = result.get("author", {})
+        if author.get("state") == "draft" and len(proposed[author["draft"]["id"]]) > 1:
+            result["author"] = {**author, "state": "review", "reason": "Different accounts produce same author ID"}
     return {"mode": "read_only", "offset": offset, "requested": limit, "max_files": max_files,
             "http_requests": discovery.REQUEST_COUNT, **batch}
 
