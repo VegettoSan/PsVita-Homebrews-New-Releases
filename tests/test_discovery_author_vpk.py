@@ -70,7 +70,8 @@ class VpkTests(unittest.TestCase):
 
     def test_valid_package_identity(self):
         self.assertEqual(validate_package(package(), "DEMO00001"),
-                         {"state": "verified", "title_id": "DEMO00001", "crc_checked": True})
+                         {"state": "verified", "title_id": "DEMO00001", "crc_checked": True,
+                          "display_name": "", "display_name_field": ""})
 
     def test_invalid_package_or_identity(self):
         for data, expected in [(package(), "OTHER0001"), (package(eboot=False), ""),
