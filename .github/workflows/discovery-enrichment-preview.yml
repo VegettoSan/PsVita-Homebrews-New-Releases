@@ -14,6 +14,11 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        offset: [0, 5, 10]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,11 +34,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCOVERY_REQUEST_BUDGET: "180"
           DISCOVERY_TIME_BUDGET: "420"
-        run: python preview_discovery_enrichment.py --limit 5 --max-files 18 --output enrichment-report.json
+        run: python preview_discovery_enrichment.py --limit 5 --offset ${{ matrix.offset }} --max-files 18 --output enrichment-report-${{ matrix.offset }}.json
       - name: Save pilot report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: enrichment-preview
-          path: enrichment-report.json
+          name: enrichment-preview-${{ matrix.offset }}
+          path: enrichment-report-${{ matrix.offset }}.json
           if-no-files-found: ignore
