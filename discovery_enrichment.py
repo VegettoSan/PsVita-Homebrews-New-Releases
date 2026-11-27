@@ -140,7 +140,7 @@ RULES = {
     "preservation": [(8, r"\b(?:preservation tool|software preservation|archival tool|historical archive)\b")],
 }
 SUB_RULES = {
-    "ports": {"fps": r"\b(?:fps|first.person shooter)\b", "racing": r"\b(?:racing|kart racing)\b", "platformer": r"\bplatformer\b", "puzzle": r"\bpuzzle\b", "rpg": r"\b(?:rpg|role.playing)\b", "strategy": r"\bstrategy\b", "source-port": r"\bsource port\b", "engine-port": r"\bengine port\b", "shooter": r"\bshooter\b", "action": r"\baction game\b", "adventure": r"\badventure game\b", "arcade": r"\barcade\b"},
+    "ports": {"fps": r"\b(?:fps|first.person shooter)\b", "racing": r"\b(?:racing|kart racing)\b", "platformer": r"\bplatformer\b", "puzzle": r"\bpuzzle\b", "rpg": r"\b(?:jrpg|arpg|rpg|role.playing)\b", "strategy": r"\bstrategy\b", "source-port": r"\bsource port\b", "engine-port": r"\bengine port\b", "shooter": r"\bshooter\b", "action": r"\baction game\b", "adventure": r"\badventure game\b", "arcade": r"\barcade\b"},
     "games": {"platformer": r"\bplatformer\b", "puzzle": r"\bpuzzle\b", "rpg": r"\b(?:rpg|role.playing)\b", "racing": r"\bracing\b", "shooter": r"\bshooter\b", "fighting": r"\bfighting game\b", "horror": r"\bhorror\b", "visual-novel": r"\bvisual novel\b", "strategy": r"\bstrategy\b", "arcade": r"\barcade\b", "rhythm": r"\brhythm game\b", "action": r"\baction game\b"},
     "emulators": {"game-boy-advance": r"\b(?:gba|game boy advance)\b", "game-boy-color": r"\b(?:gbc|game boy color)\b", "snes": r"\b(?:snes|super nintendo)\b", "nes": r"\b(?:nes|famicom)\b", "nintendo-64": r"\b(?:n64|nintendo 64)\b", "multi-system": r"\b(?:multi.system|multiple systems)\b", "playstation": r"\b(?:ps1|psx)\b", "genesis": r"\b(?:genesis|mega drive)\b"},
     "plugins": {"overclock": r"\boverclock\w*\b", "performance": r"\b(?:performance|overclock\w*)\b", "audio": r"\baudio\b", "graphics": r"\bgraphics\b", "storage": r"\bstorage\b", "input": r"\b(?:input|controller)\b", "display": r"\bdisplay\b"},
@@ -198,7 +198,14 @@ def classify_category(name, description, readme, project_type, categories):
     taxonomy = {c["id"]: {s["id"] for s in c.get("subcategories", [])}
                 for c in categories if isinstance(c, dict) and "id" in c}
     primary = (str(name) + "\n" + str(description)).replace("_", " ").replace("-", " ")
-    body = readme_purpose(readme).replace("_", " ").replace("-", " ")
+    body = readme_purpose(readme)
+    # Some READMEs begin with HTML banners/navigation and a horizontal rule.
+    # Use their explicitly labelled description as additional purpose evidence.
+    section = re.search(r"(?im)^#{1,6}[^\w\n]*description\s*$\n(.*?)(?=^#{1,6}\s|\Z)",
+                        str(readme)[:12000], re.S | re.M)
+    if section:
+        body += "\n" + readme_purpose(section.group(1))
+    body = body.replace("_", " ").replace("-", " ")
     if target_review(name, description, readme)["state"] == "review":
         return {"state": "target_review", "category_id": "", "subcategory_ids": [], "scores": {}, "evidence": {}}
     # Explicit product purpose outranks secondary features in a description.
@@ -257,7 +264,7 @@ def classify_category(name, description, readme, project_type, categories):
         purpose, re.I)
     game_context = re.search(
         r"\b(?:game (?:files|data|assets|engine)|(?:original|android|pc|commercial) game|"
-        r"gameplay|video game|game port|rpg|first person shooter|role playing game)\b",
+        r"gameplay|video game|game port|jrpg|arpg|rpg|first person shooter|role playing game|the game calls)\b",
         primary + "\n" + body, re.I)
     non_game_subject = re.search(
         r"\b(?:port of (?:an? )?(?:[^.\n]{0,50} )?(?:emulator|file manager|music player|web browser)|"
@@ -277,7 +284,7 @@ def classify_category(name, description, readme, project_type, categories):
         return {"state": "ambiguous", "category_id": "", "subcategory_ids": [], "scores": scores, "evidence": evidence}
     # For a clear purpose, use that evidence first; secondary features must
     # not supply unrelated subcategories.
-    sub_text = purpose if cid in purpose_matches else primary + "\n" + body
+    sub_text = primary + "\n" + body if cid == "ports" else (purpose if cid in purpose_matches else primary + "\n" + body)
     subs = [sid for sid, pattern in SUB_RULES.get(cid, {}).items()
             if sid in taxonomy[cid] and re.search(pattern, sub_text, re.I)]
     return {"state": "suggested", "category_id": cid, "subcategory_ids": subs[:5],
