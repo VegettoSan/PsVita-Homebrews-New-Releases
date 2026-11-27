@@ -57,13 +57,12 @@ jobs:
           a = json.loads(Path("enrichment-report-round1.json").read_text())
           q = a["quota"]
           left = max(0, 600 - a["http_requests"])
-          if q["remaining"] is not None:
-              left = min(left, max(0, q["remaining"] - q["reserve"]))
-          proceed = not q["rate_limited"] and left >= 80
+          core_left = None if q["remaining"] is None else max(0, q["remaining"] - q["reserve"])
+          proceed = not q["rate_limited"] and left >= 80 and (core_left is None or core_left >= 5)
           with open(os.environ["GITHUB_OUTPUT"], "a") as out:
               print(f"proceed={'true' if proceed else 'false'}", file=out)
               print(f"budget={left}", file=out)
-          print("Quota:", q, "remaining local budget:", left)
+          print("Quota:", q, "remaining local budget:", left, "remaining core budget:", core_left)
           if not proceed:
               print("Round two deferred; queue retained.")
           PY
