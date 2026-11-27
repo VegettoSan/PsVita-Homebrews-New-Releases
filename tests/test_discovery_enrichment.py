@@ -109,6 +109,24 @@ class TaxonomyTests(unittest.TestCase):
         result = self.classify("Native Spotify Connect (Premium) client for PS Vita homebrew")
         self.assertEqual(result["category_id"], "media")
 
+    def test_native_game_ports_with_plugin_dependencies(self):
+        cases = [
+            ("Android to PS Vita port of Gameloft's Eternal Legacy",
+             "# Eternal Legacy\n---\n## 📖 Description\nEternal Legacy is a turn-based 3D JRPG originally released for Android.\nThis port uses an Android runtime emulation layer and a kernel plugin."),
+            ("Android to PS Vita port of Gameloft's Dungeon Hunter 3",
+             "# Dungeon Hunter 3\n---\n## 📖 Description\nA native port to PlayStation Vita.\nThe Android runtime the game calls into uses a kernel plugin."),
+            ("Project I.G.I. native PS Vita port - releases (no game files)",
+             "# Project I.G.I.\nThis is not an emulator: the original Windows executable was statically recompiled to C."),
+        ]
+        for description, readme in cases:
+            with self.subTest(description=description):
+                self.assertEqual(classify_category("", description, readme, "homebrew", self.taxonomy)["category_id"], "ports")
+
+    def test_native_emulator_with_game_files_is_not_game_port(self):
+        result = classify_category("", "Native PS Vita port of a Game Boy Advance emulator",
+                                   "Uses game files from the user.", "homebrew", self.taxonomy)
+        self.assertEqual(result["category_id"], "emulators")
+
     def test_taxonomy_only(self):
         result = classify_category("", "Game port of a first-person shooter", "", "homebrew",
                                    [{"id": "ports", "subcategories": []}])
