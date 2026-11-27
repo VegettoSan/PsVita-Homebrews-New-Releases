@@ -9,6 +9,7 @@ from pathlib import PurePosixPath
 from urllib.parse import urlsplit, unquote, urljoin
 import requests
 from discovery_enrichment import sfo_title_id
+from vpk_display_name import sfo_display_name
 
 MAX_BYTES = 64 * 1024 * 1024
 MAX_UNPACKED = 256 * 1024 * 1024
@@ -69,7 +70,8 @@ def validate_package(file, expected="", deadline=None):
             if not 20 <= sfo.file_size <= 65536 or z.getinfo("eboot.bin").file_size <= 0:
                 raise ValueError("Invalid required entry size")
             with z.open(sfo) as src:
-                tid = sfo_title_id(src.read(65537))
+                raw = src.read(65537)
+                tid = sfo_title_id(raw)
             if not tid or (expected and expected != tid):
                 raise ValueError("Invalid or mismatched internal Title ID")
             for i in infos:
@@ -79,7 +81,9 @@ def validate_package(file, expected="", deadline=None):
                     while src.read(262144):
                         if deadline is not None and time.monotonic() >= deadline:
                             return {"state": "deferred", "reason": "Package verification time budget"}
-            return {"state": "verified", "title_id": tid, "crc_checked": True}
+            name, field = sfo_display_name(raw)
+            return {"state": "verified", "title_id": tid, "crc_checked": True,
+                    "display_name": name, "display_name_field": field}
     except (ValueError, OSError, RuntimeError, NotImplementedError, zipfile.BadZipFile, EOFError) as exc:
         return {"state": "invalid", "reason": type(exc).__name__ + ": " + str(exc)[:160]}
 

@@ -289,8 +289,9 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
         else:
             try:
                 cached = queue.cached_vpk(state["records"][result["key"]], result["vpk_asset"], title.get("suggestion", "")) if state is not None else None
-                if cached is not None and media_dir is not None and cached.get("artwork", {}).get("version") != 1:
-                    cached = None  # Older validation records never inspected native artwork.
+                if cached is not None and ("display_name_field" not in cached or
+                        (media_dir is not None and cached.get("artwork", {}).get("version") != 1)):
+                    cached = None  # Revalidate old records that lack native title/artwork inspection.
                 result["vpk"] = cached or verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget, media_dir)
                 if result["vpk"].get("artwork"):
                     artwork = result["vpk"]["artwork"]
@@ -304,6 +305,10 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
             if not result["vpk"].get("cache_hit"):
                 binary_budget -= result["vpk"].get("bytes_read", 0)
             if result["vpk"]["state"] == "verified":
+                native = result["vpk"].get("display_name")
+                result["name_proposal"] = {"name": native or (entry.get("app_draft") or {}).get("name") or entry["project"].split("/")[-1],
+                    "source": "sce_sys/param.sfo:" + result["vpk"]["display_name_field"] if native else "repository_fallback",
+                    "vpk_sha256": result["vpk"]["sha256"]}
                 tid = result["vpk"]["title_id"]
                 evidence = title["evidence"] + [{"title_id": tid, "source": result["vpk"]["url"],
                     "ref": result["vpk"]["sha256"], "kind": "downloaded_vpk_sfo", "confidence": "high"}]
@@ -312,6 +317,8 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
             # Use existing, exact-account author matches; new drafts remain pending
             # until PSVitaAlive can validate both records atomically.
             draft = dict(entry.get("app_draft") or {})
+            if result.get("name_proposal"):
+                draft["name"] = result["name_proposal"]["name"]
             if result["author"]["state"] == "existing":
                 draft["author_ids"] = result["author"]["author_ids"]
             result["readiness"] = readiness({**entry, "app_draft": draft}, result, taxonomy, authors, apps, registry)
