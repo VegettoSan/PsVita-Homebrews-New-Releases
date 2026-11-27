@@ -258,7 +258,7 @@ def run(limit, offset, max_files, state_path=None, media_dir=None):
     if state is not None:
         state = queue.reconcile(state, candidates)
         queue.save_state(state_path, state)
-        rows = queue.choose(state, candidates, limit)
+        rows = queue.choose(state, candidates, limit, prioritize_publication=True)
     else:
         rows = sorted(candidates.items())[offset:offset+limit]
     batch = inspect_batch(rows, taxonomy, official, retired, max_files)
