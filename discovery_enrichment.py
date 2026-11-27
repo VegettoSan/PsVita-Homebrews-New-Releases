@@ -140,15 +140,15 @@ RULES = {
     "preservation": [(8, r"\b(?:preservation tool|software preservation|archival tool|historical archive)\b")],
 }
 SUB_RULES = {
-    "ports": {"fps": r"\b(?:fps|first.person shooter)\b", "racing": r"\b(?:racing|kart racing)\b", "platformer": r"\bplatformer\b", "puzzle": r"\bpuzzle\b", "rpg": r"\b(?:jrpg|arpg|rpg|role.playing)\b", "strategy": r"\bstrategy\b", "source-port": r"\bsource port\b", "engine-port": r"\bengine port\b", "shooter": r"\bshooter\b", "action": r"\baction game\b", "adventure": r"\badventure game\b", "arcade": r"\barcade\b"},
+    "ports": {"fps": r"\b(?:fps|first.person shooter)\b", "racing": r"\b(?:racing|kart racing)\b", "platformer": r"\bplatformer\b", "puzzle": r"\bpuzzle\b", "rpg": r"\b(?:jrpg|arpg|rpg|role.playing)\b", "strategy": r"\bstrategy\b", "source-port": r"\bsource port\b", "engine-port": r"\bengine port\b", "shooter": r"\bshooter\b", "action": r"\b(?:action game|hack and slash|action adventure)\b", "adventure": r"\b(?:adventure game|action adventure)\b", "arcade": r"\barcade\b"},
     "games": {"platformer": r"\bplatformer\b", "puzzle": r"\bpuzzle\b", "rpg": r"\b(?:rpg|role.playing)\b", "racing": r"\bracing\b", "shooter": r"\bshooter\b", "fighting": r"\bfighting game\b", "horror": r"\bhorror\b", "visual-novel": r"\bvisual novel\b", "strategy": r"\bstrategy\b", "arcade": r"\barcade\b", "rhythm": r"\brhythm game\b", "action": r"\baction game\b"},
-    "emulators": {"game-boy-advance": r"\b(?:gba|game boy advance)\b", "game-boy-color": r"\b(?:gbc|game boy color)\b", "snes": r"\b(?:snes|super nintendo)\b", "nes": r"\b(?:nes|famicom)\b", "nintendo-64": r"\b(?:n64|nintendo 64)\b", "multi-system": r"\b(?:multi.system|multiple systems)\b", "playstation": r"\b(?:ps1|psx)\b", "genesis": r"\b(?:genesis|mega drive)\b"},
-    "plugins": {"overclock": r"\boverclock\w*\b", "performance": r"\b(?:performance|overclock\w*)\b", "audio": r"\baudio\b", "graphics": r"\bgraphics\b", "storage": r"\bstorage\b", "input": r"\b(?:input|controller)\b", "display": r"\bdisplay\b"},
+    "emulators": {"commodore": r"\b(?:amiga|commodore(?: 64| 128)?|c64)\b", "game-boy-advance": r"\b(?:gba|game boy advance)\b", "game-boy-color": r"\b(?:gbc|game boy color)\b", "snes": r"\b(?:snes|super nintendo)\b", "nes": r"\b(?:nes|famicom)\b", "nintendo-64": r"\b(?:n64|nintendo 64)\b", "multi-system": r"\b(?:multi.system|multiple systems)\b", "playstation": r"\b(?:ps1|psx)\b", "genesis": r"\b(?:genesis|mega drive)\b"},
+    "plugins": {"overclock": r"\boverclock\w*\b", "performance": r"\b(?:performance|overclock\w*)\b", "audio": r"\baudio\b", "graphics": r"\bgraphics\b", "storage": r"\bstorage\b", "input": r"\b(?:input|controller|button combo|combo de bot[oõ]es|anal[oó]gico)\b", "display": r"\bdisplay\b"},
     "utilities": {"file-manager": r"\bfile manager\b", "ftp": r"\bftp\b", "save-manager": r"\bsave manager\b", "calculator": r"\bcalculator\b", "installer": r"\binstaller\b", "launcher": r"\blauncher\b", "terminal": r"\bterminal\b", "text-editor": r"\btext editor\b", "backup": r"\bbackup\b", "updater": r"\bupdater\b"},
-    "networking": {"messaging": r"\b(?:irc|chat|instant messaging|messaging) client\b", "network-tools": r"\b(?:vpn|network diagnostic)\b", "ftp": r"\bftp\b", "web-browser": r"\bweb browser\b", "game-streaming": r"\bgame streaming\b", "remote-desktop": r"\bremote desktop\b", "client": r"\bclient\b", "server": r"\bserver\b"},
+    "networking": {"file-sharing": r"\b(?:file|folder|directory) (?:sync(?:hronization|hronisation)?|sharing)\b|\bin sync with\b[^.\n]{0,70}\bdevices\b|\b(?:sync|synchronize|synchronise)\b[^.\n]{0,100}\b(?:files|folders|devices)\b", "messaging": r"\b(?:irc|chat|instant messaging|messaging) client\b", "network-tools": r"\b(?:vpn|network diagnostic)\b", "ftp": r"\bftp\b", "web-browser": r"\bweb browser\b", "game-streaming": r"\bgame streaming\b", "remote-desktop": r"\bremote desktop\b", "client": r"\bclient\b", "server": r"\bserver\b"},
     "media": {"audio": r"\baudio\b", "music-player": r"\b(?:music player|audio (?:[a-z]+ ){0,2}player|spotify connect (?:\(premium\) )?(?:audio )?client)\b", "video-player": r"\b(?:video player|umd (?:video )?player)\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
     "modding": {"translation": r"\b(?:translation|fan translation)\b", "game-patches": r"\bgame patch\b", "rom-hacks": r"\brom hack\b", "textures": r"\btexture pack\b"},
-    "system": {"firmware": r"\bcustom firmware\b", "firmware-tools": r"\bfirmware tool\b", "downgrade": r"\bdowngrade\b", "storage": r"\bstorage manager\b"},
+    "system": {"recovery": r"\brecovery\b", "diagnostics": r"\bdiagnostic(?:s)?\b", "storage": r"\bstorage (?:manager|diagnostics|repair)\b", "firmware": r"\bcustom firmware\b", "firmware-tools": r"\bfirmware tool\b", "downgrade": r"\bdowngrade\b"},
     "demos": {"proof-of-concept": r"\b(?:proof of concept|poc)\b", "tech-demo": r"\b(?:tech demo|qr demo)\b"},
     "development": {"interpreter": r"\binterpreter\b", "lua": r"\blua\b"},
     "customization": {"themes": r"\btheme\b", "wallpapers": r"\bwallpaper\b", "boot-animation": r"\bboot animation\b"},
@@ -206,6 +206,8 @@ def classify_category(name, description, readme, project_type, categories):
     if section:
         body += "\n" + readme_purpose(section.group(1))
     body = body.replace("_", " ").replace("-", " ")
+    # Join wrapped README paragraphs before matching semantic phrases.
+    opening = re.sub(r"\s+", " ", body).strip()
     if target_review(name, description, readme)["state"] == "review":
         return {"state": "target_review", "category_id": "", "subcategory_ids": [], "scores": {}, "evidence": {}}
     # Explicit product purpose outranks secondary features in a description.
@@ -261,14 +263,15 @@ def classify_category(name, description, readme, project_type, categories):
         r"\b(?:android|windows|pc|linux|ios|psp)\s+to\s+(?:the )?(?:ps vita|playstation vita)\s+port\b|"
         r"\b(?:native\s+)?(?:ps vita|playstation vita)\s+port\b|"
         r"\bport\s+of\b[^.\n]{0,160}\b(?:to|for)\s+(?:the )?(?:ps vita|playstation vita)\b",
-        purpose, re.I)
+        purpose, re.I) or re.search(
+        r"\b(?:native\s+)?(?:ps vita|playstation vita)\s+port\s+of\b", opening, re.I)
     game_context = re.search(
-        r"\b(?:game (?:files|data|assets|engine)|(?:original|android|pc|commercial) game|"
+        r"\b(?:game (?:files|data|assets|engine)|(?:original|android|pc|commercial|xbox|windows|console) game|"
         r"gameplay|video game|game port|jrpg|arpg|rpg|first person shooter|role playing game|the game calls)\b",
-        primary + "\n" + body, re.I)
+        primary + "\n" + opening, re.I)
     non_game_subject = re.search(
         r"\b(?:port of (?:an? )?(?:[^.\n]{0,50} )?(?:emulator|file manager|music player|web browser)|"
-        r"(?:emulator|file manager|music player|web browser)\s+port)\b", purpose, re.I)
+        r"(?:emulator|file manager|music player|web browser)\s+port)\b", purpose + "\n" + opening, re.I)
     if (directional_port and game_context and not non_game_subject
             and "ports" in taxonomy and project_type == "homebrew"):
         scores["ports"] = max(12, max(scores.values(), default=0) + 3)
@@ -276,6 +279,29 @@ def classify_category(name, description, readme, project_type, categories):
             {"match": directional_port.group(0), "source": "primary_purpose"},
             {"match": game_context.group(0), "source": "game_context"}])
         purpose_matches["ports"] = directional_port
+    # Match what the product *is*, not what it configures or depends on.
+    # README purpose can disambiguate terse repository metadata.
+    subject = purpose + "\n" + opening
+    sync = re.search(r"\b(?:file|folder|directory)\s+(?:sync(?:hronization|hronisation)?|sharing)\b|\b(?:sync|synchronize|synchronise)\b[^.\n]{0,100}\b(?:files|folders|devices)\b|\bin sync with\b[^.\n]{0,70}\bdevices\b", subject, re.I)
+    network = re.search(r"\b(?:wi\s*fi|internet|lan|network|peer to peer|protocol|remote devices)\b", opening + " " + purpose, re.I)
+    recovery = re.search(r"\b(?:diagnostic and recovery environment|system recovery (?:tool|environment|menu)|recovery (?:menu|environment)|system diagnostics tool)\b", subject, re.I)
+    strong = {}
+    if sync and network and "networking" in taxonomy:
+        strong["networking"] = sync
+    if recovery and "system" in taxonomy:
+        strong["system"] = recovery
+    # An explicitly declared standalone patch is not a game port just
+    # because it mentions the game or a compatible port in its README.
+    patch_subject = re.search(r"\b(?:texture pack|translation patch|game patch|rom hack|fan translation|localization patch)\b", purpose, re.I)
+    if patch_subject and project_type == "patch" and "modding" in taxonomy:
+        strong["modding"] = patch_subject
+    if len(strong) == 1 and project_type not in {"plugin", "patch"} and not ("ports" in purpose_matches):
+        cid, hit = next(iter(strong.items()))
+        scores[cid] = max(12, max(scores.values(), default=0) + 3)
+        evidence.setdefault(cid, []).append({"match": hit.group(0), "source": "product_purpose"})
+        purpose_matches[cid] = hit
+    elif len(strong) > 1:
+        return {"state": "ambiguous", "category_id": "", "subcategory_ids": [], "scores": scores, "evidence": evidence}
     ranked = sorted(scores, key=lambda k: (-scores[k], k))
     if not ranked or scores[ranked[0]] < 6:
         return {"state": "missing", "category_id": "", "subcategory_ids": [], "scores": scores, "evidence": evidence}
@@ -285,6 +311,8 @@ def classify_category(name, description, readme, project_type, categories):
     # For a clear purpose, use that evidence first; secondary features must
     # not supply unrelated subcategories.
     sub_text = primary + "\n" + body if cid == "ports" else (purpose if cid in purpose_matches else primary + "\n" + body)
+    if cid in strong:
+        sub_text = subject
     subs = [sid for sid, pattern in SUB_RULES.get(cid, {}).items()
             if sid in taxonomy[cid] and re.search(pattern, sub_text, re.I)]
     return {"state": "suggested", "category_id": cid, "subcategory_ids": subs[:5],

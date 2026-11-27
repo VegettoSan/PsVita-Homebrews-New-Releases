@@ -127,6 +127,36 @@ class TaxonomyTests(unittest.TestCase):
                                    "Uses game files from the user.", "homebrew", self.taxonomy)
         self.assertEqual(result["category_id"], "emulators")
 
+    def test_wrapped_readme_game_port_over_texture_features(self):
+        taxonomy = self.taxonomy + [
+            {"id": "ports", "subcategories": [{"id": "action"}, {"id": "adventure"}]},
+            {"id": "modding", "subcategories": [{"id": "textures"}]}]
+        readme = "# The Two Towers — PS Vita port\n\nA PS Vita port of *The Lord of the Rings: The Two Towers* (Xbox, USA, 2002), built on\nThe Two Towers Recompiled (static recompilation of the\nXbox game). The Xbox code runs natively on the Vita. Texture pack support."
+        self.assertEqual(classify_category("lotr-two-towers-vita", "lotr-two-towers-vita", readme, "homebrew", taxonomy)["category_id"], "ports")
+        self.assertEqual(classify_category("Texture pack", "Texture pack for the PS Vita port", readme, "patch", taxonomy)["category_id"], "modding")
+
+    def test_network_sync_and_recovery_primary_purpose(self):
+        taxonomy = self.taxonomy + [
+            {"id": "networking", "subcategories": [{"id": "file-sharing"}, {"id": "client"}]},
+            {"id": "system", "subcategories": [{"id": "recovery"}, {"id": "diagnostics"}, {"id": "storage"}]}]
+        readme = "# Syncthing for PS Vita\n\nKeep your PlayStation Vita in sync with the rest of your devices. Save files travel over Wi-Fi or the Internet.\nThis is a native PS Vita client for Syncthing."
+        result = classify_category("Syncthing", "Vita port of the syncthing utility", readme, "homebrew", taxonomy)
+        self.assertEqual(result["category_id"], "networking")
+        self.assertEqual(set(result["subcategory_ids"]), {"file-sharing", "client"})
+        result = classify_category("PS Vita Recovery", "A diagnostic and recovery environment for the PlayStation Vita with plugin repair tools, storage diagnostics, and boot-time recovery", "", "homebrew", taxonomy)
+        self.assertEqual(result["category_id"], "system")
+        self.assertTrue({"recovery", "diagnostics"} <= set(result["subcategory_ids"]))
+        self.assertNotEqual(classify_category("Backup", "Local file synchronization utility", "", "homebrew", taxonomy)["category_id"], "networking")
+
+    def test_commodore_emulator_and_portuguese_input_plugin(self):
+        taxonomy = self.taxonomy + [
+            {"id": "emulators", "subcategories": [{"id": "commodore"}]},
+            {"id": "plugins", "subcategories": [{"id": "input"}]}]
+        self.assertEqual(classify_category("UAE4All2 HD", "Amiga emulator for PS Vita", "", "homebrew", taxonomy)["subcategory_ids"], ["commodore"])
+        result = classify_category("ComboPeel", "Plugin para PS Vita: desbloqueia a tela de bloqueio com analógico", "Plugin de kernel (taiHEN) com combo de botões", "homebrew", taxonomy)
+        self.assertEqual(result["category_id"], "plugins")
+        self.assertEqual(result["subcategory_ids"], ["input"])
+
     def test_taxonomy_only(self):
         result = classify_category("", "Game port of a first-person shooter", "", "homebrew",
                                    [{"id": "ports", "subcategories": []}])
