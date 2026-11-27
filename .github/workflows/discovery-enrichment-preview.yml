@@ -3,6 +3,8 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - discover_homebrew.py
+      - discovery_enrichment_queue.py
       - discovery_enrichment.py
       - discovery_requirements.py
       - discovery_readiness.py
@@ -22,7 +24,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 1
       matrix:
         offset: [0, 5, 10]
     steps:
@@ -39,14 +41,15 @@ jobs:
         run: python -m unittest discover -s tests -p test_discovery_readiness.py -v
       - name: Author profile and VPK safety tests
         run: python -m unittest discover -s tests -p test_discovery_author_vpk.py -v
-      - name: Read-only sample of existing discoveries
+      - name: Read-only sample of existing discoveries (manual only)
+        if: github.event_name == 'workflow_dispatch'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCOVERY_REQUEST_BUDGET: "180"
           DISCOVERY_TIME_BUDGET: "420"
         run: python preview_discovery_enrichment.py --limit 5 --offset ${{ matrix.offset }} --max-files 18 --output enrichment-report-${{ matrix.offset }}.json
       - name: Save pilot report
-        if: always()
+        if: always() && github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: enrichment-preview-${{ matrix.offset }}
