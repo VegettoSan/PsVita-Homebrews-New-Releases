@@ -2,6 +2,9 @@ import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from unittest.mock import patch
+import requests
+import discover_homebrew as discovery
 
 import discovery_enrichment_queue as q
 
@@ -69,6 +72,66 @@ class QueueTests(unittest.TestCase):
         for change in ({"digest": None}, {"digest": "sha256:" + "b"*64}, {"asset_id": 124}, {"size": 43}, {"tag": "v2"}):
             self.assertIsNone(q.cached_vpk(record, {**asset, **change}))
         self.assertIsNone(q.cached_vpk(record, asset, "OTHER0001"))
+
+
+
+class QuotaTests(unittest.TestCase):
+    def setUp(self):
+        for key, value in (("REQUEST_COUNT", 0), ("LOW_RATE_LIMIT", False),
+                           ("RATE_RESERVE", 30), ("RATE_REMAINING", None),
+                           ("RATE_RESET", None), ("RATE_STOP_REASON", "")):
+            p = patch.object(discovery, key, value)
+            p.start()
+            self.addCleanup(p.stop)
+
+    def response(self, status, remaining, text="{}", extra=None):
+        r = requests.Response()
+        r.status_code = status
+        r.url = "https://api.github.com/repos/dev/demo"
+        r._content = text.encode()
+        r.headers.update({"X-RateLimit-Remaining": str(remaining),
+                          "X-RateLimit-Reset": "1795806000", **(extra or {})})
+        return r
+
+    def test_forbidden_repository_is_not_global_rate_limit(self):
+        with patch.object(discovery.HTTP, "get", return_value=self.response(403, 500, '{"message":"Forbidden"}')):
+            with self.assertRaises(requests.HTTPError):
+                discovery.request("https://api.github.com/repos/dev/demo")
+        self.assertFalse(discovery.LOW_RATE_LIMIT)
+        self.assertEqual(discovery.REQUEST_COUNT, 1)
+
+    def test_real_rate_limit_stops_and_reports_reset(self):
+        with patch.object(discovery.HTTP, "get", return_value=self.response(403, 0, '{"message":"API rate limit exceeded"}')):
+            with self.assertRaises(discovery.DiscoveryBudgetReached):
+                discovery.request("https://api.github.com/repos/dev/demo")
+        self.assertTrue(discovery.quota_status()["rate_limited"])
+        self.assertEqual(discovery.quota_status()["remaining"], 0)
+        self.assertTrue(discovery.quota_status()["reset_at"])
+
+    def test_reserve_blocks_next_call_without_network(self):
+        with patch.object(discovery.HTTP, "get", return_value=self.response(200, 30)) as get:
+            discovery.request("https://api.github.com/repos/dev/demo")
+            with self.assertRaises(discovery.DiscoveryBudgetReached):
+                discovery.request("https://api.github.com/repos/dev/other")
+            self.assertEqual(get.call_count, 1)
+
+    def test_secondary_throttle_with_remaining_quota(self):
+        with patch.object(discovery.HTTP, "get", return_value=self.response(429, 500, extra={"Retry-After": "60"})):
+            with self.assertRaises(discovery.DiscoveryBudgetReached):
+                discovery.request("https://api.github.com/repos/dev/demo")
+        self.assertTrue(discovery.LOW_RATE_LIMIT)
+
+    def test_network_failure_counts_attempt(self):
+        with patch.object(discovery.HTTP, "get", side_effect=requests.Timeout):
+            with self.assertRaises(requests.Timeout):
+                discovery.request("https://api.github.com/repos/dev/demo")
+        self.assertEqual(discovery.REQUEST_COUNT, 1)
+
+    def test_public_raw_request_never_sends_provider_token(self):
+        with patch.dict(discovery.HEADERS, {"Authorization": "Bearer synthetic-fixture"}):
+            with patch.object(discovery.HTTP, "get", return_value=self.response(200, 500)) as get:
+                discovery.request("https://raw.githubusercontent.com/dev/demo/main/file.json")
+                self.assertNotIn("Authorization", get.call_args.kwargs["headers"])
 
 
 if __name__ == "__main__":
