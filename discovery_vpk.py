@@ -84,7 +84,7 @@ def validate_package(file, expected="", deadline=None):
         return {"state": "invalid", "reason": type(exc).__name__ + ": " + str(exc)[:160]}
 
 
-def verify_download(asset, expected="", deadline=None, byte_budget=MAX_BYTES):
+def verify_download(asset, expected="", deadline=None, byte_budget=MAX_BYTES, media_dir=None):
     if asset.get("state") != "selected":
         return asset
     size = asset["size"]
@@ -123,6 +123,13 @@ def verify_download(asset, expected="", deadline=None, byte_budget=MAX_BYTES):
                         return {"state": "invalid", "reason": "Official digest mismatch", "bytes_read": total}
                     file.seek(0)
                     result = validate_package(file, expected, deadline)
+                    if result.get("state") == "verified" and media_dir is not None:
+                        from discovery_vpk_artwork import extract_artwork
+                        try:
+                            file.seek(0)
+                            result["artwork"] = extract_artwork(file, sha, media_dir)
+                        except (OSError, ValueError, RuntimeError, zipfile.BadZipFile) as exc:
+                            result["artwork_error"] = type(exc).__name__
                     return {**result, "bytes_read": total, "sha256": sha, "asset_id": asset.get("asset_id"),
                             "tag": asset.get("tag"), "url": asset["url"]}
             return {"state": "review", "reason": "Too many download redirects", "bytes_read": total}
