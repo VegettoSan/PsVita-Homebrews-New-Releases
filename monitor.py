@@ -359,6 +359,20 @@ def rolling_release_metadata(release: dict[str, Any]) -> dict[str, Any]:
     return metadata
 
 
+_PRERELEASE_TAG = re.compile(
+    r"^(?:v?\.?\d+(?:\.\d+){0,3}[ ._-]?(?:dev|test|alpha|a|beta|b|pre|preview|rc)(?:[ ._-]?\d+)?"
+    r"|(?:dev|test|alpha|beta|pre|preview|rc|beta[ ._-]+build)[ ._-]*"
+    r"(?:v?\.?\d+(?:\.\d+){0,3})?)$", re.I,
+)
+
+
+def github_is_prerelease(release: dict[str, Any]) -> bool:
+    """Honor both provider flags and explicit version-stage tags."""
+    return (bool(release.get("prerelease"))
+            or bool(_PRERELEASE_TAG.fullmatch(str(release.get("tag_name") or "").strip()))
+            or bool(rolling_release_metadata(release)))
+
+
 def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, Any]:
     """Build a trusted provider snapshot without downloading VPKs."""
     assets = [
@@ -380,7 +394,7 @@ def _github_release_record(project: str, release: dict[str, Any]) -> dict[str, A
         "name": release.get("name") or release.get("tag_name") or "Release",
         "url": release.get("html_url") or f"https://github.com/{project}/releases",
         "published": release.get("published_at") or release.get("created_at") or "",
-        "prerelease": bool(release.get("prerelease")) or bool(rolling),
+        "prerelease": github_is_prerelease(release),
         "draft": False,
         "body": release.get("body") or "",
         "assets": assets,
@@ -445,22 +459,45 @@ def get_github_release(project: str) -> dict[str, Any] | None:
         record["canonical_repo"], record["repo_id"] = canonical
     if record["prerelease"]:
         previous_stable = next(
-            (item for item in published[1:] if not item.get("prerelease")), None
+            (item for item in published[1:] if not github_is_prerelease(item)), None
         )
         if previous_stable is None:
-            # /releases/latest omits prereleases. A 404 confirms no stable;
-            # errors are never interpreted as confirmed absence.
+            # GitHub's latest endpoint ignores the provider prerelease flag,
+            # but developers can publish beta tags as regular releases.
+            # An API error or incomplete scan never proves absence.
             try:
                 previous_stable = request_json(
                     base + "/latest", headers=github_headers()
                 )
+                if previous_stable is None:
+                    record["no_stable_release"] = True
+                elif (isinstance(previous_stable, dict) and previous_stable
+                      and not previous_stable.get("draft")
+                      and github_is_prerelease(previous_stable)):
+                    previous_stable = None
+                    # Full first page may hide a genuine stable. Look at
+                    # at most four additional pages; absence requires EOF.
+                    complete = len(data) < 20 and all(isinstance(x, dict) for x in data)
+                    if not complete:
+                        for page in range(2, 6):
+                            more = request_json(base, headers=github_headers(),
+                                                params={"per_page": 20, "page": page})
+                            if not isinstance(more, list) or not all(isinstance(x, dict) for x in more):
+                                break
+                            previous_stable = next((x for x in more
+                                if not x.get("draft") and not github_is_prerelease(x)), None)
+                            if previous_stable is not None:
+                                break
+                            if len(more) < 20:
+                                complete = True
+                                break
+                    if previous_stable is None and complete:
+                        record["no_stable_release"] = True
             except RuntimeError as exc:
                 print(f"Cannot verify stable release for {project}: {exc}")
                 previous_stable = {}
-            if previous_stable is None:
-                record["no_stable_release"] = True
         if (isinstance(previous_stable, dict) and previous_stable
-                and not previous_stable.get("prerelease")
+                and not github_is_prerelease(previous_stable)
                 and not previous_stable.get("draft")):
             record["stable_release"] = github_stable_snapshot(
                 project, previous_stable, canonical

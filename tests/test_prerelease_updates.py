@@ -47,6 +47,35 @@ class PrereleaseMonitorTests(unittest.TestCase):
         self.assertTrue(result["prerelease"])
         self.assertNotIn("stable_release", result)
 
+    def test_beta_tag_marked_as_regular_release_is_not_a_stable(self):
+        beta = entry("beta-2", False, 12)
+        with patch.object(monitor, "request_json", side_effect=[[beta], beta]):
+            record = monitor.get_github_release("dev/port")
+        self.assertTrue(record["prerelease"])
+        self.assertTrue(record["no_stable_release"])
+        self.assertNotIn("stable_release", record)
+
+    def test_mislabeled_beta_does_not_hide_real_stable(self):
+        beta = entry("v1.2-beta2", False, 12)
+        old_beta = entry("v1.2-beta1", False, 11)
+        stable = entry("v1.1", False, 10)
+        with patch.object(monitor, "request_json", return_value=[beta, old_beta, stable]):
+            record = monitor.get_github_release("dev/port")
+        self.assertTrue(record["prerelease"])
+        self.assertEqual(record["stable_release"]["tag"], "v1.1")
+
+    def test_mislabeled_beta_full_page_requires_more_evidence(self):
+        releases = [entry("beta-" + str(i), False, i) for i in range(20, 0, -1)]
+        stable = entry("v0.9", False, 99)
+        with patch.object(monitor, "request_json", side_effect=[releases, releases[0], [stable]]):
+            record = monitor.get_github_release("dev/port")
+        self.assertEqual(record["stable_release"]["tag"], "v0.9")
+        self.assertNotIn("no_stable_release", record)
+        with patch.object(monitor, "request_json",
+                          side_effect=[releases, releases[0], RuntimeError("rate limit")]):
+            record = monitor.get_github_release("dev/port")
+        self.assertNotIn("no_stable_release", record)
+
     def test_drafts_ignored(self):
         draft = entry("v3.0", False, 13)
         draft["draft"] = True
