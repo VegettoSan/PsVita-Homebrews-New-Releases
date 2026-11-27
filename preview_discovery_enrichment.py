@@ -322,10 +322,11 @@ def run(limit, offset, max_files, state_path=None):
             stage = record.get("state", "new")
             counts[stage] = counts.get(stage, 0) + 1
         batch["queue"] = {"inventory": len(state["records"]), "states": counts,
-                          "selected_keys": [key for key, _ in rows]}
+                          "selected_keys": [key for key, _ in rows],
+                          "processed_keys": [r["key"] for r in batch["results"] if r.get("state") != "deferred"]}
     return {"mode": "queue_preview" if state is not None else "read_only", "offset": offset,
             "requested": limit, "max_files": max_files,
-            "http_requests": discovery.REQUEST_COUNT, **batch}
+            "http_requests": discovery.REQUEST_COUNT, "quota": discovery.quota_status(), **batch}
 
 
 def main():
@@ -336,8 +337,8 @@ def main():
     parser.add_argument("--output", type=Path)
     parser.add_argument("--queue-state", type=Path, help="Persistent pilot state; only enrichment-state.json in current directory")
     args = parser.parse_args()
-    if not 1 <= args.limit <= 15 or args.offset < 0 or not 1 <= args.max_files <= 40:
-        parser.error("limit 1–15, offset >=0, max-files 1–40")
+    if not 1 <= args.limit <= 20 or args.offset < 0 or not 1 <= args.max_files <= 40:
+        parser.error("limit 1–20, offset >=0, max-files 1–40")
     if args.queue_state is not None and (args.queue_state != Path("enrichment-state.json") or args.offset != 0):
         parser.error("queue-state must be enrichment-state.json and cannot be combined with offset")
     result = run(args.limit, args.offset, args.max_files, args.queue_state)
