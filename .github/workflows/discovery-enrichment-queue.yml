@@ -1,5 +1,12 @@
 name: Discovery persistent queue pilot
 on:
+  schedule:
+    - cron: '37 2-23/3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/discovery-enrichment-queue.yml
   pull_request:
     branches: [main]
     paths:
@@ -13,11 +20,17 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: discovery-queue-pilot-${{ github.event.pull_request.number }}
+  group: ${{ github.event_name == 'pull_request' && format('discovery-queue-pilot-{0}', github.event.pull_request.number) || 'psvita-release-tracker-v2' }}
   cancel-in-progress: false
 jobs:
   queue:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/discovery-enrichment'
+    if: >-
+      github.repository == 'VegettoSan/PsVita-Homebrews-New-Releases' &&
+      (github.ref == 'refs/heads/main' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/discovery-enrichment'))
+    permissions:
+      contents: write
+      actions: read
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
@@ -31,6 +44,7 @@ jobs:
       - name: Native artwork regression tests
         run: python -m unittest discover -s tests -p test_discovery_vpk_artwork.py -v
       - name: Restore last successful queue checkpoint for this branch
+        if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
           BRANCH: ${{ github.event.pull_request.head.ref }}
@@ -44,6 +58,19 @@ jobs:
           else
             echo "First queue pilot run"
           fi
+      - name: Restore durable main checkpoint (or migrate verified pilot)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          if [ -s data/discovery/enrichment_state.json ]; then
+            cp data/discovery/enrichment_state.json enrichment-state.json
+          else
+            gh run download 46059093491 --repo "$GITHUB_REPOSITORY" --name enrichment-queue-state --dir .
+          fi
+          test -s enrichment-state.json
       - name: Queue round one
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -93,6 +120,19 @@ jobs:
           else:
               print("Second round deferred safely. Queue:", a["queue"], "Quota:", a["quota"])
           PY
+      - name: Commit durable enrichment state on main
+        if: github.ref == 'refs/heads/main' && success()
+        run: |
+          set -euo pipefail
+          python -c 'import discovery_enrichment_queue as q; q.load_state("enrichment-state.json")'
+          cp enrichment-state.json data/discovery/enrichment_state.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/discovery/enrichment_state.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Checkpoint automatic discovery enrichment"
+            git push origin HEAD:main
+          fi
       - name: Save queue checkpoint
         if: always()
         uses: actions/upload-artifact@v4
