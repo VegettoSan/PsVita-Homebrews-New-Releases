@@ -134,5 +134,58 @@ class QuotaTests(unittest.TestCase):
                 self.assertNotIn("Authorization", get.call_args.kwargs["headers"])
 
 
+
+class OptimizationTests(unittest.TestCase):
+    now = datetime(2026, 11, 27, 18, 0, tzinfo=timezone.utc)
+
+    def test_quota_pause_survives_checkpoint_and_expires(self):
+        state = q.empty_state()
+        reset = self.now + timedelta(minutes=12)
+        q.apply_quota_pause(state, {"rate_limited": True, "reset_at": reset.isoformat()}, self.now)
+        self.assertTrue(q.paused(state, self.now))
+        self.assertTrue(q.paused(state, reset))
+        self.assertFalse(q.paused(state, reset + timedelta(seconds=61)))
+        q.apply_quota_pause(state, {"rate_limited": False}, reset)
+        self.assertNotIn("resume_at", state)
+
+    def test_public_profile_cache_matches_numeric_identity_and_expires(self):
+        state = q.empty_state()
+        calls = []
+        url = "https://api.github.com/users/demo"
+        def request(url):
+            calls.append(url)
+            return {"id": 12, "type": "User", "login": "demo", "html_url": "https://github.com/demo",
+                    "name": "Demo", "private_field": "must not persist"}
+        lookup = q.profile_request(state, {"id": 12}, request, self.now)
+        lookup(url)
+        cached = q.profile_request(state, {"id": 12}, request, self.now)(url)
+        self.assertEqual(cached["id"], 12)
+        self.assertNotIn("private_field", cached)
+        self.assertEqual(len(calls), 1)
+        q.profile_request(state, {"id": 99}, request, self.now)(url)
+        self.assertEqual(len(calls), 2)
+        q.profile_request(state, {"id": 12}, request, self.now + timedelta(days=8))(url)
+        self.assertEqual(len(calls), 3)
+
+    def test_raw_is_bounded_and_does_not_use_core_quota_or_token(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.__enter__.return_value = response
+        response.status_code = 200
+        response.headers = {}
+        response.iter_content.return_value = iter([b"hello", b" world"])
+        with patch.object(discovery.HTTP, "get", return_value=response) as get, patch.object(discovery, "REQUEST_COUNT", 0), patch.object(discovery, "RAW_REQUEST_COUNT", 0), patch.object(discovery, "CORE_REQUEST_COUNT", 0), patch.object(discovery, "LOW_RATE_LIMIT", True):
+            self.assertEqual(discovery.raw_bytes("dev/demo", "a"*40, "docs/README.md"), b"hello world")
+            self.assertEqual(discovery.RAW_REQUEST_COUNT, 1)
+            self.assertEqual(discovery.CORE_REQUEST_COUNT, 0)
+            self.assertNotIn("Authorization", get.call_args.kwargs["headers"])
+            self.assertFalse(get.call_args.kwargs["allow_redirects"])
+            response.iter_content.return_value = iter([b"123456"])
+            self.assertIsNone(discovery.raw_bytes("dev/demo", "a"*40, "README.md", 5))
+            with self.assertRaises(ValueError):
+                discovery.raw_bytes("dev/demo", "a"*40, "../secret")
+            self.assertEqual(get.call_count, 2)
+
+
 if __name__ == "__main__":
     unittest.main()
