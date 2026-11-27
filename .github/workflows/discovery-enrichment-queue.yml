@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'discovery_*.py'
+      - discover_homebrew.py
       - preview_discovery_enrichment.py
       - 'tests/test_discovery_*.py'
       - .github/workflows/discovery-enrichment-queue.yml
@@ -17,7 +18,7 @@ jobs:
   queue:
     if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/discovery-enrichment'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -43,24 +44,52 @@ jobs:
       - name: Queue round one
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          DISCOVERY_REQUEST_BUDGET: "180"
-          DISCOVERY_TIME_BUDGET: "420"
-        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 3 --max-files 18 --output enrichment-report-round1.json
+          DISCOVERY_REQUEST_BUDGET: "600"
+          DISCOVERY_RATE_RESERVE: "30"
+          DISCOVERY_TIME_BUDGET: "900"
+        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 10 --max-files 18 --output enrichment-report-round1.json
+      - name: Determine remaining round budget
+        id: budget
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          a = json.loads(Path("enrichment-report-round1.json").read_text())
+          q = a["quota"]
+          left = max(0, 600 - a["http_requests"])
+          if q["remaining"] is not None:
+              left = min(left, max(0, q["remaining"] - q["reserve"]))
+          proceed = not q["rate_limited"] and left >= 80
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              print(f"proceed={'true' if proceed else 'false'}", file=out)
+              print(f"budget={left}", file=out)
+          print("Quota:", q, "remaining local budget:", left)
+          if not proceed:
+              print("Round two deferred; queue retained.")
+          PY
       - name: Queue round two (resume same checkpoint)
+        if: steps.budget.outputs.proceed == 'true'
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          DISCOVERY_REQUEST_BUDGET: "180"
-          DISCOVERY_TIME_BUDGET: "420"
-        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 3 --max-files 18 --output enrichment-report-round2.json
-      - name: Assert independent rounds
+          DISCOVERY_REQUEST_BUDGET: ${{ steps.budget.outputs.budget }}
+          DISCOVERY_RATE_RESERVE: "30"
+          DISCOVERY_TIME_BUDGET: "900"
+        run: python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 10 --max-files 18 --output enrichment-report-round2.json
+      - name: Assert independent processed candidates
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          a, b = (json.loads(Path(f"enrichment-report-round{i}.json").read_text()) for i in (1, 2))
-          assert not set(a["queue"]["selected_keys"]) & set(b["queue"]["selected_keys"]), "Repeated candidates within same round window"
-          print("Checkpoint resumed; independent candidates selected.")
-          print("Queue:", b["queue"])
+          a = json.loads(Path("enrichment-report-round1.json").read_text())
+          path = Path("enrichment-report-round2.json")
+          if path.exists():
+              b = json.loads(path.read_text())
+              assert not set(a["queue"]["processed_keys"]) & set(b["queue"]["selected_keys"]), "Previously processed candidate repeated"
+              assert a["http_requests"] + b["http_requests"] <= 600, "Shared local budget exceeded"
+              print("Checkpoint resumed; unprocessed candidates may be retried.")
+              print("Queue:", b["queue"], "Quota:", b["quota"])
+          else:
+              print("Second round deferred safely. Queue:", a["queue"], "Quota:", a["quota"])
           PY
       - name: Save queue checkpoint
         if: always()
