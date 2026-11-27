@@ -17,6 +17,7 @@ from discovery_enrichment import (
     classify_category, prioritized_paths, resolve_title, sfo_title_id, text_evidence,
 )
 
+from discovery_readiness import readiness
 from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
 
 BASE = "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/"
@@ -215,6 +216,9 @@ def run(limit, offset, max_files):
     taxonomy = to_v1(discovery.request(BASE + "categories.json"))
     catalog = to_v1(discovery.request(BASE + "catalog.json"))
     registry = discovery.request(BASE + "registry/retired_ids.json")
+    authors = to_v1(discovery.request(BASE + "authors.json"))
+    if not isinstance(authors, list) or not authors:
+        raise ValueError("Official author profiles unavailable")
     if not isinstance(taxonomy, list) or not taxonomy or not isinstance(registry, dict) or not isinstance(registry.get("apps", {}).get("title_ids"), list):
         raise ValueError("Official taxonomy or retired registry unavailable")
     apps = discovery.official_apps(catalog)
@@ -227,6 +231,12 @@ def run(limit, offset, max_files):
         raise ValueError("Invalid candidate inventory")
     rows = sorted(candidates.items())[offset:offset+limit]
     batch = inspect_batch(rows, taxonomy, official, retired, max_files)
+    for result in batch["results"]:
+        if result.get("state") in {"inspected", "partial"}:
+            try:
+                result["readiness"] = readiness(candidates[result["key"]], result, taxonomy, authors, apps, registry)
+            except (ValueError, TypeError, KeyError, AttributeError) as exc:
+                result["readiness"] = {"state": "review", "error_type": type(exc).__name__, "publication_allowed": False}
     return {"mode": "read_only", "offset": offset, "requested": limit, "max_files": max_files,
             "http_requests": discovery.REQUEST_COUNT, **batch}
 
