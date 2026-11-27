@@ -5,6 +5,7 @@ on:
     paths:
       - discover_homebrew.py
       - discovery_enrichment_queue.py
+      - tests/test_discovery_enrichment_queue.py
       - discovery_enrichment.py
       - discovery_requirements.py
       - discovery_readiness.py
@@ -48,6 +49,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_discovery_author_vpk.py -v
       - name: Native display title regression tests
         run: python -m unittest discover -s tests -p test_discovery_vpk_display_name.py -v
+      - name: Persistent publication queue regressions (offline)
+        run: python -m unittest discover -s tests -p test_discovery_enrichment_queue.py -v
       - name: Native artwork regression tests
         run: python -m unittest discover -s tests -p test_discovery_vpk_artwork.py -v
       - name: Read-only sample of existing discoveries (manual only)
