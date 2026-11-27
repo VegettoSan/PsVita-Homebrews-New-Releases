@@ -129,9 +129,14 @@ class PreviewTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pilot.safe_project(p, "github")
 
+    def test_github_read_file_uses_immutable_raw(self):
+        with patch.object(pilot.discovery, "raw_bytes", return_value=b"abc") as raw:
+            self.assertEqual(pilot.read_file("https://api.github.com/repos/a/b", "github", "nested/file", "a"*40), b"abc")
+            raw.assert_called_once_with("a/b", "a"*40, "nested/file", pilot.MAX_FILE_BYTES)
+
     def test_read_file_size_and_encoding(self):
         with patch.object(pilot.discovery, "request", return_value={"size": 3, "encoding": "base64", "content": "YWJj"}):
-            self.assertEqual(pilot.read_file("https://api.github.com/repos/a/b", "github", "nested/file", "a"*40), b"abc")
+            self.assertEqual(pilot.read_file("https://gitlab.com/api/v4/projects/a%2Fb", "gitlab", "nested/file", "a"*40), b"abc")
         with patch.object(pilot.discovery, "request", return_value={"size": 9999999, "encoding": "base64", "content": "YWJj"}):
             self.assertIsNone(pilot.read_file("https://api.github.com/repos/a/b", "github", "nested/file", "a"*40))
 
