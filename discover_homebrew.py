@@ -34,6 +34,8 @@ MAX_REQUESTS = max(80, min(750, int(os.getenv("DISCOVERY_REQUEST_BUDGET", "520")
 MAX_SECONDS = max(120, min(1080, int(os.getenv("DISCOVERY_TIME_BUDGET", "720"))))
 RATE_RESERVE = max(10, min(100, int(os.getenv("DISCOVERY_RATE_RESERVE", "70"))))
 REQUEST_COUNT = 0
+RAW_REQUEST_COUNT = 0
+CORE_REQUEST_COUNT = 0
 LOW_RATE_LIMIT = False
 RATE_REMAINING = None
 RATE_RESET = None
@@ -78,12 +80,13 @@ def write_json(path, obj):
 def quota_status():
     return {"request_budget": MAX_REQUESTS, "requests_used": REQUEST_COUNT,
             "reserve": RATE_RESERVE, "remaining": RATE_REMAINING,
+            "raw_requests": RAW_REQUEST_COUNT, "core_requests": CORE_REQUEST_COUNT,
             "reset_at": RATE_RESET, "rate_limited": LOW_RATE_LIMIT,
             "reason": RATE_STOP_REASON}
 
 
 def request(url, params=None, gitlab=False, plain=False):
-    global REQUEST_COUNT, LOW_RATE_LIMIT, RATE_REMAINING, RATE_RESET, RATE_STOP_REASON
+    global REQUEST_COUNT, CORE_REQUEST_COUNT, LOW_RATE_LIMIT, RATE_REMAINING, RATE_RESET, RATE_STOP_REASON
     if LOW_RATE_LIMIT:
         raise DiscoveryBudgetReached(RATE_STOP_REASON or "API reserve reached")
     if REQUEST_COUNT >= MAX_REQUESTS:
@@ -95,8 +98,10 @@ def request(url, params=None, gitlab=False, plain=False):
     headers = GL_HEADERS if gitlab and host == "gitlab.com" else HEADERS if host == "api.github.com" else {
         "User-Agent": "PSVitaAlive-Discovery/1.0", "Accept": "application/json"}
     REQUEST_COUNT += 1  # Failed network attempts also consume local budget.
-    response = HTTP.get(url, params=params, headers=headers, timeout=(5, 18))
     core = host == "api.github.com" and "/search/" not in url
+    if core:
+        CORE_REQUEST_COUNT += 1
+    response = HTTP.get(url, params=params, headers=headers, timeout=(5, 18))
     remaining = response.headers.get("X-RateLimit-Remaining")
     try:
         remaining = int(remaining) if remaining is not None else None
@@ -127,6 +132,48 @@ def request(url, params=None, gitlab=False, plain=False):
         return {"tree": []}
     response.raise_for_status()
     return response.text[:40000] if plain else response.json()
+
+
+
+def raw_bytes(project, ref, path, max_bytes=262144):
+    """Read public immutable GitHub files without using the core REST quota.
+
+    Count attempts in the local budget, stream bounded bytes, never forward
+    provider tokens, and never follow redirects from an untrusted source.
+    """
+    global REQUEST_COUNT, RAW_REQUEST_COUNT
+    if REQUEST_COUNT >= MAX_REQUESTS:
+        raise DiscoveryBudgetReached("Local request budget reached")
+    if time.monotonic() - START_TIME >= MAX_SECONDS:
+        raise DiscoveryBudgetReached("Local time budget reached")
+    if (not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", project)
+            or any(p in {".", ".."} for p in project.split("/"))
+            or not re.fullmatch(r"[0-9a-f]{40}", ref)
+            or not path or any(p in {"", ".", ".."} for p in path.split("/"))
+            or "\\" in path or any(ord(c) < 32 for c in path)):
+        raise ValueError("Invalid immutable raw file path")
+    url = "https://raw.githubusercontent.com/" + project + "/" + ref + "/" + quote(path, safe="/")
+    REQUEST_COUNT += 1
+    RAW_REQUEST_COUNT += 1
+    with HTTP.get(url, headers={"User-Agent": "PSVitaAlive-Discovery/1.0",
+                               "Accept-Encoding": "identity"},
+                  stream=True, allow_redirects=False, timeout=(5, 10)) as response:
+        if response.status_code == 404:
+            return None
+        if response.status_code != 200:
+            response.raise_for_status()
+            raise ValueError("Unexpected raw response")
+        size = response.headers.get("Content-Length")
+        if size and size.isdigit() and int(size) > max_bytes:
+            return None
+        data = bytearray()
+        for chunk in response.iter_content(32768):
+            if time.monotonic() - START_TIME >= MAX_SECONDS:
+                raise DiscoveryBudgetReached("Local time budget reached")
+            data.extend(chunk)
+            if len(data) > max_bytes:
+                return None
+        return bytes(data) if data else None
 
 
 def project_url_key(value):
