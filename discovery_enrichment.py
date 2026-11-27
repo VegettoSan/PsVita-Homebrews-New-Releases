@@ -247,6 +247,28 @@ def classify_category(name, description, readme, project_type, categories):
         cid, hit = next(iter(purpose_matches.items()))
         scores[cid] = max(10, scores.get(cid, 0), max(scores.values(), default=0) + 3)
         evidence.setdefault(cid, []).append({"match": hit.group(0), "source": "primary_purpose"})
+    # Direction and subject matter more than dependencies or implementation.
+    # A native game port can use plugins or Android runtime emulation without
+    # being either a plugin or an emulator itself.
+    directional_port = re.search(
+        r"\b(?:android|windows|pc|linux|ios|psp)\s+to\s+(?:the )?(?:ps vita|playstation vita)\s+port\b|"
+        r"\b(?:native\s+)?(?:ps vita|playstation vita)\s+port\b|"
+        r"\bport\s+of\b[^.\n]{0,160}\b(?:to|for)\s+(?:the )?(?:ps vita|playstation vita)\b",
+        purpose, re.I)
+    game_context = re.search(
+        r"\b(?:game (?:files|data|assets|engine)|(?:original|android|pc|commercial) game|"
+        r"gameplay|video game|game port|rpg|first person shooter|role playing game)\b",
+        primary + "\n" + body, re.I)
+    non_game_subject = re.search(
+        r"\b(?:port of (?:an? )?(?:[^.\n]{0,50} )?(?:emulator|file manager|music player|web browser)|"
+        r"(?:emulator|file manager|music player|web browser)\s+port)\b", purpose, re.I)
+    if (directional_port and game_context and not non_game_subject
+            and "ports" in taxonomy and project_type == "homebrew"):
+        scores["ports"] = max(12, max(scores.values(), default=0) + 3)
+        evidence.setdefault("ports", []).extend([
+            {"match": directional_port.group(0), "source": "primary_purpose"},
+            {"match": game_context.group(0), "source": "game_context"}])
+        purpose_matches["ports"] = directional_port
     ranked = sorted(scores, key=lambda k: (-scores[k], k))
     if not ranked or scores[ranked[0]] < 6:
         return {"state": "missing", "category_id": "", "subcategory_ids": [], "scores": scores, "evidence": evidence}
