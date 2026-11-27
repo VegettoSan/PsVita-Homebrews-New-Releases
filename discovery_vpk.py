@@ -78,7 +78,7 @@ def latest_publication_asset(entry, repo, latest, now=None):
     if len(assets) != 1:
         return {"state": "WAITING_RELEASE", "reason": "no_unique_vpk"}
     a = assets[0]
-    if a.get("state") != "uploaded" or type(a.get("size")) is not int or not 0 < a["size"] <= MAX_BYTES or not isinstance(a.get("browser_download_url"), str):
+    if type(a.get("id")) is not int or a["id"] <= 0 or a.get("state") != "uploaded" or type(a.get("size")) is not int or not 0 < a["size"] <= MAX_BYTES or not isinstance(a.get("browser_download_url"), str):
         return {"state": "WAITING_RELEASE", "reason": "asset_not_publishable"}
     old = entry.get("app_draft") or {}
     url = a["browser_download_url"]

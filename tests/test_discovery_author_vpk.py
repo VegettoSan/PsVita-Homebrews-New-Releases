@@ -73,7 +73,7 @@ class VpkTests(unittest.TestCase):
         now = datetime(2026, 11, 27, tzinfo=timezone.utc)
         entry = {**self.entry, "key": "gh:123", "author_profile": "https://github.com/dev"}
         repo = {"id": 123, "full_name": "dev/demo", "fork": False, "owner": {"login": "dev", "type": "User"}}
-        asset = {**self.asset, "browser_download_url": self.url.replace("/v1/", "/v2/")}
+        asset = {**self.asset, "id": 123, "browser_download_url": self.url.replace("/v1/", "/v2/")}
         latest = {"draft": False, "prerelease": False, "tag_name": "v2", "published_at": "2026-11-26T00:00:00Z", "assets": [asset]}
         proof = latest_publication_asset(entry, repo, latest, now)
         self.assertEqual(proof["state"], "verified")

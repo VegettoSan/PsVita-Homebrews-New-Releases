@@ -128,6 +128,9 @@ def source_proof_matches(result, now):
         return False
     return (proof.get("state") == "verified" and timedelta(0) <= age <= timedelta(hours=24)
             and asset.get("state") == "selected"
+            and isinstance(asset.get("tag"), str) and bool(asset["tag"])
+            and isinstance(asset.get("url"), str) and bool(asset["url"])
+            and type(asset.get("asset_id")) is int and asset["asset_id"] > 0
             and asset.get("tag") == vpk.get("tag") and asset.get("url") == vpk.get("url")
             and asset.get("size") == vpk.get("bytes_read")
             and asset.get("asset_id") == vpk.get("asset_id")

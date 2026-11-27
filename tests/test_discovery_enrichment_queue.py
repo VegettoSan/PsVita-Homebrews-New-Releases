@@ -50,8 +50,9 @@ class QueueTests(unittest.TestCase):
                           "url": entry["app_draft"]["links"][0]["url"]},
                   "category": {"state": "suggested", "category_id": "demos", "subcategory_ids": ["other"]},
                   "author": {"state": "draft"}, "requirements": {"state": "no_data"}}
+        result["vpk"].update(tag="v1", asset_id=123)
         result["publication_preflight"] = {"state": "verified", "checked_at": self.now.isoformat(),
-            "asset": {"state": "selected", "size": 100, "url": result["vpk"]["url"]}}
+            "asset": {"state": "selected", "size": 100, "url": result["vpk"]["url"], "tag": "v1", "asset_id": 123}}
         taxonomy = [{"id": "demos", "subcategories": [{"id": "other"}]}]
         self.assertTrue(q.source_proof_matches(result, self.now))
         self.assertFalse(q.source_proof_matches(result, self.now + timedelta(hours=25)))
