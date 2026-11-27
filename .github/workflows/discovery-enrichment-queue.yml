@@ -24,6 +24,7 @@ permissions:
 concurrency:
   group: ${{ github.event_name == 'pull_request' && format('discovery-queue-pilot-{0}', github.event.pull_request.number) || 'psvita-release-tracker-v2' }}
   cancel-in-progress: false
+  queue: max
 jobs:
   queue:
     if: >-
