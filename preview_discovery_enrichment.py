@@ -21,6 +21,7 @@ from discovery_enrichment import (
 from discovery_readiness import readiness
 from discovery_author_profiles import author_proposal
 from discovery_vpk import select_vpk, verify_download
+from discovery_vpk_artwork import media_proposal
 import discovery_enrichment_queue as queue
 from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
 
@@ -227,7 +228,7 @@ def inspect_batch(rows, taxonomy, official, retired, max_files):
             "unattempted_keys": pending, "internal_errors": unexpected}
 
 
-def run(limit, offset, max_files, state_path=None):
+def run(limit, offset, max_files, state_path=None, media_dir=None):
     state = None
     if state_path is not None:
         state = queue.load_state(state_path)
@@ -288,7 +289,13 @@ def run(limit, offset, max_files, state_path=None):
         else:
             try:
                 cached = queue.cached_vpk(state["records"][result["key"]], result["vpk_asset"], title.get("suggestion", "")) if state is not None else None
-                result["vpk"] = cached or verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget)
+                if cached is not None and media_dir is not None and cached.get("artwork", {}).get("version") != 1:
+                    cached = None  # Older validation records never inspected native artwork.
+                result["vpk"] = cached or verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget, media_dir)
+                if result["vpk"].get("artwork"):
+                    artwork = result["vpk"]["artwork"]
+                    result["media_proposal"] = media_proposal(entry.get("app_draft") or {}, artwork, discovery.media_image_fallback)
+                    result["media_proposal"]["artifact_scope"] = "previous verification; re-extract before publication" if cached else "current run artifact"
             except Exception as exc:
                 # Preserve the rest of the batch and mark CI failed for defects.
                 batch["internal_errors"] += 1
@@ -309,6 +316,8 @@ def run(limit, offset, max_files, state_path=None):
                 draft["author_ids"] = result["author"]["author_ids"]
             result["readiness"] = readiness({**entry, "app_draft": draft}, result, taxonomy, authors, apps, registry)
             result["readiness"]["vpk_verified"] = result["vpk"]["state"] == "verified"
+            result["readiness"]["icon_recoverable"] = bool(result.get("media_proposal", {}).get("icon"))
+            result["readiness"]["fallback_images_available"] = len(result.get("media_proposal", {}).get("fallback_screenshots", []))
             result["readiness"]["publication_allowed"] = False
         except (ValueError, TypeError, KeyError, AttributeError) as exc:
             result["readiness"] = {"state": "review", "error_type": type(exc).__name__, "publication_allowed": False}
@@ -342,12 +351,15 @@ def main():
     parser.add_argument("--max-files", type=int, default=18)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--queue-state", type=Path, help="Persistent pilot state; only enrichment-state.json in current directory")
+    parser.add_argument("--media-dir", type=Path, help="Stage verified VPK images in enrichment-media only")
     args = parser.parse_args()
     if not 1 <= args.limit <= 20 or args.offset < 0 or not 1 <= args.max_files <= 40:
         parser.error("limit 1–20, offset >=0, max-files 1–40")
     if args.queue_state is not None and (args.queue_state != Path("enrichment-state.json") or args.offset != 0):
         parser.error("queue-state must be enrichment-state.json and cannot be combined with offset")
-    result = run(args.limit, args.offset, args.max_files, args.queue_state)
+    if args.media_dir is not None and args.media_dir != Path("enrichment-media"):
+        parser.error("media-dir must be enrichment-media in the working directory")
+    result = run(args.limit, args.offset, args.max_files, args.queue_state, args.media_dir)
     text = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         # Reports only: don't permit overwriting canonical state or source files.
