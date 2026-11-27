@@ -115,5 +115,50 @@ class PreviewTests(unittest.TestCase):
         self.assertFalse(row["publication_allowed"])
 
 
+    def test_individual_failure_does_not_stop_batch(self):
+        rows = [(key, {"key": key, "project": key}) for key in ("a", "b", "c")]
+        with patch.object(pilot, "inspect", side_effect=[
+                ValueError("bad candidate"), {"key": "b"}, {"key": "c"}]) as scan:
+            report = pilot.inspect_batch(rows, [], [], [], 5)
+        self.assertEqual(scan.call_count, 3)
+        self.assertEqual(report["results"][0]["state"], "candidate_error")
+        self.assertTrue(report["results"][0]["retry"])
+        self.assertEqual(report["results"][2]["key"], "c")
+        self.assertFalse(report["budget_stopped"])
+
+    def test_malformed_candidate_and_unexpected_error_are_isolated(self):
+        rows = [("a", None), ("b", {"key": "b"}), ("c", {"key": "c"})]
+        with patch.object(pilot, "inspect", side_effect=[AttributeError("bug"), {"key": "c"}]):
+            report = pilot.inspect_batch(rows, [], [], [], 5)
+        self.assertEqual([r.get("state") for r in report["results"][:2]],
+                         ["candidate_error", "internal_error"])
+        self.assertEqual(report["results"][2]["key"], "c")
+        self.assertEqual(report["internal_errors"], 1)
+        self.assertFalse(report["budget_stopped"])
+
+    def test_global_budget_defers_remaining_candidates(self):
+        rows = [(key, {"key": key}) for key in ("a", "b", "c")]
+        with patch.object(pilot, "inspect", side_effect=[
+                {"key": "a"}, pilot.discovery.DiscoveryBudgetReached("budget")]) as scan:
+            report = pilot.inspect_batch(rows, [], [], [], 5)
+        self.assertEqual(scan.call_count, 2)
+        self.assertTrue(report["budget_stopped"])
+        self.assertEqual(report["results"][1]["state"], "deferred")
+        self.assertEqual(report["unattempted_keys"], ["c"])
+
+    def test_file_failure_preserves_later_evidence(self):
+        entry = {"key": "gh:1", "project": "a/b", "platform": "github"}
+        with patch.object(pilot, "provider_repo", return_value=({}, "https://api.github.com/repos/a/b", "a"*40)), \
+             patch.object(pilot.discovery, "files_for", return_value=["a/Makefile", "b/Makefile"]), \
+             patch.object(pilot.discovery, "request", side_effect=pilot.requests.Timeout()), \
+             patch.object(pilot, "read_file", side_effect=[pilot.requests.Timeout(), b'TITLE_ID=EXAM00001']):
+            row = pilot.inspect(entry, TaxonomyTests.taxonomy, [], [], 5)
+        self.assertEqual(row["title"]["suggestion"], "EXAM00001")
+        self.assertEqual(row["state"], "partial")
+        self.assertTrue(row["retry"])
+        self.assertEqual(len(row["errors"]), 2)
+        self.assertFalse(row["publication_allowed"])
+
+
 if __name__ == "__main__":
     unittest.main()
