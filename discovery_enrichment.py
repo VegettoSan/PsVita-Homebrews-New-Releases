@@ -129,7 +129,7 @@ RULES = {
     "plugins": [(10, r"\b(?:taihen plugin|kernel plugin|user plugin|vita plugin|skprx|suprx)\b"), (5, r"\bplugin\b")],
     "utilities": [(8, r"\b(?:file manager|save manager|calculator|backup tool|installer|terminal emulator|text editor|launcher|updater|utility)\b")],
     "system": [(8, r"\b(?:custom firmware|firmware tool|downgrade|system manager|mount tool|system diagnostics|system information|storage manager)\b")],
-    "media": [(8, r"\b(?:music player|video player|image viewer|image editor|audio (?:[a-z]+ ){0,2}player|multimedia player|media player|umd (?:video )?player|spotify connect (?:audio )?client)\b")],
+    "media": [(8, r"\b(?:music player|video player|image viewer|image editor|audio (?:[a-z]+ ){0,2}player|multimedia player|media player|umd (?:video )?player|spotify connect (?:\(premium\) )?(?:audio )?client)\b")],
     "networking": [(8, r"\b(?:ftp server|ssh client|ssh server|web browser|remote desktop|game streaming|network tool|http server|messaging client|irc client|chat client|instant messaging client|vpn client|vpn server)\b")],
     "customization": [(8, r"\b(?:theme manager|custom theme|wallpaper|boot animation|bubble manager|font manager)\b")],
     "modding": [(9, r"\b(?:translation patch|game patch|rom hack|texture pack|fan translation|localization patch|game mod)\b")],
@@ -146,7 +146,7 @@ SUB_RULES = {
     "plugins": {"overclock": r"\boverclock\w*\b", "performance": r"\b(?:performance|overclock\w*)\b", "audio": r"\baudio\b", "graphics": r"\bgraphics\b", "storage": r"\bstorage\b", "input": r"\b(?:input|controller)\b", "display": r"\bdisplay\b"},
     "utilities": {"file-manager": r"\bfile manager\b", "ftp": r"\bftp\b", "save-manager": r"\bsave manager\b", "calculator": r"\bcalculator\b", "installer": r"\binstaller\b", "launcher": r"\blauncher\b", "terminal": r"\bterminal\b", "text-editor": r"\btext editor\b", "backup": r"\bbackup\b", "updater": r"\bupdater\b"},
     "networking": {"messaging": r"\b(?:irc|chat|instant messaging|messaging) client\b", "network-tools": r"\b(?:vpn|network diagnostic)\b", "ftp": r"\bftp\b", "web-browser": r"\bweb browser\b", "game-streaming": r"\bgame streaming\b", "remote-desktop": r"\bremote desktop\b", "client": r"\bclient\b", "server": r"\bserver\b"},
-    "media": {"audio": r"\baudio\b", "music-player": r"\b(?:music player|audio (?:[a-z]+ ){0,2}player|spotify connect (?:audio )?client)\b", "video-player": r"\b(?:video player|umd (?:video )?player)\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
+    "media": {"audio": r"\baudio\b", "music-player": r"\b(?:music player|audio (?:[a-z]+ ){0,2}player|spotify connect (?:\(premium\) )?(?:audio )?client)\b", "video-player": r"\b(?:video player|umd (?:video )?player)\b", "image-viewer": r"\bimage viewer\b", "image-editor": r"\bimage editor\b"},
     "modding": {"translation": r"\b(?:translation|fan translation)\b", "game-patches": r"\bgame patch\b", "rom-hacks": r"\brom hack\b", "textures": r"\btexture pack\b"},
     "system": {"firmware": r"\bcustom firmware\b", "firmware-tools": r"\bfirmware tool\b", "downgrade": r"\bdowngrade\b", "storage": r"\bstorage manager\b"},
     "demos": {"proof-of-concept": r"\b(?:proof of concept|poc)\b", "tech-demo": r"\b(?:tech demo|qr demo)\b"},
@@ -207,7 +207,7 @@ def classify_category(name, description, readme, project_type, categories):
     purpose = purpose.replace("_", " ").replace("-", " ")
     direct = {
         "networking": r"\b(?:irc|chat|instant messaging|messaging|vpn) (?:client|server)\b",
-        "media": r"\b(?:umd (?:video )?player|spotify connect (?:audio )?client)\b",
+        "media": r"\b(?:umd (?:video )?player|spotify connect (?:\(premium\) )?(?:audio )?client)\b",
         "ports": r"\b(?:port of|ported from)\b[^.\n]{0,100}\b(?:game remake|remake of (?:a |the )?game)\b",
     }
     purpose_matches = {cid: re.search(pattern, purpose, re.I)
