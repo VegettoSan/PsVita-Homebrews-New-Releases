@@ -56,3 +56,26 @@ report lists missing required fields before optional data. A complete metadata
 report does not authorize publication; the canonical validator and additional
 identity/media checks remain required. Reports are read-only and do not modify
 candidates or canonical sources.
+
+## Persistent queue pilot
+
+Run locally from Orbit with:
+
+    python preview_discovery_enrichment.py --queue-state enrichment-state.json --limit 3 --max-files 18 --output enrichment-report-round1.json
+
+The checkpoint is separate from canonical catalogue and discovery state. It
+uses stable candidate keys; candidate metadata changes invalidate old records,
+and removed candidates are pruned. Never-attempted and oldest attempts rotate
+first, with mandatory-field completeness as tie-breaker. Individual failures
+retry with bounded backoff; global-budget deferrals do not count as failures.
+Completed metadata is not permission to publish. A cached VPK verification is
+reused only when current official asset ID, URL, tag, size and SHA-256 match;
+without an official digest the VPK must be checked again. Canonical identity
+conflicts are rechecked. No VPK binaries are stored in the checkpoint.
+
+The PR-only queue workflow runs two independent batches of three and persists
+its checkpoint as an Actions artifact (30 days); later successful PR runs
+restore the latest successful artifact for this branch. This is a pilot, not
+the final scheduled production queue. A failed restore must not silently reset
+state. Recursive source-file cursors and current-release selection are still
+pending, as are verified VPK icon extraction and actual canonical publishing.
