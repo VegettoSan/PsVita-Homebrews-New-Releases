@@ -41,3 +41,18 @@ validación y simulación de publicación en PSVitaAlive. Reutilizar su
 validador/generador, registro de IDs, lock vitahub-catalog-publisher y
 sistema de respaldo autorizado existente. No inferir autorización de
 redistribución de la mera existencia de un repositorio público.
+
+## Mandatory metadata preflight (2026-11-27)
+
+The live PSVitaAlive source validator requires non-empty long_description and
+subcategory_ids, positive integer size, real version/date, existing authors,
+category, requirements, status and links. The automation additionally requires
+an application icon; empty screenshots are allowed. Reuse the short description
+as long_description when necessary; use the official subcategory other only if
+it exists within the selected category; use exactly "- no data" if runtime
+requirements are unknown. Do not invent release data, authors, download links,
+or status. New author drafts and status policy require approval. The readiness
+report lists missing required fields before optional data. A complete metadata
+report does not authorize publication; the canonical validator and additional
+identity/media checks remain required. Reports are read-only and do not modify
+candidates or canonical sources.
