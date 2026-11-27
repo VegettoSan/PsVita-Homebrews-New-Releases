@@ -6,6 +6,7 @@ import argparse
 import base64
 import json
 import re
+import traceback
 from pathlib import Path
 from urllib.parse import quote
 
@@ -88,10 +89,17 @@ def inspect(entry, taxonomy, official, retired, max_files):
     evidence = []
     readmes = []
     skipped = []
+    errors = []
     read_count = 0
     # Inspect the release metadata already exposed by the official APIs. A
     # different ID in an older release is conservatively treated as ambiguous.
-    releases = discovery.request(endpoint + "/releases", {"per_page": 5}, gitlab=platform == "gitlab") or []
+    try:
+        releases = discovery.request(endpoint + "/releases", {"per_page": 5}, gitlab=platform == "gitlab") or []
+    except discovery.DiscoveryBudgetReached:
+        raise
+    except (requests.RequestException, ValueError, RuntimeError) as exc:
+        errors.append({"source": "releases", "error_type": type(exc).__name__})
+        releases = []
     for release in releases[:5] if isinstance(releases, list) else []:
         if not isinstance(release, dict) or release.get("draft"):
             continue
@@ -99,7 +107,14 @@ def inspect(entry, taxonomy, official, retired, max_files):
         body = str(release.get("body") or release.get("description") or "")[:40000]
         evidence.extend(text_evidence(body, "release:" + tag, "release", tag))
     for path in paths[:max_files]:
-        raw = read_file(endpoint, platform, path, ref)
+        try:
+            raw = read_file(endpoint, platform, path, ref)
+        except discovery.DiscoveryBudgetReached:
+            raise
+        except (requests.RequestException, ValueError, RuntimeError) as exc:
+            errors.append({"source": path, "error_type": type(exc).__name__})
+            skipped.append(path)
+            continue
         if raw is None:
             skipped.append(path)
             continue
@@ -135,7 +150,46 @@ def inspect(entry, taxonomy, official, retired, max_files):
                          "read_files": read_count, "skipped": skipped, "remaining": max(0, len(paths) - max_files),
                          "complete": False, "note": "Bounded pilot; tree/release coverage is not proof of exhaustive inspection"},
             "icon_present": bool(app.get("icon")), "screenshots_count": len(app.get("screenshots") or []),
-            "publication_allowed": False}
+            "publication_allowed": False, "errors": errors,
+            "state": "partial" if errors else "inspected", "retry": bool(errors)}
+
+
+def inspect_batch(rows, taxonomy, official, retired, max_files):
+    """Isolate candidate failures, reserving global stop for exhausted budgets.
+
+    Unexpected defects are reported separately so CI does not pass silently.
+    """
+    results = []
+    stopped = False
+    unexpected = 0
+    for key, entry in rows:
+        project = entry.get("project", "") if isinstance(entry, dict) else ""
+        identity = {"key": key, "project": project}
+        try:
+            if not isinstance(entry, dict) or entry.get("key") != key:
+                raise ValueError("Malformed candidate identity")
+            results.append(inspect(entry, taxonomy, official, retired, max_files))
+        except discovery.DiscoveryBudgetReached as exc:
+            results.append({**identity, "state": "deferred", "error": str(exc),
+                            "retry": True, "publication_allowed": False})
+            stopped = True
+            break
+        except (requests.RequestException, ValueError, KeyError, TypeError, RuntimeError) as exc:
+            results.append({**identity, "state": "candidate_error",
+                            "error_type": type(exc).__name__, "retry": True,
+                            "publication_allowed": False})
+        except Exception as exc:
+            # Do not swallow programming defects: retain diagnostics and fail
+            # CI after processing the other independent candidates.
+            unexpected += 1
+            results.append({**identity, "state": "internal_error",
+                            "error_type": type(exc).__name__,
+                            "trace": [f"{Path(f.filename).name}:{f.lineno}:{f.name}"
+                                      for f in traceback.extract_tb(exc.__traceback__)],
+                            "retry": True, "publication_allowed": False})
+    pending = [key for key, _ in rows[len(results):]]
+    return {"results": results, "budget_stopped": stopped,
+            "unattempted_keys": pending, "internal_errors": unexpected}
 
 
 def run(limit, offset, max_files):
@@ -150,18 +204,12 @@ def run(limit, offset, max_files):
     official = {str(a.get("title_id", "")).upper() for a in apps if a.get("title_id")}
     retired = registry["apps"]["title_ids"]
     candidates = json.loads(Path("data/discovery/candidates.json").read_text(encoding="utf-8"))
-    rows = sorted(candidates.values(), key=lambda e: e["key"])[offset:offset+limit]
-    results = []
-    for entry in rows:
-        try:
-            results.append(inspect(entry, taxonomy, official, retired, max_files))
-        except discovery.DiscoveryBudgetReached as exc:
-            results.append({"key": entry["key"], "project": entry["project"], "error": str(exc), "retry": True})
-            break
-        except (requests.RequestException, ValueError, KeyError, TypeError, RuntimeError) as exc:
-            results.append({"key": entry["key"], "project": entry["project"], "error": str(exc)[:200], "retry": True})
+    if not isinstance(candidates, dict):
+        raise ValueError("Invalid candidate inventory")
+    rows = sorted(candidates.items())[offset:offset+limit]
+    batch = inspect_batch(rows, taxonomy, official, retired, max_files)
     return {"mode": "read_only", "offset": offset, "requested": limit, "max_files": max_files,
-            "http_requests": discovery.REQUEST_COUNT, "results": results}
+            "http_requests": discovery.REQUEST_COUNT, **batch}
 
 
 def main():
@@ -181,6 +229,8 @@ def main():
             parser.error("output must be enrichment-report*.json in the working directory")
         args.output.write_text(text, encoding="utf-8")
     print(text)
+    if result["internal_errors"]:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
