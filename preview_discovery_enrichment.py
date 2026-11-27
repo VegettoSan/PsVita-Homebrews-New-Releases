@@ -21,6 +21,7 @@ from discovery_enrichment import (
 from discovery_readiness import readiness
 from discovery_author_profiles import author_proposal
 from discovery_vpk import select_vpk, verify_download
+import discovery_enrichment_queue as queue
 from discovery_requirements import extract_requirements, resolve_requirements, relevant_document
 
 BASE = "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/"
@@ -225,7 +226,7 @@ def inspect_batch(rows, taxonomy, official, retired, max_files):
             "unattempted_keys": pending, "internal_errors": unexpected}
 
 
-def run(limit, offset, max_files):
+def run(limit, offset, max_files, state_path=None):
     taxonomy = to_v1(discovery.request(BASE + "categories.json"))
     catalog = to_v1(discovery.request(BASE + "catalog.json"))
     registry = discovery.request(BASE + "registry/retired_ids.json")
@@ -242,13 +243,22 @@ def run(limit, offset, max_files):
     candidates = json.loads(Path("data/discovery/candidates.json").read_text(encoding="utf-8"))
     if not isinstance(candidates, dict):
         raise ValueError("Invalid candidate inventory")
-    rows = sorted(candidates.items())[offset:offset+limit]
+    state = None
+    if state_path is not None:
+        state = queue.reconcile(queue.load_state(state_path), candidates)
+        queue.save_state(state_path, state)
+        rows = queue.choose(state, candidates, limit)
+    else:
+        rows = sorted(candidates.items())[offset:offset+limit]
     batch = inspect_batch(rows, taxonomy, official, retired, max_files)
     binary_budget = 128 * 1024 * 1024
     deadline = min(time.monotonic() + 180, discovery.START_TIME + discovery.MAX_SECONDS)
     author_cache = {}
     for result in batch["results"]:
         if result.get("state") not in {"inspected", "partial"}:
+            if state is not None:
+                queue.checkpoint(state, result["key"], result)
+                queue.save_state(state_path, state)
             continue
         entry = candidates[result["key"]]
         owner = result.get("owner_profile", {})
@@ -266,13 +276,15 @@ def run(limit, offset, max_files):
             result["vpk"] = {"state": "review", "reason": "Resolve identity or platform conflict first"}
         else:
             try:
-                result["vpk"] = verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget)
+                cached = queue.cached_vpk(state["records"][result["key"]], result["vpk_asset"], title.get("suggestion", "")) if state is not None else None
+                result["vpk"] = cached or verify_download(result["vpk_asset"], title.get("suggestion", ""), deadline, binary_budget)
             except Exception as exc:
                 # Preserve the rest of the batch and mark CI failed for defects.
                 batch["internal_errors"] += 1
                 result["vpk"] = {"state": "internal_error", "error_type": type(exc).__name__}
                 binary_budget = 0  # Unknown consumption: do not exceed the byte cap.
-            binary_budget -= result["vpk"].get("bytes_read", 0)
+            if not result["vpk"].get("cache_hit"):
+                binary_budget -= result["vpk"].get("bytes_read", 0)
             if result["vpk"]["state"] == "verified":
                 tid = result["vpk"]["title_id"]
                 evidence = title["evidence"] + [{"title_id": tid, "source": result["vpk"]["url"],
@@ -289,6 +301,9 @@ def run(limit, offset, max_files):
             result["readiness"]["publication_allowed"] = False
         except (ValueError, TypeError, KeyError, AttributeError) as exc:
             result["readiness"] = {"state": "review", "error_type": type(exc).__name__, "publication_allowed": False}
+        if state is not None:
+            queue.checkpoint(state, result["key"], result)
+            queue.save_state(state_path, state)
     # Different accounts may normalize to the same slug. Detect collisions
     # within this sample; final canonical publication must recheck globally.
     proposed = {}
@@ -300,7 +315,16 @@ def run(limit, offset, max_files):
         author = result.get("author", {})
         if author.get("state") == "draft" and len(proposed[author["draft"]["id"]]) > 1:
             result["author"] = {**author, "state": "review", "reason": "Different accounts produce same author ID"}
-    return {"mode": "read_only", "offset": offset, "requested": limit, "max_files": max_files,
+    if state is not None:
+        queue.save_state(state_path, state)
+        counts = {}
+        for record in state["records"].values():
+            stage = record.get("state", "new")
+            counts[stage] = counts.get(stage, 0) + 1
+        batch["queue"] = {"inventory": len(state["records"]), "states": counts,
+                          "selected_keys": [key for key, _ in rows]}
+    return {"mode": "queue_preview" if state is not None else "read_only", "offset": offset,
+            "requested": limit, "max_files": max_files,
             "http_requests": discovery.REQUEST_COUNT, **batch}
 
 
@@ -310,10 +334,13 @@ def main():
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--max-files", type=int, default=18)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--queue-state", type=Path, help="Persistent pilot state; only enrichment-state.json in current directory")
     args = parser.parse_args()
     if not 1 <= args.limit <= 15 or args.offset < 0 or not 1 <= args.max_files <= 40:
         parser.error("limit 1–15, offset >=0, max-files 1–40")
-    result = run(args.limit, args.offset, args.max_files)
+    if args.queue_state is not None and (args.queue_state != Path("enrichment-state.json") or args.offset != 0):
+        parser.error("queue-state must be enrichment-state.json and cannot be combined with offset")
+    result = run(args.limit, args.offset, args.max_files, args.queue_state)
     text = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         # Reports only: don't permit overwriting canonical state or source files.
