@@ -6,6 +6,9 @@ on:
       - discovery_enrichment.py
       - discovery_requirements.py
       - discovery_readiness.py
+      - discovery_author_profiles.py
+      - discovery_vpk.py
+      - tests/test_discovery_author_vpk.py
       - tests/test_discovery_readiness.py
       - preview_discovery_enrichment.py
       - tests/test_discovery_enrichment.py
@@ -34,6 +37,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_discovery_enrichment.py -v
       - name: Mandatory metadata preflight tests
         run: python -m unittest discover -s tests -p test_discovery_readiness.py -v
+      - name: Author profile and VPK safety tests
+        run: python -m unittest discover -s tests -p test_discovery_author_vpk.py -v
       - name: Read-only sample of existing discoveries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
