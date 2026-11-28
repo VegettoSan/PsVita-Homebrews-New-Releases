@@ -1,6 +1,311 @@
 [
   {
     "platform": "github",
+    "repo": "CBOC-Vita-Lab/galaxy-vita",
+    "release_id": "461233675",
+    "tag": "v3.0.1",
+    "name": "Super Mario Galaxy for PS Vita v3.0.1",
+    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v3.0.1",
+    "published": "2026-11-28T02:08:58Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "\nA focused quality-of-life and stability update on top of 3.0 — **fully cross-compatible with 3.0 multiplayer sessions and online play (`galaxy.psvita.dev`)**. Upgrading from 3.0 keeps all saves, settings, and your 5,401-shader cache intact.\n\n### Right-Stick Free Camera (New Default on Handheld & PS TV)\n- **Full analog 360° Free Camera on the right stick:** Orbit smoothly around Mario with full horizontal yaw and vertical pitch (`-5°` to `+65°`) on eligible 3D gameplay cameras, including **spherical planet anchoring** so orbits stay level as you walk around curved planets.\n- **Smart auto-yield:** Automatically yields cleanly to 2D/fixed/rail/boss/pipe/event cameras, opening flyovers, first-person view, Pull Star aiming, menus, and the multiplayer bubble-follow camera.\n- **Smooth collision & recenter:** Real-time line-of-sight wall pull-in (`18–67 µs`), low-angle floor lift, and **△** to smoothly recenter behind Mario.\n- **In-game Settings (all 5 languages):** Choose **Free Camera** (default), **Camera** (classic 45° snap), or **Pointer** under **Settings > Controls > Right Stick**, plus new **Camera Speed (1–10)** and **Invert Camera (Off / Horizontal / Vertical / Both)** rows.\n- **Camera-turn scenery smoothness (30 fps & 60 fps):** Removed SMG's 75% wall/floor-graze orbit brake and double-damping Cartesian chord lag, added horizontal-biased leading-edge frustum pre-unclipping across `GXV_CLIP_PAIR` frames, paused/reset `GXV_LATE_TURN` pre-sleep during spins, and widened `60 Assist` turn guard bands (`4.0° -> 4.6°`) — cutting Observatory turning hitches by **67%** (`6 -> 2`) and visible multi-refresh holds by **71%** (`7 -> 2`) on real PS Vita hardware.\n\n### Controller Plugins & Bug Fixes\n- **Permanent fix for \"Controller disconnected\" popups with Vita plugins (`MiniVitaTV`, `ds4vita`, `reVita`, Bluetooth plugins):** 5-tier port failover across active ports plus `sceCtrlPeekBufferPositive(0)` fallback and `Positive2` trigger normalization; handheld Vitas with virtual pad plugins are no longer misclassified as PS TV, while genuine unpaired PS TV disconnect detection is preserved.\n- **Controller init fallback:** `port_vita_input_init` now handles zero-cap boot states cleanly.\n- **Settings UI hardening:** Fixed button-capture deadlock (`S_SET_CAPTURE` exits cleanly on conflict/disconnect), added `HostAllocScope` across Settings UI allocations, closed Settings cleanly on forced scene cuts, suppressed background `ZoomSave` while Settings is open, flushed camera zoom on clean exit, and fixed **Put Everything Back** so `Camera Speed` and `Invert Camera` always reset cleanly.\n- **Fan-translated / patched ISO compatibility:** Replacing game files over an existing install now automatically invalidates `sizes.cache` (`fst.bin`, `Message.arc`, `Font.arc`), and malformed `0x1A` BMG text tags are safely guarded without breaking standard Wii button icon tags.\n- **Sleep / LiveArea resume:** CPU/GPU/bus clocks (`GXV_CLOCK_KEEP=1` by default) and pad/touch/motion sampling now refresh immediately upon waking from sleep or returning from LiveArea.\n\n---\n\n",
+    "assets": [
+      {
+        "name": "cboc-release.json",
+        "size": 1502,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0.1/cboc-release.json",
+        "content_type": "application/json"
+      },
+      {
+        "name": "Galaxy-Vita-install.zip",
+        "size": 42564594,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0.1/Galaxy-Vita-install.zip",
+        "content_type": "application/zip"
+      },
+      {
+        "name": "Galaxy-Vita.vpk",
+        "size": 14008203,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0.1/Galaxy-Vita.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 864842,
+        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0.1/SHA256SUMS",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "github-actions[bot]",
+    "homebrew_name": "Super Mario Galaxy",
+    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+    "homebrew_id": "super-mario-galaxy",
+    "homebrew_authors": [
+      "cboc-vita-lab"
+    ],
+    "homebrew_version": "3.0",
+    "catalog_apps": [
+      {
+        "id": "super-mario-galaxy",
+        "name": "Super Mario Galaxy",
+        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
+        "category": "ports",
+        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
+        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
+        "version": "3.0",
+        "version_date": "2026-11-27",
+        "author_ids": [
+          "cboc-vita-lab"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/smg-vita/super-mario-galaxy%20v3.0.vpk",
+            "size": 13616965,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files USA",
+            "url": "https://archive.org/download/smg-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 2469606195,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "smg"
+            ]
+          },
+          {
+            "type": "Mod",
+            "name": "HD Textures",
+            "url": "https://archive.org/download/smg-vita/hdtex.pack",
+            "size": 4718592,
+            "extract_path": "ux0:data/smg/"
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 3.0 → release v3.0.1",
+    "catalog_version": "3.0",
+    "archive_current_link": "https://archive.org/download/smg-vita/super-mario-galaxy%20v3.0.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
+    "repo": "SaNch0sE/azahar-vita-mh4u",
+    "release_id": "461175770",
+    "tag": "0.4.7-beta",
+    "name": "Azahar MH4U 0.4.7-beta",
+    "url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/tag/0.4.7-beta",
+    "published": "2026-11-28T00:11:01Z",
+    "prerelease": true,
+    "draft": false,
+    "body": "Azahar for the PS Vita, built on [Grarak's beta-1](https://github.com/Grarak/azahar/releases/tag/beta-1), with optimisations for **Monster Hunter 4 Ultimate**, and speed options for **Monster Hunter XX**. Other games run as in beta-1. Beta: back up your saves.\n\nBeta-1's new CPU and GPU emulation fixes the lighting and dark ground of our 0.3 builds, and our changes bring MH4U to 30 fps in the places we test (beta-1 alone ran them at 67–84% speed).\n\n> [!IMPORTANT]\n> The MH4U optimisations are tested **only** with the **USA** game (`0004000000126300`), its **1.3 (v1.1) update**, and the **Heavenfall mod**. Other regions, other versions or no mod may run slower or show problems.\n\nNo game files are included: you need your own decrypted copy of the game and its update.\n\n## New in 0.4.7-beta\n\n- **Monster Hunter XX: explosions, fire and smoke are much lighter** with **Patches → Per-vertex effect lighting** on. The heaviest effect we found, an explosion's smoke, now costs the GPU 32 instructions per pixel (82 in 0.4.6). In our explosion test, already at 56 instructions, the option held 96–102% speed and 23–30 fps where it dipped to 82% and 14 fps without it; and a whole quest played without the big drops monster attacks, your attacks and Palico buffs used to cause.\n  - The price: with the option on, effects ignore shadows, and some of MHXX's ground patches show light lines inside a monster's shadow. If that bothers you, turn the option off for that game.\n- **The shader cache survives updates** that leave the shader code alone: effects no longer stutter all over again after every update. Old caches are deleted automatically (the last three are kept). This version does change the shaders, so expect the usual first-time stutters once.\n- **Less CPU work in busy MHXX fights:** repeated ground draws share their setup, and particle geometry is cheaper to prepare (the particle setup in our clash test: 47 → 33 ms per second).\n- **CPU clock:** with these changes the game looked fine at **444 MHz** in our play, but that needs more testing. Keep **500 MHz** for the steadiest frame rate, or try **444 MHz** to save a little battery.\n\nRecommended for MHXX: internal resolution **1x**, HUD resolution **1.25x**, Even frame pacing **on**, Vsync **on**, Per-vertex effect lighting **on**.\n\n## In 0.4.6-beta\n\n- **Parallel geometry, MH4U, Monster Hunter XX and any game you turn it on for.** Effects such as a wyvern's takeoff wind and dust used to build their particles one after another on the GPU. They are now built side by side: in MHXX at 1x, the Rathian's takeoff went from dipping to 26 fps to 29–30 fps. Particle **trails** (wind, dust ribbons) are built trail by trail, so they come out exactly as before (checked draw by draw against the old way); this fixes the stray triangles some testers saw with the first version of the option.\n  - **Patches → Parallel geometry**: on by default in MHXX, off in MH4U and other games.\n- **Fast shadows and Parallel geometry for every game.** Both now appear under **Patches** for any game, off by default except where tested (Fast shadows on in MH4U and MHXX, Parallel geometry on in MHXX). They only help games that use real-time shadow maps or geometry-shader particles. If an effect looks wrong with one on, turn it off for that game and tell us which game.\n- **Monster Hunter XX: HUD resolution and Even frame pacing.**\n  - **Patches → HUD resolution**: draw the HUD sharper than the 3D scene. Internal resolution **1x** with HUD **1.25x** held 29–30 fps near the Rathian in our tests, where the whole picture at 1.25x still dips when it takes off.\n  - **Patches → Even frame pacing**: with Vsync on, pictures shown an even two refreshes apart 99% of the time (71–79% without it), at the same frame rate. Costs about one refresh (17 ms) of delay.\n- **Display → Smooth picture at Native** (off by default): at internal resolution 1x, the screens are scaled to the Vita's display smoothly instead of pixel for pixel. No speed cost.\n- **Fixes**\n  - Changing the internal resolution (or other settings) in the pause menu could freeze the game on **Resume**. Fixed.\n  - MHXX: a freeze of about 17 seconds shortly after loading. Fixed.\n  - MHXX at 1x: short hitches in the first seconds after loading. Fixed.\n\n## In 0.4.5-beta\n\n- **Per-vertex effect lighting** (optional, off by default), MH4U and MHXX: see-through lit effects such as a wyvern's takeoff mist are lit once per corner instead of per pixel.\n- **Monster Hunter XX: particle effects get the room they need**, as MH4U's.\n\n## Which download?\n\n| File | Installs as | Settings |\n|---|---|---|\n| **`Azahar-MH4U-0.4.7-beta.vpk`** (recommended) | **Azahar MH4U**, a separate app next to Azahar | its own (`settings-AZAHMH4UB.txt`) |\n| `Azahar-0.4.7-beta-replaces-Azahar.vpk` | **Azahar**, over upstream Azahar | Azahar's (`settings.txt`) |\n\nWe recommend **Azahar MH4U**: you keep upstream Azahar installed and can update it whenever a new version comes out, while Azahar MH4U stays your MH4U app. Both apps use `ux0:data/azahar`, so games, installed updates, saves, savestates, mods and cheats are shared: install the game update once and play it in either app. Only settings are separate (Azahar MH4U copies Azahar's on its first start), so changing a setting in one doesn't reset the other's. Run one app at a time.\n\n## Install\n\n1. **A PS Vita** on firmware 3.60, 3.65, 3.68 or 3.73.\n2. **The app.** Copy the vpk to the Vita and install it with VitaShell. The kernel plugin ships inside the vpk: nothing to add to taiHEN's `config.txt` (if you added `azaharnative.skprx` there for Azahar 0.1, remove that line and reboot).\n3. **The game.** Put your decrypted Monster Hunter 4 Ultimate (USA) `.3ds` / `.cci` / `.cxi` in `ux0:data/azahar/roms/`.\n4. **The update (1.3, v1.1).** Put your decrypted update `.cia` in `ux0:data/azahar/roms/` too. Start the app, select the update in the game list and press **Install**. You can delete the `.cia` afterwards.\n5. **The Heavenfall mod** (menus on one screen; the port is tuned for it):\n   1. Open the web installer, https://popzol.github.io/4u-heavenfall-mod-beta/, on a PC or phone. Your game is never uploaded.\n   2. Choose your **base game** file (the same decrypted `.3ds`), not the update `.cia`.\n   3. Options: **Single Screen mode** on; **HUD size** **80%** (with the HUD drawn at 1.5x it's sharp and readable; the default 70% is small on the Vita); **Aspect ratio**: tick *Allow other aspect ratios (EXPERIMENTAL)* and choose **16:9**; keep the quality-of-life (\"other\") module on. Layered Gear and the mod's cheats are your choice.\n   4. Press **Make the mod**, download the zip and extract it. You get a folder named `0004000000126300`.\n   5. Copy that folder to `ux0:data/azahar/load/mods/`, so that you have `ux0:data/azahar/load/mods/0004000000126300/romfs`. To change the mod later, delete that folder first and copy the new one in.\n6. **CPU at 500 MHz** (recommended). Set it with a clock plugin before starting a game. Higher clocks make the console warmer. 444 MHz may be enough since 0.4.7-beta (still being tested): try it to save a little battery.\n7. **Start the game.** In the game's START menu, third page, **Mod Settings → Display**: aspect ratio **16:9** if you made the mod with it, **FPS: 30**, 3D mode off.\n\n## What's in it for MH4U\n\nAlways on for MH4U (USA), listed under **Patches → SaNch0sE optimizations**:\n\n- **Geometry batches:** grass, sprites and particles go to the GPU in fewer, larger batches.\n- **Hidden screen not drawn:** with the single-screen layout, the bottom screen's draws are skipped.\n- **Full speed from a cold start:** the intro and Val Habar no longer run slowly until a savestate is taken or loaded.\n- **Performance profile:** the app is compiled with upstream's profile merged with one recorded from MH4U on this code: about 2–3% more headroom in our tests.\n\nMH4U starts with these settings (pause menu → **Game settings**, all yours to change):\n\n- Layout **single** screen, Widescreen **stretch**\n- Internal resolution **1.25x**, HUD resolution **1.5x**\n- Even frame pacing **on**, Vsync **on**\n- Touch a hidden bottom screen **off**\n\nIf MH4U already has settings of its own (for example copied from Azahar's file), those are kept: set the values above by hand.\n\nThe options behind them:\n\n- **Patches → HUD resolution:** draws the HUD and text at a higher resolution than the 3D scene, e.g. the scene at 1.25x with the HUD at 1.5x. It applies only above the internal resolution. (Whole-screen 1.5x is too heavy: about 17 fps.)\n- **Patches → Per-vertex effect lighting:** see-through lit effects lit per corner instead of per pixel, and without shadows (off by default; recommended on for MHXX).\n- **Patches → Fast shadows:** one shadow-map read per lit pixel instead of four (on by default; off gives soft shadow edges).\n- **Patches → Parallel geometry:** effect particles built side by side on the GPU (off by default in MH4U; on in MHXX).\n- **Patches → Even frame pacing (experimental):** with vsync on, holds an early frame so frames are shown two refreshes apart. Costs about one refresh (17 ms) of delay. If it looks worse to you, turn it off.\n- **Display → Smooth picture at Native:** at 1x, smooth scaling instead of pixel for pixel (off by default).\n- **Controls → Touch a hidden bottom screen:** off so stray touches don't open bottom-screen menus.\n\n## Known issues\n\n- Exiting the app sometimes leaves a black screen with sound still playing, or restarts the console. Hold the power button to restart if it hangs.\n- After many hours or a Wi-Fi drop, the console's kernel memory can run out: the app closes with an error (C1-2569-2) or the console restarts when the app starts. A console restart clears it.\n- Tested in the intro, the character select, Val Habar, the quest counter, fields and hunt savestates. Not yet tested: long sessions, every menu, other regions or versions.\n\n- **USB video** can leave a game on its loading screen forever when another USB plugin (such as `udcd_uvc`) is installed: keep **System → USB video** off. If it happened, hold the power button to restart, then turn the option off before starting a game.\n- MHXX with Per-vertex effect lighting on: some ground patches show light lines inside a monster's shadow (the price of the effect speed-up; turn the option off to avoid it).\n- MHXX at internal resolution 1.25x for the whole picture still dips (to 23–25 fps) for a moment when a wyvern takes off: use 1x with HUD 1.25x.\n\n## Reporting a problem\n\nOpen an issue with the app (Azahar MH4U or Azahar), where in the game it happens and, after a crash, the zip from `ux0:data/azahar/crashes/`.\n\n## Checksums (SHA-256)\n\n- `Azahar-MH4U-0.4.7-beta.vpk`: `330bd473d258397c209229290d479c44bc41dc9ab8978f3e0143ff8a6555e255`\n- `Azahar-0.4.7-beta-replaces-Azahar.vpk`: `37acc4e2a21add4cb9da78958867ae64ad6ac35a7d383a868ea5e9d446062ce6`\n\n",
+    "assets": [
+      {
+        "name": "Azahar-0.4.7-beta-replaces-Azahar.vpk",
+        "size": 8459071,
+        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.7-beta/Azahar-0.4.7-beta-replaces-Azahar.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "Azahar-MH4U-0.4.7-beta.vpk",
+        "size": 8459703,
+        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.7-beta/Azahar-MH4U-0.4.7-beta.vpk",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "SaNch0sE",
+    "no_stable_release": true,
+    "homebrew_name": "Monster Hunter 4 Ultimate",
+    "homebrew_icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+    "homebrew_long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+    "homebrew_id": "monster-hunter-4-ultimate",
+    "homebrew_authors": [
+      "sanch0se"
+    ],
+    "homebrew_version": "0.3.2",
+    "catalog_apps": [
+      {
+        "id": "monster-hunter-4-ultimate",
+        "name": "Monster Hunter 4 Ultimate",
+        "icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
+        "category": "ports",
+        "description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+        "long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
+        "version": "0.3.2",
+        "version_date": "2026-11-18",
+        "author_ids": [
+          "sanch0se"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
+            "size": 8703181,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/Game%20Files%20for%20PSVA.zip",
+            "size": 2791728742,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "mh4u"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "mh4unative.skprx",
+            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/mh4unative.skprx",
+            "size": 24678,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/mh4unative.skprx",
+            "required": true
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5222,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": true
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/SaNch0sE/azahar-vita-mh4u"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.3.2 → release 0.4.7-beta · Revisión manual: 2 VPK diferentes",
+    "catalog_version": "0.3.2",
+    "archive_current_link": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
+    "archive_media_item": "",
+    "backup_status": "review",
+    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
+  },
+  {
+    "platform": "github",
+    "repo": "danos-x5/NFSUG2_VITA",
+    "release_id": "461094515",
+    "tag": "v0.9.1",
+    "name": "v0.9.1",
+    "url": "https://github.com/danos-x5/NFSUG2_VITA/releases/tag/v0.9.1",
+    "published": "2026-11-27T21:49:07Z",
+    "prerelease": false,
+    "draft": false,
+    "body": "Multi Langauge, a headlights control, more Extra Options and new Visual Rep remover in the Mods tab, and scenery settings tuned for the Vita.\n\n- Language: pick any of the game's own languages in the start-up configurator (the first setting there). The port's own texts are translated into French, German, Italian, Spanish, Dutch, Swedish and Danish.\n- Headlights: a Toggle Headlights control action\n- Extra Options 5.1.0.1340: the Mods tab now has its lap, drift, menu and gameplay options (Outrun, hidden camera modes, barrier removal, starting cash, unlock all and more).\n- Mods: NFSU/NFSU2 Visual Reputation Remover 1.1 as a Mods tab feature.\n- Graphics: scenery detail defaults set for the Vita, and the first launch writes the Vita graphics values in place of the old graphics preset setting.\n- Game folder: ux0:data/NFSU2 works as the game folder when ux0:data/NeedForSpeedUnderground2 does not exist (#26).\n",
+    "assets": [
+      {
+        "name": "LICENSE",
+        "size": 1092,
+        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.9.1/LICENSE",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "NFSU2VITA.vpk",
+        "size": 11776045,
+        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.9.1/NFSU2VITA.vpk",
+        "content_type": "application/octet-stream"
+      },
+      {
+        "name": "THIRD_PARTY.md",
+        "size": 7545,
+        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.9.1/THIRD_PARTY.md",
+        "content_type": "application/octet-stream"
+      }
+    ],
+    "author": "danos-x5",
+    "homebrew_name": "NFS Underground 2",
+    "homebrew_icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
+    "homebrew_category": "ports",
+    "homebrew_description": "Need for Speed Underground 2 port for the PS VITA",
+    "homebrew_long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
+    "homebrew_id": "nfs-underground-2",
+    "homebrew_authors": [
+      "danos-x5"
+    ],
+    "homebrew_version": "0.9.0",
+    "catalog_apps": [
+      {
+        "id": "nfs-underground-2",
+        "name": "NFS Underground 2",
+        "icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
+        "category": "ports",
+        "description": "Need for Speed Underground 2 port for the PS VITA",
+        "long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
+        "version": "0.9.0",
+        "version_date": "2026-11-25",
+        "author_ids": [
+          "danos-x5"
+        ],
+        "links": [
+          {
+            "type": "Download",
+            "name": "VPK",
+            "url": "https://archive.org/download/NFSUG2_VITA/nfs-underground-2%20v0.9.0.vpk",
+            "size": 11972573,
+            "recommended": true
+          },
+          {
+            "type": "Game Files",
+            "name": "Game Files",
+            "url": "https://archive.org/download/NFSUG2_VITA/Game%20Files%20for%20PSVA.zip",
+            "size": 2899102925,
+            "extract_path": "ux0:data/",
+            "installed_paths": [
+              "NeedForSpeedUnderground2"
+            ]
+          },
+          {
+            "type": "Plugin",
+            "name": "CapUnlocker 1.4 (Recommended)",
+            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
+            "size": 5837,
+            "extract_path": "ur0:tai/",
+            "section": "*KERNEL",
+            "line": "ur0:tai/CapUnlocker.skprx",
+            "required": false
+          },
+          {
+            "type": "Repository",
+            "name": "Github",
+            "url": "https://github.com/danos-x5/NFSUG2_VITA"
+          }
+        ]
+      }
+    ],
+    "catalog_update_status": "pending",
+    "catalog_update_detail": "PSVitaAlive 0.9.0 → release v0.9.1",
+    "catalog_version": "0.9.0",
+    "archive_current_link": "https://archive.org/download/NFSUG2_VITA/nfs-underground-2%20v0.9.0.vpk",
+    "archive_media_item": "",
+    "backup_status": "outdated",
+    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente"
+  },
+  {
+    "platform": "github",
     "repo": "FWGS/xash3d-fwgs",
     "release_id": "461056481",
     "tag": "continuous",
@@ -247,108 +552,6 @@
     "archive_media_item": "",
     "backup_status": "review",
     "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
-    "repo": "CBOC-Vita-Lab/galaxy-vita",
-    "release_id": "460959464",
-    "tag": "v3.0",
-    "name": "Super Mario Galaxy 3.0",
-    "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/tag/v3.0",
-    "published": "2026-11-27T18:48:43Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "# Super Mario Galaxy for PS Vita 3.0 — Full-Res 60 FPS & First-Ever Multiplayer\n\n![Galaxy Vita 3.0](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/hero.png)\n\n**Version 3.0 is the biggest leap since Super Mario Galaxy first landed on PlayStation Vita.** Compared to 2.0, almost the entire adventure now runs at **full native resolution (`960×544`) at up to 60 FPS**, **Quality mode gains hardware `2× MSAA`**, **5,401 precompiled shaders** eliminate first-visit stutters, and — for the very first time anywhere on Vita — **Super Mario Galaxy has full 2–4 player Multiplayer** built for both local and online play.\n\n> You still need your own Super Mario Galaxy Wii USA (`RMGE01`) disc files. **Upgrading from 2.x?** Install `Galaxy-Vita.vpk` right over your current install — your saves, settings, and game files stay safe.\n\n---\n\n## First-Ever Super Mario Galaxy Multiplayer (Local & Online-Ready)\n\n![Luigi and Mario together in the Comet Observatory garden](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/mp-garden.png)\n\n![The gathering screen: a 3D face for every player found on your Wi-Fi](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/mp-gathering.png)\n\n* **Play Together (2–4 Players):** Team up in one shared galaxy where switches, Star Bits, purple coins, enemies, and Power Stars count for everyone. Fall off a planet and a **rescue bubble** floats you smoothly right back to a teammate — with a live follow camera tracking you all the way until they pop you free.\n* **Star Race (2–4 Players):** Race head-to-head to the same Power Star from a synchronized countdown, complete with an on-screen timer, live standings, series leaderboard points, and automatic winner start delays so every rematch stays intense.\n* **Zero Setup Hassle:** Choose **Multiplayer** right after the title screen. Every player on your **same Wi-Fi** pops onto the gathering screen as a 3D face — no host/join menus, just press **START**. Also built with **Nearby** (direct console-to-console, no router), **Far-Away Friend Codes**, and live **Online Play** on **`https://galaxy.psvita.dev`** (**Play with Anyone**, **Friends**, **Star Race Leaderboards**, and Cloudflare TURN relay).\n\n![Fall off and a rescue bubble carries you smoothly back to a teammate](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/mp-bubble.png)\n\n* **Six Playable Characters:** Mario, Luigi, Toad, Yellow Toad, Cosmic Mario, and Cosmic Luigi — plus quick messages and typed chat (with per-player mute).\n* **Polished on Real Hardware:** Smooth remote player movement, zero pushing during galaxy fly-ins, full Luigi rendering on face-first launch rings, encrypted sessions, automatic reconnection (up to 75 s), and clean **even 60 / even 30** frame pacing (60.0 FPS on Flipswitch, locked 30 on busy open planets like Good Egg).\n* **Your Single-Player Save Stays Protected:** Multiplayer uses its own **Team Files** and creates an automatic checked Safe Copy on first launch.\n\n*(Hardware status: live 2-player Play Together over Wi-Fi verified on a real PS Vita at 5–16 ms ping, and the public online server `https://galaxy.psvita.dev` is live with TURN relay, WAF, and rate limiting active. Two physical Vitas, Nearby ad-hoc, far-away codes across real routers, and 4-player console stress tests have only been tested on computers so far — see [Known Issues](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/KNOWN-ISSUES.md).)*\n\n---\n\n## Full-Resolution 60 FPS & Hardware 2× MSAA Quality Mode\n\n![Beach Bowl Galaxy](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/beach-bowl.png)\n\nA massive GPU, shader, and CPU overhaul since Version 2.0 delivers both higher frame rates and sharper visuals on real PS Vita hardware (measured at **500 MHz CPU / 222 MHz GPU / 222 MHz BUS** via **PSVshell** with the 4th CPU core unlocked via **CapUnlocker**):\n\n| Mode / Galaxy | Version 3.0 (Real PS Vita) |\n|---|---|\n| **Good Egg, Gusty Garden, Freezeflame, Battlerock, Space Junk, Toy Time, Sea Slide, Bowser Jr.** | **58–60 FPS** at native `960×544` |\n| **Honeyhive Galaxy** | **59.9 FPS native** at `960×544` (`100%` frame cadence — up from 12 FPS in v1.2!) |\n| **Beach Bowl & Melty Molten Galaxy** | **55–60 FPS** at `960×544` (Melty Molten up to `59.6 FPS` steady!) |\n| **Dreadnought & Final Bowser Fight** | **55–60 FPS** in normal play; clean **locked even 30 FPS** on the heaviest overlooks |\n| **Quality Mode (Full Detail)** | **Locked 30.0 FPS** at native **`960×544` with hardware `2× MSAA`** & anisotropic filtering |\n\n* **No More Choppy 48–50 FPS Judder:** Performance mode locks cleanly to **even 60 FPS**, and only steps down to a **silky-even 30 FPS** during sustained heavy scenes — automatically stepping right back up to 60 as soon as the action clears.\n* **Under-the-Hood Horsepower:** Major shader optimizations (split branchless vertex shaders, half-precision fog, early alpha-test, projective UV cuts), exact 1-byte intensity textures, fast ARMv7 geometry welding, `4×` faster CPU texture swizzling, vitaGL fast-path upgrades, and a freshly recorded **CPU PGO profile** squeeze dramatically more speed out of the Vita without changing the look of the game.\n* **Instant Shader Loading (5,401 Precompiled Shaders):** Every galaxy, boss fight, power-up, multiplayer screen, and menu was harvested natively on a real PS Vita. All **5,401 shaders preload into RAM in ~0.4 seconds** — giving **zero cold shader compiles** across Title, Observatory, Good Egg, Honeyhive, Beach Bowl, Melty Molten, and Dreadnought even on a brand-new install!\n\n---\n\n## All Major Bug Fixes & Quality-of-Life Upgrades Since 2.0\n\n![The Comet Observatory](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/observatory.png)\n\nMore than **30 major crash, visual, audio, control, save, and multiplayer fixes** have landed between Version 2.0 and Version 3.0:\n\n### Crashes & Stability\n* **Bee Mushroom & power-up transformation crashes fixed:** Grabbing a Bee Mushroom, Ice Flower, Spring Mushroom, Rainbow Star, or getting shocked by an electric enemy no longer crashes Mario or Luigi mid-morph.\n* **Power-ups are never lost** if a form's models aren't loaded yet — the item stays put instead of vanishing.\n* **Comet Observatory & Kitchen Dome crashes fixed:** Resolved the GPU memory-free-while-drawing fault behind both crashes.\n* **Performance-mode loading black-screen hang fixed:** Galaxies no longer stall indefinitely on a black screen during 60 FPS loads.\n* **Post-load resolution-switch crash fixed** by resampling cleanly instead of reusing stale pre-load timings.\n* **Boot stall watch & crash reports improved:** Eliminated false \"Taking longer than usual\" messages during active shader prep, and improved `log.txt` + `psp2dmp` diagnostics if an unexpected exit ever happens.\n\n### Graphics & Visual Fixes\n* **Black-hole white flicker & crosshair artifact fixed** while Mario is falling into a black hole.\n* **Missing fog & corrupted object textures fixed** (locked shader fog slot alignment).\n* **Blinking ground shadows fixed** on small planets and Dreadnought's start disc.\n* **No vanishing objectives in Performance mode:** Distant Toads, Lumas, Rosalina, bunnies, switches, and bosses are always kept drawn.\n* **Misplaced-object shader bugs from 2.1 completely gone:** All **5,401** shaders ship compiled directly on real PS Vita hardware.\n* **Upgraded Home Screen bubble, LiveArea & launch splash (`content-rev 5`):** Refreshed 8-bit palette artwork tailored for the Vita Home Screen and Start gate.\n\n### Stutter, Audio & Engine Fixes\n* **20-second periodic micro-hitch (\"little stutter here and there\") eliminated** by spreading thread checks smoothly across frames.\n* **48 FPS lock & uneven 50 FPS judder eliminated** in both single player and multiplayer.\n* **Music cutouts during loading fixed:** Long memory-card archive reads are chunked into 512 KiB slices so audio streams never stall behind them.\n* **Resolution-switch & menu stutters eliminated:** Next picture sizes are pre-allocated (~1 ms swap) and menus warm up at start-up.\n* **Quieter memory-card logging & faster start-up:** Dropped constant 100 ms dev-stat card writes during play and trimmed boot overhead.\n\n### Controls, Camera, Saves & Console Experience\n* **Broken motion sensor auto-fallback:** On Manta Surfing and Star Ball levels, an unresponsive tilt sensor automatically hands control to the left stick.\n* **Zoomed-in (`1.5×`) off-screen Pull Stars, Launch Stars, Coins & Star Bits fixed:** Nearby items just outside the zoomed view stay active, and the camera automatically eases back to `1.0×` for Pull Stars and fixed dome shots.\n* **Bowser's planet on the Galaxy Map fixed:** Planets whose center sits off the screen edge can now be selected anywhere their disc is visible.\n* **\"Controller disconnected\" Settings freeze fixed** with a clean fallback to direct Vita pad reads.\n* **Settings moved inside the game:** Open from the Start screen or press **△** in pause — clean 2-mode Picture choice (**Smooth Motion 60 FPS** vs. **Full Detail 30 FPS 2× MSAA**), automatic Vita system language detection (**English, French, Spanish, German, Italian**), and one-tap **Save and Start Again**.\n* **Safe Saves always on & OLED-safe keep-awake:** Power-cut-safe atomic saves with `.mpbak` backups protect both single-player saves and Team Files, and the screen stays cleanly awake during play.\n\n### Multiplayer Fixes (Hardware Verified on PS Vita)\n* **Smooth remote player movement** (velocity-matched glide + 30 FPS puppet animation cadence eliminate jumpy motion).\n* **Zero fly-in pushing** so teammates never knock each other off the landing platform.\n* **Full Luigi body on face-first launch-ring fly-ins** (fixed missing body segments).\n* **Bubble rescue follow camera & anti-double-death fix** (camera tracks your bubble across the galaxy without overriding cutscenes, and clears leftover death hits when popped).\n* **Multiplayer pause camera zoom (`L`/`R`) restored**, faster gathering screen, group-restart sync guards, encrypted sessions, and up to 75-second silent-link reconnection.\n\n---\n\n## Quick Update Guide\n\n* **Installing or Updating:** Install `Galaxy-Vita.vpk` in VitaShell (or use **[CBOC Vita Installer](https://github.com/CBOC-Vita-Lab/vita-installer/releases/latest)**). Your saves, settings, and prepared game files stay intact. If LiveArea still shows the old icon or Settings tile, run **Refresh LiveArea** in VitaShell.\n* **Strongly Recommended Plug-ins for Best 60 FPS Performance:** While Galaxy runs without extra plug-ins, we strongly recommend **CapUnlocker** (unlocks the Vita's 4th CPU core) together with **PSVshell / PSVshellPlus** (or your preferred overclock plug-in set to **500 MHz CPU / 222 MHz GPU / 222 MHz BUS** — Galaxy automatically respects your 500 MHz overclock profile).\n* **Full Details:** See [What's New](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/CHANGELOG.md) for every technical change, [Multiplayer Guide](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/docs/MULTIPLAYER.md) to get started with friends, and [Known Issues](https://github.com/CBOC-Vita-Lab/galaxy-vita/blob/v3.0/KNOWN-ISSUES.md) for open items.\n\n## Gallery (Straight from a PS Vita Running 3.0)\n\n| | |\n|---|---|\n| ![Honeyhive](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/honeyhive.png) | ![Gusty Garden](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/gusty-garden.png) |\n| ![Toy Time](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/toy-time.png) | ![Freezeflame](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/freezeflame.png) |\n| ![Melty Molten](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/melty-molten.png) | ![Dreadnought](https://raw.githubusercontent.com/CBOC-Vita-Lab/galaxy-vita/v3.0/store/screenshots/3.0/dreadnought.png) |\n\nThank you to everyone in the PS Vita community who tested, reported issues, and cheered this port on. Grab your Vita, grab a friend, and blast off! — **CBOC Vita**\n",
-    "assets": [
-      {
-        "name": "cboc-release.json",
-        "size": 1426,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/cboc-release.json",
-        "content_type": "application/json"
-      },
-      {
-        "name": "Galaxy-Vita-install.zip",
-        "size": 42133176,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/Galaxy-Vita-install.zip",
-        "content_type": "application/zip"
-      },
-      {
-        "name": "Galaxy-Vita.vpk",
-        "size": 13616965,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/Galaxy-Vita.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "SHA256SUMS",
-        "size": 864560,
-        "download_url": "https://github.com/CBOC-Vita-Lab/galaxy-vita/releases/download/v3.0/SHA256SUMS",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "homebrew_name": "Super Mario Galaxy",
-    "homebrew_icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-    "homebrew_long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-    "homebrew_id": "super-mario-galaxy",
-    "homebrew_authors": [
-      "cboc-vita-lab"
-    ],
-    "homebrew_version": "3.0",
-    "catalog_apps": [
-      {
-        "id": "super-mario-galaxy",
-        "name": "Super Mario Galaxy",
-        "icon": "https://archive.org/download/smg-vita/New%20icon0.png",
-        "category": "ports",
-        "description": "Super Mario Galaxy, running natively on PS Vita. Rear touch Star Bit aiming, touch and tilt controls.",
-        "long_description": "This is Super Mario Galaxy running natively on a PS Vita. There's no emulator and no streaming involved: the game itself was rebuilt to run on the Vita's own processor and graphics chip.",
-        "version": "3.0",
-        "version_date": "2026-11-27",
-        "author_ids": [
-          "cboc-vita-lab"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/smg-vita/super-mario-galaxy%20v3.0.vpk",
-            "size": 13616965,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files USA",
-            "url": "https://archive.org/download/smg-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 2469606195,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "smg"
-            ]
-          },
-          {
-            "type": "Mod",
-            "name": "HD Textures",
-            "url": "https://archive.org/download/smg-vita/hdtex.pack",
-            "size": 4718592,
-            "extract_path": "ux0:data/smg/"
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/CBOC-Vita-Lab/galaxy-vita"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 3.0",
-    "catalog_version": "3.0",
-    "archive_current_link": "https://archive.org/download/smg-vita/super-mario-galaxy%20v3.0.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
   },
   {
     "platform": "github",
@@ -1048,110 +1251,6 @@
   },
   {
     "platform": "github",
-    "repo": "SaNch0sE/azahar-vita-mh4u",
-    "release_id": "459101541",
-    "tag": "0.4.6-beta",
-    "name": "Azahar MH4U 0.4.6-beta",
-    "url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/tag/0.4.6-beta",
-    "published": "2026-11-26T07:53:43Z",
-    "prerelease": true,
-    "draft": false,
-    "body": "Azahar for the PS Vita, built on [Grarak's beta-1](https://github.com/Grarak/azahar/releases/tag/beta-1), with optimisations for **Monster Hunter 4 Ultimate**, and speed options for **Monster Hunter XX**. Other games run as in beta-1. Beta: back up your saves.\n\nBeta-1's new CPU and GPU emulation fixes the lighting and dark ground of our 0.3 builds, and our changes bring MH4U to 30 fps in the places we test (beta-1 alone ran them at 67–84% speed).\n\n> [!IMPORTANT]\n> The MH4U optimisations are tested **only** with the **USA** game (`0004000000126300`), its **1.3 (v1.1) update**, and the **Heavenfall mod**. Other regions, other versions or no mod may run slower or show problems.\n\nNo game files are included: you need your own decrypted copy of the game and its update.\n\n## New in 0.4.6-beta\n\n- **Parallel geometry, MH4U, Monster Hunter XX and any game you turn it on for.** Effects such as a wyvern's takeoff wind and dust used to build their particles one after another on the GPU. They are now built side by side: in MHXX at 1x, the Rathian's takeoff went from dipping to 26 fps to 29–30 fps. Particle **trails** (wind, dust ribbons) are built trail by trail, so they come out exactly as before (checked draw by draw against the old way); this fixes the stray triangles some testers saw with the first version of the option.\n  - **Patches → Parallel geometry**: on by default in MHXX, off in MH4U and other games.\n- **Fast shadows and Parallel geometry for every game.** Both now appear under **Patches** for any game, off by default except where tested (Fast shadows on in MH4U and MHXX, Parallel geometry on in MHXX). They only help games that use real-time shadow maps or geometry-shader particles. If an effect looks wrong with one on, turn it off for that game and tell us which game.\n- **Monster Hunter XX: HUD resolution and Even frame pacing.**\n  - **Patches → HUD resolution**: draw the HUD sharper than the 3D scene. Internal resolution **1x** with HUD **1.25x** held 29–30 fps near the Rathian in our tests, where the whole picture at 1.25x still dips when it takes off.\n  - **Patches → Even frame pacing**: with Vsync on, pictures shown an even two refreshes apart 99% of the time (71–79% without it), at the same frame rate. Costs about one refresh (17 ms) of delay.\n- **Display → Smooth picture at Native** (off by default): at internal resolution 1x, the screens are scaled to the Vita's display smoothly instead of pixel for pixel. No speed cost.\n- **Fixes**\n  - Changing the internal resolution (or other settings) in the pause menu could freeze the game on **Resume**. Fixed.\n  - MHXX: a freeze of about 17 seconds shortly after loading. Fixed.\n  - MHXX at 1x: short hitches in the first seconds after loading. Fixed.\n\nRecommended for MHXX: internal resolution **1x**, HUD resolution **1.25x**, Even frame pacing **on**, Vsync **on**.\n\n## In 0.4.5-beta\n\n- **Per-vertex effect lighting** (optional, off by default), MH4U and MHXX: see-through lit effects such as a wyvern's takeoff mist are lit once per corner instead of per pixel.\n- **Monster Hunter XX: particle effects get the room they need**, as MH4U's.\n\n## Which download?\n\n| File | Installs as | Settings |\n|---|---|---|\n| **`Azahar-MH4U-0.4.6-beta.vpk`** (recommended) | **Azahar MH4U**, a separate app next to Azahar | its own (`settings-AZAHMH4UB.txt`) |\n| `Azahar-0.4.6-beta-replaces-Azahar.vpk` | **Azahar**, over upstream Azahar | Azahar's (`settings.txt`) |\n\nWe recommend **Azahar MH4U**: you keep upstream Azahar installed and can update it whenever a new version comes out, while Azahar MH4U stays your MH4U app. Both apps use `ux0:data/azahar`, so games, installed updates, saves, savestates, mods and cheats are shared: install the game update once and play it in either app. Only settings are separate (Azahar MH4U copies Azahar's on its first start), so changing a setting in one doesn't reset the other's. Run one app at a time.\n\n## Install\n\n1. **A PS Vita** on firmware 3.60, 3.65, 3.68 or 3.73.\n2. **The app.** Copy the vpk to the Vita and install it with VitaShell. The kernel plugin ships inside the vpk: nothing to add to taiHEN's `config.txt` (if you added `azaharnative.skprx` there for Azahar 0.1, remove that line and reboot).\n3. **The game.** Put your decrypted Monster Hunter 4 Ultimate (USA) `.3ds` / `.cci` / `.cxi` in `ux0:data/azahar/roms/`.\n4. **The update (1.3, v1.1).** Put your decrypted update `.cia` in `ux0:data/azahar/roms/` too. Start the app, select the update in the game list and press **Install**. You can delete the `.cia` afterwards.\n5. **The Heavenfall mod** (menus on one screen; the port is tuned for it):\n   1. Open the web installer, https://popzol.github.io/4u-heavenfall-mod-beta/, on a PC or phone. Your game is never uploaded.\n   2. Choose your **base game** file (the same decrypted `.3ds`), not the update `.cia`.\n   3. Options: **Single Screen mode** on; **HUD size** **80%** (with the HUD drawn at 1.5x it's sharp and readable; the default 70% is small on the Vita); **Aspect ratio**: tick *Allow other aspect ratios (EXPERIMENTAL)* and choose **16:9**; keep the quality-of-life (\"other\") module on. Layered Gear and the mod's cheats are your choice.\n   4. Press **Make the mod**, download the zip and extract it. You get a folder named `0004000000126300`.\n   5. Copy that folder to `ux0:data/azahar/load/mods/`, so that you have `ux0:data/azahar/load/mods/0004000000126300/romfs`. To change the mod later, delete that folder first and copy the new one in.\n6. **CPU at 500 MHz.** Set it with a clock plugin before starting a game. Higher clocks make the console warmer.\n7. **Start the game.** In the game's START menu, third page, **Mod Settings → Display**: aspect ratio **16:9** if you made the mod with it, **FPS: 30**, 3D mode off.\n\n## What's in it for MH4U\n\nAlways on for MH4U (USA), listed under **Patches → SaNch0sE optimizations**:\n\n- **Geometry batches:** grass, sprites and particles go to the GPU in fewer, larger batches.\n- **Hidden screen not drawn:** with the single-screen layout, the bottom screen's draws are skipped.\n- **Full speed from a cold start:** the intro and Val Habar no longer run slowly until a savestate is taken or loaded.\n- **Performance profile:** the app is compiled with upstream's profile merged with one recorded from MH4U on this code: about 2–3% more headroom in our tests.\n\nMH4U starts with these settings (pause menu → **Game settings**, all yours to change):\n\n- Layout **single** screen, Widescreen **stretch**\n- Internal resolution **1.25x**, HUD resolution **1.5x**\n- Even frame pacing **on**, Vsync **on**\n- Touch a hidden bottom screen **off**\n\nIf MH4U already has settings of its own (for example copied from Azahar's file), those are kept: set the values above by hand.\n\nThe options behind them:\n\n- **Patches → HUD resolution:** draws the HUD and text at a higher resolution than the 3D scene, e.g. the scene at 1.25x with the HUD at 1.5x. It applies only above the internal resolution. (Whole-screen 1.5x is too heavy: about 17 fps.)\n- **Patches → Per-vertex effect lighting:** see-through lit effects lit per corner instead of per pixel (off by default).\n- **Patches → Fast shadows:** one shadow-map read per lit pixel instead of four (on by default; off gives soft shadow edges).\n- **Patches → Parallel geometry:** effect particles built side by side on the GPU (off by default in MH4U; on in MHXX).\n- **Patches → Even frame pacing (experimental):** with vsync on, holds an early frame so frames are shown two refreshes apart. Costs about one refresh (17 ms) of delay. If it looks worse to you, turn it off.\n- **Display → Smooth picture at Native:** at 1x, smooth scaling instead of pixel for pixel (off by default).\n- **Controls → Touch a hidden bottom screen:** off so stray touches don't open bottom-screen menus.\n\n## Known issues\n\n- Exiting the app sometimes leaves a black screen with sound still playing, or restarts the console. Hold the power button to restart if it hangs.\n- After many hours or a Wi-Fi drop, the console's kernel memory can run out: the app closes with an error (C1-2569-2) or the console restarts when the app starts. A console restart clears it.\n- Tested in the intro, the character select, Val Habar, the quest counter, fields and hunt savestates. Not yet tested: long sessions, every menu, other regions or versions.\n\n- **USB video** can leave a game on its loading screen forever when another USB plugin (such as `udcd_uvc`) is installed: keep **System → USB video** off. If it happened, hold the power button to restart, then turn the option off before starting a game.\n- MHXX at internal resolution 1.25x for the whole picture still dips (to 23–25 fps) for a moment when a wyvern takes off: use 1x with HUD 1.25x.\n\n## Reporting a problem\n\nOpen an issue with the app (Azahar MH4U or Azahar), where in the game it happens and, after a crash, the zip from `ux0:data/azahar/crashes/`.\n\n## Checksums (SHA-256)\n\n- `Azahar-MH4U-0.4.6-beta.vpk`: `d3f096cd372acc83d4097f820744c3a4a96da7c2b49df3b53f6f4a139d443a56`\n- `Azahar-0.4.6-beta-replaces-Azahar.vpk`: `8a075c494c5fcee43e28e61d3354b05c7b7137b8f0cf4119c60c126f42072b50`\n",
-    "assets": [
-      {
-        "name": "Azahar-0.4.6-beta-replaces-Azahar.vpk",
-        "size": 8453218,
-        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.6-beta/Azahar-0.4.6-beta-replaces-Azahar.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "Azahar-MH4U-0.4.6-beta.vpk",
-        "size": 8453171,
-        "download_url": "https://github.com/SaNch0sE/azahar-vita-mh4u/releases/download/0.4.6-beta/Azahar-MH4U-0.4.6-beta.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "SaNch0sE",
-    "no_stable_release": true,
-    "homebrew_name": "Monster Hunter 4 Ultimate",
-    "homebrew_icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-    "homebrew_long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-    "homebrew_id": "monster-hunter-4-ultimate",
-    "homebrew_authors": [
-      "sanch0se"
-    ],
-    "homebrew_version": "0.3.2",
-    "catalog_apps": [
-      {
-        "id": "monster-hunter-4-ultimate",
-        "name": "Monster Hunter 4 Ultimate",
-        "icon": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/icon0.png",
-        "category": "ports",
-        "description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-        "long_description": "A port of the Azahar 3DS emulator, built on Grarak's PS Vita port and tuned for one game: Monster Hunter 4 Ultimate.",
-        "version": "0.3.2",
-        "version_date": "2026-11-18",
-        "author_ids": [
-          "sanch0se"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
-            "size": 8703181,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/Game%20Files%20for%20PSVA.zip",
-            "size": 2791728742,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "mh4u"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "mh4unative.skprx",
-            "url": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/mh4unative.skprx",
-            "size": 24678,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/mh4unative.skprx",
-            "required": true
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5222,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": true
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/SaNch0sE/azahar-vita-mh4u"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.3.2 → release 0.4.6-beta · Revisión manual: 2 VPK diferentes",
-    "catalog_version": "0.3.2",
-    "archive_current_link": "https://archive.org/download/monster-hunter-4-ultimate-ps-vita/MH4U%20v0.3.2a.vpk",
-    "archive_media_item": "",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org"
-  },
-  {
-    "platform": "github",
     "repo": "VegettoSan/PSVitaAlive",
     "release_id": "459070818",
     "tag": "02.20",
@@ -1436,105 +1535,6 @@
     "catalog_update_detail": "PSVitaAlive 1.3",
     "catalog_version": "1.3",
     "archive_current_link": "https://archive.org/download/mario-kart-ds-vita/mario-kart-ds%20v1.3.vpk",
-    "archive_media_item": "",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
-  },
-  {
-    "platform": "github",
-    "repo": "danos-x5/NFSUG2_VITA",
-    "release_id": "458506829",
-    "tag": "v0.9.0",
-    "name": "v0.9.0",
-    "url": "https://github.com/danos-x5/NFSUG2_VITA/releases/tag/v0.9.0",
-    "published": "2026-11-25T18:44:25Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Controller customisation overhaul with PS2-style control types and icons throughout, full Screen Anti-Aliasing, and camera free look.\n\n- Controls: PS2-style Control Types 1-4 plus Custom. You can now set thumbsticks' dead zone, outer limit and sensitivity, and Joypad Configuration shows a picture of the Vita with each assignment and the touch zones.\n- Anti-Aliasing: the game's Full Screen Anti-Aliasing row in the Display menu now drives 2x and 4x multisampling (off by default).\n- Free look and touch: the right stick aims the race camera (down replaces Look Back). In career free roam the minimap and the ring arms at the top left of the screen are touch zones that are always on.\n- PS2-style bottom bar: Help is shown only on screens where it opens a help text, in-race and free-roam menus show their prompts in the panel's button row, car select shows L1/R1 icons, the button icons are redrawn, and the start screen asks for \"Press START button\".\n- Movies playback improvement: VP6 movie frames are converted to pixels by native NEON code. They are now the default path, and there is no need to convert to H.264 mp4 format.\n- Mods: EU Car Content now also adds the Corsa and Peugeot 106 to the AI opponents' car lists\n",
-    "assets": [
-      {
-        "name": "LICENSE",
-        "size": 1092,
-        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.9.0/LICENSE",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "NFSU2VITA.vpk",
-        "size": 11972573,
-        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.9.0/NFSU2VITA.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "THIRD_PARTY.md",
-        "size": 6347,
-        "download_url": "https://github.com/danos-x5/NFSUG2_VITA/releases/download/v0.9.0/THIRD_PARTY.md",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "danos-x5",
-    "homebrew_name": "NFS Underground 2",
-    "homebrew_icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Need for Speed Underground 2 port for the PS VITA",
-    "homebrew_long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
-    "homebrew_id": "nfs-underground-2",
-    "homebrew_authors": [
-      "danos-x5"
-    ],
-    "homebrew_version": "0.9.0",
-    "catalog_apps": [
-      {
-        "id": "nfs-underground-2",
-        "name": "NFS Underground 2",
-        "icon": "https://archive.org/download/NFSUG2_VITA/icon0.png",
-        "category": "ports",
-        "description": "Need for Speed Underground 2 port for the PS VITA",
-        "long_description": "A fan project that enables you to play your own PC copy of Need For Speed Underground 2 (Version 1.2) on your PS VITA.",
-        "version": "0.9.0",
-        "version_date": "2026-11-25",
-        "author_ids": [
-          "danos-x5"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/NFSUG2_VITA/nfs-underground-2%20v0.9.0.vpk",
-            "size": 11972573,
-            "recommended": true
-          },
-          {
-            "type": "Game Files",
-            "name": "Game Files",
-            "url": "https://archive.org/download/NFSUG2_VITA/Game%20Files%20for%20PSVA.zip",
-            "size": 2899102925,
-            "extract_path": "ux0:data/",
-            "installed_paths": [
-              "NeedForSpeedUnderground2"
-            ]
-          },
-          {
-            "type": "Plugin",
-            "name": "CapUnlocker 1.4 (Recommended)",
-            "url": "https://archive.org/download/plugins-ps-vita/CapUnlocker.skprx",
-            "size": 5837,
-            "extract_path": "ur0:tai/",
-            "section": "*KERNEL",
-            "line": "ur0:tai/CapUnlocker.skprx",
-            "required": false
-          },
-          {
-            "type": "Repository",
-            "name": "Github",
-            "url": "https://github.com/danos-x5/NFSUG2_VITA"
-          }
-        ]
-      }
-    ],
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive 0.9.0",
-    "catalog_version": "0.9.0",
-    "archive_current_link": "https://archive.org/download/NFSUG2_VITA/nfs-underground-2%20v0.9.0.vpk",
     "archive_media_item": "",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
@@ -7274,7 +7274,7 @@
     "homebrew_authors": [
       "sharkwouter"
     ],
-    "homebrew_version": "v.22.02",
+    "homebrew_version": "26.11",
     "catalog_apps": [
       {
         "id": "freegemas",
@@ -7283,8 +7283,8 @@
         "category": "ports",
         "description": "Port of Freegemas for PSVITA.",
         "long_description": "A port of Freegemas for PSVITA/PSTV. Freegemas is an open source clone of the well known Bejeweled.\n\n- PsVitaAlive -",
-        "version": "v.22.02",
-        "version_date": "2022-02-15",
+        "version": "26.11",
+        "version_date": "2026-11-18",
         "author_ids": [
           "sharkwouter"
         ],
@@ -7292,7 +7292,7 @@
           {
             "type": "Download",
             "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-freegemas/freegemas.vpk",
+            "url": "https://archive.org/download/psvitaalive-freegemas/freegemas%20v26.11--zip-cae1f57548f3b033.vpk",
             "recommended": true
           },
           {
@@ -7313,12 +7313,12 @@
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.22.02 → release 26.11 · Revisión manual: release sin VPK",
-    "catalog_version": "v.22.02",
-    "archive_current_link": "https://archive.org/download/psvitaalive-freegemas/freegemas.vpk",
-    "backup_status": "outdated",
-    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente",
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 26.11",
+    "catalog_version": "26.11",
+    "archive_current_link": "https://archive.org/download/psvitaalive-freegemas/freegemas%20v26.11--zip-cae1f57548f3b033.vpk",
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
     "archive_media_item": ""
   },
   {
@@ -8824,7 +8824,7 @@
     "homebrew_authors": [
       "tchisholm20"
     ],
-    "homebrew_version": "0.1.3",
+    "homebrew_version": "0.2.0",
     "catalog_apps": [
       {
         "id": "star-fox-adventures",
@@ -8833,8 +8833,8 @@
         "category": "ports",
         "description": "Star Fox Adventures for PS Vita: a native port",
         "long_description": "A native PS Vita port of Star Fox Adventures (GameCube), built on the Star Fox Adventures decompilation and its PC port branch (Cassieandstuff/SFA-Decomp@pc-port-continued), with a graphics backend written for the Vita's GPU.",
-        "version": "0.1.3",
-        "version_date": "2026-11-05",
+        "version": "0.2.0",
+        "version_date": "2026-11-14",
         "author_ids": [
           "tchisholm20"
         ],
@@ -8842,8 +8842,8 @@
           {
             "type": "Download",
             "name": "VPK",
-            "url": "https://archive.org/download/star-fox-adventures-for-ps-vita/StarFoxAdventures%20v0.1.3.vpk",
-            "size": 9017754,
+            "url": "https://archive.org/download/star-fox-adventures-for-ps-vita/star-fox-adventures%20v0.2.0--zip-41d390fd7d207762.vpk",
+            "size": 8719901,
             "recommended": true
           },
           {
@@ -8864,12 +8864,12 @@
         ]
       }
     ],
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive 0.1.3 → release v0.2.0 · Revisión manual: release sin VPK",
-    "catalog_version": "0.1.3",
-    "archive_current_link": "https://archive.org/download/star-fox-adventures-for-ps-vita/StarFoxAdventures%20v0.1.3.vpk",
-    "backup_status": "outdated",
-    "backup_detail": "Archive.org enlaza la versión del catálogo, pero ya hay otra versión más reciente",
+    "catalog_update_status": "uptodate",
+    "catalog_update_detail": "PSVitaAlive 0.2.0",
+    "catalog_version": "0.2.0",
+    "archive_current_link": "https://archive.org/download/star-fox-adventures-for-ps-vita/star-fox-adventures%20v0.2.0--zip-41d390fd7d207762.vpk",
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)",
     "archive_media_item": ""
   },
   {
@@ -16955,7 +16955,7 @@
     ],
     "author": "github-actions[bot]",
     "homebrew_name": "VitaIRC",
-    "homebrew_icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/vitairc/41c698e6f401fa05cf5390610eeaa3d53135c0948321179814930f9284e4b0ce.png",
+    "homebrew_icon": "https://archive.org/download/psvitaalive-vitairc/icon0.png",
     "homebrew_category": "networking",
     "homebrew_description": "Native IRC client for the PS Vita: SSL, SASL, bouncer support, chat history, ChatGPT translation, Imgur uploads, a camera and an image viewer, in English and Spanish.",
     "homebrew_long_description": "A native, lightweight IRC client for the PlayStation Vita with free translation , image uploads , emoji and reactions , an image viewer and bouncer support.",
@@ -16968,7 +16968,7 @@
       {
         "id": "vitairc",
         "name": "VitaIRC",
-        "icon": "https://raw.githubusercontent.com/VegettoSan/PSVitaAlive/main/apps/media/vitairc/41c698e6f401fa05cf5390610eeaa3d53135c0948321179814930f9284e4b0ce.png",
+        "icon": "https://archive.org/download/psvitaalive-vitairc/icon0.png",
         "category": "networking",
         "description": "Native IRC client for the PS Vita: SSL, SASL, bouncer support, chat history, ChatGPT translation, Imgur uploads, a camera and an image viewer, in English and Spanish.",
         "long_description": "A native, lightweight IRC client for the PlayStation Vita with free translation , image uploads , emoji and reactions , an image viewer and bouncer support.",
@@ -16986,7 +16986,7 @@
           {
             "type": "Download",
             "name": "VPK",
-            "url": "https://github.com/ArchelKrozt/VitaIRC/releases/download/v1.5/VitaIRC.vpk",
+            "url": "https://archive.org/download/psvitaalive-vitairc/vitairc%20v1.5.vpk",
             "recommended": true
           }
         ]
@@ -16995,10 +16995,10 @@
     "catalog_update_status": "uptodate",
     "catalog_update_detail": "PSVitaAlive 1.5",
     "catalog_version": "1.5",
-    "archive_current_link": "",
+    "archive_current_link": "https://archive.org/download/psvitaalive-vitairc/vitairc%20v1.5.vpk",
     "archive_media_item": "",
-    "backup_status": "missing",
-    "backup_detail": "El VPK actual todavía no está enlazado desde Archive.org"
+    "backup_status": "matched",
+    "backup_detail": "Descarga principal en Archive.org con nombre de versión coincidente (no verificado)"
   },
   {
     "platform": "github",
@@ -48478,990 +48478,6 @@
     "archive_current_link": "https://archive.org/download/psvitaalive-anomaly-korea-vita/anomaly-korea-vita.vpk",
     "backup_status": "matched",
     "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/sleepwalkers-vita",
-    "release_id": "94508259",
-    "tag": "v.1.2",
-    "name": "v.1.2",
-    "url": "https://github.com/Rinnegatamante/sleepwalkers-vita/releases/tag/v.1.2",
-    "published": "2023-03-04T10:58:57Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Added playback of the intro video at app start.\r\n- Made it possible to rewind time by pressing L trigger.\r\n- Made it possible to fast forward by pressing R trigger.",
-    "assets": [
-      {
-        "name": "sleepwalkers.vpk",
-        "size": 1072564,
-        "download_url": "https://github.com/Rinnegatamante/sleepwalkers-vita/releases/download/v.1.2/sleepwalkers.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2",
-    "catalog_version": "v.1.2",
-    "homebrew_name": "Sleepwalker's Journey Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-sleepwalker-s-journey-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Sleepwalker's Journey for the PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Sleepwalker's Journey for PSVITA.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as it is.\n\n- PsVitaAlive -",
-    "homebrew_id": "sleepwalker-s-journey-vita",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.1.2",
-    "catalog_apps": [
-      {
-        "id": "sleepwalker-s-journey-vita",
-        "name": "Sleepwalker's Journey Vita",
-        "icon": "https://archive.org/download/psvitaalive-sleepwalker-s-journey-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Sleepwalker's Journey for the PSVITA.",
-        "long_description": "This is a wrapper/port of Sleepwalker's Journey for PSVITA.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as it is.\n\n- PsVitaAlive -",
-        "version": "v.1.2",
-        "version_date": "2023-03-04",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-sleepwalker-s-journey-vita/sleepwalker-s-journey-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/sleepwalkers-vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/sleepwalkers-vita/releases/tag/v.1.2"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/sleepwalkers-vita/"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-sleepwalker-s-journey-vita/sleepwalker-s-journey-vita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/anomaly2_vita",
-    "release_id": "94387735",
-    "tag": "v.1.2",
-    "name": "v.1.2",
-    "url": "https://github.com/Rinnegatamante/anomaly2_vita/releases/tag/v.1.2",
-    "published": "2023-03-03T09:26:21Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Added configurator app.\r\n- Made possible to change Graphics Quality.\r\n- Made possible to change Textures Quality.\r\n- Added optional 30 fps cap.\r\n- Made possible to overload language setting.\r\n- Disabled logs (Slight performance improvements).\r\n- Reworked Livearea assets (Thanks to Once13one).",
-    "assets": [
-      {
-        "name": "anomaly2.vpk",
-        "size": 14225527,
-        "download_url": "https://github.com/Rinnegatamante/anomaly2_vita/releases/download/v.1.2/anomaly2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2",
-    "catalog_version": "v.1.2",
-    "homebrew_name": "Anomaly 2 Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-anomaly-2-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Anomaly 2 for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Anomaly 2 for PSVITA.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as it is.\n\n- PsVitaAlive -",
-    "homebrew_id": "anomaly-2-vita",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.1.2",
-    "catalog_apps": [
-      {
-        "id": "anomaly-2-vita",
-        "name": "Anomaly 2 Vita",
-        "icon": "https://archive.org/download/psvitaalive-anomaly-2-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Anomaly 2 for PSVITA.",
-        "long_description": "This is a wrapper/port of Anomaly 2 for PSVITA.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as it is.\n\n- PsVitaAlive -",
-        "version": "v.1.2",
-        "version_date": "2023-03-03",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-anomaly-2-vita/anomaly-2-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/anomaly2_vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/anomaly2_vita/releases/tag/v.1.2"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/anomaly2_vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-anomaly-2-vita/anomaly-2-vita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/funky_vita",
-    "release_id": "94062339",
-    "tag": "v.1.1",
-    "name": "v.1.1",
-    "url": "https://github.com/Rinnegatamante/funky_vita/releases/tag/v.1.1",
-    "published": "2023-03-01T10:32:08Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Moved to precompiled shaders usage. Makes loading times much faster.\r\n- Made so that it's possible to pause game by pressing the Start button.",
-    "assets": [
-      {
-        "name": "funky.vpk",
-        "size": 1055367,
-        "download_url": "https://github.com/Rinnegatamante/funky_vita/releases/download/v.1.1/funky.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.1",
-    "catalog_version": "v.1.1",
-    "homebrew_name": "Funky Smugglers Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-funky-smugglers-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Funky Smugglers for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Funky Smugglers for PSVITA.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as it is.\n\n- PsVitaAlive -",
-    "homebrew_id": "funky-smugglers-vita",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.1.1",
-    "catalog_apps": [
-      {
-        "id": "funky-smugglers-vita",
-        "name": "Funky Smugglers Vita",
-        "icon": "https://archive.org/download/psvitaalive-funky-smugglers-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Funky Smugglers for PSVITA.",
-        "long_description": "This is a wrapper/port of Funky Smugglers for PSVITA.\nThe port works by loading the official Android ARMv6 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executable as it is.\n\n- PsVitaAlive -",
-        "version": "v.1.1",
-        "version_date": "2023-03-01",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-funky-smugglers-vita/funky-smugglers-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/funky_vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/funky_vita/releases/tag/v.1.1"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/funky_vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-funky-smugglers-vita/funky-smugglers-vita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "MEGAgameBoy/I-Wanna-Reach-The-Unity-PS-Vita-Port",
-    "release_id": "93711389",
-    "tag": "1.0",
-    "name": "I Wanna Reach The Unity PS Vita 1.0",
-    "url": "https://github.com/MEGAgameBoy/I-Wanna-Reach-The-Unity-PS-Vita-Port/releases/tag/1.0",
-    "published": "2023-02-26T13:23:16Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "First release",
-    "assets": [
-      {
-        "name": "iwrtu.vpk",
-        "size": 117256859,
-        "download_url": "https://github.com/MEGAgameBoy/I-Wanna-Reach-The-Unity-PS-Vita-Port/releases/download/1.0/iwrtu.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MEGAgameBoy",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "homebrew_name": "I Wanna Reach The Unity",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-i-wanna-reach-the-unity/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of I Wanna Reach The Unity for PSVITA.",
-    "homebrew_long_description": "This is a port of I Wanna Reach The Unity for the PS Vita.\nI Wanna Reach The Unity is a fangame of I Wanna Be The Guy is a die and retry game\ninspired and containing levels from others I Wanna Be The Guy fangames\nOriginal game by HaselLoyance\n\n- PsVitaAlive -",
-    "homebrew_id": "i-wanna-reach-the-unity",
-    "homebrew_authors": [
-      "megagameboy"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "i-wanna-reach-the-unity",
-        "name": "I Wanna Reach The Unity",
-        "icon": "https://archive.org/download/psvitaalive-i-wanna-reach-the-unity/icon0.png",
-        "category": "ports",
-        "description": "Port of I Wanna Reach The Unity for PSVITA.",
-        "long_description": "This is a port of I Wanna Reach The Unity for the PS Vita.\nI Wanna Reach The Unity is a fangame of I Wanna Be The Guy is a die and retry game\ninspired and containing levels from others I Wanna Be The Guy fangames\nOriginal game by HaselLoyance\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2023-02-26",
-        "author_ids": [
-          "megagameboy"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-i-wanna-reach-the-unity/i-wanna-reach-the-unity.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/MEGAgameBoy/I-Wanna-Reach-The-Unity-PS-Vita-Port/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/MEGAgameBoy/I-Wanna-Reach-The-Unity-PS-Vita-Port/releases/tag/1.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/MEGAgameBoy/I-Wanna-Reach-The-Unity-PS-Vita-Port"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-i-wanna-reach-the-unity/i-wanna-reach-the-unity.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "RaycGaming/SculptorVita",
-    "release_id": "93487783",
-    "tag": "v1.1",
-    "name": "Sculptor 1.1",
-    "url": "https://github.com/Raycx86/SculptorVita/releases/tag/v1.1",
-    "published": "2023-02-23T19:27:29Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Livearea image fix.",
-    "assets": [
-      {
-        "name": "Sculptor-1.-1.vpk",
-        "size": 43578669,
-        "download_url": "https://github.com/Raycx86/SculptorVita/releases/download/v1.1/Sculptor-1.-1.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "Raycx86",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2",
-    "catalog_version": "v.1.2",
-    "homebrew_name": "Sculptor Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-sculptor-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Sculptor for PSVITA.",
-    "homebrew_long_description": "This is a port of Sculptor for the PS Vita. The game was originally made by discardedunion.\nThis game is an adult fantasy game intended for adults, with lots of sexual content. Sculptor is a visual novel where the player feminizes their former bully. The base scenario can be set up as appeals to the player - both the player character and the target of the game can have their gender identity (pronouns) and biological sex (genitals) changed to suit the preference of the player.\n\n- PsVitaAlive -",
-    "homebrew_id": "sculptor-vita",
-    "homebrew_authors": [
-      "rayc"
-    ],
-    "homebrew_version": "v.1.2",
-    "catalog_apps": [
-      {
-        "id": "sculptor-vita",
-        "name": "Sculptor Vita",
-        "icon": "https://archive.org/download/psvitaalive-sculptor-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Sculptor for PSVITA.",
-        "long_description": "This is a port of Sculptor for the PS Vita. The game was originally made by discardedunion.\nThis game is an adult fantasy game intended for adults, with lots of sexual content. Sculptor is a visual novel where the player feminizes their former bully. The base scenario can be set up as appeals to the player - both the player character and the target of the game can have their gender identity (pronouns) and biological sex (genitals) changed to suit the preference of the player.\n\n- PsVitaAlive -",
-        "version": "v.1.2",
-        "version_date": "2023-02-24",
-        "author_ids": [
-          "rayc"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-sculptor-vita/sculptor-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Repository",
-            "url": "https://github.com/RaycGaming/SculptorVita"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Raycx86/SculptorVita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-sculptor-vita/sculptor-vita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "Rinnegatamante/Aerofoil-Vita",
-    "release_id": "93196416",
-    "tag": "v.1.0",
-    "name": "v.1.0",
-    "url": "https://github.com/Rinnegatamante/Aerofoil-Vita/releases/tag/v.1.0",
-    "published": "2023-02-21T17:54:40Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "Aerofoil.vpk",
-        "size": 2110560,
-        "download_url": "https://github.com/Rinnegatamante/Aerofoil-Vita/releases/download/v.1.0/Aerofoil.vpk",
-        "content_type": "application/octet-stream"
-      },
-      {
-        "name": "aerofoil.zip",
-        "size": 9311670,
-        "download_url": "https://github.com/Rinnegatamante/Aerofoil-Vita/releases/download/v.1.0/aerofoil.zip",
-        "content_type": "application/x-zip-compressed"
-      }
-    ],
-    "author": "Rinnegatamante",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.0",
-    "catalog_version": "v.1.0",
-    "homebrew_name": "Aerofoil Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-aerofoil-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Aerofoil for PSVITA.",
-    "homebrew_long_description": "This is a wrapper/port of Aerofoil, a sourceport of Glider Pro, for PSVITA.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as it is.\n\n- PsVitaAlive -",
-    "homebrew_id": "aerofoil-vita",
-    "homebrew_authors": [
-      "rinnegatamante"
-    ],
-    "homebrew_version": "v.1.0",
-    "catalog_apps": [
-      {
-        "id": "aerofoil-vita",
-        "name": "Aerofoil Vita",
-        "icon": "https://archive.org/download/psvitaalive-aerofoil-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Aerofoil for PSVITA.",
-        "long_description": "This is a wrapper/port of Aerofoil, a sourceport of Glider Pro, for PSVITA.\nThe port works by loading the official Android ARMv7 executable in memory, resolving its imports with native functions and patching it in order to properly run. By doing so, it's basically as if we emulate a minimalist Android environment in which we run natively the executables as it is.\n\n- PsVitaAlive -",
-        "version": "v.1.0",
-        "version_date": "2023-02-21",
-        "author_ids": [
-          "rinnegatamante"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-aerofoil-vita/aerofoil-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/Aerofoil-Vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/Rinnegatamante/Aerofoil-Vita/releases/tag/v.1.0"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/Rinnegatamante/Aerofoil-Vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-aerofoil-vita/aerofoil-vita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "YuriSizuku/psv-OnscripterJH",
-    "release_id": "92935012",
-    "tag": "v0.5.1.3",
-    "name": "v0.5.1.3",
-    "url": "https://github.com/YuriSizuku/psv-OnscripterJH/releases/tag/v0.5.1.3",
-    "published": "2023-02-19T05:17:12Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "",
-    "assets": [
-      {
-        "name": "VitaOns.vpk",
-        "size": 10676517,
-        "download_url": "https://github.com/YuriSizuku/psv-OnscripterJH/releases/download/v0.5.1.3/VitaOns.vpk",
-        "content_type": "raw"
-      }
-    ],
-    "author": "github-actions[bot]",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.0.5.1.3",
-    "catalog_version": "v.0.5.1.3",
-    "homebrew_name": "ONScripter-jh-PSVita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-onscripter-jh-psvita/icon0.png",
-    "homebrew_category": "emulators",
-    "homebrew_description": "Port of ONScripter-jh for PSVITA.",
-    "homebrew_long_description": "Port of ONScripter-jh for PSVITA. ONScripter (O-N-Scripter) is a program that interprets and executes scripts written for NScripter in its own way. It can run games on Windows, Android, iOS, etc. using the exact same game data.",
-    "homebrew_id": "onscripter-jh-psvita",
-    "homebrew_authors": [
-      "yurisizuku"
-    ],
-    "homebrew_version": "v.0.5.1.3",
-    "catalog_apps": [
-      {
-        "id": "onscripter-jh-psvita",
-        "name": "ONScripter-jh-PSVita",
-        "icon": "https://archive.org/download/psvitaalive-onscripter-jh-psvita/icon0.png",
-        "category": "emulators",
-        "description": "Port of ONScripter-jh for PSVITA.",
-        "long_description": "Port of ONScripter-jh for PSVITA. ONScripter (O-N-Scripter) is a program that interprets and executes scripts written for NScripter in its own way. It can run games on Windows, Android, iOS, etc. using the exact same game data.",
-        "version": "v.0.5.1.3",
-        "version_date": "2023-02-19",
-        "author_ids": [
-          "yurisizuku"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-onscripter-jh-psvita/onscripter-jh-psvita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/YuriSizuku/psv-OnscripterJH/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/YuriSizuku/psv-OnscripterJH/releases/tag/v0.5.1.3"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/YuriSizuku/psv-OnscripterJH"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-onscripter-jh-psvita/onscripter-jh-psvita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "MEGAgameBoy/Super-Mario-UniMaker-PS-Vita-Port",
-    "release_id": "92880076",
-    "tag": "1.2.3.4",
-    "name": "Super Mario UniMaker PS Vita 1.2.3.4",
-    "url": "https://github.com/MEGAgameBoy/Super-Mario-UniMaker-PS-Vita-Port/releases/tag/1.2.3.4",
-    "published": "2023-02-17T20:01:16Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Fixed level selection bug.",
-    "assets": [
-      {
-        "name": "unimaker.vpk",
-        "size": 294642493,
-        "download_url": "https://github.com/MEGAgameBoy/Super-Mario-UniMaker-PS-Vita-Port/releases/download/1.2.3.4/unimaker.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MEGAgameBoy",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.2.3.4",
-    "catalog_version": "v.1.2.3.4",
-    "homebrew_name": "Super Mario UniMaker",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-super-mario-unimaker/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Super Mario UniMaker for PSVITA.",
-    "homebrew_long_description": "Super Mario UniMaker is a fan game of Super Mario Maker that lets you make your own Super Mario levels. You can Create/Play and Modify levels at your will ! Original game by NinStar.\nFor installing custom levels you need to take the '.unis' file and put it in the ux0:app/SMUM30622/games/courses/ folder.\n\n- PsVitaAlive -",
-    "homebrew_id": "super-mario-unimaker",
-    "homebrew_authors": [
-      "megagameboy"
-    ],
-    "homebrew_version": "v.1.2.3.4",
-    "catalog_apps": [
-      {
-        "id": "super-mario-unimaker",
-        "name": "Super Mario UniMaker",
-        "icon": "https://archive.org/download/psvitaalive-super-mario-unimaker/icon0.png",
-        "category": "ports",
-        "description": "Port of Super Mario UniMaker for PSVITA.",
-        "long_description": "Super Mario UniMaker is a fan game of Super Mario Maker that lets you make your own Super Mario levels. You can Create/Play and Modify levels at your will ! Original game by NinStar.\nFor installing custom levels you need to take the '.unis' file and put it in the ux0:app/SMUM30622/games/courses/ folder.\n\n- PsVitaAlive -",
-        "version": "v.1.2.3.4",
-        "version_date": "2023-02-05",
-        "author_ids": [
-          "megagameboy"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-super-mario-unimaker/super-mario-unimaker.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/MEGAgameBoy/Super-Mario-UniMaker-PS-Vita-Port/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/MEGAgameBoy/Super-Mario-UniMaker-PS-Vita-Port/releases/tag/1.2.3.4"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/MEGAgameBoy/Super-Mario-UniMaker-PS-Vita-Port"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-super-mario-unimaker/super-mario-unimaker.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "MEGAgameBoy/Italian-Plumber-Adventures-PS-Vita",
-    "release_id": "92879196",
-    "tag": "1.1",
-    "name": "Italian Plumber Adventures PS Vita v1.1",
-    "url": "https://github.com/MEGAgameBoy/Italian-Plumber-Adventures-PS-Vita/releases/tag/1.1",
-    "published": "2023-02-17T19:49:29Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- The game now properly save gamepad configuration\r\n- Fixed Jump+Up sound bug",
-    "assets": [
-      {
-        "name": "ipa.vpk",
-        "size": 10458605,
-        "download_url": "https://github.com/MEGAgameBoy/Italian-Plumber-Adventures-PS-Vita/releases/download/1.1/ipa.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "MEGAgameBoy",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.1",
-    "catalog_version": "v.1.1",
-    "homebrew_name": "Italian Plumber Adventures",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-italian-plumber-adventures/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Italian Plumber Adventures for PSVITA.",
-    "homebrew_long_description": "Italian Plumber Adventures is a new adventure starring an unknown character and reimagined from the perspective of JDSoft.\nOriginal game by JDSoft.\n\n- PsVitaAlive -",
-    "homebrew_id": "italian-plumber-adventures",
-    "homebrew_authors": [
-      "megagameboy"
-    ],
-    "homebrew_version": "v.1.1",
-    "catalog_apps": [
-      {
-        "id": "italian-plumber-adventures",
-        "name": "Italian Plumber Adventures",
-        "icon": "https://archive.org/download/psvitaalive-italian-plumber-adventures/icon0.png",
-        "category": "ports",
-        "description": "Port of Italian Plumber Adventures for PSVITA.",
-        "long_description": "Italian Plumber Adventures is a new adventure starring an unknown character and reimagined from the perspective of JDSoft.\nOriginal game by JDSoft.\n\n- PsVitaAlive -",
-        "version": "v.1.1",
-        "version_date": "2023-02-17",
-        "author_ids": [
-          "megagameboy"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-italian-plumber-adventures/italian-plumber-adventures.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/MEGAgameBoy/Italian-Plumber-Adventures-PS-Vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/MEGAgameBoy/Italian-Plumber-Adventures-PS-Vita/releases/tag/1.1"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/MEGAgameBoy/Italian-Plumber-Adventures-PS-Vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-italian-plumber-adventures/italian-plumber-adventures.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "mrdivdiz/aowv",
-    "release_id": "92237049",
-    "tag": "v1.1",
-    "name": "v1.1",
-    "url": "https://github.com/mrdivdiz/aowv/releases/tag/v1.1",
-    "published": "2023-02-13T15:53:22Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "- Fixed age upgrade crash\r\n- Fixed some shaders\r\n- Now money gain will show correctly\r\nSo now you can proceed into another age!\r\nUPD: hotfix uploaded",
-    "assets": [
-      {
-        "name": "aowv2.vpk",
-        "size": 49070621,
-        "download_url": "https://github.com/mrdivdiz/aowv/releases/download/v1.1/aowv2.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "mrdivdiz",
-    "catalog_update_status": "uptodate",
-    "catalog_update_detail": "PSVitaAlive v.1.1",
-    "catalog_version": "v.1.1",
-    "homebrew_name": "Age of War Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-age-of-war-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Age of War for PSVITA.",
-    "homebrew_long_description": "Port of Age of War for PSVITA.\nTake control of 16 different units and 15 different turrets to defend your base and destroy your enemy.\nIn this game, you start at the caveman age, then evolve! There are a total of 5 ages, each with its own unique units and turrets. Can you advance faster than your enemy?\n\n- PsVitaAlive -",
-    "homebrew_id": "age-of-war-vita",
-    "homebrew_authors": [
-      "mrdivdiz"
-    ],
-    "homebrew_version": "v.1.1",
-    "catalog_apps": [
-      {
-        "id": "age-of-war-vita",
-        "name": "Age of War Vita",
-        "icon": "https://archive.org/download/psvitaalive-age-of-war-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Age of War for PSVITA.",
-        "long_description": "Port of Age of War for PSVITA.\nTake control of 16 different units and 15 different turrets to defend your base and destroy your enemy.\nIn this game, you start at the caveman age, then evolve! There are a total of 5 ages, each with its own unique units and turrets. Can you advance faster than your enemy?\n\n- PsVitaAlive -",
-        "version": "v.1.1",
-        "version_date": "2023-02-13",
-        "author_ids": [
-          "mrdivdiz"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-age-of-war-vita/age-of-war-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/mrdivdiz/aowv/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/mrdivdiz/aowv/releases/tag/v1.1"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/mrdivdiz/aowv"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-age-of-war-vita/age-of-war-vita.vpk",
-    "backup_status": "matched",
-    "backup_detail": "Descarga principal en Archive.org; VPK antiguo sin versión en el nombre (no verificado)",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "ParallelProductions/FarawaySpace",
-    "release_id": "91961792",
-    "tag": "Vita-v0.1b",
-    "name": "Vita Beta v0.1",
-    "url": "https://github.com/ParallelProductions/FarawaySpace/releases/tag/Vita-v0.1b",
-    "published": "2023-02-10T01:09:15Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "*This has lots of issues! Takes a WHILE to load and once load stays at about 5 FPS for a bit until you leave the start area.\r\n*Can crash sometimes.",
-    "assets": [
-      {
-        "name": "Faraway.Space.vpk",
-        "size": 61553099,
-        "download_url": "https://github.com/ParallelProductions/FarawaySpace/releases/download/Vita-v0.1b/Faraway.Space.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ParallelProductions",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1 BETA → release Vita-v0.1b",
-    "catalog_version": "v.0.1 BETA",
-    "homebrew_name": "Faraway Space",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-faraway-space/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Faraway Space for PSVITA.",
-    "homebrew_long_description": "A 3D arcade shooter made with Godot 3.4 ported to PSVita.\nIn current state expect framerate drops and occasional crashes.\n\n- PsVitaAlive -",
-    "homebrew_id": "faraway-space",
-    "homebrew_authors": [
-      "parallel-productions"
-    ],
-    "homebrew_version": "v.0.1 BETA",
-    "catalog_apps": [
-      {
-        "id": "faraway-space",
-        "name": "Faraway Space",
-        "icon": "https://archive.org/download/psvitaalive-faraway-space/icon0.png",
-        "category": "ports",
-        "description": "Port of Faraway Space for PSVITA.",
-        "long_description": "A 3D arcade shooter made with Godot 3.4 ported to PSVita.\nIn current state expect framerate drops and occasional crashes.\n\n- PsVitaAlive -",
-        "version": "v.0.1 BETA",
-        "version_date": "2023-02-10",
-        "author_ids": [
-          "parallel-productions"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-faraway-space/faraway-space.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/ParallelProductions/FarawaySpace/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/ParallelProductions/FarawaySpace/releases/tag/Vita-v0.1b"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/ParallelProductions/FarawaySpace"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-faraway-space/faraway-space.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "ParallelProductions/super-dungeon-delve-vita",
-    "release_id": "91548681",
-    "tag": "v1.0.1-vita.2",
-    "name": "Super Dungeon Delve v1.0.2-vita (UI PATCH)",
-    "url": "https://github.com/ParallelProductions/super-dungeon-delve-vita/releases/tag/v1.0.1-vita.2",
-    "published": "2023-02-07T04:13:32Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "What's Changed?\r\n\r\n- Resolution Tweaked.\r\n- UI's are fixed (But are broken on the first load, for example pause for the first time its broken, pause again its fine.)\r\n- Fixed math calculations causing frame drops (Sometimes it still does)\r\n- Framerate Improved.\r\n\r\nWhat's Next?\r\n\r\n- Study the code and possibly have Vita Exclusive enemy's.\r\n- Finish Dungeon 60, Which is an alternate version that runs at 60 fps. (Both can be installed at once)",
-    "assets": [
-      {
-        "name": "Dungeon.UI.Update.vpk",
-        "size": 26937762,
-        "download_url": "https://github.com/ParallelProductions/super-dungeon-delve-vita/releases/download/v1.0.1-vita.2/Dungeon.UI.Update.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ParallelProductions",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v1.0.2-vita → release v1.0.1-vita.2",
-    "catalog_version": "v1.0.2-vita",
-    "homebrew_name": "Super Dungeon Delta",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-super-dungeon-delta/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Super Dungeon Delta port for PSVITA.",
-    "homebrew_long_description": "Super Dungeon Delve is retro style 2D dungeon crawl game. It was created as a learning project to learn and get started with with the Godot Engine. The game was inspired by rougelikes and the 80s Gauntlet arcade game, Gauntlet.\nThe scope was kept deliberately small, in order to achieve some sembalance of a finished/playable game\n\n- PsVitaAlive -",
-    "homebrew_id": "super-dungeon-delta",
-    "homebrew_authors": [
-      "parallel-productions"
-    ],
-    "homebrew_version": "v1.0.2-vita",
-    "catalog_apps": [
-      {
-        "id": "super-dungeon-delta",
-        "name": "Super Dungeon Delta",
-        "icon": "https://archive.org/download/psvitaalive-super-dungeon-delta/icon0.png",
-        "category": "ports",
-        "description": "Super Dungeon Delta port for PSVITA.",
-        "long_description": "Super Dungeon Delve is retro style 2D dungeon crawl game. It was created as a learning project to learn and get started with with the Godot Engine. The game was inspired by rougelikes and the 80s Gauntlet arcade game, Gauntlet.\nThe scope was kept deliberately small, in order to achieve some sembalance of a finished/playable game\n\n- PsVitaAlive -",
-        "version": "v1.0.2-vita",
-        "version_date": "2023-02-07",
-        "author_ids": [
-          "parallel-productions"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-super-dungeon-delta/super-dungeon-delta.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/ParallelProductions/super-dungeon-delve-vita/releases"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/ParallelProductions/super-dungeon-delve-vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-super-dungeon-delta/super-dungeon-delta.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org",
-    "archive_media_item": ""
-  },
-  {
-    "platform": "github",
-    "repo": "ParallelProductions/Lango_GodotRPG-Vita",
-    "release_id": "91543829",
-    "tag": "v0.1.0-vita",
-    "name": "Vita v0.1.0",
-    "url": "https://github.com/ParallelProductions/Lango_GodotRPG-Vita/releases/tag/v0.1.0-vita",
-    "published": "2023-02-07T02:52:03Z",
-    "prerelease": false,
-    "draft": false,
-    "body": "Current version is a 1:1 Port. No optimizations needed, it runs perfect without them.",
-    "assets": [
-      {
-        "name": "Lango.vpk",
-        "size": 27567790,
-        "download_url": "https://github.com/ParallelProductions/Lango_GodotRPG-Vita/releases/download/v0.1.0-vita/Lango.vpk",
-        "content_type": "application/octet-stream"
-      }
-    ],
-    "author": "ParallelProductions",
-    "catalog_update_status": "pending",
-    "catalog_update_detail": "PSVitaAlive v.0.1.0 → release v0.1.0-vita",
-    "catalog_version": "v.0.1.0",
-    "homebrew_name": "Lango Vita",
-    "homebrew_icon": "https://archive.org/download/psvitaalive-lango-vita/icon0.png",
-    "homebrew_category": "ports",
-    "homebrew_description": "Port of Lango for PSVITA.",
-    "homebrew_long_description": "Lango is a simple and open source project of an RPG game in the style of the Legendary Legends of Zelda, made on the Godot Engine with the intention of serving as an initial base for you to create your own game.\n\n- PsVitaAlive -",
-    "homebrew_id": "lango-vita",
-    "homebrew_authors": [
-      "parallel-productions"
-    ],
-    "homebrew_version": "v.0.1.0",
-    "catalog_apps": [
-      {
-        "id": "lango-vita",
-        "name": "Lango Vita",
-        "icon": "https://archive.org/download/psvitaalive-lango-vita/icon0.png",
-        "category": "ports",
-        "description": "Port of Lango for PSVITA.",
-        "long_description": "Lango is a simple and open source project of an RPG game in the style of the Legendary Legends of Zelda, made on the Godot Engine with the intention of serving as an initial base for you to create your own game.\n\n- PsVitaAlive -",
-        "version": "v.0.1.0",
-        "version_date": "2023-02-07",
-        "author_ids": [
-          "parallel-productions"
-        ],
-        "links": [
-          {
-            "type": "Download",
-            "name": "VPK",
-            "url": "https://archive.org/download/psvitaalive-lango-vita/lango-vita.vpk",
-            "recommended": true
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/ParallelProductions/Lango_GodotRPG-Vita/releases"
-          },
-          {
-            "type": "Official Website",
-            "name": "Release Page",
-            "url": "https://github.com/ParallelProductions/Lango_GodotRPG-Vita/releases/tag/v0.1.0-vita"
-          },
-          {
-            "type": "Repository",
-            "name": "Repositorio",
-            "url": "https://github.com/ParallelProductions/Lango_GodotRPG-Vita"
-          }
-        ]
-      }
-    ],
-    "archive_current_link": "https://archive.org/download/psvitaalive-lango-vita/lango-vita.vpk",
-    "backup_status": "review",
-    "backup_detail": "La versión de GitHub/GitLab es ambigua; revisar respaldo de Archive.org",
     "archive_media_item": ""
   }
 ]
