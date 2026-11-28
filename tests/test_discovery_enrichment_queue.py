@@ -36,6 +36,35 @@ class QueueTests(unittest.TestCase):
         q.checkpoint(self.state,"c",{"state":"inspected"},self.now)
         self.assertEqual([k for k,_ in q.choose(self.state,self.candidates,2,self.now,prioritize_publication=True)],["a","b"])
 
+    def test_operator_priority_respects_first_attempt_and_duplicate_filter(self):
+        candidates = {}
+        for key in ("gh:1", "gh:2", "gh:3"):
+            project = "dev/demo" + key.split(":")[1]
+            candidates[key] = {"key": key, "platform": "github", "project_type": "homebrew",
+                "project": project, "app_draft": {"version_date": "2020-01-01", "size": 100,
+                "description": "Demo", "links": [{"type": "Download",
+                "url": "https://github.com/" + project + "/releases/download/v1/demo.vpk"}]}}
+        state = q.reconcile(q.empty_state(), candidates)
+        def chosen():
+            return [key for key, _ in q.choose(state, candidates, 2, self.now, prioritize_publication=True)]
+        with patch.object(q, "operator_priority", return_value={"gh:3"}):
+            self.assertEqual(chosen(), ["gh:3", "gh:1"])
+            state["publication_queue"] = {"records": {"gh:3": {"state": "DUPLICATE"}}}
+            self.assertEqual(chosen(), ["gh:1", "gh:2"])
+            state.pop("publication_queue")
+            state["records"]["gh:3"]["next_at"] = (self.now + timedelta(hours=1)).isoformat()
+            self.assertEqual(chosen(), ["gh:1", "gh:2"])
+            state["records"]["gh:3"]["next_at"] = ""
+            state["records"]["gh:3"]["attempts"] = 1
+            self.assertEqual(chosen(), ["gh:1", "gh:2"])
+
+    def test_operator_priority_expires(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "priority.json"
+            path.write_text('{"schema_version":1,"keys":["gh:3"],"expires_at":"2026-11-28T00:00:00Z"}')
+            self.assertEqual(q.operator_priority(self.now, path), {"gh:3"})
+            self.assertEqual(q.operator_priority(self.now + timedelta(days=1), path), set())
+
     def test_recent_promising_and_ready_snapshot(self):
         entry = {"key": "gh:123", "platform": "github", "project_type": "homebrew",
                  "project": "dev/demo", "app_draft": {"id": "demo", "description": "Demo",

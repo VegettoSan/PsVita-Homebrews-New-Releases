@@ -218,6 +218,21 @@ def publication_snapshot(state, candidates, apps, registry, taxonomy, feedback=N
     return state["publication_queue"]
 
 
+def operator_priority(now, path=None):
+    """Optional, expiring maintainer request; scheduling only, never approval."""
+    path = Path(path or "data/discovery/operator_priority.json")
+    if not path.exists():
+        return set()
+    data = json.loads(path.read_text(encoding="utf-8"))
+    keys = data["keys"]
+    expiry = datetime.fromisoformat(data["expires_at"])
+    if (data.get("schema_version") != 1 or not isinstance(keys, list)
+            or len(keys) > 5 or any(not isinstance(k, str) or not re.fullmatch(r"gh:[0-9]+", k) for k in keys)
+            or expiry.tzinfo is None):
+        raise ValueError("Invalid operator priority request")
+    return set(keys) if now < expiry else set()
+
+
 def choose(state, candidates, limit, now=None, prioritize_publication=False):
     """Rotate by last attempt; prefer nearly complete candidates among equal age."""
     now = now or now_utc()
@@ -249,6 +264,15 @@ def choose(state, candidates, limit, now=None, prioritize_publication=False):
                     and (index.get(row[2], {}).get("state", "PROMISING") == "PROMISING" or row[1] < -100)][:max(1, limit*4//5)]
         keys = {row[2] for row in priority}
         rows = priority + [row for row in rows if row[2] not in keys]
+        # Reserve at most one slot for a requested, unattempted promising candidate.
+        # The ordinary due/duplicate/feedback filters above still apply.
+        requested = operator_priority(now)
+        selected = next((row for row in rows if row[2] in requested
+                         and state["records"][row[2]].get("attempts", 0) == 0
+                         and publication_priority(candidates[row[2]], now)
+                         and index.get(row[2], {}).get("state", "PROMISING") == "PROMISING"), None)
+        if selected is not None:
+            rows = [selected] + [row for row in rows if row[2] != selected[2]]
     return [(key, candidates[key]) for _, _, key in rows[:limit]]
 
 
