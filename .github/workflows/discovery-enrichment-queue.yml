@@ -3,6 +3,12 @@ on:
   schedule:
     - cron: '37 2-23/3 * * *'
   workflow_dispatch:
+  # Discovery checkpoints are committed before this successful workflow completes.
+  # Keep the schedule as a fallback for retries, backlog and failed discovery runs.
+  workflow_run:
+    workflows: ['Discover New PS Vita Homebrew']
+    types: [completed]
+    branches: [main]
   push:
     branches: [main]
     paths:
@@ -30,6 +36,10 @@ jobs:
   queue:
     if: >-
       github.repository == 'VegettoSan/PsVita-Homebrews-New-Releases' &&
+      (github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository)) &&
       (github.ref == 'refs/heads/main' ||
       (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feature/prioritize-publishable-discoveries'))
     permissions:
